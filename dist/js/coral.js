@@ -35049,7 +35049,17 @@ var Coral = (function (exports) {
             return;
           }
 
-          var focusedItem = document.activeElement.parentNode; // hide the popover(needed to disable fade time of popover)
+          var focusedItem = document.activeElement.parentNode; // we need to check if item has 'hasAttribute' because it is not present on the document
+
+          var isFocusedItemInsideActionBar = this.parentNode.contains(focusedItem);
+          var isFocusedItemOffscreen = focusedItem.hasAttribute && focusedItem.hasAttribute('coral-actionbar-offscreen');
+
+          if (isFocusedItemInsideActionBar && isFocusedItemOffscreen) {
+            // if currently an element is focused, that should not be visible (or is no actionbar-item) => select 'more'
+            // button
+            this._elements.moreButton.focus();
+          } // hide the popover(needed to disable fade time of popover)
+
 
           this._elements.overlay.hidden = true;
           this._elements.overlay.focusOnShow = this._elements.overlay; // close any popovers, that might be inside the 'more' popover
@@ -35066,16 +35076,7 @@ var Coral = (function (exports) {
 
           this._itemsInPopover = []; // clear overlay
 
-          this._elements.overlay.content.innerHTML = ''; // we need to check if item has 'hasAttribute' because it is not present on the document
-
-          var isFocusedItemInsideActionBar = this.parentNode.contains(focusedItem);
-          var isFocusedItemOffscreen = focusedItem.hasAttribute && focusedItem.hasAttribute('coral-actionbar-offscreen');
-
-          if (isFocusedItemInsideActionBar && isFocusedItemOffscreen) {
-            // if currently an element is focused, that should not be visible (or is no actionbar-item) => select 'more'
-            // button
-            this._elements.moreButton.focus();
-          }
+          this._elements.overlay.content.innerHTML = '';
         }
       }, {
         key: "_onOverlayKeyDown",
@@ -51705,6 +51706,11 @@ var Coral = (function (exports) {
     DRILLDOWN: 'drilldown'
   };
   /**
+   Utility that identifies Chrome on macOS, which announces drilldown items as "row 1 expanded" or "row 1 collapsed" when navigating between items.
+   */
+
+  var isChromeMacOS = !!window && !!window.chrome && /Mac/i.test(window.navigator.platform);
+  /**
    @class Coral.ColumnView.Item
    @classdesc A ColumnView Item component
    @htmltag coral-columnview-item
@@ -51898,9 +51904,16 @@ var Coral = (function (exports) {
             this.insertAdjacentHTML('beforeend', Icon._renderSVG('spectrum-css-icon-ChevronRightMedium', ['_coral-AssetList-itemChildIndicator', '_coral-UIIcon-ChevronRightMedium']));
           }
 
-          this.classList.add('is-branch'); // @a11y Update aria-expanded. Active drilldowns should be expanded.
+          this.classList.add('is-branch'); // @a11y Update aria-expanded. Active drilldowns should be expanded. 
+          // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
+          // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when 
+          // navigating between items. 
 
-          this.setAttribute('aria-expanded', this.active);
+          if (this.selected || isChromeMacOS && this.getAttribute('aria-level') === '1') {
+            this.removeAttribute('aria-expanded');
+          } else {
+            this.setAttribute('aria-expanded', this.active);
+          }
         } else {
           this.classList.remove('is-branch');
           this.removeAttribute('aria-expanded');
@@ -51964,14 +51977,16 @@ var Coral = (function (exports) {
 
         this.classList.toggle('is-selected', this._selected);
         this.setAttribute('aria-selected', this._selected); // @a11y Update aria-expanded. Active drilldowns should be expanded.
+        // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
+        // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when 
+        // navigating between items. 
 
         if (this.variant === variant$g.DRILLDOWN) {
-          if (this._ariaExpandedTimeout) {
-            window.clearTimeout(this._ariaExpandedTimeout);
-            this._ariaExpandedTimeout = undefined;
+          if (this._selected || isChromeMacOS && this.getAttribute('aria-level') === '1') {
+            this.removeAttribute('aria-expanded');
+          } else {
+            this.setAttribute('aria-expanded', this.active);
           }
-
-          this.setAttribute('aria-expanded', this.active);
         }
 
         var accessibilityState = this._elements.accessibilityState;
@@ -52021,53 +52036,22 @@ var Coral = (function (exports) {
         return this._active || false;
       },
       set: function set(value) {
-        var _this2 = this;
-
         this._active = transform.booleanAttr(value);
 
         this._reflectAttribute('active', this._active);
 
         this.classList.toggle('is-navigated', this._active);
-        this.setAttribute('aria-selected', this._active); // @a11y Update aria-expanded. Active drilldowns should be expanded.
+        this.setAttribute('aria-selected', this.hasAttribute('_selectable') ? this.selected : this._active); // @a11y Update aria-expanded. Active drilldowns should be expanded.
+        // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
+        // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when 
+        // navigating between items. 
 
         if (this.variant === variant$g.DRILLDOWN) {
-          // @a11y workaround for VoiceOver announcing expanded state rather than the item name when the item receives focus.
-          if (this._ariaExpandedTimeout) {
-            window.cancelAnimationFrame(this._ariaExpandedTimeout);
-            window.clearTimeout(this._ariaExpandedTimeout);
-            this._ariaExpandedTimeout = undefined;
+          if (this._selected || isChromeMacOS && this.getAttribute('aria-level') === '1') {
+            this.removeAttribute('aria-expanded');
+          } else {
+            this.setAttribute('aria-expanded', this.active);
           }
-
-          var timeoutDelay = 20;
-          this._ariaExpandedTimeout = commons.nextFrame(function () {
-            var isFocused = _this2 === document.activeElement || _this2.contains(document.activeElement);
-
-            var activeElement;
-
-            if (isFocused && !_this2.selected) {
-              _this2.setAttribute('aria-expanded', _this2._active);
-
-              activeElement = document.activeElement;
-              activeElement.blur();
-            } else {
-              _this2.setAttribute('aria-hidden', true);
-            } // @a11y after a delay to give focused item time to announce,
-
-
-            commons.nextFrame(function () {
-              if (isFocused && activeElement) {
-                activeElement.focus();
-              } else {
-                window.setTimeout(function () {
-                  _this2.setAttribute('aria-expanded', _this2._active);
-
-                  commons.nextFrame(function () {
-                    return _this2.removeAttribute('aria-hidden');
-                  });
-                }, timeoutDelay);
-              }
-            });
-          });
         }
 
         if (!this._active) {
@@ -60211,6 +60195,153 @@ var Coral = (function (exports) {
   Masonry.Item = MasonryItem;
   Masonry.Layout = MasonryLayout;
 
+  /**
+   * Copyright 2020 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+  var translations$h = {
+    "en-US": {
+      "({0} of {1})": "({0} of {1})",
+      "Remove": "Remove",
+      "Reorder": "Reorder",
+      "reorder_drag_handle": "move handle",
+      "reorder_hint": "Drag and drop or use the up and down arrow keys to reorder."
+    },
+    "fr-FR": {
+      "({0} of {1})": "({0} sur {1})",
+      "Remove": "Supprimer",
+      "Reorder": "Réorganiser",
+      "reorder_drag_handle": "déplacer la poignée",
+      "reorder_hint": "Réorganisez en utilisant le glisser-déposer ou les touches fléchées haut et bas."
+    },
+    "de-DE": {
+      "({0} of {1})": "({0} von {1})",
+      "Remove": "Entfernen",
+      "Reorder": "Neu sortieren",
+      "reorder_drag_handle": "Verschiebepunkt",
+      "reorder_hint": "Neu anordnen mit Drag & Drop oder den Aufwärts- und Abwärtspfeiltasten."
+    },
+    "it-IT": {
+      "({0} of {1})": "({0} di {1})",
+      "Remove": "Rimuovi",
+      "Reorder": "Riordina",
+      "reorder_drag_handle": "maniglia di spostamento",
+      "reorder_hint": "Trascina e rilascia o usa i tasti freccia su e giù per riordinare."
+    },
+    "es-ES": {
+      "({0} of {1})": "({0} de {1})",
+      "Remove": "Eliminar",
+      "Reorder": "Reordenar",
+      "reorder_drag_handle": "mover controlador",
+      "reorder_hint": "Arrastre y suelte o use las teclas de flecha arriba y abajo para reordenar."
+    },
+    "pt-BR": {
+      "({0} of {1})": "({0} de {1})",
+      "Remove": "Remover",
+      "Reorder": "Reorganizar",
+      "reorder_drag_handle": "mover a alça",
+      "reorder_hint": "Arraste e solte ou use as teclas de seta para cima e para baixo para reordenar."
+    },
+    "ja-JP": {
+      "({0} of {1})": "({0}/{1})",
+      "Remove": "削除",
+      "Reorder": "並べ替え",
+      "reorder_drag_handle": "ハンドルを移動",
+      "reorder_hint": "ドラッグアンドドロップするか、上下の矢印キーを使用して並べ替えます。"
+    },
+    "ko-KR": {
+      "({0} of {1})": "({0}/{1})",
+      "Remove": "제거",
+      "Reorder": "재정렬",
+      "reorder_drag_handle": "핸들 이동",
+      "reorder_hint": "드래그 앤 드롭하거나 위 / 아래 화살표 키를 사용하여 순서를 변경하십시오."
+    },
+    "zh-CN": {
+      "({0} of {1})": "({0}/{1})",
+      "Remove": "删除",
+      "Reorder": "重新排序",
+      "reorder_drag_handle": "移动手抦",
+      "reorder_hint": "拖放或使用向上和向下箭头键重新排序。"
+    },
+    "zh-TW": {
+      "({0} of {1})": "({0}/{1})",
+      "Remove": "移除",
+      "Reorder": "重新排序",
+      "reorder_drag_handle": "移動控制點",
+      "reorder_hint": "拖放或使用向上和向下箭頭鍵重新排序。"
+    },
+    "nl-NL": {
+      "({0} of {1})": "({0} van {1})",
+      "Remove": "Verwijderen",
+      "Reorder": "Opnieuw ordenen",
+      "reorder_drag_handle": "ingang verplaatsen",
+      "reorder_hint": "Sleep en zet neer of gebruik de pijltoetsen omhoog en omlaag om opnieuw te ordenen."
+    },
+    "da-DK": {
+      "({0} of {1})": "({0} af {1})",
+      "Remove": "Fjern",
+      "Reorder": "Omarranger",
+      "reorder_drag_handle": "flyt håndtag",
+      "reorder_hint": "Træk og slip eller brug piletasterne op og ned til at sortere igen."
+    },
+    "fi-FI": {
+      "({0} of {1})": "({0}/{1})",
+      "Remove": "Poista",
+      "Reorder": "Järjestä uudelleen",
+      "reorder_drag_handle": "siirtokahva",
+      "reorder_hint": "Vedä ja pudota tai käytä ylä- ja alanuolinäppäimiä järjestyksen muuttamiseksi."
+    },
+    "nb-NO": {
+      "({0} of {1})": "({0} av {1})",
+      "Remove": "Fjern",
+      "Reorder": "Endre rekkefølge",
+      "reorder_drag_handle": "flytt håndtak",
+      "reorder_hint": "Dra og slipp eller bruk piltastene opp og ned for å ordne på nytt."
+    },
+    "sv-SE": {
+      "({0} of {1})": "({0} av {1})",
+      "Remove": "Ta bort",
+      "Reorder": "Ändra ordning",
+      "reorder_drag_handle": "flytta handtag",
+      "reorder_hint": "Dra och släpp eller använd upp- och nedpiltangenterna för att ordna om."
+    },
+    "cs-CZ": {
+      "({0} of {1})": "({0} z {1})",
+      "Remove": "Odebrat",
+      "Reorder": "Změnit pořadí",
+      "reorder_drag_handle": "táhlo přesunu",
+      "reorder_hint": "Chcete-li změnit pořadí, přetáhněte nebo přetáhněte nebo použijte klávesy se šipkami nahoru a dolů."
+    },
+    "pl-PL": {
+      "({0} of {1})": "({0} z {1})",
+      "Remove": "Usuń",
+      "Reorder": "Zmień kolejność",
+      "reorder_drag_handle": "przeciągnij uchwyt",
+      "reorder_hint": "Przeciągnij i upuść lub użyj klawiszy strzałek w górę iw dół, aby zmienić kolejność."
+    },
+    "ru-RU": {
+      "({0} of {1})": ", {0} из {1})",
+      "Remove": "Удалить",
+      "Reorder": "Переупорядочить",
+      "reorder_drag_handle": "переместить манипулятор",
+      "reorder_hint": "Перетащите или используйте клавиши со стрелками вверх и вниз, чтобы изменить порядок."
+    },
+    "tr-TR": {
+      "({0} of {1})": "({0}/{1})",
+      "Remove": "Kaldır",
+      "Reorder": "Yeniden Sırala",
+      "reorder_drag_handle": "move handle",
+      "reorder_hint": "Yeniden sıralamak için sürükleyip bırakın veya yukarı ve aşağı ok tuşlarını kullanın."
+    }
+  };
+
   var MultifieldCollection = /*#__PURE__*/function (_Collection) {
     _inherits(MultifieldCollection, _Collection);
 
@@ -60280,19 +60411,32 @@ var Coral = (function (exports) {
 
       _classCallCheck(this, Multifield);
 
-      _this = _super.call(this); // Attach events
+      _this = _super.call(this);
 
-      _this._delegateEvents({
+      _this.setAttribute('id', _this.id || commons.getUID()); // Attach events
+
+
+      var events = {
         'coral-dragaction:dragstart coral-multifield-item': '_onDragStart',
         'coral-dragaction:drag coral-multifield-item': '_onDrag',
         'coral-dragaction:dragend coral-multifield-item': '_onDragEnd',
         'click [coral-multifield-add]': '_onAddItemClick',
         'click ._coral-Multifield-remove': '_onRemoveItemClick',
+        'click [coral-multifield-move]': '_onClickDragHandle',
+        'key:up [coral-multifield-move]': '_onMoveItemUp',
+        'key:pageup [coral-multifield-move]': '_onMoveItemUp',
+        'key:down [coral-multifield-move]': '_onMoveItemDown',
+        'key:pagedown [coral-multifield-move]': '_onMoveItemDown',
+        'key:home [coral-multifield-move]': '_onMoveItemHome',
+        'key:end [coral-multifield-move]': '_onMoveItemEnd',
+        'key:esc [coral-multifield-move]': '_onMoveItemEsc',
+        'capture:blur [coral-multifield-move]': '_onBlurDragHandle',
         'change coral-multifield-item-content > input': '_onInputChange'
-      }); // Templates
+      };
+      events["global:key:escape #".concat(_this.id, " > [coral-multifield-move]")] = '_onMoveItemEsc';
 
+      _this._delegateEvents(events); // Templates
 
-      _this.setAttribute('id', _this.id || commons.getUID());
 
       _this._elements = {
         template: _this.querySelector("#".concat(_this.id, " > template[coral-multifield-template]")) || document.createElement('template')
@@ -60317,6 +60461,8 @@ var Coral = (function (exports) {
               _this.items.getAll().forEach(function (item) {
                 _this._renderTemplate(item);
               });
+
+              _this._updatePosInSet();
             }
           }
         });
@@ -60382,13 +60528,233 @@ var Coral = (function (exports) {
           var item = event.matchedTarget.closest('coral-multifield-item');
 
           if (item) {
+            // manage focus when item is removed
+            var itemToFocus;
+            var items = this.items.getAll();
+            var setsize = items.length;
+
+            if (setsize > 1) {
+              var itemIndex = items.indexOf(item);
+
+              if (itemIndex === setsize - 1) {
+                itemToFocus = items[itemIndex - 1];
+              } else {
+                itemToFocus = items[itemIndex + 1];
+              }
+            }
+
             item.remove();
+
+            if (itemToFocus) {
+              itemToFocus._elements.remove.focus();
+            } else {
+              itemToFocus = this.querySelector('[coral-multifield-add]');
+
+              if (itemToFocus) {
+                itemToFocus.focus();
+              }
+            }
           }
 
           this.trigger('change');
 
           this._trackEvent('click', 'remove item button', event);
         }
+      }
+      /** 
+       * Toggles keyboard accessible dragging of the current multifield item.
+       * @ignore
+       */
+
+    }, {
+      key: "_toggleItemDragging",
+      value: function _toggleItemDragging(multiFieldItem) {
+        var dragging = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+        if (multiFieldItem._dragging === dragging) {
+          return;
+        }
+
+        multiFieldItem._dragging = dragging;
+
+        if (dragging) {
+          this._oldBefore = multiFieldItem.previousElementSibling;
+          this._before = multiFieldItem.nextElementSibling;
+        } else {
+          this.trigger('coral-multifield:beforeitemorder', {
+            item: multiFieldItem,
+            oldBefore: this._oldBefore,
+            before: this._before
+          });
+          this.trigger('coral-multifield:itemorder', {
+            item: multiFieldItem,
+            oldBefore: this._oldBefore,
+            before: multiFieldItem.nextElementSibling
+          });
+          this.trigger('change');
+          this._oldBefore = null;
+          this._before = null;
+        }
+      }
+      /** 
+       * Clicking dragHandle toggles keyboard accessible dragging of the current multifield item.
+       * @ignore
+       */
+
+    }, {
+      key: "_onClickDragHandle",
+      value: function _onClickDragHandle(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var multiFieldItem = event.matchedTarget.closest('coral-multifield-item');
+
+        this._toggleItemDragging(multiFieldItem, !multiFieldItem._dragging);
+      }
+      /** 
+       * When the drag handle blurs, cancel dragging, leaving item where it is.
+       * @ignore
+       */
+
+    }, {
+      key: "_onBlurDragHandle",
+      value: function _onBlurDragHandle(event) {
+        var _this3 = this;
+
+        var dragHandle = event.matchedTarget;
+        var multiFieldItem = dragHandle.closest('coral-multifield-item');
+        commons.nextFrame(function () {
+          if (document.activeElement !== dragHandle) {
+            _this3._toggleItemDragging(multiFieldItem, false);
+          }
+        });
+      }
+      /** 
+       * Moves multiField item selected for dragging up one index position in the multifield collection.
+       * @ignore
+       */
+
+    }, {
+      key: "_onMoveItemUp",
+      value: function _onMoveItemUp(event) {
+        var dragHandle = event.matchedTarget;
+        var dragElement = dragHandle.closest('coral-multifield-item');
+
+        if (!dragElement._dragging) {
+          return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+        var items = this.items.getAll();
+        var dragElementIndex = items.indexOf(dragElement);
+
+        if (dragElementIndex > 0) {
+          this.insertBefore(dragElement, dragElement.previousElementSibling);
+        }
+
+        dragElement._dragging = true;
+        dragHandle.focus();
+      }
+      /** 
+       * Moves multiField item selected for dragging down one index position in the multifield collection.
+       * @ignore
+       */
+
+    }, {
+      key: "_onMoveItemDown",
+      value: function _onMoveItemDown(event) {
+        var dragHandle = event.matchedTarget;
+        var dragElement = dragHandle.closest('coral-multifield-item');
+
+        if (!dragElement._dragging) {
+          return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+        var items = this.items.getAll();
+        var dragElementIndex = items.indexOf(dragElement);
+
+        if (dragElementIndex < items.length - 1) {
+          var nextElement = dragElement.nextElementSibling;
+          this.insertBefore(dragElement, nextElement.nextElementSibling);
+        }
+
+        dragElement._dragging = true;
+        dragHandle.focus();
+      }
+      /** 
+       * Moves multiField item selected for dragging to start of multifield collection.
+       * @ignore
+       */
+
+    }, {
+      key: "_onMoveItemHome",
+      value: function _onMoveItemHome(event) {
+        var dragHandle = event.matchedTarget;
+        var dragElement = dragHandle.closest('coral-multifield-item');
+
+        if (!dragElement._dragging) {
+          return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+        var items = this.items.getAll();
+        var dragElementIndex = items.indexOf(dragElement);
+
+        if (dragElementIndex > 0) {
+          this.insertBefore(dragElement, this.items.first());
+        }
+
+        dragElement._dragging = true;
+        dragHandle.focus();
+      }
+      /** 
+       * Moves multiField item selected for dragging to end of multifield collection.
+       * @ignore
+       */
+
+    }, {
+      key: "_onMoveItemEnd",
+      value: function _onMoveItemEnd(event) {
+        var dragHandle = event.matchedTarget;
+        var dragElement = dragHandle.closest('coral-multifield-item');
+
+        if (!dragElement._dragging) {
+          return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+        var items = this.items.getAll();
+        var dragElementIndex = items.indexOf(dragElement);
+
+        if (dragElementIndex < items.length - 1) {
+          this.insertBefore(dragElement, this.items.last().nextElementSibling);
+        }
+
+        dragElement._dragging = true;
+        dragHandle.focus();
+      }
+      /** 
+       * Cancels keyboard drag and drop operation, restoring item to its previous location.
+       * @ignore
+       */
+
+    }, {
+      key: "_onMoveItemEsc",
+      value: function _onMoveItemEsc(event) {
+        var dragHandle = event.matchedTarget;
+        var multiFieldItem = dragHandle.closest('coral-multifield-item');
+
+        if (multiFieldItem._dragging && this._oldBefore && this._before) {
+          event.stopPropagation();
+          this.insertBefore(multiFieldItem, this._before);
+          dragHandle.focus();
+        }
+
+        this._toggleItemDragging(multiFieldItem, false);
       }
     }, {
       key: "_onInputChange",
@@ -60404,7 +60770,9 @@ var Coral = (function (exports) {
           document.body.classList.add('u-coral-closedHand');
           var dragElement = event.detail.dragElement;
           var items = this.items.getAll();
-          var dragElementIndex = items.indexOf(dragElement);
+          var dragElementIndex = items.indexOf(dragElement); // Toggle dragging state on multifield item.
+
+          dragElement._dragging = true;
           dragElement.classList.add(IS_DRAGGING_CLASS$1);
           items.forEach(function (item, i) {
             if (i < dragElementIndex) {
@@ -60490,14 +60858,18 @@ var Coral = (function (exports) {
 
             if (after) {
               this.insertBefore(dragElement, after.nextElementSibling);
-            }
+            } // Toggle dragging state on multifield item.
 
+
+            dragElement._dragging = false;
             this.trigger('coral-multifield:itemorder', {
               item: dragElement,
               oldBefore: oldBefore,
               before: before
             });
             this.trigger('change');
+
+            dragElement._elements.move.focus();
           }
         }
       }
@@ -60509,7 +60881,35 @@ var Coral = (function (exports) {
         // Update the item content with the template content
         if (item.parentNode === this) {
           this._renderTemplate(item);
+
+          this._updatePosInSet();
         }
+      }
+    }, {
+      key: "_onItemRemoved",
+      value: function _onItemRemoved() {
+        this._updatePosInSet();
+      }
+      /**
+       * update aria-posinset and aria-setsize for each item in the collection
+       * @private
+       */
+
+    }, {
+      key: "_updatePosInSet",
+      value: function _updatePosInSet() {
+        var items = this.items.getAll();
+        var setsize = items.length;
+        items.forEach(function (item, i) {
+          item.setAttribute('aria-posinset', i + 1);
+          item.setAttribute('aria-setsize', setsize);
+          item.setAttribute('aria-label', i18n.get('({0} of {1})', i + 1, setsize)); // so long as item content is not another multifield, 
+          // add aria-labelledby so that the item is labelled by its content and itself.
+
+          if (!item.querySelector('coral-multifield')) {
+            item.setAttribute('aria-labelledby', "".concat(item.id, "-content ").concat(item.id));
+          }
+        });
       }
       /** @private */
 
@@ -60539,7 +60939,7 @@ var Coral = (function (exports) {
 
       /** @ignore */
       value: function render() {
-        var _this3 = this;
+        var _this4 = this;
 
         _get(_getPrototypeOf(Multifield.prototype), "render", this).call(this);
 
@@ -60550,8 +60950,10 @@ var Coral = (function (exports) {
         this.template = this._elements.template; // Prepare items content based on the given template
 
         this.items.getAll().forEach(function (item) {
-          _this3._renderTemplate(item);
-        });
+          _this4._renderTemplate(item);
+        }); // update aria-posinset and aria-setsize for each item in the collection
+
+        this._updatePosInSet();
       }
       /**
        Triggered when the {@link Multifield} item are reordered.
@@ -60589,7 +60991,8 @@ var Coral = (function (exports) {
             itemTagName: 'coral-multifield-item',
             // allows multifields to be nested
             itemSelector: ':scope > coral-multifield-item',
-            onItemAdded: this._onItemAdded
+            onItemAdded: this._onItemAdded,
+            onItemRemoved: this._onItemRemoved
           });
         }
 
@@ -60638,6 +61041,10 @@ var Coral = (function (exports) {
   var template$E = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["remove"] = document.createElement("button", "coral-button");
+    el0.id = data_0["uid"] + "-remove";
+    el0.setAttribute("aria-labelledby", data_0["uid"] + "-remove " + data_0["uid"] + "-content " + data_0["uid"]);
+    el0.setAttribute("aria-label", data_0["i18n"]["get"]('Remove'));
+    el0.setAttribute("title", data_0["i18n"]["get"]('Remove'));
     el0.setAttribute("tracking", "off");
     el0.setAttribute("type", "button");
     el0.setAttribute("is", "coral-button");
@@ -60652,6 +61059,13 @@ var Coral = (function (exports) {
     var el1 = document.createTextNode("\n");
     frag.appendChild(el1);
     var el2 = this["move"] = document.createElement("button", "coral-button");
+    el2.id = data_0["uid"] + "-reorder";
+    el2.setAttribute("aria-labelledby", data_0["uid"] + "-reorder " + data_0["uid"] + "-content " + data_0["uid"]);
+    el2.setAttribute("aria-label", data_0["i18n"]["get"]('Reorder'));
+    el2.setAttribute("aria-roledescription", data_0["i18n"]["get"]('reorder_drag_handle'));
+    el2.setAttribute("aria-grabbed", "false");
+    el2.setAttribute("aria-pressed", "false");
+    el2.setAttribute("title", data_0["i18n"]["get"]('reorder_hint'));
     el2.setAttribute("tracking", "off");
     el2.setAttribute("type", "button");
     el2.setAttribute("is", "coral-button");
@@ -60663,8 +61077,6 @@ var Coral = (function (exports) {
     el2.className += " _coral-Multifield-move u-coral-openHand";
     el2.setAttribute("coral-multifield-move", "");
     frag.appendChild(el2);
-    var el3 = document.createTextNode("\n");
-    frag.appendChild(el3);
     return frag;
   };
 
@@ -60695,7 +61107,16 @@ var Coral = (function (exports) {
         // Create or fetch the content zones
         content: _this.querySelector('coral-multifield-item-content') || document.createElement('coral-multifield-item-content')
       };
-      template$E.call(_this._elements);
+      var uid = _this.id || commons.getUID();
+
+      _this.setAttribute('id', uid);
+
+      _this._elements.content.setAttribute('id', "".concat(uid, "-content"));
+
+      template$E.call(_this._elements, {
+        i18n: i18n,
+        uid: uid
+      });
       return _this;
     }
     /**
@@ -60720,8 +61141,8 @@ var Coral = (function (exports) {
         var fragment = document.createDocumentFragment();
         var templateHandleNames = ['move', 'remove']; // Render the main template
 
-        fragment.appendChild(this._elements.move);
         fragment.appendChild(this._elements.remove);
+        fragment.appendChild(this._elements.move);
         var content = this._elements.content; // Remove it so we can process children
 
         if (content.parentNode) {
@@ -60764,6 +61185,38 @@ var Coral = (function (exports) {
             this.insertBefore(content, this.firstChild);
           }
         });
+      }
+      /**
+       Whether the item is set to be reorder using the keyboard
+       
+       @type {boolean}
+       @private
+       */
+
+    }, {
+      key: "_dragging",
+      get: function get() {
+        return this.__dragging || false;
+      },
+      set: function set(value) {
+        this.__dragging = transform.boolean(value);
+
+        if (this.__dragging) {
+          // Setting role="application" to the move button forces 
+          // NVDA and JAWS screen readers into forms mode, 
+          // so arrow keys can be used to reorder.
+          this._elements.move.setAttribute('role', 'application');
+        } else {
+          // when reordering stops, restore the default role for the move button
+          this._elements.move.removeAttribute('role');
+        } // aria-grabbed, may be deprecated in WAI-ARIA 1.1, but it is still reported by NVDA as "draggable" or "dragging"
+
+
+        this._elements.move.setAttribute('aria-grabbed', this.__dragging);
+
+        this._elements.move.setAttribute('aria-pressed', this.__dragging);
+
+        this._elements.move.selected = this.__dragging;
       }
     }, {
       key: "_contentZones",
@@ -60810,6 +61263,10 @@ var Coral = (function (exports) {
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
+
+  commons.extend(strings, {
+    'coral-component-multifield': translations$h
+  }); // Expose component on the Coral namespace
 
   commons._define('coral-multifield-item', MultifieldItem);
 
@@ -63316,7 +63773,7 @@ var Coral = (function (exports) {
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$h = {
+  var translations$i = {
     "en-US": {
       "More actions": "More actions"
     },
@@ -63389,7 +63846,7 @@ var Coral = (function (exports) {
    */
 
   commons.extend(strings, {
-    'coral-component-quickactions': translations$h
+    'coral-component-quickactions': translations$i
   }); // Expose component on the Coral namespace
 
   commons._define('coral-quickactions-item', QuickActionsItem);
@@ -64130,7 +64587,7 @@ var Coral = (function (exports) {
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$i = {
+  var translations$j = {
     "it-IT": {
       "Clear search": "Azzera ricerca"
     },
@@ -64672,7 +65129,7 @@ var Coral = (function (exports) {
    */
 
   commons.extend(strings, {
-    'coral-component-search': translations$i
+    'coral-component-search': translations$j
   }); // Expose component on the Coral namespace
 
   commons._define('coral-search', Search);
@@ -70381,7 +70838,7 @@ var Coral = (function (exports) {
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$j = {
+  var translations$k = {
     "en-US": {
       "Step List": "Step List",
       "completed: ": "completed: ",
@@ -70511,7 +70968,7 @@ var Coral = (function (exports) {
    */
 
   commons.extend(strings, {
-    'coral-component-steplist': translations$j
+    'coral-component-steplist': translations$k
   }); // Expose component on the Coral namespace
 
   commons._define('coral-step', Step);
@@ -70531,7 +70988,7 @@ var Coral = (function (exports) {
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$k = {
+  var translations$l = {
     "en-US": {
       "Select": "Select"
     },
@@ -70998,7 +71455,7 @@ var Coral = (function (exports) {
    */
 
   commons.extend(strings, {
-    'coral-component-switch': translations$k
+    'coral-component-switch': translations$l
   }); // Expose component on the Coral namespace
 
   commons._define('coral-switch', Switch);
@@ -71016,7 +71473,7 @@ var Coral = (function (exports) {
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$l = {
+  var translations$m = {
     "en-US": {
       "Select": "Select",
       "Select All": "Select All",
@@ -75975,7 +76432,7 @@ var Coral = (function (exports) {
    */
 
   commons.extend(strings, {
-    'coral-component-table': translations$l
+    'coral-component-table': translations$m
   }); // Expose component on the Coral namespace
 
   commons._define('coral-table-column', TableColumn, {
@@ -79615,7 +80072,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.9.0";
+  var version$1 = "4.10.0";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

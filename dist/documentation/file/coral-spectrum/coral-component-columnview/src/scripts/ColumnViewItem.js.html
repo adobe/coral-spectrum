@@ -457,6 +457,11 @@ const variant = {
 };
 
 /**
+ Utility that identifies Chrome on macOS, which announces drilldown items as &quot;row 1 expanded&quot; or &quot;row 1 collapsed&quot; when navigating between items.
+ */
+const isChromeMacOS = !!window &amp;&amp; !!window.chrome &amp;&amp; /Mac/i.test(window.navigator.platform);
+
+/**
  @class Coral.ColumnView.Item
  @classdesc A ColumnView Item component
  @htmltag coral-columnview-item
@@ -550,8 +555,16 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       
       this.classList.add(&apos;is-branch&apos;);
 
-      // @a11y Update aria-expanded. Active drilldowns should be expanded.
-      this.setAttribute(&apos;aria-expanded&apos;, this.active);
+      // @a11y Update aria-expanded. Active drilldowns should be expanded. 
+      // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
+      // to announce drilldown items as &quot;row 1 expanded&quot; or &quot;row 1 collapsed&quot; when 
+      // navigating between items. 
+      if (this.selected || (isChromeMacOS &amp;&amp; this.getAttribute(&apos;aria-level&apos;) === &apos;1&apos;)) {
+        this.removeAttribute(&apos;aria-expanded&apos;);
+      }
+      else {
+        this.setAttribute(&apos;aria-expanded&apos;, this.active);
+      }
     }
     else {
       this.classList.remove(&apos;is-branch&apos;);
@@ -614,12 +627,16 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     this.setAttribute(&apos;aria-selected&apos;, this._selected);
 
     // @a11y Update aria-expanded. Active drilldowns should be expanded.
+    // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
+    // to announce drilldown items as &quot;row 1 expanded&quot; or &quot;row 1 collapsed&quot; when 
+    // navigating between items. 
     if (this.variant === variant.DRILLDOWN) {
-      if (this._ariaExpandedTimeout) {
-        window.clearTimeout(this._ariaExpandedTimeout);
-        this._ariaExpandedTimeout = undefined;
+      if (this._selected || (isChromeMacOS &amp;&amp; this.getAttribute(&apos;aria-level&apos;) === &apos;1&apos;)) {
+        this.removeAttribute(&apos;aria-expanded&apos;);
       }
-      this.setAttribute(&apos;aria-expanded&apos;, this.active);
+      else {
+        this.setAttribute(&apos;aria-expanded&apos;, this.active);
+      }
     }
 
     let accessibilityState = this._elements.accessibilityState;
@@ -677,42 +694,19 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     this._reflectAttribute(&apos;active&apos;, this._active);
   
     this.classList.toggle(&apos;is-navigated&apos;, this._active);
-    this.setAttribute(&apos;aria-selected&apos;, this._active);
+    this.setAttribute(&apos;aria-selected&apos;, this.hasAttribute(&apos;_selectable&apos;) ? this.selected : this._active);
 
     // @a11y Update aria-expanded. Active drilldowns should be expanded.
-    if (this.variant === variant.DRILLDOWN) {
-      // @a11y workaround for VoiceOver announcing expanded state rather than the item name when the item receives focus.
-      if (this._ariaExpandedTimeout) {
-        window.cancelAnimationFrame(this._ariaExpandedTimeout);
-        window.clearTimeout(this._ariaExpandedTimeout);
-        this._ariaExpandedTimeout = undefined;
+    // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
+    // to announce drilldown items as &quot;row 1 expanded&quot; or &quot;row 1 collapsed&quot; when 
+    // navigating between items. 
+    if (this.variant === variant.DRILLDOWN) { 
+      if (this._selected || (isChromeMacOS &amp;&amp; this.getAttribute(&apos;aria-level&apos;) === &apos;1&apos;)) {
+        this.removeAttribute(&apos;aria-expanded&apos;);
       }
-      const timeoutDelay = 20;
-      this._ariaExpandedTimeout = commons.nextFrame(() =&gt; {
-        const isFocused = this === document.activeElement || this.contains(document.activeElement);
-        let activeElement;
-        if (isFocused &amp;&amp; !this.selected) {
-          this.setAttribute(&apos;aria-expanded&apos;, this._active);
-          activeElement = document.activeElement;
-          activeElement.blur();
-        }
-        else {
-          this.setAttribute(&apos;aria-hidden&apos;, true);
-        }
-      
-        // @a11y after a delay to give focused item time to announce,
-        commons.nextFrame(() =&gt; {
-          if (isFocused &amp;&amp; activeElement) {
-            activeElement.focus();
-          }
-          else {
-            window.setTimeout(() =&gt; {
-              this.setAttribute(&apos;aria-expanded&apos;, this._active);
-              commons.nextFrame(() =&gt; this.removeAttribute(&apos;aria-hidden&apos;));
-            }, timeoutDelay);
-          }
-        });
-      });
+      else {
+        this.setAttribute(&apos;aria-expanded&apos;, this.active);
+      }
     }
 
     if (!this._active) {

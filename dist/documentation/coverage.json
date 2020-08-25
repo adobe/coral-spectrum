@@ -1,7 +1,7 @@
 {
-  "coverage": "64.75%",
-  "expectCount": 3643,
-  "actualCount": 2359,
+  "coverage": "64.8%",
+  "expectCount": 3657,
+  "actualCount": 2370,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
       "expectCount": 6,
@@ -779,18 +779,17 @@
     },
     "coral-spectrum/coral-component-columnview/src/scripts/ColumnViewItem.js": {
       "expectCount": 22,
-      "actualCount": 12,
+      "actualCount": 13,
       "undocumentLines": [
         20,
-        50,
-        119,
-        153,
-        188,
-        198,
-        254,
-        305,
-        368,
-        370
+        55,
+        124,
+        166,
+        201,
+        271,
+        299,
+        362,
+        364
       ]
     },
     "coral-spectrum/coral-component-columnview/src/scripts/ColumnViewItemContent.js": {
@@ -1276,19 +1275,22 @@
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-multifield/src/scripts/Multifield.js": {
-      "expectCount": 23,
-      "actualCount": 13,
+      "expectCount": 35,
+      "actualCount": 22,
       "undocumentLines": [
         18,
         19,
         20,
         21,
         22,
-        53,
-        62,
-        99,
-        176,
-        320
+        67,
+        76,
+        114,
+        224,
+        225,
+        369,
+        498,
+        544
       ]
     },
     "coral-spectrum/coral-component-multifield/src/scripts/MultifieldCollection.js": {
@@ -1300,12 +1302,13 @@
       ]
     },
     "coral-spectrum/coral-component-multifield/src/scripts/MultifieldItem.js": {
-      "expectCount": 7,
-      "actualCount": 4,
+      "expectCount": 9,
+      "actualCount": 5,
       "undocumentLines": [
-        18,
-        34,
-        61
+        19,
+        35,
+        76,
+        93
       ]
     },
     "coral-spectrum/coral-component-multifield/src/scripts/MultifieldItemContent.js": {

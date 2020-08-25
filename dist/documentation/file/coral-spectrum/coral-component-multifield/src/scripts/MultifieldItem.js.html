@@ -436,6 +436,7 @@ import {BaseComponent} from &apos;../../../coral-base-component&apos;;
 import &apos;../../../coral-component-button&apos;;
 import item from &apos;../templates/item&apos;;
 import {DragAction} from &apos;../../../coral-dragaction&apos;;
+import {i18n, transform, commons} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-Multifield-item&apos;;
 
@@ -457,7 +458,11 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
       // Create or fetch the content zones
       content: this.querySelector(&apos;coral-multifield-item-content&apos;) || document.createElement(&apos;coral-multifield-item-content&apos;)
     };
-    item.call(this._elements);
+
+    const uid = this.id || commons.getUID();
+    this.setAttribute(&apos;id&apos;, uid);
+    this._elements.content.setAttribute(&apos;id&apos;, `${uid}-content`);
+    item.call(this._elements, {i18n, uid});
   }
   
   /**
@@ -479,6 +484,33 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
       }
     });
   }
+
+  /**
+   Whether the item is set to be reorder using the keyboard
+   
+   @type {boolean}
+   @private
+   */
+  get _dragging() {
+    return this.__dragging || false;
+  }
+  set _dragging(value) {
+    this.__dragging = transform.boolean(value);
+    if (this.__dragging) {
+      // Setting role=&quot;application&quot; to the move button forces 
+      // NVDA and JAWS screen readers into forms mode, 
+      // so arrow keys can be used to reorder.
+      this._elements.move.setAttribute(&apos;role&apos;, &apos;application&apos;);
+    }
+    else {
+      // when reordering stops, restore the default role for the move button
+      this._elements.move.removeAttribute(&apos;role&apos;);
+    }
+    // aria-grabbed, may be deprecated in WAI-ARIA 1.1, but it is still reported by NVDA as &quot;draggable&quot; or &quot;dragging&quot;
+    this._elements.move.setAttribute(&apos;aria-grabbed&apos;, this.__dragging);
+    this._elements.move.setAttribute(&apos;aria-pressed&apos;, this.__dragging);
+    this._elements.move.selected = this.__dragging;
+  }
   
   get _contentZones() { return {&apos;coral-multifield-item-content&apos;: &apos;content&apos;}; }
   
@@ -497,8 +529,8 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
     const templateHandleNames = [&apos;move&apos;, &apos;remove&apos;];
     
     // Render the main template
-    fragment.appendChild(this._elements.move);
     fragment.appendChild(this._elements.remove);
+    fragment.appendChild(this._elements.move);
   
     const content = this._elements.content;
   

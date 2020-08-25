@@ -435,7 +435,7 @@
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
 import MultifieldCollection from &apos;./MultifieldCollection&apos;;
 import &apos;../../../coral-component-textfield&apos;;
-import {commons} from &apos;../../../coral-utils&apos;;
+import {commons, i18n} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-Multifield&apos;;
 const IS_DRAGGING_CLASS = &apos;is-dragging&apos;;
@@ -458,20 +458,34 @@ class Multifield extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
+
+    this.setAttribute(&apos;id&apos;, this.id || commons.getUID());
     
     // Attach events
-    this._delegateEvents({
+    const events = {
       &apos;coral-dragaction:dragstart coral-multifield-item&apos;: &apos;_onDragStart&apos;,
       &apos;coral-dragaction:drag coral-multifield-item&apos;: &apos;_onDrag&apos;,
       &apos;coral-dragaction:dragend coral-multifield-item&apos;: &apos;_onDragEnd&apos;,
   
       &apos;click [coral-multifield-add]&apos;: &apos;_onAddItemClick&apos;,
       &apos;click ._coral-Multifield-remove&apos;: &apos;_onRemoveItemClick&apos;,
+      &apos;click [coral-multifield-move]&apos;: &apos;_onClickDragHandle&apos;,
+      &apos;key:up [coral-multifield-move]&apos;: &apos;_onMoveItemUp&apos;,
+      &apos;key:pageup [coral-multifield-move]&apos;: &apos;_onMoveItemUp&apos;,
+      &apos;key:down [coral-multifield-move]&apos;: &apos;_onMoveItemDown&apos;,
+      &apos;key:pagedown [coral-multifield-move]&apos;: &apos;_onMoveItemDown&apos;,
+      &apos;key:home [coral-multifield-move]&apos;: &apos;_onMoveItemHome&apos;,
+      &apos;key:end [coral-multifield-move]&apos;: &apos;_onMoveItemEnd&apos;,
+      &apos;key:esc [coral-multifield-move]&apos;: &apos;_onMoveItemEsc&apos;,
+      &apos;capture:blur [coral-multifield-move]&apos;: &apos;_onBlurDragHandle&apos;,
       &apos;change coral-multifield-item-content &gt; input&apos;: &apos;_onInputChange&apos;
-    });
+    };
+
+    events[`global:key:escape #${this.id} &gt; [coral-multifield-move]`] = &apos;_onMoveItemEsc&apos;;
     
+    this._delegateEvents(events);
+
     // Templates
-    this.setAttribute(&apos;id&apos;, this.id || commons.getUID());
     this._elements = {
       template: this.querySelector(`#${this.id} &gt; template[coral-multifield-template]`) || document.createElement(&apos;template&apos;)
     };
@@ -494,6 +508,7 @@ class Multifield extends BaseComponent(HTMLElement) {
             this.items.getAll().forEach((item) =&gt; {
               this._renderTemplate(item);
             });
+            this._updatePosInSet();
           }
         }
       });
@@ -523,7 +538,8 @@ class Multifield extends BaseComponent(HTMLElement) {
         itemTagName: &apos;coral-multifield-item&apos;,
         // allows multifields to be nested
         itemSelector: &apos;:scope &gt; coral-multifield-item&apos;,
-        onItemAdded: this._onItemAdded
+        onItemAdded: this._onItemAdded,
+        onItemRemoved: this._onItemRemoved
       });
     }
     return this._items;
@@ -586,13 +602,190 @@ class Multifield extends BaseComponent(HTMLElement) {
     if (event.matchedTarget.closest(&apos;coral-multifield&apos;) === this) {
       const item = event.matchedTarget.closest(&apos;coral-multifield-item&apos;);
       if (item) {
+        // manage focus when item is removed
+        let itemToFocus;
+        const items = this.items.getAll();
+        const setsize = items.length;
+        if (setsize &gt; 1) {
+          const itemIndex = items.indexOf(item);
+          if (itemIndex === setsize - 1) {
+            itemToFocus = items[itemIndex - 1];
+          }
+          else {
+            itemToFocus = items[itemIndex + 1];
+          }
+        }
         item.remove();
+        if (itemToFocus) {
+          itemToFocus._elements.remove.focus();
+        }
+        else {
+          itemToFocus = this.querySelector(&apos;[coral-multifield-add]&apos;);
+          if (itemToFocus) {
+            itemToFocus.focus();
+          }
+        }
       }
       
       this.trigger(&apos;change&apos;);
   
       this._trackEvent(&apos;click&apos;, &apos;remove item button&apos;, event);
     }
+  }
+
+  /** 
+   * Toggles keyboard accessible dragging of the current multifield item.
+   * @ignore
+   */
+  _toggleItemDragging(multiFieldItem, dragging = false) {
+    if (multiFieldItem._dragging === dragging) {
+      return;
+    }
+    multiFieldItem._dragging = dragging;
+    if (dragging) {
+      this._oldBefore = multiFieldItem.previousElementSibling;
+      this._before = multiFieldItem.nextElementSibling;
+    }
+    else {
+      this.trigger(&apos;coral-multifield:beforeitemorder&apos;, {
+        item: multiFieldItem,
+        oldBefore: this._oldBefore,
+        before: this._before
+      });
+      this.trigger(&apos;coral-multifield:itemorder&apos;, {
+        item: multiFieldItem,
+        oldBefore: this._oldBefore,
+        before: multiFieldItem.nextElementSibling
+      });
+      this.trigger(&apos;change&apos;);
+      this._oldBefore = null;
+      this._before = null;
+    } 
+  }
+
+  /** 
+   * Clicking dragHandle toggles keyboard accessible dragging of the current multifield item.
+   * @ignore
+   */
+  _onClickDragHandle(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const multiFieldItem = event.matchedTarget.closest(&apos;coral-multifield-item&apos;);
+    this._toggleItemDragging(multiFieldItem, !multiFieldItem._dragging);
+  }
+
+  /** 
+   * When the drag handle blurs, cancel dragging, leaving item where it is.
+   * @ignore
+   */
+  _onBlurDragHandle(event) {
+    const dragHandle = event.matchedTarget;
+    const multiFieldItem = dragHandle.closest(&apos;coral-multifield-item&apos;);
+    commons.nextFrame(() =&gt; {
+      if (document.activeElement !== dragHandle) {
+        this._toggleItemDragging(multiFieldItem, false);
+      }
+    });
+  }
+
+  /** 
+   * Moves multiField item selected for dragging up one index position in the multifield collection.
+   * @ignore
+   */
+  _onMoveItemUp(event) {
+    const dragHandle = event.matchedTarget;
+    const dragElement = dragHandle.closest(&apos;coral-multifield-item&apos;);
+    if (!dragElement._dragging) {
+      return;
+    }
+    event.preventDefault();
+    event.stopPropagation();
+    const items = this.items.getAll();
+    const dragElementIndex = items.indexOf(dragElement);
+    if (dragElementIndex &gt; 0) {
+      this.insertBefore(dragElement, dragElement.previousElementSibling);
+    }
+    dragElement._dragging = true;
+    dragHandle.focus();
+  }
+
+  /** 
+   * Moves multiField item selected for dragging down one index position in the multifield collection.
+   * @ignore
+   */
+  _onMoveItemDown(event) {
+    const dragHandle = event.matchedTarget;
+    const dragElement = dragHandle.closest(&apos;coral-multifield-item&apos;);
+    if (!dragElement._dragging) {
+      return;
+    }
+    event.preventDefault();
+    event.stopPropagation();
+    const items = this.items.getAll();
+    const dragElementIndex = items.indexOf(dragElement);
+    if (dragElementIndex &lt; items.length - 1) {
+      const nextElement = dragElement.nextElementSibling;
+      this.insertBefore(dragElement, nextElement.nextElementSibling);
+    }
+    dragElement._dragging = true;
+    dragHandle.focus();
+  }
+
+  /** 
+   * Moves multiField item selected for dragging to start of multifield collection.
+   * @ignore
+   */
+  _onMoveItemHome(event) {
+    const dragHandle = event.matchedTarget;
+    let dragElement = dragHandle.closest(&apos;coral-multifield-item&apos;);
+    if (!dragElement._dragging) {
+      return;
+    }
+    event.preventDefault();
+    event.stopPropagation();
+    const items = this.items.getAll();
+    const dragElementIndex = items.indexOf(dragElement);
+    if (dragElementIndex &gt; 0) {
+      this.insertBefore(dragElement, this.items.first());
+    }
+    dragElement._dragging = true;
+    dragHandle.focus();
+  }
+
+  /** 
+   * Moves multiField item selected for dragging to end of multifield collection.
+   * @ignore
+   */
+  _onMoveItemEnd(event) {
+    const dragHandle = event.matchedTarget;
+    let dragElement = dragHandle.closest(&apos;coral-multifield-item&apos;);
+    if (!dragElement._dragging) {
+      return;
+    }
+    event.preventDefault();
+    event.stopPropagation();
+    const items = this.items.getAll();
+    const dragElementIndex = items.indexOf(dragElement);
+    if (dragElementIndex &lt; items.length - 1) {
+      this.insertBefore(dragElement, this.items.last().nextElementSibling);
+    }
+    dragElement._dragging = true;
+    dragHandle.focus();
+  }
+
+  /** 
+   * Cancels keyboard drag and drop operation, restoring item to its previous location.
+   * @ignore
+   */
+  _onMoveItemEsc(event) {
+    const dragHandle = event.matchedTarget;
+    const multiFieldItem = dragHandle.closest(&apos;coral-multifield-item&apos;);
+    if (multiFieldItem._dragging &amp;&amp; this._oldBefore &amp;&amp; this._before) {
+      event.stopPropagation();
+      this.insertBefore(multiFieldItem, this._before);
+      dragHandle.focus();
+    }
+    this._toggleItemDragging(multiFieldItem, false);
   }
   
   _onInputChange(event) {
@@ -607,7 +800,9 @@ class Multifield extends BaseComponent(HTMLElement) {
       const dragElement = event.detail.dragElement;
       const items = this.items.getAll();
       const dragElementIndex = items.indexOf(dragElement);
-    
+
+      // Toggle dragging state on multifield item.
+      dragElement._dragging = true;
       dragElement.classList.add(IS_DRAGGING_CLASS);
       items.forEach((item, i) =&gt; {
         if (i &lt; dragElementIndex) {
@@ -696,6 +891,9 @@ class Multifield extends BaseComponent(HTMLElement) {
         if (after) {
           this.insertBefore(dragElement, after.nextElementSibling);
         }
+
+        // Toggle dragging state on multifield item.
+        dragElement._dragging = false;
   
         this.trigger(&apos;coral-multifield:itemorder&apos;, {
           item: dragElement,
@@ -704,6 +902,8 @@ class Multifield extends BaseComponent(HTMLElement) {
         });
   
         this.trigger(&apos;change&apos;);
+
+        dragElement._elements.move.focus();
       }
     }
   }
@@ -713,7 +913,31 @@ class Multifield extends BaseComponent(HTMLElement) {
     // Update the item content with the template content
     if (item.parentNode === this) {
       this._renderTemplate(item);
+      this._updatePosInSet();
     }
+  }
+
+  _onItemRemoved() {
+    this._updatePosInSet();
+  }
+
+  /**
+   * update aria-posinset and aria-setsize for each item in the collection
+   * @private
+   */
+  _updatePosInSet() {
+    const items = this.items.getAll();
+    const setsize = items.length;
+    items.forEach((item, i) =&gt; {
+      item.setAttribute(&apos;aria-posinset&apos;, i + 1);
+      item.setAttribute(&apos;aria-setsize&apos;, setsize);
+      item.setAttribute(&apos;aria-label&apos;, i18n.get(&apos;({0} of {1})&apos;, i + 1, setsize));
+      // so long as item content is not another multifield, 
+      // add aria-labelledby so that the item is labelled by its content and itself.
+      if (!item.querySelector(&apos;coral-multifield&apos;)) {
+        item.setAttribute(&apos;aria-labelledby&apos;, `${item.id}-content ${item.id}`);
+      }
+    });
   }
   
   /** @private */
@@ -757,6 +981,9 @@ class Multifield extends BaseComponent(HTMLElement) {
     this.items.getAll().forEach((item) =&gt; {
       this._renderTemplate(item);
     });
+
+    // update aria-posinset and aria-setsize for each item in the collection
+    this._updatePosInSet();
   }
   
   /**
