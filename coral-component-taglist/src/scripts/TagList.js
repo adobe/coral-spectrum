@@ -287,11 +287,13 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     
     // adds the role to support accessibility
     attachedItem.setAttribute('role', 'row');
-    attachedItem.setAttribute('tabindex', '-1');
+    if (!this.disabled) {
++       attachedItem.setAttribute('tabindex', '-1');
++    }
     attachedItem[this.readOnly ? 'removeAttribute' : 'setAttribute']('closable', '');
     
     // add tabindex to first item if none existing
-    if (!this.querySelector(`${ITEM_TAGNAME}[tabindex="0"]`)) {
+    if (!this.disabled && !this.querySelector(`${ITEM_TAGNAME}[tabindex="0"]`)) {
       const first = items[0];
       if (first) {
         first.setAttribute('tabindex', '0');
@@ -312,14 +314,46 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     // Cleans the tag from TagList specific values
     detachedItem.removeAttribute('role');
     detachedItem.removeAttribute('tabindex');
-    detachedItem._host = undefined;
-    
-    //if all tags are removed focus should move to previously focused element 
-    if (this._itemToFocusAfterDelete && this._previouslyFocusElement && (detachedItem === this._itemToFocusAfterDelete)) {
-        this._itemToFocusAfterDelete = this._previouslyFocusElement;
+    const parentElement = this.parentElement;
+    if (this.items.length === 0 && parentElement) {
+        // If all tags are removed, call focus method on parent element 
+        if (typeof parentElement.focus === 'function') {
+            parentElement.focus();
     }
 
-    if (this._itemToFocusAfterDelete) {
+    // clear orphaned ::before and ::after from .coral3-TagList:empty TagList which should default to display: none
+        this.innerHTML = '';
+
+        var self = this;
+
+    window.requestAnimationFrame(() => {
+          // if the parentElement did not receive focus or move focus to some other element
+          if (document.activeElement.tagName === 'BODY') {
+            // make the TagList focusable
+            self.tabIndex = -1;
+            self.classList.add('u-coral-screenReaderOnly');
+            self.style.outline = '0';
+            self.innerHTML = ' ';
+            var onBlurFocusManagement = function onBlurFocusManagement() {
+              self.removeAttribute('tabindex');
+              self.classList.remove('u-coral-screenReaderOnly');
+              self.style.outline = '';
+              self.innerHTML = '';
+              self._vent.off('blur.focusManagement');
+            };
+            self._vent.on('blur.focusManagement', null, onBlurFocusManagement); 
+            Coral.commons.nextFrame(function() {
+              if (!parentElement.contains(document.activeElement)) {
+                self.focus();
+              } 
+              else {
+                onBlurFocusManagement();
+              }
+            });
+          }
+        });
+      }
+      else if (this._itemToFocusAfterDelete) {
       this._itemToFocusAfterDelete.focus();
     }
     
