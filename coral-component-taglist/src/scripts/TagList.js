@@ -288,8 +288,8 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     // adds the role to support accessibility
     attachedItem.setAttribute('role', 'row');
     if (!this.disabled) {
-+       attachedItem.setAttribute('tabindex', '-1');
-+    }
+        attachedItem.setAttribute('tabindex', '-1');
+    }
     attachedItem[this.readOnly ? 'removeAttribute' : 'setAttribute']('closable', '');
     
     // add tabindex to first item if none existing
