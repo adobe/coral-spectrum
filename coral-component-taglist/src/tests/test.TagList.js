@@ -647,8 +647,7 @@ describe('TagList', function() {
             });
           });
         });
-    });
-
+      });
     it('if focus is not managed by parentElement, focus should be set to the taglist itself', function() {
         var tagList = helpers.build(window.__html__['TagList.base.html']);
         var all = tagList.items.getAll();
@@ -656,12 +655,13 @@ describe('TagList', function() {
         tagList.items.first().focus();
         expect(document.activeElement).to.equal(tagList.items.first());
         helpers.next(function() {
-        helpers.keypress('backspace', tagList.items.first());
-        expect(tagList.items.length).to.equal(0);
-        expect(document.activeElement).to.equal(tagList);
-        // remove tabindex from taglist element on blur
-        tagList.trigger('blur');
-        expect(tagList.hasAttribute('tabindex')).to.be.false;
-        });
-    });
+          helpers.keypress('backspace', tagList.items.first());
+            expect(tagList.items.length).to.equal(0);
+                expect(document.activeElement).to.equal(tagList);
+                // remove tabindex from taglist element on blur
+                tagList.trigger('blur');
+                  expect(tagList.hasAttribute('tabindex')).to.be.false;
+              });       
+            });
+});
 });
