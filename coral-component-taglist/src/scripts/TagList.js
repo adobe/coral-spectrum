@@ -72,8 +72,6 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     this._labellableElement = this;
   
     this._itemToFocusAfterDelete = null;
-    //track previously focused element before taglist
-    this._previouslyFocusElement = null;
   }
   
   /**
@@ -288,7 +286,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     // adds the role to support accessibility
     attachedItem.setAttribute('role', 'row');
     if (!this.disabled) {
-        attachedItem.setAttribute('tabindex', '-1');
+      attachedItem.setAttribute('tabindex', '-1');
     }
     attachedItem[this.readOnly ? 'removeAttribute' : 'setAttribute']('closable', '');
     
@@ -314,27 +312,30 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     // Cleans the tag from TagList specific values
     detachedItem.removeAttribute('role');
     detachedItem.removeAttribute('tabindex');
+    detachedItem._host = undefined;
+
     const parentElement = this.parentElement;
     if (this.items.length === 0 && parentElement) {
-        // If all tags are removed, call focus method on parent element 
-        if (typeof parentElement.focus === 'function') {
-            parentElement.focus();
-    }
+      // If all tags are removed, call focus method on parent element
+      if (typeof parentElement.focus === 'function') {
+        parentElement.focus();
+      }
 
-    // clear orphaned ::before and ::after from .coral3-TagList:empty TagList which should default to display: none
-        this.innerHTML = '';
+      const self = this;
 
-        var self = this;
-
-    window.requestAnimationFrame(() => {
-          // if the parentElement did not receive focus or move focus to some other element
-          if (document.activeElement.tagName === 'BODY') {
+      commons.nextFrame(() => {
+        // if the parentElement did not receive focus or move focus to some other element
+        if (document.activeElement.tagName === 'BODY') {
+          if (this.items.length > 0) {
+            self.items.first().focus();
+          }
+          else {
             // make the TagList focusable
             self.tabIndex = -1;
             self.classList.add('u-coral-screenReaderOnly');
             self.style.outline = '0';
             self.innerHTML = ' ';
-            var onBlurFocusManagement = function onBlurFocusManagement() {
+            const onBlurFocusManagement = function() {
               self.removeAttribute('tabindex');
               self.classList.remove('u-coral-screenReaderOnly');
               self.style.outline = '';
@@ -342,18 +343,17 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
               self._vent.off('blur.focusManagement');
             };
             self._vent.on('blur.focusManagement', null, onBlurFocusManagement); 
-            Coral.commons.nextFrame(function() {
-              if (!parentElement.contains(document.activeElement)) {
-                self.focus();
-              } 
-              else {
-                onBlurFocusManagement();
-              }
-            });
+            if (!parentElement.contains(document.activeElement)) {
+              self.focus();
+            }
+            else {
+              onBlurFocusManagement();
+            }
           }
-        });
-      }
-      else if (this._itemToFocusAfterDelete) {
+        }
+      });
+    }
+    else if (this._itemToFocusAfterDelete) {
       this._itemToFocusAfterDelete.focus();
     }
     
@@ -366,9 +366,6 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @private */
   _onItemFocus(event) {
     if (!this.disabled) {
-        if (!this._previouslyFocusElement) {
-            this._previouslyFocusElement = event.relatedTarget;
-        }	
       this.setAttribute('aria-live', 'polite');
       
       const tag = event.matchedTarget;

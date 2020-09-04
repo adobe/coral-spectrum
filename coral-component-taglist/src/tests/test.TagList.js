@@ -618,50 +618,51 @@ describe('TagList', function() {
       expect(spyCall.args[2]).to.be.an.instanceof(TagList);
     });
   });
-
-
-  describe('when last Tag is removed', function() {
+  
+  describe('when last Tag is removed', () => {
     it('if focus is not managed by parentElement, focus should be set to the taglist itself', function(done) {
       var tagList = helpers.build(window.__html__['TagList.base.html']);
-        var parentElement = document.createElement('coral-taglist-parent');
-        var input = document.createElement('input');
-        parentElement.appendChild(input);
-        parentElement.focus = function() {
-          input.focus();
-        };
-        helpers.target.appendChild(parentElement);
-        parentElement.appendChild(tagList);
-        var all = tagList.items.getAll();
-        expect(all.length).to.equal(1);
-        tagList.items.first().focus();
-        expect(document.activeElement).to.equal(tagList.items.first());
+      var parentElement = document.createElement('coral-taglist-parent');
+      var input = document.createElement('input');
+      parentElement.appendChild(input);
+      parentElement.focus = () => {
+        input.focus();
+      };
+      helpers.target.appendChild(parentElement);
+      parentElement.appendChild(tagList);
+      var all = tagList.items.getAll();
+      expect(all.length).to.equal(1);
+      tagList.items.first().focus();
+      expect(document.activeElement).to.equal(tagList.items.first());
+      helpers.next(() => {
+        helpers.keypress('backspace', tagList.items.first());
         helpers.next(function() {
-          helpers.keypress('backspace', tagList.items.first());
+          expect(tagList.items.length).to.equal(0);
           helpers.next(function() {
-            expect(tagList.items.length).to.equal(0);
-            helpers.next(function() {
-              helpers.next(function() {
-               expect(document.activeElement).to.equal(input);
-                done();
-              });
-            });
+            expect(document.activeElement).to.equal(input);
+            done();
           });
         });
       });
-    it('if focus is not managed by parentElement, focus should be set to the taglist itself', function() {
-        var tagList = helpers.build(window.__html__['TagList.base.html']);
-        var all = tagList.items.getAll();
-        expect(all.length).to.equal(1);
-        tagList.items.first().focus();
-        expect(document.activeElement).to.equal(tagList.items.first());
-        helpers.next(function() {
-          helpers.keypress('backspace', tagList.items.first());
-            expect(tagList.items.length).to.equal(0);
-                expect(document.activeElement).to.equal(tagList);
-                // remove tabindex from taglist element on blur
-                tagList.trigger('blur');
-                  expect(tagList.hasAttribute('tabindex')).to.be.false;
-              });       
-            });
-});
+    });
+
+    it('if focus is not managed by parentElement, focus should be set to the taglist itself', function(done) {
+      var tagList = helpers.build(window.__html__['TagList.base.html']);
+      var all = tagList.items.getAll();
+      expect(all.length).to.equal(1);
+      tagList.items.first().focus();
+      expect(document.activeElement).to.equal(tagList.items.first());
+      helpers.next(() => {
+        helpers.keypress('backspace', tagList.items.first());
+        helpers.next(() => {
+          expect(tagList.items.length).to.equal(0);
+          expect(document.activeElement).to.equal(tagList);
+          // remove tabindex from taglist element on blur
+          tagList.trigger('blur');
+          expect(tagList.hasAttribute('tabindex')).to.be.false;
+          done();
+        });
+      });
+    });
+  });
 });
