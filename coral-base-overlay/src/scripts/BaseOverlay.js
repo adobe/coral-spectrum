@@ -460,11 +460,18 @@ const BaseOverlay = (superClass) => class extends superClass {
     value = transform.string(value).toLowerCase();
     this._returnFocus = validate.enumeration(returnFocus)(value) && value || returnFocus.OFF;
   }
-
+  /**
+  returns element that will receive focus when overlay is closed
+  @returns {HTMLElement}element passed via returnFocusTo()
+  */
   get returnFocusToElement() {
     return this._returnFocusToElement;
   }
 
+  /**
+  returns element that will receive focus when overlay is hidden
+  @returns {HTMLElement} element cached
+  */
   get elementToFocusWhenHidden() {
     return this._elementToFocusWhenHidden;
   }
