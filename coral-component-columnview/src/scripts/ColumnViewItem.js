@@ -319,6 +319,9 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
         if (!itemSelector) {
           itemSelector = new Checkbox();
           itemSelector.setAttribute('coral-columnview-itemselect', '');
+          if (this.classList.contains('is-selected')){
+            itemSelector.setAttribute('checked', '');
+          }
           itemSelector._elements.input.tabIndex = -1;
           itemSelector.setAttribute('labelledby', this._elements.content.id);
       
