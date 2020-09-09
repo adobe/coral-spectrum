@@ -461,6 +461,14 @@ const BaseOverlay = (superClass) => class extends superClass {
     this._returnFocus = validate.enumeration(returnFocus)(value) && value || returnFocus.OFF;
   }
 
+  get returnFocusToElement() {
+    return this._returnFocusToElement;
+  }
+
+  get elementToFocusWhenHidden() {
+    return this._elementToFocusWhenHidden;
+  }
+
   /**
    Whether the browser should scroll the document to bring the newly-focused element into view. See {@link OverlayScrollOnFocusEnum}.
 
