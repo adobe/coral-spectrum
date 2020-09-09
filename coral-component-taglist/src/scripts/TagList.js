@@ -285,11 +285,13 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     
     // adds the role to support accessibility
     attachedItem.setAttribute('role', 'row');
-    attachedItem.setAttribute('tabindex', '-1');
+    if (!this.disabled) {
+      attachedItem.setAttribute('tabindex', '-1');
+    }
     attachedItem[this.readOnly ? 'removeAttribute' : 'setAttribute']('closable', '');
     
     // add tabindex to first item if none existing
-    if (!this.querySelector(`${ITEM_TAGNAME}[tabindex="0"]`)) {
+    if (!this.disabled && !this.querySelector(`${ITEM_TAGNAME}[tabindex="0"]`)) {
       const first = items[0];
       if (first) {
         first.setAttribute('tabindex', '0');
@@ -311,8 +313,47 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     detachedItem.removeAttribute('role');
     detachedItem.removeAttribute('tabindex');
     detachedItem._host = undefined;
-    
-    if (this._itemToFocusAfterDelete) {
+
+    const parentElement = this.parentElement;
+    if (this.items.length === 0 && parentElement) {
+      // If all tags are removed, call focus method on parent element
+      if (typeof parentElement.focus === 'function') {
+        parentElement.focus();
+      }
+
+      const self = this;
+
+      commons.nextFrame(() => {
+        // if the parentElement did not receive focus or move focus to some other element
+        if (document.activeElement.tagName === 'BODY') {
+          if (this.items.length > 0) {
+            self.items.first().focus();
+          }
+          else {
+            // make the TagList focusable
+            self.tabIndex = -1;
+            self.classList.add('u-coral-screenReaderOnly');
+            self.style.outline = '0';
+            self.innerHTML = ' ';
+            const onBlurFocusManagement = function() {
+              self.removeAttribute('tabindex');
+              self.classList.remove('u-coral-screenReaderOnly');
+              self.style.outline = '';
+              self.innerHTML = '';
+              self._vent.off('blur.focusManagement');
+            };
+            self._vent.on('blur.focusManagement', null, onBlurFocusManagement); 
+            if (!parentElement.contains(document.activeElement)) {
+              self.focus();
+            }
+            else {
+              onBlurFocusManagement();
+            }
+          }
+        }
+      });
+    }
+    else if (this._itemToFocusAfterDelete) {
       this._itemToFocusAfterDelete.focus();
     }
     
