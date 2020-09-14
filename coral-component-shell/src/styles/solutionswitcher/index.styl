@@ -85,13 +85,18 @@ $shell-solution-secondary-icon-color = rgba(255, 255, 255, .60);
   &:focus {
     outline: none;
     color: $shell-solution-text-color-hover;
+
+    coral-shell-solution-label {
+      text-decoration: underline;
+    }
+
     &.focus-ring {
       &:before {
         position: absolute;
-        top: 8px;
+        top: 0;
         left: -8px;
-        bottom: 8px;
-        right: 8px;
+        bottom: 0;
+        right: 0;
         border-radius: 4px;
         box-shadow: 0 0 0 1px rgb(38, 128, 235);
         border 1px solid  rgb(38, 128, 235);
@@ -108,6 +113,10 @@ $shell-solution-secondary-icon-color = rgba(255, 255, 255, .60);
 
 ._coral-Shell-solution:hover {
   color: $shell-solution-text-color-hover;
+
+  coral-shell-solution-label {
+    text-decoration: underline;
+  }
 }
 
 ._coral-Shell-solution--linked {
@@ -161,13 +170,15 @@ coral-shell-solution-label {
     text-decoration: none;
     text-align: left;
 
-    &:hover {
+    &:hover,
+    &:focus {
       ._coral-Shell-solution-icon {
         transform: scale(1);
       }
 
       coral-shell-solution-label {
         color: $shell-solution-text-color-hover;
+        text-decoration: underline;
       }
     }
 
