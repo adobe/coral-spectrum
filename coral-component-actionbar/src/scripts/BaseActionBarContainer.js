@@ -37,9 +37,6 @@ const copyAttributes = (from, to) => {
       }
     }
   }
-
-  // ensure that click event on menu item gets triggered on actionbar item
-  to.addEventListener('click', () => from.click());
 };
 
 /**
