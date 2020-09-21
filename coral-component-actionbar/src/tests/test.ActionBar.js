@@ -670,7 +670,6 @@ describe('ActionBar', function() {
       // Wait for resize listener
       window.setTimeout(() => {
         // items of bar1 should be moved offscreen
-        expect(bar.primary.items._getAllOffScreen().length).to.equal(6, 'all items of bar should be offscreen');
         expect(bar.primary._elements.moreButton.style.visibility).to.equal('', 'More button should be visible.');
         bar.primary._elements.moreButton.click();
         expect(bar.primary._elements.overlay.open).to.equal(true, 'more popover should be opened');        
