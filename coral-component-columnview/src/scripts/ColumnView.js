@@ -581,6 +581,9 @@ class ColumnView extends BaseComponent(HTMLElement) {
       item.focus();
       if (this.selectionMode === selectionMode.NONE  ||
         selectedItems.length === 0 ||
+        // For use case in cascading schema editor,
+        // where the focused item is not in the same column as the selected items,
+        // we should activate the item so that coral-columnview:activeitemchange gets called.
         item.parentElement !== selectedItems[0].parentElement) {
         item.click();
       }
@@ -627,6 +630,9 @@ class ColumnView extends BaseComponent(HTMLElement) {
       item.focus();
       if (this.selectionMode === selectionMode.NONE ||
         selectedItems.length === 0 ||
+        // For use case in cascading schema editor,
+        // where the focused item is not in the same column as the selected items,
+        // we should activate the item so that coral-columnview:activeitemchange gets called.
         item.parentElement !== selectedItems[0].parentElement) {
         item.click();
       }
@@ -1231,6 +1237,9 @@ class ColumnView extends BaseComponent(HTMLElement) {
       if (this.selectionMode === selectionMode.NONE ||
         this._oldSelection.length === 0 || 
         selectedItems.length === 0 ||
+        // For use case in cascading schema editor,
+        // where the focused item is not in the same column as the selected items,
+        // we should activate the item so that coral-columnview:activeitemchange gets called.
         item.parentElement !== selectedItems[0].parentElement) {
         item.click();
       }
