@@ -80,14 +80,19 @@ describe('ColumnView.Item', function() {
         expect(el.selected).to.be.false;
       });
 
-      it('should be settable', function() {
+      it('should be settable', function(done) {
         el.selected = true;
-        expect(el.selected).to.be.true;
-        expect(el.classList.contains('is-selected')).to.be.true;
+        helpers.next(() => {
+          expect(el.selected).to.be.true;
+          expect(el.classList.contains('is-selected')).to.be.true;
 
-        el.selected = false;
-        expect(el.selected).to.be.false;
-        expect(el.classList.contains('is-selected')).to.be.false;
+          el.selected = false;
+          helpers.next(() => {
+            expect(el.selected).to.be.false;
+            expect(el.classList.contains('is-selected')).to.be.false;
+            done();
+          });
+        });
       });
     });
   });
