@@ -1950,6 +1950,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "coral-spectrum/coral-base-overlay/src/scripts/baseoverlay.js~baseoverlay#elementtofocuswhenhidden",
+    "class/coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js~BaseOverlay.html#instance-member-elementToFocusWhenHidden",
+    "coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js~BaseOverlay#elementToFocusWhenHidden",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-base-overlay/src/scripts/baseoverlay.js~baseoverlay#focusonshow",
     "class/coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js~BaseOverlay.html#instance-member-focusOnShow",
     "coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js~BaseOverlay#focusOnShow",
@@ -1978,6 +1984,12 @@ window.esdocSearchIndex = [
     "class/coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js~BaseOverlay.html#instance-method-returnFocusTo",
     "coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js~BaseOverlay#returnFocusTo",
     "method"
+  ],
+  [
+    "coral-spectrum/coral-base-overlay/src/scripts/baseoverlay.js~baseoverlay#returnfocustoelement",
+    "class/coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js~BaseOverlay.html#instance-member-returnFocusToElement",
+    "coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js~BaseOverlay#returnFocusToElement",
+    "member"
   ],
   [
     "coral-spectrum/coral-base-overlay/src/scripts/baseoverlay.js~baseoverlay#scrollonfocus",

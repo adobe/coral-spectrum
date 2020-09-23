@@ -17204,10 +17204,14 @@ var Coral = (function (exports) {
         attachedItem.setAttribute('size', Tag.size.SMALL); // adds the role to support accessibility
 
         attachedItem.setAttribute('role', 'row');
-        attachedItem.setAttribute('tabindex', '-1');
+
+        if (!this.disabled) {
+          attachedItem.setAttribute('tabindex', '-1');
+        }
+
         attachedItem[this.readOnly ? 'removeAttribute' : 'setAttribute']('closable', ''); // add tabindex to first item if none existing
 
-        if (!this.querySelector("".concat(ITEM_TAGNAME, "[tabindex=\"0\"]"))) {
+        if (!this.disabled && !this.querySelector("".concat(ITEM_TAGNAME, "[tabindex=\"0\"]"))) {
           var first = items[0];
 
           if (first) {
@@ -17227,12 +17231,53 @@ var Coral = (function (exports) {
     }, {
       key: "_onItemDisconnected",
       value: function _onItemDisconnected(detachedItem) {
+        var _this2 = this;
+
         // Cleans the tag from TagList specific values
         detachedItem.removeAttribute('role');
         detachedItem.removeAttribute('tabindex');
         detachedItem._host = undefined;
+        var parentElement = this.parentElement;
 
-        if (this._itemToFocusAfterDelete) {
+        if (this.items.length === 0 && parentElement) {
+          // If all tags are removed, call focus method on parent element
+          if (typeof parentElement.focus === 'function') {
+            parentElement.focus();
+          }
+
+          var self = this;
+          commons.nextFrame(function () {
+            // if the parentElement did not receive focus or move focus to some other element
+            if (document.activeElement.tagName === 'BODY') {
+              if (_this2.items.length > 0) {
+                self.items.first().focus();
+              } else {
+                // make the TagList focusable
+                self.tabIndex = -1;
+                self.classList.add('u-coral-screenReaderOnly');
+                self.style.outline = '0';
+                self.innerHTML = ' ';
+
+                var onBlurFocusManagement = function onBlurFocusManagement() {
+                  self.removeAttribute('tabindex');
+                  self.classList.remove('u-coral-screenReaderOnly');
+                  self.style.outline = '';
+                  self.innerHTML = '';
+
+                  self._vent.off('blur.focusManagement');
+                };
+
+                self._vent.on('blur.focusManagement', null, onBlurFocusManagement);
+
+                if (!parentElement.contains(document.activeElement)) {
+                  self.focus();
+                } else {
+                  onBlurFocusManagement();
+                }
+              }
+            }
+          });
+        } else if (this._itemToFocusAfterDelete) {
           this._itemToFocusAfterDelete.focus();
         } // triggers the Coral.Collection event
 
@@ -17365,7 +17410,7 @@ var Coral = (function (exports) {
     }, {
       key: "_setItemToFocusOnDelete",
       value: function _setItemToFocusOnDelete(tag) {
-        var _this2 = this;
+        var _this3 = this;
 
         var itemToFocusAfterDelete = tag.nextElementSibling; // Next item will be focusable if the focused tag is removed
 
@@ -17390,7 +17435,7 @@ var Coral = (function (exports) {
         }
 
         window.requestAnimationFrame(function () {
-          if (tag.parentElement !== null && !_this2.contains(document.activeElement)) {
+          if (tag.parentElement !== null && !_this3.contains(document.activeElement)) {
             itemToFocusAfterDelete = undefined;
           }
         });
@@ -17422,7 +17467,7 @@ var Coral = (function (exports) {
 
       /** @ignore */
       value: function render() {
-        var _this3 = this;
+        var _this4 = this;
 
         _get(_getPrototypeOf(TagList.prototype), "render", this).call(this);
 
@@ -17443,7 +17488,7 @@ var Coral = (function (exports) {
 
 
         this.items.getAll().forEach(function (item) {
-          _this3._prepareItem(item);
+          _this4._prepareItem(item);
         });
       }
     }, {
@@ -17454,7 +17499,7 @@ var Coral = (function (exports) {
         });
       },
       set: function set(values) {
-        var _this4 = this;
+        var _this5 = this;
 
         if (Array.isArray(values)) {
           this.items.clear();
@@ -17466,9 +17511,9 @@ var Coral = (function (exports) {
               value: value
             });
 
-            _this4._attachInputToItem(item);
+            _this5._attachInputToItem(item);
 
-            _this4.items.add(item);
+            _this5.items.add(item);
           });
         }
       }
@@ -17506,7 +17551,7 @@ var Coral = (function (exports) {
         return this._name || '';
       },
       set: function set(value) {
-        var _this5 = this;
+        var _this6 = this;
 
         this._name = transform.string(value);
 
@@ -17514,7 +17559,7 @@ var Coral = (function (exports) {
 
         this.items.getAll().forEach(function (item) {
           if (item._input) {
-            item._input.name = _this5._name;
+            item._input.name = _this6._name;
           }
         });
       }
@@ -17561,17 +17606,17 @@ var Coral = (function (exports) {
         return this._disabled || false;
       },
       set: function set(value) {
-        var _this6 = this;
+        var _this7 = this;
 
         this._disabled = transform.booleanAttr(value);
 
         this._reflectAttribute('disabled', this._disabled);
 
         this.items.getAll().forEach(function (item) {
-          item.classList.toggle('is-disabled', _this6._disabled);
+          item.classList.toggle('is-disabled', _this7._disabled);
 
           if (item._input) {
-            item._input.disabled = _this6._disabled;
+            item._input.disabled = _this7._disabled;
           }
         }); // a11y
 
@@ -17584,12 +17629,12 @@ var Coral = (function (exports) {
         return _get(_getPrototypeOf(TagList.prototype), "invalid", this);
       },
       set: function set(value) {
-        var _this7 = this;
+        var _this8 = this;
 
         _set(_getPrototypeOf(TagList.prototype), "invalid", value, this, true);
 
         this.items.getAll().forEach(function (item) {
-          item.classList.toggle('is-invalid', _this7._invalid);
+          item.classList.toggle('is-invalid', _this8._invalid);
         });
       }
       /**
@@ -17606,14 +17651,14 @@ var Coral = (function (exports) {
         return this._readOnly || false;
       },
       set: function set(value) {
-        var _this8 = this;
+        var _this9 = this;
 
         this._readOnly = transform.booleanAttr(value);
 
         this._reflectAttribute('readonly', this._readOnly);
 
         this.items.getAll().forEach(function (item) {
-          item.closable = !_this8._readOnly;
+          item.closable = !_this9._readOnly;
         });
       }
       /**
@@ -21004,6 +21049,26 @@ var Coral = (function (exports) {
         set: function set(value) {
           value = transform.string(value).toLowerCase();
           this._returnFocus = validate.enumeration(returnFocus)(value) && value || returnFocus.OFF;
+        }
+        /**
+        returns element that will receive focus when overlay is closed
+        @returns {HTMLElement}element passed via returnFocusTo()
+        */
+
+      }, {
+        key: "returnFocusToElement",
+        get: function get() {
+          return this._returnFocusToElement;
+        }
+        /**
+        returns element that will receive focus when overlay is hidden
+        @returns {HTMLElement} element cached
+        */
+
+      }, {
+        key: "elementToFocusWhenHidden",
+        get: function get() {
+          return this._elementToFocusWhenHidden;
         }
         /**
          Whether the browser should scroll the document to bring the newly-focused element into view. See {@link OverlayScrollOnFocusEnum}.
@@ -34901,12 +34966,7 @@ var Coral = (function (exports) {
           to.setAttribute(attr.nodeName, attr.nodeValue);
         }
       }
-    } // ensure that click event on menu item gets triggered on actionbar item
-
-
-    to.addEventListener('click', function () {
-      return from.click();
-    });
+    }
   };
   /**
    @base BaseActionBarContainer
@@ -80072,7 +80132,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.10.0";
+  var version$1 = "4.10.1";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

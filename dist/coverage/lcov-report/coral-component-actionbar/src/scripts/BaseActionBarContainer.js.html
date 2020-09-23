@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.98% </span>
+                <span class="strong">89.6% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>113/127</span>
+                <span class='fraction'>112/125</span>
             </div>
         
             
@@ -36,16 +36,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>21/25</span>
+                <span class='fraction'>21/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.98% </span>
+                <span class="strong">89.6% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>113/127</span>
+                <span class='fraction'>112/125</span>
             </div>
         
             
@@ -406,10 +406,7 @@
 <a name='L348'></a><a href='#L348'>348</a>
 <a name='L349'></a><a href='#L349'>349</a>
 <a name='L350'></a><a href='#L350'>350</a>
-<a name='L351'></a><a href='#L351'>351</a>
-<a name='L352'></a><a href='#L352'>352</a>
-<a name='L353'></a><a href='#L353'>353</a>
-<a name='L354'></a><a href='#L354'>354</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L351'></a><a href='#L351'>351</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -451,11 +448,6 @@
 <span class="cline-any cline-yes">120x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">64x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -739,7 +731,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1914x</span>
+<span class="cline-any cline-yes">1895x</span>
 <span class="cline-any cline-yes">260x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -747,7 +739,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1914x</span>
+<span class="cline-any cline-yes">1895x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -762,7 +754,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">882x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">870x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -801,14 +795,11 @@ const copyAttributes = (from, to) =&gt; {
       }
     }
   }
-&nbsp;
-  // ensure that click event on menu item gets triggered on actionbar item
-  to.addEventListener('click', () =&gt; from.click());
 };
 &nbsp;
 /**
- @base BaseActionBarContainer<span class="fstat-no" title="function not covered" ></span>
- @cl<span class="cstat-no" title="statement not covered" >assdesc The base elem</span>ent for action bar containers
+ @base BaseActionBarContainer
+ @classdesc The base element for action bar containers
  */
 const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
   /** @ignore */
@@ -895,10 +886,10 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
    
    @type {String}
    @default ""
-   @htmlattribute morebuttontext
-   */
-  get mo<span class="missing-if-branch" title="if path not taken" >I</span>reButtonText() {
-    return<span class="cstat-no" title="statement not covered" > this._m</span>oreButtonText || '';
+   @html<span class="missing-if-branch" title="if path not taken" >I</span>attribute morebuttontext
+   */<span class="cstat-no" title="statement not covered" ></span>
+  get moreButtonText() {
+    return this._moreButtonText || '';
   }
   set moreButtonText(value) {
     this._moreButtonText = transform.string(value);
@@ -946,10 +937,10 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
     }
 &nbsp;
     // Set focus to first focusable descendant of the overlay by default
-    this._elements.overlay.focusOnShow = 'on';
-&nbsp;
-    this<span class="missing-if-branch" title="if path not taken" >I</span>._itemsInPopover.forEach((item) =&gt; {
-      item<span class="cstat-no" title="statement not covered" >.style.v</span>isibility = '';
+    this<span class="missing-if-branch" title="if path not taken" >I</span>._elements.overlay.focusOnShow = 'on';
+<span class="cstat-no" title="statement not covered" ></span>
+    this._itemsInPopover.forEach((item) =&gt; {
+      item.style.visibility = '';
       // Store the button and popover on the item
       item._button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
       item._popover = item.querySelector('coral-popover');
@@ -968,9 +959,9 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
     // render popover content
     const popover = this._elements.overlay;
     popover.content.innerHTML = '';
-    popover.content.appendChild(overlayContent.call(this._elements, {
+    popove<span class="cstat-no" title="statement not covered" >r.content.appendChild(overlayCo</span>ntent.call(this._elements, {
       items: this._itemsInPopover,
-      copy<span class="cstat-no" title="statement not covered" >Attributes</span>
+      copyAttributes
     }));
   }
   
@@ -981,21 +972,21 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
    */
   _onOverlayBeforeClose(event) {
     // there might be popovers in popover =&gt; ignore them
-    if (event.target !== this._elements.overlay) {
-      return;
-    }<span class="fstat-no" title="function not covered" ></span>
+    if (event.target !<span class="fstat-no" title="function not covered" >== this._elements.</span>overlay) {
+      re<span class="cstat-no" title="statement not covered" >turn;</span>
+    }
     <span class="cstat-no" title="statement not covered" ></span>
-    const focusedItem = document.activeElement.parentNode;
-<span class="cstat-no" title="statement not covered" ></span>
-    // w<span class="cstat-no" title="statement not covered" >e need to check if item has 'hasAttribute' because it is not present on the doc</span>ument
+    cons<span class="cstat-no" title="statement not covered" >t focusedItem = document.activeElement.parentNode;</span>
+&nbsp;
+    // we need to check if item has 'hasAttribute' because it is not present on the document
     const isFocusedItemInsideActionBar = this.parentNode.contains(focusedItem);
-    const isFocusedItemOffscreen = focusedItem.hasAttribute &amp;&amp; focusedItem.hasAttribute('coral-actionbar-offscreen');
-    if (isFocusedItemInsideActionBar &amp;&amp; isFocusedItemOffscreen) {
-      // if currently <span class="fstat-no" title="function not covered" >an element is fo</span>cused, that should not be visible (or is no actionbar-item) =&gt; select 'more'
+    const isFocusedIte<span class="fstat-no" title="function not covered" >mOffscreen = foc</span>usedItem.hasAttribute &amp;&amp; focusedItem.hasAttribute('coral-actionbar-offscreen');
+    if (<span class="cstat-no" title="statement not covered" >isFocusedItemInsideActio</span>nBar &amp;&amp; isFocusedItemOffscreen) {
+      // if currently an element is focused, that should not be visible (or is no actionbar-item) =&gt; select 'more'
       //<span class="cstat-no" title="statement not covered" > button</span>
-      this._elements.moreButton.focus();
-    }<span class="cstat-no" title="statement not covered" ></span>
-    <span class="cstat-no" title="statement not covered" ></span>
+      th<span class="cstat-no" title="statement not covered" >is._elements.moreButton.focus();</span>
+    }
+    
     // hide the popover(needed to disable fade time of popover)
     this._elements.overlay.hidden = true;
     this._elements.overlay.focusOnShow = this._elements.overlay;
@@ -1023,12 +1014,12 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
     this._elements.anchorList &amp;&amp; this._elements.anchorList._focusFirstItem(event);
     this._elements.buttonList &amp;&amp; this._elements.buttonList._focusFirstItem(event);
   }
-  
+  <span class="cstat-no" title="statement not covered" ></span>
   _onOverlayKeyUp(event) {
-    event.preventDefault();<span class="cstat-no" title="statement not covered" ></span>
-    
-    // Foc<span class="cstat-no" title="statement not covered" >us last item</span>
-    this._el<span class="cstat-no" title="statement not covered" >ements.anchorList &amp;&amp; this._elemen</span>ts.anchorList._focusLastItem(event);
+    event.<span class="cstat-no" title="statement not covered" >preventDefault();</span>
+    <span class="cstat-no" title="statement not covered" ></span>
+    // Focus last item
+    this._elements.anchorList &amp;&amp; this._elements.anchorList._focusLastItem(event);
     this._elements.buttonList &amp;&amp; this._elements.buttonList._focusLastItem(event);
   }
   
@@ -1076,10 +1067,10 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
     }
   
     // Cleanup 'More' popover
-    const popover = this.querySelector('[coral-actionbar-popover]');
-    if (popover) {
-      this.removeChi<span class="fstat-no" title="function not covered" >ld(p</span>opover);
-    }<span class="cstat-no" title="statement not covered" ></span>
+    const popover = <span class="fstat-no" title="function not covered" >this</span>.querySelector('[coral-actionbar-popover]');
+    if (<span class="cstat-no" title="statement not covered" >popover) {</span>
+      this.removeChild(popover);
+    }
   
     // Copy more text
     this._elements.moreButton.label.textContent = this.moreButtonText;
@@ -1122,7 +1113,7 @@ export default BaseActionBarContainer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Aug 25 2020 09:24:05 GMT+0200 (Central European Summer Time)
+                at Wed Sep 23 2020 13:04:07 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

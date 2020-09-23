@@ -1,7 +1,7 @@
 {
-  "coverage": "64.8%",
-  "expectCount": 3657,
-  "actualCount": 2370,
+  "coverage": "64.82%",
+  "expectCount": 3659,
+  "actualCount": 2372,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
       "expectCount": 6,
@@ -90,8 +90,8 @@
       ]
     },
     "coral-spectrum/coral-base-overlay/src/scripts/BaseOverlay.js": {
-      "expectCount": 65,
-      "actualCount": 41,
+      "expectCount": 67,
+      "actualCount": 43,
       "undocumentLines": [
         18,
         21,
@@ -103,20 +103,20 @@
         401,
         417,
         461,
-        476,
-        494,
-        546,
-        564,
-        655,
-        677,
-        729,
-        734,
-        784,
-        863,
-        867,
-        935,
-        939,
-        978
+        491,
+        509,
+        561,
+        579,
+        670,
+        692,
+        744,
+        749,
+        799,
+        878,
+        882,
+        950,
+        954,
+        993
       ]
     },
     "coral-spectrum/coral-collection/src/scripts/Collection.js": {
@@ -272,14 +272,14 @@
       "undocumentLines": [
         22,
         24,
-        55,
-        56,
-        101,
-        124,
-        140,
-        255,
-        263,
-        271
+        52,
+        53,
+        98,
+        121,
+        137,
+        252,
+        260,
+        268
       ]
     },
     "coral-spectrum/coral-component-actionbar/src/scripts/getFirstSelectableWrappedItem.js": {
@@ -2279,9 +2279,9 @@
         196,
         218,
         237,
-        401,
-        405,
-        502
+        442,
+        446,
+        543
       ]
     },
     "coral-spectrum/coral-component-textarea/src/scripts/Textarea.js": {

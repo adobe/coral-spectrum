@@ -707,11 +707,13 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     
     // adds the role to support accessibility
     attachedItem.setAttribute(&apos;role&apos;, &apos;row&apos;);
-    attachedItem.setAttribute(&apos;tabindex&apos;, &apos;-1&apos;);
+    if (!this.disabled) {
+      attachedItem.setAttribute(&apos;tabindex&apos;, &apos;-1&apos;);
+    }
     attachedItem[this.readOnly ? &apos;removeAttribute&apos; : &apos;setAttribute&apos;](&apos;closable&apos;, &apos;&apos;);
     
     // add tabindex to first item if none existing
-    if (!this.querySelector(`${ITEM_TAGNAME}[tabindex=&quot;0&quot;]`)) {
+    if (!this.disabled &amp;&amp; !this.querySelector(`${ITEM_TAGNAME}[tabindex=&quot;0&quot;]`)) {
       const first = items[0];
       if (first) {
         first.setAttribute(&apos;tabindex&apos;, &apos;0&apos;);
@@ -733,8 +735,47 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     detachedItem.removeAttribute(&apos;role&apos;);
     detachedItem.removeAttribute(&apos;tabindex&apos;);
     detachedItem._host = undefined;
-    
-    if (this._itemToFocusAfterDelete) {
+
+    const parentElement = this.parentElement;
+    if (this.items.length === 0 &amp;&amp; parentElement) {
+      // If all tags are removed, call focus method on parent element
+      if (typeof parentElement.focus === &apos;function&apos;) {
+        parentElement.focus();
+      }
+
+      const self = this;
+
+      commons.nextFrame(() =&gt; {
+        // if the parentElement did not receive focus or move focus to some other element
+        if (document.activeElement.tagName === &apos;BODY&apos;) {
+          if (this.items.length &gt; 0) {
+            self.items.first().focus();
+          }
+          else {
+            // make the TagList focusable
+            self.tabIndex = -1;
+            self.classList.add(&apos;u-coral-screenReaderOnly&apos;);
+            self.style.outline = &apos;0&apos;;
+            self.innerHTML = &apos; &apos;;
+            const onBlurFocusManagement = function() {
+              self.removeAttribute(&apos;tabindex&apos;);
+              self.classList.remove(&apos;u-coral-screenReaderOnly&apos;);
+              self.style.outline = &apos;&apos;;
+              self.innerHTML = &apos;&apos;;
+              self._vent.off(&apos;blur.focusManagement&apos;);
+            };
+            self._vent.on(&apos;blur.focusManagement&apos;, null, onBlurFocusManagement); 
+            if (!parentElement.contains(document.activeElement)) {
+              self.focus();
+            }
+            else {
+              onBlurFocusManagement();
+            }
+          }
+        }
+      });
+    }
+    else if (this._itemToFocusAfterDelete) {
       this._itemToFocusAfterDelete.focus();
     }
     

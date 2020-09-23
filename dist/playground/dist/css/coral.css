@@ -23923,12 +23923,15 @@ coral-shell-orgswitcher-footer ._coral-Button + ._coral-Button {
   outline: none;
   color: #fff;
 }
+._coral-Shell-solution:focus coral-shell-solution-label {
+  text-decoration: underline;
+}
 ._coral-Shell-solution:focus.focus-ring:before {
   position: absolute;
-  top: 8px;
+  top: 0;
   left: -8px;
-  bottom: 8px;
-  right: 8px;
+  bottom: 0;
+  right: 0;
   border-radius: 4px;
   box-shadow: 0 0 0 1px #2680eb;
   border: 1px solid #2680eb;
@@ -23938,6 +23941,9 @@ coral-shell-orgswitcher-footer ._coral-Button + ._coral-Button {
 }
 ._coral-Shell-solution:hover {
   color: #fff;
+}
+._coral-Shell-solution:hover coral-shell-solution-label {
+  text-decoration: underline;
 }
 ._coral-Shell-solution--linked {
   color: rgba(226,226,226,0.8);
@@ -23984,11 +23990,14 @@ coral-shell-solution-label {
   text-decoration: none;
   text-align: left;
 }
-._coral-Shell-solutions--secondary ._coral-Shell-solution:not(:first-of-type):hover ._coral-Shell-solution-icon {
+._coral-Shell-solutions--secondary ._coral-Shell-solution:not(:first-of-type):hover ._coral-Shell-solution-icon,
+._coral-Shell-solutions--secondary ._coral-Shell-solution:not(:first-of-type):focus ._coral-Shell-solution-icon {
   transform: scale(1);
 }
-._coral-Shell-solutions--secondary ._coral-Shell-solution:not(:first-of-type):hover coral-shell-solution-label {
+._coral-Shell-solutions--secondary ._coral-Shell-solution:not(:first-of-type):hover coral-shell-solution-label,
+._coral-Shell-solutions--secondary ._coral-Shell-solution:not(:first-of-type):focus coral-shell-solution-label {
   color: #fff;
+  text-decoration: underline;
 }
 ._coral-Shell-solutions--secondary ._coral-Shell-solution:not(:first-of-type) coral-shell-solution-label {
   margin-left: 0;
