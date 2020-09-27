@@ -1358,5 +1358,14 @@ describe('ColumnView', function() {
       expect(activeItemSpy.callCount).to.equal(1, 'Deselecting the item causes the active item to change');
       expect(removeItemSpy.callCount).to.equal(1);
     });
+
+    it('should ensure tabbable item when ColumnView intializes', function() {
+      const el = helpers.build(window.__html__['Coral.ColumnView.base.html']);
+      const items = el.items.getAll();
+      
+      items.forEach(function(item, i) {
+	expect(item.getAttribute('tabindex')).to.equal(i === 0 ? '0' : '-1');
+      });
+    });
   });
 });
