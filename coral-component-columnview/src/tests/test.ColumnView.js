@@ -1364,7 +1364,7 @@ describe('ColumnView', function() {
       const items = el.items.getAll();
       
       items.forEach(function(item, i) {
-	expect(item.getAttribute('tabindex')).to.equal(i === 0 ? '0' : '-1');
+        expect(item.getAttribute('tabindex')).to.equal(i === 0 ? '0' : '-1');
       });
     });
   });
