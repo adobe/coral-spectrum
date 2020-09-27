@@ -1360,7 +1360,7 @@ describe('ColumnView', function() {
     });
 
     it('should ensure tabbable item when ColumnView intializes', function() {
-      const el = helpers.build(window.__html__['Coral.ColumnView.base.html']);
+      const el = helpers.build(window.__html__['ColumnView.base.html']);
       const items = el.items.getAll();
       
       items.forEach(function(item, i) {
