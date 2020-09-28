@@ -49705,6 +49705,8 @@ var Coral = (function (exports) {
         'key:command+shift+a': '_onKeyCtrlShiftA',
         'key:esc': '_onKeyCtrlShiftA',
         'capture:focus coral-columnview-item': '_onItemFocus',
+        'mousedown coral-columnview-item': '_onItemMouseDown',
+        'mouseup coral-columnview-item': '_onItemMouseUp',
         // column events
         'coral-columnview-column:_loaditems': '_onColumnLoadItems',
         'coral-columnview-column:_activeitemchanged': '_onColumnActiveItemChanged',
@@ -50113,7 +50115,10 @@ var Coral = (function (exports) {
         if (item && item !== document.activeElement) {
           item.focus();
 
-          if (this.selectionMode === selectionMode$1.NONE || selectedItems.length === 0) {
+          if (this.selectionMode === selectionMode$1.NONE || selectedItems.length === 0 || // For use case in cascading schema editor,
+          // where the focused item is not in the same column as the selected items,
+          // we should activate the item so that coral-columnview:activeitemchange gets called.
+          item.parentElement !== selectedItems[0].parentElement) {
             item.click();
           }
         }
@@ -50155,7 +50160,10 @@ var Coral = (function (exports) {
         if (item && item !== document.activeElement) {
           item.focus();
 
-          if (this.selectionMode === selectionMode$1.NONE || selectedItems.length === 0) {
+          if (this.selectionMode === selectionMode$1.NONE || selectedItems.length === 0 || // For use case in cascading schema editor,
+          // where the focused item is not in the same column as the selected items,
+          // we should activate the item so that coral-columnview:activeitemchange gets called.
+          item.parentElement !== selectedItems[0].parentElement) {
             item.click();
           }
         }
@@ -50177,8 +50185,18 @@ var Coral = (function (exports) {
           return;
         }
 
-        event.preventDefault();
-        var nextColumn = this.activeItem && this.activeItem.closest('coral-columnview-column').nextElementSibling;
+        event.preventDefault(); // we can only navigate right when there is a column on the right side to navigate to
+
+        var nextColumn; // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
+
+        var selectedItems = this._oldSelection; // when there is an active item, we use the item containing the active item as reference
+
+        if (matchedTarget) {
+          nextColumn = matchedTarget.closest('coral-columnview-column').nextElementSibling;
+        } // otherwise when there is selection, we use the item containing the selected items as reference
+        else if (selectedItems.length !== 0) {
+            nextColumn = selectedItems[0].closest('coral-columnview-column').nextElementSibling;
+          }
 
         if (nextColumn && nextColumn.tagName === 'CORAL-COLUMNVIEW-COLUMN') {
           // we need to make sure the column is initialized
@@ -50216,7 +50234,10 @@ var Coral = (function (exports) {
 
           if (activeDescendant && activeDescendant !== document.activeElement) {
             activeDescendant.focus();
-            activeDescendant.click();
+
+            if (this.selectionMode === selectionMode$1.NONE || selectedItems.length === 0) {
+              activeDescendant.click();
+            }
           }
         }
       }
@@ -50318,7 +50339,7 @@ var Coral = (function (exports) {
 
         var matchedTarget = this._getRealMatchedTarget(event);
 
-        if (!matchedTarget.hasAttribute('active') && !this._oldSelection.length) {
+        if (!this.activeItem && !this._oldSelection.length && !matchedTarget._flagMouseDown) {
           matchedTarget.setAttribute('active', '');
         }
 
@@ -50329,6 +50350,32 @@ var Coral = (function (exports) {
         if (matchedTarget.contains(document.activeElement)) {
           matchedTarget.focus();
         }
+      }
+      /** @ignore */
+
+    }, {
+      key: "_onItemMouseDown",
+      value: function _onItemMouseDown(event) {
+        if (isInteractiveTarget(event.target)) {
+          return;
+        }
+
+        var matchedTarget = this._getRealMatchedTarget(event);
+
+        matchedTarget._flagMouseDown = true;
+      }
+      /** @ignore */
+
+    }, {
+      key: "_onItemMouseUp",
+      value: function _onItemMouseUp(event) {
+        if (isInteractiveTarget(event.target)) {
+          return;
+        }
+
+        var matchedTarget = this._getRealMatchedTarget(event);
+
+        delete matchedTarget._flagMouseDown;
       }
       /** @ignore */
 
@@ -50771,17 +50818,21 @@ var Coral = (function (exports) {
       key: "_focusAndActivateFirstSelectableItem",
       value: function _focusAndActivateFirstSelectableItem(column) {
         var item;
+        var selectedItems = this.selectedItems;
 
         if (column.items) {
           item = column.items._getFirstSelectable();
         } else if (column.tagName === 'CORAL-COLUMNVIEW-PREVIEW') {
-          item = this.selectedItems[0] || this.activeItem;
+          item = selectedItems[0] || this.activeItem;
         }
 
         if (item && item !== document.activeElement) {
           item.focus();
 
-          if (this.selectionMode === selectionMode$1.NONE || this._oldSelection.length === 0) {
+          if (this.selectionMode === selectionMode$1.NONE || this._oldSelection.length === 0 || selectedItems.length === 0 || // For use case in cascading schema editor,
+          // where the focused item is not in the same column as the selected items,
+          // we should activate the item so that coral-columnview:activeitemchange gets called.
+          item.parentElement !== selectedItems[0].parentElement) {
             item.click();
           }
         }
@@ -51833,6 +51884,11 @@ var Coral = (function (exports) {
               if (!itemSelector) {
                 itemSelector = new Checkbox();
                 itemSelector.setAttribute('coral-columnview-itemselect', '');
+
+                if (this.classList.contains('is-selected')) {
+                  itemSelector.setAttribute('checked', '');
+                }
+
                 itemSelector._elements.input.tabIndex = -1;
                 itemSelector.setAttribute('labelledby', this._elements.content.id); // Add the item selector as first child
 
@@ -52031,55 +52087,68 @@ var Coral = (function (exports) {
         return this._selected || false;
       },
       set: function set(value) {
+        var _this2 = this;
+
         this._selected = transform.booleanAttr(value);
 
         this._reflectAttribute('selected', this._selected);
 
-        this.classList.toggle('is-selected', this._selected);
-        this.setAttribute('aria-selected', this._selected); // @a11y Update aria-expanded. Active drilldowns should be expanded.
-        // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
-        // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when 
-        // navigating between items. 
+        this.trigger('coral-columnview-item:_selectedchanged'); // wait a frame before updating attributes
 
-        if (this.variant === variant$g.DRILLDOWN) {
-          if (this._selected || isChromeMacOS && this.getAttribute('aria-level') === '1') {
-            this.removeAttribute('aria-expanded');
-          } else {
-            this.setAttribute('aria-expanded', this.active);
+        commons.nextFrame(function () {
+          _this2.classList.toggle('is-selected', _this2._selected);
+
+          _this2.setAttribute('aria-selected', _this2._selected); // @a11y Update aria-expanded. Active drilldowns should be expanded.
+          // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
+          // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when 
+          // navigating between items. 
+
+
+          if (_this2.variant === variant$g.DRILLDOWN) {
+            if (_this2._selected || isChromeMacOS && _this2.getAttribute('aria-level') === '1') {
+              _this2.removeAttribute('aria-expanded');
+            } else {
+              _this2.setAttribute('aria-expanded', _this2.active);
+            }
           }
-        }
 
-        var accessibilityState = this._elements.accessibilityState;
+          var accessibilityState = _this2._elements.accessibilityState;
 
-        if (this.selected) {
-          // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
-          this.removeAttribute('aria-owns');
-          this.removeAttribute('aria-describedby'); // @a11y Update content to ensure that checked state is announced by assistive technology when the item receives focus
+          if (_this2._selected) {
+            // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
+            _this2.removeAttribute('aria-owns');
 
-          accessibilityState.innerHTML = i18n.get(', checked'); // @a11y append live region content element
+            _this2.removeAttribute('aria-describedby'); // @a11y Update content to ensure that checked state is announced by assistive technology when the item receives focus
 
-          if (!this.contains(accessibilityState)) {
-            this.appendChild(accessibilityState);
+
+            accessibilityState.innerHTML = i18n.get(', checked'); // @a11y append live region content element
+
+            if (!_this2.contains(accessibilityState)) {
+              _this2.appendChild(accessibilityState);
+            }
+          } // @a11y If deselecting from checked state,
+          else {
+              // @a11y remove, but retain reference to accessibilityState state
+              if (accessibilityState.parentNode) {
+                _this2._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+              } // @a11y Update content to remove checked state
+
+
+              _this2._elements.accessibilityState.innerHTML = '';
+            } // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
+
+
+          var ariaLabelledby = _this2._elements.thumbnail.id + ' ' + _this2._elements.content.id;
+
+          _this2.setAttribute('aria-labelledby', _this2.selected ? "".concat(ariaLabelledby, " ").concat(accessibilityState.id) : ariaLabelledby); // Sync checkbox item selector
+
+
+          var itemSelector = _this2.querySelector('coral-checkbox[coral-columnview-itemselect]');
+
+          if (itemSelector) {
+            itemSelector[_this2._selected ? 'setAttribute' : 'removeAttribute']('checked', '');
           }
-        } // @a11y If deselecting from checked state,
-        else {
-            // @a11y remove, but retain reference to accessibilityState state
-            this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState); // @a11y Update content to remove checked state
-
-            this._elements.accessibilityState.innerHTML = '';
-          } // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
-
-
-        var ariaLabelledby = this._elements.thumbnail.id + ' ' + this._elements.content.id;
-        this.setAttribute('aria-labelledby', this.selected ? "".concat(ariaLabelledby, " ").concat(accessibilityState.id) : ariaLabelledby); // Sync checkbox item selector
-
-        var itemSelector = this.querySelector('coral-checkbox[coral-columnview-itemselect]');
-
-        if (itemSelector) {
-          itemSelector[this._selected ? 'setAttribute' : 'removeAttribute']('checked', '');
-        }
-
-        this.trigger('coral-columnview-item:_selectedchanged');
+        });
       }
       /**
        Whether the item is active.
@@ -80132,7 +80201,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.10.1";
+  var version$1 = "4.10.2";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

@@ -510,6 +510,9 @@ class ColumnView extends BaseComponent(HTMLElement) {
       &apos;key:esc&apos;: &apos;_onKeyCtrlShiftA&apos;,
 
       &apos;capture:focus coral-columnview-item&apos;: &apos;_onItemFocus&apos;,
+
+      &apos;mousedown coral-columnview-item&apos;: &apos;_onItemMouseDown&apos;,
+      &apos;mouseup coral-columnview-item&apos;: &apos;_onItemMouseUp&apos;,
   
       // column events
       &apos;coral-columnview-column:_loaditems&apos;: &apos;_onColumnLoadItems&apos;,
@@ -998,7 +1001,12 @@ class ColumnView extends BaseComponent(HTMLElement) {
     // we use click instead of selected to force the deselection of the other items
     if (item &amp;&amp; item !== document.activeElement) {
       item.focus();
-      if (this.selectionMode === selectionMode.NONE || selectedItems.length === 0) {
+      if (this.selectionMode === selectionMode.NONE  ||
+        selectedItems.length === 0 ||
+        // For use case in cascading schema editor,
+        // where the focused item is not in the same column as the selected items,
+        // we should activate the item so that coral-columnview:activeitemchange gets called.
+        item.parentElement !== selectedItems[0].parentElement) {
         item.click();
       }
     }
@@ -1042,7 +1050,12 @@ class ColumnView extends BaseComponent(HTMLElement) {
     // we use click instead of selected to force the deselection of the other items
     if (item &amp;&amp; item !== document.activeElement) {
       item.focus();
-      if (this.selectionMode === selectionMode.NONE || selectedItems.length === 0) {
+      if (this.selectionMode === selectionMode.NONE ||
+        selectedItems.length === 0 ||
+        // For use case in cascading schema editor,
+        // where the focused item is not in the same column as the selected items,
+        // we should activate the item so that coral-columnview:activeitemchange gets called.
+        item.parentElement !== selectedItems[0].parentElement) {
         item.click();
       }
     }
@@ -1062,7 +1075,19 @@ class ColumnView extends BaseComponent(HTMLElement) {
 
     event.preventDefault();
 
-    const nextColumn = (this.activeItem &amp;&amp; this.activeItem.closest(&apos;coral-columnview-column&apos;).nextElementSibling);
+    // we can only navigate right when there is a column on the right side to navigate to
+    let nextColumn;
+    // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
+    let selectedItems = this._oldSelection;
+
+    // when there is an active item, we use the item containing the active item as reference
+    if (matchedTarget) {
+      nextColumn = matchedTarget.closest(&apos;coral-columnview-column&apos;).nextElementSibling;
+    }
+    // otherwise when there is selection, we use the item containing the selected items as reference
+    else if (selectedItems.length !== 0) {
+      nextColumn = selectedItems[0].closest(&apos;coral-columnview-column&apos;).nextElementSibling;
+    }
       
     if (nextColumn &amp;&amp; nextColumn.tagName === &apos;CORAL-COLUMNVIEW-COLUMN&apos;) {
       // we need to make sure the column is initialized
@@ -1098,7 +1123,10 @@ class ColumnView extends BaseComponent(HTMLElement) {
       const activeDescendant = previousColumn.activeItem || previousColumn.items._getFirstSelected() || previousColumn.items._getFirstSelectable();
       if (activeDescendant &amp;&amp; activeDescendant !== document.activeElement) {
         activeDescendant.focus();
-        activeDescendant.click();
+        if (this.selectionMode === selectionMode.NONE ||
+          selectedItems.length === 0) {
+          activeDescendant.click();
+        }
       }
     }
   }
@@ -1193,7 +1221,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
     }
 
     const matchedTarget = this._getRealMatchedTarget(event);
-    if (!matchedTarget.hasAttribute(&apos;active&apos;) &amp;&amp; !this._oldSelection.length) {
+    if(!this.activeItem &amp;&amp; !this._oldSelection.length &amp;&amp; !matchedTarget._flagMouseDown) {
       matchedTarget.setAttribute(&apos;active&apos;, &apos;&apos;);
     }
     this.items._getSelectableItems().forEach(item =&gt; {
@@ -1203,6 +1231,24 @@ class ColumnView extends BaseComponent(HTMLElement) {
     if (matchedTarget.contains(document.activeElement)) {
       matchedTarget.focus();
     }
+  }
+
+  /** @ignore */
+  _onItemMouseDown(event) {
+    if (isInteractiveTarget(event.target)) {
+      return;
+    }
+    var matchedTarget = this._getRealMatchedTarget(event);
+    matchedTarget._flagMouseDown = true;
+  }
+
+  /** @ignore */
+  _onItemMouseUp(event) {
+    if (isInteractiveTarget(event.target)) {
+      return;
+    }
+    var matchedTarget = this._getRealMatchedTarget(event);
+    delete matchedTarget._flagMouseDown;
   }
 
   /** @ignore */
@@ -1599,17 +1645,24 @@ class ColumnView extends BaseComponent(HTMLElement) {
 
   _focusAndActivateFirstSelectableItem(column) {
     let item;
+    let selectedItems = this.selectedItems;
 
     if (column.items) {
       item = column.items._getFirstSelectable();
     }
     else if (column.tagName === &apos;CORAL-COLUMNVIEW-PREVIEW&apos;) {
-      item = this.selectedItems[0] || this.activeItem;
+      item = selectedItems[0] || this.activeItem;
     }
 
     if (item &amp;&amp; item !== document.activeElement) {
       item.focus();
-      if (this.selectionMode === selectionMode.NONE || this._oldSelection.length === 0) {
+      if (this.selectionMode === selectionMode.NONE ||
+        this._oldSelection.length === 0 || 
+        selectedItems.length === 0 ||
+        // For use case in cascading schema editor,
+        // where the focused item is not in the same column as the selected items,
+        // we should activate the item so that coral-columnview:activeitemchange gets called.
+        item.parentElement !== selectedItems[0].parentElement) {
         item.click();
       }
     }
