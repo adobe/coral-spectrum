@@ -733,7 +733,7 @@ describe('ColumnView', function() {
         const oldActiveItem = el.activeItem;
         const lastColumn = columns[columns.length - 1];
 
-        expect(oldActiveItem).to.equal(null, 'The colum has no initial active item');
+        expect(oldActiveItem).to.equal(null, 'The column has no initial active item');
 
         // clicks on the "English" item
         const firstItem = lastColumn.items.first();
@@ -796,6 +796,156 @@ describe('ColumnView', function() {
         expect(changeSpy.callCount).to.equal(0);
 
         expect(columnActiveChangeSpy.callCount).to.equal(1, 'The event should not be triggered again');
+      });
+
+      it('should trigger an event when the active parent is focused with selected items in next column', function(done) {
+        const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
+        // no initial events
+        expect(columnActiveChangeSpy.callCount).to.equal(0);
+
+        let columns = el.columns.getAll();
+        expect(columns.length).to.equal(1, 'Just the initial column should be there');
+
+        const oldActiveItem = el.activeItem;
+        const lastColumn = columns[columns.length - 1];
+
+        expect(oldActiveItem).to.equal(null, 'The column has no initial active item');
+
+        // clicks on the "English" item
+        const firstItem = lastColumn.items.first();
+        firstItem.click();
+
+        expect(el.activeItem).to.equal(firstItem);
+
+        expect(columnActiveChangeSpy.callCount).to.equal(1, 'Active item should have changed');
+        expect(columnActiveChangeSpy.getCall(0).args[0].detail.activeItem).to.equal(firstItem, 'The first item is activated');
+        expect(columnActiveChangeSpy.getCall(0).args[0].detail.oldActiveItem).to.equal(null, 'No item was active');
+
+        // we refresh the variables since new columns were added
+        columns = el.columns.getAll();
+        const newColumn = columns[columns.length - 1];
+
+        expect(lastColumn).not.to.equal(newColumn, 'A new column has been added');
+
+        // we wait for the column to be ready since it was just added
+        helpers.next(() => {
+          let newActiveItem = newColumn.items.first();
+          newActiveItem.querySelector('[coral-columnview-itemselect]').click();
+          newActiveItem.focus();
+
+          expect(changeSpy.callCount).to.equal(1, 'Select event should be triggered');
+          expect(changeSpy.getCall(0).args[0].detail.selection).to.deep.equal([newActiveItem], 'Selection should be an array with the selected item');
+          expect(changeSpy.getCall(0).args[0].detail.oldSelection).to.deep.equal([], 'Old Selection should be an empty array');
+
+          expect(columnActiveChangeSpy.callCount).to.equal(1, 'Active item should not have have changed');
+          expect(columnActiveChangeSpy.getCall(0).args[0].detail.activeItem).to.equal(firstItem, 'The first item is activated');
+          expect(columnActiveChangeSpy.getCall(0).args[0].detail.oldActiveItem).to.equal(null, 'No item was active');
+
+          expect(firstItem.active).to.equal(true, 'The initial item should be active although it is not in the selected column');
+
+          helpers.keypress('left', newActiveItem);
+
+          expect(el.activeItem).to.equal(firstItem);
+
+          expect(columnActiveChangeSpy.callCount).to.equal(1, 'Even though the firstItem was active, the event should be triggered because the column changed');
+          expect(columnActiveChangeSpy.getCall(0).args[0].detail.activeItem).to.equal(firstItem);
+          expect(columnActiveChangeSpy.getCall(0).args[0].detail.oldActiveItem).to.equal(null);
+
+          expect(changeSpy.callCount).to.equal(1, 'Select event should not have been triggered');
+
+          helpers.keypress('right', el.activeItem);
+
+          helpers.next(function() {
+            expect(document.activeElement.id).to.equal(newActiveItem.id);
+            expect(newActiveItem.selected);
+
+            expect(columnActiveChangeSpy.callCount).to.equal(1, 'Even though the focused item changed, the event should not be triggered because focused item is selected');
+            expect(changeSpy.callCount).to.equal(1, 'Select event should not have been triggered');
+
+            done();
+          });
+        });
+      });
+
+      it('should not trigger an event when the active parent is clicked with selected items in next column', function(done) {
+        const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
+        // no initial events
+        expect(columnActiveChangeSpy.callCount).to.equal(0);
+
+        let columns = el.columns.getAll();
+        expect(columns.length).to.equal(1, 'Just the initial column should be there');
+
+        const oldActiveItem = el.activeItem;
+        const lastColumn = columns[columns.length - 1];
+
+        expect(oldActiveItem).to.equal(null, 'The column has no initial active item');
+
+        // clicks on the "English" item
+        const firstItem = lastColumn.items.first();
+        firstItem.click();
+
+        expect(el.activeItem).to.equal(firstItem);
+
+        expect(columnActiveChangeSpy.callCount).to.equal(1, 'Active item should have changed');
+        expect(columnActiveChangeSpy.getCall(0).args[0].detail.activeItem).to.equal(firstItem, 'The first item is activated');
+        expect(columnActiveChangeSpy.getCall(0).args[0].detail.oldActiveItem).to.equal(null, 'No item was active');
+
+        // we refresh the variables since new columns were added
+        columns = el.columns.getAll();
+        const newColumn = columns[columns.length - 1];
+
+        expect(lastColumn).not.to.equal(newColumn, 'A new column has been added');
+
+        // we wait for the column to be ready since it was just added
+        helpers.next(function() {
+          let newActiveItem = newColumn.items.first();
+          newActiveItem.querySelector('[coral-columnview-itemselect]').click();
+          newActiveItem.focus();
+
+          expect(changeSpy.callCount).to.equal(1, 'Select event should be triggered');
+          expect(changeSpy.getCall(0).args[0].detail.selection).to.deep.equal([newActiveItem], 'Selection should be an array with the selected item');
+          expect(changeSpy.getCall(0).args[0].detail.oldSelection).to.deep.equal([], 'Old Selection should be an empty array');
+
+          expect(columnActiveChangeSpy.callCount).to.equal(1, 'Active item should not have have changed');
+          expect(columnActiveChangeSpy.getCall(0).args[0].detail.activeItem).to.equal(firstItem, 'The first item is activated');
+          expect(columnActiveChangeSpy.getCall(0).args[0].detail.oldActiveItem).to.equal(null, 'No item was active');
+
+          expect(firstItem.active).to.equal(true, 'The initial item should be active although it is not in the selected column');
+
+          firstItem.trigger('mousedown');
+          firstItem.focus();
+          firstItem.trigger('focus');
+          firstItem.trigger('mouseup');
+          firstItem.click();
+
+          expect(el.activeItem).to.equal(firstItem);
+
+          expect(columnActiveChangeSpy.callCount).to.equal(1, 'Even though the column changed, the event should not be triggered because active item is the same');
+          expect(columnActiveChangeSpy.getCall(0).args[0].detail.activeItem).to.equal(firstItem);
+          expect(columnActiveChangeSpy.getCall(0).args[0].detail.oldActiveItem).to.equal(null);
+
+          expect(changeSpy.callCount).to.equal(2, 'Select event should have been triggered, to clear selection');
+          expect(changeSpy.getCall(1).args[0].detail.selection).to.deep.equal([]);
+          expect(changeSpy.getCall(1).args[0].detail.oldSelection).to.deep.equal([newActiveItem]);
+
+          columns = el.columns.getAll();
+          newActiveItem = columns[columns.length - 1].items.first();
+          newActiveItem.trigger('mousedown');
+          newActiveItem.focus();
+          newActiveItem.trigger('focus');
+          newActiveItem.trigger('mouseup');
+          newActiveItem.click();
+
+          helpers.next(function () {
+            expect(document.activeElement.id).to.equal(newActiveItem.id);
+            expect(!newActiveItem.selected);
+
+            expect(columnActiveChangeSpy.callCount).to.equal(2, 'Active item should not have have changed');
+            expect(changeSpy.callCount).to.equal(2, 'Select event should not have been triggered, because nothing new has been selected');
+
+            done();
+          });
+        });
       });
     });
   });

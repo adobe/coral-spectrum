@@ -200,60 +200,64 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
-  
-    this.classList.toggle('is-selected', this._selected);
-    this.setAttribute('aria-selected', this._selected);
-
-    // @a11y Update aria-expanded. Active drilldowns should be expanded.
-    // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
-    // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when 
-    // navigating between items. 
-    if (this.variant === variant.DRILLDOWN) {
-      if (this._selected || (isChromeMacOS && this.getAttribute('aria-level') === '1')) {
-        this.removeAttribute('aria-expanded');
-      }
-      else {
-        this.setAttribute('aria-expanded', this.active);
-      }
-    }
-
-    let accessibilityState = this._elements.accessibilityState;
-    
-    if (this.selected) {
-
-      // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
-      this.removeAttribute('aria-owns');
-      this.removeAttribute('aria-describedby');
-
-      // @a11y Update content to ensure that checked state is announced by assistive technology when the item receives focus
-      accessibilityState.innerHTML = i18n.get(', checked');
-
-      // @a11y append live region content element
-      if (!this.contains(accessibilityState)) {
-        this.appendChild(accessibilityState);
-      }
-    }
-    // @a11y If deselecting from checked state,
-    else {
-
-      // @a11y remove, but retain reference to accessibilityState state
-      this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
-
-      // @a11y Update content to remove checked state
-      this._elements.accessibilityState.innerHTML = '';
-    }
-
-    // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
-    let ariaLabelledby = this._elements.thumbnail.id + ' ' + this._elements.content.id;
-    this.setAttribute('aria-labelledby', this.selected ? `${ariaLabelledby} ${accessibilityState.id}` : ariaLabelledby);
-
-    // Sync checkbox item selector
-    const itemSelector = this.querySelector('coral-checkbox[coral-columnview-itemselect]');
-    if (itemSelector) {
-      itemSelector[this._selected ? 'setAttribute' : 'removeAttribute']('checked', '');
-    }
-    
     this.trigger('coral-columnview-item:_selectedchanged');
+  
+    // wait a frame before updating attributes
+    commons.nextFrame(() => {
+      this.classList.toggle('is-selected', this._selected);
+      this.setAttribute('aria-selected', this._selected);
+
+      // @a11y Update aria-expanded. Active drilldowns should be expanded.
+      // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
+      // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when 
+      // navigating between items. 
+      if (this.variant === variant.DRILLDOWN) {
+        if (this._selected || (isChromeMacOS && this.getAttribute('aria-level') === '1')) {
+          this.removeAttribute('aria-expanded');
+        }
+        else {
+          this.setAttribute('aria-expanded', this.active);
+        }
+      }
+
+      let accessibilityState = this._elements.accessibilityState;
+      
+      if (this._selected) {
+
+        // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
+        this.removeAttribute('aria-owns');
+        this.removeAttribute('aria-describedby');
+
+        // @a11y Update content to ensure that checked state is announced by assistive technology when the item receives focus
+        accessibilityState.innerHTML = i18n.get(', checked');
+
+        // @a11y append live region content element
+        if (!this.contains(accessibilityState)) {
+          this.appendChild(accessibilityState);
+        }
+      }
+      // @a11y If deselecting from checked state,
+      else {
+
+        // @a11y remove, but retain reference to accessibilityState state
+        if (accessibilityState.parentNode) {
+          this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+        }
+
+        // @a11y Update content to remove checked state
+        this._elements.accessibilityState.innerHTML = '';
+      }
+
+      // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
+      let ariaLabelledby = this._elements.thumbnail.id + ' ' + this._elements.content.id;
+      this.setAttribute('aria-labelledby', this.selected ? `${ariaLabelledby} ${accessibilityState.id}` : ariaLabelledby);
+
+      // Sync checkbox item selector
+      const itemSelector = this.querySelector('coral-checkbox[coral-columnview-itemselect]');
+      if (itemSelector) {
+        itemSelector[this._selected ? 'setAttribute' : 'removeAttribute']('checked', '');
+      }
+    });
   }
   
   /**
@@ -319,6 +323,9 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
         if (!itemSelector) {
           itemSelector = new Checkbox();
           itemSelector.setAttribute('coral-columnview-itemselect', '');
+          if (this.classList.contains('is-selected')){
+            itemSelector.setAttribute('checked', '');
+          }
           itemSelector._elements.input.tabIndex = -1;
           itemSelector.setAttribute('labelledby', this._elements.content.id);
       
