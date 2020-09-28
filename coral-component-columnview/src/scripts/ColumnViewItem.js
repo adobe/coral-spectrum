@@ -361,7 +361,10 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
 
     this.id = this.id || commons.getUID();
 
-    this.tabIndex = this.active || this.selected ? 0 : -1;
+    // only set tabIndex if it is not already set
+    if (!this.hasAttribute('tabindex')) {
+      this.tabIndex = this.active || this.selected ? 0 : -1;
+    }
     
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }
