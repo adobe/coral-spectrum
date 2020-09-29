@@ -3,17 +3,17 @@
 A JavaScript library of Web Components following Spectrum design patterns.
 
 # Important
-Please follow [Angular Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines). To easily comply is recommended to use [cz-cli](https://github.com/commitizen/cz-cli).
+Please follow the [Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines). To easily comply, it is recommended to use [cz-cli](https://github.com/commitizen/cz-cli).
 
 ## Showcase
 
-#### [Component Examples](http://opensource.adobe.com/coral-spectrum/dist/examples)
+#### [Component Examples](http://opensource.adobe.com/coral-spectrum/examples)
 To see all components in action. These are only examples and don't cover all scenarios.
 
-#### [API References](http://opensource.adobe.com/coral-spectrum/dist/documentation/identifiers.html)
+#### [API References](http://opensource.adobe.com/coral-spectrum/documentation/identifiers.html)
 Covers the API for all components including properties, events and more.
 
-#### [Playground](http://opensource.adobe.com/coral-spectrum/dist/playground)
+#### [Playground](http://opensource.adobe.com/coral-spectrum/playground)
 Experiment and preview code with the latest Coral Spectrum version.
 Code can be shared by copy pasting the URL. The playground is sandboxed to prevent security risks.
 
