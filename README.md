@@ -268,6 +268,7 @@ Each component can be built independently e.g. `cd coral-component-button && gul
 ### Releasing
 #### Automatic release:
 Merging the PR to master will trigger an automatic release Github Action. It is important to follow [Angular Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines). It is recommended to use [cz-cli](https://github.com/commitizen/cz-cli) for easy commits.
+Only **fix** and **feat** can trigger a release. If you want to skip release [add \[skip release\] or \[release skip\] to the commit message](https://semantic-release.gitbook.io/semantic-release/support/faq#can-i-exclude-commits-from-the-analysis)
 #### Manual releasing:
 We are currently releasing this package on `npm`.
 

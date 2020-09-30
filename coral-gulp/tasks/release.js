@@ -24,20 +24,20 @@ module.exports = function(gulp) {
   const util = require('../helpers/util');
   const root = util.getRoot();
   const CWD = process.cwd();
-  
+
   let modulePackageJson = util.getPackageJSON();
-  
+
   // The version we'll actually release
   let releaseVersion;
-  
+
   gulp.task('check-root-folder', function(done) {
     if (CWD !== root) {
       done(new PluginError('release', 'Release aborted: not in root folder.'));
     }
-    
+
     done();
   });
-  
+
   // Push current branch commits to origin
   gulp.task('push', function(done) {
     // Get the current branch name
@@ -47,41 +47,41 @@ module.exports = function(gulp) {
       }
       else {
         const currentBranch = stdout.trim();
-        
+
         git.push('origin', currentBranch, function(err) {
           if (err) {
             done(new PluginError('release', err.message));
           }
-          
+
           done();
         });
       }
     });
   });
-  
+
   // Tag and push release
   gulp.task('tag-release', function(done) {
     // Read updated package.json
     modulePackageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-    releaseVersion = modulePackageJson.version;
-    
+    releaseVersion = 'v' + modulePackageJson.version;
+
     const releaseMessage = `releng - Release ${releaseVersion}`;
-    
+
     git.tag(releaseVersion, releaseMessage, function(err) {
       if (err) {
         done(new PluginError('release', err.message));
       }
-      
+
       git.push('origin', releaseVersion, function(err) {
         if (err) {
           done(new PluginError('release', err.message));
         }
-        
+
         done();
       });
     });
   });
-  
+
   // Increase release version based on user choice
   gulp.task('bump-version', function(done) {
     const doVersionBump = () => {
@@ -94,9 +94,9 @@ module.exports = function(gulp) {
           done();
         });
     };
-    
+
     const currentVersion = modulePackageJson.version;
-    
+
     // Potential versions
     const patchVersion = semver.inc(currentVersion, 'patch');
     const minorVersion = semver.inc(currentVersion, 'minor');
@@ -105,7 +105,7 @@ module.exports = function(gulp) {
     const preMajorVersion = semver.inc(currentVersion, 'premajor', 'beta');
     const preMinorVersion = semver.inc(currentVersion, 'preminor', 'beta');
     const prePatchVersion = semver.inc(currentVersion, 'prepatch', 'beta');
-    
+
     // Command line bump shortcuts
     if (argv.pre) {
       releaseVersion = preVersion;
@@ -131,13 +131,13 @@ module.exports = function(gulp) {
     else if (argv.releaseVersion) {
       releaseVersion = argv.releaseVersion;
     }
-    
+
     if (releaseVersion) {
       doVersionBump();
     }
     else {
       let choices = [];
-      
+
       if (currentVersion.match('-beta')) {
         choices = choices.concat([
           {
@@ -146,7 +146,7 @@ module.exports = function(gulp) {
           }
         ]);
       }
-      
+
       if (patchVersion !== majorVersion) {
         // Only provide these options if they're not identical
         // These options will be identical if the current version is a beta of a major version
@@ -174,7 +174,7 @@ module.exports = function(gulp) {
           }
         ]);
       }
-      
+
       choices = choices.concat([
         {
           name: 'prepatch - ' + prePatchVersion,
@@ -193,7 +193,7 @@ module.exports = function(gulp) {
           value: 'custom'
         }
       ]);
-      
+
       inq.prompt([{
         type: 'list',
         name: 'version',
@@ -219,7 +219,7 @@ module.exports = function(gulp) {
         });
     }
   });
-  
+
   gulp.task('perform-release', function(done) {
     const release = () => {
       spawn(`
@@ -235,10 +235,10 @@ module.exports = function(gulp) {
         gulp tag-release &&
         npm publish --access public
       `, [], {shell: true, stdio: 'inherit'});
-      
+
       done();
     };
-    
+
     // Command line shortcut
     if (argv.confirm) {
       release();
@@ -256,7 +256,7 @@ module.exports = function(gulp) {
         });
     }
   });
-  
+
   // Full release task
   gulp.task('release',
     gulp.series(
