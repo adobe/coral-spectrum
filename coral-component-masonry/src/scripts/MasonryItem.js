@@ -150,8 +150,11 @@ class MasonryItem extends BaseComponent(HTMLElement) {
   
   /** @ignore */
   connectedCallback() {
+    if (this._ignoreConnectedCallback) {
+      return;
+    }
+
     super.connectedCallback();
-    
     // Inform masonry immediately
     this.trigger('coral-masonry-item:_connected');
   }
@@ -177,8 +180,11 @@ class MasonryItem extends BaseComponent(HTMLElement) {
   
   /** @ignore */
   disconnectedCallback() {
+    if (this._ignoreConnectedCallback) {
+      return;
+    }
     super.disconnectedCallback();
-  
+
     // Handle it in masonry immediately
     const masonry = this._masonry;
     if (masonry) {

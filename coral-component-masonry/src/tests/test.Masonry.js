@@ -12,6 +12,7 @@
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Masonry} from '../../../coral-component-masonry';
+import {commons} from '../../../coral-utils';
 
 describe('Masonry.Layout', function() {
   
@@ -532,6 +533,70 @@ describe('Masonry.Layout', function() {
       expect(el.parentElement.getAttribute('aria-label')).to.equal('Masonry Label', 'Masonry parent element should receive same aria-label as Masonry');
       expect(el.parentElement.getAttribute('aria-labelledby')).to.equal('Masonry Labelledby', 'Masonry parent element should receive same aria-labelledby as Masonry');
     });
+  });
 
+  describe('#attaching/detching', function() {
+    it('reattaching changing masonry should keep child intact', function(done) {
+      const el = helpers.build(window.__html__['Masonry.with.div.wrapper.html']);
+      const masonry = el.querySelector("coral-masonry");
+
+      expect(masonry.items.getAll().length).to.equal(2);
+
+      el.appendChild(masonry);
+      //wait for transition to end
+      commons.transitionEnd(masonry, () => {
+        helpers.next(function() {
+          expect(masonry.items.getAll().length).to.equal(2);
+          done();
+        });
+      });
+    });
+
+    it('removing item and then attaching should keep the item', function(done) {
+      const el = helpers.build(window.__html__['Masonry.with.div.wrapper.html']);
+      const masonry = el.querySelector("coral-masonry");
+      const item =  masonry.querySelector("coral-masonry-item");
+
+      expect(masonry.items.getAll().length).to.equal(2);
+
+      item.remove();
+      expect(item._disconnected).to.be.true;
+      expect(item.hasAttribute("_removing")).to.be.true;
+
+      masonry.appendChild(item);
+      expect(item._disconnected).to.be.false;
+
+      //wait for transition to end
+      commons.transitionEnd(masonry, () => {
+        helpers.next(function() {
+          expect(masonry.items.getAll().length).to.equal(2);
+          done();
+        });
+      });
+    });
+
+    it('removing item should not again attach the item', function(done) {
+      const el = helpers.build(window.__html__['Masonry.with.div.wrapper.html']);
+      const masonry = el.querySelector("coral-masonry");
+      const item =  masonry.querySelector("coral-masonry-item");
+
+      expect(masonry.items.getAll().length).to.equal(2);
+
+      item.remove();
+      expect(item._disconnected).to.be.true;
+      expect(item.hasAttribute("_removing")).to.be.true;
+
+      //wait for transition to end
+      commons.transitionEnd(masonry, () => {
+        helpers.next(function() {
+          expect(masonry.items.getAll().length).to.equal(1);
+          // even after some time it should not gets reattach
+          setTimeout(function() {
+            expect(masonry.items.getAll().length).to.equal(1);
+            done();
+          }, 200);
+        });
+      });
+    });
   });
 });
