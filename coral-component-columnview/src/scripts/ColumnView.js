@@ -1039,16 +1039,15 @@ class ColumnView extends BaseComponent(HTMLElement) {
     // initial state of the columnview
     this._oldActiveItem = this.activeItem;
     this._oldSelection = this.selectedItems;
+      
+    this._ensureTabbableItem();
 
-    if (!this._oldActiveItem && !this._oldSelection.length) {
-      const selectableItems = this.items._getSelectableItems();
-      if (selectableItems.length) {
-        selectableItems[0].tabIndex = 0;
-      }
-    }
-
-    if (this.columns && this.columns.first()) {
-      this._updateAriaLevel(this.columns.first());
+    if (this.columns) {
+      var columns = this.columns.getAll();
+      var self = this;
+      columns.forEach(function(column) {
+        self._updateAriaLevel(column);
+      });
     }
   }
   
