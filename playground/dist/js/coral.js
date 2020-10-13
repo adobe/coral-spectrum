@@ -50621,16 +50621,14 @@
         this._oldActiveItem = this.activeItem;
         this._oldSelection = this.selectedItems;
 
-        if (!this._oldActiveItem && !this._oldSelection.length) {
-          var selectableItems = this.items._getSelectableItems();
+        this._ensureTabbableItem();
 
-          if (selectableItems.length) {
-            selectableItems[0].tabIndex = 0;
-          }
-        }
-
-        if (this.columns && this.columns.first()) {
-          this._updateAriaLevel(this.columns.first());
+        if (this.columns) {
+          var columns = this.columns.getAll();
+          var self = this;
+          columns.forEach(function (column) {
+            self._updateAriaLevel(column);
+          });
         }
       }
       /** @private */
@@ -51915,8 +51913,12 @@
         this.classList.add(CLASSNAME$Q); // @a11y
 
         this.setAttribute('role', 'treeitem');
-        this.id = this.id || commons.getUID();
-        this.tabIndex = this.active || this.selected ? 0 : -1; // Default reflected attributes
+        this.id = this.id || commons.getUID(); // only set tabIndex if it is not already set
+
+        if (!this.hasAttribute('tabindex')) {
+          this.tabIndex = this.active || this.selected ? 0 : -1;
+        } // Default reflected attributes
+
 
         if (!this._variant) {
           this.variant = variant$g.DEFAULT;
@@ -80201,7 +80203,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.10.3";
+  var version$1 = "4.10.4";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

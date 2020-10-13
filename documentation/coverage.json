@@ -729,12 +729,12 @@
         306,
         392,
         444,
-        1140,
-        1168,
-        1193,
-        1224,
-        1323,
-        1345
+        1139,
+        1167,
+        1192,
+        1223,
+        1322,
+        1344
       ]
     },
     "coral-spectrum/coral-component-columnview/src/scripts/ColumnViewCollection.js": {
@@ -789,7 +789,7 @@
         275,
         303,
         369,
-        371
+        373
       ]
     },
     "coral-spectrum/coral-component-columnview/src/scripts/ColumnViewItemContent.js": {
