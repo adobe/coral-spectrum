@@ -633,8 +633,6 @@ const BaseOverlay = (superClass) => class extends superClass {
 
           const closeComplete = () => {
             if (!this.open) {
-              // Hide self
-              this.style.display = 'none';
 
               // When the CSS transition has finished, set visibility to browser default, `visibility: visible`,
               // to ensure that the overlay will be included in accessibility name or description
@@ -643,6 +641,9 @@ const BaseOverlay = (superClass) => class extends superClass {
 
               // makes sure the focus is returned per accessibility recommendations
               this._handleReturnFocus();
+
+              // Hide self
+              this.style.display = 'none';
 
               this._debounce(() => {
                 // Inform child overlays that we're closing
