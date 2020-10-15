@@ -196,7 +196,7 @@ const BaseList = (superClass) => class extends superClass {
   /** @ignore */
   focus() {
     if (!this.contains(document.activeElement)) {
-      const items = this._getSelectableItems().filter(item => !item.hasAttribute('hidden'));
+      const items = this._getSelectableItems();
       if (items.length > 0) {
         const firstFocusable = items.find(item => item.tabIndex === 0);
         (firstFocusable || items[0]).focus();

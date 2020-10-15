@@ -221,38 +221,11 @@ class SelectList extends BaseComponent(HTMLElement) {
   
   set _tabTarget(value) {
     this.__tabTarget = value;
-    if (this.groups && this._groups.getAll().length > 0) {
-      let firstFocusable;
-      // set first item or selected item to be tab target
-      this._groups.getAll().forEach((group) => {
-        const items = group.items._getSelectableItems();
-        if (items.length > 0) {
-          if (!firstFocusable) {
-            firstFocusable = items[0];
-            if (firstFocusable) {
-              firstFocusable.setAttribute('tabindex', 0);
-            }
-          }
-          items.forEach((item) => {
-            if (item === value) {
-              item.setAttribute('tabindex', 0);
-              if (firstFocusable && item !== firstFocusable) {
-                firstFocusable.setAttribute('tabindex', -1);
-              }
-            }
-            else if (item !== firstFocusable) {
-              item.setAttribute('tabindex', -1); 
-            }
-          });
-        }
-      });
-    }
-    else {
-      // Set all but the current set _tabTarget to not be a tab target:
-      this.items._getSelectableItems().forEach((item) => {
-        item.setAttribute('tabindex', !value || item === value ? 0 : -1);
-      });
-    }
+    
+    // Set all but the current set _tabTarget to not be a tab target:
+    this.items._getSelectableItems().forEach((item) => {
+      item.setAttribute('tabindex', !value || item === value ? 0 : -1);
+    });
   }
   
   /** @private */
@@ -305,14 +278,14 @@ class SelectList extends BaseComponent(HTMLElement) {
   /** @private */
   _focusPreviousItem(event) {
     event.preventDefault();
-    event.stopPropagation();
+
     this._focusItem(this.items._getPreviousSelectable(event.target));
   }
   
   /** @private */
   _focusNextItem(event) {
     event.preventDefault();
-    event.stopPropagation();
+
     this._focusItem(this.items._getNextSelectable(event.target));
   }
   
@@ -363,7 +336,7 @@ class SelectList extends BaseComponent(HTMLElement) {
     }, this._keypressTimeoutDuration);
     
     // Search within selectable items
-    const selectableItems = this.items._getSelectableItems();
+    const selectableItems = this.items._getSelectableItems().filter(item => !item.hasAttribute('hidden') && item.offsetParent);
     
     // Remember the index of the focused item within the array of selectable items
     const currentIndex = selectableItems.indexOf(this._tabTarget);
@@ -431,13 +404,39 @@ class SelectList extends BaseComponent(HTMLElement) {
    @private
    */
   _resetTabTarget(forceFirst = false) {
-    let items = this.items._getAllSelected().filter(item => !item.hasAttribute('hidden'));
+    let items = this.items._getAllSelected().filter(item => !item.hasAttribute('hidden') && item.offsetParent);
 
     if (items.length === 0) {
-      items = this.items._getSelectableItems().filter(item => !item.hasAttribute('hidden'));
+      items = this.items._getSelectableItems().filter(item => !item.hasAttribute('hidden') && item.offsetParent);
     }
     
-    this._tabTarget = forceFirst ? items[0] : (items.find(item => item.tabIndex === 0) || items[0]); 
+    this._tabTarget = forceFirst ? items[0] : (items.find(item => item.tabIndex === 0) || items[0]);
+
+    if (this.groups && this._groups.getAll().length > 0) {
+      let firstFocusable;
+      this._groups.getAll().forEach((group) => {
+        const items = group.items._getSelectableItems().filter(item => !item.hasAttribute('hidden') && item.offsetParent);
+        if (items.length > 0) {
+          if (!firstFocusable) {
+            firstFocusable = items[0];
+            if (firstFocusable) {
+              firstFocusable.setAttribute('tabindex', 0);
+            }
+          }
+          items.forEach((item) => {
+            if (item === this._tabTarget) {
+              item.setAttribute('tabindex', 0);
+              if (firstFocusable && item !== firstFocusable) {
+                firstFocusable.setAttribute('tabindex', -1);
+              }
+            }
+            else if (item !== firstFocusable) {
+              item.setAttribute('tabindex', -1); 
+            }
+          });
+        }
+      });
+    }
   }
   
   /** @private */

@@ -131,7 +131,6 @@ class SelectableCollection extends Collection {
       }
     }
   
-    // in case the item is not specified, or it is not inside the collection, we need to return the first selectable
     return sibling || item;
   }
   
