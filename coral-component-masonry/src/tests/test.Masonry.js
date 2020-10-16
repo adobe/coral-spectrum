@@ -580,7 +580,7 @@ describe('Masonry', function() {
 
       expect(masonry.items.getAll().length).to.equal(2);
 
-      masonry.replaceChild(item);
+      masonry.removeChild(item);
       // Here we cannot test item _disconnected and isConnected
       // because we again attach item with removing attribute to show transition.
       expect(item.hasAttribute("_removing")).to.be.true;
