@@ -411,32 +411,6 @@ class SelectList extends BaseComponent(HTMLElement) {
     }
     
     this._tabTarget = forceFirst ? items[0] : (items.find(item => item.tabIndex === 0) || items[0]);
-
-    if (this.groups && this._groups.getAll().length > 0) {
-      let firstFocusable;
-      this._groups.getAll().forEach((group) => {
-        const items = group.items._getSelectableItems().filter(item => !item.hasAttribute('hidden') && item.offsetParent);
-        if (items.length > 0) {
-          if (!firstFocusable) {
-            firstFocusable = items[0];
-            if (firstFocusable) {
-              firstFocusable.setAttribute('tabindex', 0);
-            }
-          }
-          items.forEach((item) => {
-            if (item === this._tabTarget) {
-              item.setAttribute('tabindex', 0);
-              if (firstFocusable && item !== firstFocusable) {
-                firstFocusable.setAttribute('tabindex', -1);
-              }
-            }
-            else if (item !== firstFocusable) {
-              item.setAttribute('tabindex', -1); 
-            }
-          });
-        }
-      });
-    }
   }
   
   /** @private */
