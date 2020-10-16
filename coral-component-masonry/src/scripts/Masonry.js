@@ -816,16 +816,9 @@ class Masonry extends BaseComponent(HTMLElement) {
     if (!item.hasAttribute('_removing')) {
       // Attach again for remove transition
       item.setAttribute('_removing', '');
-      // Avoid calling of connected and disconnected callbacks.
-      item._ignoreConnectedCallback = true;
       this.appendChild(item);
-      item._ignoreConnectedCallback = false;
       commons.transitionEnd(item, () => {
-        var parent = item.parentElement;
-        var connected = !item._disconnected || false;
         item.remove();
-        // If items gets reattached either by user or reattaching, again append the items.
-        connected && parent.appendChild(item);
       });
     }
     // remove transition completed

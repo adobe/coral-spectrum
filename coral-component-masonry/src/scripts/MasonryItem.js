@@ -150,7 +150,7 @@ class MasonryItem extends BaseComponent(HTMLElement) {
   
   /** @ignore */
   connectedCallback() {
-    if (this._ignoreConnectedCallback) {
+    if (!this.isConnected) {
       return;
     }
 
@@ -180,9 +180,10 @@ class MasonryItem extends BaseComponent(HTMLElement) {
   
   /** @ignore */
   disconnectedCallback() {
-    if (this._ignoreConnectedCallback) {
+    if (this.isConnected) {
       return;
     }
+
     super.disconnectedCallback();
 
     // Handle it in masonry immediately
