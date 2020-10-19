@@ -87,21 +87,26 @@ class SelectableCollection extends Collection {
    @protected
    */
   _getPreviousSelectable(item) {
-    let sibling = item.previousElementSibling;
+    const items = this.getAll();
+    let index = items.indexOf(item);
+    let sibling = index > 0 ? items[index - 1] : null;
+
     while (sibling) {
       if (sibling.matches(this._selectableItemSelector)) {
         break;
       }
       else {
-        sibling = sibling.previousElementSibling;
+        index--;
+        sibling = index > 0 ? items[index - 1] : null;
       }
     }
-    
-    return sibling || item;
+
+    // in case the item is not specified, or it is not inside the collection, we need to return the first selectable
+    return sibling || (item.matches(this._selectableItemSelector) ? item : this._getFirstSelectable());
   }
   
   /**
-   Returns the net selectable item.
+   Returns the next selectable item.
    
    @param {HTMLElement} item
    The reference item.
@@ -112,16 +117,20 @@ class SelectableCollection extends Collection {
    @protected
    */
   _getNextSelectable(item) {
-    let sibling = item.nextElementSibling;
+    const items = this.getAll();
+    let index = items.indexOf(item);
+    let sibling = index < items.length - 1 ? items[index + 1] : null;
+
     while (sibling) {
       if (sibling.matches(this._selectableItemSelector)) {
         break;
       }
       else {
-        sibling = sibling.nextElementSibling;
+        index++;
+        sibling = index < items.length - 1 ? items[index + 1] : null;
       }
     }
-    
+  
     return sibling || item;
   }
   

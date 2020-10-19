@@ -728,6 +728,9 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     if (this.readOnly) {
       event.preventDefault();
     }
+
+    // focus first selected or tabbable item when the list expands
+    this._elements.list._resetTabTarget(true);
   }
 
   /** @private */

@@ -218,12 +218,13 @@ class SelectList extends BaseComponent(HTMLElement) {
   get _tabTarget() {
     return this.__tabTarget || null;
   }
+  
   set _tabTarget(value) {
     this.__tabTarget = value;
-  
+    
     // Set all but the current set _tabTarget to not be a tab target:
-    this.items.getAll().forEach((item) => {
-      item.setAttribute('tabindex', item === value ? 0 : -1);
+    this.items._getSelectableItems().forEach((item) => {
+      item.setAttribute('tabindex', !value || item === value ? 0 : -1);
     });
   }
   
@@ -277,14 +278,14 @@ class SelectList extends BaseComponent(HTMLElement) {
   /** @private */
   _focusPreviousItem(event) {
     event.preventDefault();
-    
+
     this._focusItem(this.items._getPreviousSelectable(event.target));
   }
   
   /** @private */
   _focusNextItem(event) {
     event.preventDefault();
-    
+
     this._focusItem(this.items._getNextSelectable(event.target));
   }
   
@@ -335,7 +336,7 @@ class SelectList extends BaseComponent(HTMLElement) {
     }, this._keypressTimeoutDuration);
     
     // Search within selectable items
-    const selectableItems = this.items._getSelectableItems();
+    const selectableItems = this.items._getSelectableItems().filter(item => !item.hasAttribute('hidden') && item.offsetParent);
     
     // Remember the index of the focused item within the array of selectable items
     const currentIndex = selectableItems.indexOf(this._tabTarget);
@@ -402,9 +403,14 @@ class SelectList extends BaseComponent(HTMLElement) {
    
    @private
    */
-  _resetTabTarget() {
-    const selectedItems = this.items._getAllSelected().filter(item => !item.hasAttribute('hidden'));
-    this._tabTarget = selectedItems.length ? selectedItems[0] : this.items._getSelectableItems().filter(item => !item.hasAttribute('hidden'))[0];
+  _resetTabTarget(forceFirst = false) {
+    let items = this.items._getAllSelected().filter(item => !item.hasAttribute('hidden') && item.offsetParent);
+
+    if (items.length === 0) {
+      items = this.items._getSelectableItems().filter(item => !item.hasAttribute('hidden') && item.offsetParent);
+    }
+    
+    this._tabTarget = forceFirst ? items[0] : (items.find(item => item.tabIndex === 0) || items[0]);
   }
   
   /** @private */

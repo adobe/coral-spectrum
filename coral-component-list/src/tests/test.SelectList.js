@@ -417,6 +417,71 @@ describe('SelectList', function() {
         done();
       });
     });
+
+    describe('groups', function() {
+      let el;
+      let groups;
+      let item1;
+      let item2;
+
+      beforeEach(function() {
+        el = helpers.build(window.__html__['SelectList.groups.html']);
+      });
+
+      afterEach(function() {
+        el.remove();
+        el = groups = item1 = item2 = null;
+      });
+
+      it('navigates between groups using ArrowUp/ArrowDown', function() {
+        groups = el.groups.getAll();
+
+        // last item in first group
+        item1 = groups[0].items.last();
+
+        // first item in last group
+        item2 = groups[1].items.first();
+
+        // focus last item in first group
+        item1.focus();
+
+        // ArrowDown focuses first item in next group
+        helpers.keypress('down', item1);
+
+        // verify focus on first item of second group
+        expect(item2).equals(document.activeElement);
+
+        // ArrowUp focuses last item in previous group
+        helpers.keypress('up', item2);
+
+        // verify focus on last item of first group
+        expect(item1).equals(document.activeElement);
+
+         // PageDown focuses first item in next group
+         helpers.keypress('pagedown', item1);
+
+         // verify focus on first item of second group
+         expect(item2).equals(document.activeElement);
+ 
+         // PageUp focuses last item in previous group
+         helpers.keypress('pageup', item2);
+ 
+         // verify focus on last item of first group
+         expect(item1).equals(document.activeElement);
+
+         // End focuses last item of last group
+         helpers.keypress('end', item1);
+ 
+         // verify focus on last item of last group
+         expect(groups[1].items.last()).equals(document.activeElement);
+
+         // Home focuses first item of first group
+         helpers.keypress('home', item1);
+ 
+         // verify focus on first item of first group
+         expect(groups[0].items.first()).equals(document.activeElement);
+      });
+    });
     // @todo: test focus of initial state
     // @todo: test focus of an empty list
     // @todo: test focus of a list with a selected item
