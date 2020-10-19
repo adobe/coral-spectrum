@@ -408,9 +408,14 @@ describe('BaseOverlay', function() {
           overlay.hide();
         });
 
+        overlay.on('coral-overlay:beforeclose', function() {
+          expect(overlay).to.equal(document.activeElement, 'Overlay should be in focus');
+        });
+
         overlay.on('coral-overlay:close', function() {
           // See if our spy was called
           expect(focusSpy.callCount).to.equal(1, 'Focus should have been called once');
+          expect(button).to.equal(document.activeElement, 'Focus should be restored to the button');
 
           done();
         });
