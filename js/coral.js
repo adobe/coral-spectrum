@@ -16184,20 +16184,24 @@ var Coral = (function (exports) {
     }, {
       key: "_getPreviousSelectable",
       value: function _getPreviousSelectable(item) {
-        var sibling = item.previousElementSibling;
+        var items = this.getAll();
+        var index = items.indexOf(item);
+        var sibling = index > 0 ? items[index - 1] : null;
 
         while (sibling) {
           if (sibling.matches(this._selectableItemSelector)) {
             break;
           } else {
-            sibling = sibling.previousElementSibling;
+            index--;
+            sibling = index > 0 ? items[index - 1] : null;
           }
-        }
+        } // in case the item is not specified, or it is not inside the collection, we need to return the first selectable
 
-        return sibling || item;
+
+        return sibling || (item.matches(this._selectableItemSelector) ? item : this._getFirstSelectable());
       }
       /**
-       Returns the net selectable item.
+       Returns the next selectable item.
        
        @param {HTMLElement} item
        The reference item.
@@ -16211,13 +16215,16 @@ var Coral = (function (exports) {
     }, {
       key: "_getNextSelectable",
       value: function _getNextSelectable(item) {
-        var sibling = item.nextElementSibling;
+        var items = this.getAll();
+        var index = items.indexOf(item);
+        var sibling = index < items.length - 1 ? items[index + 1] : null;
 
         while (sibling) {
           if (sibling.matches(this._selectableItemSelector)) {
             break;
           } else {
-            sibling = sibling.nextElementSibling;
+            index++;
+            sibling = index < items.length - 1 ? items[index + 1] : null;
           }
         }
 
@@ -19227,7 +19234,9 @@ var Coral = (function (exports) {
           _this2._keypressSearchString = '';
         }, this._keypressTimeoutDuration); // Search within selectable items
 
-        var selectableItems = this.items._getSelectableItems(); // Remember the index of the focused item within the array of selectable items
+        var selectableItems = this.items._getSelectableItems().filter(function (item) {
+          return !item.hasAttribute('hidden') && item.offsetParent;
+        }); // Remember the index of the focused item within the array of selectable items
 
 
         var currentIndex = selectableItems.indexOf(this._tabTarget);
@@ -19296,13 +19305,21 @@ var Coral = (function (exports) {
     }, {
       key: "_resetTabTarget",
       value: function _resetTabTarget() {
-        var selectedItems = this.items._getAllSelected().filter(function (item) {
-          return !item.hasAttribute('hidden');
+        var forceFirst = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+        var items = this.items._getAllSelected().filter(function (item) {
+          return !item.hasAttribute('hidden') && item.offsetParent;
         });
 
-        this._tabTarget = selectedItems.length ? selectedItems[0] : this.items._getSelectableItems().filter(function (item) {
-          return !item.hasAttribute('hidden');
-        })[0];
+        if (items.length === 0) {
+          items = this.items._getSelectableItems().filter(function (item) {
+            return !item.hasAttribute('hidden') && item.offsetParent;
+          });
+        }
+
+        this._tabTarget = forceFirst ? items[0] : items.find(function (item) {
+          return item.tabIndex === 0;
+        }) || items[0];
       }
       /** @private */
 
@@ -19605,8 +19622,8 @@ var Coral = (function (exports) {
       set: function set(value) {
         this.__tabTarget = value; // Set all but the current set _tabTarget to not be a tab target:
 
-        this.items.getAll().forEach(function (item) {
-          item.setAttribute('tabindex', item === value ? 0 : -1);
+        this.items._getSelectableItems().forEach(function (item) {
+          item.setAttribute('tabindex', !value || item === value ? 0 : -1);
         });
       }
     }], [{
@@ -27837,7 +27854,10 @@ var Coral = (function (exports) {
 
         if (this.readOnly) {
           event.preventDefault();
-        }
+        } // focus first selected or tabbable item when the list expands
+
+
+        this._elements.list._resetTabTarget(true);
       }
       /** @private */
 
@@ -80203,7 +80223,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.10.4";
+  var version$1 = "4.10.5";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
