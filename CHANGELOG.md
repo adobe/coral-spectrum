@@ -1,3 +1,10 @@
+## [4.10.6](https://github.com/adobe/coral-spectrum/compare/v4.10.5...v4.10.6) (2020-10-19)
+
+
+### Bug Fixes
+
+* **CQ-4295097:** Accessibility - Spectrum SelectList user is not able to select next group with keyboard ([#127](https://github.com/adobe/coral-spectrum/issues/127)) ([c80e629](https://github.com/adobe/coral-spectrum/commit/c80e629f5d3411d1672822cd2aa4a80fd76e9784))
+
 ## [4.10.5](https://github.com/adobe/coral-spectrum/compare/v4.10.4...v4.10.5) (2020-10-13)
 
 
