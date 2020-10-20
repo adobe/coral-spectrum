@@ -1,3 +1,10 @@
+## [4.10.7](https://github.com/adobe/coral-spectrum/compare/v4.10.6...v4.10.7) (2020-10-20)
+
+
+### Bug Fixes
+
+* **CUI-7430:** Coral.mixin.overlay should not hide overlay before calling _handleReturnFocus ([#140](https://github.com/adobe/coral-spectrum/issues/140)) ([0eb1973](https://github.com/adobe/coral-spectrum/commit/0eb197326369169466365b0438acaa5cadf1abd5))
+
 ## [4.10.6](https://github.com/adobe/coral-spectrum/compare/v4.10.5...v4.10.6) (2020-10-19)
 
 
