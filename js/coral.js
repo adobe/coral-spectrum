@@ -21238,14 +21238,15 @@ var Coral = (function (exports) {
 
                 var closeComplete = function closeComplete() {
                   if (!_this2.open) {
-                    // Hide self
-                    _this2.style.display = 'none'; // When the CSS transition has finished, set visibility to browser default, `visibility: visible`,
+                    // When the CSS transition has finished, set visibility to browser default, `visibility: visible`,
                     // to ensure that the overlay will be included in accessibility name or description
                     // of an element that references it using `aria-labelledby` or `aria-describedby`.
-
                     _this2.style.visibility = 'visible'; // makes sure the focus is returned per accessibility recommendations
 
-                    _this2._handleReturnFocus();
+                    _this2._handleReturnFocus(); // Hide self
+
+
+                    _this2.style.display = 'none';
 
                     _this2._debounce(function () {
                       // Inform child overlays that we're closing
@@ -80223,7 +80224,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.10.5";
+  var version$1 = "4.10.6";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
