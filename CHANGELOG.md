@@ -1,3 +1,10 @@
+## [4.10.8](https://github.com/adobe/coral-spectrum/compare/v4.10.7...v4.10.8) (2020-10-22)
+
+
+### Bug Fixes
+
+* **Masonry:** Changing Masonry parent leads to removal of its items ([#139](https://github.com/adobe/coral-spectrum/issues/139)) ([46ae499](https://github.com/adobe/coral-spectrum/commit/46ae499f9aef04a1416ebb26b1c5365af36a0698))
+
 ## [4.10.7](https://github.com/adobe/coral-spectrum/compare/v4.10.6...v4.10.7) (2020-10-20)
 
 
