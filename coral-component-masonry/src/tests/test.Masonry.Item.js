@@ -12,6 +12,7 @@
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Masonry} from '../../../coral-component-masonry';
+import {commons} from '../../../coral-utils';
 
 describe('Masonry.Item', function() {
   describe('Namespace', function() {
@@ -186,7 +187,75 @@ describe('Masonry.Item', function() {
       });
     });
   });
-  
+
+  describe('Attach/Detach', function() {
+    describe('replacing masonry item', function() {
+      it('with another masonry item using replaceChild', function(done) {
+        const el = helpers.build(window.__html__['Masonry.with.div.wrapper.html']);
+        const masonry = el.querySelector("coral-masonry");
+        const oldItem = masonry.querySelector("coral-masonry-item");
+
+        const newItem = new Masonry.Item();
+        newItem.content.innerHTML = "Hi";
+
+        masonry.replaceChild(newItem, oldItem);
+
+        // Here we cannot test oldItem _disconnected and isConnected
+        // because we again attach item with removing attribute to show transition.
+        expect(oldItem.hasAttribute("_removing")).to.be.true;
+
+        expect(newItem.isConnected).to.be.true;
+        expect(newItem.parentElement).to.equal(masonry);
+        expect(masonry.items.getAll().length).to.equal(2);
+
+        const item = masonry.querySelector("coral-masonry-item");
+        //wait for transition to end
+        commons.transitionEnd(oldItem, () => {
+          helpers.next(function() {
+            expect(masonry.items.getAll().length).to.equal(2);
+            // After transition, we test for oldItem _disconnected and isConnected
+            expect(oldItem._disconnected).to.be.true;
+            expect(oldItem.isConnected).to.be.false;
+            expect(oldItem.parentElement).to.equal(null);
+            done();
+          });
+        });
+      });
+
+      it('with another masonry item using replaceWith', function(done) {
+        const el = helpers.build(window.__html__['Masonry.with.div.wrapper.html']);
+        const masonry = el.querySelector("coral-masonry");
+        const oldItem = masonry.querySelector("coral-masonry-item");
+
+        const newItem = new Masonry.Item();
+        newItem.content.innerHTML = "Hi";
+
+        oldItem.replaceWith(newItem);
+
+        // Here we cannot test oldItem _disconnected and isConnected
+        // because we again attach item with removing attribute to show transition.
+        expect(oldItem.hasAttribute("_removing")).to.be.true;
+
+        expect(newItem.isConnected).to.be.true;
+        expect(newItem.parentElement).to.equal(masonry);
+        expect(masonry.items.getAll().length).to.equal(2);
+
+        const item = masonry.querySelector("coral-masonry-item");
+        //wait for transition to end
+        commons.transitionEnd(oldItem, () => {
+          helpers.next(function() {
+            expect(masonry.items.getAll().length).to.equal(2);
+            // after actual removal _disconnected is false and isConnected is true
+            expect(oldItem._disconnected).to.be.true;
+            expect(oldItem.isConnected).to.be.false;
+            expect(oldItem.parentElement).to.equal(null);
+            done();
+          });
+        });
+      });
+    });
+  });
+
   describe('Accessibility', function() {
     it('should have an aria attribute for selection', function() {
       const el = new Masonry.Item();
