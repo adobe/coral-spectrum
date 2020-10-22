@@ -7736,6 +7736,7 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
 .coral-DecoratedTextfield > .coral-DecoratedTextfield-button._coral-Button {
   margin-right: 0;
   max-width: 32px;
+  position: absolute;
 }
 .coral-DecoratedTextfield > .coral-DecoratedTextfield-input {
   padding-right: 32px;
