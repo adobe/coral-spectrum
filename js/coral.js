@@ -58134,6 +58134,10 @@ var Coral = (function (exports) {
     }, {
       key: "connectedCallback",
       value: function connectedCallback() {
+        if (!this.isConnected) {
+          return;
+        }
+
         _get(_getPrototypeOf(MasonryItem.prototype), "connectedCallback", this).call(this); // Inform masonry immediately
 
 
@@ -58165,6 +58169,10 @@ var Coral = (function (exports) {
     }, {
       key: "disconnectedCallback",
       value: function disconnectedCallback() {
+        if (this.isConnected) {
+          return;
+        }
+
         _get(_getPrototypeOf(MasonryItem.prototype), "disconnectedCallback", this).call(this); // Handle it in masonry immediately
 
 
