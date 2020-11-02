@@ -1517,5 +1517,57 @@ describe('ColumnView', function() {
         expect(item.getAttribute('tabindex')).to.equal(i === 0 ? '0' : '-1');
       });
     });
+
+    describe('ColumnView.Preview', function() {
+      function onChangeEvent(event) {
+        const columnView = event.target;
+        if (event.detail.selection.length) {
+          // on selection, it means we load the item content
+          let url = columnView.items._getLastSelected().dataset.src;
+  
+          // there is no information on additional items
+          if (typeof url === 'undefined') {
+            return;
+          }
+  
+          // we load the url from the snippets instead of using ajax
+          let data = window.__html__[`examples/${url}`];
+          if (typeof data !== 'undefined') {
+            let t = document.createElement('div');
+            t.innerHTML = data;
+            let el = t.firstElementChild;
+  
+            // if it is a preview column we add it directly
+            if (el.matches('coral-columnview-preview')) {
+              columnView.setNextColumn(el, columnView.columns.last(), false);
+            }
+          }
+        }
+      }
+
+      beforeEach(function() {
+        helpers.target.addEventListener('coral-columnview:change', onChangeEvent);
+      });
+  
+      afterEach(function() {
+        helpers.target.removeEventListener('coral-columnview:change', onChangeEvent);
+      });
+
+      it('should not be in tab order with selection in previous column', function() {
+        const el = helpers.build(window.__html__['ColumnView.full.html']);
+        const item = el.items.getAll()[3];
+        item.focus();
+        item.active = true;
+        let focusables = el.querySelectorAll('coral-columnview-preview coral-columnview-preview-value[tabindex="-1"]');
+        let tabbables = el.querySelectorAll('coral-columnview-preview coral-columnview-preview-value[tabindex="0"]');
+        expect(focusables.length).to.equal(0);
+        expect(tabbables.length).to.equal(7);
+        item.selected = true;
+        focusables = el.querySelectorAll('coral-columnview-preview coral-columnview-preview-value[tabindex="-1"]');
+        tabbables = el.querySelectorAll('coral-columnview-preview coral-columnview-preview-value[tabindex="0"]');
+        expect(focusables.length).to.equal(7);
+        expect(tabbables.length).to.equal(0);
+      })
+    });
   });
 });
