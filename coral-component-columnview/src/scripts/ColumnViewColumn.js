@@ -560,9 +560,10 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
     super.render();
     
     this.classList.add(CLASSNAME);
-  
     // @a11y
-    this.setAttribute('role', 'group');
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'group');
+    }
 
     this.id = this.id || commons.getUID();
   
