@@ -18949,6 +18949,18 @@ coral-autocomplete-item {
 .coral--large ._coral-Calendar {
   max-height: 377px;
 }
+.coral--light ._coral-Calendar-body:focus ._coral-Calendar-date.is-today.is-focused:before {
+  border-color: rgb(38, 128, 235);
+}
+.coral--lightest ._coral-Calendar-body:focus ._coral-Calendar-date.is-today.is-focused:before {
+  border-color: rgb(55, 142, 240);
+}
+.coral--dark ._coral-Calendar-body:focus ._coral-Calendar-date.is-today.is-focused:before {
+  border-color: rgb(38, 128, 235);
+}
+.coral--darkest ._coral-Calendar-body:focus ._coral-Calendar-date.is-today.is-focused:before {
+  border-color: rgb(20, 115, 230);
+}
 
 /**
  * Copyright 2019 Adobe. All rights reserved.
