@@ -52356,11 +52356,7 @@
         var length = elements.length;
         var i;
         var element;
-        var elementLabel; // @a11y If the previous column has selected items,
-        // do not include item values in the tab order, 
-        // so that a keyboard user can quickly advance to a subsequent toolbar.
-
-        var tabIndex = this.parentElement && this.parentElement.tagName === 'CORAL-COLUMNVIEW' && this.parentElement.selectedItems.length ? -1 : 0;
+        var elementLabel;
 
         for (i = 0; i < length; i++) {
           element = elements[i];
@@ -52368,7 +52364,7 @@
           elementLabel.id = elementLabel.id || commons.getUID();
           element.setAttribute('aria-labelledby', elementLabel.id);
           element.setAttribute('role', 'textbox');
-          element.setAttribute('tabindex', tabIndex);
+          element.setAttribute('tabindex', '0');
           element.setAttribute('aria-readonly', 'true'); // force ChromeVox to read value of textbox
 
           if (window.cvox) {
