@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.Alert</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Alert</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Alerts are used as static indicators of an operation's result, or as messages to highlight information to the user.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <coral-alert>
+          <coral-alert-header>Info</coral-alert-header>
+          <coral-alert-content>For great success, configure the whozit.</coral-alert-content>
+        </coral-alert>
+      </div>
+
+      <h2 class="coral--Heading--S">Error</h2>
+      <div class="markup">
+        <coral-alert variant="error">
+          <coral-alert-header>Error</coral-alert-header>
+          <coral-alert-content>There is something borked!</coral-alert-content>
+        </coral-alert>
+      </div>
+
+      <h2 class="coral--Heading--S">Warning</h2>
+      <div class="markup">
+        <coral-alert variant="warning">
+          <coral-alert-header>Warning</coral-alert-header>
+          <coral-alert-content>Something is about to go wrong!</coral-alert-content>
+        </coral-alert>
+      </div>
+
+      <h2 class="coral--Heading--S">Success</h2>
+      <div class="markup">
+        <coral-alert variant="success">
+          <coral-alert-header>Success</coral-alert-header>
+          <coral-alert-content>Everything went better than expected.</coral-alert-content>
+        </coral-alert>
+      </div>
+
+      <h2 class="coral--Heading--S">Help</h2>
+      <div class="markup">
+        <coral-alert variant="help">
+          <coral-alert-header>Help</coral-alert-header>
+          <coral-alert-content>
+            If you are struggling, read <a class="coral-Link coral-Link--subtle" href="#">the manual</a>.
+          </coral-alert-content>
+        </coral-alert>
+      </div>
+
+      <h2 class="coral--Heading--S">Closable</h2>
+      <div class="markup">
+        <coral-alert variant="success">
+          <coral-alert-header>Success</coral-alert-header>
+          <coral-alert-content>Everything went better than expected.</coral-alert-content>
+          <coral-alert-footer>
+            <a href="#" onclick="event.preventDefault()" class="coral-Link" coral-close>You can click me to close the alert</a>
+          </coral-alert-footer>
+        </coral-alert>
+      </div>
+    </main>
+  </body>
+</html>

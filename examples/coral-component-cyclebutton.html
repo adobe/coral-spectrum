@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.CycleButton</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Cycle Button</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Cycle buttons are simple multi-state toggle buttons that toggle between the possible items below a certain threshold, and show them in a popover selector when above.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <coral-cyclebutton>
+          <coral-cyclebutton-item icon="add">Add</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="remove">Remove</coral-cyclebutton-item>
+        </coral-cyclebutton>
+      </div>
+
+      <h2 class="coral--Heading--S"><label id="label-1" for="cyclebutton-1-button">With content and pre-selected item</label></h2>
+      <div class="markup">
+        <coral-cyclebutton aria-labelledby="label-1" id="cyclebutton-1">
+          <coral-cyclebutton-item icon="viewCard">Card View</coral-cyclebutton-item>
+          <coral-cyclebutton-item>Grid looooooooooooooong View</coral-cyclebutton-item>
+          <coral-cyclebutton-item selected icon="viewList">List View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="">Column View</coral-cyclebutton-item>
+        </coral-cyclebutton>
+      </div>
+
+      <h2 class="coral--Heading--S"><label id="label-2" for="cyclebutton-2-button">With threshold=0</label></h2>
+      <div class="markup">
+        <coral-cyclebutton threshold="0" aria-labelledby="label-2" id="cyclebutton-2">
+          <coral-cyclebutton-item icon="viewCard">Card View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewGrid">Grid View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewList">List View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewColumn">Column View</coral-cyclebutton-item>
+        </coral-cyclebutton>
+      </div>
+
+      <h2 class="coral--Heading--S"><label id="label-3" for="cyclebutton-3-button">With displayMode=icontext</label></h2>
+      <div class="markup">
+        <coral-cyclebutton displaymode="icontext" aria-labelledby="label-3" id="cyclebutton-3">
+          <coral-cyclebutton-item icon="deviceRotatePortrait">Portrait</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="deviceRotateLandscape">Landscape</coral-cyclebutton-item>
+        </coral-cyclebutton>
+      </div>
+
+      <h2 class="coral--Heading--S"><label id="label-4" for="cyclebutton-4-button">With additional actions</label></h2>
+      <div class="markup">
+        <coral-cyclebutton displaymode="icontext" aria-labelledby="label-4" id="cyclebutton-4">
+          <coral-cyclebutton-item icon="viewCard">Card View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewGrid">Grid View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewList">List View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewColumn">Column View</coral-cyclebutton-item>
+          <coral-cyclebutton-action icon="settings">View Settings</coral-cyclebutton-action>
+          <coral-cyclebutton-action icon="more">More Settings</coral-cyclebutton-action>
+        </coral-cyclebutton>
+      </div>
+
+      <h2 class="coral--Heading--S"><label id="label-5" for="cyclebutton-5-button">With multiple display modes</label></h2>
+      <div class="markup">
+        <coral-cyclebutton displayMode="icontext" aria-labelledby="label-5" id="cyclebutton-5">
+          <coral-cyclebutton-item icon="viewCard" displayMode="icon">Card View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewGrid">Grid View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewList">List View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewColumn">Column View</coral-cyclebutton-item>
+        </coral-cyclebutton>
+      </div>
+
+      <h2 class="coral--Heading--S"><label id="label-6" for="cyclebutton-6-button">With a general icon</label></h2>
+      <div class="markup">
+        <coral-cyclebutton icon="apps" aria-labelledby="label-6" id="cyclebutton-6">
+          <coral-cyclebutton-item>Card View</coral-cyclebutton-item>
+          <coral-cyclebutton-item>Grid View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewList">List View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewColumn">Column View</coral-cyclebutton-item>
+        </coral-cyclebutton>
+      </div>
+
+      <h2 class="coral--Heading--S"><label id="label-7" for="cyclebutton-7-button">Without any icons</label></h2>
+      <div class="markup">
+        <coral-cyclebutton aria-labelledby="label-7" id="cyclebutton-7">
+          <coral-cyclebutton-item>Card View</coral-cyclebutton-item>
+          <coral-cyclebutton-item>Grid View</coral-cyclebutton-item>
+          <coral-cyclebutton-item>List View</coral-cyclebutton-item>
+          <coral-cyclebutton-item>Column View</coral-cyclebutton-item>
+        </coral-cyclebutton>
+      </div>
+
+      <h2 class="coral--Heading--S">Labelled using aria-label</h2>
+      <div class="markup">
+        <coral-cyclebutton displaymode="icontext" aria-label="Labelled using aria-label">
+          <coral-cyclebutton-item icon="viewCard">Card View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewGrid">Grid View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewList">List View</coral-cyclebutton-item>
+          <coral-cyclebutton-item icon="viewColumn">Column View</coral-cyclebutton-item>
+          <coral-cyclebutton-action icon="settings">View Settings</coral-cyclebutton-action>
+          <coral-cyclebutton-action icon="more">More Settings</coral-cyclebutton-action>
+        </coral-cyclebutton>
+      </div>
+    </main>
+  </body>
+</html>

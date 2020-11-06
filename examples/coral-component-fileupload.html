@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.FileUpload</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">File Upload</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        File uploads are managing the upload process of multiple files.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <coral-fileupload name="file" action="http://localhost/~ringel/singlefileupload.php">
+          <button is="coral-button" coral-fileupload-select>Upload</button>
+        </coral-fileupload>
+      </div>
+
+      <h2 class="coral--Heading--S">Mime type support</h2>
+      <div class="markup">
+        <coral-fileupload name="file" action="http://localhost/~ringel/singlefileupload.php" accept="image/*, *.txt">
+          <button is="coral-button" coral-fileupload-select>Only images and .txt files</button>
+        </coral-fileupload>
+      </div>
+
+      <h2 class="coral--Heading--S">File size support</h2>
+      <div class="markup">
+        <coral-fileupload name="file" action="http://localhost/~ringel/singlefileupload.php" sizelimit="1000000">
+          <button is="coral-button" coral-fileupload-select>Only files &lt; 1mb</button>
+        </coral-fileupload>
+      </div>
+
+      <h2 class="coral--Heading--S">With upload on file selection</h2>
+      <div class="markup">
+        <coral-fileupload name="file" action="http://localhost/~ringel/singlefileupload.php" autostart>
+          <button is="coral-button" coral-fileupload-select>Upload</button>
+        </coral-fileupload>
+      </div>
+
+      <h2 class="coral--Heading--S">Disabled by default</h2>
+      <div class="markup">
+        <coral-fileupload name="file" action="http://localhost/~ringel/singlefileupload.php" disabled>
+          <button is="coral-button" coral-fileupload-select>Upload</button>
+        </coral-fileupload>
+      </div>
+
+      <h2 class="coral--Heading--S">Set action with button</h2>
+      <div class="markup">
+        <coral-fileupload action="http://localhost/~ringel/singlefileupload.php" multiple>
+          <button coral-fileupload-select is="coral-button">Select files..</button>
+          <button is="coral-button" coral-fileupload-submit formaction="/media">Upload to /media</button>
+          <button is="coral-button" coral-fileupload-submit formaction="/files">Upload to /files</button>
+          <button is="coral-button" coral-fileupload-submit>Upload to default</button>
+        </coral-fileupload>
+      </div>
+
+      <h2 class="coral--Heading--S">Set method with button</h2>
+      <div class="markup">
+        <coral-fileupload action="http://localhost/~ringel/singlefileupload.php" method="post">
+          <button is="coral-button" coral-fileupload-select>Select files..</button>
+          <button is="coral-button" coral-fileupload-submit formmethod="put">Upload as PUT</button>
+          <button is="coral-button" coral-fileupload-submit>Upload as default</button>
+        </coral-fileupload>
+      </div>
+
+      <h2 class="coral--Heading--S">Synchronous in a form</h2>
+      <div class="markup">
+        <form method="post" enctype="multipart/form-data" action="http://localhost/~ringel/singlefileupload.php">
+          <coral-fileupload name="file">
+            <button type="button" coral-fileupload-select coral-fileupload-dropzone is="coral-button">Select file...</button>
+          </coral-fileupload>
+          <button type="submit" is="coral-button">Submit</button>
+        </form>
+      </div>
+
+      <h2 class="coral--Heading--S">Asynchronous with multiple selection</h2>
+      <div class="markup">
+        <style>
+          .fileUpload-dropZone {
+            border: 1px dashed rgb(150, 150, 150);
+            padding: 10px;
+            margin-bottom: 10px;
+          }
+        </style>
+
+        <coral-fileupload name="file" async id="fileUpload" action="http://localhost/~ringel/multiplefileupload.php" multiple>
+          <div coral-fileupload-dropzone class="fileUpload-dropZone">Drop files...</div>
+          <button coral-fileupload-select is="coral-button">Select files...</button>
+          <button coral-fileupload-submit variant="cta" is="coral-button">Upload</button>
+          <button coral-fileupload-abort variant="warning" is="coral-button">Abort</button>
+          <button coral-fileupload-clear variant="quiet" is="coral-button">Clear</button>
+          <ul id="fileList"></ul>
+        </coral-fileupload>
+
+        <script>
+          window.addEventListener('load', function() {
+            var fileUpload = document.getElementById('fileUpload');
+
+            // Listen to XHR events
+            var xhrEventNames = [
+              'loadstart',
+              'readystatechange',
+              'progress',
+              'timeout',
+              'load',
+              'loadend',
+              'error',
+              'abort',
+              'dragenter',
+              'dragover',
+              'dragleave',
+              'drop'
+            ];
+
+            xhrEventNames.forEach(function(name) {
+              fileUpload.on('coral-fileupload:' + name, function(event) {
+                console.log(name);
+                if (event.detail && event.detail.item) {
+                  console.log(event.detail.item);
+                }
+              })
+            });
+
+            // Listen to fileupload events
+            fileUpload
+              .on('change', function(event) {
+                console.log('change');
+              })
+              .on('coral-fileupload:fileadded', function(event) {
+                console.log('fileadded');
+                var item = event.detail.item;
+                var size = Math.round(item.file.size / 1000);
+
+                var li = document.createElement('li');
+                li._filename = item.file.name;
+                li.innerHTML = '<a class="uploadFile" href="#" coral-fileupload-uploadfile="' + item.file.name + '">upload</a> - <a coral-fileupload-removefile="' + item.file.name + '"class="removeFile" href="#">remove</a><span class="progress"></span>';
+                li.insertBefore(document.createTextNode(item.file.name + ' - ' + (size === 0 ? item.file.size + ' bytes ' : size + ' kb ')), li.firstChild);
+
+                fileList.appendChild(li);
+              })
+              .on('coral-fileupload:fileremoved', function(event) {
+                console.log('fileremoved');
+                var item = event.detail.item;
+
+                Array.prototype.some.call(fileList.querySelectorAll('li'), function(li) {
+                  if (li._filename === item.file.name) {
+                    fileList.removeChild(li);
+                    return true;
+                  }
+                });
+              })
+              .on('coral-fileupload:progress', function(event) {
+                console.log('progress');
+                var item = event.detail.item;
+
+                Array.prototype.some.call(fileList.querySelectorAll('li'), function(li) {
+                  if (event.detail.lengthComputable && li._filename === item.file.name) {
+                    li.querySelector('.progress').textContent = ' - ' + Math.ceil(event.detail.loaded / event.detail.total * 100) + '%';
+                    return true;
+                  }
+                });
+              })
+              .on('coral-fileupload:load', function(event) {
+                console.log('load');
+                var item = event.detail.item;
+                if (item.status === 200) {
+                  Array.prototype.forEach.call(fileList.querySelectorAll('li'), function(li) {
+                    if (li._filename === item.file.name) {
+                      li.style.color = 'green';
+                    }
+                  });
+                }
+              })
+              .on('coral-fileupload:error', function(event) {
+                console.log('error');
+                var item = event.detail.item;
+                Array.prototype.forEach.call(fileList.querySelectorAll('li'), function(li) {
+                  if (li._filename === item.file.name) {
+                    li.style.color = 'red';
+                  }
+                });
+              });
+          });
+        </script>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../">
+  <title data-ice="title">Manual | Coral Spectrum</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<script src="./inject/script/0-typekit.js"></script><script src="./inject/script/0-guide.js"></script><link rel="stylesheet" href="./inject/css/0-guide.css"><meta name="description" content="Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Coral Spectrum"><meta property="twitter:description" content="Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns."></head>
+<body class="layout-container manual-root" data-ice="rootContainer">
+
+<header>
+  <a href="./" style="display: flex; align-items: center;"><img src="./image/brand_logo.svg" style="width:34px;"></a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/adobe/coral-spectrum"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div class="manual-toc-root">
+  
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/README.html"><a href="manual/README.html#coral-spectrum--img-src--https---github-com-adobe-coral-spectrum-workflows-unit-20tests-20and-20accessibility-20ci-badge-svg--alt--build-status--" data-ice="link">Coral Spectrum </a></li>
+<li data-ice="manualNav" class="indent-h1" data-link="manual/README.html"><a href="manual/README.html#important" data-ice="link">Important</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#showcase" data-ice="link">Showcase</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-a-href--http---opensource-adobe-com-coral-spectrum-examples--component-examples--a-" data-ice="link">Component Examples</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-a-href--http---opensource-adobe-com-coral-spectrum-documentation-identifiers-html--api-references--a-" data-ice="link">API References</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-a-href--http---opensource-adobe-com-coral-spectrum-playground--playground--a-" data-ice="link">Playground</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#spectrum" data-ice="link">Spectrum</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#angular--react--vue-js-compatibility" data-ice="link">Angular, React, Vue.js compatibility</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#browser-support" data-ice="link">Browser support</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#theme--light--dark--lightest--darkest-" data-ice="link">Theme (light, dark, lightest, darkest)</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#large-scale-support" data-ice="link">Large scale support</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#built-in-accessibility-and-keyboard-support" data-ice="link">Built-in Accessibility and Keyboard support</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#internationalization-support" data-ice="link">Internationalization support</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#using-coral-spectrum" data-ice="link">Using Coral Spectrum</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#easiest-way-via-a-cdn" data-ice="link">Easiest way via a CDN</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#copying-the-distribution-files" data-ice="link">Copying the distribution files</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#including-entire-library-with-a-bundler-like-parcel" data-ice="link">Including entire library with a bundler like parcel</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#including-only-the-components-you-need" data-ice="link">Including only the components you need</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#contributing" data-ice="link">Contributing</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#building-and-testing" data-ice="link">Building and Testing</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#releasing" data-ice="link">Releasing</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#automatic-release-" data-ice="link">Automatic release:</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#manual-releasing-" data-ice="link">Manual releasing:</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/overview.html"><a href="manual/overview.html" data-ice="link">Overview</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#introduction" data-ice="link">Introduction</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#unified-experience" data-ice="link">Unified Experience</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#enhanced-api" data-ice="link">Enhanced API</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#future-thinking" data-ice="link">Future Thinking</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#spectrum" data-ice="link">Spectrum</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#built-in-accessibility-and-keyboard-support" data-ice="link">Built-in Accessibility and Keyboard support</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#internationalization-support" data-ice="link">Internationalization support</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#browser-support" data-ice="link">Browser Support</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/overview.html"><a href="manual/overview.html#backwards-compatibility" data-ice="link">Backwards Compatibility</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/manual.html"><a href="manual/manual.html" data-ice="link">Manual</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/manual.html"><a href="manual/manual.html#using-coral-spectrum" data-ice="link">Using Coral Spectrum</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/manual.html"><a href="manual/manual.html#easiest-way-via-a-cdn" data-ice="link">Easiest way via a CDN</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/manual.html"><a href="manual/manual.html#copying-the-distribution-files" data-ice="link">Copying the distribution files</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/manual.html"><a href="manual/manual.html#using-a-bundler-like-webpack" data-ice="link">Using a bundler like Webpack</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/manual.html"><a href="manual/manual.html#building-and-testing" data-ice="link">Building and Testing</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/manual.html"><a href="manual/manual.html#releasing" data-ice="link">Releasing</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/upgrade.html"><a href="manual/upgrade.html" data-ice="link">Upgrade</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/upgrade.html"><a href="manual/upgrade.html#from-coralui3-to-coral-spectrum" data-ice="link">From CoralUI3 to Coral Spectrum</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/upgrade.html"><a href="manual/upgrade.html#custom-elements-v1" data-ice="link">Custom Elements v1</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/upgrade.html"><a href="manual/upgrade.html#spectrum" data-ice="link">Spectrum</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/upgrade.html"><a href="manual/upgrade.html#performance" data-ice="link">Performance</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/upgrade.html"><a href="manual/upgrade.html#overlay-mechanism" data-ice="link">Overlay mechanism</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/upgrade.html"><a href="manual/upgrade.html#upgrade-changes" data-ice="link">Upgrade changes</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/upgrade.html"><a href="manual/upgrade.html#custom-elements-v1" data-ice="link">Custom Elements v1</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/upgrade.html"><a href="manual/upgrade.html#spectrum" data-ice="link">Spectrum</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/upgrade.html"><a href="manual/upgrade.html#selection-pattern-for-table--columnview-and-masonry" data-ice="link">Selection pattern for Table, ColumnView and Masonry</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/upgrade.html"><a href="manual/upgrade.html#svg-icons" data-ice="link">SVG Icons</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/upgrade.html"><a href="manual/upgrade.html#unsupported-styles" data-ice="link">Unsupported styles</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/upgrade.html"><a href="manual/upgrade.html#internal-private-markup-and-classes" data-ice="link">Internal private markup and classes</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/upgrade.html"><a href="manual/upgrade.html#parent-child-component-events" data-ice="link">Parent-child component events</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/upgrade.html"><a href="manual/upgrade.html#dependencies" data-ice="link">Dependencies</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/upgrade.html"><a href="manual/upgrade.html#api-changes" data-ice="link">API changes</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/upgrade.html"><a href="manual/upgrade.html#compatibility-with-coralui3" data-ice="link">Compatibility with CoralUI3</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/upgrade.html"><a href="manual/upgrade.html#coral-register" data-ice="link">Coral.register</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/upgrade.html"><a href="manual/upgrade.html#coral-commons-ready" data-ice="link">Coral.commons.ready</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/upgrade.html"><a href="manual/upgrade.html#off-line-custom-elements-v0-creation" data-ice="link">Off-line Custom Elements v0 creation</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/styles.html"><a href="manual/styles.html" data-ice="link">Styles</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/styles.html"><a href="manual/styles.html#theme--light--dark--lightest--darkest-" data-ice="link">Theme (light, dark, lightest, darkest)</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/styles.html"><a href="manual/styles.html#large-scale-support" data-ice="link">Large scale support</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/styles.html"><a href="manual/styles.html#css-utility-classes" data-ice="link">CSS utility classes</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-clearfix" data-ice="link">u-coral-clearFix</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-noborder" data-ice="link">u-coral-noBorder</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-noscroll" data-ice="link">u-coral-noScroll</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-screenreaderonly" data-ice="link">u-coral-screenReaderOnly</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-closedhand" data-ice="link">u-coral-closedHand</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-openhand" data-ice="link">u-coral-openHand</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-pullleft" data-ice="link">u-coral-pullLeft</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-pullright" data-ice="link">u-coral-pullRight</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-padding" data-ice="link">u-coral-padding</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-padding-horizontal" data-ice="link">u-coral-padding-horizontal</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-padding-vertical" data-ice="link">u-coral-padding-vertical</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-margin" data-ice="link">u-coral-margin</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-nopadding" data-ice="link">u-coral-noPadding</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-nopadding-horizontal" data-ice="link">u-coral-noPadding-horizontal</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-nopadding-vertical" data-ice="link">u-coral-noPadding-vertical</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-nomargin" data-ice="link">u-coral-noMargin</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-ellipsis" data-ice="link">u-coral-ellipsis</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-visiblexs---u-coral-hiddenxs" data-ice="link">u-coral-visibleXS | u-coral-hiddenXS</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-visibles---u-coral-hiddens" data-ice="link">u-coral-visibleS | u-coral-hiddenS</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-visiblem---u-coral-hiddenm" data-ice="link">u-coral-visibleM | u-coral-hiddenM</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-visiblel---u-coral-hiddenl" data-ice="link">u-coral-visibleL | u-coral-hiddenL</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-visiblexl---u-coral-hiddenxl" data-ice="link">u-coral-visibleXL | u-coral-hiddenXL</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#u-coral-visiblexxl---u-coral-hiddenxxl" data-ice="link">u-coral-visibleXXL | u-coral-hiddenXXL</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/styles.html"><a href="manual/styles.html#fonts-via-typekit" data-ice="link">Fonts via Typekit</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#domains" data-ice="link">Domains</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#using-a-custom-kit-with-coral-spectrum" data-ice="link">Using a Custom Kit with Coral Spectrum</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/styles.html"><a href="manual/styles.html#font-loading" data-ice="link">Font loading</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/architecture.html"><a href="manual/architecture.html" data-ice="link">Architecture</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/architecture.html"><a href="manual/architecture.html#web-components" data-ice="link">Web Components</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/architecture.html"><a href="manual/architecture.html#content-zones" data-ice="link">Content Zones</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/architecture.html"><a href="manual/architecture.html#dependencies" data-ice="link">Dependencies</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/contribution.html"><a href="manual/contribution.html" data-ice="link">Contribution</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/contribution.html"><a href="manual/contribution.html#code-of-conduct" data-ice="link">Code Of Conduct</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/contribution.html"><a href="manual/contribution.html#have-a-question-" data-ice="link">Have A Question?</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/contribution.html"><a href="manual/contribution.html#security-issues" data-ice="link">Security Issues</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/contribution.html"><a href="manual/contribution.html#contributor-license-agreement" data-ice="link">Contributor License Agreement</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/contribution.html"><a href="manual/contribution.html#code-reviews" data-ice="link">Code Reviews</a></li>
+</ul>
+  </div>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="overview">Overview</h1><h2 id="introduction">Introduction</h2><p>Coral Spectrum has roots as an internal Open Development project, with core volunteers working on this problem since 2012. 
+As of 2016, the effort has become part of the One Adobe &amp; Cloud Platform effort, which means building a full Coral Spectrum 
+team that includes Exec Leadership, PgM, PM, EM, Dev, and QE members. Coral Spectrum is also becoming a One Adobe Technical 
+Standard, meaning it will be used as the default platform for web projects.</p>
+<h2 id="unified-experience">Unified Experience</h2><p>Our vision is to create consistent Adobe experiences by providing a complete, easy to use library of HTML components. 
+Standardization on Coral Spectrum allows teams to reduce code duplication and variation and encourages company wide collaboration. 
+This reduction in effort means teams can focus on meeting customer needs, not reinventing the wheel. Use of Coral Spectrum also 
+enables easy, unified design updates, and provides a library that is under Adobe&#x2019;s full control.</p>
+<h2 id="enhanced-api">Enhanced API</h2><p>Coral Spectrum&apos;s components are essentially extended DOM elements. We enhance the existing API with additional functionality, 
+as well as providing some patterns that aren&apos;t available with native HTML alone. Since we expose a JavaScript API that&#x2019;s 
+based on the native DOM API and has all of the same methods as any other HTML element instance, anyone familiar with the 
+DOM already knows most of the API works. </p>
+<p>Most API is available via markup, so don&#x2019;t have to write JavaScript for most basic uses. All you have to do is write 
+the markup for a component, just like you would a normal HTML element.</p>
+<h2 id="future-thinking">Future Thinking</h2><p>Coral Spectrum is pushing the web forward by leveraging the <a href="https://www.webcomponents.org/introduction">Web Components</a> specification. 
+However, given the landscape of browser implementation and the state of the polyfill ecosystem, we decided to only implement 
+<a href="https://html.spec.whatwg.org/multipage/custom-elements.html">Custom Elements v1</a> at this time.</p>
+<p>A strong advantage Coral Spectrum derives from custom elements is the ability to hide many implementation details from the consumer. 
+More to the point, we found that designs become closely tied to their markup. The use of custom elements allows much more 
+freedom to change the underlying markup that supports those elements. This makes the exposed API smaller and more explicit, 
+resulting in a lower risk of updates to Coral Spectrum needing to introduce breaking changes.</p>
+<p>In addition, every Coral component is an HTML element. This give us the ability to create components from markup or JavaScript 
+and lets us treat them like any other native element, setting properties, appending them in the DOM, etc. </p>
+<h2 id="spectrum">Spectrum</h2><p>The current default theme is is an implementation of the <a href="https://spectrum.adobe.com">Spectrum</a> design specifications, Adobe&#x2019;s design system.
+Spectrum provides elements and tools to help product teams work more efficiently, and to make Adobe&#x2019;s applications more cohesive.</p>
+<p>Coral Spectrum leverages the <a href="https://github.com/adobe/spectrum-css">Spectrum CSS</a> framework to style 
+components including the <a href="https://spectrum.adobe.com/page/icons">Spectrum SVG icons</a>.   </p>
+<h2 id="built-in-accessibility-and-keyboard-support">Built-in Accessibility and Keyboard support</h2><p>Having an inaccessible application can mean thousands of dollars of fines if you land a government contract. 
+It also means alienating an entire segment of society by making your application completely unusable to them. 
+To help you avoid this, we&#x2019;ve made it a rule that every Coral Spectrum component should be accessible. We&#x2019;ve also built a few 
+things into Coral Spectrum to make implementing accessibility easier for component authors and consumers alike.</p>
+<h2 id="internationalization-support">Internationalization support</h2><p>Coral Spectrum provides a robust internal system for internationalization of its strings. 
+This is done via an internal Adobe process.</p>
+<p>Supported languages are :</p>
+<table>
+<thead>
+<tr>
+<th>Language family</th>
+<th>Language tag</th>
+<th>Language variant</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>English</td>
+<td>en-US</td>
+<td>American English</td>
+</tr>
+<tr>
+<td>French</td>
+<td>fr-FR</td>
+<td>Standard French</td>
+</tr>
+<tr>
+<td>German</td>
+<td>de-DE</td>
+<td>Standard German</td>
+</tr>
+<tr>
+<td>Italian</td>
+<td>it-IT</td>
+<td>Standard Italian</td>
+</tr>
+<tr>
+<td>Spanish</td>
+<td>es-ES</td>
+<td>Castilian Spanish</td>
+</tr>
+<tr>
+<td>Portuguese</td>
+<td>pt-BR</td>
+<td>Brazilian Portuguese</td>
+</tr>
+<tr>
+<td>Japanese</td>
+<td>ja-JP</td>
+<td>Standard Japanese</td>
+</tr>
+<tr>
+<td>Korean</td>
+<td>ko-KR</td>
+<td>Standard Korean</td>
+</tr>
+<tr>
+<td>Chinese</td>
+<td>zh-CN</td>
+<td>Mainland China, simplified characters</td>
+</tr>
+<tr>
+<td>Chinese</td>
+<td>zh-TW</td>
+<td>Taiwan, traditional characters</td>
+</tr>
+<tr>
+<td>Dutch</td>
+<td>nl-NL</td>
+<td>Netherlands Dutch</td>
+</tr>
+<tr>
+<td>Danish</td>
+<td>da-DK</td>
+<td>Standard Danish</td>
+</tr>
+<tr>
+<td>Finnish</td>
+<td>fi-FI</td>
+<td>Standard Finnish</td>
+</tr>
+<tr>
+<td>Norwegian</td>
+<td>no-NO</td>
+<td>Standard Norwegian</td>
+</tr>
+<tr>
+<td>Swedish</td>
+<td>sv-SE</td>
+<td>Standard Swedish</td>
+</tr>
+<tr>
+<td>Czech</td>
+<td>cs-CZ</td>
+<td>Standard Czech</td>
+</tr>
+<tr>
+<td>Polish</td>
+<td>pl-PL</td>
+<td>Standard Polish</td>
+</tr>
+<tr>
+<td>Russian</td>
+<td>ru-RU</td>
+<td>Standard Russian</td>
+</tr>
+<tr>
+<td>Turkish</td>
+<td>tr-TR</td>
+<td>Standard Turkish</td>
+</tr>
+</tbody>
+</table>
+<h2 id="browser-support">Browser Support</h2><p>Coral Spectrum is designed to support the following browsers:</p>
+<ul>
+<li>Chrome (latest)</li>
+<li>Safari (latest)</li>
+<li>Firefox (latest)</li>
+<li>Edge (latest)</li>
+<li>IE 11</li>
+<li>iOS 7+</li>
+<li>Android 4.4+</li>
+</ul>
+<h2 id="backwards-compatibility">Backwards Compatibility</h2><p>Coral Spectrum ships by default a compatibility package to support the CoralUI 3.x way to register elements <code>Coral.register</code>. 
+Custom Coral components using Custom Elements v0 are therefore still supported although we highly encourage to migrate 
+to Custom Elements v1 as it&apos;ll become the Web standard. </p>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

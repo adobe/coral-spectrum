@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.Multifield</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Multi Field</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Multifields enable adding, reordering, and removing multiple instances of a text field.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <coral-multifield aria-label="Default multifield">
+          <coral-multifield-item>
+            <input is="coral-textfield" aria-label="input" type="text" value="Basel"/>
+          </coral-multifield-item>
+          <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+          <template coral-multifield-template>
+            <input is="coral-textfield" aria-label="input" type="text"/>
+          </template>
+        </coral-multifield>
+      </div>
+
+      <h2 class="coral--Heading--S">Nested multifield</h2>
+      <div class="markup">
+        <coral-multifield aria-label="Fieldsets">
+          <coral-multifield-item>
+            <coral-multifield aria-label="Fieldset">
+              <coral-multifield-item></coral-multifield-item>
+              <coral-multifield-item></coral-multifield-item>
+              <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+              <template coral-multifield-template>
+                <input is="coral-textfield" aria-label="input" type="text"/>
+              </template>
+            </coral-multifield>
+          </coral-multifield-item>
+          <button coral-multifield-add type="button" is="coral-button">Add a fieldset</button>
+          <template coral-multifield-template>
+            <coral-multifield aria-label="Fieldset">
+              <coral-multifield-item></coral-multifield-item>
+              <coral-multifield-item></coral-multifield-item>
+              <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+              <template coral-multifield-template>
+                <input is="coral-textfield" aria-label="input" type="text"/>
+              </template>
+            </coral-multifield>
+          </template>
+        </coral-multifield>
+      </div>
+
+      <h2 class="coral--Heading--S">Rendered with JS</h2>
+      <div class="markup">
+        <div id="with-js"></div>
+        <script>
+          window.addEventListener('load', function() {
+            var multifield = new Coral.Multifield();
+            multifield.setAttribute('aria-label', 'Multifield rendered with JS');
+            var input = document.createElement('input', {is: 'coral-textfield'});
+            input.setAttribute('aria-label', 'input');
+            multifield.template.content.appendChild(input);
+            multifield.items.add(new Coral.Multifield.Item());
+            var addButton = document.createElement('button', {is: 'coral-button'});
+            addButton.setAttribute('coral-multifield-add', '');
+            addButton.label.textContent = 'Add a field';
+            addButton.type = 'button';
+            multifield.appendChild(addButton);
+
+            document.getElementById('with-js').appendChild(multifield);
+          });
+        </script>
+      </div>
+    </main>
+  </body>
+</html>

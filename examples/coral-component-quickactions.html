@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.QuickActions</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+
+    <style>
+    .box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 300px;
+      height: 200px;
+      text-align: center;
+      background: palevioletred;
+      color: white;
+    }
+    </style>
+  </head>
+
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Quick Actions</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Quick actions allow users to perform contextual actions when hovering or focusing on a specific component. They're shortcuts meant to make workflows more efficient.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <div class="box">Hover me</div>
+        <coral-quickactions target="_prev">
+          <coral-quickactions-item type="anchor" href="#" icon="copy">Copy</coral-quickactions-item>
+          <coral-quickactions-item type="anchor" href="#" icon="move">Move</coral-quickactions-item>
+          <coral-quickactions-item type="anchor" href="#" icon="download">Download</coral-quickactions-item>
+          <coral-quickactions-item type="anchor" href="#" icon="share">Share</coral-quickactions-item>
+          <coral-quickactions-item type="anchor" href="#" icon="assetsPublished">Publish</coral-quickactions-item>
+          <coral-quickactions-item type="anchor" href="#" icon="copy">Copy</coral-quickactions-item>
+          <coral-quickactions-item type="anchor" href="#" icon="lockClosed">Lock</coral-quickactions-item>
+          <coral-quickactions-item type="anchor" href="#" icon="lockOpen">Unlock</coral-quickactions-item>
+          <coral-quickactions-item icon="note">Annotate</coral-quickactions-item>
+          <coral-quickactions-item icon="paste">Paste</coral-quickactions-item>
+          <coral-quickactions-item icon="pinOn">Add Pin</coral-quickactions-item>
+          <coral-quickactions-item icon="pinOff">Remove Pin</coral-quickactions-item>
+          <coral-quickactions-item icon="print">Print</coral-quickactions-item>
+        </coral-quickactions>
+      </div>
+
+      <h2 class="coral--Heading--S">Threshold limited</h2>
+      <div class="markup">
+        <div class="box">Hover me</div>
+        <coral-quickactions target="_prev" threshold="2" placement="center" lengthoffset="0">
+          <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
+          <coral-quickactions-item icon="move">Move</coral-quickactions-item>
+          <coral-quickactions-item icon="download">Download</coral-quickactions-item>
+          <coral-quickactions-item icon="share">Share</coral-quickactions-item>
+          <coral-quickactions-item icon="assetsPublished">Publish</coral-quickactions-item>
+          <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
+          <coral-quickactions-item icon="lockClosed">Lock</coral-quickactions-item>
+          <coral-quickactions-item icon="lockOpen">Unlock</coral-quickactions-item>
+          <coral-quickactions-item icon="note">Annotate</coral-quickactions-item>
+          <coral-quickactions-item icon="paste">Paste</coral-quickactions-item>
+          <coral-quickactions-item icon="pinOn">Add Pin</coral-quickactions-item>
+          <coral-quickactions-item icon="pinOff">Remove Pin</coral-quickactions-item>
+          <coral-quickactions-item icon="print">Print</coral-quickactions-item>
+        </coral-quickactions>
+      </div>
+
+      <h2 class="coral--Heading--S">Threshold unlimited</h2>
+      <div class="markup">
+        <div class="box">Hover me</div>
+        <coral-quickactions target="_prev" threshold="-1" placement="bottom">
+          <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
+          <coral-quickactions-item icon="move">Move</coral-quickactions-item>
+          <coral-quickactions-item icon="download">Download</coral-quickactions-item>
+          <coral-quickactions-item icon="share">Share</coral-quickactions-item>
+          <coral-quickactions-item icon="assetsPublished">Publish</coral-quickactions-item>
+          <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
+          <coral-quickactions-item icon="lockClosed">Lock</coral-quickactions-item>
+          <coral-quickactions-item icon="lockOpen">Unlock</coral-quickactions-item>
+          <coral-quickactions-item icon="note">Annotate</coral-quickactions-item>
+          <coral-quickactions-item icon="paste">Paste</coral-quickactions-item>
+          <coral-quickactions-item icon="pinOn">Add Pin</coral-quickactions-item>
+          <coral-quickactions-item icon="pinOff">Remove Pin</coral-quickactions-item>
+          <coral-quickactions-item icon="print">Print</coral-quickactions-item>
+        </coral-quickactions>
+      </div>
+
+      <h2 class="coral--Heading--S">Open on parent focus</h2>
+      <div class="markup">
+        <div class="box" role="link" tabindex="0">
+          Focus me
+          <coral-quickactions target="_parent" threshold="-1">
+            <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
+            <coral-quickactions-item icon="move">Move</coral-quickactions-item>
+            <coral-quickactions-item icon="download">Download</coral-quickactions-item>
+            <coral-quickactions-item icon="share">Share</coral-quickactions-item>
+            <coral-quickactions-item icon="assetsPublished">Publish</coral-quickactions-item>
+            <coral-quickactions-item icon="copy">Copy</coral-quickactions-item>
+            <coral-quickactions-item icon="lockClosed">Lock</coral-quickactions-item>
+            <coral-quickactions-item icon="lockOpen">Unlock</coral-quickactions-item>
+            <coral-quickactions-item icon="note">Annotate</coral-quickactions-item>
+            <coral-quickactions-item icon="paste">Paste</coral-quickactions-item>
+            <coral-quickactions-item icon="pinOn">Add Pin</coral-quickactions-item>
+            <coral-quickactions-item icon="pinOff">Remove Pin</coral-quickactions-item>
+            <coral-quickactions-item icon="print">Print</coral-quickactions-item>
+          </coral-quickactions>
+        </a>
+        <script>
+          (function (document, window) {
+
+            // opens descendant coral-quickactions when parent element receives focus
+            function handleQuickActionsTargetFocus(event) {
+              var currentTarget = event.currentTarget;
+              var quickActions = currentTarget.querySelector('coral-quickactions');
+              if (quickActions && !quickActions.open && !currentTarget._justClosed) {
+                quickActions.open = true;
+                currentTarget.addEventListener('blur', handleQuickActionsTargetBlur, true);
+                currentTarget.addEventListener('coral-overlay:beforeclose', handleQuickActionsBeforeClose, true);
+              }
+              else if (currentTarget._justClosed) {
+                currentTarget._justClosed = undefined;
+              }
+            }
+
+            // flags when quickactions were just closed, so that we don't reopen them when focus is restored to the target
+            function handleQuickActionsBeforeClose(event) {
+              event.currentTarget._justClosed = true;
+              event.currentTarget.removeEventListener('coral-overlay:beforeclose', handleQuickActionsBeforeClose, true);
+            }
+
+            // closes descendant coral-quickactions on focus outside of parent element
+            function handleQuickActionsTargetBlur(event) {
+              var currentTarget = event.currentTarget;
+              var quickActions = currentTarget.querySelector('coral-quickactions');
+              window.requestAnimationFrame(function() {
+                if (quickActions.open && !currentTarget.contains(document.activeElement)) {
+                  quickActions.open = false;
+                  currentTarget.removeEventListener('blur', handleQuickActionsTargetBlur, true);
+                  currentTarget.removeEventListener('coral-overlay:beforeclose', handleQuickActionsBeforeClose, true);
+                  currentTarget._justClosed = undefined;
+                }
+              });
+            }
+
+            // find focusable box elements
+            var focusables = document.querySelectorAll('.box[tabindex="0"]');
+            for (var i = 0; i < focusables.length; i++) {
+              var focusable = focusables[i];
+              focusable.addEventListener('focus', handleQuickActionsTargetFocus, true);
+            }
+          }(document, window));
+        </script>
+      </div>
+    </main>
+  </body>
+</html>

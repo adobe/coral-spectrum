@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.Clock</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <!--Load momentJS to support different formats -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Clock</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Clocks are used as time selection form fields.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <coral-clock></coral-clock>
+      </div>
+
+      <h2 class="coral--Heading--S">Preset time</h2>
+      <div class="markup">
+        <coral-clock value="05:04"></coral-clock>
+      </div>
+
+      <h2 class="coral--Heading--S">Custom value format</h2>
+      <div class="markup">
+        <coral-clock valueformat="H-m" value="3-4"></coral-clock>
+      </div>
+
+      <h2 class="coral--Heading--S">AM/PM display format</h2>
+      <div class="markup">
+        <coral-clock displayformat="hh:mm A" value="15:04"></coral-clock>
+      </div>
+
+      <h2 class="coral--Heading--S">Quiet variant</h2>
+      <div class="markup">
+        <coral-clock labelledby="clock-label-4" value="05:04" variant="quiet"></coral-clock>
+      </div>
+
+      <h2 class="coral--Heading--S">AM/PM display format quiet variant</h2>
+      <div class="markup">
+        <coral-clock displayformat="hh:mm A" value="15:04" variant="quiet"></coral-clock>
+      </div>
+
+      <h2 class="coral--Heading--S">Disabled</h2>
+      <div class="markup">
+        <coral-clock disabled></coral-clock>
+      </div>
+
+      <h2 class="coral--Heading--S">Invalid</h2>
+      <div class="markup">
+        <coral-clock invalid></coral-clock>
+      </div>
+
+      <h2 class="coral--Heading--S">ReadOnly</h2>
+      <div class="markup">
+        <coral-clock readonly value="15:04"></coral-clock>
+      </div>
+    </main>
+  </body>
+</html>

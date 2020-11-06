@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.Shell</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<a style="position:fixed;bottom:15px;left:15px;z-index:1" onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre style="position:absolute;margin:0;top:48px" hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+
+  </head>
+  <body class="coral--light">
+    <main>
+      <div class="markup">
+        <coral-shell>
+          <coral-shell-header>
+            <coral-shell-header-home>
+              <a is="coral-shell-homeanchor" icon="adobeExperienceManagerColor_Dark" href="#">Adobe Experience Manager</a>
+            </coral-shell-header-home>
+            <coral-shell-header-content>
+              <coral-shell-workspaces role="tablist" aria-label="Workspaces">
+                <a is="coral-shell-workspace" href="#workspace1" role="tab" selected>Workspace 1</a>
+                <a is="coral-shell-workspace" href="#workspace2" role="tab">Workspace 2</a>
+                <a is="coral-shell-workspace" href="#workspace3" role="tab">Workspace 3</a>
+              </coral-shell-workspaces>
+            </coral-shell-header-content>
+            <coral-shell-header-actions>
+              <!-- Normal quiet button is used here if necessary -->
+              <!--<a is="coral-anchorbutton" variant="quiet" href="#">Beta Feedback</a>-->
+              <coral-shell-menubar> 
+                <coral-shell-menubar-item menu="#menu_organizations">Microsoft</coral-shell-menubar-item>
+                <coral-shell-menubar-item menu="#menu_solutions" icon="apps" aria-label="Solutions" title="Solutions"></coral-shell-menubar-item>
+                <coral-shell-menubar-item menu="#menu_help" icon="helpOutline" aria-label="Help" title="Help"></coral-shell-menubar-item>
+                <coral-shell-menubar-item menu="#menu_pulse" icon="bell" badge="5" aria-label="Inbox : 5 Notifications" title="Inbox : 5 Notifications"></coral-shell-menubar-item>
+                <coral-shell-menubar-item menu="#menu_user" iconsize="M" iconvariant="circle" icon="userCircleColor_Dark" aria-label="User Profile" title="User Profile"></coral-shell-menubar-item>
+              </coral-shell-menubar>
+            </coral-shell-header-actions>
+          </coral-shell-header>
+          <coral-shell-menu id="menu_organizations">
+            <coral-shell-orgswitcher>
+              <coral-shell-organization selected name="microsoft" icon="windows8">Microsoft</coral-shell-organization>
+              <coral-shell-organization name="facebook" icon="facebook">Facebook</coral-shell-organization>
+              <coral-shell-organization name="flickr" icon="flickr">Flickr</coral-shell-organization>
+              <coral-shell-organization name="newsgator" icon="newsgator">Newsgator</coral-shell-organization>
+            </coral-shell-orgswitcher>
+          </coral-shell-menu>
+          <coral-shell-menu id="menu_help">
+            <coral-shell-help id="help">
+              <a is="coral-shell-help-item" href="/learn">Marketing Cloud Help</a>
+              <a is="coral-shell-help-item" href="/community">Community</a>
+              <a is="coral-shell-help-item" href="/customercare">Customer Care</a>
+              <a is="coral-shell-help-item" href="/news">What's new</a>
+              <a is="coral-shell-help-item" href="/status">Adobe Marketing Cloud Status</a>
+              <coral-shell-help-separator></coral-shell-help-separator>
+              <a is="coral-shell-help-item" href="/getstarted">Getting Started</a>
+              <a is="coral-shell-help-item" href="/getstarted">Feedback</a>
+            </coral-shell-help>
+          </coral-shell-menu>
+          <coral-shell-menu id="menu_pulse">
+            <h2 class="coral-Heading coral-Heading--4 u-coral-margin">Pulse notifications</h2>
+          </coral-shell-menu>
+          <coral-shell-menu id="menu_solutions" placement="top" from="top" full top>
+            <coral-shell-solutionswitcher>
+              <coral-shell-solutions>
+                <a is="coral-shell-solution" icon="AdobeExperienceCloudColor" linked href="#">Experience Cloud</a>
+              </coral-shell-solutions>
+
+              <coral-shell-solutions>
+                <a is="coral-shell-solution" icon="adobeAdvertisingCloud" href="#">Advertising Cloud</a>
+                <a is="coral-shell-solution" icon="adobeAnalytics" href="#">Analytics</a>
+                <a is="coral-shell-solution" icon="adobeAudienceManager" href="#">Audience Manager</a>
+                <a is="coral-shell-solution" icon="adobeCampaign" href="#">Campaign</a>
+                <a is="coral-shell-solution" icon="AdobeExperienceManagerColor_Dark" linked href="#">Experience Manager</a>
+                <a is="coral-shell-solution" icon="magentoCommerce" href="#">Magento Commerce</a>
+                <a is="coral-shell-solution" icon="adobePrimetime" href="#">Primetime</a>
+                <a is="coral-shell-solution" icon="adobeSocial" href="#">Social</a>
+                <a is="coral-shell-solution" icon="adobeTarget" href="#">Target</a>
+              </coral-shell-solutions>
+
+              <coral-shell-solutions secondary>
+                <a is="coral-shell-solution" icon="AdobeExperiencePlatformColor" linked href="#">Experience Platform</a>
+                <a is="coral-shell-solution" href="#">Exchange</a>
+                <a is="coral-shell-solution" href="#">Launch</a>
+                <a is="coral-shell-solution" href="#">People</a>
+                <a is="coral-shell-solution" linked href="#">Assets</a>
+              </coral-shell-solutions>
+            </coral-shell-solutionswitcher>
+          </coral-shell-menu>
+          <coral-shell-menu id="menu_user">
+            <coral-shell-user avatar="https://wwwimages2.adobe.com/content/dam/acom/en/leaders/photos/shantanu-narayen.jpg">
+              <coral-shell-user-name>Shantanu Narayen</coral-shell-user-name>
+              <coral-shell-user-heading>CEO</coral-shell-user-heading>
+              <coral-shell-user-content>
+                <div style="display:flex;justify-content:center">
+                  <a is="coral-anchorbutton" variant="quiet" href="#profile">Edit Profile</a>
+                </div>
+              </coral-shell-user-content>
+              <coral-shell-user-footer>
+                <a is="coral-anchorbutton" href="#signout">Sign Out</a>
+              </coral-shell-user-footer>
+            </coral-shell-user>
+          </coral-shell-menu>
+          <coral-shell-content>
+            <div style="position:absolute;top:16px;right:16px;">
+              <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+              <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+              <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+              <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+              <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+              <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+              <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+              <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+            </div>
+            
+            <!-- Main application goes here -->
+            <section class="u-coral-padding" id="workspace1">
+              <h1 class="coral-Heading--XXL">Shell</h1>
+
+              <h2 class="coral-Heading--M">Usage notes</h2>
+              <hr class="coral-Divider--L">
+              <p class="coral-Body--M u-coral-padding-vertical">
+                Shell is a container attached to the top of a page that house product-wide or global actions and navigation, as well as user preferences and branding.
+                Adobe applications should share the same fundamental structure. This guarantees consistent and familiar experiences across products and platforms, and a shorter learning curve.
+              </p>
+            </section>
+            <section class="u-coral-padding" id="workspace2">
+            </section>
+            <section class="u-coral-padding" id="workspace3">
+            </section>
+          </coral-shell-content>
+        </coral-shell>
+
+        <script>
+          window.addEventListener('load', function() {
+            // Get the API endpoint based on locale
+            function getHelpAPIEndpoint() {
+              // @todo i18n locale
+              switch (Coral.locale) {
+                case 'de_DE':
+                  return 'https://sp10050568.guided.ss-omtrdc.net/';
+                case 'es_ES':
+                  return 'https://sp10050569.guided.ss-omtrdc.net/';
+                case 'fr_FR':
+                  return 'https://sp1005056a.guided.ss-omtrdc.net/';
+                case 'ja_JP':
+                  return 'https://sp1005056d.guided.ss-omtrdc.net/';
+                case 'ko_KR':
+                  return 'https://sp1005056e.guided.ss-omtrdc.net/';
+                case 'pt_BR':
+                  return 'https://sp1005056b.guided.ss-omtrdc.net/';
+                case 'zh_CN':
+                  return 'https://sp1005056f.guided.ss-omtrdc.net/';
+                case 'zh_TW':
+                  return 'https://sp1004f0bc.guided.ss-omtrdc.net/';
+                default: // en_US
+                  return 'https://sp1004ced0.guided.ss-omtrdc.net/';
+              }
+            }
+
+            function jsonp(url, callback, onError) {
+              var callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+              window[callbackName] = function(data) {
+                delete window[callbackName];
+                document.body.removeChild(script);
+                callback(data);
+              };
+
+              var script = document.createElement('script');
+              script.src = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + callbackName;
+              document.body.appendChild(script);
+
+              script.onerror = onError;
+            }
+
+            // For all results (with a q param)
+            var helpSiteURL = 'https://marketing.adobe.com/resources/help/en_US/home/';
+
+            // Get a reference to the component
+            var help = document.getElementById('help');
+
+            // Listen for search requests
+            help.on('coral-shell-help:search', function(event) {
+              // Get the search term from the event detail
+              var searchTerm = event.detail.value;
+
+              // Request results
+              jsonp(getHelpAPIEndpoint() + '?tmpl=help&q=' + searchTerm, function(response) {
+                var results = response.results;
+
+                // Populate results
+                var resultItems = results.map(function(result) {
+                  return {
+                    tags: result.t0.split(/,\s*/),
+                    title: result.title,
+                    href: result.href,
+                    target: '_blank'
+                  };
+                });
+
+                // Show total
+                var total = parseInt(response.resultcount.total, 10);
+                help.showResults(resultItems, total, helpSiteURL + '?q=' + encodeURIComponent(searchTerm));
+              }, function() {
+                help.showError();
+              });
+            });
+          });
+        </script>
+      </div>
+    </main>
+  </body>
+</html>

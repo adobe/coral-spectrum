@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.TagList</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Tag List</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Tags allow users to categorize content. They can represent keywords or people, and are grouped to describe an item or a search request.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <coral-taglist>
+          <coral-tag>Tag 1</coral-tag>
+          <coral-tag>Tag 2</coral-tag>
+          <coral-tag>Tag 3</coral-tag>
+        </coral-taglist>
+      </div>
+
+      <h2 class="coral--Heading--S">Quiet tags</h2>
+      <div class="markup">
+        <coral-taglist>
+          <coral-tag>Tag 1</coral-tag>
+          <coral-tag quiet>Tag 2</coral-tag>
+          <coral-tag>Tag 3</coral-tag>
+        </coral-taglist>
+      </div>
+
+      <h2 class="coral--Heading--S">Multi-line tags</h2>
+      <div class="markup">
+        <coral-taglist>
+          <coral-tag multiline>Tag 1<br> with a few <br> line breaks</coral-tag>
+          <coral-tag multiline>Tag 2<br> with a few <br> line breaks</coral-tag>
+          <coral-tag multiline>Tag 3<br> with a few <br> line breaks</coral-tag>
+        </coral-taglist>
+      </div>
+
+      <h2 class="coral--Heading--S">Read only</h2>
+      <div class="markup">
+        <coral-taglist readonly>
+          <coral-tag style="width: 100px;">Apathorn Rungratsamentagfslkjd</coral-tag>
+          <coral-tag>Paris</coral-tag>
+          <coral-tag>Basel</coral-tag>
+        </coral-taglist>
+      </div>
+
+      <h2 class="coral--Heading--S">Disabled</h2>
+      <div class="markup">
+        <coral-taglist disabled>
+          <coral-tag>Lehi</coral-tag>
+          <coral-tag>Paris</coral-tag>
+          <coral-tag>Basel</coral-tag>
+        </coral-taglist>
+      </div>
+
+      <h2 class="coral--Heading--S">Invalid</h2>
+      <div class="markup">
+        <coral-taglist invalid>
+          <coral-tag>Lehi</coral-tag>
+          <coral-tag>Paris</coral-tag>
+          <coral-tag>Basel</coral-tag>
+        </coral-taglist>
+      </div>
+
+      <h2 class="coral--Heading--S">Colored tags</h2>
+      <div class="markup">
+        <coral-tag color="red">Tag 1</coral-tag>
+        <coral-tag color="blue">Tag 2</coral-tag>
+        <coral-tag color="green">Tag 3</coral-tag>
+        <coral-tag color="orange">Tag 4</coral-tag>
+        <coral-tag color="grey">Tag 5</coral-tag>
+        <coral-tag color="yellow">Tag 6</coral-tag>
+        <coral-tag color="seafoam">Tag 7</coral-tag>
+        <coral-tag color="fuchsia">Tag 8</coral-tag>
+      </div>
+
+      <h2 class="coral--Heading--S">Sized tags</h2>
+      <div class="markup">
+        <p>Only colored tags can have different sizes.</p>
+        <coral-tag color="red" size="S">Tag 1</coral-tag>
+        <coral-tag color="blue" size="M">Tag 2</coral-tag>
+        <coral-tag color="green" size="L">Tag 3</coral-tag>
+      </div>
+    </main>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const taglists = document.body.querySelectorAll('coral-taglist');
+        for (var i = 0; i < taglists.length; i++) {
+          const taglist = taglists[i];
+          const h2 = taglist.parentElement.previousElementSibling;
+          h2.id = 'coral-taglist-heading-' + i;
+          taglist.setAttribute('labelledby', h2.id);
+        }
+      });
+    </script>
+  </body>
+</html>

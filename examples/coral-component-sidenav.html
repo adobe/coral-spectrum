@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.SideNav</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Side Nav</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Side navigation lets users navigate the entire content of a product or a section. These can be used for a single level or a multi-level navigation.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <nav is="coral-sidenav" style="width:240px;">
+          <a is="coral-sidenav-item" href="#">Item 1</a>
+          <a is="coral-sidenav-item" href="#">Item 2</a>
+          <a is="coral-sidenav-item" href="#">Item 3</a>
+        </nav>
+      </div>
+
+      <h2 class="coral--Heading--S">With icons and pre-selection</h2>
+      <div class="markup">
+        <nav is="coral-sidenav" style="width:240px;">
+          <a is="coral-sidenav-item" href="#" icon="Add" selected>Item 1</a>
+          <a is="coral-sidenav-item" href="#" icon="Remove">Item 2</a>
+          <a is="coral-sidenav-item" href="#" icon="Star">Item 3</a>
+        </nav>
+      </div>
+
+      <h2 class="coral--Heading--S">With headings</h2>
+      <div class="markup">
+        <nav is="coral-sidenav" style="width:240px;">
+          <coral-sidenav-heading aria-level="3">Heading A</coral-sidenav-heading>
+          <coral-sidenav-level>
+            <a is="coral-sidenav-item" href="#">A item 1</a>
+            <a is="coral-sidenav-item" href="#">A item 2</a>
+            <a is="coral-sidenav-item" href="#">A item 3</a>
+          </coral-sidenav-level>
+          <coral-sidenav-heading aria-level="3">Heading B</coral-sidenav-heading>
+          <coral-sidenav-level>
+            <a is="coral-sidenav-item" href="#">B item 1</a>
+            <a is="coral-sidenav-item" href="#">B item 2</a>
+            <a is="coral-sidenav-item" href="#">B item 3</a>
+          </coral-sidenav-level>
+        </nav>
+      </div>
+
+      <h2 class="coral--Heading--S">With custom selection behavior</h2>
+      <div class="markup">
+        <nav is="coral-sidenav" id="sidenav" style="width:240px;">
+          <a is="coral-sidenav-item" href="#">Item 1</a>
+          <a is="coral-sidenav-item" href="#">Item 2</a>
+          <a is="coral-sidenav-item" href="#">Item 3</a>
+        </nav>
+
+        <script>
+          const nav = document.getElementById('sidenav');
+          sidenav.addEventListener('coral-sidenav:change', function(event) {
+            alert(event.detail.selection.content.textContent + ' is selected');
+          });
+        </script>
+      </div>
+
+      <h2 class="coral--Heading--S">Multi-level variant</h2>
+      <div class="markup">
+        <nav is="coral-sidenav" variant="multilevel" style="width:240px;">
+          <a is="coral-sidenav-item" href="#">Item 1</a>
+          <a is="coral-sidenav-item" href="#">Item 2</a>
+          <a is="coral-sidenav-item" href="#">Expandable Item 3</a>
+          <coral-sidenav-level>
+            <a is="coral-sidenav-item" href="#">Sub Item 1</a>
+            <a is="coral-sidenav-item" href="#">Sub Item 2</a>
+            <a is="coral-sidenav-item" href="#">Expandable Sub Item 3</a>
+            <coral-sidenav-level>
+              <a is="coral-sidenav-item" href="#">Sub Item 1</a>
+              <a is="coral-sidenav-item" href="#">Sub Item 2</a>
+              <a is="coral-sidenav-item" href="#">Sub Item 3</a>
+            </coral-sidenav-level>
+          </coral-sidenav-level>
+          <a is="coral-sidenav-item" href="#">Item 4</a>
+        </nav>
+      </div>
+
+      <h2 class="coral--Heading--S">Pre-selected item</h2>
+      <div class="markup">
+        <nav is="coral-sidenav" variant="multilevel" style="width:240px;">
+          <a is="coral-sidenav-item" href="#">Level 1</a>
+          <a is="coral-sidenav-item" href="#">Level 2</a>
+          <a is="coral-sidenav-item" href="#">Level 3</a>
+          <coral-sidenav-level>
+            <a is="coral-sidenav-item" href="#">Level 3.1</a>
+            <a is="coral-sidenav-item" href="#">Level 3.2</a>
+            <a is="coral-sidenav-item" href="#">Level 3.3</a>
+            <coral-sidenav-level>
+              <a is="coral-sidenav-item" href="#">Level 3.3.1</a>
+              <a is="coral-sidenav-item" href="#">Level 3.3.2</a>
+              <a is="coral-sidenav-item" href="#" selected>Level 3.3.3</a>
+            </coral-sidenav-level>
+          </coral-sidenav-level>
+          <a is="coral-sidenav-item" href="#">Item 4</a>
+        </nav>
+      </div>
+    </main>
+  </body>
+</html>

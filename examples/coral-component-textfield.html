@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.Textfield</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Text Field</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Text fields are text boxes that allow users to input custom text entries with a keyboard. Various decorations can be displayed around the field to communicate the entry requirements.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <input type="text" is="coral-textfield" aria-label="text input">
+      </div>
+
+      <h2 class="coral--Heading--S">Disabled</h2>
+      <div class="markup">
+        <input type="text" is="coral-textfield" disabled aria-label="text input">
+      </div>
+
+      <h2 class="coral--Heading--S">Invalid</h2>
+      <div class="markup">
+        <input type="text" is="coral-textfield" invalid aria-label="text input">
+      </div>
+
+      <h2 class="coral--Heading--S">Name</h2>
+      <div class="markup">
+        <input type="text" is="coral-textfield" name="name" aria-label="text input">
+      </div>
+
+      <h2 class="coral--Heading--S">ReadOnly</h2>
+      <div class="markup">
+        <input type="text" is="coral-textfield" readonly value="readonly field" aria-label="text input">
+      </div>
+
+      <h2 class="coral--Heading--S">Required</h2>
+      <div class="markup">
+        <input type="text" is="coral-textfield" required aria-label="text input">
+      </div>
+
+      <h2 class="coral--Heading--S">Value</h2>
+      <div class="markup">
+        <input type="text" is="coral-textfield" value="value" aria-label="text input">
+      </div>
+
+      <h2 class="coral--Heading--S">Quiet variant</h2>
+      <div class="markup">
+        <input type="text" is="coral-textfield" placeholder="Enter your name" variant="quiet" aria-label="text input">
+      </div>
+
+      <h2 class="coral--Heading--S">Form Field</h2>
+      <div class="markup">
+        <form class="coral-Form coral-Form--vertical" style="max-width:300px;">
+          <label id="label" class="coral-FieldLabel">Label</label>
+          <input is="coral-textfield" labelledby="label" class="coral-Form-field"/>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

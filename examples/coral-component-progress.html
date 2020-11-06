@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.Progress</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Progress</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Progress bars show the progression of a system operation: downloading, uploading, processing, etc., in a visual way. They can represent either determinate or indeterminate progress.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <coral-progress value="65"></coral-progress>
+      </div>
+
+      <h2 class="coral--Heading--S">Small</h2>
+      <div class="markup">
+        <coral-progress value="65" size="S"></coral-progress>
+      </div>
+
+      <h2 class="coral--Heading--S">With label</h2>
+      <div class="markup">
+        <coral-progress value="65">Loading</coral-progress>
+      </div>
+
+      <h2 class="coral--Heading--S">With percent</h2>
+      <div class="markup">
+        <coral-progress value="65" showpercent></coral-progress>
+      </div>
+
+      <h2 class="coral--Heading--S">With label + percent</h2>
+      <div class="markup">
+        <coral-progress value="65" showpercent>Laden ihrer Creative Cloud dateien</coral-progress>
+      </div>
+
+      <h2 class="coral--Heading--S">With side positioned label</h2>
+      <div class="markup">
+        <coral-progress value="65" labelposition="side">Loading</coral-progress>
+      </div>
+
+      <h2 class="coral--Heading--S">With side positioned label + percent</h2>
+      <div class="markup">
+        <coral-progress value="65" labelposition="side" showpercent>Loading</coral-progress>
+      </div>
+
+      <h2 class="coral--Heading--S">With label content zone</h2>
+      <div class="markup">
+        <coral-progress value="22">
+          <coral-progress-label>This is my progress</coral-progress-label>
+        </coral-progress>
+      </div>
+
+      <h2 class="coral--Heading--S">Indeterminate</h2>
+      <div class="markup">
+        <coral-progress indeterminate></coral-progress>
+      </div>
+    </main>
+  </body>
+</html>

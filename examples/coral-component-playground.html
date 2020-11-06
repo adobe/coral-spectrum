@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <title>Playground | Coral Spectrum</title>
+    <link rel="icon" type="image/x-icon" href="../documentation/manual/asset/favicon.ico">
+    <link id="coral-link" rel="stylesheet" href="../css/coral.css">
+    <script id="coral-script" src="../js/coral.js"></script>
+
+    <style>
+      .nav-toggle-header {
+        display: flex;
+        height: 48px;
+        box-sizing: border-box;
+        align-items: center;
+        padding: 0 16px;
+        background-color: rgb(250, 250, 250);
+        position: relative;
+        z-index: 10;
+        border-bottom: 1px solid rgb(234, 234, 234);
+      }
+
+      .nav-toggle-header .adobe-icon {
+        height: 32px;
+        width: 36px !important;
+        fill: currentColor;
+        color: rgb(225, 37, 27);
+      }
+
+      .nav-toggle-header h1 {
+        font-size: 20px;
+        color: rgb(44, 44, 44);
+        padding-left: 16px;
+        margin: 0;
+        font-weight: 700;
+      }
+
+      .nav-toggle-header a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
+
+      #playground {
+        position: fixed;
+      }
+
+      #playground[screen="horizontal"] {
+        height: calc(100% - 48px);
+      }
+    </style>
+  </head>
+  <body class="coral--lightest">
+    <div class="nav-toggle-header">
+      <a href="../documentation">
+        <svg class="adobe-icon" viewBox="0 0 30 26" focusable="false"
+             aria-hidden="true" aria-label="Adobe logo">
+          <polygon points="19,0 30,0 30,26"></polygon>
+          <polygon points="11.1,0 0,0 0,26"></polygon>
+          <polygon points="15,9.6 22.1,26 17.5,26 15.4,20.8 10.2,20.8"></polygon>
+        </svg>
+        <h1>Coral Spectrum</h1>
+      </a>
+    </div>
+
+    <script>
+      var link = document.getElementById('coral-link');
+      var script = document.getElementById('coral-script');
+
+      // JS constructor example with sharable code
+      var config = Coral.Playground.read(location.hash.substr(1));
+      if (!Object.keys(config).length) {
+        config.code = '<!DOCTYPE html>\n' +
+          '<html>\n' +
+          '<head>\n' +
+          '  <link rel="stylesheet" href="'+ link.href +'"/>\n' +
+          '  <script src="'+ script.src +'"><\/script>\n' +
+          '</head>\n' +
+          '<body class="coral--lightest">\n' +
+          '  <button is="coral-button" icon="add">Button</button>\n' +
+          '</body>\n' +
+          '</html>\n';
+        config.livereload = true;
+        config.screen = window.screen.width > window.screen.height ? Coral.Playground.screen.VERTICAL : Coral.Playground.screen.HORIZONTAL;
+      }
+
+      var playground = new Coral.Playground(config);
+      playground.id = 'playground';
+
+      playground.addEventListener('coral-playground:coderun', function() {
+        location.hash = playground.share();
+
+        playground.run(playground.code);
+      });
+
+      playground.addEventListener('coral-playground:settingschange', function() {
+        location.hash = playground.share();
+      });
+
+      document.body.appendChild(playground);
+    </script>
+  </body>
+</html>

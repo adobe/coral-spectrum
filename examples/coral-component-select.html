@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.Select</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+    <script>
+      window.addEventListener('load', function() {
+        const selectElements = document.querySelectorAll('coral-select:not([labelledby])');
+        for (let i = 0; i < selectElements.length; i++) {
+          const header = selectElements[i].closest('.markup').previousElementSibling;
+          if (header) {
+            header.id = header.id || Coral.commons.getUID();
+            selectElements[i].setAttribute('labelledby', header.id);
+          }
+        }
+      });
+    </script>
+  </head>
+
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Select</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Select fields allow users to choose from a list of options in a limited space. The list of options can change based on the context.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <coral-select>
+          <coral-select-item value="actions">
+            <coral-icon alt="" icon="actions"></coral-icon>
+            Actions
+          </coral-select-item>
+          <coral-select-item value="add">
+            <coral-icon alt="" icon="add"></coral-icon>
+            Add
+          </coral-select-item>
+          <coral-select-item value="add-circle">
+            <coral-icon alt="" icon="addCircle"></coral-icon>
+            Add-Circle
+          </coral-select-item>
+          <coral-select-item value="alert">
+            <coral-icon alt="" icon="alert"></coral-icon>
+            Alert
+          </coral-select-item>
+          <coral-select-item value="alert-add">
+            <coral-icon alt="" icon="alertAdd"></coral-icon>
+            Alert-Add
+          </coral-select-item>
+          <coral-select-item value="alias">
+            <coral-icon alt="" icon="alias"></coral-icon>
+            Alias
+          </coral-select-item>
+          <coral-select-item value="anchor">
+            <coral-icon alt="" icon="anchor"></coral-icon>
+            Anchor
+          </coral-select-item>
+          <coral-select-item value="annotate">
+            <coral-icon alt="" icon="AnnotatePen"></coral-icon>
+            Annotate
+          </coral-select-item>
+          <coral-select-item value="answer">
+            <coral-icon alt="" icon="answer"></coral-icon>
+            Answer
+          </coral-select-item>
+        </coral-select>
+      </div>
+
+      <h2 class="coral--Heading--S">With placeholder</h2>
+      <div class="markup">
+        <coral-select placeholder="Choose an item">
+          <coral-select-item value="tza">Tanzania - United Republic of Tanzania, Northwest</coral-select-item>
+          <coral-select-item value="are">United Arab Emirates</coral-select-item>
+          <coral-select-item value="gbr">United Kingdom</coral-select-item>
+          <coral-select-item value="usa">United States of America and the republic for which it stands, one nation</coral-select-item>
+        </coral-select>
+      </div>
+
+      <h2 class="coral--Heading--S">Initially selected</h2>
+      <div class="markup">
+        <coral-select>
+          <coral-select-item value="actions">
+            <coral-icon alt="" icon="actions"></coral-icon>
+            Actions
+          </coral-select-item>
+          <coral-select-item value="add" selected>
+            <coral-icon alt="" icon="add"></coral-icon>
+            Add
+          </coral-select-item>
+          <coral-select-item value="add-circle">
+            <coral-icon alt="" icon="addCircle"></coral-icon>
+            Add-Circle
+          </coral-select-item>
+        </coral-select>
+      </div>
+
+      <h2 class="coral--Heading--S">Initially selected + Placeholder</h2>
+      <div class="markup">
+        <coral-select placeholder="Choose a continent">
+          <coral-select-item value="am">America</coral-select-item>
+          <coral-select-item value="eu" selected>Europe</coral-select-item>
+          <coral-select-item value="af">Africa</coral-select-item>
+          <coral-select-item value="as">Asia</coral-select-item>
+          <coral-select-item value=""></coral-select-item>
+        </coral-select>
+      </div>
+
+      <h2 class="coral--Heading--S">Quiet + Placeholder</h2>
+      <div class="markup">
+        <coral-select placeholder="Choose a continent" variant="quiet">
+          <coral-select-item value="am">America</coral-select-item>
+          <coral-select-item value="eu">Europe</coral-select-item>
+          <coral-select-item value="af">Africa</coral-select-item>
+          <coral-select-item value="as">Asia</coral-select-item>
+          <coral-select-item value="oc">Oceania</coral-select-item>
+        </coral-select>
+      </div>
+
+      <h2 class="coral--Heading--S">Loading remote data</h2>
+      <div class="markup">
+        <coral-select id="remote" placeholder="Remote data"></coral-select>
+
+        <script>
+          window.addEventListener('load', function() {
+            // Fake remote data
+            var data = [];
+            for (var i = 1; i <= 1000; i++) {
+              data.push('Item ' + i);
+            }
+
+            var MULTIPLE_PAGE_SIZE = 20;
+            var LOADING_TIME = 1000;
+
+            var timeout;
+            var select = document.getElementById('remote');
+
+            select.addEventListener('coral-select:showitems', function(event) {
+
+              // Based on the amount of the items that the select currently has
+              var start = event.detail.start;
+              var end = MULTIPLE_PAGE_SIZE + start;
+
+              // If we have reached the end of the array there is nothing else to do
+              if (start >= data.length) {
+                return;
+              }
+
+              // Stop previous request
+              clearTimeout(timeout);
+
+              // Causes it to show the loading inside the selectlist
+              event.preventDefault();
+
+              // Make a request and show suggestions from that
+              timeout = setTimeout(function() {
+                data.slice(start, end).forEach(function(item) {
+                  select.items.add({
+                    content: {
+                      textContent: item
+                    }
+                  });
+                });
+              }, LOADING_TIME);
+            });
+          });
+        </script>
+      </div>
+
+      <h2 class="coral--Heading--S">Multiple selection</h2>
+      <div class="markup">
+        <coral-select multiple>
+          <coral-select-item value="actions">
+            <coral-icon alt="" icon="actions"></coral-icon>
+            Actions
+          </coral-select-item>
+          <coral-select-item value="add">
+            <coral-icon alt="" icon="add"></coral-icon>
+            Add
+          </coral-select-item>
+          <coral-select-item value="add-circle">
+            <coral-icon alt="" icon="addCircle"></coral-icon>
+            Add-Circle
+          </coral-select-item>
+          <coral-select-item value="alert">
+            <coral-icon alt="" icon="alert"></coral-icon>
+            Alert
+          </coral-select-item>
+          <coral-select-item value="alert-add">
+            <coral-icon alt="" icon="alertAdd"></coral-icon>
+            Alert-Add
+          </coral-select-item>
+          <coral-select-item value="alias">
+            <coral-icon alt="" icon="alias"></coral-icon>
+            Alias
+          </coral-select-item>
+          <coral-select-item value="anchor">
+            <coral-icon alt="" icon="anchor"></coral-icon>
+            Anchor
+          </coral-select-item>
+          <coral-select-item value="annotate">
+            <coral-icon alt="" icon="AnnotatePen"></coral-icon>
+            Annotate
+          </coral-select-item>
+          <coral-select-item value="answer">
+            <coral-icon alt="" icon="answer"></coral-icon>
+            Answer
+          </coral-select-item>
+        </coral-select>
+      </div>
+
+      <h2 class="coral--Heading--S">Placeholder + Multiple</h2>
+      <div class="markup">
+        <coral-select multiple placeholder="Choose an action">
+          <coral-select-item value="actions">
+            <coral-icon alt="" icon="actions"></coral-icon> Actions </coral-select-item>
+          <coral-select-item value="add">
+            <coral-icon alt="" icon="add"></coral-icon> Add </coral-select-item>
+          <coral-select-item value="add-circle">
+            <coral-icon icon="addCircle"></coral-icon> Add-Circle </coral-select-item>
+          <coral-select-item value="alert">
+            <coral-icon alt="" icon="alert"></coral-icon> Alert </coral-select-item>
+          <coral-select-item value="alert-add">
+            <coral-icon alt="" icon="alertAdd"></coral-icon> Alert-Add </coral-select-item>
+          <coral-select-item value="alias">
+            <coral-icon alt="" icon="alias"></coral-icon> Alias </coral-select-item>
+          <coral-select-item value="anchor">
+            <coral-icon alt="" icon="anchor"></coral-icon> Anchor </coral-select-item>
+          <coral-select-item value="annotate">
+            <coral-icon alt="" icon="AnnotatePen"></coral-icon> Annotate </coral-select-item>
+          <coral-select-item value="answer">
+            <coral-icon alt="" icon="answer"></coral-icon> Answer </coral-select-item>
+        </coral-select>
+      </div>
+
+      <h2 class="coral--Heading--S">Initially selected + Multiple</h2>
+      <div class="markup">
+        <coral-select multiple>
+          <coral-select-item value="actions">
+            <coral-icon alt="" icon="actions"></coral-icon>
+            Actions
+          </coral-select-item>
+          <coral-select-item value="add" selected>
+            <coral-icon alt="" icon="add"></coral-icon>
+            Add
+          </coral-select-item>
+          <coral-select-item value="add-circle">
+            <coral-icon alt="" icon="addCircle"></coral-icon>
+            Add-Circle
+          </coral-select-item>
+          <coral-select-item value="adjust" selected>
+            <coral-icon alt="" icon="adjust"></coral-icon> Adjust </coral-select-item>
+        </coral-select>
+      </div>
+
+      <h2 class="coral--Heading--S">Initially selected + Multiple + Placeholder</h2>
+      <div class="markup">
+        <coral-select multiple placeholder="Choose an action">
+          <coral-select-item value="actions">
+            <coral-icon alt="" icon="actions"></coral-icon>
+            Actions
+          </coral-select-item>
+          <coral-select-item value="add" selected>
+            <coral-icon alt="" icon="add"></coral-icon>
+            Add
+          </coral-select-item>
+          <coral-select-item value="add-circle">
+            <coral-icon alt="" icon="addCircle"></coral-icon>
+            Add-Circle
+          </coral-select-item>
+        </coral-select>
+      </div>
+
+      <h2 class="coral--Heading--S">Required</h2>
+      <div class="markup">
+        <coral-select required placeholder="Choose an item">
+          <coral-select-item value="actions">
+            <coral-icon alt="" icon="actions"></coral-icon>
+            Actions
+          </coral-select-item>
+          <coral-select-item value="add">
+            <coral-icon alt="" icon="add"></coral-icon>
+            Add
+          </coral-select-item>
+          <coral-select-item value="add-circle">
+            <coral-icon alt="" icon="addCircle"></coral-icon>
+            Add-Circle
+          </coral-select-item>
+          <coral-select-item value="alert">
+            <coral-icon alt="" icon="alert"></coral-icon>
+            Alert
+          </coral-select-item>
+          <coral-select-item value="alert-add">
+            <coral-icon alt="" icon="alertAdd"></coral-icon>
+            Alert-Add
+          </coral-select-item>
+          <coral-select-item value="alias">
+            <coral-icon alt="" icon="alias"></coral-icon>
+            Alias
+          </coral-select-item>
+          <coral-select-item value="anchor">
+            <coral-icon alt="" icon="anchor"></coral-icon>
+            Anchor
+          </coral-select-item>
+          <coral-select-item value="annotate">
+            <coral-icon alt="" icon="AnnotatePen"></coral-icon>
+            Annotate
+          </coral-select-item>
+          <coral-select-item value="answer">
+            <coral-icon alt="" icon="answer"></coral-icon>
+            Answer
+          </coral-select-item>
+        </coral-select>
+      </div>
+
+      <h2 class="coral--Heading--S">Invalid</h2>
+      <div class="markup">
+        <coral-select invalid>
+          <coral-select-item value="actions">
+            <coral-icon alt="" icon="actions"></coral-icon>
+            Actions
+          </coral-select-item>
+          <coral-select-item value="add">
+            <coral-icon alt="" icon="add"></coral-icon>
+            Add
+          </coral-select-item>
+          <coral-select-item value="add-circle">
+            <coral-icon alt="" icon="addCircle"></coral-icon>
+            Add-Circle
+          </coral-select-item>
+          <coral-select-item value="alert">
+            <coral-icon alt="" icon="alert"></coral-icon>
+            Alert
+          </coral-select-item>
+          <coral-select-item value="alert-add">
+            <coral-icon alt="" icon="alertAdd"></coral-icon>
+            Alert-Add
+          </coral-select-item>
+          <coral-select-item value="alias">
+            <coral-icon alt="" icon="alias"></coral-icon>
+            Alias
+          </coral-select-item>
+          <coral-select-item value="anchor">
+            <coral-icon alt="" icon="anchor"></coral-icon>
+            Anchor
+          </coral-select-item>
+          <coral-select-item value="annotate">
+            <coral-icon alt="" icon="AnnotatePen"></coral-icon>
+            Annotate
+          </coral-select-item>
+          <coral-select-item value="answer">
+            <coral-icon alt="" icon="answer"></coral-icon>
+            Answer
+          </coral-select-item>
+        </coral-select>
+      </div>
+
+      <h2 class="coral--Heading--S">Disabled</h2>
+      <div class="markup">
+        <coral-select placeholder="Choose an item" disabled>
+          <coral-select-item value="tza">Tanzania - United Republic of Tanzania, Northwest</coral-select-item>
+          <coral-select-item value="are">United Arab Emirates</coral-select-item>
+          <coral-select-item value="gbr">United Kingdom</coral-select-item>
+          <coral-select-item value="usa">United States of America and the republic for which it stands, one nation</coral-select-item>
+        </coral-select>
+      </div>
+
+      <h2 class="coral--Heading--S">Quiet + Placeholder + Disabled</h2>
+      <div class="markup">
+        <coral-select placeholder="Choose a continent" variant="quiet" disabled>
+          <coral-select-item value="am">America</coral-select-item>
+          <coral-select-item value="eu">Europe</coral-select-item>
+          <coral-select-item value="af">Africa</coral-select-item>
+          <coral-select-item value="as">Asia</coral-select-item>
+          <coral-select-item value="oc">Oceania</coral-select-item>
+        </coral-select>
+      </div>
+
+      <h2 class="coral--Heading--S">ReadOnly</h2>
+      <div class="markup">
+        <coral-select readonly>
+          <coral-select-item value="actions">
+            <coral-icon alt="" icon="actions"></coral-icon>
+            Actions
+          </coral-select-item>
+          <coral-select-item value="add">
+            <coral-icon alt="" icon="add"></coral-icon>
+            Add
+          </coral-select-item>
+          <coral-select-item value="add-circle">
+            <coral-icon alt="" icon="addCircle"></coral-icon>
+            Add-Circle
+          </coral-select-item>
+          <coral-select-item value="alert">
+            <coral-icon alt="" icon="alert"></coral-icon>
+            Alert
+          </coral-select-item>
+          <coral-select-item value="alert-add">
+            <coral-icon alt="" icon="alertAdd"></coral-icon>
+            Alert-Add
+          </coral-select-item>
+          <coral-select-item value="alias">
+            <coral-icon alt="" icon="alias"></coral-icon>
+            Alias
+          </coral-select-item>
+          <coral-select-item value="anchor">
+            <coral-icon alt="" icon="anchor"></coral-icon>
+            Anchor
+          </coral-select-item>
+          <coral-select-item value="annotate">
+            <coral-icon alt="" icon="AnnotatePen"></coral-icon>
+            Annotate
+          </coral-select-item>
+          <coral-select-item value="answer">
+            <coral-icon alt="" icon="answer"></coral-icon>
+            Answer
+          </coral-select-item>
+        </coral-select>
+      </div>
+
+      <h2 class="coral--Heading--S">Form Field</h2>
+      <div class="markup">
+        <form class="coral-Form coral-Form--vertical" style="max-width:300px;">
+          <label id="label" class="coral-FieldLabel">Label</label>
+          <coral-select class="coral-Form-field" labelledby="label">
+            <coral-select-item>Item 1</coral-select-item>
+            <coral-select-item>Item 2</coral-select-item>
+            <coral-select-item>Item 3</coral-select-item>
+          </coral-select>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

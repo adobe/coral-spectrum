@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.ActionBar</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+
+    <style type="text/css">
+      coral-actionbar-primary > coral-actionbar-item > a {
+        display: block;
+        padding: 8px;
+      }
+    </style>
+  </head>
+
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Action Bar</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Action bars are floating bars that are used in selection mode.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <coral-actionbar>
+          <coral-actionbar-item>
+            <a is="coral-anchorbutton" href="#" variant="quiet" icon="search" title="Delete">Search</a>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <a is="coral-anchorbutton" href="#" variant="quiet" icon="clock" title="Timeline">Timeline</a>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <a is="coral-anchorbutton" href="#" variant="quiet" icon="unmerge" title="References">References</a>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <a is="coral-anchorbutton" href="#" variant="quiet" title="Exit">Exit</a>
+          </coral-actionbar-item>
+        </coral-actionbar>
+      </div>
+
+      <h2 class="coral--Heading--S">With primary and secondary containers</h2>
+      <div class="markup">
+        <coral-actionbar>
+          <coral-actionbar-primary threshold="-1" morebuttontext="More">
+            <coral-actionbar-item>
+              <button is="coral-button" icon="viewCard">View Card</button>
+            </coral-actionbar-item>
+            <coral-actionbar-item>
+              <button is="coral-button" icon="viewList">View List</button>
+            </coral-actionbar-item>
+            <coral-actionbar-item>
+              <!-- additional nesting, as with fileupload -->
+              <span>
+                <button is="coral-button">Upload</button>
+              </span>
+            </coral-actionbar-item>
+            <coral-actionbar-item>
+              <button is="coral-button" icon="viewColumn">View a <span style="color:red">loooooonoooooog Column</span></button>
+            </coral-actionbar-item>
+            <coral-actionbar-item>
+              <button is="coral-button" class="custom" variant="quiet" disabled data-custom="text">Disable action</button>
+            </coral-actionbar-item>
+          </coral-actionbar-primary>
+          <coral-actionbar-secondary morebuttontext="More">
+            <coral-actionbar-item>
+              <button is="coral-button" icon="search">Search</button>
+            </coral-actionbar-item>
+            <coral-actionbar-item>
+              <button is="coral-button" icon="clock">Timeline</button>
+            </coral-actionbar-item>
+            <coral-actionbar-item>
+              <button is="coral-button" icon="unmerge">References</button>
+            </coral-actionbar-item>
+            <coral-actionbar-item>
+              <button is="coral-button" icon="closeCircle">Exit</button>
+            </coral-actionbar-item>
+            <coral-actionbar-item>
+              <button is="coral-button" icon="add">Create</button>
+            </coral-actionbar-item>
+            <coral-actionbar-item>
+              <button is="coral-button" icon="copy">Copy</button>
+            </coral-actionbar-item>
+            <coral-actionbar-item>
+              <button is="coral-button" icon="move">Move</button>
+            </coral-actionbar-item>
+            <coral-actionbar-item>
+              <button is="coral-button" icon="globe">Publish</button>
+            </coral-actionbar-item>
+            <coral-actionbar-item>
+              <button is="coral-button" icon="globeRemove">Unpublish</button>
+            </coral-actionbar-item>
+            <coral-actionbar-item>
+              <button is="coral-button" icon="delete" style="width:120px">Delete everything currently selected</button>
+            </coral-actionbar-item>
+          </coral-actionbar-secondary>
+        </coral-actionbar>
+      </div>
+
+      <h2 class="coral--Heading--S">With arbitrary elements</h2>
+      <div class="markup">
+        <coral-actionbar>
+          <coral-actionbar-primary>
+            <coral-actionbar-item><a href="#" class="coral-Link coral-Link--subtle">Link 1</a></coral-actionbar-item>
+            <coral-actionbar-item><a href="#" class="coral-Link coral-Link--subtle">Link 2</a></coral-actionbar-item>
+            <coral-actionbar-item><a href="#" class="coral-Link coral-Link--subtle">Link 3</a></coral-actionbar-item>
+            <coral-actionbar-item><a href="#" class="coral-Link coral-Link--subtle">Link 4</a></coral-actionbar-item>
+            <coral-actionbar-item><a href="#" class="coral-Link coral-Link--subtle">Link 5</a></coral-actionbar-item>
+          </coral-actionbar-primary>
+          <coral-actionbar-secondary>
+            <coral-actionbar-item>
+              <button is="coral-button" icon="closeCircle">Exit</button>
+            </coral-actionbar-item>
+          </coral-actionbar-secondary>
+        </coral-actionbar>
+      </div>
+
+      <h2 class="coral--Heading--S">With action menu</h2>
+      <div class="markup">
+        <coral-actionbar id="switchBar1">
+          <coral-actionbar-item>
+            <button is="coral-button" variant="quiet" icon="copy">Copy</button>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <button is="coral-button" variant="quiet" icon="globe">Publish</button>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <button is="coral-button" variant="quiet" icon="globeRemove">Unpublish</button>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <button class="popover-button" is="coral-button" icon="search" title="Delete">Open Popover</button>
+            <coral-popover target=".popover-button" placement="bottom">
+              <coral-buttonlist>
+                <button is="coral-buttonlist-item" icon="add">Add</button>
+                <button is="coral-buttonlist-item" icon="move">Move</button>
+                <button is="coral-buttonlist-item" disabled>Delete</button>
+              </coral-buttonlist>
+              </coral-popover-content>
+            </coral-popover>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <button is="coral-button" variant="quiet" icon="copy">Copy</button>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <button is="coral-button" variant="quiet" icon="globe">Publish</button>
+          </coral-actionbar-item>
+          <coral-actionbar-item>
+            <button is="coral-button" variant="quiet" icon="globeRemove">Unpublish</button>
+          </coral-actionbar-item>
+        </coral-actionbar>
+      </div>
+    </main>
+    <script>
+      document.addEventListener('click', function(event) {
+        var item = event.target.closest('button, a');
+        if (item) {
+          console.log(event.type, ':', item.textContent.trim());
+          event.stopImmediatePropagation();
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.DragAction</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="event.preventDefault();this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <h1 class="coral-Heading--XXL">Drag Action</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Drag actions are decorators which add draggable functionality to elements.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <span coral-dragaction>
+        <p>You can drag me</p>
+        <img alt="" src="http://via.placeholder.com/200x100">
+      </span>
+      </div>
+
+      <h2 class="coral--Heading--S">Limited to a single axis</h2>
+      <div class="markup">
+        <span coral-dragaction coral-dragaction-axis="horizontal">You can drag me on the horizontal axis only</span>
+      </div>
+
+      <h2 class="coral--Heading--S">Limited to a handle</h2>
+      <div class="markup">
+        <div coral-dragaction coral-dragaction-handle=".handle1, .handle2">
+          I can be dragged only by this
+          <span class="handle1"><b>handle</b></span> or this <span class="handle2"><i>handle</i></span>
+        </div>
+      </div>
+
+      <h2 class="coral--Heading--S">Containment</h2>
+      <div class="markup">
+        <div style="height:200px;width:200px;background: #eee;overflow:scroll;">
+          <div coral-dragaction coral-dragaction-containment style="width:50px;border:1px solid #999;">
+            You can not drag me out
+          </div>
+        </div>
+      </div>
+
+      <h2 class="coral--Heading--S">Automatic window scroll</h2>
+      <div class="markup">
+        <span coral-dragaction coral-dragaction-scroll>You can drag me and window will scroll</span>
+      </div>
+
+      <h2 class="coral--Heading--S">Automatic container scroll</h2>
+      <div class="markup">
+        <div style="overflow: auto;border: 1px solid; height:500px;width:500px;">
+          <span coral-dragaction coral-dragaction-scroll>You can drag me and container will scroll</span>
+          <div style="background: linear-gradient(lightgoldenrodyellow, lightcoral); height:1000px;width:1000px;" tabindex="0"></div>
+        </div>
+      </div>
+
+      <h2 class="coral--Heading--S">Drag'n'drop</h2>
+      <div class="markup">
+        <span id="dragaction" coral-dragaction coral-dragaction-dropzone="#dropzone">You can drop me on #dropzone</span>
+
+        <div id="dropzone" style="height:200px;width:200px;background:#eee;">I'm #dropzone</div>
+
+        <script>
+          window.addEventListener('load', function() {
+            document.getElementById('dragaction').addEventListener('coral-dragaction:drop', function(event) {
+              event.detail.dropElement.style.background = 'beige';
+            });
+          });
+        </script>
+      </div>
+
+      <h2 class="coral--Heading--S">Initialized with JS</h2>
+      <div class="markup">
+        <span id="init-js">You can drag me vertically</span>
+        <script>
+          window.addEventListener('load', function() {
+            var dragAction = new Coral.DragAction('#init-js');
+            dragAction.axis = 'vertical';
+          });
+        </script>
+      </div>
+      <script>
+        window.addEventListener('load', function() {
+          var dragActions = document.querySelectorAll('[coral-dragaction]');
+          for (var i = 0; i < dragActions.length; i++) {
+            new Coral.DragAction(dragActions[i]);
+          }
+        });
+      </script>
+    </main>
+  </body>
+</html>
