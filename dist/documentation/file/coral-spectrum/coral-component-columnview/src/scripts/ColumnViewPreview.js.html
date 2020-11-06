@@ -513,13 +513,21 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
     let i;
     let element;
     let elementLabel;
+
+    // @a11y If the previous column has selected items,
+    // do not include item values in the tab order, 
+    // so that a keyboard user can quickly advance to a subsequent toolbar.
+    const tabIndex = (this.parentElement &amp;&amp;
+      this.parentElement.tagName === &apos;CORAL-COLUMNVIEW&apos; &amp;&amp;
+      this.parentElement.selectedItems.length) ? -1 : 0;
+
     for (i = 0; i &lt; length; i++) {
       element = elements[i];
       elementLabel = element.previousElementSibling;
       elementLabel.id = elementLabel.id || commons.getUID();
       element.setAttribute(&apos;aria-labelledby&apos;, elementLabel.id);
       element.setAttribute(&apos;role&apos;, &apos;textbox&apos;);
-      element.setAttribute(&apos;tabindex&apos;, &apos;0&apos;);
+      element.setAttribute(&apos;tabindex&apos;, tabIndex);
       element.setAttribute(&apos;aria-readonly&apos;, &apos;true&apos;);
 
       // force ChromeVox to read value of textbox

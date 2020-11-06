@@ -51613,7 +51613,10 @@
 
         this.classList.add(CLASSNAME$P); // @a11y
 
-        this.setAttribute('role', 'group');
+        if (!this.hasAttribute('role')) {
+          this.setAttribute('role', 'group');
+        }
+
         this.id = this.id || commons.getUID(); // @todo: initial collection items needs to be triggered
 
         var content = this._elements.content; // when the content zone was not created, we need to make sure that everything is added inside it as a content.
@@ -52353,7 +52356,11 @@
         var length = elements.length;
         var i;
         var element;
-        var elementLabel;
+        var elementLabel; // @a11y If the previous column has selected items,
+        // do not include item values in the tab order, 
+        // so that a keyboard user can quickly advance to a subsequent toolbar.
+
+        var tabIndex = this.parentElement && this.parentElement.tagName === 'CORAL-COLUMNVIEW' && this.parentElement.selectedItems.length ? -1 : 0;
 
         for (i = 0; i < length; i++) {
           element = elements[i];
@@ -52361,7 +52368,7 @@
           elementLabel.id = elementLabel.id || commons.getUID();
           element.setAttribute('aria-labelledby', elementLabel.id);
           element.setAttribute('role', 'textbox');
-          element.setAttribute('tabindex', '0');
+          element.setAttribute('tabindex', tabIndex);
           element.setAttribute('aria-readonly', 'true'); // force ChromeVox to read value of textbox
 
           if (window.cvox) {
@@ -80232,7 +80239,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.10.9";
+  var version$1 = "4.10.10";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
