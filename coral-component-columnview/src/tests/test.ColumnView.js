@@ -1316,6 +1316,14 @@ describe('ColumnView', function() {
       expect(el.getAttribute('role')).to.equal('tree');
     });
 
+    describe('First column', function() {
+      it('should have role equal to "presentation", while subsequent columns have role equal to "group"', function() {
+        const el = helpers.build(window.__html__['ColumnView.full.html']);
+        expect(el.columns.first().getAttribute('role')).to.equal('presentation');
+        expect(el.columns.getAll()[1].getAttribute('role')).to.equal('group');
+      });
+    });
+
     describe('when selectionMode equals "multiple"', function() {
       it('should have aria-multiselectable equal to "true"', function(done) {
         const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
