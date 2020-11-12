@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.Dialog</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Dialog</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Dialogs display important information that users need to acknowledge. They appear over the interface and block further interactions.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <coral-dialog id="markupDialog">
+          <coral-dialog-header>Dialog from Markup</coral-dialog-header>
+          <coral-dialog-content>This dialog was created from markup with child elements.</coral-dialog-content>
+          <coral-dialog-footer>
+            <button is="coral-button" coral-close>Cancel</button>
+            <button is="coral-button" variant="primary" coral-close>Done</button>
+          </coral-dialog-footer>
+        </coral-dialog>
+        <button is="coral-button" onclick="showDialog('markupDialog')">Dialog from Markup</button>
+      </div>
+
+      <h2 class="coral--Heading--S">Custom Sized Dialog</h2>
+      <div class="markup">
+        <coral-dialog id="customSizedDialog">
+          <coral-dialog-header>Small Dialog</coral-dialog-header>
+          <coral-dialog-content>This dialog is supposed to be very small with 200px width.</coral-dialog-content>
+        </coral-dialog>
+        <button is="coral-button" onclick="showDialog('customSizedDialog')">Custom Sized Dialog</button>
+        <style>
+          #customSizedDialog [coral-dialog-size] {
+            width: 200px;
+          }
+        </style>
+      </div>
+
+      <h2 class="coral--Heading--S">Scrolling Dialog</h2>
+      <div class="markup">
+        <coral-dialog id="scrollingDialog">
+          <coral-dialog-header>Scrolling Dialog</coral-dialog-header>
+          <coral-dialog-content>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+          </coral-dialog-content>
+          <coral-dialog-footer>
+            <button is="coral-button" variant="primary" coral-close>Done</button>
+          </coral-dialog-footer>
+        </coral-dialog>
+      </div>
+      <button is="coral-button" onclick="showDialog('scrollingDialog')">Scrolling Dialog</button>
+
+      <h2 class="coral--Heading--S">Fullscreen Dialog</h2>
+      <div class="markup">
+        <coral-dialog fullscreen id="fullscreenDialog">
+          <coral-dialog-header>Fullscreen Dialog</coral-dialog-header>
+          <coral-dialog-content>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+          </coral-dialog-content>
+          <coral-dialog-footer>
+            <button is="coral-button" variant="primary" coral-close>Done</button>
+          </coral-dialog-footer>
+        </coral-dialog>
+        <button is="coral-button" onclick="showDialog('fullscreenDialog')">Fullscreen Dialog</button>
+      </div>
+
+      <h2 class="coral--Heading--S">Scrolling fullscreen Dialog</h2>
+      <div class="markup">
+        <coral-dialog fullscreen id="scrollingFullscreenDialog">
+          <coral-dialog-header>Scrolling Fullscreen Dialog</coral-dialog-header>
+          <coral-dialog-content>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+          </coral-dialog-content>
+          <coral-dialog-footer>
+            <button is="coral-button" variant="primary" coral-close>Done</button>
+          </coral-dialog-footer>
+        </coral-dialog>
+        <button is="coral-button" onclick="showDialog('scrollingFullscreenDialog')">Scrolling fullscreen Dialog</button>
+      </div>
+
+      <h2 class="coral--Heading--S">Variants</h2>
+      <div class="markup">
+        <coral-dialog id="dialog-variant" fullscreen>
+          <coral-dialog-header id="content_title">Fullscreen Dialog</coral-dialog-header>
+          <coral-dialog-content>
+            <p id="content_fullscreen">
+              This is a fullscreen dialog. The footer is moved above,
+              so buttons are on the top right of the dialog above content.
+            </p>
+            <p id="content_normal" hidden>
+              This is a normal dialog. The footer remains below, so buttons are beneath content.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+          </coral-dialog-content>
+          <coral-dialog-footer>
+            <button id="switchVariant" is="coral-button" variant="quiet">Switch Variant</button>
+            <button id="switchMode" is="coral-button" variant="primary">Switch Mode</button>
+          </coral-dialog-footer>
+        </coral-dialog>
+        <button is="coral-button" onclick="showDialog('dialog-variant')">Variant Dialog</button>
+        <script>
+          window.addEventListener('load', function() {
+            const dialogVariant = document.getElementById('dialog-variant');
+            document.getElementById('switchMode').addEventListener('click', function() {
+              dialogVariant.fullscreen = !dialogVariant.fullscreen;
+
+              document.querySelector('#content_fullscreen').hidden = !dialogVariant.fullscreen;
+              document.querySelector('#content_normal').hidden = dialogVariant.fullscreen;
+              document.querySelector('#content_title').innerHTML = dialogVariant.fullscreen ? 'Fullscreen Dialog' : 'Normal Dialog';
+            });
+
+            var variants = Object.keys(Coral.Dialog.variant);
+            variants.currentVariant = 0;
+
+            document.getElementById('switchVariant').addEventListener('click', function() {
+              variants.currentVariant++;
+              if (variants.currentVariant > variants.length) {
+                variants.currentVariant = 0;
+              }
+              dialogVariant.variant = Coral.Dialog.variant[variants[variants.currentVariant]];
+            });
+          });
+        </script>
+      </div>
+
+      <h2 class="coral--Heading--S">Stacking context</h2>
+      <button is="coral-button" id="multipleDialogsSomeWithoutBackdrop">Show Multiple Dialogs, some without backdrop</button>
+      <div class="markup">
+        <script>
+          document.getElementById('multipleDialogsSomeWithoutBackdrop').addEventListener('click', function() {
+            for (var i = 0; i < 5; i++) {
+              // Create the dialog
+              var dialog = new Coral.Dialog();
+              dialog.set({
+                backdrop: i % 2 === 0 ? 'none' : 'modal',
+                header: {
+                  innerHTML: 'Dialog '+(i+1)
+                },
+                content: {
+                  innerHTML: 'This is dialog number '+(i+1)+'.'
+                },
+                footer: {
+                  innerHTML: '<button is="coral-button" variant="primary" coral-close>Done</button>'
+                }
+              });
+
+              // Add the dialog to the DOM
+              document.body.appendChild(dialog);
+
+              // Show the dialog and return focus to the button when its closed
+              dialog.show();
+            }
+          });
+        </script>
+      </div>
+
+      <h2 class="coral--Heading--S">Closable</h2>
+      <div class="markup">
+        <coral-dialog id='defaultCloseButtonDialog' closable='on'>
+          <coral-dialog-header>Done</coral-dialog-header>
+          <coral-dialog-content>You can close this now.</coral-dialog-content>
+        </coral-dialog>
+        <button is='coral-button' onclick="showDialog('defaultCloseButtonDialog')">Closable On</button>
+      </div>
+
+      <h2 class="coral--Heading--S">Movable</h2>
+      <div class="markup">
+        <coral-dialog id="movableDialog" movable>
+          <coral-dialog-header>Movable Dialog</coral-dialog-header>
+          <coral-dialog-content>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+              vitae arcu ut ultrices. Cras pharetra augue lacus, vitae cursus odio scelerisque
+              sit amet. Etiam efficitur aliquam eros quis tincidunt. Donec odio tortor, placerat
+              a mattis eget, ultrices quis urna. Etiam pellentesque mollis finibus. Etiam a elit
+              rhoncus, porta magna non, mollis ante. Interdum et malesuada fames ac ante ipsum primis
+              in faucibus.
+            </p>
+          </coral-dialog-content>
+          <coral-dialog-footer>
+            <button is="coral-button" variant="primary" coral-close>Ok</button>
+          </coral-dialog-footer>
+        </coral-dialog>
+        <button is='coral-button' onclick="showDialog('movableDialog')">Movable Dialog</button>
+      </div>
+
+      <h2 class="coral--Heading--S">Wrapped Dialogs</h2>
+      <div class="markup">
+        <coral-dialog id="no_content_zones">
+          <meta name="name" content="content">
+          I have no content zones predefined
+        </coral-dialog>
+
+        <coral-dialog id="multi_wrapper">
+          <div>
+            <coral-fileupload>
+              <form action="/submit" method="post">
+                <input type="hidden" value="">
+                <coral-dialog-header>Dialog with a Multiple wrappers</coral-dialog-header>
+                <coral-dialog-content>
+                    I have 3 wrappers
+                </coral-dialog-content>
+                <coral-dialog-footer><button is="coral-button" variant="primary" coral-close>Submit</button></coral-dialog-footer>
+              </form>
+            </coral-fileupload>
+          </div>
+        </coral-dialog>
+
+        <button is="coral-button" onclick="showDialog('no_content_zones')">No Content Zones Dialog</button>
+        <button is="coral-button" onclick="showDialog('multi_wrapper')">Multi Wrapper Dialog</button>
+
+      </div>
+
+    </main>
+
+    <script>
+      function showDialog(id) {
+        var dialog = document.getElementById(id);
+        dialog.show();
+      }
+    </script>
+  </body>
+</html>
+

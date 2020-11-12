@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.StepList</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+
+    <style type="text/css">
+    section {
+      padding: 15px;
+    }
+    </style>
+  </head>
+
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Step List</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Step lists hold a collection of steps.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <coral-steplist>
+          <coral-step>Step 1</coral-step>
+          <coral-step>Step 2</coral-step>
+          <coral-step>Step 3</coral-step>
+        </coral-steplist>
+      </div>
+
+      <h2 class="coral--Heading--S">Single Step</h2>
+      <div class="markup">
+        <coral-steplist interaction="on">
+          <coral-step>Step 1</coral-step>
+        </coral-steplist>
+      </div>
+
+      <h2 class="coral--Heading--S">Selectable Steps</h2>
+      <div class="markup">
+        <coral-steplist interaction="on">
+          <coral-step>Step 1</coral-step>
+          <coral-step selected>Step 2</coral-step>
+          <coral-step>Step 3</coral-step>
+        </coral-steplist>
+      </div>
+
+      <h2 class="coral--Heading--S">Small Size</h2>
+      <div class="markup">
+        <coral-steplist size="S" interaction="on">
+          <coral-step>Step 1</coral-step>
+          <coral-step selected>Step 2</coral-step>
+          <coral-step>Step 3</coral-step>
+          <coral-step>Step 4</coral-step>
+          <coral-step>Step 5</coral-step>
+        </coral-steplist>
+      </div>
+
+      <h2 class="coral--Heading--S">Long Text</h2>
+      <div class="markup">
+        <coral-steplist interaction="on">
+          <coral-step>My text is the longest among all</coral-step>
+          <coral-step selected>And my text is quite long too</coral-step>
+          <coral-step>My text is short</coral-step>
+        </coral-steplist>
+      </div>
+
+      <h2 class="coral-Heading--S">Disabled not completed items</h2>
+      <div class="markup">
+        <coral-steplist interaction="on">
+          <coral-step>Step 1</coral-step>
+          <coral-step selected>Step 2</coral-step>
+          <coral-step disabled>Step 3</coral-step>
+          <coral-step disabled>Step 4</coral-step>
+          <coral-step disabled>Step 5</coral-step>
+        </coral-steplist>
+      </div>
+
+      <h2 class="coral-Heading--S">labelled, labelledBy and describedBy</h2>
+      <div class="markup">
+        <coral-steplist size="S" interaction="on" id="labelled-steps-example">
+          <coral-step labelled="Step 1"></coral-step>
+          <coral-step labelled="Step 2" labelledby="labelled-steps-example-label" describedby="labelled-steps-example-desc" selected></coral-step>
+          <coral-step labelled="Step 3"></coral-step>
+          <coral-step labelled="Step 4"></coral-step>
+          <coral-step labelled="Step 5"></coral-step>
+        </coral-steplist>
+        <div class="coral-Well">
+          <h3><span id="labelled-steps-example-label">Step 2</span> heading</h3>
+          <p id="labelled-steps-example-desc"><span>Step 2</span> content</p>
+        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            var stepList = document.getElementById('labelled-steps-example');
+            var spans = stepList.nextElementSibling.querySelectorAll('span');
+            function onStepListChange(event) {
+              var stepLabel = event.detail.selection.getAttribute('labelled');
+              for (var i = 0; i < spans.length; i++) {
+                spans[i].textContent = stepLabel;
+              }
+              event.detail.oldSelection.removeAttribute('labelledby');
+              event.detail.selection.setAttribute('labelledby', stepList.id + '-label');
+              event.detail.oldSelection.removeAttribute('describedby');
+              event.detail.selection.setAttribute('describedby', stepList.id + '-desc');
+            }
+            stepList.addEventListener('coral-steplist:change', onStepListChange);
+          });
+        </script>
+      </div>
+    </main>
+  </body>
+</html>

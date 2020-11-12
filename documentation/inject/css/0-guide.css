@@ -1,0 +1,480 @@
+/**
+ * Copyright 2019 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+
+html, body {
+  font-family: adobe-clean,Helvetica,Arial,sans-serif;
+  font-weight: 400;
+  background: rgb(255, 255, 255);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: rgb(13, 102, 208);
+}
+
+h1 {
+  color: rgb(44, 44, 44);
+  font-size: 45px;
+  border: none;
+  font-family: adobe-clean-serif, 'Source Serif Pro', Georgia, serif;
+  margin-bottom: 24px;
+}
+
+h2 {
+  border-bottom: none;
+  font-weight: 400;
+}
+
+.github-markdown h1 {
+  font-weight: 700;
+  font-size: 45px;
+  padding-bottom: 0;
+}
+
+.github-markdown h2,
+.github-markdown h4 {
+  font-weight: 500;
+}
+
+.github-markdown pre > code {
+  background: #fafafa;
+  border: solid 1px #ddd;
+  padding: 8px;
+  overflow-x: auto;
+}
+
+#meet-coral-spectrum + p {
+  font-size: 18px;
+}
+
+img:not([src*=".svg"]).logo {
+  box-shadow: none;
+  padding: 40px 0;
+  box-sizing: border-box;
+}
+
+.header-notice {
+  font-size: 18px;
+}
+
+.content {
+  padding: 40px 52px 24px 52px;
+  box-sizing: border-box;
+}
+
+.content .detail > * {
+  margin: 24px 0;
+}
+
+.content .detail > h3 {
+  padding: 8px;
+  border-radius: 4px;
+}
+
+footer {
+  border-top: 2px solid rgb(225, 225, 225);
+  font-style: normal;
+  font-size: 16px;
+  padding: 20px 0;
+  font-weight: 400;
+  color: rgb(75, 75, 75);
+}
+
+.navigation {
+  border-right: none;
+  background-color: rgb(250, 250, 250);
+  box-shadow: none;
+  padding: 0 24px !important;
+  margin-top: 0 !important;
+  width: 256px;
+  transition: transform 160ms ease-in-out;
+  z-index: 10;
+}
+
+.navigation li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.inner-link-active {
+  padding-left: 8px !important;
+  background-color: rgba(0, 0, 0, .4) !important;
+}
+
+.github-markdown .inner-link-active {
+  background-color: transparent !important;
+  color: inherit !important;
+  padding-left: 0 !important;
+}
+
+body {
+  visibility: hidden;
+}
+
+body.is-ready {
+  visibility: visible;
+}
+
+.layout-container > header {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  border-bottom: none;
+  left: 256px;
+  right: 0;
+  width: auto;
+  overflow: visible;
+}
+
+.layout-container > header > a {
+  color: #4b4b4b;
+  margin: 0 8px;
+}
+
+.layout-container > header > a:hover {
+  color: #2c2c2c;
+}
+
+.layout-container > header > a.is-active {
+  color: #2c2c2c;
+  border-bottom: solid 2px rgb(44, 44, 44);
+}
+
+.navigation > a:first-child {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.navigation a:first-child img {
+  height: 32px;
+  width: 36px !important;
+}
+
+.navigation a:first-child span {
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 16px;
+  color: rgb(44, 44, 44);
+}
+
+.navigation .manual-toc-root > div {
+  padding-left: 0;
+}
+
+.navigation .manual-toc .indent-h2 a {
+  padding-left: 1.5em;
+}
+
+.navigation .manual-toc .indent-h3 a {
+  padding-left: 2.5em;
+}
+
+.navigation .manual-toc .indent-h3 a {
+  padding-left: 3.5em;
+}
+
+.navigation .manual-toc .indent-h4 a {
+  padding-left: 4.5em;
+}
+
+.navigation .manual-toc li {
+  padding: 0;
+  margin: 4px 0 0 0 !important;
+  white-space: normal;
+}
+
+.navigation .manual-toc li a {
+  display: flex !important;
+  color: #555 !important;
+  padding: 5px 12px;
+  min-height: 32px;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0;
+  border-radius: 4px;
+  transition: background-color 130ms ease-out, color 130ms ease-out;
+}
+
+.navigation .manual-toc li:hover a,
+.navigation .manual-toc li.is-selected a {
+  color: rgb(44, 44, 44);
+  background-color: rgba(44, 44, 44, 0.06);
+}
+
+.navigation .manual-toc .indent-h1 a {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(50, 50, 50);
+}
+
+.manual-root .navigation .manual-toc li:not(.indent-h1) {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.search-input {
+  border-color: #8c8c8c;
+  font-family: adobe-clean,Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  padding-left: 24px;
+}
+
+.search-input:focus {
+  border-color: #c0c0c0;
+}
+
+.search-box {
+  top: 8px;
+  right: 10px;
+}
+
+.search-box img {
+  display: none;
+}
+
+.search-box.active .search-input-edge {
+  display: none;
+}
+
+.search-icon {
+  position: absolute;
+  top: -3px;
+  width: 16px;
+  height: 32px;
+  color: rgb(112, 112, 112);
+  fill: currentColor;
+  pointer-events: none;
+}
+
+.search-result {
+  height: inherit;
+  max-height: 600px;
+  border: 1px solid rgb(225, 225, 225);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  right: 8px;
+}
+
+.search-result li {
+  font-size: 14px;
+  padding: 0;
+  margin: 4px 0;
+}
+
+.search-result li a {
+  color: rgb(75, 75, 75);
+  padding: 5px 12px;
+  box-sizing: border-box;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.search-result li a span:nth-child(2) {
+  display: none;
+}
+
+.search-result li.selected {
+  background-color: rgb(245, 245, 245);
+}
+
+.search-box.active .search-input {
+  transition: none;
+}
+
+.search-box img {
+  width: 18px;
+  vertical-align: baseline;
+}
+
+.search-result li.search-separator {
+  color: rgb(110, 110, 110);
+  background: transparent;
+  font-size: 11px;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 12px;
+}
+
+.kind-enum {
+  color: royalblue;
+  background: lightblue;
+}
+
+.kind-event {
+  color: orange;
+  background: cornsilk;
+}
+
+.example-caption,
+pre.prettyprint, pre > code {
+  background-color: transparent;
+}
+
+pre.prettyprint > code,
+.import-path pre.prettyprint code {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+  padding: 8px;
+  margin-left: 0;
+  overflow-x: auto;
+}
+
+.import-path {
+  margin-bottom: 8px;
+}
+
+.identifier-dir-tree-header,
+table.summary thead,
+table.files-summary thead,
+table.params thead,
+table thead {
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 12px;
+  color: rgb(110, 110, 110);
+  background-color: transparent;
+}
+
+table.summary td,
+table.files-summary td,
+table.params td,
+table td {
+  padding: 8px;
+}
+
+table.summary td p {
+  line-height: 1.3;
+}
+
+code[data-ice="importPathCode"]:empty {
+  display: none;
+}
+
+.expression-extends .prettyprint {
+  padding: 0;
+}
+
+[data-ice="exampleDocs"] h4,
+[data-ice="mixinExtends"] {
+  display: none;
+}
+
+.nav-toggle-header {
+  display: none;
+  height: 48px;
+  box-sizing: border-box;
+  align-items: center;
+  padding: 0 16px;
+  justify-content: flex-end;
+  background-color: rgb(250, 250, 250);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  border-bottom: 1px solid rgb(234, 234, 234);
+}
+
+.nav-toggle-header .toggle-icon {
+  height: 22px;
+  width: 22px !important;
+  fill: currentColor;
+  color: rgb(110, 110, 110);
+  padding: 16px;
+  left: 0;
+  position: absolute;
+  cursor: pointer;
+}
+
+.nav-toggle-header .adobe-icon {
+  height: 32px;
+  width: 36px !important;
+  fill: currentColor;
+  color: rgb(225, 37, 27);
+}
+
+.nav-toggle-header h2 {
+  font-size: 20px;
+  color: rgb(44, 44, 44);
+  padding-left: 16px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.nav-toggle-header a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nav-toggle-overlay {
+  transition: opacity 160ms ease-in;
+  background-color: rgba(0, 0, 0, .4);
+  pointer-events: none;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+}
+
+@media screen and (max-width: 960px) {
+  .layout-container > header {
+    left: 0;
+    top: 48px;
+  }
+
+  .footer {
+    margin-left: 40px;
+  }
+
+  .content {
+    margin-left: 0;
+    margin-top: 98px;
+  }
+
+  .search-box {
+    display: none;
+  }
+
+  .navigation {
+    top: 48px;
+  }
+
+  .nav-toggle-header {
+    display: flex;
+  }
+
+  .nav-toggle-overlay.is-open {
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+  .navigation > a:first-child {
+    display: none !important;
+  }
+
+  .navigation {
+    transform: translateX(-100%);
+  }
+
+  .navigation.is-open {
+    transform: translateX(0);
+  }
+}

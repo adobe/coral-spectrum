@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.PanelStack</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+
+    <style>
+    section {
+      padding: 15px;
+    }
+    </style>
+  </head>
+
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Panel Stack</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Panel stacks are used to group fields together.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <coral-panelstack id="panel-well">
+          <coral-panel selected class="coral-Well">Panel 0: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+          <coral-panel selected class="coral-Well">Panel 1: Lorem ipsum dolor sit amet.</coral-panel>
+          <coral-panel class="coral-Well"> Panel 2: Sed eget eros sit amet nulla ultricies.</coral-panel>
+          <coral-panel class="coral-Well">
+            Panel 3: Fusce nec ante non nibh mollis mollis mollis vitae dui. Vivamus tristique nunc lacus, a placerat orci dapibus vel. Sed eget eros sit amet nulla ultricies scelerisque.
+          </coral-panel>
+          <coral-panel class="coral-Well">Panel 4: Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+        </coral-panelstack>
+
+        <a href="#" class="coral-Link cycle" data-target="panel-well">Next</a>
+
+        <script>
+          window.addEventListener('load', function() {
+            Coral.events.on('click', '.cycle', function(event) {
+              event.preventDefault();
+
+              var panel = document.getElementById(this.dataset.target);
+              var items = panel.items.getAll();
+              var selectedItem = panel.selectedItem;
+
+              var next = selectedItem === items.slice(-1)[0] ? items[0] : items[items.indexOf(selectedItem) + 1];
+
+              next.setAttribute('selected', '');
+            });
+          });
+        </script>
+      </div>
+    </main>
+  </body>
+</html>

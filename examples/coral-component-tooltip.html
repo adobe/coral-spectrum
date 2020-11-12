@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.Tooltip</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Tooltip</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Tooltips allow users to get contextual help or information about specific components when hovering or focusing on them.
+      </p>
+
+      <div class="markup">
+        <style>
+          .grid {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+          }
+
+          .grid-center {
+            width: 10rem;
+            height: 10rem;
+          }
+
+          .box {
+            width: 10rem;
+            height: 10rem;
+            border: 1px dashed #333;
+            background: rgba(255, 255, 255, .5);
+          }
+        </style>
+
+        <table class="grid">
+          <tr>
+            <td><button class="box" id="target_1">Target 1</button></td>
+            <td></td>
+            <td><button class="box" id="target_2">Target 2</button></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="grid-center"><button class="box" id="target_3">Target 3</button></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><button class="box" id="target_4">Target 4</button></td>
+            <td></td>
+            <td><button class="box" id="target_5">Target 5</button></td>
+          </tr>
+        </table>
+
+        <section style="margin-top:15px">
+          <a href="#" class="coral-Link" onclick="toggleVisibility();">Toggle (t)</a> |
+          <a href="#" class="coral-Link" onclick="cycleTargets();">Cycle target (a)</a> |
+          <a href="#" class="coral-Link" onclick="cyclePointFrom();">Cycle placement (f)</a> |
+          <a href="#" class="coral-Link" onclick="cycleVariant();">Cycle variant (v)</a>
+        </section>
+
+        <coral-tooltip id="tooltip" target="#target_1">
+          This is typical tooltip content.
+          There may be multiple lines and various items in the content, but line breaks are discouraged.
+        </coral-tooltip>
+
+        <script>
+          window.addEventListener('load', function() {
+            var target = [
+              '#target_1',
+              '#target_2',
+              '#target_3',
+              '#target_4',
+              '#target_5'
+            ];
+            target.curIndex = 0;
+
+            var placement = [
+              'right',
+              'bottom',
+              'left',
+              'top'
+            ];
+            placement.curIndex = 0;
+
+            var variant = [
+              'info',
+              'error',
+              'warning',
+              'success',
+              'inspect'
+            ];
+            variant.curIndex = 0;
+
+            function updateAriaDescribedby() {
+              target.forEach(function(selector) {
+                var targetElement = document.querySelector(selector);
+                if (selector === tooltip.target) {
+                  targetElement.setAttribute('aria-describedby', tooltip.id);
+                }
+                else {
+                  targetElement.removeAttribute('aria-describedby');
+                }
+              });
+            }
+
+            var tooltip = document.getElementById('tooltip');
+            updateAriaDescribedby();
+            tooltip.show();
+
+            window.cycleTargets = function() {
+              tooltip.target = target[++target.curIndex % target.length];
+              console.log('target changed to', tooltip.target);
+              updateAriaDescribedby();
+            };
+
+            window.cyclePointFrom = function() {
+              tooltip.placement = placement[++placement.curIndex % placement.length];
+              console.log('placement changed to', tooltip.placement);
+            };
+
+            window.cycleVariant = function() {
+              tooltip.variant = variant[++variant.curIndex % variant.length];
+              console.log('variant changed to', tooltip.variant);
+            };
+
+            window.toggleVisibility = function() {
+              tooltip.open = !tooltip.open;
+            };
+
+            Coral.keys.on('f', cyclePointFrom);
+            Coral.keys.on('a', cycleTargets);
+            Coral.keys.on('t', toggleVisibility);
+            Coral.keys.on('v', cycleVariant);
+          });
+        </script>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral CSS FormGroup</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Form Group</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Form groups provide structure and spacing for form fields.
+      </p>
+
+      <h3 class="coral-Heading--S">Labels above</h3>
+      <div class="markup">
+        <form class="coral-FormGroup coral-FormGroup--labelsAbove">
+          <div class="coral-FormGroup-item">
+            <label for="fieldLabelExample-lifestory" class="coral-FormGroup-itemLabel">Company Title</label>
+            <div class="coral-FormGroup-itemField">
+              <textarea id="fieldLabelExample-lifestory" placeholder="Enter your life story" name="field" is="coral-textarea"></textarea>
+            </div>
+          </div>
+          <div class="coral-FormGroup-item">
+            <label class="coral-FormGroup-itemLabel" for="fieldLabelExample-emailaddress">Email Address</label>
+            <div class="coral-FormGroup-itemField">
+              <input is="coral-textfield" aria-invalid="false" type="text" placeholder="Enter your e-mail address" id="fieldLabelExample-emailaddress">
+            </div>
+          </div>
+          <div class="coral-FormGroup-item">
+            <label class="coral-FormGroup-itemLabel" id="fieldLabelExample-country">Country</label>
+            <div class="coral-FormGroup-itemField">
+              <coral-select placeholder="Select a Country" labelledby="fieldLabelExample-country">
+                <coral-select-item>France</coral-select-item>
+                <coral-select-item>Germany</coral-select-item>
+                <coral-select-item>Switzerland</coral-select-item>
+                <coral-select-item>Italy</coral-select-item>
+              </coral-select>
+            </div>
+          </div>
+
+          <div class="coral-FormGroup-item">
+            <label class="coral-FormGroup-itemLabel">Interests</label>
+            <div class="coral-FormGroup-itemField">
+              <coral-radiogroup orientation="vertical" aria-label="Animals2">
+                <coral-radio name="animals2">Kittens</coral-radio>
+                <coral-radio name="animals2">Dogs</coral-radio>
+              </coral-radiogroup>
+
+              <coral-checkboxgroup orientation="vertical" aria-label="Checkboxes">
+                <coral-checkbox>Checkbox</coral-checkbox>
+                <coral-checkbox checked>Checkbox</coral-checkbox>
+              </coral-checkboxgroup>
+            </div>
+          </div>
+
+          <div class="coral-FormGroup-item">
+            <label class="coral-FormGroup-itemLabel" id="fieldLabelExample-stepper">Age</label>
+            <div class="coral-FormGroup-itemField">
+              <coral-numberinput placeholder="Enter a number" labelledby="fieldLabelExample-stepper"></coral-numberinput>
+            </div>
+          </div>
+
+          <div class="coral-FormGroup-item">
+            <label class="coral-FormGroup-itemLabel" for="invalid-input">Invalid Field</label>
+            <div class="coral-FormGroup-itemField">
+              <input is="coral-textfield" class="coral-Form-field is-invalid" aria-invalid="true" invalid type="text" placeholder="Enter your e-mail address" id="invalid-input">
+            </div>
+            <label class="coral-Form-errorlabel">Error: Please fill out this field.</label>
+          </div>
+        </form>
+
+        <br>
+        <!-- Deprecated -->
+        <form class="coral-Form coral-Form--vertical" style="width:300px;">
+          <fieldset class="coral-Form-fieldset">
+            <legend class="coral-Form-fieldset-legend">Registration</legend>
+
+            <label class="coral-Form-fieldlabel" for="username-input">Username</label>
+            <input is="coral-textfield" class="coral-Form-field" id="username-input"/>
+            <div class="coral-Form-fieldwrapper">
+              <label class="coral-Form-fieldlabel" for="password-input">Password</label>
+              <button id="password-input-info" is="coral-button" type="button" variant="minimal" class="coral-Form-fieldinfo" icon="info" iconSize="XS" aria-label="At least 12 characters" style="height:12px;width:12px;border-radius:6px;border-width:0;padding:0;min-height:0;"></button>
+              <coral-tooltip target="_prev" variant="info" placement="right" offset="8">At least 12 characters</coral-tooltip>
+              <input is="coral-textfield" class="coral-Form-field" id="password-input" type="password" aria-describedby="password-input-info"/>
+            </div>
+            <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+              <coral-checkbox class="coral-Form-field">Remember me</coral-checkbox>
+            </div>
+            <div class="coral-Form-fieldwrapper">
+              <label class="coral-Form-fieldlabel" for="invalid-input-vertical">Invalid Field</label>
+              <input is="coral-textfield" class="coral-Form-field is-invalid" aria-invalid="true" invalid type="text" placeholder="Enter your e-mail address" id="invalid-input-vertical">
+              <label class="coral-Form-errorlabel">Error: Please fill out this field.</label>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+      <h3 class="coral-Heading--S">Labels left aligned</h3>
+      <div class="markup">
+        <form class="coral-FormGroup">
+          <div class="coral-FormGroup-item">
+            <label for="fieldLabelExample2-lifestory" class="coral-FormGroup-itemLabel coral-FieldLabel--left">Company Title</label>
+            <div class="coral-FormGroup-itemField">
+              <textarea id="fieldLabelExample2-lifestory" placeholder="Enter your life story" name="field" is="coral-textarea"></textarea>
+            </div>
+          </div>
+          <div class="coral-FormGroup-item">
+            <label class="coral-FormGroup-itemLabel coral-FieldLabel--left" for="fieldLabelExample2-emailaddress">Email Address</label>
+            <div class="coral-FormGroup-itemField">
+              <input is="coral-textfield" aria-invalid="false" type="text" placeholder="Enter your e-mail address" id="fieldLabelExample2-emailaddress">
+            </div>
+          </div>
+          <div class="coral-FormGroup-item">
+            <label class="coral-FormGroup-itemLabel coral-FieldLabel--left" id="fieldLabelExample2-country">Country</label>
+            <div class="coral-FormGroup-itemField">
+              <coral-select placeholder="Select a Country" labelledby="fieldLabelExample2-country">
+                <coral-select-item>France</coral-select-item>
+                <coral-select-item>Germany</coral-select-item>
+                <coral-select-item>Switzerland</coral-select-item>
+                <coral-select-item>Italy</coral-select-item>
+              </coral-select>
+            </div>
+          </div>
+
+          <div class="coral-FormGroup-item">
+            <label class="coral-FormGroup-itemLabel coral-FieldLabel--left">Interests</label>
+            <div class="coral-FormGroup-itemField">
+              <coral-radiogroup orientation="vertical" aria-label="Animals">
+                <coral-radio name="animals">Kittens</coral-radio>
+                <coral-radio name="animals">Dogs</coral-radio>
+              </coral-radiogroup>
+
+              <coral-checkboxgroup orientation="vertical" aria-label="Checkboxes">
+                <coral-checkbox>Checkbox</coral-checkbox>
+                <coral-checkbox checked>Checkbox</coral-checkbox>
+              </coral-checkboxgroup>
+            </div>
+          </div>
+
+          <div class="coral-FormGroup-item">
+            <label class="coral-FormGroup-itemLabel coral-FieldLabel--left" id="fieldLabelExample2-stepper">Age</label>
+            <div class="coral-FormGroup-itemField">
+              <coral-numberinput placeholder="Enter a number" labelledby="fieldLabelExample2-stepper"></coral-numberinput>
+            </div>
+          </div>
+        </form>
+
+        <br>
+        <!-- Deprecated -->
+        <form class="coral-Form coral-Form--aligned">
+          <fieldset class="coral-Form-fieldset">
+            <legend class="coral-Form-fieldset-legend">Registration</legend>
+
+            <label class="coral-Form-fieldlabel" for="username-input-aligned">Username</label>
+            <input is="coral-textfield" class="coral-Form-field" id="username-input-aligned"/>
+            <div class="coral-Form-fieldwrapper">
+              <label class="coral-Form-fieldlabel" for="password-input-aligned">Password</label>
+              <input is="coral-textfield" class="coral-Form-field" id="password-input-aligned" type="password" aria-describedby="password-input-aligned-info"/>
+              <button id="password-input-aligned-info" is="coral-button" type="button" variant="minimal" class="coral-Form-fieldinfo" icon="info" iconSize="XS" aria-label="At least 12 characters" style="height:12px;width:12px;border-radius:6px;border-width:0;padding:0;min-height:0;"></button>
+              <coral-tooltip target="_prev" variant="info" placement="right" offset="8">At least 12 characters</coral-tooltip>
+            </div>
+            <div class="coral-Form-fieldwrapper">
+              <label class="coral-Form-fieldlabel" for="invalid-input-aligned">Invalid Field</label>
+              <input is="coral-textfield" class="coral-Form-field is-invalid" aria-invalid="true" invalid type="text" placeholder="Enter your e-mail address" id="invalid-input-aligned">
+              <label class="coral-Form-errorlabel">Error: Please fill out this field.</label>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

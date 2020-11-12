@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.ColumnView</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+
+    <!-- We use jQuery for remote AJAX requests and parsing HTML response -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  </head>
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Column View</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Column views are used to display and allow users to browse and select items in a dynamic tree structure (e.g. a filesystem or multi-level navigation).
+      </p>
+
+      <div class="markup">
+
+        <style type="text/css">
+          coral-columnview-column {
+            max-height: 400px;
+          }
+
+          #log {
+            height: 200px;
+            overflow-y: scroll;
+            padding: 10px;
+            margin: 15px;
+          }
+        </style>
+
+        <script type="text/html" id="content.8.html">
+          <coral-columnview-column data-src="content.10.html">
+            <coral-columnview-column-content>
+              <coral-columnview-item variant="drilldown" data-src="content/en.html" icon="folder">
+                <coral-columnview-item-content>Extra Item (lazy loaded)</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item variant="drilldown" data-src="content/en.html" icon="folder">
+                <coral-columnview-item-content>Second extra item (lazy loaded)</coral-columnview-item-content>
+              </coral-columnview-item>
+            </coral-columnview-column-content>
+          </coral-columnview-column>
+        </script>
+
+        <script type="text/html" id="content.10.html">
+          <coral-columnview-column>
+            <coral-columnview-column-content>
+              <coral-columnview-item variant="drilldown" data-src="content/en.html" icon="folder">
+                <coral-columnview-item-content>Third extra item (lazy loaded)</coral-columnview-item-content>
+              </coral-columnview-item>
+            </coral-columnview-column-content>
+          </coral-columnview-column>
+        </script>
+
+        <script type="text/html" id="content.html">
+          <coral-columnview-column data-src="content.8.html">
+            <coral-columnview-column-content>
+              <coral-columnview-item variant="drilldown" data-src="content/en.html" icon="folder">
+                <coral-columnview-item-content>English</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item lang="fr" variant="drilldown" data-src="content/fr.html" icon="folder">
+                <coral-columnview-item-content>Français</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item variant="drilldown" data-src="content/levels.html" icon="folder">
+                <coral-columnview-item-content>Infinite levels to test Scrolling</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item data-src="file.icon.html" icon="document">
+                <coral-columnview-item-content>Document</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item data-src="small-image.html">
+                <coral-columnview-item-thumbnail>
+                  <img alt="" src="//placeimg.com/100/100/any">
+                </coral-columnview-item-thumbnail>
+                <coral-columnview-item-content>Small Image</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item data-src="huge-image.html">
+                <coral-columnview-item-thumbnail>
+                  <img alt="" src="//placeimg.com/400/600/any">
+                </coral-columnview-item-thumbnail>
+                <coral-columnview-item-content>Huge Image with a really really long name</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item variant="drilldown" data-src="content/fr.html" icon="folder">
+                <coral-columnview-item-content>Wrapping Long Folder Name</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item data-src="file1.html" icon="document">
+                <coral-columnview-item-content>Wrappling and Overflowing Very Very Very Very Lond Document Name</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item data-src="file2.html" icon="document">
+                <coral-columnview-item-content>OverflowingLongDocumentNameWithoutSpaces</coral-columnview-item-content>
+              </coral-columnview-item>
+            </coral-columnview-column-content>
+          </coral-columnview-column>
+        </script>
+
+        <script type="text/html" id="file.icon.html">
+          <coral-columnview-preview lang="en">
+            <coral-columnview-preview-content>
+              <coral-columnview-preview-asset>
+                <coral-icon icon="document" size="L"></coral-icon>
+              </coral-columnview-preview-asset>
+              <coral-columnview-preview-label>Name</coral-columnview-preview-label>
+              <coral-columnview-preview-value>document.txt</coral-columnview-preview-value>
+              <coral-columnview-preview-label>Title</coral-columnview-preview-label>
+              <coral-columnview-preview-value>The Document</coral-columnview-preview-value>
+              <coral-columnview-preview-label>File Size</coral-columnview-preview-label>
+              <coral-columnview-preview-value>5MB</coral-columnview-preview-value>
+              <coral-columnview-preview-label>Modified</coral-columnview-preview-label>
+              <coral-columnview-preview-value>2 hours ago</coral-columnview-preview-value>
+              <coral-columnview-preview-label>Type</coral-columnview-preview-label>
+              <coral-columnview-preview-value>application/vnd.oasis.opendocument.text-web</coral-columnview-preview-value>
+              <coral-columnview-preview-separator></coral-columnview-preview-separator>
+              <coral-columnview-preview-label>Publish Status</coral-columnview-preview-label>
+              <coral-columnview-preview-value>
+                <coral-icon icon="checkmark" size="XS"></coral-icon> Published
+              </coral-columnview-preview-value>
+              <coral-columnview-preview-separator></coral-columnview-preview-separator>
+              <coral-columnview-preview-label>References</coral-columnview-preview-label>
+              <coral-columnview-preview-value>
+                <coral-icon icon="link" size="XS"></coral-icon> 2
+              </coral-columnview-preview-value>
+            </coral-columnview-preview-content>
+          </coral-columnview-preview>
+        </script>
+
+        <script type="text/html" id="file1.html">
+          <coral-columnview-preview lang="en">
+            <coral-columnview-preview-content>
+              <coral-columnview-preview-asset>
+                <img alt="" src="//placeimg.com/1000/1000/any">
+              </coral-columnview-preview-asset>
+              <coral-columnview-preview-label>This is a really really really long name</coral-columnview-preview-label>
+              <coral-columnview-preview-value>document.txt</coral-columnview-preview-value>
+              <coral-columnview-preview-label>Title</coral-columnview-preview-label>
+              <coral-columnview-preview-value>The Document</coral-columnview-preview-value>
+              <coral-columnview-preview-label>File Size</coral-columnview-preview-label>
+              <coral-columnview-preview-value>5MB</coral-columnview-preview-value>
+              <coral-columnview-preview-label>Modified</coral-columnview-preview-label>
+              <coral-columnview-preview-value>2 hours ago</coral-columnview-preview-value>
+              <coral-columnview-preview-label>Type</coral-columnview-preview-label>
+              <coral-columnview-preview-value>application/vnd.oasis.opendocument.text-web</coral-columnview-preview-value>
+              <coral-columnview-preview-separator></coral-columnview-preview-separator>
+              <coral-columnview-preview-label>Publish Status</coral-columnview-preview-label>
+              <coral-columnview-preview-value>
+                <coral-icon icon="checkmark" size="XS"></coral-icon> Published
+              </coral-columnview-preview-value>
+              <coral-columnview-preview-separator></coral-columnview-preview-separator>
+              <coral-columnview-preview-label>References</coral-columnview-preview-label>
+              <coral-columnview-preview-value>
+                <coral-icon icon="link" size="XS"></coral-icon> 2
+              </coral-columnview-preview-value>
+            </coral-columnview-preview-content>
+          </coral-columnview-preview>
+        </script>
+
+        <script type="text/html" id="file2.html">
+          <coral-columnview-preview lang="en">
+            <coral-columnview-preview-content>
+              <coral-columnview-preview-asset>
+                <img alt="" src="//placeimg.com/640/480/any">
+              </coral-columnview-preview-asset>
+              <coral-columnview-preview-label>Title</coral-columnview-preview-label>
+              <coral-columnview-preview-value>File2</coral-columnview-preview-value>
+              <coral-columnview-preview-label>File Size</coral-columnview-preview-label>
+              <coral-columnview-preview-value>10MB</coral-columnview-preview-value>
+              <coral-columnview-preview-label>Modified</coral-columnview-preview-label>
+              <coral-columnview-preview-value>30 minutes ago</coral-columnview-preview-value>
+            </coral-columnview-preview-content>
+          </coral-columnview-preview>
+        </script>
+
+        <script type="text/html" id="huge-image.html">
+          <coral-columnview-preview lang="en">
+            <coral-columnview-preview-asset>
+              <img alt="" src="//placeimg.com/1000/1000/any">
+            </coral-columnview-preview-asset>
+            <coral-columnview-preview-label>Name</coral-columnview-preview-label>
+            <coral-columnview-preview-value>Huge Image</coral-columnview-preview-value>
+            <coral-columnview-preview-label>Title</coral-columnview-preview-label>
+            <coral-columnview-preview-value>Huge Image with a really really long title</coral-columnview-preview-value>
+            <coral-columnview-preview-label>File Size</coral-columnview-preview-label>
+            <coral-columnview-preview-value>5MB</coral-columnview-preview-value>
+            <coral-columnview-preview-label>Modified</coral-columnview-preview-label>
+            <coral-columnview-preview-value>2 hours ago</coral-columnview-preview-value>
+            <coral-columnview-preview-label>Type</coral-columnview-preview-label>
+            <coral-columnview-preview-value>image/jpeg</coral-columnview-preview-value>
+          </coral-columnview-preview>
+        </script>
+
+        <script type="text/html" id="small-image.html">
+          <coral-columnview-preview lang="en">
+            <coral-columnview-preview-asset>
+              <img alt="" src="//placeimg.com/60/60/any">
+            </coral-columnview-preview-asset>
+            <coral-columnview-preview-label>Name</coral-columnview-preview-label>
+            <coral-columnview-preview-value>small_image.jpeg</coral-columnview-preview-value>
+            <coral-columnview-preview-label>Title</coral-columnview-preview-label>
+            <coral-columnview-preview-value>Small Image</coral-columnview-preview-value>
+            <coral-columnview-preview-separator></coral-columnview-preview-separator>
+            <coral-columnview-preview-label>File Size</coral-columnview-preview-label>
+            <coral-columnview-preview-value>5MB</coral-columnview-preview-value>
+            <coral-columnview-preview-label>Modified</coral-columnview-preview-label>
+            <coral-columnview-preview-value>2 hours ago</coral-columnview-preview-value>
+            <coral-columnview-preview-label>Type</coral-columnview-preview-label>
+            <coral-columnview-preview-value>image/jpeg</coral-columnview-preview-value>
+          </coral-columnview-preview>
+        </script>
+
+        <script type="text/html" id="content/en/products.html">
+          <coral-columnview-column lang="en">
+            <coral-columnview-column-content>
+              <coral-columnview-item data-src="file1.html" icon="document">
+                <coral-columnview-item-content>Product 1</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item data-src="file2.html" icon="document">
+                <coral-columnview-item-content>Product 2</coral-columnview-item-content>
+              </coral-columnview-item>
+            </coral-columnview-column-content>
+          </coral-columnview-column>
+        </script>
+
+        <script type="text/html" id="content/en/services.html">
+          <coral-columnview-column lang="en">
+            <coral-columnview-column-content>
+              <coral-columnview-item data-src="file1.html" icon="document">
+                <coral-columnview-item-content>Service 1</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item data-src="file2.html" icon="document">
+                <coral-columnview-item-content>Service 2</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item data-src="file1.html" icon="document">
+                <coral-columnview-item-content>Service 3</coral-columnview-item-content>
+              </coral-columnview-item>
+            </coral-columnview-column-content>
+          </coral-columnview-column>
+        </script>
+
+        <script type="text/html" id="content/fr/products.html">
+          <coral-columnview-column lang="fr">
+            <coral-columnview-column-content>
+              <coral-columnview-item data-src="file1.html" icon="document">
+                <coral-columnview-item-content>Produits 1</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item data-src="file2.html" icon="document">
+                <coral-columnview-item-content>Produits 2</coral-columnview-item-content>
+              </coral-columnview-item>
+            </coral-columnview-column-content>
+          </coral-columnview-column>
+        </script>
+
+        <script type="text/html" id="content/fr/services.html">
+          <coral-columnview-column lang="fr">
+            <coral-columnview-column-content>
+              <coral-columnview-item data-src="file1.html" icon="document">
+                <coral-columnview-item-content>Service 1</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item data-src="file2.html" icon="document">
+                <coral-columnview-item-content>Service 2</coral-columnview-item-content>
+              </coral-columnview-item>
+            </coral-columnview-column-content>
+          </coral-columnview-column>
+        </script>
+
+        <script type="text/html" id="content/en.html">
+          <coral-columnview-column lang="en">
+            <coral-columnview-column-content>
+              <coral-columnview-item variant="drilldown" data-src="content/en/products.html" icon="folder">
+                <coral-columnview-item-content>Products</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item variant="drilldown" data-src="content/en/services.html" icon="folder">
+                <coral-columnview-item-content>Services</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item data-src="file1.html" icon="document">
+                <coral-columnview-item-content>Document</coral-columnview-item-content>
+              </coral-columnview-item>
+            </coral-columnview-column-content>
+          </coral-columnview-column>
+        </script>
+
+        <script type="text/html" id="content/fr.html">
+          <coral-columnview-column lang="fr">
+            <coral-columnview-column-content>
+              <coral-columnview-item variant="drilldown" data-src="content/fr/products.html" icon="folder">
+                <coral-columnview-item-content>Produits</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item variant="drilldown" data-src="content/fr/services.html" icon="folder">
+                <coral-columnview-item-content>Services</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item data-src="file1.html" icon="document">
+                <coral-columnview-item-content>Document</coral-columnview-item-content>
+              </coral-columnview-item>
+            </coral-columnview-column-content>
+          </coral-columnview-column>
+        </script>
+
+        <script type="text/html" id="content/levels.html">
+          <coral-columnview-column lang="en">
+            <coral-columnview-column-content>
+              <coral-columnview-item variant="drilldown" data-src="content.html" icon="folder">
+                <coral-columnview-item-content>Infinite Levels</coral-columnview-item-content>
+              </coral-columnview-item>
+              <coral-columnview-item variant="drilldown" data-src="content.html" icon="folder">
+                <coral-columnview-item-content>Infinite Levels</coral-columnview-item-content>
+              </coral-columnview-item>
+            </coral-columnview-column-content>
+          </coral-columnview-column>
+        </script>
+
+        <div style="margin-bottom:15px;">
+          <a class="coral-Link" href="#" id="togglelogs">Toggle logs</a>
+          <label style="padding-left:10px;">Selection mode</label>
+          <span id="selectionmode">
+            <a class="coral-Link" href="#">none</a> |
+            <a class="coral-Link" href="#">single</a> |
+            <a class="coral-Link" href="#">multiple</a>
+          </span>
+          <span style="padding-left:10px;">Selected: <b id="selected_count">0</b></span>
+          <span style="padding-left:10px;">Active item: <b id="active_item"></b> </span>
+        </div>
+
+        <coral-columnview id="columnview" selectionmode="multiple"><coral-columnview-column data-src="content.html" id="cv-multiple-0"></coral-columnview-column></coral-columnview>
+
+        <ul id="log" class="coral-Well" hidden></ul>
+
+        <script type="text/javascript">
+          const log = document.getElementById('log');
+          const columnView = document.getElementById('columnview');
+          const selectionModeSelector = document.getElementById('selectionmode');
+          const logsToggle = document.getElementById('togglelogs');
+
+          selectionModeSelector.addEventListener('click', function(event) {
+            columnView.setAttribute('selectionmode', event.target.textContent);
+          });
+
+          logsToggle.addEventListener('click', function() {
+            log.hidden = !log.hidden;
+          });
+
+          document.addEventListener('coral-columnview:loaditems', function(event) {
+            var item = event.detail.item;
+            var column = event.detail.column;
+            var url = item ? item.dataset.src : column.dataset.src || '';
+
+            const li = document.createElement('li');
+            li.innerHTML = '<b>load</b>: src: "' + url + '" start: ' + event.detail.start + ' column: ' + event.detail.column.id;
+            log.insertBefore(li, log.firstChild);
+          });
+
+          document.addEventListener('coral-columnview:change', function(event) {
+            var selection = '';
+            var oldSelection = '';
+
+            for (var i = 0; i < event.detail.selection.length; i++) {
+              selection += ' ' + event.detail.selection[i].textContent;
+            }
+
+            for (var j = 0; j < event.detail.oldSelection.length; j++) {
+              oldSelection += ' ' + event.detail.oldSelection[j].textContent;
+            }
+
+            const li = document.createElement('li');
+            li.innerHTML = '<b>select</b>: new: ' + selection + ' old: ' + oldSelection;
+            log.insertBefore(li, log.firstChild);
+
+            document.getElementById('selected_count').innerHTML = event.target.selectedItems.length;
+          });
+
+          document.addEventListener('coral-columnview:navigate', function(event) {
+            if (event.detail.activeItem) {
+              const li = document.createElement('li');
+              li.innerHTML = '<b>navigate</b>: new: "' + (event.detail.activeItem ? event.detail.activeItem.textContent : '') + '" old: "' + (event.detail.oldActiveItem && event.detail.oldActiveItem.textContent);
+              log.insertBefore(li, log.firstChild);
+            }
+          });
+
+          document.addEventListener('coral-columnview:activeitemchange', function(event) {
+            if (event.detail.activeItem) {
+              const li = document.createElement('li');
+              li.innerHTML = '<b>active</b>: new: "' + (event.detail.activeItem ? event.detail.activeItem.content.textContent : '') + '" old: "' + (event.detail.oldActiveItem && event.detail.oldActiveItem.content.textContent);
+              log.insertBefore(li, log.firstChild);
+            }
+
+            document.getElementById('active_item').innerHTML = event.detail.activeItem ? event.detail.activeItem.content.textContent : '';
+          });
+
+          document.addEventListener('coral-columnview:loaditems', function(event) {
+            var cv = event.target;
+            var item = event.detail.item;
+            var column = event.detail.column;
+
+            // if item is set, it means we load the item content
+            var url = item ? item.dataset.src : column.dataset.src;
+
+            // there is no information on additional items
+            if (typeof url === 'undefined') {
+              return;
+            }
+
+            console.log('Loading: %s', url);
+
+            var $data = $(document.getElementById(url).innerHTML);
+
+            // if it is a preview column we add it directly
+            if ($data.is('coral-columnview-preview')) {
+              cv.setNextColumn($data[0], column);
+            }
+            else {
+              // otherwise we treat it as a normal column
+              var $contentWrapper = $data.find('coral-columnview-column-content').first();
+              var $columnWrapper = $contentWrapper.closest('coral-columnview-column');
+
+              if ($contentWrapper.length > 0) {
+                if (item) {
+                  // adds an unique id to be able to identify the column
+                  $data[0].id = new Date().getTime();
+                  // we add the new column and scroll to it
+                  cv.setNextColumn($data[0], column);
+                }
+                // we load data in the current column
+                else {
+                  // update the source of the current column (so that lazyloading does work)
+                  var nextSrcToLoad = $($columnWrapper).attr('data-src');
+                  if (!nextSrcToLoad) {
+                    column.removeAttribute('data-src');
+                  }
+                  else {
+                    column.setAttribute('data-src', nextSrcToLoad);
+                  }
+
+                  // update the content
+                  $(column.content).append($contentWrapper.html());
+                }
+              }
+            }
+          });
+        </script>
+      </div>
+    </main>
+  </body>
+</html>

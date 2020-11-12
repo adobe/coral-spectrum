@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.Icon</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.dataset.coralIconsExternal = 'off';
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Icon</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Icons ship with a set of SVGs.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <coral-icon icon="add" title="Add"></coral-icon>
+      </div>
+
+      <h2 class="coral--Heading--S">No Icon</h2>
+      <div class="markup">
+        <coral-icon title="Add"></coral-icon>
+        <coral-icon icon="" title="Add"></coral-icon>
+      </div>
+
+      <h2 class="coral--Heading--S">Sizing</h2>
+      <div class="markup">
+        <coral-icon icon="add" title="Add" size="XXS"></coral-icon>
+        <coral-icon icon="add" title="Add" size="XS"></coral-icon>
+        <coral-icon icon="add" title="Add" size="S"></coral-icon>
+        <coral-icon icon="add" title="Add" size="M"></coral-icon>
+        <coral-icon icon="add" title="Add" size="L"></coral-icon>
+        <coral-icon icon="add" title="Add" size="XL"></coral-icon>
+        <coral-icon icon="add" title="Add" size="XXL"></coral-icon>
+      </div>
+
+      <h2 class="coral--Heading--S">Color Icon</h2>
+      <div class="markup">
+        <style>
+          .red-icon {
+            color: red;
+          }
+        </style>
+
+        <coral-icon class="red-icon" icon="add" size="L" title="Add"></coral-icon>
+      </div>
+
+      <h2 class="coral--Heading--S">Icon ID support</h2>
+      <div class="markup">
+        <coral-icon size="L" icon="spectrum-icon-24-AdobeExperienceCloudColor" autoarialabel="on"></coral-icon>
+        <coral-icon size="L" icon="spectrum-icon-24-AdobeAdvertisingCloudColor_Light" autoarialabel="on"></coral-icon>
+        <coral-icon size="L" icon="spectrum-icon-24-AdobeAnalyticsColor_Light" autoarialabel="on"></coral-icon>
+        <coral-icon size="L" icon="spectrum-icon-24-AdobeAudienceManagerColor_Light" autoarialabel="on"></coral-icon>
+        <coral-icon size="L" icon="spectrum-icon-24-AdobeCampaignColor_Light" autoarialabel="on"></coral-icon>
+        <coral-icon size="L" icon="spectrum-icon-24-AdobeMediaOptimizerColor_Light" autoarialabel="on"></coral-icon>
+        <coral-icon size="L" icon="spectrum-icon-24-AdobePrimetimeColor_Light" autoarialabel="on"></coral-icon>
+        <coral-icon size="L" icon="spectrum-icon-24-AdobeSocialColor_Light" autoarialabel="on"></coral-icon>
+        <coral-icon size="L" icon="spectrum-icon-24-AdobeTargetColor_Light" autoarialabel="on"></coral-icon>
+        <coral-icon size="L" icon="spectrum-icon-24-GoogleColor_Light" autoarialabel="on"></coral-icon>
+        <coral-icon size="L" icon="spectrum-icon-24-FacebookColor_Light" autoarialabel="on"></coral-icon>
+        <coral-icon size="L" icon="spectrum-icon-24-FacebookCircleColor_Light" autoarialabel="on"></coral-icon>
+        <coral-icon size="L" icon="spectrum-icon-24-YouTubeColor_Light" autoarialabel="on"></coral-icon>
+        <coral-icon size="L" icon="spectrum-icon-24-YouTubeCircleColor_Light" autoarialabel="on"></coral-icon>
+        <coral-icon size="L" icon="spectrum-icon-18-ZoomIn" autoarialabel="on"></coral-icon>
+        <coral-icon size="L" icon="spectrum-css-icon-TripleGripper" autoarialabel="on"></coral-icon>
+      </div>
+
+      <h2 class="coral--Heading--S">Inline with text</h2>
+      <div class="markup">
+        <p>
+          This is a paragraph that contains an <coral-icon icon="add" alt="Add"></coral-icon> inline icon.
+        </p>
+      </div>
+
+      <h2 class="coral--Heading--S">With URL</h2>
+      <div class="markup">
+        <coral-icon icon="http://via.placeholder.com/150x150" size="XXS" alt="Smallest" title="XXS"></coral-icon>
+        <coral-icon icon="http://via.placeholder.com/150x150" size="XS" alt="Smaller" title="XS"></coral-icon>
+        <coral-icon icon="http://via.placeholder.com/150x150" size="S" alt="Small" title="S"></coral-icon>
+        <coral-icon icon="http://via.placeholder.com/150x150" size="M" alt="Medium" title="M"></coral-icon>
+        <coral-icon icon="http://via.placeholder.com/150x150" size="L" alt="Large" title="L"></coral-icon>
+        <coral-icon icon="http://via.placeholder.com/150x150" size="XL" alt="Larger" title="XL"></coral-icon>
+        <coral-icon icon="http://via.placeholder.com/150x150" size="XXL" alt="Largest" title="XXL"></coral-icon>
+      </div>
+
+      <h2 class="coral--Heading--S">With IMG</h2>
+      <div class="markup">
+        <coral-icon size="XXS" alt="Smallest" title="XXS">
+          <img src="http://via.placeholder.com/150x150" />
+        </coral-icon>
+        <coral-icon size="XS" alt="Smaller" title="XS">
+          <img src="http://via.placeholder.com/150x150" />
+        </coral-icon>
+        <coral-icon size="S" alt="Small" title="S">
+          <img src="http://via.placeholder.com/150x150" />
+        </coral-icon>
+        <coral-icon size="M" alt="Medium" title="M">
+          <img src="http://via.placeholder.com/150x150" />
+        </coral-icon>
+        <coral-icon size="L" alt="Large" title="L">
+          <img src="http://via.placeholder.com/150x150" />
+        </coral-icon>
+        <coral-icon size="XL" alt="Larger" title="XL">
+          <img src="http://via.placeholder.com/150x150" />
+        </coral-icon>
+        <coral-icon size="XXL" alt="Largest" title="XXL">
+          <img src="http://via.placeholder.com/150x150" />
+        </coral-icon>
+      </div>
+
+      <h2 class="coral--Heading--S">Custom aria-label</h2>
+      <div class="markup">
+        <coral-icon aria-label="Custom label" autoarialabel="off" icon="ChevronRight"></coral-icon>
+        <coral-icon aria-label="Custom label" icon="http://via.placeholder.com/150x150" alt="placeholder"></coral-icon>
+      </div>
+    </main>
+  </body>
+</html>

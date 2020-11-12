@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.Toast</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Toast</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Toasts display brief, temporary notifications. They are noticeable but do not disrupt the user experience and do not require an action to be taken.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <button is="coral-button" onclick="defaultToast.show()">Show toast</button>
+        <coral-toast id="defaultToast">Default toast</coral-toast>
+      </div>
+
+      <h2 class="coral--Heading--S">Variants and Placement</h2>
+      <div class="markup">
+        <button is="coral-button" onclick="infoToast.show()">Show Left Info toast</button>
+        <button is="coral-button" onclick="errorToast.show()">Show Centered Error toast</button>
+        <button is="coral-button" onclick="successToast.show()">Show Right Success toast</button>
+        <coral-toast id="infoToast" variant="info" placement="left">Info toast</coral-toast>
+        <coral-toast id="errorToast" variant="error">Error toast</coral-toast>
+        <coral-toast id="successToast" variant="success" placement="right">Success toast</coral-toast>
+      </div>
+
+      <h2 class="coral--Heading--S">With action</h2>
+      <div class="markup">
+        <button is="coral-button" onclick="actionToast.show()">Show Toast</button>
+        <coral-toast id="actionToast">
+          <coral-toast-content>Default toast</coral-toast-content>
+          <button is="coral-button" coral-toast-action>Action</button>
+        </coral-toast>
+
+        <script>
+          actionToast.addEventListener('click', function(event) {
+            if (event.target.closest('[coral-toast-action]')) {
+              alert('action clicked');
+              actionToast.hide();
+            }
+          })
+        </script>
+      </div>
+
+      <h2 class="coral--Heading--S">Customized auto-dismiss</h2>
+      <div class="markup">
+        <button is="coral-button" onclick="dismissToast1.show();dismissToast2.show();">Show toast</button>
+        <coral-toast id="dismissToast1" autodismiss="10000">
+          Dismissed after 10 seconds
+        </coral-toast>
+        <coral-toast id="dismissToast2" autodismiss="0">
+          Toast is not dismissed automatically
+        </coral-toast>
+      </div>
+
+      <h2 class="coral--Heading--S">Created with JS</h2>
+      <div class="markup">
+        <button is="coral-button" id="JSToast">Show toast</button>
+        <script>
+          JSToast.addEventListener('click', function() {
+            const toast = new Coral.Toast().set({
+              content: {
+                textContent: 'A new version of Lightroom Classic is now available'
+              }
+            });
+            toast.style.width = '318px';
+            toast.show();
+          });
+        </script>
+      </div>
+
+      <h2 class="coral--Heading--S">Toast priority queue</h2>
+      <div class="markup">
+        <button is="coral-button" id="queueToast">Show toast queue</button>
+        <script>
+          queueToast.addEventListener('click', function() {
+            const toasts = document.getElementsByClassName('multiple');
+            for (var i = 0; i < toasts.length; i++) {
+              toasts[i].show();
+            }
+          });
+        </script>
+
+        <coral-toast variant="error" class="multiple">
+          Priority 2
+        </coral-toast>
+
+        <coral-toast variant="success" placement="right" class="multiple">
+          Priority 3a
+          <button is="coral-button" coral-toast-action>Action</button>
+        </coral-toast>
+
+        <coral-toast variant="info" placement="left" class="multiple">
+          Priority 7
+        </coral-toast>
+
+        <coral-toast placement="right" class="multiple">
+          Priority 5
+          <button is="coral-button" coral-toast-action>Action</button>
+        </coral-toast>
+
+        <coral-toast variant="success" class="multiple">
+          Priority 6
+        </coral-toast>
+
+        <coral-toast placement="right" class="multiple">
+          Priority 8
+        </coral-toast>
+
+        <coral-toast variant="error" placement="right" class="multiple">
+          Priority 1a
+          <button is="coral-button" coral-toast-action>Action</button>
+        </coral-toast>
+
+        <coral-toast variant="info" class="multiple">
+          Priority 4
+          <button is="coral-button" coral-toast-action>Action</button>
+        </coral-toast>
+
+        <coral-toast variant="success" placement="right" class="multiple">
+          Priority 3b
+          <button is="coral-button" coral-toast-action>Action</button>
+        </coral-toast>
+
+        <coral-toast variant="error" placement="right" class="multiple">
+          Priority 1b
+          <button is="coral-button" coral-toast-action>Action</button>
+        </coral-toast>
+
+        <coral-toast variant="success" placement="right" class="multiple">
+          Priority 3c
+          <button is="coral-button" coral-toast-action>Action</button>
+        </coral-toast>
+      </div>
+    </main>
+  </body>
+</html>

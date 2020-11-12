@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <title>Examples | Coral Spectrum</title>
+  <link rel="icon" type="image/x-icon" href="../documentation/manual/asset/favicon.ico">
+  <link rel="stylesheet" href="../css/coral.css">
+  <style>
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .example-List {
+      height: 100%;
+      width: 256px;
+      box-sizing: border-box;
+      padding-left: 24px;
+      overflow: scroll;
+      background-color: rgb(250, 250, 250);
+      transition: transform 160ms ease-in-out;
+      position: relative;
+      display: inline-block;
+      z-index: 10;
+    }
+
+    .example-List nav[is="coral-sidenav"] {
+      width: 208px;
+      margin-bottom: 16px;
+    }
+
+    .example-List a[is="coral-sidenav-item"] {
+      text-transform: capitalize;
+    }
+
+    .example-List coral-search {
+      margin-bottom: 24px;
+      float: left;
+      clear: both;
+      width: 208px;
+    }
+
+    .example-List coral-search input {
+      width: 100% !important;
+    }
+
+    .example-Preview {
+      width: calc(100% - 256px);
+      height: calc(100% - 40px);
+      position: absolute;
+      top: 40px;
+      right: 0;
+      border: 0;
+    }
+
+    .example-Header {
+      left: 256px;
+      width: calc(100% - 256px);
+      display: flex;
+      height: 40px;
+      line-height: 40px;
+      font-size: 16px;
+      padding: 0 10px;
+      margin: 0;
+      position: fixed;
+      z-index: 1;
+      background-color: white;
+      top: 0;
+    }
+
+    .example-Header > a {
+      color: #4b4b4b;
+      margin: 0 8px;
+      height: 40px;
+      text-decoration: none;
+    }
+
+    .example-Header > a:hover {
+      color: #2c2c2c;
+    }
+
+    .example-Header > a.is-active {
+      color: #2c2c2c;
+      border-bottom: solid 2px rgb(44, 44, 44);
+    }
+
+    .example-Logo {
+      display: flex;
+      align-items: center;
+      margin-top: 32px;
+      margin-bottom: 32px;
+      line-height: normal;
+      text-decoration: none;
+    }
+
+    .example-Logo svg {
+      height: 32px;
+      width: 36px !important;
+      fill: currentColor;
+      color: rgb(225, 37, 27);
+    }
+
+    .example-Logo h1 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 16px;
+      color: rgb(44, 44, 44);
+    }
+
+    .nav-toggle-header {
+      display: none;
+      height: 48px;
+      box-sizing: border-box;
+      align-items: center;
+      padding: 0 16px;
+      justify-content: flex-end;
+      background-color: rgb(250, 250, 250);
+      position: relative;
+      z-index: 10;
+      border-bottom: 1px solid rgb(234, 234, 234);
+    }
+
+    .nav-toggle-header .toggle-icon {
+      height: 36px;
+      width: 36px;
+      fill: currentColor;
+      color: rgb(110, 110, 110);
+      left: 4px;
+      position: absolute;
+      cursor: pointer;
+    }
+
+    .nav-toggle-header .adobe-icon {
+      height: 32px;
+      width: 36px !important;
+      fill: currentColor;
+      color: rgb(225, 37, 27);
+    }
+
+    .nav-toggle-header h1 {
+      font-size: 20px;
+      color: rgb(44, 44, 44);
+      padding-left: 16px;
+    }
+
+    .nav-toggle-header a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .nav-toggle-overlay {
+      transition: opacity 160ms ease-in;
+      background-color: rgba(0, 0, 0, .4);
+      pointer-events: none;
+      opacity: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 5;
+    }
+
+    @media screen and (max-width: 768px) {
+      .nav-toggle-header {
+        display: flex;
+      }
+
+      .nav-toggle-overlay.is-open {
+        pointer-events: auto;
+        opacity: 1;
+      }
+
+      .example-Logo {
+        display: none;
+      }
+
+      .example-Header {
+        top: 48px;
+        left: 0;
+        width: 100%;
+      }
+
+      .example-Preview {
+        top: 88px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 48px);
+      }
+
+      .example-List {
+        overflow: hidden;
+        transform: translateX(-100%);
+      }
+
+      .example-List.is-open {
+        overflow: auto;
+        transform: translateX(0);
+      }
+
+      .example-List > * {
+        transition: visibility 0ms linear 500ms;
+        visibility: hidden;
+
+      }
+
+      .example-List.is-open > * {
+        transition-delay: 0ms;
+        visibility: visible;
+
+      }
+
+      .example-List coral-search {
+        margin-top: 24px;
+      }
+    }
+  </style>
+  <script src="../js/coral.js" data-coral-icons="../resources/"></script>
+</head>
+<body class="coral--lightest">
+  <div class="nav-toggle-overlay" id="nav-toggle-overlay"></div>
+  <div class="nav-toggle-header" role="banner">
+    <a href="../documentation">
+      <svg class="adobe-icon" viewBox="0 0 30 26" focusable="false" aria-label="Adobe" role="img">
+        <polygon points="19,0 30,0 30,26"></polygon>
+        <polygon points="11.1,0 0,0 0,26"></polygon>
+        <polygon points="15,9.6 22.1,26 17.5,26 15.4,20.8 10.2,20.8"></polygon>
+      </svg>
+      <h1>Coral Spectrum</h1>
+    </a>
+    <button is="coral-button" variant="quietaction" icon="spectrum-css-icon-TripleGripper" id="nav-toggle-action" class="toggle-icon" aria-label="Show Navigation Menu"></button>
+  </div>
+
+  <div id="side-nav" class="example-List" role="navigation" aria-label="Navigation Menu">
+    <a class="example-Logo" href="../documentation">
+      <svg viewBox="0 0 30 26" focusable="false" aria-label="Adobe" role="img">
+        <polygon points="19,0 30,0 30,26"></polygon>
+        <polygon points="11.1,0 0,0 0,26"></polygon>
+        <polygon points="15,9.6 22.1,26 17.5,26 15.4,20.8 10.2,20.8"></polygon>
+      </svg>
+
+      <h1>Coral Spectrum</h1>
+    </a>
+
+    <label id="example-search-label" class="u-coral-screenReaderOnly">Search</label>
+    <coral-search id="example-search" placeholder="Search" role="search" labelledBy="example-search-label"></coral-search>
+
+    <nav is="coral-sidenav" id="example-list"></nav>
+  </div>
+  <nav class="example-Header">
+    <a href="../examples" target="_blank" class="is-active">Examples</a>
+    <a href="../playground" target="_blank">Playground</a>
+    <a href="../documentation/identifiers.html">Reference</a>
+    <a href="../documentation/source.html">Source</a>
+    <a href="https://github.com/adobe/coral-spectrum">
+      <img style="padding-top:10px;" width="20px" src="../documentation/image/github.png">
+    </a>
+  </nav>
+  <main id="example-main">
+    <iframe class="example-Preview" id="example-preview" title="Example Preview"></iframe>
+  </main>
+
+  <script>
+    (function(window, document) {
+      const sideNav = document.getElementById('side-nav');
+      const navToggleAction = document.getElementById('nav-toggle-action');
+      const navToggleOverlay = document.getElementById('nav-toggle-overlay');
+
+      function toggleSideNav() {
+        sideNav.classList.toggle('is-open', !sideNav.classList.contains('is-open'));
+        navToggleOverlay.classList.toggle('is-open', !navToggleOverlay.classList.contains('is-open'));
+        navToggleAction.setAttribute('aria-expanded', sideNav.classList.contains('is-open'));
+        navToggleAction.selected = sideNav.classList.contains('is-open');
+      }
+
+      navToggleAction.addEventListener('click', toggleSideNav);
+      navToggleOverlay.addEventListener('click', toggleSideNav);
+
+      const components = [
+        {'coral-css-heading': 'Heading'},
+        {'coral-css-body': 'Body'},
+        {'coral-css-detail': 'Detail'},
+        {'coral-css-code': 'Code'},
+        {'coral-css-link': 'Link'},
+        {'coral-css-divider': 'Divider'},
+        {'coral-css-well': 'Well'},
+        {'coral-css-decoratedtextfield': 'Decorated Text Field'},
+        {'coral-css-inputgroup': 'Input Group'},
+        {'coral-css-fieldlabel': 'Field Label'},
+        {'coral-css-formgroup': 'Form Group'},
+        {'coral-css-fixedcolumn': 'Fixed Column'},
+        {'coral-component-accordion': 'Accordion'},
+        {'coral-component-actionbar': 'Action Bar'},
+        {'coral-component-alert': 'Alert'},
+        {'coral-component-anchorbutton': 'Anchor Button'},
+        {'coral-component-autocomplete': 'Autocomplete'},
+        {'coral-component-banner': 'Banner'},
+        {'coral-component-button': 'Button'},
+        {'coral-component-buttongroup': 'Button Group'},
+        {'coral-component-calendar': 'Calendar'},
+        {'coral-component-card': 'Card'},
+        {'coral-component-charactercount': 'Character Count'},
+        {'coral-component-checkbox': 'Checkbox'},
+        {'coral-component-checkboxgroup': 'Checkbox Group'},
+        {'coral-component-clock': 'Clock'},
+        {'coral-component-coachmark': 'Coachmark'},
+        {'coral-component-colorinput': 'Color Input'},
+        {'coral-component-columnview': 'Column View'},
+        {'coral-component-cyclebutton': 'Cycle Button'},
+        {'coral-component-datepicker': 'Date Picker'},
+        {'coral-component-dialog': 'Dialog'},
+        {'coral-component-drawer': 'Drawer'},
+        {'coral-component-fileupload': 'File Upload'},
+        {'coral-component-icon': 'Icon'},
+        {'coral-component-list': 'List'},
+        {'coral-component-masonry': 'Masonry'},
+        {'coral-component-multifield': 'Multi Field'},
+        {'coral-component-numberinput': 'Number Input'},
+        {'coral-component-overlay': 'Overlay'},
+        {'coral-component-panelstack': 'Panel Stack'},
+        {'coral-component-popover': 'Popover'},
+        {'coral-component-progress': 'Progress'},
+        {'coral-component-quickactions': 'Quick Actions'},
+        {'coral-component-radio': 'Radio'},
+        {'coral-component-radiogroup': 'Radio Group'},
+        {'coral-component-search': 'Search'},
+        {'coral-component-select': 'Select'},
+        {'coral-component-sidenav': 'Side Nav'},
+        {'coral-component-shell': 'Shell'},
+        {'coral-component-slider': 'Slider'},
+        {'coral-component-splitbutton': 'Split Button'},
+        {'coral-component-status': 'Status'},
+        {'coral-component-steplist': 'Step List'},
+        {'coral-component-switch': 'Switch'},
+        {'coral-component-table': 'Table'},
+        {'coral-component-tablist': 'Tab List'},
+        {'coral-component-tabview': 'Tab View'},
+        {'coral-component-taglist': 'Tag List'},
+        {'coral-component-textarea': 'Text Area'},
+        {'coral-component-textfield': 'Text Field'},
+        {'coral-component-toast': 'Toast'},
+        {'coral-component-tooltip': 'Tooltip'},
+        {'coral-component-tree': 'Tree'},
+        {'coral-component-wait': 'Wait'},
+        {'coral-component-wizardview': 'Wizard View'},
+        {'coral-dragaction': 'Drag Action'}
+      ].sort((a, b) => Object.values(a)[0] < Object.values(b)[0] ? -1 : 1);
+
+      const list = document.getElementById('example-list');
+      const main = document.getElementById('example-main');
+      const preview = document.getElementById('example-preview');
+      const search = document.getElementById('example-search');
+
+      search.on('coral-search:input', function(event) {
+        const value = event.target.value.trim().toLowerCase();
+        list.items.getAll().forEach(function(item) {
+          item.hidden = !item.content.textContent.trim().toLowerCase().includes(value);
+        });
+      });
+
+      search.on('coral-search:clear', function() {
+        list.items.getAll().forEach(function(item) {
+          item.hidden = false;
+        });
+      });
+
+      components.forEach(function(component, i) {
+        const id = Object.keys(component)[0];
+        const name = id.split('-').pop();
+        const selected = location.hash ? location.hash.slice(1) === name : i === 0;
+        const item = list.items.add({
+          content: {
+            textContent: Object.values(component)[0]
+          },
+          selected: selected,
+          href: id + '.html'
+        });
+        item.dataset.name = name;
+        selected && item.setAttribute('aria-current', 'page');
+        item.on('click', function(event) {
+          event.preventDefault()
+        });
+      });
+
+      list.on('coral-sidenav:change', function(event) {
+        const XMLHttpRequest = new window.XMLHttpRequest();
+        XMLHttpRequest.onreadystatechange = function() {
+          if (XMLHttpRequest.readyState == 4 && XMLHttpRequest.status == 200) {
+            preview.srcdoc = this.responseText;
+            location.hash = event.detail.selection.dataset.name;
+
+            requestAnimationFrame(function() {
+              if (sideNav.classList.contains('is-open')) {
+                sideNav.classList.remove('is-open');
+                navToggleOverlay.classList.remove('is-open');
+                navToggleAction.setAttribute('aria-expanded', false);
+                navToggleAction.selected = false;
+                navToggleAction.focus();
+              }
+            });
+          }
+        };
+
+        // update aria-current to reflect current page.
+        let currentItem = event.currentTarget.querySelector('[aria-current]');
+        currentItem && currentItem.removeAttribute('aria-current');
+        event.detail.selection.setAttribute('aria-current', 'page');
+
+        // update the main region to give it a unique label
+        main.setAttribute('aria-label', event.detail.selection.textContent);
+
+        XMLHttpRequest.open('GET', event.detail.selection.getAttribute('href'), true);
+        XMLHttpRequest.send();
+      });
+
+      document.body.classList.toggle('coral--large', window.innerWidth < 768);
+      window.onresize = function() {
+        document.body.classList.toggle('coral--large', window.innerWidth < 768);
+      };
+    })(window, document);
+  </script>
+</body>
+</html>

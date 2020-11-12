@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coral.WizardView</title>
+
+    <script>document.addEventListener('click', function(event) {if (event.target.nodeName === 'A' || event.matchedTarget && event.matchedTarget.nodeName === 'A') {event.preventDefault();}});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <style>.hljs{background:#fff;font-size:12px;border-radius:4px;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;}</style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markup = document.body.querySelectorAll('.markup');
+        for (var i = 0; i < markup.length; i++) {
+          const code = markup[i].innerHTML;
+          const id = 'markup-code-' + i;
+          markup[i].insertAdjacentHTML('afterend',
+            '<div style="margin:10px 0">' +
+            '<a onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="coral-Link" href="#">Toggle markup</a>' +
+            '<pre hidden>' +
+            '<code id="'+ id +'" class="html">' +
+            '</code>' +
+            '</pre>' +
+            '</div>');
+          document.getElementById(id).textContent = code;
+        }
+        window.hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/coral.css">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '../js/coral.js';
+        script.dataset.coralIcons = '../resources/';
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+
+  <body class="coral--lightest">
+    <main class="u-coral-margin">
+      <div style="position:absolute;top:16px;right:16px;">
+        <strong style="padding-right:8px"><span class="u-coral-hiddenS">Theme:</span></strong>
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--light'">Light</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--lightest'">Lightest</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--dark'">Dark</a> |
+        <a href="#" class="coral-Link theme" onclick="document.body.className='coral--darkest'">Darkest</a>
+        <strong style="padding:0 8px 0 16px"><span class="u-coral-hiddenS">Scale:</span></strong>
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
+        <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
+      </div>
+
+      <h1 class="coral-Heading--XXL">Wizard View</h1>
+
+      <h2 class="coral-Heading--M">Usage notes</h2>
+      <hr class="coral-Divider--L">
+      <p class="coral-Body--M u-coral-padding-vertical">
+        Wizards are containers used to create the typical Wizard pattern used with step lists and panel stacks.
+      </p>
+
+      <h2 class="coral--Heading--S">Default</h2>
+      <div class="markup">
+        <coral-wizardview id="default">
+          <coral-steplist coral-wizardview-steplist interaction="on">
+            <coral-step>Coral Step 1</coral-step>
+            <coral-step>Coral Step 2</coral-step>
+            <coral-step selected>Coral Step 3</coral-step>
+            <coral-step>Coral Step 4</coral-step>
+            <coral-step>Coral Step 5</coral-step>
+          </coral-steplist>
+          <coral-panelstack coral-wizardview-panelstack class="coral-Well">
+            <coral-panel>Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+            <coral-panel>Lorem ipsum dolor sit amet.</coral-panel>
+            <coral-panel>Sed eget eros sit amet nulla ultricies.</coral-panel>
+            <coral-panel>Fusce nec ante non nibh mollis mollis mollis vitae dui.</coral-panel>
+          </coral-panelstack>
+        </coral-wizardview>
+      </div>
+
+      <h2 class="coral--Heading--S">Nested Example</h2>
+      <div class="markup">
+        <coral-wizardview id="nested_outer">
+          <coral-steplist coral-wizardview-steplist interaction="on">
+            <coral-step>Coral Step 1</coral-step>
+            <coral-step>Coral Step 2</coral-step>
+          </coral-steplist>
+          <coral-panelstack coral-wizardview-panelstack class="coral-Well">
+            <coral-panel>
+              <coral-wizardview id="nested_1">
+                <coral-steplist coral-wizardview-steplist interaction="on">
+                  <coral-step>Coral Step 1</coral-step>
+                  <coral-step>Coral Step 2</coral-step>
+                </coral-steplist>
+                <coral-panelstack coral-wizardview-panelstack>
+                  <coral-panel class="u-coral-padding">Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+                  <coral-panel class="u-coral-padding">Lorem ipsum dolor sit amet.</coral-panel>
+                </coral-panelstack>
+              </coral-wizardview>
+            </coral-panel>
+            <coral-panel>
+              <coral-wizardview id="nested_2">
+                <coral-steplist coral-wizardview-steplist interaction="on">
+                  <coral-step></coral-step>
+                  <coral-step></coral-step>
+                  <coral-step></coral-step>
+                </coral-steplist>
+                <coral-panelstack coral-wizardview-panelstack>
+                  <coral-panel class="u-coral-padding">Aenean faucibus ornare laoreet. Cras luctus purus.</coral-panel>
+                  <coral-panel class="u-coral-padding">Lorem ipsum dolor sit amet.</coral-panel>
+                </coral-panelstack>
+              </coral-wizardview>
+            </coral-panel>
+          </coral-panelstack>
+        </coral-wizardview>
+      </div>
+
+      <h2 class="coral--Heading--S">Custom Actions</h2>
+      <div class="markup">
+        <coral-wizardview>
+          <coral-steplist coral-wizardview-steplist interaction="on">
+            <coral-step>Step 1</coral-step>
+            <coral-step>Step 2</coral-step>
+            <coral-step>Step 3</coral-step>
+            <coral-step>Step 4</coral-step>
+          </coral-steplist>
+          <coral-panelstack coral-wizardview-panelstack>
+            <coral-panel class="u-coral-margin">
+              <button is="coral-button" variant="quiet">Cancel</button>
+            </coral-panel>
+            <coral-panel class="u-coral-margin">
+              <button is="coral-button" variant="quiet" coral-wizardview-previous>Previous</button>
+            </coral-panel>
+            <coral-panel class="u-coral-margin">
+              <button is="coral-button" variant="quiet" coral-wizardview-previous>Previous</button>
+            </coral-panel>
+          </coral-panelstack>
+          <coral-panelstack coral-wizardview-panelstack>
+            <coral-panel class="u-coral-margin">
+              <button is="coral-button" variant="primary" coral-wizardview-next>Next</button>
+            </coral-panel>
+            <coral-panel class="u-coral-margin">
+              <button is="coral-button" variant="primary" coral-wizardview-next>Next</button>
+            </coral-panel>
+            <coral-panel class="u-coral-margin">
+              <button is="coral-button" variant="cta">Done</button>
+            </coral-panel>
+          </coral-panelstack>
+          <coral-panelstack coral-wizardview-panelstack>
+            <coral-panel>Lorem ipsum dolor sit amet.</coral-panel>
+            <coral-panel>Aenean faucibus ornare laoreet. </coral-panel>
+            <coral-panel>Cras luctus purus.</coral-panel>
+          </coral-panelstack>
+        </coral-wizardview>
+      </div>
+    </main>
+  </body>
+</html>
