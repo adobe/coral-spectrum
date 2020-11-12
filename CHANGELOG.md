@@ -1,3 +1,10 @@
+## [4.10.11](https://github.com/adobe/coral-spectrum/compare/v4.10.10...v4.10.11) (2020-11-12)
+
+
+### Bug Fixes
+
+* trigger release ([d550919](https://github.com/adobe/coral-spectrum/commit/d55091912754abdc8e801ee1da427744c4ee69b0))
+
 ## [4.10.8](https://github.com/adobe/coral-spectrum/compare/v4.10.7...v4.10.8) (2020-10-22)
 
 
