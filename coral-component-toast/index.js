@@ -13,7 +13,7 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
+
 
 import Toast from './src/scripts/Toast';
 import ToastContent from './src/scripts/ToastContent';

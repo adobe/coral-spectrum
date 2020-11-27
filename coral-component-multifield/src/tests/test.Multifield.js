@@ -29,20 +29,20 @@ describe('Multifield', function() {
     action('_drag', x, y);
     action('_dragEnd', x, y);
   }
-  
+
   describe('Namespace', function() {
     it('should be defined', function() {
       expect(Multifield).to.have.property('Item');
       expect(Multifield.Item).to.have.property('Content');
     });
   });
-  
+
   describe('Instantation', function() {
     helpers.cloneComponent(
       'should be possible to clone the element using markup',
       window.__html__['Multifield.nested.html']
     );
-    
+
     var el = new Multifield();
     el.items.add();
     helpers.cloneComponent(
@@ -82,7 +82,7 @@ describe('Multifield', function() {
       const el = helpers.build(window.__html__['Multifield.base.html']);
       el.on('coral-collection:add', eventSpy);
       var item = el.appendChild(new Multifield.Item());
-      
+
       // Wait for MO
       helpers.next(function() {
         var all = el.items.getAll();
@@ -98,11 +98,11 @@ describe('Multifield', function() {
       const el = helpers.build(window.__html__['Multifield.base.html']);
       el.on('coral-collection:remove', eventSpy);
       var item = el.items.add({});
-      
+
       // Wait for MO
       helpers.next(function() {
         el.removeChild(item);
-        
+
         // Wait for MO
         helpers.next(function() {
           expect(el.items.length).to.equal(0);
@@ -155,7 +155,7 @@ describe('Multifield', function() {
       const el = helpers.build(window.__html__['Multifield.base.html']);
       el.on('coral-collection:add', eventSpy);
       el.items.add(new Multifield.Item());
-      
+
       // Wait for MO
       helpers.next(function() {
         expect(eventSpy.callCount).to.equal(1, 'coral-collection:add should be called once');
@@ -168,10 +168,10 @@ describe('Multifield', function() {
       const el = helpers.build(window.__html__['Multifield.base.html']);
       el.on('coral-collection:remove', eventSpy);
       el.items.add(new Multifield.Item());
-      
+
       // Wait for MO
       helpers.next(function() {
-        
+
         el.items.remove(el.items.getAll()[0]);
 
         // Wait for MO
@@ -206,7 +206,7 @@ describe('Multifield', function() {
     it('should add an item if clicking the add content zone', function() {
       const el = helpers.build(window.__html__['Multifield.base.html']);
       el.querySelector('[coral-multifield-add]').click();
-      
+
       expect(el.items.length).to.equal(1);
     });
 
@@ -217,7 +217,7 @@ describe('Multifield', function() {
       el.items.add({});
       el.items.getAll()[1]._elements.remove.focus();
       el.items.getAll()[1]._elements.remove.click();
-      
+
       expect(el.items.length).to.equal(2);
 
       // when item is removed, focus should be restored to remove button on next element
@@ -246,7 +246,7 @@ describe('Multifield', function() {
         helpers.target.appendChild(item);
         item.parentNode.addEventListener('change', eventSpy);
         item._elements.remove.click();
-        
+
         expect(eventSpy.callCount).to.equal(0);
       });
 
@@ -256,7 +256,7 @@ describe('Multifield', function() {
         el.addEventListener('change', eventSpy);
         var item = el.items.add({});
         item._elements.remove.click();
-        
+
         expect(eventSpy.callCount).to.equal(1);
       });
 
@@ -266,7 +266,7 @@ describe('Multifield', function() {
         el.addEventListener('change', eventSpy);
         el.items.add({});
         el.items.add({});
-        
+
         // Wait for MO
         helpers.next(function() {
           expect(el.items.length).to.equal(2);
@@ -282,7 +282,7 @@ describe('Multifield', function() {
         el.addEventListener('change', eventSpy);
         el.items.add({});
         el.items.add({});
-        
+
         // Wait fo MO
         helpers.next(function() {
           expect(el.items.length).to.equal(2);
@@ -292,7 +292,7 @@ describe('Multifield', function() {
         });
       });
     });
-  
+
     describe('#itemorder', function() {
       it('should trigger a coral-multifield:itemorder event when reordering', function(done) {
         var eventSpy = sinon.spy();
@@ -307,7 +307,7 @@ describe('Multifield', function() {
           done();
         });
       });
-    
+
       it('should trigger a coral-multifield:beforeitemorder event before reordering', function(done) {
         var eventSpy = sinon.spy();
         const el = helpers.build(window.__html__['Multifield.base.html']);
@@ -321,7 +321,7 @@ describe('Multifield', function() {
           done();
         });
       });
-    
+
       it('should not trigger change event if coral-multifield:beforeitemorder event was prevented', function(done) {
         var eventSpy = sinon.spy();
         const el = helpers.build(window.__html__['Multifield.base.html']);
@@ -346,7 +346,7 @@ describe('Multifield', function() {
     it('should support nested multifield', function(done) {
       const el = helpers.build(window.__html__['Multifield.nested.html']);
       el.items.add();
-      
+
       // Wait for MO
       helpers.next(function() {
         var firstNested = el.items.first().content.firstElementChild;
@@ -358,19 +358,19 @@ describe('Multifield', function() {
       });
     });
   });
-  
+
   describe('Tracking', function() {
     var trackerFnSpy;
-    
+
     beforeEach(function() {
       trackerFnSpy = sinon.spy();
       tracking.addListener(trackerFnSpy);
     });
-    
+
     afterEach(function() {
       tracking.removeListener(trackerFnSpy);
     });
-    
+
     it('should call tracker callback only once when the "add" button is clicked', function(done) {
       const el = helpers.build(window.__html__['Multifield.base.trackingOnWithAttrs.html']);
       el.querySelector('[coral-multifield-add]').click();
@@ -379,7 +379,7 @@ describe('Multifield', function() {
         done();
       });
     });
-    
+
     it('should call tracker callback with expected track data values when the "add" button is clicked', function(done) {
       const el = helpers.build(window.__html__['Multifield.base.trackingOnWithAttrs.html']);
       el.querySelector('[coral-multifield-add]').click();
@@ -395,15 +395,15 @@ describe('Multifield', function() {
         done();
       });
     });
-    
+
     it('should call tracker callback with expected track data values when "remove" button is clicked', function(done) {
       const el = helpers.build(window.__html__['Multifield.base.trackingOnWithAttrs.html']);
       el.querySelector('[coral-multifield-add]').click();
-      
+
       helpers.next(function() {
         // Click on remove.
         el.querySelector('button[handle="remove"]').click();
-        
+
         helpers.next(function() {
           expect(trackerFnSpy.callCount).to.equal(2, 'Track callback should be called twice.');
           var spyCall = trackerFnSpy.getCall(1);
@@ -418,19 +418,19 @@ describe('Multifield', function() {
         });
       });
     });
-    
+
     it('should call tracker callback with expected track data values when a field value changes', function(done){
       const el = helpers.build(window.__html__['Multifield.base.trackingOnWithAttrs.html']);
       el.items.add(new Multifield.Item());
-      
+
       helpers.next(function() {
         var inputEl = el.querySelector('input');
         inputEl.value = 'a';
         helpers.event('change', inputEl, {bubbles: true});
-        
+
         var spyCall = trackerFnSpy.getCall(0);
         var targetData = spyCall.args[0];
-        
+
         expect(trackerFnSpy.callCount).to.equal(1);
         expect(targetData).to.have.property('targetType', 'input');
         expect(targetData).to.have.property('eventType', 'change');

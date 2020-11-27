@@ -13,7 +13,7 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
+
 
 import QuickActions from './src/scripts/QuickActions';
 import QuickActionsItem from './src/scripts/QuickActionsItem';

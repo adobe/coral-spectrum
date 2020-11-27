@@ -13,7 +13,7 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
+
 
 import helpTranslations from './i18n/coral-component-shell-help/translations';
 import orgSwitcherTranslations from './i18n/coral-component-shell-orgswitcher/translations';

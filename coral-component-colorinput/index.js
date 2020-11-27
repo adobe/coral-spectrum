@@ -13,7 +13,6 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
 
 import Color from './src/scripts/Color';
 import ColorInput from './src/scripts/ColorInput';

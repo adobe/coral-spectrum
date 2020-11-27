@@ -13,7 +13,7 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
+
 
 import translations from './i18n/translations';
 import {strings, commons} from '../coral-utils';

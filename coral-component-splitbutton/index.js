@@ -13,7 +13,7 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
+
 
 import SplitButton from './src/scripts/SplitButton';
 

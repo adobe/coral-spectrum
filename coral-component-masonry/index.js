@@ -13,7 +13,7 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
+
 
 import Masonry from './src/scripts/Masonry';
 import MasonryItem from './src/scripts/MasonryItem';

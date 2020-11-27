@@ -13,7 +13,6 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
 
 import Banner from './src/scripts/Banner';
 import BannerHeader from './src/scripts/BannerHeader';

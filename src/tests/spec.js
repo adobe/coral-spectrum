@@ -18,7 +18,6 @@ import '../../coral-base-labellable/src/tests/spec';
 import '../../coral-base-fieldgroup/src/tests/spec';
 import '../../coral-base-formfield/src/tests/spec';
 import '../../coral-base-overlay/src/tests/spec';
-import '../../coral-compat/src/tests/spec';
 
 import '../../coral-component-accordion/src/tests/spec';
 import '../../coral-component-actionbar/src/tests/spec';

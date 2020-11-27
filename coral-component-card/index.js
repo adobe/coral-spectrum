@@ -13,7 +13,6 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
 
 import Card from './src/scripts/Card';
 import CardProperty from './src/scripts/CardProperty';

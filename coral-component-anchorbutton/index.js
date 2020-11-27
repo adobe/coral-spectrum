@@ -13,7 +13,6 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
 
 import AnchorButton from './src/scripts/AnchorButton';
 import AnchorButtonLabel from './src/scripts/AnchorButtonLabel';

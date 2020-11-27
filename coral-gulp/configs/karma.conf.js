@@ -17,15 +17,15 @@ const util = require('../helpers/util');
 module.exports = function(config) {
   const root = util.getRoot();
   const CWD = process.cwd();
-  
+
   const rollupConfig = require('./rollup.conf.js')({runTests: true});
-  
+
   const preprocessors = {};
-  
+
   const specs = path.join(CWD, 'src/tests/spec.js');
   let snippets;
   let scripts;
-  
+
   if (util.isTLB()) {
     snippets = path.join(root, 'coral-*/src/tests/snippets/**/*.html');
     scripts = path.join(root, 'coral-*/src/scripts/*.js');
@@ -34,20 +34,20 @@ module.exports = function(config) {
     snippets = path.join(CWD, 'src/tests/snippets/**/*.html');
     scripts = path.join(CWD, 'src/scripts/*.js');
   }
-  
+
   // Rollup pre-process
   preprocessors[specs] = ['rollup'];
-  
+
   // Pre-process HTML snippets
   preprocessors[snippets] = ['html2js'];
-  
+
   rollupConfig.push(istanbul({
     include: scripts
   }));
-  
+
   config.set({
     preprocessors: preprocessors,
-  
+
     // specify the config for the rollup pre-processor: run babel plugin on the code
     rollupPreprocessor: {
       plugins: rollupConfig,
@@ -57,7 +57,7 @@ module.exports = function(config) {
         sourcemap: 'inline'
       }
     },
-  
+
     customLaunchers: {
       FirefoxHeadless: {
         base: 'Firefox',
@@ -68,25 +68,25 @@ module.exports = function(config) {
         }
       },
     },
-  
+
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['ChromeHeadless', 'FirefoxHeadless'],
-    
+
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['mocha', 'sinon-chai'],
-  
+
     // Adding a proxy to map the icons
     proxies: {
       [path.join('/absolute', CWD, 'dist/resources/')]: path.join(root, 'coral-component-icon/src/resources/')
     },
-    
+
     // list of files / patterns to load in the browser
     files: [
       // Load momentJS for date time components
       `${root}/node_modules/moment/moment.js`,
-  
+
       {
         // Load the resources
         pattern: path.join(root, 'coral-component-icon/src/resources/**/*'),
@@ -94,7 +94,7 @@ module.exports = function(config) {
         included: false,
         served: true
       },
-      
+
       {
         // Files to be available as window.__html__['FILENAME.html']
         pattern: snippets,
@@ -102,7 +102,7 @@ module.exports = function(config) {
         served: true,
         included: true // Include HTML snippets so they are preprocessed
       },
-      
+
       {
         // Tests that will be included as executable JS
         pattern: specs,
@@ -111,18 +111,18 @@ module.exports = function(config) {
         included: true
       }
     ],
-    
+
     // test results reporter to use
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha', 'coverage-istanbul'],
-  
-    // Configure the reporter
-    coverageIstanbulReporter: {
-      dir: path.join(CWD, 'dist/coverage'),
-      combineBrowserReports: true,
-      reports: ['lcov', 'text-summary']
-    },
-  
+    reporters: ['mocha'],
+
+    // // Configure the reporter
+    // coverageIstanbulReporter: {
+    //   dir: path.join(CWD, 'dist/coverage'),
+    //   combineBrowserReports: true,
+    //   reports: ['lcov', 'text-summary']
+    // },
+
     html2JsPreprocessor: {
       processPath: function(filePath) {
         let parts = path.dirname(path.normalize(filePath)).split(path.sep);
@@ -137,26 +137,26 @@ module.exports = function(config) {
         return path.join(lastFolder, path.basename(filePath));
       }
     },
-    
+
     // enable / disable colors in the output (reporters and logs)
     colors: true,
-    
+
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
-  
+
     // Don't fail if no tests
     failOnEmptyTestSuite: false,
-    
+
     // enable / disable watching file and executing tests whenever any file changes
     background: true,
     autoWatch: true,
-    
+
     // If browser does not capture in given timeout [ms], kill it
     captureTimeout: 20000,
     // report which specs are slower than 500ms
     reportSlowerThan: 500,
-  
+
     client: {
       // Set to true for debugging via e.g console.debug
       captureConsole: false

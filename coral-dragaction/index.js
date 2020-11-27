@@ -12,7 +12,7 @@
 
 import '../coral-theme-spectrum';
 import '../coral-externals';
-import '../coral-compat';
+
 
 import DragAction from './src/scripts/DragAction';
 

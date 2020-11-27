@@ -13,7 +13,7 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
+
 
 import FileUpload from './src/scripts/FileUpload';
 import FileUploadItem from './src/scripts/FileUploadItem';

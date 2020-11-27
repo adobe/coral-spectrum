@@ -13,7 +13,7 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
+
 
 import Progress from './src/scripts/Progress';
 import ProgressLabel from './src/scripts/ProgressLabel';

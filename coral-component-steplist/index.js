@@ -13,7 +13,7 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
+
 
 import StepList from './src/scripts/StepList';
 import Step from './src/scripts/Step';

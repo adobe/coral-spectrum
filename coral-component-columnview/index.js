@@ -13,7 +13,6 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
 
 import ColumnView from './src/scripts/ColumnView';
 import ColumnViewColumn from './src/scripts/ColumnViewColumn';

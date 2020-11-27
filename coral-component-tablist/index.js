@@ -13,7 +13,7 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
+
 
 import Tab from './src/scripts/Tab';
 import TabLabel from './src/scripts/TabLabel';

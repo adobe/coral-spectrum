@@ -13,7 +13,6 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
 
 import CycleButton from './src/scripts/CycleButton';
 import CycleButtonItem from './src/scripts/CycleButtonItem';

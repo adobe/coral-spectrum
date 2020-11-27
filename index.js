@@ -80,8 +80,5 @@ export {Tree, TreeItem} from './coral-component-tree';
 export {Wait} from './coral-component-wait';
 export {WizardView} from './coral-component-wizardview';
 
-// @compat
-export {register, property, Component} from './coral-compat';
-
 // Export current version
 export {version} from './src/scripts/version';

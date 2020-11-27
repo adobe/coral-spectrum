@@ -13,7 +13,7 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
+
 
 import PanelStack from './src/scripts/PanelStack';
 import Panel from './src/scripts/Panel';

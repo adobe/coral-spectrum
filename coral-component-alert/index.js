@@ -13,7 +13,6 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
 
 import Alert from './src/scripts/Alert';
 import AlertHeader from './src/scripts/AlertHeader';

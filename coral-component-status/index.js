@@ -13,7 +13,7 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
+
 
 import Status from './src/scripts/Status';
 import StatusLabel from './src/scripts/StatusLabel';

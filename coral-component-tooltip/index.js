@@ -13,7 +13,7 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
+
 
 import Tooltip from './src/scripts/Tooltip';
 import TooltipContent from './src/scripts/TooltipContent';

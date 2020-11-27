@@ -13,7 +13,6 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
 
 import Button from './src/scripts/Button';
 import ButtonLabel from './src/scripts/ButtonLabel';

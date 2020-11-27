@@ -13,7 +13,6 @@
 import '../coral-theme-spectrum';
 
 import '../coral-externals';
-import '../coral-compat';
 
 import Slider from './src/scripts/Slider';
 import SliderContent from './src/scripts/SliderContent';
