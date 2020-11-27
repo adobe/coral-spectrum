@@ -114,14 +114,14 @@ module.exports = function(config) {
 
     // test results reporter to use
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha'],
+    reporters: ['mocha', 'coverage-istanbul'],
 
-    // // Configure the reporter
-    // coverageIstanbulReporter: {
-    //   dir: path.join(CWD, 'dist/coverage'),
-    //   combineBrowserReports: true,
-    //   reports: ['lcov', 'text-summary']
-    // },
+    // Configure the reporter
+    coverageIstanbulReporter: {
+      dir: path.join(CWD, 'dist/coverage'),
+      combineBrowserReports: true,
+      reports: ['lcov', 'text-summary']
+    },
 
     html2JsPreprocessor: {
       processPath: function(filePath) {
