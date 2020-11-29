@@ -39,6 +39,7 @@ class Multifield extends BaseComponent(HTMLElement) {
   }
 
   connectedCallback() {
+    super.connectedCallback();
     this.setAttribute('id', this.id || commons.getUID());
 
     // Attach events

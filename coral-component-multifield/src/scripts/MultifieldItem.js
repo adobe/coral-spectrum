@@ -30,7 +30,11 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
     // Prepare templates
     this._elements = {
       // Create or fetch the content zones
@@ -42,10 +46,10 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
     this._elements.content.setAttribute('id', `${uid}-content`);
     item.call(this._elements, {i18n, uid});
   }
-  
+
   /**
    The item content.
-   
+
    @type {MultifieldItemContent}
    @contentzone
    */
@@ -65,7 +69,7 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
 
   /**
    Whether the item is set to be reorder using the keyboard
-   
+
    @type {boolean}
    @private
    */
@@ -75,8 +79,8 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
   set _dragging(value) {
     this.__dragging = transform.boolean(value);
     if (this.__dragging) {
-      // Setting role="application" to the move button forces 
-      // NVDA and JAWS screen readers into forms mode, 
+      // Setting role="application" to the move button forces
+      // NVDA and JAWS screen readers into forms mode,
       // so arrow keys can be used to reorder.
       this._elements.move.setAttribute('role', 'application');
     }
@@ -89,34 +93,34 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
     this._elements.move.setAttribute('aria-pressed', this.__dragging);
     this._elements.move.selected = this.__dragging;
   }
-  
+
   get _contentZones() { return {'coral-multifield-item-content': 'content'}; }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // a11y
     this.setAttribute('role', 'listitem');
-  
+
     // Create a fragment
     const fragment = document.createDocumentFragment();
-  
+
     const templateHandleNames = ['move', 'remove'];
-    
+
     // Render the main template
     fragment.appendChild(this._elements.remove);
     fragment.appendChild(this._elements.move);
-  
+
     const content = this._elements.content;
-  
+
     // Remove it so we can process children
     if (content.parentNode) {
       this.removeChild(content);
     }
-  
+
     // Process remaining elements as necessary
     while (this.firstChild) {
       const child = this.firstChild;
@@ -130,13 +134,13 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
         this.removeChild(child);
       }
     }
-  
+
     // Add the frag to the component
     this.appendChild(fragment);
-  
+
     // Assign the content zones, moving them into place in the process
     this.content = content;
-  
+
     // Attach drag events
     const dragAction = new DragAction(this);
     dragAction.axis = 'vertical';

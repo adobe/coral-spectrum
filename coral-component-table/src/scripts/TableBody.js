@@ -29,34 +29,38 @@ class TableBody extends BaseTableSection(BaseComponent(HTMLTableSectionElement))
   /** @ignore */
   constructor() {
     super();
-  
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
     this._toggleObserver(true);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     if (getRows([this]).length === 0) {
       this.trigger('coral-table-body:_empty');
     }
   }
-  
+
   /**
    Triggered when the {@link TableBody} content changed.
-   
+
    @typedef {CustomEvent} coral-table-body:_contentchanged
-   
+
    @private
    */
-  
+
   /**
    Triggered when the {@link TableBody} is initialized without rows.
-   
+
    @typedef {CustomEvent} coral-table-body:_empty
-   
+
    @private
    */
 }

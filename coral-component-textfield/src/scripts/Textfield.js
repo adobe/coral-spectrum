@@ -16,9 +16,9 @@ import {transform, validate} from '../../../coral-utils';
 
 /**
  Enumeration for {@link Textfield} variants.
- 
+
  @typedef {Object} TextfieldVariantEnum
- 
+
  @property {String} DEFAULT
  A default textfield.
  @property {String} QUIET
@@ -52,13 +52,17 @@ class Textfield extends BaseFormField(BaseComponent(HTMLInputElement)) {
   /** @ignore */
   constructor() {
     super();
-  
+
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
     this._delegateEvents(this._events);
   }
-  
+
   /**
    The textfield's variant. See {@link TextfieldVariantEnum}.
-   
+
    @type {String}
    @default TextfieldVariantEnum.DEFAULT
    @htmlattribute variant
@@ -71,7 +75,7 @@ class Textfield extends BaseFormField(BaseComponent(HTMLInputElement)) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-    
+
     // removes every existing variant
     this.classList.remove(...ALL_VARIANT_CLASSES);
 
@@ -79,25 +83,25 @@ class Textfield extends BaseFormField(BaseComponent(HTMLInputElement)) {
       this.classList.add(`${CLASSNAME}--${this._variant}`);
     }
   }
-  
+
   /**
    Returns {@link Textfield} variants.
-   
+
    @return {TextfieldVariantEnum}
    */
   static get variant() { return variant; }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super._nativeObservedAttributes.concat(['variant']);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }
   }

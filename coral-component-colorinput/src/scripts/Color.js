@@ -24,11 +24,11 @@ const colorSpace = {
 
 /**
  Transforms part of a color (r,g,b) into a hex value.
- 
+
  @static
  @param {Number} x
  value between 0-255
- 
+
  @return {String} Hex representation
  @ignore
  */
@@ -39,54 +39,54 @@ function _hex(x) {
 /** @ignore */
 function _slice(str, startStr) {
   let sliced = [];
-  
+
   str = transform.string(str).toLowerCase();
   startStr = transform.string(startStr).toLowerCase();
-  
+
   if (str.indexOf(startStr) !== -1) {
     sliced = str.substring(str.indexOf(startStr) + startStr.length, str.lastIndexOf(')')).split(/,\s*/);
   }
-  
+
   return sliced;
 }
 
 /**
  Parse an rgb value into an object.
  e.g.: 'rgb(0,0,0)' => {r:0, g:0, b:0}
- 
+
  @static
  @param {String} rgbStr
  The string representing the rgb value
- 
+
  @return {Object} {r, g, b} Returns null if string could not be parsed
  @ignore
  */
 function _parseRGB(rgbStr) {
   const sliced = _slice(rgbStr, 'rgb(');
-  
+
   if (sliced.length !== 3) {
     return null;
   }
-  
+
   const r = parseInt(sliced[0], 10);
   const g = parseInt(sliced[1], 10);
   const b = parseInt(sliced[2], 10);
-  
+
   if (isNaN(r) || isNaN(g) || isNaN(b)) {
     return null;
   }
-  
+
   if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
     return null;
   }
-  
+
   return {r, g, b};
 }
 
 /**
  Serialize an rgb object into a string.
  e.g.: {r:0, g:0, b:0} => 'rgb(0,0,0)'
- 
+
  @static
  @param {Object} rgb
  @return {String} rgbStr The string representing the rgb value
@@ -96,48 +96,48 @@ function _serializeRGB(rgb) {
   if (rgb) {
     return `rgb(${rgb.r},${rgb.g},${rgb.b})`;
   }
-  
+
   return '';
 }
 
 /**
  Parse an rgba value into an object.
  e.g.: 'rgba(0,0,0,0.5)' => {r:0, g:0, b:0, a:0.5}
- 
+
  @static
  @param {String} rgbaStr
  The string representing the rgba value.
- 
+
  @return {Object} {r, g, b, a} Returns null if string could not be parsed
  @ignore
  */
 function _parseRGBA(rgbaStr) {
   const sliced = _slice(rgbaStr, 'rgba(');
-  
+
   if (sliced.length !== 4) {
     return null;
   }
-  
+
   const r = parseInt(sliced[0], 10);
   const g = parseInt(sliced[1], 10);
   const b = parseInt(sliced[2], 10);
   const a = parseFloat(sliced[3]);
-  
+
   if (isNaN(r) || isNaN(g) || isNaN(b) || isNaN(a)) {
     return null;
   }
-  
+
   if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255 || a < 0 || a > 1) {
     return null;
   }
-  
+
   return {r, g, b, a};
 }
 
 /**
  Serialize an rgba object into a string.
  e.g.: {r:0, g:0, b:0, a:0.5} => 'rgb(0,0,0,0.5)'
- 
+
  @static
  @param {Object} rgba
  @return {String} rgbaStr The string representing the rgba value
@@ -153,41 +153,41 @@ function _serializeRGBA(rgba) {
 /**
  Parse an cmyk value into an object.
  e.g.: 'cmyk(0, 100, 50, 0)' => {c:0, m:100, y:50, k:0}
- 
+
  @static
  @param {String} cmykStr
  The string representing the cmyk value.
- 
+
  @return {Object} {c, m, y, k} Returns null if string could not be parsed
  @ignore
  */
 function _parseCMYK(cmykStr) {
   const sliced = _slice(cmykStr, 'cmyk(');
-  
+
   if (sliced.length !== 4) {
     return null;
   }
-  
+
   const c = parseFloat(sliced[0]);
   const m = parseFloat(sliced[1]);
   const y = parseFloat(sliced[2]);
   const k = parseFloat(sliced[3]);
-  
+
   if (isNaN(c) || isNaN(m) || isNaN(y) || isNaN(k)) {
     return null;
   }
-  
+
   if (c < 0 || c > 100 || m < 0 || m > 100 || y < 0 || y > 100 || k < 0 || k > 100) {
     return null;
   }
-  
+
   return {c, m, y, k};
 }
 
 /**
  Serialize an cmyk object into a string.
  e.g.: {c:0, m:100, y:50, k:0} => 'cmyk(0, 100, 50, 0)'
- 
+
  @static
  @param {Object} cmyk
  @return {String} cmykStr The string representing the cmyk value
@@ -200,7 +200,7 @@ function _serializeCMYK(cmyk) {
     const m = parseFloat(cmyk.m.toFixed(2));
     const y = parseFloat(cmyk.y.toFixed(2));
     const k = parseFloat(cmyk.k.toFixed(2));
-    
+
     return `cmyk(${c},${m},${y},${k})`;
   }
   return '';
@@ -209,7 +209,7 @@ function _serializeCMYK(cmyk) {
 /**
  Parse an hex value into a number. Corrects a hex value, if it is represented by 3 or 6 characters with or without
  '#'.
- 
+
  @static
  @param {String} hexStr The string representing the hex value
  @return {Number} Returns a number representing the parsed hex value
@@ -217,29 +217,29 @@ function _serializeCMYK(cmyk) {
  */
 function _parseHex(hexStr) {
   hexStr = transform.string(hexStr).replace('#', '');
-  
+
   if (hexStr.length === 3) {
     hexStr = hexStr.charAt(0) + hexStr.charAt(0) +
       hexStr.charAt(1) + hexStr.charAt(1) +
       hexStr.charAt(2) + hexStr.charAt(2);
   }
-  
+
   // test if this could be a hex value
   const isOk = (/^[0-9A-F]{6}$/i).test(hexStr);
   if (!isOk) {
     return null;
   }
-  
+
   return parseInt(hexStr, 16);
 }
 
 /**
  Transforms a hex color into RGB representation.
- 
+
  @static
  @param {Number} hex
  The color hex representation.
- 
+
  @return {Object} {r, g, b}
  @ignore
  */
@@ -259,7 +259,7 @@ function _hexToRgb(hex) {
 
 /**
  Serialize a hex number into a string.
- 
+
  @static
  @param {Number} hex
  @return {String}
@@ -271,13 +271,13 @@ function _serializeHex(hex) {
     const rgb = _hexToRgb(hex);
     return `#${_hex(rgb.r) + _hex(rgb.g) + _hex(rgb.b)}`;
   }
-  
+
   return '';
 }
 
 /**
  Transforms a RGB color into HEX representation.
- 
+
  @static
  @param {Object} rgb
  @return {Number} hex The color hex representation
@@ -293,7 +293,7 @@ function _rgbToHex(rgb) {
 /**
  Transforms a cmyk color into RGB representation. Converting CMYK to RGB will incur slight loss because both color
  spaces are not absolute and there will be some round-off error in the conversion process.
- 
+
  @static
  @param {Object} cmyk
  @return {Object} {r, g, b}
@@ -303,33 +303,33 @@ function _cmykToRgb(cmyk) {
   if (!cmyk) {
     return null;
   }
-  
+
   const result = {
     r: 0,
     g: 0,
     b: 0
   };
-  
+
   const c = parseFloat(cmyk.c) / 100;
   const m = parseFloat(cmyk.m) / 100;
   const y = parseFloat(cmyk.y) / 100;
   const k = parseFloat(cmyk.k) / 100;
-  
+
   result.r = 1 - Math.min(1, c * (1 - k) + k);
   result.g = 1 - Math.min(1, m * (1 - k) + k);
   result.b = 1 - Math.min(1, y * (1 - k) + k);
-  
+
   result.r = Math.round(result.r * 255);
   result.g = Math.round(result.g * 255);
   result.b = Math.round(result.b * 255);
-  
+
   return result;
 }
 
 /**
  Transforms a rgb color into cmyk representation. Converting CMYK to RGB will incur slight loss because both color
  spaces are not absolute and there will be some round-off error in the conversion process.
- 
+
  @static
  @param {Object} rgb
  @return {Object} {c, m, y, k}
@@ -339,74 +339,74 @@ function _rgbToCmyk(rgb) {
   if (!rgb) {
     return null;
   }
-  
+
   const result = {
     c: 0,
     m: 0,
     y: 0,
     k: 0
   };
-  
+
   if (rgb.r === 0 && rgb.g === 0 && rgb.b === 0) {
     result.k = 100;
     return result;
   }
-  
+
   const r = rgb.r / 255;
   const g = rgb.g / 255;
   const b = rgb.b / 255;
-  
+
   result.k = Math.min(1 - r, 1 - g, 1 - b);
   result.c = (1 - r - result.k) / (1 - result.k);
   result.m = (1 - g - result.k) / (1 - result.k);
   result.y = (1 - b - result.k) / (1 - result.k);
-  
+
   result.c = Math.round(result.c * 100);
   result.m = Math.round(result.m * 100);
   result.y = Math.round(result.y * 100);
   result.k = Math.round(result.k * 100);
-  
+
   return result;
 }
 
 /**
  Parse an hsb value into an object.
  e.g.: 'hsb(360,100,0)' => {h:360, s:100, b:0}
- 
+
  @static
  @param {String} hsbStr
  The string representing the hsb value.
- 
+
  @return {Object} {h, s, b} Returns null if string could not be parsed
  @ignore
  */
 function _parseHSB(hsbStr) {
   const sliced = _slice(hsbStr, 'hsb(');
-  
+
   if (sliced.length !== 3) {
     return null;
   }
-  
+
   // make sure there are not more than 2 digits after dot
   const h = parseFloat(sliced[0]);
   const s = parseFloat(sliced[1]);
   const b = parseFloat(sliced[2]);
-  
+
   if (isNaN(h) || isNaN(s) || isNaN(b)) {
     return null;
   }
-  
+
   if (h < 0 || h > 360 || s < 0 || s > 100 || b < 0 || b > 100) {
     return null;
   }
-  
+
   return {h, s, b};
 }
 
 /**
  Serialize an hsb object into a string.
  e.g.: {h:0, s:0, b:0} => 'hsb(0,0,0)'
- 
+
  @static
  @param {Object} hsb
  @return {String} hsb The string representing the hsb value
@@ -418,10 +418,10 @@ function _serializeHSB(hsb) {
     const h = parseFloat(hsb.h.toFixed(2));
     const s = parseFloat(hsb.s.toFixed(2));
     const b = parseFloat(hsb.b.toFixed(2));
-    
+
     return `hsb(${h},${s},${b})`;
   }
-  
+
   return '';
 }
 
@@ -430,7 +430,7 @@ function _serializeHSB(hsb) {
  h (hue has value between 0-360 degree)
  s (saturation has a value between 0-100 percent)
  b (brightness has a value between 0-100 percent)
- 
+
  @static
  @param {Object} hsb
  @return {Object} {r, g, b}
@@ -440,11 +440,11 @@ function _hsbToRgb(hsb) {
   if (!hsb) {
     return null;
   }
-  
+
   const h = hsb.h / 360;
   const s = hsb.s / 100;
   const v = hsb.b / 100;
-  
+
   let r, g, b;
   const i = Math.floor(h * 6);
   const f = h * 6 - i;
@@ -492,7 +492,7 @@ function _hsbToRgb(hsb) {
 
 /**
  Transforms a RGB color into HSB (same as HSV) representation.
- 
+
  @static
  @param {Object} rgb
  @return {Object} {h, s, b}
@@ -502,18 +502,18 @@ function _rgbToHsb(rgb) {
   if (!rgb) {
     return null;
   }
-  
+
   const r = rgb.r;
   const g = rgb.g;
   const b = rgb.b;
-  
+
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
   const d = max - min;
   let h;
   const s = max === 0 ? 0 : d / max;
   const v = max / 255;
-  
+
   switch (max) {
     case min:
       h = 0;
@@ -531,7 +531,7 @@ function _rgbToHsb(rgb) {
       h /= 6 * d;
       break;
   }
-  
+
   return {
     h: h * 360,
     s: s * 100,
@@ -542,41 +542,41 @@ function _rgbToHsb(rgb) {
 /**
  Parse an hsl value into an object.
  e.g.: 'hsl(360,100,0)' => {h:360, s:100, b:0}
- 
+
  @static
  @param {String} hslStr
  The string representing the hsl value.
- 
+
  @return {Object} {h, s, l} Returns null if string could not be parsed
  @ignore
  */
 function _parseHSL(hslStr) {
   const sliced = _slice(hslStr, 'hsl(');
-  
+
   if (sliced.length !== 3) {
     return null;
   }
-  
+
   // make sure there are not more than 2 digits after dot
   const h = parseFloat(sliced[0]);
   const s = parseFloat(sliced[1]);
   const l = parseFloat(sliced[2]);
-  
+
   if (isNaN(h) || isNaN(s) || isNaN(l)) {
     return null;
   }
-  
+
   if (h < 0 || h > 360 || s < 0 || s > 100 || l < 0 || l > 100) {
     return null;
   }
-  
+
   return {h, s, l};
 }
 
 /**
  Serialize an hsl object into a string.
  e.g.: {h:0, s:0, l:0} => 'hsl(0,0%,0%)'
- 
+
  @static
  @param {Object} hsl
  @return {String} hsb The string representing the hsb value
@@ -588,10 +588,10 @@ function _serializeHSL(hsl) {
     const h = parseFloat(hsl.h.toFixed(2));
     const s = parseFloat(hsl.s.toFixed(2));
     const l = parseFloat(hsl.l.toFixed(2));
-    
+
     return `hsl(${h},${s}%,${l}%)`;
   }
-  
+
   return '';
 }
 
@@ -600,7 +600,7 @@ function _serializeHSL(hsl) {
  h (hue has value between 0-360 degree)
  s (saturation has a value between 0-100 percent)
  l (lightness has a value between 0-100 percent)
- 
+
  @static
  @param {Object} hsl
  @return {Object} {r, g, b}
@@ -610,15 +610,15 @@ function _hslToRgb(hsl) {
   if (!hsl) {
     return null;
   }
-  
+
   const h = hsl.h / 360;
   const s = hsl.s / 100;
   const l = hsl.l / 100;
-  
+
   let r;
   let g;
   let b;
-  
+
   if (s === 0) {
     // achromatic
     r = g = b = l;
@@ -642,14 +642,14 @@ function _hslToRgb(hsl) {
       }
       return p;
     };
-    
+
     const qValue = l < 0.5 ? l * (1 + s) : l + s - l * s;
     const pValue = 2 * l - qValue;
     r = hue2rgb(pValue, qValue, h + 1 / 3);
     g = hue2rgb(pValue, qValue, h);
     b = hue2rgb(pValue, qValue, h - 1 / 3);
   }
-  
+
   return {
     r: Math.round(r * 255),
     g: Math.round(g * 255),
@@ -659,7 +659,7 @@ function _hslToRgb(hsl) {
 
 /**
  Transforms an RGB color into HSL representation.
- 
+
  @static
  @param {Object} rgb
  @return {Object} {h, s, l}
@@ -669,17 +669,17 @@ function _rgbToHsl(rgb) {
   if (!rgb) {
     return null;
   }
-  
+
   const r = rgb.r / 255;
   const g = rgb.g / 255;
   const b = rgb.b / 255;
-  
+
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
   let h;
   let s;
   const l = (max + min) / 2;
-  
+
   if (max === min) {
     // achromatic
     h = s = 0;
@@ -700,7 +700,7 @@ function _rgbToHsl(rgb) {
     }
     h /= 6;
   }
-  
+
   return {
     h: h * 360,
     s: s * 100,
@@ -711,42 +711,42 @@ function _rgbToHsl(rgb) {
 /**
  Parse an hsla value into an object.
  e.g.: 'hsla(360,100%,0%,0.5)' => {h:360, s:100, l:0, 0.5}
- 
+
  @static
  @param {String} hslaStr
  The string representing the hsl value.
- 
+
  @return {Object} {h, s, l, a} Returns null if string could not be parsed
  @ignore
  */
 function _parseHSLA(hslaStr) {
   const sliced = _slice(hslaStr, 'hsla(');
-  
+
   if (sliced.length !== 4) {
     return null;
   }
-  
+
   // make sure there are not more than 2 digits after dot
   const h = parseFloat(sliced[0]);
   const s = parseFloat(sliced[1]);
   const l = parseFloat(sliced[2]);
   const a = parseFloat(sliced[3]);
-  
+
   if (isNaN(h) || isNaN(s) || isNaN(l)) {
     return null;
   }
-  
+
   if (h < 0 || h > 360 || s < 0 || s > 100 || l < 0 || l > 100 || a < 0 || a > 1) {
     return null;
   }
-  
+
   return {h, s, l, a};
 }
 
 /**
  Serialize an hsla object into a string.
  e.g.: {h:0, s:0, l:0, a:0.5} => 'hsl(0,0%,0%,0.5)'
- 
+
  @static
  @param {Object} hsla
  @return {String} hsb The string representing the hsb value
@@ -759,10 +759,10 @@ function _serializeHSLA(hsla) {
     const s = parseFloat(hsla.s.toFixed(2));
     const l = parseFloat(hsla.l.toFixed(2));
     const a = parseFloat(hsla.a.toFixed(2));
-    
+
     return `hsla(${h},${s}%,${l}%,${a})`;
   }
-  
+
   return '';
 }
 
@@ -772,16 +772,19 @@ function _serializeHSLA(hsla) {
 class Color {
   /** @ignore */
   constructor() {
+  }
+
+  connectedCallback() {
     // Set defaults
     this._colorSpace = colorSpace.HEX;
     this._value = '';
     this._alpha = 1;
   }
-  
+
   /**
    The value of the color. This value can be set in different formats (HEX, RGB, RGBA, HSB, HSL, HSLA and CMYK).
    Corrects a hex value, if it is represented by 3 or 6 characters with or without '#'.
-   
+
    e.g:
    HEX:  #FFFFFF
    RGB:  rgb(16,16,16)
@@ -790,7 +793,7 @@ class Color {
    HSL:  hsl(360,100%,100%)
    HSLA: hsla(360,100%,100%,0.9)
    CMYK: cmyk(0,100,50,0)
-   
+
    @type {String}
    @default ""
    */
@@ -801,13 +804,13 @@ class Color {
     // Two color formats with alpha values
     const rgba = _parseRGBA(value);
     const hsla = _parseHSLA(value);
-    
+
     const rgb = _parseRGB(value);
     const cmyk = _parseCMYK(value);
     const hsb = _parseHSB(value);
     const hsl = _parseHSL(value);
     const hex = _parseHex(value);
-    
+
     if (rgba !== null) {
       this._colorSpace = colorSpace.RGB;
       this.alpha = rgba.a;
@@ -846,13 +849,13 @@ class Color {
       this._colorSpace = colorSpace.HEX;
       value = '';
     }
-    
+
     this._value = value;
   }
-  
+
   /**
    The alpha value of the color (value between 0-1).
-   
+
    @type {Number}
    @default 1
    */
@@ -865,11 +868,11 @@ class Color {
     }
     this._alpha = transform.number(value);
   }
-  
+
   /**
    The rgb values of the color (value between 0-255).
    e.g.: {r:0, g:0, b:0}
-   
+
    @type {Object}
    @default null
    */
@@ -899,11 +902,11 @@ class Color {
   set rgb(value) {
     this.value = _serializeRGB(value);
   }
-  
+
   /**
    The serialized rgb values of the color (r,g,b values between 0-255).
    e.g: 'rgb(0,0,0)'
-   
+
    @type {String}
    @default ""
    */
@@ -913,11 +916,11 @@ class Color {
   set rgbValue(value) {
     this.value = value;
   }
-  
+
   /**
    The rgba values of the color (r,g,b values between 0-255 and a between 0-1).
    e.g: {r:0, g:0, b:0, a:1}
-   
+
    @type {Object}
    @default null
    */
@@ -931,17 +934,17 @@ class Color {
         a: this.alpha
       };
     }
-    
+
     return null;
   }
   set rgba(value) {
     this.value = _serializeRGBA(value);
   }
-  
+
   /**
    The serialized rgba values of the color (r,g,b values between 0-255 and alpha between 0-1).
    e.g: 'rgba(0,0,0,1)'
-   
+
    @type {String}
    @default ""
    */
@@ -951,10 +954,10 @@ class Color {
   set rgbaValue(value) {
     this.value = value;
   }
-  
+
   /**
    The hex value of the color.
-   
+
    @type {Number}
    @default null
    */
@@ -965,11 +968,11 @@ class Color {
   set hex(value) {
     this.value = _serializeHex(value);
   }
-  
+
   /**
    The serialized hex value of the color.
    e.g: '#94CD4B'
-   
+
    @type {String}
    @default ""
    */
@@ -979,11 +982,11 @@ class Color {
   set hexValue(value) {
     this.value = value;
   }
-  
+
   /**
    The cmyk values of the color (all values between 0-100).
    e.g: {c:0, m:100, y:0, k:100}
-   
+
    @type {Object}
    @default null
    */
@@ -1017,11 +1020,11 @@ class Color {
   set cmyk(value) {
     this.value = _serializeCMYK(value);
   }
-  
+
   /**
    The serialized cmyk values of the color (all values between 0-100).
    e.g: 'cmyk(100,100,100,100)'
-   
+
    @type {String}
    @default ""
    */
@@ -1031,13 +1034,13 @@ class Color {
   set cmykValue(value) {
     this.value = value;
   }
-  
+
   /**
    The hsb values of the color.
    h (hue has value between 0-360 degree)
    s (saturation has a value between 0-100 percent)
    b (brightness has a value between 0-100 percent)
-   
+
    @type {Object}
    @default null
    */
@@ -1071,11 +1074,11 @@ class Color {
   set hsb(value) {
     this.value = _serializeHSB(value);
   }
-  
+
   /**
    The serialized hsb values of the color (s and b values between 0-100, h between 0-360).
    e.g: 'hsb(360,100,100)'
-   
+
    @type {String}
    @default ""
    */
@@ -1085,13 +1088,13 @@ class Color {
   set hsbValue(value) {
     this.value = value;
   }
-  
+
   /*
    The hsl values of the color.
    h (hue has value between 0-360 degree)
    s (saturation has a value between 0-100 percent)
    l (lightness has a value between 0-100 percent)
-   
+
    @type {Object}
    @default null
    */
@@ -1125,11 +1128,11 @@ class Color {
   set hsl(value) {
     this.value = _serializeHSL(value);
   }
-  
+
   /**
    The serialized hsl values of the color (s and l values between 0-100 in percent, h between 0-360).
    e.g: 'hsl(360,100%,100%)'
-   
+
    @type {String}
    @default ""
    */
@@ -1139,14 +1142,14 @@ class Color {
   set hslValue(value) {
     this.value = value;
   }
-  
+
   /**
    The hsla values of the color.
    h (hue has value between 0-360 degree)
    s (saturation has a value between 0-100 percent)
    l (lightness has a value between 0-100 percent)
    a (alpha has a value between 0-1)
-   
+
    @type {Object}
    @default null
    */
@@ -1160,13 +1163,13 @@ class Color {
         a: this.alpha
       };
     }
-    
+
     return null;
   }
   set hsla(value) {
     this.value = _serializeHSLA(value);
   }
-  
+
   /**
    The serialized hsla values of the color.
    h (hue has value between 0-360 degree)
@@ -1174,7 +1177,7 @@ class Color {
    l (lightness has a value between 0-100 percent)
    a (alpha has a value between 0-1)
    e.g: 'hsla(360,50%,50%,0.9)'
-   
+
    @type {String}
    @default ""
    */
@@ -1184,10 +1187,10 @@ class Color {
   set hslaValue(value) {
     this.value = value;
   }
-  
+
   /**
    Clone this color.
-   
+
    @type {Color}
    */
   clone() {
@@ -1196,72 +1199,72 @@ class Color {
     clone.alpha = this.alpha;
     return clone;
   }
-  
+
   /**
    Test if this Color is similar to another color.
-   
+
    @type {Boolean}
    @param {Color} compareColor
    The color to compare this color too.
-   
+
    @param {Boolean} [allowSlightColorDifference=true]
    While converting between color spaces slight loses might happen => we should normally consider colors equal,
    even if they are minimally different.
- 
+
    */
   isSimilarTo(compareColor, allowSlightColorDifference) {
     if (this.rgb === null && (!compareColor || compareColor.rgb === null)) {
       // Consider an rgb of null equal to a null object (or another value of null)
       return true;
     }
-    
+
     if (!compareColor || compareColor.rgb === null || this.rgb === null) {
       return false;
     }
-    
+
     let allowedRgbDifference = 1;
     let allowedAlphaDifference = 0.01;
-    
+
     if (allowSlightColorDifference === false) {
       allowedRgbDifference = 0;
       allowedAlphaDifference = 0;
     }
-    
+
     const rgb = this.rgb;
     const rgb2 = compareColor.rgb;
-    
+
     const rDiff = Math.abs(rgb2.r - rgb.r);
     const gDiff = Math.abs(rgb2.g - rgb.g);
     const bDiff = Math.abs(rgb2.b - rgb.b);
     const aDiff = Math.abs(this.alpha - compareColor.alpha);
-    
+
     if (rDiff <= allowedRgbDifference && gDiff <= allowedRgbDifference && bDiff <= allowedRgbDifference && aDiff <= allowedAlphaDifference) {
       return true;
     }
-    
+
     return false;
   }
-  
+
   /**
    Calculates an array of lighter colors.
-   
+
    @type {Array<Coral.Color>}
    @param {Number} amount
    Amount of tint colors to generate.
- 
+
    */
   calculateTintColors(amount) {
     const tintColors = [];
     let tintColor = null;
-    
+
     const rgb = this.rgb;
     if (rgb) {
       const r = rgb.r;
       const g = rgb.g;
       const b = rgb.b;
-      
+
       let tintFactor = 1;
-      
+
       for (let i = 1; i <= amount; i++) {
         tintFactor = i / (amount + 1);
         tintColor = this.clone();
@@ -1271,34 +1274,34 @@ class Color {
           g: g + (255 - g) * tintFactor,
           b: b + (255 - b) * tintFactor
         };
-        
+
         tintColors.push(tintColor);
       }
     }
-    
+
     return tintColors;
   }
-  
+
   /**
    Calculates an array of darker colors.
-   
+
    @type {Array<Coral.Color>}
    @param {Number} amount
    Amount of shade colors to generate.
- 
+
    */
   calculateShadeColors(amount) {
     const shadeColors = [];
     let shadeColor = null;
-    
+
     const rgb = this.rgb;
     if (rgb) {
       const r = rgb.r;
       const g = rgb.g;
       const b = rgb.b;
-      
+
       let shadeFactor = 1;
-      
+
       for (let i = 1; i <= amount; i++) {
         shadeFactor = i / (amount + 1);
         shadeColor = this.clone();
@@ -1308,11 +1311,11 @@ class Color {
           g: g * (1 - shadeFactor),
           b: b * (1 - shadeFactor)
         };
-        
+
         shadeColors.push(shadeColor);
       }
     }
-    
+
     return shadeColors;
   }
 }

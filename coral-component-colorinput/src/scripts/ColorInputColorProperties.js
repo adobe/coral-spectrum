@@ -33,7 +33,11 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
   /** @ignore */
   constructor() {
     super();
-    
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
     this._delegateEvents(commons.extend(this._events, {
       'change [handle="redSlider"]': '_onRedSliderChange',
       'change [handle="greenSlider"]': '_onGreenSliderChange',
@@ -42,56 +46,56 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
       'change ._coral-ColorInput-editHex': '_onChangeHex',
       'change ._coral-ColorInput-editRgba': '_onChangeRgba'
     }));
-    
+
     // Templates
     this._elements = {};
     propertiesSubview.call(this._elements, {commons, i18n});
   }
-  
+
   /** @ignore */
   _onColorInputChange() {
     const newColor = this._colorinput.valueAsColor;
     const colorPreview = this._elements.colorPreview2;
     let rgba;
-  
+
     if (!newColor) {
       // update the colorPreview background color, state, and label
       colorPreview.setAttribute('aria-pressed', 'true');
       colorPreview.setAttribute('aria-label', i18n.get('Color not set'));
-    
+
       // reset Hex value to empty
       this._elements.hexInput.value = '';
     }
     else {
       rgba = newColor.rgba;
-    
+
       // update the colorPreview background color, state, and label
       colorPreview.style.backgroundColor = newColor.rgbValue;
       colorPreview.setAttribute('aria-pressed', 'false');
       colorPreview.setAttribute('aria-label', i18n.get('{value}, Color', {
         value: parseFloat(rgba.a) === 1 ? newColor.value : newColor.rgbaValue
       }));
-    
+
       // update the Hex input value
       this._elements.hexInput.value = newColor.hexValue.substr(1);
     }
-  
+
     const prefixes = ['red', 'green', 'blue', 'alpha'];
     const prefixesLength = prefixes.length;
     let prefix;
     let abbr;
     let isAlpha;
     let val;
-  
+
     // update rgba slider and input values
     for (let i = 0; i < prefixesLength; i++) {
       prefix = prefixes[i];
       abbr = prefix.substr(0, 1);
       isAlpha = i === prefixesLength - 1;
-    
+
       // default slider and input value
       val = isAlpha ? 100 : 127;
-    
+
       // with new color, get appropriate RGBA value
       if (newColor) {
         if (!rgba) {
@@ -104,55 +108,55 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
           val = rgba[abbr];
         }
       }
-    
+
       // update the slider and input values
       this._elements[`${prefix}Slider`].value = this._elements[`${prefix}Input`].value = val;
     }
-  
+
     if (colorPreview === document.activeElement) {
       // force blur and focus on colorButton so that new color or state is announced
       colorPreview.blur();
-    
+
       // delay focus by 100ms so that screen reader has time to adjust to label with updated color value
       window.setTimeout(() => {
         colorPreview.focus();
       }, 100);
     }
   }
-  
+
   /** @ignore */
   _onRedSliderChange(event) {
     this._elements.redInput.value = this._elements.redSlider.value;
     this._onChangeRgba(event);
   }
-  
+
   /** @ignore */
   _onGreenSliderChange(event) {
     this._elements.greenInput.value = this._elements.greenSlider.value;
     this._onChangeRgba(event);
   }
-  
+
   /** @ignore */
   _onBlueSliderChange(event) {
     this._elements.blueInput.value = this._elements.blueSlider.value;
     this._onChangeRgba(event);
   }
-  
+
   /** @ignore */
   _onAlphaSliderChange(event) {
     this._elements.alphaInput.value = this._elements.alphaSlider.value;
     this._onChangeRgba(event);
   }
-  
+
   /** @ignore */
   _onChangeHex(event) {
     event.stopPropagation();
-  
+
     // Value of hexInput field is without '#'.
     const value = `#${this._elements.hexInput.value}`;
     const color = new Color();
     color.value = value;
-    
+
     if (color.hex === null) {
       // no valid color value
       this._elements.hexInput.value = '';
@@ -166,37 +170,37 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
       this._colorinput._setActiveColor(color);
     }
   }
-  
+
   /** @ignore */
   _onChangeRgba(event) {
     event.stopPropagation();
-    
+
     const r = parseInt(this._elements.redInput.value, 10);
     const g = parseInt(this._elements.greenInput.value, 10);
     const b = parseInt(this._elements.blueInput.value, 10);
     const a = parseInt(this._elements.alphaInput.value, 10);
-    
+
     let colorValid = true;
     if (isNaN(r) || r < 0 || r > 255) {
       colorValid = false;
       this._elements.redInput.value = '';
     }
-    
+
     if (isNaN(g) || g < 0 || g > 255) {
       colorValid = false;
       this._elements.greenInput.value = '';
     }
-    
+
     if (isNaN(b) || b < 0 || b > 255) {
       colorValid = false;
       this._elements.blueInput.value = '';
     }
-    
+
     if (isNaN(a) || a < 0 || a > 100) {
       colorValid = false;
       this._elements.alphaInput.value = '';
     }
-    
+
     if (colorValid) {
       const color = new Color();
       color.rgba = {
@@ -208,19 +212,19 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
       this._colorinput._setActiveColor(color);
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Support cloneNode
     const subview = this.querySelector('._coral-ColorInput-propertiesSubview');
     if (subview) {
       subview.remove();
     }
-    
+
     this.appendChild(this._elements.propertiesSubview);
   }
 }

@@ -17,9 +17,9 @@ const CLASSNAME = '_coral-Shell-user';
 
 /**
  Enumeration for {@link ShellUser} avatar options. Avatar assets should use one of those provided, when no asset is set
- 
+
  @typedef {Object} ShellUserAvatarEnum
- 
+
  @property {String} DEFAULT
  Default avatar, show user icon from icon font.
  */
@@ -38,7 +38,7 @@ class ShellUser extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
@@ -48,14 +48,18 @@ class ShellUser extends BaseComponent(HTMLElement) {
       content: this.querySelector('coral-shell-user-content') || document.createElement('coral-shell-user-content'),
       footer: this.querySelector('coral-shell-user-footer') || document.createElement('coral-shell-user-footer')
     };
-    
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
     user.call(this._elements, {icon: avatar.DEFAULT});
   }
-  
+
   /**
    Specifies the asset used inside the avatar view.
    See {@link Icon} for valid usage and icon names.
-   
+
    @type {String}
    @default ShellUserAvatarEnum.DEFAULT
    @htmlattribute avatar
@@ -66,10 +70,10 @@ class ShellUser extends BaseComponent(HTMLElement) {
   set avatar(value) {
     this._elements.avatar.icon = value;
   }
-  
+
   /**
    The name content zone of the user-menu.
-   
+
    @type {ShellUserName}
    @contentzone
    */
@@ -85,10 +89,10 @@ class ShellUser extends BaseComponent(HTMLElement) {
       }
     });
   }
-  
+
   /**
    The heading content zone of the user-menu.
-   
+
    @type {ShellUserHeading}
    @contentzone
    */
@@ -104,10 +108,10 @@ class ShellUser extends BaseComponent(HTMLElement) {
       }
     });
   }
-  
+
   /**
    The subheading content zone of the user-menu.
-   
+
    @type {ShellUserSubheading}
    @contentzone
    */
@@ -123,10 +127,10 @@ class ShellUser extends BaseComponent(HTMLElement) {
       }
     });
   }
-  
+
   /**
    The main content zone of the user-menu.
-   
+
    @type {ShellUserContent}
    @contentzone
    */
@@ -142,15 +146,15 @@ class ShellUser extends BaseComponent(HTMLElement) {
         if (content.innerHTML.trim() === '') {
           content.innerHTML = '';
         }
-        
+
         this.appendChild(content);
       }
     });
   }
-  
+
   /**
    The footer content zone of the user-menu.
-   
+
    @type {ShellUserFooter}
    @contentzone
    */
@@ -166,7 +170,7 @@ class ShellUser extends BaseComponent(HTMLElement) {
       }
     });
   }
-  
+
   get _contentZones() {
     return {
       'coral-shell-user-name': 'name',
@@ -176,28 +180,28 @@ class ShellUser extends BaseComponent(HTMLElement) {
       'coral-shell-user-footer': 'footer'
     };
   }
-  
+
   /** @ignore */
   static get observedAttributes() { return super.observedAttributes.concat(['avatar']); }
-  
+
   /**
    Returns {@link ShellUser} avatar options.
-   
+
    @return {ShellUserAvatarEnum}
    */
   static get avatar() { return avatar; }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     const frag = document.createDocumentFragment();
-  
+
     // Render template
     frag.appendChild(this._elements.container);
-  
+
     for (const contentZone in this._contentZones) {
       const element = this._elements[this._contentZones[contentZone]];
       // Remove it so we can process children
@@ -205,7 +209,7 @@ class ShellUser extends BaseComponent(HTMLElement) {
         element.parentNode.removeChild(element);
       }
     }
-  
+
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
@@ -218,14 +222,14 @@ class ShellUser extends BaseComponent(HTMLElement) {
         this.removeChild(child);
       }
     }
-    
+
     this.appendChild(frag);
-  
+
     // Assign the content zones so the insert functions will be called
     for (const contentZone in this._contentZones) {
       const contentZoneName = this._contentZones[contentZone];
       const element = this._elements[this._contentZones[contentZone]];
-  
+
       /** @ignore */
       this[contentZoneName] = element;
     }

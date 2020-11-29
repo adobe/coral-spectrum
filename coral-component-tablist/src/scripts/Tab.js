@@ -37,6 +37,10 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
       invalidIcon: this.querySelector('._coral-Tabs-itemInvalidIcon') || this._createInvalidIcon()
     };
     base.call(this._elements);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
 
     // Listen for mutations
     this._observer = new MutationObserver(() => {

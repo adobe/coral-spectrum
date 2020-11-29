@@ -31,9 +31,9 @@ const MIN_REG_EXP = new RegExp('m{1,2}');
 
 /**
  Enumeration for {@link Clock} variants.
- 
+
  @typedef {Object} ClockVariantEnum
- 
+
  @property {String} DEFAULT
  A default, gray Clock.
  @property {String} QUIET
@@ -66,28 +66,32 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-  
+
+    this._elements = {};
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
     // Default value
     this._value = '';
-    
+
     // Events
     this._delegateEvents(commons.extend(this._events, {
       'change [handle="period"]': '_onPeriodChange'
     }));
-    
+
     // Prepare templates
-    this._elements = {};
     this._template = base.call(this._elements, {commons, i18n});
-  
+
     // Pre-define labellable element
     this._labellableElement = this;
   }
-  
+
   /**
    The format used to display the selected time to the user. If the user manually types a time, this format
    will be used to parse the value. 'HH:mm' is supported by default. Include momentjs to support additional format
    string options see http://momentjs.com/docs/#/displaying/.
-   
+
    @type {String}
    @default "HH:mm"
    @htmlattribute displayformat
@@ -99,16 +103,16 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   set displayFormat(value) {
     this._displayFormat = this._extractTimeFormat(transform.string(value).trim(), TIME_REG_EXP, DEFAULT_TIME_FORMAT);
     this._reflectAttribute('displayformat', this._displayFormat);
-    
+
     this._syncDisplay();
   }
-  
+
   /**
    The format to use on expressing the time as a string on the <code>value</code> attribute. The value
    will be sent to the server using this format. If an empty string is provided, then the default value per type
    will be used. 'HH:mm' is supported by default. Include momentjs to support additional format string options
    see http://momentjs.com/docs/#/displaying/.
-   
+
    @type {String}
    @default "HH:mm"
    @htmlattribute valueformat
@@ -122,7 +126,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
       this._valueFormat = this._extractTimeFormat(transform.string(newValue).trim(), TIME_REG_EXP, DEFAULT_TIME_FORMAT);
       this._reflectAttribute('valueformat', this._valueFormat);
     };
-  
+
     // Once the valueFormat is set, we make sure the value is also correct
     if (!this._valueFormat && this._originalValue) {
       setValueFormat(value);
@@ -133,10 +137,10 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
       this._elements.input.value = this.value;
     }
   }
-  
+
   /**
    The current value as a Date. If the value is "" or an invalid date, <code>null</code> will be returned.
-   
+
    @type {Date}
    @default null
    */
@@ -146,10 +150,10 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   set valueAsDate(value) {
     this.value = value instanceof Date ? new DateTime.Moment(value, null, true).format(this.valueFormat) : '';
   }
-  
+
   /**
    The clock's variant. See {@link ClockVariantEnum}.
-   
+
    @type {String}
    @default ClockVariantEnum.DEFAULT
    @htmlattribute variant
@@ -162,20 +166,20 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-  
+
     // passes down the variant to the underlying components
     this._elements.hours.variant = this._variant;
     this._elements.minutes.variant = this._variant;
     this._elements.period.variant = this._variant;
-  
+
     // removes every existing variant
     this.classList.remove(...ALL_VARIANT_CLASSES);
-  
+
     if (this._variant !== variant.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._variant}`);
     }
   }
-  
+
   /**
    Name used to submit the data in a form.
    @type {String}
@@ -188,10 +192,10 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   set name(value) {
     this._reflectAttribute('name', value);
-    
+
     this._elements.input.name = value;
   }
-  
+
   /**
    Whether this field is disabled or not.
    @type {Boolean}
@@ -205,16 +209,16 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
-    
+
     this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
     this.classList.toggle('is-disabled', this._disabled);
-    
+
     this._elements.hours.disabled = this._disabled;
     this._elements.minutes.disabled = this._disabled;
     // stops the form submission
     this._elements.input.disabled = this._disabled;
   }
-  
+
   /**
    Inherited from {@link BaseFormField#invalid}.
    */
@@ -223,11 +227,11 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   set invalid(value) {
     super.invalid = value;
-  
+
     this._elements.hours.invalid = this._invalid;
     this._elements.minutes.invalid = this._invalid;
   }
-  
+
   /**
    Whether this field is required or not.
    @type {Boolean}
@@ -241,12 +245,12 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
-  
+
     this._elements.hours.required = this._required;
     this._elements.minutes.required = this._required;
     this._elements.input.required = this._required;
   }
-  
+
   /**
    Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
    @type {Boolean}
@@ -260,12 +264,12 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
-  
+
     this._elements.hours.readOnly = this._readOnly;
     this._elements.minutes.readOnly = this._readOnly;
     this._elements.input.readOnly = this._readOnly;
   }
-  
+
   /**
    This field's current value.
    @type {String}
@@ -279,28 +283,28 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
     value = typeof value === 'string' ? value : '';
     // This is used to change the value if valueformat is also set but afterwards
     this._originalValue = value;
-    
+
     // we do strict conversion of the values
     const time = new DateTime.Moment(value, this.valueFormat, true);
     this._value = time.isValid() ? time : '';
     this._elements.input.value = this.value;
-  
+
     this._syncValueAsText();
     this._syncDisplay();
   }
-  
+
   /**
    Inherited from {@link BaseFormField#labelledBy}.
    */
   get labelledBy() {
     // Get current aria-labelledby attribute on the labellable element.
     let labelledBy = this.getAttribute('aria-labelledby');
-  
+
     // If a labelledBy attribute has been defined,
     if (labelledBy) {
       // and strip the valueAsText element id from the end of the aria-labelledby string.
       labelledBy = labelledBy.replace(this._elements.valueAsText.id, '').trim();
-    
+
       // If the resulting labelledBy string is empty, return null.
       if (!labelledBy.length) {
         labelledBy = null;
@@ -310,18 +314,18 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   set labelledBy(value) {
     super.labelledBy = value;
-  
+
     // The specified labelledBy property.
     const labelledBy = this.labelledBy;
-  
+
     // An array of element ids to label control, the last being the valueAsText element id.
     const ids = [this._elements.valueAsText.id];
-  
+
     // If a labelledBy property exists,
     if (labelledBy) {
       // prepend the labelledBy value to the ids array
       ids.unshift(labelledBy);
-  
+
       // Set aria-labelledby attribute on the labellable element joining ids array into space-delimited list of ids.
       this.setAttribute('aria-labelledby', ids.join(' '));
     }
@@ -330,39 +334,39 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
       this.removeAttribute('aria-labelledby');
     }
   }
-  
+
   /**
    Ignore the date part and use the time part only
-   
+
    @private
    */
   _extractTimeFormat(format, regExp, defaultFormat) {
     const match = regExp.exec(format);
     return match && match.length && match[0] !== '' ? match[0] : defaultFormat;
   }
-  
+
   /**
    Sync time display based on the format
-   
+
    @private
    */
   _syncDisplay() {
     const hourFormat = this._extractTimeFormat(this.displayFormat, HOUR_REG_EXP, DEFAULT_HOUR_FORMAT);
     const minuteFormat = this._extractTimeFormat(this.displayFormat, MIN_REG_EXP, DEFAULT_MINUTE_FORMAT);
-    
+
     this._elements.hours.placeholder = hourFormat;
     this._elements.minutes.placeholder = minuteFormat;
-    
+
     this._elements.hours.value = this._getValueAsString(this._value, hourFormat);
     this._elements.minutes.value = this._getValueAsString(this._value, minuteFormat);
-    
+
     this._syncPeriod();
     this._syncValueAsText();
   }
-  
+
   /**
    Sync period selector based on the format
-   
+
    @private
    */
   _syncPeriod() {
@@ -371,7 +375,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
     const am = i18n.get('am');
     const pm = i18n.get('pm');
     const items = period.items.getAll();
-    
+
     if (time && time.isValid()) {
       if (time.hours() < 12) {
         period.value = 'am';
@@ -380,7 +384,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
         period.value = 'pm';
       }
     }
-    
+
     // Check for am/pm
     if (this.displayFormat.indexOf('a') !== -1) {
       items[0].textContent = am;
@@ -396,21 +400,21 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
       this._togglePeriod(false);
     }
   }
-  
+
   /** @private */
   _togglePeriod(show) {
     this.classList.toggle(`${CLASSNAME}--extended`, show);
     this._elements.period.hidden = !show;
   }
-  
+
   /** @private */
   _onPeriodChange(event) {
     // stops the event from leaving the component
     event.stopImmediatePropagation();
-    
+
     const time = this._value;
     const period = this._elements.period;
-    
+
     // we check if a change event needs to be triggered since it was produced via user interaction
     if (time && time.isValid()) {
       if (this.displayFormat.indexOf('h') !== -1) {
@@ -421,35 +425,35 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
           time.add(12, 'h');
         }
       }
-      
+
       this.value = time.format(this.valueFormat);
       this.trigger('change');
     }
   }
-  
+
   _syncValueAsText() {
     this._elements.valueAsText.textContent = this._getValueAsString(this._value, this.displayFormat);
-    
+
     if (!this.getAttribute('aria-labelledby')) {
       this.labelledBy = this.labelledBy;
     }
   }
-  
+
   /**
    Kills the internal _onInputChange from BaseFormField because it does not check the target.
-   
+
    @private
    */
   _onInputChange(event) {
     // stops the event from leaving the component
     event.stopImmediatePropagation();
-    
+
     let newTime = new DateTime.Moment();
     const oldTime = this._value;
-    
+
     let hours = parseInt(this._elements.hours.value, 10);
     const minutes = parseInt(this._elements.minutes.value, 10);
-    
+
     if (window.isNaN(hours) || window.isNaN(minutes)) {
       newTime = '';
     }
@@ -459,16 +463,16 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
         this._elements.period.value === 'pm') {
         hours += 12;
       }
-      
+
       newTime.hours(hours);
       newTime.minutes(minutes);
     }
-    
+
     // we check if a change event needs to be triggered since it was produced via user interaction
     if (newTime && newTime.isValid()) {
       // @polyfill ie
       this.invalid = false;
-      
+
       if (!newTime.isSame(oldTime, 'hour') || !newTime.isSame(oldTime, 'minute')) {
         this.value = newTime.format(this.valueFormat);
         this.trigger('change');
@@ -479,51 +483,51 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
       this.invalid = true;
       // does not sync the inputs so allow the user to continue typing the date
       this._value = '';
-      
+
       if (newTime !== oldTime) {
         this.trigger('change');
       }
     }
   }
-  
+
   /**
    Helper class that converts the internal moment value into a String using the provided date format. If the value is
    invalid, empty string will be returned.
-   
+
    @param {?Moment} value
    The value representing the date. It has to be a moment object or <code>null</code>
    @param {String} format
    The Date format to be used.
-   
+
    @returns {String} a String representing the value in the given format.
-   
+
    @ignore
    */
   _getValueAsString(value, format) {
     return value && value.isValid() ? value.format(format) : '';
   }
-  
+
   focus() {
     // Sets focus to appropriate descendant
     if (!this.contains(document.activeElement)) {
       this._elements.hours.focus();
     }
   }
-  
+
   /**
    Returns {@link Clock} variants.
-   
+
    @return {ClockVariantEnum}
    */
   static get variant() { return variant; }
-  
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       displayformat: 'displayFormat',
       valueformat: 'valueFormat'
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -532,29 +536,29 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
       'variant'
     ]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // a11y
     this.setAttribute('role', 'group');
-    
+
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }
     if (!this._valueFormat) { this.valueFormat = DEFAULT_TIME_FORMAT; }
     if (!this._displayFormat) { this.displayFormat = DEFAULT_TIME_FORMAT; }
-  
+
     // clean up to be able to clone it
     while (this.firstChild) {
       this.removeChild(this.firstChild);
     }
-    
+
     // Render template
     this.appendChild(this._template);
-    
+
     this._syncDisplay();
   }
 }

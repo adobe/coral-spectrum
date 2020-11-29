@@ -25,6 +25,10 @@ class SelectItem extends BaseComponent(HTMLElement) {
   constructor() {
     super();
 
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
     this._observer = new MutationObserver(this._handleMutation.bind(this));
     this._observer.observe(this, {
       characterData: true,

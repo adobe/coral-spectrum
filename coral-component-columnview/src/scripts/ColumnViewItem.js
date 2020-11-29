@@ -21,9 +21,9 @@ const CLASSNAME = '_coral-AssetList-item';
 
 /**
  Enumeration for {@link ColumnViewItem} variants.
- 
+
  @typedef {Object} ColumnViewItemVariantEnum
- 
+
  @property {String} DEFAULT
  Default item variant. Contains no special decorations.
  @property {String} DRILLDOWN
@@ -50,25 +50,29 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-  
+
     // Content zone
     this._elements = {
       content: this.querySelector('coral-columnview-item-content') || document.createElement('coral-columnview-item-content'),
       thumbnail: this.querySelector('coral-columnview-item-thumbnail') || document.createElement('coral-columnview-item-thumbnail'),
       accessibilityState: this.querySelector('span[handle="accessibilityState"]')
     };
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
 
     if (!this._elements.accessibilityState) {
       // Templates
       accessibilityState.call(this._elements, {commons});
     }
-  
+
     super._observeLabel();
   }
-  
+
   /**
    The content of the item.
-   
+
    @type {ColumnViewItemContent}
    @contentzone
    */
@@ -86,10 +90,10 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       }
     });
   }
-  
+
   /**
    The thumbnail of the item. It is used to hold an icon or an image.
-   
+
    @type {ColumnViewItemThumbnail}
    @contentzone
    */
@@ -107,10 +111,10 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       }
     });
   }
-  
+
   /**
    The item's variant. See {@link ColumnViewItemVariantEnum}.
-   
+
    @type {String}
    @default ColumnViewItemVariantEnum.DEFAULT
    @htmlattribute variant
@@ -123,20 +127,20 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-  
+
     if (this._variant === variant.DRILLDOWN) {
       // Render chevron on demand
       const childIndicator = this.querySelector('._coral-AssetList-itemChildIndicator');
       if (!childIndicator) {
         this.insertAdjacentHTML('beforeend', Icon._renderSVG('spectrum-css-icon-ChevronRightMedium', ['_coral-AssetList-itemChildIndicator', '_coral-UIIcon-ChevronRightMedium']));
       }
-      
+
       this.classList.add('is-branch');
 
-      // @a11y Update aria-expanded. Active drilldowns should be expanded. 
-      // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
-      // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when 
-      // navigating between items. 
+      // @a11y Update aria-expanded. Active drilldowns should be expanded.
+      // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+      // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
+      // navigating between items.
       if (this.selected || (isChromeMacOS && this.getAttribute('aria-level') === '1')) {
         this.removeAttribute('aria-expanded');
       }
@@ -149,11 +153,11 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       this.removeAttribute('aria-expanded');
     }
   }
-  
+
   /**
    Specifies the icon that will be placed inside the thumbnail. The size of the icon is always controlled by the
    component.
-   
+
    @type {String}
    @default ""
    @htmlattribute icon
@@ -165,30 +169,30 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   set icon(value) {
     this._icon = transform.string(value);
     this._reflectAttribute('icon', this._icon);
-  
+
     // ignored if it is an empty string
     if (this._icon) {
       // creates a new icon element
       if (!this._elements.icon) {
         this._elements.icon = new Icon();
       }
-    
+
       this._elements.icon.icon = this.icon;
       this._elements.icon.size = Icon.size.SMALL;
-    
+
       // removes all the items, since the icon attribute has precedence
       this._elements.thumbnail.innerHTML = '';
-    
+
       // adds the newly created icon
       this._elements.thumbnail.appendChild(this._elements.icon);
     }
-  
+
     super._toggleIconAriaHidden();
   }
-  
+
   /**
    Whether the item is selected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -201,16 +205,16 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
     this.trigger('coral-columnview-item:_selectedchanged');
-  
+
     // wait a frame before updating attributes
     commons.nextFrame(() => {
       this.classList.toggle('is-selected', this._selected);
       this.setAttribute('aria-selected', this._selected);
 
       // @a11y Update aria-expanded. Active drilldowns should be expanded.
-      // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
-      // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when 
-      // navigating between items. 
+      // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+      // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
+      // navigating between items.
       if (this.variant === variant.DRILLDOWN) {
         if (this._selected || (isChromeMacOS && this.getAttribute('aria-level') === '1')) {
           this.removeAttribute('aria-expanded');
@@ -221,7 +225,7 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       }
 
       let accessibilityState = this._elements.accessibilityState;
-      
+
       if (this._selected) {
 
         // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
@@ -259,10 +263,10 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       }
     });
   }
-  
+
   /**
    Whether the item is active.
-   
+
    @type {Boolean}
    @default false
    @htmlattribut active
@@ -274,15 +278,15 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   set active(value) {
     this._active = transform.booleanAttr(value);
     this._reflectAttribute('active', this._active);
-  
+
     this.classList.toggle('is-navigated', this._active);
     this.setAttribute('aria-selected', this.hasAttribute('_selectable') ? this.selected : this._active);
 
     // @a11y Update aria-expanded. Active drilldowns should be expanded.
-    // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
-    // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when 
-    // navigating between items. 
-    if (this.variant === variant.DRILLDOWN) { 
+    // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+    // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
+    // navigating between items.
+    if (this.variant === variant.DRILLDOWN) {
       if (this._selected || (isChromeMacOS && this.getAttribute('aria-level') === '1')) {
         this.removeAttribute('aria-expanded');
       }
@@ -296,17 +300,17 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       this.removeAttribute('aria-owns');
       this.removeAttribute('aria-describedby');
     }
-    
+
     this.trigger('coral-columnview-item:_activechanged');
   }
-  
+
   get _contentZones() {
     return {
       'coral-columnview-item-content': 'content',
       'coral-columnview-item-thumbnail': 'thumbnail'
     };
   }
-  
+
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === '_selectable') {
@@ -318,7 +322,7 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       else {
         this.classList.add('is-selectable');
         let itemSelector = this.querySelector('[coral-columnview-itemselect]');
-  
+
         // Render checkbox on demand
         if (!itemSelector) {
           itemSelector = new Checkbox();
@@ -328,7 +332,7 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
           }
           itemSelector._elements.input.tabIndex = -1;
           itemSelector.setAttribute('labelledby', this._elements.content.id);
-      
+
           // Add the item selector as first child
           this.insertBefore(itemSelector, this.firstChild);
         }
@@ -338,14 +342,14 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
-  
+
   /**
    Returns {@link ColumnViewItem} variants.
-   
+
    @return {ColumnViewItemVariantEnum}
    */
   static get variant() { return variant; }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -356,13 +360,13 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       '_selectable'
     ]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // @a11y
     this.setAttribute('role', 'treeitem');
 
@@ -372,22 +376,22 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     if (!this.hasAttribute('tabindex')) {
       this.tabIndex = this.active || this.selected ? 0 : -1;
     }
-    
+
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DEFAULT; }
-    
+
     const thumbnail = this._elements.thumbnail;
     const content = this._elements.content;
-    
+
     const contentZoneProvided = content.parentNode || thumbnail.parentNode;
-    
+
     if (!contentZoneProvided) {
       // move the contents of the item into the content zone
       while (this.firstChild) {
         content.appendChild(this.firstChild);
       }
     }
-  
+
     // Assign content zones
     this.content = content;
     this.thumbnail = thumbnail;

@@ -27,18 +27,22 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
   /** @ignore */
   constructor() {
     super();
-    
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
       label: this.querySelector('coral-shell-solution-label') || document.createElement('coral-shell-solution-label')
     };
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
     solutionIcon.call(this._elements);
   }
-  
+
   /**
    Specifies the icon name used inside the button. See {@link Icon} for valid icon names.
-   
+
    @type {String}
    @default ""
    @htmlattribute icon
@@ -49,10 +53,10 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
   set icon(value) {
     this._elements.icon.icon = value;
   }
-  
+
   /**
    The solution's label content zone.
-   
+
    @type {ShellSolutionLabel}
    @contentzone
    */
@@ -68,10 +72,10 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
       }
     });
   }
-  
+
   /**
    Whether a solution is linked or not
-   
+
    @type {Boolean}
    @default false
    @htmlattribute linked
@@ -83,35 +87,35 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
   set linked(value) {
     this._linked = transform.booleanAttr(value);
     this._reflectAttribute('linked', this._linked);
-    
+
     this.classList.toggle(`${CLASSNAME}--linked`, this._linked);
   }
-  
+
   get _contentZones() { return {'coral-shell-solution-label': 'label'}; }
-  
+
   /** @ignore */
   static get observedAttributes() { return super.observedAttributes.concat(['icon', 'linked']); }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     const fragment = document.createDocumentFragment();
-  
+
     // Render template
     fragment.appendChild(this._elements.icon);
-  
+
     const label = this._elements.label;
-    
+
     // Remove it so we can process children
     if (label) { label.remove(); }
-  
+
     // Move any remaining elements into the content sub-component
     while (this.firstChild) {
       const child = this.firstChild;
-      
+
       if (child.nodeType === Node.TEXT_NODE ||
         child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'icon') {
         label.appendChild(child);
@@ -120,10 +124,10 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
         this.removeChild(child);
       }
     }
-  
+
     // Add template to component
     this.appendChild(fragment);
-    
+
     // Call the content zone insert
     this.label = label;
   }

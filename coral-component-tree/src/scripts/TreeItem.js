@@ -20,9 +20,9 @@ const CLASSNAME = '_coral-TreeView-item';
 
 /**
  Enumeration for {@link TreeItem} variants.
- 
+
  @typedef {Object} TreeItemVariantEnum
- 
+
  @property {String} DRILLDOWN
  Default variant with icon to expand/collapse subtree.
  @property {String} LEAF
@@ -54,12 +54,16 @@ class TreeItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
-    // Prepare templates
+
     this._elements = {
       // Create or fetch the content zones
       content: this.querySelector('coral-tree-item-content') || document.createElement('coral-tree-item-content')
     };
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    // Prepare templates
     treeItem.call(this._elements, {Icon, commons});
 
     if (!this._elements.icon) {
@@ -69,20 +73,20 @@ class TreeItem extends BaseComponent(HTMLElement) {
     // Tells the collection to automatically detect the items and handle the events
     this.items._startHandlingItems();
   }
-  
+
   /**
    The parent tree. Returns <code>null</code> if item is the root.
-   
+
    @type {HTMLElement}
    @readonly
    */
   get parent() {
     return this._parent || null;
   }
-  
+
   /**
    The content of this tree item.
-   
+
    @type {TreeItemContent}
    @contentzone
    */
@@ -98,10 +102,10 @@ class TreeItem extends BaseComponent(HTMLElement) {
       }
     });
   }
-  
+
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+
    @type {Collection}
    @readonly
    */
@@ -118,13 +122,13 @@ class TreeItem extends BaseComponent(HTMLElement) {
         onItemRemoved: this._onItemRemoved
       });
     }
-  
+
     return this._items;
   }
-  
+
   /**
    Whether the item is expanded. Expanded cannot be set to <code>true</code> if the item is disabled.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute expanded
@@ -136,13 +140,13 @@ class TreeItem extends BaseComponent(HTMLElement) {
   set expanded(value) {
     value = transform.booleanAttr(value);
     const triggerEvent = this.expanded !== value;
-    
+
     this._expanded = value;
     this._reflectAttribute('expanded', this._expanded);
-  
+
     const header = this._elements.header;
     const subTreeContainer = this._elements.subTreeContainer;
-  
+
     this.classList.toggle('is-open', this._expanded);
     this.classList.toggle('is-collapsed', !this._expanded);
 
@@ -154,7 +158,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
       header.setAttribute('aria-expanded', this._expanded);
       header.setAttribute('aria-owns', subTreeContainer.id);
     }
-    
+
     if (this._expanded) {
       subTreeContainer.removeAttribute('aria-hidden');
     }
@@ -166,9 +170,9 @@ class TreeItem extends BaseComponent(HTMLElement) {
       const icon = header.querySelector('._coral-TreeView-indicator');
       icon.setAttribute('aria-label', i18n.get(this._expanded ? 'Collapse' : 'Expand'));
     }
-    
+
     this.trigger('coral-tree-item:_expandedchanged');
-    
+
     // Do animation in next frame to avoid a forced reflow
     window.requestAnimationFrame(() => {
       // Don't animate on initialization
@@ -181,13 +185,13 @@ class TreeItem extends BaseComponent(HTMLElement) {
           else {
             subTreeContainer.hidden = true;
           }
-  
+
           // Trigger once the animation is over to inform coral-tree
           if (triggerEvent) {
             this.trigger('coral-tree-item:_afterexpandedchanged');
           }
         });
-    
+
         // Force height to enable transition
         if (!this.expanded) {
           subTreeContainer.style.height = `${subTreeContainer.scrollHeight}px`;
@@ -195,18 +199,18 @@ class TreeItem extends BaseComponent(HTMLElement) {
         else {
           subTreeContainer.hidden = false;
         }
-  
+
         // We read the offset height to force a reflow, this is needed to start the transition between absolute values
         // https://blog.alexmaccaw.com/css-transitions under Redrawing
         // eslint-disable-next-line no-unused-vars
         const offsetHeight = subTreeContainer.offsetHeight;
-        
+
         subTreeContainer.style.height = this.expanded ? `${subTreeContainer.scrollHeight}px` : 0;
       }
       else {
         // Make sure it's animated next time
         this._animate = true;
-    
+
         // Hide it on initialization if closed
         if (!this.expanded) {
           subTreeContainer.style.height = 0;
@@ -215,10 +219,10 @@ class TreeItem extends BaseComponent(HTMLElement) {
       }
     });
   }
-  
+
   /**
    The item's variant. See {@link TreeItemVariantEnum}.
-   
+
    @type {String}
    @default TreeItemVariant.DRILLDOWN
    @htmlattribute variant
@@ -230,15 +234,15 @@ class TreeItem extends BaseComponent(HTMLElement) {
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant, value) && value || variant.DRILLDOWN;
-  
+
     // removes every existing variant
     this.classList.remove(...ALL_VARIANT_CLASSES);
     this.classList.add(`${CLASSNAME}--${this._variant}`);
   }
-  
+
   /**
    Whether the item is selected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -250,7 +254,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
-  
+
     this._elements.header.classList.toggle('is-selected', this._selected);
     this._elements.header.setAttribute('aria-selected', this._selected);
 
@@ -260,13 +264,13 @@ class TreeItem extends BaseComponent(HTMLElement) {
     if (IS_TOUCH_DEVICE) {
       selectedState.setAttribute('aria-pressed', this._selected);
     }
-    
+
     this.trigger('coral-tree-item:_selectedchanged');
   }
-  
+
   /**
    Whether this item is disabled.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute disabled
@@ -278,13 +282,13 @@ class TreeItem extends BaseComponent(HTMLElement) {
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
-  
+
     this._elements.header.classList.toggle('is-disabled', this._disabled);
     this._elements.header[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
-    
+
     this.trigger('coral-tree-item:_disabledchanged');
   }
-  
+
   /**
    @ignore
    */
@@ -293,11 +297,11 @@ class TreeItem extends BaseComponent(HTMLElement) {
   }
   set hidden(value) {
     this._reflectAttribute('hidden', transform.booleanAttr(value));
-  
+
     // We redefine hidden to trigger an event
     this.trigger('coral-tree-item:_hiddenchanged');
   }
-  
+
   /** @private */
   _filterItem(item) {
     // Handle nesting check for parent tree item
@@ -305,7 +309,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
     // Use _parent for removed items
     return item.parentNode && item.parentNode.parentNode === this || item._parent === this;
   }
-  
+
   /** @private */
   _onItemAdded(item) {
     item._parent = this;
@@ -316,7 +320,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
       header.setAttribute('aria-owns', subTreeContainer.id);
     }
   }
-  
+
   /** @private */
   _onItemRemoved(item) {
     item._parent = undefined;
@@ -326,42 +330,42 @@ class TreeItem extends BaseComponent(HTMLElement) {
       this._elements.header.removeAttribute('aria-owns');
     }
   }
-  
+
   /**
    Handles the focus of the item.
- 
+
    @ignore
    */
   focus() {
     this._elements.header.setAttribute('tabindex', '0');
     this._elements.header.focus();
   }
-  
+
   /**
    Returns {@link TreeItem} variants.
-   
+
    @return {TreeItemVariantEnum}
    */
   static get variant() { return variant; }
-  
+
   get _contentZones() { return {'coral-tree-item-content': 'content'}; }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['selected', 'disabled', 'variant', 'expanded', 'hidden']);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
 
     const header = this._elements.header;
     const subTreeContainer = this._elements.subTreeContainer;
     const content = this._elements.content;
     const selectedState =  this._elements.selectedState;
-  
+
     // a11ys
     content.id = content.id || commons.getUID();
     this.setAttribute('role', 'presentation');
@@ -388,16 +392,16 @@ class TreeItem extends BaseComponent(HTMLElement) {
       selectedState.setAttribute('aria-pressed', this.selected);
       selectedState.setAttribute('style', 'outline: none !important');
     }
-  
+
     // Default reflected attributes
     if (!this._variant) { this.variant = variant.DRILLDOWN; }
     this.expanded = this.expanded;
-    
+
     // Render the template and set element references
     const frag = document.createDocumentFragment();
-  
+
     const templateHandleNames = ['header', 'icon', 'subTreeContainer'];
-    
+
     const subTree = this.querySelector('._coral-TreeView');
     if (subTree) {
       const items = subTree.querySelectorAll('coral-tree-item');
@@ -405,14 +409,14 @@ class TreeItem extends BaseComponent(HTMLElement) {
         subTreeContainer.appendChild(items[i]);
       }
     }
-    
+
     // Add templates into the frag
     frag.appendChild(header);
     frag.appendChild(subTreeContainer);
-  
+
     // Assign the content zones, moving them into place in the process
     this.content = content;
-  
+
     // Move any remaining elements into the content sub-component
     while (this.firstChild) {
       const child = this.firstChild;
@@ -436,40 +440,40 @@ class TreeItem extends BaseComponent(HTMLElement) {
     if (this.variant === variant.DRILLDOWN && this.items.length && !header.hasAttribute('aria-owns')) {
       header.setAttribute('aria-owns', subTreeContainer.id);
     }
-  
+
     // Lastly, add the fragment into the container
     this.appendChild(frag);
   }
-  
+
   /**
    Triggered when {@link TreeItem#selected} changed.
- 
+
    @typedef {CustomEvent} coral-tree-item:_selectedchanged
-   
+
    @private
    */
-  
+
   /**
    Triggered when {@link TreeItem#expanded} changed.
- 
+
    @typedef {CustomEvent} coral-tree-item:_expandedchanged
-   
+
    @private
    */
-  
+
   /**
    Triggered when {@link TreeItem#hidden} changed.
- 
+
    @typedef {CustomEvent} coral-tree-item:_hiddenchanged
-   
+
    @private
    */
-  
+
   /**
    Triggered when {@link TreeItem#disabled} changed.
- 
+
    @typedef {CustomEvent} coral-tree-item:_disabledchanged
-   
+
    @private
    */
 }

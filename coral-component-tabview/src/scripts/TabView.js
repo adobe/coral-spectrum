@@ -17,9 +17,9 @@ import {commons} from '../../../coral-utils';
 
 /**
  Enumeration for {@link TabView} orientations.
- 
+
  @typedef {Object} TabViewOrientationEnum
- 
+
  @property {String} HORIZONTAL
  Tabs on top of the panels. This is the default.
  @property {String} VERTICAL
@@ -46,14 +46,18 @@ class TabView extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
-    // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
       tabList: this.querySelector('coral-tablist') || document.createElement('coral-tablist'),
       panelStack: this.querySelector('coral-panelstack') || document.createElement('coral-panelstack')
     };
-    
+
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
+    // Prepare templates
     // Events
     this._delegateEvents({
       'coral-tablist:change > coral-tablist': '_onTabListChange',
@@ -64,10 +68,10 @@ class TabView extends BaseComponent(HTMLElement) {
       'coral-collection:remove > coral-panelstack': '_syncTabListAndPanelStack'
     });
   }
-  
+
   /**
    The TabView's orientation. See {@link TabViewOrientationEnum}.
-   
+
    @type {String}
    @default TabViewOrientationEnum.HORIZONTAL
    @htmlattribute orientation
@@ -80,13 +84,13 @@ class TabView extends BaseComponent(HTMLElement) {
     // We rely on the tablist orientation enum so don't need to double check enums
     this._elements.tabList.setAttribute('orientation', value);
     this._reflectAttribute('orientation', this.orientation);
-  
+
     this.classList[this.orientation === orientation.VERTICAL ? 'add' : 'remove'](`${CLASSNAME}--vertical`);
   }
-  
+
   /**
    The TabList which handles all the tabs.
-   
+
    @type {TabList}
    @contentzone
    */
@@ -106,10 +110,10 @@ class TabView extends BaseComponent(HTMLElement) {
       });
     }
   }
-  
+
   /**
    The PanelStack which contains all the panels.
-   
+
    @type {PanelStack}
    @contentzone
    */
@@ -128,10 +132,10 @@ class TabView extends BaseComponent(HTMLElement) {
       });
     }
   }
-  
+
   /**
    Detects a change in the TabList and triggers an event.
-   
+
    @private
    */
   _onTabListChange(event) {
@@ -140,14 +144,14 @@ class TabView extends BaseComponent(HTMLElement) {
       oldSelection: event.detail.oldSelection
     });
   }
-  
+
   /** @private */
   _onPanelStackChange(event) {
     // everytime the panelstack changes, we verify that the tablist and panelstack are up to date
     if (event.detail.selection) {
       const tabSelector = event.detail.selection.getAttribute('aria-labelledby');
       const tab = document.getElementById(tabSelector);
-    
+
       // we select the tab if this was not the case
       if (tab) {
         if (!tab.hasAttribute('selected')) {
@@ -159,56 +163,56 @@ class TabView extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /** @private */
   _syncTabListAndPanelStack() {
     this._elements.tabList.target = this._elements.tabList.target;
   }
-  
+
   get _contentZones() {
     return {
       'coral-tablist': 'tabList',
       'coral-panelstack': 'panelStack'
     };
   }
-  
+
   /**
    Returns {@link TabView} orientation options.
-   
+
    @return {TabViewOrientationEnum}
    */
   static get orientation() { return orientation; }
-  
+
   /** @ignore */
   static get observedAttributes() { return super.observedAttributes.concat(['orientation']); }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // Default reflected attributes
     if (!this._orientation) { this.orientation = this.orientation; }
-  
+
     // Fetch or create the content zone elements
     const tabs = this._elements.tabList;
     const panels = this._elements.panelStack;
-  
+
     // Bind the tablist and panel stack together, using the panel id
     panels.id = panels.id || commons.getUID();
     tabs.setAttribute('target', `#${panels.id}`);
-  
+
     // Assign the content zones.
     this.panelStack = panels;
     this.tabList = tabs;
   }
-  
+
   /**
    Triggered when the {@link TabView} selected tab panel item has changed.
- 
+
    @typedef {CustomEvent} coral-tabview:change
-   
+
    @property {Tab} event.detail.selection
    The new selected tab panel item.
    @param {Tab} event.detail.oldSelection

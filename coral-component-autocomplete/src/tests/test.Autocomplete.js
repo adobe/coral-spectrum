@@ -27,7 +27,7 @@ describe('Autocomplete', function() {
       'should be possible to clone using markup',
       window.__html__['Autocomplete.base.html']
     );
-    
+
     helpers.cloneComponent(
       'should be possible to clone using js',
       new Autocomplete()
@@ -204,26 +204,26 @@ describe('Autocomplete', function() {
         expect(el.getAttribute('icon')).to.equal('search');
       });
     });
-    
+
     describe('#variant', function() {
       it('should default to DEFAULT', function() {
         expect(el.variant).to.equal(Autocomplete.variant.DEFAULT);
         expect(el.getAttribute('variant')).to.equal(el.variant);
       });
-      
+
       it('should switch the variant to QUIET', function() {
         el.variant = Autocomplete.variant.QUIET;
-        
+
         expect(el.variant).to.equal(Autocomplete.variant.QUIET);
         expect(el.getAttribute('variant')).to.equal(el.variant);
         expect(el._elements.trigger.classList.contains('_coral-FieldButton--quiet')).to.be.true;
         expect(el._elements.inputGroup.classList.contains('_coral-InputGroup--quiet')).to.be.true;
       });
-  
+
       it('should restore the DEFAULT variant', function() {
         el.variant = Autocomplete.variant.QUIET;
         el.variant = Autocomplete.variant.DEFAULT;
-  
+
         expect(el.variant).to.equal(Autocomplete.variant.DEFAULT);
         expect(el.getAttribute('variant')).to.equal(el.variant);
         expect(el._elements.trigger.classList.contains('_coral-FieldButton--quiet')).to.be.false;
@@ -342,7 +342,7 @@ describe('Autocomplete', function() {
       });
     });
   });
-  
+
   describe('Markup', () => {
     describe('#value', () => {
       it('should read the value from the DOM', () => {
@@ -458,10 +458,10 @@ describe('Autocomplete', function() {
 
         // Select first item
         helpers.keydown('down', el._elements.input);
-        
+
         // Hit enter to select value
         helpers.keypress('enter', el._elements.input);
-        
+
         // Check for selected value
         expect(el.value).to.equal('ch', 'value should be set from SelectList item click');
       });
@@ -541,7 +541,7 @@ describe('Autocomplete', function() {
 
           // Hit enter
           helpers.keypress('enter', el._elements.input);
-          
+
           expect(spy.callCount).to.equal(1, 'call count after hitting enter on exact match');
 
           // Remove event listener to prevent blur event problems
@@ -627,7 +627,7 @@ describe('Autocomplete', function() {
 
           // Hit enter
           helpers.keypress('enter', el._elements.input);
-          
+
           expect(spy.callCount).to.equal(1, 'call count after hitting enter on non-matching entry');
 
           // Remove event listener to prevent blur event problems
@@ -670,7 +670,7 @@ describe('Autocomplete', function() {
           helpers.keypress('enter', el._elements.input);
           // Lose focus
           el.trigger('blur');
-          
+
           expect(spy.callCount).to.equal(1, 'call count after losing focus on component');
 
           // Remove event listener to prevent blur event problems
@@ -713,7 +713,7 @@ describe('Autocomplete', function() {
 
           // Lost focus
           el.trigger('blur');
-          
+
           expect(spy.callCount).to.equal(1, 'call count after hitting enter on non-matching entry');
 
           // Remove event listener to prevent blur event problems
@@ -738,12 +738,12 @@ describe('Autocomplete', function() {
 
         var spy = sinon.spy();
         el.on('change', spy);
-        
+
         expect(tagList.items.length).to.equal(1, 'TagList should have 1 item after a frame');
 
         // Find the first tag and remove it
         el.querySelector('coral-tag').remove();
-        
+
         expect(tagList.items.length).to.equal(0, 'TagList should have 0 item after a frame');
         expect(spy.callCount).to.equal(1, 'Change spy should have been called once');
       });
@@ -1167,7 +1167,7 @@ describe('Autocomplete', function() {
         helpers.keypress('enter', el._elements.input);
 
         expect(el.value).to.equal('anything', 'value should be "anything"');
-      
+
         // Set empty text
         el._elements.input.value = '';
 
@@ -1181,17 +1181,22 @@ describe('Autocomplete', function() {
     });
 
     it('should be possible to select an item using the keyboard alone (if forceSelection === true)', function(done) {
-      el.multiple = false;
-      el.forceSelection = true;
+      const el1 = helpers.build(new Autocomplete());
 
-      el.items.add({
+      // No delay by default
+      el1.delay = 0;
+
+      el1.multiple = false;
+      el1.forceSelection = true;
+
+      el1.items.add({
         value: 'ch',
         content: {
           textContent: ' Chrome '
         }
       });
 
-      el.items.add({
+      el1.items.add({
         value: 'fi',
         content: {
           textContent: ' Firefox '
@@ -1201,26 +1206,26 @@ describe('Autocomplete', function() {
       // Wait for mutation observers to pick up items
       helpers.next(function() {
         // Trigger down arrow on input to open selectList
-        helpers.keydown('down', el._elements.input);
+        helpers.keydown('down', el1._elements.input);
 
         // Wait for mutation observers to pick up items
         helpers.next(function() {
-          expect(el._elements.overlay.open).to.be.true;
+          expect(el1._elements.overlay.open).to.be.true;
 
           // Trigger down arrow on input to focus first item in selectList
-          helpers.keydown('down', el._elements.input);
+          helpers.keydown('down', el1._elements.input);
 
           helpers.next(function() {
-            var selectListItem = el._elements.selectList.items.first();
+            var selectListItem = el1._elements.selectList.items.first();
 
-            expect(el._elements.input.getAttribute('aria-activedescendant')).to.equal(selectListItem.id, 'aria-activedescendant on input should match id of first item in selectList');
+            expect(el1._elements.input.getAttribute('aria-activedescendant')).to.equal(selectListItem.id, 'aria-activedescendant on input should match id of first item in selectList');
 
             expect(selectListItem.className.indexOf('is-focused') !== -1).to.equal(true, 'item in selectList should display keyboard focus');
 
             // trigger selection of 'focused' item is selectList
-            helpers.keydown('enter', el._elements.input);
-            
-            expect(el.value).to.equal(el.items.first().value, 'new value should match value of item selected using keyboard');
+            helpers.keydown('enter', el1._elements.input);
+
+            expect(el1.value).to.equal(el1.items.first().value, 'new value should match value of item selected using keyboard');
 
             done();
           });
@@ -1230,7 +1235,7 @@ describe('Autocomplete', function() {
 
     it('should be possible set focus to an item in the dropdown menu without closing the menu', function(done) {
       const overlayAnimationDuration = 125;
-      
+
       el.multiple = false;
       el.forceSelection = false;
 
@@ -1258,7 +1263,7 @@ describe('Autocomplete', function() {
 
           // Set focus to first selectList item
           el._elements.selectList.querySelector('[role=option]').focus();
-        
+
           expect(el._elements.overlay.open).to.equal(true, 'menu should remain open when item receives focus');
 
           // click focused selectList item element
@@ -1280,7 +1285,7 @@ describe('Autocomplete', function() {
     it('should be possible close menu by clicking the toggle button', function(done) {
       const overlayAnimationDuration = 125;
       var event = document.createEvent('MouseEvent');
-      
+
       el.multiple = false;
       el.forceSelection = false;
 
@@ -1303,37 +1308,37 @@ describe('Autocomplete', function() {
 
         // Click trigger to open selectList overlay
         el._elements.trigger.click();
-        
+
         setTimeout(function() {
           // SelectList overlay should be open
           expect(el._elements.overlay.open).to.be.true;
-  
+
           // Input should have focus
           expect(document.activeElement === el._elements.input).to.be.true;
-  
+
           // Mousedown on trigger
           helpers.mouseEvent('mousedown', el._elements.trigger);
-  
+
           // Trigger should receive focus on mousedown
           expect(document.activeElement === el._elements.trigger).to.be.true;
-  
+
           // SelectList overlay should still be open
           expect(el._elements.overlay.open).to.be.true;
-  
+
           // Mouseup on trigger
           helpers.mouseEvent('mouseup', el._elements.trigger);
           event.initEvent('mouseup', true, true);
-  
+
           // Click trigger to close selectList overlay
           el._elements.trigger.click();
-          
+
           setTimeout(function() {
             // SelectList overlay should be closed
             expect(el._elements.overlay.open).to.be.false;
-  
+
             // TODO Focus should be restored to input
             // expect(document.activeElement === el._elements.input).to.be.true;
-  
+
             done();
           }, overlayAnimationDuration);
         }, overlayAnimationDuration);
@@ -1446,7 +1451,7 @@ describe('Autocomplete', function() {
       });
 
       item.selected = true;
-      
+
       expect(el.value).to.equal(item.value, 'value should now be &&');
     });
 
@@ -1476,7 +1481,7 @@ describe('Autocomplete', function() {
 
         // Special characters should not be escaped
         expect(el.value).to.equal(item.value, 'value should now be &&');
-        
+
         done();
       });
     });
@@ -1507,7 +1512,7 @@ describe('Autocomplete', function() {
 
         // Special characters should not be escaped
         expect(el.value).to.equal(item.value, 'value should now be &&');
-        
+
         done();
       });
     });
@@ -1529,7 +1534,7 @@ describe('Autocomplete', function() {
           textContent: 'Firefox'
         }
       });
-      
+
       expect(firefox.disabled).to.equal(false);
       expect(firefox.hasAttribute('disabled')).to.equal(false);
       expect(chrome.disabled).to.equal(true);
@@ -1573,47 +1578,47 @@ describe('Autocomplete', function() {
         expect(el._elements.trigger.getAttribute('aria-label')).to.equal('Show suggestions');
 
         el._elements.input.value = 'Chrome';
-        
+
         helpers.event('input', el._elements.input);
-  
+
         el._elements.overlay.on('coral-overlay:open', function() {
           if (count === 0) {
             expect(el._elements.overlay.open).to.be.true;
-  
+
             expect(el._elements.trigger.getAttribute('aria-label')).to.equal('Show suggestion');
-  
+
             // close selectList
             helpers.keydown('esc', el._elements.input);
-  
+
             // clear value
             el._elements.input.value = '';
             helpers.event('input', el._elements.input);
-            
+
             count++
           }
           else if (count === 1) {
             expect(el._elements.trigger.getAttribute('aria-label')).to.equal('Show 4 suggestions');
-  
+
             // close selectList
             helpers.keydown('esc', el._elements.input);
-  
+
             // search for items containing the letter 'i'
             el._elements.input.value = 'i';
             helpers.event('input', el._elements.input);
-            
+
             count++;
           }
           else if (count === 2) {
             expect(el._elements.trigger.getAttribute('aria-label')).to.equal('Show 3 suggestions');
-  
+
             // navigate to focus first item in selectList
             helpers.keydown('down', el._elements.input);
-  
+
             // select focused item in selectList
             helpers.keydown('Enter', el._elements.input);
-  
+
             expect(el._elements.trigger.getAttribute('aria-label')).to.equal('Show suggestions');
-  
+
             done();
           }
         });
@@ -1667,7 +1672,7 @@ describe('Autocomplete', function() {
 
     it('should select the best matching option when an item is selected inside of the SelectList', function(done) {
       var el = helpers.build(new Autocomplete());
-      
+
       // Add same text options but case different
       el.items.add({
         value: 'uppercase',
@@ -1688,7 +1693,7 @@ describe('Autocomplete', function() {
 
         // Mimic the input focus out
         el._handleFocusOut({target: el._elements.input, preventDefault: function() {}});
-        
+
         // Lowercase option should be the selected value
         var matchedOption = el.items.last();
         expect(el._elements.input.value).to.equal(matchedOption.textContent);
@@ -1700,17 +1705,17 @@ describe('Autocomplete', function() {
       el._elements.input.value = 'c';
       helpers.event('input', el._elements.input);
     });
-  
+
     it('should suggest the best matching option supporting html entities', function(done) {
       var el = helpers.build(new Autocomplete());
-    
+
       el.items.add({
         value: 'ch',
         content: {
           innerHTML: 'chrome'
         }
       });
-    
+
       // Add html entity &amp;
       el.items.add({
         value: 'ie',
@@ -1718,40 +1723,40 @@ describe('Autocomplete', function() {
           innerHTML: 'Internet &amp; Explorer'
         }
       });
-    
+
       el.on('coral-overlay:open', function() {
         var suggestions = el._elements.selectList.items.getAll();
-      
+
         expect(suggestions.length).to.equal(1);
         expect(suggestions[0].value).to.equal('ie');
-      
+
         done();
       });
-    
+
       el._elements.input.value = 'Internet & Explorer';
       helpers.event('input', el._elements.input);
     });
-  
+
     it('should set the value of the multiline content option when selected', function(done) {
       const el = helpers.build(window.__html__['Autocomplete.content.html']);
       el.on('coral-overlay:open', function() {
         el._elements.selectList.items.first().trigger('mousedown');
-      
+
         // Mimic the input focus out
         el._handleFocusOut({target: el._elements.input, preventDefault: function() {}});
-        
+
         expect(el.value).to.equal(el.items.first().value);
         done();
       });
-      
+
       el._elements.input.value = 'c';
       helpers.event('input', el._elements.input);
     });
-  
+
     describe('Smart Overlay', () => {
       helpers.testSmartOverlay('coral-autocomplete');
     });
-  
+
     describe('#formField (single select)', function() {
       // Run generic formField tests
       helpers.testFormField(window.__html__['Autocomplete.base.html'], {
@@ -1759,7 +1764,7 @@ describe('Autocomplete', function() {
         default: ''
       });
     });
-  
+
     describe('#formField (multi select)', function() {
       // Run generic formField tests
       helpers.testFormField(window.__html__['Autocomplete.multiple.value.html'], {
@@ -1818,14 +1823,14 @@ describe('Autocomplete', function() {
           textContent: 'Safari'
         }
       });
-      
+
       helpers.next(() => {
         input = el._elements.input;
         inputGroup = el._elements.inputGroup;
         trigger = el._elements.trigger;
         selectList = el._elements.selectList;
         tagList = el._elements.tagList;
-        
+
         done();
       });
     });

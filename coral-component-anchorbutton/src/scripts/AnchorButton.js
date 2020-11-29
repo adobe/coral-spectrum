@@ -33,20 +33,23 @@ class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
   /** @ignore */
   constructor() {
     super();
-    
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
     // Events
     this._delegateEvents(commons.extend(this._events, {
       keydown: '_onKeyDown',
       keyup: '_onKeyUp'
     }));
-    
+
     // cannot use the events hash because events on disabled items are not reported
     this.addEventListener('click', this._onDisabledClick.bind(this));
   }
-  
+
   /**
    Disables the button from user interaction.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute disabled
@@ -58,16 +61,16 @@ class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
-    
+
     this.classList.toggle('is-disabled', this._disabled);
     this.setAttribute('tabindex', this._disabled ? '-1' : '0');
     this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
   }
-  
+
   /**
    Keyboard handling per the WAI-ARIA button widget design pattern:
    https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_button_role
- 
+
    @ignore
    */
   _onKeyDown(event) {
@@ -77,7 +80,7 @@ class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
       this.classList.add('is-selected');
     }
   }
-  
+
   /** @ignore */
   _onKeyUp(event) {
     if (event.keyCode === SPACE) {
@@ -85,26 +88,26 @@ class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
       this.classList.remove('is-selected');
     }
   }
-  
+
   /** @ignore */
   _onDisabledClick(event) {
     if (this.disabled) {
       event.preventDefault();
     }
   }
-  
+
   // Override content zone name
   get _contentZones() { return {'coral-anchorbutton-label': 'label'}; }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['disabled']);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     // a11y
     this.setAttribute('role', 'button');
     if (!this.disabled) {

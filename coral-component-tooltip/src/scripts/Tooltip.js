@@ -86,6 +86,13 @@ class Tooltip extends Overlay {
   /** @ignore */
   constructor() {
     super();
+    this._elements = commons.extend(this._elements, {
+      content: this.querySelector('coral-tooltip-content') || document.createElement('coral-tooltip-content')
+    });
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
 
     // Override defaults
     this._lengthOffset = OFFSET;
@@ -93,9 +100,6 @@ class Tooltip extends Overlay {
     this._focusOnShow = Overlay.focusOnShow.OFF;
 
     // Fetch or create the content zone element
-    this._elements = commons.extend(this._elements, {
-      content: this.querySelector('coral-tooltip-content') || document.createElement('coral-tooltip-content')
-    });
 
     // Generate template
     base.call(this._elements);
@@ -309,10 +313,10 @@ class Tooltip extends Overlay {
     const handleEventToShow = () => {
       // Don't let the tooltip hide
       this._cancelHide();
-      
+
       if (!this.open) {
         this._cancelShow();
-        
+
         if (this.delay === 0) {
           // Show immediately
           this.show();
@@ -324,7 +328,7 @@ class Tooltip extends Overlay {
         }
       }
     };
-  
+
     this._targetEvents.on(`mouseenter.Tooltip${this._id}`, handleEventToShow);
     this._targetEvents.on(`focusin.Tooltip${this._id}`, handleEventToShow);
 

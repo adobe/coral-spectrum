@@ -26,16 +26,20 @@ class Panel extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
     // Templates
     this._elements = {
       content: this.querySelector('coral-panel-content') || document.createElement('coral-panel-content')
     };
   }
-  
+
   /**
    The content of the panel.
-   
+
    @type {PanelContent}
    @contentzone
    */
@@ -51,12 +55,12 @@ class Panel extends BaseComponent(HTMLElement) {
       }
     });
   }
-  
+
   /**
    Whether the item is selected. When true, the item will appear as the active element in the PanelStack. The item
    must be a child of a PanelStack before this property is set to true. This property cannot be programmatically set
    to false.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -68,41 +72,41 @@ class Panel extends BaseComponent(HTMLElement) {
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
-    
+
     this.classList.toggle('is-selected', this._selected);
     this.setAttribute('aria-hidden', !this.selected);
-    
+
     this.trigger('coral-panel:_selectedchanged');
   }
-  
+
   get _contentZones() { return {'coral-panel-content': 'content'}; }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['selected']);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // Adds the role to support accessibility when role is not already defined.
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'region');
     }
-  
+
     // Fetch the content zone elements
     const content = this._elements.content;
-  
+
     // Move the content into the content zone if none specified
     if (!content.parentNode) {
       while (this.firstChild) {
         content.appendChild(this.firstChild);
       }
     }
-  
+
     // Assign the content zone so the insert function will be called
     this.content = content;
   }

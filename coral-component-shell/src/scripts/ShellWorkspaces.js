@@ -27,7 +27,17 @@ class ShellWorkspaces extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+    // Template
+    this._elements = {
+      select: new Select().set({
+        variant: 'quiet'
+      })
+    };
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
     // Events
     this._delegateEvents({
       'key:down [is="coral-shell-workspace"]': '_focusNextItem',
@@ -42,25 +52,19 @@ class ShellWorkspaces extends BaseComponent(HTMLElement) {
       'coral-shell-workspace:_selectedchanged': '_onItemSelectedChanged',
       'change ._coral-Shell-workspaces-select': '_onSelectChanged'
     });
-    
-    // Template
-    this._elements = {
-      select: new Select().set({
-        variant: 'quiet'
-      })
-    };
+
     this._elements.select.classList.add('_coral-Shell-workspaces-select');
-  
+
     // Used for eventing
     this._oldSelection = null;
-  
+
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
   }
-  
+
   /**
    The item collection.
-   
+
    @type {SelectableCollection}
    @readonly
    */
@@ -75,31 +79,31 @@ class ShellWorkspaces extends BaseComponent(HTMLElement) {
         onItemRemoved: this._validateSelection
       });
     }
-  
+
     return this._items;
   }
-  
+
   /**
    Returns the selected workspace.
-   
+
    @type {HTMLElement}
    @readonly
    */
   get selectedItem() {
     return this.items._getLastSelected();
   }
-  
+
   /** @private */
   _validateSelection(item) {
     // gets the current selection
     const selection = this.items._getAllSelected();
     const selectionCount = selection.length;
-    
+
     // if no item is currently selected, we need to find a candidate
     if (selectionCount === 0) {
       // gets the first candidate for selection
       const selectable = this.items._getFirstSelectable();
-      
+
       if (selectable) {
         selectable.setAttribute('selected', '');
       }
@@ -108,7 +112,7 @@ class ShellWorkspaces extends BaseComponent(HTMLElement) {
     else if (selectionCount > 1) {
       // By default, the last one stays selected
       item = item || selection[selection.length - 1];
-      
+
       for (let i = 0; i < selectionCount; i++) {
         if (selection[i] !== item) {
           // Don't trigger change events
@@ -116,20 +120,20 @@ class ShellWorkspaces extends BaseComponent(HTMLElement) {
           selection[i].removeAttribute('selected');
         }
       }
-      
+
       // We can trigger change events again
       this._preventTriggeringEvents = false;
     }
-  
+
     // Sync select items under the hood
     this._renderSelectItems();
-    
+
     this._triggerChangeEvent();
   }
-  
+
   _renderSelectItems() {
     this._elements.select.items.clear();
-    
+
     this.items.getAll().forEach((item) => {
       this._elements.select.items.add({
         content: {
@@ -140,62 +144,62 @@ class ShellWorkspaces extends BaseComponent(HTMLElement) {
       });
     });
   }
-  
+
   _onSelectChanged(event) {
     event.stopImmediatePropagation();
-    
+
     this._elements.select.selectedItem._workspace.selected = true;
   }
-  
+
   /** @private */
   _triggerChangeEvent() {
     const selectedItem = this.selectedItem;
     const oldSelection = this._oldSelection;
-    
+
     if (!this._preventTriggeringEvents && selectedItem !== oldSelection) {
       this.trigger('coral-shell-workspaces:change', {
         oldSelection: oldSelection,
         selection: selectedItem
       });
-      
+
       this._oldSelection = selectedItem;
     }
   }
-  
+
   /** @private */
   _onItemSelectedChanged(event) {
     event.stopImmediatePropagation();
-    
+
     const item = event.target;
     this._validateSelection(item);
   }
-  
+
   /**
    Returns true if the event is at the matched target.
-   
+
    @private
    */
   _eventIsAtTarget(event) {
     const target = event.target;
     const listItem = event.matchedTarget;
-  
+
     const isAtTarget = target === listItem;
-  
+
     if (isAtTarget) {
       // Don't let arrow keys etc scroll the page
       event.preventDefault();
       event.stopPropagation();
     }
-  
+
     return isAtTarget;
   }
-  
+
   /** @private */
   _focusNextItem(event) {
     if (!this._eventIsAtTarget(event)) {
       return;
     }
-  
+
     const target = event.matchedTarget;
     if (target.nextElementSibling) {
       target.nextElementSibling.focus();
@@ -204,13 +208,13 @@ class ShellWorkspaces extends BaseComponent(HTMLElement) {
       this.items.first().focus();
     }
   }
-  
+
   /** @private */
   _focusPreviousItem(event) {
     if (!this._eventIsAtTarget(event)) {
       return;
     }
-  
+
     const target = event.matchedTarget;
     if (target.previousElementSibling) {
       target.previousElementSibling.focus();
@@ -219,44 +223,44 @@ class ShellWorkspaces extends BaseComponent(HTMLElement) {
       this.items.last().focus();
     }
   }
-  
+
   /** @private */
   _focusFirstItem(event) {
     if (!this._eventIsAtTarget(event)) {
       return;
     }
-    
+
     this.items.first().focus();
   }
-  
+
   /** @private */
   _focusLastItem(event) {
     if (!this._eventIsAtTarget(event)) {
       return;
     }
-  
+
     this.items.last().focus();
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;
     this._validateSelection();
     this._preventTriggeringEvents = false;
-  
+
     this._oldSelection = this.selectedItem;
-    
+
     // Support cloneNode
     const template = this.querySelector('._coral-Shell-workspaces-select');
     if (template) {
       template.remove();
     }
-    
+
     this.appendChild(this._elements.select);
   }
 }
