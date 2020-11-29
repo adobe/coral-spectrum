@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {helpers} from '../../../coral-utils/src/tests/helpers';
+import {helpers} from './helpers';
 import {commons} from '../../../coral-utils';
 
 describe('commons', function() {
@@ -363,7 +363,7 @@ describe('commons', function() {
       constructor() {
         super();
       }
-  
+
       connectedCallback() {
         this.appendChild(document.createElement('coral-element-item'));
       }
@@ -382,34 +382,34 @@ describe('commons', function() {
         super();
       }
     }, {extends: 'button'});
-    
+
     it('should call the callback when all components are ready', function(done) {
       const el = helpers.build(document.createElement('coral-element'));
-      
+
       commons.ready(() => {
         expect(el.contains(el.querySelector('coral-element-item')));
         expect(window.customElements.get('coral-element')).to.not.equal(undefined);
         expect(window.customElements.get('coral-element-item')).to.not.equal(undefined);
-        
+
         done();
       });
     });
 
     it('should call the callback when all subcomponents components are ready (recursively)', function(done) {
       const el = helpers.build(document.createElement('coral-element'));
-  
+
       commons.ready(el, () => {
         expect(el.contains(el.querySelector('coral-element-item')));
         expect(window.customElements.get('coral-element')).to.not.equal(undefined);
         expect(window.customElements.get('coral-element-item')).to.not.equal(undefined);
-        
+
         done();
       });
     });
 
     it('should work with custom elements that use is=""', function(done) {
       const el = document.createElement('button', {is: 'coral-element-button'});
-  
+
       commons.ready(el, () => {
         expect(window.customElements.get('coral-element-button')).to.not.equal(undefined);
         done();
@@ -418,7 +418,7 @@ describe('commons', function() {
 
     it('should pass the element to the callback', function(done) {
       const el = document.createElement('button', {is: 'coral-element-button'});
-  
+
       commons.ready(el, (passedEl) => {
         expect(el).to.equal(passedEl);
         done();
@@ -427,26 +427,26 @@ describe('commons', function() {
 
     it('should pass window to the callback when no element is passed', function(done) {
       const el = helpers.build(document.createElement('button', {is: 'coral-element-button'}));
-  
+
       commons.ready((passedEl) => {
         expect(window).to.equal(passedEl);
         done();
       });
     });
-    
+
     it('should work with normal custom elements and some that use is="..."', function(done) {
       helpers.target.appendChild(document.createElement('coral-element'));
       helpers.target.appendChild(document.createElement('coral-element-button'), {is:'coral-element-button'});
-  
+
       commons.ready(() => {
         expect(window.customElements.get('coral-element')).to.not.equal(undefined);
         expect(window.customElements.get('coral-element-item')).to.not.equal(undefined);
         expect(window.customElements.get('coral-element-button')).to.not.equal(undefined);
-        
+
         done();
       });
     });
-    
+
     it('should not be blocking', function(done) {
       commons.ready(10, () => {
         done();
@@ -461,7 +461,7 @@ describe('commons', function() {
       var el = helpers.target.appendChild(document.createElement('div'));
       el.textContent = 'onTransitionEnd Test';
       el.setAttribute('style', '-webkit-transition: all 100ms ease; -moz-transition: all 100ms ease; -o-transition: all 100ms ease; transition: all 100ms ease;');
-      
+
       commons.transitionEnd(el, function(event) {
         expect(el).to.equal(event.target);
 
@@ -471,7 +471,7 @@ describe('commons', function() {
 
         done();
       });
-  
+
       el.style.marginTop = '100px';
     });
 
@@ -560,7 +560,7 @@ describe('commons', function() {
 
     it('should call the provided callback when element is initially loaded', function(done) {
       const div = helpers.build('<div></div>');
-      
+
       commons.addResizeListener(div, function() {
         done();
       });
@@ -568,10 +568,10 @@ describe('commons', function() {
 
     it('should call the provided callback whenever the size of the element is changed (due to content added)', function(done) {
       const div = helpers.build('<div><div id="container"></div></div>');
-      
+
       var containerHTML = '<div>Test</div>';
       var container = document.getElementById('container');
-      
+
       commons.addResizeListener(div, function() {
         expect(container.innerHTML).to.equal(containerHTML, 'inner content should now be set and a resize has been called');
         done();
@@ -582,7 +582,7 @@ describe('commons', function() {
     it('should call the provided callback whenever the size of the element is changed (due to content removed)', function(done) {
       const div = helpers.build('<div><div id="container"><div>Test</div></div></div>');
       var container = document.getElementById('container');
-      
+
       commons.addResizeListener(div, function() {
         expect(container.innerHTML).to.equal('', 'inner content should now be removed and a resize has been called');
         done();
@@ -592,7 +592,7 @@ describe('commons', function() {
 
     it('should be possible to listen to resize events even if element is initially hidden', function(done) {
       const div =helpers.build('<div style="display:none;"></div>');
-      
+
       commons.addResizeListener(div, function() {
         done();
       });
@@ -601,10 +601,10 @@ describe('commons', function() {
 
     it('should be possible to listen to resize events even if parent is initially hidden', function(done) {
       const div = helpers.build('<div id="parent" style="display:none;"><div id="child"></div></div>');
-      
+
       var parentEl = document.getElementById('parent');
       var childEl = document.getElementById('child');
-      
+
       commons.addResizeListener(childEl, function() {
         done();
       });
@@ -613,9 +613,9 @@ describe('commons', function() {
 
     it('should be possible get notified when sizeof the element is changed via css', function(done) {
       const div = helpers.build('<div style="width:50px; height: 50px;"></div>');
-      
+
       var widthWasChanged = false;
-      
+
       commons.addResizeListener(div, function() {
         if (widthWasChanged) {
           expect(div.style.width).to.equal('70px', 'width of div should be 70px');
@@ -629,11 +629,11 @@ describe('commons', function() {
 
     it('should be possible get notified when size is changed due to css change anywhere hierarchy', function(done) {
       const div = helpers.build('<div id="parent" style="width:50px; height: 50px;"><div id="child" style="width:100%; height: 100%;" ></div></div>');
-      
+
       var parentEl = document.getElementById('parent');
       var childEl = document.getElementById('child');
       var widthOfParentWasSet = false;
-      
+
       commons.addResizeListener(childEl, function() {
         if (widthOfParentWasSet) {
           expect(parentEl.style.width).to.equal('70px', 'width of parent should be 70px');
