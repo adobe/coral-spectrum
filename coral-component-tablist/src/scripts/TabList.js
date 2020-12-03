@@ -149,9 +149,11 @@ class TabList extends BaseComponent(HTMLElement) {
       this._target = value;
 
       // we do in case the target was not yet in the DOM
-      window.requestAnimationFrame(() => {
-        const realTarget = getTarget(this._target);
+      // trigger once in an animation frame
+      !(this._setTargetInQueue === true) && window.requestAnimationFrame(() => {
+        delete this._setTargetInQueue;
 
+        const realTarget = getTarget(this._target);
         // we add proper accessibility if available
         if (realTarget) {
           const tabItems = this.items.getAll();
@@ -193,6 +195,7 @@ class TabList extends BaseComponent(HTMLElement) {
           }
         }
       });
+      this._setTargetInQueue = true;
     }
   }
 
@@ -393,6 +396,7 @@ class TabList extends BaseComponent(HTMLElement) {
   }
 
   _setLine() {
+<<<<<<< HEAD
     // Debounce
     if (this._timeout !== null) {
       window.clearTimeout(this._timeout);
@@ -400,6 +404,11 @@ class TabList extends BaseComponent(HTMLElement) {
 
     this._timeout = window.setTimeout(() => {
       this._timeout = null;
+=======
+    // trigger once in an animation frame
+    !(this._setLineInQueue === true) && window.requestAnimationFrame(() => {
+      delete this._setLineInQueue;
+>>>>>>> df381a6cc... fix(GRANITE-32187): Massive performance drop in complex dialog openings with coral spectrum
 
       const selectedItem = this.selectedItem;
 
@@ -429,15 +438,23 @@ class TabList extends BaseComponent(HTMLElement) {
           this._elements.line.style.height = `${height}px`;
           this._elements.line.style.transform = `translate(0, ${top}px)`;
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> df381a6cc... fix(GRANITE-32187): Massive performance drop in complex dialog openings with coral spectrum
         this._elements.line.hidden = false;
       } else {
         // Hide line if no selected item
         this._elements.line.hidden = true;
       }
+<<<<<<< HEAD
 
+=======
+>>>>>>> df381a6cc... fix(GRANITE-32187): Massive performance drop in complex dialog openings with coral spectrum
       this._previousOrientation = this.orientation;
-    }, this._wait);
+    });
+
+    this._setLineInQueue = true;
   }
 
   /** @private */

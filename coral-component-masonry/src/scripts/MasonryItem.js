@@ -153,10 +153,14 @@ class MasonryItem extends BaseComponent(HTMLElement) {
     if (!this.isConnected) {
       return;
     }
+    // true if component connectedCallback has already been called
+    let isConnected = this._disconnected === false;
 
     super.connectedCallback();
+
     // Inform masonry immediately
-    this.trigger('coral-masonry-item:_connected');
+    // only trigger once while connecting
+    !isConnected && this.trigger('coral-masonry-item:_connected');
   }
 
   /** @ignore */

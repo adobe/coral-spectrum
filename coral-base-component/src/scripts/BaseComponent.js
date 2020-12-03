@@ -775,8 +775,10 @@ const BaseComponent = (superClass) => class extends superClass {
     // A component that is reattached should respond to global events again
     if (this._disconnected) {
       delegateGlobalEvents.call(this);
-      this._disconnected = false;
     }
+    // set _disconnected to false instead of undefined
+    // would ensure that connectedCallback has executed for the component
+    this._disconnected = false;
 
     if (!this._rendered) {
       this.render();

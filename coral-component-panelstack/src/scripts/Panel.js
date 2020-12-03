@@ -68,7 +68,14 @@ class Panel extends BaseComponent(HTMLElement) {
   }
 
   set selected(value) {
-    this._selected = transform.booleanAttr(value);
+    let _selected = transform.booleanAttr(value);
+
+    if(this._selected === _selected) {
+      // do nothing if value not changed
+      return;
+    }
+
+    this._selected = _selected;
     this._reflectAttribute('selected', this._selected);
 
     this.classList.toggle('is-selected', this._selected);

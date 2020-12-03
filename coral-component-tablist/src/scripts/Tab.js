@@ -184,10 +184,15 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   }
 
   set selected(value) {
-    value = transform.booleanAttr(value);
+    let _selected = transform.booleanAttr(value);
 
-    if (!value || value && !this.disabled) {
-      this._selected = value;
+    if(this._selected === _selected) {
+      // do nothing if value not changed
+      return;
+    }
+
+    if (!_selected || _selected && !this.disabled) {
+      this._selected = _selected;
       this._reflectAttribute('selected', this.disabled ? false : this._selected);
 
       this.classList.toggle('is-selected', this._selected);
