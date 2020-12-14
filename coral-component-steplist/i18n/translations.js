@@ -18,7 +18,7 @@ export default {
     "not completed: ": "not completed: "
   },
   "de-DE": {
-	  "Step List": "Schrittliste",
+    "Step List": "Schrittliste",
     "completed: ": "abgeschlossen: ",
     "current: ": "aktuell: ",
     "not completed: ": "nicht abgeschlossen: "
@@ -27,7 +27,7 @@ export default {
     "Step List": "Liste des étapes",
     "completed: ": "terminé : ",
     "current: ": "actuel : ",
-    "not completed: ": "non terminé : "  
+    "not completed: ": "non terminé : "
   },
   "it-IT": {
     "Step List": "Elenco passi",
@@ -36,7 +36,7 @@ export default {
     "not completed: ": "non completato: "
   },
   "ja-JP": {
-	  "Step List": "手順リスト",
+    "Step List": "手順リスト",
     "completed: ": "完了: ",
     "current: ": "現在: ",
     "not completed: ": "未完了: "
@@ -66,7 +66,7 @@ export default {
     "not completed: ": "未完成: "
   },
   "pt-BR": {
-	  "Step List": "Lista de passos",
+    "Step List": "Lista de passos",
     "completed: ": "concluído: ",
     "current: ": "atual: ",
     "not completed: ": "não concluído: "
@@ -78,7 +78,7 @@ export default {
     "not completed: ": "niet voltooid: "
   },
   "da-DK": {
-	  "Step List": "Trin liste",
+    "Step List": "Trin liste",
     "completed: ": "Afsluttet: ",
     "current: ": "aktuelt: ",
     "not completed: ": "Ikke afsluttet: "
@@ -96,7 +96,7 @@ export default {
     "not completed: ": "ikke fullført: "
   },
   "sv-SE": {
-	  "Step List": "Steg lista",
+    "Step List": "Steg lista",
     "completed: ": "slutförd: ",
     "current: ": "aktuell: ",
     "not completed: ": "inte slutförd: "
@@ -114,7 +114,7 @@ export default {
     "not completed: ": "nieukończone: "
   },
   "ru-RU": {
-	  "Step List": "Список шагов",
+    "Step List": "Список шагов",
     "completed: ": "завершено: ",
     "current: ": "текущий: ",
     "not completed: ": "не завершено: "

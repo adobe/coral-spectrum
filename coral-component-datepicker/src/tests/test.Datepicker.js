@@ -15,10 +15,10 @@ import {Datepicker} from '../../../coral-component-datepicker';
 import {DateTime} from '../../../coral-datetime';
 import {commons, Keys, tracking} from '../../../coral-utils';
 
-describe('Datepicker', function() {
+describe('Datepicker', function () {
   // @todo: add tests for mobile
-  describe('Namespace', function() {
-    it('should define the types in an enum', function() {
+  describe('Namespace', function () {
+    it('should define the types in an enum', function () {
       expect(Datepicker.type).to.exist;
       expect(Datepicker.type.DATE).to.equal('date');
       expect(Datepicker.type.DATETIME).to.equal('datetime');
@@ -31,7 +31,7 @@ describe('Datepicker', function() {
     });
   });
 
-  describe('Instantiation', function() {
+  describe('Instantiation', function () {
     helpers.cloneComponent(
       'should be possible to clone the element using markup',
       window.__html__['Datepicker.base.html']
@@ -44,11 +44,11 @@ describe('Datepicker', function() {
   });
 
   // Run tests once with moment fallback and once with moment
-  for (let useMomentJS = 0; useMomentJS < 2; useMomentJS++) {
+  for (let useMomentJS = 0 ; useMomentJS < 2 ; useMomentJS++) {
 
     const momentJS = window.moment;
 
-    beforeEach(function() {
+    beforeEach(function () {
       // Make sure Clock and tests use momentJS fallback
       if (!useMomentJS) {
         window.moment = undefined;
@@ -59,27 +59,27 @@ describe('Datepicker', function() {
       }
     });
 
-    describe('API', function() {
+    describe('API', function () {
       var el;
 
-      beforeEach(function() {
+      beforeEach(function () {
         el = helpers.build(new Datepicker());
         el._renderCalendar();
       });
 
-      afterEach(function() {
+      afterEach(function () {
         el = null;
       });
 
-      describe('#disabled', function() {
+      describe('#disabled', function () {
       });
 
-      describe('#displayFormat', function() {
-        it('should default to YYYY-MM-DD', function() {
+      describe('#displayFormat', function () {
+        it('should default to YYYY-MM-DD', function () {
           expect(el.displayFormat).to.equal('YYYY-MM-DD');
         });
 
-        it('should change the default based on the type', function() {
+        it('should change the default based on the type', function () {
           expect(el.type).to.equal(Datepicker.type.DATE);
           expect(el.displayFormat).to.equal('YYYY-MM-DD');
 
@@ -90,7 +90,7 @@ describe('Datepicker', function() {
           expect(el.displayFormat).to.equal('HH:mm');
         });
 
-        it('should allow a custom value', function() {
+        it('should allow a custom value', function () {
           expect(el.type).to.equal(Datepicker.type.DATE);
           el.displayFormat = 'MM-DD-YYYY';
           expect(el.displayFormat).to.equal('MM-DD-YYYY');
@@ -99,7 +99,7 @@ describe('Datepicker', function() {
           expect(el.displayFormat).to.equal('MM-DD-YYYY');
         });
 
-        it('should fallback empty strings to the defaults', function() {
+        it('should fallback empty strings to the defaults', function () {
           expect(el.type).to.equal(Datepicker.type.DATE);
           el.displayFormat = 'MM-DD-YYYY';
           expect(el.displayFormat).to.equal('MM-DD-YYYY');
@@ -108,7 +108,7 @@ describe('Datepicker', function() {
           expect(el.displayFormat).to.equal('YYYY-MM-DD');
         });
 
-        it('should allow the user to type dates in the displayFormat', function() {
+        it('should allow the user to type dates in the displayFormat', function () {
           if (useMomentJS) {
             el.displayFormat = 'DD-MM-YY';
 
@@ -125,7 +125,7 @@ describe('Datepicker', function() {
           }
         });
 
-        it('should reject the value if it does not match the format', function() {
+        it('should reject the value if it does not match the format', function () {
           el.displayFormat = 'MM-DD-YYYY';
           el._elements.input.value = '30';
           el._elements.input.trigger('change');
@@ -134,7 +134,7 @@ describe('Datepicker', function() {
           expect(el._elements.input.value).to.equal('');
         });
 
-        it('should update the input with the new value based on the format', function() {
+        it('should update the input with the new value based on the format', function () {
           el.value = '2015-07-10';
 
           expect(el._elements.input.value).to.equal('2015-07-10');
@@ -148,7 +148,7 @@ describe('Datepicker', function() {
           }
         });
 
-        it('should allow setting a format with am/pm', function() {
+        it('should allow setting a format with am/pm', function () {
           if (useMomentJS) {
             el.type = Datepicker.type.TIME;
             el.displayFormat = 'hh:mm A';
@@ -161,35 +161,35 @@ describe('Datepicker', function() {
         });
       });
 
-      describe('#headerFormat', function() {
+      describe('#headerFormat', function () {
       });
 
-      describe('#invalid', function() {
+      describe('#invalid', function () {
       });
 
-      describe('#labelled', function() {
-        it('should label the input', function() {
+      describe('#labelled', function () {
+        it('should label the input', function () {
           el.labelled = 'newLabel';
 
           expect(el._elements.input.getAttribute('aria-label')).to.equal('newLabel');
           expect(el._elements.hiddenInput.hasAttribute('aria-label')).to.be.false;
-            
+
           expect(el.getAttribute('role')).to.equal('group', 'coral-datepicker wrapping element should have role of group');
           expect(el.getAttribute('aria-label')).to.equal('newLabel', 'coral-datepicker wrapping element should also be labelled to provide context when focus moves to Calendar button');
           expect(el._elements.overlay.getAttribute('aria-label')).to.equal('newLabel');
           expect(el._elements.calendar.getAttribute('aria-label')).to.equal('newLabel');
 
           el.labelled = '';
-          
+
           expect(el._elements.input.hasAttribute('aria-label')).to.be.false;
           expect(el._elements.hiddenInput.hasAttribute('aria-label')).to.be.false;
           expect(el._elements.overlay.hasAttribute('aria-label'), 'aria-label should be removed').to.be.false;
           expect(el._elements.calendar.hasAttribute('aria-label'), 'aria-label should be removed').to.be.false;
         });
       });
-    
-      describe('#labelledBy', function() {
-        it('should label the input', function() {
+
+      describe('#labelledBy', function () {
+        it('should label the input', function () {
           var label1 = document.createElement('label');
           label1.textContent = 'label1';
           label1.id = commons.getUID();
@@ -203,7 +203,7 @@ describe('Datepicker', function() {
           expect(el._elements.input.getAttribute('aria-labelledby')).to.equal(label1.id);
           expect(el._elements.toggle.hasAttribute('aria-labelledby')).to.be.false;
           expect(el._elements.hiddenInput.hasAttribute('aria-labelledby')).to.be.false;
-          
+
           expect(el.getAttribute('role')).to.equal('group', 'coral-datepicker wrapping element should have role of group');
           expect(el.getAttribute('aria-labelledby')).to.equal(label1.id, 'coral-datepicker wrapping element should also be labelled to provide context when focus moves to Calendar button');
           expect(el._elements.overlay.getAttribute('aria-labelledby')).to.equal(label1.id);
@@ -222,27 +222,27 @@ describe('Datepicker', function() {
         });
       });
 
-      describe('#max', function() {
+      describe('#max', function () {
       });
 
-      describe('#min', function() {
+      describe('#min', function () {
       });
 
-      describe('#name', function() {
-        it('should have empty string as default', function() {
+      describe('#name', function () {
+        it('should have empty string as default', function () {
           expect(el.name).to.equal('');
           expect(el._elements.hiddenInput.name).to.equal('');
           expect(el._elements.input.name).to.equal('');
         });
 
-        it('should set the name', function() {
+        it('should set the name', function () {
           el.name = 'dp';
           expect(el.name).to.equal('dp');
           expect(el._elements.hiddenInput.name).to.equal('dp');
           expect(el._elements.input.name).to.equal('');
         });
 
-        it('should submit nothing when the name is not specified', function() {
+        it('should submit nothing when the name is not specified', function () {
           // we wrap first the select
           var form = document.createElement('form');
           form.appendChild(el);
@@ -258,7 +258,7 @@ describe('Datepicker', function() {
           expect(values.length).to.equal(0);
         });
 
-        it('should submit the value', function() {
+        it('should submit the value', function () {
           // we wrap first the select
           var form = document.createElement('form');
           form.appendChild(el);
@@ -280,7 +280,7 @@ describe('Datepicker', function() {
           }]);
         });
 
-        it('should use the valueformat for the submitted value', function() {
+        it('should use the valueformat for the submitted value', function () {
           if (useMomentJS) {
             // we wrap first the select
             var form = document.createElement('form');
@@ -307,26 +307,26 @@ describe('Datepicker', function() {
         });
       });
 
-      describe('#placeholder', function() {
-        it('should default to ""', function() {
+      describe('#placeholder', function () {
+        it('should default to ""', function () {
           expect(el.placeholder).to.equal('');
           expect(el.hasAttribute('placeholder')).to.be.false;
         });
 
-        it('should be set and reflected', function() {
+        it('should be set and reflected', function () {
           el.placeholder = 'dp1';
           expect(el.placeholder).to.equal('dp1');
           expect(el._elements.input.getAttribute('placeholder')).to.equal('dp1');
         });
       });
 
-      describe('#readOnly', function() {
-        it('should default to false', function() {
+      describe('#readOnly', function () {
+        it('should default to false', function () {
           expect(el.readOnly).to.be.false;
           expect(el.hasAttribute('readonly')).to.be.false;
         });
 
-        it('should set readonly with value true', function() {
+        it('should set readonly with value true', function () {
           el.readOnly = true;
 
           expect(el._elements.input.readOnly).to.be.true;
@@ -334,35 +334,35 @@ describe('Datepicker', function() {
           expect(el.hasAttribute('readonly')).to.be.true;
         });
 
-        it('should set readonly with value 1', function() {
+        it('should set readonly with value 1', function () {
           el.readOnly = 1;
-  
+
           expect(el._elements.input.readOnly).to.be.true;
           expect(el._elements.toggle.disabled).to.be.true;
           expect(el.hasAttribute('readonly')).to.be.true;
         });
-  
-        it('should not be selectable with readOnly set to true', function() {
+
+        it('should not be selectable with readOnly set to true', function () {
           el.readOnly = true;
           el.focus();
-    
+
           expect(el.contains(document.activeElement)).to.be.false;
         });
       });
 
-      describe('#required', function() {
+      describe('#required', function () {
       });
 
-      describe('#startDay', function() {
+      describe('#startDay', function () {
       });
 
-      describe('#type', function() {
-        it('should default to false', function() {
+      describe('#type', function () {
+        it('should default to false', function () {
           expect(el.type).to.equal(Datepicker.type.DATE);
           expect(el.getAttribute('type')).to.equal(Datepicker.type.DATE);
         });
 
-        it('should set the new type', function() {
+        it('should set the new type', function () {
           el.type = Datepicker.type.TIME;
           expect(el.type).to.equal(Datepicker.type.TIME);
 
@@ -370,40 +370,40 @@ describe('Datepicker', function() {
         });
       });
 
-      describe('#value', function() {
-        it('should default to empty string', function() {
+      describe('#value', function () {
+        it('should default to empty string', function () {
           expect(el.value).to.equal('');
         });
 
-        it('should accept valid dates', function() {
+        it('should accept valid dates', function () {
           el.value = '2000-12-31';
 
           expect(el.value).to.equal('2000-12-31');
           expect(new DateTime.Moment(el.valueAsDate).isSame(new DateTime.Moment(new Date(2000, 11, 31)), 'day')).to.be.true;
         });
 
-        it('should accept "today" as a value', function() {
+        it('should accept "today" as a value', function () {
           el.value = 'today';
 
           expect(new DateTime.Moment().isSame(new DateTime.Moment(el.valueAsDate), 'day')).to.be.true;
           expect(new DateTime.Moment(el.value).isSame(new DateTime.Moment(Date.now()), 'day')).to.be.true;
         });
 
-        it('should reject invalid value strings', function() {
+        it('should reject invalid value strings', function () {
           el.value = 'nondate';
 
           expect(el.value).to.equal('');
           expect(el.valueAsDate).to.be.null;
         });
 
-        it('should reject invalid date strings', function() {
+        it('should reject invalid date strings', function () {
           el.value = 'a';
 
           expect(el.value).to.equal('');
           expect(el.valueAsDate).to.be.null;
         });
 
-        it('should accept date objects', function() {
+        it('should accept date objects', function () {
           var today = new Date();
 
           el.value = today;
@@ -411,7 +411,7 @@ describe('Datepicker', function() {
           expect(new DateTime.Moment(el.valueAsDate).isSame(new DateTime.Moment(today), 'day')).to.be.true;
         });
 
-        it('should accept moment objects', function() {
+        it('should accept moment objects', function () {
           var date = new DateTime.Moment('1988-01-12');
 
           el.value = date;
@@ -420,25 +420,25 @@ describe('Datepicker', function() {
         });
       });
 
-      describe('#valueAsDate', function() {
-        it('should default to null', function() {
+      describe('#valueAsDate', function () {
+        it('should default to null', function () {
           expect(el.valueAsDate).to.be.null;
         });
 
-        it('should accept dates', function() {
+        it('should accept dates', function () {
           var newDate = new Date();
           el.valueAsDate = newDate;
           expect(new DateTime.Moment(newDate).isSame(new DateTime.Moment(el.valueAsDate), 'day')).to.be.true;
         });
 
-        it('should reject date strings', function() {
+        it('should reject date strings', function () {
           el.valueAsDate = '2000-02-20';
 
           expect(el.value).to.equal('');
           expect(el.valueAsDate).to.be.null;
         });
 
-        it('should be able to clear the value', function() {
+        it('should be able to clear the value', function () {
           el.valueAsDate = new Date();
           expect(el.value).not.to.equal('');
 
@@ -448,12 +448,12 @@ describe('Datepicker', function() {
         });
       });
 
-      describe('#valueFormat', function() {
-        it('should default to YYYY-MM-DD', function() {
+      describe('#valueFormat', function () {
+        it('should default to YYYY-MM-DD', function () {
           expect(el.valueFormat).to.equal('YYYY-MM-DD');
         });
 
-        it('should change the default based on the type', function() {
+        it('should change the default based on the type', function () {
           expect(el.type).to.equal(Datepicker.type.DATE);
           expect(el.valueFormat).to.equal('YYYY-MM-DD');
 
@@ -464,7 +464,7 @@ describe('Datepicker', function() {
           expect(el.valueFormat).to.equal('HH:mm');
         });
 
-        it('should allow a custom value', function() {
+        it('should allow a custom value', function () {
           expect(el.type).to.equal(Datepicker.type.DATE);
           el.valueFormat = 'MM-DD-YYYY';
           expect(el.valueFormat).to.equal('MM-DD-YYYY');
@@ -473,7 +473,7 @@ describe('Datepicker', function() {
           expect(el.valueFormat).to.equal('MM-DD-YYYY');
         });
 
-        it('should fallback empty strings to the defaults', function() {
+        it('should fallback empty strings to the defaults', function () {
           expect(el.type).to.equal(Datepicker.type.DATE);
           el.valueFormat = 'MM-DD-YYYY';
           expect(el.valueFormat).to.equal('MM-DD-YYYY');
@@ -482,7 +482,7 @@ describe('Datepicker', function() {
           expect(el.valueFormat).to.equal('YYYY-MM-DD');
         });
 
-        it('should accept values with the new format', function() {
+        it('should accept values with the new format', function () {
           if (useMomentJS) {
             el.valueFormat = 'DD-MM-YY';
 
@@ -491,7 +491,7 @@ describe('Datepicker', function() {
           }
         });
 
-        it('should update the hidden input with the new value based on the format', function() {
+        it('should update the hidden input with the new value based on the format', function () {
           el.value = '2015-07-10';
 
           expect(el._elements.hiddenInput.value).to.equal('2015-07-10');
@@ -504,7 +504,7 @@ describe('Datepicker', function() {
           }
         });
 
-        it('should update Min and Max values with the new format', function() {
+        it('should update Min and Max values with the new format', function () {
           if (useMomentJS) {
             el.valueFormat = 'DD-MM-YYYY';
 
@@ -526,12 +526,12 @@ describe('Datepicker', function() {
         });
       });
 
-      describe('#variant', function() {
-        it('should be set to "default" by default', function() {
+      describe('#variant', function () {
+        it('should be set to "default" by default', function () {
           expect(el.variant).to.equal(Datepicker.variant.DEFAULT, '"default" should be set');
         });
 
-        it('should be possible to set the variant', function() {
+        it('should be possible to set the variant', function () {
           expect(el.classList.contains('_coral-InputGroup--quiet')).to.be.false;
 
           expect(el.variant).to.equal(Datepicker.variant.DEFAULT, '"default" should be set');
@@ -549,10 +549,10 @@ describe('Datepicker', function() {
       });
     });
 
-    describe('Markup', function() {
+    describe('Markup', function () {
 
-      describe('#invalid', function() {
-        it('should consider the markup as the truth until user interaction happened', function() {
+      describe('#invalid', function () {
+        it('should consider the markup as the truth until user interaction happened', function () {
           helpers.build(window.__html__['Datepicker.invalid.html']);
           var validDatepicker1 = document.getElementById('validDatepicker1');
           var validDatepicker2 = document.getElementById('validDatepicker2');
@@ -568,29 +568,29 @@ describe('Datepicker', function() {
         });
       });
 
-      describe('#type', function() {
-        it('should default to "date"', function() {
+      describe('#type', function () {
+        it('should default to "date"', function () {
           const el = helpers.build(window.__html__['Datepicker.base.html']);
           expect(el.type).to.equal('date');
           expect(el.valueFormat).to.equal('YYYY-MM-DD');
           expect(el.displayFormat).to.equal(el.valueFormat);
         });
 
-        it('should accept "datetime"', function() {
+        it('should accept "datetime"', function () {
           const el = helpers.build(window.__html__['Datepicker.type.datetime.html']);
           expect(el.type).to.equal('datetime');
           expect(el.valueFormat).to.equal('YYYY-MM-DD[T]HH:mmZ');
           expect(el.displayFormat).to.equal(el.valueFormat);
         });
 
-        it('should accept "time"', function() {
+        it('should accept "time"', function () {
           const el = helpers.build(window.__html__['Datepicker.type.time.html']);
           expect(el.type).to.equal('time');
           expect(el.valueFormat).to.equal('HH:mm');
           expect(el.displayFormat).to.equal(el.valueFormat);
         });
 
-        it('should accept custom value format', function() {
+        it('should accept custom value format', function () {
           const el = helpers.build(window.__html__['Datepicker.type.customvalueformat.html']);
           expect(el.type).to.equal('time');
           // should use the format from the markup
@@ -599,7 +599,7 @@ describe('Datepicker', function() {
           expect(el.displayFormat).to.equal('HH:mm');
         });
 
-        it('should accept custom display format', function() {
+        it('should accept custom display format', function () {
           const el = helpers.build(window.__html__['Datepicker.type.customdisplayformat.html']);
           expect(el.type).to.equal('time');
           // should use the format from the markup
@@ -609,20 +609,20 @@ describe('Datepicker', function() {
         });
       });
 
-      describe('#value', function() {
-        it('should default to empty string', function() {
+      describe('#value', function () {
+        it('should default to empty string', function () {
           const el = helpers.build(window.__html__['Datepicker.base.html']);
           expect(el.value).to.equal('');
         });
 
-        it('should accept valid dates', function() {
+        it('should accept valid dates', function () {
           const el = helpers.build(window.__html__['Datepicker.value.html']);
           expect(el.value).to.equal('2000-12-31');
           expect(el.getAttribute('value')).to.equal('2000-12-31');
           expect(new DateTime.Moment(el.valueAsDate).isSame(new DateTime.Moment(new Date(2000, 11, 31)), 'day')).to.be.true;
         });
 
-        it('should accept "today" as a value', function() {
+        it('should accept "today" as a value', function () {
           const el = helpers.build(window.__html__['Datepicker.value.today.html']);
           expect(new DateTime.Moment(el.value, el.valueFormat).isSame(new DateTime.Moment(Date.now()), 'day')).to.be.true;
           expect(el.getAttribute('value')).to.equal('today');
@@ -631,7 +631,7 @@ describe('Datepicker', function() {
           expect(new DateTime.Moment(el.value).isSame(new DateTime.Moment(Date.now()), 'day')).to.be.true;
         });
 
-        it('should automatically initialize the clock to "now" if the type is "time" and value "today"', function() {
+        it('should automatically initialize the clock to "now" if the type is "time" and value "today"', function () {
           const el = helpers.build('<coral-datepicker type="time" value="today"></coral-datepicker>');
           // this test just verifies that the current time is set
 
@@ -645,7 +645,7 @@ describe('Datepicker', function() {
           expect(passedMinutesOfInitDay <= passedMinutesOfCurrentDay && passedMinutesOfInitDay + 2 > passedMinutesOfCurrentDay).to.equal(true, 'current time should have been set as default time');
         });
 
-        it('should automatically initialize the clock to "now" if the type is "datetime" and value "today"', function() {
+        it('should automatically initialize the clock to "now" if the type is "datetime" and value "today"', function () {
           const el = helpers.build('<coral-datepicker type="datetime" value="today" ></coral-datepicker>');
           // this test just verifies that the current date & time is set
 
@@ -657,7 +657,7 @@ describe('Datepicker', function() {
           expect(initTime <= currentTime && initTime + 60000 > currentTime).to.equal(true, 'current date & time should have been set as default time');
         });
 
-        it('should initialize the clock to 0am if the type is "date" and value "today"', function() {
+        it('should initialize the clock to 0am if the type is "date" and value "today"', function () {
           const el = helpers.build('<coral-datepicker value="today" type="date"></coral-datepicker>');
           // this test just verifies that the current date & time is set
 
@@ -671,7 +671,7 @@ describe('Datepicker', function() {
           expect(passedMinutesOfInitDay === 0 && passedMinutesOfCurrentDay >= passedMinutesOfInitDay).to.equal(true, 'time should have been set to 0:00');
         });
 
-        it('should reject invalid value strings', function() {
+        it('should reject invalid value strings', function () {
           const el = helpers.build(window.__html__['Datepicker.value.invalid.html']);
           expect(el.value).to.equal('');
           expect(el.getAttribute('value')).to.equal('a');
@@ -679,28 +679,28 @@ describe('Datepicker', function() {
         });
       });
 
-      describe('#valueAsDate', function() {
-        it('should default to null', function() {
+      describe('#valueAsDate', function () {
+        it('should default to null', function () {
           const el = helpers.build(window.__html__['Datepicker.base.html']);
           expect(el.valueAsDate).to.be.null;
         });
 
-        it('should return assigned value as Date', function() {
+        it('should return assigned value as Date', function () {
           const el = helpers.build(window.__html__['Datepicker.value.html']);
           expect(el.valueAsDate instanceof Date).to.be.true;
           expect(new DateTime.Moment(el.valueAsDate).isSame(new DateTime.Moment('2000-12-31'), 'day')).to.be.true;
         });
 
-        it('should not accept valueAsDate as an attribute', function() {
+        it('should not accept valueAsDate as an attribute', function () {
           const el = helpers.build(window.__html__['Datepicker.valueasdate.html']);
           expect(el.valueAsDate).to.be.null;
         });
       });
     });
 
-    describe('Events', function() {
-      describe('#change', function() {
-        it('should not trigger a change event at instantiation', function() {
+    describe('Events', function () {
+      describe('#change', function () {
+        it('should not trigger a change event at instantiation', function () {
           var changeSpy = sinon.spy();
 
           // we assign the listener to the container in case the event bubbles
@@ -711,7 +711,7 @@ describe('Datepicker', function() {
           expect(changeSpy.callCount).to.equal(0);
         });
 
-        it('should not trigger a change event when a value is set programmatically', function() {
+        it('should not trigger a change event when a value is set programmatically', function () {
           var changeSpy = sinon.spy();
 
           const el = helpers.build(window.__html__['Datepicker.value.html']);
@@ -721,7 +721,7 @@ describe('Datepicker', function() {
           expect(changeSpy.callCount).to.equal(0);
         });
 
-        it('should trigger a change event when a date is selected', function(done) {
+        it('should trigger a change event when a date is selected', function (done) {
           var changeSpy = sinon.spy();
 
           const el = helpers.build(window.__html__['Datepicker.value.html']);
@@ -730,7 +730,7 @@ describe('Datepicker', function() {
           el._elements.toggle.click();
 
           // Overlay does not open immediately any longer
-          helpers.next(function() {
+          helpers.next(function () {
             var cell = el._elements.calendar._elements.body.querySelector('a');
 
             cell.click();
@@ -741,7 +741,7 @@ describe('Datepicker', function() {
           });
         });
 
-        it('should trigger a change event when a time is selected', function(done) {
+        it('should trigger a change event when a time is selected', function (done) {
           var changeSpy = sinon.spy();
 
           const el = helpers.build(window.__html__['Datepicker.type.time.html']);
@@ -750,7 +750,7 @@ describe('Datepicker', function() {
           el._elements.toggle.click();
 
           // Overlay does not open immediately any longer
-          helpers.next(function() {
+          helpers.next(function () {
             // we need to select a full time to have a valid change event
             el._elements.clock._elements.hours.value = '12';
             el._elements.clock._elements.hours.trigger('change');
@@ -763,7 +763,7 @@ describe('Datepicker', function() {
           });
         });
 
-        it('should trigger a change event when a datetime is selected', function(done) {
+        it('should trigger a change event when a datetime is selected', function (done) {
           var changeSpy = sinon.spy();
 
           const el = helpers.build('<coral-datepicker type="datetime" value="2015-04-20T00:00+02:00"></coral-datepicker>');
@@ -772,7 +772,7 @@ describe('Datepicker', function() {
           el._elements.toggle.click();
 
           // Overlay does not open immediately any longer
-          helpers.next(function() {
+          helpers.next(function () {
             el._elements.clock._elements.minutes.value = '59';
             el._elements.clock._elements.minutes.trigger('change');
 
@@ -781,7 +781,7 @@ describe('Datepicker', function() {
           });
         });
 
-        it('should trigger a change event when a datetime (with no initial value) is selected', function(done) {
+        it('should trigger a change event when a datetime (with no initial value) is selected', function (done) {
           var changeSpy = sinon.spy();
 
           const el = helpers.build(window.__html__['Datepicker.type.datetime.html']);
@@ -790,7 +790,7 @@ describe('Datepicker', function() {
           el._elements.toggle.click();
 
           // Overlay does not open immediately any longer
-          helpers.next(function() {
+          helpers.next(function () {
             // we need to set a full time for the change event to be triggered
             el._elements.clock._elements.hours.value = '12';
             el._elements.clock._elements.hours.trigger('change');
@@ -805,8 +805,8 @@ describe('Datepicker', function() {
       });
     });
 
-    describe('User Interaction', function() {
-      it('should show the invalid style if the user sets the date manually', function() {
+    describe('User Interaction', function () {
+      it('should show the invalid style if the user sets the date manually', function () {
         const el = helpers.build('<coral-datepicker min="2015-04-10" max="2015-04-28" value="2015-04-15"></coral-datepicker>');
         // sets a value outside of the range
         el._elements.input.value = '2015-04-29';
@@ -817,14 +817,14 @@ describe('Datepicker', function() {
         expect(el.classList.contains('is-invalid')).to.be.true;
       });
 
-      it('should show set the current time as default when no time is set, but a date was chosen', function(done) {
+      it('should show set the current time as default when no time is set, but a date was chosen', function (done) {
         const el = helpers.build('<coral-datepicker type="datetime" value=""></coral-datepicker>');
 
         // we open the calendar to select a new date
         el._elements.toggle.click();
 
         // Overlay does not open immediately any longer
-        helpers.next(function() {
+        helpers.next(function () {
           var cell = el._elements.calendar._elements.body.querySelector('a');
           cell.click();
 
@@ -843,11 +843,11 @@ describe('Datepicker', function() {
         });
       });
 
-      it('toggle should open calendar', function(done) {
+      it('toggle should open calendar', function (done) {
         const el = helpers.build(window.__html__['Datepicker.base.html']);
 
         // Overlay does not open immediately any longer
-        el.on('coral-overlay:open', function() {
+        el.on('coral-overlay:open', function () {
           expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
           expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('true');
           done();
@@ -857,7 +857,7 @@ describe('Datepicker', function() {
         el._elements.toggle.click();
       });
 
-      it('should not toggle the calendar when readonly', function() {
+      it('should not toggle the calendar when readonly', function () {
         const el = helpers.build(window.__html__['Datepicker.readonly.html']);
         // opens the popover
         el._elements.toggle.click();
@@ -865,7 +865,7 @@ describe('Datepicker', function() {
         expect(el._elements.overlay.open).to.be.false;
       });
 
-      it('should recheck the invalid state after a user interaction happened', function() {
+      it('should recheck the invalid state after a user interaction happened', function () {
         helpers.build(window.__html__['Datepicker.invalid.html']);
         var datepicker1 = document.getElementById('validDatepicker1');
         var datepicker2 = document.getElementById('validDatepicker2');
@@ -885,7 +885,7 @@ describe('Datepicker', function() {
       });
 
       // @flaky on FF
-      it.skip('should restore focus to toggle when closed using ESC key', function(done) {
+      it.skip('should restore focus to toggle when closed using ESC key', function (done) {
         const el = helpers.build(window.__html__['Datepicker.type.time.html']);
         el._elements.overlay._overlayAnimationTime = 0;
 
@@ -893,17 +893,17 @@ describe('Datepicker', function() {
         el._elements.toggle.focus();
 
         // Overlay does not open immediately any longer
-        el.on('coral-overlay:open', function() {
+        el.on('coral-overlay:open', function () {
           // hours input should have focus when popover opens
           expect(document.activeElement).to.equal(el._elements.clock._elements.hours);
           expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
           expect(el._elements.trigger.getAttribute('aria-expanded')).to.equal('true');
-        
+
           // trigger ESC key down event on hours input
           helpers.keydown(Keys.keyToCode('esc'), el._elements.clock._elements.hours);
         });
 
-        el.on('coral-overlay:close', function() {
+        el.on('coral-overlay:close', function () {
           // focus should return to toggle button
           expect(document.activeElement).to.equal(el._elements.toggle);
 
@@ -918,9 +918,9 @@ describe('Datepicker', function() {
       });
     });
 
-    describe('Implementation details', function() {
-      describe('Accessibility', function() {
-        it('should implement combobox design pattern per WAI-ARIA 1.2', function() {
+    describe('Implementation details', function () {
+      describe('Accessibility', function () {
+        it('should implement combobox design pattern per WAI-ARIA 1.2', function () {
           var el = new Datepicker();
           el._renderCalendar();
           helpers.target.appendChild(el);
@@ -935,7 +935,7 @@ describe('Datepicker', function() {
         });
       });
 
-      it('should show different controls depending on the type', function(done) {
+      it('should show different controls depending on the type', function (done) {
         var el = new Datepicker();
         el._renderCalendar();
         helpers.target.appendChild(el);
@@ -944,7 +944,7 @@ describe('Datepicker', function() {
 
         el._elements.toggle.click();
 
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el._elements.calendar.hidden).to.be.false;
           expect(el._elements.clock.hidden).to.be.true;
           expect(el._elements.toggle.icon).to.equal('calendar');
@@ -966,15 +966,15 @@ describe('Datepicker', function() {
         });
       });
 
-      it('should close the popover when a date is clicked', function(done) {
+      it('should close the popover when a date is clicked', function (done) {
         const el = helpers.build(window.__html__['Datepicker.value.html']);
 
-        el.on('coral-overlay:open', function() {
+        el.on('coral-overlay:open', function () {
           expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
           expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('true');
         });
 
-        el.on('coral-overlay:close', function() {
+        el.on('coral-overlay:close', function () {
           expect(el._elements.input.getAttribute('aria-expanded')).to.equal('false');
           expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('false');
 
@@ -988,7 +988,7 @@ describe('Datepicker', function() {
         el._elements.toggle.click();
 
         // Overlay does not open immediately any longer
-        helpers.next(function() {
+        helpers.next(function () {
           var cell = el._elements.calendar._elements.body.querySelector('a');
 
           cell.click();
@@ -998,15 +998,15 @@ describe('Datepicker', function() {
         });
       });
 
-      it('should close the popover when the same date is clicked', function(done) {
+      it('should close the popover when the same date is clicked', function (done) {
         const el = helpers.build(window.__html__['Datepicker.value.html']);
 
-        el.on('coral-overlay:open', function() {
+        el.on('coral-overlay:open', function () {
           expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
           expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('true');
         });
 
-        el.on('coral-overlay:close', function() {
+        el.on('coral-overlay:close', function () {
           expect(el._elements.input.getAttribute('aria-expanded')).to.equal('false');
           expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('false');
 
@@ -1020,7 +1020,7 @@ describe('Datepicker', function() {
         el._elements.toggle.click();
 
         // Overlay does not open immediately any longer
-        helpers.next(function() {
+        helpers.next(function () {
           var cell = el._elements.calendar._elements.body.querySelector('a[data-date="2000-12-31"]');
           expect(cell.dataset.date).to.equal('2000-12-31');
 
@@ -1031,15 +1031,15 @@ describe('Datepicker', function() {
         });
       });
 
-      it('should close the popover when the same date is clicked', function(done) {
+      it('should close the popover when the same date is clicked', function (done) {
         const el = helpers.build(window.__html__['Datepicker.value.html']);
 
-        el.on('coral-overlay:open', function() {
+        el.on('coral-overlay:open', function () {
           expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
           expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('true');
         });
 
-        el.on('coral-overlay:close', function() {
+        el.on('coral-overlay:close', function () {
           expect(el._elements.input.getAttribute('aria-expanded')).to.equal('false');
           expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('false');
 
@@ -1053,7 +1053,7 @@ describe('Datepicker', function() {
         el._elements.toggle.click();
 
         // Overlay does not open immediately any longer
-        helpers.next(function() {
+        helpers.next(function () {
           var cell = el._elements.calendar._elements.body.querySelector('a[data-date="2000-12-31"]');
           expect(cell.dataset.date).to.equal('2000-12-31');
 
@@ -1064,22 +1064,22 @@ describe('Datepicker', function() {
         });
       });
 
-      describe('Tracking', function() {
+      describe('Tracking', function () {
         var trackerFnSpy;
 
-        beforeEach(function() {
+        beforeEach(function () {
           trackerFnSpy = sinon.spy();
           tracking.addListener(trackerFnSpy);
         });
 
-        afterEach(function() {
+        afterEach(function () {
           tracking.removeListener(trackerFnSpy);
         });
 
-        it('should call tracker callback with the expected tracker data when toggle button is clicked', function(done) {
+        it('should call tracker callback with the expected tracker data when toggle button is clicked', function (done) {
           const el = helpers.build(window.__html__['Datepicker.base.trackingOnWithAttributes.html']);
           el._elements.toggle.click();
-          el.on('coral-overlay:open', function() {
+          el.on('coral-overlay:open', function () {
             expect(trackerFnSpy.callCount).to.equal(1, 'Track callback should be called once.');
             var spyCall = trackerFnSpy.getCall(0);
             var trackData = spyCall.args[0];
@@ -1093,12 +1093,12 @@ describe('Datepicker', function() {
           });
         });
 
-        it('should call tracker callback with the expected tracker data when value is manually changed', function(done) {
+        it('should call tracker callback with the expected tracker data when value is manually changed', function (done) {
           const el = helpers.build(window.__html__['Datepicker.base.trackingOnWithAttributes.html']);
           var inputEl = el._elements.input;
           inputEl.value = '2018-01-01';
           inputEl.trigger('change');
-          helpers.next(function() {
+          helpers.next(function () {
             var spyCall = trackerFnSpy.getCall(0);
             var trackData = spyCall.args[0];
             expect(trackData).to.have.property('targetType', 'coral-datepicker');
@@ -1116,7 +1116,7 @@ describe('Datepicker', function() {
         helpers.testSmartOverlay('coral-datepicker');
       });
 
-      describe('#formField', function() {
+      describe('#formField', function () {
         helpers.testFormField(window.__html__['Datepicker.value.html'], {
           value: '2014-12-31'
         });

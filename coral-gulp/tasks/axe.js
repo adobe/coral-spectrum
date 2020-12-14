@@ -10,20 +10,20 @@
  * governing permissions and limitations under the License.
  */
 
-module.exports = function(gulp) {
+module.exports = function (gulp) {
   const axe = require('gulp-axe-webdriver');
   const glob = require('glob-all');
   const isTLB = require('../helpers/util').isTLB();
   const config = require(`../configs/axe.conf`);
 
-  gulp.task('axe', function() {
+  gulp.task('axe', function () {
     const files = isTLB ? glob.sync([
       './dist/examples/coral-*.html',
       '!./dist/examples/coral-component-playground.html',
     ]) : ['examples/index.html'];
-    
+
     config.urls = files;
-    
+
     return axe(config);
   });
 };

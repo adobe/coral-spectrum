@@ -10,17 +10,17 @@
  * governing permissions and limitations under the License.
  */
 
-module.exports = function(gulp) {
+module.exports = function (gulp) {
   const ghPages = require('gulp-gh-pages');
   const plumb = require('./plumb');
   const PluginError = require('plugin-error');
   const util = require('../helpers/util');
-  
+
   gulp.task('deploy', (done) => {
     if (!util.isTLB()) {
       done(new PluginError('deploy', 'Deploy aborted: not in root folder.'));
     }
-    
+
     return gulp.src('./dist/**/*', {base: '.'})
       .pipe(plumb())
       .pipe(ghPages({

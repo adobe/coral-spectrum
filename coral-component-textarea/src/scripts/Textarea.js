@@ -20,9 +20,9 @@ const CLASSNAME = '_coral-Textfield';
 
 /**
  Enumeration for {@link Textarea} variants.
- 
+
  @typedef {Object} TextareaVariantEnum
- 
+
  @property {String} DEFAULT
  A default textarea.
  @property {String} QUIET
@@ -53,15 +53,15 @@ class Textarea extends BaseFormField(BaseComponent(HTMLTextAreaElement)) {
   /** @ignore */
   constructor() {
     super();
-  
+
     this._delegateEvents(commons.extend(this._events, {
       input: '_onInput'
     }));
   }
-  
+
   /**
    The textarea's variant. See {@link TextareaVariantEnum}.
-   
+
    @type {String}
    @default TextareaVariantEnum.DEFAULT
    @htmlattribute variant
@@ -70,30 +70,30 @@ class Textarea extends BaseFormField(BaseComponent(HTMLTextAreaElement)) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-  
+
     // removes every existing variant
     this.classList.remove(...ALL_VARIANT_CLASSES);
 
     if (this._variant !== variant.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._variant}`);
     }
-    
+
     // Restore the original height
     if (this._variant === variant.QUIET) {
       this._defaultHeight = this._defaultHeight || this.style.height;
-    }
-    else {
+    } else {
       this.style.height = this._defaultHeight;
       this._defaultHeight = undefined;
     }
 
     this._onInput();
   }
-  
+
   /**
    Inherited from {@link BaseFormField#reset}.
    */
@@ -101,11 +101,11 @@ class Textarea extends BaseFormField(BaseComponent(HTMLTextAreaElement)) {
     // The textarea uses the textContent to save the old value and not the value attribute
     /** @ignore */
     this.value = this.textContent;
-    
+
     // Reset height if quiet variant
     this._onInput();
   }
-  
+
   /** @private */
   _onInput() {
     if (this.variant === variant.QUIET) {
@@ -115,27 +115,31 @@ class Textarea extends BaseFormField(BaseComponent(HTMLTextAreaElement)) {
       });
     }
   }
-  
+
   /**
    Returns {@link Textarea} variants.
-   
+
    @return {TextareaVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+
   /** @ignore */
   static get observedAttributes() {
     return super._nativeObservedAttributes.concat(['variant']);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME, `${CLASSNAME}--multiline`);
-    
+
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
   }
 }
 

@@ -29,22 +29,23 @@ class MasonryItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-  
+
     // Represents ownership (necessary when the item is moved which triggers callbacks)
     this._masonry = null;
-    
+
     // Default value
     this._dragAction = null;
-    
+
     // Template
     this._elements = {};
     quickactions.call(this._elements);
   }
-  
+
   // @compat
   get content() {
     return this;
   }
+
   set content(value) {
     // Support configs
     if (typeof value === 'object') {
@@ -54,10 +55,10 @@ class MasonryItem extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /**
    Whether the item is selected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -66,39 +67,40 @@ class MasonryItem extends BaseComponent(HTMLElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
-  
+
     this.setAttribute('aria-selected', this._selected);
     this.classList.toggle('is-selected', this._selected);
-    
+
     this._elements.check[this._selected ? 'setAttribute' : 'removeAttribute']('checked', '');
-    
+
     this.trigger('coral-masonry-item:_selectedchanged');
   }
-  
+
   /**
    Animates the insertion of the item.
-   
+
    @private
    */
   _insert() {
     if (this.classList.contains('is-beforeInserting')) {
       this.classList.remove('is-beforeInserting');
       this.classList.add('is-inserting');
-      
+
       commons.transitionEnd(this, () => {
         this.classList.remove('is-inserting');
       });
     }
   }
-  
+
   /** @private */
   _setTabbable(tabbable) {
     this.setAttribute('tabindex', tabbable ? 0 : -1);
   }
-  
+
   /** @private */
   _updateDragAction(enabled) {
     let handle;
@@ -106,8 +108,7 @@ class MasonryItem extends BaseComponent(HTMLElement) {
       // Find handle
       if (this.getAttribute('coral-masonry-draghandle') !== null) {
         handle = this;
-      }
-      else {
+      } else {
         handle = this.querySelector('[coral-masonry-draghandle]');
         if (!handle) {
           // Disable drag&drop if handle wasn't found
@@ -115,23 +116,24 @@ class MasonryItem extends BaseComponent(HTMLElement) {
         }
       }
     }
-    
+
     if (enabled) {
       if (!this._dragAction) {
         this._dragAction = new DragAction(this);
         this._dragAction.dropZone = this.parentNode;
       }
       this._dragAction.handle = handle;
-    }
-    else if (this._dragAction) {
+    } else if (this._dragAction) {
       this._dragAction.destroy();
       this._dragAction = null;
     }
   }
-  
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['selected', '_removing', '_orderable']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['selected', '_removing', '_orderable']);
+  }
+
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === '_removing') {
@@ -139,15 +141,13 @@ class MasonryItem extends BaseComponent(HTMLElement) {
       window.requestAnimationFrame(() => {
         this.classList.toggle('is-removing', value !== null);
       });
-    }
-    else if (name === '_orderable') {
+    } else if (name === '_orderable') {
       this._updateDragAction(value !== null);
-    }
-    else {
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
-  
+
   /** @ignore */
   connectedCallback() {
     if (!this.isConnected) {
@@ -158,16 +158,16 @@ class MasonryItem extends BaseComponent(HTMLElement) {
     // Inform masonry immediately
     this.trigger('coral-masonry-item:_connected');
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // @a11y
     this.setAttribute('tabindex', '-1');
-    
+
     // Support cloneNode
     const template = this.querySelector('._coral-Masonry-item-quickActions');
     if (template) {
@@ -177,7 +177,7 @@ class MasonryItem extends BaseComponent(HTMLElement) {
     // todo workaround to not give user possibility to tab into checkbox
     this._elements.check._labellableElement.tabIndex = -1;
   }
-  
+
   /** @ignore */
   disconnectedCallback() {
     if (this.isConnected) {

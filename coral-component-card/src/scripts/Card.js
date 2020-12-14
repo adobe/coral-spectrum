@@ -18,9 +18,9 @@ const COLOR_HINT_REG_EXP = /^#[0-9A-F]{6}$/i;
 
 /**
  Enumeration for {@link Card} variants.
- 
+
  @typedef {Object} CardVariantEnum
- 
+
  @property {String} DEFAULT
  Default card variant that shows the asset, overlay and content in their default positions.
  @property {String} QUIET
@@ -61,7 +61,7 @@ class Card extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
@@ -71,37 +71,38 @@ class Card extends BaseComponent(HTMLElement) {
       overlay: this.querySelector('coral-card-overlay') || document.createElement('coral-card-overlay')
     };
     base.call(this._elements);
-    
+
     // Events
     this._delegateEvents({
       'capture:load coral-card-asset img': '_onLoad'
     });
   }
-  
+
   /**
    The Asset of the card.
-   
+
    @type {CardAsset}
    @contentzone
    */
   get asset() {
     return this._getContentZone(this._elements.asset);
   }
+
   set asset(value) {
     this._setContentZone('asset', value, {
       handle: 'asset',
       tagName: 'coral-card-asset',
-      insert: function(asset) {
+      insert: function (asset) {
         this.insertBefore(asset, this.info || this._elements.wrapper || null);
       }
     });
   }
-  
+
   /**
    Hints the height of the asset that is going to be loaded. This prepares the size so that when the image is
    loaded no reflow is triggered. Both <code>assetHeight</code> and <code>assetWidth</code> need to be specified
    for this feature to take effect.
-   
+
    @type {String}
    @default ""
    @htmlattribute assetheight
@@ -109,9 +110,10 @@ class Card extends BaseComponent(HTMLElement) {
   get assetHeight() {
     return this._assetHeight || '';
   }
+
   set assetHeight(value) {
     this._assetHeight = transform.number(value);
-    
+
     // Avoid a forced reflow by executing following in the next frame
     window.requestAnimationFrame(() => {
       // both hint dimensions need to be set in order to use this feature
@@ -121,7 +123,7 @@ class Card extends BaseComponent(HTMLElement) {
         const width = clientRect.right - clientRect.left;
         // calculates the image ratio used to resize the height
         const ratio = width / this.assetWidth;
-    
+
         // the image is considered "low resolution"
         // @todo: check this after removal of lowResolution
         if (ratio > 1) {
@@ -135,12 +137,12 @@ class Card extends BaseComponent(HTMLElement) {
       }
     });
   }
-  
+
   /**
    Hints the width of the asset that is going to be loaded. This prepares the size so that when the image is
    loaded no reflow is triggered. Both <code>assetHeight</code> and <code>assetWidth</code> need to be specified
    for this feature to take effect.
-   
+
    @type {String}
    @default ""
    @htmlattribute assetwidth
@@ -148,10 +150,11 @@ class Card extends BaseComponent(HTMLElement) {
   get assetWidth() {
     return this._assetWidth || '';
   }
+
   set assetWidth(value) {
     this._assetWidth = transform.number(value);
   }
-  
+
   /**
    @type {String}
    @default ""
@@ -160,65 +163,68 @@ class Card extends BaseComponent(HTMLElement) {
   get colorHint() {
     return this._colorHint || '';
   }
+
   set colorHint(value) {
     if (COLOR_HINT_REG_EXP.test(value)) {
       this._colorHint = value;
-  
+
       // if the image is already loaded we do not add the color hint to the asset
       if (!this._loaded) {
         this._elements.asset.style['background-color'] = this._colorHint;
       }
     }
   }
-  
+
   /**
    The Content of the card.
-   
+
    @type {CardContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-card-content',
-      insert: function(content) {
+      insert: function (content) {
         // Ensure title comes first
         const title = content.querySelector('coral-card-title');
         if (title) {
           content.insertBefore(title, content.firstChild);
         }
-        
+
         this._elements.wrapper.insertBefore(content, this.overlay || null);
       }
     });
   }
-  
+
   /**
    The information area of the card, which is placed over all the content. It is typically used for alerts.
-   
+
    @type {CardInfo}
    @contentzone
    */
   get info() {
     return this._getContentZone(this._elements.info);
   }
+
   set info(value) {
     this._setContentZone('info', value, {
       handle: 'info',
       tagName: 'coral-card-info',
-      insert: function(info) {
+      insert: function (info) {
         this.appendChild(info);
       }
     });
   }
-  
+
   /**
    Fixes the width of the card. By default cards will take the width of their containers allowing them to interact
    nicely with grids. Whenever they are used standalone fixing the width might be desired.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute fixedwidth
@@ -227,35 +233,37 @@ class Card extends BaseComponent(HTMLElement) {
   get fixedWidth() {
     return this._fixedWidth || false;
   }
+
   set fixedWidth(value) {
     this._fixedWidth = transform.booleanAttr(value);
     this._reflectAttribute('fixedwidth', this._fixedWidth);
-  
+
     this.classList.toggle(`${CLASSNAME}--fixedWidth`, this._fixedWidth);
   }
-  
+
   /**
    The Overlay of the card.
-   
+
    @type {CardOverlay}
    @contentzone
    */
   get overlay() {
     return this._getContentZone(this._elements.overlay);
   }
+
   set overlay(value) {
     this._setContentZone('overlay', value, {
       handle: 'overlay',
       tagName: 'coral-card-overlay',
-      insert: function(overlay) {
+      insert: function (overlay) {
         this._elements.wrapper.appendChild(overlay);
       }
     });
   }
-  
+
   /**
    Whether the card is stacked or not. This is used to represent several assets grouped together.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute stacked
@@ -264,17 +272,18 @@ class Card extends BaseComponent(HTMLElement) {
   get stacked() {
     return this._stacked || false;
   }
+
   set stacked(value) {
     this._stacked = transform.booleanAttr(value);
     this._reflectAttribute('stacked', this._stacked);
-  
+
     this.classList.toggle(`${CLASSNAME}--stacked`, this._stacked);
   }
-  
+
   /**
    The card's variant. It determines which sections of the Card and in which position they are shown.
    See {@link CardVariantEnum}.
-   
+
    @type {String}
    @default CardVariantEnum.DEFAULT
    @htmlattribute variant
@@ -282,6 +291,7 @@ class Card extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
@@ -292,23 +302,23 @@ class Card extends BaseComponent(HTMLElement) {
     if (this._variant !== variant.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._variant}`);
     }
-    
+
     this.assetHeight = this.assetHeight;
   }
-  
+
   /** @ignore */
   _onLoad(event) {
     // @todo fix me for multiple images
     // sets the image as loaded
     this._loaded = true;
-  
+
     // removes the height style since the asset has been completely loaded
     this._elements.asset.style.height = '';
-  
+
     // enables the transition
     event.target.classList.remove('is-loading');
   }
-  
+
   get _contentZones() {
     return {
       'coral-card-asset': 'asset',
@@ -317,14 +327,16 @@ class Card extends BaseComponent(HTMLElement) {
       'coral-card-overlay': 'overlay'
     };
   }
-  
+
   /**
    Returns {@link Card} variants.
-   
+
    @return {CardVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       assetwidth: 'assetWidth',
@@ -333,7 +345,7 @@ class Card extends BaseComponent(HTMLElement) {
       fixedwidth: 'fixedWidth'
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -345,29 +357,31 @@ class Card extends BaseComponent(HTMLElement) {
       'stacked'
     ]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-  
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
+
     const content = this._elements.content;
     const asset = this._elements.asset;
-    
+
     // Prepares images to be loaded nicely
     const images = asset.querySelectorAll('img');
     const imagesCount = images.length;
-    for (let i = 0; i < imagesCount; i++) {
+    for (let i = 0 ; i < imagesCount ; i++) {
       const image = images[i];
       if (!image.complete) {
         image.classList.add('is-loading');
       }
     }
-  
+
     for (const contentZone in this._contentZones) {
       const element = this._elements[this._contentZones[contentZone]];
       // Remove it so we can process children
@@ -375,7 +389,7 @@ class Card extends BaseComponent(HTMLElement) {
         element.parentNode.removeChild(element);
       }
     }
-  
+
     // Moves everything into the main content zone
     while (this.firstChild) {
       const child = this.firstChild;
@@ -390,21 +404,21 @@ class Card extends BaseComponent(HTMLElement) {
         this.removeChild(child);
       }
     }
-  
+
     // Assign the content zones so the insert functions will be called
     this.overlay = this._elements.overlay;
     this.content = content;
     this.info = this._elements.info;
-  
+
     this.appendChild(this._elements.wrapper);
-  
+
     // The 'asset' setter knows to insert the element just before the wrapper node.
     this.asset = asset;
-    
+
     // In case a lot of alerts are added, they will not overflow the card
     // Also check whether any alerts are available
     this.classList.toggle(`${CLASSNAME}--overflow`, this.info.childNodes.length && this.info.scrollHeight > this.clientHeight);
-   }
+  }
 }
 
 export default Card;

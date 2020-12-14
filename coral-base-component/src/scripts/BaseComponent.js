@@ -18,9 +18,9 @@ const delegateEventSplitter = /^(\S+)\s*(.*)$/;
 
 /**
  Enumeration representing the tracking options.
- 
+
  @typedef {Object} TrackingEnum
- 
+
  @property {String} ON
  Enables tracking of the component interactions.
  @property {String} OFF
@@ -35,33 +35,31 @@ const tracking = {
  Return the method corresponding to the method name or the function, if passed.
  @ignore
  */
-const getListenerFromMethodNameOrFunction = function(obj, eventName, methodNameOrFunction) {
+const getListenerFromMethodNameOrFunction = function (obj, eventName, methodNameOrFunction) {
   // Try to get the method
   if (typeof methodNameOrFunction === 'function') {
     return methodNameOrFunction;
-  }
-  else if (typeof methodNameOrFunction === 'string') {
+  } else if (typeof methodNameOrFunction === 'string') {
     if (!obj[methodNameOrFunction]) {
       throw new Error(`Coral.Component: Unable to add ${eventName} listener for ${obj.toString()}, method
       ${methodNameOrFunction} not found`);
     }
-    
+
     const listener = obj[methodNameOrFunction];
-    
+
     if (typeof listener !== 'function') {
       throw new Error(`Coral.Component: Unable to add ${eventName} listener for ${obj.toString()}, listener is a
       ${(typeof listener)} but should be a function`);
     }
-    
+
     return listener;
-  }
-  else if (methodNameOrFunction) {
+  } else if (methodNameOrFunction) {
     // If we're passed something that's truthy (like an object), but it's not a valid method name or a function, get
     // angry
     throw new Error(`Coral.Component: Unable to add ${eventName} listener for ${obj.toString()}, ${methodNameOrFunction}
     is neither a method name or a function`);
   }
-  
+
   return null;
 };
 
@@ -69,7 +67,7 @@ const getListenerFromMethodNameOrFunction = function(obj, eventName, methodNameO
  Add local event and key combo listeners for this component, store global event/key combo listeners for later.
  @ignore
  */
-const delegateEvents = function() {
+const delegateEvents = function () {
   /*
    Add listeners to new event
    - Include in hash
@@ -88,41 +86,41 @@ const delegateEvents = function() {
   let isKey;
   let isResize;
   let isCapture;
-  
+
   for (eventInfo in this._events) {
     listener = this._events[eventInfo];
-    
+
     // Extract the event name and the selector
     match = eventInfo.match(delegateEventSplitter);
     eventName = `${match[1]}.CoralComponent`;
     selector = match[2];
-    
+
     if (selector === '') {
       // instead of null because the key module checks for undefined
       selector = undefined;
     }
-    
+
     // Try to get the method corresponding to the value in the map
     listener = getListenerFromMethodNameOrFunction(this, eventName, listener);
-    
+
     if (listener) {
       // Always execute in the context of the object
       // @todo is this necessary? this should be correct anyway
       listener = listener.bind(this);
-      
+
       // Check if the listener is on the window
       isGlobal = eventName.indexOf('global:') === 0;
       if (isGlobal) {
         eventName = eventName.substr(7);
       }
-      
+
       // Check if the listener is a capture listener
       isCapture = eventName.indexOf('capture:') === 0;
       if (isCapture) {
         // @todo Limitation: It should be possible to do capture:global:, but it isn't
         eventName = eventName.substr(8);
       }
-      
+
       // Check if the listener is a key listener
       isKey = eventName.indexOf('key:') === 0;
       if (isKey) {
@@ -131,7 +129,7 @@ const delegateEvents = function() {
         }
         eventName = eventName.substr(4);
       }
-      
+
       // Check if the listener is a resize listener
       isResize = eventName.indexOf('resize') === 0;
       if (isResize) {
@@ -139,7 +137,7 @@ const delegateEvents = function() {
           throw new Error('Coral.commons.addResizeListener does not currently support listening to resize event with capture');
         }
       }
-      
+
       if (isGlobal) {
         // Store for adding/removal
         if (isKey) {
@@ -149,8 +147,7 @@ const delegateEvents = function() {
             selector: selector,
             listener: listener
           });
-        }
-        else {
+        } else {
           this._globalEvents = this._globalEvents || [];
           this._globalEvents.push({eventName, selector, listener, isCapture});
         }
@@ -164,22 +161,19 @@ const delegateEvents = function() {
           // Execute key listeners in the context of the element
           context: this
         });
-    
+
         // Add listener locally
         this._keys.on(eventName, selector, listener);
-      }
-      else if (isResize) {
+      } else if (isResize) {
         if (selector) {
           elements = document.querySelectorAll(selector);
-          for (let i = 0; i < elements.length; ++i) {
+          for (let i = 0 ; i < elements.length ; ++i) {
             commons.addResizeListener(elements[i], listener);
           }
-        }
-        else {
+        } else {
           commons.addResizeListener(this, listener);
         }
-      }
-      else {
+      } else {
         this._vent.on(eventName, selector, listener, isCapture);
       }
     }
@@ -190,24 +184,24 @@ const delegateEvents = function() {
  Attach global event listeners for this component.
  @ignore
  */
-const delegateGlobalEvents = function() {
+const delegateGlobalEvents = function () {
   let i;
   if (this._globalEvents) {
     // Remove global event listeners
-    for (i = 0; i < this._globalEvents.length; i++) {
+    for (i = 0 ; i < this._globalEvents.length ; i++) {
       const event = this._globalEvents[i];
       events.on(event.eventName, event.selector, event.listener, event.isCapture);
     }
   }
-  
+
   if (this._globalKeys) {
     // Remove global key listeners
-    for (i = 0; i < this._globalKeys.length; i++) {
+    for (i = 0 ; i < this._globalKeys.length ; i++) {
       const key = this._globalKeys[i];
       keys.on(key.keyCombo, key.selector, key.listener);
     }
   }
-  
+
   if (this._keys) {
     this._keys.init(true);
   }
@@ -217,24 +211,24 @@ const delegateGlobalEvents = function() {
  Remove global event listeners for this component.
  @ignore
  */
-const undelegateGlobalEvents = function() {
+const undelegateGlobalEvents = function () {
   let i;
   if (this._globalEvents) {
     // Remove global event listeners
-    for (i = 0; i < this._globalEvents.length; i++) {
+    for (i = 0 ; i < this._globalEvents.length ; i++) {
       const event = this._globalEvents[i];
       events.off(event.eventName, event.selector, event.listener, event.isCapture);
     }
   }
-  
+
   if (this._globalKeys) {
     // Remove global key listeners
-    for (i = 0; i < this._globalKeys.length; i++) {
+    for (i = 0 ; i < this._globalKeys.length ; i++) {
       const key = this._globalKeys[i];
       keys.off(key.keyCombo, key.selector, key.listener);
     }
   }
-  
+
   if (this._keys) {
     this._keys.destroy(true);
   }
@@ -247,25 +241,25 @@ const REG_EXP_UPPERCASE = /[A-Z]/g;
  Returns the constructor namespace
  @ignore
  */
-const getConstructorName = function(constructor) {
+const getConstructorName = function (constructor) {
   // Will contain the namespace of the constructor in reversed order
   const constructorName = [];
   // Keep a reference on the passed constructor
   const originalConstructor = constructor;
-  
+
   // Traverses Coral constructors if not already done to set the namespace
   if (!constructor._namespace) {
     // Set namespace on Coral constructors until 'constructor' is found
     const find = (obj, constructorToFind) => {
       let found = false;
       const type = typeof obj;
-    
+
       if (obj && type === 'object' || type === 'function') {
         const subObj = Object.keys(obj);
-      
-        for (let i = 0; i < subObj.length; i++) {
+
+        for (let i = 0 ; i < subObj.length ; i++) {
           const key = subObj[i];
-        
+
           // Components are capitalized
           if (key[0].match(REG_EXP_UPPERCASE) !== null) {
             // Keep a reference of the constructor name and its parent
@@ -273,40 +267,38 @@ const getConstructorName = function(constructor) {
               parent: obj,
               value: key
             };
-          
+
             found = obj[key] === constructorToFind;
-          
+
             if (found) {
               break;
-            }
-            else {
+            } else {
               found = find(obj[key], constructorToFind);
             }
           }
         }
       }
-    
+
       return found;
     };
-  
+
     // Look for the constructor in the Coral namespace
     find(window.Coral, constructor);
   }
-  
+
   // Climb up the constructor namespace
   while (constructor) {
     if (constructor._namespace) {
       constructorName.push(constructor._namespace.value);
       constructor = constructor._namespace.parent;
-    }
-    else {
+    } else {
       constructor = false;
     }
   }
-  
+
   // Build the full namespace string and save it for reuse
   originalConstructor._componentName = constructorName.reverse().join('.');
-  
+
   return originalConstructor._componentName;
 };
 
@@ -318,18 +310,18 @@ const BaseComponent = (superClass) => class extends superClass {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Attach Vent
     this._vent = new Vent(this);
     this._events = {};
-    
+
     // Content zone MO for virtual DOM support
     if (this._contentZones) {
       this._contentZoneObserver = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
-          for (let i = 0; i < mutation.addedNodes.length; i++) {
+          for (let i = 0 ; i < mutation.addedNodes.length ; i++) {
             const addedNode = mutation.addedNodes[i];
-        
+
             for (const name in this._contentZones) {
               const contentZone = this._contentZones[name];
               if (addedNode.nodeName.toLowerCase() === name && !addedNode._contentZoned) {
@@ -341,18 +333,18 @@ const BaseComponent = (superClass) => class extends superClass {
           }
         });
       });
-  
+
       this._contentZoneObserver.observe(this, {
         childList: true,
         subtree: true
       });
     }
   }
-  
+
   /**
    Tracking of events. This provides insight on the usage of the components. It accepts "ON" and "OFF". In order to
    successfully track the events, {Tracking} needs to be configured.
-   
+
    @type {String}
    @default TrackingEnum.ON
    @htmlattribute tracking
@@ -360,15 +352,16 @@ const BaseComponent = (superClass) => class extends superClass {
   get tracking() {
     return this._tracking || this.getAttribute('tracking') || tracking.ON;
   }
+
   set tracking(value) {
     value = transform.string(value).toLowerCase();
     this._tracking = validate.enumeration(tracking)(value) && value || tracking.ON;
   }
-  
+
   /**
    The string representing the feature being tracked. This provides additional context to the analytics trackers
    about the feature that the element enables.
-   
+
    @type {String}
    @default ""
    @htmlattribute trackingfeature
@@ -376,14 +369,15 @@ const BaseComponent = (superClass) => class extends superClass {
   get trackingFeature() {
     return this._trackingFeature || this.getAttribute('trackingFeature') || '';
   }
+
   set trackingFeature(value) {
     this._trackingFeature = transform.string(value);
   }
-  
+
   /**
    The string representing the element name being tracked. This providex additional context to the trackers about the
    element that was interacted with.
-   
+
    @type {String}
    @default ""
    @htmlattribute trackingelement
@@ -391,28 +385,33 @@ const BaseComponent = (superClass) => class extends superClass {
   get trackingElement() {
     return this._trackingElement || this.getAttribute('trackingElement') || '';
   }
+
   set trackingElement(value) {
     this._trackingElement = transform.string(value);
   }
-  
+
   // Constructs and returns the component name based on the constructor
-  get _componentName() { return this.constructor._componentName || getConstructorName(this.constructor); }
-  
+  get _componentName() {
+    return this.constructor._componentName || getConstructorName(this.constructor);
+  }
+
   // The filter function for keyboard events. By default, any child element can trigger keyboard events.
   // You can pass {@link Keys.filterInputs} to avoid listening to key events triggered from within
   // inputs.
-  _filterKeys() { return true; }
-  
+  _filterKeys() {
+    return true;
+  }
+
   // Attach event listeners including global ones
   _delegateEvents(eventMap) {
     this._events = commons.extend(this._events, eventMap);
     delegateEvents.call(this);
     delegateGlobalEvents.call(this);
-    
+
     // Once events are attached, we dispose them
     this._events = {};
   }
-  
+
   // Returns the content zone if the component is connected and contains the content zone else null
   // Ideally content zones will be replaced by shadow dom and <slot> elements
   _getContentZone(contentZone) {
@@ -422,7 +421,7 @@ const BaseComponent = (superClass) => class extends superClass {
     // Return the content zone by default
     return contentZone;
   }
-  
+
   // Sets the value as content zone for the property given the specified options
   // Ideally content zones will be replaced by shadow dom and <slot> elements
   _setContentZone(property, value, options) {
@@ -430,25 +429,25 @@ const BaseComponent = (superClass) => class extends superClass {
     const expectedTagName = options.tagName;
     const additionalSetter = options.set;
     const insert = options.insert;
-    
+
     let oldNode;
-    
+
     if (value) {
       if (!(value instanceof HTMLElement)) {
         throw new Error(`DOMException: Failed to set the "${property}" property on "${this.toString()}":
         The provided value is not of type "HTMLElement".`);
       }
-      
+
       if (expectedTagName && value.tagName.toLowerCase() !== expectedTagName) {
         throw new Error(`DOMException: Failed to set the "${property}" property on "${this.toString()}": The new
         ${property} element is of type "${value.tagName}". It must be a "${expectedTagName.toUpperCase()}" element.`);
       }
-      
+
       oldNode = this._elements[handle];
-  
+
       // Flag it for the content zone MO
       value._contentZoned = true;
-      
+
       // Replace the existing element
       if (insert) {
         // Remove old node
@@ -457,35 +456,32 @@ const BaseComponent = (superClass) => class extends superClass {
         }
         // Insert new node
         insert.call(this, value);
-      }
-      else if (oldNode && oldNode.parentNode) {
+      } else if (oldNode && oldNode.parentNode) {
         commons._log('warn', `${this._componentName} does not define an insert method for content zone ${handle}, falling back to replace.`);
         // Old way -- assume we have an old node
         this._elements[handle].parentNode.replaceChild(value, this._elements[handle]);
-      }
-      else {
+      } else {
         commons._log('error', `${this._componentName} does not define an insert method for content zone ${handle}, falling back to append.`);
         // Just append, which may introduce bugs, but at least doesn't crazy
         this.appendChild(value);
       }
-    }
-    else {
+    } else {
       // we need to remove the content zone if it exists
       oldNode = this._elements[handle];
       if (oldNode && oldNode.parentNode) {
         oldNode.parentNode.removeChild(oldNode);
       }
     }
-    
+
     // Re-assign the handle to the new element
     this._elements[handle] = value;
-    
+
     // Invoke the setter
     if (typeof additionalSetter === 'function') {
       additionalSetter.call(this, value);
     }
   }
-  
+
   // Handles the reflection of properties by using a flag to prevent setting the property by changing the attribute
   _reflectAttribute(attributeName, value) {
     if (typeof value === 'boolean') {
@@ -493,29 +489,27 @@ const BaseComponent = (superClass) => class extends superClass {
         this._reflectedAttribute = true;
         this.setAttribute(attributeName, '');
         this._reflectedAttribute = false;
-      }
-      else if (!value && this.hasAttribute(attributeName)) {
+      } else if (!value && this.hasAttribute(attributeName)) {
         this._reflectedAttribute = true;
         this.removeAttribute(attributeName);
         this._reflectedAttribute = false;
       }
-    }
-    else if (this.getAttribute(attributeName) !== String(value)) {
+    } else if (this.getAttribute(attributeName) !== String(value)) {
       this._reflectedAttribute = true;
       this.setAttribute(attributeName, value);
       this._reflectedAttribute = false;
     }
   }
-  
+
   /**
    Notifies external listeners about an internal interaction. This method is used internally in every
    component's method that we want to track.
-   
+
    @param {String} eventType The event type. Eg. click, select, etc.
    @param {String} targetType The element type being used. Eg. cyclebutton, cyclebuttonitem, etc.
    @param {CustomEvent} event
    @param {BaseComponent} childComponent - Optional, in case the event occurred on a child component.
-   
+
    @returns {BaseComponent}
    */
   _trackEvent(eventType, targetType, event, childComponent) {
@@ -524,19 +518,19 @@ const BaseComponent = (superClass) => class extends superClass {
     }
     return this;
   }
-  
+
   /**
    Returns the component name.
-   
+
    @return {String}
    */
   toString() {
     return `Coral.${this._componentName}`;
   }
-  
+
   /**
    Add an event listener.
- 
+
    @param {String} eventName
    The event name to listen for.
    @param {String} [selector]
@@ -551,10 +545,10 @@ const BaseComponent = (superClass) => class extends superClass {
     this._vent.on(eventName, selector, func, useCapture);
     return this;
   }
-  
+
   /**
    Remove an event listener.
-   
+
    @param {String} eventName
    The event name to stop listening for.
    @param {String} [selector]
@@ -569,10 +563,10 @@ const BaseComponent = (superClass) => class extends superClass {
     this._vent.off(eventName, selector, func, useCapture);
     return this;
   }
-  
+
   /**
    Trigger an event.
-   
+
    @param {String} eventName
    The event name to trigger.
    @param {Object} [props]
@@ -586,32 +580,33 @@ const BaseComponent = (superClass) => class extends superClass {
   trigger(eventName, props, bubbles, cancelable) {
     // When 'bubbles' is not set, then default to true:
     bubbles = bubbles || bubbles === undefined;
-    
+
     // When 'cancelable' is not set, then default to true:
     cancelable = cancelable || cancelable === undefined;
-    
+
     const event = new CustomEvent(eventName, {
       bubbles: bubbles,
       cancelable: cancelable,
       detail: props
     });
-  
+
     // Don't trigger the event if silenced
     if (this._silenced) {
       return event;
     }
-    
+
     // default value in case the dispatching fails
     let defaultPrevented = false;
-    
+
     try {
       // leads to NS_ERROR_UNEXPECTED in Firefox
       // https://bugzilla.mozilla.org/show_bug.cgi?id=329509
       defaultPrevented = !this.dispatchEvent(event);
     }
-    // eslint-disable-next-line no-empty
-    catch (e) {}
-    
+      // eslint-disable-next-line no-empty
+    catch (e) {
+    }
+
     // Check if the defaultPrevented status was correctly stored back to the event object
     if (defaultPrevented !== event.defaultPrevented) {
       // dispatchEvent() doesn't correctly set event.defaultPrevented in IE 9
@@ -621,37 +616,37 @@ const BaseComponent = (superClass) => class extends superClass {
       // First, we'll create an object that uses the event as its prototype
       // This gives us an object we can modify that is still technically an instanceof Event
       const patchedEvent = Object.create(event);
-      
+
       // Next, we set the correct value for defaultPrevented on the new object
       // We cannot simply assign defaultPrevented, it causes a "Invalid Calling Object" error in IE 9
       // For some reason, defineProperty doesn't cause this
       Object.defineProperty(patchedEvent, 'defaultPrevented', {
         value: defaultPrevented
       });
-      
+
       return patchedEvent;
     }
-    
+
     return event;
   }
-  
+
   /**
    Set multiple properties.
-   
+
    @param {Object.<String, *>} properties
    An object of property/value pairs to set.
    @param {Boolean} silent
    If true, events should not be triggered as a result of this set.
-   
+
    @returns {BaseComponent} this, chainable.
    */
   set(propertyOrProperties, valueOrSilent, silent) {
     let property;
     let properties;
     let value;
-    
+
     const isContentZone = (prop) => this._contentZones && commons.swapKeysAndValues(this._contentZones)[prop];
-    
+
     const updateContentZone = (prop, val) => {
       // If content zone exists and we only want to update properties on the content zone
       if (this[prop] instanceof HTMLElement && !(val instanceof HTMLElement)) {
@@ -666,44 +661,42 @@ const BaseComponent = (superClass) => class extends superClass {
         this[prop] = val;
       }
     };
-    
+
     const setProperty = (prop, val) => {
       if (isContentZone(prop)) {
         updateContentZone(prop, val);
-      }
-      else {
+      } else {
         this._silenced = silent;
         /** @ignore */
         this[prop] = val;
         this._silenced = false;
       }
     };
-    
+
     if (typeof propertyOrProperties === 'string') {
       // Set a single property
       property = propertyOrProperties;
       value = valueOrSilent;
-      
+
       setProperty(property, value);
-    }
-    else {
+    } else {
       properties = propertyOrProperties;
       silent = valueOrSilent;
-      
+
       // Set a map of properties
       for (property in properties) {
         value = properties[property];
-        
+
         setProperty(property, value);
       }
     }
-    
+
     return this;
   }
-  
+
   /**
    Get the value of a property.
-   
+
    @param {String} property
    The name of the property to fetch the value of.
    @returns {*} Property value.
@@ -711,22 +704,22 @@ const BaseComponent = (superClass) => class extends superClass {
   get(property) {
     return this[property];
   }
-  
+
   /**
    Show this component.
-   
+
    @returns {BaseComponent} this, chainable
    */
   show() {
     if (!this.hidden) {
       return this;
     }
-  
+
     /** @ignore */
     this.hidden = false;
     return this;
   }
-  
+
   /**
    Hide this component.
    @returns {BaseComponent} this, chainable
@@ -735,28 +728,28 @@ const BaseComponent = (superClass) => class extends superClass {
     if (this.hidden) {
       return this;
     }
-  
+
     /** @ignore */
     this.hidden = true;
     return this;
   }
-  
+
   /**
    Returns {@link BaseComponent} tracking options.
-   
+
    @return {TrackingEnum}
    */
   static get tracking() {
     return tracking;
   }
-  
+
   static get _attributePropertyMap() {
     return {
       trackingelement: 'trackingElement',
       trackingfeature: 'trackingFeature'
     };
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return [
@@ -766,7 +759,7 @@ const BaseComponent = (superClass) => class extends superClass {
       'trackingFeature'
     ];
   }
-  
+
   /** @ignore */
   // eslint-disable-next-line no-unused-vars
   attributeChangedCallback(name, oldValue, value) {
@@ -776,7 +769,7 @@ const BaseComponent = (superClass) => class extends superClass {
       self[self.constructor._attributePropertyMap[name] || name] = value;
     }
   }
-  
+
   /** @ignore */
   connectedCallback() {
     // A component that is reattached should respond to global events again
@@ -784,17 +777,17 @@ const BaseComponent = (superClass) => class extends superClass {
       delegateGlobalEvents.call(this);
       this._disconnected = false;
     }
-    
+
     if (!this._rendered) {
       this.render();
     }
   }
-  
+
   /** @ignore */
   render() {
     this._rendered = true;
   }
-  
+
   /** @ignore */
   disconnectedCallback() {
     // A component that isn't in the DOM should not be responding to global events

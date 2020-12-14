@@ -14,8 +14,8 @@ import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {CoachMark} from '../../../coral-component-coachmark';
 
 describe('CoachMark', function () {
-  describe('Instantiation', function() {
-    it('should be possible using new', function() {
+  describe('Instantiation', function () {
+    it('should be possible using new', function () {
       const el = helpers.build(new CoachMark());
       expect(el.className).to.equal('_coral-CoachMarkIndicator');
       expect(el.querySelectorAll('._coral-CoachMarkIndicator-ring').length).to.equal(3);
@@ -35,45 +35,45 @@ describe('CoachMark', function () {
       'should be possible to clone the element with a size',
       window.__html__['CoachMark.size.html']
     );
-    
+
     // todo
     // helpers.cloneComponent(
     //   'should be possible to clone using js',
     //   new CoachMark()
     // );
   });
-  
-  describe('API', function() {
+
+  describe('API', function () {
     let el = null;
-  
-    beforeEach(function() {
+
+    beforeEach(function () {
       el = new CoachMark();
     });
-  
-    afterEach(function() {
+
+    afterEach(function () {
       el = null;
     });
-    
-    describe('#target', function() {
-      it('should default to null', function() {
+
+    describe('#target', function () {
+      it('should default to null', function () {
         expect(el.target).to.equal(null);
       });
     });
-  
-    describe('#variant', function() {
-      it('should default to variant.DEFAULT', function() {
+
+    describe('#variant', function () {
+      it('should default to variant.DEFAULT', function () {
         expect(el.variant).to.equal(CoachMark.variant.DEFAULT);
         expect(el.classList.contains('_coral-CoachMarkIndicator--light')).to.be.false;
         expect(el.classList.contains('_coral-CoachMarkIndicator--dark')).to.be.false;
       });
-      
-      it('should be settable', function() {
+
+      it('should be settable', function () {
         el.variant = CoachMark.variant.LIGHT;
         expect(el.variant).to.equal(CoachMark.variant.LIGHT);
         expect(el.getAttribute('variant')).to.equal(CoachMark.variant.LIGHT);
         expect(el.classList.contains('_coral-CoachMarkIndicator--light')).to.be.true;
         expect(el.classList.contains('_coral-CoachMarkIndicator--dark')).to.be.false;
-  
+
         el.variant = CoachMark.variant.DARK;
         expect(el.variant).to.equal(CoachMark.variant.DARK);
         expect(el.getAttribute('variant')).to.equal(CoachMark.variant.DARK);
@@ -81,14 +81,14 @@ describe('CoachMark', function () {
         expect(el.classList.contains('_coral-CoachMarkIndicator--dark')).to.be.true;
       });
     });
-  
-    describe('#size', function() {
-      it('should default to size.MEDIUM', function() {
+
+    describe('#size', function () {
+      it('should default to size.MEDIUM', function () {
         expect(el.size).to.equal(CoachMark.size.MEDIUM);
         expect(el.classList.contains('_coral-CoachMarkIndicator--quiet')).to.be.false;
       });
-  
-      it('should be settable', function() {
+
+      it('should be settable', function () {
         el.size = CoachMark.size.SMALL;
         expect(el.size).to.equal(CoachMark.size.SMALL);
         expect(el.getAttribute('size')).to.equal(CoachMark.size.SMALL);
@@ -96,22 +96,22 @@ describe('CoachMark', function () {
       });
     });
   });
-  
-  describe('Markup', function() {
-    describe('#target', function() {
-      it('should be settable using a string', function(done) {
+
+  describe('Markup', function () {
+    describe('#target', function () {
+      it('should be settable using a string', function (done) {
         const wrapper = helpers.build(window.__html__['CoachMark.target.html']);
         const el = wrapper.querySelector('coral-coachmark');
         expect(el.target).to.equal('#target');
-        
+
         requestAnimationFrame(() => {
           // Implies it was positioned based on the defined target
           expect(wrapper.querySelector('coral-coachmark')._popper).to.not.equal(undefined);
           done();
         });
       });
-      
-      it('should be settable using a node', function(done) {
+
+      it('should be settable using a node', function (done) {
         const el = helpers.build(window.__html__['CoachMark.default.html']);
         const target = document.createElement('div');
         helpers.target.appendChild(target);
@@ -124,16 +124,16 @@ describe('CoachMark', function () {
         });
       });
     });
-    
-    describe('#variant', function() {
-      it('should be settable per attribute', function() {
+
+    describe('#variant', function () {
+      it('should be settable per attribute', function () {
         const el = helpers.build(window.__html__['CoachMark.variant.html']);
         expect(el.variant).to.equal(CoachMark.variant.LIGHT);
       });
     });
-  
-    describe('#size', function() {
-      it('should be settable per attribute', function() {
+
+    describe('#size', function () {
+      it('should be settable per attribute', function () {
         const el = helpers.build(window.__html__['CoachMark.size.html']);
         expect(el.size).to.equal(CoachMark.size.SMALL);
       });

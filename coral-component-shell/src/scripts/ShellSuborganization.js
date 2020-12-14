@@ -25,12 +25,12 @@ class ShellSuborganization extends ShellOrganization {
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Set the icon size
     this._elements.icon.size = Icon.size.SMALL;
-  
+
     // Be accessible
     this.setAttribute('role', 'button');
     this.setAttribute('tabindex', 0);

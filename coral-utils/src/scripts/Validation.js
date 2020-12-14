@@ -18,12 +18,12 @@ import commons from './Commons';
 class Validation {
   /**
    Ensures that the value has changed.
-   
+
    @param {*} newValue
    The new value.
    @param {*} oldValue
    The existing value.
-   
+
    @returns {Boolean} <code>true</code> if the values are different.
    */
   valueMustChange(newValue, oldValue) {
@@ -31,25 +31,25 @@ class Validation {
     // converted to the same type as a stored value
     return newValue !== oldValue;
   }
-  
+
   /**
    Ensures that the new value is within the enumeration. The enumeration can be given as an array of values or as a
    key/value Object. Take into consideration that enumerations are case sensitive.
-   
+
    @example // Enumeration as Array
    Coral.validate.enumeration(['xs', 's', 'm', 'l']);
    @example // Enumeration as Object
    Coral.validate.enumeration({EXTRA_SMALL : 'xs', SMALL : 's', MEDIUM : 'm', LARGE : 'l'});
    @param {Object} enumeration
    Object that represents an enum.
-   
+
    @returns {ValidationFunction}
    a validation function that ensures that the given value is within the enumeration.
    */
   enumeration(enumeration) {
     // Reverses the enumeration, so that we can check that the variable new value exists inside
     const enumReversed = commons.swapKeysAndValues(enumeration);
-  
+
     // Returns a new function that matches the newValue, oldValue signature
     return (newValue) => typeof enumReversed[newValue] !== 'undefined';
   }
@@ -58,20 +58,20 @@ class Validation {
 /**
  Signature of the function used to validate new input. It accepts a newValue and an oldValue which are used to
  determine if the newValue is valid.
- 
+
  @typedef {function} ValidationFunction
- 
+
  @param {*} newValue
  The new value to validate.
  @param {*} oldValue
  The existing value.
- 
+
  @returns {Boolean} <code>true</code> if the validation succeeded, otherwise <code>false</code>.
  */
 
 /**
  A property transform utility.
- 
+
  @type {Validation}
  */
 const validate = new Validation();

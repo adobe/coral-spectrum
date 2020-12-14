@@ -12,9 +12,9 @@
 
 /**
  Enumeration for {@link BaseOverlay} trap options.
- 
+
  @typedef {Object} OverlayTrapFocusEnum
- 
+
  @property {String} ON
  Focus is trapped such that the use cannot focus outside of the overlay.
  @property {String} OFF
@@ -27,9 +27,9 @@ const trapFocus = {
 
 /**
  Enumeration for {@link BaseOverlay} scroll focus options.
- 
+
  @typedef {Object} OverlayScrollOnFocusEnum
- 
+
  @property {String} ON
  Scroll the document to bring the newly-focused element into view.
  @property {String} OFF
@@ -42,9 +42,9 @@ const scrollOnFocus = {
 
 /**
  Enumeration for {@link BaseOverlay} return focus options.
- 
+
  @typedef {Object} OverlayReturnFocusEnum
- 
+
  @property {String} ON
  When the overlay is closed, the element that was focused before the it was shown will be focused again.
  @property {String} OFF
@@ -57,9 +57,9 @@ const returnFocus = {
 
 /**
  Enumeration for {@link BaseOverlay} focus behavior options.
- 
+
  @typedef {Object} OverlayFocusOnShowEnum
- 
+
  @property {String} ON
  When the overlay is opened, it will be focused.
  @property {String} OFF
@@ -73,7 +73,7 @@ const focusOnShow = {
 /**
  The time it should take for {@link BaseOverlay} to fade in milliseconds.
  Important: This should be greater than or equal to the CSS transition time.
- 
+
  @typedef {Number} OverlayFadeTime
  */
 const FADETIME = 350;

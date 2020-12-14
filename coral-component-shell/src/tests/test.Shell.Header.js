@@ -13,19 +13,19 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Shell} from '../../../coral-component-shell';
 
-describe('Shell.Header', function() {
-  describe('Namespace', function() {
-    it('should be defined in the Shell namespace', function() {
+describe('Shell.Header', function () {
+  describe('Namespace', function () {
+    it('should be defined in the Shell namespace', function () {
       expect(Shell).to.have.property('Header');
     });
   });
-  
-  describe('Instantiation', function() {
+
+  describe('Instantiation', function () {
     helpers.cloneComponent(
       'should be possible to clone using markup',
       window.__html__['Shell.Header.base.html']
     );
-  
+
     helpers.cloneComponent(
       'should be possible to clone using js',
       new Shell.Header()

@@ -28,10 +28,10 @@ class CheckboxGroup extends BaseFieldGroup(BaseComponent(HTMLElement)) {
     // Used for Collection
     return 'coral-checkbox';
   }
-  
+
   /**
    Returns an Array containing the selected field group items.
-   
+
    @type {Array.<HTMLElement>}
    @readonly
    */

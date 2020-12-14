@@ -14,7 +14,7 @@ import {target, build} from './helpers.build';
 
 const overlay = {};
 
-overlay.createFloatingTarget = function() {
+overlay.createFloatingTarget = function () {
   var overlayTarget = document.createElement('div');
   overlayTarget.textContent = 'Floating overlay target';
   overlayTarget.style.position = 'fixed';
@@ -27,7 +27,7 @@ overlay.createFloatingTarget = function() {
   return overlayTarget;
 };
 
-overlay.createStaticTarget = function() {
+overlay.createStaticTarget = function () {
   var overlayTarget = document.createElement('div');
   overlayTarget.textContent = 'Static overlay target';
 
@@ -39,10 +39,10 @@ overlay.createStaticTarget = function() {
 
 /**
  Helper used to check that the component complies with the smart overlay behavior.
- 
+
  @param {String} tagName
  */
-const testSmartOverlay = function(tagName) {
+const testSmartOverlay = function (tagName) {
   describe('testSmartOverlay', () => {
     it('should add/remove the overlay if the component is added/removed from the document', () => {
       const wrapper = build(`
@@ -50,19 +50,19 @@ const testSmartOverlay = function(tagName) {
           <${tagName}></${tagName}>
         </div>
       `);
-      
+
       const el = wrapper.querySelector(tagName);
       el._elements.overlay.open = true;
-    
+
       expect(el.contains(el._elements.overlay)).to.be.false;
       expect(document.body.contains(el._elements.overlay)).to.be.true;
-    
+
       el.remove();
-    
+
       expect(document.body.contains(el._elements.overlay)).to.be.false;
-    
+
       wrapper.appendChild(el);
-    
+
       expect(el._elements.overlay.hasAttribute('open')).to.be.false;
       expect(document.body.contains(el._elements.overlay)).to.be.true;
     });

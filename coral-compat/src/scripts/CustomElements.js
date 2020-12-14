@@ -11,7 +11,8 @@
  */
 
 /* eslint-disable-next-line no-empty-function */
-const f = () => {};
+const f = () => {
+};
 
 // Mostly empty functions to avoid breaking code
 if (!window.CustomElements) {

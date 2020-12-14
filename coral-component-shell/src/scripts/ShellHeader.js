@@ -26,7 +26,7 @@ class ShellHeader extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
@@ -34,24 +34,25 @@ class ShellHeader extends BaseComponent(HTMLElement) {
       actions: this.querySelector('coral-shell-header-actions') || document.createElement('coral-shell-header-actions'),
       content: this.querySelector('coral-shell-header-content') || document.createElement('coral-shell-header-content')
     };
-  
+
     Overlay._OverlayManager.push(this);
   }
-  
+
   /**
    The label of the panel.
-   
+
    @type {HTMLElement}
    @contentzone
    */
   get home() {
     return this._getContentZone(this._elements.home);
   }
+
   set home(value) {
     this._setContentZone('home', value, {
       handle: 'home',
       tagName: 'coral-shell-header-home',
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
@@ -59,42 +60,44 @@ class ShellHeader extends BaseComponent(HTMLElement) {
 
   /**
    The main content zone of the panel.
-   
+
    @type {HTMLElement}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-shell-header-content',
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
   }
-  
+
   /**
    The content zone where the actions are placed.
-   
+
    @type {HTMLElement}
    @contentzone
    */
   get actions() {
     return this._getContentZone(this._elements.actions);
   }
+
   set actions(value) {
     this._setContentZone('actions', value, {
       handle: 'actions',
       tagName: 'coral-shell-header-actions',
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
   }
-  
+
   get _contentZones() {
     return {
       'coral-shell-header-home': 'home',
@@ -102,29 +105,35 @@ class ShellHeader extends BaseComponent(HTMLElement) {
       'coral-shell-header-actions': 'actions'
     };
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
     // appheader only exists on darkest theme
     this.classList.add('coral--darkest', 'u-coral-clearFix');
-    
+
     const home = this._elements.home;
     const actions = this._elements.actions;
     const content = this._elements.content;
-    
+
     // Remove them so we can process children
-    if (home.parentNode) { home.remove(); }
-    if (actions.parentNode) { actions.remove(); }
-    if (content.parentNode) { content.remove(); }
-    
+    if (home.parentNode) {
+      home.remove();
+    }
+    if (actions.parentNode) {
+      actions.remove();
+    }
+    if (content.parentNode) {
+      content.remove();
+    }
+
     // moves everything to the main content zone
     while (this.firstChild) {
       content.appendChild(this.firstChild);
     }
-    
+
     // // Call the content zone insert
     this.home = home;
     this.actions = actions;

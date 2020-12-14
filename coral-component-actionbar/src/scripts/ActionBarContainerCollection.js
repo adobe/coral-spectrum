@@ -26,23 +26,23 @@ class ActionBarContainerCollection extends SelectableCollection {
       const moreButton = this._host._elements.moreButton;
       before = this._host.contains(moreButton) ? moreButton : null;
     }
-  
+
     return super.add(item, before);
   }
-  
+
   clear() {
     const items = super.clear();
-  
+
     this._host._itemsInPopover = [];
-  
+
     return items;
   }
-  
+
   _getAllSelectable() {
     const selectableItems = [];
-    
+
     let child = null;
-    for (let i = 0; i < this._host.children.length; i++) {
+    for (let i = 0 ; i < this._host.children.length ; i++) {
       child = this._host.children[i];
       if (
         !child.hasAttribute('disabled') &&
@@ -54,10 +54,10 @@ class ActionBarContainerCollection extends SelectableCollection {
         selectableItems.push(child);
       }
     }
-  
+
     return selectableItems;
   }
-  
+
   _getAllOffScreen() {
     return Array.prototype.slice.call(this._host.querySelectorAll(`${this._itemTagName}[coral-actionbar-offscreen]`));
   }

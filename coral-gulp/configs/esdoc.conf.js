@@ -45,8 +45,17 @@ const config = {
     },
     {name: 'esdoc-lint-plugin', option: {enable: false}},
     {name: path.join(root, 'coral-guide/plugins/Enhancer.js')},
-    {name: 'esdoc-inject-script-plugin', option: {enable: true, scripts: [path.join(root, 'coral-guide/scripts/typekit.js'), path.join(root, 'coral-guide/scripts/guide.js')]}},
-    {name: 'esdoc-inject-style-plugin', option: {enable: true, styles: [path.join(root, 'coral-guide/styles/guide.css')]}}
+    {
+      name: 'esdoc-inject-script-plugin',
+      option: {
+        enable: true,
+        scripts: [path.join(root, 'coral-guide/scripts/typekit.js'), path.join(root, 'coral-guide/scripts/guide.js')]
+      }
+    },
+    {
+      name: 'esdoc-inject-style-plugin',
+      option: {enable: true, styles: [path.join(root, 'coral-guide/styles/guide.css')]}
+    }
   ]
 };
 
@@ -55,7 +64,7 @@ if (util.isTLB()) {
   config.source = '.';
   config.includes = ['^.external-ecmascript.js', '^coral-[a-z]+-[a-z]+/src/scripts', '^coral-[a-z]+/src/scripts'];
   config.excludes = ['^node_modules', '^dist', '^coral-component-playground', '^src/scripts/version.js'];
-  
+
   config.plugins.find(plugin => plugin.name === 'esdoc-standard-plugin').option.manual = {
     index: path.join(root, 'index.md'),
     globalIndex: true,

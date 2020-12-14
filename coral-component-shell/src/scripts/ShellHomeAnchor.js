@@ -28,39 +28,40 @@ class ShellHomeAnchor extends BaseComponent(HTMLAnchorElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
       label: this.querySelector('coral-shell-homeanchor-label') || document.createElement('coral-shell-homeanchor-label')
     };
-  
+
     // Create icon by default
     homeAnchorIcon.call(this._elements);
   }
-  
+
   /**
    The label of the anchor.
-   
+
    @type {ShellHomeAnchorLabel}
    @contentzone
    */
   get label() {
     return this._getContentZone(this._elements.label);
   }
+
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: 'coral-shell-homeanchor-label',
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
   }
-  
+
   /**
    Specifies the icon name used in the anchor. See {@link Coral.Icon} for valid icon names.
-   
+
    @type {String}
    @default ""
    @htmlattribute icon
@@ -68,9 +69,10 @@ class ShellHomeAnchor extends BaseComponent(HTMLAnchorElement) {
   get icon() {
     return this._elements.icon.icon;
   }
+
   set icon(value) {
     this._elements.icon.icon = value;
-  
+
     // removes the icon element from the DOM.
     if (this.icon === '') {
       this._elements.icon.remove();
@@ -80,56 +82,57 @@ class ShellHomeAnchor extends BaseComponent(HTMLAnchorElement) {
       this.insertBefore(this._elements.icon, this.firstChild);
     }
   }
-  
-  get _contentZones() { return {'coral-shell-homeanchor-label': 'label'}; }
-  
+
+  get _contentZones() {
+    return {'coral-shell-homeanchor-label': 'label'};
+  }
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['icon']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['icon']);
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Create doc fragment
     const fragment = document.createDocumentFragment();
-    
+
     const label = this._elements.label;
-  
+
     // Remove it so we can process children
     if (label.parentNode) {
       this.removeChild(label);
     }
-  
+
     // Move any remaining elements into the label
     while (this.firstChild) {
       const child = this.firstChild;
-    
+
       if (child.nodeType === Node.TEXT_NODE) {
         // Move text elements to the label
         label.appendChild(child);
-      }
-      else if (child.nodeName === 'CORAL-ICON') {
+      } else if (child.nodeName === 'CORAL-ICON') {
         if (!fragment.childNodes.length) {
           // Conserve existing icon element to content
           this._elements.icon = child;
           fragment.appendChild(child);
-        }
-        else {
+        } else {
           // Remove cloned icon
           this.removeChild(child);
         }
-      }
-      else {
+      } else {
         // Remove anything else
         this.removeChild(child);
       }
     }
-    
+
     // Add fragment back
     this.appendChild(fragment);
-    
+
     // Insert icon and label insert
     this.icon = this.icon;
     this.label = label;

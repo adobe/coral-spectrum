@@ -13,21 +13,21 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {ColorInput, Color} from '../../../coral-component-colorinput';
 
-describe('ColorInput.Item', function() {
-  describe('Namespace', function() {
-    it('should be defined', function() {
+describe('ColorInput.Item', function () {
+  describe('Namespace', function () {
+    it('should be defined', function () {
       expect(ColorInput).to.have.property('Item');
     });
   });
 
-  describe('API', function() {
-    describe('#value', function() {
-      it('should be set up with default values', function() {
+  describe('API', function () {
+    describe('#value', function () {
+      it('should be set up with default values', function () {
         var color = new ColorInput.Item();
         expect(color.value).to.equal('');
       });
 
-      it('should be possible to get/set a valid color values (generic test)', function() {
+      it('should be possible to get/set a valid color values (generic test)', function () {
         // should be possible to create elements using snippets
         const colors = helpers.build(window.__html__['ColorInput.Items.html']);
 
@@ -35,7 +35,7 @@ describe('ColorInput.Item', function() {
 
         var color = null;
         var colorEl = null;
-        for (var i = 0; i < validColorSelectors.length; i++) {
+        for (var i = 0 ; i < validColorSelectors.length ; i++) {
           colorEl = colors.querySelector(validColorSelectors[i]);
           expect(colorEl.value).to.not.equal('');
 
@@ -46,7 +46,7 @@ describe('ColorInput.Item', function() {
         }
       });
 
-      it('should not be possible to get/set a invalid color values (generic test)', function() {
+      it('should not be possible to get/set a invalid color values (generic test)', function () {
         // should be possible to create elements using snippets
         const colors = helpers.build(window.__html__['ColorInput.Items.html']);
 
@@ -54,7 +54,7 @@ describe('ColorInput.Item', function() {
 
         var color = null;
         var colorEl = null;
-        for (var i = 0; i < invalidColorSelectors.length; i++) {
+        for (var i = 0 ; i < invalidColorSelectors.length ; i++) {
           colorEl = colors.querySelector(invalidColorSelectors[i]);
           expect(colorEl.value).to.equal('');
 

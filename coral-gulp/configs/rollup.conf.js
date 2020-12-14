@@ -49,10 +49,10 @@ module.exports = (options = {}) => {
       ]
     })
   ];
-  
+
   if (options.min) {
     plugins.push(terser());
   }
-  
+
   return plugins;
 };

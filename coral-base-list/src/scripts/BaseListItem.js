@@ -24,25 +24,26 @@ const BaseListItem = (superClass) => class extends BaseLabellable(superClass) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Templates
     this._elements = {
       // Fetch or create the content zone element
       content: this.querySelector('coral-list-item-content') || document.createElement('coral-list-item-content')
     };
-  
+
     super._observeLabel();
   }
-  
+
   /**
    The content of the help item.
-   
+
    @type {ListItemContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
@@ -57,7 +58,7 @@ const BaseListItem = (superClass) => class extends BaseLabellable(superClass) {
 
   /**
    Whether this item is disabled.
-   
+
    @default false
    @type {Boolean}
    @htmlattribute disabled
@@ -66,17 +67,18 @@ const BaseListItem = (superClass) => class extends BaseLabellable(superClass) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
-  
+
     this.classList.toggle('is-disabled', this._disabled);
     this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
   }
-  
+
   /**
    The icon to display. See {@link Icon}.
-   
+
    @type {String}
    @default ""
    @htmlattribute icon
@@ -85,20 +87,20 @@ const BaseListItem = (superClass) => class extends BaseLabellable(superClass) {
     const el = this._getIconElement();
     return el.icon;
   }
+
   set icon(value) {
     const el = this._getIconElement();
     if (transform.string(value) === '') {
       el.remove();
-    }
-    else {
+    } else {
       this.insertBefore(el, this.firstChild);
     }
-    
+
     el.icon = value;
-    
+
     super._toggleIconAriaHidden();
   }
-  
+
   _getIconElement() {
     if (!this._elements.icon) {
       this._elements.icon = this.querySelector('._coral-Menu-item-icon') || new Icon();
@@ -107,25 +109,29 @@ const BaseListItem = (superClass) => class extends BaseLabellable(superClass) {
     }
     return this._elements.icon;
   }
-  
-  get _contentZones() { return {'coral-list-item-content': 'content'}; }
-  
+
+  get _contentZones() {
+    return {'coral-list-item-content': 'content'};
+  }
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['disabled', 'icon']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['disabled', 'icon']);
+  }
+
   /** @ignore */
   render() {
     super.render();
-  
+
     this.classList.add(CLASSNAME);
-  
+
     // The attribute that makes different types of list items co-exist
     // This is also used for event delegation
     this.setAttribute('coral-list-item', '');
-  
+
     // Fetch or create the content content zone element
     const content = this._elements.content;
-  
+
     // This stops the content zone from being voracious
     if (!content.parentNode) {
       // move the contents of the item into the content zone
@@ -133,7 +139,7 @@ const BaseListItem = (superClass) => class extends BaseLabellable(superClass) {
         content.appendChild(this.firstChild);
       }
     }
-  
+
     // Assign the content zones, moving them into place in the process
     this.icon = this.icon;
     this.content = content;

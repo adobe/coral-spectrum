@@ -13,37 +13,37 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {SelectList} from '../../../coral-component-list';
 
-describe('SelectList', function() {
-  describe('Instantiation', function() {
+describe('SelectList', function () {
+  describe('Instantiation', function () {
     function testDefaultInstance(el) {
       expect(el.classList.contains('_coral-Menu')).to.be.true;
       expect(el.getAttribute('role')).equal('listbox');
     }
 
-    it('should be possible using new', function() {
+    it('should be possible using new', function () {
       var el = helpers.build(new SelectList());
       testDefaultInstance(el);
     });
 
-    it('should be possible using createElement', function() {
+    it('should be possible using createElement', function () {
       var el = helpers.build(document.createElement('coral-selectlist'));
       testDefaultInstance(el);
     });
 
-    it('should be possible using markup', function() {
+    it('should be possible using markup', function () {
       testDefaultInstance(helpers.build('<coral-selectlist></coral-selectlist>'));
     });
-    
+
     helpers.cloneComponent(
       'should be possible to clone using markup',
       helpers.build(window.__html__['SelectList.base.html'])
     );
-    
+
     helpers.cloneComponent(
       'should be possible to clone using markup with groups',
       helpers.build(window.__html__['SelectList.groups.html'])
     );
-    
+
     const el = new SelectList();
     el.items.add({
       content: {
@@ -55,66 +55,66 @@ describe('SelectList', function() {
       el
     );
   });
-  
-  describe('API', function() {
-    
+
+  describe('API', function () {
+
     let el = null;
     let item = null;
     let group = null;
-    
-    beforeEach(function() {
+
+    beforeEach(function () {
       el = new SelectList();
       item = new SelectList.Item();
       group = new SelectList.Group();
     });
-    
-    afterEach(function() {
+
+    afterEach(function () {
       el = item = group = null;
     });
-    
-    describe('#selectedItems', function() {
-      it('should default to empty array', function() {
+
+    describe('#selectedItems', function () {
+      it('should default to empty array', function () {
         expect(el.selectedItems).to.deep.equal([]);
       });
     });
-    
-    describe('#selectedItem', function() {
-      it('should default to null', function() {
+
+    describe('#selectedItem', function () {
+      it('should default to null', function () {
         expect(el.selectedItem).to.be.null;
       });
     });
-    
-    describe('#multiple', function() {
-      it('should default to false', function() {
+
+    describe('#multiple', function () {
+      it('should default to false', function () {
         expect(el.multiple).to.be.false;
       });
     });
-    
-    describe('#loading', function() {
-      it('should default to false', function() {
+
+    describe('#loading', function () {
+      it('should default to false', function () {
         expect(el.loading).to.be.false;
       });
     });
   });
 
-  describe('Markup', function() {
-  
-    describe('#multiple', function() {
-      it('should allow to select all items if [multiple=true]', function() {
+  describe('Markup', function () {
+
+    describe('#multiple', function () {
+      it('should allow to select all items if [multiple=true]', function () {
         const el = helpers.build(window.__html__['SelectList.base.html']);
         const items = el.items.getAll();
-      
+
         el.multiple = true;
         items.forEach((item) => {
           item.setAttribute('selected', '');
         });
         expect(items).to.deep.equal(el.selectedItems);
       });
-    
-      it('should only allow to select 1 item if [multiple=false]', function() {
+
+      it('should only allow to select 1 item if [multiple=false]', function () {
         const el = helpers.build(window.__html__['SelectList.base.html']);
         expect(el.multiple).to.be.false;
-      
+
         el.items.getAll().forEach((item) => {
           item.setAttribute('selected', '');
         });
@@ -122,13 +122,13 @@ describe('SelectList', function() {
       });
     });
 
-    describe('#selectedItem', function() {
-      it('should default to null', function() {
+    describe('#selectedItem', function () {
+      it('should default to null', function () {
         const el = helpers.build(window.__html__['SelectList.base.html']);
         expect(el.selectedItem).to.be.null;
       });
 
-      it('should take the last selected if not multiple', function() {
+      it('should take the last selected if not multiple', function () {
         helpers.target.innerHTML = window.__html__['SelectList.doubleselected.html'];
         const el = document.querySelector('coral-selectlist');
         var items = el.items.getAll();
@@ -138,7 +138,7 @@ describe('SelectList', function() {
         expect(items[2].selected).to.be.true;
       });
 
-      it('should take the first selected with multiple', function() {
+      it('should take the first selected with multiple', function () {
         helpers.target.innerHTML = (window.__html__['SelectList.multiple.html']);
         const el = document.querySelector('coral-selectlist');
         var items = el.items.getAll();
@@ -148,14 +148,14 @@ describe('SelectList', function() {
         expect(items[0].selected).to.be.true;
       });
 
-      it('should read the selected from the markup', function() {
+      it('should read the selected from the markup', function () {
         const el = helpers.build(window.__html__['SelectList.selected.html']);
         expect(el.selectedItem).to.equal(el.items.first());
       });
     });
-  
-    describe('#selectedItems', function() {
-      it('should return all selected items', function() {
+
+    describe('#selectedItems', function () {
+      it('should return all selected items', function () {
         const el = helpers.build(window.__html__['SelectList.selected.html']);
         expect(el.selectedItems).to.deep.equal([el.items.first()]);
         el.items.first().selected = false;
@@ -167,29 +167,29 @@ describe('SelectList', function() {
       });
     });
 
-    describe('#loading', function() {
-      it('should show a loading indicator when set to true', function() {
+    describe('#loading', function () {
+      it('should show a loading indicator when set to true', function () {
         const el = helpers.build(window.__html__['SelectList.base.html']);
         el.loading = true;
-      
+
         var indicator = el.querySelector('._coral-SelectList-loading');
         expect(indicator).to.not.equal(null);
       });
 
-      it('should hide a loading indicator when set to false', function() {
+      it('should hide a loading indicator when set to false', function () {
         const el = helpers.build(window.__html__['SelectList.base.html']);
         el.loading = true;
         el.loading = false;
-        
+
         var indicator = el.querySelector('._coral-SelectList-loading');
         expect(indicator).to.equal(null);
       });
 
-      it('should always add the loading at the end', function() {
+      it('should always add the loading at the end', function () {
         const el = helpers.build(window.__html__['SelectList.base.html']);
         el.loading = true;
         el.loading = false;
-        
+
         var indicator = el.querySelector('._coral-SelectList-loading');
         expect(indicator).to.equal(null);
 
@@ -201,26 +201,26 @@ describe('SelectList', function() {
         });
 
         el.loading = true;
-        
+
         var indicator = el.children[el.children.length - 1];
 
         expect(indicator.classList.contains('_coral-SelectList-loading')).to.be.true;
       });
     });
 
-    describe('#groups', function() {
+    describe('#groups', function () {
       var el;
 
-      beforeEach(function() {
+      beforeEach(function () {
         el = helpers.build(window.__html__['SelectList.groups.html']);
       });
 
-      it('retrieves all groups', function() {
+      it('retrieves all groups', function () {
         var groups = el.groups.getAll();
         expect(groups.length).to.equal(2);
       });
 
-      it('adds a group instance', function() {
+      it('adds a group instance', function () {
         var group = new SelectList.Group();
         group.label = 'Test group';
 
@@ -231,7 +231,7 @@ describe('SelectList', function() {
         expect(groups[2].label).to.equal('Test group');
       });
 
-      it('adds a group using a config object', function() {
+      it('adds a group using a config object', function () {
         el.groups.add({
           label: 'Test group'
         });
@@ -241,7 +241,7 @@ describe('SelectList', function() {
         expect(groups[2].label).to.equal('Test group');
       });
 
-      it('removes a group', function() {
+      it('removes a group', function () {
         var group = el.groups.getAll()[0];
         el.groups.remove(group);
 
@@ -250,55 +250,55 @@ describe('SelectList', function() {
         expect(group.parentNode).to.be.null;
       });
 
-      it('clears all groups', function() {
+      it('clears all groups', function () {
         el.groups.clear();
 
         var groups = Array.prototype.slice.call(el.getElementsByTagName('coral-selectlist-group'));
         expect(groups.length).to.equal(0);
       });
     });
-  
-    describe('#focus()', function() {
-      it('should focus the first item when no selection is available', function() {
+
+    describe('#focus()', function () {
+      it('should focus the first item when no selection is available', function () {
         const el = helpers.build(window.__html__['SelectList.base.html']);
         expect(document.activeElement).not.to.equal(el);
-        
+
         el.focus();
-  
+
         expect(document.activeElement).to.equal(el.items.first(), 'Focus should move to the first item');
       });
-    
-      it('should not shift focus if already inside the component', function() {
+
+      it('should not shift focus if already inside the component', function () {
         const el = helpers.build(window.__html__['SelectList.base.html']);
         expect(document.activeElement).not.to.equal(el);
-        
+
         // we focus the last item to shift focus into the component
         el.items.last().focus();
-        
+
         expect(document.activeElement).to.equal(el.items.last(), 'Focus should move inside the component');
-      
+
         el.focus();
-        
+
         expect(document.activeElement).to.equal(el.items.last(), 'Focus should not be reset');
       });
-    
-      it('should should move the focus to the selected item', function() {
+
+      it('should should move the focus to the selected item', function () {
         const el = helpers.build(window.__html__['SelectList.selected.html']);
         expect(document.activeElement).not.to.equal(el);
-        
+
         el.focus();
-        
+
         expect(document.activeElement).to.equal(el.selectedItem, 'Focus should move to the selected item');
       });
     });
   });
 
-  describe('Events', function() {
+  describe('Events', function () {
 
     var el;
     var item1, item2, item3;
 
-    beforeEach(function() {
+    beforeEach(function () {
       el = helpers.build(new SelectList());
 
       item1 = new SelectList.Item();
@@ -311,65 +311,65 @@ describe('SelectList', function() {
       item3.label = 'Item 3';
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el = item1 = item2 = item3 = null;
     });
-  
-    describe('#coral-selectlist:beforechange', function() {
-      it('should be able to prevent a user selection', function() {
+
+    describe('#coral-selectlist:beforechange', function () {
+      it('should be able to prevent a user selection', function () {
         const el = helpers.build(window.__html__['SelectList.selected.html']);
-        el.on('coral-selectlist:beforechange', function(e) {
+        el.on('coral-selectlist:beforechange', function (e) {
           e.preventDefault();
         });
         el.selectedItem.click();
         expect(el.selectedItem).to.not.be.null;
       });
     });
-    
-    describe('#coral-selectlist:change', function() {
-      it('should trigger on selection change', function() {
+
+    describe('#coral-selectlist:change', function () {
+      it('should trigger on selection change', function () {
         const el = helpers.build(window.__html__['SelectList.base.html']);
         let changeSpy = sinon.spy();
         el.on('coral-selectlist:change', changeSpy);
         el.items.first().selected = true;
-      
+
         expect(changeSpy.callCount).to.equal(1);
         expect(changeSpy.args[0][0].detail.selection).to.equal(el.selectedItem);
         expect(changeSpy.args[0][0].detail.oldSelection).to.equal(null);
       });
-    
-      it('should return an array for selection and oldSelection if multiple=true', function() {
+
+      it('should return an array for selection and oldSelection if multiple=true', function () {
         const el = helpers.build(window.__html__['SelectList.selected.html']);
         el.multiple = true;
         let changeSpy = sinon.spy();
         el.on('coral-selectlist:change', changeSpy);
         el.items.last().selected = true;
-      
+
         expect(changeSpy.callCount).to.equal(1);
         expect(changeSpy.args[0][0].detail.selection).to.deep.equal([el.items.first(), el.items.last()]);
         expect(changeSpy.args[0][0].detail.oldSelection).to.deep.equal([el.items.first()]);
       });
-    
-      it('should trigger on multiple change', function() {
+
+      it('should trigger on multiple change', function () {
         const el = helpers.build(window.__html__['SelectList.selected.html']);
         el.multiple = true;
         el.items.last().selected = true;
-      
+
         let changeSpy = sinon.spy();
         el.on('coral-selectlist:change', changeSpy);
         el.multiple = false;
-      
+
         expect(changeSpy.callCount).to.equal(1);
         expect(changeSpy.args[0][0].detail.selection).to.equal(el.items.last());
         expect(changeSpy.args[0][0].detail.oldSelection).to.deep.equal([el.items.first(), el.items.last()]);
       });
     });
 
-    describe('#coral-selectlist:scrollbottom', function() {
+    describe('#coral-selectlist:scrollbottom', function () {
 
-      it('should trigger a scrollbottom event when user scrolls to the bottom of the list', function() {
+      it('should trigger a scrollbottom event when user scrolls to the bottom of the list', function () {
         const el = helpers.build(new SelectList());
-        for (var i = 0; i < 50; i++) {
+        for (var i = 0 ; i < 50 ; i++) {
           el.items.add({
             value: 'value' + i,
             content: {
@@ -377,63 +377,63 @@ describe('SelectList', function() {
             }
           });
         }
-  
+
         var spy = sinon.spy();
         var clock = sinon.useFakeTimers();
-  
+
         el.on('coral-selectlist:scrollbottom', spy);
-  
+
         el.scrollTop = 10000;
         el.trigger('scroll');
         clock.tick(1000); // Fast-forward past scroll debounce.
-  
+
         expect(spy.callCount).to.equal(1);
-  
+
         // If the user scrolls again but doesn't scroll outside of the bottom threshold
         // distance it should still trigger another scrollbottom event.
         el.scrollTop -= 10;
         el.trigger('scroll');
         clock.tick(1000); // Fast-forward past scroll debounce.
-  
+
         expect(spy.callCount).to.equal(2);
-  
+
         clock.restore();
       });
     });
   });
 
-  describe('User Interaction', function() {
-    it('should focus the item which contains text starting with the letter O', function(done) {
+  describe('User Interaction', function () {
+    it('should focus the item which contains text starting with the letter O', function (done) {
       const el = helpers.build(window.__html__['SelectList.base.html']);
       el._keypressTimeoutDuration = 0;
-      
+
       const lastItem = el.items.last();
       el._onKeyPress({which: 'O'.charCodeAt(0)});
-      
+
       // Key press search is implemented with a 1 sec timeout but we override it
-      window.setTimeout(function() {
+      window.setTimeout(function () {
         expect(lastItem.getAttribute('tabindex')).to.equal('0');
         expect(document.activeElement).to.equal(lastItem);
         done();
       });
     });
 
-    describe('groups', function() {
+    describe('groups', function () {
       let el;
       let groups;
       let item1;
       let item2;
 
-      beforeEach(function() {
+      beforeEach(function () {
         el = helpers.build(window.__html__['SelectList.groups.html']);
       });
 
-      afterEach(function() {
+      afterEach(function () {
         el.remove();
         el = groups = item1 = item2 = null;
       });
 
-      it('navigates between groups using ArrowUp/ArrowDown', function() {
+      it('navigates between groups using ArrowUp/ArrowDown', function () {
         groups = el.groups.getAll();
 
         // last item in first group
@@ -457,29 +457,29 @@ describe('SelectList', function() {
         // verify focus on last item of first group
         expect(item1).equals(document.activeElement);
 
-         // PageDown focuses first item in next group
-         helpers.keypress('pagedown', item1);
+        // PageDown focuses first item in next group
+        helpers.keypress('pagedown', item1);
 
-         // verify focus on first item of second group
-         expect(item2).equals(document.activeElement);
- 
-         // PageUp focuses last item in previous group
-         helpers.keypress('pageup', item2);
- 
-         // verify focus on last item of first group
-         expect(item1).equals(document.activeElement);
+        // verify focus on first item of second group
+        expect(item2).equals(document.activeElement);
 
-         // End focuses last item of last group
-         helpers.keypress('end', item1);
- 
-         // verify focus on last item of last group
-         expect(groups[1].items.last()).equals(document.activeElement);
+        // PageUp focuses last item in previous group
+        helpers.keypress('pageup', item2);
 
-         // Home focuses first item of first group
-         helpers.keypress('home', item1);
- 
-         // verify focus on first item of first group
-         expect(groups[0].items.first()).equals(document.activeElement);
+        // verify focus on last item of first group
+        expect(item1).equals(document.activeElement);
+
+        // End focuses last item of last group
+        helpers.keypress('end', item1);
+
+        // verify focus on last item of last group
+        expect(groups[1].items.last()).equals(document.activeElement);
+
+        // Home focuses first item of first group
+        helpers.keypress('home', item1);
+
+        // verify focus on first item of first group
+        expect(groups[0].items.first()).equals(document.activeElement);
       });
     });
     // @todo: test focus of initial state

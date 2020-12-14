@@ -22,8 +22,8 @@ const removeLines = (file, lines) => {
     if (content.startsWith('.spectrum--large {')) {
       fs.writeFileSync(file, content.split('\n').slice(lines).join('\n'), 'utf8');
     }
+  } catch (e) {
   }
-  catch (e) {}
 };
 
 removeLines(barLoader, 8);

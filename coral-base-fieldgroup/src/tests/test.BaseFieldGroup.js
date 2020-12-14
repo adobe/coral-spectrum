@@ -14,7 +14,7 @@ import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {BaseComponent} from '../../../coral-base-component';
 import {BaseFieldGroup} from '../../../coral-base-fieldgroup';
 
-describe('BaseFieldGroup', function() {
+describe('BaseFieldGroup', function () {
   // Dummy custom element
   class FieldGroup extends BaseFieldGroup(BaseComponent(HTMLElement)) {
     get _itemTagName() {
@@ -22,25 +22,25 @@ describe('BaseFieldGroup', function() {
       return 'coral-fieldgroup-item';
     }
   }
-  
+
   window.customElements.define('coral-fieldgroup', FieldGroup);
-  
-  describe('API', function() {
+
+  describe('API', function () {
     let el;
-    
-    beforeEach(function() {
+
+    beforeEach(function () {
       el = new FieldGroup();
     });
-    
-    afterEach(function() {
+
+    afterEach(function () {
       el = null;
     });
-    
-    describe('#orientation', function() {
+
+    describe('#orientation', function () {
       it('should default to horizontal', () => {
         expect(el.orientation).to.equal(FieldGroup.orientation.HORIZONTAL);
       });
-      
+
       it('should support vertical orientation', () => {
         el.orientation = FieldGroup.orientation.VERTICAL;
         expect(el.orientation).to.equal(FieldGroup.orientation.VERTICAL);
@@ -48,38 +48,37 @@ describe('BaseFieldGroup', function() {
         expect(el.classList.contains('coral-RadioGroup--vertical')).to.be.true;
       });
     });
-  
-    describe('#items', function() {
-      it('should be readonly', function() {
+
+    describe('#items', function () {
+      it('should be readonly', function () {
         const items = el.items;
         try {
           el.items = '';
-        }
-        catch (e) {
+        } catch (e) {
           expect(el.items).to.equal(items);
         }
       });
 
-      it('should retrieve all items', function() {
+      it('should retrieve all items', function () {
         el.appendChild(document.createElement('coral-fieldgroup-item'));
         el.appendChild(document.createElement('coral-fieldgroup-item'));
-  
+
         expect(el.items.length).to.equal(2);
         expect(el.items.length).to.equal(el.querySelectorAll('coral-fieldgroup-item').length);
       });
     });
-  
-    describe('#selectedItem', function() {
+
+    describe('#selectedItem', function () {
       it('should return selected item', () => {
         el.appendChild(document.createElement('coral-fieldgroup-item'));
         el.appendChild(document.createElement('coral-fieldgroup-item'));
-  
+
         el.items.last().setAttribute('checked');
         expect(el.selectedItem).to.equal(el.items.last());
       });
     });
   });
-  
+
   describe('Markup', () => {
     describe('#orientation', () => {
       it('should default to horizontal', () => {
@@ -87,7 +86,7 @@ describe('BaseFieldGroup', function() {
         expect(el.orientation).to.equal(FieldGroup.orientation.HORIZONTAL);
         expect(el.getAttribute('orientation')).to.equal('horizontal');
       });
-  
+
       it('should support vertical orientation', () => {
         const el = helpers.build('<coral-fieldgroup></coral-fieldgroup>');
         el.setAttribute('orientation', 'vertical');
@@ -97,8 +96,8 @@ describe('BaseFieldGroup', function() {
       });
     });
   });
-  
-  describe('Accessibility', function() {
+
+  describe('Accessibility', function () {
     it('should have role group', () => {
       const el = helpers.build(document.createElement('coral-fieldgroup'));
       expect(el.getAttribute('role')).to.equal('group');

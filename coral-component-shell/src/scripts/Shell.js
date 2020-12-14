@@ -27,7 +27,7 @@ class Shell extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
@@ -35,10 +35,10 @@ class Shell extends BaseComponent(HTMLElement) {
       content: this.querySelector('coral-shell-content') || document.createElement('coral-shell-content')
     };
   }
-  
+
   /**
    The menu collection.
-   
+
    @type {Collection}
    @readonly
    */
@@ -50,81 +50,83 @@ class Shell extends BaseComponent(HTMLElement) {
         itemTagName: 'coral-shell-menu'
       });
     }
-    
+
     return this._menus;
   }
-  
+
   /**
    The shell header zone.
-   
+
    @type {ShellHeader}
    @contentzone
    */
   get header() {
     return this._getContentZone(this._elements.header);
   }
+
   set header(value) {
     this._setContentZone('header', value, {
       handle: 'header',
       tagName: 'coral-shell-header',
-      insert: function(header) {
+      insert: function (header) {
         this.insertBefore(header, this.firstChild);
       }
     });
   }
-  
+
   /**
    The shell content zone.
-   
+
    @type {ShellContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-shell-content',
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
   }
-  
+
   get _contentZones() {
     return {
       'coral-shell-header': 'header',
       'coral-shell-content': 'content'
     };
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     const header = this._elements.header;
     const menus = this.menus.getAll();
     const content = this._elements.content;
-  
+
     // If the the content zone is not provided, we need to make sure that it holds all children
     if (!content.parentNode) {
       // Remove header
       if (header.parentNode) {
         header.parentNode.removeChild(header);
       }
-      
+
       // Remove menus
       this.menus.clear();
-      
+
       // Move the rest into content
       while (this.firstChild) {
         content.appendChild(this.firstChild);
       }
     }
-  
+
     // Call the content zone insert
     this.header = header;
     menus.forEach((menu) => this.menus.add(menu));

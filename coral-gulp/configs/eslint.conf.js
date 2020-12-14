@@ -1,14 +1,14 @@
 module.exports = {
   "extends": "standard",
-  "env" : {
-    "browser" : true,
-    "es6" : true
+  "env": {
+    "browser": true,
+    "es6": true
   },
   "rules": {
-    "brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
+    "brace-style": ["error", "stroustrup", {"allowSingleLine": true}],
     "operator-linebreak": ["error", "after"],
     "semi": [2, "always"],
-    "complexity": [ "warn", 15 ],
+    "complexity": ["warn", 15],
     "max-depth": 1,
     "max-lines": 0,
     "no-trailing-spaces": 0,

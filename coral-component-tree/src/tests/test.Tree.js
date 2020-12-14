@@ -17,48 +17,50 @@ import {Tree} from '../../../coral-component-tree';
 const onIndicatorClick = (el, item) => {
   el._onItemClick({
     target: item.querySelector('._coral-TreeView-indicator'),
-    preventDefault: () => {},
-    stopPropagation: () => {}
+    preventDefault: () => {
+    },
+    stopPropagation: () => {
+    }
   });
 };
 
-describe('Tree', function() {
+describe('Tree', function () {
   // Assert whether an item is properly active or inactive.
-  var assertActiveness = function(item, isSelected, isExpanded) {
+  var assertActiveness = function (item, isSelected, isExpanded) {
     expect(item.selected).to.equal(isSelected);
     expect(item.expanded).to.equal(isExpanded);
   };
-  
-  describe('Namespace', function() {
-    it('should be defined', function() {
+
+  describe('Namespace', function () {
+    it('should be defined', function () {
       expect(Tree).to.have.property('Item');
       expect(Tree.Item).to.have.property('Content');
     });
-    
-    it('Variants should be defined', function() {
+
+    it('Variants should be defined', function () {
       expect(Tree.Item.variant).to.exist;
       expect(Tree.Item.variant.LEAF).to.equal('leaf');
       expect(Tree.Item.variant.DRILLDOWN).to.equal('drilldown');
       expect(Object.keys(Tree.Item.variant).length).to.equal(2);
     });
   });
-  
-  describe('Instantiation', function() {
+
+  describe('Instantiation', function () {
     helpers.cloneComponent(
       'should be possible to clone using markup',
       window.__html__['Tree.base.html']
     );
-  
+
     helpers.cloneComponent(
       'should be possible to clone nested tree using markup',
       window.__html__['Tree.nested.html']
     );
-  
+
     helpers.cloneComponent(
       'should be possible to clone tree with interactive elements',
       window.__html__['Tree.interactive.html']
     );
-  
+
     const el = new Tree();
     el.items.add(new Tree.Item());
     helpers.cloneComponent(
@@ -66,396 +68,394 @@ describe('Tree', function() {
       el
     );
   });
-  
-  describe('API', function() {
-    
-    describe('#variant', function() {
-      it('should have default variant drilldown', function() {
+
+  describe('API', function () {
+
+    describe('#variant', function () {
+      it('should have default variant drilldown', function () {
         var item = new Tree.Item();
         expect(item.variant).to.equal(Tree.Item.variant.DRILLDOWN);
       });
-      
-      it('should be possible to set variant through API', function() {
+
+      it('should be possible to set variant through API', function () {
         var item = new Tree.Item().set({
           variant: 'leaf'
         });
         expect(item.variant).to.equal(Tree.Item.variant.LEAF);
       });
-      
-      it('should change the variant after initialized', function() {
+
+      it('should change the variant after initialized', function () {
         var item = new Tree.Item();
         expect(item.variant).to.equal(Tree.Item.variant.DRILLDOWN);
         item.variant = Tree.Item.variant.LEAF;
         expect(item.variant).to.equal(Tree.Item.variant.LEAF);
       });
     });
-    
-    describe('#expanded', function() {
-      it('should be possible to expand collapse items in Tree', function() {
+
+    describe('#expanded', function () {
+      it('should be possible to expand collapse items in Tree', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
-        
+
         var secondItem = el.items.getAll()[1];
         secondItem.expanded = true;
-        
+
         assertActiveness(secondItem, false, true);
-        
+
         secondItem.expanded = false;
         assertActiveness(secondItem, false, false);
       });
     });
-    
-    describe('#parent', function() {
-      it('should be readonly', function() {
+
+    describe('#parent', function () {
+      it('should be readonly', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
         var item = el.items.first();
         try {
           item.parent = document.body;
-        }
-        catch (e) {
+        } catch (e) {
           expect(item.parent).to.equal(null);
         }
       });
-      
-      it('should retrieve the parent tree', function() {
+
+      it('should retrieve the parent tree', function () {
         const el = helpers.build(window.__html__['Tree.nested.html']).items.first();
         expect(el.parent).to.equal(null);
-        el.items.getAll().forEach(function(item) {
+        el.items.getAll().forEach(function (item) {
           expect(item.parent).to.equal(el);
         });
       });
     });
-    
-    describe('#selected', function() {
-      it('should be possible to select items in Tree', function() {
+
+    describe('#selected', function () {
+      it('should be possible to select items in Tree', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
-        
+
         var secondItem = el.items.getAll()[1];
         secondItem.selected = true;
-        
+
         assertActiveness(secondItem, true, false);
         expect(el.selectedItem).to.equal(secondItem);
-        
+
         secondItem.selected = false;
-        
+
         assertActiveness(secondItem, false, false);
         expect(el.selectedItem).to.equal(null);
       });
-      
-      it('should be possible to select and expand same item in Tree', function() {
+
+      it('should be possible to select and expand same item in Tree', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
-        
+
         var firstItem = el.items.getAll()[0];
         firstItem.selected = firstItem.expanded = true;
-        
+
         assertActiveness(firstItem, true, true);
         expect(el.selectedItem).to.equal(firstItem);
       });
     });
-    
-    describe('#expandAll', function() {
-      it('should be possible to expand all items in Tree', function() {
+
+    describe('#expandAll', function () {
+      it('should be possible to expand all items in Tree', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
         el.expandAll();
-        
+
         var items = el.items.getAll();
         var length = items.length;
-        for (var index = 0; index < length; index++) {
+        for (var index = 0 ; index < length ; index++) {
           assertActiveness(items[index], false, true);
         }
       });
     });
-    
-    describe('#collapseAll', function() {
-      it('should be possible to collapse all items in Tree', function() {
+
+    describe('#collapseAll', function () {
+      it('should be possible to collapse all items in Tree', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
         el.collapseAll();
-        
+
         var items = el.items.getAll();
         var length = items.length;
-        for (var index = 0; index < length; index++) {
+        for (var index = 0 ; index < length ; index++) {
           assertActiveness(items[index], false, false);
         }
       });
     });
-    
-    describe('#disabled', function() {
-      it('should be possible to enable/disable item in Tree', function() {
+
+    describe('#disabled', function () {
+      it('should be possible to enable/disable item in Tree', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
-        
+
         var firstItem = el.items.getAll()[0];
         expect(firstItem.disabled).to.be.false;
-        
+
         firstItem.disabled = true;
-        
+
         assertActiveness(firstItem, false, false);
         expect(firstItem.disabled).to.be.true;
       });
     });
-    
-    describe('#selectedItems', function() {
-      it('should retrieve all selected items included nested ones', function() {
+
+    describe('#selectedItems', function () {
+      it('should retrieve all selected items included nested ones', function () {
         const el = helpers.build(window.__html__['Tree.nested.html']);
         var items = el.items.getAll();
         el.multiple = true;
-        items.forEach(function(item) {
+        items.forEach(function (item) {
           item.selected = true;
         });
         expect(el.selectedItems).to.deep.equal(items);
       });
     });
-    
-    describe('#selectedItem', function() {
-      it('should retrieve the first selected item', function() {
+
+    describe('#selectedItem', function () {
+      it('should retrieve the first selected item', function () {
         const el = helpers.build(window.__html__['Tree.nested.html']);
         var items = el.items.getAll();
         el.multiple = true;
-        items.forEach(function(item) {
+        items.forEach(function (item) {
           item.selected = true;
         });
         expect(el.selectedItem).to.equal(el.selectedItems[0]);
       });
     });
-    
-    describe('#multiple', function() {
-      it('should not allow to select multiple items', function() {
+
+    describe('#multiple', function () {
+      it('should not allow to select multiple items', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
         var items = el.items.getAll();
-        items.forEach(function(item) {
+        items.forEach(function (item) {
           item.selected = true;
         });
         expect(el.selectedItems).to.deep.equal([items[items.length - 1]]);
       });
-      
-      it('should select the last item if multiple is changed to false', function() {
+
+      it('should select the last item if multiple is changed to false', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
         var items = el.items.getAll();
         el.multiple = true;
-        items.forEach(function(item) {
+        items.forEach(function (item) {
           item.selected = true;
         });
         el.multiple = false;
         expect(el.selectedItems).to.deep.equal([items[items.length - 1]]);
       });
     });
-    
-    describe('#items', function() {
-      it('should be readOnly', function() {
+
+    describe('#items', function () {
+      it('should be readOnly', function () {
         const el = new Tree();
-        
+
         try {
           el.items = null;
-        }
-        catch (e) {
+        } catch (e) {
           expect(el.items).not.to.be.null;
         }
       });
-      
-      it('should get all the items with getAll()', function() {
+
+      it('should get all the items with getAll()', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
-        
+
         var items = el.items.getAll();
         expect(items.length).to.equal(3);
       });
-      
-      it('should remove all the items with clear()', function() {
+
+      it('should remove all the items with clear()', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
         // we remove all the items
         el.items.clear();
         expect(el.items.length).to.equal(0);
       });
-      
-      it('should add items using add()', function() {
+
+      it('should add items using add()', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
-        
+
         var item = new Tree.Item().set({
           content: {
             innerHTML: 'Item 4'
           }
         });
-        
+
         el.items.add(item);
         expect(el.items.length).to.equal(4);
       });
     });
   });
-  
-  describe('Markup', function() {
-    
-    describe('#variant', function() {
-      it('should be possible to set variant through markup', function() {
+
+  describe('Markup', function () {
+
+    describe('#variant', function () {
+      it('should be possible to set variant through markup', function () {
         const item = helpers.build('<coral-tree-item variant="leaf"></coral-tree-item>');
         expect(item.variant).to.equal(Tree.Item.variant.LEAF);
       });
     });
-    
-    describe('#selected', function() {
-      it('should be possible to select item using markup', function() {
+
+    describe('#selected', function () {
+      it('should be possible to select item using markup', function () {
         const el = helpers.build(window.__html__['Tree.items.html']);
         var item = el.items.getAll()[0];
         assertActiveness(item, true, false);
       });
     });
-    
-    describe('#expanded', function() {
-      it('should be possible to expand item using markup', function() {
+
+    describe('#expanded', function () {
+      it('should be possible to expand item using markup', function () {
         const el = helpers.build(window.__html__['Tree.items.html']);
         var item = el.items.getAll()[1];
         assertActiveness(item, false, true);
       });
     });
-    
-    describe('#disabled', function() {
-      it('should be possible to disable item using markup', function() {
+
+    describe('#disabled', function () {
+      it('should be possible to disable item using markup', function () {
         const el = helpers.build(window.__html__['Tree.items.html']);
         var item = el.items.getAll()[2];
         expect(item.disabled).to.be.true;
       });
     });
   });
-  
-  describe('User Interaction', function() {
-    
-    it('should expand/collapse item in tree when expand/collapse icon is clicked', function() {
+
+  describe('User Interaction', function () {
+
+    it('should expand/collapse item in tree when expand/collapse icon is clicked', function () {
       const el = helpers.build(window.__html__['Tree.base.html']);
-      
+
       var item = el.items.getAll()[1];
-      
+
       onIndicatorClick(el, item);
-      
+
       assertActiveness(item, false, true);
-      
+
       onIndicatorClick(el, item);
-      
+
       assertActiveness(item, false, false);
     });
-    
-    it('should select item in tree when content is clicked', function() {
+
+    it('should select item in tree when content is clicked', function () {
       const el = helpers.build(window.__html__['Tree.base.html']);
-      
+
       var item = el.items.getAll()[1];
       item._elements.content.click();
-      
+
       assertActiveness(item, true, false);
-      
+
       item._elements.content.click();
-      
+
       assertActiveness(item, false, false);
     });
-    
-    it('should focus the first item via keyboard', function() {
+
+    it('should focus the first item via keyboard', function () {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var lastItem = el.items.last();
-      
+
       el._resetFocusableItem(lastItem);
-      
+
       helpers.keypress('home', lastItem._elements.header);
-      
+
       var firstItem = el.items.first();
       expect(lastItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
       expect(firstItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
       expect(firstItem._elements.header).to.equal(document.activeElement);
     });
-    
-    it('should focus the last item via keyboard', function(done) {
+
+    it('should focus the last item via keyboard', function (done) {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var firstItem = el.items.first();
       var lastItem = el.items.last();
-      
+
       helpers.next(() => {
         helpers.keypress('end', firstItem._elements.header);
-        
+
         expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
         expect(lastItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
         expect(lastItem._elements.header).to.equal(document.activeElement);
         done();
       });
     });
-    
-    it('should focus the next item via keyboard', function() {
+
+    it('should focus the next item via keyboard', function () {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var firstItem = el.items.first();
       var nextItem = firstItem.nextElementSibling;
-      
+
       helpers.keypress('down', firstItem._elements.header);
-      
+
       expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
       expect(nextItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
       expect(nextItem._elements.header).to.equal(document.activeElement);
     });
-    
-    it('should focus the previous item via keyboard', function() {
+
+    it('should focus the previous item via keyboard', function () {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var lastItem = el.items.last();
-      
+
       el._resetFocusableItem(lastItem);
-      
+
       var previousItem = lastItem.previousElementSibling;
       helpers.keypress('up', lastItem._elements.header);
-      
+
       expect(lastItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
       expect(previousItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
       expect(previousItem._elements.header).to.equal(document.activeElement);
     });
-    
-    it('should focus the next edge item via keyboard', function() {
+
+    it('should focus the next edge item via keyboard', function () {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var firstItem = el.items.first();
       var lastItem = el.items.last();
-      
+
       helpers.keypress('up', firstItem._elements.header);
-      
+
       expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
       expect(lastItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
       expect(lastItem._elements.header).to.equal(document.activeElement);
     });
-    
-    it('should focus the previous edge item via keyboard', function() {
+
+    it('should focus the previous edge item via keyboard', function () {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var firstItem = el.items.first();
       var lastItem = el.items.last();
-      
+
       el._resetFocusableItem(lastItem);
-      
+
       helpers.keypress('down', lastItem._elements.header);
-      
+
       expect(lastItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
       expect(firstItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
       expect(firstItem._elements.header).to.equal(document.activeElement);
     });
-    
-    it('should focus the sibling item via keyboard (nested)', function() {
+
+    it('should focus the sibling item via keyboard (nested)', function () {
       const el = helpers.build(window.__html__['Tree.nested.html']);
       var items = el.items.getAll();
       var firstItem = items[0];
       var beforeLastItem = items[items.length - 2];
-      
+
       el._resetFocusableItem(beforeLastItem);
-      
+
       helpers.keypress('up', beforeLastItem._elements.header);
-      
+
       expect(beforeLastItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
       expect(firstItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
       expect(firstItem._elements.header).to.equal(document.activeElement);
     });
 
-    it('should expand/collapse current item using key:right/key:left (nested)', function(done) {
+    it('should expand/collapse current item using key:right/key:left (nested)', function (done) {
       const el = helpers.build(window.__html__['Tree.nested.html']);
       var items = el.items.getAll();
       var firstItem = items[0];
       var secondItem = items[1];
-      
+
       el._resetFocusableItem(firstItem);
       helpers.keypress('right', firstItem._elements.header);
-      helpers.next(function() {
+      helpers.next(function () {
         assertActiveness(firstItem, false, true);
         helpers.keypress('right', firstItem._elements.header);
-        helpers.next(function() {
+        helpers.next(function () {
 
           // with item expanded, right arrow should move focus to the first item in the expanded subtree
           assertActiveness(firstItem, false, true);
           expect(secondItem._elements.header).to.equal(document.activeElement);
           helpers.keypress('left', secondItem._elements.header);
-          helpers.next(function() {
+          helpers.next(function () {
 
             // left arrow on a collaped item should move focus from the expanded subtree to the parent item
             expect(firstItem._elements.header).to.equal(document.activeElement);
@@ -463,7 +463,7 @@ describe('Tree', function() {
 
             // with item expanded, left arrow on the item should collapse the subtree
             helpers.keypress('left', firstItem._elements.header);
-            helpers.next(function() {
+            helpers.next(function () {
               assertActiveness(firstItem, false, false);
               done();
             });
@@ -472,63 +472,63 @@ describe('Tree', function() {
       });
     });
 
-    it('should set a new focusable item if the current one is disabled', function(done) {
+    it('should set a new focusable item if the current one is disabled', function (done) {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var items = el.items.getAll();
       var firstItem = items[0];
       var secondItem = items[1];
-      
+
       firstItem.disabled = true;
-      
+
       helpers.next(() => {
         expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
         expect(secondItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
         done();
       });
     });
-    
-    it('should set a new focusable item if the current one is hidden', function(done) {
+
+    it('should set a new focusable item if the current one is hidden', function (done) {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var items = el.items.getAll();
       var firstItem = items[0];
       var secondItem = items[1];
-      
+
       firstItem.hidden = true;
-  
+
       helpers.next(() => {
         expect(firstItem._elements.header.getAttribute('tabindex') === '-1').to.be.true;
         expect(secondItem._elements.header.getAttribute('tabindex') === '0').to.be.true;
         done();
       });
     });
-    
-    it('should expand the tree item with key:return', function() {
+
+    it('should expand the tree item with key:return', function () {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var firstItem = el.items.first();
       helpers.keypress('return', firstItem._elements.header);
-      
+
       expect(firstItem.expanded).to.be.true;
     });
-    
-    it('should select the tree item with key:space', function() {
+
+    it('should select the tree item with key:space', function () {
       const el = helpers.build(window.__html__['Tree.base.html']);
       var firstItem = el.items.first();
       helpers.keypress('space', firstItem._elements.header);
-      
+
       expect(firstItem.selected).to.be.true;
     });
   });
-  
-  describe('Events', function() {
-    
-    describe('#coral-collection:add', function() {
-      it('should be triggered with add()', function(done) {
+
+  describe('Events', function () {
+
+    describe('#coral-collection:add', function () {
+      it('should be triggered with add()', function (done) {
         var el = helpers.build(new Tree());
-        
+
         // Wait for MO to kick-in
-        helpers.next(function() {
+        helpers.next(function () {
           var item = null;
-          el.on('coral-collection:add', function(event) {
+          el.on('coral-collection:add', function (event) {
             expect(event.target).to.equal(el, 'Event should be triggered by the collection');
             expect(event.detail).to.deep.equal({
               item: item
@@ -539,15 +539,15 @@ describe('Tree', function() {
           item = el.items.add();
         });
       });
-      
-      it('should be triggered with add() for nested items', function(done) {
+
+      it('should be triggered with add() for nested items', function (done) {
         const el = helpers.build(window.__html__['Tree.base.html']).items.first();
         var spy = sinon.spy();
         el.on('coral-collection:add', spy);
         var item = el.items.add();
-        
+
         // Wait for the MO to kick in
-        helpers.next(function() {
+        helpers.next(function () {
           expect(spy.callCount).to.equal(1);
           expect(spy.getCall(0).args[0].target).to.equal(el, 'Event should be triggered by the collection');
           expect(spy.getCall(0).args[0].detail).to.deep.equal({
@@ -558,17 +558,17 @@ describe('Tree', function() {
         });
       });
     });
-    
-    describe('#coral-collection:remove', function() {
-      it('should be triggered with remove()', function(done) {
+
+    describe('#coral-collection:remove', function () {
+      it('should be triggered with remove()', function (done) {
         const el = helpers.build(window.__html__['Tree.base.html']);
         var spy = sinon.spy();
         el.on('coral-collection:remove', spy);
         var item = el.items.last();
         item.remove();
-        
+
         // Wait for the MO to kick in
-        helpers.next(function() {
+        helpers.next(function () {
           expect(spy.callCount).to.equal(1);
           expect(spy.getCall(0).args[0].target).to.equal(el, 'Event should be triggered by the collection');
           expect(spy.getCall(0).args[0].detail).to.deep.equal({
@@ -578,16 +578,16 @@ describe('Tree', function() {
           done();
         });
       });
-      
-      it('should be triggered with remove() for nested items', function(done) {
+
+      it('should be triggered with remove() for nested items', function (done) {
         const el = helpers.build(window.__html__['Tree.nested.html']).items.first();
         var spy = sinon.spy();
         el.on('coral-collection:remove', spy);
         var item = el.items.last();
         item.remove();
-        
+
         // Wait for the MO to kick in
-        helpers.next(function() {
+        helpers.next(function () {
           expect(spy.callCount).to.equal(1);
           expect(spy.getCall(0).args[0].target).to.equal(el, 'Event should be triggered by the collection');
           expect(spy.getCall(0).args[0].detail).to.deep.equal({
@@ -598,34 +598,34 @@ describe('Tree', function() {
         });
       });
     });
-    
-    describe('#coral-tree:change', function() {
-      it('should trigger a change event on selecting an item', function() {
+
+    describe('#coral-tree:change', function () {
+      it('should trigger a change event on selecting an item', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
         var spy = sinon.spy();
         var firstItem = el.items.first();
         el.on('coral-tree:change', spy);
         firstItem.selected = true;
-        
+
         expect(spy.callCount).to.equal(1);
         expect(spy.getCall(0).args[0].detail.oldSelection).to.equal(null);
         expect(spy.getCall(0).args[0].detail.selection).to.equal(firstItem);
       });
-      
-      it('should trigger a change event on deselecting an item', function() {
+
+      it('should trigger a change event on deselecting an item', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
         var spy = sinon.spy();
         var firstItem = el.items.first();
         firstItem.selected = true;
         el.on('coral-tree:change', spy);
         firstItem.selected = false;
-        
+
         expect(spy.callCount).to.equal(1);
         expect(spy.getCall(0).args[0].detail.oldSelection).to.equal(firstItem);
         expect(spy.getCall(0).args[0].detail.selection).to.equal(null);
       });
-      
-      it('should trigger a change event on changing the selection', function() {
+
+      it('should trigger a change event on changing the selection', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
         var spy = sinon.spy();
         var firstItem = el.items.first();
@@ -633,91 +633,91 @@ describe('Tree', function() {
         firstItem.selected = true;
         el.on('coral-tree:change', spy);
         lastItem.selected = true;
-        
+
         expect(spy.callCount).to.equal(1);
         expect(spy.getCall(0).args[0].detail.oldSelection).to.equal(firstItem);
         expect(spy.getCall(0).args[0].detail.selection).to.equal(lastItem);
       });
-  
-      it('should return an array for selection and oldSelection if multiple=true', function() {
+
+      it('should return an array for selection and oldSelection if multiple=true', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
         el.multiple = true;
         let changeSpy = sinon.spy();
         el.items.first().selected = true;
         el.on('coral-tree:change', changeSpy);
         el.items.last().selected = true;
-    
+
         expect(changeSpy.callCount).to.equal(1);
         expect(changeSpy.args[0][0].detail.selection).to.deep.equal([el.items.first(), el.items.last()]);
         expect(changeSpy.args[0][0].detail.oldSelection).to.deep.equal([el.items.first()]);
       });
-      
-      it('should trigger a change event on changing multiple to false', function() {
+
+      it('should trigger a change event on changing multiple to false', function () {
         const el = helpers.build(window.__html__['Tree.base.html']);
         var spy = sinon.spy();
         el.multiple = true;
         var items = el.items.getAll();
-        items.forEach(function(item) {
+        items.forEach(function (item) {
           item.selected = true;
         });
         el.on('coral-tree:change', spy);
         el.multiple = false;
-        
+
         expect(spy.callCount).to.equal(1);
         expect(spy.getCall(0).args[0].detail.oldSelection).to.deep.equal(items);
         expect(spy.getCall(0).args[0].detail.selection).to.equal(items[items.length - 1]);
       });
     });
-    
-    describe('#coral-tree:expand', function() {
-      it('should trigger the event if an item is expanded', function(done) {
+
+    describe('#coral-tree:expand', function () {
+      it('should trigger the event if an item is expanded', function (done) {
         const el = helpers.build(window.__html__['Tree.nested.html']);
         el.on('coral-tree:expand', (event) => {
           expect(event.detail.item).to.equal(item);
           done();
         });
-        
+
         var item = el.items.first();
         item.expanded = true;
       });
     });
-    
-    describe('#coral-tree:collapse', function() {
-      it('should trigger the event if an item is collapsed', function(done) {
+
+    describe('#coral-tree:collapse', function () {
+      it('should trigger the event if an item is collapsed', function (done) {
         const el = helpers.build(window.__html__['Tree.items.html']);
         el.on('coral-tree:collapse', (event) => {
           expect(event.detail.item).to.equal(item);
           done();
         });
-        
+
         var item = el.items.getAll()[1];
         item.expanded = false;
       });
     });
   });
-  
-  describe('Implementation Details', function() {
+
+  describe('Implementation Details', function () {
     var el;
     var item;
-    
-    beforeEach(function() {
+
+    beforeEach(function () {
       el = helpers.build(new Tree());
-      
+
       item = new Tree.Item();
       item.set({
         content: {
           innerHTML: 'Item'
         }
       });
-      
+
       el.items.add(item);
     });
-    
-    afterEach(function() {
+
+    afterEach(function () {
       el = item = null;
     });
-    
-    it('should have right role set', function() {
+
+    it('should have right role set', function () {
       expect(el.getAttribute('role')).to.equal('tree');
       var item = el.items.getAll()[0];
       var header = item._elements.header;
@@ -729,14 +729,14 @@ describe('Tree', function() {
       expect(header.hasAttribute('aria-owns')).to.be.false;
       expect(subTree.getAttribute('aria-labelledby')).to.equal(content.id);
     });
-    
-    it('should have right classes set', function() {
+
+    it('should have right classes set', function () {
       expect(el.classList.contains('_coral-TreeView')).to.be.true;
       var item = el.items.getAll()[0];
       expect(item.classList.contains('_coral-TreeView-item')).to.be.true;
     });
-    
-    it('should generate header and subtree for tree item with right classes', function() {
+
+    it('should generate header and subtree for tree item with right classes', function () {
       var item = el.items.getAll()[0];
       var header = item._elements.header;
       var subTree = item._elements.subTreeContainer;
@@ -746,67 +746,67 @@ describe('Tree', function() {
       expect(subTree.classList.contains('_coral-TreeView')).to.be.true;
     });
   });
-  
-  describe('#InteractiveElements', function() {
-    
-    it('should not select item when checkbox checked', function() {
+
+  describe('#InteractiveElements', function () {
+
+    it('should not select item when checkbox checked', function () {
       const el = helpers.build(window.__html__['Tree.interactive.html']);
       var item = el.items.getAll()[0];
       assertActiveness(item, false, false);
-      
+
       var checkbox = item.querySelector('input[type="checkbox"]');
       expect(checkbox).to.exist;
       checkbox.click();
-      
+
       expect(checkbox.checked).to.equal(true);
       assertActiveness(item, false, false);
-      
+
       onIndicatorClick(el, item);
-      
+
       assertActiveness(item, false, true);
       item._elements.content.click();
-      
+
       assertActiveness(item, true, true);
     });
-    
-    it('should not select item when select is selected', function() {
+
+    it('should not select item when select is selected', function () {
       const el = helpers.build(window.__html__['Tree.interactive.html']);
       var item = el.items.getAll()[1];
       assertActiveness(item, false, false);
-      
+
       var select = item.querySelector('select');
       expect(select).to.exist;
       expect(select.value).to.equal('Option 1');
       select.click();
       select.focus();
-      
+
       assertActiveness(item, false, false);
       onIndicatorClick(el, item);
-      
+
       assertActiveness(item, false, true);
       item._elements.content.click();
-      
+
       assertActiveness(item, true, true);
     });
-    
-    it('should select item when button is selected', function() {
+
+    it('should select item when button is selected', function () {
       const el = helpers.build(window.__html__['Tree.interactive.html']);
       var item = el.items.getAll()[2];
       assertActiveness(item, false, false);
       var button = item.querySelector('button');
       expect(button).to.exist;
       button.click();
-      
+
       assertActiveness(item, false, false);
       onIndicatorClick(el, item);
-      
+
       assertActiveness(item, false, true);
       item._elements.content.click();
-      
+
       assertActiveness(item, true, true);
     });
-    
-    it('should select item when textarea is focused', function() {
+
+    it('should select item when textarea is focused', function () {
       const el = helpers.build(window.__html__['Tree.interactive.html']);
       var item = el.items.getAll()[3];
       assertActiveness(item, false, false);
@@ -815,57 +815,57 @@ describe('Tree', function() {
       textarea.click();
       textarea.focus();
       textarea.blur();
-      
+
       assertActiveness(item, false, false);
       onIndicatorClick(el, item);
-      
+
       assertActiveness(item, false, true);
       item._elements.content.click();
-      
+
       assertActiveness(item, true, true);
     });
-    
-    it('should be possible to select items in an interactive tree', function() {
+
+    it('should be possible to select items in an interactive tree', function () {
       const el = helpers.build(window.__html__['Tree.interactive.html']);
       var item = el.items.getAll()[0];
       item.selected = true;
-      
+
       assertActiveness(item, true, false);
       expect(el.selectedItem).to.equal(item);
       item.selected = false;
-      
+
       assertActiveness(item, false, false);
       expect(el.selectedItem).to.equal(null);
     });
-    
-    it('should not select the item if the radio is selected', function() {
+
+    it('should not select the item if the radio is selected', function () {
       const el = helpers.build(window.__html__['Tree.interactive.html']);
       var item = el.items.getAll()[4];
       assertActiveness(item, false, false);
-      
+
       var radio = item.querySelector('input[type="radio"]');
       expect(radio).to.exist;
       expect(radio.checked).to.equal(false);
       radio.click();
-  
+
       expect(radio.checked).to.equal(true);
       assertActiveness(item, false, false);
       onIndicatorClick(el, item);
-      
+
       assertActiveness(item, false, true);
       item._elements.content.click();
-  
+
       assertActiveness(item, true, true);
     });
-    
-    it('should be possible to expand items in an interactive tree', function() {
+
+    it('should be possible to expand items in an interactive tree', function () {
       const el = helpers.build(window.__html__['Tree.interactive.html']);
       var item = el.items.getAll()[0];
       item.expanded = true;
-      
+
       assertActiveness(item, false, true);
       item.expanded = false;
-      
+
       assertActiveness(item, false, false);
     });
   });

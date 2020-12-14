@@ -16,9 +16,9 @@ import {transform, validate} from '../../../coral-utils';
 
 /**
  Enumeration for {@link Alert} variants.
- 
+
  @typedef {Object} AlertVariantEnum
- 
+
  @property {String} ERROR
  An alert with a warning icon to indicate that an error has occurred.
  @property {String} WARNING
@@ -40,9 +40,9 @@ const variant = {
 
 /**
  Enumeration for {@link Alert} sizes.
- 
+
  @typedef {Object} AlertSizeEnum
- 
+
  @property {String} SMALL
  A small alert, usually employed for single line alerts without headers.
  @property {String} LARGE
@@ -77,7 +77,7 @@ class Alert extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
@@ -85,16 +85,16 @@ class Alert extends BaseComponent(HTMLElement) {
       content: this.querySelector('coral-alert-content') || document.createElement('coral-alert-content'),
       footer: this.querySelector('coral-alert-footer') || document.createElement('coral-alert-footer')
     };
-    
+
     // Events
     this._delegateEvents({
       'click [coral-close]': '_onCloseClick'
     });
   }
-  
+
   /**
    The alert variant style to use. See {@link AlertVariantEnum}.
-   
+
    @type {String}
    @default AlertVariantEnum.INFO
    @htmlattribute variant
@@ -103,13 +103,14 @@ class Alert extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.INFO;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.INFO;
     this._reflectAttribute('variant', this._variant);
-    
+
     this._insertTemplate();
-    
+
     // Remove all variant classes
     this.classList.remove(...ALL_VARIANT_CLASSES);
 
@@ -118,10 +119,10 @@ class Alert extends BaseComponent(HTMLElement) {
     // This lets popover get our styles for free
     this.classList.add(`${CLASSNAME}--${this._variant}`);
   }
-  
+
   /**
    The size of the alert. It accepts both lower and upper case sizes. See {@link AlertVariantEnum}.
-   
+
    @type {String}
    @default AlertSizeEnum.SMALL
    @htmlattribute size
@@ -130,74 +131,78 @@ class Alert extends BaseComponent(HTMLElement) {
   get size() {
     return this._size || size.SMALL;
   }
+
   set size(value) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.SMALL;
     this._reflectAttribute('size', this._size);
   }
-  
+
   /**
    The alert header element.
-   
+
    @type {AlertHeader}
    @contentzone
    */
   get header() {
     return this._getContentZone(this._elements.header);
   }
+
   set header(value) {
     this._setContentZone('header', value, {
       handle: 'header',
       tagName: 'coral-alert-header',
-      insert: function(header) {
+      insert: function (header) {
         header.classList.add(`${CLASSNAME}-header`);
         this.insertBefore(header, this.firstChild);
       }
     });
   }
-  
+
   /**
    The alert content element.
-   
+
    @type {AlertContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-alert-content',
-      insert: function(content) {
+      insert: function (content) {
         content.classList.add(`${CLASSNAME}-content`);
         // After the header
         this.insertBefore(content, this.header.nextElementSibling);
       }
     });
   }
-  
+
   /**
    The alert footer element.
-   
+
    @type {AlertFooter}
    @contentzone
    */
   get footer() {
     return this._getContentZone(this._elements.footer);
   }
+
   set footer(value) {
     this._setContentZone('footer', value, {
       handle: 'footer',
       tagName: 'coral-alert-footer',
-      insert: function(footer) {
+      insert: function (footer) {
         footer.classList.add(`${CLASSNAME}-footer`);
         // After the content
         this.insertBefore(footer, this.content.nextElementSibling);
       }
     });
   }
-  
+
   /**
    @ignore
    @todo maybe this should be base or something
@@ -209,28 +214,28 @@ class Alert extends BaseComponent(HTMLElement) {
       this.hidden = true;
       event.stopPropagation();
     }
-  
+
     this._trackEvent('close', 'coral-alert', event);
   }
-  
+
   _insertTemplate() {
     if (this._elements.icon) {
       this._elements.icon.remove();
     }
-  
+
     let variantValue = this.variant;
-    
+
     // Warning icon is same as ERROR icon
     if (variantValue === variant.WARNING || variantValue === variant.ERROR) {
       variantValue = 'alert';
     }
-    
+
     // Inject the SVG icon
     const iconName = capitalize(variantValue);
     this.insertAdjacentHTML('afterbegin', Icon._renderSVG(`spectrum-css-icon-${iconName}Medium`, ['_coral-Alert-icon', `_coral-UIIcon-${iconName}Medium`]));
     this._elements.icon = this.querySelector('._coral-Alert-icon');
   }
-  
+
   get _contentZones() {
     return {
       'coral-alert-header': 'header',
@@ -238,37 +243,47 @@ class Alert extends BaseComponent(HTMLElement) {
       'coral-alert-footer': 'footer'
     };
   }
-  
+
   /**
    Returns {@link Alert} variants.
-   
+
    @return {AlertVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+
   /**
    Returns {@link Alert} sizes.
-   
+
    @return {AlertSizeEnum}
    */
-  static get size() { return size; }
-  
+  static get size() {
+    return size;
+  }
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['variant', 'size']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['variant', 'size']);
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // a11y
     this.setAttribute('role', 'alert');
-    
+
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.INFO; }
-    if (!this._size) { this.size = size.SMALL; }
-    
+    if (!this._variant) {
+      this.variant = variant.INFO;
+    }
+    if (!this._size) {
+      this.size = size.SMALL;
+    }
+
     for (const contentZone in this._contentZones) {
       const element = this._elements[this._contentZones[contentZone]];
       // Remove it so we can process children
@@ -276,26 +291,25 @@ class Alert extends BaseComponent(HTMLElement) {
         element.parentNode.removeChild(element);
       }
     }
-    
+
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
         child.nodeType === Node.ELEMENT_NODE && !child.classList.contains('_coral-Alert-icon')) {
         // Add non-template elements to the content
         this._elements.content.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else element
         this.removeChild(child);
       }
     }
-    
+
     this._insertTemplate();
-  
+
     // Assign the content zones so the insert functions will be called
     for (const contentZone in this._contentZones) {
       const contentZoneName = this._contentZones[contentZone];
-      
+
       /** @ignore */
       this[contentZoneName] = this._elements[contentZoneName];
     }

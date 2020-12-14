@@ -13,94 +13,94 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Shell} from '../../../coral-component-shell';
 
-describe('Shell', function() {
-  
-  describe('Instantiation', function() {
+describe('Shell', function () {
+
+  describe('Instantiation', function () {
     helpers.cloneComponent(
       'should be possible to clone using markup',
       window.__html__['Shell.base.html']
     );
-  
+
     helpers.cloneComponent(
       'should be possible to clone using js',
       new Shell()
     );
   });
 
-  describe('API', function() {
+  describe('API', function () {
     var el;
 
-    beforeEach(function() {
+    beforeEach(function () {
       el = helpers.build(new Shell());
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el = null;
     });
-    
-    describe('#header', function() {
-      it('should be defined', function() {
+
+    describe('#header', function () {
+      it('should be defined', function () {
         expect(el.header).to.exist;
       });
-  
-      it('should be a content zone', function() {
+
+      it('should be a content zone', function () {
         el.header.appendChild(document.createElement('button'));
         expect(el.header.children.length).not.to.equal(0);
       });
     });
-    
-    describe('#menus', function() {
-      it('should be defined', function() {
+
+    describe('#menus', function () {
+      it('should be defined', function () {
         expect(el.header).to.exist;
       });
-      
-      it('should return a collection of menus', function() {
+
+      it('should return a collection of menus', function () {
         expect(el.menus).to.exist;
         el.menus.add();
         expect(el.querySelector('coral-shell-menu')).to.equal(el.menus.first());
       });
     });
 
-    describe('#content', function() {
-      it('should be defined', function() {
+    describe('#content', function () {
+      it('should be defined', function () {
         expect(el.content).to.exist;
       });
 
-      it('should be a content zone', function() {
+      it('should be a content zone', function () {
         el.content.appendChild(document.createElement('button'));
         expect(el.content.children.length).not.to.equal(0);
       });
     });
   });
 
-  describe('Markup', function() {
-    describe('#header', function() {
-      it('should be created if not provided', function() {
+  describe('Markup', function () {
+    describe('#header', function () {
+      it('should be created if not provided', function () {
         const el = helpers.build(window.__html__['Shell.base.html']);
         expect(el.header).to.equal(el.children[0]);
       });
     });
-    
-    describe('#content', function() {
-      it('should be created if not provided', function() {
+
+    describe('#content', function () {
+      it('should be created if not provided', function () {
         const el = helpers.build(window.__html__['Shell.base.html']);
         expect(el.content).to.equal(el.children[1]);
         expect(el.content.textContent.trim()).to.equal('This is the content.');
       });
 
-      it('should keep an existing content if provided', function() {
+      it('should keep an existing content if provided', function () {
         const el = helpers.build(window.__html__['Shell.content.html']);
         const title = el.querySelector('h1');
         expect(el.contains(title)).to.be.true;
         expect(el.content.contains(title)).to.be.false;
       });
     });
-  
-    describe('#menus', function() {
-      it('should keep an existing content if provided', function() {
+
+    describe('#menus', function () {
+      it('should keep an existing content if provided', function () {
         const el = helpers.build(window.__html__['Shell.content.html']);
         expect(el.menus.length).to.equal(3);
-        el.menus.getAll().forEach(function(menu) {
+        el.menus.getAll().forEach(function (menu) {
           expect(el.content.contains(menu)).to.be.false;
         });
       });

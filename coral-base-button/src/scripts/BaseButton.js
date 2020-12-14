@@ -16,9 +16,9 @@ import {transform, validate, commons} from '../../../coral-utils';
 
 /**
  Enumeration for {@link Button}, {@link AnchorButton} icon sizes.
- 
+
  @typedef {Object} ButtonIconSizeEnum
- 
+
  @property {String} EXTRA_EXTRA_SMALL
  Extra extra small size icon, typically 9px size.
  @property {String} EXTRA_SMALL
@@ -39,9 +39,9 @@ for (const key in Icon.size) {
 
 /**
  Enumeration for {@link Button}, {@link AnchorButton} variants.
- 
+
  @typedef {Object} ButtonVariantEnum
- 
+
  @property {String} CTA
  A button that is meant to grab the user's attention.
  @property {String} PRIMARY
@@ -115,9 +115,9 @@ const VARIANT_MAP = {
 
 /**
  Enumeration for {@link BaseButton} sizes.
- 
+
  @typedef {Object} ButtonSizeEnum
- 
+
  @property {String} MEDIUM
  A medium button is the default, normal sized button.
  @property {String} LARGE
@@ -130,9 +130,9 @@ const size = {
 
 /**
  Enumeration for {@link BaseButton} icon position options.
- 
+
  @typedef {Object} ButtonIconPositionEnum
- 
+
  @property {String} RIGHT
  Position should be right of the button label.
  @property {String} LEFT
@@ -151,23 +151,23 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Templates
     this._elements = {
       // Create or fetch the label element
       label: this.querySelector(this._contentZoneTagName) || document.createElement(this._contentZoneTagName),
       icon: this.querySelector('coral-icon')
     };
-    
+
     // Events
     this._events = {
       mousedown: '_onMouseDown',
       click: '_onClick'
     };
-  
+
     super._observeLabel();
   }
-  
+
   /**
    The label of the button.
    @type {HTMLElement}
@@ -176,34 +176,34 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
   get label() {
     return this._getContentZone(this._elements.label);
   }
+
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: this._contentZoneTagName,
-      insert: function(label) {
+      insert: function (label) {
         // Update label styles
         this._updateLabel(label);
-        
+
         // Ensure there's no extra space left for icon only buttons
         if (label.innerHTML.trim() === '') {
           label.textContent = '';
         }
-        
+
         if (this.iconPosition === iconPosition.LEFT) {
           this.appendChild(label);
-        }
-        else {
+        } else {
           this.insertBefore(label, this.firstChild);
         }
       }
     });
   }
-  
+
   /**
    Position of the icon relative to the label. If no <code>iconPosition</code> is provided, it will be set on the
    left side by default.
    See {@link ButtonIconPositionEnum}.
-   
+
    @type {String}
    @default ButtonIconPositionEnum.LEFT
    @htmlattribute iconposition
@@ -212,17 +212,18 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
   get iconPosition() {
     return this._iconPosition || iconPosition.LEFT;
   }
+
   set iconPosition(value) {
     value = transform.string(value).toLowerCase();
     this._iconPosition = validate.enumeration(iconPosition)(value) && value || iconPosition.LEFT;
     this._reflectAttribute('iconposition', this._iconPosition);
-    
+
     this._updateIcon(this.icon);
   }
-  
+
   /**
    Specifies the icon name used inside the button. See {@link Icon} for valid icon names.
-   
+
    @type {String}
    @default ""
    @htmlattribute icon
@@ -231,18 +232,19 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
     if (this._elements.icon) {
       return this._elements.icon.getAttribute('icon') || '';
     }
-  
+
     return this._icon || '';
   }
+
   set icon(value) {
     this._icon = transform.string(value);
-    
+
     this._updateIcon(value);
   }
-  
+
   /**
    Size of the icon. It accepts both lower and upper case sizes. See {@link ButtonIconSizeEnum}.
-   
+
    @type {String}
    @default ButtonIconSizeEnum.SMALL
    @htmlattribute iconsize
@@ -251,13 +253,14 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
     if (this._elements.icon) {
       return this._elements.icon.getAttribute('size') || Icon.size.SMALL;
     }
-  
+
     return this._iconSize || Icon.size.SMALL;
   }
+
   set iconSize(value) {
     value = transform.string(value).toUpperCase();
     this._iconSize = validate.enumeration(Icon.size)(value) && value || Icon.size.SMALL;
-  
+
     if (this._updatedIcon) {
       this._getIconElement().setAttribute('size', value);
     }
@@ -265,7 +268,7 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
 
   /**
    Whether aria-label is set automatically. See {@link IconAutoAriaLabelEnum}.
-   
+
    @type {String}
    @default IconAutoAriaLabelEnum.OFF
    @htmlattribute autoarialabel
@@ -274,22 +277,23 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
     if (this._elements.icon) {
       return this._elements.icon.getAttribute('autoarialabel') || Icon.autoAriaLabel.OFF;
     }
-  
+
     return this._iconAutoAriaLabel || Icon.autoAriaLabel.OFF;
   }
+
   set iconAutoAriaLabel(value) {
     value = transform.string(value).toLowerCase();
     this._iconAutoAriaLabel = validate.enumeration(Icon.autoAriaLabel)(value) && value || Icon.autoAriaLabel.OFF;
-  
+
     if (this._updatedIcon) {
       this._getIconElement().setAttribute('autoarialabel', value);
     }
   }
-  
+
   /**
    The size of the button. It accepts both lower and upper case sizes. See {@link ButtonSizeEnum}.
    Currently only "MEDIUM" is supported.
-   
+
    @type {String}
    @default ButtonSizeEnum.MEDIUM
    @htmlattribute size
@@ -298,15 +302,16 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
   get size() {
     return this._size || size.MEDIUM;
   }
+
   set size(value) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
     this._reflectAttribute('size', this._size);
   }
-  
+
   /**
    Whether the button is selected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -315,29 +320,31 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
-    
+
     this.classList.toggle('is-selected', this._selected);
-    
+
     this.trigger('coral-button:_selectedchanged');
   }
-  
+
   // We just reflect it but we also trigger an event to be used by button group
   /** @ignore */
   get value() {
     return this.getAttribute('value');
   }
+
   set value(value) {
     this._reflectAttribute('value', value);
-  
+
     this.trigger('coral-button:_valuechanged');
   }
-  
+
   /**
    Expands the button to the full width of the parent.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute block
@@ -346,16 +353,17 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
   get block() {
     return this._block || false;
   }
+
   set block(value) {
     this._block = transform.booleanAttr(value);
     this._reflectAttribute('block', this._block);
-  
+
     this.classList.toggle(`${CLASSNAME}--block`, this._block);
   }
-  
+
   /**
    The button's variant. See {@link ButtonVariantEnum}.
-   
+
    @type {String}
    @default ButtonVariantEnum.DEFAULT
    @htmlattribute variant
@@ -364,57 +372,58 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-    
+
     // removes every existing variant
     this.classList.remove(CLASSNAME, ACTION_CLASSNAME);
     this.classList.remove(...ALL_VARIANT_CLASSES);
-    
+
     if (this._variant === variant._CUSTOM) {
       this.classList.remove(CLASSNAME);
-    }
-    else {
+    } else {
       this.classList.add(...VARIANT_MAP[this._variant]);
-      
+
       if (this._variant === variant.ACTION || this._variant === variant.QUIET_ACTION) {
         this.classList.remove(CLASSNAME);
       }
     }
-  
+
     // Update label styles
     this._updateLabel();
   }
-  
+
   /**
    Inherited from {@link BaseComponent#trackingElement}.
    */
   get trackingElement() {
     return typeof this._trackingElement === 'undefined' ?
-    // keep spaces to only 1 max and trim. this mimics native html behaviors
+      // keep spaces to only 1 max and trim. this mimics native html behaviors
       (this.label || this).textContent.replace(/\s{2,}/g, ' ').trim() || this.icon :
       this._trackingElement;
   }
+
   set trackingElement(value) {
     super.trackingElement = value;
   }
-  
+
   _onClick(event) {
     if (!this.disabled) {
       this._trackEvent('click', this.getAttribute('is'), event);
     }
   }
-  
+
   /** @ignore */
   _updateIcon(value) {
     if (!this._updatedIcon && this._elements.icon) {
       return;
     }
-    
+
     this._updatedIcon = true;
-  
+
     const iconSizeValue = this.iconSize;
     const iconAutoAriaLabelValue = this.iconAutoAriaLabel;
     const iconElement = this._getIconElement();
@@ -423,7 +432,7 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
     iconElement.size = iconSizeValue;
     // Update autoAriaLabel as well
     iconElement.autoAriaLabel = iconAutoAriaLabelValue;
-  
+
     // removes the icon element from the DOM.
     if (this.icon === '') {
       iconElement.remove();
@@ -435,10 +444,10 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
         this.insertBefore(iconElement, this.iconPosition === iconPosition.LEFT ? this.label : this.label.nextElementSibling);
       }
     }
-    
+
     super._toggleIconAriaHidden();
   }
-  
+
   /** @ignore */
   _getIconElement() {
     if (!this._elements.icon) {
@@ -447,7 +456,7 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
     }
     return this._elements.icon;
   }
-  
+
   /**
    Forces button to receive focus on mousedown
    @param {MouseEvent} event mousedown event
@@ -455,7 +464,7 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
    */
   _onMouseDown(event) {
     const target = event.matchedTarget;
-    
+
     // Wait a frame or button won't receive focus in Safari.
     window.requestAnimationFrame(() => {
       if (target !== document.activeElement) {
@@ -463,57 +472,66 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
       }
     });
   }
-  
+
   _updateLabel(label) {
     label = label || this._elements.label;
-    
+
     label.classList.remove(`${CLASSNAME}-label`, `${ACTION_CLASSNAME}-label`);
-    
+
     if (this._variant !== variant._CUSTOM) {
       if (this._variant === variant.ACTION || this._variant === variant.QUIET_ACTION) {
         label.classList.add(`${ACTION_CLASSNAME}-label`);
-      }
-      else {
+      } else {
         label.classList.add(`${CLASSNAME}-label`);
       }
     }
   }
-  
+
   /** @private */
   get _contentZoneTagName() {
     return Object.keys(this._contentZones)[0];
   }
-  
-  get _contentZones() { return {'coral-button-label': 'label'}; }
-  
+
+  get _contentZones() {
+    return {'coral-button-label': 'label'};
+  }
+
   /**
    Returns {@link BaseButton} sizes.
-   
+
    @return {ButtonSizeEnum}
    */
-  static get size() { return size; }
-  
+  static get size() {
+    return size;
+  }
+
   /**
    Returns {@link BaseButton} variants.
-   
+
    @return {ButtonVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+
   /**
    Returns {@link BaseButton} icon positions.
-   
+
    @return {ButtonIconPositionEnum}
    */
-  static get iconPosition() { return iconPosition; }
-  
+  static get iconPosition() {
+    return iconPosition;
+  }
+
   /**
    Returns {@link BaseButton} icon sizes.
-   
+
    @return {ButtonIconSizeEnum}
    */
-  static get iconSize() { return iconSize; }
-  
+  static get iconSize() {
+    return iconSize;
+  }
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       iconposition: 'iconPosition',
@@ -521,7 +539,7 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
       iconautoarialabel: 'iconAutoAriaLabel'
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -536,38 +554,41 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
       'value'
     ]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-    if (!this._size) { this.size = size.MEDIUM; }
-    
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
+    if (!this._size) {
+      this.size = size.MEDIUM;
+    }
+
     // Create a fragment
     const fragment = document.createDocumentFragment();
-    
+
     const label = this._elements.label;
-  
+
     const contentZoneProvided = label.parentNode;
-    
+
     // Remove it so we can process children
     if (contentZoneProvided) {
       this.removeChild(label);
     }
-  
+
     let iconAdded = false;
     // Process remaining elements as necessary
     while (this.firstChild) {
       const child = this.firstChild;
-    
+
       if (child.nodeName === 'CORAL-ICON') {
         // Don't add duplicated icons
         if (iconAdded) {
           this.removeChild(child);
-        }
-        else {
+        } else {
           // Conserve existing icon element to content
           this._elements.icon = child;
           fragment.appendChild(child);
@@ -577,37 +598,36 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
       // Avoid content zone to be voracious
       else if (contentZoneProvided) {
         fragment.appendChild(child);
-      }
-      else {
+      } else {
         // Move anything else into the label
         label.appendChild(child);
       }
     }
-  
+
     // Add the frag to the component
     this.appendChild(fragment);
-  
+
     // Assign the content zones, moving them into place in the process
     this.label = label;
-  
+
     // Make sure the icon is well positioned
     this._updatedIcon = true;
     this._updateIcon(this.icon);
   }
-  
+
   /**
    Triggered when {@link BaseButton#selected} changed.
-   
+
    @typedef {CustomEvent} coral-button:_selectedchanged
-   
+
    @private
    */
-  
+
   /**
    Triggered when {@link BaseButton#value} changed.
-   
+
    @typedef {CustomEvent} coral-button:_valuechanged
-   
+
    @private
    */
 };

@@ -13,36 +13,36 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {SideNav} from '../../../coral-component-sidenav';
 
-describe('SideNav.Level', function() {
-  describe('Namespace', function() {
-    it('should be defined', function() {
+describe('SideNav.Level', function () {
+  describe('Namespace', function () {
+    it('should be defined', function () {
       expect(SideNav).to.have.property('Level');
     });
   });
-  
-  describe('Instantiation', function() {
+
+  describe('Instantiation', function () {
     function testDefaultInstance(el) {
       expect(el.classList.contains('_coral-SideNav')).to.be.true;
     }
-    
-    it('should be possible using new', function() {
+
+    it('should be possible using new', function () {
       const el = helpers.build(new SideNav.Level());
       testDefaultInstance(el);
     });
-    
-    it('should be possible using createElement', function() {
+
+    it('should be possible using createElement', function () {
       const el = helpers.build(document.createElement('coral-sidenav-level'));
       testDefaultInstance(el);
     });
-    
-    it('should be possible using markup', function() {
+
+    it('should be possible using markup', function () {
       const el = helpers.build(window.__html__['SideNav.level.base.html']);
       testDefaultInstance(el);
     });
   });
-  
-  describe('Implementation Details', function() {
-    it('should toggle expansion', function(done) {
+
+  describe('Implementation Details', function () {
+    it('should toggle expansion', function (done) {
       const el = helpers.build(new SideNav.Level());
       expect(el.hasAttribute('_expanded')).to.be.false;
 

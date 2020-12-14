@@ -26,7 +26,7 @@ class Button extends BaseButton(BaseComponent(HTMLButtonElement)) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Events
     this._delegateEvents(this._events);
   }

@@ -13,77 +13,77 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {SideNav} from '../../../coral-component-sidenav';
 
-describe('SideNav.Item', function() {
-  describe('Namespace', function() {
-    it('should be defined', function() {
+describe('SideNav.Item', function () {
+  describe('Namespace', function () {
+    it('should be defined', function () {
       expect(SideNav).to.have.property('Item');
     });
   });
-  
-  describe('Instantiation', function() {
+
+  describe('Instantiation', function () {
     function testDefaultInstance(el) {
       expect(el.classList.contains('_coral-SideNav-item')).to.be.true;
     }
-  
-    it('should be possible using new', function() {
+
+    it('should be possible using new', function () {
       const el = helpers.build(new SideNav.Item());
       testDefaultInstance(el);
     });
-  
-    it('should be possible using createElement', function() {
+
+    it('should be possible using createElement', function () {
       const el = helpers.build(document.createElement('coral-sidenav', {is: 'coral-sidenav-item'}));
       testDefaultInstance(el);
     });
-  
-    it('should be possible using markup', function() {
+
+    it('should be possible using markup', function () {
       const el = helpers.build(window.__html__['SideNav.item.base.html']);
       testDefaultInstance(el);
     });
   });
-  
-  describe('API', function() {
+
+  describe('API', function () {
     let el;
-    
-    beforeEach(function() {
+
+    beforeEach(function () {
       el = helpers.build(new SideNav.Item());
     });
-    
-    afterEach(function() {
+
+    afterEach(function () {
       el = null;
     });
-    
-    describe('#content', function() {
-      it('should default to empty string', function() {
+
+    describe('#content', function () {
+      it('should default to empty string', function () {
         expect(el.content.innerHTML).to.equal('');
       });
-      
-      it('should support setting content', function() {
+
+      it('should support setting content', function () {
         el.content.textContent = 'Item';
         expect(el.textContent.trim()).to.equal('Item');
       });
     });
-    
-    describe('#selected', function() {
-      it('should not be selected by default', function() {
+
+    describe('#selected', function () {
+      it('should not be selected by default', function () {
         const el = new SideNav.Item();
         expect(el.selected).to.be.false;
         expect(el.classList.contains('is-selected')).to.be.false;
         expect(el.hasAttribute('selected')).to.be.false;
       });
     });
-    
-    describe('#icon', function() {
-      it('should be empty string by default', function() {
+
+    describe('#icon', function () {
+      it('should be empty string by default', function () {
         const el = new SideNav.Item();
         expect(el.icon).to.equal('');
       });
-  
-      it('should be hidden by default', function() {
+
+      it('should be hidden by default', function () {
         const el = new SideNav.Item();
         expect(el._elements.icon.hidden).to.be.true;
       });
-      
-      it('should set the icon', function() {
+
+      it('should set the icon', function () {
         const el = new SideNav.Item();
         el.icon = 'Add';
         expect(el._elements.icon.icon).to.equal('Add');
@@ -91,31 +91,31 @@ describe('SideNav.Item', function() {
       });
     });
   });
-  
-  describe('Markup', function() {
-    describe('#content', function() {
-      it('should move content into the content zone', function() {
+
+  describe('Markup', function () {
+    describe('#content', function () {
+      it('should move content into the content zone', function () {
         const el = helpers.build(window.__html__['SideNav.item.base.html']);
         expect(el.content.innerHTML).to.equal('<strong>Item</strong>');
       });
-  
-      it('should not touch existing content zone', function() {
+
+      it('should not touch existing content zone', function () {
         const el = helpers.build(window.__html__['SideNav.item.content.html']);
         expect(el.content.textContent.trim()).to.equal('Item');
       });
     });
-    
-    describe('#selected', function() {
-      it('should not be selected by default', function() {
+
+    describe('#selected', function () {
+      it('should not be selected by default', function () {
         const el = helpers.build(window.__html__['SideNav.item.base.html']);
         expect(el.selected).to.be.false;
         expect(el.classList.contains('is-selected')).to.be.false;
         expect(el.hasAttribute('selected')).to.be.false;
       });
     });
-    
-    describe('#icon', function() {
-      it('should set the icon', function() {
+
+    describe('#icon', function () {
+      it('should set the icon', function () {
         const el = helpers.build(window.__html__['SideNav.item.icon.html']);
         expect(el.icon).to.equal('Add');
         expect(el._elements.icon.icon).to.equal('Add');
@@ -123,10 +123,10 @@ describe('SideNav.Item', function() {
       });
     });
   });
-  
-  describe('Events', function() {
-    describe('#coral-sidenav-item:_selectedchanged', function() {
-      it('should be triggered when the selection changes', function() {
+
+  describe('Events', function () {
+    describe('#coral-sidenav-item:_selectedchanged', function () {
+      it('should be triggered when the selection changes', function () {
         const el = helpers.build(new SideNav.Item());
         const changeSpy = sinon.spy();
         el.on('coral-sidenav-item:_selectedchanged', changeSpy);

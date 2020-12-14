@@ -23,10 +23,10 @@ class Events {
   constructor(elementOrSelector) {
     this._vent = new Vent(elementOrSelector);
   }
-  
+
   /**
    Add an event listener.
-  
+
    @param {String} eventName
    The event name to listen for, including optional namespace(s).
    @param {String} [selector]
@@ -41,10 +41,10 @@ class Events {
     this._vent.on(eventName, selector, handler, useCapture);
     return this;
   }
-  
+
   /**
    Remove an event listener.
-   
+
    @param {String} [eventName]
    The event name to stop listening for, including optional namespace(s).
    @param {String} [selector]
@@ -59,10 +59,10 @@ class Events {
     this._vent.off(eventName, selector, handler, useCapture);
     return this;
   }
-  
+
   /**
    Dispatch a custom event at the root element.
-   
+
    @param {String} eventName
    The name of the event to dispatch.
    @param {Object} [options]
@@ -78,7 +78,7 @@ class Events {
   dispatch(eventName, options) {
     return this._vent.dispatch(eventName, options);
   }
-  
+
   /**
    Destroy this instance, removing all events and references.
    */
@@ -89,7 +89,7 @@ class Events {
 
 /**
  An enhanced event helper.
- 
+
  @type {Events}
  */
 const events = new Events(window);

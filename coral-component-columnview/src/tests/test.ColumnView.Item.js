@@ -14,15 +14,15 @@ import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {ColumnView} from '../../../coral-component-columnview';
 import {Icon} from '../../../coral-component-icon';
 
-describe('ColumnView.Item', function() {
-  describe('Namespace', function() {
-    it('should be defined', function() {
+describe('ColumnView.Item', function () {
+  describe('Namespace', function () {
+    it('should be defined', function () {
       expect(ColumnView).to.have.property('Item');
       expect(ColumnView.Item).to.have.property('Content');
       expect(ColumnView.Item).to.have.property('Thumbnail');
     });
 
-    it('should define the variants in an enum', function() {
+    it('should define the variants in an enum', function () {
       expect(ColumnView.Item.variant).to.exist;
       expect(ColumnView.Item.variant.DEFAULT).to.equal('default');
       expect(ColumnView.Item.variant.DRILLDOWN).to.equal('drilldown');
@@ -30,30 +30,33 @@ describe('ColumnView.Item', function() {
     });
   });
 
-  describe('API', function() {
+  describe('API', function () {
     var el;
 
-    beforeEach(function() {
+    beforeEach(function () {
       el = helpers.build(new ColumnView.Item());
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el = null;
     });
 
-    describe('#content', function() {});
-    describe('#thumbnail', function() {});
-    describe('#variant', function() {});
+    describe('#content', function () {
+    });
+    describe('#thumbnail', function () {
+    });
+    describe('#variant', function () {
+    });
 
-    describe('#icon', function() {
-      it('should default to empty string', function() {
+    describe('#icon', function () {
+      it('should default to empty string', function () {
         expect(el.icon).to.equal('');
       });
 
-      it('should be settable', function() {
+      it('should be settable', function () {
         el.icon = 'document';
         expect(el.icon).to.equal('document');
-      
+
         expect(el._elements.icon).to.exist;
         expect(el._elements.icon.icon).to.equal('document');
         expect(el._elements.icon.size).to.equal(Icon.size.SMALL);
@@ -62,25 +65,25 @@ describe('ColumnView.Item', function() {
         expect(el.thumbnail.contains(el._elements.icon)).to.be.true;
       });
 
-      it('should remove the contents of the thumbnail if set', function() {
+      it('should remove the contents of the thumbnail if set', function () {
         var img = document.createElement('img');
         el.thumbnail.appendChild(img);
         expect(el.thumbnail.children.length).to.equal(1);
 
         el.icon = 'folder';
         expect(el.icon).to.equal('folder');
-        
+
         expect(el.thumbnail.children.length).to.equal(1);
         expect(el.contains(img)).to.be.false;
       });
     });
 
-    describe('#selected', function() {
-      it('should default to false', function() {
+    describe('#selected', function () {
+      it('should default to false', function () {
         expect(el.selected).to.be.false;
       });
 
-      it('should be settable', function(done) {
+      it('should be settable', function (done) {
         el.selected = true;
         helpers.next(() => {
           expect(el.selected).to.be.true;
@@ -97,8 +100,12 @@ describe('ColumnView.Item', function() {
     });
   });
 
-  describe('Markup', function() {});
-  describe('Events', function() {});
-  describe('User Interaction', function() {});
-  describe('Implementation Details', function() {});
+  describe('Markup', function () {
+  });
+  describe('Events', function () {
+  });
+  describe('User Interaction', function () {
+  });
+  describe('Implementation Details', function () {
+  });
 });

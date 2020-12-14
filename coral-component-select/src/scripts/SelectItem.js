@@ -37,6 +37,7 @@ class SelectItem extends BaseComponent(HTMLElement) {
   get content() {
     return this;
   }
+
   set content(value) {
     // Support configs
     if (typeof value === 'object') {
@@ -59,6 +60,7 @@ class SelectItem extends BaseComponent(HTMLElement) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -77,6 +79,7 @@ class SelectItem extends BaseComponent(HTMLElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
@@ -98,14 +101,14 @@ class SelectItem extends BaseComponent(HTMLElement) {
       if (this.getAttribute('value') === null) {
         // keep spaces to only 1 max and trim to mimic native select option behavior
         val = this.textContent.replace(/\s{2,}/g, ' ').trim();
-      }
-      else {
+      } else {
         val = this.getAttribute('value');
       }
     }
 
     return val;
   }
+
   set value(value) {
     this._value = transform.string(value);
     this._reflectAttribute('value', this._value);
@@ -122,6 +125,7 @@ class SelectItem extends BaseComponent(HTMLElement) {
       this.value || this.textContent.replace(/\s{2,}/g, ' ').trim() :
       this._trackingElement;
   }
+
   set trackingElement(value) {
     super.trackingElement = value;
   }

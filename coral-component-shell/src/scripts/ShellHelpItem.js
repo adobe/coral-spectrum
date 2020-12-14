@@ -24,7 +24,7 @@ class ShellHelpItem extends AnchorList.Item {
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
   }
 }

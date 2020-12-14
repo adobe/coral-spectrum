@@ -12,10 +12,10 @@
 
 import {Color} from '../../../coral-component-colorinput';
 
-describe('Color', function() {
-  
-  describe('API', function() {
-    it('should be set up with default values', function() {
+describe('Color', function () {
+
+  describe('API', function () {
+    it('should be set up with default values', function () {
       var color = new Color();
       expect(color.value).to.equal('');
 
@@ -36,7 +36,7 @@ describe('Color', function() {
       expect(color.hsla).to.be.null;
     });
 
-    it('should be possible to get/set alpha', function() {
+    it('should be possible to get/set alpha', function () {
       var color = new Color();
 
       // 1 by default
@@ -50,7 +50,7 @@ describe('Color', function() {
       expect(color.alpha).to.equal(0.5);
     });
 
-    it('should be possible to set rgb values', function() {
+    it('should be possible to set rgb values', function () {
       var color = new Color();
 
       expect(color.rgb).to.be.null;
@@ -66,7 +66,7 @@ describe('Color', function() {
       expect(color.rgb.b).to.equal(0);
     });
 
-    it('should be possible to set an rgb string as value', function() {
+    it('should be possible to set an rgb string as value', function () {
       // parsing color should work the same as setting values directly
       var color = new Color();
       color.value = 'rgb(255,0,0)';
@@ -81,7 +81,7 @@ describe('Color', function() {
       expect(color.isSimilarTo(color2)).to.be.true;
     });
 
-    it('should be possible to parse an rgba', function() {
+    it('should be possible to parse an rgba', function () {
       // parsing color should work the same as setting values directly
       var color = new Color();
       color.value = 'rgb(255,0,0)';
@@ -96,7 +96,7 @@ describe('Color', function() {
       expect(color.isSimilarTo(color2)).to.be.true;
     });
 
-    it('should be possible to use isSimilarTo', function() {
+    it('should be possible to use isSimilarTo', function () {
       // converting between this color spaces might loose some data
       var rgb = {
         r: 148,
@@ -116,7 +116,7 @@ describe('Color', function() {
       expect(rgbColor.isSimilarTo(cmykColor, false)).to.be.false;
     });
 
-    it('should be possible to parse a cmyk', function() {
+    it('should be possible to parse a cmyk', function () {
       var color1 = new Color();
       color1.cmyk = {
         c: 0,
@@ -130,7 +130,7 @@ describe('Color', function() {
       expect(color1.isSimilarTo(color2)).to.be.true;
     });
 
-    it('should be possible to parse a hex color', function() {
+    it('should be possible to parse a hex color', function () {
       var color1 = new Color();
       color1.rgb = {
         r: 148,
@@ -143,7 +143,7 @@ describe('Color', function() {
       expect(color1.isSimilarTo(color2)).to.be.true;
     });
 
-    it('should be possible to parse a hsb color', function() {
+    it('should be possible to parse a hsb color', function () {
       var color1 = new Color();
       color1.hsb = {
         h: 0,
@@ -156,7 +156,7 @@ describe('Color', function() {
       expect(color1.isSimilarTo(color2)).to.be.true;
     });
 
-    it('should be possible to parse a hsl color', function() {
+    it('should be possible to parse a hsl color', function () {
       var color1 = new Color();
       color1.hsl = {
         h: 0,
@@ -169,7 +169,7 @@ describe('Color', function() {
       expect(color1.isSimilarTo(color2)).to.be.true;
     });
 
-    it('should be possible to parse a hsla color', function() {
+    it('should be possible to parse a hsla color', function () {
       var color1 = new Color();
       color1.hsla = {
         h: 360,
@@ -183,56 +183,56 @@ describe('Color', function() {
       expect(color1.isSimilarTo(color2)).to.be.true;
     });
 
-    it('should be possible to get/set rgbValue', function() {
+    it('should be possible to get/set rgbValue', function () {
       var string = 'rgb(255,0,0)';
       var color = new Color();
       color.rgbValue = string;
       expect(color.rgbValue).to.equal(string);
     });
 
-    it('should be possible to get/set rgbaValue', function() {
+    it('should be possible to get/set rgbaValue', function () {
       var string = 'rgba(255,0,0,1)';
       var color = new Color();
       color.rgbaValue = string;
       expect(color.rgbaValue).to.equal(string);
     });
 
-    it('should be possible to get/set hexValue', function() {
+    it('should be possible to get/set hexValue', function () {
       var string = '#94cd4b';
       var color = new Color();
       color.hexValue = string;
       expect(color.hexValue).to.equal(string);
     });
 
-    it('should be possible to get/set cmykValue', function() {
+    it('should be possible to get/set cmykValue', function () {
       var string = 'cmyk(100,0,0,0)';
       var color = new Color();
       color.cmykValue = string;
       expect(color.cmykValue).to.equal(string);
     });
 
-    it('should be possible to get/set hsbValue', function() {
+    it('should be possible to get/set hsbValue', function () {
       var string = 'hsb(180,100,100)';
       var color = new Color();
       color.hsbValue = string;
       expect(color.hsbValue).to.equal(string);
     });
 
-    it('should be possible to get/set hslValue', function() {
+    it('should be possible to get/set hslValue', function () {
       var string = 'hsl(180,100%,100%)';
       var color = new Color();
       color.hslValue = string;
       expect(color.hslValue).to.equal(string);
     });
 
-    it('should be possible to get/set hslaValue', function() {
+    it('should be possible to get/set hslaValue', function () {
       var string = 'hsla(180,100%,100%,0.4)';
       var color = new Color();
       color.hslaValue = string;
       expect(color.hslaValue).to.equal(string);
     });
 
-    it('should be able to parse valid colors (generic test)', function() {
+    it('should be able to parse valid colors (generic test)', function () {
       var someValidColors = ['rgb(0,0,0)', 'rgb(0, 0, 0)', 'rgb(255,255,255)',
         'rgba(0,0,0,0)', 'rgba(255,255,255,1)',
         'cmyk(0,100,50,0)',
@@ -243,14 +243,14 @@ describe('Color', function() {
       ];
 
       var color = null;
-      for (var i = 0; i < someValidColors.length; i++) {
+      for (var i = 0 ; i < someValidColors.length ; i++) {
         color = new Color();
         color.value = someValidColors[i];
         expect(color.rgb).to.not.be.null;
       }
     });
 
-    it('should not be to parse all invalid colors (generic test)', function() {
+    it('should not be to parse all invalid colors (generic test)', function () {
       var someInvalidColors = ['rgb(-1,-1,-1)', 'rgb(256,256,256)', 'rgb(,,)',
         'rgba(0,0,0)', 'rgba(-1,-1,-1,0)', 'rgba(0,0,0,2)',
         'cmyk(0,100,50)',
@@ -261,14 +261,14 @@ describe('Color', function() {
       ];
 
       var color = null;
-      for (var i = 0; i < someInvalidColors.length; i++) {
+      for (var i = 0 ; i < someInvalidColors.length ; i++) {
         color = new Color();
         color.value = someInvalidColors[i];
         expect(color.rgb).to.be.null;
       }
     });
 
-    it('should be possible to check if colors are similar (generic test)', function() {
+    it('should be possible to check if colors are similar (generic test)', function () {
       var someColors = [
         ['#a96836', 'rgb(169, 104, 54)', 'rgba(169, 104, 54, 1)', 'hsb(26.1, 68.1, 66.3)', 'hsl(26.1, 51.6%, 43.7%)', 'hsla(26.1, 51.6%, 43.7%, 1)', 'cmyk(0, 38.5, 68.1, 33.7)'],
         ['#000', 'rgb(0, 0, 0)', 'rgba(0, 0, 0, 1)', 'hsb(0, 0, 0)', 'hsl(0, 0%, 0%)', 'hsla(0, 0%, 0%, 1)', 'cmyk(0, 0, 0, 100)'],
@@ -279,9 +279,9 @@ describe('Color', function() {
       var colorGroup = null;
       var previousColor = null;
       var currentColor = null;
-      for (var i = 0; i < someColors.length; i++) {
+      for (var i = 0 ; i < someColors.length ; i++) {
         colorGroup = someColors[i];
-        for (var j = 1; j < colorGroup.length; j++) {
+        for (var j = 1 ; j < colorGroup.length ; j++) {
           previousColor = new Color();
           previousColor.value = colorGroup[j - 1];
 
@@ -294,7 +294,7 @@ describe('Color', function() {
       }
     });
 
-    it('should be possible to easily convert colors without loss (generic test)', function() {
+    it('should be possible to easily convert colors without loss (generic test)', function () {
       var someColors = [
         ['#a96836', 'rgb(169, 104, 54)', 'rgba(169, 104, 54, 1)', 'hsb(26.1, 68.1, 66.3)', 'hsl(26.1, 51.6%, 43.7%)', 'hsla(26.1, 51.6%, 43.7%, 1)', 'cmyk(0, 38.5, 68.1, 33.7)'],
         ['#000', 'rgb(0, 0, 0)', 'rgba(0, 0, 0, 1)', 'hsb(0, 0, 0)', 'hsl(0, 0%, 0%)', 'hsla(0, 0%, 0%,1)', 'cmyk(0, 0, 0, 100)'],
@@ -304,9 +304,9 @@ describe('Color', function() {
 
       var colorGroup, color, rgb, hsb, hsl, cmyk, rgba, hsla,
         hex = null;
-      for (var i = 0; i < someColors.length; i++) {
+      for (var i = 0 ; i < someColors.length ; i++) {
         colorGroup = someColors[i];
-        for (var j = 0; j < colorGroup.length; j++) {
+        for (var j = 0 ; j < colorGroup.length ; j++) {
           color = new Color();
           color.value = colorGroup[j];
 

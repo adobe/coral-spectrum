@@ -10,12 +10,12 @@
  * governing permissions and limitations under the License.
  */
 
-module.exports = function(gulp) {
+module.exports = function (gulp) {
   const KarmaServer = require('karma').Server;
   const configFile = `${__dirname}/../configs/karma.conf.js`;
   const PluginError = require('plugin-error');
-  
-  gulp.task('karma', function(done) {
+
+  gulp.task('karma', function (done) {
     new KarmaServer({
       configFile: configFile,
       singleRun: true
@@ -26,8 +26,8 @@ module.exports = function(gulp) {
       done();
     }).start();
   });
-  
-  gulp.task('karma-watch', function(done) {
+
+  gulp.task('karma-watch', function (done) {
     new KarmaServer({
       configFile: configFile
     }, done).start();

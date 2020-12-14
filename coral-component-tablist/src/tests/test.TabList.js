@@ -15,9 +15,9 @@ import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {TabList, Tab} from '../../../coral-component-tablist';
 import {Icon} from '../../../coral-component-icon';
 
-describe('TabList', function() {
-  
-  describe('Instantiation', function() {
+describe('TabList', function () {
+
+  describe('Instantiation', function () {
     function testDefaultInstance(el) {
       expect(el.getAttribute('aria-multiselectable')).to.equal('false');
       expect(el.classList.contains('_coral-Tabs')).to.be.true;
@@ -27,30 +27,30 @@ describe('TabList', function() {
       expect(el.getAttribute('aria-multiselectable')).to.equal('false');
     }
 
-    it('should be possible using new', function() {
+    it('should be possible using new', function () {
       var el = helpers.build(new TabList());
       testDefaultInstance(el);
     });
 
-    it('should be possible using createElement', function() {
+    it('should be possible using createElement', function () {
       var el = helpers.build(document.createElement('coral-tablist'));
       testDefaultInstance(el);
     });
 
-    it('should be possible using markup', function() {
+    it('should be possible using markup', function () {
       testDefaultInstance(helpers.build('<coral-tablist></coral-tablist>'));
     });
-  
+
     helpers.cloneComponent(
       'should be possible via clone using markup',
       window.__html__['TabList.base.html']
     );
-  
+
     helpers.cloneComponent(
       'should be possible via clone using markup with textContent',
       window.__html__['TabList.selectedItem.html']
     );
-    
+
     var el;
     var item1, item2, item3;
 
@@ -68,18 +68,18 @@ describe('TabList', function() {
     el.appendChild(item1);
     el.appendChild(item2);
     el.appendChild(item3);
-    
+
     helpers.cloneComponent(
       'should be possible via clone using js',
       el
     );
   });
 
-  describe('API', function() {
+  describe('API', function () {
     var el;
     var item1, item2, item3;
 
-    beforeEach(function() {
+    beforeEach(function () {
       el = new TabList();
 
       item1 = new Tab();
@@ -92,24 +92,24 @@ describe('TabList', function() {
       item3.label.textContent = 'Item 3';
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el = item1 = item2 = item3 = null;
     });
 
-    describe('#selectedItem', function() {
+    describe('#selectedItem', function () {
 
-      it('should default to null', function() {
+      it('should default to null', function () {
         expect(el.selectedItem).to.be.null;
         expect(el.items.length).to.equal(0);
       });
 
-      it('should automatically select the first available item', function(done) {
+      it('should automatically select the first available item', function (done) {
         el.appendChild(item1);
         el.appendChild(item2);
         el.appendChild(item3);
 
         // Wait for MO
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el.selectedItem).to.equal(item1);
           expect(item1.selected).to.be.true;
           expect(item1.hasAttribute('selected')).to.be.true;
@@ -117,7 +117,7 @@ describe('TabList', function() {
         });
       });
 
-      it('should select another item when the active one is disabled', function() {
+      it('should select another item when the active one is disabled', function () {
         el.appendChild(item1);
         el.appendChild(item2);
         item1.selected = true;
@@ -133,22 +133,22 @@ describe('TabList', function() {
         expect(item2.selected).to.be.false;
       });
 
-      it('should select the tab that just became enabled', function() {
+      it('should select the tab that just became enabled', function () {
         el.appendChild(item1);
-        
+
         item1.selected = true;
-  
+
         expect(el.selectedItem).to.equal(item1);
-  
+
         item1.disabled = true;
         expect(el.selectedItem).to.be.null;
         expect(item1.selected).to.be.false;
-  
+
         item1.disabled = false;
         expect(el.selectedItem).to.equal(item1);
       });
 
-      it('selecting another item should modify #selectedItem', function() {
+      it('selecting another item should modify #selectedItem', function () {
         el.appendChild(item1);
         el.appendChild(item2);
 
@@ -169,7 +169,7 @@ describe('TabList', function() {
         expect(item2.hasAttribute('selected')).to.be.true;
       });
 
-      it('removing an unselected item should not modify #selectedItem', function() {
+      it('removing an unselected item should not modify #selectedItem', function () {
         el.appendChild(item1);
         el.appendChild(item2);
         el.appendChild(item3);
@@ -186,7 +186,7 @@ describe('TabList', function() {
         expect(item3.hasAttribute('selected')).to.be.false;
       });
 
-      it('should be null if all items are removed', function() {
+      it('should be null if all items are removed', function () {
         el.appendChild(item1);
         item1.selected = true;
 
@@ -198,7 +198,7 @@ describe('TabList', function() {
         expect(el.selectedItem).to.be.null;
       });
 
-      it('should be null the last item is disabled', function() {
+      it('should be null the last item is disabled', function () {
         el.appendChild(item1);
         item1.selected = true;
 
@@ -211,19 +211,19 @@ describe('TabList', function() {
         expect(el.selectedItem).to.be.null;
       });
 
-      it('should be the first available item if the current selectedItem is removed', function(done) {
+      it('should be the first available item if the current selectedItem is removed', function (done) {
         el.appendChild(item1);
         el.appendChild(item2);
         el.appendChild(item3);
         item1.selected = true;
         item2.disabled = true;
-  
+
         // Wait one more frame to make sure MO is ready
-        helpers.next(function() {
+        helpers.next(function () {
           item1.remove();
-  
+
           // Wait for MO to detect removed node
-          helpers.next(function() {
+          helpers.next(function () {
             expect(el.selectedItem).to.equal(item3);
             expect(item2.selected).to.be.false;
             expect(item2.hasAttribute('selected')).to.be.false;
@@ -233,21 +233,21 @@ describe('TabList', function() {
           });
         });
       });
-      
-      describe('#size', function() {
-        it('should default to TabList.size.MEDIUM', function() {
+
+      describe('#size', function () {
+        it('should default to TabList.size.MEDIUM', function () {
           expect(el.size).to.equal(TabList.size.MEDIUM);
         });
-  
-        it('should set the size classnames', function() {
+
+        it('should set the size classnames', function () {
           el.size = TabList.size.SMALL;
           expect(el.classList.contains('_coral-Tabs--compact')).be.true;
           expect(el.classList.contains('_coral-Tabs--quiet')).be.false;
-  
+
           el.size = TabList.size.LARGE;
           expect(el.classList.contains('_coral-Tabs--quiet')).be.true;
           expect(el.classList.contains('_coral-Tabs--compact')).be.false;
-  
+
           el.size = TabList.size.MEDIUM;
           expect(el.classList.contains('_coral-Tabs--quiet')).be.false;
           expect(el.classList.contains('_coral-Tabs--compact')).be.false;
@@ -255,68 +255,68 @@ describe('TabList', function() {
       });
     });
 
-    describe('#icon', function() {
+    describe('#icon', function () {
       var defaultMarkup = window.__html__['TabList.base.html'];
 
-      it('should be initially empty', function() {
+      it('should be initially empty', function () {
         const el = helpers.build(defaultMarkup);
         var items = el.items.getAll();
-  
+
         expect(items[0].getAttribute('icon')).to.be.null;
         expect(items[0].icon).to.equal('');
       });
 
-      it('should set the new icon', function() {
+      it('should set the new icon', function () {
         const el = helpers.build(defaultMarkup);
         var items = el.items.getAll();
         var tabPanelItem = items[0];
-  
+
         tabPanelItem.icon = 'settings';
-        
+
         expect(tabPanelItem._elements.icon).to.exist;
         expect(tabPanelItem._elements.icon.icon).to.equal('settings');
-  
+
         // By Default, Extra Small icons are used in tab panel
         expect(tabPanelItem._elements.icon.size).to.equal(Icon.size.EXTRA_SMALL);
       });
-  
-      it('should change icon size depending on label', function(done) {
+
+      it('should change icon size depending on label', function (done) {
         const el = new Tab();
         el.icon = 'add';
         expect(el._elements.icon.size).to.equal(Icon.size.SMALL);
-        
+
         el.label.textContent = 'text';
         // Wait for MO
         helpers.next(() => {
           expect(el._elements.icon.size).to.equal(Icon.size.EXTRA_SMALL);
-          
+
           done();
         });
       });
     });
   });
 
-  describe('Markup', function() {
+  describe('Markup', function () {
 
-    describe('#target', function() {
-      it('should default to null', function() {
+    describe('#target', function () {
+      it('should default to null', function () {
         const el = helpers.build(window.__html__['TabList.base.html']);
         expect(el.target).to.be.null;
       });
 
-      it('should not fail with empty string', function() {
+      it('should not fail with empty string', function () {
         const el = helpers.build(window.__html__['TabList.target.html']);
         expect(el.target).to.equal('');
       });
 
-      it('should select the target after being inserted in the DOM', function(done) {
+      it('should select the target after being inserted in the DOM', function (done) {
         helpers.build(window.__html__['TabList.virtualtarget.html']);
-  
+
         var tabItem = document.getElementById('tabItem');
         var targetItem = document.getElementById('targetItem');
-        
+
         // Wait for target to be in the DOM
-        helpers.next(function() {
+        helpers.next(function () {
           expect(targetItem.hasAttribute('selected')).to.be.true;
           expect(targetItem.getAttribute('aria-labelledby')).to.equal(tabItem.id);
           expect(targetItem.getAttribute('role')).to.equal('tabpanel');
@@ -326,13 +326,13 @@ describe('TabList', function() {
       });
     });
 
-    describe('#selectedItem', function() {
-      it('should default to the first item', function() {
+    describe('#selectedItem', function () {
+      it('should default to the first item', function () {
         const el = helpers.build(window.__html__['TabList.base.html']);
         expect(el.selectedItem).to.equal(el.items.getAll()[0]);
       });
 
-      it('should take the last selected', function() {
+      it('should take the last selected', function () {
         helpers.target.innerHTML = window.__html__['TabList.doubleselected.html'];
         const el = helpers.target.querySelector('coral-tablist');
         var items = el.items.getAll();
@@ -341,37 +341,37 @@ describe('TabList', function() {
         expect(items[1].selected).to.be.false;
       });
 
-      it('should read the selected from the markup', function() {
+      it('should read the selected from the markup', function () {
         const el = helpers.build(window.__html__['TabList.selectedItem.html']);
         expect(el.selectedItem).to.equal(el.items.getAll()[1]);
       });
     });
   });
-  
-  describe('Events', function() {
+
+  describe('Events', function () {
     let el = null;
     let item1 = null;
     let item2 = null;
-    
-    beforeEach(function() {
+
+    beforeEach(function () {
       el = new TabList();
       item1 = el.items.add();
       item2 = el.items.add();
     });
-    
-    afterEach(function() {
+
+    afterEach(function () {
       el = item1 = item2;
     });
-    
-    it('should trigger a coral-tablist:change event when an item is selected', function() {
+
+    it('should trigger a coral-tablist:change event when an item is selected', function () {
       var spy = sinon.spy();
       el.on('coral-tablist:change', spy);
-    
+
       item1.selected = true;
       expect(spy.callCount).to.equal(1);
       expect(spy.args[0][0].detail.selection).to.equal(item1);
       expect(spy.args[0][0].detail.oldSelection).to.equal(null);
-  
+
       var spy = sinon.spy();
       el.on('coral-tablist:change', spy);
       item2.selected = true;
@@ -379,144 +379,144 @@ describe('TabList', function() {
       expect(spy.args[0][0].detail.selection).to.equal(item2);
       expect(spy.args[0][0].detail.oldSelection).to.equal(item1);
     });
-  
-    it('should select the target item before triggering a coral-tablist:change event', function(done) {
+
+    it('should select the target item before triggering a coral-tablist:change event', function (done) {
       var target = document.createElement('div');
-      for (var i = 0; i < el.items.length; i++) {
+      for (var i = 0 ; i < el.items.length ; i++) {
         target.appendChild(document.createElement('div'));
       }
       helpers.target.appendChild(target);
-    
+
       el.target = target;
-    
-      el.on('coral-tablist:change', function() {
+
+      el.on('coral-tablist:change', function () {
         expect(target.children[1].hasAttribute('selected')).to.be.true;
         done();
       });
-    
+
       item2.selected = true;
     });
   });
 
-  describe('User Interaction', function() {
+  describe('User Interaction', function () {
     var defaultMarkup = window.__html__['TabList.base.html'];
     var selectedItemMarkup = window.__html__['TabList.selectedItem.html'];
 
-    it('should select tab on click', function() {
+    it('should select tab on click', function () {
       const el = helpers.build(defaultMarkup);
       var items = el.items.getAll();
-  
+
       expect(items.length).to.equal(5);
-  
+
       expect(el.selectedItem).to.equal(items[0]);
-  
+
       items[1].click();
-  
+
       expect(items[0].selected).to.be.false;
-      
+
       expect(items[0].classList.contains('is-selected')).to.be.false;
       expect(items[0].getAttribute('tabindex')).to.equal('-1');
-  
+
       expect(el.selectedItem).to.equal(items[1]);
     });
 
-    it('should ignore clicks on disabled tabs', function() {
+    it('should ignore clicks on disabled tabs', function () {
       const el = helpers.build(defaultMarkup);
       var items = el.items.getAll();
-  
+
       expect(items.length).to.equal(5);
-  
+
       expect(el.selectedItem).to.equal(items[0]);
-  
+
       items[3].click();
-  
+
       expect(items[0].selected).to.be.true;
     });
 
-    it('should select the last tab on end press', function() {
+    it('should select the last tab on end press', function () {
       const el = helpers.build(defaultMarkup);
       var items = el.items.getAll();
-  
+
       expect(items.length).to.equal(5);
-  
+
       expect(el.selectedItem).to.equal(items[0]);
-  
+
       // focuses the item before producing the key press
       items[0].focus();
-  
+
       expect(document.activeElement).to.equal(items[0]);
-  
+
       helpers.keypress('end', items[0]);
-  
+
       expect(el.selectedItem).to.equal(items[4]);
       expect(document.activeElement).to.equal(items[4]);
     });
 
-    it('should select the first tab on home press', function() {
+    it('should select the first tab on home press', function () {
       const el = helpers.build(selectedItemMarkup);
       var items = el.items.getAll();
-  
+
       expect(el.selectedItem).to.equal(items[1]);
-  
+
       // focuses the item before producing the key press
       items[1].focus();
-  
+
       expect(document.activeElement).to.equal(items[1]);
-  
+
       helpers.keypress('home', items[1]);
-  
+
       expect(el.selectedItem).to.equal(items[0]);
       expect(document.activeElement).to.equal(items[0]);
     });
 
-    it('should select the next tab on pagedown, right, and down', function() {
+    it('should select the next tab on pagedown, right, and down', function () {
       const el = helpers.build(defaultMarkup);
       var items = el.items.getAll();
-  
+
       helpers.keypress('pagedown', items[0]);
-  
+
       expect(el.selectedItem).to.equal(items[1]);
       expect(document.activeElement).to.equal(items[1]);
-  
+
       helpers.keypress('right', items[1]);
-  
+
       expect(el.selectedItem).to.equal(items[2]);
       expect(document.activeElement).to.equal(items[2]);
-  
+
       helpers.keypress('down', items[2]);
-  
+
       expect(el.selectedItem).to.equal(items[4]);
       expect(document.activeElement).to.equal(items[4]);
     });
 
-    it('should select the previous item on pageup, left and up', function() {
+    it('should select the previous item on pageup, left and up', function () {
       const el = helpers.build(defaultMarkup);
       var items = el.items.getAll();
-  
+
       // forces the selected item to be the last one
       helpers.keypress('end', items[0]);
       expect(el.selectedItem).to.equal(items[4]);
       expect(document.activeElement).to.equal(items[4]);
-  
+
       helpers.keypress('pageup', items[4]);
-  
+
       expect(el.selectedItem).to.equal(items[2]);
       expect(document.activeElement).to.equal(items[2]);
-  
+
       helpers.keypress('left', items[2]);
-  
+
       expect(el.selectedItem).to.equal(items[1]);
       expect(document.activeElement).to.equal(items[1]);
-  
+
       helpers.keypress('up', items[1]);
-  
+
       expect(el.selectedItem).to.equal(items[0]);
       expect(document.activeElement).to.equal(items[0]);
     });
   });
 
-  describe('Implementation Details', function() {
-    it('clicking the tab should select the tab', function() {
+  describe('Implementation Details', function () {
+    it('clicking the tab should select the tab', function () {
       const el = helpers.build(window.__html__['TabList.selectedItem.html']);
       var tab1 = el.querySelector('[role=tab]');
       tab1.click();
@@ -525,71 +525,71 @@ describe('TabList', function() {
       expect(el.selectedItem).to.equal(item1);
       expect(item1.selected).to.be.true;
     });
-    
-    it('should set the line under the selected item', function(done) {
+
+    it('should set the line under the selected item', function (done) {
       const el = helpers.build(window.__html__['TabList.selectedItem.html']);
       const wait = el._wait;
       el._wait = 0;
-      
+
       setTimeout(() => {
         expect(el._elements.line.style.transform).to.not.equal('');
         expect(el._elements.line.style.width).to.not.equal('');
         expect(el._elements.line.hidden).to.be.false;
-        
+
         done();
       }, wait * 2);
     });
-  
-    it('should set the line under the newly selected item', function(done) {
+
+    it('should set the line under the newly selected item', function (done) {
       const el = helpers.build(window.__html__['TabList.selectedItem.html']);
       const wait = el._wait;
       el._wait = 0;
-      
+
       el.items.first().selected = true;
-    
+
       setTimeout(() => {
         expect(el._elements.line.style.transform).to.not.equal('');
         expect(el._elements.line.style.width).to.not.equal('');
         expect(el._elements.line.hidden).to.be.false;
-        
+
         done();
       }, wait * 2);
     });
-  
-    it('should set the line under the selected item after switching orientation', function(done) {
+
+    it('should set the line under the selected item after switching orientation', function (done) {
       const el = helpers.build(window.__html__['TabList.selectedItem.html']);
       const wait = el._wait;
       el._wait = 0;
-      
+
       el.orientation = 'vertical';
-      
+
       setTimeout(() => {
         expect(el._elements.line.style.width).to.equal('');
         expect(el._elements.line.style.height).to.not.equal('');
         expect(el._elements.line.style.transform).to.not.equal('');
         expect(el._elements.line.hidden).to.be.false;
-        
+
         done();
       }, wait * 2);
     });
-  
-    it('should hide the line if no selected item', function(done) {
+
+    it('should hide the line if no selected item', function (done) {
       const el = new TabList();
       expect(el._elements.line.hidden).to.be.true;
-      
+
       helpers.build(el);
-  
+
       // Line is set next frame
       helpers.next(() => {
         // Still hidden
         expect(el._elements.line.hidden).to.be.true;
-        
+
         done();
       });
     });
   });
 
-  describe('Collection API', function() {
+  describe('Collection API', function () {
 
     var addSpy;
     var removeSpy;
@@ -597,7 +597,7 @@ describe('TabList', function() {
     var el;
     var item1, item2, item3;
 
-    beforeEach(function() {
+    beforeEach(function () {
       el = new TabList();
       helpers.target.appendChild(el);
 
@@ -617,7 +617,7 @@ describe('TabList', function() {
       el.on('coral-collection:remove', removeSpy);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el.off('coral-collection:add', addSpy);
       el.off('coral-collection:remove', removeSpy);
 
@@ -625,7 +625,7 @@ describe('TabList', function() {
       el = item1 = item2 = item3 = null;
     });
 
-    it('#items cannot be set', function() {
+    it('#items cannot be set', function () {
       el.appendChild(item1);
       el.appendChild(item2);
 
@@ -633,13 +633,12 @@ describe('TabList', function() {
 
       try {
         el.items = null;
-      }
-      catch (e) {
+      } catch (e) {
         expect(el.items).to.equal(items);
       }
     });
 
-    it('triggers coral-collection:add on appendChild', function(done) {
+    it('triggers coral-collection:add on appendChild', function (done) {
       el.appendChild(item1);
       el.appendChild(item2);
       var all = el.items.getAll();
@@ -649,19 +648,19 @@ describe('TabList', function() {
       expect(all[1]).to.equal(item2);
 
       // Wait for MO
-      helpers.next(function() {
+      helpers.next(function () {
         expect(addSpy.callCount).to.equal(2);
         expect(removeSpy.callCount).to.equal(0);
         done();
       });
     });
 
-    it('triggers coral-collection:remove on removeChild', function(done) {
+    it('triggers coral-collection:remove on removeChild', function (done) {
       var addSpy = sinon.spy();
       var removeSpy = sinon.spy();
 
       var el = helpers.build(window.__html__['TabList.base.html']);
-      
+
       el.on('coral-collection:add', addSpy);
       el.on('coral-collection:remove', removeSpy);
 
@@ -675,36 +674,36 @@ describe('TabList', function() {
       expect(el.items.length).to.equal(4);
 
       // Wait for MO
-      helpers.next(function() {
+      helpers.next(function () {
         expect(addSpy.callCount).to.equal(0);
         expect(removeSpy.callCount).to.equal(1);
         done();
       });
     });
 
-    it('triggers coral-collection:remove on removeChild', function(done) {
+    it('triggers coral-collection:remove on removeChild', function (done) {
       el.items.add(item1);
       el.items.add(item2);
       el.items.add(item3);
 
       expect(el.items.length).to.equal(3);
-  
+
       var all = el.items.getAll();
       var item = all[2];
-  
+
       el.removeChild(item);
-  
+
       expect(el.items.length).to.equal(2);
-  
+
       // Wait for MO
-      helpers.next(function() {
+      helpers.next(function () {
         expect(addSpy.callCount).to.equal(3);
         expect(removeSpy.callCount).to.equal(1);
         done();
       });
     });
 
-    it('#add should add the item', function(done) {
+    it('#add should add the item', function (done) {
       var ret = el.items.add(item1);
       var all = el.items.getAll();
 
@@ -714,14 +713,14 @@ describe('TabList', function() {
       expect(ret).to.equal(item1);
 
       // Wait for MO
-      helpers.next(function() {
+      helpers.next(function () {
         expect(addSpy.callCount).to.equal(1);
         expect(removeSpy.callCount).to.equal(0);
         done();
       });
     });
 
-    it('#add should also support config', function(done) {
+    it('#add should also support config', function (done) {
       var ret = el.items.add({
         label: {
           textContent: 'Header 1'
@@ -746,14 +745,14 @@ describe('TabList', function() {
       expect(ret.content.textContent).to.equal('content');
 
       // Wait for MO
-      helpers.next(function() {
+      helpers.next(function () {
         expect(addSpy.callCount).to.equal(1);
         expect(removeSpy.callCount).to.equal(0);
         done();
       });
     });
 
-    it('#add with before null should insert at the end', function(done) {
+    it('#add with before null should insert at the end', function (done) {
       el.items.add(item1, null);
       el.items.add(item2, null);
       var all = el.items.getAll();
@@ -763,14 +762,14 @@ describe('TabList', function() {
       expect(all[1]).to.equal(item2);
 
       // Wait for MO
-      helpers.next(function() {
+      helpers.next(function () {
         expect(addSpy.callCount).to.equal(2);
         expect(removeSpy.callCount).to.equal(0);
         done();
       });
     });
-    
-    it('#add is able to insert before', function(done) {
+
+    it('#add is able to insert before', function (done) {
       el.items.add(item1);
       el.items.add(item2, item1);
       var all = el.items.getAll();
@@ -780,14 +779,14 @@ describe('TabList', function() {
       expect(all[1]).to.equal(item1);
 
       // Wait for MO
-      helpers.next(function() {
+      helpers.next(function () {
         expect(addSpy.callCount).to.equal(2);
         expect(removeSpy.callCount).to.equal(0);
         done();
       });
     });
 
-    it('#add with both disabled and selected should make it unselected', function(done) {
+    it('#add with both disabled and selected should make it unselected', function (done) {
       var ret = el.items.add({
         label: {
           textContent: 'Header 1'
@@ -806,14 +805,14 @@ describe('TabList', function() {
       expect(ret.disabled).to.be.true;
 
       // Wait for MO
-      helpers.next(function() {
+      helpers.next(function () {
         expect(addSpy.callCount).to.equal(1);
         expect(removeSpy.callCount).to.equal(0);
         done();
       });
     });
 
-    it('#remove should remove the item', function(done) {
+    it('#remove should remove the item', function (done) {
       var addSpy = sinon.spy();
       var removeSpy = sinon.spy();
 
@@ -832,64 +831,64 @@ describe('TabList', function() {
       expect(el.items.length).to.equal(4);
 
       // Wait for MO
-      helpers.next(function() {
+      helpers.next(function () {
         expect(addSpy.callCount).to.equal(0);
         expect(removeSpy.callCount).to.equal(1);
         done();
       });
     });
 
-    it('#getAll should be empty initially', function(done) {
+    it('#getAll should be empty initially', function (done) {
       var all = el.items.getAll();
       expect(all.length).to.equal(0);
 
       // Wait for MO
-      helpers.next(function() {
+      helpers.next(function () {
         expect(addSpy.callCount).to.equal(0);
         expect(removeSpy.callCount).to.equal(0);
         done();
       });
     });
 
-    it('#clear should clear all the items', function(done) {
+    it('#clear should clear all the items', function (done) {
       var addSpy = sinon.spy();
       var removeSpy = sinon.spy();
       var el = helpers.build(window.__html__['TabList.base.html']);
-  
+
       el.on('coral-collection:add', addSpy);
       el.on('coral-collection:remove', removeSpy);
-  
+
       expect(el.items.length).to.equal(5);
       el.items.clear();
       expect(el.items.length).to.equal(0);
-  
+
       // Wait for MO
-      helpers.next(function() {
+      helpers.next(function () {
         expect(addSpy.callCount).to.equal(0);
         expect(removeSpy.callCount).to.equal(5);
         done();
       });
     });
   });
-  
-  describe('Tracking', function() {
+
+  describe('Tracking', function () {
     var trackerFnSpy;
-    
+
     beforeEach(function () {
       trackerFnSpy = sinon.spy();
       tracking.addListener(trackerFnSpy);
     });
-    
+
     afterEach(function () {
       tracking.removeListener(trackerFnSpy);
     });
-    
+
     it('should call the tracker callback with the expected trackData parameters when an item is clicked', function () {
       const el = helpers.build(window.__html__['TabList.base.tracking.html']);
       var items = el.items.getAll();
       items[0].click();
       expect(trackerFnSpy.callCount).to.equal(1, 'Track callback should have been called only once.');
-      
+
       var spyCall = trackerFnSpy.getCall(0);
       var trackData = spyCall.args[0];
       expect(trackData).to.have.property('targetType', 'coral-tab');
@@ -899,13 +898,13 @@ describe('TabList', function() {
       expect(trackData).to.have.property('rootElement', 'element name');
       expect(trackData).to.have.property('rootType', 'coral-tablist');
     });
-    
+
     it('should call the tracker callback with the expected trackData parameters when an item that has annotations is clicked', function () {
       const el = helpers.build(window.__html__['TabList.base.tracking.html']);
       var items = el.items.getAll();
       items[1].click();
       expect(trackerFnSpy.callCount).to.equal(1, 'Track callback should have been called only once.');
-      
+
       var spyCall = trackerFnSpy.getCall(0);
       var trackData = spyCall.args[0];
       expect(trackData).to.have.property('targetType', 'coral-tab');

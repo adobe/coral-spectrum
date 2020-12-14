@@ -21,9 +21,9 @@ const LABEL_CLASSNAME = '_coral-Label';
 
 /**
  Enumeration for {@link Tag} sizes. Only colored tags can have different sizes.
- 
+
  @typedef {Object} TagSizeEnum
- 
+
  @property {String} SMALL
  A small sized tag.
  @property {String} MEDIUM
@@ -39,9 +39,9 @@ const size = {
 
 /**
  Enumeration for {@link Tag} colors.
- 
+
  @typedef {Object} TagColorEnum
- 
+
  @property {String} DEFAULT
  @property {String} GREY
  @property {String} BLUE
@@ -149,14 +149,14 @@ class Tag extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Attach events
     this._delegateEvents({
       'click [handle="button"]': '_onRemoveButtonClick',
       'key:backspace': '_onRemoveButtonClick',
       'key:delete': '_onRemoveButtonClick'
     });
-    
+
     // Prepare templates
     this._elements = {
       // Create or fetch the label element.
@@ -164,31 +164,32 @@ class Tag extends BaseComponent(HTMLElement) {
     };
     base.call(this._elements, {i18n, Icon});
   }
-  
+
   /**
    The tag's label element.
-   
+
    @type {TagLabel}
    @contentzone
    */
   get label() {
     return this._getContentZone(this._elements.label);
   }
+
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: 'coral-tag-label',
-      insert: function(label) {
+      insert: function (label) {
         label.classList.add(`${CLASSNAME}Label`);
         this.insertBefore(label, this.firstChild);
         this._updateAriaLabel();
       }
     });
   }
-  
+
   /**
    Whether this component can be closed.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute closable
@@ -197,26 +198,27 @@ class Tag extends BaseComponent(HTMLElement) {
   get closable() {
     return this._closable || false;
   }
+
   set closable(value) {
     this._closable = transform.booleanAttr(value);
     this._reflectAttribute('closable', this._closable);
-  
+
     // Only tags are closable
     this._toggleTagVariant();
-    
+
     if (this._closable && !this.contains(this._elements.buttonCell)) {
       // Insert the buttonCell if it was not added to the DOM
       this.appendChild(this._elements.buttonCell);
     }
-    
+
     this._elements.button.hidden = !this._closable;
     this._elements.buttonCell.hidden = !this._closable;
     this._updateAriaLabel();
   }
-  
+
   /**
    Value of the tag. If not explicitly set, the value of <code>Node.textContent</code> is returned.
-   
+
    @type {String}
    @default ""
    @htmlattribute value
@@ -225,16 +227,17 @@ class Tag extends BaseComponent(HTMLElement) {
   get value() {
     return typeof this._value === 'string' ? this._value : this.textContent.replace(/\s{2,}/g, ' ').trim();
   }
+
   set value(value) {
     this._value = transform.string(value);
     this._reflectAttribute('value', this._value);
-    
+
     this.trigger('coral-tag:_valuechanged');
   }
-  
+
   /**
    A quiet tag to differentiate it from default tag.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute quiet
@@ -243,17 +246,18 @@ class Tag extends BaseComponent(HTMLElement) {
   get quiet() {
     return this._quiet || false;
   }
+
   set quiet(value) {
     this._quiet = transform.booleanAttr(value);
     this._reflectAttribute('quiet', this._quiet);
-  
+
     // Only tags are quiet
     this._toggleTagVariant();
   }
-  
+
   /**
    A multiline tag for block-level layout with multiline text.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute multiline
@@ -262,16 +266,17 @@ class Tag extends BaseComponent(HTMLElement) {
   get multiline() {
     return this._multiline || false;
   }
+
   set multiline(value) {
     this._multiline = transform.booleanAttr(value);
     this._reflectAttribute('multiline', this._multiline);
-  
+
     this.classList.toggle(MULTILINE_CLASSNAME, this._multiline);
   }
-  
+
   /**
    The tag's size. See {@link {TagSizeEnum}. Only colored tags can have different sizes.
-   
+
    @type {String}
    @default TagSizeEnum.MEDIUM
    @htmlattribute size
@@ -280,17 +285,18 @@ class Tag extends BaseComponent(HTMLElement) {
   get size() {
     return this._size || size.MEDIUM;
   }
+
   set size(value) {
     value = this._host ? size.MEDIUM : transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
     this._reflectAttribute('size', this._size);
-  
+
     this._toggleTagVariant();
   }
-  
+
   /**
    The tags's color. See {@link TagColorEnum}.
-   
+
    @type {String}
    @default Coral.Tag.color.DEFAULT
    @htmlattribute color
@@ -299,47 +305,48 @@ class Tag extends BaseComponent(HTMLElement) {
   get color() {
     return this._color || color.DEFAULT;
   }
+
   set color(value) {
     value = this._host ? color.DEFAULT : transform.string(value).toLowerCase();
     this._color = validate.enumeration(color)(value) && value || color.DEFAULT;
-    
+
     // Map unsupported colors
     if (Object.keys(colorMap).indexOf(this._color) !== -1) {
       this._color = colorMap[this._color];
     }
-    
+
     this._reflectAttribute('color', this._color);
-    
+
     this._toggleTagVariant();
   }
-  
+
   /**
-    Toggle between Tag and Label styles
-   
-    @private
+   Toggle between Tag and Label styles
+
+   @private
    */
   _toggleTagVariant() {
     const isColored = this.color !== color.DEFAULT;
-    
+
     // Base
     this.classList.toggle(CLASSNAME, !isColored);
     this.classList.toggle(LABEL_CLASSNAME, isColored);
-    
+
     // Closable
     this.classList.toggle(`${CLASSNAME}--deletable`, !isColored);
-    
+
     // Quiet
     this.classList.toggle(QUIET_CLASSNAME, !isColored && this.quiet);
-    
+
     // Size
     this.classList.remove(...ALL_SIZE_CLASSES);
     this.classList.toggle(`${LABEL_CLASSNAME}--${swappedSize[this.size].toLowerCase()}`, isColored);
-  
+
     // Color
     this.classList.remove(...ALL_COLOR_CLASSES);
     this.classList.toggle(`${LABEL_CLASSNAME}--${this.color}`, isColored);
   }
-  
+
   /**
    Inherited from {@link BaseComponent#trackingElement}.
    */
@@ -350,36 +357,37 @@ class Tag extends BaseComponent(HTMLElement) {
       this.value || (this.label || this).textContent.replace(/\s{2,}/g, ' ').trim() :
       this._trackingElement;
   }
+
   set trackingElement(value) {
     super.trackingElement = value;
   }
-  
+
   /** @private */
   _onRemoveButtonClick(event) {
     event.preventDefault();
     if (this.closable && !this._elements.button.disabled) {
       event.stopPropagation();
       this.focus();
-      
+
       const host = this._host;
       this.remove();
-  
+
       if (host) {
         host._onTagButtonClicked(this, event);
       }
     }
   }
-  
+
   /**
    Updates the aria-label property from the button and label elements.
-   
-      @ignore
+
+   @ignore
    */
   _updateAriaLabel() {
     const button = this._elements.button;
     const buttonCell = this._elements.buttonCell;
     const label = this._elements.label;
-  
+
     // In the edge case that this is a Tag without a TagList,
     // just treat the Tag as a container element without special labelling.
     if (this.getAttribute('role') !== 'row') {
@@ -396,32 +404,38 @@ class Tag extends BaseComponent(HTMLElement) {
 
     const buttonAriaLabel = button.getAttribute('title');
     const labelTextContent = label.textContent;
-  
+
     // button should be labelled, "Remove: labelTextContent".
     button.setAttribute('aria-label', `${buttonAriaLabel}: ${labelTextContent}`);
 
     if (!label.id) {
       label.id = commons.getUID();
     }
-    this.setAttribute('aria-labelledby', label.id); 
+    this.setAttribute('aria-labelledby', label.id);
   }
-  
-  get _contentZones() { return {'coral-tag-label': 'label'}; }
-  
+
+  get _contentZones() {
+    return {'coral-tag-label': 'label'};
+  }
+
   /**
    Returns {@link Tag} sizes.
-   
+
    @return {TagSizeEnum}
    */
-  static get size() { return size; }
-  
+  static get size() {
+    return size;
+  }
+
   /**
    Returns {@link Tag} colors.
-   
+
    @return {TagColorEnum}
    */
-  static get color() { return color; }
-  
+  static get color() {
+    return color;
+  }
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -435,7 +449,7 @@ class Tag extends BaseComponent(HTMLElement) {
       'role'
     ]);
   }
-  
+
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     // This is required by TagList but we don't need to expose disabled publicly as API
@@ -445,37 +459,40 @@ class Tag extends BaseComponent(HTMLElement) {
     // This is required by TagList but we don't need to expose disabled publicly as API
     else if (name === 'role') {
       this._updateAriaLabel();
-    }
-    else {
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
-  
+
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-  
+
     // Used to inform the tag list that it's added
     this.trigger('coral-tag:_connected');
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     // Default reflected attributes
-    if (!this._size) { this.size = size.MEDIUM; }
-    if (!this._color) { this.color = color.DEFAULT; }
-  
+    if (!this._size) {
+      this.size = size.MEDIUM;
+    }
+    if (!this._color) {
+      this.color = color.DEFAULT;
+    }
+
     const templateHandleNames = ['input', 'button', 'buttonCell'];
-    
+
     const label = this._elements.label;
-  
+
     // Remove it so we can process children
     if (label.parentNode) {
       this.removeChild(label);
     }
-  
+
     // Process remaining elements as necessary
     while (this.firstChild) {
       const child = this.firstChild;
@@ -483,40 +500,39 @@ class Tag extends BaseComponent(HTMLElement) {
         templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the label
         label.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else
         this.removeChild(child);
       }
     }
-  
+
     // Assign the content zones, moving them into place in the process
     this.label = label;
   }
-  
+
   /** @ignore */
   disconnectedCallback() {
     super.disconnectedCallback();
-    
+
     // Used to inform the tag list that it's removed synchronously
     if (this._host) {
       this._host._onItemDisconnected(this);
     }
   }
-  
+
   /**
    Triggered when the {@link Tag} value is changed.
- 
+
    @typedef {CustomEvent} coral-tag:_valuechanged
-   
+
    @private
    */
-  
+
   /**
    Triggered when the {@link Tag} is added to the document.
- 
+
    @typedef {CustomEvent} coral-tag:_connected
-   
+
    @private
    */
 }

@@ -23,9 +23,9 @@ class CardPropertyList extends BaseComponent(HTMLElement) {
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add('u-coral-clearFix');
-    
+
     // Empty it if no items
     if (this.innerHTML.trim() === '') {
       this.textContent = '';

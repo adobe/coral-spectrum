@@ -15,9 +15,9 @@ import {transform, validate} from '../../../coral-utils';
 
 /**
  Enumeration for {@link Status} variants.
- 
+
  @typedef {Object} StatusVariantEnum
- 
+
  @property {String} NEUTRAL
  A default semantic neutral status.
  @property {String} WARNING
@@ -39,9 +39,9 @@ const variant = {
 
 /**
  Enumeration for {@link Status} colors.
- 
+
  @typedef {Object} StatusColorEnum
- 
+
  @property {String} DEFAULT
  @property {String} CELERY
  @property {String} YELLOW
@@ -85,7 +85,7 @@ for (const colorValue in color) {
  @class Coral.Status
  @classdesc A Status component to describe the condition of another entity. They can be used to convey semantic meaning
  such as statuses and categories.
- 
+
  @htmltag coral-status
  @extends {HTMLElement}
  @extends {BaseComponent}
@@ -94,17 +94,17 @@ class Status extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone element
       label: this.querySelector('coral-status-label') || document.createElement('coral-status-label')
     };
   }
-  
+
   /**
    Whether the status is disabled or not.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute disabled
@@ -113,17 +113,18 @@ class Status extends BaseComponent(HTMLElement) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
-    
+
     this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
   }
-  
+
   /**
    The status variant. See {@link StatusVariantEnum}.
    When a status has a semantic meaning, it should use semantic colors.
- 
+
    @type {String}
    @default StatusVariantEnum.NEUTRAL
    @htmlattribute variant
@@ -132,20 +133,21 @@ class Status extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.NEUTRAL;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.NEUTRAL;
     this._reflectAttribute('variant', this._variant);
-  
+
     this.classList.remove(...ALL_VARIANT_CLASSES);
     this.classList.add(`${CLASSNAME}--${variantMapping[this._variant.toUpperCase()] || this._variant}`);
   }
-  
+
   /**
    The status color. See {@link StatusColorEnum}.
    When a status is used to color code categories and labels commonly found in data visualization, they should use
    colors.
-   
+
    The ideal usage for colors is when there are 8 or fewer categories or labels being color coded.
    Use them in the following order to ensure the greatest possible color differences for multiple forms of color
    blindness:
@@ -157,9 +159,9 @@ class Status extends BaseComponent(HTMLElement) {
    - Seafoam
    - Chartreuse
    - Purple
- 
+
    If a color is set, it'll override any semantic variant.
-   
+
    @type {String}
    @default StatusColorEnum.DEFAULT
    @htmlattribute color
@@ -168,74 +170,84 @@ class Status extends BaseComponent(HTMLElement) {
   get color() {
     return this._color || color.DEFAULT;
   }
+
   set color(value) {
     value = transform.string(value).toLowerCase();
     this._color = validate.enumeration(color)(value) && value || color.DEFAULT;
     this._reflectAttribute('color', this._color);
-  
+
     this.classList.remove(...ALL_COLOR_CLASSES);
     if (this._color !== color.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._color}`);
     }
   }
-  
+
   /**
    The status label element.
-   
+
    @type {StatusLabel}
    @contentzone
    */
   get label() {
     return this._getContentZone(this._elements.label);
   }
+
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: 'coral-status-label',
-      insert: function(label) {
+      insert: function (label) {
         this.appendChild(label);
       }
     });
   }
-  
+
   get _contentZones() {
     return {
       'coral-status-label': 'label'
     };
   }
-  
+
   /**
    Returns {@link Status} variants.
-   
+
    @return {StatusVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+
   /**
    Returns {@link Status} colors.
-   
+
    @return {StatusColorEnum}
    */
-  static get color() { return color; }
-  
+  static get color() {
+    return color;
+  }
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['variant', 'color', 'disabled']);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.NEUTRAL; }
-    if (!this._color) { this.color = color.DEFAULT; }
-  
+    if (!this._variant) {
+      this.variant = variant.NEUTRAL;
+    }
+    if (!this._color) {
+      this.color = color.DEFAULT;
+    }
+
     // Fetch or create the content content zone element
     const label = this._elements.label;
-  
+
     // This stops the content zone from being voracious
     if (!label.parentNode) {
       // move the contents into the content zone
@@ -243,7 +255,7 @@ class Status extends BaseComponent(HTMLElement) {
         label.appendChild(this.firstChild);
       }
     }
-  
+
     // Assign the content zone moving it into place
     this.label = label;
   }

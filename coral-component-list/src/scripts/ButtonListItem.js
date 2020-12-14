@@ -33,14 +33,15 @@ class ButtonListItem extends BaseListItem(BaseComponent(HTMLButtonElement)) {
       (this.content || this).textContent.replace(/\s{2,}/g, ' ').trim() :
       this._trackingElement;
   }
+
   set trackingElement(value) {
     super.trackingElement = value;
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
   }
 }

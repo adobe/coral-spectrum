@@ -26,12 +26,12 @@ class TableHeaderCell extends BaseComponent(HTMLTableCellElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Templates
     this._elements = {
       content: this.querySelector('coral-table-headercell-content') || document.createElement('coral-table-headercell-content')
     };
-  
+
     // Watch for content changes in sticky header cell
     this._stickyCellObserver = new MutationObserver(this._handleMutations.bind(this));
     this._stickyCellObserver.observe(this._elements.content, {
@@ -39,58 +39,61 @@ class TableHeaderCell extends BaseComponent(HTMLTableCellElement) {
       subtree: true
     });
   }
-  
+
   /**
    The header cell's content.
-   
+
    @type {TableHeaderCellContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-table-headercell-content',
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
   }
-  
+
   /** @private */
   _handleMutations() {
     this.trigger('coral-table-headercell:_contentchanged');
   }
-  
-  get _contentZones() { return {'coral-table-headercell-content': 'content'}; }
-  
+
+  get _contentZones() {
+    return {'coral-table-headercell-content': 'content'};
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Fetch or create the content zone element
     const content = this._elements.content;
-    
+
     if (!content.parentNode) {
       // Move component children into the content
       while (this.firstChild) {
         content.appendChild(this.firstChild);
       }
     }
-    
+
     // Assign the content zone so the insert function will be called
     this.content = content;
   }
-  
+
   /**
    Triggered when the {@link TableHeaderCell} content changed.
- 
+
    @typedef {CustomEvent} coral-table-headercell:_contentchanged
-   
+
    @private
    */
 }

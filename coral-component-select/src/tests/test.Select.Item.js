@@ -14,31 +14,31 @@ import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Select} from '../../../coral-component-select';
 import {Icon} from '../../../coral-component-icon';
 
-describe('Select.Item', function() {
-  describe('Namespace', function() {
-    it('should be defined', function() {
+describe('Select.Item', function () {
+  describe('Namespace', function () {
+    it('should be defined', function () {
       expect(Select).to.have.property('Item');
     });
   });
 
-  describe('API', function() {
+  describe('API', function () {
     // the select list item used in every test
     var el;
 
-    beforeEach(function() {
+    beforeEach(function () {
       el = helpers.build(new Select.Item());
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el = null;
     });
 
-    describe('#content', function() {
-      it('should default to empty string', function() {
+    describe('#content', function () {
+      it('should default to empty string', function () {
         expect(el.content.innerHTML).to.equal('');
       });
 
-      it('should support HTML content', function() {
+      it('should support HTML content', function () {
         var htmlContent = '<strong>Highlighted</strong> text';
         el.content.innerHTML = htmlContent;
 
@@ -47,14 +47,14 @@ describe('Select.Item', function() {
       });
     });
 
-    describe('#value', function() {
-      it('should default empty string', function() {
+    describe('#value', function () {
+      it('should default empty string', function () {
         expect(el.value).to.equal('');
 
         expect(el.hasAttribute('value')).to.be.false;
       });
 
-      it('should default to the content when value is null', function() {
+      it('should default to the content when value is null', function () {
         el.content.innerHTML = 'Switzerland';
 
         expect(el.content.innerHTML).to.equal('Switzerland');
@@ -62,7 +62,7 @@ describe('Select.Item', function() {
         expect(el.hasAttribute('value')).to.be.false;
       });
 
-      it('should default to the empty string when value is empty string', function() {
+      it('should default to the empty string when value is empty string', function () {
         el.setAttribute('value', '');
         el.content.innerHTML = 'Switzerland';
 
@@ -71,14 +71,14 @@ describe('Select.Item', function() {
         expect(el.hasAttribute('value')).to.be.true;
       });
 
-      it('should keep maximum 1 space from the content', function() {
+      it('should keep maximum 1 space from the content', function () {
         el.content.innerHTML = 'Costa   Rica';
 
         expect(el.content.innerHTML).to.equal('Costa   Rica');
         expect(el.value).to.equal('Costa Rica');
       });
 
-      it('should remove the html from the value', function() {
+      it('should remove the html from the value', function () {
         var htmlContent = '<strong>Highlighted</strong> text';
         el.content.innerHTML = htmlContent;
 
@@ -86,35 +86,35 @@ describe('Select.Item', function() {
         expect(el.value).to.equal('Highlighted text');
       });
 
-      it('should convert the value to string', function() {
+      it('should convert the value to string', function () {
         el.value = 9.5;
 
         expect(el.value).to.equal('9.5');
         expect(el.getAttribute('value')).to.equal('9.5');
       });
 
-      it('should reflect the value', function() {
+      it('should reflect the value', function () {
         el.value = 'crc';
 
         expect(el.getAttribute('value')).to.equal('crc');
       });
     });
 
-    describe('#selected', function() {
-      it('should be not be selected by default', function() {
+    describe('#selected', function () {
+      it('should be not be selected by default', function () {
         expect(el.selected).to.be.false;
 
         expect(el.hasAttribute('selected')).to.be.false;
       });
 
-      it('should be settable', function() {
+      it('should be settable', function () {
         el.selected = true;
 
         expect(el.selected).to.be.true;
         expect(el.hasAttribute('selected')).to.be.true;
       });
 
-      it('should accept truthy', function() {
+      it('should accept truthy', function () {
         el.selected = true;
 
         expect(el.selected).to.be.true;
@@ -122,20 +122,20 @@ describe('Select.Item', function() {
       });
     });
 
-    describe('#disabled', function() {
-      it('should be not be disabled by default', function() {
+    describe('#disabled', function () {
+      it('should be not be disabled by default', function () {
         expect(el.disabled).to.be.false;
         expect(el.hasAttribute('disabled')).to.be.false;
       });
 
-      it('should be settable', function() {
+      it('should be settable', function () {
         el.disabled = true;
 
         expect(el.disabled).to.be.true;
         expect(el.hasAttribute('disabled')).to.be.true;
       });
 
-      it('should accept truthy', function() {
+      it('should accept truthy', function () {
         el.disabled = 1;
 
         expect(el.disabled).to.be.true;
@@ -144,17 +144,17 @@ describe('Select.Item', function() {
     });
   });
 
-  describe('Markup', function() {
+  describe('Markup', function () {
 
-    describe('#content', function() {
+    describe('#content', function () {
 
-      it('should have content set to innerHTML if property not provided', function() {
+      it('should have content set to innerHTML if property not provided', function () {
         const el = helpers.build(window.__html__['Select.Item.base.html']);
         expect(el.content.innerHTML).to.equal('Costa Rica');
         expect(el.value).to.equal('Costa Rica');
       });
 
-      it('should support HTML content', function() {
+      it('should support HTML content', function () {
         const el = helpers.build(window.__html__['Select.Item.full.html']);
         expect(el.content.innerHTML).to.equal('<em>Costa</em> Rica');
         expect(el.innerHTML).to.equal('<em>Costa</em> Rica');
@@ -162,13 +162,13 @@ describe('Select.Item', function() {
       });
     });
 
-    describe('#value', function() {
-      it('should set the value from markup', function() {
+    describe('#value', function () {
+      it('should set the value from markup', function () {
         const el = helpers.build(window.__html__['Select.Item.full.html']);
         expect(el.value).to.equal('crc');
       });
 
-      it('should default to the content', function() {
+      it('should default to the content', function () {
         const el = helpers.build(window.__html__['Select.Item.base.html']);
         expect(el.value).to.equal('Costa Rica');
         expect(el.hasAttribute('value')).to.be.false;
@@ -176,7 +176,7 @@ describe('Select.Item', function() {
 
       // @todo: this is the behavior of the default select option since we use coral.transform.string we cannot detect
       // the difference
-      it.skip('should fall back to content if attribute is removed', function() {
+      it.skip('should fall back to content if attribute is removed', function () {
         const el = helpers.build(window.__html__['Select.Item.full.html']);
         expect(el.value).to.equal('crc');
         el.removeAttribute('value');
@@ -184,8 +184,8 @@ describe('Select.Item', function() {
       });
     });
 
-    describe('#selected', function() {
-      it('should not be selected by default', function() {
+    describe('#selected', function () {
+      it('should not be selected by default', function () {
         const el = helpers.build(window.__html__['Select.Item.base.html']);
         expect(el.selected).to.be.false;
         expect(el.classList.contains('is-selected')).to.be.false;
@@ -193,8 +193,8 @@ describe('Select.Item', function() {
       });
     });
 
-    describe('#disabled', function() {
-      it('should not be disabled by default', function() {
+    describe('#disabled', function () {
+      it('should not be disabled by default', function () {
         const el = helpers.build(window.__html__['Select.Item.base.html']);
         expect(el.disabled).to.be.false;
         expect(el.classList.contains('is-disabled')).to.be.false;
@@ -203,21 +203,21 @@ describe('Select.Item', function() {
     });
   });
 
-  describe('Events', function() {
+  describe('Events', function () {
     // the select list item used in every test
     var el;
 
-    beforeEach(function() {
+    beforeEach(function () {
       el = helpers.build(new Select.Item());
       el.value = 'item1';
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el = null;
     });
 
-    describe('#coral-select-item:_valuechanged', function() {
-      it('should be triggered when the value changes', function() {
+    describe('#coral-select-item:_valuechanged', function () {
+      it('should be triggered when the value changes', function () {
         var changeSpy = sinon.spy();
         el.on('coral-select-item:_valuechanged', changeSpy);
 
@@ -228,15 +228,15 @@ describe('Select.Item', function() {
       });
     });
 
-    describe('#coral-select-item:_contentchanged', function() {
-      it('should be triggered when the content changes', function(done) {
+    describe('#coral-select-item:_contentchanged', function () {
+      it('should be triggered when the content changes', function (done) {
         var changeSpy = sinon.spy();
         el.on('coral-select-item:_contentchanged', changeSpy);
 
         el.content.innerHTML = 'new content';
 
         // we need to wait for the mutation observer
-        helpers.next(function() {
+        helpers.next(function () {
           expect(changeSpy.callCount).to.equal(1);
           expect(changeSpy.getCall(0).args[0].target.content.innerHTML).to.equal('new content');
 
@@ -244,7 +244,7 @@ describe('Select.Item', function() {
         });
       });
 
-      it('should be triggered when item is appended', function(done) {
+      it('should be triggered when item is appended', function (done) {
         var changeSpy = sinon.spy();
         el.on('coral-select-item:_contentchanged', changeSpy);
 
@@ -253,7 +253,7 @@ describe('Select.Item', function() {
         el.content.appendChild(icon);
 
         // we need to wait for the mutation observer
-        helpers.next(function() {
+        helpers.next(function () {
           expect(changeSpy.callCount).to.equal(1);
 
           done();
@@ -261,8 +261,8 @@ describe('Select.Item', function() {
       });
     });
 
-    describe('#coral-select-item:_disabledchanged', function() {
-      it('should be triggered when the value changes', function() {
+    describe('#coral-select-item:_disabledchanged', function () {
+      it('should be triggered when the value changes', function () {
         var changeSpy = sinon.spy();
         el.on('coral-select-item:_disabledchanged', changeSpy);
 
@@ -273,8 +273,8 @@ describe('Select.Item', function() {
       });
     });
 
-    describe('#coral-select-item:_selectedchanged', function() {
-      it('should be triggered when the value changes', function() {
+    describe('#coral-select-item:_selectedchanged', function () {
+      it('should be triggered when the value changes', function () {
         var changeSpy = sinon.spy();
         el.on('coral-select-item:_selectedchanged', changeSpy);
 
@@ -286,8 +286,8 @@ describe('Select.Item', function() {
     });
   });
 
-  describe('Implementation Details', function() {
-    it('should always be hidden', function() {
+  describe('Implementation Details', function () {
+    it('should always be hidden', function () {
       var el = helpers.build(new Select.Item());
       helpers.target.appendChild(el);
 

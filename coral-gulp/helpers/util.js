@@ -21,18 +21,17 @@ try {
   root = CWD;
   packageJSON = require(path.join(root, 'package.json'));
   isTLB = true;
-}
-catch (e) {
+} catch (e) {
   root = path.join(root, '..');
   packageJSON = require(path.join(root, 'package.json'));
   isTLB = false;
 }
 
 module.exports = {
-  getRoot: function() {
+  getRoot: function () {
     return root;
   },
-  isTLB: function() {
+  isTLB: function () {
     return isTLB;
   },
   getPackageJSON() {

@@ -13,9 +13,9 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {commons} from '../../../coral-utils';
 
-describe('commons', function() {
-  describe('#extend', function() {
-    it('should combine properties', function() {
+describe('commons', function () {
+  describe('#extend', function () {
+    it('should combine properties', function () {
       var obj1 = {
         a: 1,
         b: 2
@@ -45,8 +45,8 @@ describe('commons', function() {
     });
   });
 
-  describe('#augment', function() {
-    it('should not overwrite properties', function() {
+  describe('#augment', function () {
+    it('should not overwrite properties', function () {
       var obj1 = {
         a: 1,
         b: 2
@@ -69,7 +69,7 @@ describe('commons', function() {
       expect(augmented.c).to.equal(3);
     });
 
-    it('should support multiple source objects', function() {
+    it('should support multiple source objects', function () {
       var obj1 = {
         a: 1,
         b: 2
@@ -98,7 +98,7 @@ describe('commons', function() {
       expect(augmented.d).to.equal(4);
     });
 
-    it('should not modify source objects', function() {
+    it('should not modify source objects', function () {
       var obj1 = {
         a: 1,
         b: 2
@@ -118,7 +118,7 @@ describe('commons', function() {
       expect(Object.keys(augmented).length).to.equal(4);
     });
 
-    it('should call the callback for collisions and assign its return value', function() {
+    it('should call the callback for collisions and assign its return value', function () {
       var obj1 = {
         a: 1,
         b: 2
@@ -127,7 +127,7 @@ describe('commons', function() {
         a: -1
       };
 
-      var augmented = commons.augment(obj1, obj2, function(oldValue, newValue, prop, dest, source) {
+      var augmented = commons.augment(obj1, obj2, function (oldValue, newValue, prop, dest, source) {
         expect(dest).to.equal(obj1);
         expect(source).to.equal(obj2);
         expect(oldValue).to.equal(1);
@@ -145,7 +145,7 @@ describe('commons', function() {
       expect(augmented.b).to.equal(2);
     });
 
-    it('should not assign the return value of the callback if it is undefined', function() {
+    it('should not assign the return value of the callback if it is undefined', function () {
       var obj1 = {
         a: 1,
         b: 2
@@ -154,7 +154,7 @@ describe('commons', function() {
         a: -1
       };
 
-      var augmented = commons.augment(obj1, obj2, function(oldValue, newValue, prop, dest, source) {
+      var augmented = commons.augment(obj1, obj2, function (oldValue, newValue, prop, dest, source) {
         return undefined;
       });
 
@@ -168,16 +168,16 @@ describe('commons', function() {
     });
   });
 
-  describe('#getUID', function() {
-    it('should return unique IDs', function() {
+  describe('#getUID', function () {
+    it('should return unique IDs', function () {
       var id1 = commons.getUID();
       var id2 = commons.getUID();
       expect(id1).to.not.equal(id2);
     });
   });
 
-  describe('#setSubProperty', function() {
-    it('should set immediate properties', function() {
+  describe('#setSubProperty', function () {
+    it('should set immediate properties', function () {
       var a = {
         b: 'value'
       };
@@ -187,7 +187,7 @@ describe('commons', function() {
       expect(a.b).to.equal('value');
     });
 
-    it('should assign nested properties', function() {
+    it('should assign nested properties', function () {
       var a = {
         b: {
           c: {}
@@ -201,8 +201,8 @@ describe('commons', function() {
     });
   });
 
-  describe('#getSubProperty', function() {
-    it('should get immediate properties', function() {
+  describe('#getSubProperty', function () {
+    it('should get immediate properties', function () {
       var a = {
         b: 'value'
       };
@@ -210,13 +210,13 @@ describe('commons', function() {
       expect(commons.getSubProperty(a, 'b')).to.equal('value');
     });
 
-    it('should get undefined immediate properties', function() {
+    it('should get undefined immediate properties', function () {
       var a = {};
 
       expect(commons.getSubProperty(a, 'b')).to.be.undefined;
     });
 
-    it('should get nested properties', function() {
+    it('should get nested properties', function () {
       var a = {
         b: {
           c: {
@@ -228,7 +228,7 @@ describe('commons', function() {
       expect(commons.getSubProperty(a, 'b.c.d')).to.equal('value');
     });
 
-    it('should get undefined nested properties', function() {
+    it('should get undefined nested properties', function () {
       var a = {
         b: {
           c: {}
@@ -239,8 +239,8 @@ describe('commons', function() {
     });
   });
 
-  describe('#swapKeysAndValues', function() {
-    it('should swap the keys and values of an object', function() {
+  describe('#swapKeysAndValues', function () {
+    it('should swap the keys and values of an object', function () {
       var obj = {
         a: 'z',
         b: 'y',
@@ -263,8 +263,8 @@ describe('commons', function() {
     });
   });
 
-  describe('#callAll', function() {
-    it('should call all provided functions in order and return the specified index', function() {
+  describe('#callAll', function () {
+    it('should call all provided functions in order and return the specified index', function () {
       var calls = [];
 
       function pushCall(count) {
@@ -286,7 +286,7 @@ describe('commons', function() {
       expect(ret).to.equal(1);
     });
 
-    it('should ignore non-function arguments and assume index is relative to arguments', function() {
+    it('should ignore non-function arguments and assume index is relative to arguments', function () {
       var calls = [];
 
       function pushCall(count) {
@@ -308,7 +308,7 @@ describe('commons', function() {
       expect(ret).to.equal(2);
     });
 
-    it('should return the return value of the 0th function if nth not provided', function() {
+    it('should return the return value of the 0th function if nth not provided', function () {
       var calls = [];
 
       function pushCall(count) {
@@ -327,7 +327,7 @@ describe('commons', function() {
       expect(ret).to.equal('a');
     });
 
-    it('should just return the return value of the function if only one function provided', function() {
+    it('should just return the return value of the function if only one function provided', function () {
       function noop() {
       }
 
@@ -336,9 +336,10 @@ describe('commons', function() {
       expect(aggregate).to.equal(noop);
     });
 
-    it('should return the return value of the first valid function if nth argument is not a function', function() {
+    it('should return the return value of the first valid function if nth argument is not a function', function () {
       function noop() {
       }
+
       function returnOne() {
         return 1;
       }
@@ -350,20 +351,20 @@ describe('commons', function() {
       expect(ret).to.equal(1);
     });
 
-    it('should still return a function if no functions provided', function() {
+    it('should still return a function if no functions provided', function () {
       var aggregate = commons.callAll(null, null, null);
 
       expect(aggregate).to.be.a('function');
     });
   });
 
-  describe('#ready', function() {
+  describe('#ready', function () {
     // Define custom element parent
     window.customElements.define('coral-element', class extends HTMLElement {
       constructor() {
         super();
       }
-  
+
       connectedCallback() {
         this.appendChild(document.createElement('coral-element-item'));
       }
@@ -382,87 +383,87 @@ describe('commons', function() {
         super();
       }
     }, {extends: 'button'});
-    
-    it('should call the callback when all components are ready', function(done) {
+
+    it('should call the callback when all components are ready', function (done) {
       const el = helpers.build(document.createElement('coral-element'));
-      
+
       commons.ready(() => {
         expect(el.contains(el.querySelector('coral-element-item')));
         expect(window.customElements.get('coral-element')).to.not.equal(undefined);
         expect(window.customElements.get('coral-element-item')).to.not.equal(undefined);
-        
+
         done();
       });
     });
 
-    it('should call the callback when all subcomponents components are ready (recursively)', function(done) {
+    it('should call the callback when all subcomponents components are ready (recursively)', function (done) {
       const el = helpers.build(document.createElement('coral-element'));
-  
+
       commons.ready(el, () => {
         expect(el.contains(el.querySelector('coral-element-item')));
         expect(window.customElements.get('coral-element')).to.not.equal(undefined);
         expect(window.customElements.get('coral-element-item')).to.not.equal(undefined);
-        
+
         done();
       });
     });
 
-    it('should work with custom elements that use is=""', function(done) {
+    it('should work with custom elements that use is=""', function (done) {
       const el = document.createElement('button', {is: 'coral-element-button'});
-  
+
       commons.ready(el, () => {
         expect(window.customElements.get('coral-element-button')).to.not.equal(undefined);
         done();
       });
     });
 
-    it('should pass the element to the callback', function(done) {
+    it('should pass the element to the callback', function (done) {
       const el = document.createElement('button', {is: 'coral-element-button'});
-  
+
       commons.ready(el, (passedEl) => {
         expect(el).to.equal(passedEl);
         done();
       });
     });
 
-    it('should pass window to the callback when no element is passed', function(done) {
+    it('should pass window to the callback when no element is passed', function (done) {
       const el = helpers.build(document.createElement('button', {is: 'coral-element-button'}));
-  
+
       commons.ready((passedEl) => {
         expect(window).to.equal(passedEl);
         done();
       });
     });
-    
-    it('should work with normal custom elements and some that use is="..."', function(done) {
+
+    it('should work with normal custom elements and some that use is="..."', function (done) {
       helpers.target.appendChild(document.createElement('coral-element'));
-      helpers.target.appendChild(document.createElement('coral-element-button'), {is:'coral-element-button'});
-  
+      helpers.target.appendChild(document.createElement('coral-element-button'), {is: 'coral-element-button'});
+
       commons.ready(() => {
         expect(window.customElements.get('coral-element')).to.not.equal(undefined);
         expect(window.customElements.get('coral-element-item')).to.not.equal(undefined);
         expect(window.customElements.get('coral-element-button')).to.not.equal(undefined);
-        
+
         done();
       });
     });
-    
-    it('should not be blocking', function(done) {
+
+    it('should not be blocking', function (done) {
       commons.ready(10, () => {
         done();
       });
     });
   });
 
-  describe('#transitionEnd', function() {
+  describe('#transitionEnd', function () {
 
     // @flaky on FF
-    it.skip('should call the provided callback (even if the browser does not support transitions)', function(done) {
+    it.skip('should call the provided callback (even if the browser does not support transitions)', function (done) {
       var el = helpers.target.appendChild(document.createElement('div'));
       el.textContent = 'onTransitionEnd Test';
       el.setAttribute('style', '-webkit-transition: all 100ms ease; -moz-transition: all 100ms ease; -o-transition: all 100ms ease; transition: all 100ms ease;');
-      
-      commons.transitionEnd(el, function(event) {
+
+      commons.transitionEnd(el, function (event) {
         expect(el).to.equal(event.target);
 
         // In most browsers the callback should be asynchronous
@@ -471,15 +472,15 @@ describe('commons', function() {
 
         done();
       });
-  
+
       el.style.marginTop = '100px';
     });
 
-    it('should call the provided callback even if no transition was configured', function(done) {
+    it('should call the provided callback even if no transition was configured', function (done) {
       var el = helpers.target.appendChild(document.createElement('div'));
       el.textContent = 'onTransitionEnd Test';
 
-      commons.transitionEnd(el, function(event) {
+      commons.transitionEnd(el, function (event) {
         expect(el).to.equal(event.target);
 
         // In most browsers the callback should be asynchronous
@@ -490,12 +491,12 @@ describe('commons', function() {
       });
     });
 
-    it('should call the provided callback even if the transition duration is 0', function(done) {
+    it('should call the provided callback even if the transition duration is 0', function (done) {
       var el = helpers.target.appendChild(document.createElement('div'));
       el.textContent = 'onTransitionEnd Test';
       el.setAttribute('style', '-webkit-transition: all 0s ease; -moz-transition: all 0s ease; -o-transition: all 0s ease; transition: all 0s ease;');
 
-      commons.transitionEnd(el, function(event) {
+      commons.transitionEnd(el, function (event) {
         expect(el).to.equal(event.target);
 
         // In most browsers the callback should be asynchronous
@@ -506,16 +507,16 @@ describe('commons', function() {
       });
     });
 
-    it('should only call the transitionEnd callback once', function(done) {
+    it('should only call the transitionEnd callback once', function (done) {
       var el = helpers.target.appendChild(document.createElement('div'));
       el.textContent = 'onTransitionEnd Test';
       el.setAttribute('style', '-webkit-transition: all 300ms ease; -moz-transition: all 300ms ease; -o-transition: all 300ms ease; transition: all 300ms ease;');
 
       var spy = sinon.spy();
-      var animate = function() {
+      var animate = function () {
         el.style.marginTop = '100px';
 
-        setTimeout(function() {
+        setTimeout(function () {
           expect(spy.callCount).to.equal(1);
           done();
         }, 400); // transition-duration (ms) + 100ms
@@ -527,7 +528,7 @@ describe('commons', function() {
       setTimeout(animate, 1);
     });
 
-    it('per default transitionEnd is automatically unregistered after one callback', function(done) {
+    it('per default transitionEnd is automatically unregistered after one callback', function (done) {
       var el = helpers.target.appendChild(document.createElement('div'));
       el.textContent = 'onTransitionEnd Test';
       el.setAttribute('style', '-webkit-transition: all 300ms ease; -moz-transition: all 300ms ease; -o-transition: all 300ms ease; transition: all 300ms ease;');
@@ -538,15 +539,15 @@ describe('commons', function() {
       commons.transitionEnd(el, spy);
 
       // Wait a moment after the append before triggering the animation otherwise transitionend event doesn't fire
-      setTimeout(function() {
+      setTimeout(function () {
         el.style.marginTop = '100px';
-        setTimeout(function() {
+        setTimeout(function () {
           expect(spy.callCount).to.equal(1);
 
           // Undo last CSS animation and check that the callback has not been called again
-          setTimeout(function() {
+          setTimeout(function () {
             el.style.marginTop = '0px';
-            setTimeout(function() {
+            setTimeout(function () {
               expect(spy.callCount).to.equal(1); // => callback should not have been called again
               done();
             }, wait);
@@ -556,67 +557,67 @@ describe('commons', function() {
     });
   });
 
-  describe('#addResizeListener', function() {
+  describe('#addResizeListener', function () {
 
-    it('should call the provided callback when element is initially loaded', function(done) {
+    it('should call the provided callback when element is initially loaded', function (done) {
       const div = helpers.build('<div></div>');
-      
-      commons.addResizeListener(div, function() {
+
+      commons.addResizeListener(div, function () {
         done();
       });
     });
 
-    it('should call the provided callback whenever the size of the element is changed (due to content added)', function(done) {
+    it('should call the provided callback whenever the size of the element is changed (due to content added)', function (done) {
       const div = helpers.build('<div><div id="container"></div></div>');
-      
+
       var containerHTML = '<div>Test</div>';
       var container = document.getElementById('container');
-      
-      commons.addResizeListener(div, function() {
+
+      commons.addResizeListener(div, function () {
         expect(container.innerHTML).to.equal(containerHTML, 'inner content should now be set and a resize has been called');
         done();
       });
       container.innerHTML = containerHTML;
     });
 
-    it('should call the provided callback whenever the size of the element is changed (due to content removed)', function(done) {
+    it('should call the provided callback whenever the size of the element is changed (due to content removed)', function (done) {
       const div = helpers.build('<div><div id="container"><div>Test</div></div></div>');
       var container = document.getElementById('container');
-      
-      commons.addResizeListener(div, function() {
+
+      commons.addResizeListener(div, function () {
         expect(container.innerHTML).to.equal('', 'inner content should now be removed and a resize has been called');
         done();
       });
       container.innerHTML = '';
     });
 
-    it('should be possible to listen to resize events even if element is initially hidden', function(done) {
-      const div =helpers.build('<div style="display:none;"></div>');
-      
-      commons.addResizeListener(div, function() {
+    it('should be possible to listen to resize events even if element is initially hidden', function (done) {
+      const div = helpers.build('<div style="display:none;"></div>');
+
+      commons.addResizeListener(div, function () {
         done();
       });
       div.style.display = 'block';
     });
 
-    it('should be possible to listen to resize events even if parent is initially hidden', function(done) {
+    it('should be possible to listen to resize events even if parent is initially hidden', function (done) {
       const div = helpers.build('<div id="parent" style="display:none;"><div id="child"></div></div>');
-      
+
       var parentEl = document.getElementById('parent');
       var childEl = document.getElementById('child');
-      
-      commons.addResizeListener(childEl, function() {
+
+      commons.addResizeListener(childEl, function () {
         done();
       });
       parentEl.style.display = 'block';
     });
 
-    it('should be possible get notified when sizeof the element is changed via css', function(done) {
+    it('should be possible get notified when sizeof the element is changed via css', function (done) {
       const div = helpers.build('<div style="width:50px; height: 50px;"></div>');
-      
+
       var widthWasChanged = false;
-      
-      commons.addResizeListener(div, function() {
+
+      commons.addResizeListener(div, function () {
         if (widthWasChanged) {
           expect(div.style.width).to.equal('70px', 'width of div should be 70px');
           done();
@@ -627,14 +628,14 @@ describe('commons', function() {
       div.style.width = '70px';
     });
 
-    it('should be possible get notified when size is changed due to css change anywhere hierarchy', function(done) {
+    it('should be possible get notified when size is changed due to css change anywhere hierarchy', function (done) {
       const div = helpers.build('<div id="parent" style="width:50px; height: 50px;"><div id="child" style="width:100%; height: 100%;" ></div></div>');
-      
+
       var parentEl = document.getElementById('parent');
       var childEl = document.getElementById('child');
       var widthOfParentWasSet = false;
-      
-      commons.addResizeListener(childEl, function() {
+
+      commons.addResizeListener(childEl, function () {
         if (widthOfParentWasSet) {
           expect(parentEl.style.width).to.equal('70px', 'width of parent should be 70px');
           done();
@@ -646,12 +647,12 @@ describe('commons', function() {
     });
   });
 
-  describe('#removeResizeListener', function() {
-    it('should be possible to remove a resize listener if no longer needed', function(done) {
+  describe('#removeResizeListener', function () {
+    it('should be possible to remove a resize listener if no longer needed', function (done) {
       const div = helpers.build('<div style="width:50px; height: 50px;"></div>');
 
       var isCallbackDetached = false;
-      var resizeCallback = function() {
+      var resizeCallback = function () {
         // This resize callback should only be called once as we detach it after the first time
         expect(isCallbackDetached).to.be.false;
         isCallbackDetached = true;
@@ -660,7 +661,7 @@ describe('commons', function() {
         // Force a resize of the element
         div.style.width = '70px';
 
-        window.setTimeout(function() {
+        window.setTimeout(function () {
           // If after a short time resize was not triggered again we are sure that removeResizeListener did work
           expect(div.style.width).to.equal('70px', 'width of div should be 70px');
           done();
@@ -671,8 +672,8 @@ describe('commons', function() {
     });
   });
 
-  describe('#TABBABLE_ELEMENT_SELECTOR', function() {
-    it('should not select items with tabIndex=-1', function() {
+  describe('#TABBABLE_ELEMENT_SELECTOR', function () {
+    it('should not select items with tabIndex=-1', function () {
       var div = document.createElement('div');
       div.tabIndex = -1;
       expect(div.matches(commons.TABBABLE_ELEMENT_SELECTOR)).to.equal(false, 'Div with tabIndex=-1 should not be selected');

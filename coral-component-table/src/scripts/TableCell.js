@@ -28,6 +28,7 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
   get content() {
     return this;
   }
+
   set content(value) {
     // Support configs
     if (typeof value === 'object') {
@@ -37,10 +38,10 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
       }
     }
   }
-  
+
   /**
    Whether the table cell is selected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -49,28 +50,29 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     // Prevent selection if disabled
     if (this.hasAttribute('coral-table-cellselect') && this.hasAttribute('disabled') ||
       this.querySelector('[coral-table-cellselect][disabled]')) {
       return;
     }
-    
+
     this.trigger('coral-table-cell:_beforeselectedchanged');
-    
+
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
-    
+
     this.trigger('coral-table-cell:_selectedchanged');
-  
+
     this._syncAriaSelectedState();
     this._syncSelectHandle();
   }
-  
+
   /**
    The cell's value. It is used to compare cells during a column sort. If not set, the sorting will be performed on the
    cell content. The content will be parse accordingly based on the column's <code>sortabletype</code> property.
-   
+
    @type {String}
    @default ""
    @htmlattribute value
@@ -79,10 +81,11 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
   get value() {
     return this.getAttribute('value') || '';
   }
+
   set value(value) {
     this.setAttribute('value', transform.string(value));
   }
-  
+
   /** @private */
   _setHandle(handle) {
     requestAnimationFrame(() => {
@@ -99,13 +102,12 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
   _getHandle(handle) {
     return this.hasAttribute(handle) ? this : this.querySelector(`[${handle}]`);
   }
-  
+
   /** @private */
   _toggleSelectable(selectable) {
     if (selectable) {
       this._setHandle('coral-table-cellselect');
-    }
-    else {
+    } else {
       // Remove the handle
       this.removeAttribute('coral-table-cellselect');
 
@@ -115,18 +117,17 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
 
     this._syncAriaSelectedState();
   }
-  
+
   /** @private */
   _syncAriaSelectedState() {
     this.classList.toggle('is-selected', this.selected);
     if (this._getHandle('coral-table-cellselect')) {
       this.setAttribute('aria-selected', this.selected);
-    }
-    else {
+    } else {
       this.removeAttribute('aria-selected');
     }
   }
-  
+
   /** @private */
   _syncSelectHandle() {
     // Check/uncheck the select handle
@@ -135,44 +136,43 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
       selectHandle[this.selected ? 'setAttribute' : 'removeAttribute']('checked', '');
     }
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['selected', '_selectable']);
   }
-  
+
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === '_selectable') {
       this._toggleSelectable(value !== null);
-    }
-    else {
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
 
     this.id = this.id || commons.getUID();
   }
-  
+
   /**
    Triggered before {@link TableCell#selected} is changed.
-   
+
    @typedef {CustomEvent} coral-table-cell:_beforeselectedchanged
-   
+
    @private
    */
-  
+
   /**
    Triggered when {@link TableCell#selected} changed.
-   
+
    @typedef {CustomEvent} coral-table-cell:_selectedchanged
-   
+
    @private
    */
 }

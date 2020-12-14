@@ -17,9 +17,9 @@ const CLASSNAME = '_coral-Banner';
 
 /**
  Enumeration for {@link Banner} variants.
- 
+
  @typedef {Object} BannerVariantEnum
- 
+
  @property {String} ERROR
  A banner to indicate that an error has occurred.
  @property {String} WARNING
@@ -50,17 +50,17 @@ class Banner extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Fetch content zones
     this._elements = {
       header: this.querySelector('coral-banner-header') || document.createElement('coral-banner-header'),
       content: this.querySelector('coral-banner-content') || document.createElement('coral-banner-content')
     };
   }
-  
+
   /**
    The banner variant style to use. See {@link BannerVariantEnum}.
-   
+
    @type {String}
    @default BannerVariantEnum.INFO
    @htmlattribute variant
@@ -69,104 +69,110 @@ class Banner extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.INFO;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.INFO;
     this._reflectAttribute('variant', this._variant);
-    
+
     // Remove all variant classes
     this.classList.remove(...ALL_VARIANT_CLASSES);
-    
+
     // Set new variant class
     this.classList.add(`${CLASSNAME}--${this._variant}`);
   }
-  
+
   /**
    The banner's header.
-   
+
    @type {BannerHeader}
    @contentzone
    */
   get header() {
     return this._getContentZone(this._elements.header);
   }
+
   set header(value) {
     this._setContentZone('header', value, {
       handle: 'header',
       tagName: 'coral-banner-header',
-      insert: function(header) {
+      insert: function (header) {
         header.classList.add(`${CLASSNAME}-header`);
         this.insertBefore(header, this.firstChild);
       }
     });
   }
-  
+
   /**
    The banner's content.
-   
+
    @type {BannerContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-banner-content',
-      insert: function(content) {
+      insert: function (content) {
         content.classList.add(`${CLASSNAME}-content`);
         this.appendChild(content);
       }
     });
   }
-  
+
   get _contentZones() {
     return {
       'coral-banner-header': 'header',
       'coral-banner-content': 'content'
     };
   }
-  
+
   /**
    Returns {@link Banner} variants.
-   
+
    @return {BannerVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+
   /** @ignore */
   static get observedAttributes() {
     return ['variant'];
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.INFO; }
-    
+    if (!this._variant) {
+      this.variant = variant.INFO;
+    }
+
     const header = this._elements.header;
     const content = this._elements.content;
-  
+
     // When the content zone was not created, we need to make sure that everything is added inside it as a content.
     if (!content.parentNode) {
       while (this.firstChild) {
         const child = this.firstChild;
-        
+
         // Don't move header into content
         if (child === header) {
           child.remove();
-        }
-        else {
+        } else {
           content.appendChild(this.firstChild);
         }
       }
     }
-    
+
     // Assign content zones
     this.header = this._elements.header;
     this.content = this._elements.content;

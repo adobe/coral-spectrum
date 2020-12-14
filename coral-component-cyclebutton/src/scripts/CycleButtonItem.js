@@ -15,9 +15,9 @@ import {commons, transform, validate} from '../../../coral-utils';
 
 /**
  Enum for {CycleButtonItem} display options.
- 
+
  @typedef {Object} CycleButtonItemDisplayModeEnum
- 
+
  @property {String} ICON
  Icon display mode.
  @property {String} TEXT
@@ -44,7 +44,7 @@ const displayMode = {
 class CycleButtonItem extends BaseComponent(HTMLElement) {
   /**
    The Item's icon. See {@link Coral.Icon} for valid icon names.
-   
+
    @type {String}
    @default ""
    @htmlattribute icon
@@ -53,17 +53,19 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
   get icon() {
     return this._icon || '';
   }
+
   set icon(value) {
     this._icon = transform.string(value);
     this._reflectAttribute('icon', this._icon);
-    
+
     this.trigger('coral-cyclebutton-item:_iconchanged');
   }
-  
+
   // @compat
   get content() {
     return this;
   }
+
   set content(value) {
     // Support configs
     if (typeof value === 'object') {
@@ -73,10 +75,10 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /**
    Whether the Item is disabled. When set to true, this will prevent every user interacting with it.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute disabled
@@ -85,23 +87,24 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
-    
+
     this.classList.toggle('is-disabled', this.disabled);
     this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
-    
+
     if (this._disabled && this.selected) {
       this.selected = false;
     }
-    
+
     if (!this._disabled && !this.selected) {
       // We inform the parent to verify if this item should be selected because it's the only one left
       this.trigger('coral-cyclebutton-item:_validateselection');
     }
   }
-  
+
   /**
    Whether the Item is selected.
    @type {Boolean}
@@ -112,27 +115,28 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     value = transform.booleanAttr(value);
-    
+
     if (!value || value && !this.disabled) {
       this._selected = value;
       this._reflectAttribute('selected', this.disabled ? false : this._selected);
-      
+
       this.classList.toggle('is-selected', this._selected);
       this.setAttribute('aria-checked', this._selected);
-      
+
       this.trigger('coral-cyclebutton-item:_selectedchanged');
     }
   }
-  
+
   /**
    The displayMode to be used when the particular item is selected. When this value is set to <code>inherit</code>
    it will defer to the component level displayMode. If the selected item does not have the necessary icon or text
    information, then fallback to show whichever is available. The appearance of collapsed items in the popover are
    not affected by this property.
    See {@link CycleButtonItemDisplayModeEnum}.
-   
+
    @type {String}
    @default CycleButtonItemDisplayModeEnum.INHERIT
    @htmlattribute displaymode
@@ -141,14 +145,15 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
   get displayMode() {
     return this._displayMode || displayMode.INHERIT;
   }
+
   set displayMode(value) {
     value = transform.string(value).toLowerCase();
     this._displayMode = validate.enumeration(displayMode)(value) && value || displayMode.INHERIT;
     this._reflectAttribute('displaymode', this._displayMode);
-    
+
     this.trigger('coral-cyclebutton-item:_displaymodechanged');
   }
-  
+
   /**
    Inherited from {@link BaseComponent#trackingElement}.
    */
@@ -158,37 +163,42 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
       (this.content || this).textContent.replace(/\s{2,}/g, ' ').trim() || this.icon :
       this._trackingElement;
   }
+
   set trackingElement(value) {
     super.trackingElement = value;
   }
-  
+
   /**
    Returns {@link CycleButtonItem} display options.
-   
+
    @return {CycleButtonItemDisplayModeEnum}
    */
-  static get displayMode() { return displayMode; }
-  
+  static get displayMode() {
+    return displayMode;
+  }
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       displaymode: 'displayMode'
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['selected', 'disabled', 'icon', 'displaymode']);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     // adds the role to support accessibility
     this.setAttribute('role', 'menuitemradio');
-  
+
     // Default reflected attributes
-    if (!this._displayMode) { this.displayMode = displayMode.INHERIT; }
+    if (!this._displayMode) {
+      this.displayMode = displayMode.INHERIT;
+    }
   }
 }
 

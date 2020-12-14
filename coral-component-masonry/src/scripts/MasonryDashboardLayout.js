@@ -15,10 +15,10 @@ import MasonryVariableLayout from './MasonryVariableLayout';
 /**
  Layout with variable width items which are expanded in their height to fill gaps (which are common with colspan).
  The minimal width of the items is defined with the <code>columnwidth</code> attribute.
- 
+
  @example
  <coral-masonry layout="dashboard" columnwidth="300">
- 
+
  @class Coral.Masonry.DashboardLayout
  @extends {MasonryVariableLayout}
  */
@@ -28,15 +28,15 @@ class MasonryDashboardLayout extends MasonryVariableLayout {
     // Reset height because otherwise getBoundingClientRect() will not return the real height
     this._resetItem(item);
   }
-  
+
   /** @inheritdoc */
   _postLayout(contentHeight) {
-    for (let columnIndex = 0; columnIndex < this._columns.length; columnIndex++) {
+    for (let columnIndex = 0 ; columnIndex < this._columns.length ; columnIndex++) {
       const column = this._columns[columnIndex];
       let nextItemTop = contentHeight + this._offsetTop;
-      
+
       // Fill gaps by expanding the height of the items
-      for (let itemIndex = column.items.length - 1; itemIndex >= 0; itemIndex--) {
+      for (let itemIndex = column.items.length - 1 ; itemIndex >= 0 ; itemIndex--) {
         const item = column.items[itemIndex];
         const layoutData = item._layoutData;
         if (layoutData.columnIndex === columnIndex) {
@@ -47,7 +47,7 @@ class MasonryDashboardLayout extends MasonryVariableLayout {
       }
     }
   }
-  
+
   /** @inheritdoc */
   _resetItem(item) {
     item.style.height = '';

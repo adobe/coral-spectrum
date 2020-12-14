@@ -29,10 +29,11 @@ class ShellMenu extends Popover {
     // Force 'coral-shell'
     return document.querySelector('coral-shell') || 'coral-shell';
   }
+
   set within(value) {
     super.within = value;
   }
-  
+
   /**
    Inherited from {@link Popover#placement}.
    */
@@ -40,13 +41,14 @@ class ShellMenu extends Popover {
     // Force bottom placement
     return this.constructor.placement.BOTTOM;
   }
+
   set placement(value) {
     super.placement = value;
   }
-  
+
   /**
    Whether the overlay should use all available space.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute full
@@ -55,24 +57,25 @@ class ShellMenu extends Popover {
   get full() {
     return this._full || false;
   }
+
   set full(value) {
     this._full = transform.booleanAttr(value);
     this._reflectAttribute('full', this._full);
-  
+
     this.classList.toggle(`${CLASSNAME}--full`, this._full);
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['full']);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     this.trigger('coral-shell-menu:_connected');
   }
 }

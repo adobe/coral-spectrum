@@ -13,9 +13,9 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Shell} from '../../../coral-component-shell';
 
-describe('Shell.User', function() {
-  describe('Namespace', function() {
-    it('should be defined in the Shell namespace', function() {
+describe('Shell.User', function () {
+  describe('Namespace', function () {
+    it('should be defined in the Shell namespace', function () {
       expect(Shell).to.have.property('User');
       expect(Shell.User).to.have.property('Content');
       expect(Shell.User).to.have.property('Footer');
@@ -25,34 +25,34 @@ describe('Shell.User', function() {
     });
   });
 
-  describe('Instantiation', function() {
-    it('should be possible using new', function() {
+  describe('Instantiation', function () {
+    it('should be possible using new', function () {
       var user = helpers.build(new Shell.User());
       expect(user.classList.contains('_coral-Shell-user')).to.be.true;
     });
 
-    it('should be possible using createElement', function() {
+    it('should be possible using createElement', function () {
       var user = helpers.build(document.createElement('coral-shell-user'));
       expect(user.classList.contains('_coral-Shell-user')).to.be.true;
     });
 
-    it('should be possible using markup', function() {
+    it('should be possible using markup', function () {
       const el = helpers.build('<coral-shell-user>');
       expect(el instanceof Shell.User).to.equal(true);
     });
-  
+
     helpers.cloneComponent(
       'should be possible to clone using markup',
       '<coral-shell-user></coral-shell-user>'
     );
-  
+
     helpers.cloneComponent(
       'should be possible to clone using js',
       new Shell.User()
     );
   });
-  
-  describe('API', function() {
+
+  describe('API', function () {
     let el;
     beforeEach(() => {
       el = helpers.build(new Shell.User());
@@ -60,143 +60,143 @@ describe('Shell.User', function() {
     afterEach(() => {
       el = null;
     });
-    
-    describe('#name', function() {
-      it('should return the content zone', function() {
+
+    describe('#name', function () {
+      it('should return the content zone', function () {
         expect(el.name.tagName).to.equal('CORAL-SHELL-USER-NAME');
       });
-      
-      it('should set the content zone', function() {
+
+      it('should set the content zone', function () {
         const newContentZone = new Shell.User.Name();
         el.name = newContentZone;
         expect(el.name).to.equal(newContentZone);
       });
     });
-    
-    describe('#heading', function() {
-      it('should return the content zone', function() {
+
+    describe('#heading', function () {
+      it('should return the content zone', function () {
         expect(el.heading.tagName).to.equal('CORAL-SHELL-USER-HEADING');
       });
-  
-      it('should set the content zone', function() {
+
+      it('should set the content zone', function () {
         const newContentZone = new Shell.User.Heading();
         el.heading = newContentZone;
         expect(el.heading).to.equal(newContentZone);
       });
     });
-    
-    describe('#subheading', function() {
-      it('should return the content zone', function() {
+
+    describe('#subheading', function () {
+      it('should return the content zone', function () {
         expect(el.subheading.tagName).to.equal('CORAL-SHELL-USER-SUBHEADING');
       });
-  
-      it('should set the content zone', function() {
+
+      it('should set the content zone', function () {
         const newContentZone = new Shell.User.Subheading();
         el.subheading = newContentZone;
         expect(el.subheading).to.equal(newContentZone);
       });
     });
-    
-    describe('#content', function() {
-      it('should return the content zone', function() {
+
+    describe('#content', function () {
+      it('should return the content zone', function () {
         expect(el.content.tagName).to.equal('CORAL-SHELL-USER-CONTENT');
       });
-  
-      it('should set the content zone', function() {
+
+      it('should set the content zone', function () {
         const newContentZone = new Shell.User.Content();
         el.content = newContentZone;
         expect(el.content).to.equal(newContentZone);
       });
     });
-    
-    describe('#footer', function() {
-      it('should return the content zone', function() {
+
+    describe('#footer', function () {
+      it('should return the content zone', function () {
         expect(el.footer.tagName).to.equal('CORAL-SHELL-USER-FOOTER');
       });
-  
-      it('should set the content zone', function() {
+
+      it('should set the content zone', function () {
         const newContentZone = new Shell.User.Footer();
         el.footer = newContentZone;
         expect(el.footer).to.equal(newContentZone);
       });
     });
-    
-    describe('#avatar', function() {
-      it('should default to avatar.DEFAULT', function() {
+
+    describe('#avatar', function () {
+      it('should default to avatar.DEFAULT', function () {
         var user = helpers.build(new Shell.User());
         expect(user.avatar).to.equal(Shell.User.avatar.DEFAULT);
         expect(user._elements.avatar.classList.contains('_coral-Shell-user-avatar')).to.be.true;
       });
-      
-      it('should set the new avatar', function() {
+
+      it('should set the new avatar', function () {
         var user = helpers.build(new Shell.User());
         user.avatar = 'image.png';
         expect(user._elements.avatar.icon).to.equal('image.png');
       });
-      
-      it('should set the avatar back to default', function() {
+
+      it('should set the avatar back to default', function () {
         var user = helpers.build(new Shell.User());
         user.avatar = 'image.png';
-        
+
         user.avatar = Shell.User.avatar.DEFAULT;
-  
+
         expect(user.avatar).to.equal(Shell.User.avatar.DEFAULT);
       });
-      
-      it('should set the avatar to empty string when the attribute is removed', function() {
+
+      it('should set the avatar to empty string when the attribute is removed', function () {
         var user = helpers.build(new Shell.User());
         user.setAttribute('avatar', 'image.png');
-        
+
         expect(user._elements.avatar.icon).to.equal('image.png');
         user.removeAttribute('avatar');
-        
+
         expect(user.avatar).to.equal('');
       });
     });
   });
 
-  describe('Markup', function() {
+  describe('Markup', function () {
 
-    describe('#avatar', function() {
+    describe('#avatar', function () {
 
-      it('should be default value initially', function() {
+      it('should be default value initially', function () {
         var user = helpers.build('<coral-shell-user></coral-shell-user>');
         expect(user.avatar).to.equal(Shell.User.avatar.DEFAULT);
         expect(user._elements.avatar.classList.contains('_coral-Shell-user-avatar')).to.be.true;
       });
 
-      it('should set the new avatar', function() {
+      it('should set the new avatar', function () {
         var user = helpers.build('<coral-shell-user avatar="http://wwwimages.adobe.com/content/dam/Adobe/en/leaders/images/138x138/adobe-leaders-shantanu-narayen-138x138.jpg"></coral-shell-user>');
         expect(user.avatar).to.equal('http://wwwimages.adobe.com/content/dam/Adobe/en/leaders/images/138x138/adobe-leaders-shantanu-narayen-138x138.jpg');
         expect(user._elements.avatar.classList.contains('_coral-Shell-user-avatar')).to.be.true;
       });
 
-      it('should allow empty avatar', function() {
+      it('should allow empty avatar', function () {
         var user = helpers.build('<coral-shell-user avatar=""></coral-shell-user>');
         expect(user.avatar).to.equal('');
         expect(user.hasAttribute('avatar')).to.be.true;
         expect(user._elements.avatar.classList.contains('_coral-Shell-user-avatar')).to.be.true;
       });
 
-      it('should support arbitrary relative URLs', function() {
+      it('should support arbitrary relative URLs', function () {
         var user = helpers.build('<coral-shell-user avatar="image.png"></coral-shell-user>');
         expect(user.avatar).to.equal('image.png');
         expect(user._elements.avatar.icon).to.equal('image.png');
       });
 
-      it('should support arbitrary relative URLs with paths', function() {
+      it('should support arbitrary relative URLs with paths', function () {
         var user = helpers.build('<coral-shell-user avatar="../image.png"></coral-shell-user>');
         expect(user.avatar).to.equal('../image.png');
         expect(user._elements.avatar.icon).to.equal('../image.png');
       });
 
-      it('should support root relative URLs', function() {
+      it('should support root relative URLs', function () {
         var user = helpers.build('<coral-shell-user avatar="/image.png"></coral-shell-user>');
         expect(user.avatar).to.equal('/image.png');
         expect(user._elements.avatar.icon).to.equal('/image.png');
       });
 
-      it('should support arbitrary absolute URLs', function() {
+      it('should support arbitrary absolute URLs', function () {
         var user = helpers.build('<coral-shell-user avatar="http://localhost/image.png"></coral-shell-user>');
         expect(user.avatar).to.equal('http://localhost/image.png');
         expect(user._elements.avatar.icon).to.equal('http://localhost/image.png');

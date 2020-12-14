@@ -60,6 +60,7 @@ function preventScroll(instance) {
  Cancel the backdrop hide mid-animation.
  */
 let fadeTimeout;
+
 function cancelBackdropHide() {
   window.clearTimeout(fadeTimeout);
 }
@@ -70,7 +71,7 @@ function cancelBackdropHide() {
 function hideEverythingBut(instance) {
   // ARIA: Hide all the things
   const children = document.body.children;
-  for (let i = 0; i < children.length; i++) {
+  for (let i = 0 ; i < children.length ; i++) {
     const child = children[i];
 
     // If it's not a parent of or not the instance itself, it needs to be hidden
@@ -84,8 +85,7 @@ function hideEverythingBut(instance) {
           // It's already true, don't bother setting
           continue;
         }
-      }
-      else {
+      } else {
         // Nothing is hidden by default, store that
         child._previousAriaHidden = 'false';
       }
@@ -108,7 +108,7 @@ function doRepositionBackdrop() {
 
   if (top) {
     // The backdrop, if shown, should be positioned under the topmost overlay that does have a backdrop
-    for (let i = overlayStack.length - 1; i > -1; i--) {
+    for (let i = overlayStack.length - 1 ; i > -1 ; i--) {
       if (overlayStack[i].backdrop) {
         backdropEl.style.zIndex = overlayStack[i].zIndex - 1;
         break;
@@ -168,7 +168,7 @@ OverlayManager = {
     // Loop over stack
     // Find overlay
     // Return index
-    for (let i = 0; i < overlayStack.length; i++) {
+    for (let i = 0 ; i < overlayStack.length ; i++) {
       if (overlayStack[i].instance === instance) {
         return i;
       }
@@ -244,8 +244,7 @@ function createDocumentTabCaptureEls() {
         }
       }
     });
-  }
-  else {
+  } else {
     if (document.body.firstElementChild !== topTabCaptureEl) {
       // Make sure we stay at the very top
       document.body.insertBefore(topTabCaptureEl, document.body.firstChild);
@@ -278,7 +277,7 @@ function hideDocumentTabCaptureEls() {
 function showEverything() {
   // ARIA: Show all the things
   const children = document.body.children;
-  for (let i = 0; i < children.length; i++) {
+  for (let i = 0 ; i < children.length ; i++) {
     const child = children[i];
     // Restore the previous aria-hidden value
     child.setAttribute('aria-hidden', child._previousAriaHidden || 'false');
@@ -326,8 +325,7 @@ function hideOrRepositionBackdrop() {
   if (!keepBackdrop) {
     // Hide the backdrop
     doBackdropHide();
-  }
-  else {
+  } else {
     // Reposition the backdrop
     doRepositionBackdrop();
   }
@@ -337,8 +335,7 @@ function hideOrRepositionBackdrop() {
   const top = OverlayManager.top();
   if (!top || !(top.instance.trapFocus === trapFocus.ON && top.instance._requestedBackdrop)) {
     hideDocumentTabCaptureEls();
-  }
-  else if (top && top.instance.trapFocus === trapFocus.ON && top.instance._requestedBackdrop) {
+  } else if (top && top.instance.trapFocus === trapFocus.ON && top.instance._requestedBackdrop) {
     createDocumentTabCaptureEls();
   }
 }
@@ -412,6 +409,7 @@ const BaseOverlay = (superClass) => class extends superClass {
   get trapFocus() {
     return this._trapFocus || trapFocus.OFF;
   }
+
   set trapFocus(value) {
     value = transform.string(value).toLowerCase();
     this._trapFocus = validate.enumeration(trapFocus)(value) && value || trapFocus.OFF;
@@ -433,8 +431,7 @@ const BaseOverlay = (superClass) => class extends superClass {
       this._handleRootKeypress = this._handleRootKeypress.bind(this);
       this._vent.on('keydown', this._handleRootKeypress);
       this._vent.on('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
-    }
-    else if (this._trapFocus === trapFocus.OFF) {
+    } else if (this._trapFocus === trapFocus.OFF) {
       // Remove elements
       this._elements.topTabCapture && this._elements.topTabCapture.remove();
       this._elements.intermediateTabCapture && this._elements.intermediateTabCapture.remove();
@@ -456,22 +453,24 @@ const BaseOverlay = (superClass) => class extends superClass {
   get returnFocus() {
     return this._returnFocus || returnFocus.OFF;
   }
+
   set returnFocus(value) {
     value = transform.string(value).toLowerCase();
     this._returnFocus = validate.enumeration(returnFocus)(value) && value || returnFocus.OFF;
   }
+
   /**
-  returns element that will receive focus when overlay is closed
-  @returns {HTMLElement}element passed via returnFocusTo()
-  */
+   returns element that will receive focus when overlay is closed
+   @returns {HTMLElement}element passed via returnFocusTo()
+   */
   get returnFocusToElement() {
     return this._returnFocusToElement;
   }
 
   /**
-  returns element that will receive focus when overlay is hidden
-  @returns {HTMLElement} element cached
-  */
+   returns element that will receive focus when overlay is hidden
+   @returns {HTMLElement} element cached
+   */
   get elementToFocusWhenHidden() {
     return this._elementToFocusWhenHidden;
   }
@@ -486,6 +485,7 @@ const BaseOverlay = (superClass) => class extends superClass {
   get scrollOnFocus() {
     return this._scrollOnFocus || scrollOnFocus.ON;
   }
+
   set scrollOnFocus(value) {
     value = transform.string(value).toLowerCase();
     this._scrollOnFocus = validate.enumeration(scrollOnFocus)(value) && value || scrollOnFocus.ON;
@@ -504,6 +504,7 @@ const BaseOverlay = (superClass) => class extends superClass {
   get focusOnShow() {
     return this._focusOnShow || focusOnShow.ON;
   }
+
   set focusOnShow(value) {
     if (typeof value === 'string' || value instanceof HTMLElement) {
       this._focusOnShow = value;
@@ -525,6 +526,7 @@ const BaseOverlay = (superClass) => class extends superClass {
   get open() {
     return this._open || false;
   }
+
   set open(value) {
     const silenced = this._silenced;
 
@@ -544,8 +546,7 @@ const BaseOverlay = (superClass) => class extends superClass {
       // Doesn't matter when we set aria-hidden true (nothing being announced)
       if (open) {
         this.removeAttribute('aria-hidden');
-      }
-      else {
+      } else {
         this.setAttribute('aria-hidden', !open);
       }
 
@@ -566,8 +567,7 @@ const BaseOverlay = (superClass) => class extends superClass {
               // element that had focus before opening the overlay
               (document.activeElement === document.body ? null : document.activeElement);
           }
-        }
-        else {
+        } else {
           // Release zIndex
           this._popOverlay();
         }
@@ -621,13 +621,11 @@ const BaseOverlay = (superClass) => class extends superClass {
           if (this._overlayAnimationTime) {
             // Wait for animation to complete
             commons.transitionEnd(this, openComplete);
-          }
-          else {
+          } else {
             // Execute immediately
             openComplete();
           }
-        }
-        else {
+        } else {
           // Fade out
           this.classList.remove('is-open');
 
@@ -658,8 +656,7 @@ const BaseOverlay = (superClass) => class extends superClass {
           if (this._overlayAnimationTime) {
             // Wait for animation to complete
             commons.transitionEnd(this, closeComplete);
-          }
-          else {
+          } else {
             // Execute immediately
             closeComplete();
           }
@@ -672,7 +669,7 @@ const BaseOverlay = (superClass) => class extends superClass {
     const components = this.querySelectorAll(COMPONENTS_WITH_OVERLAY);
 
     // Close all children overlays and components with overlays
-    for (let i = 0; i < components.length; i++) {
+    for (let i = 0 ; i < components.length ; i++) {
       const component = components[i];
 
       // Overlay component
@@ -818,11 +815,9 @@ const BaseOverlay = (superClass) => class extends superClass {
     // ON handles the focusing per accessibility recommendations
     if (this.focusOnShow === focusOnShow.ON) {
       this._focusOn('first');
-    }
-    else if (this.focusOnShow instanceof HTMLElement) {
+    } else if (this.focusOnShow instanceof HTMLElement) {
       this.focusOnShow.focus(preventScroll(this));
-    }
-    else if (typeof this.focusOnShow === 'string' && this.focusOnShow !== focusOnShow.OFF) {
+    } else if (typeof this.focusOnShow === 'string' && this.focusOnShow !== focusOnShow.OFF) {
       // we need to add :not([coral-tabcapture]) to avoid selecting the tab captures
       const selectedElement = this.querySelector(`${this.focusOnShow}:not([coral-tabcapture])`);
 
@@ -961,35 +956,45 @@ const BaseOverlay = (superClass) => class extends superClass {
 
    @return {OverlayTrapFocusEnum}
    */
-  static get trapFocus() { return trapFocus; }
+  static get trapFocus() {
+    return trapFocus;
+  }
 
   /**
    Returns {@link BaseOverlay} return focus options.
 
    @return {OverlayReturnFocusEnum}
    */
-  static get returnFocus() { return returnFocus; }
+  static get returnFocus() {
+    return returnFocus;
+  }
 
   /**
    Returns {@link BaseOverlay} scroll focus options.
 
    @return {OverlayScrollOnFocusEnum}
    */
-  static get scrollOnFocus() { return scrollOnFocus; }
+  static get scrollOnFocus() {
+    return scrollOnFocus;
+  }
 
   /**
    Returns {@link BaseOverlay} focus on show options.
 
    @return {OverlayFocusOnShowEnum}
    */
-  static get focusOnShow() { return focusOnShow; }
+  static get focusOnShow() {
+    return focusOnShow;
+  }
 
   /**
    Returns {@link BaseOverlay} fadetime in milliseconds.
 
    @return {Number}
    */
-  static get FADETIME() { return FADETIME; }
+  static get FADETIME() {
+    return FADETIME;
+  }
 
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
@@ -1013,10 +1018,18 @@ const BaseOverlay = (superClass) => class extends superClass {
   connectedCallback() {
     super.connectedCallback();
 
-    if (!this.hasAttribute('trapfocus')) { this.trapFocus = this.trapFocus; }
-    if (!this.hasAttribute('returnfocus')) { this.returnFocus = this.returnFocus; }
-    if (!this.hasAttribute('focusonshow')) { this.focusOnShow = this.focusOnShow; }
-    if (!this.hasAttribute('scrollonfocus')) { this.scrollOnFocus = this.scrollOnFocus; }
+    if (!this.hasAttribute('trapfocus')) {
+      this.trapFocus = this.trapFocus;
+    }
+    if (!this.hasAttribute('returnfocus')) {
+      this.returnFocus = this.returnFocus;
+    }
+    if (!this.hasAttribute('focusonshow')) {
+      this.focusOnShow = this.focusOnShow;
+    }
+    if (!this.hasAttribute('scrollonfocus')) {
+      this.scrollOnFocus = this.scrollOnFocus;
+    }
 
     if (this.open) {
       this._pushOverlay();
@@ -1025,8 +1038,7 @@ const BaseOverlay = (superClass) => class extends superClass {
         // Show the backdrop again
         this._showBackdrop();
       }
-    }
-    else {
+    } else {
       // If overlay is closed, make sure that it is hidden with `display: none`,
       // but set `visibility: visible` to ensure that the overlay will be included in accessibility name or description
       // of an element that references it using `aria-labelledby` or `aria-describedby`.

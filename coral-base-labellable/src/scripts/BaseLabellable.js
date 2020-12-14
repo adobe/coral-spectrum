@@ -17,10 +17,10 @@
 const BaseLabellable = (superClass) => class extends superClass {
   _observeLabel() {
     this._observableLabel = this._observableLabel || this._elements.label || this._elements.content;
-    
+
     // Listen for mutations
     this._observer = new MutationObserver(this._toggleIconAriaHidden.bind(this));
-  
+
     // Watch for changes to the content element
     this._observer.observe(this._observableLabel, {
       // Catch changes to childList
@@ -31,30 +31,31 @@ const BaseLabellable = (superClass) => class extends superClass {
       subtree: true
     });
   }
-  
+
   // Hides the icon from screen readers to avoid duplicated labels
   _toggleIconAriaHidden() {
     this._renderedLabel = this._renderedLabel || this.label || this.content;
-    
+
     // toggle aria-hidden if tab is labelled
     if (this._elements.icon) {
       const isLabelled = (this._renderedLabel && this._renderedLabel.textContent.trim().length) ||
         this.getAttribute('aria-label') !== null ||
         this.getAttribute('aria-labelledby') !== null;
-  
+
       this._elements.icon[isLabelled ? 'setAttribute' : 'removeAttribute']('aria-hidden', 'true');
     }
   }
-  
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['aria-label', 'aria-labelledby']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['aria-label', 'aria-labelledby']);
+  }
+
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === 'aria-label' || name === 'aria-labelledby') {
       this._toggleIconAriaHidden();
-    }
-    else {
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
