@@ -123,6 +123,7 @@ class Tooltip extends Overlay {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
@@ -142,6 +143,7 @@ class Tooltip extends Overlay {
   get delay() {
     return typeof this._delay === 'number' ? this._delay : 500;
   }
+
   set delay(value) {
     this._delay = transform.number(value);
   }
@@ -155,11 +157,12 @@ class Tooltip extends Overlay {
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-tooltip-content',
-      insert: function(content) {
+      insert: function (content) {
         content.classList.add(`${CLASSNAME}-label`);
         this.appendChild(content);
       }
@@ -172,6 +175,7 @@ class Tooltip extends Overlay {
   get open() {
     return super.open;
   }
+
   set open(value) {
     super.open = value;
 
@@ -187,6 +191,7 @@ class Tooltip extends Overlay {
   get target() {
     return super.target;
   }
+
   set target(value) {
     super.target = value;
 
@@ -199,8 +204,7 @@ class Tooltip extends Overlay {
         // Add listeners to the target
         this._addTargetListeners(target);
       }
-    }
-    else {
+    } else {
       this._elements.tip.hidden = true;
     }
   }
@@ -211,6 +215,7 @@ class Tooltip extends Overlay {
   get interaction() {
     return super.interaction;
   }
+
   set interaction(value) {
     super.interaction = value;
 
@@ -219,8 +224,7 @@ class Tooltip extends Overlay {
     if (target) {
       if (value === this.constructor.interaction.ON) {
         this._addTargetListeners(target);
-      }
-      else {
+      } else {
         this._removeTargetListeners(target);
       }
     }
@@ -240,14 +244,11 @@ class Tooltip extends Overlay {
     // popper takes care of setting left, top to 0 on positioning
     if (popperPlacement === 'left') {
       this.style.left = '8px';
-    }
-    else if (popperPlacement === 'top') {
+    } else if (popperPlacement === 'top') {
       this.style.top = '8px';
-    }
-    else if (popperPlacement === 'right') {
+    } else if (popperPlacement === 'right') {
       this.style.left = '-8px';
-    }
-    else if (popperPlacement === 'bottom') {
+    } else if (popperPlacement === 'bottom') {
       this.style.top = '-8px';
     }
   }
@@ -280,8 +281,7 @@ class Tooltip extends Overlay {
     if (this.delay === 0) {
       // Hide immediately
       this._handleFocusOut();
-    }
-    else {
+    } else {
       this._hideTimeout = window.setTimeout(() => {
         this._handleFocusOut();
       }, this.delay);
@@ -320,8 +320,7 @@ class Tooltip extends Overlay {
         if (this.delay === 0) {
           // Show immediately
           this.show();
-        }
-        else {
+        } else {
           this._showTimeout = window.setTimeout(() => {
             this.show();
           }, this.delay);
@@ -358,8 +357,7 @@ class Tooltip extends Overlay {
       if (this.delay === 0) {
         // Show immediately
         this.show();
-      }
-      else {
+      } else {
         this._showTimeout = window.setTimeout(() => {
           this.show();
         }, this.delay);
@@ -377,14 +375,18 @@ class Tooltip extends Overlay {
     target[`_hasTooltipListeners${this._id}`] = false;
   }
 
-  get _contentZones() { return {'coral-tooltip-content': 'content'}; }
+  get _contentZones() {
+    return {'coral-tooltip-content': 'content'};
+  }
 
   /**
    Returns {@link Tooltip} variants.
 
    @return {TooltipVariantEnum}
    */
-  static get variant() { return variant; }
+  static get variant() {
+    return variant;
+  }
 
   /** @ignore */
   static get observedAttributes() {
@@ -404,7 +406,9 @@ class Tooltip extends Overlay {
     this.setAttribute('tabindex', '-1');
 
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
 
     // Support cloneNode
     const tip = this.querySelector('._coral-Tooltip-tip');

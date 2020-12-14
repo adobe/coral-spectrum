@@ -27,16 +27,16 @@ class ShellWorkspace extends BaseComponent(HTMLAnchorElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Events
     this._delegateEvents({
       click: '_onClick'
     });
   }
-  
+
   /**
    Whether this workspace is selected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -45,38 +45,41 @@ class ShellWorkspace extends BaseComponent(HTMLAnchorElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
-  
+
     this.setAttribute('aria-selected', this._selected);
     this.classList.toggle('is-selected', this._selected);
-    
+
     this.trigger('coral-shell-workspace:_selectedchanged');
   }
-  
+
   /** @private */
   _onClick() {
     if (!this.selected) {
       this.selected = true;
     }
   }
-  
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['selected']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['selected']);
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
   }
-  
+
   /**
    Triggered when a {@link ShellWorkspace} selection changed.
-   
+
    @typedef {CustomEvent} coral-shell-workspace:_selectedchanged
-   
+
    @private
    */
 }

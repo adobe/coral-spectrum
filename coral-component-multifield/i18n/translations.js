@@ -23,7 +23,7 @@ export default {
     "Remove": "Supprimer",
     "Reorder": "Réorganiser",
     "reorder_drag_handle": "déplacer la poignée",
-    "reorder_hint": "Réorganisez en utilisant le glisser-déposer ou les touches fléchées haut et bas."  
+    "reorder_hint": "Réorganisez en utilisant le glisser-déposer ou les touches fléchées haut et bas."
   },
   "de-DE": {
     "({0} of {1})": "({0} von {1})",
@@ -135,13 +135,13 @@ export default {
     "Remove": "Удалить",
     "Reorder": "Переупорядочить",
     "reorder_drag_handle": "переместить манипулятор",
-    "reorder_hint": "Перетащите или используйте клавиши со стрелками вверх и вниз, чтобы изменить порядок."  
+    "reorder_hint": "Перетащите или используйте клавиши со стрелками вверх и вниз, чтобы изменить порядок."
   },
   "tr-TR": {
     "({0} of {1})": "({0}/{1})",
     "Remove": "Kaldır",
     "Reorder": "Yeniden Sırala",
     "reorder_drag_handle": "move handle",
-    "reorder_hint": "Yeniden sıralamak için sürükleyip bırakın veya yukarı ve aşağı ok tuşlarını kullanın."  
+    "reorder_hint": "Yeniden sıralamak için sürükleyip bırakın veya yukarı ve aşağı ok tuşlarını kullanın."
   }
 };

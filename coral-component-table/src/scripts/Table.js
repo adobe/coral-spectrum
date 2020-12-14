@@ -22,8 +22,22 @@ import '../../../coral-component-button';
 import {Checkbox} from '../../../coral-component-checkbox';
 import base from '../templates/base';
 import {SelectableCollection} from '../../../coral-collection';
-import {isTableHeaderCell, isTableCell, isTableRow, isTableBody, getCellByIndex, getColumns, getCells, getContentCells, getHeaderCells, getRows, getSiblingsOf, getIndexOf, divider} from './TableUtil';
-import {transform, validate, commons, i18n,  Keys} from '../../../coral-utils';
+import {
+  isTableHeaderCell,
+  isTableCell,
+  isTableRow,
+  isTableBody,
+  getCellByIndex,
+  getColumns,
+  getCells,
+  getContentCells,
+  getHeaderCells,
+  getRows,
+  getSiblingsOf,
+  getIndexOf,
+  divider
+} from './TableUtil';
+import {transform, validate, commons, i18n, Keys} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Table-wrapper';
 
@@ -194,11 +208,12 @@ class Table extends BaseComponent(HTMLTableElement) {
   get head() {
     return this._getContentZone(this._elements.head);
   }
+
   set head(value) {
     this._setContentZone('head', value, {
       handle: 'head',
       tagName: 'thead',
-      insert: function(head) {
+      insert: function (head) {
         // Using the native table API allows to position the head element at the correct position.
         this._elements.table.tHead = head;
 
@@ -217,11 +232,12 @@ class Table extends BaseComponent(HTMLTableElement) {
   get body() {
     return this._getContentZone(this._elements.body);
   }
+
   set body(value) {
     this._setContentZone('body', value, {
       handle: 'body',
       tagName: 'tbody',
-      insert: function(body) {
+      insert: function (body) {
         this._elements.table.appendChild(body);
         this.items._container = body;
 
@@ -240,11 +256,12 @@ class Table extends BaseComponent(HTMLTableElement) {
   get foot() {
     return this._getContentZone(this._elements.foot);
   }
+
   set foot(value) {
     this._setContentZone('foot', value, {
       handle: 'foot',
       tagName: 'tfoot',
-      insert: function(foot) {
+      insert: function (foot) {
         // Using the native table API allows to position the foot element at the correct position.
         this._elements.table.tFoot = foot;
       }
@@ -260,11 +277,12 @@ class Table extends BaseComponent(HTMLTableElement) {
   get columns() {
     return this._getContentZone(this._elements.columns);
   }
+
   set columns(value) {
     this._setContentZone('columns', value, {
       handle: 'columns',
       tagName: 'colgroup',
-      insert: function(content) {
+      insert: function (content) {
         this._elements.table.appendChild(content);
       }
     });
@@ -281,6 +299,7 @@ class Table extends BaseComponent(HTMLTableElement) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
@@ -301,6 +320,7 @@ class Table extends BaseComponent(HTMLTableElement) {
   get selectable() {
     return this._selectable || false;
   }
+
   set selectable(value) {
     this._selectable = transform.booleanAttr(value);
     this._reflectAttribute('selectable', this._selectable);
@@ -311,8 +331,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       rows.forEach((row) => {
         row.setAttribute('_selectable', '');
       });
-    }
-    else {
+    } else {
       // Clear selection
       rows.forEach((row) => {
         row.removeAttribute('_selectable');
@@ -343,6 +362,7 @@ class Table extends BaseComponent(HTMLTableElement) {
   get orderable() {
     return this._orderable || false;
   }
+
   set orderable(value) {
     this._orderable = transform.booleanAttr(value);
     this._reflectAttribute('orderable', this._orderable);
@@ -366,6 +386,7 @@ class Table extends BaseComponent(HTMLTableElement) {
   get multiple() {
     return this._multiple || false;
   }
+
   set multiple(value) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute('multiple', this._multiple);
@@ -387,8 +408,7 @@ class Table extends BaseComponent(HTMLTableElement) {
 
         if (newSelection.length) {
           this._setSelectAllHandleState('indeterminate');
-        }
-        else {
+        } else {
           this._setSelectAllHandleState('unchecked');
         }
 
@@ -416,6 +436,7 @@ class Table extends BaseComponent(HTMLTableElement) {
   get lockable() {
     return this._lockable || false;
   }
+
   set lockable(value) {
     this._lockable = transform.booleanAttr(value);
     this._reflectAttribute('lockable', this._lockable);
@@ -438,6 +459,7 @@ class Table extends BaseComponent(HTMLTableElement) {
   get labelledBy() {
     return this._elements.table.getAttribute('aria-labelledby');
   }
+
   set labelledBy(value) {
     value = transform.string(value);
 
@@ -454,6 +476,7 @@ class Table extends BaseComponent(HTMLTableElement) {
   get labelled() {
     return this._elements.table.getAttribute('aria-label');
   }
+
   set labelled(value) {
     value = transform.string(value);
 
@@ -528,8 +551,7 @@ class Table extends BaseComponent(HTMLTableElement) {
           // Sync used collection
           this._oldSelection = rows;
           this._lastSelectedItems.items = rows;
-        }
-        else {
+        } else {
           // Only select last item
           const lastItem = rows[rows.length - 1];
           lastItem.selected = !lastItem.selected;
@@ -569,8 +591,7 @@ class Table extends BaseComponent(HTMLTableElement) {
 
       if (row === items[0]) {
         table.classList.add(IS_FIRST_ITEM_DRAGGED);
-      }
-      else if (row === items[items.length - 1]) {
+      } else if (row === items[items.length - 1]) {
         table.classList.add(IS_LAST_ITEM_DRAGGED);
       }
 
@@ -714,14 +735,12 @@ class Table extends BaseComponent(HTMLTableElement) {
             if (isHeaderCellDragged) {
               const nextHeaderCellWidth = draggedHeaderCell.clientWidth;
               draggedHeaderCell.style.left = `${nextHeaderCellWidth}px`;
-            }
-            else {
+            } else {
               const nextHeaderCell = getSiblingsOf(headerCell, 'th[is="coral-table-headercell"]', 'next');
               const nextHeaderCellLeftOffset = nextHeaderCell.getBoundingClientRect().left + documentScrollLeft;
               draggedHeaderCell.style.left = `${nextHeaderCellLeftOffset + containerScrollLeft}px`;
             }
-          }
-          else {
+          } else {
             draggedHeaderCell.style.left = '';
           }
         }
@@ -735,13 +754,11 @@ class Table extends BaseComponent(HTMLTableElement) {
             if (isHeaderCellDragged) {
               const beforeHeaderCellWidth = prev.clientWidth;
               draggedHeaderCell.style.left = `${-1 * (beforeHeaderCellWidth)}px`;
-            }
-            else {
+            } else {
               const beforeHeaderCellLeftOffset = prev.getBoundingClientRect().left + documentScrollLeft;
               draggedHeaderCell.style.left = `${beforeHeaderCellLeftOffset + containerScrollLeft}px`;
             }
-          }
-          else {
+          } else {
             draggedHeaderCell.style.left = '';
           }
         }
@@ -783,8 +800,7 @@ class Table extends BaseComponent(HTMLTableElement) {
 
       after = row.querySelectorAll(`th[is="coral-table-headercell"].${IS_BEFORE_CLASS}`);
       after = after.length ? after[after.length - 1] : null;
-    }
-    else {
+    } else {
       before = row.querySelector(`th[is="coral-table-headercell"] > coral-table-headercell-content.${IS_AFTER_CLASS}`);
       before = before ? before.parentNode : null;
 
@@ -943,8 +959,7 @@ class Table extends BaseComponent(HTMLTableElement) {
               getSiblingsOf(selectionRangeRow, row, rangeQuery).forEach((item) => {
                 item.set('selected', true, true);
               });
-            }
-            else {
+            } else {
               const selection = getSiblingsOf(lastSelectedItem, row, rangeQuery);
 
               // If some items are not selected
@@ -958,8 +973,7 @@ class Table extends BaseComponent(HTMLTableElement) {
                 getSiblingsOf(row, 'tr[is="coral-table-row"]:not([selected])', rangeQuery).forEach((item) => {
                   item.set('selected', false, true);
                 });
-              }
-              else {
+              } else {
                 // Deselect items
                 selection[before ? 'push' : 'unshift'](lastSelectedItem);
                 selection.forEach((item) => {
@@ -968,8 +982,7 @@ class Table extends BaseComponent(HTMLTableElement) {
               }
             }
           }
-        }
-        else {
+        } else {
           // Remove direction if simple click without shift key pressed
           table._lastSelectedItems.direction = null;
         }
@@ -1083,8 +1096,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       window.requestAnimationFrame(() => {
         if (position < topScrollLimit) {
           table._elements.container.scrollTop -= scrollOffset;
-        }
-        else if (position > bottomScrollLimit) {
+        } else if (position > bottomScrollLimit) {
           table._elements.container.scrollTop += scrollOffset;
         }
       });
@@ -1208,11 +1220,9 @@ class Table extends BaseComponent(HTMLTableElement) {
   _syncSelectAllHandle(selectedItems, items) {
     if (items.length && selectedItems.length === items.length) {
       this._setSelectAllHandleState('checked');
-    }
-    else if (!selectedItems.length) {
+    } else if (!selectedItems.length) {
       this._setSelectAllHandleState('unchecked');
-    }
-    else {
+    } else {
       this._setSelectAllHandleState('indeterminate');
     }
   }
@@ -1236,12 +1246,10 @@ class Table extends BaseComponent(HTMLTableElement) {
       if (state === 'checked') {
         handle.removeAttribute('indeterminate');
         handle.setAttribute('checked', '');
-      }
-      else if (state === 'unchecked') {
+      } else if (state === 'unchecked') {
         handle.removeAttribute('indeterminate');
         handle.removeAttribute('checked');
-      }
-      else if (state === 'indeterminate') {
+      } else if (state === 'indeterminate') {
         handle.setAttribute('indeterminate', '');
       }
     }
@@ -1300,8 +1308,7 @@ class Table extends BaseComponent(HTMLTableElement) {
 
         // Trigger event on table
         table.trigger('coral-table:rowlock', {row});
-      }
-      else {
+      } else {
         // Put the row back to its initial position
         if (row._rowIndex >= 0) {
           const beforeRow = getRows([body])[row._rowIndex];
@@ -1328,7 +1335,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     const head = table.head;
     const addedNodes = event.detail.addedNodes;
 
-    for (let i = 0; i < addedNodes.length; i++) {
+    for (let i = 0 ; i < addedNodes.length ; i++) {
       const node = addedNodes[i];
 
       // Sync header cell whether sticky or not
@@ -1354,7 +1361,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     let changed = false;
 
     // Sync added nodes
-    for (let i = 0; i < addedNodes.length; i++) {
+    for (let i = 0 ; i < addedNodes.length ; i++) {
       addedNode = addedNodes[i];
 
       // Sync row state with table properties
@@ -1399,7 +1406,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     }
 
     // Sync removed nodes
-    for (let k = 0; k < removedNodes.length; k++) {
+    for (let k = 0 ; k < removedNodes.length ; k++) {
       const removedNode = removedNodes[k];
 
       if (isTableRow(removedNode)) {
@@ -1474,7 +1481,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     };
 
     // Sync added nodes
-    for (let i = 0; i < addedNodes.length; i++) {
+    for (let i = 0 ; i < addedNodes.length ; i++) {
       addedNode = addedNodes[i];
 
       // Sync row state with table properties
@@ -1505,7 +1512,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     }
 
     // Sync removed nodes
-    for (let k = 0; k < removedNodes.length; k++) {
+    for (let k = 0 ; k < removedNodes.length ; k++) {
       const removedNode = removedNodes[k];
 
       if (isTableCell(removedNode)) {
@@ -1619,8 +1626,7 @@ class Table extends BaseComponent(HTMLTableElement) {
 
       if (column.sortableDirection === sortableDirection.DEFAULT) {
         this._elements.liveRegion.innerText = '';
-      }
-      else {
+      } else {
         const textContent = headerCell.content.textContent.trim();
         if (textContent.length) {
           // Set live region to true so that sort description string will be announced.
@@ -1720,14 +1726,12 @@ class Table extends BaseComponent(HTMLTableElement) {
           const aText = a.value ? a.value : a.textContent;
           const bText = b.value ? b.value : b.textContent;
           return aText.localeCompare(bText);
-        }
-        else if (column.sortableType === sortableType.NUMBER) {
+        } else if (column.sortableType === sortableType.NUMBER) {
           // Remove all spaces and replace commas with dots for decimal values
           const aNumber = parseFloat(a.value ? a.value : a.textContent.replace(/\s+/g, '').replace(/,/g, '.'));
           const bNumber = parseFloat(b.value ? b.value : b.textContent.replace(/\s+/g, '').replace(/,/g, '.'));
           return aNumber > bNumber ? 1 : -1;
-        }
-        else if (column.sortableType === sortableType.DATE) {
+        } else if (column.sortableType === sortableType.DATE) {
           const aDate = a.value ? new Date(parseInt(a.value, 10)) : new Date(a.textContent);
           const bDate = b.value ? new Date(parseInt(b.value, 10)) : new Date(b.textContent);
           return aDate > bDate ? 1 : -1;
@@ -1757,8 +1761,7 @@ class Table extends BaseComponent(HTMLTableElement) {
           row.dragAction.destroy();
         }
       });
-    }
-    else if (column.sortableDirection === sortableDirection.DESCENDING) {
+    } else if (column.sortableDirection === sortableDirection.DESCENDING) {
       getSiblingsOf(column, 'col[is="coral-table-column"]').forEach((col) => {
         col._preventSort = true;
         col.setAttribute('sortabledirection', sortableDirection.DEFAULT);
@@ -1777,14 +1780,12 @@ class Table extends BaseComponent(HTMLTableElement) {
           const aText = a.value ? a.value : a.textContent;
           const bText = b.value ? b.value : b.textContent;
           return bText.localeCompare(aText);
-        }
-        else if (column.sortableType === sortableType.NUMBER) {
+        } else if (column.sortableType === sortableType.NUMBER) {
           // Remove all spaces and replace commas with dots for decimal values
           const aNumber = parseFloat(a.value ? a.value : a.textContent.replace(/\s+/g, '').replace(/,/g, '.'));
           const bNumber = parseFloat(b.value ? b.value : b.textContent.replace(/\s+/g, '').replace(/,/g, '.'));
           return aNumber < bNumber ? 1 : -1;
-        }
-        else if (column.sortableType === sortableType.DATE) {
+        } else if (column.sortableType === sortableType.DATE) {
           const aDate = a.value ? new Date(parseInt(a.value, 10)) : new Date(a.textContent);
           const bDate = b.value ? new Date(parseInt(b.value, 10)) : new Date(b.textContent);
           return aDate < bDate ? 1 : -1;
@@ -1814,8 +1815,7 @@ class Table extends BaseComponent(HTMLTableElement) {
           row.dragAction.destroy();
         }
       });
-    }
-    else if (column.sortableDirection === sortableDirection.DEFAULT && !onInitialization) {
+    } else if (column.sortableDirection === sortableDirection.DEFAULT && !onInitialization) {
       // Only sort if not custom sorting
       if (column.sortableType !== sortableType.CUSTOM) {
         // Put rows back to their initial position
@@ -1927,7 +1927,7 @@ class Table extends BaseComponent(HTMLTableElement) {
         // Verify if there are any visible nodes without text content which could take layout space
         else {
           const headerCellChildren = headerCell.content.children;
-          for (let i = 0; i < headerCellChildren.length && !hasVisibleChildNodes; i++) {
+          for (let i = 0 ; i < headerCellChildren.length && !hasVisibleChildNodes ; i++) {
             if (headerCellChildren[0].offsetParent) {
               hasVisibleChildNodes = true;
             }
@@ -1949,8 +1949,7 @@ class Table extends BaseComponent(HTMLTableElement) {
 
       // Reflect headercell size on sticky cell
       headerCell.content.style.width = `${cellWidth + cellPadding + borderRightWidth}px`;
-    }
-    else {
+    } else {
       // Restore headercell style
       headerCell.style.minWidth = '';
       headerCell.content.style.width = '';
@@ -1978,8 +1977,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       // Handle the scroll in table
       dragAction.scroll = false;
       headerCell.setAttribute('orderable', '');
-    }
-    else {
+    } else {
       headerCell.removeAttribute('orderable');
     }
   }
@@ -1997,8 +1995,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       if (!focusableItem) {
         this._toggleElementTabIndex(firstItem);
       }
-    }
-    else if (focusableItem) {
+    } else if (focusableItem) {
       // Basic table is not focusable
       focusableItem.removeAttribute('tabindex');
     }
@@ -2090,8 +2087,7 @@ class Table extends BaseComponent(HTMLTableElement) {
 
         // Toggle selection
         lastSelectedItem.selected = !lastSelectedItem.selected;
-      }
-      else if (getRows([this.body]).length) {
+      } else if (getRows([this.body]).length) {
         const focusableItem = this._getFocusableItem();
 
         // Store last selection
@@ -2125,8 +2121,7 @@ class Table extends BaseComponent(HTMLTableElement) {
   _addLastSelectedItem(item) {
     if (this._lastSelectedItems.items.indexOf(item) === -1) {
       this._lastSelectedItems.items.push(item);
-    }
-    else {
+    } else {
       // Push it at the end
       this._removeLastSelectedItem(item);
       this._addLastSelectedItem(item);
@@ -2174,18 +2169,17 @@ class Table extends BaseComponent(HTMLTableElement) {
   }
 
   /**
-  * Call the layout method of table component
-  *
-  * @param {Boolean} forced
-  * If true call the layout method immediately, else wait for timeout
-  */
+   * Call the layout method of table component
+   *
+   * @param {Boolean} forced
+   * If true call the layout method immediately, else wait for timeout
+   */
   resetLayout(forced) {
     forced = transform.boolean(forced);
     if (forced === true) {
       this._doResetLayout();
       this._preventResetLayout = false;
-    }
-    else {
+    } else {
       this._resetLayout();
     }
   }
@@ -2310,8 +2304,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       const containerMarginTop = `${calculatedHeadSize}px`;
       const containerHeight = `calc(100% - ${calculatedHeadSize + containerBorderSize}px)`;
       this._resetContainerLayout(containerMarginTop, containerHeight);
-    }
-    else {
+    } else {
       this._resetContainerLayout();
     }
   }
@@ -2402,8 +2395,7 @@ class Table extends BaseComponent(HTMLTableElement) {
                   headerCell.content.style.marginLeft = `-${scrollLeft + paddingLeft}px`;
                 });
               });
-            }
-            else {
+            } else {
               // We don't need to layout the sticky cells manually
               table._preventLayoutStickyCellOnScroll = true;
             }
@@ -2437,17 +2429,19 @@ class Table extends BaseComponent(HTMLTableElement) {
 
       if (isRowSelect || isCellSelect) {
         let handle;
-        if (isRowSelect) { handle = 'coral-table-rowselect'; }
-        if (isCellSelect) { handle = 'coral-table-cellselect'; }
-
+        if (isRowSelect) {
+          handle = 'coral-table-rowselect';
+        }
+        if (isCellSelect) {
+          handle = 'coral-table-cellselect';
+}
         renderCheckbox(cell, (checkbox) => {
           // Define selection handle
           if (isRowSelect) {
             cell.classList.add('_coral-Table-cell--check');
             cell.removeAttribute(handle);
             checkbox.setAttribute(handle, '');
-          }
-          else {
+          } else {
             cell.setAttribute(handle, '');
             checkbox.removeAttribute(handle);
           }
@@ -2468,8 +2462,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       if (this.head && this.head.sticky) {
         headerCell.setAttribute('role', 'presentation');
         headerCell._elements.content.setAttribute('role', 'columnheader');
-      }
-      else {
+      } else {
         headerCell.setAttribute('role', 'columnheader');
       }
     }
@@ -2483,7 +2476,7 @@ class Table extends BaseComponent(HTMLTableElement) {
   _handleMutations(mutations) {
     mutations.forEach((mutation) => {
       // Sync removed nodes
-      for (let k = 0; k < mutation.removedNodes.length; k++) {
+      for (let k = 0 ; k < mutation.removedNodes.length ; k++) {
         const removedNode = mutation.removedNodes[k];
 
         if (isTableBody(removedNode)) {
@@ -2518,8 +2511,7 @@ class Table extends BaseComponent(HTMLTableElement) {
         childList: true,
         subtree: true
       });
-    }
-    else {
+    } else {
       this._observer.disconnect();
     }
   }
@@ -2538,15 +2530,17 @@ class Table extends BaseComponent(HTMLTableElement) {
 
    @return {TableVariantEnum}
    */
-  static get variant() { return variant; }
-
+  static get variant() {
+    return variant;
+}
   /**
    Returns divider options for {@link TableHead}, {@link TableBody} and {@link TableFoot}.
 
    @return {TableSectionDividerEnum}
    */
-  static get divider() { return divider; }
-
+  static get divider() {
+    return divider;
+}
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       labelledby: 'labelledBy'
@@ -2568,8 +2562,9 @@ class Table extends BaseComponent(HTMLTableElement) {
     this.setAttribute('role', 'presentation');
 
     // Default reflected attribute
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+}
     const head = this._elements.head;
     const body = this._elements.body;
     const foot = this._elements.foot;

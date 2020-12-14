@@ -18,6 +18,6 @@ function handleError(err) {
   process.exit();
 };
 
-module.exports = function() {
+module.exports = function () {
   return plumber({errorHandler: handleError});
 };

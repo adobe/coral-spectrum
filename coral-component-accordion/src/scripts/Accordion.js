@@ -94,6 +94,7 @@ class Accordion extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
@@ -131,6 +132,7 @@ class Accordion extends BaseComponent(HTMLElement) {
   get multiple() {
     return this._multiple || false;
   }
+
   set multiple(value) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute('multiple', this._multiple);
@@ -158,13 +160,13 @@ class Accordion extends BaseComponent(HTMLElement) {
   }
 
   /**
-    The heading level for Accordion items within the Accordion
+   The heading level for Accordion items within the Accordion
 
-    @type {Number}
-    @default 3
-    @htmlattribute level
-    @htmlattributereflected
-  */
+   @type {Number}
+   @default 3
+   @htmlattribute level
+   @htmlattributereflected
+   */
   get level() {
     return this._level || 3;
   }
@@ -182,6 +184,7 @@ class Accordion extends BaseComponent(HTMLElement) {
   get _tabTarget() {
     return this.__tabTarget || null;
   }
+
   set _tabTarget(value) {
     this.__tabTarget = value;
 
@@ -354,8 +357,7 @@ class Accordion extends BaseComponent(HTMLElement) {
           oldSelection: oldSelection,
           selection: selectedItems
         });
-      }
-      else {
+      } else {
         // Return all items if we just switched from multiple=true to multiple=false and we had >1 selected items
         this.trigger('coral-accordion:change', {
           oldSelection: oldSelection.length > 1 ? oldSelection : oldSelection[0] || null,
@@ -422,7 +424,9 @@ class Accordion extends BaseComponent(HTMLElement) {
 
    @return {AccordionVariantEnum}
    */
-  static get variant() { return variant; }
+  static get variant() {
+    return variant;
+  }
 
   /** @ignore */
   static get observedAttributes() {
@@ -436,7 +440,9 @@ class Accordion extends BaseComponent(HTMLElement) {
     this.classList.add(CLASSNAME);
 
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
 
     // WAI-ARIA 1.1
     this.setAttribute('role', 'region');

@@ -26,6 +26,7 @@ class ActionBarItem extends BaseComponent(HTMLElement) {
   get content() {
     return this;
   }
+
   set content(value) {
     // Support configs
     if (typeof value === 'object') {
@@ -35,11 +36,11 @@ class ActionBarItem extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
   }
 }

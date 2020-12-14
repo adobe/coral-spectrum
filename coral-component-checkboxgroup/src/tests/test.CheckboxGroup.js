@@ -13,22 +13,22 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {CheckboxGroup} from '../../../coral-component-checkboxgroup';
 
-describe('CheckboxGroup', function() {
-  
-  describe('Instantiation', function() {
-    it('should support creation from markup', function() {
+describe('CheckboxGroup', function () {
+
+  describe('Instantiation', function () {
+    it('should support creation from markup', function () {
       expect(helpers.build('<coral-checkboxgroup>') instanceof CheckboxGroup).to.equal(true);
     });
-    
+
     helpers.cloneComponent(
       'should be possible via cloneNode using markup',
       window.__html__['CheckboxGroup.base.html']
     );
   });
-  
-  describe('Markup', function() {
-    describe('#selectedItems', function() {
-      it('should return all checked checkboxes', function() {
+
+  describe('Markup', function () {
+    describe('#selectedItems', function () {
+      it('should return all checked checkboxes', function () {
         const el = helpers.build(window.__html__['CheckboxGroup.items.checked.html']);
         expect(el.items.length).to.equal(3);
         expect(el.selectedItems.length).to.equal(2);

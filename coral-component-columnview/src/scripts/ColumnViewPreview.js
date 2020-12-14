@@ -26,35 +26,38 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Content zone
     this._elements = {
       content: this.querySelector('coral-columnview-preview-content') || document.createElement('coral-columnview-preview-content')
     };
   }
-  
+
   /**
    The content of the Preview.
-   
+
    @type {ColumnViewPreviewContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-columnview-preview-content',
-      insert: function(content) {
+      insert: function (content) {
         content.classList.add('coral-Body--small');
         this.appendChild(content);
       }
     });
   }
-  
-  get _contentZones() { return {'coral-columnview-preview-content': 'content'}; }
-  
+
+  get _contentZones() {
+    return {'coral-columnview-preview-content': 'content'};
+  }
+
   /** @ignore */
   render() {
     super.render();
@@ -62,11 +65,11 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
     this.setAttribute('role', 'group');
 
     this.id = this.id || commons.getUID();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     const content = this._elements.content;
-  
+
     // when the content zone was not created, we need to make sure that everything is added inside it as a content.
     // this stops the content zone from being voracious
     if (!content.parentNode) {
@@ -75,7 +78,7 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
         content.appendChild(this.firstChild);
       }
     }
-    
+
     // Call content zone insert
     this.content = content;
 
@@ -84,8 +87,8 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   _makeAccessible() {
-    
-    // @a11y For item values with a label, identify the value as a focusable, readOnly textbox labeled by the label. 
+
+    // @a11y For item values with a label, identify the value as a focusable, readOnly textbox labeled by the label.
     let elements = this.content.querySelectorAll('coral-columnview-preview-label + coral-columnview-preview-value');
     let length = elements.length;
     let i;
@@ -93,13 +96,13 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
     let elementLabel;
 
     // @a11y If the previous column has selected items,
-    // do not include item values in the tab order, 
+    // do not include item values in the tab order,
     // so that a keyboard user can quickly advance to a subsequent toolbar.
     const tabIndex = (this.parentElement &&
       this.parentElement.tagName === 'CORAL-COLUMNVIEW' &&
       this.parentElement.selectedItems.length) ? -1 : 0;
 
-    for (i = 0; i < length; i++) {
+    for (i = 0 ; i < length ; i++) {
       element = elements[i];
       elementLabel = element.previousElementSibling;
       elementLabel.id = elementLabel.id || commons.getUID();
@@ -117,16 +120,16 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
     // @a11y Expose separator as a horizontally-oriented separator.
     elements = this.content.querySelectorAll('coral-columnview-preview-separator');
     length = elements.length;
-    for (i = 0; i < length; i++) {
+    for (i = 0 ; i < length ; i++) {
       element = elements[i];
       element.setAttribute('role', 'separator');
       element.setAttribute('aria-orientation', 'horizontal');
     }
 
-    // @a11y If the preview asset image does not include an alt attribute, set alt="", so that screen readers do not announce the image url. 
+    // @a11y If the preview asset image does not include an alt attribute, set alt="", so that screen readers do not announce the image url.
     elements = this.content.querySelectorAll('coral-columnview-preview-asset > img:not([alt])');
     length = elements.length;
-    for (i = 0; i < length; i++) {
+    for (i = 0 ; i < length ; i++) {
       element = elements[i];
       element.setAttribute('alt', '');
     }

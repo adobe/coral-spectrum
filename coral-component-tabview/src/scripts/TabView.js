@@ -46,6 +46,8 @@ class TabView extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
+
+    // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
       tabList: this.querySelector('coral-tablist') || document.createElement('coral-tablist'),
@@ -80,6 +82,7 @@ class TabView extends BaseComponent(HTMLElement) {
   get orientation() {
     return this._elements.tabList.getAttribute('orientation') || orientation.HORIZONTAL;
   }
+
   set orientation(value) {
     // We rely on the tablist orientation enum so don't need to double check enums
     this._elements.tabList.setAttribute('orientation', value);
@@ -97,13 +100,14 @@ class TabView extends BaseComponent(HTMLElement) {
   get tabList() {
     return this._getContentZone(this._elements.tabList);
   }
+
   set tabList(value) {
     // Support nested coral-tablist
     if (value instanceof HTMLElement && !value.parentNode || value.parentNode === this) {
       this._setContentZone('tabList', value, {
         handle: 'tabList',
         tagName: 'coral-tablist',
-        insert: function(tabs) {
+        insert: function (tabs) {
           tabs.setAttribute('tracking', 'off');
           this.insertBefore(tabs, this._elements.panelStack || null);
         }
@@ -120,13 +124,14 @@ class TabView extends BaseComponent(HTMLElement) {
   get panelStack() {
     return this._getContentZone(this._elements.panelStack);
   }
+
   set panelStack(value) {
     // Support nested coral-panelstack
     if (value instanceof HTMLElement && !value.parentNode || value.parentNode === this) {
       this._setContentZone('panelStack', value, {
         handle: 'panelStack',
         tagName: 'coral-panelstack',
-        insert: function(panels) {
+        insert: function (panels) {
           this.appendChild(panels);
         }
       });
@@ -156,8 +161,7 @@ class TabView extends BaseComponent(HTMLElement) {
       if (tab) {
         if (!tab.hasAttribute('selected')) {
           tab.setAttribute('selected', '');
-        }
-        else {
+        } else {
           this._trackEvent('display', 'coral-tab', event, event.detail.selection);
         }
       }
@@ -181,11 +185,13 @@ class TabView extends BaseComponent(HTMLElement) {
 
    @return {TabViewOrientationEnum}
    */
-  static get orientation() { return orientation; }
-
+  static get orientation() {
+    return orientation;
+}
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['orientation']); }
-
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['orientation']);
+}
   /** @ignore */
   render() {
     super.render();
@@ -193,8 +199,9 @@ class TabView extends BaseComponent(HTMLElement) {
     this.classList.add(CLASSNAME);
 
     // Default reflected attributes
-    if (!this._orientation) { this.orientation = this.orientation; }
-
+    if (!this._orientation) {
+      this.orientation = this.orientation;
+}
     // Fetch or create the content zone elements
     const tabs = this._elements.tabList;
     const panels = this._elements.panelStack;

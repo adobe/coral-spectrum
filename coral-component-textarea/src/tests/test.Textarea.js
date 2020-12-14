@@ -13,54 +13,54 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Textarea} from '../../../coral-component-textarea';
 
-describe('Textarea', function() {
+describe('Textarea', function () {
 
-  describe('Instantiation', function() {
+  describe('Instantiation', function () {
     helpers.cloneComponent(
       'should be possible via clone using markup',
       window.__html__['Textarea.base.html']
     );
-  
+
     helpers.cloneComponent(
       'should be possible via clone using markup with textContent',
       window.__html__['Textarea.value.html']
     );
-  
+
     helpers.cloneComponent(
       'should be possible via clone using js',
       new Textarea()
     );
   });
 
-  describe('API', function() {
+  describe('API', function () {
     var el;
 
-    beforeEach(function() {
+    beforeEach(function () {
       el = new Textarea();
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el = null;
     });
 
-    describe('#value', function() {
-      it('should return empty string by default', function() {
+    describe('#value', function () {
+      it('should return empty string by default', function () {
         expect(el.value).to.equal('');
       });
     });
 
-    describe('#name', function() {
-      it('should return empty string by default', function() {
+    describe('#name', function () {
+      it('should return empty string by default', function () {
         expect(el.name).to.equal('');
       });
     });
 
-    describe('#variant', function() {
-      it('should be set to "default" by default', function() {
+    describe('#variant', function () {
+      it('should be set to "default" by default', function () {
         expect(el.variant).to.equal(Textarea.variant.DEFAULT, '"default" should be set');
       });
 
-      it('should be possible to set the variant', function() {
+      it('should be possible to set the variant', function () {
 
         expect(el.classList.contains('_coral-Textfield--quiet')).to.be.false;
 
@@ -69,7 +69,7 @@ describe('Textarea', function() {
         expect(el.classList.contains('_coral-Textfield--quiet')).to.be.true;
       });
 
-      it('should increase the height automatically if variant=quiet', function(done) {
+      it('should increase the height automatically if variant=quiet', function (done) {
         helpers.build(el);
         el.variant = Textarea.variant.QUIET;
         var initialHeight = el.clientHeight;
@@ -84,7 +84,7 @@ describe('Textarea', function() {
         });
       });
 
-      it('should decrease the height automatically if variant=quiet', function(done) {
+      it('should decrease the height automatically if variant=quiet', function (done) {
         helpers.build(el);
         el.variant = Textarea.variant.QUIET;
         el.value = '\n\n\n';
@@ -94,7 +94,7 @@ describe('Textarea', function() {
           var initialHeight = el.clientHeight;
           el.value = '';
           el.trigger('input');
-  
+
           helpers.next(() => {
             var newHeight = el.clientHeight;
             expect(newHeight < initialHeight).to.be.true;
@@ -102,32 +102,32 @@ describe('Textarea', function() {
           });
         });
       });
-  
-      it('should restore the default height if variant was quiet', function() {
+
+      it('should restore the default height if variant was quiet', function () {
         var initialHeight = '10px';
         el.style.height = initialHeight;
-    
+
         el.variant = Textarea.variant.QUIET;
-  
+
         el.value = '\n\n\n';
         el.trigger('input');
-  
+
         el.variant = Textarea.variant.DEFAULT;
-        
+
         expect(el.style.height).to.be.equal(initialHeight);
       });
-      
-      it('should restore height if reset() is called and value is empty', function(done) {
+
+      it('should restore height if reset() is called and value is empty', function (done) {
         const initialHeight = el.clientHeight;
-  
+
         el.variant = Textarea.variant.QUIET;
-  
+
         el.value = '\n\n\n';
-        
+
         expect(el.clientHeight > initialHeight);
-        
+
         el.reset();
-        
+
         helpers.next(() => {
           expect(el.clientHeight === initialHeight);
           done();
@@ -136,8 +136,8 @@ describe('Textarea', function() {
     });
   });
 
-  describe('Implementation Details', function() {
-    describe('#formField', function() {
+  describe('Implementation Details', function () {
+    describe('#formField', function () {
       helpers.testFormField(window.__html__['Textarea.value.html'], {
         value: 'abc'
       });

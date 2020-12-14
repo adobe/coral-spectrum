@@ -54,6 +54,7 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     value = transform.booleanAttr(value);
 
@@ -86,6 +87,7 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   get targetColor() {
     return this._targetColor || null;
   }
+
   set targetColor(value) {
     if (typeof value === 'string') {
       value = this.querySelector(value);
@@ -109,8 +111,7 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
       this._elements.colorButton.style.backgroundColor = cssColorValue;
       this._elements.colorButton.label.textContent = hexColorValue;
       this.setAttribute('data-value', hexColorValue);
-    }
-    else {
+    } else {
       this._elements.colorButton.classList.add('_coral-ColorInput-swatch-novalue');
       this._elements.colorButton.label.textContent = i18n.get('unset');
       this.setAttribute('data-value', '');
@@ -128,6 +129,7 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   get disabled() {
     return this._elements.colorButton.disabled;
   }
+
   set disabled(value) {
     this._elements.colorButton.disabled = value;
     this._reflectAttribute('disabled', this.disabled);
@@ -147,6 +149,7 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   get tabIndex() {
     return this._elements.colorButton.tabIndex;
   }
+
   set tabIndex(value) {
     this._elements.colorButton.tabIndex = value;
     this.removeAttribute('tabindex');

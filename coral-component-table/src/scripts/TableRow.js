@@ -62,6 +62,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   get locked() {
     return this._locked || false;
   }
+
   set locked(value) {
     this._locked = transform.booleanAttr(value);
     this._reflectAttribute('locked', this._locked);
@@ -80,10 +81,11 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     // Prevent selection if disabled
     if (this.hasAttribute('coral-table-rowselect') && this.hasAttribute('disabled') ||
-    this.querySelector('[coral-table-rowselect][disabled]')) {
+      this.querySelector('[coral-table-rowselect][disabled]')) {
       return;
     }
 
@@ -109,6 +111,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   get selectable() {
     return this._selectable || false;
   }
+
   set selectable(value) {
     this._selectable = transform.booleanAttr(value);
     this._reflectAttribute('selectable', this._selectable);
@@ -129,6 +132,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   get multiple() {
     return this._multiple || false;
   }
+
   set multiple(value) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute('multiple', this._multiple);
@@ -209,7 +213,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
     const selectHandle = this.querySelector('[coral-table-rowselect]');
 
     // @a11y Only update aria-selected if the table row can be selected
-    if(!(this.hasAttribute('coral-table-rowselect') || selectHandle)) {
+    if (!(this.hasAttribute('coral-table-rowselect') || selectHandle)) {
       this.removeAttribute('aria-selected');
       return;
     }
@@ -347,7 +351,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       return (
         cell.id &&
         !(
-          cell.hasAttribute('coral-table-roworder') || cell.querySelector('[coral-table-roworder]')  ||
+          cell.hasAttribute('coral-table-roworder') || cell.querySelector('[coral-table-roworder]') ||
           cell.hasAttribute('coral-table-rowlock') || cell.querySelector('[coral-table-rowlock]') ||
           cell.hasAttribute('coral-row-remove') || cell.querySelector('[coral-table-remove]')
         )
@@ -425,9 +429,9 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
         // @a11y provide a more explicit label for the checkbox than just "Select"
         if (this.hasAttribute('aria-labelledby')) {
           let ids = this.getAttribute('aria-labelledby')
-          .split(' ')
-          .filter(id => selectHandle._elements.input.id !== id && this._elements.accessibilityState.id !== id)
-          .join(' ');
+            .split(' ')
+            .filter(id => selectHandle._elements.input.id !== id && this._elements.accessibilityState.id !== id)
+            .join(' ');
           selectHandle.labelledBy = selectHandle._elements.input.id + ' ' + ids;
         }
       }
@@ -438,8 +442,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   _toggleSelectable(selectable) {
     if (selectable) {
       this._setHandle('coral-table-rowselect');
-    }
-    else {
+    } else {
       // Clear selection but leave the handle if any
       this.set('selected', false, true);
     }
@@ -500,14 +503,11 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   attributeChangedCallback(name, oldValue, value) {
     if (name === '_selectable') {
       this._toggleSelectable(value !== null);
-    }
-    else if (name === '_orderable') {
+    } else if (name === '_orderable') {
       this._toggleOrderable(value !== null);
-    }
-    else if (name === '_lockable') {
+    } else if (name === '_lockable') {
       this._toggleLockable(value !== null);
-    }
-    else {
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }

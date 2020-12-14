@@ -10,20 +10,20 @@
  * governing permissions and limitations under the License.
  */
 
-module.exports = function(gulp) {
+module.exports = function (gulp) {
   const plumb = require('./plumb');
   const eslint = require('gulp-eslint');
   const conf = require('../configs/eslint.conf.js');
   const util = require('../helpers/util');
-  
+
   let src = 'src/scripts/**/*.js';
-  
+
   // Lint all components if we're in the top level builder
   if (util.isTLB()) {
     src = `coral-*/${src}`;
   }
-  
-  gulp.task('lint', function() {
+
+  gulp.task('lint', function () {
     return gulp.src(src)
       .pipe(plumb())
       .pipe(eslint(conf))

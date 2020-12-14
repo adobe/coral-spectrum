@@ -17,9 +17,9 @@ const CLASSNAME = '_coral-CharacterCount';
 
 /**
  Enumeration for {@link CharacterCount} targets.
- 
+
  @typedef {Object} CharacterCountTargetEnum
- 
+
  @property {String} PREVIOUS
  Relates the CharacterCount to the previous sibling.
  @property {String} NEXT
@@ -41,7 +41,7 @@ class CharacterCount extends BaseComponent(HTMLElement) {
   /**
    The target Textfield or Textarea for this component. It accepts values from {@link CharacterCountTargetEnum},
    as well as any DOM element or CSS selector.
-   
+
    @type {HTMLElement|String}
    @default CharacterCountTargetEnum.PREVIOUS
    @htmlattribute target
@@ -49,32 +49,30 @@ class CharacterCount extends BaseComponent(HTMLElement) {
   get target() {
     return this._target || target.PREVIOUS;
   }
+
   set target(value) {
     if (typeof value === 'string' || value instanceof Node) {
       this._target = value;
-  
+
       // Remove previous event listener
       if (this._targetEl) {
         this._targetEl.removeEventListener('input', this._refreshCharCount.bind(this));
       }
-  
+
       // Get the target DOM element
       if (value === target.NEXT) {
         this._targetEl = this.nextElementSibling;
-      }
-      else if (value === target.PREVIOUS) {
+      } else if (value === target.PREVIOUS) {
         this._targetEl = this.previousElementSibling;
-      }
-      else if (typeof value === 'string') {
+      } else if (typeof value === 'string') {
         this._targetEl = document.querySelector(value);
-      }
-      else {
+      } else {
         this._targetEl = value;
       }
-  
+
       if (this._targetEl) {
         this._targetEl.addEventListener('input', this._refreshCharCount.bind(this));
-    
+
         // Try to get maxlength from target element
         if (this._targetEl.getAttribute('maxlength')) {
           this.maxLength = this._targetEl.getAttribute('maxlength');
@@ -82,10 +80,10 @@ class CharacterCount extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /**
    Maximum character length for the TextField/TextArea (will be read from target field markup if able).
-   
+
    @type {Number}
    @default null
    @htmlattribute maxlength
@@ -94,23 +92,24 @@ class CharacterCount extends BaseComponent(HTMLElement) {
   get maxLength() {
     return this._maxLength || null;
   }
+
   set maxLength(value) {
     this._maxLength = transform.number(value);
     this._reflectAttribute('maxlength', this._maxLength);
-    
+
     this._refreshCharCount();
   }
-  
+
   /** @ignore */
   _getCharCount() {
     let elementLength = 0;
     if (this._targetEl && this._targetEl.value) {
       elementLength = this._targetEl.value.length;
     }
-    
+
     return this._maxLength ? this._maxLength - elementLength : elementLength;
   }
-  
+
   /** @ignore */
   _refreshCharCount() {
     const currentCount = this._getCharCount();
@@ -122,34 +121,36 @@ class CharacterCount extends BaseComponent(HTMLElement) {
       this.classList.toggle('is-invalid', isMaxExceeded);
     }
   }
-  
+
   /**
    Returns {@link CharacterCount} target options.
-   
+
    @return {CharacterCountTargetEnum}
    */
-  static get target() { return target; }
-  
+  static get target() {
+    return target;
+  }
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       maxlength: 'maxLength'
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['target', 'maxlength']);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME, 'coral-Body--S');
-    
+
     // Set defaults
     this.target = this.target;
-  
+
     // Refresh once connected
     this._refreshCharCount();
   }

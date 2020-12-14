@@ -100,6 +100,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get displayFormat() {
     return this._displayFormat || DEFAULT_TIME_FORMAT;
   }
+
   set displayFormat(value) {
     this._displayFormat = this._extractTimeFormat(transform.string(value).trim(), TIME_REG_EXP, DEFAULT_TIME_FORMAT);
     this._reflectAttribute('displayformat', this._displayFormat);
@@ -121,6 +122,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get valueFormat() {
     return this._valueFormat || DEFAULT_TIME_FORMAT;
   }
+
   set valueFormat(value) {
     const setValueFormat = (newValue) => {
       this._valueFormat = this._extractTimeFormat(transform.string(newValue).trim(), TIME_REG_EXP, DEFAULT_TIME_FORMAT);
@@ -131,8 +133,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
     if (!this._valueFormat && this._originalValue) {
       setValueFormat(value);
       this.value = this._originalValue;
-    }
-    else {
+    } else {
       setValueFormat(value);
       this._elements.input.value = this.value;
     }
@@ -147,6 +148,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get valueAsDate() {
     return this._value ? new Date(this._value.toDate().getTime()) : null;
   }
+
   set valueAsDate(value) {
     this.value = value instanceof Date ? new DateTime.Moment(value, null, true).format(this.valueFormat) : '';
   }
@@ -162,6 +164,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
@@ -190,6 +193,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._elements.input.name;
   }
+
   set name(value) {
     this._reflectAttribute('name', value);
 
@@ -206,6 +210,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -225,6 +230,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get invalid() {
     return super.invalid;
   }
+
   set invalid(value) {
     super.invalid = value;
 
@@ -242,6 +248,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
@@ -261,6 +268,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
@@ -279,6 +287,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get value() {
     return this._getValueAsString(this._value, this.valueFormat);
   }
+
   set value(value) {
     value = typeof value === 'string' ? value : '';
     // This is used to change the value if valueformat is also set but afterwards
@@ -312,6 +321,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
     }
     return labelledBy;
   }
+
   set labelledBy(value) {
     super.labelledBy = value;
 
@@ -328,8 +338,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
 
       // Set aria-labelledby attribute on the labellable element joining ids array into space-delimited list of ids.
       this.setAttribute('aria-labelledby', ids.join(' '));
-    }
-    else {
+    } else {
       // labelledBy property is null, remove the aria-labelledby attribute.
       this.removeAttribute('aria-labelledby');
     }
@@ -379,8 +388,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
     if (time && time.isValid()) {
       if (time.hours() < 12) {
         period.value = 'am';
-      }
-      else {
+      } else {
         period.value = 'pm';
       }
     }
@@ -390,13 +398,11 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
       items[0].textContent = am;
       items[1].textContent = pm;
       this._togglePeriod(true);
-    }
-    else if (this.displayFormat.indexOf('A') !== -1) {
+    } else if (this.displayFormat.indexOf('A') !== -1) {
       items[0].textContent = am.toUpperCase();
       items[1].textContent = pm.toUpperCase();
       this._togglePeriod(true);
-    }
-    else {
+    } else {
       this._togglePeriod(false);
     }
   }
@@ -420,8 +426,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
       if (this.displayFormat.indexOf('h') !== -1) {
         if (period.value === 'am') {
           time.subtract(12, 'h');
-        }
-        else {
+        } else {
           time.add(12, 'h');
         }
       }
@@ -456,8 +461,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
 
     if (window.isNaN(hours) || window.isNaN(minutes)) {
       newTime = '';
-    }
-    else {
+    } else {
       if (!this._elements.period.hidden &&
         this.displayFormat.indexOf('h') !== -1 &&
         this._elements.period.value === 'pm') {
@@ -477,8 +481,7 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
         this.value = newTime.format(this.valueFormat);
         this.trigger('change');
       }
-    }
-    else {
+    } else {
       // @polyfill ie
       this.invalid = true;
       // does not sync the inputs so allow the user to continue typing the date
@@ -519,7 +522,9 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
 
    @return {ClockVariantEnum}
    */
-  static get variant() { return variant; }
+  static get variant() {
+    return variant;
+  }
 
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
@@ -547,9 +552,15 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
     this.setAttribute('role', 'group');
 
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-    if (!this._valueFormat) { this.valueFormat = DEFAULT_TIME_FORMAT; }
-    if (!this._displayFormat) { this.displayFormat = DEFAULT_TIME_FORMAT; }
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
+    if (!this._valueFormat) {
+      this.valueFormat = DEFAULT_TIME_FORMAT;
+    }
+    if (!this._displayFormat) {
+      this.displayFormat = DEFAULT_TIME_FORMAT;
+    }
 
     // clean up to be able to clone it
     while (this.firstChild) {

@@ -27,7 +27,7 @@ class SliderItem extends BaseComponent(HTMLElement) {
   /**
    The slider's item value.
    This should contain a number formatted as a string (e.g.: "10") or an empty string.
-   
+
    @type {String}
    @default ""
    @htmlattribute value
@@ -36,25 +36,27 @@ class SliderItem extends BaseComponent(HTMLElement) {
   get value() {
     return this.getAttribute('value');
   }
+
   set value(value) {
     this._reflectAttribute('value', transform.string(value));
   }
-  
+
   // @compat
   get content() {
     return this;
   }
+
   set content(value) {
     if (value instanceof HTMLElement) {
       /** @ignore */
       this.innerHTML = value.innerHTML;
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
   }
 }

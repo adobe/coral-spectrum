@@ -12,9 +12,9 @@
 
 /**
  Enumeration for {@link ColumnView} selection options.
- 
+
  @typedef {Object} ColumnViewSelectionModeEnum
- 
+
  @property {String} NONE
  None is default, selection of items does not happen based on click.
  @property {String} SINGLE

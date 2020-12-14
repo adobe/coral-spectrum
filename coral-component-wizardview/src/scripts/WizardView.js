@@ -30,11 +30,10 @@ class WizardView extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-  }
+}
 
   connectedCallback() {
     super.connectedCallback();
-
     this._delegateEvents({
       'capture:click coral-steplist[coral-wizardview-steplist] > coral-step': '_onStepClick',
       'coral-steplist:change coral-steplist[coral-wizardview-steplist]': '_onStepListChange',
@@ -50,7 +49,7 @@ class WizardView extends BaseComponent(HTMLElement) {
     this._observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         // Sync added nodes
-        for (let i = 0; i < mutation.addedNodes.length; i++) {
+        for (let i = 0 ; i < mutation.addedNodes.length ; i++) {
           const addedNode = mutation.addedNodes[i];
 
           if (addedNode.setAttribute &&
@@ -192,13 +191,12 @@ class WizardView extends BaseComponent(HTMLElement) {
     let stepIndex = -1;
     if (stepList.items) {
       stepIndex = stepList.items.getAll().indexOf(stepList.selectedItem);
-    }
-    else {
+    } else {
       // Manually get the selected step
       const steps = stepList.querySelectorAll('coral-step');
 
       // Find the last selected step
-      for (let i = steps.length - 1; i >= 0; i--) {
+      for (let i = steps.length - 1 ; i >= 0 ; i--) {
         if (steps[i].hasAttribute('selected')) {
           stepIndex = i;
           break;
@@ -234,8 +232,7 @@ class WizardView extends BaseComponent(HTMLElement) {
     else if (component.tagName === 'CORAL-STEPLIST') {
       // @polyfill IE - we use id since :scope is not supported
       item = component.querySelectorAll(`#${component.id} > coral-step`)[index];
-    }
-    else if (component.tagName === 'CORAL-PANELSTACK') {
+    } else if (component.tagName === 'CORAL-PANELSTACK') {
       // @polyfill IE - we use id since :scope is not supported
       item = component.querySelectorAll(`#${component.id} > coral-panel`)[index];
     }
@@ -246,15 +243,14 @@ class WizardView extends BaseComponent(HTMLElement) {
         item.setAttribute('selected', '');
       }
     }
-    // if we did not find an item to select, it means that the "index" is not available in the component, therefore we
+      // if we did not find an item to select, it means that the "index" is not available in the component, therefore we
     // need to deselect all items
     else {
       // we use the component id to be able to find direct children
       if (component.tagName === 'CORAL-STEPLIST') {
         // @polyfill IE - we use id since :scope is not supported
         item = component.querySelector(`#${component.id} > coral-step[selected]`);
-      }
-      else if (component.tagName === 'CORAL-PANELSTACK') {
+      } else if (component.tagName === 'CORAL-PANELSTACK') {
         // @polyfill IE - we use id since :scope is not supported
         item = component.querySelector(`#${component.id} > coral-panel[selected]`);
       }
@@ -290,8 +286,7 @@ class WizardView extends BaseComponent(HTMLElement) {
     if (index === -1) {
       if (typeof defaultIndex !== 'undefined') {
         index = defaultIndex;
-      }
-      else {
+      } else {
         // No panel selected
         return;
       }
@@ -314,8 +309,7 @@ class WizardView extends BaseComponent(HTMLElement) {
     if (index === -1) {
       if (typeof defaultIndex !== 'undefined') {
         index = defaultIndex;
-      }
-      else {
+      } else {
         // No step selected
         return;
       }
@@ -374,7 +368,7 @@ class WizardView extends BaseComponent(HTMLElement) {
     // Disable tracking for specific elements that are attached to the component.
     const selector = '[coral-wizardview-next],[coral-wizardview-previous],[coral-wizardview-steplist],[coral-wizardview-panelstack]';
     const items = this.querySelectorAll(selector);
-    for (let i = 0; i < items.length; i++) {
+    for (let i = 0 ; i < items.length ; i++) {
       items[i].setAttribute('tracking', 'off');
     }
   }

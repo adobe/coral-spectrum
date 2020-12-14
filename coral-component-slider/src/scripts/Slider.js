@@ -102,11 +102,12 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-slider-content',
-      insert: function(content) {
+      insert: function (content) {
         this._elements.labelContent.appendChild(content);
       }
     });
@@ -140,6 +141,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get step() {
     return this._getValueOf('step', 1);
   }
+
   set step(value) {
     value = transform.number(value);
     if (value > 0) {
@@ -163,6 +165,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get min() {
     return this._getValueOf('min', 1);
   }
+
   set min(value) {
     this._min = transform.number(value);
     this._reflectAttribute('min', this._min);
@@ -183,6 +186,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get max() {
     return this._getValueOf('max', 100);
   }
+
   set max(value) {
     this._max = transform.number(value);
     this._reflectAttribute('max', this._max);
@@ -200,6 +204,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get tooltips() {
     return this.showValue;
   }
+
   set tooltips(value) {
     this.showValue = value;
   }
@@ -215,6 +220,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get showValue() {
     return this._showValue || false;
   }
+
   set showValue(value) {
     this._showValue = transform.booleanAttr(value);
     this._reflectAttribute('showvalue', this._showValue);
@@ -233,6 +239,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get orientation() {
     return this._orientation || orientation.HORIZONTAL;
   }
+
   set orientation(value) {
     value = transform.string(value).toLowerCase();
     this._orientation = validate.enumeration(orientation)(value) && value || orientation.HORIZONTAL;
@@ -250,6 +257,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get filled() {
     return this._filled || false;
   }
+
   set filled(value) {
     this._filled = transform.booleanAttr(value);
     this._reflectAttribute('filled', this._filled);
@@ -266,6 +274,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get valueAsNumber() {
     return parseFloat(this.value);
   }
+
   set valueAsNumber(value) {
     this.value = transform.float(value);
   }
@@ -280,6 +289,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._elements.inputs[0].name;
   }
+
   set name(value) {
     this._reflectAttribute('name', value);
 
@@ -297,6 +307,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get value() {
     return this._elements.inputs[0].value;
   }
+
   set value(value) {
     value = transform.number(value);
 
@@ -310,8 +321,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
       if (input.value) {
         input.setAttribute('aria-valuenow', value);
         input.setAttribute('aria-valuetext', this._getLabel(value));
-      }
-      else {
+      } else {
         input.removeAttribute('aria-valuenow');
         input.removeAttribute('aria-valuetext');
       }
@@ -334,6 +344,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -355,6 +366,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
@@ -374,6 +386,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
@@ -389,6 +402,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get labelledBy() {
     return super.labelledBy;
   }
+
   set labelledBy(value) {
     super.labelledBy = value;
 
@@ -404,6 +418,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get _values() {
     return this._elements.inputs.map((input) => String(parseInt(input.value, 10)));
   }
+
   set _values(values) {
     if (values && values.length === this._elements.handles.length) {
       this._elements.inputs.forEach((input, i) => {
@@ -413,8 +428,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
         if (input.value) {
           input.setAttribute('aria-valuenow', value);
           input.setAttribute('aria-valuetext', this._getLabel(value));
-        }
-        else {
+        } else {
           input.removeAttribute('aria-valuenow');
           input.removeAttribute('aria-valuetext');
         }
@@ -428,8 +442,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   _getValueOf(name, defaultValue) {
     if (typeof this[`_${name}`] === 'number') {
       return this[`_${name}`];
-    }
-    else if (this.hasAttribute(name)) {
+    } else if (this.hasAttribute(name)) {
       return parseFloat(this.getAttribute(name));
     }
 
@@ -490,8 +503,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   _getPoint(event) {
     if (event.changedTouches && event.changedTouches.length > 0) {
       return event.changedTouches[0];
-    }
-    else if (event.touches && event.touches.length > 0) {
+    } else if (event.touches && event.touches.length > 0) {
       return event.touches[0];
     }
 
@@ -600,8 +612,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
       handle.nextElementSibling.style.width = `${100 - percent}%`;
 
       labelValue.push(this._getLabel(this._values[0]));
-    }
-    else {
+    } else {
       const leftHandle = this._elements.handles[0];
       const leftPercent = calculatePercent(this._values[0]);
       leftHandle.style.left = `${leftPercent}%`;
@@ -768,15 +779,13 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
 
     if (Math.abs(remainder) * 2 >= step) {
       snappedValue = rawValue - Math.abs(remainder) + step;
-    }
-    else {
+    } else {
       snappedValue = rawValue - remainder;
     }
 
     if (snappedValue < min) {
       snappedValue = min;
-    }
-    else if (snappedValue > max) {
+    } else if (snappedValue > max) {
       snappedValue = min + Math.floor((max - min) / step) * step;
     }
 
@@ -821,7 +830,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     const items = this.items.getAll();
     let item;
 
-    for (let i = 0; i < items.length; i++) {
+    for (let i = 0 ; i < items.length ; i++) {
       if (transform.number(items[i].getAttribute('value')) === transform.number(value)) {
         item = items[i];
         break;
@@ -837,15 +846,16 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     return base;
   }
 
-  get _contentZones() { return {'coral-slider-content': 'content'}; }
-
+  get _contentZones() { return {'coral-slider-content': 'content'};
+}
   /**
    Returns {@link Slider} orientation options.
 
    @return {SliderOrientationEnum}
    */
-  static get orientation() { return orientation; }
-
+  static get orientation() {
+    return orientation;
+}
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       showvalue: 'showValue'
@@ -872,17 +882,24 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     this.classList.add(CLASSNAME);
 
     // Default reflected attributes
-    if (!this._min) { this.min = this.min; }
-    if (!this._max) { this.max = this.max; }
-    if (!this._step) { this.step = this.step; }
-    if (!this._orientation) { this.orientation = orientation.HORIZONTAL; }
-
+    if (!this._min) {
+      this.min = this.min;
+    }
+    if (!this._max) {
+      this.max = this.max;
+    }
+    if (!this._step) {
+      this.step = this.step;
+    }
+    if (!this._orientation) {
+      this.orientation = orientation.HORIZONTAL;
+}
     // A11y
     this.setAttribute('role', 'presentation');
 
     // Support cloneNode
     const template = this.querySelectorAll('._coral-Slider-labelContainer, ._coral-Slider-controls');
-    for (let i = 0; i < template.length; i++) {
+    for (let i = 0 ; i < template.length ; i++) {
       template[i].remove();
     }
 
@@ -902,8 +919,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
         if (child.nodeName === 'CORAL-SLIDER-ITEM') {
           // Add items to the fragment
           frag.appendChild(child);
-        }
-        else {
+        } else {
           // Add anything else to the content
           content.appendChild(child);
         }

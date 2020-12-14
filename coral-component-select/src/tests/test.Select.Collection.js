@@ -12,10 +12,10 @@
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 
-describe('Select.Collection', function() {
-  describe('API', function() {
-    describe('#_getFirstSelectable()', function() {
-      it('should return the first valid item for selection', function() {
+describe('Select.Collection', function () {
+  describe('API', function () {
+    describe('#_getFirstSelectable()', function () {
+      it('should return the first valid item for selection', function () {
         const el = helpers.build(window.__html__['Select.items.base.html']);
         var items = el.items.getAll();
         var firstSelectable = el.items._getFirstSelectable();
@@ -25,7 +25,7 @@ describe('Select.Collection', function() {
         expect(firstSelectable.content.textContent).to.equal('America');
       });
 
-      it('should include disabled and hidden items', function() {
+      it('should include disabled and hidden items', function () {
         const el = helpers.build(window.__html__['Select.items.selectable.html']);
         var items = el.items.getAll();
         var firstSelectable = el.items._getFirstSelectable();
@@ -36,8 +36,8 @@ describe('Select.Collection', function() {
       });
     });
 
-    describe('#_getFirstSelected()', function() {
-      it('should return the first selected item', function() {
+    describe('#_getFirstSelected()', function () {
+      it('should return the first selected item', function () {
         const el = helpers.build(window.__html__['Select.items.base.html']);
         var items = el.items.getAll();
         var firstSelected = el.items._getFirstSelected();
@@ -47,7 +47,7 @@ describe('Select.Collection', function() {
         expect(firstSelected.content.textContent).to.equal('Africa');
       });
 
-      it('should include disabled and hidden items', function() {
+      it('should include disabled and hidden items', function () {
         const el = helpers.build(window.__html__['Select.items.selectable.html']);
         var items = el.items.getAll();
         var firstSelected = el.items._getFirstSelected();
@@ -58,8 +58,8 @@ describe('Select.Collection', function() {
       });
     });
 
-    describe('#_getLastSelected()', function() {
-      it('should return the last selected item', function() {
+    describe('#_getLastSelected()', function () {
+      it('should return the last selected item', function () {
         const el = helpers.build(window.__html__['Select.items.base.html']);
         var items = el.items.getAll();
         var lastSelected = el.items._getLastSelected();
@@ -69,7 +69,7 @@ describe('Select.Collection', function() {
         expect(lastSelected.content.textContent).to.equal('Oceania');
       });
 
-      it('should ignore disabled and hidden items', function() {
+      it('should ignore disabled and hidden items', function () {
         const el = helpers.build(window.__html__['Select.items.selectable.html']);
         var items = el.items.getAll();
         var lastSelected = el.items._getLastSelected();
@@ -80,8 +80,8 @@ describe('Select.Collection', function() {
       });
     });
 
-    describe('#_getAllSelected()', function() {
-      it('should all the selected items', function() {
+    describe('#_getAllSelected()', function () {
+      it('should all the selected items', function () {
         const el = helpers.build(window.__html__['Select.items.base.html']);
         var items = el.items.getAll();
         var selectedItems = el.items._getAllSelected();
@@ -89,7 +89,7 @@ describe('Select.Collection', function() {
         expect(selectedItems).to.deep.equal([items[1], items[2], items[6]]);
       });
 
-      it('should include disabled and hidden items', function() {
+      it('should include disabled and hidden items', function () {
         const el = helpers.build(window.__html__['Select.items.selectable.html']);
         var items = el.items.getAll();
         var selectedItems = el.items._getAllSelected();
@@ -98,8 +98,8 @@ describe('Select.Collection', function() {
       });
     });
 
-    describe('#_deselectAllExceptLast()', function() {
-      it('should all the deselect all items except the last one', function() {
+    describe('#_deselectAllExceptLast()', function () {
+      it('should all the deselect all items except the last one', function () {
         const el = helpers.build(window.__html__['Select.items.base.html']);
         var items = el.items.getAll();
         el.items._deselectAllExceptLast();
@@ -110,7 +110,7 @@ describe('Select.Collection', function() {
         expect(Array.prototype.slice.call(selectedItems)).to.deep.equal([items[6]]);
       });
 
-      it('should include disabled and hidden items', function() {
+      it('should include disabled and hidden items', function () {
         const el = helpers.build(window.__html__['Select.items.selectable.html']);
         var items = el.items.getAll();
 
@@ -129,8 +129,8 @@ describe('Select.Collection', function() {
       });
     });
 
-    describe('#_deselectAllExcept()', function() {
-      it('should all the deselect all items', function() {
+    describe('#_deselectAllExcept()', function () {
+      it('should all the deselect all items', function () {
         const el = helpers.build(window.__html__['Select.items.base.html']);
         el.items._deselectAllExcept();
 
@@ -140,7 +140,7 @@ describe('Select.Collection', function() {
         expect(Array.prototype.slice.call(selectedItems)).to.deep.equal([]);
       });
 
-      it('should ignore disabled and hidden items', function() {
+      it('should ignore disabled and hidden items', function () {
         const el = helpers.build(window.__html__['Select.items.selectable.html']);
         el.items._deselectAllExcept();
 

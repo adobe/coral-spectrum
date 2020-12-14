@@ -28,13 +28,13 @@ const BaseTableSection = (superClass) => class extends superClass {
   /** @ignore */
   constructor() {
     super();
-    
+
     this._tagName = this.getAttribute('is').toLowerCase();
   }
-  
+
   /**
    The table section divider. See {@link TableSectionDividerEnum}.
-   
+
    @type {String}
    @default TableSectionDividerEnum.ROW
    @htmlattributereflected
@@ -43,30 +43,30 @@ const BaseTableSection = (superClass) => class extends superClass {
   get divider() {
     return this._divider || divider.ROW;
   }
+
   set divider(value) {
     value = transform.string(value).toLowerCase();
     this._divider = validate.enumeration(divider)(value) && value || divider.ROW;
     this._reflectAttribute('divider', this._divider);
-  
+
     this.classList.remove(...ALL_DIVIDER_CLASSES);
     this.classList.add(`_coral-Table-divider--${this.divider}`);
   }
-  
+
   _toggleObserver(enable) {
     this._observer = this._observer || new MutationObserver(this._handleMutations.bind(this));
-    
+
     if (enable) {
       // Initialize content MO
       this._observer.observe(this, {
         childList: true,
         subtree: true
       });
-    }
-    else {
+    } else {
       this._observer.disconnect();
     }
   }
-  
+
   _handleMutations(mutations) {
     mutations.forEach((mutation) => {
       this.trigger(`${this._tagName}:_contentchanged`, {
@@ -75,26 +75,29 @@ const BaseTableSection = (superClass) => class extends superClass {
       });
     });
   }
-  
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['divider', '_observe']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['divider', '_observe']);
+  }
+
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === '_observe') {
       this._toggleObserver(value !== 'off');
-    }
-    else {
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     // Default reflected attributes
-    if (!this._divider) { this.divider = divider.ROW; }
+    if (!this._divider) {
+      this.divider = divider.ROW;
+    }
   }
 };
 

@@ -225,11 +225,11 @@
 /**
  * @external {HTMLTableElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTableElement
  */
- 
+
 /**
  * @external {HTMLTableSectionElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTableSectionElement
  */
- 
+
 /**
  * @external {HTMLTableCellElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTableCellElement
  */

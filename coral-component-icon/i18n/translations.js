@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
- export default {
+export default {
   "en-US": {
     "123/[translation hint:default icon alt text]": "123",
     "alert/[translation hint:default icon alt text]": "Alert",

@@ -14,37 +14,37 @@ import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Shell} from '../../../coral-component-shell';
 import {Collection} from '../../../coral-collection';
 
-describe('Shell.Help', function() {
+describe('Shell.Help', function () {
   let htmlSnippet = '<coral-shell-help></coral-shell-help>';
 
-  describe('Namespace', function() {
-    it('should be defined in the Shell namespace', function() {
+  describe('Namespace', function () {
+    it('should be defined in the Shell namespace', function () {
       expect(Shell).to.have.property('Help');
       expect(Shell.Help).to.have.property('Item');
     });
   });
 
-  describe('Instantiation', function() {
-    it('should support creation from markup', function() {
+  describe('Instantiation', function () {
+    it('should support creation from markup', function () {
       const el = helpers.build(htmlSnippet);
       expect(el instanceof Shell.Help).to.equal(true);
     });
 
-    it('should support creation from js', function() {
+    it('should support creation from js', function () {
       const help = new Shell.Help();
       expect(help instanceof Shell.Help).to.equal(true);
     });
 
-    it('should create a help component with predefined items', function() {
+    it('should create a help component with predefined items', function () {
       const el = helpers.build(window.__html__['Shell.Help.base.html']);
       expect(el.items.length).to.equal(6);
     });
-  
+
     helpers.cloneComponent(
       'should be possible to clone using markup',
       window.__html__['Shell.Help.base.html']
     );
-  
+
     const el = new Shell.Help();
     el.items.add({textContent: 'Link'});
     helpers.cloneComponent(
@@ -53,42 +53,41 @@ describe('Shell.Help', function() {
     );
   });
 
-  describe('API', function() {
-    describe('#items', function() {
-      it('should return the Help Menu items', function() {
+  describe('API', function () {
+    describe('#items', function () {
+      it('should return the Help Menu items', function () {
         const el = helpers.build(htmlSnippet);
         expect(el.items instanceof Collection).to.equal(true);
       });
 
-      it('Setting Help Menu items should have no effect', function() {
+      it('Setting Help Menu items should have no effect', function () {
         const el = helpers.build(htmlSnippet);
         const items = el.items;
-        
+
         try {
           el.items = new Collection();
-        }
-        catch(e) {
+        } catch (e) {
           expect(el.items).to.equal(items);
         }
       });
     });
 
-    describe('#placeholder', function() {
-      it('should have a placeholder attribute', function() {
+    describe('#placeholder', function () {
+      it('should have a placeholder attribute', function () {
         const el = helpers.build(htmlSnippet);
         expect(el.placeholder).to.equal('Search for Help');
       });
 
-      it('should have a placeholder attribute initialized with the correct value', function() {
+      it('should have a placeholder attribute initialized with the correct value', function () {
         const el = helpers.build('<coral-shell-help placeholder="placeholder"></coral-shell-help>');
         expect(el.placeholder).to.equal('placeholder');
       });
     });
   });
 
-  describe('Markup', function() {
-    describe('#showError()', function() {
-      it('should display an Error Message on "showError" function call', function(done) {
+  describe('Markup', function () {
+    describe('#showError()', function () {
+      it('should display an Error Message on "showError" function call', function (done) {
         const el = helpers.build(htmlSnippet);
         const resultMessage = el._elements.resultMessage;
         const expectedResultMessage = 'Error fetching results';
@@ -102,8 +101,8 @@ describe('Shell.Help', function() {
       });
     });
 
-    describe('#showResults()', function() {
-      it('should show search results on "showResults" function call', function() {
+    describe('#showResults()', function () {
+      it('should show search results on "showResults" function call', function () {
         const resultItems = [
           {
             'tags': [
@@ -133,7 +132,7 @@ describe('Shell.Help', function() {
         expect(el._elements.results.lastChild.target).to.equal('_blank');
       });
 
-      it('should display a "no results message" on "showResults" function call with an array and total = 0', function(done) {
+      it('should display a "no results message" on "showResults" function call with an array and total = 0', function (done) {
         const el = helpers.build(htmlSnippet);
         el.showResults([], 0);
         const resultMessage = el._elements.resultMessage;
@@ -148,32 +147,32 @@ describe('Shell.Help', function() {
     });
   });
 
-  describe('User Interaction', function() {
-    describe('search', function() {
-      it('should perform a search', function() {
+  describe('User Interaction', function () {
+    describe('search', function () {
+      it('should perform a search', function () {
         const searchSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['Shell.Help.base.html']);
         const search = el.querySelector('coral-search');
         el.on('coral-shell-help:search', searchSpy);
         search.value = 'customer';
-        
+
         search.trigger('coral-search:submit');
-  
+
         expect(searchSpy.called).to.equal(true);
         expect(searchSpy.args[0][0].detail.value).to.equal('customer');
         expect(el._elements.loading.hidden).to.equal(false);
       });
-      
 
-      it('it should clear loading spinner on clear button click', function() {
+
+      it('it should clear loading spinner on clear button click', function () {
         const el = helpers.build(window.__html__['Shell.Help.base.html']);
         const search = el.querySelector('coral-search');
 
         search.value = 'customer';
-        
+
         search.querySelector('[handle=clearButton]').click();
-        
+
         expect(el._elements.loading.hidden).to.equal(true);
       });
     });

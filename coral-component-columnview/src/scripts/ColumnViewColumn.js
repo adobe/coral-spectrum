@@ -107,11 +107,12 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-columnview-column-content',
-      insert: function(content) {
+      insert: function (content) {
         content.classList.add('_coral-AssetList');
         this.appendChild(content);
       }
@@ -172,6 +173,7 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
   get _selectionMode() {
     return this.__selectionMode;
   }
+
   set _selectionMode(value) {
     value = transform.string(value).toLowerCase();
     this.__selectionMode = validate.enumeration(selectionMode)(value) && value || null;
@@ -191,6 +193,7 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
   get _lastSelectedItems() {
     return this.__lastSelectedItems || this.selectedItems;
   }
+
   set _lastSelectedItems(value) {
     this.__lastSelectedItems = value;
   }
@@ -205,8 +208,7 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
     if (event.matchedTarget.hasAttribute('active')) {
       // directly calls the event since setting the attribute will not trigger an event
       this._onItemActiveChange(event);
-    }
-    else {
+    } else {
       // sets the item as active. while handling mouse interaction, items are not toggled
       event.matchedTarget.active = true;
     }
@@ -312,8 +314,7 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
     if (isSelected) {
       // Remember the last selected item
       this._lastSelectedItems.push(item);
-    }
-    else {
+    } else {
       const removedItemIndex = this._lastSelectedItems.indexOf(item);
       if (removedItemIndex !== -1) {
         this._lastSelectedItems = this._lastSelectedItems.splice(removedItemIndex, 1);
@@ -509,7 +510,7 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
   /** @private */
   _handleMutation(mutations) {
     const mutationsCount = mutations.length;
-    for (let i = 0; i < mutationsCount; i++) {
+    for (let i = 0 ; i < mutationsCount ; i++) {
       const mutation = mutations[i];
       // we handle the collection events
       this._triggerCollectionEvents(mutation.addedNodes, mutation.removedNodes);
@@ -528,7 +529,7 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
   _triggerCollectionEvents(addedNodes, removedNodes) {
     let item;
     const addedNodesCount = addedNodes.length;
-    for (let i = 0; i < addedNodesCount; i++) {
+    for (let i = 0 ; i < addedNodesCount ; i++) {
       item = addedNodes[i];
       if (item.tagName === 'CORAL-COLUMNVIEW-ITEM') {
         this.trigger('coral-collection:add', {item});
@@ -536,7 +537,7 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
     }
 
     const removedNodesCount = removedNodes.length;
-    for (let j = 0; j < removedNodesCount; j++) {
+    for (let j = 0 ; j < removedNodesCount ; j++) {
       item = removedNodes[j];
       if (item.tagName === 'CORAL-COLUMNVIEW-ITEM') {
         this.trigger('coral-collection:remove', {item});
@@ -544,7 +545,9 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
     }
   }
 
-  get _contentZones() { return {'coral-columnview-column-content': 'content'}; }
+  get _contentZones() {
+    return {'coral-columnview-column-content': 'content'};
+  }
 
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
@@ -604,8 +607,7 @@ class ColumnViewColumn extends BaseComponent(HTMLElement) {
       window.addEventListener('load', () => {
         this._loadFittingAdditionalItems();
       });
-    }
-    else {
+    } else {
       // macro-task is necessary for the same reasons as listed above
       window.setTimeout(() => {
         this._loadFittingAdditionalItems();

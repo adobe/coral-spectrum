@@ -28,11 +28,9 @@ function isDateInRange(date, startDate, endDate) {
 
   if (startDate === null && endDate === null) {
     return true;
-  }
-  else if (startDate === null) {
+  } else if (startDate === null) {
     return date.toDate() <= endDate;
-  }
-  else if (endDate === null) {
+  } else if (endDate === null) {
     return date.toDate() >= startDate;
   }
 
@@ -43,8 +41,7 @@ function isDateInRange(date, startDate, endDate) {
 function toMoment(value, format) {
   if (value === 'today') {
     return new DateTime.Moment().startOf('day');
-  }
-  else if (DateTime.Moment.isMoment(value)) {
+  } else if (DateTime.Moment.isMoment(value)) {
     return value.isValid() ? value.clone() : null;
   }
 
@@ -253,6 +250,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
 
     return 0;
   }
+
   set startDay(value) {
     if (value >= 0 && value < 7) {
       this._startDay = value;
@@ -273,6 +271,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get headerFormat() {
     return this._headerFormat || 'MMMM YYYY';
   }
+
   set headerFormat(value) {
     this._headerFormat = transform.string(value);
     this._renderCalendar();
@@ -288,6 +287,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get min() {
     return this._min ? this._min.toDate() : null;
   }
+
   set min(value) {
     value = toMoment(value, this.valueFormat);
 
@@ -308,6 +308,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get max() {
     return this._max ? this._max.toDate() : null;
   }
+
   set max(value) {
     value = toMoment(value, this.valueFormat);
 
@@ -330,6 +331,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get valueFormat() {
     return this._valueFormat || INTERNAL_FORMAT;
   }
+
   set valueFormat(value) {
     value = transform.string(value);
 
@@ -342,8 +344,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     if (!this._valueFormat && this._originalValue) {
       setValueFormat(value);
       this.value = this._originalValue;
-    }
-    else {
+    } else {
       setValueFormat(value);
       this._elements.input.value = this.value;
     }
@@ -358,12 +359,12 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get valueAsDate() {
     return this._value ? this._value.toDate() : null;
   }
+
   set valueAsDate(value) {
     if (value instanceof Date) {
       this._valueAsDate = new DateTime.Moment(value);
       this.value = this._valueAsDate;
-    }
-    else {
+    } else {
       this._valueAsDate = null;
       this.value = '';
     }
@@ -380,6 +381,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get value() {
     return this._value ? this._value.format(this.valueFormat) : '';
   }
+
   set value(value) {
     // This is used to change the value if valueformat is also set but afterwards
     this._originalValue = value;
@@ -408,6 +410,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._elements.input.name;
   }
+
   set name(value) {
     this._reflectAttribute('name', value);
 
@@ -424,6 +427,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
@@ -441,6 +445,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -460,6 +465,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get invalid() {
     return super.invalid;
   }
+
   set invalid(value) {
     super.invalid = value;
 
@@ -476,6 +482,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
@@ -586,13 +593,11 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
           if (dates.length) {
             if (this._isBeforeMin(currentMoment)) {
               el = dates[0];
-            }
-            else if (this._isAfterMax(currentMoment)) {
+            } else if (this._isAfterMax(currentMoment)) {
               el = dates[dates.length - 1];
             }
           }
-        }
-        else {
+        } else {
           el = this._elements.body.querySelector('.is-focused') || this._elements.body.querySelector('.is-today');
         }
 
@@ -624,8 +629,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
         window.requestAnimationFrame(() => {
           el.querySelector('._coral-Calendar-date').classList.add('is-focused');
         });
-      }
-      else {
+      } else {
         // Focus the selected date
         el.querySelector('._coral-Calendar-date').classList.add('is-focused');
       }
@@ -715,12 +719,10 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
               result.dateAttr = cursorLocal.format(INTERNAL_FORMAT);
               result.weekIndex = cursor.week();
               result.formattedDate = cursor.format('LL');
-            }
-            else {
+            } else {
               cssClass.push('is-disabled');
             }
-          }
-          else {
+          } else {
             cssClass.push('is-outsideMonth');
           }
 
@@ -786,8 +788,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
         this._getToNewMoment(direction, operator, difference);
         this._setActiveDescendant();
       }
-    }
-    else {
+    } else {
       this._requireCursor();
 
       // if cursor is out of range
@@ -795,8 +796,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
         // advance to closest value in range
         if (this._isBeforeMin(this._cursor)) {
           newMoment = this.min;
-        }
-        else if (this._isAfterMax(this._cursor)) {
+        } else if (this._isAfterMax(this._cursor)) {
           newMoment = this.max;
         }
         newMoment = new DateTime.Moment(newMoment);
@@ -840,8 +840,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
 
     if (el) {
       currentActive = el.dataset.date;
-    }
-    else {
+    } else {
       this._requireCursor();
       currentActive = this._cursor.format(INTERNAL_FORMAT);
     }
@@ -858,8 +857,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
       this._requireCursor();
       this._cursor[operator](1, 'months');
       this._renderCalendar(direction);
-    }
-    else if (newMonth === currentMonth && newYear !== currentYear) {
+    } else if (newMonth === currentMonth && newYear !== currentYear) {
       this._requireCursor();
       this._cursor[operator](1, 'years');
       this._renderCalendar(direction);
@@ -999,11 +997,11 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
    sets focus to appropriate descendant
    */
   focus() {
-      const focusedElement = this._elements.body.querySelector('.is-focused');
-      if (focusedElement !== document.activeElement && !this.disabled) {
-        this._setActiveDescendant();
-        this._elements.body.focus();
-      }
+    const focusedElement = this._elements.body.querySelector('.is-focused');
+    if (focusedElement !== document.activeElement && !this.disabled) {
+      this._setActiveDescendant();
+      this._elements.body.focus();
+    }
   }
 
   static get _attributePropertyMap() {
@@ -1034,7 +1032,9 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     this.setAttribute('role', 'group');
 
     // Default reflected attribute
-    if (!this._valueFormat) { this.valueFormat = INTERNAL_FORMAT; }
+    if (!this._valueFormat) {
+      this.valueFormat = INTERNAL_FORMAT;
+    }
 
     const frag = document.createDocumentFragment();
 

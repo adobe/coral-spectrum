@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-module.exports = function(gulp) {
+module.exports = function (gulp) {
   const fs = require('fs');
   const path = require('path');
   const plumb = require('./plumb');
@@ -22,14 +22,14 @@ module.exports = function(gulp) {
   const modifyFile = require('gulp-modify-file');
   const util = require('../helpers/util');
   const spectrumConfig = require(`../configs/spectrum.conf.js`);
-  
+
   const root = util.getRoot();
-  
-  gulp.task('styles', function() {
+
+  gulp.task('styles', function () {
     return gulp.src(
-        ['src/styles/index.styl', path.join(root, 'coral-*/src/styles/index.styl')],
-        {allowEmpty: true}
-      )
+      ['src/styles/index.styl', path.join(root, 'coral-*/src/styles/index.styl')],
+      {allowEmpty: true}
+    )
       .pipe(plumb())
       .pipe(stylus({
         'include css': true,
@@ -49,17 +49,17 @@ module.exports = function(gulp) {
         spectrumConfig.forEach((selectors) => {
           content = content.replace(selectors.spectrum, selectors.coral);
         });
-        
+
         // Remove topdoc comments
         content = content.replace(/\/\* topdoc.*[\s\S]*?\*\//g, '\n\n');
-        
+
         return content;
       }))
       .pipe(gulp.dest(function (file) {
         return file.base;
       }));
   });
-  
+
   // Up to @adobe/spectrum-css@2.14.0
   // gulp.task('styles-vars', function(done) {
   //   let content = ':root {';

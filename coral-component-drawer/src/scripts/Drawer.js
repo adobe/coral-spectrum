@@ -78,6 +78,7 @@ class Drawer extends BaseComponent(HTMLElement) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -96,11 +97,12 @@ class Drawer extends BaseComponent(HTMLElement) {
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-drawer-content',
-      insert: function(content) {
+      insert: function (content) {
         this._elements.contentWrapper.appendChild(content);
       }
     });
@@ -117,6 +119,7 @@ class Drawer extends BaseComponent(HTMLElement) {
   get direction() {
     return this._direction || direction.DOWN;
   }
+
   set direction(value) {
     value = transform.string(value).toLowerCase();
     this._direction = validate.enumeration(direction)(value) && value || direction.DOWN;
@@ -137,6 +140,7 @@ class Drawer extends BaseComponent(HTMLElement) {
   get open() {
     return this._open || false;
   }
+
   set open(value) {
     const silenced = this._silenced;
 
@@ -176,8 +180,7 @@ class Drawer extends BaseComponent(HTMLElement) {
       window.setTimeout(() => {
         slider.style.height = this._open ? `${slider.scrollHeight}px` : 0;
       }, 10);
-    }
-    else {
+    } else {
       // Make sure it's animated next time
       this._animate = true;
 
@@ -193,14 +196,18 @@ class Drawer extends BaseComponent(HTMLElement) {
     this.open = !this.open;
   }
 
-  get _contentZones() { return {'coral-drawer-content': 'content'}; }
+  get _contentZones() {
+    return {'coral-drawer-content': 'content'};
+  }
 
   /**
    Returns {@link Drawer} direction options.
 
    @return {DrawerDirectionEnum}
    */
-  static get direction() { return direction; }
+  static get direction() {
+    return direction;
+  }
 
   /** @ignore */
   static get observedAttributes() {
@@ -218,8 +225,12 @@ class Drawer extends BaseComponent(HTMLElement) {
     this.classList.add(CLASSNAME, 'coral-Well');
 
     // Default reflected attributes
-    if (!this._direction) { this.direction = direction.DOWN; }
-    if (!this._open) { this.open = false; }
+    if (!this._direction) {
+      this.direction = direction.DOWN;
+    }
+    if (!this._open) {
+      this.open = false;
+    }
 
     // Create a fragment
     const fragment = document.createDocumentFragment();
@@ -240,8 +251,7 @@ class Drawer extends BaseComponent(HTMLElement) {
         child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the label
         content.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else
         this.removeChild(child);
       }

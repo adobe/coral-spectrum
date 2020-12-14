@@ -82,6 +82,7 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._elements.input.name;
   }
+
   set name(value) {
     this._reflectAttribute('name', value);
 
@@ -98,6 +99,7 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   get value() {
     return this._elements.input.value || '';
   }
+
   set value(value) {
     this._elements.input.value = value;
     this._updateClearButton();
@@ -113,6 +115,7 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -133,6 +136,7 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
@@ -150,6 +154,7 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
@@ -164,6 +169,7 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   get labelledBy() {
     return super.labelledBy;
   }
+
   set labelledBy(value) {
     super.labelledBy = value;
     // in case the user focuses the buttons, he will still get a notion of the usage of the component
@@ -181,6 +187,7 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   get placeholder() {
     return this._elements.input.placeholder || '';
   }
+
   set placeholder(value) {
     value = transform.string(value);
     this._reflectAttribute('placeholder', value);
@@ -197,6 +204,7 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   get maxLength() {
     return this._elements.input.maxLength;
   }
+
   set maxLength(value) {
     this._elements.input.maxLength = value;
     this._reflectAttribute('maxlength', this.maxLength);
@@ -213,6 +221,7 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
@@ -229,6 +238,7 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   get icon() {
     return this._icon || 'search';
   }
+
   set icon(value) {
     this._icon = transform.string(value);
     this._reflectAttribute('icon', this._icon);
@@ -240,6 +250,7 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   get invalid() {
     return super.invalid;
   }
+
   set invalid(value) {
     super.invalid = value;
   }
@@ -282,7 +293,7 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
    @ignore
    */
   _updateClearButton() {
-    this._elements.clearButton.style.display = this._elements.input.value === '' ? 'none': '';
+    this._elements.clearButton.style.display = this._elements.input.value === '' ? 'none' : '';
   }
 
   /**
@@ -318,8 +329,9 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
 
    @return {SearchVariantEnum}
    */
-  static get variant() { return variant; }
-
+  static get variant() {
+    return variant;
+}
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       maxlength: 'maxLength'
@@ -338,12 +350,15 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
     this.classList.add(CLASSNAME);
 
     // Default reflected attributes
-    if (!this._icon) { this.icon = 'search'; }
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-
+    if (!this._icon) {
+      this.icon = 'search';
+    }
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+}
     // Support cloneNode
     const templates = this.querySelectorAll('._coral-Search-input, ._coral-Search-icon, ._coral-Search-clear');
-    for (let i = 0; i < templates.length; i++) {
+    for (let i = 0 ; i < templates.length ; i++) {
       templates[i].remove();
     }
 

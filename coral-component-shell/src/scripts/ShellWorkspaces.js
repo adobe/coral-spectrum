@@ -113,7 +113,7 @@ class ShellWorkspaces extends BaseComponent(HTMLElement) {
       // By default, the last one stays selected
       item = item || selection[selection.length - 1];
 
-      for (let i = 0; i < selectionCount; i++) {
+      for (let i = 0 ; i < selectionCount ; i++) {
         if (selection[i] !== item) {
           // Don't trigger change events
           this._preventTriggeringEvents = true;
@@ -203,8 +203,7 @@ class ShellWorkspaces extends BaseComponent(HTMLElement) {
     const target = event.matchedTarget;
     if (target.nextElementSibling) {
       target.nextElementSibling.focus();
-    }
-    else {
+    } else {
       this.items.first().focus();
     }
   }
@@ -218,8 +217,7 @@ class ShellWorkspaces extends BaseComponent(HTMLElement) {
     const target = event.matchedTarget;
     if (target.previousElementSibling) {
       target.previousElementSibling.focus();
-    }
-    else {
+    } else {
       this.items.last().focus();
     }
   }

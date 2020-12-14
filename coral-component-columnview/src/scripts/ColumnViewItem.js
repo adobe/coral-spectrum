@@ -79,11 +79,12 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-columnview-item-content',
-      insert: function(content) {
+      insert: function (content) {
         content.classList.add(`${CLASSNAME}Label`);
         // Insert before chevron
         this.insertBefore(content, this.querySelector('._coral-AssetList-itemChildIndicator'));
@@ -100,11 +101,12 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   get thumbnail() {
     return this._getContentZone(this._elements.thumbnail);
   }
+
   set thumbnail(value) {
     this._setContentZone('thumbnail', value, {
       handle: 'thumbnail',
       tagName: 'coral-columnview-item-thumbnail',
-      insert: function(thumbnail) {
+      insert: function (thumbnail) {
         thumbnail.classList.add(`${CLASSNAME}Thumbnail`);
         // Insert before content
         this.insertBefore(thumbnail, this.content || null);
@@ -123,6 +125,7 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
@@ -143,12 +146,10 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       // navigating between items.
       if (this.selected || (isChromeMacOS && this.getAttribute('aria-level') === '1')) {
         this.removeAttribute('aria-expanded');
-      }
-      else {
+      } else {
         this.setAttribute('aria-expanded', this.active);
       }
-    }
-    else {
+    } else {
       this.classList.remove('is-branch');
       this.removeAttribute('aria-expanded');
     }
@@ -166,6 +167,7 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   get icon() {
     return this._icon || '';
   }
+
   set icon(value) {
     this._icon = transform.string(value);
     this._reflectAttribute('icon', this._icon);
@@ -201,6 +203,7 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
@@ -218,8 +221,7 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       if (this.variant === variant.DRILLDOWN) {
         if (this._selected || (isChromeMacOS && this.getAttribute('aria-level') === '1')) {
           this.removeAttribute('aria-expanded');
-        }
-        else {
+        } else {
           this.setAttribute('aria-expanded', this.active);
         }
       }
@@ -275,6 +277,7 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   get active() {
     return this._active || false;
   }
+
   set active(value) {
     this._active = transform.booleanAttr(value);
     this._reflectAttribute('active', this._active);
@@ -289,8 +292,7 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     if (this.variant === variant.DRILLDOWN) {
       if (this._selected || (isChromeMacOS && this.getAttribute('aria-level') === '1')) {
         this.removeAttribute('aria-expanded');
-      }
-      else {
+      } else {
         this.setAttribute('aria-expanded', this.active);
       }
     }
@@ -327,7 +329,7 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
         if (!itemSelector) {
           itemSelector = new Checkbox();
           itemSelector.setAttribute('coral-columnview-itemselect', '');
-          if (this.classList.contains('is-selected')){
+          if (this.classList.contains('is-selected')) {
             itemSelector.setAttribute('checked', '');
           }
           itemSelector._elements.input.tabIndex = -1;
@@ -337,8 +339,7 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
           this.insertBefore(itemSelector, this.firstChild);
         }
       }
-    }
-    else {
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
@@ -348,7 +349,9 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
 
    @return {ColumnViewItemVariantEnum}
    */
-  static get variant() { return variant; }
+  static get variant() {
+    return variant;
+  }
 
   /** @ignore */
   static get observedAttributes() {
@@ -378,7 +381,9 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     }
 
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
 
     const thumbnail = this._elements.thumbnail;
     const content = this._elements.content;

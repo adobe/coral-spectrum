@@ -18,7 +18,7 @@ let LABELLABLE_ELEMENTS_SELECTOR = 'button,input:not([type=hidden]),keygen,meter
 // IE11 throws syntax error because of the "not()" in the selector for some reason in ColorInputColorProperties
 if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
   LABELLABLE_ELEMENTS_SELECTOR = 'button,keygen,meter,output,progress,select,textarea,';
-  
+
   // Since we can't use :not() we have to indicate all input types
   [
     'text',
@@ -43,7 +43,7 @@ if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('
   ].forEach((type) => {
     LABELLABLE_ELEMENTS_SELECTOR += `input[type=${type}],`;
   });
-  
+
   // Remove last ","
   LABELLABLE_ELEMENTS_SELECTOR = LABELLABLE_ELEMENTS_SELECTOR.slice(0, -1);
 }
@@ -65,76 +65,76 @@ const BaseFormField = (superClass) => class extends superClass {
   /** @ignore */
   constructor() {
     super();
-    
+
     this._events = {
       'capture:change input': '_onTargetInputChange',
       'global:reset': '_onFormReset'
     };
   }
-  
+
   /**
    Whether this field is disabled or not.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute disabled
    @htmlattributereflected
    @abstract
    */
-  
+
   /**
    Whether the current value of this field is invalid or not.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute invalid
    @htmlattributereflected
    @abstract
    */
-  
+
   /**
    Name used to submit the data in a form.
-   
+
    @type {String}
    @default ""
    @htmlattribute name
    @htmlattributereflected
    @abstract
    */
-  
+
   /**
    Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
    This is ignored for checkbox, radio or fileupload.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute readonly
    @htmlattributereflected
    @abstract
    */
-  
+
   /**
    Whether this field is required or not.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute required
    @htmlattributereflected
    @abstract
    */
-  
+
   /**
    This field's current value.
-   
+
    @type {String}
    @default ""
    @htmlattribute value
    @abstract
    */
-  
+
   /**
    Whether the current value of this field is invalid or not.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute invalid
@@ -143,17 +143,18 @@ const BaseFormField = (superClass) => class extends superClass {
   get invalid() {
     return this._invalid || false;
   }
+
   set invalid(value) {
     this._invalid = transform.booleanAttr(value);
     this._reflectAttribute('invalid', this._invalid);
-    
+
     this.setAttribute('aria-invalid', this._invalid);
     this.classList.toggle('is-invalid', this._invalid);
   }
 
   /**
    Reflects the <code>aria-describedby</code> attribute to the labellable element e.g. inner input.
-   
+
    @type {String}
    @default null
    @htmlattribute describedby
@@ -161,15 +162,16 @@ const BaseFormField = (superClass) => class extends superClass {
   get describedBy() {
     return this._getLabellableElement().getAttribute('aria-describedby');
   }
+
   set describedBy(value) {
     value = transform.string(value);
-  
+
     this._getLabellableElement()[value ? 'setAttribute' : 'removeAttribute']('aria-describedby', value);
   }
 
   /**
    Reflects the <code>aria-label</code> attribute to the labellable element e.g. inner input.
-   
+
    @type {String}
    @default null
    @htmlattribute labelled
@@ -177,12 +179,13 @@ const BaseFormField = (superClass) => class extends superClass {
   get labelled() {
     return this._getLabellableElement().getAttribute('aria-label');
   }
+
   set labelled(value) {
     value = transform.string(value);
-  
+
     this._getLabellableElement()[value ? 'setAttribute' : 'removeAttribute']('aria-label', value);
   }
-  
+
   /**
    Reference to a space delimited set of ids for the HTML elements that provide a label for the formField.
    Implementers should override this method to ensure that the appropriate descendant elements are labelled using the
@@ -195,34 +198,34 @@ const BaseFormField = (superClass) => class extends superClass {
   get labelledBy() {
     return this._getLabellableElement().getAttribute('aria-labelledby');
   }
+
   set labelledBy(value) {
     value = transform.string(value);
-  
+
     // gets the element that will get the label assigned. the _getLabellableElement method should be overriden to
     // allow other bevaviors.
     const element = this._getLabellableElement();
     // we get and assign the it that will be passed around
     const elementId = element.id = element.id || commons.getUID();
-  
+
     const currentLabelledBy = element.getAttribute('aria-labelledby');
-  
+
     // we clear the old label assignments
     if (currentLabelledBy && currentLabelledBy !== value) {
       this._updateForAttributes(currentLabelledBy, elementId, true);
     }
-  
+
     if (value) {
       element.setAttribute('aria-labelledby', value);
       if (element.matches(LABELLABLE_ELEMENTS_SELECTOR)) {
         this._updateForAttributes(value, elementId);
       }
-    }
-    else {
+    } else {
       // since no labelledby value was set, we remove everything
       element.removeAttribute('aria-labelledby');
     }
   }
-  
+
   /**
    Target property inside the component that will be updated when a change event is triggered.
    @type {String}
@@ -232,7 +235,7 @@ const BaseFormField = (superClass) => class extends superClass {
   get _componentTargetProperty() {
     return 'value';
   }
-  
+
   /**
    Target property that will be taken from <code>event.target</code> and set into
    {@link BaseFormField#_componentTargetProperty} when a change event is triggered.
@@ -243,7 +246,7 @@ const BaseFormField = (superClass) => class extends superClass {
   get _eventTargetProperty() {
     return 'value';
   }
-  
+
   /**
    Whether the change event needs to be triggered when {@link BaseFormField#_onInputChange} is called.
    @type {Boolean}
@@ -253,7 +256,7 @@ const BaseFormField = (superClass) => class extends superClass {
   get _triggerChangeEvent() {
     return true;
   }
-  
+
   /**
    Gets the element that should get the label. In case none of the valid labelelable items are found, the component
    will be labelled instead.
@@ -263,11 +266,11 @@ const BaseFormField = (superClass) => class extends superClass {
   _getLabellableElement() {
     // Use predefined element or query it
     const element = this._labellableElement || this.querySelector(LABELLABLE_ELEMENTS_SELECTOR);
-    
+
     // Use the found element or the container
     return element || this;
   }
-  
+
   /**
    Gets the internal input that the BaseFormField would watch for change. By default, it searches if the
    <code>_getLabellableElement()</code> is an input. Components can override this function to be able to provide a
@@ -283,7 +286,7 @@ const BaseFormField = (superClass) => class extends superClass {
       (this._targetChangeInput = this._getLabellableElement().matches(TARGET_INPUT_SELECTOR) ?
         this._getLabellableElement() : null);
   }
-  
+
   /**
    Function called whenever the target component triggers a change event. <code>_getTargetChangeInput</code> is used
    internally to determine if the input belongs to the component. If the component decides to override this function,
@@ -293,16 +296,16 @@ const BaseFormField = (superClass) => class extends superClass {
   _onInputChange(event) {
     // stops the current event
     event.stopPropagation();
-    
+
     /** @ignore */
     this[this._componentTargetProperty] = event.target[this._eventTargetProperty];
-    
+
     // Explicitly re-emit the change event after the property has been set
     if (this._triggerChangeEvent) {
       this.trigger('change');
     }
   }
-  
+
   /**
    Resets the formField when a reset is triggered on the parent form.
    @protected
@@ -312,7 +315,7 @@ const BaseFormField = (superClass) => class extends superClass {
       this.reset();
     }
   }
-  
+
   /**
    We capture every input change and validate that it belongs to our target input. If this is the case,
    <code>_onInputChange</code> will be called with the same event.
@@ -326,7 +329,7 @@ const BaseFormField = (superClass) => class extends superClass {
       this._onInputChange(event);
     }
   }
-  
+
   /**
    A utility method for adding the appropriate <code>for</code> attribute to any <code>label</code> elements
    referenced by the <code>labelledBy</code> property value.
@@ -348,14 +351,13 @@ const BaseFormField = (superClass) => class extends superClass {
       const labelElement = document.getElementById(currentValue);
       if (labelElement && labelElement.tagName === 'LABEL') {
         const forAttribute = labelElement.getAttribute('for');
-        
+
         if (remove) {
           // we just remove it when it is our target
           if (forAttribute === elementId) {
             labelElement.removeAttribute('for');
           }
-        }
-        else {
+        } else {
           // if we do not have to remove, it does not matter the current value of the label, we can set it in every
           // case
           labelElement.setAttribute('for', elementId);
@@ -363,7 +365,7 @@ const BaseFormField = (superClass) => class extends superClass {
       }
     });
   }
-  
+
   /**
    Clears the <code>value</code> of formField to the default value.
    */
@@ -371,7 +373,7 @@ const BaseFormField = (superClass) => class extends superClass {
     /** @ignore */
     this.value = '';
   }
-  
+
   /**
    Resets the <code>value</code> to the initial value.
    */
@@ -381,7 +383,7 @@ const BaseFormField = (superClass) => class extends superClass {
     /** @ignore */
     this.value = transform.string(this.getAttribute('value'));
   }
-  
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       describedby: 'describedBy',
@@ -389,7 +391,7 @@ const BaseFormField = (superClass) => class extends superClass {
       readonly: 'readOnly',
     });
   }
-  
+
   // We don't want to watch existing attributes for components that extend native HTML elements
   static get _nativeObservedAttributes() {
     return super.observedAttributes.concat([
@@ -399,7 +401,7 @@ const BaseFormField = (superClass) => class extends superClass {
       'invalid'
     ]);
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([

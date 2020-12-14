@@ -143,12 +143,10 @@ class ColorInputSwatches extends BaseColorInputAbstractSubview(BaseComponent(HTM
     let colorsElementsChanged = false;
     if (!this._cachedColorElements) {
       colorsElementsChanged = true;
-    }
-    else if (this._cachedColorElements.length !== colorElements.length) {
+    } else if (this._cachedColorElements.length !== colorElements.length) {
       colorsElementsChanged = true;
-    }
-    else if (this._cachedColorElements.length === colorElements.length) {
-      for (let i = 0; i < colorElements.length; i++) {
+    } else if (this._cachedColorElements.length === colorElements.length) {
+      for (let i = 0 ; i < colorElements.length ; i++) {
         if (this._cachedColorElements[i] !== colorElements[i]) {
           colorsElementsChanged = true;
           break;
@@ -191,7 +189,7 @@ class ColorInputSwatches extends BaseColorInputAbstractSubview(BaseComponent(HTM
 
     const colorsLength = colors.length;
     let swatchSelected = false;
-    for (let colorCount = 0; colorCount < colorsLength; colorCount++) {
+    for (let colorCount = 0 ; colorCount < colorsLength ; colorCount++) {
       const color = colors[colorCount];
 
       const swatch = new ColorInputSwatch();
@@ -300,7 +298,7 @@ class ColorInputSwatches extends BaseColorInputAbstractSubview(BaseComponent(HTM
   _onFocus(event) {
     const allItems = this.items.getAll();
 
-    for (let i = 0; i < allItems.length; i++) {
+    for (let i = 0 ; i < allItems.length ; i++) {
       const swatch = allItems[i];
       if (!swatch.contains(event.matchedTarget)) {
         swatch.tabIndex = -1;

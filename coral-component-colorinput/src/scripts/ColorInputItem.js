@@ -25,7 +25,7 @@ class ColorInputItem extends BaseComponent(HTMLElement) {
   /**
    The value of the color. This value can be set in different formats (HEX, RGB, RGBA, HSB, HSL, HSLA and CMYK).
    Corrects a hex value, if it is represented by 3 or 6 characters with or without '#'.
-   
+
    e.g:
    HEX:  #FFFFFF
    RGB:  rgb(16,16,16)
@@ -34,7 +34,7 @@ class ColorInputItem extends BaseComponent(HTMLElement) {
    HSL: hsl(360,100,100)
    HSLA: hsla(360,100%,100%, 0.9)
    CMYK: cmyk(0,100,50,0)
-   
+
    @type {String}
    @default ""
    @htmlattribute value
@@ -43,16 +43,17 @@ class ColorInputItem extends BaseComponent(HTMLElement) {
   get value() {
     return this._value || '';
   }
+
   set value(value) {
     // invalid values fallback to empty string
     const color = new Color();
     color.value = value;
-    
+
     // invalid values fallback to empty string
     this._value = color.rgb !== null ? value : '';
     this._reflectAttribute('value', this._value);
   }
-  
+
   /**
    Whether the Item is selected.
    @type {Boolean}
@@ -63,27 +64,28 @@ class ColorInputItem extends BaseComponent(HTMLElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     value = transform.booleanAttr(value);
-    
+
     this._selected = value;
     this._reflectAttribute('selected', this._selected);
-    
+
     this.classList.toggle('is-selected', this._selected);
     this.setAttribute('aria-selected', this._selected);
-    
+
     this.trigger('coral-colorinput-item:_selectedchanged');
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['selected', 'value']);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     // adds the role to support accessibility
     this.setAttribute('role', 'option');
   }

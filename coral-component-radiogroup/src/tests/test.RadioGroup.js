@@ -13,23 +13,23 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {RadioGroup} from '../../../coral-component-radiogroup';
 
-describe('RadioGroup', function() {
-  
-  describe('Instantiation', function() {
-    it('should support creation from markup', function() {
+describe('RadioGroup', function () {
+
+  describe('Instantiation', function () {
+    it('should support creation from markup', function () {
       expect(helpers.build('<coral-radiogroup>') instanceof RadioGroup).to.equal(true);
     });
-    
+
     it('should expose 3 orientations', () => {
       expect(Object.keys(RadioGroup.orientation).length).to.equal(3);
     });
-    
+
     helpers.cloneComponent(
       'should be possible via cloneNode using markup',
       window.__html__['RadioGroup.base.html']
     );
   });
-  
+
   describe('API', () => {
     it('should support orientation.LABELS_BELOW', () => {
       const el = new RadioGroup();
@@ -38,8 +38,8 @@ describe('RadioGroup', function() {
       expect(el.classList.contains('coral-RadioGroup--labelsBelow')).to.be.true;
     });
   });
-  
-  describe('Markup', function() {
+
+  describe('Markup', function () {
     it('should support orientation.LABELS_BELOW', () => {
       const el = helpers.build(window.__html__['RadioGroup.orientation.labelsBelow.html']);
       expect(el.getAttribute('orientation')).to.equal('labelsbelow');

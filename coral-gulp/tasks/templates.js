@@ -10,18 +10,18 @@
  * governing permissions and limitations under the License.
  */
 
-module.exports = function(gulp) {
+module.exports = function (gulp) {
   const path = require('path');
   const plumb = require('./plumb');
   const domly = require('gulp-domly');
   const modifyFile = require('gulp-modify-file');
   const util = require('../helpers/util');
-  
-  gulp.task('templates', function() {
+
+  gulp.task('templates', function () {
     return gulp.src(
-        ['src/templates/*.html', path.join(util.getRoot(), 'coral-*/src/templates/*.html')],
-        {allowEmpty: true}
-      )
+      ['src/templates/*.html', path.join(util.getRoot(), 'coral-*/src/templates/*.html')],
+      {allowEmpty: true}
+    )
       .pipe(plumb())
       .pipe(domly({
         compilerOptions: {

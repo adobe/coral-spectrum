@@ -174,11 +174,12 @@ class Tag extends BaseComponent(HTMLElement) {
   get label() {
     return this._getContentZone(this._elements.label);
   }
+
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: 'coral-tag-label',
-      insert: function(label) {
+      insert: function (label) {
         label.classList.add(`${CLASSNAME}Label`);
         this.insertBefore(label, this.firstChild);
         this._updateAriaLabel();
@@ -197,6 +198,7 @@ class Tag extends BaseComponent(HTMLElement) {
   get closable() {
     return this._closable || false;
   }
+
   set closable(value) {
     this._closable = transform.booleanAttr(value);
     this._reflectAttribute('closable', this._closable);
@@ -225,6 +227,7 @@ class Tag extends BaseComponent(HTMLElement) {
   get value() {
     return typeof this._value === 'string' ? this._value : this.textContent.replace(/\s{2,}/g, ' ').trim();
   }
+
   set value(value) {
     this._value = transform.string(value);
     this._reflectAttribute('value', this._value);
@@ -243,6 +246,7 @@ class Tag extends BaseComponent(HTMLElement) {
   get quiet() {
     return this._quiet || false;
   }
+
   set quiet(value) {
     this._quiet = transform.booleanAttr(value);
     this._reflectAttribute('quiet', this._quiet);
@@ -262,6 +266,7 @@ class Tag extends BaseComponent(HTMLElement) {
   get multiline() {
     return this._multiline || false;
   }
+
   set multiline(value) {
     this._multiline = transform.booleanAttr(value);
     this._reflectAttribute('multiline', this._multiline);
@@ -280,6 +285,7 @@ class Tag extends BaseComponent(HTMLElement) {
   get size() {
     return this._size || size.MEDIUM;
   }
+
   set size(value) {
     value = this._host ? size.MEDIUM : transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
@@ -299,6 +305,7 @@ class Tag extends BaseComponent(HTMLElement) {
   get color() {
     return this._color || color.DEFAULT;
   }
+
   set color(value) {
     value = this._host ? color.DEFAULT : transform.string(value).toLowerCase();
     this._color = validate.enumeration(color)(value) && value || color.DEFAULT;
@@ -314,9 +321,9 @@ class Tag extends BaseComponent(HTMLElement) {
   }
 
   /**
-    Toggle between Tag and Label styles
+   Toggle between Tag and Label styles
 
-    @private
+   @private
    */
   _toggleTagVariant() {
     const isColored = this.color !== color.DEFAULT;
@@ -350,6 +357,7 @@ class Tag extends BaseComponent(HTMLElement) {
       this.value || (this.label || this).textContent.replace(/\s{2,}/g, ' ').trim() :
       this._trackingElement;
   }
+
   set trackingElement(value) {
     super.trackingElement = value;
   }
@@ -373,7 +381,7 @@ class Tag extends BaseComponent(HTMLElement) {
   /**
    Updates the aria-label property from the button and label elements.
 
-      @ignore
+   @ignore
    */
   _updateAriaLabel() {
     const button = this._elements.button;
@@ -406,22 +414,24 @@ class Tag extends BaseComponent(HTMLElement) {
     this.setAttribute('aria-labelledby', label.id);
   }
 
-  get _contentZones() { return {'coral-tag-label': 'label'}; }
-
+  get _contentZones() { return {'coral-tag-label': 'label'};
+}
   /**
    Returns {@link Tag} sizes.
 
    @return {TagSizeEnum}
    */
-  static get size() { return size; }
-
+  static get size() {
+    return size;
+}
   /**
    Returns {@link Tag} colors.
 
    @return {TagColorEnum}
    */
-  static get color() { return color; }
-
+  static get color() {
+    return color;
+}
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -445,8 +455,7 @@ class Tag extends BaseComponent(HTMLElement) {
     // This is required by TagList but we don't need to expose disabled publicly as API
     else if (name === 'role') {
       this._updateAriaLabel();
-    }
-    else {
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
@@ -464,9 +473,12 @@ class Tag extends BaseComponent(HTMLElement) {
     super.render();
 
     // Default reflected attributes
-    if (!this._size) { this.size = size.MEDIUM; }
-    if (!this._color) { this.color = color.DEFAULT; }
-
+    if (!this._size) {
+      this.size = size.MEDIUM;
+    }
+    if (!this._color) {
+      this.color = color.DEFAULT;
+}
     const templateHandleNames = ['input', 'button', 'buttonCell'];
 
     const label = this._elements.label;
@@ -483,8 +495,7 @@ class Tag extends BaseComponent(HTMLElement) {
         templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the label
         label.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else
         this.removeChild(child);
       }

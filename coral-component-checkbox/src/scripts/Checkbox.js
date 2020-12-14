@@ -80,6 +80,7 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
   get checked() {
     return this._checked || false;
   }
+
   set checked(value) {
     this._checked = transform.booleanAttr(value);
     this._reflectAttribute('checked', this._checked);
@@ -98,6 +99,7 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
   get indeterminate() {
     return this._indeterminate || false;
   }
+
   set indeterminate(value) {
     this._indeterminate = transform.booleanAttr(value);
     this._reflectAttribute('indeterminate', this._indeterminate);
@@ -116,11 +118,12 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
   get label() {
     return this._getContentZone(this._elements.label);
   }
+
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: 'coral-checkbox-label',
-      insert: function(label) {
+      insert: function (label) {
         this._elements.labelWrapper.appendChild(label);
       }
     });
@@ -136,6 +139,7 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._elements.input.name;
   }
+
   set name(value) {
     this._reflectAttribute('name', value);
 
@@ -152,6 +156,7 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
   get value() {
     return this._elements.input.value || 'on';
   }
+
   set value(value) {
     this._elements.input.value = value;
   }
@@ -166,6 +171,7 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -185,6 +191,7 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
@@ -202,6 +209,7 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
@@ -216,18 +224,20 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
   get labelled() {
     return super.labelled;
   }
+
   set labelled(value) {
     super.labelled = value;
 
     this._hideLabelIfEmpty();
   }
 
-    /**
+  /**
    Inherited from {@link BaseFormField#labelledBy}.
    */
   get labelledBy() {
     return super.labelledBy;
   }
+
   set labelledBy(value) {
     super.labelledBy = value;
 
@@ -244,6 +254,7 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
       (this.name ? `${this.name}=${this.value}` : '') || (this.label || this).textContent.replace(/\s{2,}/g, ' ').trim() :
       this._trackingElement;
   }
+
   set trackingElement(value) {
     super.trackingElement = value;
   }
@@ -253,14 +264,18 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
 
    @protected
    */
-  get _componentTargetProperty() { return 'checked'; }
+  get _componentTargetProperty() {
+    return 'checked';
+  }
 
   /*
    Indicates to the formField that the 'checked' property has to be extracted from the event.
 
    @protected
    */
-  get _eventTargetProperty() { return 'checked'; }
+  get _eventTargetProperty() {
+    return 'checked';
+  }
 
   /** @private */
   _onInputChange(event) {
@@ -281,8 +296,7 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
         window.requestAnimationFrame(() => {
           this.trigger('change');
         });
-      }
-      else {
+      } else {
         this.trigger('change');
       }
     }
@@ -352,7 +366,9 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
     this.checked = this._initialCheckedState;
   }
 
-  get _contentZones() { return {'coral-checkbox-label': 'label'}; }
+  get _contentZones() {
+    return {'coral-checkbox-label': 'label'};
+  }
 
   /** @ignore */
   static get observedAttributes() {
@@ -388,8 +404,7 @@ class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
         child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the label
         label.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else (e.g labelWrapper)
         this.removeChild(child);
       }

@@ -14,7 +14,7 @@ const path = require('path');
 const istanbul = require('rollup-plugin-istanbul');
 const util = require('../helpers/util');
 
-module.exports = function(config) {
+module.exports = function (config) {
   const root = util.getRoot();
   const CWD = process.cwd();
 
@@ -29,8 +29,7 @@ module.exports = function(config) {
   if (util.isTLB()) {
     snippets = path.join(root, 'coral-*/src/tests/snippets/**/*.html');
     scripts = path.join(root, 'coral-*/src/scripts/*.js');
-  }
-  else {
+  } else {
     snippets = path.join(CWD, 'src/tests/snippets/**/*.html');
     scripts = path.join(CWD, 'src/scripts/*.js');
   }
@@ -61,7 +60,7 @@ module.exports = function(config) {
     customLaunchers: {
       FirefoxHeadless: {
         base: 'Firefox',
-        flags: [ '-headless' ],
+        flags: ['-headless'],
         prefs: {
           // Fixes tabs opened on startup
           'extensions.enabledScopes': 0
@@ -124,7 +123,7 @@ module.exports = function(config) {
     },
 
     html2JsPreprocessor: {
-      processPath: function(filePath) {
+      processPath: function (filePath) {
         let parts = path.dirname(path.normalize(filePath)).split(path.sep);
         const lastFolder = parts.pop();
 

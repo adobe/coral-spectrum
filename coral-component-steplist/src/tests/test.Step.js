@@ -13,67 +13,67 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Step, StepList} from '../../../coral-component-steplist';
 
-describe('Step', function() {
+describe('Step', function () {
   var el;
   var item;
   var item1;
   var item2;
 
-  beforeEach(function(done) {
+  beforeEach(function (done) {
     el = new StepList();
     el.interaction = StepList.interaction.ON;
 
     // Not added to StepList
     item = new Step();
-    
+
     item1 = new Step();
     el.appendChild(item1);
     item2 = new Step();
     el.appendChild(item2);
-    
+
     // Wait for MO
     helpers.next(() => {
       done();
     })
   });
 
-  afterEach(function() {
+  afterEach(function () {
     el = item = item1 = item2 = null;
   });
 
-  describe('Namespace', function() {
-    it('should be defined', function() {
+  describe('Namespace', function () {
+    it('should be defined', function () {
       expect(Step).to.have.property('Label');
     });
   });
-  
-  describe('Instantiation', function() {
+
+  describe('Instantiation', function () {
     helpers.cloneComponent(
       'should be possible to clone the element using markup',
       '<coral-step></coral-step>'
     );
-  
+
     helpers.cloneComponent(
       'should be possible to clone using js',
       new Step()
     );
   });
 
-  describe('API', function() {
-    describe('#label', function() {
+  describe('API', function () {
+    describe('#label', function () {
 
-      it('should default to empty string', function() {
+      it('should default to empty string', function () {
         expect(item.label.textContent).to.equal('');
       });
 
-      it('should be settable', function() {
+      it('should be settable', function () {
         item.label.innerHTML = 'Item 1';
         expect(item.label.innerHTML).to.equal('Item 1');
       });
     });
 
-    describe('#selected', function() {
-      it('should default to false', function() {
+    describe('#selected', function () {
+      it('should default to false', function () {
         expect(item.selected).to.be.false;
         expect(item.hasAttribute('tabindex')).to.be.false;
         expect(item._elements.link.hasAttribute('role')).to.be.false;
@@ -81,9 +81,9 @@ describe('Step', function() {
         expect(item._elements.link.hasAttribute('aria-current')).to.be.false;
       });
 
-      it('should be settable to truthy', function() {
+      it('should be settable to truthy', function () {
         item1.selected = true;
-        
+
         expect(item1.selected).to.be.true;
         expect(item1.hasAttribute('selected')).to.be.true;
         expect(item1.classList.contains('is-selected')).to.be.true;
@@ -94,19 +94,19 @@ describe('Step', function() {
       });
     });
 
-    describe('#labelled', function() {
-      it('should default to empty string', function() {
+    describe('#labelled', function () {
+      it('should default to empty string', function () {
         expect(item.labelled).to.equal('');
       });
 
-      it('should be settable', function(done) {
+      it('should be settable', function (done) {
         item.labelled = 'Item 1';
-        helpers.next(function() {
+        helpers.next(function () {
           expect(item.getAttribute('labelled')).to.equal(item.labelled);
           expect(item._elements.stepMarkerContainer.getAttribute('aria-label')).to.equal(item.labelled);
           expect(item._elements.stepMarkerContainer.hasAttribute('aria-hidden')).to.be.false;
           item.labelled = null;
-          helpers.next(function() {
+          helpers.next(function () {
             expect(item.hasAttribute('labelled')).to.be.false;
             expect(item._elements.stepMarkerContainer.hasAttribute('aria-label')).to.be.false;
             expect(item._elements.stepMarkerContainer.getAttribute('aria-hidden')).to.equal('true');
@@ -115,14 +115,14 @@ describe('Step', function() {
         });
       });
 
-      it('should reflect attribute', function(done) {
+      it('should reflect attribute', function (done) {
         item.setAttribute('labelled', 'Item 1');
-        helpers.next(function() {
+        helpers.next(function () {
           expect(item.labelled).to.equal('Item 1');
           expect(item._elements.stepMarkerContainer.getAttribute('aria-label')).to.equal(item.labelled);
           expect(item._elements.stepMarkerContainer.hasAttribute('aria-hidden')).to.be.false;
           item.removeAttribute('labelled');
-          helpers.next(function() {
+          helpers.next(function () {
             expect(item.labelled).to.equal('');
             expect(item._elements.stepMarkerContainer.hasAttribute('aria-label')).to.be.false;
             expect(item._elements.stepMarkerContainer.getAttribute('aria-hidden')).to.equal('true');
@@ -132,19 +132,19 @@ describe('Step', function() {
       });
     });
 
-    describe('#labelledBy', function() {
-      it('should default to empty string', function() {
+    describe('#labelledBy', function () {
+      it('should default to empty string', function () {
         expect(item.labelledBy).to.equal('');
       });
 
-      it('should be settable', function(done) {
+      it('should be settable', function (done) {
         item.labelledBy = 'foo';
-        helpers.next(function() {
+        helpers.next(function () {
           expect(item.getAttribute('labelledby')).to.equal(item.labelledBy);
           expect(item._elements.stepMarkerContainer.getAttribute('aria-labelledby')).to.equal(item.labelledBy);
           expect(item._elements.stepMarkerContainer.hasAttribute('aria-hidden')).to.be.false;
           item.labelledBy = null;
-          helpers.next(function() {
+          helpers.next(function () {
             expect(item.hasAttribute('labelledby')).to.be.false;
             expect(item._elements.stepMarkerContainer.hasAttribute('aria-labelledby')).to.be.false;
             expect(item._elements.stepMarkerContainer.getAttribute('aria-hidden')).to.equal('true');
@@ -153,14 +153,14 @@ describe('Step', function() {
         });
       });
 
-      it('should reflect attribute', function(done) {
+      it('should reflect attribute', function (done) {
         item.setAttribute('labelledby', 'foo');
-        helpers.next(function() {
+        helpers.next(function () {
           expect(item.labelledBy).to.equal('foo');
           expect(item._elements.stepMarkerContainer.getAttribute('aria-labelledby')).to.equal(item.labelledBy);
           expect(item._elements.stepMarkerContainer.hasAttribute('aria-hidden')).to.be.false;
           item.removeAttribute('labelledby');
-          helpers.next(function() {
+          helpers.next(function () {
             expect(item.labelledBy).to.equal('');
             expect(item._elements.stepMarkerContainer.hasAttribute('aria-labelledby')).to.be.false;
             expect(item._elements.stepMarkerContainer.getAttribute('aria-hidden')).to.equal('true');
@@ -170,18 +170,18 @@ describe('Step', function() {
       });
     });
 
-    describe('#describedBy', function() {
-      it('should default to empty string', function() {
+    describe('#describedBy', function () {
+      it('should default to empty string', function () {
         expect(item.describedBy).to.equal('');
       });
 
-      it('should be settable', function(done) {
+      it('should be settable', function (done) {
         item.describedBy = 'bar';
-        helpers.next(function() {
+        helpers.next(function () {
           expect(item.getAttribute('describedby')).to.equal(item.describedBy);
           expect(item._elements.link.getAttribute('aria-describedby')).to.equal(item.describedBy);
           item.describedBy = null;
-          helpers.next(function() {
+          helpers.next(function () {
             expect(item.hasAttribute('describedby')).to.be.false;
             expect(item._elements.link.hasAttribute('aria-describedby')).to.be.false;
             done();
@@ -189,13 +189,13 @@ describe('Step', function() {
         });
       });
 
-      it('should reflect attribute', function(done) {
+      it('should reflect attribute', function (done) {
         item.setAttribute('describedby', 'foo');
-        helpers.next(function() {
+        helpers.next(function () {
           expect(item.describedBy).to.equal('foo');
           expect(item._elements.link.getAttribute('aria-describedby')).to.equal(item.describedBy);
           item.removeAttribute('describedby');
-          helpers.next(function() {
+          helpers.next(function () {
             expect(item.describedBy).to.equal('');
             expect(item._elements.link.hasAttribute('aria-describedby')).to.be.false;
             done();
@@ -205,15 +205,15 @@ describe('Step', function() {
     });
   });
 
-  describe('Implementation Details', function() {
-    it('tabindex should be removed when StepList interaction is OFF', function() {
+  describe('Implementation Details', function () {
+    it('tabindex should be removed when StepList interaction is OFF', function () {
       expect(item1.hasAttribute('tabindex')).to.be.false;
       expect(item1._elements.link.getAttribute('role')).to.equal('link');
       expect(item1._elements.link.getAttribute('tabindex')).to.equal('0');
       expect(item1._elements.link.getAttribute('aria-current')).to.equal('step');
 
       el.interaction = StepList.interaction.OFF;
-      
+
       expect(item1._elements.link.hasAttribute('role')).to.be.false;
       expect(item1._elements.link.hasAttribute('tabindex')).to.be.false;
       expect(item1._elements.link.getAttribute('aria-current')).to.equal('step');

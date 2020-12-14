@@ -27,13 +27,13 @@ class AnchorListItem extends BaseListItem(BaseComponent(HTMLAnchorElement)) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Events
     this._delegateEvents({
       click: '_onClick'
     });
   }
-  
+
   /**
    Whether this field is disabled or not.
    @type {Boolean}
@@ -44,19 +44,19 @@ class AnchorListItem extends BaseListItem(BaseComponent(HTMLAnchorElement)) {
   get disabled() {
     return super.disabled;
   }
+
   set disabled(value) {
     super.disabled = value;
-    
+
     if (this.disabled) {
       // It's not tabbable anymore
       this.setAttribute('tabindex', '-1');
-    }
-    else {
+    } else {
       // Now it's tabbable
       this.setAttribute('tabindex', '0');
     }
   }
-  
+
   /**
    Inherited from {@link BaseComponent#trackingElement}.
    */
@@ -66,10 +66,11 @@ class AnchorListItem extends BaseListItem(BaseComponent(HTMLAnchorElement)) {
       (this.content || this).textContent.replace(/\s{2,}/g, ' ').trim() :
       this._trackingElement;
   }
+
   set trackingElement(value) {
     super.trackingElement = value;
   }
-  
+
   /** @private */
   _onClick(event) {
     // Support disabled property
@@ -77,11 +78,11 @@ class AnchorListItem extends BaseListItem(BaseComponent(HTMLAnchorElement)) {
       event.preventDefault();
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
   }
 }

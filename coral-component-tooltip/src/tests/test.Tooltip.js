@@ -13,13 +13,13 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Tooltip} from '../../../coral-component-tooltip';
 
-describe('Tooltip', function() {
-  describe('Namespace', function() {
-    it('should be defined in Coral namespace', function() {
+describe('Tooltip', function () {
+  describe('Namespace', function () {
+    it('should be defined in Coral namespace', function () {
       expect(Tooltip).to.have.property('Content');
     });
 
-    it('should have correct default property values', function() {
+    it('should have correct default property values', function () {
       var tooltip = helpers.build(new Tooltip());
       helpers.target.appendChild(tooltip);
 
@@ -28,7 +28,7 @@ describe('Tooltip', function() {
     });
   });
 
-  describe('Instantiation', function() {
+  describe('Instantiation', function () {
     helpers.cloneComponent(
       'should be possible to clone the element using markup',
       '<coral-tooltip></coral-tooltip>'
@@ -40,10 +40,10 @@ describe('Tooltip', function() {
     );
   });
 
-  describe('API', function() {
+  describe('API', function () {
 
-    describe('#content', function() {
-      it('should set content', function() {
+    describe('#content', function () {
+      it('should set content', function () {
         var tooltip = helpers.build(new Tooltip());
         tooltip.content.innerHTML = 'Test';
 
@@ -51,12 +51,12 @@ describe('Tooltip', function() {
       });
     });
 
-    describe('#open', function() {
-      it('should open when target element on proper events', function() {
+    describe('#open', function () {
+      it('should open when target element on proper events', function () {
         let target;
         let tooltip;
 
-        beforeEach(function() {
+        beforeEach(function () {
           target = helpers.overlay.createFloatingTarget();
           tooltip = new Tooltip().set({
             content: {
@@ -69,20 +69,20 @@ describe('Tooltip', function() {
           helpers.target.appendChild(tooltip);
         });
 
-        it('should open on hover', function() {
+        it('should open on hover', function () {
           expect(tooltip.open).to.equal(false, 'tooltip closed initially');
           helpers.mouseEvent('mouseenter', target);
           expect(tooltip.open).to.equal(true, 'tooltip open after hovering on target');
         });
 
-        it('should open on focusin', function() {
+        it('should open on focusin', function () {
           expect(tooltip.open).to.equal(false, 'tooltip closed initially');
           helpers.mouseEvent('focusin', target);
           expect(tooltip.open).to.equal(true, 'tooltip open after focusing on target');
         });
       });
 
-      it('should not display the tooltip until the specified delay', function() {
+      it('should not display the tooltip until the specified delay', function () {
         var target = helpers.overlay.createFloatingTarget();
 
         var tooltip = new Tooltip().set({
@@ -101,8 +101,8 @@ describe('Tooltip', function() {
       });
     });
 
-    describe('#target', function() {
-      it('should remove and add target listeners when target changed', function() {
+    describe('#target', function () {
+      it('should remove and add target listeners when target changed', function () {
         var target = helpers.overlay.createStaticTarget();
 
         var tooltip = new Tooltip().set({
@@ -143,7 +143,7 @@ describe('Tooltip', function() {
         expect(tooltip.open).to.equal(true, 'tooltip open after clicking new target');
       });
 
-      it('should be hidden when focusout triggered on the target element', function(done) {
+      it('should be hidden when focusout triggered on the target element', function (done) {
         var target = helpers.overlay.createFloatingTarget();
 
         var tooltip = new Tooltip().set({
@@ -161,13 +161,13 @@ describe('Tooltip', function() {
 
         helpers.mouseEvent('mouseleave', target);
 
-        helpers.next(function() {
+        helpers.next(function () {
           expect(tooltip.open).to.be.false;
           done();
         });
       });
 
-      it('should clear any remaining timeouts when focusout triggered on the target element', function(done) {
+      it('should clear any remaining timeouts when focusout triggered on the target element', function (done) {
         var target = helpers.overlay.createFloatingTarget();
 
         var tooltip = new Tooltip().set({
@@ -179,14 +179,14 @@ describe('Tooltip', function() {
 
         expect(tooltip.open).to.be.false;
 
-        tooltip.on('coral-overlay:open', function() {
+        tooltip.on('coral-overlay:open', function () {
           expect(tooltip.open).to.be.true;
           helpers.mouseEvent('mouseenter', target);
           helpers.mouseEvent('mouseleave', target);
         });
 
-        tooltip.on('coral-overlay:close', function() {
-          helpers.next(function() {
+        tooltip.on('coral-overlay:close', function () {
+          helpers.next(function () {
             expect(tooltip.open).to.be.false;
             done();
           });
@@ -196,8 +196,8 @@ describe('Tooltip', function() {
       });
     });
 
-    describe('#interaction', function() {
-      it('should not open on target mouseenter when interaction="off"', function() {
+    describe('#interaction', function () {
+      it('should not open on target mouseenter when interaction="off"', function () {
         var target = helpers.overlay.createFloatingTarget();
 
         var tooltip = new Tooltip().set({
@@ -219,7 +219,7 @@ describe('Tooltip', function() {
       });
     });
 
-    it('should not open on target mouseenter when interaction="off"', function() {
+    it('should not open on target mouseenter when interaction="off"', function () {
       var target = helpers.overlay.createFloatingTarget();
 
       var tooltip = new Tooltip().set({
@@ -248,7 +248,7 @@ describe('Tooltip', function() {
     });
   });
 
-  describe('Implementation Details', function() {
+  describe('Implementation Details', function () {
     it('should handle slide in animation', (done) => {
       const target = helpers.overlay.createFloatingTarget();
 
@@ -273,7 +273,7 @@ describe('Tooltip', function() {
       helpers.mouseEvent('mouseenter', target);
     });
 
-    it('should support multiple tooltips on the same target', function() {
+    it('should support multiple tooltips on the same target', function () {
       var target = helpers.overlay.createFloatingTarget();
 
       var tooltipTop = new Tooltip().set({
@@ -305,7 +305,7 @@ describe('Tooltip', function() {
       expect(tooltipBottom.open).to.equal(true, 'tooltipBottom open after hovering on target');
     });
 
-    it('should not set the tabindex attribute on a target element which already has a tabindex attribute', function() {
+    it('should not set the tabindex attribute on a target element which already has a tabindex attribute', function () {
       var target = helpers.overlay.createFloatingTarget();
       target.setAttribute('tabindex', 1);
 
@@ -318,7 +318,7 @@ describe('Tooltip', function() {
       expect(target.getAttribute('tabindex')).to.equal('1');
     });
 
-    it('should hide the tip if no target defined', function() {
+    it('should hide the tip if no target defined', function () {
       var tooltip = new Tooltip();
       helpers.target.appendChild(tooltip);
 

@@ -27,6 +27,7 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
   /** @ignore */
   constructor() {
     super();
+
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
@@ -50,6 +51,7 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
   get icon() {
     return this._elements.icon.icon;
   }
+
   set icon(value) {
     this._elements.icon.icon = value;
   }
@@ -63,11 +65,12 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
   get label() {
     return this._getContentZone(this._elements.label);
   }
+
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: 'coral-shell-solution-label',
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
@@ -84,6 +87,7 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
   get linked() {
     return this._linked || false;
   }
+
   set linked(value) {
     this._linked = transform.booleanAttr(value);
     this._reflectAttribute('linked', this._linked);
@@ -91,11 +95,12 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
     this.classList.toggle(`${CLASSNAME}--linked`, this._linked);
   }
 
-  get _contentZones() { return {'coral-shell-solution-label': 'label'}; }
-
+  get _contentZones() { return {'coral-shell-solution-label': 'label'};
+}
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['icon', 'linked']); }
-
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['icon', 'linked']);
+}
   /** @ignore */
   render() {
     super.render();
@@ -110,8 +115,9 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
     const label = this._elements.label;
 
     // Remove it so we can process children
-    if (label) { label.remove(); }
-
+    if (label) {
+      label.remove();
+}
     // Move any remaining elements into the content sub-component
     while (this.firstChild) {
       const child = this.firstChild;
@@ -119,8 +125,7 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
       if (child.nodeType === Node.TEXT_NODE ||
         child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'icon') {
         label.appendChild(child);
-      }
-      else {
+      } else {
         this.removeChild(child);
       }
     }

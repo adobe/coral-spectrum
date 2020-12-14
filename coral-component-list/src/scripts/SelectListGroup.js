@@ -26,7 +26,7 @@ const CLASSNAME = '_coral-SelectList-group';
 class SelectListGroup extends BaseComponent(HTMLElement) {
   /**
    The label of the group. It reflects the <code>label</code> attribute to the DOM.
-   
+
    @type {String}
    @default ""
    @htmlattribute label
@@ -35,16 +35,17 @@ class SelectListGroup extends BaseComponent(HTMLElement) {
   get label() {
     return this._label || '';
   }
+
   set label(value) {
     this._label = transform.string(value);
     this._reflectAttribute('label', this._label);
-  
+
     this.setAttribute('aria-label', this._label);
   }
-  
+
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+
    @type {SelectableCollection}
    @readonly
    */
@@ -58,18 +59,18 @@ class SelectListGroup extends BaseComponent(HTMLElement) {
     }
     return this._items;
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['label']);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     this.setAttribute('role', 'group');
   }
 }

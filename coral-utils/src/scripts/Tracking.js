@@ -13,14 +13,14 @@
 /**
  Signature function used to track the usage of Coral components. By default, there is no out of the box
  implementation as tracking is agnostic of the underlying technology.
- 
+
  You need to implement a new tracker and add it with: <code>Coral.tracking.addListener(fn(){ });</code>
- 
+
  The <code>fn()</code> callback will receive multiple arguments:
  * <code>trackData</code> - an object with fixed structure e.g. <code>{type: "button", eventType: "click", element: "save settings", feature: "sites"}</code>
  * <code>event</code> - the CustomEvent or MouseEvent details object.
  * <code>component</code> - the component reference object.
- 
+
  Using the above data you can map it to your own analytics tracker.
  */
 class Tracking {
@@ -28,15 +28,15 @@ class Tracking {
   constructor() {
     /**
      All registered trackers.
-     
+
      @type {Array<Function>}
      */
     this._trackers = [];
   }
-  
+
   /**
    Returns <code>true</code> if the tracking is disabled for the given component, otherwise false.
-   
+
    @param {HTMLElement} component
    @returns {Boolean}
    */
@@ -45,10 +45,10 @@ class Tracking {
       typeof component.tracking !== 'undefined' &&
       component.tracking === component.constructor.tracking.OFF;
   }
-  
+
   /**
    Get tracking annotations from the parent Component to which the event was bound.
-   
+
    @param {BaseComponent} component
    @returns {{trackingElement: String, trackingElement: String}}
    */
@@ -59,19 +59,19 @@ class Tracking {
         trackingFeature: ''
       };
     }
-    
+
     // Eg. from DOM trackingfeature="sites"
     const trackingFeature = component.trackingFeature || '';
-    
+
     // Eg. from DOM trackingelement="rail toggle"
     const trackingElement = component.trackingElement || '';
-    
+
     return {trackingFeature, trackingElement};
   }
-  
+
   /**
    Returns a tracking data object that can be used to compile data to send to an actual Analytics tracker.
-   
+
    @param {String} eventType
    @param {String} targetType
    @param {CustomEvent} event
@@ -81,10 +81,10 @@ class Tracking {
    */
   _createTrackingData(eventType, targetType, event, component, childComponent) {
     const parentComponentType = (component.getAttribute('is') || component.tagName).toLowerCase();
-    
+
     // Gather data into the Coral Tracking structure.
     const trackDataFromAttr = this._getTrackingDataFromComponentAttr(component);
-    
+
     // Compile data
     /**
      The default Coral tracking data object
@@ -100,10 +100,10 @@ class Tracking {
       rootType: parentComponentType
     };
   }
-  
+
   /**
    Add a tracking callback. This will be invoked every time a tracking event is emitted.
-   
+
    @param {TrackingCallback} trackingCallback
    The callback to execute.
    */
@@ -111,26 +111,26 @@ class Tracking {
     if (typeof trackingCallback !== 'function') {
       throw new Error('Coral.Tracking: Tracker must be a function callback.');
     }
-    
+
     if (this._trackers.indexOf(trackingCallback) !== -1) {
       throw new Error('Coral.Tracking: Tracker callback cannot be added twice.');
     }
-    
+
     this._trackers.push(trackingCallback);
   }
-  
+
   /**
    Removes a tracker.
-   
+
    @param {TrackingCallback} trackingCallback
    */
   removeListener(trackingCallback) {
     this._trackers = this._trackers.filter(trackerFn => trackerFn !== trackingCallback);
   }
-  
+
   /**
    Notify all trackers subscribed.
-   
+
    @param {String} eventType
    Eg. click, select, etc.
    @param {String} targetType
@@ -149,23 +149,24 @@ class Tracking {
     ) {
       return false;
     }
-    
+
     const args = Array.prototype.slice.call(arguments, [2]);
-    
+
     const trackingData = this._createTrackingData(eventType, targetType, event, component, childComponent);
     this._trackers.forEach((trackerFn) => {
       trackerFn.apply(null, [trackingData].concat(args));
     });
-    
+
     return true;
   }
 }
+
 /**
  Executes the callback when ever there is an interaction inside the component that needs to be tracked. This can be used
  to get insight on how users interact with the page and the features that available.
- 
+
  @typedef {function} TrackingCallback
- 
+
  @param {Object} trackData
  Object containing the data to be tracked. It contains the properties <code>type</code>, <code>eventType</code>,
  <code>element</code> and <code>feature</code>.
@@ -176,7 +177,7 @@ class Tracking {
  */
 /**
  Tracking API to get insight on component usage.
- 
+
  @type {Tracking}
  */
 const tracking = new Tracking();

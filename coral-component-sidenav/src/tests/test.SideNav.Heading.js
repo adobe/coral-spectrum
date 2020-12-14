@@ -13,15 +13,15 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {SideNav} from '../../../coral-component-sidenav';
 
-describe('SideNav.Heading', function() {
-  describe('Namespace', function() {
-    it('should be defined', function() {
+describe('SideNav.Heading', function () {
+  describe('Namespace', function () {
+    it('should be defined', function () {
       expect(SideNav).to.have.property('Heading');
     });
   });
-  
-  describe('Instantiation', function() {
-    it('should be possible using new', function() {
+
+  describe('Instantiation', function () {
+    it('should be possible using new', function () {
       const el = helpers.build(new SideNav.Heading());
       expect(el.nodeName).to.equal('CORAL-SIDENAV-HEADING');
     });

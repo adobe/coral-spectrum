@@ -14,9 +14,9 @@ import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {ColumnView} from '../../../coral-component-columnview';
 import {commons, i18n} from '../../../coral-utils';
 
-describe('ColumnView', function() {
+describe('ColumnView', function () {
   // handles the loading and annotating of the columns so that content can be loaded remotely
-  const onLoadEvent = function(event) {
+  const onLoadEvent = function (event) {
     const cv = event.target;
     const item = event.detail.item;
     const column = event.detail.column;
@@ -30,7 +30,7 @@ describe('ColumnView', function() {
     }
 
     // we load the url from the snippets instead of using ajax
-    const data = window.__html__[`examples/${url}` ];
+    const data = window.__html__[`examples/${url}`];
     if (typeof data !== 'undefined') {
       const t = document.createElement('div');
       t.innerHTML = data;
@@ -39,8 +39,7 @@ describe('ColumnView', function() {
       // if it is a preview column we add it directly
       if (el.matches('coral-columnview-preview')) {
         cv.setNextColumn(el, column, false);
-      }
-      else {
+      } else {
         // otherwise we treat it as a normal column
         const contentWrapper = el.querySelector('coral-columnview-column-content');
         const columnWrapper = contentWrapper.closest('coral-columnview-column');
@@ -58,8 +57,7 @@ describe('ColumnView', function() {
             const nextSrcToLoad = columnWrapper.dataset.src;
             if (!nextSrcToLoad) {
               column.removeAttribute('data-src');
-            }
-            else {
+            } else {
               column.setAttribute('data-src', nextSrcToLoad);
             }
 
@@ -71,12 +69,12 @@ describe('ColumnView', function() {
     }
   };
 
-  describe('Namespace', function() {
-    it('should be defined in the Coral namespace', function() {
+  describe('Namespace', function () {
+    it('should be defined in the Coral namespace', function () {
       expect(ColumnView).to.have.property('Column');
     });
 
-    it('should define the selection mode in an enum', function() {
+    it('should define the selection mode in an enum', function () {
       expect(ColumnView.selectionMode).to.exist;
       expect(ColumnView.selectionMode.NONE).to.equal('none');
       expect(ColumnView.selectionMode.SINGLE).to.equal('single');
@@ -84,41 +82,46 @@ describe('ColumnView', function() {
       expect(Object.keys(ColumnView.selectionMode).length).to.equal(3);
     });
   });
-  
-  describe('Instantiation', function() {
+
+  describe('Instantiation', function () {
     helpers.cloneComponent(
       'should be possible to clone via markup',
       window.__html__['ColumnView.full.html']
     );
   });
 
-  describe('API', function() {
+  describe('API', function () {
     let el;
 
-    beforeEach(function() {
+    beforeEach(function () {
       helpers.target.addEventListener('coral-columnview:loaditems', onLoadEvent);
       el = helpers.build(new ColumnView());
       el.focus();
     });
 
-    afterEach(function() {
+    afterEach(function () {
       helpers.target.removeEventListener('coral-columnview:loaditems', onLoadEvent);
       el = null;
     });
 
-    describe('#activeItem', function() {});
-    describe('#items', function() {});
-    describe('#columns', function() {});
-    describe('#selectedItem', function() {});
-    describe('#selectedItems', function() {});
+    describe('#activeItem', function () {
+    });
+    describe('#items', function () {
+    });
+    describe('#columns', function () {
+    });
+    describe('#selectedItem', function () {
+    });
+    describe('#selectedItems', function () {
+    });
 
-    describe('#selectionMode', function() {
-      it('should default to false', function() {
+    describe('#selectionMode', function () {
+      it('should default to false', function () {
         expect(el.selectionMode).to.equal(ColumnView.selectionMode.NONE);
         expect(el.columns.length).to.equal(0);
       });
 
-      it('should set the selectionMode on the internal columns', function(done) {
+      it('should set the selectionMode on the internal columns', function (done) {
         el.selectionMode = ColumnView.selectionMode.SINGLE;
 
         const column = new ColumnView.Column();
@@ -126,7 +129,7 @@ describe('ColumnView', function() {
         el.columns.add(column);
 
         // we wait for the mutation observer to kick in
-        helpers.next(function() {
+        helpers.next(function () {
           expect(column._selectionMode).to.equal(ColumnView.selectionMode.SINGLE);
 
           done();
@@ -134,22 +137,24 @@ describe('ColumnView', function() {
       });
     });
 
-    describe('#setNextColumn()', function() {});
+    describe('#setNextColumn()', function () {
+    });
   });
 
-  describe('Markup', function() {});
+  describe('Markup', function () {
+  });
 
-  describe('Events', function() {
+  describe('Events', function () {
     let changeSpy;
     let loadItemsSpy;
     let columnActiveChangeSpy;
 
-    const spiedLoadEvent = function(event) {
+    const spiedLoadEvent = function (event) {
       loadItemsSpy(event);
       onLoadEvent(event);
     };
 
-    beforeEach(function() {
+    beforeEach(function () {
       changeSpy = sinon.spy();
       loadItemsSpy = sinon.spy();
       columnActiveChangeSpy = sinon.spy();
@@ -159,7 +164,7 @@ describe('ColumnView', function() {
       helpers.target.addEventListener('coral-columnview:activeitemchange', columnActiveChangeSpy);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       // clears the event listeners so the target is clean
       helpers.target.removeEventListener('coral-columnview:change', changeSpy);
       helpers.target.removeEventListener('coral-columnview:loaditems', spiedLoadEvent);
@@ -169,9 +174,9 @@ describe('ColumnView', function() {
     });
 
     // @todo: add test to make sure loaditems it not triggered when the "item" is not active.
-    describe('#coral-columnview:loaditems', function() {
+    describe('#coral-columnview:loaditems', function () {
       // @flaky
-      it.skip('should fire a "coral-columnview:loaditems" event after initial load if there is space on screen for more items', function(done) {
+      it.skip('should fire a "coral-columnview:loaditems" event after initial load if there is space on screen for more items', function (done) {
         const loadItemsSpy = sinon.spy();
         const columnView = new ColumnView();
         const column = new ColumnView.Column();
@@ -180,36 +185,36 @@ describe('ColumnView', function() {
 
         helpers.target.appendChild(columnView);
         columnView.appendChild(column);
-        
+
         // The event is triggered in a macrotask
-        window.setTimeout(function() {
+        window.setTimeout(function () {
           expect(loadItemsSpy.callCount).to.not.equal(0);
           done();
         });
       });
 
       // @flaky
-      it('should fire a "coral-columnview:loaditems" event until there is no more space on screen', function(done) {
+      it('should fire a "coral-columnview:loaditems" event until there is no more space on screen', function (done) {
         const columnView = new ColumnView();
         // Set height to detect overflow is occurring due to items being added
         columnView.style.height = '100px';
         const column = new ColumnView.Column();
 
-        // @flaky this test sometimes fails to call 'coral-columnview:loaditems' within 2 secs, so call done before uncaught exception 
+        // @flaky this test sometimes fails to call 'coral-columnview:loaditems' within 2 secs, so call done before uncaught exception
         const timeout = window.setTimeout(done, 1900);
-  
+
         // this callback should be called several times until there is no more space available
-        columnView.on('coral-columnview:loaditems', function() {
-          
+        columnView.on('coral-columnview:loaditems', function () {
+
           // should trigger a new "coral-columnview:loaditems" asynchronously if space available
           column.items.add(new ColumnView.Item());
 
           // calculate if there is more space and more items should be loaded
           let itemsHeight = 0;
-          column.items.getAll().forEach(function(item) {
+          column.items.getAll().forEach(function (item) {
             itemsHeight += item.offsetHeight + parseFloat(getComputedStyle(item).marginTop);
           });
-          
+
           if (itemsHeight >= columnView.offsetHeight) {
             clearTimeout(timeout);
             done();
@@ -221,31 +226,31 @@ describe('ColumnView', function() {
       });
     });
 
-    describe('#coral-columnview:change', function() {
-      it('should be triggered once when multiple items are clicked with shift key', function() {
+    describe('#coral-columnview:change', function () {
+      it('should be triggered once when multiple items are clicked with shift key', function () {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         // no initial events
         expect(changeSpy.callCount).to.equal(0);
-    
+
         const columns = el.columns.getAll();
-    
+
         const firstColumn = columns[0];
-    
+
         // First select an item
         firstColumn.items.first().selected = true;
         expect(changeSpy.callCount).to.equal(1);
-    
+
         // Then select another item with shift key
         firstColumn.items.last().querySelector('[coral-columnview-itemselect]').dispatchEvent(new MouseEvent('click', {
           bubbles: true,
           shiftKey: true
         }));
-    
+
         expect(changeSpy.callCount).to.equal(2, 'The event should be triggered once');
         expect(firstColumn.selectedItems).to.deep.equal(firstColumn.items.getAll());
       });
-      
-      it('should not be triggered when the column content is clicked an nothing was active', function() {
+
+      it('should not be triggered when the column content is clicked an nothing was active', function () {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -269,7 +274,7 @@ describe('ColumnView', function() {
         expect(removeItemSpy.callCount).to.equal(0, 'No column was attempted to be cleaned');
       });
 
-      it('should be triggered when an item is selected', function() {
+      it('should be triggered when an item is selected', function () {
         const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -306,7 +311,7 @@ describe('ColumnView', function() {
         expect(changeSpy.getCall(2).args[0].detail.oldSelection).to.deep.equal([items[0], items[2]], 'Old selection should include both items');
       });
 
-      it('should be triggered when an item is activated', function() {
+      it('should be triggered when an item is activated', function () {
         const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -346,7 +351,7 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.calledBefore(changeSpy)).to.be.true;
       });
 
-      it('should be triggered when an item is activated (selectionMode=single)', function() {
+      it('should be triggered when an item is activated (selectionMode=single)', function () {
         const el = helpers.build(window.__html__['ColumnView.selectionMode.single.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -378,7 +383,7 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.calledBefore(changeSpy)).to.be.true;
       });
 
-      it('should not be triggered if selectionMode=NONE', function() {
+      it('should not be triggered if selectionMode=NONE', function () {
         const el = helpers.build(window.__html__['ColumnView.base.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -393,7 +398,7 @@ describe('ColumnView', function() {
         expect(changeSpy.callCount).to.equal(0);
       });
 
-      it('should be triggered when selection is in a different column', function() {
+      it('should be triggered when selection is in a different column', function () {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -418,7 +423,7 @@ describe('ColumnView', function() {
         expect(changeSpy.getCall(1).args[0].detail.oldSelection).to.deep.equal([selectedItem1]);
       });
 
-      it('should be triggered when another column is activated', function() {
+      it('should be triggered when another column is activated', function () {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -441,7 +446,7 @@ describe('ColumnView', function() {
         expect(changeSpy.getCall(1).args[0].detail.oldSelection).to.deep.equal([selectedItem]);
       });
 
-      it('should be triggered when the the content background is clicked', function() {
+      it('should be triggered when the the content background is clicked', function () {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -463,7 +468,7 @@ describe('ColumnView', function() {
         expect(changeSpy.getCall(1).args[0].detail.oldSelection).to.deep.equal([selectedItem]);
       });
 
-      it('should be triggered when the the content background of a column without selection is clicked', function() {
+      it('should be triggered when the the content background of a column without selection is clicked', function () {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -490,20 +495,20 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.calledBefore(changeSpy)).to.be.true;
       });
 
-      it('should not active when column is selected ', function() {
-          const el = helpers.build(window.__html__['ColumnView.full.html']);
-          const columns = el.columns.getAll();
-          const firstColumn = columns[0];
-          const selectedItem = firstColumn.items.first();
-          const secondColumn = columns[1];
-          selectedItem.setAttribute("selected",true);
-          const selectedActiveColumn = selectedItem.getAttribute("active");
-          const secondColumnActive = secondColumn.getAttribute("active");
-          expect(secondColumnActive).to.be.null;
-          expect(selectedActiveColumn).to.be.null;
+      it('should not active when column is selected ', function () {
+        const el = helpers.build(window.__html__['ColumnView.full.html']);
+        const columns = el.columns.getAll();
+        const firstColumn = columns[0];
+        const selectedItem = firstColumn.items.first();
+        const secondColumn = columns[1];
+        selectedItem.setAttribute("selected", true);
+        const selectedActiveColumn = selectedItem.getAttribute("active");
+        const secondColumnActive = secondColumn.getAttribute("active");
+        expect(secondColumnActive).to.be.null;
+        expect(selectedActiveColumn).to.be.null;
       });
 
-      it('should trigger an event when a selected item is removed', function(done) {
+      it('should trigger an event when a selected item is removed', function (done) {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -524,11 +529,11 @@ describe('ColumnView', function() {
 
         expect(changeSpy.callCount).to.equal(2);
 
-        helpers.next(function() {
+        helpers.next(function () {
           selectedItem2.remove();
 
           // we need to wait for the mutation observers
-          helpers.next(function() {
+          helpers.next(function () {
             expect(changeSpy.callCount).to.equal(3, 'Removing an item should trigger an event');
             expect(changeSpy.getCall(2).args[0].detail.selection).to.deep.equal([selectedItem1]);
             expect(changeSpy.getCall(2).args[0].detail.oldSelection).to.deep.equal([selectedItem1, selectedItem2]);
@@ -538,8 +543,8 @@ describe('ColumnView', function() {
       });
     });
 
-    describe('#coral-columnview:navigate', function() {
-      it('should not be triggered when the column view initializes', function() {
+    describe('#coral-columnview:navigate', function () {
+      it('should not be triggered when the column view initializes', function () {
         const navigateSpy = sinon.spy();
 
         helpers.target.addEventListener('coral-columnview:navigate', navigateSpy);
@@ -547,15 +552,15 @@ describe('ColumnView', function() {
         helpers.build(window.__html__['ColumnView.full.html']);
         // no initial events
         expect(navigateSpy.callCount).to.equal(0);
-  
+
         // we clean the test afterwards
         helpers.target.removeEventListener('coral-columnview:navigate', navigateSpy);
       });
 
-      it('should be triggered when a new column is added and it is ready', function(done) {
+      it('should be triggered when a new column is added and it is ready', function (done) {
         const navigateSpy = sinon.spy();
 
-        const navigateEvent = function(event) {
+        const navigateEvent = function (event) {
           navigateSpy(event);
 
           const columns = event.target.columns.getAll();
@@ -586,11 +591,11 @@ describe('ColumnView', function() {
         // activates the item which will load a new column
         item.click();
       });
-      
-      it('should be triggered when a column is removed', function(done) {
+
+      it('should be triggered when a column is removed', function (done) {
         const navigateSpy = sinon.spy();
 
-        const navigateEvent = function(event) {
+        const navigateEvent = function (event) {
           navigateSpy(event);
           helpers.next(() => {
             const columns = event.target.columns.getAll();
@@ -623,8 +628,8 @@ describe('ColumnView', function() {
       });
     });
 
-    describe('#coral-columnview:activeitemchange', function() {
-      it('should be triggered when an item is activated', function() {
+    describe('#coral-columnview:activeitemchange', function () {
+      it('should be triggered when an item is activated', function () {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -658,7 +663,7 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.getCall(1).args[0].detail.oldActiveItem).to.equal(firstItem, 'Old active item is the first item');
       });
 
-      it('should support activating an item in a previous column', function() {
+      it('should support activating an item in a previous column', function () {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -694,7 +699,7 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.getCall(1).args[0].detail.oldActiveItem).to.equal(firstItem);
       });
 
-      it('should not trigger an event when the same item is activated', function() {
+      it('should not trigger an event when the same item is activated', function () {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -722,7 +727,7 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.callCount).to.equal(1, 'Activating it again causes no change');
       });
 
-      it('should trigger an event when the active parent is activated again', function() {
+      it('should trigger an event when the active parent is activated again', function () {
         const el = helpers.build(window.__html__['ColumnView.base.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -750,7 +755,7 @@ describe('ColumnView', function() {
         const newColumn = columns[columns.length - 1];
 
         expect(lastColumn).not.to.equal(newColumn, 'A new column has been added');
-      
+
         const newActiveItem = newColumn.items.first();
         newActiveItem.click();
 
@@ -768,7 +773,7 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.getCall(2).args[0].detail.oldActiveItem).to.equal(newActiveItem);
       });
 
-      it('should be triggered when the the content background is clicked', function() {
+      it('should be triggered when the the content background is clicked', function () {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -798,7 +803,7 @@ describe('ColumnView', function() {
         expect(columnActiveChangeSpy.callCount).to.equal(1, 'The event should not be triggered again');
       });
 
-      it('should trigger an event when the active parent is focused with selected items in next column', function(done) {
+      it('should trigger an event when the active parent is focused with selected items in next column', function (done) {
         const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -855,7 +860,7 @@ describe('ColumnView', function() {
 
           helpers.keypress('right', el.activeItem);
 
-          helpers.next(function() {
+          helpers.next(function () {
             expect(document.activeElement.id).to.equal(newActiveItem.id);
             expect(newActiveItem.selected);
 
@@ -867,7 +872,7 @@ describe('ColumnView', function() {
         });
       });
 
-      it('should not trigger an event when the active parent is clicked with selected items in next column', function(done) {
+      it('should not trigger an event when the active parent is clicked with selected items in next column', function (done) {
         const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
         // no initial events
         expect(columnActiveChangeSpy.callCount).to.equal(0);
@@ -897,7 +902,7 @@ describe('ColumnView', function() {
         expect(lastColumn).not.to.equal(newColumn, 'A new column has been added');
 
         // we wait for the column to be ready since it was just added
-        helpers.next(function() {
+        helpers.next(function () {
           let newActiveItem = newColumn.items.first();
           newActiveItem.querySelector('[coral-columnview-itemselect]').click();
           newActiveItem.focus();
@@ -951,101 +956,101 @@ describe('ColumnView', function() {
   });
 
   // @todo: add tests for keys
-  describe('User Interaction', function() {
-    it('should select all items between the last selected item and item clicked with shift key (down)', function() {
+  describe('User Interaction', function () {
+    it('should select all items between the last selected item and item clicked with shift key (down)', function () {
       const el = helpers.build(window.__html__['ColumnView.full.html']);
       const columns = el.columns.getAll();
-    
+
       const firstColumn = columns[0];
 
       const items = firstColumn.items.getAll();
       const fromIndex = 1;
       const toIndex = 4;
-    
+
       // First select an item
       items[fromIndex].selected = true;
-    
+
       // Then select another item with shift key
       items[toIndex].querySelector('[coral-columnview-itemselect]').dispatchEvent(new MouseEvent('click', {
         bubbles: true,
         shiftKey: true
       }));
-    
-      items.forEach(function(item, i) {
+
+      items.forEach(function (item, i) {
         const isSelected = (i >= fromIndex && i <= toIndex);
         expect(item.selected).to.equal(isSelected);
       });
     });
 
-    describe('#focus()', function() {
-      it('should marshall focus to active element', function() {
+    describe('#focus()', function () {
+      it('should marshall focus to active element', function () {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         el.focus();
         expect(document.activeElement.id).to.equal(el.activeItem.id);
       });
     });
 
-    describe('Keyboard Interaction', function() {
-      it('ArrowUp should focus previous item', function(done) {
+    describe('Keyboard Interaction', function () {
+      it('ArrowUp should focus previous item', function (done) {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         const activeItem = el.activeItem;
         activeItem.trigger('click');
         helpers.keypress('up', activeItem);
-        helpers.next(function() {
+        helpers.next(function () {
           expect(document.activeElement.id).to.equal(el.columns.getAll()[1].items.first().id);
           expect(document.activeElement.id).to.equal(el.activeItem.id);
           done();
         });
       });
 
-      it('ArrowDown should focus next item', function(done) {
+      it('ArrowDown should focus next item', function (done) {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         const activeItem = el.activeItem;
         activeItem.trigger('click');
         helpers.keypress('down', activeItem);
-        helpers.next(function() {
+        helpers.next(function () {
           expect(document.activeElement.id).to.equal(el.columns.getAll()[1].items.getAll()[2].id);
           expect(document.activeElement.id).to.equal(el.activeItem.id);
           done();
         });
       });
 
-      it('ArrowRight on item with variant=drilldown should focus first item in next column', function(done) {
+      it('ArrowRight on item with variant=drilldown should focus first item in next column', function (done) {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         const activeItem = el.items.getAll()[2];
         activeItem.trigger('click');
         helpers.keypress('right', activeItem);
-        window.setTimeout(function() {
-          helpers.next(function() {
+        window.setTimeout(function () {
+          helpers.next(function () {
             expect(document.activeElement.id).to.equal(el.columns.getAll()[1].items.first().id);
             done();
           });
         }, 200);
       });
 
-      it('ArrowLeft on item with previous column should focus active item in previous column', function(done) {
+      it('ArrowLeft on item with previous column should focus active item in previous column', function (done) {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         const activeItem = el.activeItem;
         activeItem.trigger('click');
         helpers.keypress('left', activeItem);
-        window.setTimeout(function() {
+        window.setTimeout(function () {
           expect(document.activeElement.id).to.equal(el.columns.first().items.getAll()[1].id);
           expect(document.activeElement.id).to.equal(el.activeItem.id);
           done();
         }, 200);
       });
 
-      it('Space on item should toggle selection', function(done) {
+      it('Space on item should toggle selection', function (done) {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         const activeItem = el.items.getAll()[2];
         activeItem.trigger('click');
         helpers.keypress('space', activeItem);
-        helpers.next(function() {
+        helpers.next(function () {
           expect(activeItem.selected).to.be.true;
           expect(activeItem.hasAttribute('selected')).to.be.true;
           expect(activeItem).to.equal(el.selectedItem);
           helpers.keypress('space', activeItem);
-          helpers.next(function() {
+          helpers.next(function () {
             expect(activeItem.selected).to.be.false;
             expect(activeItem.hasAttribute('selected')).to.be.false;
             expect(activeItem.id).to.equal(el.activeItem.id);
@@ -1054,14 +1059,14 @@ describe('ColumnView', function() {
         });
       });
 
-      describe('When selectionMode="single", ', function() {
+      describe('When selectionMode="single", ', function () {
 
-        it('Shift+ArrowUp on item should select previous item', function(done) {
+        it('Shift+ArrowUp on item should select previous item', function (done) {
           const el = helpers.build(window.__html__['ColumnView.selectionMode.single.html']);
           const activeItem = el.items.getAll()[1];
           activeItem.trigger('click');
           helpers.keypress('up', activeItem, [16]);
-          helpers.next(function() {
+          helpers.next(function () {
             expect(activeItem.previousElementSibling.selected).to.be.true;
             expect(activeItem.previousElementSibling.hasAttribute('selected')).to.be.true;
             expect(activeItem.previousElementSibling.id).to.equal(el.selectedItem.id);
@@ -1069,12 +1074,12 @@ describe('ColumnView', function() {
           });
         });
 
-        it('Shift+ArrowDown on item should select next item', function(done) {
+        it('Shift+ArrowDown on item should select next item', function (done) {
           const el = helpers.build(window.__html__['ColumnView.selectionMode.single.html']);
           const activeItem = el.items.getAll()[1];
           activeItem.trigger('click');
           helpers.keypress('down', activeItem, [16]);
-          helpers.next(function() {
+          helpers.next(function () {
             expect(activeItem.nextElementSibling.selected).to.be.true;
             expect(activeItem.nextElementSibling.hasAttribute('selected')).to.be.true;
             expect(activeItem.nextElementSibling.id).to.equal(el.selectedItem.id);
@@ -1082,12 +1087,12 @@ describe('ColumnView', function() {
           });
         });
 
-        it('Command+A on item should select just the current item', function(done) {
+        it('Command+A on item should select just the current item', function (done) {
           const el = helpers.build(window.__html__['ColumnView.selectionMode.single.html']);
           const activeItem = el.items.getAll()[1];
           activeItem.trigger('click');
           helpers.keypress('a', activeItem, [91]);
-          helpers.next(function() {
+          helpers.next(function () {
             expect(activeItem.selected).to.be.true;
             expect(activeItem.hasAttribute('selected')).to.be.true;
             expect(activeItem.id).to.equal(el.selectedItem.id);
@@ -1095,13 +1100,13 @@ describe('ColumnView', function() {
           });
         });
 
-        it('Command+Shift+A on item should deselect all', function(done) {
+        it('Command+Shift+A on item should deselect all', function (done) {
           const el = helpers.build(window.__html__['ColumnView.selectionMode.single.html']);
           const activeItem = el.items.getAll()[1];
           activeItem.trigger('click');
           activeItem.selected = true;
-          helpers.keypress('a', activeItem, [16,91]);
-          helpers.next(function() {
+          helpers.keypress('a', activeItem, [16, 91]);
+          helpers.next(function () {
             expect(activeItem.selected).to.be.false;
             expect(activeItem.hasAttribute('selected')).to.be.false;
             expect(activeItem.id).to.equal(el.activeItem.id);
@@ -1111,7 +1116,7 @@ describe('ColumnView', function() {
         });
       });
 
-      it('should make activeItem tabbable, and other items focusable', function() {
+      it('should make activeItem tabbable, and other items focusable', function () {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         const activeItem = el.activeItem;
         const previousElementSibling = el.activeItem.previousElementSibling;
@@ -1125,13 +1130,13 @@ describe('ColumnView', function() {
         expect(previousElementSibling.tabIndex).to.equal(0);
       });
 
-      describe('When selectionMode="multiple", ', function() {
-        it('Shift+ArrowUp on item should select current and previous item', function(done) {
+      describe('When selectionMode="multiple", ', function () {
+        it('Shift+ArrowUp on item should select current and previous item', function (done) {
           const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
           const activeItem = el.items.getAll()[1];
           activeItem.trigger('click');
           helpers.keypress('up', activeItem, [16]);
-          helpers.next(function() {
+          helpers.next(function () {
             expect(activeItem.selected).to.be.true;
             expect(activeItem.hasAttribute('selected')).to.be.true;
             expect(activeItem.previousElementSibling.selected).to.be.true;
@@ -1140,12 +1145,12 @@ describe('ColumnView', function() {
             done();
           });
         });
-        it('Shift+ArrowDown on item should select current and next item', function(done) {
+        it('Shift+ArrowDown on item should select current and next item', function (done) {
           const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
           const activeItem = el.items.getAll()[1];
           activeItem.trigger('click');
           helpers.keypress('down', activeItem, [16]);
-          helpers.next(function() {
+          helpers.next(function () {
             expect(activeItem.selected).to.be.true;
             expect(activeItem.hasAttribute('selected')).to.be.true;
             expect(activeItem.nextElementSibling.selected).to.be.true;
@@ -1154,65 +1159,65 @@ describe('ColumnView', function() {
             done();
           });
         });
-        it('Command+A on item should select all items in the current column', function(done) {
+        it('Command+A on item should select all items in the current column', function (done) {
           const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
           const activeItem = el.items.getAll()[1];
           activeItem.trigger('click');
           helpers.keypress('a', activeItem, [91]);
-          helpers.next(function() {
+          helpers.next(function () {
             expect(el.selectedItems.length).to.equal(el.columns.first().items.length);
             done();
           });
         });
 
-        describe('with one or more items selected', function() {
-          it('Command+Shift+A on item should deselect all', function(done) {
+        describe('with one or more items selected', function () {
+          it('Command+Shift+A on item should deselect all', function (done) {
             const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
             const activeItem = el.items.getAll()[1];
             activeItem.trigger('click');
             helpers.keypress('a', activeItem, [91]);
-            helpers.next(function() {
+            helpers.next(function () {
               expect(el.selectedItems.length).to.equal(el.columns.first().items.length);
-              helpers.keypress('a', activeItem, [16,91]);
-              helpers.next(function() {
+              helpers.keypress('a', activeItem, [16, 91]);
+              helpers.next(function () {
                 expect(el.selectedItems.length).to.equal(0);
                 expect(activeItem.id).to.equal(el.activeItem.id);
                 done();
               });
             });
           });
-          it('Esc on item should deselect all', function(done) {
+          it('Esc on item should deselect all', function (done) {
             const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
             const activeItem = el.items.getAll()[1];
             activeItem.trigger('click');
             helpers.keypress('a', activeItem, [91]);
-            helpers.next(function() {
+            helpers.next(function () {
               expect(el.selectedItems.length).to.equal(el.columns.first().items.length);
               helpers.keypress('esc', activeItem);
-              helpers.next(function() {
+              helpers.next(function () {
                 expect(el.selectedItems.length).to.equal(0);
                 expect(activeItem.id).to.equal(el.activeItem.id);
                 done();
               });
             });
           });
-          it('ArrowUp on selected item should focus next item without selecting or activating it', function(done) {
+          it('ArrowUp on selected item should focus next item without selecting or activating it', function (done) {
             const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
             const activeItem = el.items.getAll()[1];
             activeItem.trigger('click');
             activeItem.selected = true;
             helpers.keypress('up', activeItem);
-            helpers.next(function() {
+            helpers.next(function () {
               expect(document.activeElement.id).to.equal(activeItem.previousElementSibling.id);
               helpers.keypress('space', document.activeElement);
-              helpers.next(function() {
-                helpers.next(function() {
+              helpers.next(function () {
+                helpers.next(function () {
                   expect(document.activeElement.selected).to.be.true;
                   expect(document.activeElement.hasAttribute('selected')).to.be.true;
                   expect(el.selectedItems.length).to.equal(2);
                   helpers.keypress('space', document.activeElement);
-                    helpers.next(function() {
-                      helpers.next(function() {
+                  helpers.next(function () {
+                    helpers.next(function () {
                       expect(document.activeElement.selected).to.be.false;
                       expect(document.activeElement.hasAttribute('selected')).to.be.false;
                       expect(el.selectedItems.length).to.equal(1);
@@ -1224,23 +1229,23 @@ describe('ColumnView', function() {
               });
             });
           });
-          it('ArrowDown on selected item should focus next item without selecting or activating it', function(done) {
+          it('ArrowDown on selected item should focus next item without selecting or activating it', function (done) {
             const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
             const activeItem = el.items.getAll()[1];
             activeItem.trigger('click');
             activeItem.selected = true;
             helpers.keypress('down', activeItem);
-            helpers.next(function() {
+            helpers.next(function () {
               expect(document.activeElement.id).to.equal(activeItem.nextElementSibling.id);
               helpers.keypress('space', document.activeElement);
-              helpers.next(function() {
-                helpers.next(function() {
+              helpers.next(function () {
+                helpers.next(function () {
                   expect(document.activeElement.selected).to.be.true;
                   expect(document.activeElement.hasAttribute('selected')).to.be.true;
                   expect(el.selectedItems.length).to.equal(2);
                   helpers.keypress('space', document.activeElement);
-                  helpers.next(function() {
-                    helpers.next(function() {
+                  helpers.next(function () {
+                    helpers.next(function () {
                       expect(document.activeElement.selected).to.be.false;
                       expect(document.activeElement.hasAttribute('selected')).to.be.false;
                       expect(el.selectedItems.length).to.equal(1);
@@ -1256,7 +1261,7 @@ describe('ColumnView', function() {
       });
     });
 
-    it('should select all items between the last selected item and item clicked with shift key (down)', function(done) {
+    it('should select all items between the last selected item and item clicked with shift key (down)', function (done) {
       const el = helpers.build(window.__html__['ColumnView.full.html']);
       const firstColumn = el.columns.first();
 
@@ -1273,7 +1278,7 @@ describe('ColumnView', function() {
         shiftKey: true
       }));
 
-      items.forEach(function(item, i) {
+      items.forEach(function (item, i) {
         const isSelected = (i >= fromIndex && i <= toIndex);
         expect(item.selected).to.equal(isSelected);
       });
@@ -1282,17 +1287,17 @@ describe('ColumnView', function() {
     });
   });
 
-  describe('Accessibility', function() {
+  describe('Accessibility', function () {
     let changeSpy;
     let loadItemsSpy;
     let columnActiveChangeSpy;
 
-    const spiedLoadEvent = function(event) {
+    const spiedLoadEvent = function (event) {
       loadItemsSpy(event);
       onLoadEvent(event);
     };
 
-    beforeEach(function() {
+    beforeEach(function () {
       changeSpy = sinon.spy();
       loadItemsSpy = sinon.spy();
       columnActiveChangeSpy = sinon.spy();
@@ -1302,7 +1307,7 @@ describe('ColumnView', function() {
       helpers.target.addEventListener('coral-columnview:activeitemchange', columnActiveChangeSpy);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       // clears the event listeners so the target is clean
       helpers.target.removeEventListener('coral-columnview:change', changeSpy);
       helpers.target.removeEventListener('coral-columnview:loaditems', spiedLoadEvent);
@@ -1311,31 +1316,31 @@ describe('ColumnView', function() {
       changeSpy = loadItemsSpy = columnActiveChangeSpy = null;
     });
 
-    it('should have role equal to "tree"', function() {
+    it('should have role equal to "tree"', function () {
       const el = helpers.build(window.__html__['ColumnView.full.html']);
       expect(el.getAttribute('role')).to.equal('tree');
     });
 
-    describe('First column', function() {
-      it('should have role equal to "presentation", while subsequent columns have role equal to "group"', function() {
+    describe('First column', function () {
+      it('should have role equal to "presentation", while subsequent columns have role equal to "group"', function () {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         expect(el.columns.first().getAttribute('role')).to.equal('presentation');
         expect(el.columns.getAll()[1].getAttribute('role')).to.equal('group');
       });
     });
 
-    describe('when selectionMode equals "multiple"', function() {
-      it('should have aria-multiselectable equal to "true"', function(done) {
+    describe('when selectionMode equals "multiple"', function () {
+      it('should have aria-multiselectable equal to "true"', function (done) {
         const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
         expect(el.getAttribute('aria-multiselectable')).to.equal('true');
         el.selectionMode = ColumnView.selectionMode.NONE;
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el.getAttribute('aria-multiselectable')).to.equal('false');
           done();
         });
       });
 
-      it('should announce item select or unselect using a aria-live region', function(done) {
+      it('should announce item select or unselect using a aria-live region', function (done) {
         const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
         const accessibilityState = el._elements.accessibilityState;
         expect(accessibilityState.getAttribute('role')).to.equal('presentation');
@@ -1346,10 +1351,10 @@ describe('ColumnView', function() {
         // select an item
         const item = el.items.getAll()[1];
         item.focus();
-        window.setTimeout(function() {
-          
+        window.setTimeout(function () {
+
           item.selected = true;
-          helpers.next(function() {
+          helpers.next(function () {
             expect(item.selected).to.be.true;
             // the selected item's accessibility state should be ", checked"
             expect(item._elements.accessibilityState.textContent).to.equal(i18n.get(', checked'));
@@ -1357,7 +1362,7 @@ describe('ColumnView', function() {
             expect(item._elements.accessibilityState.getAttribute('lang')).to.equal(i18n.locale);
 
             // wait 20ms for ColumnView accessibilityState to update
-            window.setTimeout(function() {
+            window.setTimeout(function () {
               // ColumnView accessibilityState should announce assertively,
               expect(accessibilityState.getAttribute('aria-live')).to.equal('assertive');
               // and should not be hidden.
@@ -1372,7 +1377,7 @@ describe('ColumnView', function() {
 
               // deselect the item
               item.selected = false;
-              helpers.next(function() {
+              helpers.next(function () {
                 expect(item.selected).to.be.false;
                 // item accessibility should be empty for an unselected item
                 expect(item._elements.accessibilityState.textContent).to.equal('');
@@ -1381,7 +1386,7 @@ describe('ColumnView', function() {
                 expect(accessibilityState.hidden).to.be.true;
                 expect(accessibilityState.innerHTML).to.equal('');
                 // wait 20ms for ColumnView accessibilityState to update
-                window.setTimeout(function() {
+                window.setTimeout(function () {
                   // accessibilityState firstChild to announce should be <span><span lang="fr">Français</span>, unchecked<span>
                   spans = accessibilityState.querySelectorAll('span');
                   expect(spans.length).to.equal(2);
@@ -1397,21 +1402,21 @@ describe('ColumnView', function() {
         }, 400);
       });
     });
-    describe('#coral-interactive', function() {
-      it('Clicking on checkbox within an item should not toggle selection of the item', function(done) {
+    describe('#coral-interactive', function () {
+      it('Clicking on checkbox within an item should not toggle selection of the item', function (done) {
         const el = helpers.build(window.__html__['ColumnView.coral-interactive.html']);
         const activeItem = el.items.getAll()[0];
         const coralInteractiveElement = activeItem.querySelector('[coral-interactive]');
         coralInteractiveElement.focus();
         coralInteractiveElement.click();
-        helpers.next(function() {
+        helpers.next(function () {
           expect(activeItem.selected).to.be.false;
           expect(activeItem.hasAttribute('selected')).to.be.false;
           expect(el.activeItem).to.be.null;
           expect(el.selectedItem).to.be.null;
           expect(coralInteractiveElement.checked).to.be.true;
           coralInteractiveElement.click();
-          helpers.next(function() {
+          helpers.next(function () {
             expect(activeItem.selected).to.be.false;
             expect(activeItem.hasAttribute('selected')).to.be.false;
             expect(el.activeItem).to.be.null;
@@ -1421,51 +1426,51 @@ describe('ColumnView', function() {
           });
         });
       });
-      it('Using arrow key with focus on checkbox within an item should not navigate', function(done) {
+      it('Using arrow key with focus on checkbox within an item should not navigate', function (done) {
         const el = helpers.build(window.__html__['ColumnView.coral-interactive.html']);
         const activeItem = el.items.getAll()[0];
         const coralInteractiveElement = activeItem.querySelector('[coral-interactive]');
         coralInteractiveElement.focus();
         helpers.keypress('down', document.activeElement);
-        helpers.next(function() {
+        helpers.next(function () {
           expect(document.activeElement).to.equal(coralInteractiveElement);
           done();
         });
       });
     });
-    describe('when selectionMode equals "single"', function() {
-      it('should have aria-multiselectable equal to "false"', function(done) {
+    describe('when selectionMode equals "single"', function () {
+      it('should have aria-multiselectable equal to "false"', function (done) {
         const el = helpers.build(window.__html__['ColumnView.selectionMode.single.html']);
         expect(el.getAttribute('aria-multiselectable')).to.equal('false');
         el.selectionMode = ColumnView.selectionMode.MULTIPLE;
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el.getAttribute('aria-multiselectable')).to.equal('true');
           done();
         });
       });
     });
 
-    describe('when selectionMode equals "none"', function() {
-      it('should have aria-multiselectable equal to "false"', function(done) {
+    describe('when selectionMode equals "none"', function () {
+      it('should have aria-multiselectable equal to "false"', function (done) {
         const el = helpers.build(window.__html__['ColumnView.selectionMode.multiple.html']);
         el.selectionMode = ColumnView.selectionMode.NONE;
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el.getAttribute('aria-multiselectable')).to.equal('false');
           done();
         });
       });
     });
 
-    describe('when item is expanded', function() {
-      it('should have aria-expanded equal to "true"', function(done) {
+    describe('when item is expanded', function () {
+      it('should have aria-expanded equal to "true"', function (done) {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el.activeItem.getAttribute('aria-expanded')).to.equal('true');
           done();
         });
       });
 
-      it('should express ownership of expanded column using aria-owns', function(done) {
+      it('should express ownership of expanded column using aria-owns', function (done) {
         function navigateEvent(event) {
           const el = event.target;
           const columns = el.columns;
@@ -1490,16 +1495,16 @@ describe('ColumnView', function() {
   });
 
   // @todo: add test for preview resize
-  describe('Implementation Details', function() {
-    beforeEach(function() {
+  describe('Implementation Details', function () {
+    beforeEach(function () {
       helpers.target.addEventListener('coral-columnview:loaditems', onLoadEvent);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       helpers.target.removeEventListener('coral-columnview:loaditems', onLoadEvent);
     });
 
-    it('should clear the columns to the right when an item is programmatically activated', function() {
+    it('should clear the columns to the right when an item is programmatically activated', function () {
       const el = helpers.build(window.__html__['ColumnView.full.html']);
       const activeItemSpy = sinon.spy();
       const removeItemSpy = sinon.spy(el, '_afterItemSelectedInColumn');
@@ -1517,34 +1522,34 @@ describe('ColumnView', function() {
       expect(removeItemSpy.callCount).to.equal(1);
     });
 
-    it('should ensure tabbable item when ColumnView intializes', function() {
+    it('should ensure tabbable item when ColumnView intializes', function () {
       const el = helpers.build(window.__html__['ColumnView.base.html']);
       const items = el.items.getAll();
-      
-      items.forEach(function(item, i) {
+
+      items.forEach(function (item, i) {
         expect(item.getAttribute('tabindex')).to.equal(i === 0 ? '0' : '-1');
       });
     });
 
-    describe('ColumnView.Preview', function() {
+    describe('ColumnView.Preview', function () {
       function onChangeEvent(event) {
         const columnView = event.target;
         if (event.detail.selection.length) {
           // on selection, it means we load the item content
           let url = columnView.items._getLastSelected().dataset.src;
-  
+
           // there is no information on additional items
           if (typeof url === 'undefined') {
             return;
           }
-  
+
           // we load the url from the snippets instead of using ajax
           let data = window.__html__[`examples/${url}`];
           if (typeof data !== 'undefined') {
             let t = document.createElement('div');
             t.innerHTML = data;
             let el = t.firstElementChild;
-  
+
             // if it is a preview column we add it directly
             if (el.matches('coral-columnview-preview')) {
               columnView.setNextColumn(el, columnView.columns.last(), false);
@@ -1553,15 +1558,15 @@ describe('ColumnView', function() {
         }
       }
 
-      beforeEach(function() {
+      beforeEach(function () {
         helpers.target.addEventListener('coral-columnview:change', onChangeEvent);
       });
-  
-      afterEach(function() {
+
+      afterEach(function () {
         helpers.target.removeEventListener('coral-columnview:change', onChangeEvent);
       });
 
-      it('should not be in tab order with selection in previous column', function() {
+      it('should not be in tab order with selection in previous column', function () {
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         const item = el.items.getAll()[3];
         item.focus();

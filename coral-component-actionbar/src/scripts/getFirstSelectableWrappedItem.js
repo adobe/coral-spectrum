@@ -18,16 +18,16 @@ export default function getFirstSelectableWrappedItem(wrapperItem) {
   if (!wrapperItem) {
     return null;
   }
-  
+
   if (wrapperItem.hasAttribute('coral-actionbar-more')) {
     // more buttons are no 'real' actionbar items => not wrapped
     return wrapperItem;
   }
-  
+
   let child = null;
-  for (let i = 0; i < wrapperItem.children.length; i++) {
+  for (let i = 0 ; i < wrapperItem.children.length ; i++) {
     child = wrapperItem.children[i];
-    
+
     // maybe filter even more elements? (opacity, display='none', position='absolute' ...)
     if (child.offsetParent && (child.matches(commons.FOCUSABLE_ELEMENT_SELECTOR) || child.matches('a:not([href])'))) {
       return child;
@@ -35,9 +35,9 @@ export default function getFirstSelectableWrappedItem(wrapperItem) {
   }
 
   // search at 2nd level, some elements like coral-fileupload has selectable items inside them
-  for (let i = 0; i < wrapperItem.children.length; i++) {
+  for (let i = 0 ; i < wrapperItem.children.length ; i++) {
     child = wrapperItem.children[i];
-    for (let j = 0; j < child.children.length; j++) {
+    for (let j = 0 ; j < child.children.length ; j++) {
       let subChild = child.children[j];
       // maybe filter even more elements? (opacity, display='none', position='absolute' ...)
       if (subChild.offsetParent && (subChild.matches(commons.FOCUSABLE_ELEMENT_SELECTOR) || child.matches('a:not([href])'))) {
@@ -45,6 +45,6 @@ export default function getFirstSelectableWrappedItem(wrapperItem) {
       }
     }
   }
-  
+
   return null;
 }

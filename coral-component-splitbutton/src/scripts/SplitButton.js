@@ -19,9 +19,9 @@ import {transform, validate, commons} from '../../../coral-utils';
 
 /**
  Enumeration for {@link SplitButton} variants.
- 
+
  @typedef {Object} SplitButtonVariantEnum
- 
+
  @property {String} DEFAULT
  The default button look and feel.
  @property {String} CTA
@@ -43,7 +43,7 @@ const CLASSNAME = '_coral-SplitButton';
  These elements should be marked with following attributes:
  - <code>[coral-splitbutton-action]</code> for the main action button.
  - <code>[coral-splitbutton-trigger]</code> for the trigger button.
- 
+
  @htmltag coral-splitbutton
  @extends {HTMLElement}
  @extends {BaseComponent}
@@ -52,23 +52,23 @@ class SplitButton extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Watch for inner button changes
     this._observer = new MutationObserver(() => {
       this._updateLeftVariant();
       this._updateInnerButtons();
       this._updateInnerButtonsVariant(this.variant);
     });
-    
+
     this._observer.observe(this, {
       subtree: true,
       childList: true
     });
   }
-  
+
   /**
    The button's variant. See {@link SplitButtonVariantEnum}.
-   
+
    @type {String}
    @default SplitButtonVariantEnum.DEFAULT
    @htmlattribute variant
@@ -77,43 +77,49 @@ class SplitButton extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-  
+
     this._updateInnerButtonsVariant(this._variant);
   }
-  
+
   _getInnerButtons() {
     const action = this.querySelector('[coral-splitbutton-action]');
     const trigger = this.querySelector('[coral-splitbutton-trigger]');
     return {action, trigger};
   }
-  
+
   _updateLeftVariant() {
-    for (let i = 0; i < this.children.length; i++) {
+    for (let i = 0 ; i < this.children.length ; i++) {
       const child = this.children[i];
       if (child.hasAttribute('coral-splitbutton-trigger')) {
         this.classList.add('_coral-SplitButton--left');
         return;
-      }
-      else if (child.hasAttribute('coral-splitbutton-action')) {
+      } else if (child.hasAttribute('coral-splitbutton-action')) {
         this.classList.remove('_coral-SplitButton--left');
         return;
       }
     }
   }
-  
+
   _updateInnerButtonsVariant(variant) {
     const {action, trigger} = this._getInnerButtons();
-    if (action) {action.setAttribute('variant', variant);}
-    if (trigger) {trigger.setAttribute('variant', variant);}
+    if (action) {
+      action.setAttribute('variant', variant);
+    }
+    if (trigger) {
+      trigger.setAttribute('variant', variant);
+    }
   }
-  
+
   _updateInnerButtons() {
     const {action, trigger} = this._getInnerButtons();
-    if (action) {action.classList.add('_coral-SplitButton-action');}
+    if (action) {
+      action.classList.add('_coral-SplitButton-action');
+    }
     if (trigger) {
       trigger.classList.add('_coral-SplitButton-trigger');
       // a11y assume a popover is targeting the trigger
@@ -124,29 +130,35 @@ class SplitButton extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /**
    Returns {@link SplitButton} variants.
-   
+
    @return {SplitButtonVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['variant']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['variant']);
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // a11y
     this.setAttribute('role', 'group');
-    
+
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-    
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
+
     // Update styles
     this._updateLeftVariant();
     this._updateInnerButtons();

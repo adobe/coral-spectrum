@@ -54,7 +54,6 @@ class TreeItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-
     this._elements = {
       // Create or fetch the content zones
       content: this.querySelector('coral-tree-item-content') || document.createElement('coral-tree-item-content')
@@ -93,11 +92,12 @@ class TreeItem extends BaseComponent(HTMLElement) {
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-tree-item-content',
-      insert: function(content) {
+      insert: function (content) {
         this._elements.header.appendChild(content);
       }
     });
@@ -137,6 +137,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
   get expanded() {
     return this._expanded || false;
   }
+
   set expanded(value) {
     value = transform.booleanAttr(value);
     const triggerEvent = this.expanded !== value;
@@ -153,16 +154,14 @@ class TreeItem extends BaseComponent(HTMLElement) {
     if (this.variant !== variant.DRILLDOWN) {
       header.removeAttribute('aria-expanded');
       header.removeAttribute('aria-owns');
-    }
-    else if (this.items.length > 0) {
+    } else if (this.items.length > 0) {
       header.setAttribute('aria-expanded', this._expanded);
       header.setAttribute('aria-owns', subTreeContainer.id);
     }
 
     if (this._expanded) {
       subTreeContainer.removeAttribute('aria-hidden');
-    }
-    else {
+    } else {
       subTreeContainer.setAttribute('aria-hidden', !this._expanded);
     }
 
@@ -181,8 +180,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
         commons.transitionEnd(subTreeContainer, () => {
           if (this.expanded) {
             subTreeContainer.style.height = '';
-          }
-          else {
+          } else {
             subTreeContainer.hidden = true;
           }
 
@@ -195,8 +193,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
         // Force height to enable transition
         if (!this.expanded) {
           subTreeContainer.style.height = `${subTreeContainer.scrollHeight}px`;
-        }
-        else {
+        } else {
           subTreeContainer.hidden = false;
         }
 
@@ -206,8 +203,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
         const offsetHeight = subTreeContainer.offsetHeight;
 
         subTreeContainer.style.height = this.expanded ? `${subTreeContainer.scrollHeight}px` : 0;
-      }
-      else {
+      } else {
         // Make sure it's animated next time
         this._animate = true;
 
@@ -231,6 +227,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.DRILLDOWN;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant, value) && value || variant.DRILLDOWN;
@@ -251,6 +248,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
@@ -258,7 +256,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
     this._elements.header.classList.toggle('is-selected', this._selected);
     this._elements.header.setAttribute('aria-selected', this._selected);
 
-    const selectedState =  this._elements.selectedState;
+    const selectedState = this._elements.selectedState;
     selectedState.textContent = i18n.get(this._selected ? 'selected' : 'not selected');
 
     if (IS_TOUCH_DEVICE) {
@@ -279,6 +277,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -295,6 +294,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
   get hidden() {
     return this.hasAttribute('hidden');
   }
+
   set hidden(value) {
     this._reflectAttribute('hidden', transform.booleanAttr(value));
 
@@ -348,8 +348,8 @@ class TreeItem extends BaseComponent(HTMLElement) {
    */
   static get variant() { return variant; }
 
-  get _contentZones() { return {'coral-tree-item-content': 'content'}; }
-
+  get _contentZones() { return {'coral-tree-item-content': 'content'};
+}
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['selected', 'disabled', 'variant', 'expanded', 'hidden']);
@@ -364,8 +364,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
     const header = this._elements.header;
     const subTreeContainer = this._elements.subTreeContainer;
     const content = this._elements.content;
-    const selectedState =  this._elements.selectedState;
-
+    const selectedState = this._elements.selectedState;
     // a11ys
     content.id = content.id || commons.getUID();
     this.setAttribute('role', 'presentation');
@@ -394,7 +393,9 @@ class TreeItem extends BaseComponent(HTMLElement) {
     }
 
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DRILLDOWN; }
+    if (!this._variant) {
+      this.variant = variant.DRILLDOWN;
+    }
     this.expanded = this.expanded;
 
     // Render the template and set element references
@@ -405,7 +406,7 @@ class TreeItem extends BaseComponent(HTMLElement) {
     const subTree = this.querySelector('._coral-TreeView');
     if (subTree) {
       const items = subTree.querySelectorAll('coral-tree-item');
-      for (let i = 0; i < items.length; i++) {
+      for (let i = 0 ; i < items.length ; i++) {
         subTreeContainer.appendChild(items[i]);
       }
     }
@@ -425,13 +426,11 @@ class TreeItem extends BaseComponent(HTMLElement) {
         child._parent = this;
         // Add tree items to the sub tree container
         subTreeContainer.appendChild(child);
-      }
-      else if (child.nodeType === Node.TEXT_NODE ||
+      } else if (child.nodeType === Node.TEXT_NODE ||
         child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the content
         content.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else element
         this.removeChild(child);
       }

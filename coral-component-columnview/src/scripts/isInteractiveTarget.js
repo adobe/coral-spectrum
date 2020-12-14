@@ -13,7 +13,7 @@
 
 /**
  * Helper function to test whether event.target is explicitly marked as interactive.
- * 
+ *
  * Interactive elements included in an Item should respond to keyboard events without the event being handled by the Item as well.
  *
  * @private

@@ -622,8 +622,7 @@ function _hslToRgb(hsl) {
   if (s === 0) {
     // achromatic
     r = g = b = l;
-  }
-  else {
+  } else {
     const hue2rgb = (p, q, t) => {
       if (t < 0) {
         t += 1;
@@ -683,8 +682,7 @@ function _rgbToHsl(rgb) {
   if (max === min) {
     // achromatic
     h = s = 0;
-  }
-  else {
+  } else {
     const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
     switch (max) {
@@ -800,6 +798,7 @@ class Color {
   get value() {
     return this._value;
   }
+
   set value(value) {
     // Two color formats with alpha values
     const rgba = _parseRGBA(value);
@@ -819,8 +818,7 @@ class Color {
         g: rgba.g,
         b: rgba.b
       });
-    }
-    else if (hsla !== null) {
+    } else if (hsla !== null) {
       this._colorSpace = colorSpace.HSL;
       this.alpha = hsla.a;
       value = _serializeHSL({
@@ -828,23 +826,17 @@ class Color {
         s: hsla.s,
         l: hsla.l
       });
-    }
-    else if (rgb !== null) {
+    } else if (rgb !== null) {
       this._colorSpace = colorSpace.RGB;
-    }
-    else if (cmyk !== null) {
+    } else if (cmyk !== null) {
       this._colorSpace = colorSpace.CMYK;
-    }
-    else if (hsb !== null) {
+    } else if (hsb !== null) {
       this._colorSpace = colorSpace.HSB;
-    }
-    else if (hsl !== null) {
+    } else if (hsl !== null) {
       this._colorSpace = colorSpace.HSL;
-    }
-    else if (hex !== null) {
+    } else if (hex !== null) {
       this._colorSpace = colorSpace.HEX;
-    }
-    else {
+    } else {
       // restore defaults
       this._colorSpace = colorSpace.HEX;
       value = '';
@@ -862,6 +854,7 @@ class Color {
   get alpha() {
     return this._alpha;
   }
+
   set alpha(value) {
     if (isNaN(value) || value < 0 || value > 1) {
       return;
@@ -880,25 +873,22 @@ class Color {
     let rgb = null;
     if (this._colorSpace === colorSpace.RGB) {
       rgb = _parseRGB(this.value);
-    }
-    else if (this._colorSpace === colorSpace.HEX) {
+    } else if (this._colorSpace === colorSpace.HEX) {
       const hex = _parseHex(this.value);
       rgb = _hexToRgb(hex);
-    }
-    else if (this._colorSpace === colorSpace.CMYK) {
+    } else if (this._colorSpace === colorSpace.CMYK) {
       const cmyk = _parseCMYK(this.value);
       rgb = _cmykToRgb(cmyk);
-    }
-    else if (this._colorSpace === colorSpace.HSB) {
+    } else if (this._colorSpace === colorSpace.HSB) {
       const hsb = _parseHSB(this.value);
       rgb = _hsbToRgb(hsb);
-    }
-    else if (this._colorSpace === colorSpace.HSL) {
+    } else if (this._colorSpace === colorSpace.HSL) {
       const hsl = _parseHSL(this.value);
       rgb = _hslToRgb(hsl);
     }
     return rgb;
   }
+
   set rgb(value) {
     this.value = _serializeRGB(value);
   }
@@ -913,6 +903,7 @@ class Color {
   get rgbValue() {
     return _serializeRGB(this.rgb);
   }
+
   set rgbValue(value) {
     this.value = value;
   }
@@ -937,6 +928,7 @@ class Color {
 
     return null;
   }
+
   set rgba(value) {
     this.value = _serializeRGBA(value);
   }
@@ -951,6 +943,7 @@ class Color {
   get rgbaValue() {
     return _serializeRGBA(this.rgba);
   }
+
   set rgbaValue(value) {
     this.value = value;
   }
@@ -965,6 +958,7 @@ class Color {
     // as hex color space is essentially just the same as rgb and there is no loss in conversion, we can do it this way
     return _rgbToHex(this.rgb);
   }
+
   set hex(value) {
     this.value = _serializeHex(value);
   }
@@ -979,6 +973,7 @@ class Color {
   get hexValue() {
     return _serializeHex(this.hex);
   }
+
   set hexValue(value) {
     this.value = value;
   }
@@ -996,27 +991,24 @@ class Color {
     if (this._colorSpace === colorSpace.RGB) {
       rgb = _parseRGB(this.value);
       cmyk = _rgbToCmyk(rgb);
-    }
-    else if (this._colorSpace === colorSpace.HEX) {
+    } else if (this._colorSpace === colorSpace.HEX) {
       const hex = _parseHex(this.value);
       rgb = _hexToRgb(hex);
       cmyk = _rgbToCmyk(rgb);
-    }
-    else if (this._colorSpace === colorSpace.CMYK) {
+    } else if (this._colorSpace === colorSpace.CMYK) {
       cmyk = _parseCMYK(this.value);
-    }
-    else if (this._colorSpace === colorSpace.HSB) {
+    } else if (this._colorSpace === colorSpace.HSB) {
       const hsb = _parseHSB(this.value);
       rgb = _hsbToRgb(hsb);
       cmyk = _rgbToCmyk(rgb);
-    }
-    else if (this._colorSpace === colorSpace.HSL) {
+    } else if (this._colorSpace === colorSpace.HSL) {
       const hsl = _parseHSL(this.value);
       rgb = _hslToRgb(hsl);
       cmyk = _rgbToCmyk(rgb);
     }
     return cmyk;
   }
+
   set cmyk(value) {
     this.value = _serializeCMYK(value);
   }
@@ -1031,6 +1023,7 @@ class Color {
   get cmykValue() {
     return _serializeCMYK(this.cmyk);
   }
+
   set cmykValue(value) {
     this.value = value;
   }
@@ -1050,27 +1043,24 @@ class Color {
     if (this._colorSpace === colorSpace.RGB) {
       rgb = _parseRGB(this.value);
       hsb = _rgbToHsb(rgb);
-    }
-    else if (this._colorSpace === colorSpace.HEX) {
+    } else if (this._colorSpace === colorSpace.HEX) {
       const hex = _parseHex(this.value);
       rgb = _hexToRgb(hex);
       hsb = _rgbToHsb(rgb);
-    }
-    else if (this._colorSpace === colorSpace.CMYK) {
+    } else if (this._colorSpace === colorSpace.CMYK) {
       const cmyk = _parseCMYK(this.value);
       rgb = _cmykToRgb(cmyk);
       hsb = _rgbToHsb(rgb);
-    }
-    else if (this._colorSpace === colorSpace.HSB) {
+    } else if (this._colorSpace === colorSpace.HSB) {
       hsb = _parseHSB(this.value);
-    }
-    else if (this._colorSpace === colorSpace.HSL) {
+    } else if (this._colorSpace === colorSpace.HSL) {
       const hsl = _parseHSL(this.value);
       rgb = _hslToRgb(hsl);
       hsb = _rgbToHsb(rgb);
     }
     return hsb;
   }
+
   set hsb(value) {
     this.value = _serializeHSB(value);
   }
@@ -1085,6 +1075,7 @@ class Color {
   get hsbValue() {
     return _serializeHSB(this.hsb);
   }
+
   set hsbValue(value) {
     this.value = value;
   }
@@ -1104,27 +1095,24 @@ class Color {
     if (this._colorSpace === colorSpace.RGB) {
       rgb = _parseRGB(this.value);
       hsl = _rgbToHsl(rgb);
-    }
-    else if (this._colorSpace === colorSpace.HEX) {
+    } else if (this._colorSpace === colorSpace.HEX) {
       const hex = _parseHex(this.value);
       rgb = _hexToRgb(hex);
       hsl = _rgbToHsl(rgb);
-    }
-    else if (this._colorSpace === colorSpace.CMYK) {
+    } else if (this._colorSpace === colorSpace.CMYK) {
       const cmyk = _parseCMYK(this.value);
       rgb = _cmykToRgb(cmyk);
       hsl = _rgbToHsl(rgb);
-    }
-    else if (this._colorSpace === colorSpace.HSB) {
+    } else if (this._colorSpace === colorSpace.HSB) {
       const hsb = _parseHSB(this.value);
       rgb = _hsbToRgb(hsb);
       hsl = _rgbToHsl(rgb);
-    }
-    else if (this._colorSpace === colorSpace.HSL) {
+    } else if (this._colorSpace === colorSpace.HSL) {
       hsl = _parseHSL(this.value);
     }
     return hsl;
   }
+
   set hsl(value) {
     this.value = _serializeHSL(value);
   }
@@ -1139,6 +1127,7 @@ class Color {
   get hslValue() {
     return _serializeHSL(this.hsl);
   }
+
   set hslValue(value) {
     this.value = value;
   }
@@ -1166,6 +1155,7 @@ class Color {
 
     return null;
   }
+
   set hsla(value) {
     this.value = _serializeHSLA(value);
   }
@@ -1184,6 +1174,7 @@ class Color {
   get hslaValue() {
     return _serializeHSLA(this.hsla);
   }
+
   set hslaValue(value) {
     this.value = value;
   }
@@ -1265,7 +1256,7 @@ class Color {
 
       let tintFactor = 1;
 
-      for (let i = 1; i <= amount; i++) {
+      for (let i = 1 ; i <= amount ; i++) {
         tintFactor = i / (amount + 1);
         tintColor = this.clone();
         // alpha value kept from original
@@ -1302,7 +1293,7 @@ class Color {
 
       let shadeFactor = 1;
 
-      for (let i = 1; i <= amount; i++) {
+      for (let i = 1 ; i <= amount ; i++) {
         shadeFactor = i / (amount + 1);
         shadeColor = this.clone();
         // alpha value kept from original

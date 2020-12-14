@@ -16,28 +16,28 @@ import {Panel, PanelStack} from '../../../coral-component-panelstack';
 import {Step, StepList} from '../../../coral-component-steplist';
 import {tracking} from '../../../coral-utils';
 
-describe('WizardView', function() {
+describe('WizardView', function () {
   function testDefaultInstance(el) {
     expect(el.classList.contains('_coral-WizardView')).to.be.true;
   }
 
-  describe('Instantiation', function() {
-    it('should be possible using new', function() {
+  describe('Instantiation', function () {
+    it('should be possible using new', function () {
       var el = helpers.build(new WizardView());
       testDefaultInstance(el);
     });
 
-    it('should be possible using createElement', function() {
+    it('should be possible using createElement', function () {
       var el = helpers.build(document.createElement('coral-wizardview'));
       testDefaultInstance(el);
     });
 
-    it('should be possible using markup', function() {
+    it('should be possible using markup', function () {
       const el = helpers.build('<coral-wizardview></coral-wizardview>');
       testDefaultInstance(el);
     });
 
-    it('should select the correct step and panel when instantiated from markup', function() {
+    it('should select the correct step and panel when instantiated from markup', function () {
       const el = helpers.build(window.__html__['WizardView.selectedItem.html']);
       var stepList = el.stepLists.first();
       var panelStack = el.panelStacks.first();
@@ -45,7 +45,7 @@ describe('WizardView', function() {
       expect(panelStack.items.getAll().indexOf(panelStack.selectedItem)).to.equal(1);
     });
 
-    it('should select the correct step and panel when instantiated from nested markup', function() {
+    it('should select the correct step and panel when instantiated from nested markup', function () {
       const el = helpers.build(window.__html__['WizardView.nested.html']);
 
       var outer = document.querySelector('#outer');
@@ -56,35 +56,35 @@ describe('WizardView', function() {
       expect(inner.stepLists.getAll().length).to.equal(1);
       expect(inner.panelStacks.getAll().length).to.equal(1);
 
-      outer.panelStacks.getAll().forEach(function(panelStack) {
+      outer.panelStacks.getAll().forEach(function (panelStack) {
         expect(panelStack.items.getAll().indexOf(panelStack.selectedItem)).to.equal(1, 'selected outer panel index');
       });
 
-      outer.stepLists.getAll().forEach(function(stepList) {
+      outer.stepLists.getAll().forEach(function (stepList) {
         expect(stepList.items.getAll().indexOf(stepList.selectedItem)).to.equal(1, 'selected outer steplist index');
       });
 
-      inner.panelStacks.getAll().forEach(function(panelStack) {
+      inner.panelStacks.getAll().forEach(function (panelStack) {
         expect(panelStack.items.getAll().indexOf(panelStack.selectedItem)).to.equal(2, 'selected inner panel index');
       });
 
-      inner.stepLists.getAll().forEach(function(stepList) {
+      inner.stepLists.getAll().forEach(function (stepList) {
         expect(stepList.items.getAll().indexOf(stepList.selectedItem)).to.equal(2, 'selected inner steplist index');
       });
     });
-  
+
     helpers.cloneComponent(
       'should be possible via clone using markup',
       window.__html__['WizardView.base.html']
     );
-  
+
     helpers.cloneComponent(
       'should be possible via clone using js',
       new WizardView()
     );
   });
 
-  describe('API', function() {
+  describe('API', function () {
     var el;
     var panelStacks = [];
     var stepLists = [];
@@ -110,8 +110,7 @@ describe('WizardView', function() {
 
       if (append) {
         parent.appendChild(stepList);
-      }
-      else {
+      } else {
         parent.stepLists.add(stepList);
       }
 
@@ -141,8 +140,7 @@ describe('WizardView', function() {
 
       if (append) {
         parent.appendChild(panelStack);
-      }
-      else {
+      } else {
         parent.panelStacks.add(panelStack);
       }
 
@@ -151,7 +149,7 @@ describe('WizardView', function() {
       return panelStack;
     }
 
-    beforeEach(function() {
+    beforeEach(function () {
       el = new WizardView();
 
       createStepList();
@@ -163,53 +161,53 @@ describe('WizardView', function() {
       helpers.target.appendChild(el);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el = null;
       stepLists.length = 0;
       panelStacks.length = 0;
     });
 
-    describe('#panelStacks', function() {
-      it('should provide a reference to all panelStacks', function() {
+    describe('#panelStacks', function () {
+      it('should provide a reference to all panelStacks', function () {
         expect(el.panelStacks.getAll().length).to.equal(2);
       });
 
-      it('should add new panelStacks to the collection', function() {
+      it('should add new panelStacks to the collection', function () {
         createPanelStack();
         expect(el.panelStacks.getAll().length).to.equal(3);
       });
 
-      it('should select the correct panel when a panelStack is added using the collections API', function(done) {
+      it('should select the correct panel when a panelStack is added using the collections API', function (done) {
         // Select an item first
         stepLists[0].items.getAll()[1].selected = true;
 
         // Add a new panelstack with the collections API
         var panelStack = createPanelStack();
-        
+
         // Wait for MO
-        helpers.next(function() {
+        helpers.next(function () {
           // Make sure the right panel is selected
           expect(panelStack.items.getAll()[1].selected).to.equal(true, 'second item should be selected');
           done();
         });
       });
 
-      it('should select the correct panel when a panelStack is added using appendChild', function(done) {
+      it('should select the correct panel when a panelStack is added using appendChild', function (done) {
         // Select an item first
         stepLists[0].items.getAll()[1].selected = true;
 
         // Add a new panelstack with appendChild
         var panelStack = createPanelStack(true);
-        
+
         // Wait for MO
-        helpers.next(function() {
+        helpers.next(function () {
           // Make sure the right panel is selected
           expect(panelStack.items.getAll()[1].selected).to.equal(true, 'second item should be selected');
           done();
         });
       });
-      
-      it('should support nested WizardViews', function() {
+
+      it('should support nested WizardViews', function () {
         var nestedWizardView = new WizardView();
         createStepList(false, nestedWizardView);
         createPanelStack(false, nestedWizardView);
@@ -219,17 +217,17 @@ describe('WizardView', function() {
       });
     });
 
-    describe('#stepLists', function() {
-      it('should provide a reference to all stepLists', function() {
+    describe('#stepLists', function () {
+      it('should provide a reference to all stepLists', function () {
         expect(el.stepLists.getAll().length).to.equal(2);
       });
 
-      it('should add new stepLists to the collection', function() {
+      it('should add new stepLists to the collection', function () {
         createStepList();
         expect(el.stepLists.getAll().length).to.equal(3);
       });
 
-      it('should select the correct panel when a stepList is added using the collections API', function(done) {
+      it('should select the correct panel when a stepList is added using the collections API', function (done) {
         // Select an item first
         stepLists[0].items.getAll()[1].selected = true;
 
@@ -237,14 +235,14 @@ describe('WizardView', function() {
         var stepList = createStepList();
 
         // Wait for MO
-        helpers.next(function() {
+        helpers.next(function () {
           // Make sure the right step is selected
           expect(stepList.items.getAll()[1].selected).to.equal(true, 'second item should be selected');
           done();
         });
       });
 
-      it('should select the correct panel when a stepList is added using appendChild', function(done) {
+      it('should select the correct panel when a stepList is added using appendChild', function (done) {
         // Select an item first
         stepLists[0].items.getAll()[1].selected = true;
 
@@ -252,7 +250,7 @@ describe('WizardView', function() {
         var stepList = createStepList(true);
 
         // Wait for MO
-        helpers.next(function() {
+        helpers.next(function () {
           // Make sure the right step is selected
           expect(stepList.items.getAll()[1].selected).to.equal(true, 'second item should be selected');
           done();
@@ -260,15 +258,17 @@ describe('WizardView', function() {
       });
     });
 
-    describe('#previous()', function() {});
-    describe('#next()', function() {});
+    describe('#previous()', function () {
+    });
+    describe('#next()', function () {
+    });
   });
 
-  describe('Events', function() {
+  describe('Events', function () {
 
-    describe('coral-wizardview:change', function() {
+    describe('coral-wizardview:change', function () {
 
-      it('should trigger a coral-wizardview:change event when an item is selected', function() {
+      it('should trigger a coral-wizardview:change event when an item is selected', function () {
         var spy = sinon.spy();
 
         var el = new WizardView();
@@ -298,7 +298,7 @@ describe('WizardView', function() {
         helpers.target.appendChild(el);
 
         el.on('coral-wizardview:change', spy);
-        
+
         spy.resetHistory();
         step2.selected = true;
 
@@ -322,7 +322,7 @@ describe('WizardView', function() {
         expect(spy.getCall(0).args[0].detail.selection).to.equal(step1, 'event.detail.oldSelection should be Step 1');
       });
 
-      it('should trigger an event when next() is called', function() {
+      it('should trigger an event when next() is called', function () {
 
         var changeSpy = sinon.spy();
 
@@ -345,7 +345,7 @@ describe('WizardView', function() {
         expect(changeSpy.getCall(0).args[0].detail.selection).to.equal(step2, 'event.detail.selection should be Step 2');
       });
 
-      it('should not trigger an event when next() is called and there are no steplists', function() {
+      it('should not trigger an event when next() is called and there are no steplists', function () {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['WizardView.empty.html']);
@@ -356,7 +356,7 @@ describe('WizardView', function() {
         expect(changeSpy.callCount).to.equal(0, 'event should not be triggered');
       });
 
-      it('should trigger an event when previous() is called', function() {
+      it('should trigger an event when previous() is called', function () {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['WizardView.selectedItem.html']);
@@ -378,7 +378,7 @@ describe('WizardView', function() {
         expect(changeSpy.getCall(0).args[0].detail.selection).to.equal(step1, 'event.detail.selection should be Step 1');
       });
 
-      it('should not trigger an event when previous() is called and there are no steplists', function() {
+      it('should not trigger an event when previous() is called and there are no steplists', function () {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['WizardView.empty.html']);
@@ -389,7 +389,7 @@ describe('WizardView', function() {
         expect(changeSpy.callCount).to.equal(0, 'event should not be triggered');
       });
 
-      it('should not trigger an event when next() is called and it is already the last item', function() {
+      it('should not trigger an event when next() is called and it is already the last item', function () {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['WizardView.base.html']);
@@ -407,7 +407,7 @@ describe('WizardView', function() {
         expect(changeSpy.callCount).to.equal(2);
       });
 
-      it('should not trigger an event when previous() is called and it is already in the first item', function() {
+      it('should not trigger an event when previous() is called and it is already in the first item', function () {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['WizardView.base.html']);
@@ -418,25 +418,25 @@ describe('WizardView', function() {
         expect(changeSpy.callCount).to.equal(0);
       });
 
-      it('should have all panels up to date once the event is triggered', function() {
+      it('should have all panels up to date once the event is triggered', function () {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['WizardView.full.html']);
         el.on('coral-wizardview:change', changeSpy);
 
         el.next();
-        
+
         var items = el.stepLists.first().items.getAll();
 
         var step1 = items[1];
         var step2 = items[2];
-  
+
         expect(changeSpy.callCount).to.equal(1);
         expect(changeSpy.args[0][0].detail.selection).to.equal(step2);
         expect(changeSpy.args[0][0].detail.oldSelection).to.equal(step1);
-        
+
         expect(changeSpy.getCall(0).args[0].target.stepLists.first().selectedItem).to.equal(step2);
-        
+
         var contentStack = el.panelStacks.getAll()[0];
         var controlStack = el.panelStacks.getAll()[1];
 
@@ -450,8 +450,8 @@ describe('WizardView', function() {
     });
   });
 
-  describe('User Interaction', function() {
-    it('should show go to the next step when a button is clicked', function() {
+  describe('User Interaction', function () {
+    it('should show go to the next step when a button is clicked', function () {
       var changeSpy = sinon.spy();
 
       const el = helpers.build(window.__html__['WizardView.full.html']);
@@ -463,7 +463,7 @@ describe('WizardView', function() {
       expect(changeSpy.callCount).to.equal(1);
     });
 
-    it('should show go to the previous step when a button is clicked', function() {
+    it('should show go to the previous step when a button is clicked', function () {
       var changeSpy = sinon.spy();
 
       const el = helpers.build(window.__html__['WizardView.full.html']);
@@ -475,51 +475,51 @@ describe('WizardView', function() {
       expect(changeSpy.callCount).to.equal(1);
     });
 
-    it('should control the right content when nested', function() {
+    it('should control the right content when nested', function () {
       const el = helpers.build(window.__html__['WizardView.nested.html']);
-      
+
       var outer = document.querySelector('#outer');
       var inner = document.querySelector('#inner');
 
-      outer.panelStacks.getAll().forEach(function(panelStack) {
+      outer.panelStacks.getAll().forEach(function (panelStack) {
         expect(panelStack.items.getAll().indexOf(panelStack.selectedItem)).to.equal(1, 'selected outer panel index');
       });
 
-      outer.stepLists.getAll().forEach(function(stepList) {
+      outer.stepLists.getAll().forEach(function (stepList) {
         expect(stepList.items.getAll().indexOf(stepList.selectedItem)).to.equal(1, 'selected outer steplist index');
       });
 
-      inner.panelStacks.getAll().forEach(function(panelStack) {
+      inner.panelStacks.getAll().forEach(function (panelStack) {
         expect(panelStack.items.getAll().indexOf(panelStack.selectedItem)).to.equal(2, 'selected inner panel index');
       });
 
-      inner.stepLists.getAll().forEach(function(stepList) {
+      inner.stepLists.getAll().forEach(function (stepList) {
         expect(stepList.items.getAll().indexOf(stepList.selectedItem)).to.equal(2, 'selected inner steplist index');
       });
 
       // finds and clicks the next button
       el.querySelector('[coral-wizardview-next]').click();
-    
-      outer.panelStacks.getAll().forEach(function(panelStack) {
+
+      outer.panelStacks.getAll().forEach(function (panelStack) {
         expect(panelStack.items.getAll().indexOf(panelStack.selectedItem)).to.equal(2, 'selected outer panel index');
       });
 
-      outer.stepLists.getAll().forEach(function(stepList) {
+      outer.stepLists.getAll().forEach(function (stepList) {
         expect(stepList.items.getAll().indexOf(stepList.selectedItem)).to.equal(2, 'selected outer steplist index');
       });
 
-      inner.panelStacks.getAll().forEach(function(panelStack) {
+      inner.panelStacks.getAll().forEach(function (panelStack) {
         expect(panelStack.items.getAll().indexOf(panelStack.selectedItem)).to.equal(2, 'selected inner panel index');
       });
 
-      inner.stepLists.getAll().forEach(function(stepList) {
+      inner.stepLists.getAll().forEach(function (stepList) {
         expect(stepList.items.getAll().indexOf(stepList.selectedItem)).to.equal(2, 'selected inner steplist index');
       });
     });
   });
 
-  describe('Implementation Details', function() {
-    it('should deselect the panel if there if there is no matching step', function() {
+  describe('Implementation Details', function () {
+    it('should deselect the panel if there if there is no matching step', function () {
       const el = helpers.build(window.__html__['WizardView.irregular.html']);
       var stepList = el.stepLists.first();
       var steps = stepList.items.getAll();
@@ -527,7 +527,7 @@ describe('WizardView', function() {
       var selectedIndex = steps.indexOf(stepList.selectedItem);
 
       // we check that all panels have the correct item assigned
-      el.panelStacks.getAll().forEach(function(panelStack, index) {
+      el.panelStacks.getAll().forEach(function (panelStack, index) {
         expect(panelStack.items.getAll().indexOf(panelStack.selectedItem)).to.equal(selectedIndex);
       });
 
@@ -535,33 +535,32 @@ describe('WizardView', function() {
       selectedIndex = steps.length - 1;
       steps[selectedIndex].setAttribute('selected', '');
 
-      el.panelStacks.getAll().forEach(function(panelStack) {
+      el.panelStacks.getAll().forEach(function (panelStack) {
         if (selectedIndex < panelStack.items.length) {
           expect(panelStack.items.getAll().indexOf(panelStack.selectedItem)).to.equal(selectedIndex);
-        }
-        else {
+        } else {
           // if the panelstack has less panels than steps it should have nothing selected
           expect(panelStack.selectedItem).to.equal(null, 'No panel should be selected');
         }
       });
     });
   });
-  
-  describe('Tracking', function() {
+
+  describe('Tracking', function () {
     let trackerFnSpy;
     let el;
-    
-    beforeEach(function() {
+
+    beforeEach(function () {
       el = helpers.build(window.__html__['WizardView.full.trackingAnnotated.html']);
       trackerFnSpy = sinon.spy();
       tracking.addListener(trackerFnSpy);
     });
-    
-    afterEach(function() {
+
+    afterEach(function () {
       tracking.removeListener(trackerFnSpy);
     });
-    
-    it('should call tracker callback with the expected tracker data when "Next" button is clicked', function() {
+
+    it('should call tracker callback with the expected tracker data when "Next" button is clicked', function () {
       // finds and clicks the next button
       el.querySelector('[coral-wizardview-next]').click();
       expect(trackerFnSpy.callCount).to.equal(2, 'Track callback should have been called twice.');
@@ -584,70 +583,70 @@ describe('WizardView', function() {
       expect(trackData).to.have.property('rootElement', 'element name');
       expect(trackData).to.have.property('rootType', 'coral-wizardview');
     });
-    
-    it('should call tracker callback with the expected tracker data when stepping back and forth clicking "Next" and "Previous" buttons', function() {
+
+    it('should call tracker callback with the expected tracker data when stepping back and forth clicking "Next" and "Previous" buttons', function () {
       // Go to "Step 3"
       el.querySelector('[coral-wizardview-next]').click();
       expect(trackerFnSpy.callCount).to.equal(2, 'Track callback should have been called twice so far.');
-      
+
       var spyCall = trackerFnSpy.getCall(0);
       var trackData = spyCall.args[0];
       expect(trackData).to.have.property('targetType', 'coral-wizardview');
       expect(trackData).to.have.property('targetElement', 'element name');
       expect(trackData).to.have.property('eventType', 'change');
-      
+
       spyCall = trackerFnSpy.getCall(1);
       trackData = spyCall.args[0];
       expect(trackData).to.have.property('targetType', 'coral-wizardview-next');
       expect(trackData).to.have.property('targetElement', 'Coral Step 3');
       expect(trackData).to.have.property('eventType', 'click');
-      
+
       // Go back to "Step 2"
       el.querySelector('[coral-wizardview-previous]').click();
       expect(trackerFnSpy.callCount).to.equal(4, 'Track callback should have been called four times so far.');
-      
+
       spyCall = trackerFnSpy.getCall(2);
       trackData = spyCall.args[0];
       expect(trackData).to.have.property('targetType', 'coral-wizardview');
       expect(trackData).to.have.property('targetElement', 'element name');
       expect(trackData).to.have.property('eventType', 'change');
-      
+
       spyCall = trackerFnSpy.getCall(3);
       trackData = spyCall.args[0];
       expect(trackData).to.have.property('targetType', 'coral-wizardview-previous');
       expect(trackData).to.have.property('targetElement', 'Coral Step 2');
       expect(trackData).to.have.property('eventType', 'click');
-      
+
       // Go back to "Step 1"
       el.querySelector('[coral-wizardview-previous]').click();
       expect(trackerFnSpy.callCount).to.equal(6, 'Track callback should have been called six times so far.');
-      
+
       spyCall = trackerFnSpy.getCall(4);
       trackData = spyCall.args[0];
       expect(trackData).to.have.property('targetType', 'coral-wizardview');
       expect(trackData).to.have.property('targetElement', 'element name');
       expect(trackData).to.have.property('eventType', 'change');
-      
+
       spyCall = trackerFnSpy.getCall(5);
       trackData = spyCall.args[0];
       expect(trackData).to.have.property('targetType', 'coral-wizardview-previous');
       expect(trackData).to.have.property('targetElement', 'Coral Step 1');
       expect(trackData).to.have.property('eventType', 'click');
     });
-    
-    it('should not call tracker callback when clicking on "Next" button and tracking is disabled for both wizard and buttons', function() {
+
+    it('should not call tracker callback when clicking on "Next" button and tracking is disabled for both wizard and buttons', function () {
       el.tracking = el.constructor.tracking.OFF;
-      
+
       // Go to "Next" step.
       el.querySelector('[coral-wizardview-next]').click();
       expect(trackerFnSpy.callCount).to.equal(0, 'Track callback should not have been called.');
     });
-    
-    it('should call tracker callback with expected data when clicking on the Step from the StepList', function() {
+
+    it('should call tracker callback with expected data when clicking on the Step from the StepList', function () {
       // Go to "Next" step.
       el.querySelector('coral-step:nth-child(3)').click();
       expect(trackerFnSpy.callCount).to.equal(1, 'Track callback should have been called once so far.');
-      
+
       var spyCall = trackerFnSpy.getCall(0);
       var trackData = spyCall.args[0];
       expect(trackData).to.have.property('targetType', 'coral-wizardview-steplist-step');

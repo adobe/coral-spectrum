@@ -71,6 +71,7 @@ class Textfield extends BaseFormField(BaseComponent(HTMLInputElement)) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
@@ -89,8 +90,9 @@ class Textfield extends BaseFormField(BaseComponent(HTMLInputElement)) {
 
    @return {TextfieldVariantEnum}
    */
-  static get variant() { return variant; }
-
+  static get variant() {
+    return variant;
+}
   /** @ignore */
   static get observedAttributes() {
     return super._nativeObservedAttributes.concat(['variant']);
@@ -103,7 +105,9 @@ class Textfield extends BaseFormField(BaseComponent(HTMLInputElement)) {
     this.classList.add(CLASSNAME);
 
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
   }
 }
 

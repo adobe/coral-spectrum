@@ -174,6 +174,7 @@ class SelectList extends BaseComponent(HTMLElement) {
   get multiple() {
     return this._multiple || false;
   }
+
   set multiple(value) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute('multiple', this._multiple);
@@ -194,6 +195,7 @@ class SelectList extends BaseComponent(HTMLElement) {
   get loading() {
     return this._loading || false;
   }
+
   set loading(value) {
     this._loading = transform.booleanAttr(value);
     this._reflectAttribute('loading', this._loading);
@@ -212,8 +214,7 @@ class SelectList extends BaseComponent(HTMLElement) {
         /** @ignore */
         this.scrollTop = this.scrollHeight;
       }
-    }
-    else {
+    } else {
       load.remove();
     }
   }
@@ -351,13 +352,11 @@ class SelectList extends BaseComponent(HTMLElement) {
     // If the currentIndex is -1, meaning no item has focus, start from the beginning
     if (currentIndex === -1) {
       start = 0;
-    }
-    else if (this._keypressSearchString.length === 1) {
+    } else if (this._keypressSearchString.length === 1) {
       // Otherwise, if there is only one character to compare, start comparing from the next item after the currently
       // focused item. This allows us to iterate through items beginning with the same character
       start = currentIndex + 1;
-    }
-    else {
+    } else {
       start = currentIndex;
     }
 
@@ -366,7 +365,7 @@ class SelectList extends BaseComponent(HTMLElement) {
     let item;
 
     // Compare _keypressSearchString against item text until a match is found
-    for (let i = start; i < selectableItems.length; i++) {
+    for (let i = start ; i < selectableItems.length ; i++) {
       item = selectableItems[i];
       comparison = item.textContent.trim().toLowerCase();
       if (comparison.indexOf(this._keypressSearchString) === 0) {
@@ -377,7 +376,7 @@ class SelectList extends BaseComponent(HTMLElement) {
 
     // If no match is found, continue searching for a match starting from the top
     if (!newFocusItem) {
-      for (let j = 0; j < start; j++) {
+      for (let j = 0 ; j < start ; j++) {
         item = selectableItems[j];
         comparison = item.textContent.trim().toLowerCase();
         if (comparison.indexOf(this._keypressSearchString) === 0) {
@@ -486,8 +485,7 @@ class SelectList extends BaseComponent(HTMLElement) {
           oldSelection: oldSelection,
           selection: selectedItems
         });
-      }
-      else {
+      } else {
         // Return all items if we just switched from multiple=true to multiple=false and we had >1 selected items
         this.trigger('coral-selectlist:change', {
           oldSelection: oldSelection.length > 1 ? oldSelection : oldSelection[0] || null,

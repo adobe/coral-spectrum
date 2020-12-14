@@ -13,56 +13,75 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Shell} from '../../../coral-component-shell';
 
-describe('Shell.Menu', function() {
-  describe('Namespace', function() {
-    it('should be defined', function() {
+describe('Shell.Menu', function () {
+  describe('Namespace', function () {
+    it('should be defined', function () {
       expect(Shell).to.have.property('Menu');
     });
   });
 
-  describe('Instantiation', function() {
-    it('should support creation from markup', function() {
+  describe('Instantiation', function () {
+    it('should support creation from markup', function () {
       const el = helpers.build('<coral-shell-menu>');
       expect(el).to.be.an.instanceof(Shell.Menu);
     });
-    
+
     helpers.cloneComponent(
       'should be possible to clone using markup',
       '<coral-shell-menu></coral-shell-menu>'
     );
-  
+
     helpers.cloneComponent(
       'should be possible to clone using js',
       new Shell.Menu()
     );
   });
 
-  describe('API', function() {
-    describe('#placement', function() {});
-    describe('#from', function() {});
-    describe('#full', function() {});
-    describe('#top', function() {});
-    describe('#focusOnShow', function() {});
-    describe('#returnFocus', function() {});
-    describe('#open', function() {});
+  describe('API', function () {
+    describe('#placement', function () {
+    });
+    describe('#from', function () {
+    });
+    describe('#full', function () {
+    });
+    describe('#top', function () {
+    });
+    describe('#focusOnShow', function () {
+    });
+    describe('#returnFocus', function () {
+    });
+    describe('#open', function () {
+    });
   });
 
-  describe('Markup', function() {
-    describe('#placement', function() {});
-    describe('#from', function() {});
-    describe('#full', function() {});
-    describe('#top', function() {});
-    describe('#focusOnShow', function() {});
-    describe('#returnFocus', function() {});
-    describe('#open', function() {});
+  describe('Markup', function () {
+    describe('#placement', function () {
+    });
+    describe('#from', function () {
+    });
+    describe('#full', function () {
+    });
+    describe('#top', function () {
+    });
+    describe('#focusOnShow', function () {
+    });
+    describe('#returnFocus', function () {
+    });
+    describe('#open', function () {
+    });
   });
 
-  describe('Events', function() {
-    describe('#coral-overlay:beforeopen', function() {});
-    describe('#coral-overlay:beforeclose', function() {});
-    describe('#coral-overlay:open', function() {});
-    describe('#coral-overlay:close', function() {});
+  describe('Events', function () {
+    describe('#coral-overlay:beforeopen', function () {
+    });
+    describe('#coral-overlay:beforeclose', function () {
+    });
+    describe('#coral-overlay:open', function () {
+    });
+    describe('#coral-overlay:close', function () {
+    });
   });
 
-  describe('User Interaction', function() {});
+  describe('User Interaction', function () {
+  });
 });

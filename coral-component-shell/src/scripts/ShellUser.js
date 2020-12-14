@@ -67,6 +67,7 @@ class ShellUser extends BaseComponent(HTMLElement) {
   get avatar() {
     return this._elements.avatar.icon;
   }
+
   set avatar(value) {
     this._elements.avatar.icon = value;
   }
@@ -80,11 +81,12 @@ class ShellUser extends BaseComponent(HTMLElement) {
   get name() {
     return this._getContentZone(this._elements.name);
   }
+
   set name(value) {
     this._setContentZone('content', value, {
       handle: 'name',
       tagName: 'coral-shell-user-name',
-      insert: function(content) {
+      insert: function (content) {
         this._elements.container.appendChild(content);
       }
     });
@@ -99,11 +101,12 @@ class ShellUser extends BaseComponent(HTMLElement) {
   get heading() {
     return this._getContentZone(this._elements.heading);
   }
+
   set heading(value) {
     this._setContentZone('heading', value, {
       handle: 'heading',
       tagName: 'coral-shell-user-heading',
-      insert: function(content) {
+      insert: function (content) {
         this._elements.container.appendChild(content);
       }
     });
@@ -118,11 +121,12 @@ class ShellUser extends BaseComponent(HTMLElement) {
   get subheading() {
     return this._getContentZone(this._elements.subheading);
   }
+
   set subheading(value) {
     this._setContentZone('subheading', value, {
       handle: 'subheading',
       tagName: 'coral-shell-user-subheading',
-      insert: function(content) {
+      insert: function (content) {
         this._elements.container.appendChild(content);
       }
     });
@@ -137,11 +141,12 @@ class ShellUser extends BaseComponent(HTMLElement) {
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-shell-user-content',
-      insert: function(content) {
+      insert: function (content) {
         // Empty content to hide it
         if (content.innerHTML.trim() === '') {
           content.innerHTML = '';
@@ -161,11 +166,12 @@ class ShellUser extends BaseComponent(HTMLElement) {
   get footer() {
     return this._getContentZone(this._elements.footer);
   }
+
   set footer(value) {
     this._setContentZone('footer', value, {
       handle: 'footer',
       tagName: 'coral-shell-user-footer',
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
@@ -182,15 +188,17 @@ class ShellUser extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['avatar']); }
-
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['avatar']);
+}
   /**
    Returns {@link ShellUser} avatar options.
 
    @return {ShellUserAvatarEnum}
    */
-  static get avatar() { return avatar; }
-
+  static get avatar() {
+    return avatar;
+}
   /** @ignore */
   render() {
     super.render();
@@ -216,8 +224,7 @@ class ShellUser extends BaseComponent(HTMLElement) {
         child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'container') {
         // Add non-template elements to the content
         this._elements.content.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else element
         this.removeChild(child);
       }

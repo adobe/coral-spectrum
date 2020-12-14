@@ -17,7 +17,7 @@ import {commons} from '../../../coral-utils';
  @classdesc Shell's solution sub-cloud name
  @htmltag coral-shell-solutions-header
  @return {HTMLElement}
- 
+
  @deprecated
  */
 export default () => {

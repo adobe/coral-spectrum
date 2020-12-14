@@ -15,7 +15,7 @@ import {SPECTRUM_ICONS_COLOR} from './iconCollection';
 function handleError(string) {
   string = `Coral.Icon#load: ${string}`;
   const error = new Error(string);
-  
+
   console.error(error.toString());
 }
 
@@ -25,35 +25,31 @@ function injectSVG(svgURL) {
     handleError(`failed to fetch icons, server returned ${this.status}`);
     return;
   }
-  
+
   // Parse the SVG
   const parser = new DOMParser();
   try {
     const doc = parser.parseFromString(this.responseText, 'image/svg+xml');
     const svg = doc.firstChild;
-  
+
     // Make sure a real SVG was returned
     if (svg && svg.tagName === 'svg') {
       if (svgURL.indexOf(SPECTRUM_ICONS_COLOR) !== -1) {
         // Insert it into the body
         if (document.body) {
           document.body.appendChild(svg);
-        }
-        else {
+        } else {
           document.addEventListener('DOMContentLoaded', () => {
             document.body.appendChild(svg);
           });
         }
-      }
-      else {
+      } else {
         document.head.appendChild(svg);
       }
-    }
-    else {
+    } else {
       handleError('parsed SVG document contained something other than an SVG');
     }
-  }
-  catch (err) {
+  } catch (err) {
     handleError(`error parsing SVG: ${err}`);
   }
 }
@@ -66,8 +62,7 @@ function loadIcons(svgURL) {
     script.type = 'text/javascript';
     script.src = svgURL;
     document.head.appendChild(script);
-  }
-  else {
+  } else {
     // Request the SVG icons
     const req = new XMLHttpRequest();
     req.open('GET', svgURL, true);

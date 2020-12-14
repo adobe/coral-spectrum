@@ -25,9 +25,9 @@ class ListDivider extends BaseComponent(HTMLElement) {
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // a11y
     this.setAttribute('role', 'separator');
   }

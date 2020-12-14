@@ -58,6 +58,7 @@ class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -97,7 +98,9 @@ class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
   }
 
   // Override content zone name
-  get _contentZones() { return {'coral-anchorbutton-label': 'label'}; }
+  get _contentZones() {
+    return {'coral-anchorbutton-label': 'label'};
+  }
 
   /** @ignore */
   static get observedAttributes() {

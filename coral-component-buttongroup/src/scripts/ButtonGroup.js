@@ -45,7 +45,7 @@ const ITEM_SELECTOR = 'button[is="coral-button"]';
  @returns {String} the value that will be submitted for this item.
  @private
  */
-const itemValueFromDOM = function(item) {
+const itemValueFromDOM = function (item) {
   const attr = item.getAttribute('value');
   // checking explicitely for null allows to differenciate between non set values and empty strings
   return attr !== null ? attr : item.textContent.replace(/\s{2,}/g, ' ').trim();
@@ -136,6 +136,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
   get selectionMode() {
     return this._selectionMode || selectionMode.NONE;
   }
+
   set selectionMode(value) {
     value = transform.string(value).toLowerCase();
     this._selectionMode = validate.enumeration(selectionMode)(value) && value || selectionMode.NONE;
@@ -156,14 +157,12 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
       // we make sure the selection is valid by explicitly finding a candidate or making sure just 1 item is
       // selected
       this._validateSelection();
-    }
-    else if (this._selectionMode === selectionMode.MULTIPLE) {
+    } else if (this._selectionMode === selectionMode.MULTIPLE) {
       this.setAttribute('role', 'group');
 
       // makes sure the internal options are properly initialized
       this._syncItemOptions();
-    }
-    else {
+    } else {
       this.setAttribute('role', 'group');
 
       this._removeItemOptions();
@@ -180,6 +179,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._elements.nativeSelect.name;
   }
+
   set name(value) {
     this._reflectAttribute('name', value);
 
@@ -195,6 +195,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
   get value() {
     return this._elements.nativeSelect.value;
   }
+
   set value(value) {
     if (this.selectionMode === selectionMode.NONE) {
       return;
@@ -242,12 +243,13 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
 
     // uses the nativeSelect since it holds the truth of what will be submitted with the form
     const selectedOptions = this._elements.nativeSelect.querySelectorAll(':checked');
-    for (let i = 0, selectedOptionsCount = selectedOptions.length; i < selectedOptionsCount; i++) {
+    for (let i = 0, selectedOptionsCount = selectedOptions.length ; i < selectedOptionsCount ; i++) {
       values.push(selectedOptions[i].value);
     }
 
     return values;
   }
+
   set values(values) {
     if (Array.isArray(values) && this.selectionMode !== selectionMode.NONE) {
       // just keeps the first value if selectionMode is not multiple
@@ -270,6 +272,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -293,6 +296,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
@@ -317,6 +321,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
@@ -334,6 +339,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
   get labelledBy() {
     return super.labelledBy;
   }
+
   set labelledBy(value) {
     super.labelledBy = value;
     this._elements.nativeSelect.setAttribute('aria-labelledby', this.labelledBy);
@@ -379,8 +385,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
       if (selectedItems[0] !== item) {
         this.trigger('change');
       }
-    }
-    else if (this.selectionMode === selectionMode.MULTIPLE) {
+    } else if (this.selectionMode === selectionMode.MULTIPLE) {
       // prevent event only if selectionMode is not of type none
       event.preventDefault();
 
@@ -398,7 +403,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     const buttonsCount = buttons.length;
 
     let button;
-    for (let i = 0; i < buttonsCount; i++) {
+    for (let i = 0 ; i < buttonsCount ; i++) {
       // stores the reference
       button = buttons[i];
       button.setAttribute('tabindex', button === item ? 0 : -1);
@@ -416,15 +421,14 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     const selectedItemsLength = this.selectedItems.length;
     const firstSelectable = this.items._getFirstSelectable();
     let isSelected = false;
-    for (let i = 0; i < buttonsCount; i++) {
+    for (let i = 0 ; i < buttonsCount ; i++) {
       // stores the reference
       button = buttons[i];
       isSelected = button.hasAttribute('selected');
       if (this.selectionMode === selectionMode.SINGLE) {
         // selected item should be tabbable
         tabindex = isSelected ? 0 : -1;
-      }
-      else if (this.selectionMode === selectionMode.MULTIPLE) {
+      } else if (this.selectionMode === selectionMode.MULTIPLE) {
         tabindex =
           // if no items are selected, first item should be tabbable
           !selectedItemsLength && i === 0 ||
@@ -433,8 +437,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
           // if the element losing focus is not selected, the last selected item should be tabbable
           !item.hasAttribute('selected') &&
           button === (this.selectedItems[selectedItemsLength - 1] || firstSelectable) ? 0 : -1;
-      }
-      else {
+      } else {
         // first item should be tabbable
         tabindex = button === firstSelectable ? 0 : -1;
       }
@@ -453,8 +456,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     while (!button || (button.disabled || button.nodeName !== 'BUTTON')) {
       if (!button) {
         button = this.items._getLastSelectable();
-      }
-      else {
+      } else {
         button = button.previousElementSibling;
       }
     }
@@ -478,8 +480,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     while (!button || (button.disabled || button.nodeName !== 'BUTTON')) {
       if (!button) {
         button = this.items._getFirstSelectable();
-      }
-      else {
+      } else {
         button = button.nextElementSibling;
       }
     }
@@ -543,13 +544,11 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
       if (this.selectionMode === selectionMode.SINGLE) {
         item.setAttribute('role', 'radio');
         item.setAttribute('tabindex', item.hasAttribute('selected') ? 0 : -1);
-      }
-      else {
+      } else {
         item.setAttribute('role', 'checkbox');
       }
       item.setAttribute('aria-checked', item.hasAttribute('selected'));
-    }
-    else {
+    } else {
       item.removeAttribute('role');
     }
 
@@ -607,8 +606,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     // when in single mode, we need to make sure the current selection is valid
     if (this.selectionMode === selectionMode.SINGLE) {
       this._validateSelection(isSelected ? button : null);
-    }
-    else {
+    } else {
       // we simply toggle the selection
       this._toggleItemSelection(button, isSelected);
     }
@@ -656,8 +654,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
       if (this.selectionMode === selectionMode.SINGLE && tabIndexAttr !== '0') {
         item.setAttribute('tabindex', 0);
       }
-    }
-    else if (!selected) {
+    } else if (!selected) {
       if (item.hasAttribute('selected')) {
         item.removeAttribute('selected');
       }
@@ -670,8 +667,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
         if (this.selectionMode === selectionMode.SINGLE && tabIndexAttr !== '-1') {
           item.setAttribute('tabindex', -1);
         }
-      }
-      else {
+      } else {
         item.removeAttribute('aria-checked');
         item.removeAttribute('tabindex');
       }
@@ -688,7 +684,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     const buttons = this.items.getAll();
     let item;
 
-    for (let i = 0, buttonsCount = buttons.length; i < buttonsCount; i++) {
+    for (let i = 0, buttonsCount = buttons.length ; i < buttonsCount ; i++) {
       // stores the reference
       item = buttons[i];
 
@@ -701,7 +697,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
   _setInitialValues() {
     if (this.selectionMode !== selectionMode.NONE) {
       const selectedItems = this.selectedItems;
-      for (let i = 0, selectedItemsCount = selectedItems.length; i < selectedItemsCount; i++) {
+      for (let i = 0, selectedItemsCount = selectedItems.length ; i < selectedItemsCount ; i++) {
         // Store _initalSelectedValues for reset
         this._initalSelectedValues.push(selectedItems[i].value);
 
@@ -743,7 +739,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     const buttons = this.items.getAll();
 
     let item;
-    for (let i = 0, buttonsCount = buttons.length; i < buttonsCount; i++) {
+    for (let i = 0, buttonsCount = buttons.length ; i < buttonsCount ; i++) {
       // stores the reference
       item = buttons[i];
 
@@ -773,22 +769,21 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     let role = null;
     if (this.selectionMode === selectionMode.SINGLE) {
       role = 'radio';
-    }
-    else if (this.selectionMode === selectionMode.MULTIPLE) {
+    } else if (this.selectionMode === selectionMode.MULTIPLE) {
       role = 'checkbox';
     }
 
     let button;
     let isSelected = false;
 
-    for (i; i < buttonsCount; i++) {
+    for (i ; i < buttonsCount ; i++) {
       // try attaching corresponding input element
       this._addItemOption(buttons[i]);
     }
 
     // We need to set the right state for the native select AFTER all buttons have been added
     // (as we can't disable options while there is only one option attached [at least in FF])
-    for (i = buttonsCount - 1; i >= 0; i--) {
+    for (i = buttonsCount - 1 ; i >= 0 ; i--) {
       button = buttons[i];
       isSelected = button.hasAttribute('selected');
       button.option.selected = isSelected;
@@ -796,8 +791,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
 
       if (role) {
         button.setAttribute('role', role);
-      }
-      else {
+      } else {
         button.removeAttribute('role');
       }
     }
@@ -828,7 +822,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
         // we make sure the item is selected, this is important to match the options with the selection
         this._toggleItemSelection(item, true);
 
-        for (let i = 0; i < selectionCount; i++) {
+        for (let i = 0 ; i < selectionCount ; i++) {
           if (selection[i] !== item) {
             this._toggleItemSelection(selection[i], false);
           }
@@ -842,7 +836,9 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
 
    @return {ButtonGroupSelectionModeEnum}
    */
-  static get selectionMode() { return selectionMode; }
+  static get selectionMode() {
+    return selectionMode;
+  }
 
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
@@ -867,7 +863,9 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     this.classList.add(CLASSNAME);
 
     // Default reflected attributes
-    if (!this._selectionMode) { this.selectionMode = selectionMode.NONE; }
+    if (!this._selectionMode) {
+      this.selectionMode = selectionMode.NONE;
+    }
 
     // Create a fragment
     const frag = document.createDocumentFragment();
@@ -882,8 +880,7 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
         child.getAttribute('handle') !== 'nativeSelect') {
         // Add non-template elements to the content
         frag.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else
         this.removeChild(child);
       }

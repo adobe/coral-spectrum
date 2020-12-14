@@ -23,16 +23,15 @@ const REG_EXP = /_coral([^\s]+)/g;
 
 const copyAttributes = (from, to) => {
   const excludedAttributes = ['is', 'id', 'variant', 'size'];
-  
-  for (let i = 0; i < from.attributes.length; i++) {
+
+  for (let i = 0 ; i < from.attributes.length ; i++) {
     const attr = from.attributes[i];
-    
+
     if (excludedAttributes.indexOf(attr.nodeName) === -1) {
       if (attr.nodeName === 'class') {
         // Filter out private Coral classes
         to.setAttribute(attr.nodeName, `${to.className} ${attr.nodeValue.replace(REG_EXP, '')}`);
-      }
-      else {
+      } else {
         to.setAttribute(attr.nodeName, attr.nodeValue);
       }
     }
@@ -47,7 +46,7 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Templates
     this._elements = {};
     this._itemsInPopover = [];
@@ -57,10 +56,10 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
       items: this._itemsInPopover,
       copyAttributes
     });
-  
+
     // Return focus to overlay by default
     this._elements.overlay.focusOnShow = this._elements.overlay;
-  
+
     const overlayId = this._elements.overlay.id;
     const events = {};
     events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = '_onOverlayBeforeOpen';
@@ -68,27 +67,27 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
     // Keyboard interaction
     events[`global:key:down #${overlayId}`] = '_onOverlayKeyDown';
     events[`global:key:up #${overlayId}`] = '_onOverlayKeyUp';
-  
+
     // Events
     this._delegateEvents(events);
-  
+
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
   }
-  
+
   /**
    Returns the inner overlay to allow customization.
-   
+
    @type {Popover}
    @readonly
    */
   get overlay() {
     return this._elements.overlay;
   }
-  
+
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+
    @type {ActionBarContainerCollection}
    @readonly
    */
@@ -104,11 +103,11 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
 
     return this._items;
   }
-  
+
   /**
    The amount of items that are maximally visible inside the container. Using a value <= 0 will disable this
    feature and show as many items as possible.
-   
+
    @type {Number}
    @default -1
    @htmlattribute threshold
@@ -117,15 +116,16 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
   get threshold() {
     return typeof this._threshold === 'number' ? this._threshold : -1;
   }
+
   set threshold(value) {
     this._threshold = transform.number(value);
     this._reflectAttribute('threshold', this._threshold);
   }
-  
+
   /**
    If there are more ActionBarItems inside the ActionBar than currently can be shown, then a "more" Button with the
    following text will be rendered (and some ActionBarItems will be hidden inside of a Popover).
-   
+
    @type {String}
    @default ""
    @htmlattribute morebuttontext
@@ -133,16 +133,17 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
   get moreButtonText() {
     return this._moreButtonText || '';
   }
+
   set moreButtonText(value) {
     this._moreButtonText = transform.string(value);
-  
+
     if (this._elements.moreButton) {
       // moreButton might not have been created so far
       this._elements.moreButtonLabel.innerHTML = this._moreButtonText;
       this._elements.moreButton[this._moreButtonText.trim() === '' ? 'setAttribute' : 'removeAttribute']('title', i18n.get('More'));
     }
   }
-  
+
   /**
    Style item content
    */
@@ -150,20 +151,20 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
     const button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
     if (button) {
       button.classList.add('_coral-ActionBar-button');
-      
+
       const oldVariant = button.getAttribute('variant');
       if (oldVariant === Button.variant.ACTION || oldVariant === Button.variant.QUIET_ACTION) {
         return;
       }
-      
+
       button.setAttribute('variant', oldVariant === Button.variant.QUIET ? Button.variant.QUIET_ACTION : Button.variant.ACTION);
     }
   }
-  
+
   /**
    Called after popover.open is set to true, but before the transition of the popover is done. Show elements inside
    the actionbar, that are hidden due to space problems.
-   
+
    @ignore
    */
   _onOverlayBeforeOpen(event) {
@@ -171,9 +172,9 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
     if (event.target !== this._elements.overlay) {
       return;
     }
-    
+
     this._itemsInPopover = this.items._getAllOffScreen();
-    
+
     if (this._itemsInPopover.length < 1) {
       return;
     }
@@ -186,18 +187,18 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
       // Store the button and popover on the item
       item._button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
       item._popover = item.querySelector('coral-popover');
-      if(item._popover) {
+      if (item._popover) {
         item._popoverId = item._popover.id;
       }
     });
-    
+
     // Whether a ButtonList or AnchorList should be rendered
     this._itemsInPopover.isButtonList = this._itemsInPopover.every(item => item._button && item._button.tagName === 'BUTTON');
     this._itemsInPopover.isAnchorList = this._itemsInPopover.every(item => item._button && item._button.tagName === 'A');
-    
+
     // show the current popover (hidden needed to disable fade time of popover)
     this._elements.overlay.hidden = false;
-    
+
     // render popover content
     const popover = this._elements.overlay;
     popover.content.innerHTML = '';
@@ -206,7 +207,7 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
       copyAttributes
     }));
   }
-  
+
   /**
    Called after popover.open is set to false, but before the transition of the popover is done.
    Make items visible again, that now do fit into the actionbar.
@@ -217,7 +218,7 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
     if (event.target !== this._elements.overlay) {
       return;
     }
-    
+
     const focusedItem = document.activeElement.parentNode;
 
     // we need to check if item has 'hasAttribute' because it is not present on the document
@@ -228,58 +229,58 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
       // button
       this._elements.moreButton.focus();
     }
-    
+
     // hide the popover(needed to disable fade time of popover)
     this._elements.overlay.hidden = true;
     this._elements.overlay.focusOnShow = this._elements.overlay;
-    
+
     // close any popovers, that might be inside the 'more' popover
     const childPopovers = this._elements.overlay.getElementsByTagName('coral-popover');
-    for (let i = 0; i < childPopovers.length; i++) {
+    for (let i = 0 ; i < childPopovers.length ; i++) {
       childPopovers[i].open = false;
     }
-    
+
     // return all elements from popover
     this._returnElementsFromPopover();
-    
+
     // clear cached items from popover
     this._itemsInPopover = [];
 
     // clear overlay
     this._elements.overlay.content.innerHTML = '';
   }
-  
+
   _onOverlayKeyDown(event) {
     event.preventDefault();
-    
+
     // Focus first item
     this._elements.anchorList && this._elements.anchorList._focusFirstItem(event);
     this._elements.buttonList && this._elements.buttonList._focusFirstItem(event);
   }
-  
+
   _onOverlayKeyUp(event) {
     event.preventDefault();
-    
+
     // Focus last item
     this._elements.anchorList && this._elements.anchorList._focusLastItem(event);
     this._elements.buttonList && this._elements.buttonList._focusLastItem(event);
   }
-  
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       morebuttontext: 'moreButtonText'
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['morebuttontext', 'threshold']);
   }
-  
+
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-    
+
     const overlay = this._elements.overlay;
     // Cannot be open by default when rendered
     overlay.removeAttribute('open');
@@ -288,56 +289,56 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
       overlay._parent.appendChild(overlay);
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-  
+
     // Cleanup resize helpers object (cloneNode support)
     const resizeHelpers = this.getElementsByTagName('object');
-    for (let i = 0; i < resizeHelpers.length; ++i) {
+    for (let i = 0 ; i < resizeHelpers.length ; ++i) {
       const resizeElement = resizeHelpers[i];
       if (resizeElement.parentNode === this) {
         this.removeChild(resizeElement);
       }
     }
-  
+
     // Cleanup 'More' button
     const more = this.querySelector('[coral-actionbar-more]');
     if (more) {
       this.removeChild(more);
     }
-  
+
     // Cleanup 'More' popover
     const popover = this.querySelector('[coral-actionbar-popover]');
     if (popover) {
       this.removeChild(popover);
     }
-  
+
     // Copy more text
     this._elements.moreButton.label.textContent = this.moreButtonText;
-    
+
     // Init 'More' popover
     this._elements.overlay.target = this._elements.moreButton;
-    
+
     // Create empty frag
     const frag = document.createDocumentFragment();
-  
+
     // 'More' button might be moved later in dom when Container is attached to parent
     frag.appendChild(this._elements.moreButton);
     frag.appendChild(this._elements.overlay);
-  
+
     // Render template
     this.appendChild(frag);
-  
+
     // Style the items to match action items
     this.items.getAll().forEach(item => this._styleItem(item));
   }
-  
+
   /** @ignore */
   disconnectedCallback() {
     super.disconnectedCallback();
-    
+
     const overlay = this._elements.overlay;
     // In case it was moved out don't forget to remove it
     if (!this.contains(overlay)) {

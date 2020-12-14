@@ -28,42 +28,42 @@ class ActionBarPrimary extends ActionBarContainer(BaseComponent(HTMLElement)) {
   _returnElementsFromPopover() {
     let item = null;
     let wrappedItem = null;
-    
-    for (let i = 0; i < this._itemsInPopover.length; i++) {
+
+    for (let i = 0 ; i < this._itemsInPopover.length ; i++) {
       item = this._itemsInPopover[i];
 
       item.style.visibility = 'hidden';
-      
+
       // remove tabindex again
       wrappedItem = getFirstSelectableWrappedItem(item);
       if (wrappedItem && wrappedItem.hasAttribute('tabindex')) {
         wrappedItem.setAttribute('tabindex', -1);
       }
-      
+
       this.insertBefore(item, this._elements.moreButton);
-      
+
       // Reset popover id, target
       if (item._button && item._popover) {
         item._popover.id = item._popoverId;
-        if(item._popover.target) {
+        if (item._popover.target) {
           item._popover.target = item._button;
         }
       }
     }
   }
-  
+
   /** @ignore */
   _attachMoreButtonToContainer() {
     // add the button to the left/primary contentzone
     this.appendChild(this._elements.moreButton);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     this._attachMoreButtonToContainer();
   }
 }

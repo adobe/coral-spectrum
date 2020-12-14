@@ -72,11 +72,12 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   get label() {
     return this._getContentZone(this._elements.label);
   }
+
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: 'coral-tab-label',
-      insert: function(label) {
+      insert: function (label) {
         label.classList.add(`${CLASSNAME}Label`);
         this.appendChild(label);
 
@@ -96,6 +97,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     const iconElement = this._elements.icon;
     return iconElement ? iconElement.icon : '';
   }
+
   set icon(value) {
     const iconElement = this._elements.icon;
     iconElement.icon = value;
@@ -130,6 +132,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   get invalid() {
     return this._invalid || false;
   }
+
   set invalid(value) {
     this._invalid = transform.booleanAttr(value);
     this._reflectAttribute('invalid', this._invalid);
@@ -138,8 +141,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     this.setAttribute('aria-invalid', this._invalid);
     if (this._invalid) {
       this._elements.invalidIcon.removeAttribute('hidden');
-    }
-    else {
+    } else {
       this._elements.invalidIcon.setAttribute('hidden', 'true');
     }
   }
@@ -156,6 +158,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -183,6 +186,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     value = transform.booleanAttr(value);
 
@@ -213,6 +217,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   get target() {
     return typeof this._target === 'string' ? this._target : this._target || null;
   }
+
   set target(value) {
     if (value === null || typeof value === 'string' || value instanceof Node) {
       this._target = value;
@@ -240,6 +245,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
       (this.label || this).textContent.replace(/\s{2,}/g, ' ').trim() :
       this._trackingElement;
   }
+
   set trackingElement(value) {
     super.trackingElement = value;
   }
@@ -296,7 +302,9 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     return iconElement;
   }
 
-  get _contentZones() { return {'coral-tab-label': 'label'}; }
+  get _contentZones() {
+    return {'coral-tab-label': 'label'};
+  }
 
   /** @ignore */
   static get observedAttributes() {
@@ -351,8 +359,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
         child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'icon') {
         // Add non-template elements to the label
         label.appendChild(child);
-      }
-      else {
+      } else {
         this.removeChild(child);
       }
     }

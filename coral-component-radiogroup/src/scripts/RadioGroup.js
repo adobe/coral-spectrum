@@ -16,9 +16,9 @@ import '../../../coral-component-radio';
 
 /**
  Enumeration for {@link RadioGroup} orientations.
- 
+
  @typedef {Object} RadioGroupOrientationEnum
- 
+
  @property {String} HORIZONTAL
  Horizontal default orientation.
  @property {String} VERTICAL
@@ -43,7 +43,7 @@ const orientation = {
 class RadioGroup extends BaseFieldGroup(BaseComponent(HTMLElement)) {
   /**
    Orientation of the radio group. See {@link RadioGroupOrientationEnum}.
-   
+
    @type {String}
    @default RadioGroupOrientationEnum.HORIZONTAL
    @htmlattribute orientation
@@ -52,24 +52,27 @@ class RadioGroup extends BaseFieldGroup(BaseComponent(HTMLElement)) {
   get orientation() {
     return super.orientation;
   }
+
   set orientation(value) {
     super.orientation = value;
-  
+
     this.classList.toggle(`coral-RadioGroup--labelsBelow`, this._orientation === orientation.LABELS_BELOW);
   }
-  
+
   /** @private */
   get _itemTagName() {
     // Used for Collection
     return 'coral-radio';
   }
-  
+
   /**
    Returns {@link RadioGroup} orientation options.
-   
+
    @return {RadioGroupEnum}
    */
-  static get orientation() { return orientation; }
+  static get orientation() {
+    return orientation;
+  }
 }
 
 export default RadioGroup;

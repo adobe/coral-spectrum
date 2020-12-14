@@ -14,7 +14,7 @@ window["Coral"] = window["Coral"] || {};
 window["Coral"]["templates"] = window["Coral"]["templates"] || {};
 window["Coral"]["templates"]["Element"] = window["Coral"]["templates"]["Element"] || {};
 window["Coral"]["templates"]["Element"]["base"] = (function anonymous(data_0
-                                                                     /**/) {
+                                                                      /**/) {
   var frag = document.createDocumentFragment();
   var data = data_0;
   var el0 = this["slider"] = document.createElement("div");
@@ -35,7 +35,7 @@ window["Coral"]["templates"]["Element"]["base"] = (function anonymous(data_0
   el5.className += " _coral-Drawer-toggle";
   var el6 = document.createTextNode("\n  ");
   el5.appendChild(el6);
-  var el7 = this["toggle"] = document.createElement("button","coral-button");
+  var el7 = this["toggle"] = document.createElement("button", "coral-button");
   el7.className += " _coral-Drawer-toggleButton";
   el7.setAttribute("type", "button");
   el7.setAttribute("handle", "toggle");

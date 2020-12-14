@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-module.exports = function(gulp) {
+module.exports = function (gulp) {
   const fs = require('fs');
   const exec = require('child_process').exec;
   const spawn = require('child_process').spawn;
@@ -30,7 +30,7 @@ module.exports = function(gulp) {
   // The version we'll actually release
   let releaseVersion;
 
-  gulp.task('check-root-folder', function(done) {
+  gulp.task('check-root-folder', function (done) {
     if (CWD !== root) {
       done(new PluginError('release', 'Release aborted: not in root folder.'));
     }
@@ -39,16 +39,15 @@ module.exports = function(gulp) {
   });
 
   // Push current branch commits to origin
-  gulp.task('push', function(done) {
+  gulp.task('push', function (done) {
     // Get the current branch name
-    exec('git rev-parse --abbrev-ref HEAD', function(err, stdout, stderr) {
+    exec('git rev-parse --abbrev-ref HEAD', function (err, stdout, stderr) {
       if (err) {
         done(new PluginError('release', stderr));
-      }
-      else {
+      } else {
         const currentBranch = stdout.trim();
 
-        git.push('origin', currentBranch, function(err) {
+        git.push('origin', currentBranch, function (err) {
           if (err) {
             done(new PluginError('release', err.message));
           }
@@ -60,19 +59,19 @@ module.exports = function(gulp) {
   });
 
   // Tag and push release
-  gulp.task('tag-release', function(done) {
+  gulp.task('tag-release', function (done) {
     // Read updated package.json
     modulePackageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
     releaseVersion = 'v' + modulePackageJson.version;
 
     const releaseMessage = `releng - Release ${releaseVersion}`;
 
-    git.tag(releaseVersion, releaseMessage, function(err) {
+    git.tag(releaseVersion, releaseMessage, function (err) {
       if (err) {
         done(new PluginError('release', err.message));
       }
 
-      git.push('origin', releaseVersion, function(err) {
+      git.push('origin', releaseVersion, function (err) {
         if (err) {
           done(new PluginError('release', err.message));
         }
@@ -83,7 +82,7 @@ module.exports = function(gulp) {
   });
 
   // Increase release version based on user choice
-  gulp.task('bump-version', function(done) {
+  gulp.task('bump-version', function (done) {
     const doVersionBump = () => {
       gulp.src([`${CWD}/package.json`, `${CWD}/package-lock.json`])
         .pipe(plumb())
@@ -109,33 +108,25 @@ module.exports = function(gulp) {
     // Command line bump shortcuts
     if (argv.pre) {
       releaseVersion = preVersion;
-    }
-    else if (argv.patch) {
+    } else if (argv.patch) {
       releaseVersion = patchVersion;
-    }
-    else if (argv.minor) {
+    } else if (argv.minor) {
       releaseVersion = minorVersion;
-    }
-    else if (argv.major) {
+    } else if (argv.major) {
       releaseVersion = majorVersion;
-    }
-    else if (argv.prepatch) {
+    } else if (argv.prepatch) {
       releaseVersion = prePatchVersion;
-    }
-    else if (argv.preMinorVersion) {
+    } else if (argv.preMinorVersion) {
       releaseVersion = prePatchVersion;
-    }
-    else if (argv.preMajorVersion) {
+    } else if (argv.preMajorVersion) {
       releaseVersion = prePatchVersion;
-    }
-    else if (argv.releaseVersion) {
+    } else if (argv.releaseVersion) {
       releaseVersion = argv.releaseVersion;
     }
 
     if (releaseVersion) {
       doVersionBump();
-    }
-    else {
+    } else {
       let choices = [];
 
       if (currentVersion.match('-beta')) {
@@ -164,8 +155,7 @@ module.exports = function(gulp) {
             value: majorVersion
           }
         ]);
-      }
-      else {
+      } else {
         // Provide only the major version if the current version if a beta of a major version
         choices = choices.concat([
           {
@@ -200,19 +190,18 @@ module.exports = function(gulp) {
         message: `The current version is ${currentVersion}. What version would you like to release ?`,
         choices: choices
       }])
-        .then(function(res) {
+        .then(function (res) {
           if (res.version === 'custom') {
             inq.prompt([{
               type: 'input',
               name: 'version',
               message: 'What version would you like?'
             }])
-              .then(function(res) {
+              .then(function (res) {
                 releaseVersion = res.version;
                 doVersionBump();
               });
-          }
-          else {
+          } else {
             releaseVersion = res.version;
             doVersionBump();
           }
@@ -220,7 +209,7 @@ module.exports = function(gulp) {
     }
   });
 
-  gulp.task('perform-release', function(done) {
+  gulp.task('perform-release', function (done) {
     const release = () => {
       spawn(`
         gulp build &&
@@ -242,14 +231,13 @@ module.exports = function(gulp) {
     // Command line shortcut
     if (argv.confirm) {
       release();
-    }
-    else {
+    } else {
       inq.prompt({
         type: 'confirm',
         name: 'confirmed',
         message: `Release ${releaseVersion} ?`
       })
-        .then(function(res) {
+        .then(function (res) {
           if (res.confirmed) {
             release();
           }

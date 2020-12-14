@@ -76,6 +76,7 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
   get checked() {
     return this._checked || false;
   }
+
   set checked(value) {
     this._checked = transform.booleanAttr(value);
     this._reflectAttribute('checked', this._checked);
@@ -92,11 +93,12 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
   get label() {
     return this._getContentZone(this._elements.label);
   }
+
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: 'coral-switch-label',
-      insert: function(label) {
+      insert: function (label) {
         this._elements.labelWrapper.appendChild(label);
       }
     });
@@ -112,6 +114,7 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._elements.input.name;
   }
+
   set name(value) {
     this._reflectAttribute('name', value);
 
@@ -128,6 +131,7 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
   get value() {
     return this._elements.input.value || 'on';
   }
+
   set value(value) {
     this._elements.input.value = value;
   }
@@ -142,6 +146,7 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -161,6 +166,7 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
@@ -178,6 +184,7 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
@@ -192,6 +199,7 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
   get labelled() {
     return super.labelled;
   }
+
   set labelled(value) {
     super.labelled = value;
 
@@ -203,15 +211,17 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
 
    @protected
    */
-  get _componentTargetProperty() { return 'checked'; }
-
+  get _componentTargetProperty() {
+    return 'checked';
+}
   /*
    Indicates to the formField that the 'checked' property has to be extracted from the event.
 
    @protected
    */
-  get _eventTargetProperty() { return 'checked'; }
-
+  get _eventTargetProperty() {
+    return 'checked';
+}
   /**
    Hide the label if it's empty.
 
@@ -236,8 +246,8 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements.input.classList.remove('focus-ring');
   }
 
-  get _contentZones() { return {'coral-switch-label': 'label'}; }
-
+  get _contentZones() { return {'coral-switch-label': 'label'};
+}
   /**
    Inherited from {@link BaseFormField#clear}.
    */
@@ -288,8 +298,7 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
         child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the content
         label.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else
         this.removeChild(child);
       }

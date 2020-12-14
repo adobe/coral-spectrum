@@ -14,15 +14,15 @@ import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Autocomplete} from '../../../coral-component-autocomplete';
 import {i18n, commons} from '../../../coral-utils';
 
-describe('Autocomplete', function() {
-  describe('Namespace', function() {
-    it('should expose enums', function() {
+describe('Autocomplete', function () {
+  describe('Namespace', function () {
+    it('should expose enums', function () {
       expect(Autocomplete).to.have.property('match');
       expect(Autocomplete).to.have.property('variant');
     });
   });
 
-  describe('Instantiation', function() {
+  describe('Instantiation', function () {
     helpers.cloneComponent(
       'should be possible to clone using markup',
       window.__html__['Autocomplete.base.html']
@@ -34,46 +34,46 @@ describe('Autocomplete', function() {
     );
   });
 
-  describe('API', function() {
+  describe('API', function () {
     var el;
 
-    beforeEach(function() {
+    beforeEach(function () {
       el = helpers.build(new Autocomplete());
 
       // No delay by default
       el.delay = 0;
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el = null;
     });
 
-    describe('#name', function() {
-      it('should default to empty string', function() {
+    describe('#name', function () {
+      it('should default to empty string', function () {
         expect(el.name).to.equal('');
       });
 
-      it('should set field name when name set', function() {
+      it('should set field name when name set', function () {
         el.name = 'abc';
         expect(el.name).to.equal('abc');
         expect(el.getAttribute('name')).to.equal('abc');
       });
     });
 
-    describe('#multiple', function() {
-      it('should default to false', function() {
+    describe('#multiple', function () {
+      it('should default to false', function () {
         expect(el.multiple).to.be.false;
       });
     });
 
-    describe('#forceSelection', function() {
-      it('should default to false', function() {
+    describe('#forceSelection', function () {
+      it('should default to false', function () {
         expect(el.forceSelection).to.be.false;
       });
     });
 
-    describe('#delay', function() {
-      it('should default to 200', function() {
+    describe('#delay', function () {
+      it('should default to 200', function () {
         // we create a new instance since the global one sets delay to 0
         el = new Autocomplete();
 
@@ -81,12 +81,12 @@ describe('Autocomplete', function() {
       });
     });
 
-    describe('#value', function() {
-      it('should default to empty string', function() {
+    describe('#value', function () {
+      it('should default to empty string', function () {
         expect(el.value).to.equal('');
       });
 
-      it('should set field value and select items when value set', function() {
+      it('should set field value and select items when value set', function () {
         el.value = 'abc';
 
         expect(el.value).to.equal('abc');
@@ -96,12 +96,12 @@ describe('Autocomplete', function() {
       });
     });
 
-    describe('#values', function() {
-      it('should default to empty array', function() {
+    describe('#values', function () {
+      it('should default to empty array', function () {
         expect(el.values).to.deep.equal([]);
       });
 
-      it('should add tags and select items when values set', function() {
+      it('should add tags and select items when values set', function () {
         el.multiple = true;
         expect(el.values.length).to.equal(0);
 
@@ -113,7 +113,7 @@ describe('Autocomplete', function() {
         expect(el.values[1]).to.equal('def');
       });
 
-      it('should remove values when a tag is removed', function(done) {
+      it('should remove values when a tag is removed', function (done) {
         el.multiple = true;
         expect(el.values.length).to.equal(0);
 
@@ -124,11 +124,11 @@ describe('Autocomplete', function() {
         expect(el.values[0]).to.equal('abc');
         expect(el.values[1]).to.equal('def');
 
-        helpers.next(function() {
+        helpers.next(function () {
           // Find the first tag and remove it
           el.querySelector('coral-tag').remove();
 
-          helpers.next(function() {
+          helpers.next(function () {
 
             // The first tag should be removed
             expect(el.values.length).to.equal(1);
@@ -140,14 +140,14 @@ describe('Autocomplete', function() {
       });
     });
 
-    describe('#placeholder', function() {
-      it('should default to empty string', function() {
+    describe('#placeholder', function () {
+      it('should default to empty string', function () {
         expect(el.placeholder).to.equal('');
       });
 
-      it('should set field placeholder', function(done) {
+      it('should set field placeholder', function (done) {
         el.placeholder = 'abc';
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el.placeholder).to.equal('abc');
           // get attribute as the placeholder property is not available in IE9
           expect(el._elements.input.getAttribute('placeholder')).to.equal('abc');
@@ -156,62 +156,61 @@ describe('Autocomplete', function() {
       });
     });
 
-    describe('#maxLength', function() {
-      it('should default to -1', function() {
+    describe('#maxLength', function () {
+      it('should default to -1', function () {
         expect(el.maxLength).to.equal(-1, 'Default should be -1');
       });
 
-      it('should set field maxlength to 10', function(done) {
+      it('should set field maxlength to 10', function (done) {
         el.maxLength = 10;
 
         expect(el.maxLength).to.equal(10);
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el._elements.input.getAttribute('maxlength')).to.equal('10');
           done();
         });
       });
 
-      it('should not allow setting -1', function(done) {
+      it('should not allow setting -1', function (done) {
         el.maxLength = 20;
         expect(el.maxLength).to.equal(20);
 
         try {
           el.maxLength = -1;
-        }
-        catch (e) {
+        } catch (e) {
           done();
         }
       });
 
-      it('should allow setting a string', function(done) {
+      it('should allow setting a string', function (done) {
         el.maxLength = '17';
         expect(el.maxLength).to.equal(17);
 
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el._elements.input.getAttribute('maxlength')).to.equal('17');
           done();
         });
       });
     });
 
-    describe('#icon', function() {
-      it('should default to empty string', function() {
+    describe('#icon', function () {
+      it('should default to empty string', function () {
         expect(el.icon).to.equal('');
       });
 
-      it('should set icon', function() {
+      it('should set icon', function () {
         el.icon = 'search';
         expect(el.getAttribute('icon')).to.equal('search');
       });
     });
 
-    describe('#variant', function() {
-      it('should default to DEFAULT', function() {
+    describe('#variant', function () {
+      it('should default to DEFAULT', function () {
         expect(el.variant).to.equal(Autocomplete.variant.DEFAULT);
         expect(el.getAttribute('variant')).to.equal(el.variant);
       });
 
-      it('should switch the variant to QUIET', function() {
+      it('should switch the variant to QUIET', function () {
         el.variant = Autocomplete.variant.QUIET;
 
         expect(el.variant).to.equal(Autocomplete.variant.QUIET);
@@ -220,7 +219,7 @@ describe('Autocomplete', function() {
         expect(el._elements.inputGroup.classList.contains('_coral-InputGroup--quiet')).to.be.true;
       });
 
-      it('should restore the DEFAULT variant', function() {
+      it('should restore the DEFAULT variant', function () {
         el.variant = Autocomplete.variant.QUIET;
         el.variant = Autocomplete.variant.DEFAULT;
 
@@ -231,7 +230,7 @@ describe('Autocomplete', function() {
       });
     });
 
-    it('#clear() should clear the value', function() {
+    it('#clear() should clear the value', function () {
       el.value = 'Hello!';
 
       el.clear();
@@ -241,14 +240,14 @@ describe('Autocomplete', function() {
       expect(el._elements.input.value).to.equal('');
     });
 
-    it('#showSuggestions() should display selections', function(done) {
+    it('#showSuggestions() should display selections', function (done) {
       el.multiple = true;
       el.forceSelection = false;
 
       // show suggestions with no items programmatically
       el.showSuggestions();
 
-      helpers.next(function() {
+      helpers.next(function () {
         expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
         expect(el._elements.trigger.getAttribute('aria-expanded')).to.equal('true');
 
@@ -276,7 +275,7 @@ describe('Autocomplete', function() {
         });
 
         // Wait for mutation observers to pick up items
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el._elements.input.getAttribute('aria-expanded')).to.equal('false');
           expect(el._elements.trigger.getAttribute('aria-expanded')).to.equal('false');
 
@@ -285,7 +284,7 @@ describe('Autocomplete', function() {
           // show suggestions programatically
           el.showSuggestions();
 
-          helpers.next(function() {
+          helpers.next(function () {
             expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
             expect(el._elements.trigger.getAttribute('aria-expanded')).to.equal('true');
 
@@ -299,7 +298,7 @@ describe('Autocomplete', function() {
             // Click the second suggestion
             el._elements.selectList.items.getAll()[1].trigger('mousedown');
 
-            helpers.next(function() {
+            helpers.next(function () {
               expect(el._elements.input.getAttribute('aria-expanded')).to.equal('false');
               expect(el._elements.trigger.getAttribute('aria-expanded')).to.equal('false');
 
@@ -308,7 +307,7 @@ describe('Autocomplete', function() {
               // show suggestions programatically
               el.clearSuggestions();
 
-              el.on('coral-autocomplete:showsuggestions', function(event) {
+              el.on('coral-autocomplete:showsuggestions', function (event) {
                 // Don't show suggestions from existing items
                 // This shows a loading icon until we call addSuggestions
                 event.preventDefault();
@@ -324,7 +323,7 @@ describe('Autocomplete', function() {
 
               el.showSuggestions();
 
-              helpers.next(function() {
+              helpers.next(function () {
                 expect(el._elements.input.getAttribute('aria-expanded')).to.equal('true');
                 expect(el._elements.trigger.getAttribute('aria-expanded')).to.equal('true');
 
@@ -353,25 +352,25 @@ describe('Autocomplete', function() {
     });
   });
 
-  describe('Events', function() {
+  describe('Events', function () {
     var el;
 
-    beforeEach(function() {
+    beforeEach(function () {
       el = helpers.build(new Autocomplete());
 
       // No delay by default
       el.delay = 0;
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el = null;
     });
 
-    describe('#coral-autocomplete:showsuggestions', function() {
-      it('should support "remote" suggestions with coral-autocomplete:showsuggestions', function() {
+    describe('#coral-autocomplete:showsuggestions', function () {
+      it('should support "remote" suggestions with coral-autocomplete:showsuggestions', function () {
         var spy = sinon.spy();
 
-        el.on('coral-autocomplete:showsuggestions', function(event) {
+        el.on('coral-autocomplete:showsuggestions', function (event) {
           spy();
 
           // Don't show suggestions from existing items
@@ -396,8 +395,8 @@ describe('Autocomplete', function() {
         expect(el._elements.selectList.items.getAll()[0].value).to.equal('sa', 'SelectList item should represent remote suggestion');
       });
 
-      it('should add items to the collection when selection from suggestions added with addSuggestions()', function() {
-        el.on('coral-autocomplete:showsuggestions', function(event) {
+      it('should add items to the collection when selection from suggestions added with addSuggestions()', function () {
+        el.on('coral-autocomplete:showsuggestions', function (event) {
           // Don't show suggestions from existing items
           // This shows a loading icon until we call addSuggestions
           event.preventDefault();
@@ -428,26 +427,26 @@ describe('Autocomplete', function() {
       });
 
 
-      it('should add items to the collection, when selected from suggestions with keyboard and added with addSuggestions()', function() {
-        el.on('coral-autocomplete:showsuggestions', function() {
+      it('should add items to the collection, when selected from suggestions with keyboard and added with addSuggestions()', function () {
+        el.on('coral-autocomplete:showsuggestions', function () {
 
           // Add suggestions
           el.addSuggestions([
             {
-                value: 'ch',
-                content: 'Chrome'
+              value: 'ch',
+              content: 'Chrome'
             },
-              {
-                value: 'fi',
-                content: 'Firefox'
+            {
+              value: 'fi',
+              content: 'Firefox'
             },
-              {
-                value: 'ie',
-                content: 'Internet Explorer'
+            {
+              value: 'ie',
+              content: 'Internet Explorer'
             },
-              {
-                value: 'sa',
-                content: 'Safari'
+            {
+              value: 'sa',
+              content: 'Safari'
             }
           ]);
         });
@@ -467,8 +466,8 @@ describe('Autocomplete', function() {
       });
     });
 
-    describe('#change', function() {
-      it('should trigger change events when an item is selected inside of the SelectList', function(done) {
+    describe('#change', function () {
+      it('should trigger change events when an item is selected inside of the SelectList', function (done) {
         var spy = sinon.spy();
 
         el.items.add({
@@ -485,7 +484,7 @@ describe('Autocomplete', function() {
           }
         });
 
-        var handleChange = function(event) {
+        var handleChange = function (event) {
           expect(el.value).to.equal(firefox.value);
           spy.call(spy, this.arguments);
         };
@@ -493,7 +492,7 @@ describe('Autocomplete', function() {
         el.on('change', handleChange);
 
         // Wait for mutation observers to pick up items
-        helpers.next(function() {
+        helpers.next(function () {
           // Trigger input event
           el._elements.input.value = 'fi';
           helpers.event('input', el._elements.input);
@@ -510,7 +509,7 @@ describe('Autocomplete', function() {
         });
       });
 
-      it('should trigger change events when an item is selected by exact match keyboard entry', function(done) {
+      it('should trigger change events when an item is selected by exact match keyboard entry', function (done) {
         var spy = sinon.spy();
 
         el.items.add({
@@ -527,7 +526,7 @@ describe('Autocomplete', function() {
           }
         });
 
-        var handleChange = function(event) {
+        var handleChange = function (event) {
           expect(el.value).to.equal(firefox.value);
           spy.apply(spy, arguments);
         };
@@ -535,7 +534,7 @@ describe('Autocomplete', function() {
         el.on('change', handleChange);
 
         // Wait for mutation observers to pick up items
-        helpers.next(function() {
+        helpers.next(function () {
           // Add some text
           el._elements.input.value = 'firefox';
 
@@ -551,7 +550,7 @@ describe('Autocomplete', function() {
         });
       });
 
-      it('should trigger a change event when the input is cleared', function(done) {
+      it('should trigger a change event when the input is cleared', function (done) {
         el.multiple = false;
 
         var changeSpy = sinon.spy();
@@ -574,17 +573,23 @@ describe('Autocomplete', function() {
         el.on('change', changeSpy);
 
         // Wait for mutation observers to pick up items
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el.value).to.equal('fi', 'value should be firefox');
 
           // Clear the input text and trigger events
           el._elements.input.value = '';
           helpers.event('input', el._elements.input);
-          el._handleInput({preventDefault:function(){}}); // Fake call..
-          el._onInputChange({stopPropagation:function(){}}); // Fake call..;
+          el._handleInput({
+            preventDefault: function () {
+            }
+          }); // Fake call..
+          el._onInputChange({
+            stopPropagation: function () {
+            }
+          }); // Fake call..;
 
           // Wait for mutation observers to pick up items
-          helpers.next(function() {
+          helpers.next(function () {
             expect(el.value).to.equal('', 'value should be empty');
             expect(changeSpy.callCount).to.equal(1, 'call count after selecting item');
             expect(el._elements.input.value).to.equal('', 'el._elements.input.value should now contain ""');
@@ -597,9 +602,9 @@ describe('Autocomplete', function() {
         });
       });
 
-      it('should trigger change events when an item is selected by non-matching keyboard entry', function(done) {
+      it('should trigger change events when an item is selected by non-matching keyboard entry', function (done) {
         var spy = sinon.spy();
-        var handleChange = function(event) {
+        var handleChange = function (event) {
           expect(el.value).to.equal('stuff');
           spy.apply(spy, arguments);
         };
@@ -621,7 +626,7 @@ describe('Autocomplete', function() {
         el.on('change', handleChange);
 
         // Wait for mutation observers to pick up items
-        helpers.next(function() {
+        helpers.next(function () {
           // Add some text
           el._elements.input.value = 'stuff';
 
@@ -637,7 +642,7 @@ describe('Autocomplete', function() {
         });
       });
 
-      it('should not trigger two change events when an item is selected and then component lost focus', function(done) {
+      it('should not trigger two change events when an item is selected and then component lost focus', function (done) {
         var spy = sinon.spy();
 
         el.items.add({
@@ -654,7 +659,7 @@ describe('Autocomplete', function() {
           }
         });
 
-        var handleChange = function(event) {
+        var handleChange = function (event) {
           expect(el.value).to.equal(firefox.value);
           spy.apply(spy, arguments);
         };
@@ -662,7 +667,7 @@ describe('Autocomplete', function() {
         el.on('change', handleChange);
 
         // Wait for mutation observers to pick up items
-        helpers.next(function() {
+        helpers.next(function () {
           // Add some text
           el._elements.input.value = 'firefox';
 
@@ -680,9 +685,9 @@ describe('Autocomplete', function() {
         });
       });
 
-      it('should not trigger two change events when an item is selected by non-matching keyboard entry and then component lost focus', function(done) {
+      it('should not trigger two change events when an item is selected by non-matching keyboard entry and then component lost focus', function (done) {
         var spy = sinon.spy();
-        var handleChange = function(event) {
+        var handleChange = function (event) {
           expect(el.value).to.equal('stuff');
           spy.apply(spy, arguments);
         };
@@ -704,7 +709,7 @@ describe('Autocomplete', function() {
         el.on('change', handleChange);
 
         // Wait for mutation observers to pick up items
-        helpers.next(function() {
+        helpers.next(function () {
           // Add some text
           el._elements.input.value = 'stuff';
 
@@ -723,7 +728,7 @@ describe('Autocomplete', function() {
         });
       });
 
-      it('should trigger change events when a tag is removed after a user interaction', function() {
+      it('should trigger change events when a tag is removed after a user interaction', function () {
         el.multiple = true;
         expect(el.values.length).to.equal(0);
 
@@ -749,8 +754,8 @@ describe('Autocomplete', function() {
       });
     });
 
-    describe('#coral-autocomplete-item:_valuechanged', function() {
-      it('should not be propagated on value change', function(done) {
+    describe('#coral-autocomplete-item:_valuechanged', function () {
+      it('should not be propagated on value change', function (done) {
         var spy = sinon.spy();
 
         var chrome = el.items.add({
@@ -771,12 +776,12 @@ describe('Autocomplete', function() {
         el.on('coral-autocomplete-item:_valuechanged', spy);
 
         // wait for items to be picked up
-        helpers.next(function() {
+        helpers.next(function () {
           // change value of an item
           chrome.value = 'chr';
 
           // wait for mutation observer events to propagate
-          helpers.next(function() {
+          helpers.next(function () {
             var option = el._options[0];
             expect(chrome.value).to.equal(option.value);
 
@@ -788,8 +793,8 @@ describe('Autocomplete', function() {
       });
     });
 
-    describe('#coral-autocomplete-item:_contentchanged', function() {
-      it('should not be propagated', function(done) {
+    describe('#coral-autocomplete-item:_contentchanged', function () {
+      it('should not be propagated', function (done) {
         var spy = sinon.spy();
 
         var chrome = el.items.add({
@@ -810,12 +815,12 @@ describe('Autocomplete', function() {
         el.on('coral-autocomplete-item:_contentchanged', spy);
 
         // wait for items to be picked up
-        helpers.next(function() {
+        helpers.next(function () {
           // change content of an item
           chrome.textContent = 'Chromium';
 
           // wait for mutation observer events to propagate
-          helpers.next(function() {
+          helpers.next(function () {
             var option = el._options[0];
             expect(chrome.textContent).to.equal(option.content);
 
@@ -827,8 +832,8 @@ describe('Autocomplete', function() {
       });
     });
 
-    describe('#coral-autocomplete-item:_selectedchanged', function() {
-      it('should not be propagated', function(done) {
+    describe('#coral-autocomplete-item:_selectedchanged', function () {
+      it('should not be propagated', function (done) {
         var spy = sinon.spy();
 
         var chrome = el.items.add({
@@ -849,7 +854,7 @@ describe('Autocomplete', function() {
         el.on('coral-autocomplete-item:_selectedchanged', spy);
 
         // wait for items to be picked up
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el.values.length).to.equal(0, 'Nothing is selected');
           expect(el.value).to.be.empty;
 
@@ -857,7 +862,7 @@ describe('Autocomplete', function() {
           chrome.selected = true;
 
           // Wait for event propogation
-          helpers.next(function() {
+          helpers.next(function () {
             expect(el.values.length).to.equal(1, 'Chrome is selected');
             expect(el.value).to.equal(chrome.value);
 
@@ -870,21 +875,21 @@ describe('Autocomplete', function() {
     });
   });
 
-  describe('User Interaction', function() {
+  describe('User Interaction', function () {
     var el;
 
-    beforeEach(function() {
+    beforeEach(function () {
       el = helpers.build(new Autocomplete());
 
       // No delay by default
       el.delay = 0;
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el = null;
     });
 
-    it('should clear the input field after valid selection in multiselect mode', function(done) {
+    it('should clear the input field after valid selection in multiselect mode', function (done) {
       el.multiple = true;
 
       var spy = sinon.spy();
@@ -903,7 +908,7 @@ describe('Autocomplete', function() {
         }
       });
 
-      var handleChange = function(event) {
+      var handleChange = function (event) {
         expect(el.value).to.equal(firefox.value);
         spy.call(spy, this.arguments);
       };
@@ -911,7 +916,7 @@ describe('Autocomplete', function() {
       el.on('change', handleChange);
 
       // Wait for mutation observers to pick up items
-      helpers.next(function() {
+      helpers.next(function () {
         // Trigger input event
         el._elements.input.value = 'Fi';
         helpers.event('input', el._elements.input);
@@ -929,7 +934,7 @@ describe('Autocomplete', function() {
       });
     });
 
-    it('should be possible to deselect an item by setting an incomplete text in the input in single select mode (if forceSelection === true)', function(done) {
+    it('should be possible to deselect an item by setting an incomplete text in the input in single select mode (if forceSelection === true)', function (done) {
       el.multiple = false;
       el.forceSelection = true;
 
@@ -952,7 +957,7 @@ describe('Autocomplete', function() {
       el.on('change', changeSpy);
 
       // Wait for mutation observers to pick up items
-      helpers.next(function() {
+      helpers.next(function () {
         // Trigger input event
         el._elements.input.value = 'Fi';
         helpers.event('input', el._elements.input);
@@ -968,11 +973,17 @@ describe('Autocomplete', function() {
         // As on input change is somehow not called by triggering the 'input' event we fake the call..
         el._elements.input.value = 'Firef';
         helpers.event('input', el._elements.input);
-        el._handleInput({preventDefault:function(){}}); // Fake call..
-        el._onInputChange({stopPropagation:function(){}}); // Fake call..
+        el._handleInput({
+          preventDefault: function () {
+          }
+        }); // Fake call..
+        el._onInputChange({
+          stopPropagation: function () {
+          }
+        }); // Fake call..
 
         // Wait for mutation observers to pick up items
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el.value).to.equal('', 'value should now be empty again');
           // CUI-5533 Another change event should be trigger when cleared
           expect(changeSpy.callCount).to.equal(2, 'call count after selecting item');
@@ -987,7 +998,7 @@ describe('Autocomplete', function() {
       });
     });
 
-    it('should not be possible to deselect an item by setting an incomplete text in the input in single select mode (if forceSelection === false)', function(done) {
+    it('should not be possible to deselect an item by setting an incomplete text in the input in single select mode (if forceSelection === false)', function (done) {
       el.multiple = false;
 
       var changeSpy = sinon.spy();
@@ -1009,7 +1020,7 @@ describe('Autocomplete', function() {
       el.on('change', changeSpy);
 
       // Wait for mutation observers to pick up items
-      helpers.next(function() {
+      helpers.next(function () {
         // Trigger input event
         el._elements.input.value = 'Fi';
         helpers.event('input', el._elements.input);
@@ -1025,11 +1036,17 @@ describe('Autocomplete', function() {
         // As on input change is somehow not called by triggering the 'input' event we fake the call..
         el._elements.input.value = 'Firef';
         helpers.event('input', el._elements.input);
-        el._handleInput({preventDefault:function(){}}); // Fake call..
-        el._onInputChange({stopPropagation:function(){}}); // Fake call..
+        el._handleInput({
+          preventDefault: function () {
+          }
+        }); // Fake call..
+        el._onInputChange({
+          stopPropagation: function () {
+          }
+        }); // Fake call..
 
         // Wait for mutation observers to pick up items
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el.value).to.equal('Firef', 'value should be "Firef"');
           expect(changeSpy.callCount).to.equal(2, 'call count after selecting item');
           expect(el._elements.input.value).to.equal('Firef', 'el._elements.input.value should now contain "Firef"');
@@ -1043,7 +1060,7 @@ describe('Autocomplete', function() {
       });
     });
 
-    it('should be possible to deselect an item by setting an empty text in the input in single select mode (if forceSelection === false)', function(done) {
+    it('should be possible to deselect an item by setting an empty text in the input in single select mode (if forceSelection === false)', function (done) {
       el.multiple = false;
 
       var changeSpy = sinon.spy();
@@ -1065,7 +1082,7 @@ describe('Autocomplete', function() {
       el.on('change', changeSpy);
 
       // Wait for mutation observers to pick up items
-      helpers.next(function() {
+      helpers.next(function () {
         // Trigger input event
         el._elements.input.value = 'Fi';
         helpers.event('input', el._elements.input);
@@ -1081,11 +1098,17 @@ describe('Autocomplete', function() {
         // As on input change is somehow not called by triggering the 'input' event we fake the call..
         el._elements.input.value = '';
         helpers.event('input', el._elements.input);
-        el._handleInput({preventDefault:function(){}}); // Fake call..
-        el._onInputChange({stopPropagation:function(){}}); // Fake call..
+        el._handleInput({
+          preventDefault: function () {
+          }
+        }); // Fake call..
+        el._onInputChange({
+          stopPropagation: function () {
+          }
+        }); // Fake call..
 
         // Wait for mutation observers to pick up items
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el.value).to.equal('', 'value should be "Firef"');
           // CUI-5533 Another change event should be trigger when cleared
           expect(changeSpy.callCount).to.equal(2, 'call count after selecting item');
@@ -1100,7 +1123,7 @@ describe('Autocomplete', function() {
       });
     });
 
-    it('should be possible to change the value by setting an any text in the input in multi select mode (if forceSelection === false)', function(done) {
+    it('should be possible to change the value by setting an any text in the input in multi select mode (if forceSelection === false)', function (done) {
       el.multiple = true;
       el.forceSelection = false;
 
@@ -1123,7 +1146,7 @@ describe('Autocomplete', function() {
       el.on('change', changeSpy);
 
       // Wait for mutation observers to pick up items
-      helpers.next(function() {
+      helpers.next(function () {
         // Add some text
         el._elements.input.value = 'anything';
 
@@ -1136,7 +1159,7 @@ describe('Autocomplete', function() {
       });
     });
 
-    it('should be possible to change the value by setting any text and empty text in the input in single select mode (if forceSelection === false)', function(done) {
+    it('should be possible to change the value by setting any text and empty text in the input in single select mode (if forceSelection === false)', function (done) {
       el.multiple = false;
       el.forceSelection = false;
 
@@ -1159,7 +1182,7 @@ describe('Autocomplete', function() {
       el.on('change', changeSpy);
 
       // Wait for mutation observers to pick up items
-      helpers.next(function() {
+      helpers.next(function () {
         // Add some text
         el._elements.input.value = 'anything';
 
@@ -1180,7 +1203,7 @@ describe('Autocomplete', function() {
       });
     });
 
-    it('should be possible to select an item using the keyboard alone (if forceSelection === true)', function(done) {
+    it('should be possible to select an item using the keyboard alone (if forceSelection === true)', function (done) {
       const el1 = helpers.build(new Autocomplete());
 
       // No delay by default
@@ -1204,18 +1227,18 @@ describe('Autocomplete', function() {
       });
 
       // Wait for mutation observers to pick up items
-      helpers.next(function() {
+      helpers.next(function () {
         // Trigger down arrow on input to open selectList
         helpers.keydown('down', el1._elements.input);
 
         // Wait for mutation observers to pick up items
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el1._elements.overlay.open).to.be.true;
 
           // Trigger down arrow on input to focus first item in selectList
           helpers.keydown('down', el1._elements.input);
 
-          helpers.next(function() {
+          helpers.next(function () {
             var selectListItem = el1._elements.selectList.items.first();
 
             expect(el1._elements.input.getAttribute('aria-activedescendant')).to.equal(selectListItem.id, 'aria-activedescendant on input should match id of first item in selectList');
@@ -1233,7 +1256,7 @@ describe('Autocomplete', function() {
       });
     });
 
-    it('should be possible set focus to an item in the dropdown menu without closing the menu', function(done) {
+    it('should be possible set focus to an item in the dropdown menu without closing the menu', function (done) {
       const overlayAnimationDuration = 125;
 
       el.multiple = false;
@@ -1254,11 +1277,11 @@ describe('Autocomplete', function() {
       });
 
       // Wait for mutation observers to pick up items
-      helpers.next(function() {
+      helpers.next(function () {
         // Click trigger to open selectList overlay
         el._elements.trigger.click();
 
-        setTimeout(function() {
+        setTimeout(function () {
           expect(el._elements.overlay.open).to.be.true;
 
           // Set focus to first selectList item
@@ -1269,7 +1292,7 @@ describe('Autocomplete', function() {
           // click focused selectList item element
           document.activeElement.trigger('mousedown');
 
-          setTimeout(function() {
+          setTimeout(function () {
             expect(el._elements.overlay.open).to.be.false;
 
             expect(document.activeElement === el._elements.input).to.be.true;
@@ -1282,7 +1305,7 @@ describe('Autocomplete', function() {
       });
     });
 
-    it('should be possible close menu by clicking the toggle button', function(done) {
+    it('should be possible close menu by clicking the toggle button', function (done) {
       const overlayAnimationDuration = 125;
       var event = document.createEvent('MouseEvent');
 
@@ -1304,12 +1327,12 @@ describe('Autocomplete', function() {
       });
 
       // Wait for mutation observers to pick up items
-      helpers.next(function() {
+      helpers.next(function () {
 
         // Click trigger to open selectList overlay
         el._elements.trigger.click();
 
-        setTimeout(function() {
+        setTimeout(function () {
           // SelectList overlay should be open
           expect(el._elements.overlay.open).to.be.true;
 
@@ -1332,7 +1355,7 @@ describe('Autocomplete', function() {
           // Click trigger to close selectList overlay
           el._elements.trigger.click();
 
-          setTimeout(function() {
+          setTimeout(function () {
             // SelectList overlay should be closed
             expect(el._elements.overlay.open).to.be.false;
 
@@ -1346,9 +1369,9 @@ describe('Autocomplete', function() {
     });
   });
 
-  describe('Implementation Details', function() {
+  describe('Implementation Details', function () {
 
-    it('should allow items to be added and selected before appending to the DOM', function(done) {
+    it('should allow items to be added and selected before appending to the DOM', function (done) {
       var autocomplete = new Autocomplete().set({
         placeholder: 'Enter a word',
         match: 'startswith'
@@ -1381,7 +1404,7 @@ describe('Autocomplete', function() {
       autocomplete.values = ['sa', 'fi'];
       helpers.target.appendChild(autocomplete);
 
-      helpers.next(function() {
+      helpers.next(function () {
         // Ensure autocomplete API is updated
         expect(autocomplete.values).to.include('fi');
         expect(autocomplete.values).to.include('sa');
@@ -1396,7 +1419,7 @@ describe('Autocomplete', function() {
       });
     });
 
-    it('should deselect other items when an item is selected', function(done) {
+    it('should deselect other items when an item is selected', function (done) {
       var el = new Autocomplete();
 
       // No delay by default
@@ -1419,14 +1442,14 @@ describe('Autocomplete', function() {
         selected: true
       });
 
-      helpers.next(function() {
+      helpers.next(function () {
         expect(firefox.selected).to.equal(true);
         expect(chrome.selected).to.equal(false);
 
         // Select Chrome
         chrome.selected = true;
 
-        helpers.next(function() {
+        helpers.next(function () {
           expect(firefox.selected).to.equal(false);
           expect(chrome.selected).to.equal(true);
 
@@ -1435,7 +1458,7 @@ describe('Autocomplete', function() {
       });
     });
 
-    it('should not escape special characters when an item is selected', function() {
+    it('should not escape special characters when an item is selected', function () {
       var el = new Autocomplete();
 
       // No delay by default
@@ -1455,7 +1478,7 @@ describe('Autocomplete', function() {
       expect(el.value).to.equal(item.value, 'value should now be &&');
     });
 
-    it('should not escape special characters when an item is selected from the selectlist via mouse click', function(done) {
+    it('should not escape special characters when an item is selected from the selectlist via mouse click', function (done) {
       var el = new Autocomplete();
 
       // No delay by default
@@ -1471,7 +1494,7 @@ describe('Autocomplete', function() {
       });
 
       // Wait for MO
-      helpers.next(function() {
+      helpers.next(function () {
         // Trigger input event
         el._elements.input.value = '&';
         helpers.event('input', el._elements.input);
@@ -1486,7 +1509,7 @@ describe('Autocomplete', function() {
       });
     });
 
-    it('should not escape special characters when an item is selected from the selectlist via keyboard enter', function(done) {
+    it('should not escape special characters when an item is selected from the selectlist via keyboard enter', function (done) {
       var el = new Autocomplete();
 
       // No delay by default
@@ -1502,7 +1525,7 @@ describe('Autocomplete', function() {
       });
 
       // Wait for MO
-      helpers.next(function() {
+      helpers.next(function () {
         // Trigger input event
         el._elements.input.value = '&';
         helpers.event('input', el._elements.input);
@@ -1517,7 +1540,7 @@ describe('Autocomplete', function() {
       });
     });
 
-    it('should support disabled items', function() {
+    it('should support disabled items', function () {
       var el = new Autocomplete();
 
       var chrome = el.items.add({
@@ -1541,11 +1564,11 @@ describe('Autocomplete', function() {
       expect(chrome.hasAttribute('disabled')).to.equal(true);
     });
 
-    it('should update accessibility label on toggle button when number of suggestions available', function(done) {
+    it('should update accessibility label on toggle button when number of suggestions available', function (done) {
       const el = helpers.build(new Autocomplete());
       let count = 0;
 
-       el.items.add({
+      el.items.add({
         value: 'ch',
         content: {
           textContent: 'Chrome'
@@ -1574,14 +1597,14 @@ describe('Autocomplete', function() {
       });
 
       // Wait for mutation observers to pick up items
-      helpers.next(function() {
+      helpers.next(function () {
         expect(el._elements.trigger.getAttribute('aria-label')).to.equal('Show suggestions');
 
         el._elements.input.value = 'Chrome';
 
         helpers.event('input', el._elements.input);
 
-        el._elements.overlay.on('coral-overlay:open', function() {
+        el._elements.overlay.on('coral-overlay:open', function () {
           if (count === 0) {
             expect(el._elements.overlay.open).to.be.true;
 
@@ -1595,8 +1618,7 @@ describe('Autocomplete', function() {
             helpers.event('input', el._elements.input);
 
             count++
-          }
-          else if (count === 1) {
+          } else if (count === 1) {
             expect(el._elements.trigger.getAttribute('aria-label')).to.equal('Show 4 suggestions');
 
             // close selectList
@@ -1607,8 +1629,7 @@ describe('Autocomplete', function() {
             helpers.event('input', el._elements.input);
 
             count++;
-          }
-          else if (count === 2) {
+          } else if (count === 2) {
             expect(el._elements.trigger.getAttribute('aria-label')).to.equal('Show 3 suggestions');
 
             // navigate to focus first item in selectList
@@ -1625,7 +1646,7 @@ describe('Autocomplete', function() {
       });
     });
 
-    it('should display the overlay with items and their html content', function(done) {
+    it('should display the overlay with items and their html content', function (done) {
       var el = helpers.build(new Autocomplete());
       var ch_text = 'Chrome';
       var fi_html = '<strong>Firefox</strong>';
@@ -1655,7 +1676,7 @@ describe('Autocomplete', function() {
         }
       });
 
-      el.on('coral-overlay:open', function() {
+      el.on('coral-overlay:open', function () {
         // Get all items of selectList
         var items = el._elements.selectList.items.getAll();
 
@@ -1670,7 +1691,7 @@ describe('Autocomplete', function() {
       helpers.event('input', el._elements.input);
     });
 
-    it('should select the best matching option when an item is selected inside of the SelectList', function(done) {
+    it('should select the best matching option when an item is selected inside of the SelectList', function (done) {
       var el = helpers.build(new Autocomplete());
 
       // Add same text options but case different
@@ -1688,12 +1709,14 @@ describe('Autocomplete', function() {
         }
       });
 
-      el.on('coral-overlay:open', function() {
+      el.on('coral-overlay:open', function () {
         el._elements.selectList.items.getAll()[1].trigger('mousedown');
 
         // Mimic the input focus out
-        el._handleFocusOut({target: el._elements.input, preventDefault: function() {}});
-
+        el._handleFocusOut({
+          target: el._elements.input, preventDefault: function () {
+}
+        });
         // Lowercase option should be the selected value
         var matchedOption = el.items.last();
         expect(el._elements.input.value).to.equal(matchedOption.textContent);
@@ -1706,7 +1729,7 @@ describe('Autocomplete', function() {
       helpers.event('input', el._elements.input);
     });
 
-    it('should suggest the best matching option supporting html entities', function(done) {
+    it('should suggest the best matching option supporting html entities', function (done) {
       var el = helpers.build(new Autocomplete());
 
       el.items.add({
@@ -1724,7 +1747,7 @@ describe('Autocomplete', function() {
         }
       });
 
-      el.on('coral-overlay:open', function() {
+      el.on('coral-overlay:open', function () {
         var suggestions = el._elements.selectList.items.getAll();
 
         expect(suggestions.length).to.equal(1);
@@ -1737,14 +1760,16 @@ describe('Autocomplete', function() {
       helpers.event('input', el._elements.input);
     });
 
-    it('should set the value of the multiline content option when selected', function(done) {
+    it('should set the value of the multiline content option when selected', function (done) {
       const el = helpers.build(window.__html__['Autocomplete.content.html']);
-      el.on('coral-overlay:open', function() {
+      el.on('coral-overlay:open', function () {
         el._elements.selectList.items.first().trigger('mousedown');
 
         // Mimic the input focus out
-        el._handleFocusOut({target: el._elements.input, preventDefault: function() {}});
-
+        el._handleFocusOut({
+          target: el._elements.input, preventDefault: function () {
+}
+        });
         expect(el.value).to.equal(el.items.first().value);
         done();
       });
@@ -1757,7 +1782,7 @@ describe('Autocomplete', function() {
       helpers.testSmartOverlay('coral-autocomplete');
     });
 
-    describe('#formField (single select)', function() {
+    describe('#formField (single select)', function () {
       // Run generic formField tests
       helpers.testFormField(window.__html__['Autocomplete.base.html'], {
         value: 'op',
@@ -1765,7 +1790,7 @@ describe('Autocomplete', function() {
       });
     });
 
-    describe('#formField (multi select)', function() {
+    describe('#formField (multi select)', function () {
       // Run generic formField tests
       helpers.testFormField(window.__html__['Autocomplete.multiple.value.html'], {
         value: 'op',
@@ -1774,7 +1799,7 @@ describe('Autocomplete', function() {
     });
   });
 
-  describe('Accessibility', function() {
+  describe('Accessibility', function () {
     var el;
     var input;
     var inputGroup;
@@ -1787,7 +1812,7 @@ describe('Autocomplete', function() {
     var ie;
     var safari;
 
-    beforeEach(function(done) {
+    beforeEach(function (done) {
       el = helpers.build(new Autocomplete());
 
       // No delay by default
@@ -1835,7 +1860,7 @@ describe('Autocomplete', function() {
       });
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el = null;
       input = null;
       trigger = null;
@@ -1843,19 +1868,19 @@ describe('Autocomplete', function() {
       selectList = null;
     });
 
-    describe('WAI-ARIA 1.2 Combobox design pattern', function() {
-      describe('coral-autocomplete', function() {
-        it('should have role="group"', function() {
+    describe('WAI-ARIA 1.2 Combobox design pattern', function () {
+      describe('coral-autocomplete', function () {
+        it('should have role="group"', function () {
           expect(el.getAttribute('role')).to.equal('group');
           expect(inputGroup.getAttribute('role')).to.equal('presentation', 'inputGroup should have role="presentation" so that NVDA does not announce the CSS style display: table as a table');
         });
 
-        describe('#labelledBy', function() {
-          it('should have aria-labelledby', function(done) {
+        describe('#labelledBy', function () {
+          it('should have aria-labelledby', function (done) {
             expect(el.getAttribute('aria-labelledby')).to.equal('foo-id');
             expect(tagList.getAttribute('aria-labelledby')).to.equal('foo-id');
             el.labelledBy = null;
-            helpers.next(function() {
+            helpers.next(function () {
               expect(el.getAttribute('aria-labelledby')).to.be.null;
               expect(tagList.getAttribute('aria-labelledby')).to.be.null;
               done();
@@ -1863,13 +1888,13 @@ describe('Autocomplete', function() {
           });
         });
 
-        describe('#labelled', function() {
-          it('should have aria-label', function(done) {
+        describe('#labelled', function () {
+          it('should have aria-label', function (done) {
             el.setAttribute('labelled', 'bar');
             expect(el.getAttribute('aria-label')).to.equal('bar');
             expect(tagList.getAttribute('aria-label')).to.equal('bar');
-            el.labelled= null;
-            helpers.next(function() {
+            el.labelled = null;
+            helpers.next(function () {
               expect(el.getAttribute('aria-label')).to.be.null;
               expect(tagList.getAttribute('aria-label')).to.be.null;
               done();
@@ -1878,30 +1903,30 @@ describe('Autocomplete', function() {
         });
       });
 
-      describe('input', function() {
-        it('should have role="combobox"', function() {
+      describe('input', function () {
+        it('should have role="combobox"', function () {
           expect(input.getAttribute('role')).to.equal('combobox');
         });
 
-        it('should have aria-autocomplete="list"', function() {
+        it('should have aria-autocomplete="list"', function () {
           expect(input.getAttribute('aria-autocomplete')).to.equal('list');
         });
 
-        it('should have aria-haspopup="listbox"', function() {
+        it('should have aria-haspopup="listbox"', function () {
           expect(input.getAttribute('aria-haspopup')).to.equal('listbox');
         });
 
-        it('should have aria-expanded', function(done) {
+        it('should have aria-expanded', function (done) {
           expect(input.getAttribute('aria-expanded')).to.equal('false');
 
-          el.on('coral-overlay:open', function() {
+          el.on('coral-overlay:open', function () {
             expect(input.getAttribute('aria-expanded')).to.equal('true');
             // Trigger esc key to close the input
             helpers.keydown('esc', document.body);
           });
 
-          el.on('coral-overlay:close', function() {
-            helpers.next(function() {
+          el.on('coral-overlay:close', function () {
+            helpers.next(function () {
               expect(input.getAttribute('aria-expanded')).to.equal('false');
               done();
             });
@@ -1910,27 +1935,27 @@ describe('Autocomplete', function() {
           helpers.event('input', input);
         });
 
-        it('should have aria-controls', function() {
+        it('should have aria-controls', function () {
           expect(input.getAttribute('aria-controls')).to.equal(selectList.id);
         });
 
-        describe('#labelledBy', function() {
-          it('should have aria-labelledby', function(done) {
+        describe('#labelledBy', function () {
+          it('should have aria-labelledby', function (done) {
             expect(input.getAttribute('aria-labelledby')).to.equal('foo-id');
             el.labelledBy = null;
-            helpers.next(function() {
+            helpers.next(function () {
               expect(input.getAttribute('aria-labelledby')).to.be.null;
               done();
             });
           });
         });
 
-        describe('#labelled', function() {
-          it('should have aria-label', function(done) {
+        describe('#labelled', function () {
+          it('should have aria-label', function (done) {
             el.setAttribute('labelled', 'bar');
             expect(input.getAttribute('aria-label')).to.equal('bar');
             el.labelled = null;
-            helpers.next(function() {
+            helpers.next(function () {
               expect(input.getAttribute('aria-label')).to.be.null;
               done();
             });
@@ -1938,22 +1963,22 @@ describe('Autocomplete', function() {
         });
       });
 
-      describe('trigger button', function() {
-        it('should have aria-haspopup="listbox"', function() {
+      describe('trigger button', function () {
+        it('should have aria-haspopup="listbox"', function () {
           expect(trigger.getAttribute('aria-haspopup')).to.equal('listbox');
         });
 
-        it('should have aria-expanded', function(done) {
+        it('should have aria-expanded', function (done) {
           expect(trigger.getAttribute('aria-expanded')).to.equal('false');
 
-          el.on('coral-overlay:open', function() {
+          el.on('coral-overlay:open', function () {
             expect(trigger.getAttribute('aria-expanded')).to.equal('true');
             // Trigger esc key to close the input
             helpers.keydown('esc', document.body);
           });
 
-          el.on('coral-overlay:close', function() {
-            helpers.next(function() {
+          el.on('coral-overlay:close', function () {
+            helpers.next(function () {
               if (trigger) {
                 expect(trigger.getAttribute('aria-expanded')).to.equal('false');
               }
@@ -1964,32 +1989,32 @@ describe('Autocomplete', function() {
           helpers.event('click', trigger);
         });
 
-        it('should have aria-controls', function() {
+        it('should have aria-controls', function () {
           expect(trigger.getAttribute('aria-controls')).to.equal(selectList.id);
         });
       });
 
-      describe('selectlist', function() {
-        it('should have role="listbox"', function() {
+      describe('selectlist', function () {
+        it('should have role="listbox"', function () {
           expect(selectList.getAttribute('role')).to.equal('listbox');
         });
 
-        describe('#labelledBy', function() {
-          it('should have aria-labelledby', function(done) {
+        describe('#labelledBy', function () {
+          it('should have aria-labelledby', function (done) {
             expect(selectList.getAttribute('aria-labelledby')).to.equal('foo-id');
             el.labelledBy = null;
-            helpers.next(function() {
+            helpers.next(function () {
               expect(selectList.getAttribute('aria-labelledby')).to.be.null;
               done();
             });
           });
         });
-        describe('#labelled', function() {
-          it('should have aria-label', function(done) {
+        describe('#labelled', function () {
+          it('should have aria-label', function (done) {
             el.setAttribute('labelled', 'bar');
             expect(selectList.getAttribute('aria-label')).to.equal('bar');
             el.labelled = null;
-            helpers.next(function() {
+            helpers.next(function () {
               expect(selectList.getAttribute('aria-label')).to.be.null;
               done();
             });

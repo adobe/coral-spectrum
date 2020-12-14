@@ -34,7 +34,6 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
 
   connectedCallback() {
     super.connectedCallback();
-
     // Prepare templates
     this._elements = {
       // Create or fetch the content zones
@@ -56,11 +55,12 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-multifield-item-content',
-      insert: function(content) {
+      insert: function (content) {
         // Insert the content zone before the move and remove buttons
         this.insertBefore(content, this.firstChild);
       }
@@ -76,6 +76,7 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
   get _dragging() {
     return this.__dragging || false;
   }
+
   set _dragging(value) {
     this.__dragging = transform.boolean(value);
     if (this.__dragging) {
@@ -83,8 +84,7 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
       // NVDA and JAWS screen readers into forms mode,
       // so arrow keys can be used to reorder.
       this._elements.move.setAttribute('role', 'application');
-    }
-    else {
+    } else {
       // when reordering stops, restore the default role for the move button
       this._elements.move.removeAttribute('role');
     }
@@ -94,8 +94,8 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
     this._elements.move.selected = this.__dragging;
   }
 
-  get _contentZones() { return {'coral-multifield-item-content': 'content'}; }
-
+  get _contentZones() { return {'coral-multifield-item-content': 'content'};
+}
   /** @ignore */
   render() {
     super.render();
@@ -128,8 +128,7 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
         child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the label
         content.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else
         this.removeChild(child);
       }

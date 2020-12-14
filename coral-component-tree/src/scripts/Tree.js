@@ -71,7 +71,7 @@ class Tree extends BaseComponent(HTMLElement) {
     // Listen for mutations for Torq compatibility
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
-        for (let i = 0; i < mutation.addedNodes.length; i++) {
+        for (let i = 0 ; i < mutation.addedNodes.length ; i++) {
           const addedNode = mutation.addedNodes[i];
           if (addedNode.tagName === 'CORAL-TREE-ITEM') {
             // Move tree items to their container
@@ -116,6 +116,7 @@ class Tree extends BaseComponent(HTMLElement) {
   get multiple() {
     return this._multiple || false;
   }
+
   set multiple(value) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute('multiple', this._multiple);
@@ -188,8 +189,7 @@ class Tree extends BaseComponent(HTMLElement) {
           oldSelection: oldSelection,
           selection: selectedItems
         });
-      }
-      else {
+      } else {
         // Return all items if we just switched from multiple=true to multiple=false and we had >1 selected items
         this.trigger('coral-tree:change', {
           oldSelection: oldSelection.length > 1 ? oldSelection : oldSelection[0] || null,
@@ -291,8 +291,7 @@ class Tree extends BaseComponent(HTMLElement) {
         // If the item is not expanded, expand the item
         item.expanded = !item.expanded;
         item._elements.header.classList.add('focus-ring');
-      }
-      else if (item.items.length > 0) {
+      } else if (item.items.length > 0) {
         // If the item is expanded, and contains items, focus the next item
         this._onFocusNextItem(event);
       }
@@ -316,8 +315,7 @@ class Tree extends BaseComponent(HTMLElement) {
         // If the item is not expanded, expand the item
         item.expanded = !item.expanded;
         item._elements.header.classList.add('focus-ring');
-      }
-      else if (item.parent) {
+      } else if (item.parent) {
         item._elements.header.setAttribute('tabindex', '-1');
         item._elements.header.classList.remove('focus-ring');
         item.parent.focus();
@@ -341,8 +339,7 @@ class Tree extends BaseComponent(HTMLElement) {
     // If we reached the edge, target the other edge
     if (index > focusableItems.length - 1) {
       siblingItem = focusableItems[0];
-    }
-    else if (index < 0) {
+    } else if (index < 0) {
       siblingItem = focusableItems[focusableItems.length - 1];
     }
 
@@ -354,8 +351,7 @@ class Tree extends BaseComponent(HTMLElement) {
         if (next) {
           index++;
           siblingItem = index > focusableItems.length - 1 ? item : null;
-        }
-        else {
+        } else {
           index--;
           siblingItem = index < 0 ? item : null;
         }
@@ -488,7 +484,7 @@ class Tree extends BaseComponent(HTMLElement) {
       let item;
       const length = coralTreeItems.length;
       if (length > 0) {
-        for (let index = 0; index < length; index++) {
+        for (let index = 0 ; index < length ; index++) {
           item = coralTreeItems[index];
           if (item) {
             item.expanded = expand;

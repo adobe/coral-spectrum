@@ -61,6 +61,7 @@ class Card extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
+
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
@@ -91,11 +92,12 @@ class Card extends BaseComponent(HTMLElement) {
   get asset() {
     return this._getContentZone(this._elements.asset);
   }
+
   set asset(value) {
     this._setContentZone('asset', value, {
       handle: 'asset',
       tagName: 'coral-card-asset',
-      insert: function(asset) {
+      insert: function (asset) {
         this.insertBefore(asset, this.info || this._elements.wrapper || null);
       }
     });
@@ -113,6 +115,7 @@ class Card extends BaseComponent(HTMLElement) {
   get assetHeight() {
     return this._assetHeight || '';
   }
+
   set assetHeight(value) {
     this._assetHeight = transform.number(value);
 
@@ -152,6 +155,7 @@ class Card extends BaseComponent(HTMLElement) {
   get assetWidth() {
     return this._assetWidth || '';
   }
+
   set assetWidth(value) {
     this._assetWidth = transform.number(value);
   }
@@ -164,6 +168,7 @@ class Card extends BaseComponent(HTMLElement) {
   get colorHint() {
     return this._colorHint || '';
   }
+
   set colorHint(value) {
     if (COLOR_HINT_REG_EXP.test(value)) {
       this._colorHint = value;
@@ -184,11 +189,12 @@ class Card extends BaseComponent(HTMLElement) {
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-card-content',
-      insert: function(content) {
+      insert: function (content) {
         // Ensure title comes first
         const title = content.querySelector('coral-card-title');
         if (title) {
@@ -209,11 +215,12 @@ class Card extends BaseComponent(HTMLElement) {
   get info() {
     return this._getContentZone(this._elements.info);
   }
+
   set info(value) {
     this._setContentZone('info', value, {
       handle: 'info',
       tagName: 'coral-card-info',
-      insert: function(info) {
+      insert: function (info) {
         this.appendChild(info);
       }
     });
@@ -231,6 +238,7 @@ class Card extends BaseComponent(HTMLElement) {
   get fixedWidth() {
     return this._fixedWidth || false;
   }
+
   set fixedWidth(value) {
     this._fixedWidth = transform.booleanAttr(value);
     this._reflectAttribute('fixedwidth', this._fixedWidth);
@@ -247,11 +255,12 @@ class Card extends BaseComponent(HTMLElement) {
   get overlay() {
     return this._getContentZone(this._elements.overlay);
   }
+
   set overlay(value) {
     this._setContentZone('overlay', value, {
       handle: 'overlay',
       tagName: 'coral-card-overlay',
-      insert: function(overlay) {
+      insert: function (overlay) {
         this._elements.wrapper.appendChild(overlay);
       }
     });
@@ -268,6 +277,7 @@ class Card extends BaseComponent(HTMLElement) {
   get stacked() {
     return this._stacked || false;
   }
+
   set stacked(value) {
     this._stacked = transform.booleanAttr(value);
     this._reflectAttribute('stacked', this._stacked);
@@ -286,6 +296,7 @@ class Card extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
@@ -327,7 +338,9 @@ class Card extends BaseComponent(HTMLElement) {
 
    @return {CardVariantEnum}
    */
-  static get variant() { return variant; }
+  static get variant() {
+    return variant;
+  }
 
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
@@ -357,7 +370,9 @@ class Card extends BaseComponent(HTMLElement) {
     this.classList.add(CLASSNAME);
 
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
 
     const content = this._elements.content;
     const asset = this._elements.asset;
@@ -365,7 +380,7 @@ class Card extends BaseComponent(HTMLElement) {
     // Prepares images to be loaded nicely
     const images = asset.querySelectorAll('img');
     const imagesCount = images.length;
-    for (let i = 0; i < imagesCount; i++) {
+    for (let i = 0 ; i < imagesCount ; i++) {
       const image = images[i];
       if (!image.complete) {
         image.classList.add('is-loading');
@@ -408,7 +423,7 @@ class Card extends BaseComponent(HTMLElement) {
     // In case a lot of alerts are added, they will not overflow the card
     // Also check whether any alerts are available
     this.classList.toggle(`${CLASSNAME}--overflow`, this.info.childNodes.length && this.info.scrollHeight > this.clientHeight);
-   }
+  }
 }
 
 export default Card;

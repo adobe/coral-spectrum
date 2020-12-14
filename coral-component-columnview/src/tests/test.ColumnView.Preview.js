@@ -14,9 +14,9 @@ import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {ColumnView} from '../../../coral-component-columnview';
 import {commons} from '../../../coral-utils';
 
-describe('ColumnView.Preview', function() {
-  describe('Namespace', function() {
-    it('should be defined', function() {
+describe('ColumnView.Preview', function () {
+  describe('Namespace', function () {
+    it('should be defined', function () {
       expect(ColumnView).to.have.property('Preview');
       expect(ColumnView.Preview).to.have.property('Content');
       expect(ColumnView.Preview).to.have.property('Asset');
@@ -26,17 +26,18 @@ describe('ColumnView.Preview', function() {
     });
   });
 
-  describe('API', function() {});
+  describe('API', function () {
+  });
 
-  describe('Markup', function() {
-    describe('#content', function() {
-      it('should not move items into the content zone if tag is explicitly given', function() {
+  describe('Markup', function () {
+    describe('#content', function () {
+      it('should not move items into the content zone if tag is explicitly given', function () {
         const el = helpers.build(window.__html__['ColumnView.Preview.content.html']);
         var button = el.querySelector('button');
         expect(button.parentElement).not.to.equal(el.content);
       });
 
-      it('should move items into the content zone if tag is not given', function() {
+      it('should move items into the content zone if tag is not given', function () {
         const el = helpers.build(window.__html__['ColumnView.Preview.content.implicit.html']);
         var button = el.querySelector('button');
         expect(button.parentElement).to.equal(el.content);
@@ -44,30 +45,32 @@ describe('ColumnView.Preview', function() {
     });
   });
 
-  describe('Events', function() {});
-  describe('User Interaction', function() {});
-  describe('Accessibility', function() {
-    it('should add alt="" to asset img tag when no alt text is provided', function() {
+  describe('Events', function () {
+  });
+  describe('User Interaction', function () {
+  });
+  describe('Accessibility', function () {
+    it('should add alt="" to asset img tag when no alt text is provided', function () {
       const el = helpers.build(window.__html__['ColumnView.Preview.content.implicit.html']);
       const img = el.querySelector('img');
       expect(img.hasAttribute('alt')).to.be.true;
       expect(img.getAttribute('alt')).to.equal('');
     });
 
-    it('should not add alt="" to asset img tag when alt text is provided', function() {
+    it('should not add alt="" to asset img tag when alt text is provided', function () {
       const el = helpers.build(window.__html__['ColumnView.Preview.content.html']);
       const img = el.querySelector('img');
       expect(img.hasAttribute('alt')).to.be.true;
       expect(img.getAttribute('alt')).to.equal('FPO asset image');
     });
 
-    it('should identify each value as a focusable, readOnly textbox labeled by its label', function() {
+    it('should identify each value as a focusable, readOnly textbox labeled by its label', function () {
       const el = helpers.build(window.__html__['ColumnView.Preview.content.html']);
       const elements = el.querySelectorAll('coral-columnview-preview-label + coral-columnview-preview-value');
       let i;
       let element;
       let elementLabel;
-      for (i = 0; i < elements.length; i++) {
+      for (i = 0 ; i < elements.length ; i++) {
         element = elements[i];
         elementLabel = element.previousElementSibling;
         elementLabel.id = elementLabel.id || commons.getUID();
@@ -78,17 +81,18 @@ describe('ColumnView.Preview', function() {
       }
     });
 
-    it('should identify each horizontal separator', function() {
+    it('should identify each horizontal separator', function () {
       const el = helpers.build(window.__html__['ColumnView.Preview.content.html']);
       const elements = el.querySelectorAll('coral-columnview-preview-separator');
       let i;
       let element;
-      for (i = 0; i < elements.length; i++) {
+      for (i = 0 ; i < elements.length ; i++) {
         element = elements[i];
         expect(element.getAttribute('role')).to.equal('separator');
         expect(element.getAttribute('aria-orientation')).to.equal('horizontal');
       }
     });
   });
-  describe('Implementation Details', function() {});
+  describe('Implementation Details', function () {
+  });
 });

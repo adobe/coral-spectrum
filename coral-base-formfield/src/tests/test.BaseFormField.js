@@ -15,123 +15,127 @@ import {BaseComponent} from '../../../coral-base-component';
 import {BaseFormField} from '../../../coral-base-formfield';
 import {commons, transform} from '../../../coral-utils';
 
-describe('BaseFormField', function() {
+describe('BaseFormField', function () {
   // Dummy custom element
   class Element extends BaseFormField(BaseComponent(HTMLElement)) {
     constructor() {
       super();
-      
+
       this._delegateEvents(this._events);
-      
+
       this._elements = {
         input: document.createElement('input')
       };
     }
-    
+
     get disabled() {
       return this._elements.input.disabled;
     }
+
     set disabled(value) {
       this._elements.input.disabled = transform.booleanAttr(value);
       this._reflectAttribute('disabled', this.disabled);
     }
-    
+
     get required() {
       return this._elements.input.required;
     }
+
     set required(value) {
       this._elements.input.required = transform.booleanAttr(value);
       this._reflectAttribute('required', this.required);
     }
-    
+
     get readOnly() {
       return this._elements.input.readOnly;
     }
+
     set readOnly(value) {
       this._elements.input.readOnly = transform.booleanAttr(value);
       this._reflectAttribute('readonly', this.readOnly);
     }
-    
+
     get name() {
       return this._elements.input.name;
     }
+
     set name(value) {
       this._elements.input.name = value;
       this._reflectAttribute('name', this.name);
     }
-    
+
     get value() {
       return this._elements.input.value;
     }
+
     set value(value) {
       this._elements.input.value = value;
     }
-    
+
     connectedCallback() {
       super.connectedCallback();
-      
+
       this.appendChild(this._elements.input);
     }
   }
-  
+
   window.customElements.define('coral-formfield-element', Element);
-  
-  describe('API', function() {
+
+  describe('API', function () {
     let el;
-    
-    beforeEach(function() {
+
+    beforeEach(function () {
       el = document.createElement('coral-formfield-element');
     });
-    
-    afterEach(function() {
+
+    afterEach(function () {
       el = null;
     });
-    
+
     ['name', 'value', 'disabled', 'required', 'readOnly', 'invalid', 'labelled', 'labelledBy', 'describedBy'].forEach((prop) => {
-  
+
       const value = ['name', 'value', 'labelledBy', 'labelled', 'describedBy'].indexOf(prop) !== -1 ? 'test' : true;
-      
-      describe(`#${prop}`, function() {
-        it('should set by property', function() {
+
+      describe(`#${prop}`, function () {
+        it('should set by property', function () {
           el[prop] = value;
           expect(el[prop]).to.equal(value);
-          
+
           if (prop !== 'invalid' && prop !== 'labelledBy' && prop !== 'labelled' && prop !== 'describedBy') {
             expect(el._elements.input[prop]).to.equal(value);
           }
         });
-    
-        it('should set by attribute', function() {
+
+        it('should set by attribute', function () {
           el.setAttribute(prop, value);
           expect(el[prop]).to.equal(value);
-  
+
           if (prop !== 'invalid' && prop !== 'labelledBy' && prop !== 'labelled' && prop !== 'describedBy') {
             expect(el._elements.input[prop]).to.equal(value);
           }
         });
-    
+
         if (prop !== 'value' && prop !== 'labelledBy' && prop !== 'labelled' && prop !== 'describedBy') {
-          it('should be reflected', function() {
+          it('should be reflected', function () {
             el[prop] = value;
-            
+
             if (typeof value === 'string') {
               expect(el.getAttribute([prop])).to.equal(value);
-            }
-            else {
+            } else {
               expect(el.hasAttribute([prop])).to.be.true;
             }
           });
         }
       });
     });
-  
-    describe('#labelled', function() {
-      it('should not add aria-label attribute by default', function() {
+
+    describe('#labelled', function () {
+      it('should not add aria-label attribute by default', function () {
         expect(el.hasAttribute('labelled')).to.be.false;
         expect(el._getLabellableElement().hasAttribute('aria-label')).to.be.false;
       });
-  
-      it('should add/remove aria-label attribute when labelled attribute is added/removed', function() {
+
+      it('should add/remove aria-label attribute when labelled attribute is added/removed', function () {
         el.setAttribute('labelled', 'new label');
         expect(el.labelled).to.equal('new label');
         expect(el._getLabellableElement().getAttribute('aria-label')).to.equal('new label');
@@ -139,38 +143,38 @@ describe('BaseFormField', function() {
         expect(el._getLabellableElement().hasAttribute('aria-label')).to.be.false;
       });
     });
-    
-    describe('#labelledBy', function() {
-      it('should remove old for assignments', function() {
+
+    describe('#labelledBy', function () {
+      it('should remove old for assignments', function () {
         const label = document.createElement('label');
         const example = document.createElement('coral-formfield-element');
-    
+
         label.id = commons.getUID();
         label.textContent = 'label';
-    
+
         helpers.target.appendChild(label);
         helpers.target.appendChild(example);
-        
+
         example.labelledBy = label.id;
-    
+
         expect(label.getAttribute('for')).to.equal(example._elements.input.id);
         expect(example._elements.input.getAttribute('aria-labelledby')).to.equal(label.id);
       });
     });
 
-    describe('#describedBy', function() {
-      it('should remove old for assignments', function() {
+    describe('#describedBy', function () {
+      it('should remove old for assignments', function () {
         const label = document.createElement('label');
         const example = document.createElement('coral-formfield-element');
-    
+
         label.id = commons.getUID();
         label.textContent = 'label';
-    
+
         helpers.target.appendChild(label);
         helpers.target.appendChild(example);
-        
+
         example.describedBy = label.id;
-    
+
         expect(example._elements.input.getAttribute('aria-describedby')).to.equal(label.id);
 
         example.describedBy = null;
@@ -178,65 +182,65 @@ describe('BaseFormField', function() {
         expect(example._elements.input.getAttribute('aria-describedby')).to.be.null;
       });
     });
-    
-    describe('#invalid', function() {
-      it('should set class and aria', function() {
+
+    describe('#invalid', function () {
+      it('should set class and aria', function () {
         el.invalid = true;
         expect(el.getAttribute('aria-invalid')).to.equal('true');
         expect(el.classList.contains('is-invalid')).to.be.true;
       });
     });
-    
-    describe('#clear', function() {
-      it('should set the input to empty string', function() {
+
+    describe('#clear', function () {
+      it('should set the input to empty string', function () {
         el.value = 'test';
         el.clear();
-        
+
         expect(el.value).to.equal('');
       });
     });
-    
-    describe('#reset', function() {
-      it('should reset to empty string', function() {
+
+    describe('#reset', function () {
+      it('should reset to empty string', function () {
         el.value = 'test';
         el.reset();
-  
+
         expect(el.value).to.equal('');
       });
-      
-      it('should reset to value attribute', function() {
+
+      it('should reset to value attribute', function () {
         el.setAttribute('value', 'test');
-        
+
         el.value = 'test2';
         el.reset();
-  
+
         expect(el.value).to.equal('test');
       });
     });
   });
-  
-  describe('Events', function() {
-    describe('#change', function() {
-      it('should fire change when input triggers change', function() {
+
+  describe('Events', function () {
+    describe('#change', function () {
+      it('should fire change when input triggers change', function () {
         const spy = sinon.spy();
         const el = document.createElement('coral-formfield-element');
-        
+
         helpers.target.appendChild(el);
-        
+
         el.on('change', spy);
-    
+
         el._elements.input.value = 1;
-  
+
         expect(spy.callCount).to.equal(0);
-        
+
         helpers.event('change', el._elements.input);
-    
+
         expect(spy.callCount).to.equal(1);
       });
     });
   });
-  
-  describe('Implementation Details', function() {
+
+  describe('Implementation Details', function () {
     helpers.testFormField('<coral-formfield-element></coral-formfield-element>', {
       value: 'testValue'
     });

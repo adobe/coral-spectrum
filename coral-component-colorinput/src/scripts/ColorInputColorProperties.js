@@ -65,8 +65,7 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
 
       // reset Hex value to empty
       this._elements.hexInput.value = '';
-    }
-    else {
+    } else {
       rgba = newColor.rgba;
 
       // update the colorPreview background color, state, and label
@@ -88,7 +87,7 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
     let val;
 
     // update rgba slider and input values
-    for (let i = 0; i < prefixesLength; i++) {
+    for (let i = 0 ; i < prefixesLength ; i++) {
       prefix = prefixes[i];
       abbr = prefix.substr(0, 1);
       isAlpha = i === prefixesLength - 1;
@@ -100,11 +99,9 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
       if (newColor) {
         if (!rgba) {
           val = '';
-        }
-        else if (isAlpha) {
+        } else if (isAlpha) {
           val = parseInt(rgba[abbr] * 100, 10);
-        }
-        else {
+        } else {
           val = rgba[abbr];
         }
       }
@@ -165,8 +162,7 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
         this.constructor._lastValidColor = this._colorinput.valueAsColor;
       }
       this._colorinput._setActiveColor(null);
-    }
-    else {
+    } else {
       this._colorinput._setActiveColor(color);
     }
   }

@@ -19,9 +19,9 @@ module.exports = {
   saveOutputIn: 'report.json',
   a11yCheckOptions: {
     rules: {
-      'landmark-unique': { enabled: false },
+      'landmark-unique': {enabled: false},
       // Owned by Spectrum CSS so we don't need to check for it
-      'color-contrast': { enabled: false }
+      'color-contrast': {enabled: false}
     }
   }
 };

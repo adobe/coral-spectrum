@@ -28,33 +28,33 @@ class ButtonList extends BaseList(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-  
+
     // Events
     this._delegateEvents(commons.extend(this._events, {
       'click [coral-list-item]': '_onItemClick'
     }));
   }
-  
+
   /** @private */
   get _itemTagName() {
     // Used for Collection
     return 'coral-buttonlist-item';
   }
-  
+
   /** @private */
   get _itemBaseTagName() {
     // Used for Collection
     return 'button';
   }
-  
+
   _onItemClick(event) {
     this._trackEvent('click', 'coral-buttonlist-item', event, event.matchedTarget);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
   }
 }

@@ -33,23 +33,23 @@ const iconVariant = {
 };
 
 /**
-  Enumeration for valid aria-haspopup values.
+ Enumeration for valid aria-haspopup values.
 
-  @typedef {Object} ShellMenuBarItemHasPopupRoleEnum
-  @property {String} MENU
-  ShellMenuBarItem opens a menu.
-  @property {String} LISTBOX
-  ShellMenuBarItem opens a list box.
-  @property {String} TREE
-  ShellMenuBarItem opens a tree.
-  @property {String} GRID
-  ShellMenuBarItem opens a grid.
-  @property {String} DIALOG
-  ShellMenuBarItem opens a dialog.
-  @property {Null} DEFAULT
-  Defaults to null.
+ @typedef {Object} ShellMenuBarItemHasPopupRoleEnum
+ @property {String} MENU
+ ShellMenuBarItem opens a menu.
+ @property {String} LISTBOX
+ ShellMenuBarItem opens a list box.
+ @property {String} TREE
+ ShellMenuBarItem opens a tree.
+ @property {String} GRID
+ ShellMenuBarItem opens a grid.
+ @property {String} DIALOG
+ ShellMenuBarItem opens a dialog.
+ @property {Null} DEFAULT
+ Defaults to null.
 
-*/
+ */
 const hasPopupRole = {
   MENU: 'menu',
   LISTBOX: 'listbox',
@@ -112,6 +112,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   get icon() {
     return this._elements.shellMenuButton.icon;
   }
+
   set icon(value) {
     this._elements.shellMenuButton.icon = value;
   }
@@ -127,6 +128,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   get iconSize() {
     return this._elements.shellMenuButton.iconSize;
   }
+
   set iconSize(value) {
     this._elements.shellMenuButton.iconSize = value;
     // Required for styling
@@ -143,6 +145,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   get iconVariant() {
     return this._iconVariant || iconVariant.DEFAULT;
   }
+
   set iconVariant(value) {
     value = transform.string(value).toLowerCase();
     this._iconVariant = validate.enumeration(iconVariant)(value) && value || iconVariant.DEFAULT;
@@ -165,6 +168,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   get badge() {
     return this._elements.shellMenuButton.getAttribute('badge') || '';
   }
+
   set badge(value) {
     // Non-truthy values shouldn't show
     // null, empty string, 0, etc
@@ -185,6 +189,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   get open() {
     return this._open || false;
   }
+
   set open(value) {
     const menu = this._getMenu();
 
@@ -218,11 +223,12 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   get label() {
     return this._getContentZone(this._elements.shellMenuButtonLabel);
   }
+
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'shellMenuButtonLabel',
       tagName: 'coral-button-label',
-      insert: function(label) {
+      insert: function (label) {
         this._elements.shellMenuButton.label = label;
       }
     });
@@ -239,13 +245,13 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
   get menu() {
     return this._menu || null;
   }
+
   set menu(value) {
     let menu;
     if (value instanceof HTMLElement) {
       this._menu = value;
       menu = this._menu;
-    }
-    else {
+    } else {
       this._menu = String(value);
       menu = document.querySelector(this._menu);
     }
@@ -257,21 +263,21 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
       if (this.hasPopup === hasPopupRole.DEFAULT) {
         this.hasPopup = menu.getAttribute('role') || hasPopupRole.DIALOG;
       }
-    }
-    else if (this._menu && this.hasPopup !== hasPopupRole.DEFAULT) {
+    } else if (this._menu && this.hasPopup !== hasPopupRole.DEFAULT) {
       this.hasPopup = hasPopupRole.DEFAULT;
     }
   }
 
   /**
-    Whether the item opens a popup dialog or menu. Accepts either "menu", "listbox", "tree", "grid", or "dialog".
-    @type {?String}
-    @default ShellMenuBarItemHasPopupRoleEnum.DEFAULT
-    @htmlattribute haspopup
-  */
+   Whether the item opens a popup dialog or menu. Accepts either "menu", "listbox", "tree", "grid", or "dialog".
+   @type {?String}
+   @default ShellMenuBarItemHasPopupRoleEnum.DEFAULT
+   @htmlattribute haspopup
+   */
   get hasPopup() {
     return this._hasPopup || null;
   }
+
   set hasPopup(value) {
     value = transform.string(value).toLowerCase();
     this._hasPopup = validate.enumeration(hasPopupRole)(value) && value || hasPopupRole.DEFAULT;
@@ -282,8 +288,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
     if (ariaHaspopup) {
       shellMenuButton.setAttribute('aria-haspopup', ariaHaspopup);
       shellMenuButton.setAttribute('aria-expanded', this.open);
-    }
-    else {
+    } else {
       shellMenuButton.removeAttribute('aria-haspopup');
       shellMenuButton.removeAttribute('aria-expanded');
     }
@@ -307,8 +312,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
       const shellMenuButton = this._elements.shellMenuButton;
       if (this.open !== target.open) {
         this.open = target.open;
-      }
-      else if (shellMenuButton.getAttribute('aria-expanded') !== target.open) {
+      } else if (shellMenuButton.getAttribute('aria-expanded') !== target.open) {
         shellMenuButton.setAttribute('aria-expanded', target.open);
       }
     }
@@ -338,8 +342,8 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
     return newTarget;
   }
 
-  get _contentZones() { return {'coral-button-label': 'label'}; }
-
+  get _contentZones() { return {'coral-button-label': 'label'};
+}
   /** @ignore */
   focus() {
     this._elements.shellMenuButton.focus();
@@ -350,8 +354,9 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
 
    @return {ShellMenuBarItemIconVariantEnum}
    */
-  static get iconVariant() { return iconVariant; }
-
+  static get iconVariant() {
+    return iconVariant;
+}
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       haspopup: 'hasPopup',
@@ -382,8 +387,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
       if (value && this._elements.shellMenuButton.textContent.trim() === '') {
         this._elements.shellMenuButton.setAttribute('aria-label', value);
       }
-    }
-    else {
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
@@ -401,8 +405,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
     if (button) {
       this._elements.shellMenuButton = button;
       this._elements.shellMenuButtonLabel = this.querySelector('coral-button-label');
-    }
-    else {
+    } else {
       while (this.firstChild) {
         this._elements.shellMenuButtonLabel.appendChild(this.firstChild);
       }

@@ -117,6 +117,7 @@ class Status extends BaseComponent(HTMLElement) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -136,6 +137,7 @@ class Status extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.NEUTRAL;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.NEUTRAL;
@@ -172,6 +174,7 @@ class Status extends BaseComponent(HTMLElement) {
   get color() {
     return this._color || color.DEFAULT;
   }
+
   set color(value) {
     value = transform.string(value).toLowerCase();
     this._color = validate.enumeration(color)(value) && value || color.DEFAULT;
@@ -192,11 +195,12 @@ class Status extends BaseComponent(HTMLElement) {
   get label() {
     return this._getContentZone(this._elements.label);
   }
+
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: 'coral-status-label',
-      insert: function(label) {
+      insert: function (label) {
         this.appendChild(label);
       }
     });
@@ -213,15 +217,17 @@ class Status extends BaseComponent(HTMLElement) {
 
    @return {StatusVariantEnum}
    */
-  static get variant() { return variant; }
-
+  static get variant() {
+    return variant;
+}
   /**
    Returns {@link Status} colors.
 
    @return {StatusColorEnum}
    */
-  static get color() { return color; }
-
+  static get color() {
+    return color;
+}
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['variant', 'color', 'disabled']);
@@ -234,9 +240,12 @@ class Status extends BaseComponent(HTMLElement) {
     this.classList.add(CLASSNAME);
 
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.NEUTRAL; }
-    if (!this._color) { this.color = color.DEFAULT; }
-
+    if (!this._variant) {
+      this.variant = variant.NEUTRAL;
+    }
+    if (!this._color) {
+      this.color = color.DEFAULT;
+}
     // Fetch or create the content content zone element
     const label = this._elements.label;
 

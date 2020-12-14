@@ -36,8 +36,7 @@ const scrollTo = (element, to, duration, scrollCallback) => {
       if (scrollCallback) {
         scrollCallback();
       }
-    }
-    else {
+    } else {
       scrollTo(element, to, duration - 10);
     }
   }, 10);
@@ -170,6 +169,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
   get selectionMode() {
     return this._selectionMode || selectionMode.NONE;
   }
+
   set selectionMode(value) {
     value = transform.string(value).toLowerCase();
     this._selectionMode = validate.enumeration(selectionMode)(value) && value || selectionMode.NONE;
@@ -242,8 +242,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
       // all items to the right must be removed. we do this at the end to be able to extract the values before
       // removing everything
       this._afterItemSelectedInColumn(column);
-    }
-    else {
+    } else {
       // when there is an active item, selection must not exist
       this.items._deselectAllExcept();
 
@@ -288,20 +287,20 @@ class ColumnView extends BaseComponent(HTMLElement) {
   }
 
   /**
-    Handle when first selectable item is added and make sure it is tabbable.
-    @param {HTMLElement} [item]
-    @private
-  */
+   Handle when first selectable item is added and make sure it is tabbable.
+   @param {HTMLElement} [item]
+   @private
+   */
   _onItemAdd() {
     window.requestAnimationFrame(() => this._ensureTabbableItem());
   }
 
   /**
-    Handle when item is removed, make sure that at least one element is tabbable, or if there are no items, and add listener to handle when item is added.
-    @param {HTMLElement} [item]
-      Item that was removed.
-    @private
-  */
+   Handle when item is removed, make sure that at least one element is tabbable, or if there are no items, and add listener to handle when item is added.
+   @param {HTMLElement} [item]
+   Item that was removed.
+   @private
+   */
   _onItemRemoved() {
     window.requestAnimationFrame(() => this._ensureTabbableItem());
   }
@@ -317,19 +316,16 @@ class ColumnView extends BaseComponent(HTMLElement) {
       if (!selectableItems.length) {
         this._vent.off('coral-collection:remove', this._onItemRemoved);
         this._vent.on('coral-collection:add', this._onItemAdd);
-      }
-      else {
+      } else {
         // Otherwise, if there is a selectable item, make sure it has a tabIndex.
         selectableItems[0].tabIndex = 0;
         // Listen for item removal so that we can handle the edge case where all items have been removed.
         this._vent.on('coral-collection:remove', this._onItemRemoved);
       }
-    }
-    else if (this.selectedItem && this.selectedItem.tabIndex !== 0) {
+    } else if (this.selectedItem && this.selectedItem.tabIndex !== 0) {
       // If the selectedItem is not tabbable, make sure that it has tabIndex === 0
       this.selectedItem.tabIndex = 0;
-    }
-    else if (this.activeItem && this.activeItem.tabIndex !== 0) {
+    } else if (this.activeItem && this.activeItem.tabIndex !== 0) {
       // If the activeItem is not tabbable, make sure that it has tabIndex === 0
       this.activeItem.tabIndex = 0;
     }
@@ -416,8 +412,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
       selectedItem = selectedItems[0].previousElementSibling;
       // selects the item
       selectedItem.setAttribute('selected', '');
-    }
-    else if (lastSelected.item) {
+    } else if (lastSelected.item) {
       selectedItem = lastSelected.item;
 
       // we have reached the upper selection limit
@@ -429,12 +424,10 @@ class ColumnView extends BaseComponent(HTMLElement) {
       if (!lastSelected.direction || lastSelected.direction === 'up') {
         selectedItem = selectedItem.previousElementSibling;
         selectedItem.setAttribute('selected', '');
-      }
-      else {
+      } else {
         if (selectedItem !== lastSelected.firstSelectedItem) {
           selectedItem.removeAttribute('selected');
-        }
-        else {
+        } else {
           // switches the direction if this was the last item selected
           lastSelected.direction = 'up';
         }
@@ -503,8 +496,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
       selectedItem = selectedItems[selectedItems.length - 1].nextElementSibling;
       // selects the item
       selectedItem.setAttribute('selected', '');
-    }
-    else if (lastSelected.item) {
+    } else if (lastSelected.item) {
       selectedItem = lastSelected.item;
 
       // we have reached the lower selection limit
@@ -516,12 +508,10 @@ class ColumnView extends BaseComponent(HTMLElement) {
       if (!lastSelected.direction || lastSelected.direction === 'down') {
         selectedItem = selectedItem.nextElementSibling;
         selectedItem.setAttribute('selected', '');
-      }
-      else {
+      } else {
         if (selectedItem !== lastSelected.firstSelectedItem) {
           selectedItem.removeAttribute('selected');
-        }
-        else {
+        } else {
           // switches the direction if this was the last item selected
           lastSelected.direction = 'down';
         }
@@ -571,19 +561,18 @@ class ColumnView extends BaseComponent(HTMLElement) {
         item = selectedItem;
       }
     }
-    // when there is no active item to select, we get the last item of the column. this way users can interact with
+      // when there is no active item to select, we get the last item of the column. this way users can interact with
     // the column view when there is nothing selected or activated
     else if (this._oldActiveItem === null) {
       item = this.items._getLastSelectable();
-    }
-    else {
+    } else {
       item = this._oldActiveItem.previousElementSibling;
     }
 
     // we use click instead of selected to force the deselection of the other items
     if (item && item !== document.activeElement) {
       item.focus();
-      if (this.selectionMode === selectionMode.NONE  ||
+      if (this.selectionMode === selectionMode.NONE ||
         selectedItems.length === 0 ||
         // For use case in cascading schema editor,
         // where the focused item is not in the same column as the selected items,
@@ -620,12 +609,11 @@ class ColumnView extends BaseComponent(HTMLElement) {
         item = matchedTarget;
       }
     }
-    // when there is no active item to select, we get the first item of the column. this way users can interact with
+      // when there is no active item to select, we get the first item of the column. this way users can interact with
     // the column view when there is nothing selected or activated
     else if (this._oldActiveItem === null) {
       item = this.items._getFirstSelectable();
-    }
-    else {
+    } else {
       item = this._oldActiveItem.nextElementSibling;
     }
 
@@ -734,16 +722,13 @@ class ColumnView extends BaseComponent(HTMLElement) {
       if (activeDescendant.hasAttribute('selected', '')) {
         if (selectedItems.length === 1) {
           activeDescendant.setAttribute('active', '');
-        }
-        else {
+        } else {
           activeDescendant.removeAttribute('selected', '');
         }
-      }
-      else {
+      } else {
         activeDescendant.setAttribute('selected', '');
       }
-    }
-    else {
+    } else {
       const activeItem = this.activeItem || matchedTarget;
       // toggles the selection between active and selected
       if (activeItem && this.selectionMode !== selectionMode.NONE) {
@@ -768,8 +753,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
     if (this.selectionMode === selectionMode.MULTIPLE) {
       const currentColumn = matchedTarget.closest('coral-columnview-column');
       currentColumn.items._selectAll();
-    }
-    else if (this.selectionMode === selectionMode.SINGLE) {
+    } else if (this.selectionMode === selectionMode.SINGLE) {
       if (!matchedTarget.hasAttribute('selected')) {
         matchedTarget.setAttribute('selected', '');
       }
@@ -803,7 +787,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
     }
 
     const matchedTarget = this._getRealMatchedTarget(event);
-    if(!this.activeItem && !this._oldSelection.length && !matchedTarget._flagMouseDown) {
+    if (!this.activeItem && !this._oldSelection.length && !matchedTarget._flagMouseDown) {
       matchedTarget.setAttribute('active', '');
     }
     this.items._getSelectableItems().forEach(item => {
@@ -859,8 +843,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
       if (!column.hasAttribute('aria-label')) {
         column.setAttribute('aria-label', (this.getAttribute('aria-label') || '…'));
       }
-    }
-    else if (column.getAttribute('aria-label') === (this.getAttribute('aria-label') || '…')) {
+    } else if (column.getAttribute('aria-label') === (this.getAttribute('aria-label') || '…')) {
       column.removeAttribute('aria-label');
     }
   }
@@ -932,8 +915,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
       left = this.scrollWidth - this.offsetWidth;
       duration = left - this.scrollLeft;
       scrollTo(this, left, duration, completeCallback);
-    }
-    else if (clearEmptyColumns) {
+    } else if (clearEmptyColumns) {
       this._removeEmptyColumnsWithSmoothTransition(triggerEvent);
     }
   }
@@ -993,8 +975,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
         });
         column.style.width = 0;
       });
-    }
-    else if (triggerEvent) {
+    } else if (triggerEvent) {
       this._validateNavigation(this.columns.last());
     }
   }
@@ -1003,7 +984,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
   _triggerCollectionEvents(addedNodes, removedNodes) {
     let item;
     const addedNodesCount = addedNodes.length;
-    for (let i = 0; i < addedNodesCount; i++) {
+    for (let i = 0 ; i < addedNodesCount ; i++) {
       item = addedNodes[i];
       if (this.activeItem) {
         // @a11y add aria-owns attribute to active item to express relationship of added column to the active item
@@ -1028,7 +1009,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
 
     // @todo: check if special handling is needed when selected column is removed
     const removedNodesCount = removedNodes.length;
-    for (let j = 0; j < removedNodesCount; j++) {
+    for (let j = 0 ; j < removedNodesCount ; j++) {
       item = removedNodes[j];
       // @todo: should I handle it specially if it was selected? should a selection and active event be triggered?
       if (item.tagName === 'CORAL-COLUMNVIEW-COLUMN') {
@@ -1049,7 +1030,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
     if (this.columns) {
       var columns = this.columns.getAll();
       var self = this;
-      columns.forEach(function(column) {
+      columns.forEach(function (column) {
         self._updateAriaLevel(column);
       });
     }
@@ -1058,7 +1039,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
   /** @private */
   _handleMutation(mutations) {
     const mutationsCount = mutations.length;
-    for (let i = 0; i < mutationsCount; i++) {
+    for (let i = 0 ; i < mutationsCount ; i++) {
       const mutation = mutations[i];
 
       // we handle the collection events
@@ -1158,6 +1139,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
       accessibilityState.setAttribute('aria-live', 'off');
       accessibilityState.innerHTML = '';
     }
+
     resetAccessibilityState();
 
     if (this._addTimeout || this._removeTimeout) {
@@ -1230,8 +1212,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
 
     if (column.items) {
       item = column.items._getFirstSelectable();
-    }
-    else if (column.tagName === 'CORAL-COLUMNVIEW-PREVIEW') {
+    } else if (column.tagName === 'CORAL-COLUMNVIEW-PREVIEW') {
       item = selectedItems[0] || this.activeItem;
     }
 
@@ -1283,8 +1264,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
     // handles the case where the first column needs to be added
     if (column === null || !this.contains(column)) {
       this.appendChild(newColumn);
-    }
-    else {
+    } else {
       const nextColumn = column.nextElementSibling;
 
       if (nextColumn) {
@@ -1293,8 +1273,7 @@ class ColumnView extends BaseComponent(HTMLElement) {
         const before = nextColumn.nextElementSibling;
         this.removeChild(nextColumn);
         this.insertBefore(newColumn, before);
-      }
-      else {
+      } else {
         this.appendChild(newColumn);
       }
     }
@@ -1321,7 +1300,9 @@ class ColumnView extends BaseComponent(HTMLElement) {
 
    @return {ColumnViewSelectionModeEnum}
    */
-  static get selectionMode() { return selectionMode; }
+  static get selectionMode() {
+    return selectionMode;
+  }
 
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
@@ -1353,7 +1334,9 @@ class ColumnView extends BaseComponent(HTMLElement) {
     }
 
     // Default reflect attributes
-    if (!this._selectionMode) { this._selectionMode = selectionMode.NONE; }
+    if (!this._selectionMode) {
+      this._selectionMode = selectionMode.NONE;
+    }
 
     // no need to wait for the mutation observers
     this._setStateFromDOM();

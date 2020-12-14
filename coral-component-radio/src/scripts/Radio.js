@@ -75,6 +75,7 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get checked() {
     return this._checked || false;
   }
+
   set checked(value) {
     this._checked = transform.booleanAttr(value);
     this._reflectAttribute('checked', this._checked);
@@ -94,11 +95,12 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get label() {
     return this._getContentZone(this._elements.label);
   }
+
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: 'coral-radio-label',
-      insert: function(label) {
+      insert: function (label) {
         this._elements.labelWrapper.appendChild(label);
       }
     });
@@ -114,6 +116,7 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._elements.input.name;
   }
+
   set name(value) {
     this._reflectAttribute('name', value);
 
@@ -130,6 +133,7 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get value() {
     return this._elements.input.value || 'on';
   }
+
   set value(value) {
     this._elements.input.value = value;
   }
@@ -144,6 +148,7 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -163,6 +168,7 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
@@ -180,6 +186,7 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
@@ -194,6 +201,7 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get labelled() {
     return super.labelled;
   }
+
   set labelled(value) {
     super.labelled = value;
 
@@ -210,6 +218,7 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
       (this.name ? `${this.name}=${this.value}` : '') || (this.label || this).textContent.replace(/\s{2,}/g, ' ').trim() :
       this._trackingElement;
   }
+
   set trackingElement(value) {
     super.trackingElement = value;
   }
@@ -219,15 +228,17 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
 
    @protected
    */
-  get _componentTargetProperty() { return 'checked'; }
-
+  get _componentTargetProperty() {
+    return 'checked';
+}
   /*
    Indicates to the formField that the 'checked' property has to be extracted from the event.
 
    @protected
    */
-  get _eventTargetProperty() { return 'checked'; }
-
+  get _eventTargetProperty() {
+    return 'checked';
+}
   /**
    Takes care of keeping the checked property up to date, by unchecking every radio that has the same name. This is
    only done if the radio is already in the DOM, it has a name and it is checked, otherwise this is not needed.
@@ -242,7 +253,7 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
       const items = document.querySelectorAll(`${this.tagName}[name=${JSON.stringify(this.name)}]`);
       const itemCount = items.length;
 
-      for (let i = 0; i < itemCount; i++) {
+      for (let i = 0 ; i < itemCount ; i++) {
         if (items[i] !== this) {
           // we uncheck all other radios with the same name
           items[i].removeAttribute('checked');
@@ -309,8 +320,8 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
     this.checked = this._initialCheckedState;
   }
 
-  get _contentZones() { return {'coral-radio-label': 'label'}; }
-
+  get _contentZones() { return {'coral-radio-label': 'label'};
+}
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['checked']);
@@ -345,8 +356,7 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
         child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the label
         label.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else (e.g labelWrapper)
         this.removeChild(child);
       }

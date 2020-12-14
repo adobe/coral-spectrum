@@ -29,16 +29,16 @@ class TableHead extends BaseTableSection(BaseComponent(HTMLTableSectionElement))
   /** @ignore */
   constructor() {
     super();
-  
+
     this._toggleObserver(true);
   }
-  
+
   /**
    Whether the table head is sticky. The table content becomes automatically scrollable if the table wrapper height
    is smaller than its content.
    Table exposes the <code>coral-table-scroll</code> attribute that allows in sticky mode to define the table
    scrolling container max-height. This is particularly useful if the table contains dynamic content.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute sticky
@@ -47,41 +47,42 @@ class TableHead extends BaseTableSection(BaseComponent(HTMLTableSectionElement))
   get sticky() {
     return this._sticky || false;
   }
+
   set sticky(value) {
     this._sticky = transform.booleanAttr(value);
     this._reflectAttribute('sticky', this._sticky);
-    
+
     // Delay execution for better performance
     window.requestAnimationFrame(() => {
       this.trigger('coral-table-head:_stickychanged');
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['sticky']);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
   }
-  
+
   /**
    Triggered when the {@link TableHead} content changed.
- 
+
    @typedef {CustomEvent} coral-table-head:_contentchanged
-   
+
    @private
    */
-  
+
   /**
    Triggered when {@link TableHead#sticky} changed.
- 
+
    @typedef {CustomEvent} coral-table-head:_stickychanged
-   
+
    @private
    */
 }

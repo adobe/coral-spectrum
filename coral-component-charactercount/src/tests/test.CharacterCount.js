@@ -13,11 +13,11 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {CharacterCount} from '../../../coral-component-charactercount';
 
-describe('CharacterCount', function() {
+describe('CharacterCount', function () {
   var input, characterCount;
 
-  describe('Instantiation', function() {
-    it('should be possible using new', function() {
+  describe('Instantiation', function () {
+    it('should be possible using new', function () {
       var defaultCharacterCount = helpers.build(new CharacterCount());
       expect(defaultCharacterCount.classList.contains('_coral-CharacterCount')).to.be.true;
       expect(defaultCharacterCount).to.have.property('target');
@@ -26,7 +26,7 @@ describe('CharacterCount', function() {
       expect(defaultCharacterCount.maxLength).to.be.null;
     });
 
-    it('should be possible using createElement', function() {
+    it('should be possible using createElement', function () {
       var defaultCharacterCount = helpers.build(document.createElement('coral-charactercount'));
       expect(defaultCharacterCount.classList.contains('_coral-CharacterCount')).to.be.true;
       expect(defaultCharacterCount).to.have.property('target');
@@ -35,7 +35,7 @@ describe('CharacterCount', function() {
       expect(defaultCharacterCount.maxLength).to.be.null;
     });
 
-    it('should be possible using markup', function() {
+    it('should be possible using markup', function () {
       var defaultCharacterCount = helpers.build('<coral-charactercount></coral-charactercount>');
       expect(defaultCharacterCount.classList.contains('_coral-CharacterCount')).to.be.true;
       expect(defaultCharacterCount).to.have.property('target');
@@ -43,27 +43,27 @@ describe('CharacterCount', function() {
       expect(defaultCharacterCount.target).to.equal(CharacterCount.target.PREVIOUS);
       expect(defaultCharacterCount.maxLength).to.be.null;
     });
-  
+
     helpers.cloneComponent(
       'should be possible to clone using markup',
       '<coral-charactercount></coral-charactercount>'
     );
-  
+
     helpers.cloneComponent(
       'should be possible to clone using js',
       new CharacterCount()
     );
   });
 
-  describe('Implementation Details', function() {
+  describe('Implementation Details', function () {
 
-    var typeValue = function(value){
+    var typeValue = function (value) {
       input.value = value;
 
       helpers.event('input', input);
     };
 
-    beforeEach(function(){
+    beforeEach(function () {
       input = document.createElement('input');
       input.type = 'textfield';
       input.id = 'example-input';
@@ -74,33 +74,33 @@ describe('CharacterCount', function() {
       characterCount.target = '#example-input';
     });
 
-    afterEach(function(){
+    afterEach(function () {
       input = null;
       characterCount = null;
     });
 
-    it('should reduce counter for each character entered when maxLength not null', function() {
+    it('should reduce counter for each character entered when maxLength not null', function () {
       characterCount.maxLength = 12;
 
       typeValue('12345');
       expect(characterCount.innerHTML).to.equal('7');
     });
 
-    it('should reach 0 when characters entered == maxLength', function(){
+    it('should reach 0 when characters entered == maxLength', function () {
       characterCount.maxLength = 4;
 
       typeValue('qwer');
       expect(characterCount.innerHTML).to.equal('0');
     });
 
-    it('should show a negative value when characters entered > maxLength', function(){
+    it('should show a negative value when characters entered > maxLength', function () {
       characterCount.maxLength = 2;
 
       typeValue('123');
       expect(characterCount.innerHTML).to.equal('-1');
     });
 
-    it('it should add is-invalid when character entered > maxLength', function(){
+    it('it should add is-invalid when character entered > maxLength', function () {
       characterCount.maxLength = 3;
 
       expect(input.classList.contains('is-invalid')).to.be.false;
@@ -111,11 +111,11 @@ describe('CharacterCount', function() {
       expect(characterCount.classList.contains('is-invalid')).to.be.true;
     });
 
-    it('should start counter at 0 when maxLength is null', function() {
+    it('should start counter at 0 when maxLength is null', function () {
       expect(characterCount.innerHTML).to.equal('0');
     });
 
-    it('should increment counter for each character entered when maxLength is null', function(){
+    it('should increment counter for each character entered when maxLength is null', function () {
       typeValue('98765432');
       expect(characterCount.innerHTML).to.equal('8');
     });

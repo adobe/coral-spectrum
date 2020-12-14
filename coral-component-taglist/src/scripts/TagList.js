@@ -27,7 +27,7 @@ const ITEM_TAGNAME = 'coral-tag';
  @returns {String} the value that will be submitted for this item.
  @private
  */
-const itemValueFromDOM = function(item) {
+const itemValueFromDOM = function (item) {
   const attr = item.getAttribute('value');
   // checking explicitly for null allows to differentiate between non set values and empty strings
   return attr !== null ? attr : item.textContent.replace(/\s{2,}/g, ' ').trim();
@@ -87,6 +87,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   get values() {
     return this.items.getAll().map((item) => item.value);
   }
+
   set values(values) {
     if (Array.isArray(values)) {
       this.items.clear();
@@ -133,6 +134,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._name || '';
   }
+
   set name(value) {
     this._name = transform.string(value);
     this._reflectAttribute('name', value);
@@ -154,6 +156,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     const all = this.items.getAll();
     return all.length ? all[0].value : '';
   }
+
   set value(value) {
     this.items.clear();
 
@@ -181,6 +184,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -200,6 +204,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   get invalid() {
     return super.invalid;
   }
+
   set invalid(value) {
     super.invalid = value;
 
@@ -218,6 +223,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
@@ -237,6 +243,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
@@ -332,14 +339,13 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
         if (document.activeElement.tagName === 'BODY') {
           if (this.items.length > 0) {
             self.items.first().focus();
-          }
-          else {
+          } else {
             // make the TagList focusable
             self.tabIndex = -1;
             self.classList.add('u-coral-screenReaderOnly');
             self.style.outline = '0';
             self.innerHTML = ' ';
-            const onBlurFocusManagement = function() {
+            const onBlurFocusManagement = function () {
               self.removeAttribute('tabindex');
               self.classList.remove('u-coral-screenReaderOnly');
               self.style.outline = '';
@@ -349,15 +355,13 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
             self._vent.on('blur.focusManagement', null, onBlurFocusManagement);
             if (!parentElement.contains(document.activeElement)) {
               self.focus();
-            }
-            else {
+            } else {
               onBlurFocusManagement();
             }
           }
         }
       });
-    }
-    else if (this._itemToFocusAfterDelete) {
+    } else if (this._itemToFocusAfterDelete) {
       this._itemToFocusAfterDelete.focus();
     }
 
@@ -407,8 +411,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
         if (item.tagName.toLowerCase() === ITEM_TAGNAME && !item.hidden) {
           item.focus();
           break;
-        }
-        else {
+        } else {
           item = item[sibling];
         }
       }
@@ -488,8 +491,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
       if (itemToFocusAfterDelete.tagName.toLowerCase() === ITEM_TAGNAME && !itemToFocusAfterDelete.hidden) {
         this._itemToFocusAfterDelete = itemToFocusAfterDelete;
         break;
-      }
-      else {
+      } else {
         itemToFocusAfterDelete = itemToFocusAfterDelete.previousElementSibling;
       }
     }
@@ -545,8 +547,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     // Since tagList can have multiple values, we have to store them all to be able to reset them
     if (this.hasAttribute('value')) {
       this._initialValues = [this.getAttribute('value')];
-    }
-    else {
+    } else {
       this._initialValues = this.items.getAll().map((item) => itemValueFromDOM(item));
     }
 

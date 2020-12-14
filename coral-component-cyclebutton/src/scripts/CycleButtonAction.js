@@ -23,7 +23,7 @@ import {transform} from '../../../coral-utils';
 class CycleButtonAction extends BaseComponent(HTMLElement) {
   /**
    The Action's icon. See {@link Coral.Icon} for valid icon names.
-   
+
    @type {String}
    @default ""
    @htmlattribute icon
@@ -32,15 +32,17 @@ class CycleButtonAction extends BaseComponent(HTMLElement) {
   get icon() {
     return this._icon || '';
   }
+
   set icon(value) {
     this._icon = transform.string(value);
     this._reflectAttribute('icon', this._icon);
   }
-  
+
   // @compat
   get content() {
     return this;
   }
+
   set content(value) {
     // Support configs
     if (typeof value === 'object') {
@@ -50,7 +52,7 @@ class CycleButtonAction extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /**
    Inherited from {@link BaseComponent#trackingElement}.
    */
@@ -60,6 +62,7 @@ class CycleButtonAction extends BaseComponent(HTMLElement) {
       (this.content || this).textContent.replace(/\s{2,}/g, ' ').trim() || this.icon :
       this._trackingElement;
   }
+
   set trackingElement(value) {
     super.trackingElement = value;
   }
@@ -72,10 +75,10 @@ class CycleButtonAction extends BaseComponent(HTMLElement) {
   /** @ignore */
   render() {
     super.render();
-    
+
     // adds the role to support accessibility
     this.setAttribute('role', 'menuitem');
-    this.tabIndex =  -1;
+    this.tabIndex = -1;
   }
 }
 

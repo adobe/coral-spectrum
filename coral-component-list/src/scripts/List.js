@@ -25,7 +25,7 @@ class List extends BaseList(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Events
     this._delegateEvents(this._events);
   }

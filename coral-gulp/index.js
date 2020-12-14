@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-module.exports = function(gulp) {
+module.exports = function (gulp) {
   // Tasks
   require('./tasks/clean.js')(gulp);
   require('./tasks/lint.js')(gulp);
@@ -25,7 +25,7 @@ module.exports = function(gulp) {
   require('./tasks/tests.js')(gulp);
   require('./tasks/watch.js')(gulp);
   require('./tasks/release.js')(gulp);
-  
+
   gulp.task('build',
     gulp.series(
       gulp.parallel('clean', 'lint'),
@@ -33,7 +33,7 @@ module.exports = function(gulp) {
       'scripts'
     )
   );
-  
+
   gulp.task('test',
     gulp.series(
       gulp.parallel('clean', 'lint'),

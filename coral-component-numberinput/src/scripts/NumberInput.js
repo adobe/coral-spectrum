@@ -42,11 +42,9 @@ const handleDecimalOperation = (operator, value1, value2) => {
   const operation = (operator, value1, value2) => {
     if (operator === '+') {
       return value1 + value2;
-    }
-    else if (operator === '-') {
+    } else if (operator === '-') {
       return value1 - value2;
-    }
-    else if (operator === '%') {
+    } else if (operator === '%') {
       return value1 % value2;
     }
   };
@@ -68,8 +66,7 @@ const handleDecimalOperation = (operator, value1, value2) => {
 
     // Transform the integer result back to decimal
     result /= multiplier;
-  }
-  else {
+  } else {
     result = operation(operator, value1, value2);
   }
 
@@ -135,6 +132,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   get value() {
     return this._elements.input.value;
   }
+
   set value(value) {
     value = isNaN(value) ? '' : String(value);
 
@@ -149,8 +147,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
     if (this.value) {
       this._elements.input.setAttribute('aria-valuenow', this.value);
       this._elements.input.setAttribute('aria-valuetext', this.value);
-    }
-    else {
+    } else {
       this._elements.input.removeAttribute('aria-valuenow');
       this._elements.input.removeAttribute('aria-valuetext');
     }
@@ -160,8 +157,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
     if (flagStepButtonClick || !!window.chrome) {
       this._updateLiveRegion(this.value);
       // Otherwise, clear the live region.
-    }
-    else {
+    } else {
       this._updateLiveRegion();
     }
 
@@ -191,6 +187,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
 
     return NaN;
   }
+
   set valueAsNumber(value) {
     this._valueAsNumber = transform.number(value);
 
@@ -212,6 +209,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   get min() {
     return this._min;
   }
+
   set min(value) {
     value = transform.number(value);
 
@@ -222,8 +220,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
 
       this._elements.input.removeAttribute('aria-valuemin');
       this._elements.input.removeAttribute('min');
-    }
-    else {
+    } else {
       this._reflectAttribute('min', this._min);
       // sets the min in the input so that keyboard handles this component
       this._elements.input.setAttribute('aria-valuemin', this._min);
@@ -247,6 +244,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   get max() {
     return this._max;
   }
+
   set max(value) {
     value = transform.number(value);
 
@@ -257,8 +255,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
 
       this._elements.input.removeAttribute('aria-valuemax');
       this._elements.input.removeAttribute('max');
-    }
-    else {
+    } else {
       this._reflectAttribute('max', this._max);
       // sets the max in the input so that keyboard handles this component
       this._elements.input.setAttribute('aria-valuemax', this._max);
@@ -282,6 +279,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   get step() {
     return this._step || 1;
   }
+
   set step(value) {
     if (value !== null && (value > 0 || value === 'any')) {
       this._step = value === 'any' ? value : transform.number(value);
@@ -301,6 +299,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._elements.input.name;
   }
+
   set name(value) {
     this._reflectAttribute('name', value);
 
@@ -317,6 +316,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -338,6 +338,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
@@ -355,6 +356,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
@@ -369,6 +371,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   get invalid() {
     return super.invalid;
   }
+
   set invalid(value) {
     super.invalid = value;
     this._elements.input.invalid = this._invalid;
@@ -380,6 +383,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   get labelledBy() {
     return super.labelledBy;
   }
+
   set labelledBy(value) {
     super.labelledBy = value;
     // in case the user focuses the buttons, he will still get a notion of the usage of the component
@@ -397,6 +401,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   get placeholder() {
     return this._elements.input.placeholder || '';
   }
+
   set placeholder(value) {
     value = transform.string(value);
     this._reflectAttribute('placeholder', value);
@@ -426,8 +431,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
     const step = this._getActualStep();
     if (isNaN(value)) {
       this.value = this.max !== null ? Math.min(step, this.max) : step;
-    }
-    else {
+    } else {
       const newValue = handleDecimalOperation('+', value, step);
 
       this.value = this.max !== null ? Math.min(newValue, this.max) : newValue;
@@ -444,8 +448,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
     const step = this._getActualStep();
     if (isNaN(value)) {
       this.value = this.min !== null ? Math.max(-step, this.min) : -step;
-    }
-    else {
+    } else {
       const newValue = handleDecimalOperation('-', value, step);
 
       this.value = this.min !== null ? Math.max(newValue, this.min) : newValue;
@@ -699,8 +702,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
     const delta = Math.max(-1, Math.min(1, event.wheelDelta || -event.detail || event.deltaY));
     if (delta < 0) {
       this.stepDown();
-    }
-    else {
+    } else {
       this.stepUp();
     }
 
@@ -800,7 +802,9 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
     this.classList.add(CLASSNAME);
 
     // Default reflected attributes
-    if (!this._step) { this.step = 1; }
+    if (!this._step) {
+      this.step = 1;
+    }
 
     // a11y
     this.setAttribute('role', 'group');
@@ -823,8 +827,7 @@ class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
         child.nodeType === Node.ELEMENT_NODE && templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the frag
         frag.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else
         this.removeChild(child);
       }

@@ -14,10 +14,10 @@ import {tracking} from '../../../coral-utils';
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Select} from '../../../coral-component-select';
 
-describe('Select', function() {
+describe('Select', function () {
   // @todo: test reordering the options
-  describe('Namespace', function() {
-    it('should define the variants in an enum', function() {
+  describe('Namespace', function () {
+    it('should define the variants in an enum', function () {
       expect(Select.variant).to.exist;
       expect(Select.variant.DEFAULT).to.equal('default');
       expect(Select.variant.QUIET).to.equal('quiet');
@@ -25,22 +25,22 @@ describe('Select', function() {
     });
   });
 
-  describe('Instantiation', function() {
+  describe('Instantiation', function () {
     function testDefaultInstance(select) {
       expect(select.classList.contains('_coral-Dropdown')).to.be.true;
     }
 
-    it('should be possible using new', function() {
+    it('should be possible using new', function () {
       var select = helpers.build(new Select());
       testDefaultInstance(select);
     });
 
-    it('should be possible using createElement', function() {
+    it('should be possible using createElement', function () {
       var select = helpers.build(document.createElement('coral-select'));
       testDefaultInstance(select);
     });
 
-    it('should be possible using markup', function() {
+    it('should be possible using markup', function () {
       const el = helpers.build('<coral-select></coral-select>');
       testDefaultInstance(el);
     });
@@ -62,14 +62,14 @@ describe('Select', function() {
   });
 
   // API tests that do not set the placeholder as default
-  describe('API', function() {
+  describe('API', function () {
     // the select list item used in every test
     var el;
     var item1;
     var item2;
     var item3;
 
-    beforeEach(function(done) {
+    beforeEach(function (done) {
       el = helpers.build(new Select());
 
       item1 = new Select.Item();
@@ -89,18 +89,18 @@ describe('Select', function() {
       el.items.add(item3);
 
       // Wait for MO
-      helpers.next(function() {
+      helpers.next(function () {
         done();
       });
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el = item1 = item2 = item3 = null;
     });
 
-    describe('#placeholder', function() {
+    describe('#placeholder', function () {
       // case 3: !p + !m +  se = se
-      it('should default to empty string', function() {
+      it('should default to empty string', function () {
         expect(el.placeholder).to.equal('');
 
         // selects the second item
@@ -111,7 +111,7 @@ describe('Select', function() {
       });
 
       // case 3: !p + !m +  se = se
-      it('should correctly change to selected item after changing from multiple to single', function() {
+      it('should correctly change to selected item after changing from multiple to single', function () {
         el.multiple = true;
 
         expect(el.placeholder).to.equal('');
@@ -133,14 +133,14 @@ describe('Select', function() {
       });
 
       // case 4: !p + !m + !se = firstSelectable, but with no selectable option
-      it('should default to empty string if empty', function(done) {
+      it('should default to empty string if empty', function (done) {
         // we remove all the items for the text
         el.items.clear();
 
         expect(el.placeholder).to.equal('');
 
         // waits for the MO to kick-in
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el._elements.label.innerHTML).to.equal('');
 
           done();
@@ -148,14 +148,14 @@ describe('Select', function() {
       });
 
       // case 4: !p + !m + !se = firstSelectable
-      it('should default to first selectable', function() {
+      it('should default to first selectable', function () {
         expect(el.placeholder).to.equal('');
         expect(el._elements.label.innerHTML).to.equal(item1.content.innerHTML);
       });
 
       // case 4: !p + !m + !se = firstSelectable
       // should correctly sync the value when switching
-      it('should correctly switch the first selectable', function() {
+      it('should correctly switch the first selectable', function () {
         el.multiple = true;
 
         expect(el.placeholder).to.equal('');
@@ -171,7 +171,7 @@ describe('Select', function() {
       });
 
       // case 8: !p +  m + !se = 'Select'
-      it('should show "Select" if no placeholder, multiple and nothing selected', function() {
+      it('should show "Select" if no placeholder, multiple and nothing selected', function () {
         el.multiple = true;
         el.selectedItem.selected = false;
 
@@ -181,7 +181,7 @@ describe('Select', function() {
 
       // case 8: !p +  m + !se = 'Select'
       // should correctly sync the value
-      it('should switch to default placeholder when switched from single to multiple', function() {
+      it('should switch to default placeholder when switched from single to multiple', function () {
         // starts as single
         expect(el.multiple).to.be.false;
         // with no placeholder
@@ -199,7 +199,7 @@ describe('Select', function() {
       });
 
       // case 7: !p +  m +  se = 'Select'
-      it('should enumerate the selected items in the label if multiple=true and there is selection', function() {
+      it('should enumerate the selected items in the label if multiple=true and there is selection', function () {
         // we wait for the selection to happen
         el.multiple = true;
 
@@ -210,7 +210,7 @@ describe('Select', function() {
       });
 
       // case 7: !p +  m +  se = 'Select'
-      it('should correctly change to selected item after changing from single to multiple without placeholder', function() {
+      it('should correctly change to selected item after changing from single to multiple without placeholder', function () {
         // we start as single
         expect(el.multiple).to.be.false;
         // with no placeholder
@@ -232,7 +232,7 @@ describe('Select', function() {
       });
 
       // case 5:  p + !m +  se = se
-      it('should be "Select" if multiple and has a selectedItem', function() {
+      it('should be "Select" if multiple and has a selectedItem', function () {
         el.placeholder = 'Choose an item';
 
         // selects the second item
@@ -244,7 +244,7 @@ describe('Select', function() {
       });
 
       // case 6:  p + !m + !se = p
-      it('should be "Select" if not multiple and no selectedItem', function() {
+      it('should be "Select" if not multiple and no selectedItem', function () {
         el.placeholder = 'Choose an item';
 
         // since the select was initialized without a placeholder we revert the forced selection
@@ -255,7 +255,7 @@ describe('Select', function() {
       });
 
       // case 1:  p +  m +  se = p
-      it('should show the placeholder with multiple and selectedItem(s)', function() {
+      it('should show the placeholder with multiple and selectedItem(s)', function () {
         el.placeholder = 'Choose an item';
         el.multiple = true;
 
@@ -268,7 +268,7 @@ describe('Select', function() {
       });
 
       // case 2:  p +  m + !se = p
-      it('should show the placeholder with multiple and no selectedItem(s)', function() {
+      it('should show the placeholder with multiple and no selectedItem(s)', function () {
         el.placeholder = 'Choose an item';
 
         el.multiple = true;
@@ -279,7 +279,7 @@ describe('Select', function() {
         expect(el.selectedItems).to.deep.equal([item1]);
       });
 
-      it('should go back to the placeholder once the selected is removed', function() {
+      it('should go back to the placeholder once the selected is removed', function () {
         el.placeholder = 'Choose an item';
 
         // selects the second item
@@ -296,7 +296,7 @@ describe('Select', function() {
         expect(el._elements.label.innerHTML).to.equal('Choose an item');
       });
 
-      it('should go back to the placeholder once the selected is removed', function(done) {
+      it('should go back to the placeholder once the selected is removed', function (done) {
         el.placeholder = 'Choose an item';
 
         // selects the second item
@@ -312,7 +312,7 @@ describe('Select', function() {
         expect(el.selectedItem).to.be.null;
 
         // we wait for the MO to kick in
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el._elements.label.innerHTML).to.equal('Choose an item');
 
           done();
@@ -321,7 +321,7 @@ describe('Select', function() {
     });
   });
 
-  describe('API', function() {
+  describe('API', function () {
     // the select list item used in every test
     var el;
     var button;
@@ -330,7 +330,7 @@ describe('Select', function() {
     var item2;
     var item3;
 
-    beforeEach(function(done) {
+    beforeEach(function (done) {
       el = helpers.build(new Select());
       button = el._elements.button;
       buttonLabel = el._elements.label;
@@ -355,24 +355,24 @@ describe('Select', function() {
       el.items.add(item3);
 
       // Wait for MO
-      helpers.next(function() {
+      helpers.next(function () {
         done();
       });
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el = item1 = item2 = item3 = null;
     });
 
-    describe('#placeholder', function() {
+    describe('#placeholder', function () {
       // case 6:  p + !m + !se = p
-      it('should default to the placeholder when multiple=false and no selection', function() {
+      it('should default to the placeholder when multiple=false and no selection', function () {
         expect(el._elements.label.textContent).to.equal('Placeholder');
         expect(el.selectedItems).to.deep.equal([]);
       });
 
       // case 6:  p + !m + !se = p, no items for selection
-      it('should default to placeholder when no items', function(done) {
+      it('should default to placeholder when no items', function (done) {
         expect(el.placeholder).to.equal('Placeholder');
 
         item3.selected = true;
@@ -383,7 +383,7 @@ describe('Select', function() {
         el.items.clear();
 
         // we wait for the MO to kick-in
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el.items.length).to.equal(0);
           expect(el.selectedItems).to.deep.equal([]);
           expect(el._elements.label.textContent).to.equal(el.placeholder, 'label should be the placeholder');
@@ -393,24 +393,23 @@ describe('Select', function() {
       });
     });
 
-    describe('#selectedItem', function() {
-      it('should default to null when a placeholder is added', function() {
+    describe('#selectedItem', function () {
+      it('should default to null when a placeholder is added', function () {
         expect(el.placeholder).not.to.equal('');
         expect(el.selectedItem).to.equal(null);
         expect(el._elements.label.textContent).to.equal(el.placeholder);
       });
 
-      it('should not be settable', function() {
+      it('should not be settable', function () {
         expect(el.selectedItem).to.equal(null);
         try {
           el.selectedItem = item2;
-        }
-        catch (e) {
+        } catch (e) {
           expect(el.selectedItem).to.equal(null);
         }
       });
 
-      it('should default to the first item when the placeholder is removed', function() {
+      it('should default to the first item when the placeholder is removed', function () {
         // removing the placeholder should cause the select to find a candiate for selection
         el.placeholder = '';
 
@@ -418,7 +417,7 @@ describe('Select', function() {
         expect(el._elements.label.textContent).to.equal(el.items.first().textContent);
       });
 
-      it('should update to the selected value', function() {
+      it('should update to the selected value', function () {
         item2.selected = true;
         expect(el.selectedItem).to.equal(item2);
         expect(el._elements.nativeSelect.value).to.equal(item2.value);
@@ -428,7 +427,7 @@ describe('Select', function() {
         expect(el._elements.nativeSelect.value).to.equal(item3.value);
       });
 
-      it('should be null if the selected is removed', function(done) {
+      it('should be null if the selected is removed', function (done) {
         item2.selected = true;
         expect(el.selectedItem).to.equal(item2);
         expect(el._elements.nativeSelect.value).to.equal(item2.value);
@@ -436,7 +435,7 @@ describe('Select', function() {
         item2.remove();
 
         // Wait for MO
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el.selectedItem).to.be.null;
           expect(el._elements.label.textContent).to.equal(el.placeholder);
           done();
@@ -444,21 +443,20 @@ describe('Select', function() {
       });
     });
 
-    describe('#selectedItems', function() {
-      it('should default to empty array', function() {
+    describe('#selectedItems', function () {
+      it('should default to empty array', function () {
         expect(el.selectedItems).to.deep.equal([]);
       });
 
-      it('should not be settable', function() {
+      it('should not be settable', function () {
         try {
           el.selectedItems = [item2];
-        }
-        catch (e) {
+        } catch (e) {
           expect(el.selectedItems).to.deep.equal([]);
         }
       });
 
-      it('should return all the selected items when multiple', function() {
+      it('should return all the selected items when multiple', function () {
         el.multiple = true;
 
         item2.selected = true;
@@ -468,7 +466,7 @@ describe('Select', function() {
         expect(el._elements.taglist.values).to.deep.equal(['2', '3']);
       });
 
-      it('should return an array when a single item when single', function() {
+      it('should return an array when a single item when single', function () {
         item2.selected = true;
         // only the second one will stay because multiple=false
         item3.selected = true;
@@ -477,15 +475,15 @@ describe('Select', function() {
       });
     });
 
-    describe('#multiple', function() {
-      it('should default to false', function() {
+    describe('#multiple', function () {
+      it('should default to false', function () {
         expect(el.multiple).to.be.false;
 
         expect(el._elements.nativeSelect.multiple).to.be.false;
         expect(el._elements.list.multiple).to.be.false;
       });
 
-      it('should not allow multiple selection when false', function() {
+      it('should not allow multiple selection when false', function () {
         item2.selected = true;
         item3.selected = true;
 
@@ -496,7 +494,7 @@ describe('Select', function() {
         expect(el._elements.taglist.items.length).to.equal(0);
       });
 
-      it('should allow multiple selection when true', function() {
+      it('should allow multiple selection when true', function () {
         el.multiple = true;
 
         // since the item was already initialized and is ready, it was initialized as multiple=false, meaning that it
@@ -517,7 +515,7 @@ describe('Select', function() {
         expect(el._elements.taglist.items.length).to.equal(2);
       });
 
-      it('should transform single selected items to multiple correctly', function() {
+      it('should transform single selected items to multiple correctly', function () {
         expect(el.selectedItem).to.equal(null, 'no initial selection due to placeholder');
         item2.selected = true;
 
@@ -532,7 +530,7 @@ describe('Select', function() {
         expect(tags[0].value).to.equal(item2.value);
       });
 
-      it('should not have tags and multiple selected options when multiple is switched to single', function() {
+      it('should not have tags and multiple selected options when multiple is switched to single', function () {
         el.multiple = true;
 
         expect(el.selectedItem).to.equal(null, 'no initial selection due to placeholder');
@@ -568,7 +566,7 @@ describe('Select', function() {
         expect(el._elements.label.textContent).to.equal(item3.content.textContent);
       });
 
-      it('should have tags when switched from single to multiple', function() {
+      it('should have tags when switched from single to multiple', function () {
         expect(el.multiple).to.be.false;
 
         // changes selection to 2nd item
@@ -599,7 +597,7 @@ describe('Select', function() {
         expect(el._elements.taglist.items.length).to.equal(1, 'there should be one taglist items');
       });
 
-      it('should allow inserting new items', function(done) {
+      it('should allow inserting new items', function (done) {
         el.multiple = true;
 
         var itemCount = el._elements.list.items.length;
@@ -617,7 +615,7 @@ describe('Select', function() {
         expect(el.selectedItems).to.deep.equal([item4]);
 
         // Wait for MO
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el._elements.list.items.length).to.equal(itemCount + 1);
           expect(el._elements.taglist.items.length).to.equal(1);
 
@@ -626,24 +624,24 @@ describe('Select', function() {
       });
     });
 
-    describe('#value', function() {
-      it('should default to empty string, if select is empty', function(done) {
+    describe('#value', function () {
+      it('should default to empty string, if select is empty', function (done) {
         el.items.clear();
 
         // Wait for MO
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el.value).to.equal('');
 
           done();
         });
       });
 
-      it('should default to empty string when there is a placeholder', function() {
+      it('should default to empty string when there is a placeholder', function () {
         expect(el.value).to.equal('');
         expect(el.getAttribute('value')).not.to.equal('value should not be reflected');
       });
 
-      it('should default to the first item when there is no placeholder', function() {
+      it('should default to the first item when there is no placeholder', function () {
         el.placeholder = '';
 
         // selection will happen in the sync when the placeholder detects there is no valid value
@@ -652,13 +650,13 @@ describe('Select', function() {
         expect(el._elements.nativeSelect.value).to.equal(item1.value);
       });
 
-      it('should allow to set the value', function() {
+      it('should allow to set the value', function () {
         el.value = '2';
         expect(item2.selected).to.be.true;
         expect(el.selectedItem).to.equal(item2);
       });
 
-      it('should allow to set the value even if the select is not attached to dom so far', function() {
+      it('should allow to set the value even if the select is not attached to dom so far', function () {
         var myEl = new Select();
         var myItem1 = new Select.Item();
         var myItem2 = new Select.Item();
@@ -678,7 +676,7 @@ describe('Select', function() {
         expect(myEl.selectedItem).to.equal(myItem2);
       });
 
-      it('should be updated if we select a value', function() {
+      it('should be updated if we select a value', function () {
         item3.selected = true;
         expect(el.selectedItem).to.equal(item3);
         expect(el.value).to.equal(item3.value);
@@ -686,7 +684,7 @@ describe('Select', function() {
         expect(el.value).to.equal(item3.value);
       });
 
-      it('should accept empty string', function() {
+      it('should accept empty string', function () {
         // we select something to force a value
         item2.selected = true;
 
@@ -698,14 +696,14 @@ describe('Select', function() {
         expect(el.selectedItem).to.be.null;
       });
 
-      it('should ignore invalid values', function() {
+      it('should ignore invalid values', function () {
         el.value = '5';
 
         expect(el.value).to.equal('');
         expect(el.selectedItem).to.be.null;
       });
 
-      it('should deselect the other items', function() {
+      it('should deselect the other items', function () {
         el.value = '2';
 
         expect(el.value).to.equal('2');
@@ -720,7 +718,7 @@ describe('Select', function() {
         expect(el.selectedItem).to.equal(item3);
       });
 
-      it('should selected the first item with the matching value', function() {
+      it('should selected the first item with the matching value', function () {
         // changes the value so that item2 and item3 share a value
         item3.value = '2';
 
@@ -732,13 +730,13 @@ describe('Select', function() {
         expect(item3.selected).to.be.false;
       });
 
-      it('should default to empty string when multiple', function() {
+      it('should default to empty string when multiple', function () {
         el.multiple = true;
 
         expect(el.value).to.equal('');
       });
 
-      it('should deselect all other items when multiple', function() {
+      it('should deselect all other items when multiple', function () {
         el.multiple = true;
         el.value = '2';
 
@@ -756,7 +754,7 @@ describe('Select', function() {
         expect(el.selectedItems).to.deep.equal([item3]);
       });
 
-      it('should default to empty string on invalid value', function() {
+      it('should default to empty string on invalid value', function () {
         el.multiple = true;
 
         // sets an invalid value
@@ -768,7 +766,7 @@ describe('Select', function() {
         expect(el.selectedItems).to.deep.equal([]);
       });
 
-      it('should put back the placeholder if value is set to empty string', function() {
+      it('should put back the placeholder if value is set to empty string', function () {
         // sets the placeholder
         el.placeholder = 'placeholder';
 
@@ -779,7 +777,7 @@ describe('Select', function() {
         expect(el._elements.label.textContent).to.equal(el.placeholder);
       });
 
-      it('should be empty if placeholder is set and no item is selected', function() {
+      it('should be empty if placeholder is set and no item is selected', function () {
         const el = helpers.build(window.__html__['Select.placeholder.html']);
         expect(el.selectedItems.length).to.equal(0);
         expect(el._elements.input.value).to.equal('');
@@ -788,13 +786,13 @@ describe('Select', function() {
       });
     });
 
-    describe('#values', function() {
-      it('should default to [] when there is a placeholder and multiple=false', function() {
+    describe('#values', function () {
+      it('should default to [] when there is a placeholder and multiple=false', function () {
         expect(el.placeholder).not.to.equal('');
         expect(el.values).to.deep.equal([]);
       });
 
-      it('should ignore null', function() {
+      it('should ignore null', function () {
         item2.selected = true;
 
         expect(el.values).to.deep.equal(['2']);
@@ -806,19 +804,19 @@ describe('Select', function() {
         expect(el.values).to.deep.equal(['2']);
       });
 
-      it('should get an array with the first item when there is no placeholder and multiple=false', function() {
+      it('should get an array with the first item when there is no placeholder and multiple=false', function () {
         // setting the placeholder as empty will cause the first item to be selected
         el.placeholder = '';
 
         expect(el.values).to.deep.equal(['1']);
       });
 
-      it('should get an empty array by default when multiple=true', function() {
+      it('should get an empty array by default when multiple=true', function () {
         el.multiple = true;
         expect(el.values.length).to.equal(0);
       });
 
-      it('should only set the first value when multiple=false', function() {
+      it('should only set the first value when multiple=false', function () {
         el.values = ['1', '3'];
 
         expect(el.value).to.equal('1');
@@ -829,7 +827,7 @@ describe('Select', function() {
         expect(el._elements.nativeSelect.selectedOptions[0].value).to.equal('1');
       });
 
-      it('should be possible to set multiple values if multiple=true', function() {
+      it('should be possible to set multiple values if multiple=true', function () {
         el.multiple = true;
 
         el.values = ['1', '3'];
@@ -845,7 +843,7 @@ describe('Select', function() {
         expect(el._elements.taglist.items.length).to.equal(2);
       });
 
-      it('should deselect all values with empty array and multiple=true', function() {
+      it('should deselect all values with empty array and multiple=true', function () {
         el.multiple = true;
 
         expect(el.values.length).to.equal(0);
@@ -868,7 +866,7 @@ describe('Select', function() {
         expect(el._elements.taglist.items.length).to.equal(0);
       });
 
-      it('should return [""] when an item has empty string as its value', function() {
+      it('should return [""] when an item has empty string as its value', function () {
         item1.value = '';
         item1.selected = true;
 
@@ -877,7 +875,7 @@ describe('Select', function() {
         expect(el.values).to.deep.equal(['']);
       });
 
-      it('should allow selecting items with value as empty string', function() {
+      it('should allow selecting items with value as empty string', function () {
         item2.value = '';
 
         el.values = [''];
@@ -887,20 +885,20 @@ describe('Select', function() {
       });
     });
 
-    describe('#variant', function() {
-      it('should be initially Select.variant.DEFAULT', function() {
+    describe('#variant', function () {
+      it('should be initially Select.variant.DEFAULT', function () {
         expect(el.variant).to.equal(Select.variant.DEFAULT);
         expect(el.getAttribute('variant')).to.equal(Select.variant.DEFAULT);
       });
 
-      it('should set the new variant', function() {
+      it('should set the new variant', function () {
         el.variant = Select.variant.QUIET;
 
         expect(el.variant).to.equal('quiet');
         expect(el._elements.button.classList.contains('_coral-FieldButton--quiet')).to.be.true;
       });
 
-      it('should set the default variant', function() {
+      it('should set the default variant', function () {
         el.variant = Select.variant.DEFAULT;
 
         expect(el.variant).to.equal(Select.variant.DEFAULT);
@@ -908,14 +906,14 @@ describe('Select', function() {
       });
     });
 
-    describe('#name', function() {
-      it('should have empty string as default', function() {
+    describe('#name', function () {
+      it('should have empty string as default', function () {
         expect(el.name).to.equal('');
         expect(el._elements.input.name).to.equal('');
         expect(el._elements.taglist.name).to.equal('');
       });
 
-      it('should submit nothing when name is not specified even though an item is selected', function() {
+      it('should submit nothing when name is not specified even though an item is selected', function () {
         // we wrap first the select
         var form = document.createElement('form');
         form.appendChild(el);
@@ -933,14 +931,14 @@ describe('Select', function() {
         expect(values.length).to.equal(0);
       });
 
-      it('should set the name to the native select', function() {
+      it('should set the name to the native select', function () {
         el.name = 'select';
         expect(el.name).to.equal('select');
         expect(el._elements.input.name).to.equal('select');
         expect(el._elements.taglist.name).to.equal('');
       });
 
-      it('should submit the one single value', function() {
+      it('should submit the one single value', function () {
 
         // we wrap first the select
         var form = document.createElement('form');
@@ -968,7 +966,7 @@ describe('Select', function() {
         }
       });
 
-      it('should set the input value to the added selected item value', function() {
+      it('should set the input value to the added selected item value', function () {
         var template = document.createElement('template');
         template.innerHTML = '<coral-select id="select"><coral-select-item value="abc" selected></coral-select-item></coral-select>';
         var frag = document.importNode(template.content, true);
@@ -980,7 +978,7 @@ describe('Select', function() {
         expect(el.value).to.equal(el._elements.input.value);
       });
 
-      it('should submit multiple values when multiple', function() {
+      it('should submit multiple values when multiple', function () {
         // we make sure it is multiple
         el.multiple = true;
 
@@ -1014,22 +1012,26 @@ describe('Select', function() {
       });
     });
 
-    describe('#required', function() {});
+    describe('#required', function () {
+    });
 
-    describe('#invalid', function() {});
+    describe('#invalid', function () {
+    });
 
-    describe('#disabled', function() {});
+    describe('#disabled', function () {
+    });
 
-    describe('#readOnly', function() {});
+    describe('#readOnly', function () {
+    });
 
-    describe('#labelled', function() {
-      it('should update the aria-label of button', function() {
+    describe('#labelled', function () {
+      it('should update the aria-label of button', function () {
         el.labelled = 'newlabel';
 
         expect(button.getAttribute('aria-label')).to.equal('newlabel', 'button aria-label should have changed');
       });
 
-      it('should update the aria-labelledBy of the button if there is none', function() {
+      it('should update the aria-labelledBy of the button if there is none', function () {
         el.labelled = 'newlabel';
 
         expect(button.getAttribute('aria-label')).to.equal('newlabel', 'button aria-label should have changed');
@@ -1041,7 +1043,7 @@ describe('Select', function() {
         expect(button.getAttribute('aria-labelledby').trim()).to.equal(`${button.id} ${buttonLabel.id}`, 'button aria-labelledby should include button itself and its label');
       });
 
-      it('should remove the aria-label of button if removed', function() {
+      it('should remove the aria-label of button if removed', function () {
         el.labelled = 'newlabel';
 
         expect(button.getAttribute('aria-label')).to.equal('newlabel');
@@ -1052,12 +1054,12 @@ describe('Select', function() {
       });
     });
 
-    describe('#labelledBy', function() {
-      it('should not be present when creating a new element', function() {
+    describe('#labelledBy', function () {
+      it('should not be present when creating a new element', function () {
         expect(button.getAttribute('aria-labelledby')).to.be.null;
       });
 
-      it('should update aria-labelledBy of included button element', function() {
+      it('should update aria-labelledBy of included button element', function () {
         el.labelledBy = 'newItemId';
         expect(button.getAttribute('aria-labelledby').includes('newItemId')).to.be.true;
         expect(button.getAttribute('aria-labelledby').includes(buttonLabel.id)).to.be.true;
@@ -1066,7 +1068,7 @@ describe('Select', function() {
         expect(button.getAttribute('aria-labelledby')).to.equal(null, 'button did not update aria-labelledby');
       });
 
-      it('should take precedence over labelled', function() {
+      it('should take precedence over labelled', function () {
         el.labelled = 'newlabel'
         expect(button.getAttribute('aria-label')).to.equal('newlabel', 'button aria-label should have changed');
         expect(button.getAttribute('aria-labelledby').trim()).to.equal(`${button.id} ${buttonLabel.id}`, 'button aria-labelledby should include button itself and its label');
@@ -1083,16 +1085,17 @@ describe('Select', function() {
       });
     });
 
-    describe('#loading', function() {});
+    describe('#loading', function () {
+    });
 
-    describe('#items', function() {
+    describe('#items', function () {
       // the select list item used in every test
       var el;
       var item1;
       var item2;
       var item3;
 
-      beforeEach(function() {
+      beforeEach(function () {
         el = helpers.build(new Select());
         item1 = new Select.Item();
         item2 = new Select.Item();
@@ -1106,17 +1109,16 @@ describe('Select', function() {
         item3.value = '3';
       });
 
-      it('should not be settable', function() {
+      it('should not be settable', function () {
         try {
           el.items = null;
-        }
-        catch(e) {
+        } catch (e) {
           expect(el.items).not.to.equal(null, 'items is not settable');
         }
       });
 
-      describe('#add()', function() {
-        it('should allow to add a selected item using object notation', function() {
+      describe('#add()', function () {
+        it('should allow to add a selected item using object notation', function () {
 
           el.items.add(item1);
           el.items.add(item2);
@@ -1141,8 +1143,8 @@ describe('Select', function() {
       });
     });
 
-    describe('#clear()', function() {
-      it('should default value "" when placeholder is available', function() {
+    describe('#clear()', function () {
+      it('should default value "" when placeholder is available', function () {
         expect(el.placeholder).not.to.equal('');
 
         item2.selected = true;
@@ -1156,7 +1158,7 @@ describe('Select', function() {
         expect(el._elements.label.textContent).to.equal(el.placeholder, 'label should match the placeholder');
       });
 
-      it('should default to the first item when placeholder is not available', function() {
+      it('should default to the first item when placeholder is not available', function () {
         el.placeholder = '';
 
         item2.selected = true;
@@ -1170,7 +1172,7 @@ describe('Select', function() {
         expect(el._elements.label.textContent).to.equal(item1.textContent, 'label should match the first item');
       });
 
-      it('should produce value "" when multiple', function() {
+      it('should produce value "" when multiple', function () {
         expect(el.placeholder).not.to.equal('');
 
         el.multiple = true;
@@ -1187,16 +1189,16 @@ describe('Select', function() {
       });
     });
 
-    describe('#focus()', function() {
-      it('should focus the button', function() {
+    describe('#focus()', function () {
+      it('should focus the button', function () {
         expect(document.activeElement).not.to.equal(el);
         // we focus the component
         el.focus();
         expect(el.contains(document.activeElement)).to.be.true;
       });
 
-      it('should not shift focus if already inside the component ', function(done) {
-        el.on('coral-select:_overlayopen', function() {
+      it('should not shift focus if already inside the component ', function (done) {
+        el.on('coral-select:_overlayopen', function () {
           expect(document.activeElement).not.to.equal(el._elements.button);
           // we focus the component
           el.focus();
@@ -1209,7 +1211,7 @@ describe('Select', function() {
         el._elements.button.click();
       });
 
-      it('should not focus the button if it is disabled', function() {
+      it('should not focus the button if it is disabled', function () {
         expect(document.activeElement).not.to.equal(el);
 
         el.disabled = true;
@@ -1224,21 +1226,21 @@ describe('Select', function() {
     });
   });
 
-  describe('Markup', function() {
-    describe('#variant', function() {
-      it('should not set empty variant', function() {
+  describe('Markup', function () {
+    describe('#variant', function () {
+      it('should not set empty variant', function () {
         const el = helpers.build(window.__html__['Select.variant.empty.html']);
         expect(el.variant).to.equal(Select.variant.DEFAULT);
         expect(el.getAttribute('variant')).to.equal(Select.variant.DEFAULT);
       });
 
-      it('should not set invalid variant', function() {
+      it('should not set invalid variant', function () {
         const el = helpers.build(window.__html__['Select.variant.invalid.html']);
         expect(el.variant).to.equal(Select.variant.DEFAULT);
         expect(el.getAttribute('variant')).to.equal(Select.variant.DEFAULT);
       });
 
-      it('should remove variant classnames when variant changes', function() {
+      it('should remove variant classnames when variant changes', function () {
         const el = helpers.build(window.__html__['Select.variant.quiet.html']);
         expect(el._elements.button.classList.contains('_coral-FieldButton--quiet')).to.be.true;
 
@@ -1247,8 +1249,8 @@ describe('Select', function() {
       });
     });
 
-    describe('#selectedItem', function() {
-      it('should allow selecting items in the DOM', function() {
+    describe('#selectedItem', function () {
+      it('should allow selecting items in the DOM', function () {
         const el = helpers.build(window.__html__['Select.selected.html']);
         expect(el.selectedItem.value).to.equal('eu');
         expect(el.selectedItems.length).to.equal(1);
@@ -1256,7 +1258,7 @@ describe('Select', function() {
         expect(el.values).to.deep.equal(['eu']);
       });
 
-      it('should allow removing the selected item', function() {
+      it('should allow removing the selected item', function () {
         const el = helpers.build(window.__html__['Select.selected.html']);
         // removes 'Africa'
         el.selectedItem.remove();
@@ -1270,8 +1272,8 @@ describe('Select', function() {
       });
     });
 
-    describe('#selectedItems', function() {
-      it('should allow selecting items in the DOM', function() {
+    describe('#selectedItems', function () {
+      it('should allow selecting items in the DOM', function () {
         const el = helpers.build(window.__html__['Select.multiple.selected.html']);
 
         expect(el.selectedItem.value).to.equal('af');
@@ -1280,13 +1282,13 @@ describe('Select', function() {
         expect(el.values).to.deep.equal(['af', 'eu']);
       });
 
-      it('should allow removing the selected item', function(done) {
+      it('should allow removing the selected item', function (done) {
         const el = helpers.build(window.__html__['Select.multiple.selected.html']);
         // removes 'Africa'
         el.selectedItem.remove();
 
         // Wait for MO
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el.selectedItem.value).to.equal('eu');
           expect(el.value).to.equal('eu');
           expect(el.values).to.deep.equal(['eu']);
@@ -1296,15 +1298,15 @@ describe('Select', function() {
       });
     });
 
-    describe('#multiple', function() {
-      it('should default to false', function() {
+    describe('#multiple', function () {
+      it('should default to false', function () {
         const el = helpers.build(window.__html__['Select.base.html']);
 
         expect(el.multiple).to.be.false;
         expect(el.hasAttribute('multiple')).to.be.false;
       });
 
-      it('should remove the attribute', function() {
+      it('should remove the attribute', function () {
         const el = helpers.build(window.__html__['Select.multiple.base.html']);
 
         expect(el.multiple).to.be.true;
@@ -1315,7 +1317,7 @@ describe('Select', function() {
         expect(el.hasAttribute('multiple')).to.be.false;
       });
 
-      it('should allow multiple selection when true', function() {
+      it('should allow multiple selection when true', function () {
         const el = helpers.build(window.__html__['Select.multiple.selected.html']);
         var items = el.items.getAll();
 
@@ -1333,7 +1335,7 @@ describe('Select', function() {
 
         expect(el._elements.list.selectedItems.length).to.equal(2);
 
-        el._elements.list.selectedItems.forEach(function(item) {
+        el._elements.list.selectedItems.forEach(function (item) {
           expect(item.selected).to.be.true;
         });
 
@@ -1341,27 +1343,27 @@ describe('Select', function() {
       });
     });
 
-    describe('#placeholder', function() {
-      it('should show placeholder when there is no selection', function() {
+    describe('#placeholder', function () {
+      it('should show placeholder when there is no selection', function () {
         const el = helpers.build(window.__html__['Select.placeholder.html']);
         expect(el.selectedItem).to.be.null;
         expect(el._elements.label.textContent).to.equal('Placeholder');
       });
 
-      it('should update the label to the selected item when there is selection', function() {
+      it('should update the label to the selected item when there is selection', function () {
         const el = helpers.build(window.__html__['Select.placeholder.selected.html']);
         var item = el.items.getAll()[2];
         expect(el.selectedItem).to.equal(item);
         expect(el._elements.label.textContent).to.equal(item.textContent, 'label should match the selected item');
       });
 
-      it('should show the placeholder when there is no selection and multiple=true', function() {
+      it('should show the placeholder when there is no selection and multiple=true', function () {
         const el = helpers.build(window.__html__['Select.placeholder.multiple.html']);
         expect(el.selectedItem).to.equal(null, 'no selected item');
         expect(el._elements.label.textContent).to.equal(el.placeholder, 'label should match the placeholder');
       });
 
-      it('should show the placeholder when there is selection and multiple=true', function() {
+      it('should show the placeholder when there is selection and multiple=true', function () {
         const el = helpers.build(window.__html__['Select.placeholder.multiple.selected.html']);
         var item = el.items.getAll()[2];
         expect(el.selectedItem).to.equal(item);
@@ -1369,7 +1371,7 @@ describe('Select', function() {
       });
 
       // case 7: !p +  m +  se = 'Select'
-      it('should enumerate the selected items in the label if multiple and has a selected item', function() {
+      it('should enumerate the selected items in the label if multiple and has a selected item', function () {
         const el = helpers.build(window.__html__['Select.multiple.selected.html']);
         var items = el.items.getAll();
 
@@ -1381,8 +1383,8 @@ describe('Select', function() {
       });
     });
 
-    describe('#value', function() {
-      it('should be possible to set the value using markup (in single mode)', function() {
+    describe('#value', function () {
+      it('should be possible to set the value using markup (in single mode)', function () {
         const el = helpers.build(window.__html__['Select.value.html']);
         expect(el.selectedItems.length).to.equal(1, 'one item should be selected');
         expect(el.values.length).to.equal(1, 'one value should be set');
@@ -1391,7 +1393,7 @@ describe('Select', function() {
         expect(el.value).to.equal('oc', '"oc" should be set as value');
       });
 
-      it('should be possible to set the value using markup (in multi mode)', function() {
+      it('should be possible to set the value using markup (in multi mode)', function () {
         const el = helpers.build(window.__html__['Select.multiple.value.selected.html']);
         // Setting a select.value will force all other selected items to be deselected => only one item is selected
         expect(el.selectedItems.length).to.equal(1, 'one item should be selected');
@@ -1401,12 +1403,12 @@ describe('Select', function() {
         expect(el.value).to.equal('oc', '"oc" should be set as value');
       });
 
-      it('should default to value of first item, if no items are selected', function() {
+      it('should default to value of first item, if no items are selected', function () {
         const el = helpers.build(window.__html__['Select.base.html']);
         expect(el.value).to.equal('am');
       });
 
-      it('should return the value of the selected item', function() {
+      it('should return the value of the selected item', function () {
         const el = helpers.build(window.__html__['Select.base.html']);
 
         var item2 = el.items.getAll()[1];
@@ -1418,15 +1420,15 @@ describe('Select', function() {
         expect(el.selectedItem).to.equal(item2);
       });
 
-      it('should default to empty string when multiple', function() {
+      it('should default to empty string when multiple', function () {
         const el = helpers.build(window.__html__['Select.multiple.base.html']);
         expect(el.value).to.equal('');
         expect(el.selectedItem).to.be.null;
       });
     });
 
-    describe('#values', function() {
-      it('should ignore the values attribute', function() {
+    describe('#values', function () {
+      it('should ignore the values attribute', function () {
         const el = helpers.build(window.__html__['Select.multiple.base.html']);
         expect(el.selectedItem).to.be.null;
         expect(el.selectedItems.length).to.equal(0);
@@ -1434,7 +1436,7 @@ describe('Select', function() {
         expect(el.value).to.equal('');
       });
 
-      it('should be possible to get values set in markup', function() {
+      it('should be possible to get values set in markup', function () {
         const el = helpers.build(window.__html__['Select.multiple.selected.html']);
         expect(el.selectedItems.length).to.equal(2);
         expect(el.values.length).to.equal(2);
@@ -1444,45 +1446,49 @@ describe('Select', function() {
     });
 
     // name is tested with the formField
-    describe('#name', function() {});
+    describe('#name', function () {
+    });
 
-    describe('#required', function() {});
+    describe('#required', function () {
+    });
 
-    describe('#invalid', function() {});
+    describe('#invalid', function () {
+    });
 
-    describe('#disabled', function() {});
-  
-    describe('#readOnly', function() {
-      it('should not be readOnly by default', function(done) {
+    describe('#disabled', function () {
+    });
+
+    describe('#readOnly', function () {
+      it('should not be readOnly by default', function (done) {
         const el = helpers.build(window.__html__['Select.base.html']);
         expect(el.readOnly).to.be.false;
         expect(el.hasAttribute('readOnly')).to.be.false;
         done();
       });
-    
-      it('should be settable with value true', function(done) {
+
+      it('should be settable with value true', function (done) {
         const el = helpers.build(window.__html__['Select.base.html']);
         el.readOnly = true;
-      
+
         expect(el.readOnly).to.be.true;
         expect(el.hasAttribute('readOnly')).to.be.true;
         done();
       });
-    
-      it('should be settable with value 1', function(done) {
+
+      it('should be settable with value 1', function (done) {
         const el = helpers.build(window.__html__['Select.base.html']);
         el.readOnly = 1;
-      
+
         expect(el.readOnly).to.be.true;
         expect(el.hasAttribute('readOnly')).to.be.true;
         done();
       });
-    
-      it('should be selectable with readOnly set to true', function(done) {
+
+      it('should be selectable with readOnly set to true', function (done) {
         const el = helpers.build(window.__html__['Select.base.html']);
         el.readOnly = true;
         el.focus();
-      
+
         expect(el.readOnly).to.be.true;
         expect(el.hasAttribute('readOnly')).to.be.true;
         expect(el.contains(document.activeElement)).to.be.true;
@@ -1490,14 +1496,17 @@ describe('Select', function() {
       });
     });
 
-    describe('#labelledBy', function() {});
+    describe('#labelledBy', function () {
+    });
 
-    describe('#loading', function() {});
+    describe('#loading', function () {
+    });
 
-    describe('#items', function() {});
+    describe('#items', function () {
+    });
 
-    describe('#reset()', function() {
-      it('should reset the select if reset() is called', function() {
+    describe('#reset()', function () {
+      it('should reset the select if reset() is called', function () {
         const el = helpers.build(window.__html__['Select.multiple.selected.html']);
         var selectedItems = el.selectedItems;
         var af = selectedItems[0];
@@ -1516,7 +1525,7 @@ describe('Select', function() {
         expect(el.selectedItems).to.deep.equal([af, eu]);
       });
 
-      it('should allow removing an initial value', function(done) {
+      it('should allow removing an initial value', function (done) {
         const el = helpers.build(window.__html__['Select.multiple.selected.html']);
         var selectedItems = el.selectedItems;
         var af = selectedItems[0];
@@ -1530,7 +1539,7 @@ describe('Select', function() {
         af.remove();
 
         // we need to wait for the MO to detect the element removal
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el._initialValues.length).to.equal(1, 'one item should be removed from the initial selection');
 
           el.value = '';
@@ -1545,14 +1554,16 @@ describe('Select', function() {
   });
 
   // @todo: test multiple
-  describe('Events', function() {
+  describe('Events', function () {
     // @todo: test these events
-    describe('#coral-select:showitems', function() {});
+    describe('#coral-select:showitems', function () {
+    });
 
-    describe('#coral-select:hideitems', function() {});
+    describe('#coral-select:hideitems', function () {
+    });
 
-    describe('#change', function() {
-      it('should not trigger change while setting values programmatically', function() {
+    describe('#change', function () {
+      it('should not trigger change while setting values programmatically', function () {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['Select.base.html']);
@@ -1567,7 +1578,7 @@ describe('Select', function() {
         expect(changeSpy.callCount).to.equal(0);
       });
 
-      it('should not trigger change setting the value', function() {
+      it('should not trigger change setting the value', function () {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['Select.base.html']);
@@ -1583,13 +1594,13 @@ describe('Select', function() {
         expect(changeSpy.callCount).to.equal(0);
       });
 
-      it('should trigger change if the user adds an item with the selectlist', function(done) {
+      it('should trigger change if the user adds an item with the selectlist', function (done) {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['Select.base.html']);
         el.on('change', changeSpy);
 
-        var callback = function() {
+        var callback = function () {
           if (!el._useNativeInput) {
             expect(el._elements.overlay.open).to.be.true;
             expect(el._elements.overlay.offsetParent).to.not.equal(null);
@@ -1601,18 +1612,18 @@ describe('Select', function() {
           // as change is only triggered on real user interaction, we have to fake the interaction
           if (el._useNativeInput) {
             var dummyOptions = [el._elements.nativeSelect.children[1]];
-            dummyOptions.item = function(index) {
+            dummyOptions.item = function (index) {
               return dummyOptions[index];
             };
             var dummyEvent = {
-              stopImmediatePropagation: function() {},
+              stopImmediatePropagation: function () {
+              },
               target: {
                 selectedOptions: dummyOptions
               }
             };
             el._onNativeSelectChange(dummyEvent);
-          }
-          else {
+          } else {
             el._elements.list.items.getAll()[1].click();
           }
 
@@ -1629,28 +1640,26 @@ describe('Select', function() {
 
           // opens the overlay (forces a change event to be triggered on next select)
           el._elements.button.click();
-        }
-        else {
+        } else {
           callback();
         }
       });
 
-      it('should not trigger change if the user selects the same item', function(done) {
+      it('should not trigger change if the user selects the same item', function (done) {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['Select.base.html']);
         el.on('change', changeSpy);
 
         var openEventCount = 0;
-        el.on('coral-select:_overlayopen', function() {
+        el.on('coral-select:_overlayopen', function () {
           if (openEventCount === 0) {
             expect(changeSpy.callCount).to.equal(0);
             // selects the 2nd item in the list
             el._elements.list.items.getAll()[1].click();
             expect(el.value).to.equal('af');
             expect(changeSpy.callCount).to.equal(1);
-          }
-          else if (openEventCount === 1) {
+          } else if (openEventCount === 1) {
             expect(changeSpy.callCount).to.equal(1, 'selecting an item again must not trigger a change event');
             // selects the 2nd item in the list
             el._elements.list.items.getAll()[1].click();
@@ -1665,7 +1674,7 @@ describe('Select', function() {
           openEventCount++;
         });
 
-        el.on('coral-select:_overlayclose', function() {
+        el.on('coral-select:_overlayclose', function () {
           // opens the overlay the second time
           el._elements.button.click();
         });
@@ -1676,15 +1685,15 @@ describe('Select', function() {
         });
       });
 
-      it('should not trigger new change while we are updating items in the change callback', function(done) {
+      it('should not trigger new change while we are updating items in the change callback', function (done) {
         const el = helpers.build(window.__html__['Select.base.html']);
         var changeCallbackCount = 0;
-        el.on('change', function() {
+        el.on('change', function () {
           changeCallbackCount++;
           el._elements.list.items.getAll()[2].click();
         });
 
-        el.on('coral-select:_overlayopen', function() {
+        el.on('coral-select:_overlayopen', function () {
           // selects the 2nd item in the list
           el._elements.list.items.getAll()[1].click();
           expect(el.value).to.equal('as');
@@ -1721,7 +1730,7 @@ describe('Select', function() {
         expect(changeSpy.getCall(0).args[0].target.values).to.deep.equal([]);
       });
 
-      it('should trigger a change event when a tag is removed', function() {
+      it('should trigger a change event when a tag is removed', function () {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['Select.multiple.base.html']);
@@ -1753,7 +1762,7 @@ describe('Select', function() {
         expect(el.values).to.deep.equal(['eu']);
       });
 
-      it('should trigger change if the user selects an item with the native select', function() {
+      it('should trigger change if the user selects an item with the native select', function () {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['Select.base.html']);
@@ -1780,7 +1789,7 @@ describe('Select', function() {
         expect(document.activeElement).to.equal(el._elements.button, 'focus should be on the button');
       });
 
-      it('should trigger change if the user interacts with the native select and multiple=true', function() {
+      it('should trigger change if the user interacts with the native select and multiple=true', function () {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['Select.multiple.base.html']);
@@ -1821,22 +1830,22 @@ describe('Select', function() {
     });
   });
 
-  describe('User Interaction', function() {
+  describe('User Interaction', function () {
     // @todo: add tests for space key
     // @todo: add tests for key down
     // @todo: add tests for tab key
     // @todo: add tests for global click
     // @todo: add tests for scrolling at the bottom of the list
 
-    describe('Removing the selected item', function() {
+    describe('Removing the selected item', function () {
 
-      it('should not cause an error with single selection', function(done) {
+      it('should not cause an error with single selection', function (done) {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['Select.selected.html']);
         el.on('change', changeSpy);
 
-        el.on('coral-select:_overlayopen', function() {
+        el.on('coral-select:_overlayopen', function () {
           // we remove the selected item
           el.selectedItem.remove();
 
@@ -1844,7 +1853,7 @@ describe('Select', function() {
           expect(changeSpy.callCount).to.equal(0);
 
           // Wait for MO
-          helpers.next(function() {
+          helpers.next(function () {
             // selects the item on index 1 ("Africa")
             el._elements.list.items.getAll()[1].click();
 
@@ -1865,7 +1874,7 @@ describe('Select', function() {
         el._elements.button.click();
       });
 
-      it('should not cause an error with multiple selection', function(done) {
+      it('should not cause an error with multiple selection', function (done) {
         var changeSpy = sinon.spy();
 
         const el = helpers.build(window.__html__['Select.multiple.selected.html']);
@@ -1881,7 +1890,7 @@ describe('Select', function() {
         expect(changeSpy.callCount).to.equal(0);
 
         // Wait for MO
-        helpers.next(function() {
+        helpers.next(function () {
           // checks the item was properly removed
           expect(el.items.length).to.equal(totalItems - 1);
           expect(el._elements.nativeSelect.options.length).to.equal(totalItems - 1);
@@ -1910,14 +1919,14 @@ describe('Select', function() {
       });
     });
 
-    describe('Placeholder', function() {
-      it('should be updated when an item is clicked', function(done) {
+    describe('Placeholder', function () {
+      it('should be updated when an item is clicked', function (done) {
         const el = helpers.build(window.__html__['Select.placeholder.html']);
         // all the available items
         var items = el.items.getAll();
 
         // we handle the event instead of assuming that it opens the next frame
-        el.on('coral-select:_overlayopen', function() {
+        el.on('coral-select:_overlayopen', function () {
           // selects the item on index 1
           el._elements.list.items.getAll()[1].click();
           expect(el.selectedItem).to.equal(items[1]);
@@ -1931,13 +1940,13 @@ describe('Select', function() {
         el._elements.button.click();
       });
 
-      it('should allow removing the selected item', function(done) {
+      it('should allow removing the selected item', function (done) {
         const el = helpers.build(window.__html__['Select.placeholder.html']);
         // all the available items
         var items = el.items.getAll();
         var itemCount = items.length;
 
-        el.on('coral-select:_overlayopen', function() {
+        el.on('coral-select:_overlayopen', function () {
           // selects the item on index 1, this will cause the overlay to close
           el._elements.list.items.getAll()[1].click();
 
@@ -1953,7 +1962,7 @@ describe('Select', function() {
           expect(el.items.length).to.equal(itemCount - 1);
 
           // Wait for MO
-          helpers.next(function() {
+          helpers.next(function () {
             // there is now one item less in the selectlist
             expect(el._elements.list.items.length).to.equal(itemCount - 1);
             // it should show now the placeholder
@@ -1972,14 +1981,14 @@ describe('Select', function() {
         el._elements.button.click();
       });
 
-      it('should update the placeholder when the content of the selectedItem changes', function(done) {
+      it('should update the placeholder when the content of the selectedItem changes', function (done) {
         const el = helpers.build(window.__html__['Select.selected.html']);
         expect(el._elements.label.textContent).to.equal('Europe');
 
         el.selectedItem.content.textContent = 'New Content';
 
         // we wait for the MO to trigger
-        helpers.next(function() {
+        helpers.next(function () {
           expect(el._elements.label.textContent).to.equal('New Content');
 
           done();
@@ -1987,18 +1996,18 @@ describe('Select', function() {
       });
     });
 
-    describe('Accessibility', function() {
-      it('button should communicate expanded state', function(done) {
+    describe('Accessibility', function () {
+      it('button should communicate expanded state', function (done) {
         const el = helpers.build(window.__html__['Select.base.html']);
-        el.on('coral-select:_overlayopen', function() {
+        el.on('coral-select:_overlayopen', function () {
           // selects the 2nd item in the list
           expect(el._elements.button.getAttribute('aria-expanded')).to.equal('true');
 
           // closes the overlay
-           el._elements.button.click();
+          el._elements.button.click();
         });
 
-        el.on('coral-select:_overlayclose', function() {
+        el.on('coral-select:_overlayclose', function () {
           expect(el._elements.button.getAttribute('aria-expanded')).to.equal('false');
 
           done();
@@ -2009,7 +2018,7 @@ describe('Select', function() {
       });
     });
 
-    it('should remove selected items using the taglist when multiple=true', function() {
+    it('should remove selected items using the taglist when multiple=true', function () {
       const el = helpers.build(window.__html__['Select.multiple.selected.html']);
       expect(el.multiple).to.equal(true);
       // number of currently selected items
@@ -2022,14 +2031,14 @@ describe('Select', function() {
       expect(el.selectedItems.length).to.equal(selectedItemCount - 1);
     });
 
-    it('should focus the button when an item is selected', function(done) {
+    it('should focus the button when an item is selected', function (done) {
       const el = helpers.build(window.__html__['Select.placeholder.html']);
-      el.on('coral-select:_overlayopen', function() {
+      el.on('coral-select:_overlayopen', function () {
         // selects the 2nd item in the list
         el._elements.list.items.getAll()[1].click();
       });
 
-      el.on('coral-select:_overlayclose', function() {
+      el.on('coral-select:_overlayclose', function () {
         expect(document.activeElement).to.equal(el._elements.button);
 
         done();
@@ -2039,16 +2048,16 @@ describe('Select', function() {
       el._elements.button.click();
     });
 
-    it('should focus the button when the selected item is clicked again', function(done) {
+    it('should focus the button when the selected item is clicked again', function (done) {
       const el = helpers.build(window.__html__['Select.placeholder.html']);
-      el.on('coral-select:_overlayopen', function() {
+      el.on('coral-select:_overlayopen', function () {
         var selectListItems = el._elements.list.items.getAll();
 
         expect(selectListItems[2].selected).to.be.true;
         selectListItems[2].click();
       });
 
-      el.on('coral-select:_overlayclose', function() {
+      el.on('coral-select:_overlayclose', function () {
         expect(document.activeElement).to.equal(el._elements.button);
 
         done();
@@ -2061,14 +2070,14 @@ describe('Select', function() {
       el._elements.button.click();
     });
 
-    it('should focus the button when it is toggled', function(done) {
+    it('should focus the button when it is toggled', function (done) {
       const el = helpers.build(window.__html__['Select.placeholder.html']);
-      el.on('coral-select:_overlayopen', function() {
+      el.on('coral-select:_overlayopen', function () {
         // we click the button again to toggle the overlay
         el._elements.button.click();
       });
 
-      el.on('coral-select:_overlayclose', function() {
+      el.on('coral-select:_overlayclose', function () {
         expect(document.activeElement).to.equal(el._elements.button);
 
         done();
@@ -2079,14 +2088,14 @@ describe('Select', function() {
     });
 
     // this behavior matches the native select
-    it('should focus the button when the overlay is open and the user clicks outside', function(done) {
+    it('should focus the button when the overlay is open and the user clicks outside', function (done) {
       const el = helpers.build(window.__html__['Select.placeholder.html']);
-      el.on('coral-select:_overlayopen', function() {
+      el.on('coral-select:_overlayopen', function () {
         // we simulate a click somewhere else in the page
         document.body.click();
       });
 
-      el.on('coral-select:_overlayclose', function() {
+      el.on('coral-select:_overlayclose', function () {
         expect(document.activeElement).to.equal(el._elements.button);
 
         done();
@@ -2096,7 +2105,7 @@ describe('Select', function() {
       el._elements.button.click();
     });
 
-    it('should focus the button when user interacts with the native select', function(done) {
+    it('should focus the button when user interacts with the native select', function (done) {
       const el = helpers.build(window.__html__['Select.base.html']);
       // we fake the native input
       el._useNativeInput = true;
@@ -2109,17 +2118,17 @@ describe('Select', function() {
       helpers.event('change', el._elements.nativeSelect);
 
       // Wait next frame for button to be focused
-      helpers.next(function() {
+      helpers.next(function () {
         expect(document.activeElement).to.equal(el._elements.button, 'focus should be on the button');
 
         done();
       });
     });
 
-    it('should keep the overlay open if multiple=true and an item is selected', function(done) {
+    it('should keep the overlay open if multiple=true and an item is selected', function (done) {
       const el = helpers.build(window.__html__['Select.placeholder.multiple.html']);
 
-      el.on('coral-select:_overlayopen', function() {
+      el.on('coral-select:_overlayopen', function () {
         // selects the 2nd item in the list
         el._elements.list.items.getAll()[1].click();
 
@@ -2132,14 +2141,14 @@ describe('Select', function() {
       el._elements.button.click();
     });
 
-    it('should close the overlay using esc key', function(done) {
+    it('should close the overlay using esc key', function (done) {
       const el = helpers.build(window.__html__['Select.base.html']);
-      el.on('coral-select:_overlayopen', function() {
+      el.on('coral-select:_overlayopen', function () {
         // pressing escape should close the overlay
         helpers.keypress('esc', helpers.target);
       });
 
-      el.on('coral-select:_overlayclose', function() {
+      el.on('coral-select:_overlayclose', function () {
         expect(el._elements.overlay.open).to.equal(false, 'overlay should be closed');
         expect(document.activeElement).to.equal(el._elements.button, 'focus should return to the button');
 
@@ -2149,11 +2158,11 @@ describe('Select', function() {
       // opens the overlay
       el._elements.button.click();
     });
-    
+
     it('should not open the overlay if readonly is true', () => {
       const el = helpers.build(window.__html__['Select.base.html']);
       el.readOnly = true;
-      
+
       el._elements.button.click();
       expect(el.overlay.open).to.be.false;
     });
@@ -2161,14 +2170,14 @@ describe('Select', function() {
 
   // @todo: add tests for overlay position
   // @todo: add tests for internal events not bubbling (taglist, select, selectlist)
-  describe('Implementation Details', function() {
+  describe('Implementation Details', function () {
     // the select list item used in every test
     var el;
     var item1;
     var item2;
     var item3;
 
-    beforeEach(function(done) {
+    beforeEach(function (done) {
       el = helpers.build(new Select());
       item1 = new Select.Item();
       item2 = new Select.Item();
@@ -2187,16 +2196,16 @@ describe('Select', function() {
       el.items.add(item3);
 
       // Wait for MO
-      helpers.next(function() {
+      helpers.next(function () {
         done();
       });
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el = item1 = item2 = item3 = null;
     });
 
-    it('should set value of the internal items', function() {
+    it('should set value of the internal items', function () {
       // all items should initialize the selectListItem and nativeOption
       expect(item1._selectListItem.value).to.equal(item1.value);
       expect(item2._selectListItem.value).to.equal(item2.value);
@@ -2206,14 +2215,14 @@ describe('Select', function() {
       expect(item3._nativeOption.value).to.equal(item3.value);
     });
 
-    it('should change value of the internal items', function() {
+    it('should change value of the internal items', function () {
       item1.value = '4';
 
       expect(item1._selectListItem.value).to.equal(item1.value);
       expect(item1._nativeOption.value).to.equal(item1.value);
     });
 
-    it('should change value of the internal items and multiple=true', function() {
+    it('should change value of the internal items and multiple=true', function () {
       // we switch to multiple because it includes tags
       el.multiple = true;
 
@@ -2233,11 +2242,11 @@ describe('Select', function() {
       expect(item1._tag.value).to.equal('4', 'tag value should be updated');
     });
 
-    it('should change content of the internal items', function(done) {
+    it('should change content of the internal items', function (done) {
       item1.content.textContent = 'America';
 
       // waits for the MO to kick in
-      helpers.next(function() {
+      helpers.next(function () {
         expect(item1._selectListItem.content.textContent).to.equal(item1.content.textContent);
         expect(item1._nativeOption.textContent).to.equal(item1.content.textContent);
 
@@ -2245,7 +2254,7 @@ describe('Select', function() {
       });
     });
 
-    it('should change content of the internal items and multiple=true', function(done) {
+    it('should change content of the internal items and multiple=true', function (done) {
       el.multiple = true;
 
       item1.selected = true;
@@ -2256,7 +2265,7 @@ describe('Select', function() {
       item1.content.textContent = 'America';
 
       // waits for the MO to kick in
-      helpers.next(function() {
+      helpers.next(function () {
         expect(item1._selectListItem.content.textContent).to.equal(item1.content.textContent);
         expect(item1._nativeOption.textContent).to.equal(item1.content.textContent);
         expect(item1._tag.label.textContent).to.equal(item1.content.textContent);
@@ -2265,7 +2274,7 @@ describe('Select', function() {
       });
     });
 
-    it('should change disabled of the internal items', function() {
+    it('should change disabled of the internal items', function () {
       expect(item1.disabled).to.be.false;
 
       item1.disabled = true;
@@ -2275,17 +2284,17 @@ describe('Select', function() {
       expect(item1._nativeOption.disabled).to.equal(item1.disabled);
     });
 
-    describe('arrayDiff', function() {
+    describe('arrayDiff', function () {
       // this is copied from Select.js since it is private
-      var arrayDiff = function(a, b) {
-        return a.filter(function(item) {
-          return !b.some(function(item2) {
-              return item === item2;
-            });
+      var arrayDiff = function (a, b) {
+        return a.filter(function (item) {
+          return !b.some(function (item2) {
+            return item === item2;
+          });
         });
       };
 
-      it('should calculate the different between 2 arrays', function() {
+      it('should calculate the different between 2 arrays', function () {
         expect(arrayDiff([item1, item2], [item2])).to.deep.equal([item1]);
         expect(arrayDiff([item1, item2], [])).to.deep.equal([item1, item2]);
         expect(arrayDiff([], [item1, item2, item3])).to.deep.equal([]);
@@ -2299,8 +2308,8 @@ describe('Select', function() {
     });
   });
 
-  describe('Implementation Details (compliance)', function() {
-    describe('#formField (single select)', function() {
+  describe('Implementation Details (compliance)', function () {
+    describe('#formField (single select)', function () {
       // Run generic formField tests
       helpers.testFormField(window.__html__['Select.value.html'], {
         value: 'as',
@@ -2308,7 +2317,7 @@ describe('Select', function() {
       });
     });
 
-    describe('#formField (multi select)', function() {
+    describe('#formField (multi select)', function () {
       // Run generic formField tests
       helpers.testFormField(window.__html__['Select.multiple.value.html'], {
         value: 'as',
@@ -2317,7 +2326,7 @@ describe('Select', function() {
     });
   });
 
-  describe('Tracking', function() {
+  describe('Tracking', function () {
     var trackerFnSpy;
 
     beforeEach(function () {
@@ -2329,7 +2338,7 @@ describe('Select', function() {
       tracking.removeListener(trackerFnSpy);
     });
 
-    it('should call the tracker callback fn with expected parameters when the simple select changes it\'s value that has a trackingElement attribute', function() {
+    it('should call the tracker callback fn with expected parameters when the simple select changes it\'s value that has a trackingElement attribute', function () {
       const el = helpers.build(window.__html__['Select.tracking.single.html']);
       el.click();
 
@@ -2350,7 +2359,7 @@ describe('Select', function() {
       expect(spyCall.args[2]).to.be.an.instanceof(Select);
     });
 
-    it('should call the tracker callback fn with expected parameters when the simple select changes it\'s value that doesn\'t have a trackingElement attribute', function() {
+    it('should call the tracker callback fn with expected parameters when the simple select changes it\'s value that doesn\'t have a trackingElement attribute', function () {
       const el = helpers.build(window.__html__['Select.tracking.single.html']);
       el.click();
 
@@ -2371,7 +2380,7 @@ describe('Select', function() {
       expect(spyCall.args[2]).to.be.an.instanceof(Select);
     });
 
-    it('should call the tracker callback fn with expected parameters when the multiple select changes it\'s value that doesn\'t have a trackingElement attribute', function() {
+    it('should call the tracker callback fn with expected parameters when the multiple select changes it\'s value that doesn\'t have a trackingElement attribute', function () {
       const el = helpers.build(window.__html__['Select.tracking.multiple.html']);
       el.click();
 
@@ -2392,7 +2401,7 @@ describe('Select', function() {
       expect(spyCall.args[2]).to.be.an.instanceof(Select);
     });
 
-    it.skip('should call the tracker callback fn with expected parameters when the multiple select adds a new tag and then removes it', function() {
+    it.skip('should call the tracker callback fn with expected parameters when the multiple select adds a new tag and then removes it', function () {
       const el = helpers.build(window.__html__['Select.tracking.multiple.html']);
       el.click();
 

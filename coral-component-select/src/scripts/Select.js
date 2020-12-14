@@ -51,7 +51,7 @@ const IS_MOBILE_DEVICE = navigator.userAgent.match(/iPhone|iPad|iPod|Android/i) 
 
  @private
  */
-const itemValueFromDOM = function(item) {
+const itemValueFromDOM = function (item) {
   const attr = item.getAttribute('value');
   // checking explicitely for null allows to differenciate between non set values and empty strings
   return attr !== null ? attr : item.textContent.replace(/\s{2,}/g, ' ').trim();
@@ -66,7 +66,7 @@ const itemValueFromDOM = function(item) {
  @returns {Array.<String>}
  the difference between the arrays.
  */
-const arrayDiff = function(a, b) {
+const arrayDiff = function (a, b) {
   return a.filter((item) => !b.some((item2) => item === item2));
 };
 
@@ -194,6 +194,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   get multiple() {
     return this._multiple || false;
   }
+
   set multiple(value) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute('multiple', this._multiple);
@@ -201,8 +202,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     // taglist should not be in DOM if multiple === false
     if (!this._multiple) {
       this.removeChild(this._elements.taglist);
-    }
-    else {
+    } else {
       this.appendChild(this._elements.taglist);
     }
 
@@ -219,8 +219,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
         if (this._elements.nativeSelect.parentNode) {
           this.insertBefore(this._elements.nativeSelect, this._elements.taglist);
         }
-      }
-      else {
+      } else {
         this.appendChild(this._elements.nativeSelect);
       }
     }
@@ -237,8 +236,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     this.items.getAll().forEach((item) => {
       if (this._multiple && item.hasAttribute('selected')) {
         this._addTagToTagList(item);
-      }
-      else {
+      } else {
         // taglist is never used for multiple = false
         this._removeTagFromTagList(item);
 
@@ -271,6 +269,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   get placeholder() {
     return this._placeholder || '';
   }
+
   set placeholder(value) {
     this._placeholder = transform.string(value);
     this._reflectAttribute('placeholder', this._placeholder);
@@ -282,7 +281,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
       this._elements.label.classList.add('is-placeholder');
       this._elements.label.textContent = this._placeholder;
     }
-    // case 7: !p +  m +  se = 'Select'
+      // case 7: !p +  m +  se = 'Select'
     // case 8: !p +  m + !se = 'Select'
     else if (this.hasAttribute('multiple')) {
       this._elements.label.classList.add('is-placeholder');
@@ -301,8 +300,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
         // selects using the attribute in case the item is not yet initialized
         placeholderItem.setAttribute('selected', '');
         this._elements.label.innerHTML = placeholderItem.innerHTML;
-      }
-      else {
+      } else {
         // label must be cleared when there is no placeholder and no item to select
         this._elements.label.textContent = '';
       }
@@ -319,6 +317,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this.multiple ? this._elements.taglist.name : this._elements.input.name;
   }
+
   set name(value) {
     this._setName(value);
     this._reflectAttribute('name', this.name);
@@ -335,6 +334,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     // will be correct
     return this.multiple ? this._elements.taglist.value : this._elements.input.value;
   }
+
   set value(value) {
     // we rely on the the values property to handle this correctly
     this.values = [value];
@@ -354,6 +354,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     // if there is a selection, we return whatever value it has assigned
     return this.selectedItem ? [this._elements.input.value] : [];
   }
+
   set values(values) {
     if (Array.isArray(values)) {
       // when multiple = false, we explicitely ignore the other values and just set the first one
@@ -374,7 +375,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
           item[values.indexOf(itemValue) !== -1 ? 'setAttribute' : 'removeAttribute']('selected', '');
         });
       }
-      // if single selection, we find the first item that matches the value and deselect everything else. in case,
+        // if single selection, we find the first item that matches the value and deselect everything else. in case,
       // no item matches the value, we may need to find a selection candidate
       else {
         let targetItem;
@@ -419,13 +420,14 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
 
     this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
     this.classList.toggle('is-disabled', this._disabled);
-    
+
     this._elements.button.disabled = this._disabled;
     this._elements.input.disabled = this._disabled;
     this._elements.taglist.disabled = this._disabled;
@@ -437,6 +439,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   get invalid() {
     return super.invalid;
   }
+
   set invalid(value) {
     super.invalid = value;
 
@@ -455,6 +458,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
@@ -473,10 +477,11 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
-    
+
     this._elements.input.readOnly = this._readOnly;
     this._elements.taglist.readOnly = this._readOnly;
     this._elements.taglist.disabled = this._readOnly;
@@ -488,6 +493,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   get labelled() {
     return super.labelled;
   }
+
   set labelled(value) {
     super.labelled = value;
 
@@ -496,8 +502,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
         this._elements.button.setAttribute('aria-labelledby', `${this._elements.button.id} ${this._elements.label.id} ${this.invalid ? this._elements.invalidIcon.id : ''}`);
       }
       this._elements.nativeSelect.setAttribute('aria-label', value);
-    }
-    else {
+    } else {
       this._elements.button.removeAttribute('aria-label');
       this._elements.nativeSelect.removeAttribute('aria-label');
       if (!this.labelledBy) {
@@ -514,6 +519,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   get labelledBy() {
     return this._labelledBy;
   }
+
   set labelledBy(value) {
     super.labelledBy = value;
     this._labelledBy = super.labelledBy;
@@ -521,8 +527,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     if (this._labelledBy) {
       this._elements.button.setAttribute('aria-labelledby', `${this._labelledBy} ${this._elements.label.id} ${this.invalid ? this._elements.invalidIcon.id : ''}`);
       this._elements.nativeSelect.setAttribute('aria-labelledby', this._labelledBy);
-    }
-    else {
+    } else {
       this._elements.nativeSelect.removeAttribute('aria-labelledby');
 
       // if the select is also labelled, make sure that aria-labelledby gets restored
@@ -586,6 +591,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
@@ -599,8 +605,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     if (this.multiple) {
       this._elements.input.name = '';
       this._elements.taglist.setAttribute('name', value);
-    }
-    else {
+    } else {
       this._elements.taglist.setAttribute('name', '');
       this._elements.input.name = value;
     }
@@ -625,7 +630,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
 
       // we remove the size of the load indicator
       if (loadIndicator && loadIndicator.parentNode) {
-        const outerHeight = function(el) {
+        const outerHeight = function (el) {
           let height = el.offsetHeight;
           const style = getComputedStyle(el);
 
@@ -720,10 +725,10 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
       this._elements.list.style.height = `${height - 1}px`;
     }
   }
-  
+
   _onBeforeOpen(event) {
     event.stopImmediatePropagation();
-    
+
     // Prevent opening the overlay if select is readonly
     if (this.readOnly) {
       event.preventDefault();
@@ -823,8 +828,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
       // @todo: what happens when ALL items have been selected
       //  1. a message is disabled (i18n?)
       //  2. we don't try to open the selectlist (native behavior).
-    }
-    else {
+    } else {
       this._elements.input.value = item.value;
     }
   }
@@ -917,7 +921,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
         }
       }
     }
-    // in case they are the same, we just need to trigger the hideitems event when appropiate, and that is when the
+      // in case they are the same, we just need to trigger the hideitems event when appropiate, and that is when the
     // overlay was previously open
     else if (this._elements.overlay.open) {
       // closes and triggers the hideitems event
@@ -1023,8 +1027,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
       // Toggle openness
       if (this._elements.overlay.classList.contains('is-open')) {
         this._hideOptions();
-      }
-      else {
+      } else {
         // event should be triggered based on the contents
         this._showOptions(true);
       }
@@ -1052,8 +1055,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     if (this._useNativeInput) {
       // we try to open the native select
       this._elements.nativeSelect.dispatchEvent(new MouseEvent('mousedown'));
-    }
-    else if (!this._elements.overlay.open || event.keyCode === Keys.keyToCode('space')) {
+    } else if (!this._elements.overlay.open || event.keyCode === Keys.keyToCode('space')) {
       this._elements.button.click();
     }
   }
@@ -1233,7 +1235,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     let index;
 
     // we iterate over all the nodes, checking if they matched the initial value
-    for (let i = 0, nodeCount = nodes.length; i < nodeCount; i++) {
+    for (let i = 0, nodeCount = nodes.length ; i < nodeCount ; i++) {
       // since we are not sure if the item has been upgraded, we try first the attribute, otherwise we extract the
       // value from the textContent
       item = nodes[i];
@@ -1298,8 +1300,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
             this._elements.input.value = itemValueFromDOM(selectable);
           }
         }
-      }
-      else {
+      } else {
         // we set the value explicitely, so we do not need to wait for the MO
         this._elements.input.value = itemValueFromDOM(selectedItem);
       }
@@ -1336,8 +1337,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
       if (!this.hasAttribute('multiple')) {
         this.items._deselectAllExcept(item);
       }
-    }
-    else {
+    } else {
       this._onItemDeselected(item);
 
       if (this.multiple) {
@@ -1382,7 +1382,9 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
 
    @return {SelectVariantEnum}
    */
-  static get variant() { return variant; }
+  static get variant() {
+    return variant;
+  }
 
   /** @ignore */
   static get observedAttributes() {
@@ -1409,7 +1411,9 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
     this.classList.add(CLASSNAME);
 
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
 
     this.classList.toggle(`${CLASSNAME}--native`, this._useNativeInput);
 
@@ -1429,7 +1433,7 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
 
     // Cleanup template elements (supporting cloneNode)
     const templateElements = this.querySelectorAll('[handle]');
-    for (let i = 0; i < templateElements.length; ++i) {
+    for (let i = 0 ; i < templateElements.length ; ++i) {
       const currentElement = templateElements[i];
       if (currentElement.parentNode === this) {
         this.removeChild(currentElement);

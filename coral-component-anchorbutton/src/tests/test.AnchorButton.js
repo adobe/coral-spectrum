@@ -14,19 +14,19 @@ import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {AnchorButton} from '../../../coral-component-anchorbutton';
 import {events} from '../../../coral-utils';
 
-describe('AnchorButton', function() {
-  describe('Namespace', function() {
-    it('should be defined', function() {
+describe('AnchorButton', function () {
+  describe('Namespace', function () {
+    it('should be defined', function () {
       expect(AnchorButton).to.have.property('Label');
     });
   });
-  
-  describe('Implementation Details', function() {
+
+  describe('Implementation Details', function () {
     helpers.testButton(AnchorButton, 'coral-anchorbutton', 'a');
   });
 
-  describe('Accessibility', function() {
-    it('should have aria-disabled, role and tabindex set by default', function() {
+  describe('Accessibility', function () {
+    it('should have aria-disabled, role and tabindex set by default', function () {
       const button = helpers.build('<a is="coral-anchorbutton"></a>');
       expect(button.hasAttribute('role')).to.be.true;
       expect(button.hasAttribute('tabindex')).to.be.true;
@@ -35,16 +35,16 @@ describe('AnchorButton', function() {
       expect(button.hasAttribute('aria-disabled')).to.be.false;
     });
 
-    it('should have tabindex set to -1 while disabled', function() {
+    it('should have tabindex set to -1 while disabled', function () {
       const button = helpers.build('<a is="coral-anchorbutton" disabled></a>');
       expect(button.getAttribute('role')).to.equal('button');
       expect(button.getAttribute('tabindex')).to.equal('-1');
       expect(button.getAttribute('aria-disabled')).to.equal('true');
     });
 
-    it('should set is-select on keyDown', function() {
+    it('should set is-select on keyDown', function () {
       var button = helpers.build(new AnchorButton());
-      
+
       expect(button.classList.contains('_coral-Button')).to.be.true;
       expect(button.classList.contains('is-selected')).to.be.false;
 
@@ -52,7 +52,7 @@ describe('AnchorButton', function() {
       expect(button.classList.contains('is-selected')).to.be.true;
     });
 
-    it('should not set is-select on keyDown', function() {
+    it('should not set is-select on keyDown', function () {
       var button = helpers.build(new AnchorButton());
 
       helpers.keyup('space', button);
@@ -60,7 +60,7 @@ describe('AnchorButton', function() {
     });
   });
 
-  describe('Event', function() {
+  describe('Event', function () {
     // instantiated anchorbutton element
     var anchorbutton;
     var keyDownSpy;
@@ -68,12 +68,12 @@ describe('AnchorButton', function() {
     var clickSpy;
     var preventSpy;
 
-    beforeEach(function() {
+    beforeEach(function () {
       keyDownSpy = sinon.spy();
       keyUpSpy = sinon.spy();
       clickSpy = sinon.spy();
       preventSpy = sinon.spy();
-      
+
       anchorbutton = helpers.target.appendChild(new AnchorButton());
 
       // adds the required listeners
@@ -81,7 +81,7 @@ describe('AnchorButton', function() {
       anchorbutton.on('keydown', keyDownSpy);
 
       // clickSpy and preventSpy for event bubble
-      events.on('click.TestAnchorButton', function(event) {
+      events.on('click.TestAnchorButton', function (event) {
         if (event.target instanceof AnchorButton) {
           clickSpy();
           if (event.defaultPrevented) {
@@ -96,13 +96,13 @@ describe('AnchorButton', function() {
       expect(preventSpy.callCount).to.equal(0);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       events.off('click.TestAnchorButton');
       helpers.target.removeChild(anchorbutton);
       anchorbutton = null;
     });
 
-    it('should trigger on keydown', function() {
+    it('should trigger on keydown', function () {
       helpers.keydown('space', anchorbutton);
 
       expect(keyDownSpy.callCount).to.equal(1);
@@ -113,7 +113,7 @@ describe('AnchorButton', function() {
       expect(anchorbutton.classList.contains('is-selected')).to.be.true;
     });
 
-    it('should trigger on keyup', function() {
+    it('should trigger on keyup', function () {
       helpers.keyup('space', anchorbutton);
 
       expect(keyDownSpy.callCount).to.equal(0);
@@ -122,7 +122,7 @@ describe('AnchorButton', function() {
       expect(preventSpy.callCount).to.equal(0);
     });
 
-    it('should trigger on keypressed', function() {
+    it('should trigger on keypressed', function () {
       helpers.keypress('space', anchorbutton);
 
       expect(keyDownSpy.callCount).to.equal(1);
@@ -131,7 +131,7 @@ describe('AnchorButton', function() {
       expect(preventSpy.callCount).to.equal(0);
     });
 
-    it('should prevent event from bubbling while disabled', function() {
+    it('should prevent event from bubbling while disabled', function () {
       expect(anchorbutton.disabled).to.be.false;
       anchorbutton.click();
       expect(clickSpy.callCount).to.equal(1);

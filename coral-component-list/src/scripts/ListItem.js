@@ -25,7 +25,7 @@ class ListItem extends BaseListItem(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Events
     this._delegateEvents(this._events);
   }

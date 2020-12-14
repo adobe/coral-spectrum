@@ -63,6 +63,8 @@ class TabList extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
+
+    // Templates
     this._elements = {};
   }
 
@@ -147,6 +149,7 @@ class TabList extends BaseComponent(HTMLElement) {
   get target() {
     return typeof this._target === 'string' ? this._target : this._target || null;
   }
+
   set target(value) {
     if (value === null || typeof value === 'string' || value instanceof Node) {
       this._target = value;
@@ -165,7 +168,7 @@ class TabList extends BaseComponent(HTMLElement) {
 
           let tab;
           let panel;
-          for (let i = 0; i < maxItems; i++) {
+          for (let i = 0 ; i < maxItems ; i++) {
             tab = tabItems[i];
             panel = panelItems[i];
 
@@ -186,12 +189,10 @@ class TabList extends BaseComponent(HTMLElement) {
 
               // adds role to panel to support accessibility
               panel.setAttribute('role', 'tabpanel');
-            }
-            else if (tab) {
+            } else if (tab) {
               // cleans the aria since there is no matching panel
               tab.removeAttribute('aria-controls');
-            }
-            else {
+            } else {
               // cleans the aria since there is no matching tab
               panel.removeAttribute('aria-labelledby');
             }
@@ -214,6 +215,7 @@ class TabList extends BaseComponent(HTMLElement) {
   get size() {
     return this._size || size.MEDIUM;
   }
+
   set size(value) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
@@ -224,8 +226,7 @@ class TabList extends BaseComponent(HTMLElement) {
 
     if (this._size === size.SMALL) {
       this.classList.add(`${CLASSNAME}--compact`);
-    }
-    else if (this._size === size.LARGE) {
+    } else if (this._size === size.LARGE) {
       this.classList.add(`${CLASSNAME}--quiet`);
     }
   }
@@ -241,6 +242,7 @@ class TabList extends BaseComponent(HTMLElement) {
   get orientation() {
     return this._orientation || orientation.HORIZONTAL;
   }
+
   set orientation(value) {
     value = transform.string(value).toLowerCase();
 
@@ -261,8 +263,7 @@ class TabList extends BaseComponent(HTMLElement) {
   _onItemAdded(item) {
     if (!this.selectedItem) {
       item.setAttribute('selected', '');
-    }
-    else {
+    } else {
       this._validateSelection(item);
     }
   }
@@ -372,8 +373,7 @@ class TabList extends BaseComponent(HTMLElement) {
         // We can trigger change events again
         this._preventTriggeringEvents = false;
       }
-    }
-    else if (selectedItems.length > 1) {
+    } else if (selectedItems.length > 1) {
       // If multiple items are selected, the last one wins
       item = selectedItems[selectedItems.length - 1];
 
@@ -423,8 +423,7 @@ class TabList extends BaseComponent(HTMLElement) {
 
           this._elements.line.style.width = `${width}px`;
           this._elements.line.style.transform = `translate(${left}px, 0)`;
-        }
-        else if (this.orientation === orientation.VERTICAL) {
+        } else if (this.orientation === orientation.VERTICAL) {
           const top = selectedItem.offsetTop;
           const height = selectedItem.clientHeight;
 
@@ -438,8 +437,7 @@ class TabList extends BaseComponent(HTMLElement) {
         }
 
         this._elements.line.hidden = false;
-      }
-      else {
+      } else {
         // Hide line if no selected item
         this._elements.line.hidden = true;
       }
@@ -497,9 +495,12 @@ class TabList extends BaseComponent(HTMLElement) {
     this.setAttribute('aria-multiselectable', 'false');
 
     // Default reflected attributes
-    if (!this._size) { this.size = size.MEDIUM; }
-    if (!this._orientation) { this.orientation = orientation.HORIZONTAL; }
-
+    if (!this._size) {
+      this.size = size.MEDIUM;
+    }
+    if (!this._orientation) {
+      this.orientation = orientation.HORIZONTAL;
+}
     // Support cloneNode
     const template = this.querySelector('._coral-Tabs-selectionIndicator');
     if (template) {

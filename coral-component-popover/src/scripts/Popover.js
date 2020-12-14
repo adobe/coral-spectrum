@@ -146,11 +146,12 @@ class Popover extends Overlay {
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-popover-content',
-      insert: function(content) {
+      insert: function (content) {
         content.classList.add('_coral-Dialog-content');
         const footer = this.footer;
         // The content should always be before footer
@@ -169,15 +170,16 @@ class Popover extends Overlay {
   get header() {
     return this._getContentZone(this._elements.header);
   }
+
   set header(value) {
     this._setContentZone('header', value, {
       handle: 'header',
       tagName: 'coral-popover-header',
-      insert: function(header) {
+      insert: function (header) {
         header.classList.add('_coral-Dialog-title');
         this._elements.headerWrapper.insertBefore(header, this._elements.headerWrapper.firstChild);
       },
-      set: function() {
+      set: function () {
         // Stop observing the old header and observe the new one
         this._observeContentZone('header');
 
@@ -196,16 +198,17 @@ class Popover extends Overlay {
   get footer() {
     return this._getContentZone(this._elements.footer);
   }
+
   set footer(value) {
     this._setContentZone('footer', value, {
       handle: 'footer',
       tagName: 'coral-popover-footer',
-      insert: function(footer) {
+      insert: function (footer) {
         footer.classList.add('_coral-Dialog-footer');
         // The footer should always be after content
         this.appendChild(footer);
       },
-      set: function() {
+      set: function () {
         // Stop observing the old header and observe the new one
         this._observeContentZone('footer');
 
@@ -226,6 +229,7 @@ class Popover extends Overlay {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
@@ -245,8 +249,7 @@ class Popover extends Overlay {
       this.setAttribute('role', 'dialog');
 
       this._toggleCoachMark(true);
-    }
-    else {
+    } else {
       this._toggleCoachMark(false);
 
       if (this._variant === variant.DEFAULT) {
@@ -254,8 +257,7 @@ class Popover extends Overlay {
         if (!this.hasAttribute('role')) {
           this.setAttribute('role', 'dialog');
         }
-      }
-      else {
+      } else {
         // Set new variant class
         this.classList.add(`_coral-Dialog--${this._variant}`);
 
@@ -276,6 +278,7 @@ class Popover extends Overlay {
   get closable() {
     return this._closable || closable.OFF;
   }
+
   set closable(value) {
     value = transform.string(value).toLowerCase();
     this._closable = validate.enumeration(closable)(value) && value || closable.OFF;
@@ -290,6 +293,7 @@ class Popover extends Overlay {
   get target() {
     return super.target;
   }
+
   set target(value) {
     super.target = value;
 
@@ -308,6 +312,7 @@ class Popover extends Overlay {
   get open() {
     return super.open;
   }
+
   set open(value) {
     super.open = value;
 
@@ -330,6 +335,7 @@ class Popover extends Overlay {
   get icon() {
     return this._icon || '';
   }
+
   set icon(value) {
     this._icon = transform.string(value);
   }
@@ -360,14 +366,11 @@ class Popover extends Overlay {
     // popper takes care of setting left, top to 0 on positioning
     if (popperPlacement === 'left') {
       this.style.left = '8px';
-    }
-    else if (popperPlacement === 'top') {
+    } else if (popperPlacement === 'top') {
       this.style.top = '8px';
-    }
-    else if (popperPlacement === 'right') {
+    } else if (popperPlacement === 'right') {
       this.style.left = '-8px';
-    }
-    else if (popperPlacement === 'bottom') {
+    } else if (popperPlacement === 'bottom') {
       this.style.top = '-8px';
     }
   }
@@ -468,15 +471,13 @@ class Popover extends Overlay {
         this.show();
 
         this._trackEvent('display', 'coral-popover', event);
-      }
-      else {
+      } else {
         this.hide();
 
         this._trackEvent('close', 'coral-popover', event);
       }
-    }
-    else if (this.open && !this.contains(eventTarget)) {
-      const target =  eventTarget.closest('._coral-Overlay');
+    } else if (this.open && !this.contains(eventTarget)) {
+      const target = eventTarget.closest('._coral-Overlay');
       // Also check if the click element is inside an overlay which target could be inside of this popover
       if (target && this.contains(target._getTarget())) {
         return;
@@ -502,15 +503,17 @@ class Popover extends Overlay {
 
    @return {PopoverVariantEnum}
    */
-  static get variant() { return variant; }
-
+  static get variant() {
+    return variant;
+}
   /**
    Returns {@link Popover} close options.
 
    @return {PopoverClosableEnum}
    */
-  static get closable() { return closable; }
-
+  static get closable() {
+    return closable;
+}
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -536,9 +539,12 @@ class Popover extends Overlay {
     }
 
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-    if (!this._closable) { this.closable = closable.OFF; }
-
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
+    if (!this._closable) {
+      this.closable = closable.OFF;
+}
     // // Fetch the content zones
     const header = this._elements.header;
     const content = this._elements.content;
@@ -548,10 +554,15 @@ class Popover extends Overlay {
     const contentZoneProvided = this.contains(content) && content || this.contains(footer) && footer || this.contains(header) && header;
 
     // Remove content zones so we can process children
-    if (header.parentNode) { header.remove(); }
-    if (content.parentNode) { content.remove(); }
-    if (footer.parentNode) { footer.remove(); }
-
+    if (header.parentNode) {
+      header.remove();
+    }
+    if (content.parentNode) {
+      content.remove();
+    }
+    if (footer.parentNode) {
+      footer.remove();
+}
     // Remove tab captures
     Array.prototype.filter.call(this.children, (child) => child.hasAttribute('coral-tabcapture')).forEach((tabCapture) => {
       this.removeChild(tabCapture);
@@ -559,7 +570,7 @@ class Popover extends Overlay {
 
     // Support cloneNode
     const template = this.querySelectorAll('._coral-Dialog-header, ._coral-Dialog-closeButton, ._coral-Popover-tip');
-    for (let i = 0; i < template.length; i++) {
+    for (let i = 0 ; i < template.length ; i++) {
       template[i].remove();
     }
 

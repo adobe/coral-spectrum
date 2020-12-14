@@ -78,7 +78,7 @@ class Multifield extends BaseComponent(HTMLElement) {
     // Template support: move nodes added to the <template> to its content fragment
     this._observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
-        for (let i = 0; i < mutation.addedNodes.length; i++) {
+        for (let i = 0 ; i < mutation.addedNodes.length ; i++) {
           const addedNode = mutation.addedNodes[i];
           const template = this.template;
 
@@ -138,14 +138,15 @@ class Multifield extends BaseComponent(HTMLElement) {
   get template() {
     return this._getContentZone(this._elements.template);
   }
+
   set template(value) {
     this._setContentZone('template', value, {
       handle: 'template',
       tagName: 'template',
-      insert: function(template) {
+      insert: function (template) {
         this.appendChild(template);
       },
-      set: function(content) {
+      set: function (content) {
         // Additionally add support for template
         this._handleTemplateSupport(content);
       }
@@ -191,16 +192,14 @@ class Multifield extends BaseComponent(HTMLElement) {
           const itemIndex = items.indexOf(item);
           if (itemIndex === setsize - 1) {
             itemToFocus = items[itemIndex - 1];
-          }
-          else {
+          } else {
             itemToFocus = items[itemIndex + 1];
           }
         }
         item.remove();
         if (itemToFocus) {
           itemToFocus._elements.remove.focus();
-        }
-        else {
+        } else {
           itemToFocus = this.querySelector('[coral-multifield-add]');
           if (itemToFocus) {
             itemToFocus.focus();
@@ -226,8 +225,7 @@ class Multifield extends BaseComponent(HTMLElement) {
     if (dragging) {
       this._oldBefore = multiFieldItem.previousElementSibling;
       this._before = multiFieldItem.nextElementSibling;
-    }
-    else {
+    } else {
       this.trigger('coral-multifield:beforeitemorder', {
         item: multiFieldItem,
         oldBefore: this._oldBefore,
@@ -388,8 +386,7 @@ class Multifield extends BaseComponent(HTMLElement) {
       items.forEach((item, i) => {
         if (i < dragElementIndex) {
           item.classList.add(IS_BEFORE_CLASS);
-        }
-        else if (i > dragElementIndex) {
+        } else if (i > dragElementIndex) {
           item.classList.add(IS_AFTER_CLASS);
         }
       });
@@ -446,8 +443,7 @@ class Multifield extends BaseComponent(HTMLElement) {
       items.forEach((item) => {
         if (item.classList.contains(IS_AFTER_CLASS)) {
           afterArr.push(item);
-        }
-        else if (item.classList.contains(IS_BEFORE_CLASS)) {
+        } else if (item.classList.contains(IS_BEFORE_CLASS)) {
           beforeArr.push(item);
         }
 
@@ -544,8 +540,8 @@ class Multifield extends BaseComponent(HTMLElement) {
     }
   }
 
-  get _contentZones() { return {template: 'template'}; }
-
+  get _contentZones() { return {template: 'template'};
+}
   /** @ignore */
   render() {
     super.render();

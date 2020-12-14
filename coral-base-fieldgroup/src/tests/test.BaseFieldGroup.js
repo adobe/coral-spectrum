@@ -14,7 +14,7 @@ import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {BaseComponent} from '../../../coral-base-component';
 import {BaseFieldGroup} from '../../../coral-base-fieldgroup';
 
-describe('BaseFieldGroup', function() {
+describe('BaseFieldGroup', function () {
   // Dummy custom element
   class FieldGroup extends BaseFieldGroup(BaseComponent(HTMLElement)) {
     get _itemTagName() {
@@ -25,18 +25,18 @@ describe('BaseFieldGroup', function() {
 
   window.customElements.define('coral-fieldgroup', FieldGroup);
 
-  describe('API', function() {
+  describe('API', function () {
     let el;
 
-    beforeEach(function() {
+    beforeEach(function () {
       el = new FieldGroup();
     });
 
-    afterEach(function() {
+    afterEach(function () {
       el = null;
     });
 
-    describe('#orientation', function() {
+    describe('#orientation', function () {
       it('should default to horizontal', () => {
         expect(el.orientation).to.equal(FieldGroup.orientation.HORIZONTAL);
       });
@@ -49,18 +49,17 @@ describe('BaseFieldGroup', function() {
       });
     });
 
-    describe('#items', function() {
-      it('should be readonly', function() {
+    describe('#items', function () {
+      it('should be readonly', function () {
         const items = el.items;
         try {
           el.items = '';
-        }
-        catch (e) {
+        } catch (e) {
           expect(el.items).to.equal(items);
         }
       });
 
-      it('should retrieve all items', function() {
+      it('should retrieve all items', function () {
         el.appendChild(document.createElement('coral-fieldgroup-item'));
         el.appendChild(document.createElement('coral-fieldgroup-item'));
 
@@ -69,7 +68,7 @@ describe('BaseFieldGroup', function() {
       });
     });
 
-    describe('#selectedItem', function() {
+    describe('#selectedItem', function () {
       it('should return selected item', () => {
         el.appendChild(document.createElement('coral-fieldgroup-item'));
         el.appendChild(document.createElement('coral-fieldgroup-item'));
@@ -98,7 +97,7 @@ describe('BaseFieldGroup', function() {
     });
   });
 
-  describe('Accessibility', function() {
+  describe('Accessibility', function () {
     it('should have role group', () => {
       const el = helpers.build(document.createElement('coral-fieldgroup'));
       expect(el.getAttribute('role')).to.equal('group');

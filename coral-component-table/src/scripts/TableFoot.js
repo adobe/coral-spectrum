@@ -28,7 +28,7 @@ class TableFoot extends BaseTableSection(BaseComponent(HTMLTableSectionElement))
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
   }
 }

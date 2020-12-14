@@ -46,11 +46,12 @@ class Panel extends BaseComponent(HTMLElement) {
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-panel-content',
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
@@ -69,6 +70,7 @@ class Panel extends BaseComponent(HTMLElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
@@ -79,8 +81,8 @@ class Panel extends BaseComponent(HTMLElement) {
     this.trigger('coral-panel:_selectedchanged');
   }
 
-  get _contentZones() { return {'coral-panel-content': 'content'}; }
-
+  get _contentZones() { return {'coral-panel-content': 'content'};
+}
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['selected']);

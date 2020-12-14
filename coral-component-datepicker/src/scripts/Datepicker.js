@@ -50,8 +50,7 @@ for (const variantKey in variant) {
 function toMoment(value, format) {
   if (value === 'today') {
     return new DateTime.Moment();
-  }
-  else if (DateTime.Moment.isMoment(value)) {
+  } else if (DateTime.Moment.isMoment(value)) {
     return value.isValid() ? value.clone() : null;
   }
 
@@ -156,6 +155,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get type() {
     return this._type || type.DATE;
   }
+
   set type(value) {
     // Flag to indicate that we are changing the type for the first time
     this._typeFormatChanged = typeof this._type === 'undefined';
@@ -181,8 +181,12 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements.calendar.setAttribute('aria-hidden', isTime);
 
     // Change format if we have a native format set
-    if (isNativeFormat(this.valueFormat)) { this.valueFormat = format; }
-    if (isNativeFormat(this.displayFormat)) { this.displayFormat = format; }
+    if (isNativeFormat(this.valueFormat)) {
+      this.valueFormat = format;
+    }
+    if (isNativeFormat(this.displayFormat)) {
+      this.displayFormat = format;
+    }
 
     this._useNativeInput = this._useNativeInput;
 
@@ -210,6 +214,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
 
     return typeof this._displayFormat === 'undefined' ? NATIVE_FORMATS[this.type] : this._displayFormat;
   }
+
   set displayFormat(value) {
     value = transform.string(value).trim();
 
@@ -241,6 +246,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get valueFormat() {
     return typeof this._valueFormat === 'undefined' ? NATIVE_FORMATS[this.type] : this._valueFormat;
   }
+
   set valueFormat(value) {
     const setValueFormat = (newValue) => {
       this._valueFormat = newValue === '' ? NATIVE_FORMATS[this.type] : newValue;
@@ -259,8 +265,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     if (!this._valueFormat && this._originalValue) {
       setValueFormat(value);
       this.value = this._originalValue;
-    }
-    else {
+    } else {
       setValueFormat(value);
     }
 
@@ -284,6 +289,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
 
     return value ? value.toDate() : null;
   }
+
   set valueAsDate(value) {
     this._valueAsDate = value instanceof Date ? new DateTime.Moment(value) : '';
 
@@ -303,6 +309,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get min() {
     return this._elements.calendar.min;
   }
+
   set min(value) {
     this._elements.calendar.min = value;
   }
@@ -320,6 +327,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get max() {
     return this._elements.calendar.max;
   }
+
   set max(value) {
     this._elements.calendar.max = value;
   }
@@ -338,6 +346,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get headerFormat() {
     return this._elements.calendar.headerFormat;
   }
+
   set headerFormat(value) {
     this._elements.calendar.headerFormat = value;
   }
@@ -354,6 +363,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get startDay() {
     return this._elements.calendar.startDay;
   }
+
   set startDay(value) {
     this._elements.calendar.startDay = value;
   }
@@ -371,6 +381,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get value() {
     return this._getValueAsString(this._value, this.valueFormat);
   }
+
   set value(value) {
     // This is used to change the value if valueformat is also set but afterwards
     this._originalValue = value;
@@ -394,6 +405,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get placeholder() {
     return this._elements.input.placeholder;
   }
+
   set placeholder(value) {
     this._elements.input.placeholder = value;
     this._reflectAttribute('placeholder', this.placeholder);
@@ -410,6 +422,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
@@ -436,6 +449,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._elements.hiddenInput.name;
   }
+
   set name(value) {
     this._reflectAttribute('name', value);
 
@@ -452,6 +466,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
@@ -470,6 +485,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get invalid() {
     return super.invalid;
   }
+
   set invalid(value) {
     super.invalid = value;
 
@@ -489,12 +505,13 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
 
     this._elements.toggle.classList.toggle('is-invalid', this._required);
-    
+
     this._elements.input.required = this._required;
   }
 
@@ -508,6 +525,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
@@ -523,9 +541,10 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get labelled() {
     return super.labelled;
   }
+
   set labelled(value) {
     super.labelled = value;
-    
+
     // in case the user focuses the buttons, he will still get a notion of the usage of the component
     this[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-label', this.labelled);
     this._elements.overlay[this.labelled ? 'setAttribute' : 'removeAttribute']('aria-label', this.labelled);
@@ -538,6 +557,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get labelledBy() {
     return super.labelledBy;
   }
+
   set labelledBy(value) {
     super.labelledBy = value;
 
@@ -557,6 +577,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
   get _useNativeInput() {
     return this.__useNativeInput;
   }
+
   set _useNativeInput(value) {
     this.__useNativeInput = value;
 
@@ -573,8 +594,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
       this._elements.input.removeAttribute('aria-haspopup');
       this._elements.input.removeAttribute('aria-expanded');
       this._elements.input.removeAttribute('aria-controls');
-    }
-    else {
+    } else {
       // Switch to Calendar picker
       this._elements.toggle.hidden = false;
       this._elements.input.setAttribute('type', 'text');
@@ -588,7 +608,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
       this._elements.input.setAttribute('aria-haspopup', 'dialog');
       this._elements.input.setAttribute('aria-expanded', this._elements.overlay.open);
       this._elements.input.setAttribute('aria-controls', this._elements.overlay.id);
-    
+
       // Trigger button attributes per ARIA Autocomplete
       this._elements.toggle.setAttribute('aria-haspopup', 'dialog');
       this._elements.toggle.setAttribute('aria-expanded', this._elements.overlay.open);
@@ -613,15 +633,13 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     if (this._elements.overlay.open) {
       if (this.type === type.TIME) {
         this._elements.clock.focus();
-      }
-      else {
+      } else {
         this._elements.calendar.focus();
       }
       this._elements.input.setAttribute('aria-expanded', 'true');
       this._elements.toggle.setAttribute('aria-expanded', 'true');
       this._trackEvent('open', 'coral-datepicker', event);
-    }
-    else {
+    } else {
       this._elements.input.setAttribute('aria-expanded', 'false');
       this._elements.toggle.setAttribute('aria-expanded', 'false');
       this._trackEvent('close', 'coral-datepicker', event);
@@ -684,11 +702,9 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     // check if the current value is valid and update the internal state of the component
     if (this.type === type.DATE) {
       this.invalid = this._elements.calendar.invalid;
-    }
-    else if (this.type === type.TIME) {
+    } else if (this.type === type.TIME) {
       this.invalid = this._elements.clock.invalid;
-    }
-    else {
+    } else {
       this.invalid = this._elements.calendar.invalid || this._elements.clock.invalid;
     }
   }
@@ -744,14 +760,18 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
 
    @return {DatepickerVariantEnum}
    */
-  static get variant() { return variant; }
+  static get variant() {
+    return variant;
+  }
 
   /**
    Returns {@link Datepicker} types.
 
    @return {DatepickerTypeEnum}
    */
-  static get type() { return type; }
+  static get type() {
+    return type;
+  }
 
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
@@ -806,7 +826,7 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements.input.setAttribute('aria-haspopup', 'dialog');
     this._elements.input.setAttribute('aria-expanded', 'false');
     this._elements.input.setAttribute('aria-controls', this._elements.overlay.id);
-  
+
     // Trigger button attributes per ARIA Autocomplete
     this._elements.toggle.setAttribute('aria-haspopup', 'dialog');
     this._elements.toggle.setAttribute('aria-expanded', 'false');
@@ -816,9 +836,13 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
     this._useNativeInput = IS_MOBILE_DEVICE;
 
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
     // "type" takes care of reflecting "displayFormat" and "valueFormat"
-    if (!this._type) { this.type = type.DATE; }
+    if (!this._type) {
+      this.type = type.DATE;
+    }
 
     // clean up to be able to clone it
     while (this.firstChild) {
