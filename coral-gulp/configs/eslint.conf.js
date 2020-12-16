@@ -5,7 +5,7 @@ module.exports = {
     "es6": true
   },
   "rules": {
-    "brace-style": ["error", "stroustrup", {"allowSingleLine": true}],
+    "brace-style": ["warn", "stroustrup", {"allowSingleLine": true}],
     "operator-linebreak": ["error", "after"],
     "semi": [2, "always"],
     "complexity": ["warn", 15],
