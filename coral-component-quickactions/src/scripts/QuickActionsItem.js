@@ -83,7 +83,6 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
     let _href = transform.string(value);
 
     if(this._href === _href) {
-      // do nothing if value not changed
       return;
     }
     this._href = _href;
@@ -110,7 +109,6 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
     let _icon = transform.string(value);
 
     if(this._icon === _icon) {
-      // do nothing if value not changed
       return;
     }
     this._icon = _icon;
@@ -137,7 +135,6 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
     let _type = validate.enumeration(type)(_value) && _value || type.BUTTON;
 
     if(this._type === _type) {
-      // do nothing if value not changed
       return;
     }
     this._type = _type;

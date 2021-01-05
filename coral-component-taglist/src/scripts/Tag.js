@@ -232,7 +232,6 @@ class Tag extends BaseComponent(HTMLElement) {
     let _value = transform.string(value);
 
     if(this._value === _value) {
-      // do nothing if value not changed
       return;
     }
     this._value = _value;
@@ -472,14 +471,14 @@ class Tag extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   connectedCallback() {
-    // true if component connectedCallback has already been called
-    let isConnected = this._disconnected === false;
+    if (this._skipConnectedCallback()) {
+      return;
+    }
 
     super.connectedCallback();
 
     // Used to inform the tag list that it's added
-    // only trigger once when component is attached or reattached
-    !isConnected && this.trigger('coral-tag:_connected');
+    this.trigger('coral-tag:_connected');
   }
 
   /** @ignore */

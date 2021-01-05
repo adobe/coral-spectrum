@@ -84,7 +84,6 @@ class SelectItem extends BaseComponent(HTMLElement) {
     let _selected = transform.booleanAttr(value);
 
     if(this._selected === _selected) {
-      // do nothing if value not changed
       return;
     }
 
@@ -119,7 +118,6 @@ class SelectItem extends BaseComponent(HTMLElement) {
   set value(value) {
     let _value = transform.string(value);
     if(this._value === _value) {
-      // do nothing if value not changed
       return;
     }
 

@@ -58,7 +58,6 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
     let _icon = transform.string(value);
 
     if(this._icon === _icon) {
-      // do nothing if value not changed
       return;
     }
 
@@ -127,7 +126,6 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
     let _selected = transform.booleanAttr(value);
 
     if(this._selected === _selected) {
-      // do nothing if value not changed
       return;
     }
     
@@ -163,7 +161,6 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
     let _displayMode = validate.enumeration(displayMode)(_value) && _value || displayMode.INHERIT;
 
     if(this._displayMode === _displayMode) {
-      // do nothing if value not changed
       return;
     }
 

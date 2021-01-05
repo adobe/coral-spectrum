@@ -106,7 +106,6 @@ class AccordionItem extends BaseComponent(HTMLElement) {
     let _selected = this.hasAttribute('disabled') ? false : _value;
 
     if(this._selected === _selected) {
-      // do nothing if value not changed
       return;
     }
 

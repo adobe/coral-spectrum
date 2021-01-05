@@ -52,7 +52,6 @@ class AutocompleteItem extends BaseComponent(HTMLElement) {
     let _value = transform.string(value);
 
     if(this._value === _value) {
-      // do nothing if value not changed
       return;
     }
 
@@ -93,7 +92,6 @@ class AutocompleteItem extends BaseComponent(HTMLElement) {
     let _selected = transform.booleanAttr(value);
 
     if(this._selected === _selected) {
-      // do nothing if value not changed
       return;
     }
 

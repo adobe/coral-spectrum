@@ -698,11 +698,9 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   connectedCallback() {
-    if (this._ignoreConnectedCallback) {
+    if (this._skipConnectedCallback()) {
       return;
     }
-    // true if component connectedCallback has already been called
-    let isConnected = this._disconnected === false;
 
     super.connectedCallback();
 
@@ -710,9 +708,7 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
     this.target = this.target;
 
     // We need an additional frame to help popper read the correct offsets
-
-    // trigger only once when attaching or reattaching.
-     !isConnected && window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
       // Force repositioning
       this.reposition(true);
 

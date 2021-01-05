@@ -735,6 +735,26 @@ const BaseComponent = (superClass) => class extends superClass {
   }
 
   /**
+   * checks whether connectedCallback needs to be executed or not ,skip if component is not in connected state
+   * or connectedCallback already executed for the component or we are ignore the connectedCallback for some reason
+   *
+   * @returns {Boolean} return true for skipped cases
+   */
+  _skipConnectedCallback() {
+    return !this.isConnected || this._disconnected === false || this._ignoreConnectedCallback === true;
+  }
+
+  /**
+   * checks whether disconnectedCallback needs to be executed or not ,skip if component is in connected state
+   * or disconnectedCallback already executed for the component or we ignore the callback for some reason
+   *
+   * @returns {Boolean} return true for skipped cases
+   */
+  _skipDisconnectedCallback() {
+    return this.isConnected || this._disconnected === true || this._ignoreConnectedCallback === true;
+  }
+
+  /**
    Returns {@link BaseComponent} tracking options.
 
    @return {TrackingEnum}
