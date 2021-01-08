@@ -786,8 +786,6 @@ const BaseComponent = (superClass) => class extends superClass {
     if (this._disconnected) {
       delegateGlobalEvents.call(this);
     }
-    // set _disconnected to false instead of undefined
-    // would ensure that connectedCallback has executed for the component
     this._disconnected = false;
 
     if (!this._rendered) {
