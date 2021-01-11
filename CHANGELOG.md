@@ -1,3 +1,10 @@
+## [4.10.12](https://github.com/adobe/coral-spectrum/compare/v4.10.11...v4.10.12) (2021-01-11)
+
+
+### Bug Fixes
+
+* Massive performance drop in complex dialog openings with coral spectrum ([#145](https://github.com/adobe/coral-spectrum/issues/145)) ([e569dcc](https://github.com/adobe/coral-spectrum/commit/e569dcccafab2a2eb6930d7042a48cb73aac32c1))
+
 ## [4.10.11](https://github.com/adobe/coral-spectrum/compare/v4.10.10...v4.10.11) (2020-11-12)
 
 
