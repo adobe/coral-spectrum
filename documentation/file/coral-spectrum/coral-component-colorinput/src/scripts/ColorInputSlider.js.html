@@ -449,7 +449,7 @@ class ColorInputSlider extends Slider {
   /**
    The gradient shown as slider background as space separated values (at least 2 values needed).
    e.g: #ff0000 #ffff00 #00ff00 #00ffff #0000ff #ff00ff #ff0000
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute gradient
@@ -457,28 +457,29 @@ class ColorInputSlider extends Slider {
   get gradient() {
     return this._gradient || &apos;&apos;;
   }
+
   set gradient(value) {
     this._gradient = transform.string(value);
-  
+
     const bar = this._elements.bar;
     const barStyle = bar.style;
-  
+
     const stops = this.gradient.split(&apos; &apos;);
     const amountStops = stops.length;
-  
+
     // remove old gradients
     barStyle.backgroundImage = &apos;none&apos;;
     barStyle.filter = &apos;&apos;;
-  
+
     if (amountStops &lt; 2) {
       return;
     }
-    
+
     let partialGradientStr = &apos;&apos;;
-    for (let i = 0; i &lt; amountStops; i++) {
+    for (let i = 0 ; i &lt; amountStops ; i++) {
       partialGradientStr += `, ${stops[i]} ${Math.abs(i * 100 / (amountStops - 1))}%`;
     }
-  
+
     barStyle.backgroundImage = `-moz-linear-gradient(to right${partialGradientStr})`;
     barStyle.backgroundImage = `-ms-linear-gradient(to right${partialGradientStr})`;
     barStyle.backgroundImage = `-o-linear-gradient(to right${partialGradientStr})`;
@@ -486,36 +487,36 @@ class ColorInputSlider extends Slider {
     barStyle.backgroundImage = `linear-gradient(to right${partialGradientStr})`;
     barStyle.filter = `progid:DXImageTransform.Microsoft.gradient(startColorstr=&apos;${stops[0]}&apos;, endColorstr=&apos;${stops[1]}&apos;, gradientType=1)`;
   }
-  
+
   _moveHandles() {
     const calculatePercent = (value) =&gt; (value - this.min) / (this.max - this.min) * 100;
     const labelValue = [];
-    
+
     // Set the handle position as a percentage based on the stored values
     this._elements.handles.forEach((handle, index) =&gt; {
       const percent = calculatePercent(this._values[index]);
       handle.style.left = `${percent}%`;
-      
+
       labelValue.push(this._getLabel(this._values[index]));
     });
-    
+
     this._elements.labelValue.textContent = labelValue.length &gt; 1 ? labelValue.join(&apos; - &apos;) : labelValue[0];
   }
-  
+
   /** @override */
   _getTemplate() {
     return sliderBase;
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;gradient&apos;]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(...CLASSNAMES);
   }
 }

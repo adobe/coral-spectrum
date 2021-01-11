@@ -174,7 +174,13 @@
 <a name='L116'></a><a href='#L116'>116</a>
 <a name='L117'></a><a href='#L117'>117</a>
 <a name='L118'></a><a href='#L118'>118</a>
-<a name='L119'></a><a href='#L119'>119</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -283,7 +289,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">134x</span>
 <span class="cline-any cline-yes">84x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -292,7 +297,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">134x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">134x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -320,7 +332,7 @@ const CLASSNAME = '_coral-Shell-solutions';
 class ShellSolutions extends BaseComponent(HTMLElement) {
   /**
    The item collection.
-   
+&nbsp;
    @type {Collection}
    @readonly
    */
@@ -333,13 +345,13 @@ class ShellSolutions extends BaseComponent(HTMLElement) {
         itemBaseTagName: 'a'
       });
     }
-  
+&nbsp;
     return this._items;
   }
-  
+&nbsp;
   /**
    Whether the solution list is secondary.
-   
+&nbsp;
    @type {Boolean}
    @default false
    @htmlattribute secondary
@@ -348,62 +360,68 @@ class ShellSolutions extends BaseComponent(HTMLElement) {
   get secondary() {
     return this._secondary || false;
   }
+&nbsp;
   set secondary(value) {
     this._secondary = transform.booleanAttr(value);
     this._reflectAttribute('secondary', this._secondary);
-  
+&nbsp;
     this.classList.toggle(`${CLASSNAME}--secondary`, this._secondary);
   }
-  
+&nbsp;
   _sortSolutions() {
     if (this.items.length &gt; 1) {
       const linked = [];
       const nonLinked = [];
       const isSecondary = this.hasAttribute('secondary');
-      
-      this<span class="missing-if-branch" title="else path not taken" >E</span>.items.getAll().forEach((item, i) =&gt; {
+<span class="missing-if-branch" title="else path not taken" >E</span>
+      this.items.getAll().forEach((item, i) =&gt; {
         // Exclude the first secondary item
         if (!(isSecondary &amp;&amp; i === 0)) {
-          if (item.hasAttribute('linked')) {
-<span class="cstat-no" title="statement not covered" >            linked.p</span>ush(item);
-          }
-          else {
+<span class="cstat-no" title="statement not covered" >          if (item.h</span>asAttribute('linked')) {
+            linked.push(item);
+          } else {
             nonLinked.push(item);
           }
         }
       });
-  
+&nbsp;
       const alphabeticalSort = (a, b) =&gt; {
         const aText = a.textContent.trim().toLowerCase();
         const bText = b.textContent.trim().toLowerCase();
-    
-        if (aText &lt; bText) {return -1;}
-        if (aText &gt; bText) {return 1;}
+&nbsp;
+        if (aText &lt; bText) {
+          return -1;
+        }
+        if (aText &gt; bText) {
+          return 1;
+        }
         return 0;
       };
-  
+&nbsp;
       linked.sort(alphabeticalSort);
       nonLinked.sort(alphabeticalSort);
-  
+&nbsp;
       linked.forEach((item) =&gt; {
         this.appendChild(item);
       });
-  
+&nbsp;
       nonLinked.forEach((item) =&gt; {
         this.appendChild(item);
       });
     }
   }
-  
+&nbsp;
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['secondary']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['secondary']);
+  }
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-    
+&nbsp;
     // Sort linked solutions then non linked solutions alphabetically
     this._sortSolutions();
   }
@@ -417,7 +435,7 @@ export default ShellSolutions;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

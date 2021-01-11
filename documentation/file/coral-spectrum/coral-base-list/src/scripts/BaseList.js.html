@@ -439,9 +439,9 @@ const CLASSNAME = &apos;_coral-Menu&apos;;
 
 /**
  Enumeration for {@link BaseList} interactions.
- 
+
  @typedef {Object} ListInteractionEnum
- 
+
  @property {String} ON
  Keyboard interaction is enabled.
  @property {String} OFF
@@ -460,7 +460,7 @@ class BaseList extends superClass {
   /** @ignore */
   constructor() {
     super();
-  
+
     this._events = {
       &apos;mouseenter&apos;: &apos;_onMouseEnter&apos;,
       // Keyboard interaction
@@ -474,10 +474,10 @@ class BaseList extends superClass {
       &apos;key:end [coral-list-item]&apos;: &apos;_focusLastItem&apos;
     };
   }
-  
+
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+
    @type {SelectableCollection}
    @readonly
    */
@@ -491,19 +491,19 @@ class BaseList extends superClass {
         host: this
       });
     }
-  
+
     return this._items;
   }
-  
+
   /** @private */
   get _itemTagName() {
     // Used for Collection
     return &apos;coral-list-item&apos;;
   }
-  
+
   /**
    Whether interaction with the component is enabled. See {@link ListInteractionEnum}.
-   
+
    @type {String}
    @default ListInteractionEnum.ON
    @htmlattribute interaction
@@ -512,109 +512,108 @@ class BaseList extends superClass {
   get interaction() {
     return this._interaction || interaction.ON;
   }
+
   set interaction(value) {
     value = transform.string(value).toLowerCase();
     this._interaction = validate.enumeration(interaction)(value) &amp;&amp; value || interaction.ON;
     this._reflectAttribute(&apos;interaction&apos;, this._interaction);
   }
-  
+
   /**
    Returns true if the event is at the matched target.
-   
+
    @private
    */
   _eventIsAtTarget(event) {
     const target = event.target;
     const listItem = event.matchedTarget;
-  
+
     const isAtTarget = target === listItem;
-    
+
     if (isAtTarget) {
       // Don&apos;t let arrow keys etc scroll the page
       event.preventDefault();
     }
-    
+
     return isAtTarget;
   }
-  
+
   _onMouseEnter() {
     if (this.contains(document.activeElement)) {
       document.activeElement.blur();
     }
   }
-  
+
   /** @private */
   _focusFirstItem(event) {
     if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
       return;
     }
-  
+
     const items = this._getSelectableItems();
     items[0].focus();
   }
-  
+
   /** @private */
   _focusLastItem(event) {
     if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
       return;
     }
-  
+
     const items = this._getSelectableItems();
     items[items.length - 1].focus();
   }
-  
+
   /** @private */
   _focusNextItem(event) {
     if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
       return;
     }
-  
+
     const target = event.matchedTarget;
     const items = this._getSelectableItems();
     const index = items.indexOf(target);
-    
+
     if (index === -1) {
       // Invalid state
       return;
     }
-    
+
     if (index &lt; items.length - 1) {
       items[index + 1].focus();
-    }
-    else {
+    } else {
       items[0].focus();
     }
   }
-  
+
   /** @private */
   _focusPreviousItem(event) {
     if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
       return;
     }
-  
+
     const target = event.matchedTarget;
     const items = this._getSelectableItems();
     const index = items.indexOf(target);
-    
+
     if (index === -1) {
       // Invalid state
       return;
     }
-    
+
     if (index &gt; 0) {
       items[index - 1].focus();
-    }
-    else {
+    } else {
       items[items.length - 1].focus();
     }
   }
-  
+
   /** @private */
   _getSelectableItems() {
     // Also checks if item is visible
     return this.items._getSelectableItems().filter(item =&gt; !item.hasAttribute(&apos;hidden&apos;) &amp;&amp; item.offsetParent);
   }
-  
+
   /** @ignore */
   focus() {
     if (!this.contains(document.activeElement)) {
@@ -624,25 +623,31 @@ class BaseList extends superClass {
       }
     }
   }
-  
+
   /**
    Returns {@link BaseList} interaction options.
-   
+
    @return {ListInteractionEnum}
    */
-  static get interaction() { return interaction; }
-  
+  static get interaction() {
+    return interaction;
+  }
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat([&apos;interaction&apos;]); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat([&apos;interaction&apos;]);
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // Default reflected attributes
-    if (!this._interaction) { this.interaction = interaction.ON; }
+    if (!this._interaction) {
+      this.interaction = interaction.ON;
+    }
   }
 };
 

@@ -451,39 +451,40 @@ class SideNavItem extends BaseLabellable(BaseComponent(HTMLAnchorElement)) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Prepare templates
     this._elements = {
       content: this.querySelector(&apos;coral-sidenav-item-content&apos;) || document.createElement(&apos;coral-sidenav-item-content&apos;)
     };
-    
+
     item.call(this._elements);
-  
+
     super._observeLabel();
   }
-  
+
   /**
    The content of the sidenav item.
-   
+
    @type {SideNavItemContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone(&apos;content&apos;, value, {
       handle: &apos;content&apos;,
       tagName: &apos;coral-sidenav-item-content&apos;,
-      insert: function(content) {
+      insert: function (content) {
         this._elements.container.appendChild(content);
       }
     });
   }
-  
+
   /**
    Specifies the icon name used inside the item. See {@link Icon} for valid icon names.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute icon
@@ -491,16 +492,17 @@ class SideNavItem extends BaseLabellable(BaseComponent(HTMLAnchorElement)) {
   get icon() {
     return this._elements.icon.icon;
   }
+
   set icon(value) {
     this._elements.icon.icon = value;
     this._elements.icon.hidden = this._elements.icon.icon === &apos;&apos;;
-  
+
     super._toggleIconAriaHidden();
   }
-  
+
   /**
    Whether the item is selected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -509,41 +511,44 @@ class SideNavItem extends BaseLabellable(BaseComponent(HTMLAnchorElement)) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute(&apos;selected&apos;, this._selected);
-    
+
     this.classList.toggle(&apos;is-selected&apos;, this._selected);
-    
+
     this.trigger(&apos;coral-sidenav-item:_selectedchanged&apos;);
   }
-  
-  get _contentZones() { return {&apos;coral-sidenav-item-label&apos;: &apos;content&apos;}; }
-  
+
+  get _contentZones() {
+    return {&apos;coral-sidenav-item-label&apos;: &apos;content&apos;};
+  }
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;selected&apos;, &apos;icon&apos;]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Create a fragment
     const fragment = document.createDocumentFragment();
-  
+
     // Render the main template
     fragment.appendChild(this._elements.container);
-  
+
     const content = this._elements.content;
-  
+
     // Remove it so we can process children
     if (content.parentNode) {
       content.parentNode.removeChild(content);
     }
-  
+
     // Process remaining elements as necessary
     while (this.firstChild) {
       const child = this.firstChild;
@@ -551,16 +556,15 @@ class SideNavItem extends BaseLabellable(BaseComponent(HTMLAnchorElement)) {
         child.nodeType === Node.ELEMENT_NODE &amp;&amp; child.getAttribute(&apos;handle&apos;) !== &apos;container&apos;) {
         // Add non-template elements to the content
         content.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else
         this.removeChild(child);
       }
     }
-  
+
     // Add the frag to the component
     this.appendChild(fragment);
-  
+
     // Assign the content zones, moving them into place in the process
     this.content = content;
   }

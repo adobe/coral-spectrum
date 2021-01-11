@@ -1,7 +1,7 @@
 {
   "type": "File",
   "start": 0,
-  "end": 1138,
+  "end": 1136,
   "loc": {
     "start": {
       "line": 1,
@@ -15,7 +15,7 @@
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 1138,
+    "end": 1136,
     "loc": {
       "start": {
         "line": 1,
@@ -30,8 +30,8 @@
     "body": [
       {
         "type": "Identifier",
-        "start": 1021,
-        "end": 1106,
+        "start": 1019,
+        "end": 1104,
         "loc": {
           "start": {
             "line": 25,
@@ -45,8 +45,8 @@
         "declarations": [
           {
             "type": "VariableDeclarator",
-            "start": 1027,
-            "end": 1105,
+            "start": 1025,
+            "end": 1103,
             "loc": {
               "start": {
                 "line": 25,
@@ -59,8 +59,8 @@
             },
             "id": {
               "type": "Identifier",
-              "start": 1027,
-              "end": 1040,
+              "start": 1025,
+              "end": 1038,
               "loc": {
                 "start": {
                   "line": 25,
@@ -77,8 +77,8 @@
             },
             "init": {
               "type": "ObjectExpression",
-              "start": 1043,
-              "end": 1105,
+              "start": 1041,
+              "end": 1103,
               "loc": {
                 "start": {
                   "line": 25,
@@ -92,8 +92,8 @@
               "properties": [
                 {
                   "type": "ObjectProperty",
-                  "start": 1047,
-                  "end": 1059,
+                  "start": 1045,
+                  "end": 1057,
                   "loc": {
                     "start": {
                       "line": 26,
@@ -109,8 +109,8 @@
                   "computed": false,
                   "key": {
                     "type": "Identifier",
-                    "start": 1047,
-                    "end": 1051,
+                    "start": 1045,
+                    "end": 1049,
                     "loc": {
                       "start": {
                         "line": 26,
@@ -126,8 +126,8 @@
                   },
                   "value": {
                     "type": "StringLiteral",
-                    "start": 1053,
-                    "end": 1059,
+                    "start": 1051,
+                    "end": 1057,
                     "loc": {
                       "start": {
                         "line": 26,
@@ -147,8 +147,8 @@
                 },
                 {
                   "type": "ObjectProperty",
-                  "start": 1063,
-                  "end": 1079,
+                  "start": 1061,
+                  "end": 1077,
                   "loc": {
                     "start": {
                       "line": 27,
@@ -164,8 +164,8 @@
                   "computed": false,
                   "key": {
                     "type": "Identifier",
-                    "start": 1063,
-                    "end": 1069,
+                    "start": 1061,
+                    "end": 1067,
                     "loc": {
                       "start": {
                         "line": 27,
@@ -181,8 +181,8 @@
                   },
                   "value": {
                     "type": "StringLiteral",
-                    "start": 1071,
-                    "end": 1079,
+                    "start": 1069,
+                    "end": 1077,
                     "loc": {
                       "start": {
                         "line": 27,
@@ -202,8 +202,8 @@
                 },
                 {
                   "type": "ObjectProperty",
-                  "start": 1083,
-                  "end": 1103,
+                  "start": 1081,
+                  "end": 1101,
                   "loc": {
                     "start": {
                       "line": 28,
@@ -219,8 +219,8 @@
                   "computed": false,
                   "key": {
                     "type": "Identifier",
-                    "start": 1083,
-                    "end": 1091,
+                    "start": 1081,
+                    "end": 1089,
                     "loc": {
                       "start": {
                         "line": 28,
@@ -236,8 +236,8 @@
                   },
                   "value": {
                     "type": "StringLiteral",
-                    "start": 1093,
-                    "end": 1103,
+                    "start": 1091,
+                    "end": 1101,
                     "loc": {
                       "start": {
                         "line": 28,
@@ -267,8 +267,8 @@
       },
       {
         "type": "Identifier",
-        "start": 1108,
-        "end": 1137,
+        "start": 1106,
+        "end": 1135,
         "loc": {
           "start": {
             "line": 31,
@@ -281,8 +281,8 @@
         },
         "declaration": {
           "type": "Identifier",
-          "start": 1123,
-          "end": 1136,
+          "start": 1121,
+          "end": 1134,
           "loc": {
             "start": {
               "line": 31,
@@ -302,8 +302,8 @@
       },
       {
         "type": "ExportDefaultDeclaration",
-        "start": 1108,
-        "end": 1137,
+        "start": 1106,
+        "end": 1135,
         "loc": {
           "start": {
             "line": 31,
@@ -316,8 +316,8 @@
         },
         "declaration": {
           "type": "VariableDeclaration",
-          "start": 1021,
-          "end": 1106,
+          "start": 1019,
+          "end": 1104,
           "loc": {
             "start": {
               "line": 25,
@@ -331,8 +331,8 @@
           "declarations": [
             {
               "type": "VariableDeclarator",
-              "start": 1027,
-              "end": 1105,
+              "start": 1025,
+              "end": 1103,
               "loc": {
                 "start": {
                   "line": 25,
@@ -345,8 +345,8 @@
               },
               "id": {
                 "type": "Identifier",
-                "start": 1027,
-                "end": 1040,
+                "start": 1025,
+                "end": 1038,
                 "loc": {
                   "start": {
                     "line": 25,
@@ -363,8 +363,8 @@
               },
               "init": {
                 "type": "ObjectExpression",
-                "start": 1043,
-                "end": 1105,
+                "start": 1041,
+                "end": 1103,
                 "loc": {
                   "start": {
                     "line": 25,
@@ -378,8 +378,8 @@
                 "properties": [
                   {
                     "type": "ObjectProperty",
-                    "start": 1047,
-                    "end": 1059,
+                    "start": 1045,
+                    "end": 1057,
                     "loc": {
                       "start": {
                         "line": 26,
@@ -395,8 +395,8 @@
                     "computed": false,
                     "key": {
                       "type": "Identifier",
-                      "start": 1047,
-                      "end": 1051,
+                      "start": 1045,
+                      "end": 1049,
                       "loc": {
                         "start": {
                           "line": 26,
@@ -412,8 +412,8 @@
                     },
                     "value": {
                       "type": "StringLiteral",
-                      "start": 1053,
-                      "end": 1059,
+                      "start": 1051,
+                      "end": 1057,
                       "loc": {
                         "start": {
                           "line": 26,
@@ -433,8 +433,8 @@
                   },
                   {
                     "type": "ObjectProperty",
-                    "start": 1063,
-                    "end": 1079,
+                    "start": 1061,
+                    "end": 1077,
                     "loc": {
                       "start": {
                         "line": 27,
@@ -450,8 +450,8 @@
                     "computed": false,
                     "key": {
                       "type": "Identifier",
-                      "start": 1063,
-                      "end": 1069,
+                      "start": 1061,
+                      "end": 1067,
                       "loc": {
                         "start": {
                           "line": 27,
@@ -467,8 +467,8 @@
                     },
                     "value": {
                       "type": "StringLiteral",
-                      "start": 1071,
-                      "end": 1079,
+                      "start": 1069,
+                      "end": 1077,
                       "loc": {
                         "start": {
                           "line": 27,
@@ -488,8 +488,8 @@
                   },
                   {
                     "type": "ObjectProperty",
-                    "start": 1083,
-                    "end": 1103,
+                    "start": 1081,
+                    "end": 1101,
                     "loc": {
                       "start": {
                         "line": 28,
@@ -505,8 +505,8 @@
                     "computed": false,
                     "key": {
                       "type": "Identifier",
-                      "start": 1083,
-                      "end": 1091,
+                      "start": 1081,
+                      "end": 1089,
                       "loc": {
                         "start": {
                           "line": 28,
@@ -522,8 +522,8 @@
                     },
                     "value": {
                       "type": "StringLiteral",
-                      "start": 1093,
-                      "end": 1103,
+                      "start": 1091,
+                      "end": 1101,
                       "loc": {
                         "start": {
                           "line": 28,
@@ -566,9 +566,9 @@
             },
             {
               "type": "CommentBlock",
-              "value": "*\n Enumeration for {@link ColumnView} selection options.\n \n @typedef {Object} ColumnViewSelectionModeEnum\n \n @property {String} NONE\n None is default, selection of items does not happen based on click.\n @property {String} SINGLE\n Single selection mode, only one item per column can be selected.\n @property {String} MULTIPLE\n Multiple selection mode, multiple items per column can be selected.\n ",
+              "value": "*\n Enumeration for {@link ColumnView} selection options.\n\n @typedef {Object} ColumnViewSelectionModeEnum\n\n @property {String} NONE\n None is default, selection of items does not happen based on click.\n @property {String} SINGLE\n Single selection mode, only one item per column can be selected.\n @property {String} MULTIPLE\n Multiple selection mode, multiple items per column can be selected.\n ",
               "start": 622,
-              "end": 1020,
+              "end": 1018,
               "loc": {
                 "start": {
                   "line": 13,
@@ -606,9 +606,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n Enumeration for {@link ColumnView} selection options.\n \n @typedef {Object} ColumnViewSelectionModeEnum\n \n @property {String} NONE\n None is default, selection of items does not happen based on click.\n @property {String} SINGLE\n Single selection mode, only one item per column can be selected.\n @property {String} MULTIPLE\n Multiple selection mode, multiple items per column can be selected.\n ",
+      "value": "*\n Enumeration for {@link ColumnView} selection options.\n\n @typedef {Object} ColumnViewSelectionModeEnum\n\n @property {String} NONE\n None is default, selection of items does not happen based on click.\n @property {String} SINGLE\n Single selection mode, only one item per column can be selected.\n @property {String} MULTIPLE\n Multiple selection mode, multiple items per column can be selected.\n ",
       "start": 622,
-      "end": 1020,
+      "end": 1018,
       "loc": {
         "start": {
           "line": 13,
@@ -640,9 +640,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n Enumeration for {@link ColumnView} selection options.\n \n @typedef {Object} ColumnViewSelectionModeEnum\n \n @property {String} NONE\n None is default, selection of items does not happen based on click.\n @property {String} SINGLE\n Single selection mode, only one item per column can be selected.\n @property {String} MULTIPLE\n Multiple selection mode, multiple items per column can be selected.\n ",
+      "value": "*\n Enumeration for {@link ColumnView} selection options.\n\n @typedef {Object} ColumnViewSelectionModeEnum\n\n @property {String} NONE\n None is default, selection of items does not happen based on click.\n @property {String} SINGLE\n Single selection mode, only one item per column can be selected.\n @property {String} MULTIPLE\n Multiple selection mode, multiple items per column can be selected.\n ",
       "start": 622,
-      "end": 1020,
+      "end": 1018,
       "loc": {
         "start": {
           "line": 13,
@@ -669,8 +669,8 @@
         "updateContext": null
       },
       "value": "const",
-      "start": 1021,
-      "end": 1026,
+      "start": 1019,
+      "end": 1024,
       "loc": {
         "start": {
           "line": 25,
@@ -695,8 +695,8 @@
         "binop": null
       },
       "value": "selectionMode",
-      "start": 1027,
-      "end": 1040,
+      "start": 1025,
+      "end": 1038,
       "loc": {
         "start": {
           "line": 25,
@@ -722,8 +722,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 1041,
-      "end": 1042,
+      "start": 1039,
+      "end": 1040,
       "loc": {
         "start": {
           "line": 25,
@@ -747,8 +747,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1043,
-      "end": 1044,
+      "start": 1041,
+      "end": 1042,
       "loc": {
         "start": {
           "line": 25,
@@ -773,8 +773,8 @@
         "binop": null
       },
       "value": "NONE",
-      "start": 1047,
-      "end": 1051,
+      "start": 1045,
+      "end": 1049,
       "loc": {
         "start": {
           "line": 26,
@@ -799,8 +799,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1051,
-      "end": 1052,
+      "start": 1049,
+      "end": 1050,
       "loc": {
         "start": {
           "line": 26,
@@ -826,8 +826,8 @@
         "updateContext": null
       },
       "value": "none",
-      "start": 1053,
-      "end": 1059,
+      "start": 1051,
+      "end": 1057,
       "loc": {
         "start": {
           "line": 26,
@@ -852,8 +852,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1059,
-      "end": 1060,
+      "start": 1057,
+      "end": 1058,
       "loc": {
         "start": {
           "line": 26,
@@ -878,8 +878,8 @@
         "binop": null
       },
       "value": "SINGLE",
-      "start": 1063,
-      "end": 1069,
+      "start": 1061,
+      "end": 1067,
       "loc": {
         "start": {
           "line": 27,
@@ -904,8 +904,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1069,
-      "end": 1070,
+      "start": 1067,
+      "end": 1068,
       "loc": {
         "start": {
           "line": 27,
@@ -931,8 +931,8 @@
         "updateContext": null
       },
       "value": "single",
-      "start": 1071,
-      "end": 1079,
+      "start": 1069,
+      "end": 1077,
       "loc": {
         "start": {
           "line": 27,
@@ -957,8 +957,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1079,
-      "end": 1080,
+      "start": 1077,
+      "end": 1078,
       "loc": {
         "start": {
           "line": 27,
@@ -983,8 +983,8 @@
         "binop": null
       },
       "value": "MULTIPLE",
-      "start": 1083,
-      "end": 1091,
+      "start": 1081,
+      "end": 1089,
       "loc": {
         "start": {
           "line": 28,
@@ -1009,8 +1009,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1091,
-      "end": 1092,
+      "start": 1089,
+      "end": 1090,
       "loc": {
         "start": {
           "line": 28,
@@ -1036,8 +1036,8 @@
         "updateContext": null
       },
       "value": "multiple",
-      "start": 1093,
-      "end": 1103,
+      "start": 1091,
+      "end": 1101,
       "loc": {
         "start": {
           "line": 28,
@@ -1061,8 +1061,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1104,
-      "end": 1105,
+      "start": 1102,
+      "end": 1103,
       "loc": {
         "start": {
           "line": 29,
@@ -1087,8 +1087,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1105,
-      "end": 1106,
+      "start": 1103,
+      "end": 1104,
       "loc": {
         "start": {
           "line": 29,
@@ -1115,8 +1115,8 @@
         "updateContext": null
       },
       "value": "export",
-      "start": 1108,
-      "end": 1114,
+      "start": 1106,
+      "end": 1112,
       "loc": {
         "start": {
           "line": 31,
@@ -1143,8 +1143,8 @@
         "updateContext": null
       },
       "value": "default",
-      "start": 1115,
-      "end": 1122,
+      "start": 1113,
+      "end": 1120,
       "loc": {
         "start": {
           "line": 31,
@@ -1169,8 +1169,8 @@
         "binop": null
       },
       "value": "selectionMode",
-      "start": 1123,
-      "end": 1136,
+      "start": 1121,
+      "end": 1134,
       "loc": {
         "start": {
           "line": 31,
@@ -1195,8 +1195,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1136,
-      "end": 1137,
+      "start": 1134,
+      "end": 1135,
       "loc": {
         "start": {
           "line": 31,
@@ -1221,8 +1221,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1138,
-      "end": 1138,
+      "start": 1136,
+      "end": 1136,
       "loc": {
         "start": {
           "line": 32,

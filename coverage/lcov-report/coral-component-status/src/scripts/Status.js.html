@@ -308,7 +308,19 @@
 <a name='L250'></a><a href='#L250'>250</a>
 <a name='L251'></a><a href='#L251'>251</a>
 <a name='L252'></a><a href='#L252'>252</a>
-<a name='L253'></a><a href='#L253'>253</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L253'></a><a href='#L253'>253</a>
+<a name='L254'></a><a href='#L254'>254</a>
+<a name='L255'></a><a href='#L255'>255</a>
+<a name='L256'></a><a href='#L256'>256</a>
+<a name='L257'></a><a href='#L257'>257</a>
+<a name='L258'></a><a href='#L258'>258</a>
+<a name='L259'></a><a href='#L259'>259</a>
+<a name='L260'></a><a href='#L260'>260</a>
+<a name='L261'></a><a href='#L261'>261</a>
+<a name='L262'></a><a href='#L262'>262</a>
+<a name='L263'></a><a href='#L263'>263</a>
+<a name='L264'></a><a href='#L264'>264</a>
+<a name='L265'></a><a href='#L265'>265</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -435,7 +447,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -529,8 +540,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -556,11 +565,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">70x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">70x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">70x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">224x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -577,9 +601,9 @@ import {transform, validate} from '../../../coral-utils';
 &nbsp;
 /**
  Enumeration for {@link Status} variants.
- 
+&nbsp;
  @typedef {Object} StatusVariantEnum
- 
+&nbsp;
  @property {String} NEUTRAL
  A default semantic neutral status.
  @property {String} WARNING
@@ -601,9 +625,9 @@ const variant = {
 &nbsp;
 /**
  Enumeration for {@link Status} colors.
- 
+&nbsp;
  @typedef {Object} StatusColorEnum
- 
+&nbsp;
  @property {String} DEFAULT
  @property {String} CELERY
  @property {String} YELLOW
@@ -647,7 +671,7 @@ for (const colorValue in color) {
  @class Coral.Status
  @classdesc A Status component to describe the condition of another entity. They can be used to convey semantic meaning
  such as statuses and categories.
- 
+&nbsp;
  @htmltag coral-status
  @extends {HTMLElement}
  @extends {BaseComponent}
@@ -656,17 +680,17 @@ class Status extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone element
       label: this.querySelector('coral-status-label') || document.createElement('coral-status-label')
     };
   }
-  
+&nbsp;
   /**
    Whether the status is disabled or not.
-   
+&nbsp;
    @type {Boolean}
    @default false
    @htmlattribute disabled
@@ -675,17 +699,18 @@ class Status extends BaseComponent(HTMLElement) {
   get disabled() {
     return this._disabled || false;
   }
+&nbsp;
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
-    
+&nbsp;
     this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
   }
-  
+&nbsp;
   /**
    The status variant. See {@link StatusVariantEnum}.
    When a status has a semantic meaning, it should use semantic colors.
- 
+&nbsp;
    @type {String}
    @default StatusVariantEnum.NEUTRAL
    @htmlattribute variant
@@ -694,24 +719,25 @@ class Status extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.NEUTRAL;
   }
+&nbsp;
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.NEUTRAL;
     this._reflectAttribute('variant', this._variant);
-  
+&nbsp;
     this.classList.remove(...ALL_VARIANT_CLASSES);
     this.classList.add(`${CLASSNAME}--${variantMapping[this._variant.toUpperCase()] || this._variant}`);
   }
-  
+&nbsp;
   /**
    The status color. See {@link StatusColorEnum}.
    When a status is used to color code categories and labels commonly found in data visualization, they should use
    colors.
-   
-   The ideal usage for colors is when there are 8 or fewer categories or labels being color coded.
+&nbsp;
+   The ide<span class="cstat-no" title="statement not covered" >al usage for colors is when there ar</span>e 8 or fewer categories or labels being color coded.
    Use them in the following order to ensure the greatest possible color differences for multiple forms of color
    blindness:
-   - Indig<span class="cstat-no" title="statement not covered" >o</span>
+   - Indigo
    - Celery
    - Magenta
    - Yellow
@@ -719,9 +745,9 @@ class Status extends BaseComponent(HTMLElement) {
    - Seafoam
    - Chartreuse
    - Purple
- 
+&nbsp;
    If a color is set, it'll override any semantic variant.
-   
+&nbsp;
    @type {String}
    @default StatusColorEnum.DEFAULT
    @htmlattribute color
@@ -730,74 +756,84 @@ class Status extends BaseComponent(HTMLElement) {
   get color() {
     return this._color || color.DEFAULT;
   }
+&nbsp;
   set color(value) {
     value = transform.string(value).toLowerCase();
     this._color = validate.enumeration(color)(value) &amp;&amp; value || color.DEFAULT;
     this._reflectAttribute('color', this._color);
-  
+&nbsp;
     this.classList.remove(...ALL_COLOR_CLASSES);
     if (this._color !== color.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._color}`);
     }
   }
-  
+&nbsp;
   /**
    The status label element.
-   
+&nbsp;
    @type {StatusLabel}
    @contentzone
    */
   get label() {
     return this._getContentZone(this._elements.label);
   }
+&nbsp;
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: 'coral-status-label',
-      insert: function(label) {
+      insert: function (label) {
         this.appendChild(label);
       }
     });
   }
-  
+&nbsp;
   get _contentZones() {
     return {
       'coral-status-label': 'label'
     };
   }
-  
+&nbsp;
   /**
    Returns {@link Status} variants.
-   
+&nbsp;
    @return {StatusVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+&nbsp;
   /**
    Returns {@link Status} colors.
-   
+&nbsp;
    @return {StatusColorEnum}
    */
-  static get color() { return color; }
-  
+  static get color() {
+    return color;
+  }
+&nbsp;
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['variant', 'color', 'disabled']);
   }
-  
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-    
+&nbsp;
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.NEUTRAL; }
-    if (!this._color) { this.color = color.DEFAULT; }
-  
+    if (!this._variant) {
+      this.variant = variant.NEUTRAL;
+    }
+    if (!this._color) {
+      this.color = color.DEFAULT;
+    }
+&nbsp;
     // Fetch or create the content content zone element
     const label = this._elements.label;
-  
+&nbsp;
     // This stops the content zone from being voracious
     if (!label.parentNode) {
       // move the contents into the content zone
@@ -805,7 +841,7 @@ class Status extends BaseComponent(HTMLElement) {
         label.appendChild(this.firstChild);
       }
     }
-  
+&nbsp;
     // Assign the content zone moving it into place
     this.label = label;
   }
@@ -819,7 +855,7 @@ export default Status;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

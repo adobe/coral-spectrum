@@ -264,29 +264,28 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">432x</span>
+<span class="cline-any cline-yes">330x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">432x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">330x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">922x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">922x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">922x</span>
+<span class="cline-any cline-yes">820x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">922x</span>
+<span class="cline-any cline-yes">820x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">820x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">820x</span>
 <span class="cline-any cline-yes">76x</span>
 <span class="cline-any cline-yes">152x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -298,17 +297,17 @@
 <span class="cline-any cline-yes">76x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">922x</span>
+<span class="cline-any cline-yes">820x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">922x</span>
-<span class="cline-any cline-yes">922x</span>
+<span class="cline-any cline-yes">820x</span>
+<span class="cline-any cline-yes">820x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">922x</span>
+<span class="cline-any cline-yes">820x</span>
 <span class="cline-any cline-yes">262x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -346,10 +345,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3644x</span>
+<span class="cline-any cline-yes">3438x</span>
 <span class="cline-any cline-yes">294x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -378,23 +378,23 @@ class PanelStack extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Attach events
     this._delegateEvents({
       // private
       'coral-panel:_selectedchanged': '_onItemSelectedChanged'
     });
-    
+&nbsp;
     // Used for eventing
     this._oldSelection = null;
-    
+&nbsp;
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
   }
-  
+&nbsp;
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+&nbsp;
    @type {SelectableCollection}
    @readonly
    */
@@ -412,28 +412,28 @@ class PanelStack extends BaseComponent(HTMLElement) {
     }
     return this._items;
   }
-  
+&nbsp;
   /**
    The selected item of the PanelStack.
-   
+&nbsp;
    @type {HTMLElement}
    @readonly
    */
   get selectedItem() {
     return this.items._getLastSelected();
   }
-  
+&nbsp;
   /** @private */
   _onItemSelectedChanged(event) {
     event.stopImmediatePropagation();
-    
+&nbsp;
     this._validateSelection(event.target);
   }
-  
+&nbsp;
   /** @private */
   _validateSelection(item) {
     const selectedItems = this.items._getAllSelected();
-    
+&nbsp;
     // Last selected item wins if multiple selection while not allowed
     item = item || selectedItems[selectedItems.length - 1];
 &nbsp;
@@ -445,50 +445,50 @@ class PanelStack extends BaseComponent(HTMLElement) {
           selectedItem.removeAttribute('selected');
         }
       });
-  
+&nbsp;
       // We can trigger change events again
       this._preventTriggeringEvents = false;
     }
-    
+&nbsp;
     this._triggerChangeEvent();
   }
-  
+&nbsp;
   /** @private */
   _triggerChangeEvent() {
     const selectedItem = this.selectedItem;
     const oldSelection = this._oldSelection;
-    
+&nbsp;
     if (!this._preventTriggeringEvents &amp;&amp; selectedItem !== oldSelection) {
       this.trigger('coral-panelstack:change', {
         oldSelection: oldSelection,
         selection: selectedItem
       });
-      
+&nbsp;
       this._oldSelection = selectedItem;
     }
   }
-  
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-    
+&nbsp;
     this.setAttribute('role', 'presentation');
-    
+&nbsp;
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;
     this._validateSelection();
     this._preventTriggeringEvents = false;
-    
+&nbsp;
     this._oldSelection = this.selectedItem;
   }
-  
+&nbsp;
   /**
    Triggered when {@link PanelStack} selected panel has changed.
-   
+&nbsp;
    @typedef {CustomEvent} coral-panelstack:change
-   
+&nbsp;
    @property {Panel} detail.selection
    The new selected panel.
    @property {Panel} detail.oldSelection
@@ -504,7 +504,7 @@ export default PanelStack;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

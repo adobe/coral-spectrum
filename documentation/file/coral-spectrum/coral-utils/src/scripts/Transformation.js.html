@@ -438,81 +438,81 @@
 class Transformation {
   /**
    Transform the provided value into a boolean. Follows the behavior of JavaScript thruty/falsy.
-   
+
    @param {*} value
    The value to convert to Boolean.
-   
+
    @returns {Boolean} The corresponding boolean value.
    */
   boolean(value) {
     return !!value;
   }
-  
+
   /**
    Transform the provided value into a boolean. Follows the behavior of the HTML specification, in which the existence of
    the attribute indicates &lt;code&gt;true&lt;/code&gt; regardless of the attribute&apos;s value. If the value is a boolean, it ignores
    the transformation.
-   
+
    @param {*} value
    The value to convert to Boolean.
-   
+
    @returns {Boolean} The corresponding boolean value.
    */
   booleanAttr(value) {
     return typeof value === &apos;boolean&apos; ? value : !(value === null || typeof value === &apos;undefined&apos;);
   }
-  
+
   /**
    Transforms the provided value into a floating point number.
-   
+
    @param {*} value
    The value to convert to a Number.
-   
+
    @returns {?Number} The corresponding number or &lt;code&gt;null&lt;/code&gt; if the passed value cannot be converted to a number.
    */
   number(value) {
     value = parseFloat(value);
     return isNaN(value) ? null : value;
   }
-  
+
   /**
    Transforms the provided value into a floating number. The conversion is strict in the sense that if non numeric values
    are detected, &lt;code&gt;null&lt;/code&gt; is returned instead.
-   
+
    @param {*} value
    The value to be converted to a Number.
-   
+
    @retuns {?Number} The corresponding number or &lt;code&gt;null&lt;/code&gt; if the passed value cannot be converted to number.
    */
   float(value) {
     if (/^(-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/.test(value)) {
       return Number(value);
     }
-  
+
     return null;
   }
-  
+
   /**
    Transform the provided value into a string. When given &lt;code&gt;null&lt;/code&gt; or &lt;code&gt;undefined&lt;/code&gt; it will be
    converted to an empty string(&quot;&quot;).
-   
+
    @param {*} value
    The value to convert to String.
-   
+
    @returns {String} The corresponding string value.
    */
   string(value) {
     if (value === null || typeof value === &apos;undefined&apos;) {
       return &apos;&apos;;
     }
-  
+
     return typeof value === &apos;string&apos; ? value : String(value);
   }
 }
 
 /**
  A type transform utility.
- 
+
  @type {Transformation}
  */
 const transform = new Transformation();

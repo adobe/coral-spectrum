@@ -450,14 +450,14 @@ const getIndexOf = (el) =&gt; {
   if (!parent) {
     return -1;
   }
-  
+
   return Array.prototype.indexOf.call(parent.children, el);
 };
 
 /** @ignore */
 const getSiblingsOf = (el, selector, type) =&gt; {
   const stack = [];
-  
+
   // Returns siblings of el
   if (!type) {
     [&apos;previousElementSibling&apos;, &apos;nextElementSibling&apos;].forEach((direction) =&gt; {
@@ -469,20 +469,19 @@ const getSiblingsOf = (el, selector, type) =&gt; {
         }
       }
     });
-  }
-  else {
+  } else {
     const direction = type.indexOf(&apos;next&apos;) === 0 ? &apos;nextElementSibling&apos; : &apos;previousElementSibling&apos;;
-    
+
     // All following siblings of el up to but not including the element matched by the selector
     if (type.indexOf(&apos;Until&apos;) !== -1) {
-      const matches = function() {
+      const matches = function () {
         if (typeof selector === &apos;string&apos;) {
           return el[direction].matches(selector);
         }
-        
+
         return el[direction] === selector;
       };
-      
+
       while (el[direction] &amp;&amp; !matches()) {
         stack.push(el = el[direction]);
       }
@@ -502,14 +501,14 @@ const getSiblingsOf = (el, selector, type) =&gt; {
       return sibling &amp;&amp; sibling.matches(selector) ? sibling : null;
     }
   }
-  
+
   return stack;
 };
 
 /** @ignore */
 const listToArray = (list) =&gt; {
   const res = [];
-  for (let i = 0, listCount = res.length = list.length; i &lt; listCount; i++) {
+  for (let i = 0, listCount = res.length = list.length ; i &lt; listCount ; i++) {
     res[i] = list[i];
   }
   return res;
@@ -521,13 +520,13 @@ const getColumns = (colgroup) =&gt; listToArray(colgroup.querySelectorAll(&apos;
 /** @ignore */
 const getRows = (sections) =&gt; {
   let rows = [];
-  
+
   sections.forEach((section) =&gt; {
     if (section) {
       rows = rows.concat(listToArray(section.querySelectorAll(&apos;tr[is=&quot;coral-table-row&quot;]&apos;)));
     }
   });
-  
+
   return rows;
 };
 
@@ -545,9 +544,9 @@ const getCellByIndex = (row, index) =&gt; getCells(row).filter(cell =&gt; getInd
 
 /**
  Enumeration for {@link TableHead}, {@link TableBody} and {@link TableFoot} divider values.
- 
+
  @typedef {Object} TableSectionDividerEnum
- 
+
  @property {String} NONE
  No divider.
  @property {String} ROW
@@ -566,9 +565,9 @@ const divider = {
 
 /**
  Enumeration for {@link TableColumn} alignment options.
- 
+
  @typedef {Object} TableColumnAlignmentEnum
- 
+
  @property {String} LEFT
  Left alignment.
  @property {String} CENTER

@@ -450,6 +450,7 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
   get content() {
     return this;
   }
+
   set content(value) {
     // Support configs
     if (typeof value === &apos;object&apos;) {
@@ -459,10 +460,10 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
       }
     }
   }
-  
+
   /**
    Whether the table cell is selected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -471,28 +472,29 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     // Prevent selection if disabled
     if (this.hasAttribute(&apos;coral-table-cellselect&apos;) &amp;&amp; this.hasAttribute(&apos;disabled&apos;) ||
       this.querySelector(&apos;[coral-table-cellselect][disabled]&apos;)) {
       return;
     }
-    
+
     this.trigger(&apos;coral-table-cell:_beforeselectedchanged&apos;);
-    
+
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute(&apos;selected&apos;, this._selected);
-    
+
     this.trigger(&apos;coral-table-cell:_selectedchanged&apos;);
-  
+
     this._syncAriaSelectedState();
     this._syncSelectHandle();
   }
-  
+
   /**
    The cell&apos;s value. It is used to compare cells during a column sort. If not set, the sorting will be performed on the
    cell content. The content will be parse accordingly based on the column&apos;s &lt;code&gt;sortabletype&lt;/code&gt; property.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute value
@@ -501,10 +503,11 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
   get value() {
     return this.getAttribute(&apos;value&apos;) || &apos;&apos;;
   }
+
   set value(value) {
     this.setAttribute(&apos;value&apos;, transform.string(value));
   }
-  
+
   /** @private */
   _setHandle(handle) {
     requestAnimationFrame(() =&gt; {
@@ -521,13 +524,12 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
   _getHandle(handle) {
     return this.hasAttribute(handle) ? this : this.querySelector(`[${handle}]`);
   }
-  
+
   /** @private */
   _toggleSelectable(selectable) {
     if (selectable) {
       this._setHandle(&apos;coral-table-cellselect&apos;);
-    }
-    else {
+    } else {
       // Remove the handle
       this.removeAttribute(&apos;coral-table-cellselect&apos;);
 
@@ -537,18 +539,17 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
 
     this._syncAriaSelectedState();
   }
-  
+
   /** @private */
   _syncAriaSelectedState() {
     this.classList.toggle(&apos;is-selected&apos;, this.selected);
     if (this._getHandle(&apos;coral-table-cellselect&apos;)) {
       this.setAttribute(&apos;aria-selected&apos;, this.selected);
-    }
-    else {
+    } else {
       this.removeAttribute(&apos;aria-selected&apos;);
     }
   }
-  
+
   /** @private */
   _syncSelectHandle() {
     // Check/uncheck the select handle
@@ -557,44 +558,43 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
       selectHandle[this.selected ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;checked&apos;, &apos;&apos;);
     }
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;selected&apos;, &apos;_selectable&apos;]);
   }
-  
+
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === &apos;_selectable&apos;) {
       this._toggleSelectable(value !== null);
-    }
-    else {
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
 
     this.id = this.id || commons.getUID();
   }
-  
+
   /**
    Triggered before {@link TableCell#selected} is changed.
-   
+
    @typedef {CustomEvent} coral-table-cell:_beforeselectedchanged
-   
+
    @private
    */
-  
+
   /**
    Triggered when {@link TableCell#selected} changed.
-   
+
    @typedef {CustomEvent} coral-table-cell:_selectedchanged
-   
+
    @private
    */
 }

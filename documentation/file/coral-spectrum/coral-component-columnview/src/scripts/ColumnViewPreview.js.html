@@ -448,35 +448,38 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Content zone
     this._elements = {
       content: this.querySelector(&apos;coral-columnview-preview-content&apos;) || document.createElement(&apos;coral-columnview-preview-content&apos;)
     };
   }
-  
+
   /**
    The content of the Preview.
-   
+
    @type {ColumnViewPreviewContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone(&apos;content&apos;, value, {
       handle: &apos;content&apos;,
       tagName: &apos;coral-columnview-preview-content&apos;,
-      insert: function(content) {
+      insert: function (content) {
         content.classList.add(&apos;coral-Body--small&apos;);
         this.appendChild(content);
       }
     });
   }
-  
-  get _contentZones() { return {&apos;coral-columnview-preview-content&apos;: &apos;content&apos;}; }
-  
+
+  get _contentZones() {
+    return {&apos;coral-columnview-preview-content&apos;: &apos;content&apos;};
+  }
+
   /** @ignore */
   render() {
     super.render();
@@ -484,11 +487,11 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
     this.setAttribute(&apos;role&apos;, &apos;group&apos;);
 
     this.id = this.id || commons.getUID();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     const content = this._elements.content;
-  
+
     // when the content zone was not created, we need to make sure that everything is added inside it as a content.
     // this stops the content zone from being voracious
     if (!content.parentNode) {
@@ -497,7 +500,7 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
         content.appendChild(this.firstChild);
       }
     }
-    
+
     // Call content zone insert
     this.content = content;
 
@@ -506,8 +509,8 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   _makeAccessible() {
-    
-    // @a11y For item values with a label, identify the value as a focusable, readOnly textbox labeled by the label. 
+
+    // @a11y For item values with a label, identify the value as a focusable, readOnly textbox labeled by the label.
     let elements = this.content.querySelectorAll(&apos;coral-columnview-preview-label + coral-columnview-preview-value&apos;);
     let length = elements.length;
     let i;
@@ -515,13 +518,13 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
     let elementLabel;
 
     // @a11y If the previous column has selected items,
-    // do not include item values in the tab order, 
+    // do not include item values in the tab order,
     // so that a keyboard user can quickly advance to a subsequent toolbar.
     const tabIndex = (this.parentElement &amp;&amp;
       this.parentElement.tagName === &apos;CORAL-COLUMNVIEW&apos; &amp;&amp;
       this.parentElement.selectedItems.length) ? -1 : 0;
 
-    for (i = 0; i &lt; length; i++) {
+    for (i = 0 ; i &lt; length ; i++) {
       element = elements[i];
       elementLabel = element.previousElementSibling;
       elementLabel.id = elementLabel.id || commons.getUID();
@@ -539,16 +542,16 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
     // @a11y Expose separator as a horizontally-oriented separator.
     elements = this.content.querySelectorAll(&apos;coral-columnview-preview-separator&apos;);
     length = elements.length;
-    for (i = 0; i &lt; length; i++) {
+    for (i = 0 ; i &lt; length ; i++) {
       element = elements[i];
       element.setAttribute(&apos;role&apos;, &apos;separator&apos;);
       element.setAttribute(&apos;aria-orientation&apos;, &apos;horizontal&apos;);
     }
 
-    // @a11y If the preview asset image does not include an alt attribute, set alt=&quot;&quot;, so that screen readers do not announce the image url. 
+    // @a11y If the preview asset image does not include an alt attribute, set alt=&quot;&quot;, so that screen readers do not announce the image url.
     elements = this.content.querySelectorAll(&apos;coral-columnview-preview-asset &gt; img:not([alt])&apos;);
     length = elements.length;
-    for (i = 0; i &lt; length; i++) {
+    for (i = 0 ; i &lt; length ; i++) {
       element = elements[i];
       element.setAttribute(&apos;alt&apos;, &apos;&apos;);
     }

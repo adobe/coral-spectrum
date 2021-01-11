@@ -1,7 +1,7 @@
 {
   "type": "File",
   "start": 0,
-  "end": 2681,
+  "end": 2661,
   "loc": {
     "start": {
       "line": 1,
@@ -15,7 +15,7 @@
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 2681,
+    "end": 2661,
     "loc": {
       "start": {
         "line": 1,
@@ -138,7 +138,7 @@
       {
         "type": "Identifier",
         "start": 709,
-        "end": 2166,
+        "end": 2150,
         "loc": {
           "start": {
             "line": 18,
@@ -171,7 +171,7 @@
         "body": {
           "type": "ClassBody",
           "start": 726,
-          "end": 2166,
+          "end": 2150,
           "loc": {
             "start": {
               "line": 18,
@@ -185,8 +185,8 @@
           "body": [
             {
               "type": "ClassMethod",
-              "start": 945,
-              "end": 1192,
+              "start": 939,
+              "end": 1186,
               "loc": {
                 "start": {
                   "line": 29,
@@ -201,8 +201,8 @@
               "computed": false,
               "key": {
                 "type": "Identifier",
-                "start": 945,
-                "end": 960,
+                "start": 939,
+                "end": 954,
                 "loc": {
                   "start": {
                     "line": 29,
@@ -225,8 +225,8 @@
               "params": [
                 {
                   "type": "Identifier",
-                  "start": 961,
-                  "end": 969,
+                  "start": 955,
+                  "end": 963,
                   "loc": {
                     "start": {
                       "line": 29,
@@ -242,8 +242,8 @@
                 },
                 {
                   "type": "Identifier",
-                  "start": 971,
-                  "end": 979,
+                  "start": 965,
+                  "end": 973,
                   "loc": {
                     "start": {
                       "line": 29,
@@ -260,8 +260,8 @@
               ],
               "body": {
                 "type": "BlockStatement",
-                "start": 981,
-                "end": 1192,
+                "start": 975,
+                "end": 1186,
                 "loc": {
                   "start": {
                     "line": 29,
@@ -275,8 +275,8 @@
                 "body": [
                   {
                     "type": "ReturnStatement",
-                    "start": 1159,
-                    "end": 1188,
+                    "start": 1153,
+                    "end": 1182,
                     "loc": {
                       "start": {
                         "line": 32,
@@ -289,8 +289,8 @@
                     },
                     "argument": {
                       "type": "BinaryExpression",
-                      "start": 1166,
-                      "end": 1187,
+                      "start": 1160,
+                      "end": 1181,
                       "loc": {
                         "start": {
                           "line": 32,
@@ -303,8 +303,8 @@
                       },
                       "left": {
                         "type": "Identifier",
-                        "start": 1166,
-                        "end": 1174,
+                        "start": 1160,
+                        "end": 1168,
                         "loc": {
                           "start": {
                             "line": 32,
@@ -322,8 +322,8 @@
                       "operator": "!==",
                       "right": {
                         "type": "Identifier",
-                        "start": 1179,
-                        "end": 1187,
+                        "start": 1173,
+                        "end": 1181,
                         "loc": {
                           "start": {
                             "line": 32,
@@ -343,8 +343,8 @@
                       {
                         "type": "CommentLine",
                         "value": " We can use exact equality here as validation functions are called after transform. Thus, the input value will be",
-                        "start": 987,
-                        "end": 1102,
+                        "start": 981,
+                        "end": 1096,
                         "loc": {
                           "start": {
                             "line": 30,
@@ -359,8 +359,8 @@
                       {
                         "type": "CommentLine",
                         "value": " converted to the same type as a stored value",
-                        "start": 1107,
-                        "end": 1154,
+                        "start": 1101,
+                        "end": 1148,
                         "loc": {
                           "start": {
                             "line": 31,
@@ -381,9 +381,9 @@
               "leadingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   Ensures that the value has changed.\n   \n   @param {*} newValue\n   The new value.\n   @param {*} oldValue\n   The existing value.\n   \n   @returns {Boolean} <code>true</code> if the values are different.\n   ",
+                  "value": "*\n   Ensures that the value has changed.\n\n   @param {*} newValue\n   The new value.\n   @param {*} oldValue\n   The existing value.\n\n   @returns {Boolean} <code>true</code> if the values are different.\n   ",
                   "start": 730,
-                  "end": 942,
+                  "end": 936,
                   "loc": {
                     "start": {
                       "line": 19,
@@ -399,9 +399,9 @@
               "trailingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   Ensures that the new value is within the enumeration. The enumeration can be given as an array of values or as a\n   key/value Object. Take into consideration that enumerations are case sensitive.\n   \n   @example // Enumeration as Array\n   Coral.validate.enumeration(['xs', 's', 'm', 'l']);\n   @example // Enumeration as Object\n   Coral.validate.enumeration({EXTRA_SMALL : 'xs', SMALL : 's', MEDIUM : 'm', LARGE : 'l'});\n   @param {Object} enumeration\n   Object that represents an enum.\n   \n   @returns {ValidationFunction}\n   a validation function that ensures that the given value is within the enumeration.\n   ",
-                  "start": 1198,
-                  "end": 1819,
+                  "value": "*\n   Ensures that the new value is within the enumeration. The enumeration can be given as an array of values or as a\n   key/value Object. Take into consideration that enumerations are case sensitive.\n\n   @example // Enumeration as Array\n   Coral.validate.enumeration(['xs', 's', 'm', 'l']);\n   @example // Enumeration as Object\n   Coral.validate.enumeration({EXTRA_SMALL : 'xs', SMALL : 's', MEDIUM : 'm', LARGE : 'l'});\n   @param {Object} enumeration\n   Object that represents an enum.\n\n   @returns {ValidationFunction}\n   a validation function that ensures that the given value is within the enumeration.\n   ",
+                  "start": 1190,
+                  "end": 1805,
                   "loc": {
                     "start": {
                       "line": 35,
@@ -417,8 +417,8 @@
             },
             {
               "type": "ClassMethod",
-              "start": 1822,
-              "end": 2164,
+              "start": 1808,
+              "end": 2148,
               "loc": {
                 "start": {
                   "line": 49,
@@ -433,8 +433,8 @@
               "computed": false,
               "key": {
                 "type": "Identifier",
-                "start": 1822,
-                "end": 1833,
+                "start": 1808,
+                "end": 1819,
                 "loc": {
                   "start": {
                     "line": 49,
@@ -457,8 +457,8 @@
               "params": [
                 {
                   "type": "Identifier",
-                  "start": 1834,
-                  "end": 1845,
+                  "start": 1820,
+                  "end": 1831,
                   "loc": {
                     "start": {
                       "line": 49,
@@ -475,8 +475,8 @@
               ],
               "body": {
                 "type": "BlockStatement",
-                "start": 1847,
-                "end": 2164,
+                "start": 1833,
+                "end": 2148,
                 "loc": {
                   "start": {
                     "line": 49,
@@ -490,8 +490,8 @@
                 "body": [
                   {
                     "type": "VariableDeclaration",
-                    "start": 1949,
-                    "end": 2009,
+                    "start": 1935,
+                    "end": 1995,
                     "loc": {
                       "start": {
                         "line": 51,
@@ -505,8 +505,8 @@
                     "declarations": [
                       {
                         "type": "VariableDeclarator",
-                        "start": 1955,
-                        "end": 2008,
+                        "start": 1941,
+                        "end": 1994,
                         "loc": {
                           "start": {
                             "line": 51,
@@ -519,8 +519,8 @@
                         },
                         "id": {
                           "type": "Identifier",
-                          "start": 1955,
-                          "end": 1967,
+                          "start": 1941,
+                          "end": 1953,
                           "loc": {
                             "start": {
                               "line": 51,
@@ -537,8 +537,8 @@
                         },
                         "init": {
                           "type": "CallExpression",
-                          "start": 1970,
-                          "end": 2008,
+                          "start": 1956,
+                          "end": 1994,
                           "loc": {
                             "start": {
                               "line": 51,
@@ -551,8 +551,8 @@
                           },
                           "callee": {
                             "type": "MemberExpression",
-                            "start": 1970,
-                            "end": 1995,
+                            "start": 1956,
+                            "end": 1981,
                             "loc": {
                               "start": {
                                 "line": 51,
@@ -565,8 +565,8 @@
                             },
                             "object": {
                               "type": "Identifier",
-                              "start": 1970,
-                              "end": 1977,
+                              "start": 1956,
+                              "end": 1963,
                               "loc": {
                                 "start": {
                                   "line": 51,
@@ -582,8 +582,8 @@
                             },
                             "property": {
                               "type": "Identifier",
-                              "start": 1978,
-                              "end": 1995,
+                              "start": 1964,
+                              "end": 1981,
                               "loc": {
                                 "start": {
                                   "line": 51,
@@ -602,8 +602,8 @@
                           "arguments": [
                             {
                               "type": "Identifier",
-                              "start": 1996,
-                              "end": 2007,
+                              "start": 1982,
+                              "end": 1993,
                               "loc": {
                                 "start": {
                                   "line": 51,
@@ -627,8 +627,8 @@
                       {
                         "type": "CommentLine",
                         "value": " Reverses the enumeration, so that we can check that the variable new value exists inside",
-                        "start": 1853,
-                        "end": 1944,
+                        "start": 1839,
+                        "end": 1930,
                         "loc": {
                           "start": {
                             "line": 50,
@@ -645,8 +645,8 @@
                       {
                         "type": "CommentLine",
                         "value": " Returns a new function that matches the newValue, oldValue signature",
-                        "start": 2017,
-                        "end": 2088,
+                        "start": 2001,
+                        "end": 2072,
                         "loc": {
                           "start": {
                             "line": 53,
@@ -662,8 +662,8 @@
                   },
                   {
                     "type": "ReturnStatement",
-                    "start": 2093,
-                    "end": 2160,
+                    "start": 2077,
+                    "end": 2144,
                     "loc": {
                       "start": {
                         "line": 54,
@@ -676,8 +676,8 @@
                     },
                     "argument": {
                       "type": "ArrowFunctionExpression",
-                      "start": 2100,
-                      "end": 2159,
+                      "start": 2084,
+                      "end": 2143,
                       "loc": {
                         "start": {
                           "line": 54,
@@ -695,8 +695,8 @@
                       "params": [
                         {
                           "type": "Identifier",
-                          "start": 2101,
-                          "end": 2109,
+                          "start": 2085,
+                          "end": 2093,
                           "loc": {
                             "start": {
                               "line": 54,
@@ -714,8 +714,8 @@
                       ],
                       "body": {
                         "type": "BinaryExpression",
-                        "start": 2114,
-                        "end": 2159,
+                        "start": 2098,
+                        "end": 2143,
                         "loc": {
                           "start": {
                             "line": 54,
@@ -728,8 +728,8 @@
                         },
                         "left": {
                           "type": "UnaryExpression",
-                          "start": 2114,
-                          "end": 2143,
+                          "start": 2098,
+                          "end": 2127,
                           "loc": {
                             "start": {
                               "line": 54,
@@ -744,8 +744,8 @@
                           "prefix": true,
                           "argument": {
                             "type": "MemberExpression",
-                            "start": 2121,
-                            "end": 2143,
+                            "start": 2105,
+                            "end": 2127,
                             "loc": {
                               "start": {
                                 "line": 54,
@@ -758,8 +758,8 @@
                             },
                             "object": {
                               "type": "Identifier",
-                              "start": 2121,
-                              "end": 2133,
+                              "start": 2105,
+                              "end": 2117,
                               "loc": {
                                 "start": {
                                   "line": 54,
@@ -775,8 +775,8 @@
                             },
                             "property": {
                               "type": "Identifier",
-                              "start": 2134,
-                              "end": 2142,
+                              "start": 2118,
+                              "end": 2126,
                               "loc": {
                                 "start": {
                                   "line": 54,
@@ -799,8 +799,8 @@
                         "operator": "!==",
                         "right": {
                           "type": "StringLiteral",
-                          "start": 2148,
-                          "end": 2159,
+                          "start": 2132,
+                          "end": 2143,
                           "loc": {
                             "start": {
                               "line": 54,
@@ -824,8 +824,8 @@
                       {
                         "type": "CommentLine",
                         "value": " Returns a new function that matches the newValue, oldValue signature",
-                        "start": 2017,
-                        "end": 2088,
+                        "start": 2001,
+                        "end": 2072,
                         "loc": {
                           "start": {
                             "line": 53,
@@ -845,9 +845,9 @@
               "leadingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   Ensures that the new value is within the enumeration. The enumeration can be given as an array of values or as a\n   key/value Object. Take into consideration that enumerations are case sensitive.\n   \n   @example // Enumeration as Array\n   Coral.validate.enumeration(['xs', 's', 'm', 'l']);\n   @example // Enumeration as Object\n   Coral.validate.enumeration({EXTRA_SMALL : 'xs', SMALL : 's', MEDIUM : 'm', LARGE : 'l'});\n   @param {Object} enumeration\n   Object that represents an enum.\n   \n   @returns {ValidationFunction}\n   a validation function that ensures that the given value is within the enumeration.\n   ",
-                  "start": 1198,
-                  "end": 1819,
+                  "value": "*\n   Ensures that the new value is within the enumeration. The enumeration can be given as an array of values or as a\n   key/value Object. Take into consideration that enumerations are case sensitive.\n\n   @example // Enumeration as Array\n   Coral.validate.enumeration(['xs', 's', 'm', 'l']);\n   @example // Enumeration as Object\n   Coral.validate.enumeration({EXTRA_SMALL : 'xs', SMALL : 's', MEDIUM : 'm', LARGE : 'l'});\n   @param {Object} enumeration\n   Object that represents an enum.\n\n   @returns {ValidationFunction}\n   a validation function that ensures that the given value is within the enumeration.\n   ",
+                  "start": 1190,
+                  "end": 1805,
                   "loc": {
                     "start": {
                       "line": 35,
@@ -870,8 +870,8 @@
       },
       {
         "type": "Identifier",
-        "start": 2620,
-        "end": 2654,
+        "start": 2600,
+        "end": 2634,
         "loc": {
           "start": {
             "line": 77,
@@ -885,8 +885,8 @@
         "declarations": [
           {
             "type": "VariableDeclarator",
-            "start": 2626,
-            "end": 2653,
+            "start": 2606,
+            "end": 2633,
             "loc": {
               "start": {
                 "line": 77,
@@ -899,8 +899,8 @@
             },
             "id": {
               "type": "Identifier",
-              "start": 2626,
-              "end": 2634,
+              "start": 2606,
+              "end": 2614,
               "loc": {
                 "start": {
                   "line": 77,
@@ -917,8 +917,8 @@
             },
             "init": {
               "type": "NewExpression",
-              "start": 2637,
-              "end": 2653,
+              "start": 2617,
+              "end": 2633,
               "loc": {
                 "start": {
                   "line": 77,
@@ -931,8 +931,8 @@
               },
               "callee": {
                 "type": "Identifier",
-                "start": 2641,
-                "end": 2651,
+                "start": 2621,
+                "end": 2631,
                 "loc": {
                   "start": {
                     "line": 77,
@@ -958,8 +958,8 @@
       },
       {
         "type": "Identifier",
-        "start": 2656,
-        "end": 2680,
+        "start": 2636,
+        "end": 2660,
         "loc": {
           "start": {
             "line": 79,
@@ -972,8 +972,8 @@
         },
         "declaration": {
           "type": "Identifier",
-          "start": 2671,
-          "end": 2679,
+          "start": 2651,
+          "end": 2659,
           "loc": {
             "start": {
               "line": 79,
@@ -993,8 +993,8 @@
       },
       {
         "type": "ExportDefaultDeclaration",
-        "start": 2656,
-        "end": 2680,
+        "start": 2636,
+        "end": 2660,
         "loc": {
           "start": {
             "line": 79,
@@ -1008,7 +1008,7 @@
         "declaration": {
           "type": "ClassDeclaration",
           "start": 709,
-          "end": 2166,
+          "end": 2150,
           "loc": {
             "start": {
               "line": 18,
@@ -1041,7 +1041,7 @@
           "body": {
             "type": "ClassBody",
             "start": 726,
-            "end": 2166,
+            "end": 2150,
             "loc": {
               "start": {
                 "line": 18,
@@ -1055,8 +1055,8 @@
             "body": [
               {
                 "type": "ClassMethod",
-                "start": 945,
-                "end": 1192,
+                "start": 939,
+                "end": 1186,
                 "loc": {
                   "start": {
                     "line": 29,
@@ -1071,8 +1071,8 @@
                 "computed": false,
                 "key": {
                   "type": "Identifier",
-                  "start": 945,
-                  "end": 960,
+                  "start": 939,
+                  "end": 954,
                   "loc": {
                     "start": {
                       "line": 29,
@@ -1095,8 +1095,8 @@
                 "params": [
                   {
                     "type": "Identifier",
-                    "start": 961,
-                    "end": 969,
+                    "start": 955,
+                    "end": 963,
                     "loc": {
                       "start": {
                         "line": 29,
@@ -1112,8 +1112,8 @@
                   },
                   {
                     "type": "Identifier",
-                    "start": 971,
-                    "end": 979,
+                    "start": 965,
+                    "end": 973,
                     "loc": {
                       "start": {
                         "line": 29,
@@ -1130,8 +1130,8 @@
                 ],
                 "body": {
                   "type": "BlockStatement",
-                  "start": 981,
-                  "end": 1192,
+                  "start": 975,
+                  "end": 1186,
                   "loc": {
                     "start": {
                       "line": 29,
@@ -1145,8 +1145,8 @@
                   "body": [
                     {
                       "type": "ReturnStatement",
-                      "start": 1159,
-                      "end": 1188,
+                      "start": 1153,
+                      "end": 1182,
                       "loc": {
                         "start": {
                           "line": 32,
@@ -1159,8 +1159,8 @@
                       },
                       "argument": {
                         "type": "BinaryExpression",
-                        "start": 1166,
-                        "end": 1187,
+                        "start": 1160,
+                        "end": 1181,
                         "loc": {
                           "start": {
                             "line": 32,
@@ -1173,8 +1173,8 @@
                         },
                         "left": {
                           "type": "Identifier",
-                          "start": 1166,
-                          "end": 1174,
+                          "start": 1160,
+                          "end": 1168,
                           "loc": {
                             "start": {
                               "line": 32,
@@ -1192,8 +1192,8 @@
                         "operator": "!==",
                         "right": {
                           "type": "Identifier",
-                          "start": 1179,
-                          "end": 1187,
+                          "start": 1173,
+                          "end": 1181,
                           "loc": {
                             "start": {
                               "line": 32,
@@ -1213,8 +1213,8 @@
                         {
                           "type": "CommentLine",
                           "value": " We can use exact equality here as validation functions are called after transform. Thus, the input value will be",
-                          "start": 987,
-                          "end": 1102,
+                          "start": 981,
+                          "end": 1096,
                           "loc": {
                             "start": {
                               "line": 30,
@@ -1229,8 +1229,8 @@
                         {
                           "type": "CommentLine",
                           "value": " converted to the same type as a stored value",
-                          "start": 1107,
-                          "end": 1154,
+                          "start": 1101,
+                          "end": 1148,
                           "loc": {
                             "start": {
                               "line": 31,
@@ -1251,9 +1251,9 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   Ensures that the value has changed.\n   \n   @param {*} newValue\n   The new value.\n   @param {*} oldValue\n   The existing value.\n   \n   @returns {Boolean} <code>true</code> if the values are different.\n   ",
+                    "value": "*\n   Ensures that the value has changed.\n\n   @param {*} newValue\n   The new value.\n   @param {*} oldValue\n   The existing value.\n\n   @returns {Boolean} <code>true</code> if the values are different.\n   ",
                     "start": 730,
-                    "end": 942,
+                    "end": 936,
                     "loc": {
                       "start": {
                         "line": 19,
@@ -1269,9 +1269,9 @@
                 "trailingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   Ensures that the new value is within the enumeration. The enumeration can be given as an array of values or as a\n   key/value Object. Take into consideration that enumerations are case sensitive.\n   \n   @example // Enumeration as Array\n   Coral.validate.enumeration(['xs', 's', 'm', 'l']);\n   @example // Enumeration as Object\n   Coral.validate.enumeration({EXTRA_SMALL : 'xs', SMALL : 's', MEDIUM : 'm', LARGE : 'l'});\n   @param {Object} enumeration\n   Object that represents an enum.\n   \n   @returns {ValidationFunction}\n   a validation function that ensures that the given value is within the enumeration.\n   ",
-                    "start": 1198,
-                    "end": 1819,
+                    "value": "*\n   Ensures that the new value is within the enumeration. The enumeration can be given as an array of values or as a\n   key/value Object. Take into consideration that enumerations are case sensitive.\n\n   @example // Enumeration as Array\n   Coral.validate.enumeration(['xs', 's', 'm', 'l']);\n   @example // Enumeration as Object\n   Coral.validate.enumeration({EXTRA_SMALL : 'xs', SMALL : 's', MEDIUM : 'm', LARGE : 'l'});\n   @param {Object} enumeration\n   Object that represents an enum.\n\n   @returns {ValidationFunction}\n   a validation function that ensures that the given value is within the enumeration.\n   ",
+                    "start": 1190,
+                    "end": 1805,
                     "loc": {
                       "start": {
                         "line": 35,
@@ -1287,8 +1287,8 @@
               },
               {
                 "type": "ClassMethod",
-                "start": 1822,
-                "end": 2164,
+                "start": 1808,
+                "end": 2148,
                 "loc": {
                   "start": {
                     "line": 49,
@@ -1303,8 +1303,8 @@
                 "computed": false,
                 "key": {
                   "type": "Identifier",
-                  "start": 1822,
-                  "end": 1833,
+                  "start": 1808,
+                  "end": 1819,
                   "loc": {
                     "start": {
                       "line": 49,
@@ -1327,8 +1327,8 @@
                 "params": [
                   {
                     "type": "Identifier",
-                    "start": 1834,
-                    "end": 1845,
+                    "start": 1820,
+                    "end": 1831,
                     "loc": {
                       "start": {
                         "line": 49,
@@ -1345,8 +1345,8 @@
                 ],
                 "body": {
                   "type": "BlockStatement",
-                  "start": 1847,
-                  "end": 2164,
+                  "start": 1833,
+                  "end": 2148,
                   "loc": {
                     "start": {
                       "line": 49,
@@ -1360,8 +1360,8 @@
                   "body": [
                     {
                       "type": "VariableDeclaration",
-                      "start": 1949,
-                      "end": 2009,
+                      "start": 1935,
+                      "end": 1995,
                       "loc": {
                         "start": {
                           "line": 51,
@@ -1375,8 +1375,8 @@
                       "declarations": [
                         {
                           "type": "VariableDeclarator",
-                          "start": 1955,
-                          "end": 2008,
+                          "start": 1941,
+                          "end": 1994,
                           "loc": {
                             "start": {
                               "line": 51,
@@ -1389,8 +1389,8 @@
                           },
                           "id": {
                             "type": "Identifier",
-                            "start": 1955,
-                            "end": 1967,
+                            "start": 1941,
+                            "end": 1953,
                             "loc": {
                               "start": {
                                 "line": 51,
@@ -1407,8 +1407,8 @@
                           },
                           "init": {
                             "type": "CallExpression",
-                            "start": 1970,
-                            "end": 2008,
+                            "start": 1956,
+                            "end": 1994,
                             "loc": {
                               "start": {
                                 "line": 51,
@@ -1421,8 +1421,8 @@
                             },
                             "callee": {
                               "type": "MemberExpression",
-                              "start": 1970,
-                              "end": 1995,
+                              "start": 1956,
+                              "end": 1981,
                               "loc": {
                                 "start": {
                                   "line": 51,
@@ -1435,8 +1435,8 @@
                               },
                               "object": {
                                 "type": "Identifier",
-                                "start": 1970,
-                                "end": 1977,
+                                "start": 1956,
+                                "end": 1963,
                                 "loc": {
                                   "start": {
                                     "line": 51,
@@ -1452,8 +1452,8 @@
                               },
                               "property": {
                                 "type": "Identifier",
-                                "start": 1978,
-                                "end": 1995,
+                                "start": 1964,
+                                "end": 1981,
                                 "loc": {
                                   "start": {
                                     "line": 51,
@@ -1472,8 +1472,8 @@
                             "arguments": [
                               {
                                 "type": "Identifier",
-                                "start": 1996,
-                                "end": 2007,
+                                "start": 1982,
+                                "end": 1993,
                                 "loc": {
                                   "start": {
                                     "line": 51,
@@ -1497,8 +1497,8 @@
                         {
                           "type": "CommentLine",
                           "value": " Reverses the enumeration, so that we can check that the variable new value exists inside",
-                          "start": 1853,
-                          "end": 1944,
+                          "start": 1839,
+                          "end": 1930,
                           "loc": {
                             "start": {
                               "line": 50,
@@ -1515,8 +1515,8 @@
                         {
                           "type": "CommentLine",
                           "value": " Returns a new function that matches the newValue, oldValue signature",
-                          "start": 2017,
-                          "end": 2088,
+                          "start": 2001,
+                          "end": 2072,
                           "loc": {
                             "start": {
                               "line": 53,
@@ -1532,8 +1532,8 @@
                     },
                     {
                       "type": "ReturnStatement",
-                      "start": 2093,
-                      "end": 2160,
+                      "start": 2077,
+                      "end": 2144,
                       "loc": {
                         "start": {
                           "line": 54,
@@ -1546,8 +1546,8 @@
                       },
                       "argument": {
                         "type": "ArrowFunctionExpression",
-                        "start": 2100,
-                        "end": 2159,
+                        "start": 2084,
+                        "end": 2143,
                         "loc": {
                           "start": {
                             "line": 54,
@@ -1565,8 +1565,8 @@
                         "params": [
                           {
                             "type": "Identifier",
-                            "start": 2101,
-                            "end": 2109,
+                            "start": 2085,
+                            "end": 2093,
                             "loc": {
                               "start": {
                                 "line": 54,
@@ -1584,8 +1584,8 @@
                         ],
                         "body": {
                           "type": "BinaryExpression",
-                          "start": 2114,
-                          "end": 2159,
+                          "start": 2098,
+                          "end": 2143,
                           "loc": {
                             "start": {
                               "line": 54,
@@ -1598,8 +1598,8 @@
                           },
                           "left": {
                             "type": "UnaryExpression",
-                            "start": 2114,
-                            "end": 2143,
+                            "start": 2098,
+                            "end": 2127,
                             "loc": {
                               "start": {
                                 "line": 54,
@@ -1614,8 +1614,8 @@
                             "prefix": true,
                             "argument": {
                               "type": "MemberExpression",
-                              "start": 2121,
-                              "end": 2143,
+                              "start": 2105,
+                              "end": 2127,
                               "loc": {
                                 "start": {
                                   "line": 54,
@@ -1628,8 +1628,8 @@
                               },
                               "object": {
                                 "type": "Identifier",
-                                "start": 2121,
-                                "end": 2133,
+                                "start": 2105,
+                                "end": 2117,
                                 "loc": {
                                   "start": {
                                     "line": 54,
@@ -1645,8 +1645,8 @@
                               },
                               "property": {
                                 "type": "Identifier",
-                                "start": 2134,
-                                "end": 2142,
+                                "start": 2118,
+                                "end": 2126,
                                 "loc": {
                                   "start": {
                                     "line": 54,
@@ -1669,8 +1669,8 @@
                           "operator": "!==",
                           "right": {
                             "type": "StringLiteral",
-                            "start": 2148,
-                            "end": 2159,
+                            "start": 2132,
+                            "end": 2143,
                             "loc": {
                               "start": {
                                 "line": 54,
@@ -1694,8 +1694,8 @@
                         {
                           "type": "CommentLine",
                           "value": " Returns a new function that matches the newValue, oldValue signature",
-                          "start": 2017,
-                          "end": 2088,
+                          "start": 2001,
+                          "end": 2072,
                           "loc": {
                             "start": {
                               "line": 53,
@@ -1715,9 +1715,9 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   Ensures that the new value is within the enumeration. The enumeration can be given as an array of values or as a\n   key/value Object. Take into consideration that enumerations are case sensitive.\n   \n   @example // Enumeration as Array\n   Coral.validate.enumeration(['xs', 's', 'm', 'l']);\n   @example // Enumeration as Object\n   Coral.validate.enumeration({EXTRA_SMALL : 'xs', SMALL : 's', MEDIUM : 'm', LARGE : 'l'});\n   @param {Object} enumeration\n   Object that represents an enum.\n   \n   @returns {ValidationFunction}\n   a validation function that ensures that the given value is within the enumeration.\n   ",
-                    "start": 1198,
-                    "end": 1819,
+                    "value": "*\n   Ensures that the new value is within the enumeration. The enumeration can be given as an array of values or as a\n   key/value Object. Take into consideration that enumerations are case sensitive.\n\n   @example // Enumeration as Array\n   Coral.validate.enumeration(['xs', 's', 'm', 'l']);\n   @example // Enumeration as Object\n   Coral.validate.enumeration({EXTRA_SMALL : 'xs', SMALL : 's', MEDIUM : 'm', LARGE : 'l'});\n   @param {Object} enumeration\n   Object that represents an enum.\n\n   @returns {ValidationFunction}\n   a validation function that ensures that the given value is within the enumeration.\n   ",
+                    "start": 1190,
+                    "end": 1805,
                     "loc": {
                       "start": {
                         "line": 35,
@@ -1755,9 +1755,9 @@
           "trailingComments": [
             {
               "type": "CommentBlock",
-              "value": "*\n Signature of the function used to validate new input. It accepts a newValue and an oldValue which are used to\n determine if the newValue is valid.\n \n @typedef {function} ValidationFunction\n \n @param {*} newValue\n The new value to validate.\n @param {*} oldValue\n The existing value.\n \n @returns {Boolean} <code>true</code> if the validation succeeded, otherwise <code>false</code>.\n ",
-              "start": 2168,
-              "end": 2557,
+              "value": "*\n Signature of the function used to validate new input. It accepts a newValue and an oldValue which are used to\n determine if the newValue is valid.\n\n @typedef {function} ValidationFunction\n\n @param {*} newValue\n The new value to validate.\n @param {*} oldValue\n The existing value.\n\n @returns {Boolean} <code>true</code> if the validation succeeded, otherwise <code>false</code>.\n ",
+              "start": 2152,
+              "end": 2538,
               "loc": {
                 "start": {
                   "line": 58,
@@ -1771,9 +1771,9 @@
             },
             {
               "type": "CommentBlock",
-              "value": "*\n A property transform utility.\n \n @type {Validation}\n ",
-              "start": 2559,
-              "end": 2619,
+              "value": "*\n A property transform utility.\n\n @type {Validation}\n ",
+              "start": 2540,
+              "end": 2599,
               "loc": {
                 "start": {
                   "line": 72,
@@ -1792,8 +1792,8 @@
       },
       {
         "type": "ExportDefaultDeclaration",
-        "start": 2656,
-        "end": 2680,
+        "start": 2636,
+        "end": 2660,
         "loc": {
           "start": {
             "line": 79,
@@ -1875,9 +1875,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   Ensures that the value has changed.\n   \n   @param {*} newValue\n   The new value.\n   @param {*} oldValue\n   The existing value.\n   \n   @returns {Boolean} <code>true</code> if the values are different.\n   ",
+      "value": "*\n   Ensures that the value has changed.\n\n   @param {*} newValue\n   The new value.\n   @param {*} oldValue\n   The existing value.\n\n   @returns {Boolean} <code>true</code> if the values are different.\n   ",
       "start": 730,
-      "end": 942,
+      "end": 936,
       "loc": {
         "start": {
           "line": 19,
@@ -1892,8 +1892,8 @@
     {
       "type": "CommentLine",
       "value": " We can use exact equality here as validation functions are called after transform. Thus, the input value will be",
-      "start": 987,
-      "end": 1102,
+      "start": 981,
+      "end": 1096,
       "loc": {
         "start": {
           "line": 30,
@@ -1908,8 +1908,8 @@
     {
       "type": "CommentLine",
       "value": " converted to the same type as a stored value",
-      "start": 1107,
-      "end": 1154,
+      "start": 1101,
+      "end": 1148,
       "loc": {
         "start": {
           "line": 31,
@@ -1923,9 +1923,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   Ensures that the new value is within the enumeration. The enumeration can be given as an array of values or as a\n   key/value Object. Take into consideration that enumerations are case sensitive.\n   \n   @example // Enumeration as Array\n   Coral.validate.enumeration(['xs', 's', 'm', 'l']);\n   @example // Enumeration as Object\n   Coral.validate.enumeration({EXTRA_SMALL : 'xs', SMALL : 's', MEDIUM : 'm', LARGE : 'l'});\n   @param {Object} enumeration\n   Object that represents an enum.\n   \n   @returns {ValidationFunction}\n   a validation function that ensures that the given value is within the enumeration.\n   ",
-      "start": 1198,
-      "end": 1819,
+      "value": "*\n   Ensures that the new value is within the enumeration. The enumeration can be given as an array of values or as a\n   key/value Object. Take into consideration that enumerations are case sensitive.\n\n   @example // Enumeration as Array\n   Coral.validate.enumeration(['xs', 's', 'm', 'l']);\n   @example // Enumeration as Object\n   Coral.validate.enumeration({EXTRA_SMALL : 'xs', SMALL : 's', MEDIUM : 'm', LARGE : 'l'});\n   @param {Object} enumeration\n   Object that represents an enum.\n\n   @returns {ValidationFunction}\n   a validation function that ensures that the given value is within the enumeration.\n   ",
+      "start": 1190,
+      "end": 1805,
       "loc": {
         "start": {
           "line": 35,
@@ -1940,8 +1940,8 @@
     {
       "type": "CommentLine",
       "value": " Reverses the enumeration, so that we can check that the variable new value exists inside",
-      "start": 1853,
-      "end": 1944,
+      "start": 1839,
+      "end": 1930,
       "loc": {
         "start": {
           "line": 50,
@@ -1956,8 +1956,8 @@
     {
       "type": "CommentLine",
       "value": " Returns a new function that matches the newValue, oldValue signature",
-      "start": 2017,
-      "end": 2088,
+      "start": 2001,
+      "end": 2072,
       "loc": {
         "start": {
           "line": 53,
@@ -1971,9 +1971,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n Signature of the function used to validate new input. It accepts a newValue and an oldValue which are used to\n determine if the newValue is valid.\n \n @typedef {function} ValidationFunction\n \n @param {*} newValue\n The new value to validate.\n @param {*} oldValue\n The existing value.\n \n @returns {Boolean} <code>true</code> if the validation succeeded, otherwise <code>false</code>.\n ",
-      "start": 2168,
-      "end": 2557,
+      "value": "*\n Signature of the function used to validate new input. It accepts a newValue and an oldValue which are used to\n determine if the newValue is valid.\n\n @typedef {function} ValidationFunction\n\n @param {*} newValue\n The new value to validate.\n @param {*} oldValue\n The existing value.\n\n @returns {Boolean} <code>true</code> if the validation succeeded, otherwise <code>false</code>.\n ",
+      "start": 2152,
+      "end": 2538,
       "loc": {
         "start": {
           "line": 58,
@@ -1987,9 +1987,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n A property transform utility.\n \n @type {Validation}\n ",
-      "start": 2559,
-      "end": 2619,
+      "value": "*\n A property transform utility.\n\n @type {Validation}\n ",
+      "start": 2540,
+      "end": 2599,
       "loc": {
         "start": {
           "line": 72,
@@ -2249,9 +2249,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   Ensures that the value has changed.\n   \n   @param {*} newValue\n   The new value.\n   @param {*} oldValue\n   The existing value.\n   \n   @returns {Boolean} <code>true</code> if the values are different.\n   ",
+      "value": "*\n   Ensures that the value has changed.\n\n   @param {*} newValue\n   The new value.\n   @param {*} oldValue\n   The existing value.\n\n   @returns {Boolean} <code>true</code> if the values are different.\n   ",
       "start": 730,
-      "end": 942,
+      "end": 936,
       "loc": {
         "start": {
           "line": 19,
@@ -2276,8 +2276,8 @@
         "binop": null
       },
       "value": "valueMustChange",
-      "start": 945,
-      "end": 960,
+      "start": 939,
+      "end": 954,
       "loc": {
         "start": {
           "line": 29,
@@ -2301,8 +2301,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 960,
-      "end": 961,
+      "start": 954,
+      "end": 955,
       "loc": {
         "start": {
           "line": 29,
@@ -2327,8 +2327,8 @@
         "binop": null
       },
       "value": "newValue",
-      "start": 961,
-      "end": 969,
+      "start": 955,
+      "end": 963,
       "loc": {
         "start": {
           "line": 29,
@@ -2353,8 +2353,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 969,
-      "end": 970,
+      "start": 963,
+      "end": 964,
       "loc": {
         "start": {
           "line": 29,
@@ -2379,8 +2379,8 @@
         "binop": null
       },
       "value": "oldValue",
-      "start": 971,
-      "end": 979,
+      "start": 965,
+      "end": 973,
       "loc": {
         "start": {
           "line": 29,
@@ -2404,8 +2404,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 979,
-      "end": 980,
+      "start": 973,
+      "end": 974,
       "loc": {
         "start": {
           "line": 29,
@@ -2429,8 +2429,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 981,
-      "end": 982,
+      "start": 975,
+      "end": 976,
       "loc": {
         "start": {
           "line": 29,
@@ -2445,8 +2445,8 @@
     {
       "type": "CommentLine",
       "value": " We can use exact equality here as validation functions are called after transform. Thus, the input value will be",
-      "start": 987,
-      "end": 1102,
+      "start": 981,
+      "end": 1096,
       "loc": {
         "start": {
           "line": 30,
@@ -2461,8 +2461,8 @@
     {
       "type": "CommentLine",
       "value": " converted to the same type as a stored value",
-      "start": 1107,
-      "end": 1154,
+      "start": 1101,
+      "end": 1148,
       "loc": {
         "start": {
           "line": 31,
@@ -2489,8 +2489,8 @@
         "updateContext": null
       },
       "value": "return",
-      "start": 1159,
-      "end": 1165,
+      "start": 1153,
+      "end": 1159,
       "loc": {
         "start": {
           "line": 32,
@@ -2515,8 +2515,8 @@
         "binop": null
       },
       "value": "newValue",
-      "start": 1166,
-      "end": 1174,
+      "start": 1160,
+      "end": 1168,
       "loc": {
         "start": {
           "line": 32,
@@ -2542,8 +2542,8 @@
         "updateContext": null
       },
       "value": "!==",
-      "start": 1175,
-      "end": 1178,
+      "start": 1169,
+      "end": 1172,
       "loc": {
         "start": {
           "line": 32,
@@ -2568,8 +2568,8 @@
         "binop": null
       },
       "value": "oldValue",
-      "start": 1179,
-      "end": 1187,
+      "start": 1173,
+      "end": 1181,
       "loc": {
         "start": {
           "line": 32,
@@ -2594,8 +2594,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1187,
-      "end": 1188,
+      "start": 1181,
+      "end": 1182,
       "loc": {
         "start": {
           "line": 32,
@@ -2619,8 +2619,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1191,
-      "end": 1192,
+      "start": 1185,
+      "end": 1186,
       "loc": {
         "start": {
           "line": 33,
@@ -2634,9 +2634,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   Ensures that the new value is within the enumeration. The enumeration can be given as an array of values or as a\n   key/value Object. Take into consideration that enumerations are case sensitive.\n   \n   @example // Enumeration as Array\n   Coral.validate.enumeration(['xs', 's', 'm', 'l']);\n   @example // Enumeration as Object\n   Coral.validate.enumeration({EXTRA_SMALL : 'xs', SMALL : 's', MEDIUM : 'm', LARGE : 'l'});\n   @param {Object} enumeration\n   Object that represents an enum.\n   \n   @returns {ValidationFunction}\n   a validation function that ensures that the given value is within the enumeration.\n   ",
-      "start": 1198,
-      "end": 1819,
+      "value": "*\n   Ensures that the new value is within the enumeration. The enumeration can be given as an array of values or as a\n   key/value Object. Take into consideration that enumerations are case sensitive.\n\n   @example // Enumeration as Array\n   Coral.validate.enumeration(['xs', 's', 'm', 'l']);\n   @example // Enumeration as Object\n   Coral.validate.enumeration({EXTRA_SMALL : 'xs', SMALL : 's', MEDIUM : 'm', LARGE : 'l'});\n   @param {Object} enumeration\n   Object that represents an enum.\n\n   @returns {ValidationFunction}\n   a validation function that ensures that the given value is within the enumeration.\n   ",
+      "start": 1190,
+      "end": 1805,
       "loc": {
         "start": {
           "line": 35,
@@ -2661,8 +2661,8 @@
         "binop": null
       },
       "value": "enumeration",
-      "start": 1822,
-      "end": 1833,
+      "start": 1808,
+      "end": 1819,
       "loc": {
         "start": {
           "line": 49,
@@ -2686,8 +2686,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1833,
-      "end": 1834,
+      "start": 1819,
+      "end": 1820,
       "loc": {
         "start": {
           "line": 49,
@@ -2712,8 +2712,8 @@
         "binop": null
       },
       "value": "enumeration",
-      "start": 1834,
-      "end": 1845,
+      "start": 1820,
+      "end": 1831,
       "loc": {
         "start": {
           "line": 49,
@@ -2737,8 +2737,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1845,
-      "end": 1846,
+      "start": 1831,
+      "end": 1832,
       "loc": {
         "start": {
           "line": 49,
@@ -2762,8 +2762,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1847,
-      "end": 1848,
+      "start": 1833,
+      "end": 1834,
       "loc": {
         "start": {
           "line": 49,
@@ -2778,8 +2778,8 @@
     {
       "type": "CommentLine",
       "value": " Reverses the enumeration, so that we can check that the variable new value exists inside",
-      "start": 1853,
-      "end": 1944,
+      "start": 1839,
+      "end": 1930,
       "loc": {
         "start": {
           "line": 50,
@@ -2806,8 +2806,8 @@
         "updateContext": null
       },
       "value": "const",
-      "start": 1949,
-      "end": 1954,
+      "start": 1935,
+      "end": 1940,
       "loc": {
         "start": {
           "line": 51,
@@ -2832,8 +2832,8 @@
         "binop": null
       },
       "value": "enumReversed",
-      "start": 1955,
-      "end": 1967,
+      "start": 1941,
+      "end": 1953,
       "loc": {
         "start": {
           "line": 51,
@@ -2859,8 +2859,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 1968,
-      "end": 1969,
+      "start": 1954,
+      "end": 1955,
       "loc": {
         "start": {
           "line": 51,
@@ -2885,8 +2885,8 @@
         "binop": null
       },
       "value": "commons",
-      "start": 1970,
-      "end": 1977,
+      "start": 1956,
+      "end": 1963,
       "loc": {
         "start": {
           "line": 51,
@@ -2911,8 +2911,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1977,
-      "end": 1978,
+      "start": 1963,
+      "end": 1964,
       "loc": {
         "start": {
           "line": 51,
@@ -2937,8 +2937,8 @@
         "binop": null
       },
       "value": "swapKeysAndValues",
-      "start": 1978,
-      "end": 1995,
+      "start": 1964,
+      "end": 1981,
       "loc": {
         "start": {
           "line": 51,
@@ -2962,8 +2962,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1995,
-      "end": 1996,
+      "start": 1981,
+      "end": 1982,
       "loc": {
         "start": {
           "line": 51,
@@ -2988,8 +2988,8 @@
         "binop": null
       },
       "value": "enumeration",
-      "start": 1996,
-      "end": 2007,
+      "start": 1982,
+      "end": 1993,
       "loc": {
         "start": {
           "line": 51,
@@ -3013,8 +3013,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 2007,
-      "end": 2008,
+      "start": 1993,
+      "end": 1994,
       "loc": {
         "start": {
           "line": 51,
@@ -3039,8 +3039,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 2008,
-      "end": 2009,
+      "start": 1994,
+      "end": 1995,
       "loc": {
         "start": {
           "line": 51,
@@ -3055,8 +3055,8 @@
     {
       "type": "CommentLine",
       "value": " Returns a new function that matches the newValue, oldValue signature",
-      "start": 2017,
-      "end": 2088,
+      "start": 2001,
+      "end": 2072,
       "loc": {
         "start": {
           "line": 53,
@@ -3083,8 +3083,8 @@
         "updateContext": null
       },
       "value": "return",
-      "start": 2093,
-      "end": 2099,
+      "start": 2077,
+      "end": 2083,
       "loc": {
         "start": {
           "line": 54,
@@ -3108,8 +3108,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 2100,
-      "end": 2101,
+      "start": 2084,
+      "end": 2085,
       "loc": {
         "start": {
           "line": 54,
@@ -3134,8 +3134,8 @@
         "binop": null
       },
       "value": "newValue",
-      "start": 2101,
-      "end": 2109,
+      "start": 2085,
+      "end": 2093,
       "loc": {
         "start": {
           "line": 54,
@@ -3159,8 +3159,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 2109,
-      "end": 2110,
+      "start": 2093,
+      "end": 2094,
       "loc": {
         "start": {
           "line": 54,
@@ -3185,8 +3185,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 2111,
-      "end": 2113,
+      "start": 2095,
+      "end": 2097,
       "loc": {
         "start": {
           "line": 54,
@@ -3213,8 +3213,8 @@
         "updateContext": null
       },
       "value": "typeof",
-      "start": 2114,
-      "end": 2120,
+      "start": 2098,
+      "end": 2104,
       "loc": {
         "start": {
           "line": 54,
@@ -3239,8 +3239,8 @@
         "binop": null
       },
       "value": "enumReversed",
-      "start": 2121,
-      "end": 2133,
+      "start": 2105,
+      "end": 2117,
       "loc": {
         "start": {
           "line": 54,
@@ -3265,8 +3265,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 2133,
-      "end": 2134,
+      "start": 2117,
+      "end": 2118,
       "loc": {
         "start": {
           "line": 54,
@@ -3291,8 +3291,8 @@
         "binop": null
       },
       "value": "newValue",
-      "start": 2134,
-      "end": 2142,
+      "start": 2118,
+      "end": 2126,
       "loc": {
         "start": {
           "line": 54,
@@ -3317,8 +3317,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 2142,
-      "end": 2143,
+      "start": 2126,
+      "end": 2127,
       "loc": {
         "start": {
           "line": 54,
@@ -3344,8 +3344,8 @@
         "updateContext": null
       },
       "value": "!==",
-      "start": 2144,
-      "end": 2147,
+      "start": 2128,
+      "end": 2131,
       "loc": {
         "start": {
           "line": 54,
@@ -3371,8 +3371,8 @@
         "updateContext": null
       },
       "value": "undefined",
-      "start": 2148,
-      "end": 2159,
+      "start": 2132,
+      "end": 2143,
       "loc": {
         "start": {
           "line": 54,
@@ -3397,8 +3397,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 2159,
-      "end": 2160,
+      "start": 2143,
+      "end": 2144,
       "loc": {
         "start": {
           "line": 54,
@@ -3422,8 +3422,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 2163,
-      "end": 2164,
+      "start": 2147,
+      "end": 2148,
       "loc": {
         "start": {
           "line": 55,
@@ -3447,8 +3447,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 2165,
-      "end": 2166,
+      "start": 2149,
+      "end": 2150,
       "loc": {
         "start": {
           "line": 56,
@@ -3462,9 +3462,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n Signature of the function used to validate new input. It accepts a newValue and an oldValue which are used to\n determine if the newValue is valid.\n \n @typedef {function} ValidationFunction\n \n @param {*} newValue\n The new value to validate.\n @param {*} oldValue\n The existing value.\n \n @returns {Boolean} <code>true</code> if the validation succeeded, otherwise <code>false</code>.\n ",
-      "start": 2168,
-      "end": 2557,
+      "value": "*\n Signature of the function used to validate new input. It accepts a newValue and an oldValue which are used to\n determine if the newValue is valid.\n\n @typedef {function} ValidationFunction\n\n @param {*} newValue\n The new value to validate.\n @param {*} oldValue\n The existing value.\n\n @returns {Boolean} <code>true</code> if the validation succeeded, otherwise <code>false</code>.\n ",
+      "start": 2152,
+      "end": 2538,
       "loc": {
         "start": {
           "line": 58,
@@ -3478,9 +3478,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n A property transform utility.\n \n @type {Validation}\n ",
-      "start": 2559,
-      "end": 2619,
+      "value": "*\n A property transform utility.\n\n @type {Validation}\n ",
+      "start": 2540,
+      "end": 2599,
       "loc": {
         "start": {
           "line": 72,
@@ -3507,8 +3507,8 @@
         "updateContext": null
       },
       "value": "const",
-      "start": 2620,
-      "end": 2625,
+      "start": 2600,
+      "end": 2605,
       "loc": {
         "start": {
           "line": 77,
@@ -3533,8 +3533,8 @@
         "binop": null
       },
       "value": "validate",
-      "start": 2626,
-      "end": 2634,
+      "start": 2606,
+      "end": 2614,
       "loc": {
         "start": {
           "line": 77,
@@ -3560,8 +3560,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 2635,
-      "end": 2636,
+      "start": 2615,
+      "end": 2616,
       "loc": {
         "start": {
           "line": 77,
@@ -3588,8 +3588,8 @@
         "updateContext": null
       },
       "value": "new",
-      "start": 2637,
-      "end": 2640,
+      "start": 2617,
+      "end": 2620,
       "loc": {
         "start": {
           "line": 77,
@@ -3614,8 +3614,8 @@
         "binop": null
       },
       "value": "Validation",
-      "start": 2641,
-      "end": 2651,
+      "start": 2621,
+      "end": 2631,
       "loc": {
         "start": {
           "line": 77,
@@ -3639,8 +3639,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 2651,
-      "end": 2652,
+      "start": 2631,
+      "end": 2632,
       "loc": {
         "start": {
           "line": 77,
@@ -3664,8 +3664,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 2652,
-      "end": 2653,
+      "start": 2632,
+      "end": 2633,
       "loc": {
         "start": {
           "line": 77,
@@ -3690,8 +3690,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 2653,
-      "end": 2654,
+      "start": 2633,
+      "end": 2634,
       "loc": {
         "start": {
           "line": 77,
@@ -3718,8 +3718,8 @@
         "updateContext": null
       },
       "value": "export",
-      "start": 2656,
-      "end": 2662,
+      "start": 2636,
+      "end": 2642,
       "loc": {
         "start": {
           "line": 79,
@@ -3746,8 +3746,8 @@
         "updateContext": null
       },
       "value": "default",
-      "start": 2663,
-      "end": 2670,
+      "start": 2643,
+      "end": 2650,
       "loc": {
         "start": {
           "line": 79,
@@ -3772,8 +3772,8 @@
         "binop": null
       },
       "value": "validate",
-      "start": 2671,
-      "end": 2679,
+      "start": 2651,
+      "end": 2659,
       "loc": {
         "start": {
           "line": 79,
@@ -3798,8 +3798,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 2679,
-      "end": 2680,
+      "start": 2659,
+      "end": 2660,
       "loc": {
         "start": {
           "line": 79,
@@ -3824,8 +3824,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 2681,
-      "end": 2681,
+      "start": 2661,
+      "end": 2661,
       "loc": {
         "start": {
           "line": 80,

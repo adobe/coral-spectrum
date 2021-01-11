@@ -451,25 +451,25 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-  
+
     this._delegateEvents(commons.extend(this._events, {
       click: &apos;_onClick&apos;,
       mousedown: &apos;_onMouseDown&apos;
     }));
-    
+
     // Prepare templates
     this._elements = {
       // Try to find the label content zone
       label: this.querySelector(&apos;coral-radio-label&apos;) || document.createElement(&apos;coral-radio-label&apos;)
     };
     base.call(this._elements, {commons, i18n});
-  
+
     // Pre-define labellable element
     this._labellableElement = this._elements.input;
-  
+
     // Check if the label is empty whenever we get a mutation
     this._observer = new MutationObserver(this._hideLabelIfEmpty.bind(this));
-  
+
     // Watch for changes to the label element&apos;s children
     this._observer.observe(this._elements.labelWrapper, {
       // Catch changes to childList
@@ -480,10 +480,10 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
       subtree: true
     });
   }
-  
+
   /**
    Checked state for the radio, &lt;code&gt;true&lt;/code&gt; is checked and &lt;code&gt;false&lt;/code&gt; is unchecked.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute checked
@@ -493,35 +493,37 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get checked() {
     return this._checked || false;
   }
+
   set checked(value) {
     this._checked = transform.booleanAttr(value);
     this._reflectAttribute(&apos;checked&apos;, this._checked);
-    
+
     this._elements.input.checked = this._checked;
-  
+
     // handles related radios
     this._syncRelatedRadios();
   }
-  
+
   /**
    The radios&apos;s label element.
-   
+
    @type {RadioLabel}
    @contentzone
    */
   get label() {
     return this._getContentZone(this._elements.label);
   }
+
   set label(value) {
     this._setContentZone(&apos;label&apos;, value, {
       handle: &apos;label&apos;,
       tagName: &apos;coral-radio-label&apos;,
-      insert: function(label) {
+      insert: function (label) {
         this._elements.labelWrapper.appendChild(label);
       }
     });
   }
-  
+
   /**
    Name used to submit the data in a form.
    @type {String}
@@ -532,15 +534,16 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._elements.input.name;
   }
+
   set name(value) {
     this._reflectAttribute(&apos;name&apos;, value);
-    
+
     this._elements.input.name = value;
   }
-  
+
   /**
    The value this radio should submit when checked. Changing this value will not trigger an event.
-   
+
    @type {String}
    @default &quot;on&quot;
    @htmlattribute value
@@ -548,10 +551,11 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get value() {
     return this._elements.input.value || &apos;on&apos;;
   }
+
   set value(value) {
     this._elements.input.value = value;
   }
-  
+
   /**
    Whether this field is disabled or not.
    @type {Boolean}
@@ -562,15 +566,16 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
-    
+
     this[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
     this.classList.toggle(&apos;is-disabled&apos;, this._disabled);
     this._elements.input.disabled = this._disabled;
   }
-  
+
   /**
    Whether this field is required or not.
    @type {Boolean}
@@ -581,13 +586,14 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute(&apos;required&apos;, this._required);
-    
+
     this._elements.input.required = this._required;
   }
-  
+
   /**
    Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
    @type {Boolean}
@@ -598,26 +604,28 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute(&apos;readonly&apos;, this._readOnly);
-  
+
     this.classList.toggle(&apos;is-readOnly&apos;, this._readOnly);
     this._elements.input.tabIndex = this._readOnly ? -1 : 0;
   }
-  
+
   /**
    Inherited from {@link BaseFormField#labelled}.
    */
   get labelled() {
     return super.labelled;
   }
+
   set labelled(value) {
     super.labelled = value;
-    
+
     this._hideLabelIfEmpty();
   }
-  
+
   /**
    Inherited from {@link BaseComponent#trackingElement}.
    */
@@ -628,28 +636,33 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
       (this.name ? `${this.name}=${this.value}` : &apos;&apos;) || (this.label || this).textContent.replace(/\s{2,}/g, &apos; &apos;).trim() :
       this._trackingElement;
   }
+
   set trackingElement(value) {
     super.trackingElement = value;
   }
-  
+
   /*
    Indicates to the formField that the &apos;checked&apos; property needs to be set in this component.
-   
+
    @protected
    */
-  get _componentTargetProperty() { return &apos;checked&apos;; }
-  
+  get _componentTargetProperty() {
+    return &apos;checked&apos;;
+  }
+
   /*
    Indicates to the formField that the &apos;checked&apos; property has to be extracted from the event.
-   
+
    @protected
    */
-  get _eventTargetProperty() { return &apos;checked&apos;; }
-  
+  get _eventTargetProperty() {
+    return &apos;checked&apos;;
+  }
+
   /**
    Takes care of keeping the checked property up to date, by unchecking every radio that has the same name. This is
    only done if the radio is already in the DOM, it has a name and it is checked, otherwise this is not needed.
- 
+
    @ignore
    */
   _syncRelatedRadios() {
@@ -659,8 +672,8 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
       // queries the document for all the coral-radios with the same name
       const items = document.querySelectorAll(`${this.tagName}[name=${JSON.stringify(this.name)}]`);
       const itemCount = items.length;
-    
-      for (let i = 0; i &lt; itemCount; i++) {
+
+      for (let i = 0 ; i &lt; itemCount ; i++) {
         if (items[i] !== this) {
           // we uncheck all other radios with the same name
           items[i].removeAttribute(&apos;checked&apos;);
@@ -668,23 +681,23 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
       }
     }
   }
-  
+
   /**
    Hide the label if it&apos;s empty.
- 
+
    @ignore
    */
   _hideLabelIfEmpty() {
     const label = this._elements.label;
-  
+
     // If it&apos;s empty and has no non-textnode children, hide the label
     const hiddenValue = !(label.children.length === 0 &amp;&amp; label.textContent.replace(/\s*/g, &apos;&apos;) === &apos;&apos;);
-  
+
     // Toggle the screen reader text
     this._elements.labelWrapper.style.margin = !hiddenValue ? &apos;0&apos; : &apos;&apos;;
     this._elements.screenReaderOnly.hidden = hiddenValue || this.labelled;
   }
-  
+
   /**
    @private
    */
@@ -695,11 +708,11 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
         this.checked = true;
         this.trigger(&apos;change&apos;);
       }
-  
+
       this._trackEvent(&apos;checked&apos;, &apos;coral-radio&apos;, event);
     }
   }
-  
+
   /**
    Forces radio to receive focus on mousedown
    @ignore
@@ -712,76 +725,77 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
       }
     });
   }
-  
+
   /**
    Inherited from {@link BaseFormField#clear}.
    */
   clear() {
     this.checked = false;
   }
-  
+
   /**
    Inherited from {@link BaseFormField#reset}.
    */
   reset() {
     this.checked = this._initialCheckedState;
   }
-  
-  get _contentZones() { return {&apos;coral-radio-label&apos;: &apos;label&apos;}; }
-  
+
+  get _contentZones() {
+    return {&apos;coral-radio-label&apos;: &apos;label&apos;};
+  }
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;checked&apos;]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Create a fragment
     const frag = document.createDocumentFragment();
-  
+
     const templateHandleNames = [&apos;input&apos;, &apos;checkmark&apos;, &apos;labelWrapper&apos;];
-  
+
     // Render the main template
     frag.appendChild(this._elements.input);
     frag.appendChild(this._elements.checkmark);
     frag.appendChild(this._elements.labelWrapper);
-    
+
     const label = this._elements.label;
-  
+
     // Remove it so we can process children
     if (label &amp;&amp; label.parentNode) {
       label.parentNode.removeChild(label);
     }
-  
+
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
         child.nodeType === Node.ELEMENT_NODE &amp;&amp; templateHandleNames.indexOf(child.getAttribute(&apos;handle&apos;)) === -1) {
         // Add non-template elements to the label
         label.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else (e.g labelWrapper)
         this.removeChild(child);
       }
     }
-  
+
     // Add the frag to the component
     this.appendChild(frag);
-  
+
     // Assign the content zones, moving them into place in the process
     this.label = label;
-  
+
     // Cache the initial checked state of the radio button (in order to implement reset)
     this._initialCheckedState = this.checked;
-  
+
     // handles the case where the attached component was checked
     this._syncRelatedRadios();
-  
+
     // Check if we need to hide the label
     // We must do this because IE does not catch mutations when nodes are not in the DOM
     this._hideLabelIfEmpty();

@@ -444,16 +444,30 @@ import &apos;../../../coral-component-button&apos;;
 import {Checkbox} from &apos;../../../coral-component-checkbox&apos;;
 import base from &apos;../templates/base&apos;;
 import {SelectableCollection} from &apos;../../../coral-collection&apos;;
-import {isTableHeaderCell, isTableCell, isTableRow, isTableBody, getCellByIndex, getColumns, getCells, getContentCells, getHeaderCells, getRows, getSiblingsOf, getIndexOf, divider} from &apos;./TableUtil&apos;;
-import {transform, validate, commons, i18n,  Keys} from &apos;../../../coral-utils&apos;;
+import {
+  isTableHeaderCell,
+  isTableCell,
+  isTableRow,
+  isTableBody,
+  getCellByIndex,
+  getColumns,
+  getCells,
+  getContentCells,
+  getHeaderCells,
+  getRows,
+  getSiblingsOf,
+  getIndexOf,
+  divider
+} from &apos;./TableUtil&apos;;
+import {transform, validate, commons, i18n, Keys} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-Table-wrapper&apos;;
 
 /**
  Enumeration for {@link Table} variants
- 
+
  @typedef {Object} TableVariantEnum
- 
+
  @property {String} DEFAULT
  A default table.
  @property {String} QUIET
@@ -502,7 +516,7 @@ class Table extends BaseComponent(HTMLTableElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Templates
     this._elements = {
       head: this.querySelector(&apos;thead[is=&quot;coral-table-head&quot;]&apos;) || new TableHead(),
@@ -511,14 +525,14 @@ class Table extends BaseComponent(HTMLTableElement) {
       columns: this.querySelector(&apos;colgroup&apos;) || document.createElement(&apos;colgroup&apos;)
     };
     base.call(this._elements, {commons});
-    
+
     // Events
     this._delegateEvents({
       // Table specific
       &apos;global:coral-commons:_webfontactive&apos;: &apos;_resetLayout&apos;,
       &apos;change [coral-table-select]&apos;: &apos;_onSelectAll&apos;,
       &apos;capture:scroll [handle=&quot;container&quot;]&apos;: &apos;_onScroll&apos;,
-  
+
       // Head specific
       &apos;click thead[is=&quot;coral-table-head&quot;] th[is=&quot;coral-table-headercell&quot;]&apos;: &apos;_onHeaderCellSort&apos;,
       &apos;coral-dragaction:dragstart thead[is=&quot;coral-table-head&quot;] th[is=&quot;coral-table-headercell&quot;]&apos;: &apos;_onHeaderCellDragStart&apos;,
@@ -529,7 +543,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       &apos;key:enter th[is=&quot;coral-table-headercell&quot;] coral-table-headercell-content&apos;: &apos;_onHeaderCellSort&apos;,
       &apos;key:space th[is=&quot;coral-table-headercell&quot;]&apos;: &apos;_onHeaderCellSort&apos;,
       &apos;key:space th[is=&quot;coral-table-headercell&quot;] coral-table-headercell-content&apos;: &apos;_onHeaderCellSort&apos;,
-  
+
       // Body specific
       &apos;click tbody[is=&quot;coral-table-body&quot;] [coral-table-rowlock]&apos;: &apos;_onRowLock&apos;,
       &apos;click tbody[is=&quot;coral-table-body&quot;] [coral-table-rowselect]&apos;: &apos;_onRowSelect&apos;,
@@ -558,7 +572,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       &apos;key:shift+right tbody[is=&quot;coral-table-body&quot;] tr[is=&quot;coral-table-row&quot;]&apos;: &apos;_onSelectNextItem&apos;,
       &apos;key:shift+up tbody[is=&quot;coral-table-body&quot;] tr[is=&quot;coral-table-row&quot;]&apos;: &apos;_onSelectPreviousItem&apos;,
       &apos;key:shift+down tbody[is=&quot;coral-table-body&quot;] tr[is=&quot;coral-table-row&quot;]&apos;: &apos;_onSelectNextItem&apos;,
-  
+
       // Private
       &apos;coral-table-row:_multiplechanged&apos;: &apos;_onRowMultipleChanged&apos;,
       &apos;coral-table-row:_beforeselectedchanged&apos;: &apos;_onBeforeRowSelectionChanged&apos;,
@@ -580,7 +594,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       &apos;coral-table-column:_sort&apos;: &apos;_onColumnSort&apos;,
       &apos;coral-table-head:_stickychanged&apos;: &apos;_onHeadStickyChanged&apos;
     });
-  
+
     // Required for coral-table:change event
     this._oldSelection = [];
     // References selected items in their selection order and is only used for keyboard selection
@@ -588,109 +602,113 @@ class Table extends BaseComponent(HTMLTableElement) {
       items: [],
       direction: null
     };
-    
+
     // Don&apos;t sort by default
     this._allowSorting = false;
-  
+
     // Debounce timer
     this._timeout = null;
     // Debounce wait in milliseconds
     this._wait = 50;
-    
+
     // Used by resizing detector
     this._resetLayout = this._resetLayout.bind(this);
     // Init observer
     this._toggleObserver(true);
   }
-  
+
   /**
    The head of the table.
-   
+
    @type {TableHead}
    @contentzone
    */
   get head() {
     return this._getContentZone(this._elements.head);
   }
+
   set head(value) {
     this._setContentZone(&apos;head&apos;, value, {
       handle: &apos;head&apos;,
       tagName: &apos;thead&apos;,
-      insert: function(head) {
+      insert: function (head) {
         // Using the native table API allows to position the head element at the correct position.
         this._elements.table.tHead = head;
-  
+
         // To init the head observer
         head.setAttribute(&apos;_observe&apos;, &apos;on&apos;);
       }
     });
   }
-  
+
   /**
    The body of the table. Multiple bodies are not supported.
-   
+
    @type {TableBody}
    @contentzone
    */
   get body() {
     return this._getContentZone(this._elements.body);
   }
+
   set body(value) {
     this._setContentZone(&apos;body&apos;, value, {
       handle: &apos;body&apos;,
       tagName: &apos;tbody&apos;,
-      insert: function(body) {
+      insert: function (body) {
         this._elements.table.appendChild(body);
         this.items._container = body;
-        
+
         // To init the body observer
         body.setAttribute(&apos;_observe&apos;, &apos;on&apos;);
       }
     });
   }
-  
+
   /**
    The foot of the table.
-   
+
    @type {TableFoot}
    @contentzone
    */
   get foot() {
     return this._getContentZone(this._elements.foot);
   }
+
   set foot(value) {
     this._setContentZone(&apos;foot&apos;, value, {
       handle: &apos;foot&apos;,
       tagName: &apos;tfoot&apos;,
-      insert: function(foot) {
+      insert: function (foot) {
         // Using the native table API allows to position the foot element at the correct position.
         this._elements.table.tFoot = foot;
       }
     });
   }
-  
+
   /**
    The columns of the table.
-   
+
    @type {TableColumn}
    @contentzone
    */
   get columns() {
     return this._getContentZone(this._elements.columns);
   }
+
   set columns(value) {
     this._setContentZone(&apos;columns&apos;, value, {
       handle: &apos;columns&apos;,
       tagName: &apos;colgroup&apos;,
-      insert: function(content) {
+      insert: function (content) {
         this._elements.table.appendChild(content);
       }
     });
   }
-  
+
   /**
    The table&apos;s variant. See {@link TableVariantEnum}.
-   
+
    @type {String}
    @default TableVariantEnum.DEFAULT
    @htmlattribute variant
@@ -699,18 +717,19 @@ class Table extends BaseComponent(HTMLTableElement) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.DEFAULT;
     this._reflectAttribute(&apos;variant&apos;, this._variant);
-  
+
     this.classList.remove(...ALL_VARIANT_CLASSES);
     this.classList.add(`${CLASSNAME}--${this._variant}`);
   }
-  
+
   /**
    Whether the items are selectable.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selectable
@@ -719,28 +738,28 @@ class Table extends BaseComponent(HTMLTableElement) {
   get selectable() {
     return this._selectable || false;
   }
+
   set selectable(value) {
     this._selectable = transform.booleanAttr(value);
     this._reflectAttribute(&apos;selectable&apos;, this._selectable);
-  
+
     const rows = getRows([this.body]);
-  
+
     if (this._selectable) {
       rows.forEach((row) =&gt; {
         row.setAttribute(&apos;_selectable&apos;, &apos;&apos;);
       });
-    }
-    else {
+    } else {
       // Clear selection
       rows.forEach((row) =&gt; {
         row.removeAttribute(&apos;_selectable&apos;);
       });
-    
+
       this.trigger(&apos;coral-table:change&apos;, {
         selection: [],
         oldSelection: this._oldSelection
       });
-    
+
       // Sync used collection
       this._oldSelection = [];
       this._lastSelectedItems.items = [];
@@ -749,10 +768,10 @@ class Table extends BaseComponent(HTMLTableElement) {
     // a11y
     this._toggleFocusable();
   }
-  
+
   /**
    Whether the table is orderable. If the table is sorted, ordering handles are hidden.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute orderable
@@ -761,21 +780,22 @@ class Table extends BaseComponent(HTMLTableElement) {
   get orderable() {
     return this._orderable || false;
   }
+
   set orderable(value) {
     this._orderable = transform.booleanAttr(value);
     this._reflectAttribute(&apos;orderable&apos;, this._orderable);
-  
+
     getRows([this.body]).forEach((row) =&gt; {
       row[this._orderable ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;_orderable&apos;, &apos;&apos;);
     });
-  
+
     // a11y
     this._toggleFocusable();
   }
-  
+
   /**
    Whether multiple items can be selected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute multiple
@@ -784,32 +804,32 @@ class Table extends BaseComponent(HTMLTableElement) {
   get multiple() {
     return this._multiple || false;
   }
+
   set multiple(value) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute(&apos;multiple&apos;, this._multiple);
-    
+
     this._elements.table.setAttribute(&apos;aria-multiselectable&apos;, this._multiple);
-  
+
     // Deselect all except last
     if (!this.multiple) {
       const selection = this.selectedItems;
-    
+
       if (selection.length &gt; 1) {
         selection.forEach((row, i) =&gt; {
           // Don&apos;t trigger too many events
           row.set(&apos;selected&apos;, i === selection.length - 1, true);
         });
-      
+
         // Synchronise the table select handle
         const newSelection = this.selectedItems;
-      
+
         if (newSelection.length) {
           this._setSelectAllHandleState(&apos;indeterminate&apos;);
-        }
-        else {
+        } else {
           this._setSelectAllHandleState(&apos;unchecked&apos;);
         }
-      
+
         this.trigger(&apos;coral-table:change&apos;, {
           selection: newSelection,
           oldSelection: selection
@@ -821,11 +841,11 @@ class Table extends BaseComponent(HTMLTableElement) {
       }
     }
   }
-  
+
   /**
    Whether the table rows can be locked/unlocked. If rows are locked, they float to the top of the table and aren&apos;t
    affected by column sorting.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute lockable
@@ -834,21 +854,22 @@ class Table extends BaseComponent(HTMLTableElement) {
   get lockable() {
     return this._lockable || false;
   }
+
   set lockable(value) {
     this._lockable = transform.booleanAttr(value);
     this._reflectAttribute(&apos;lockable&apos;, this._lockable);
-  
+
     getRows([this.body]).forEach((row) =&gt; {
       row[this._lockable ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;_lockable&apos;, &apos;&apos;);
     });
-  
+
     // a11y
     this._toggleFocusable();
   }
- 
+
   /**
    Specifies &lt;code&gt;aria-labelledby&lt;/code&gt; value.
-   
+
    @type {?String}
    @default null
    @htmlattribute labelledby
@@ -856,15 +877,16 @@ class Table extends BaseComponent(HTMLTableElement) {
   get labelledBy() {
     return this._elements.table.getAttribute(&apos;aria-labelledby&apos;);
   }
+
   set labelledBy(value) {
     value = transform.string(value);
-  
+
     this._elements.table[value ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-labelledby&apos;, value);
   }
 
   /**
    Specifies &lt;code&gt;aria-label&lt;/code&gt; value.
-   
+
    @type {String}
    @default null
    @htmlattribute labelled
@@ -872,36 +894,37 @@ class Table extends BaseComponent(HTMLTableElement) {
   get labelled() {
     return this._elements.table.getAttribute(&apos;aria-label&apos;);
   }
+
   set labelled(value) {
     value = transform.string(value);
-  
+
     this._elements.table[value ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-label&apos;, value);
   }
- 
+
   /**
    Returns an Array containing the selected items.
-   
+
    @type {Array.&lt;HTMLElement&gt;}
    @readonly
    */
   get selectedItems() {
     return this.items._getAllSelected();
   }
-  
+
   /**
    Returns the first selected item of the table. The value &lt;code&gt;null&lt;/code&gt; is returned if no element is
    selected.
-   
+
    @type {HTMLElement}
    @readonly
    */
   get selectedItem() {
     return this.items._getFirstSelected();
   }
-  
+
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+
    @type {SelectableCollection}
    @readonly
    */
@@ -915,39 +938,38 @@ class Table extends BaseComponent(HTMLTableElement) {
         itemTagName: &apos;coral-table-row&apos;
       });
     }
-  
+
     return this._items;
   }
-  
+
   /** @private */
   _onSelectAll(event) {
     if (this.selectable) {
       let rows = this._getSelectableItems();
-      
+
       if (rows.length) {
         if (this.multiple) {
           const selected = event.target.checked;
-          
+
           rows.forEach((row) =&gt; {
             // Don&apos;t trigger too many events
             row.set(&apos;selected&apos;, selected, true);
           });
-          
+
           rows = selected ? rows : [];
-          
+
           // Synchronise the table select handle
           this._setSelectAllHandleState(selected ? &apos;checked&apos; : &apos;unchecked&apos;);
-          
+
           this.trigger(&apos;coral-table:change&apos;, {
             selection: rows,
             oldSelection: this._oldSelection
           });
-          
+
           // Sync used collection
           this._oldSelection = rows;
           this._lastSelectedItems.items = rows;
-        }
-        else {
+        } else {
           // Only select last item
           const lastItem = rows[rows.length - 1];
           lastItem.selected = !lastItem.selected;
@@ -955,7 +977,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       }
     }
   }
-  
+
   _triggerChangeEvent() {
     if (!this._preventTriggeringEvents) {
       const selectedItems = this.selectedItems;
@@ -963,16 +985,16 @@ class Table extends BaseComponent(HTMLTableElement) {
         oldSelection: this._oldSelection,
         selection: selectedItems
       });
-      
+
       this._oldSelection = selectedItems;
     }
   }
-  
+
   /** @private */
   _onRowOrder(event) {
     const table = this;
     const row = event.target.closest(&apos;tr[is=&quot;coral-table-row&quot;]&apos;);
-    
+
     if (row &amp;&amp; table.orderable) {
       const head = table.head;
       const body = table.body;
@@ -984,34 +1006,33 @@ class Table extends BaseComponent(HTMLTableElement) {
       const items = getRows([body]);
       const tableBoundingClientRect = table.getBoundingClientRect();
       const rowBoundingClientRect = row.getBoundingClientRect();
-      
+
       if (row === items[0]) {
         table.classList.add(IS_FIRST_ITEM_DRAGGED);
-      }
-      else if (row === items[items.length - 1]) {
+      } else if (row === items[items.length - 1]) {
         table.classList.add(IS_LAST_ITEM_DRAGGED);
       }
-      
+
       dragAction.axis = &apos;vertical&apos;;
       // Handle the scroll in table
       dragAction.scroll = false;
       // Specify selection handle directly on the row if none found
       dragAction.handle = row.querySelector(&apos;[coral-table-roworder]&apos;);
-      
+
       // The row placeholder indicating where the dragged element will be dropped
       const placeholder = row.cloneNode(true);
       placeholder.classList.add(&apos;_coral-Table-row--placeholder&apos;);
-      
+
       // Prepare the row position before inserting its placeholder
       row.style.top = `${rowBoundingClientRect.top - tableBoundingClientRect.top}px`;
-      
+
       // Prevent change event from triggering if the cloned node is selected
       table._preventTriggeringEvents = true;
       body.insertBefore(placeholder, row.nextElementSibling);
       window.requestAnimationFrame(() =&gt; {
         table._preventTriggeringEvents = false;
       });
-      
+
       // Store the data to avoid re-reading the layout on drag events
       const dragData = {
         placeholder: placeholder,
@@ -1022,7 +1043,7 @@ class Table extends BaseComponent(HTMLTableElement) {
           row: style
         }
       };
-      
+
       // Required to handle the scrolling of the sticky table on drag events
       if (sticky) {
         dragData.sticky = sticky;
@@ -1031,31 +1052,31 @@ class Table extends BaseComponent(HTMLTableElement) {
         dragData.headSize = parseFloat(table._elements.container.style.marginTop);
         dragData.dragElementSize = rowBoundingClientRect.height;
       }
-      
+
       row.dragAction._dragData = dragData;
     }
   }
-  
+
   /** @private */
   _onHeaderCellSort(event) {
     const table = this;
     const matchedTarget = event.matchedTarget.closest(&apos;th&apos;);
-    
+
     // Don&apos;t sort if the column was dragged
     if (!matchedTarget._isDragging) {
       const column = table._getColumn(matchedTarget);
       // Only sort if actually sortable and event not defaultPrevented
       if (column &amp;&amp; column.sortable) {
         event.preventDefault();
-                
+
         column._sort();
-        
+
         // Restore focus on the header cell in any case
         matchedTarget.focus();
       }
     }
   }
-  
+
   /** @private */
   _onHeaderCellDragStart(event) {
     const table = this;
@@ -1063,7 +1084,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     const dragElement = event.detail.dragElement;
     const siblingHeaderCellSelector = matchedTarget === dragElement ? &apos;th[is=&quot;coral-table-headercell&quot;]&apos; : &apos;th[is=&quot;coral-table-headercell&quot;] coral-table-headercell-content&apos;;
     const tableBoundingClientRect = table.getBoundingClientRect();
-    
+
     // Store the data to be used on drag events
     dragElement.dragAction._dragData = {
       draggedColumnIndex: getIndexOf(matchedTarget),
@@ -1072,16 +1093,16 @@ class Table extends BaseComponent(HTMLTableElement) {
       dragElementSize: matchedTarget.getBoundingClientRect().width,
       tableScrollWidth: table._elements.container.scrollWidth
     };
-    
+
     getSiblingsOf(matchedTarget, siblingHeaderCellSelector, &apos;prevAll&apos;).forEach((item) =&gt; {
       item.classList.add(IS_BEFORE_CLASS);
     });
-    
+
     getSiblingsOf(matchedTarget, siblingHeaderCellSelector, &apos;nextAll&apos;).forEach((item) =&gt; {
       item.classList.add(IS_AFTER_CLASS);
     });
   }
-  
+
   /** @private */
   _onHeaderCellDrag(event) {
     const table = this;
@@ -1093,16 +1114,16 @@ class Table extends BaseComponent(HTMLTableElement) {
     const isHeaderCellDragged = matchedTarget === dragElement;
     const containerScrollLeft = container.scrollLeft;
     const documentScrollLeft = document.body.scrollLeft;
-    
+
     // Prevent sorting on header cell click if the header cell is being dragged
     matchedTarget._isDragging = true;
-    
+
     // Scroll left/right if table edge is reached
     const position = dragElement.getBoundingClientRect().left - dragData.tableLeft;
     const leftScrollLimit = 0;
     const rightScrollLimit = dragData.tableSize - dragData.dragElementSize;
     const scrollOffset = 10;
-    
+
     if (position &lt; leftScrollLimit) {
       container.scrollLeft -= scrollOffset;
     }
@@ -1110,21 +1131,21 @@ class Table extends BaseComponent(HTMLTableElement) {
     else if (position &gt; rightScrollLimit &amp;&amp; containerScrollLeft + dragData.tableSize &lt; dragData.tableScrollWidth) {
       container.scrollLeft += scrollOffset;
     }
-    
+
     // Position sibling header cells based on the dragged element
     getHeaderCells(row).forEach((headerCell) =&gt; {
       const draggedHeaderCell = isHeaderCellDragged ? headerCell : headerCell.content;
-      
+
       if (!draggedHeaderCell.classList.contains(IS_DRAGGING_CLASS)) {
         const offsetLeft = draggedHeaderCell.getBoundingClientRect().left + documentScrollLeft;
         const isAfter = event.detail.pageX &lt; offsetLeft + draggedHeaderCell.offsetWidth / 3;
-        
+
         draggedHeaderCell.classList.toggle(IS_AFTER_CLASS, isAfter);
         draggedHeaderCell.classList.toggle(IS_BEFORE_CLASS, !isAfter);
-  
+
         const columnIndex = getIndexOf(headerCell);
         const dragElementIndex = getIndexOf(matchedTarget);
-        
+
         // Place headercell after
         if (draggedHeaderCell.classList.contains(IS_AFTER_CLASS)) {
           if (columnIndex &lt; dragElementIndex) {
@@ -1132,41 +1153,37 @@ class Table extends BaseComponent(HTMLTableElement) {
             if (isHeaderCellDragged) {
               const nextHeaderCellWidth = draggedHeaderCell.clientWidth;
               draggedHeaderCell.style.left = `${nextHeaderCellWidth}px`;
-            }
-            else {
+            } else {
               const nextHeaderCell = getSiblingsOf(headerCell, &apos;th[is=&quot;coral-table-headercell&quot;]&apos;, &apos;next&apos;);
               const nextHeaderCellLeftOffset = nextHeaderCell.getBoundingClientRect().left + documentScrollLeft;
               draggedHeaderCell.style.left = `${nextHeaderCellLeftOffset + containerScrollLeft}px`;
             }
-          }
-          else {
+          } else {
             draggedHeaderCell.style.left = &apos;&apos;;
           }
         }
-        
+
         // Place headerCell before
         if (draggedHeaderCell.classList.contains(IS_BEFORE_CLASS)) {
           if (columnIndex &gt; dragElementIndex) {
             const prev = getSiblingsOf(headerCell, &apos;th[is=&quot;coral-table-headercell&quot;]&apos;, &apos;prev&apos;);
-            
+
             // Position the header cells based on their siblings position
             if (isHeaderCellDragged) {
               const beforeHeaderCellWidth = prev.clientWidth;
               draggedHeaderCell.style.left = `${-1 * (beforeHeaderCellWidth)}px`;
-            }
-            else {
+            } else {
               const beforeHeaderCellLeftOffset = prev.getBoundingClientRect().left + documentScrollLeft;
               draggedHeaderCell.style.left = `${beforeHeaderCellLeftOffset + containerScrollLeft}px`;
             }
-          }
-          else {
+          } else {
             draggedHeaderCell.style.left = &apos;&apos;;
           }
         }
       }
     });
   }
-  
+
   /** @private */
   _onHeaderCellDragEnd(event) {
     const table = this;
@@ -1177,7 +1194,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     const headRows = getRows([table.head]);
     const isHeaderCellDragged = matchedTarget === dragElement;
     const row = matchedTarget.parentElement;
-    
+
     // Select all cells in table body and foot given the index
     const getCellsByIndex = (cellIndex) =&gt; {
       const cellElements = [];
@@ -1190,41 +1207,40 @@ class Table extends BaseComponent(HTMLTableElement) {
       });
       return cellElements;
     };
-    
+
     const cells = getCellsByIndex(getIndexOf(matchedTarget));
     let before = null;
     let after = null;
-    
+
     // Siblings are either header cell or header cell content based on the current sticky state
     if (isHeaderCellDragged) {
       before = row.querySelector(`th[is=&quot;coral-table-headercell&quot;].${IS_AFTER_CLASS}`);
-      
+
       after = row.querySelectorAll(`th[is=&quot;coral-table-headercell&quot;].${IS_BEFORE_CLASS}`);
       after = after.length ? after[after.length - 1] : null;
-    }
-    else {
+    } else {
       before = row.querySelector(`th[is=&quot;coral-table-headercell&quot;] &gt; coral-table-headercell-content.${IS_AFTER_CLASS}`);
       before = before ? before.parentNode : null;
-      
+
       after = row.querySelectorAll(`th[is=&quot;coral-table-headercell&quot;] &gt; coral-table-headercell-content.${IS_BEFORE_CLASS}`);
       after = after.length ? after[after.length - 1].parentNode : null;
     }
-    
+
     // Did header cell order change ?
     const swapped = !(before &amp;&amp; before.previousElementSibling === matchedTarget || after &amp;&amp; after.nextElementSibling === matchedTarget);
-    
+
     // Switch whole columns based on the new position of the dragged element
     if (swapped) {
       const beforeColumn = before ? table._getColumn(before) : null;
-      
+
       // Trigger the event on table
       const beforeEvent = table.trigger(&apos;coral-table:beforecolumndrag&apos;, {
         column: column,
         before: beforeColumn
       });
-      
+
       const oldBefore = column.nextElementSibling;
-      
+
       if (!beforeEvent.defaultPrevented) {
         // Insert the headercell at the new position
         if (before) {
@@ -1233,13 +1249,13 @@ class Table extends BaseComponent(HTMLTableElement) {
           cells.forEach((cell, i) =&gt; {
             cell.parentNode.insertBefore(cell, beforeCells[i]);
           });
-          
+
           // Sync &lt;coral-table-column&gt; by reordering it too
           const beforeCol = getColumns(table.columns)[beforeIndex];
           if (beforeCol &amp;&amp; column) {
             table.columns.insertBefore(column, beforeCol);
           }
-          
+
           row.insertBefore(matchedTarget, before);
         }
         if (after) {
@@ -1248,16 +1264,16 @@ class Table extends BaseComponent(HTMLTableElement) {
           cells.forEach((cell, i) =&gt; {
             cell.parentNode.insertBefore(cell, afterCells[i].nextElementSibling);
           });
-          
+
           // Sync &lt;coral-table-column&gt; by reordering it too
           const afterCol = getColumns(table.columns)[afterIndex];
           if (afterCol &amp;&amp; column) {
             table.columns.insertBefore(column, afterCol.nextElementSibling);
           }
-          
+
           row.insertBefore(matchedTarget, after.nextElementSibling);
         }
-        
+
         // Trigger the order event if the column position changed
         if (dragData.draggedColumnIndex !== getIndexOf(matchedTarget)) {
           const newBefore = getColumns(table.columns)[getIndexOf(column) + 1];
@@ -1269,7 +1285,7 @@ class Table extends BaseComponent(HTMLTableElement) {
         }
       }
     }
-    
+
     // Restoring default header cells styling
     headRows.forEach((rowElement) =&gt; {
       getHeaderCells(rowElement).forEach((headerCell) =&gt; {
@@ -1279,10 +1295,10 @@ class Table extends BaseComponent(HTMLTableElement) {
         headerCell.style.left = &apos;&apos;;
       });
     });
-    
+
     // Trigger a relayout
     table._resetLayout();
-    
+
     window.requestAnimationFrame(() =&gt; {
       // Allows sorting again after dragging completed
       matchedTarget._isDragging = undefined;
@@ -1290,41 +1306,41 @@ class Table extends BaseComponent(HTMLTableElement) {
       table._toggleElementTabIndex(dragElement, null, true);
     });
   }
-  
+
   /** @private */
   _onCellSelect(event) {
     const cell = event.target.closest(&apos;td[is=&quot;coral-table-cell&quot;]&apos;);
-    
+
     if (cell) {
       cell.selected = !cell.selected;
     }
   }
-  
+
   /** @private */
   _onRowSelect(event) {
     const table = this;
     const row = event.target.closest(&apos;tr[is=&quot;coral-table-row&quot;]&apos;);
-    
+
     if (row) {
       // Ignore selection if the row is locked
       if (table.lockable &amp;&amp; row.locked) {
         return;
       }
-      
+
       // Restore text-selection
       table.classList.remove(IS_UNSELECTABLE);
-      
+
       // Prevent row selection when it&apos;s the selection handle and the target is an input
       if (table.selectable &amp;&amp; (Keys.filterInputs(event) || !row.hasAttribute(&apos;coral-table-rowselect&apos;))) {
         // Pressing space scrolls the sticky table to the bottom if scrollable
         if (event.keyCode === KEY_SPACE) {
           event.preventDefault();
         }
-        
+
         if (event.shiftKey) {
           let lastSelectedItem = table._lastSelectedItems.items[table._lastSelectedItems.items.length - 1];
           const lastSelectedDirection = table._lastSelectedItems.direction;
-          
+
           // If no selected items, by default set the first item as last selected item
           if (!table.selectedItem) {
             const rows = table._getSelectableItems();
@@ -1333,51 +1349,49 @@ class Table extends BaseComponent(HTMLTableElement) {
               lastSelectedItem.set(&apos;selected&apos;, true, true);
             }
           }
-          
+
           // Don&apos;t continue if table has no items or if the last selected item is the clicked item
           if (lastSelectedItem &amp;&amp; getIndexOf(row) !== getIndexOf(lastSelectedItem)) {
             // Range selection direction
             const before = getIndexOf(row) &lt; getIndexOf(lastSelectedItem);
             const rangeQuery = before ? &apos;prevUntil&apos; : &apos;nextUntil&apos;;
-            
+
             // Store direction
             table._lastSelectedItems.direction = before ? &apos;up&apos; : &apos;down&apos;;
-            
+
             if (!row.selected) {
               // Store selection range
               const selectionRange = getSiblingsOf(lastSelectedItem, &apos;tr[is=&quot;coral-table-row&quot;]:not([selected])&apos;, rangeQuery);
               selectionRange[before ? &apos;push&apos; : &apos;unshift&apos;](lastSelectedItem);
-              
+
               // Direction change
               if (!before &amp;&amp; lastSelectedDirection === &apos;up&apos; || before &amp;&amp; lastSelectedDirection === &apos;down&apos;) {
                 selectionRange.forEach((item) =&gt; {
                   item.set(&apos;selected&apos;, false, true);
                 });
               }
-              
+
               // Select item
               const selectionRangeRow = selectionRange[before ? 0 : selectionRange.length - 1];
               selectionRangeRow.set(&apos;selected&apos;, true, true);
               getSiblingsOf(selectionRangeRow, row, rangeQuery).forEach((item) =&gt; {
                 item.set(&apos;selected&apos;, true, true);
               });
-            }
-            else {
+            } else {
               const selection = getSiblingsOf(lastSelectedItem, row, rangeQuery);
-              
+
               // If some items are not selected
               if (selection.some((item) =&gt; !item.hasAttribute(&apos;selected&apos;))) {
                 // Select all items in between
                 selection.forEach((item) =&gt; {
                   item.set(&apos;selected&apos;, true, true);
                 });
-                
+
                 // Deselect selected item right before/after the selection range
                 getSiblingsOf(row, &apos;tr[is=&quot;coral-table-row&quot;]:not([selected])&apos;, rangeQuery).forEach((item) =&gt; {
                   item.set(&apos;selected&apos;, false, true);
                 });
-              }
-              else {
+              } else {
                 // Deselect items
                 selection[before ? &apos;push&apos; : &apos;unshift&apos;](lastSelectedItem);
                 selection.forEach((item) =&gt; {
@@ -1386,32 +1400,31 @@ class Table extends BaseComponent(HTMLTableElement) {
               }
             }
           }
-        }
-        else {
+        } else {
           // Remove direction if simple click without shift key pressed
           table._lastSelectedItems.direction = null;
         }
-        
+
         // Select the row that was clicked and keep the row selected if shift key was pressed
         row.selected = event.shiftKey ? true : !row.selected;
-        
+
         // Don&apos;t focus the row if the target isn&apos;t the row and focusable
         table._focusItem(row, event.target === event.matchedTarget || event.target.tabIndex &lt; 0);
       }
     }
   }
-  
+
   /** @private */
   _onRowLock(event) {
     const table = this;
-    
+
     if (table.lockable) {
       const row = event.target.closest(&apos;tr[is=&quot;coral-table-row&quot;]&apos;);
       if (row) {
         event.preventDefault();
         event.stopPropagation();
         row.locked = !row.locked;
-        
+
         // Refocus the locked/unlocked item manually
         window.requestAnimationFrame(() =&gt; {
           table._focusItem(row, true);
@@ -1419,15 +1432,15 @@ class Table extends BaseComponent(HTMLTableElement) {
       }
     }
   }
-  
+
   /** @private */
   _onRowDown(event) {
     const table = this;
-    
+
     // Prevent text-selection
     if (table.selectedItem &amp;&amp; event.shiftKey) {
       table.classList.add(IS_UNSELECTABLE);
-      
+
       // @polyfill IE
       // Store text selection feature
       const onSelectStart = document.onselectstart;
@@ -1439,7 +1452,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       });
     }
   }
-  
+
   /** @private */
   _onRowDragStart(event) {
     const table = this;
@@ -1447,7 +1460,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     const body = table.body;
     const dragElement = event.detail.dragElement;
     const dragData = dragElement.dragAction._dragData;
-    
+
     dragData.style.cells = [];
     getCells(dragElement).forEach((cell) =&gt; {
       // Backup styles to restore them later
@@ -1455,7 +1468,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       // Cells will shrink otherwise
       cell.style.width = window.getComputedStyle(cell).width;
     });
-  
+
     if (head &amp;&amp; !head.sticky) {
       // @polyfill ie11
       // Element that scrolls the document.
@@ -1463,14 +1476,14 @@ class Table extends BaseComponent(HTMLTableElement) {
       dragElement.style.top = `${dragElement.getBoundingClientRect().top + scrollingElement.scrollTop}px`;
     }
     dragElement.style.position = &apos;absolute&apos;;
-    
+
     // Setting drop zones allows to listen for coral-dragaction:dragover event
     dragElement.dragAction.dropZone = body.querySelectorAll(`tr[is=&quot;coral-table-row&quot;]:not(.${IS_DRAGGING_CLASS})`);
-    
+
     // We cannot rely on :focus since the row is being moved in the dom while dnd
     dragElement.classList.add(&apos;is-focused&apos;);
   }
-  
+
   /** @private */
   _onRowDrag(event) {
     const table = this;
@@ -1478,7 +1491,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     const dragElement = event.detail.dragElement;
     const dragData = dragElement.dragAction._dragData;
     const firstRow = getRows([body])[0];
-    
+
     // Insert the placeholder at the top
     if (dragElement.getBoundingClientRect().top &lt;= firstRow.getBoundingClientRect().top) {
       table._preventTriggeringEvents = true;
@@ -1487,7 +1500,7 @@ class Table extends BaseComponent(HTMLTableElement) {
         table._preventTriggeringEvents = false;
       });
     }
-    
+
     // Scroll up/down if table edge is reached
     if (dragData.sticky) {
       const dragElementTop = dragElement.getBoundingClientRect().top;
@@ -1495,20 +1508,19 @@ class Table extends BaseComponent(HTMLTableElement) {
       const topScrollLimit = 0;
       const bottomScrollLimit = dragData.tableSize - dragData.dragElementSize - dragData.headSize;
       const scrollOffset = 10;
-      
+
       // Handle the scrollbar position based on the dragged element position.
       // nextFrame is required else Chrome wouldn&apos;t take scrollTop changes in account when dragging the first row down
       window.requestAnimationFrame(() =&gt; {
         if (position &lt; topScrollLimit) {
           table._elements.container.scrollTop -= scrollOffset;
-        }
-        else if (position &gt; bottomScrollLimit) {
+        } else if (position &gt; bottomScrollLimit) {
           table._elements.container.scrollTop += scrollOffset;
         }
       });
     }
   }
-  
+
   /** @private */
   _onRowDragOver(event) {
     const table = this;
@@ -1516,7 +1528,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     const dragElement = event.detail.dragElement;
     const dropElement = event.detail.dropElement;
     const dragData = dragElement.dragAction._dragData;
-    
+
     // Swap the placeholder
     if (dragElement.getBoundingClientRect().top &gt;= dropElement.getBoundingClientRect().top) {
       table._preventTriggeringEvents = true;
@@ -1526,39 +1538,39 @@ class Table extends BaseComponent(HTMLTableElement) {
       });
     }
   }
-  
+
   /** @private */
   _onRowDragEnd(event) {
     const table = this;
     const body = table.body;
     const dragElement = event.detail.dragElement;
-    
+
     const dragData = dragElement.dragAction._dragData;
     const before = dragData.placeholder.nextElementSibling;
-    
+
     // Clean up
     table.classList.remove(IS_FIRST_ITEM_DRAGGED);
     table.classList.remove(IS_LAST_ITEM_DRAGGED);
-    
+
     body.removeChild(dragData.placeholder);
     dragElement.dragAction.destroy();
-    
+
     // Restore specific styling
     dragElement.setAttribute(&apos;style&apos;, dragData.style.row || &apos;&apos;);
     getCells(dragElement).forEach((cell, i) =&gt; {
       cell.setAttribute(&apos;style&apos;, dragData.style.cells[i] || &apos;&apos;);
     });
-    
+
     // Trigger the event on table
     const beforeEvent = table.trigger(&apos;coral-table:beforeroworder&apos;, {
       row: dragElement,
       before: before
     });
-    
+
     if (!beforeEvent.defaultPrevented) {
       // Did row order change ?
       const rows = getRows([body]).filter((item) =&gt; item !== dragElement);
-      
+
       if (dragData.index !== rows.indexOf(dragData.placeholder)) {
         // Insert the row at the new position and prevent change event from triggering
         table._preventTriggeringEvents = true;
@@ -1566,7 +1578,7 @@ class Table extends BaseComponent(HTMLTableElement) {
         window.requestAnimationFrame(() =&gt; {
           table._preventTriggeringEvents = false;
         });
-        
+
         // Trigger the order event if the row position changed
         table.trigger(&apos;coral-table:roworder&apos;, {
           row: dragElement,
@@ -1575,21 +1587,21 @@ class Table extends BaseComponent(HTMLTableElement) {
         });
       }
     }
-    
+
     // Refocus the dragged element manually
     window.requestAnimationFrame(() =&gt; {
       dragElement.classList.remove(&apos;is-focused&apos;);
       table._focusItem(dragElement, true);
     });
   }
-  
+
   /** @private */
   _onRowMultipleChanged(event) {
     event.stopImmediatePropagation();
-    
+
     const table = this;
     const row = event.target;
-    
+
     // Deselect all except last
     if (!row.multiple) {
       const selectedItems = row.selectedItems;
@@ -1597,10 +1609,10 @@ class Table extends BaseComponent(HTMLTableElement) {
       selectedItems.forEach((cell, i) =&gt; {
         cell.selected = i === selectedItems.length - 1;
       });
-      
+
       window.requestAnimationFrame(() =&gt; {
         table._preventTriggeringEvents = false;
-        
+
         table.trigger(&apos;coral-table:rowchange&apos;, {
           oldSelection: selectedItems,
           selection: row.selectedItems,
@@ -1609,11 +1621,11 @@ class Table extends BaseComponent(HTMLTableElement) {
       });
     }
   }
-  
+
   /** @private */
   _onBeforeRowSelectionChanged(event) {
     event.stopImmediatePropagation();
-    
+
     // In single selection, if the added item is selected, the rest should be deselected
     const selectedItem = this.selectedItem;
     if (!this.multiple &amp;&amp; selectedItem &amp;&amp; !event.target.selected) {
@@ -1621,24 +1633,22 @@ class Table extends BaseComponent(HTMLTableElement) {
       this._removeLastSelectedItem(selectedItem);
     }
   }
-  
+
   /** @private */
   _syncSelectAllHandle(selectedItems, items) {
     if (items.length &amp;&amp; selectedItems.length === items.length) {
       this._setSelectAllHandleState(&apos;checked&apos;);
-    }
-    else if (!selectedItems.length) {
+    } else if (!selectedItems.length) {
       this._setSelectAllHandleState(&apos;unchecked&apos;);
-    }
-    else {
+    } else {
       this._setSelectAllHandleState(&apos;indeterminate&apos;);
     }
   }
-  
+
   /** @private */
   _setSelectAllHandleState(state) {
     const handle = this.querySelector(&apos;[coral-table-select]&apos;);
-    
+
     if (handle) {
 
       // If the handle is a checkbox but lacks a label, label it with &quot;Select All&quot;.
@@ -1654,38 +1664,36 @@ class Table extends BaseComponent(HTMLTableElement) {
       if (state === &apos;checked&apos;) {
         handle.removeAttribute(&apos;indeterminate&apos;);
         handle.setAttribute(&apos;checked&apos;, &apos;&apos;);
-      }
-      else if (state === &apos;unchecked&apos;) {
+      } else if (state === &apos;unchecked&apos;) {
         handle.removeAttribute(&apos;indeterminate&apos;);
         handle.removeAttribute(&apos;checked&apos;);
-      }
-      else if (state === &apos;indeterminate&apos;) {
+      } else if (state === &apos;indeterminate&apos;) {
         handle.setAttribute(&apos;indeterminate&apos;, &apos;&apos;);
       }
     }
   }
-  
+
   /** @private */
   _onRowSelectionChanged(event) {
     event.stopImmediatePropagation();
-    
+
     this._triggerChangeEvent();
-    
+
     const table = this;
     const body = table.body;
     const row = event.target;
-  
+
     // Synchronise the table select handle
     if (body &amp;&amp; body.contains(row)) {
       const selection = table.selectedItems;
       const rows = table._getSelectableItems();
-      
+
       // Sync select all handle
       table._syncSelectAllHandle(selection, rows);
-      
+
       // Store or remove the row reference
       table[row.selected ? &apos;_addLastSelectedItem&apos; : &apos;_removeLastSelectedItem&apos;](row);
-      
+
       // Store selected items range
       const lastSelectedItem = table._lastSelectedItems.items[table._lastSelectedItems.items.length - 1];
       const next = table._lastSelectedItems.direction === &apos;down&apos;;
@@ -1696,30 +1704,29 @@ class Table extends BaseComponent(HTMLTableElement) {
       }
     }
   }
-  
+
   _onRowLockedChanged(event) {
     event.stopImmediatePropagation();
-    
+
     const table = this;
     const body = this.body;
     const row = event.target;
-    
+
     if (body &amp;&amp; body.contains(row)) {
       if (row.locked) {
         // Store the row index as reference to place it back if unlocked and its selection state
         row._rowIndex = getIndexOf(row);
-        
+
         // Insert row at first position of its tbody
         table._preventTriggeringEvents = true;
         body.insertBefore(row, getRows([body])[0]);
         window.requestAnimationFrame(() =&gt; {
           table._preventTriggeringEvents = false;
         });
-        
+
         // Trigger event on table
         table.trigger(&apos;coral-table:rowlock&apos;, {row});
-      }
-      else {
+      } else {
         // Put the row back to its initial position
         if (row._rowIndex &gt;= 0) {
           const beforeRow = getRows([body])[row._rowIndex];
@@ -1732,36 +1739,36 @@ class Table extends BaseComponent(HTMLTableElement) {
             });
           }
         }
-        
+
         // Trigger event on table
         table.trigger(&apos;coral-table:rowunlock&apos;, {row});
       }
     }
   }
-  
+
   _onHeadContentChanged(event) {
     event.stopImmediatePropagation();
-    
+
     const table = this;
     const head = table.head;
     const addedNodes = event.detail.addedNodes;
-    
-    for (let i = 0; i &lt; addedNodes.length; i++) {
+
+    for (let i = 0 ; i &lt; addedNodes.length ; i++) {
       const node = addedNodes[i];
-      
+
       // Sync header cell whether sticky or not
       if (isTableHeaderCell(node)) {
         table._toggleStickyHeaderCell(node, head.sticky);
       }
     }
   }
-  
+
   /** @private */
   _onBodyContentChanged(event) {
     if (event.stopImmediatePropagation) {
       event.stopImmediatePropagation();
     }
-    
+
     const table = this;
     const addedNodes = event.detail.addedNodes;
     const removedNodes = event.detail.removedNodes;
@@ -1770,32 +1777,32 @@ class Table extends BaseComponent(HTMLTableElement) {
       item.selected = item === addedNode;
     };
     let changed = false;
-    
+
     // Sync added nodes
-    for (let i = 0; i &lt; addedNodes.length; i++) {
+    for (let i = 0 ; i &lt; addedNodes.length ; i++) {
       addedNode = addedNodes[i];
-      
+
       // Sync row state with table properties
       if (isTableRow(addedNode)) {
         changed = true;
-        
+
         addedNode._toggleSelectable(table.selectable);
         addedNode._toggleOrderable(table.orderable);
         addedNode._toggleLockable(table.lockable);
-  
+
         // @compat
         this._toggleSelectionCheckbox(addedNode);
-        
+
         const selectedItems = table.selectedItems;
         if (addedNode.selected) {
           // In single selection, if the added item is selected, the rest should be deselected
           if (!table.multiple &amp;&amp; selectedItems.length &gt; 1) {
             selectedItems.forEach(selectItem);
           }
-          
+
           table._triggerChangeEvent();
         }
-        
+
         // Cells are selectable too
         if (addedNode.selectable) {
           addedNode.trigger(&apos;coral-table-row:_contentchanged&apos;, {
@@ -1803,26 +1810,26 @@ class Table extends BaseComponent(HTMLTableElement) {
             removedNodes: []
           });
         }
-        
+
         // Trigger collection event
         if (!table._preventTriggeringEvents) {
           table.trigger(&apos;coral-collection:add&apos;, {
             item: addedNode
           });
         }
-        
+
         // a11y
         table._toggleFocusable();
       }
     }
-    
+
     // Sync removed nodes
-    for (let k = 0; k &lt; removedNodes.length; k++) {
+    for (let k = 0 ; k &lt; removedNodes.length ; k++) {
       const removedNode = removedNodes[k];
-      
+
       if (isTableRow(removedNode)) {
         changed = true;
-        
+
         // If the focusable item is removed, the first item becomes the new focusable item
         if (removedNode.getAttribute(&apos;tabindex&apos;) === &apos;0&apos;) {
           const firstItem = getRows([table.body])[0];
@@ -1830,17 +1837,17 @@ class Table extends BaseComponent(HTMLTableElement) {
             table._focusItem(firstItem);
           }
         }
-        
+
         if (removedNode.selected) {
           table._triggerChangeEvent();
         }
-        
+
         // Sync _lastSelectedItems array
         const removedItemIndex = table._lastSelectedItems.items.indexOf(removedNode);
         if (removedItemIndex !== -1) {
           table._lastSelectedItems.items = table._lastSelectedItems.items.splice(removedItemIndex, 1);
         }
-        
+
         // Trigger collection event
         if (!table._preventTriggeringEvents) {
           table.trigger(&apos;coral-collection:remove&apos;, {
@@ -1849,7 +1856,7 @@ class Table extends BaseComponent(HTMLTableElement) {
         }
       }
     }
-    
+
     if (changed) {
       const items = this._getSelectableItems();
       // Sync select all handle if any.
@@ -1858,17 +1865,17 @@ class Table extends BaseComponent(HTMLTableElement) {
       table._toggleInteractivity(items.length === 0);
     }
   }
-  
+
   /** @private */
   _onBodyEmpty(event) {
     event.stopImmediatePropagation();
     this._toggleInteractivity(true);
   }
-  
+
   /** @private */
   _onRowChange(event) {
     event.stopImmediatePropagation();
-    
+
     if (!this._preventTriggeringEvents) {
       this.trigger(&apos;coral-table:rowchange&apos;, {
         oldSelection: event.detail.oldSelection,
@@ -1877,11 +1884,11 @@ class Table extends BaseComponent(HTMLTableElement) {
       });
     }
   }
-  
+
   /** @private */
   _onRowContentChanged(event) {
     event.stopImmediatePropagation();
-    
+
     const table = this;
     const row = event.target;
     const addedNodes = event.detail.addedNodes;
@@ -1890,25 +1897,25 @@ class Table extends BaseComponent(HTMLTableElement) {
     const selectItem = (item) =&gt; {
       item.selected = item === addedNode;
     };
-    
+
     // Sync added nodes
-    for (let i = 0; i &lt; addedNodes.length; i++) {
+    for (let i = 0 ; i &lt; addedNodes.length ; i++) {
       addedNode = addedNodes[i];
-      
+
       // Sync row state with table properties
       if (isTableCell(addedNode)) {
         addedNode._toggleSelectable(row.selectable);
-        
+
         const selectedItems = row.selectedItems;
         if (addedNode.selected) {
           // In single selection, if the added item is selected, the rest should be deselected
           if (!row.multiple &amp;&amp; selectedItems.length &gt; 1) {
             selectedItems.forEach(selectItem);
           }
-          
+
           row._triggerChangeEvent();
         }
-        
+
         // Trigger collection event
         if (!table._preventTriggeringEvents) {
           row.trigger(&apos;coral-collection:add&apos;, {
@@ -1921,16 +1928,16 @@ class Table extends BaseComponent(HTMLTableElement) {
         table._setHeaderCellScope(addedNode, row.parentNode);
       }
     }
-    
+
     // Sync removed nodes
-    for (let k = 0; k &lt; removedNodes.length; k++) {
+    for (let k = 0 ; k &lt; removedNodes.length ; k++) {
       const removedNode = removedNodes[k];
-      
+
       if (isTableCell(removedNode)) {
         if (removedNode.selected) {
           row._triggerChangeEvent();
         }
-        
+
         // Trigger collection event
         if (!table._preventTriggeringEvents) {
           row.trigger(&apos;coral-collection:remove&apos;, {
@@ -1940,37 +1947,37 @@ class Table extends BaseComponent(HTMLTableElement) {
       }
     }
   }
-  
+
   /** @private */
   _toggleInteractivity(disable) {
     const table = this;
     const selectAll = table.querySelector(&apos;[coral-table-select]&apos;);
-    
+
     if (selectAll) {
       selectAll.disabled = disable;
     }
-    
+
     table.classList.toggle(IS_DISABLED, disable);
   }
-  
+
   _onAlignmentChanged(event) {
     event.stopImmediatePropagation();
-  
+
     this._resetAlignmentColumns();
   }
-  
+
   /** @private */
   _onFixedWidthChanged(event) {
     event.stopImmediatePropagation();
-    
+
     const table = this;
     const head = table.head;
     const column = event.target;
-    
+
     if (head) {
       const headRows = getRows([head]);
       const columnIndex = getIndexOf(event.target);
-      
+
       headRows.forEach((row) =&gt; {
         const headerCell = getCellByIndex(row, columnIndex);
         if (headerCell &amp;&amp; headerCell.tagName === &apos;TH&apos;) {
@@ -1978,67 +1985,66 @@ class Table extends BaseComponent(HTMLTableElement) {
         }
       });
     }
-    
+
     table._resetLayout();
   }
-  
+
   /** @private */
   _onColumnOrderableChanged(event) {
     event.stopImmediatePropagation();
-    
+
     const table = this;
     const head = this.head;
     const column = event.target;
     const headerCell = table._getColumnHeaderCell(column);
-    
+
     if (headerCell) {
       // Move the drag handle
       table._toggleDragActionHandle(headerCell, head &amp;&amp; head.sticky);
-      
+
       table._resetLayout();
     }
   }
-  
+
   /** @private */
   _onColumnSortableChanged(event) {
     event.stopImmediatePropagation();
-    
+
     const table = this;
     const head = this.head;
     const column = event.target;
     const headerCell = table._getColumnHeaderCell(column);
-    
+
     if (headerCell) {
       // For icons (chevron up/down) styling
       headerCell[column.sortable ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;sortable&apos;, &apos;&apos;);
-      
+
       // Toggle tab index. Sortable headercells are focusable.
       table._toggleHeaderCellTabIndex(headerCell, head &amp;&amp; head.sticky);
-      
+
       table._resetLayout();
     }
   }
-  
+
   _onColumnSortableDirectionChanged(event) {
     event.stopImmediatePropagation();
-    
+
     const table = this;
     const column = event.target;
     const sortableDirection = TableColumn.sortableDirection;
-    
+
     // Hide coral-table-roworder handles if table is sorted
     table.classList.toggle(IS_SORTED, table._isSorted());
-    
+
     const headerCell = table._getColumnHeaderCell(column);
     if (headerCell) {
       // For icons (chevron up/down) styling
       headerCell.setAttribute(&apos;sortabledirection&apos;, column.sortableDirection);
       (table.head.sticky ? headerCell.content : headerCell).setAttribute(&apos;aria-sort&apos;, column.sortableDirection === sortableDirection.DEFAULT ? &apos;none&apos; : column.sortableDirection);
-      
+
       if (column.sortableDirection === sortableDirection.DEFAULT) {
         this._elements.liveRegion.innerText = &apos;&apos;;
-      }
-      else {
+      } else {
         const textContent = headerCell.content.textContent.trim();
         if (textContent.length) {
           // Set live region to true so that sort description string will be announced.
@@ -2055,38 +2061,38 @@ class Table extends BaseComponent(HTMLTableElement) {
       }
     }
   }
-  
+
   _onColumnHiddenChanged(event) {
     event.stopImmediatePropagation();
-    
+
     this._resetHiddenColumns(true);
   }
-  
+
   _onBeforeColumnSort(event) {
     event.stopImmediatePropagation();
-    
+
     const table = this;
     const column = event.target;
     const newSortableDirection = event.detail.newSortableDirection;
-    
+
     const beforeEvent = table.trigger(&apos;coral-table:beforecolumnsort&apos;, {
       column: column,
       direction: newSortableDirection
     });
-    
+
     if (!beforeEvent.defaultPrevented) {
       column.sortableDirection = newSortableDirection;
     }
   }
-  
+
   _onColumnSort(event) {
     event.stopImmediatePropagation();
-    
+
     // Don&apos;t sort yet
     if (!this._allowSorting) {
       return;
     }
-    
+
     const table = this;
     const body = table.body;
     const column = event.target;
@@ -2095,27 +2101,27 @@ class Table extends BaseComponent(HTMLTableElement) {
     const onInitialization = event.detail.onInitialization;
     const sortableDirection = event.detail.sortableDirection;
     const sortableType = event.detail.sortableType;
-    
+
     const rows = getRows([body]);
     const cells = [];
-    
+
     // Prevent change event from triggering when sorting
     if (table) {
       table._preventTriggeringEvents = true;
     }
-    
+
     // Store a reference of the default row index for default sortable direction
     rows.forEach((row, i) =&gt; {
       if (typeof row._defaultRowIndex === &apos;undefined&apos;) {
         row._defaultRowIndex = i;
       }
-      
+
       const cell = getCellByIndex(row, columnIndex);
       if (cell) {
         cells.push(cell);
       }
     });
-    
+
     if (column.sortableDirection === sortableDirection.ASCENDING) {
       // Remove sortable direction on sibling columns
       getSiblingsOf(column, &apos;col[is=&quot;coral-table-column&quot;]&apos;).forEach((col) =&gt; {
@@ -2123,7 +2129,7 @@ class Table extends BaseComponent(HTMLTableElement) {
         col.setAttribute(&apos;sortabledirection&apos;, sortableDirection.DEFAULT);
         col._preventSort = false;
       });
-      
+
       if (colHeaderCell) {
         // For icons (chevron up/down) styling
         getSiblingsOf(colHeaderCell, &apos;th[is=&quot;coral-table-headercell&quot;]&apos;).forEach((headerCell) =&gt; {
@@ -2131,27 +2137,25 @@ class Table extends BaseComponent(HTMLTableElement) {
           (table.head.sticky ? headerCell.content : headerCell).setAttribute(&apos;aria-sort&apos;, &apos;none&apos;);
         });
       }
-      
+
       // Use cell value to sort and fallback if not specified
       cells.sort((a, b) =&gt; {
         if (column.sortableType === sortableType.ALPHANUMERIC) {
           const aText = a.value ? a.value : a.textContent;
           const bText = b.value ? b.value : b.textContent;
           return aText.localeCompare(bText);
-        }
-        else if (column.sortableType === sortableType.NUMBER) {
+        } else if (column.sortableType === sortableType.NUMBER) {
           // Remove all spaces and replace commas with dots for decimal values
           const aNumber = parseFloat(a.value ? a.value : a.textContent.replace(/\s+/g, &apos;&apos;).replace(/,/g, &apos;.&apos;));
           const bNumber = parseFloat(b.value ? b.value : b.textContent.replace(/\s+/g, &apos;&apos;).replace(/,/g, &apos;.&apos;));
           return aNumber &gt; bNumber ? 1 : -1;
-        }
-        else if (column.sortableType === sortableType.DATE) {
+        } else if (column.sortableType === sortableType.DATE) {
           const aDate = a.value ? new Date(parseInt(a.value, 10)) : new Date(a.textContent);
           const bDate = b.value ? new Date(parseInt(b.value, 10)) : new Date(b.textContent);
           return aDate &gt; bDate ? 1 : -1;
         }
       });
-      
+
       // Only sort if not custom sorting
       if (column.sortableType !== sortableType.CUSTOM) {
         if (body) {
@@ -2164,51 +2168,48 @@ class Table extends BaseComponent(HTMLTableElement) {
             }
           });
         }
-        
+
         // Trigger on table
         table.trigger(&apos;coral-table:columnsort&apos;, {column});
       }
-      
+
       // Table is in a sorted state. Disable orderable actions
       rows.forEach((row) =&gt; {
         if (row.dragAction) {
           row.dragAction.destroy();
         }
       });
-    }
-    else if (column.sortableDirection === sortableDirection.DESCENDING) {
+    } else if (column.sortableDirection === sortableDirection.DESCENDING) {
       getSiblingsOf(column, &apos;col[is=&quot;coral-table-column&quot;]&apos;).forEach((col) =&gt; {
         col._preventSort = true;
         col.setAttribute(&apos;sortabledirection&apos;, sortableDirection.DEFAULT);
         col._preventSort = false;
       });
-      
+
       if (colHeaderCell) {
         getSiblingsOf(colHeaderCell, &apos;th[is=&quot;coral-table-headercell&quot;]&apos;).forEach((headerCell) =&gt; {
           headerCell.setAttribute(&apos;sortabledirection&apos;, sortableDirection.DEFAULT);
           (table.head.sticky ? headerCell.content : headerCell).setAttribute(&apos;aria-sort&apos;, &apos;none&apos;);
         });
       }
-      
+
       cells.sort((a, b) =&gt; {
         if (column.sortableType === sortableType.ALPHANUMERIC) {
           const aText = a.value ? a.value : a.textContent;
           const bText = b.value ? b.value : b.textContent;
           return bText.localeCompare(aText);
-        }
-        else if (column.sortableType === sortableType.NUMBER) {
+        } else if (column.sortableType === sortableType.NUMBER) {
           // Remove all spaces and replace commas with dots for decimal values
           const aNumber = parseFloat(a.value ? a.value : a.textContent.replace(/\s+/g, &apos;&apos;).replace(/,/g, &apos;.&apos;));
           const bNumber = parseFloat(b.value ? b.value : b.textContent.replace(/\s+/g, &apos;&apos;).replace(/,/g, &apos;.&apos;));
           return aNumber &lt; bNumber ? 1 : -1;
-        }
-        else if (column.sortableType === sortableType.DATE) {
+        } else if (column.sortableType === sortableType.DATE) {
           const aDate = a.value ? new Date(parseInt(a.value, 10)) : new Date(a.textContent);
           const bDate = b.value ? new Date(parseInt(b.value, 10)) : new Date(b.textContent);
           return aDate &lt; bDate ? 1 : -1;
         }
       });
-      
+
       // Only sort if not custom sorting
       if (column.sortableType !== sortableType.CUSTOM) {
         if (body) {
@@ -2221,31 +2222,30 @@ class Table extends BaseComponent(HTMLTableElement) {
             }
           });
         }
-        
+
         // Trigger on table
         table.trigger(&apos;coral-table:columnsort&apos;, {column});
       }
-      
+
       // Table is in a sorted state. Disable orderable actions
       rows.forEach((row) =&gt; {
         if (row.dragAction) {
           row.dragAction.destroy();
         }
       });
-    }
-    else if (column.sortableDirection === sortableDirection.DEFAULT &amp;&amp; !onInitialization) {
+    } else if (column.sortableDirection === sortableDirection.DEFAULT &amp;&amp; !onInitialization) {
       // Only sort if not custom sorting
       if (column.sortableType !== sortableType.CUSTOM) {
         // Put rows back to their initial position
         rows.sort((a, b) =&gt; a._defaultRowIndex &gt; b._defaultRowIndex ? 1 : -1);
-        
+
         rows.forEach((row) =&gt; {
           // Prevent locked row to be sorted
           if (body &amp;&amp; !row.locked) {
             body.appendChild(row);
           }
         });
-        
+
         // Trigger on table
         table.trigger(&apos;coral-table:columnsort&apos;, {column});
       }
@@ -2264,43 +2264,43 @@ class Table extends BaseComponent(HTMLTableElement) {
       table._preventTriggeringEvents = false;
     });
   }
-  
+
   _onHeadStickyChanged(event) {
     event.stopImmediatePropagation();
-  
+
     // a11y
     this._toggleFocusable();
-    
+
     const table = this;
     const head = event.target;
-    
+
     // Wait next frame before reading and changing header cell layout
     window.requestAnimationFrame(() =&gt; {
       // Defines the head height
       const tableHeight = head.sticky ? `${head.getBoundingClientRect().height}px` : null;
       table._resetContainerLayout(tableHeight, table._elements.container.style.height);
-      
+
       getRows([head]).forEach((row) =&gt; {
         getHeaderCells(row).forEach((headerCell) =&gt; {
           table._toggleStickyHeaderCell(headerCell, head.sticky);
         });
       });
-  
+
       // Make sure sticky styling is applied
       table.classList.toggle(`${CLASSNAME}--sticky`, head.sticky);
-  
+
       // Layout sticky head
       table._preventResetLayout = false;
       table._resetLayout();
     });
   }
-  
+
   /** @private */
   _getColumnHeaderCell(column) {
     const table = this;
     const head = table.head;
     let headerCell = null;
-    
+
     if (head) {
       const headRows = getRows([head]);
       const columnIndex = getIndexOf(column);
@@ -2309,32 +2309,32 @@ class Table extends BaseComponent(HTMLTableElement) {
         headerCell = headerCell &amp;&amp; headerCell.tagName === &apos;TH&apos; ? headerCell : null;
       }
     }
-    
+
     return headerCell;
   }
-  
+
   /** @private */
   _getColumn(headerCell) {
     // Get the corresponding column
     return getColumns(this.columns)[getIndexOf(headerCell)] || null;
   }
-  
+
   /** @private */
   _toggleStickyHeaderCell(headerCell, sticky) {
     // Set the size
     this._layoutStickyCell(headerCell, sticky);
-    
+
     // Define DragAction on the sticky cell instead of the headercell
     this._toggleDragActionHandle(headerCell, sticky);
-    
+
     // Toggle tab index. Sortable headercells are focusable.
     this._toggleHeaderCellTabIndex(headerCell, sticky);
   }
-  
+
   _layoutStickyCell(headerCell, sticky) {
     if (sticky) {
       const computedStyle = window.getComputedStyle(headerCell);
-      
+
       // Don&apos;t allow the column to shrink less than its minimum allowed
       if (!headerCell.style.minWidth) {
         let hasVisibleChildNodes = false;
@@ -2345,13 +2345,13 @@ class Table extends BaseComponent(HTMLTableElement) {
         // Verify if there are any visible nodes without text content which could take layout space
         else {
           const headerCellChildren = headerCell.content.children;
-          for (let i = 0; i &lt; headerCellChildren.length &amp;&amp; !hasVisibleChildNodes; i++) {
+          for (let i = 0 ; i &lt; headerCellChildren.length &amp;&amp; !hasVisibleChildNodes ; i++) {
             if (headerCellChildren[0].offsetParent) {
               hasVisibleChildNodes = true;
             }
           }
         }
-  
+
         if (hasVisibleChildNodes) {
           const width = headerCell.content.getBoundingClientRect().width;
           // Don&apos;t set the width if the header cell is hidden
@@ -2360,15 +2360,14 @@ class Table extends BaseComponent(HTMLTableElement) {
           }
         }
       }
-      
+
       const cellWidth = parseFloat(computedStyle.width);
       const cellPadding = parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight);
       const borderRightWidth = parseFloat(computedStyle.borderRightWidth);
-      
+
       // Reflect headercell size on sticky cell
       headerCell.content.style.width = `${cellWidth + cellPadding + borderRightWidth}px`;
-    }
-    else {
+    } else {
       // Restore headercell style
       headerCell.style.minWidth = &apos;&apos;;
       headerCell.content.style.width = &apos;&apos;;
@@ -2378,62 +2377,60 @@ class Table extends BaseComponent(HTMLTableElement) {
       headerCell.content.style.paddingTop = &apos;&apos;;
     }
   }
-  
+
   /** @private */
   _toggleDragActionHandle(headerCell, sticky) {
     const column = this._getColumn(headerCell);
-    
+
     if (headerCell.dragAction) {
       headerCell.dragAction.destroy();
     }
     if (headerCell.content.dragAction) {
       headerCell.content.dragAction.destroy();
     }
-    
+
     if (column &amp;&amp; column.orderable) {
       const dragAction = new DragAction(sticky ? headerCell.content : headerCell);
       dragAction.axis = &apos;horizontal&apos;;
       // Handle the scroll in table
       dragAction.scroll = false;
       headerCell.setAttribute(&apos;orderable&apos;, &apos;&apos;);
-    }
-    else {
+    } else {
       headerCell.removeAttribute(&apos;orderable&apos;);
     }
   }
-  
+
   /** @private */
   _toggleFocusable() {
     const firstItem = getRows([this.body])[0];
     if (!firstItem) {
       return;
     }
-    
+
     const focusableItem = this._getFocusableItem();
     if (this.selectable || this.lockable || this.orderable || (this.head &amp;&amp; this.head.sticky)) {
       // First item is focusable by default but don&apos;t remove the tabindex of the existing focusable item
       if (!focusableItem) {
         this._toggleElementTabIndex(firstItem);
       }
-    }
-    else if (focusableItem) {
+    } else if (focusableItem) {
       // Basic table is not focusable
       focusableItem.removeAttribute(&apos;tabindex&apos;);
     }
   }
-  
+
   /** @private */
   _toggleElementTabIndex(element, oldFocusable, forceFocus) {
     if (oldFocusable) {
       oldFocusable.removeAttribute(&apos;tabindex&apos;);
     }
-    
+
     element.setAttribute(&apos;tabindex&apos;, &apos;0&apos;);
     if (forceFocus) {
       element.focus();
     }
   }
-  
+
   /** @private */
   _toggleHeaderCellTabIndex(headerCell, sticky) {
     const column = this._getColumn(headerCell);
@@ -2441,7 +2438,7 @@ class Table extends BaseComponent(HTMLTableElement) {
     headerCell[sortable &amp;&amp; !sticky ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;tabindex&apos;, &apos;0&apos;);
     headerCell.content[sortable &amp;&amp; sticky ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;tabindex&apos;, &apos;0&apos;);
   }
-  
+
   /** @private */
   _isSorted() {
     let column = null;
@@ -2449,33 +2446,33 @@ class Table extends BaseComponent(HTMLTableElement) {
       column = col;
       return col.sortableDirection !== TableColumn.sortableDirection.DEFAULT;
     });
-    
+
     return isSorted ? column : false;
   }
-  
+
   /** @private */
   _focusEdgeItem(event, first) {
     const items = getRows([this.body]);
     if (items.length) {
       event.preventDefault();
-      
+
       let item = this._getFocusableItem();
       if (item) {
         item.removeAttribute(&apos;tabindex&apos;);
       }
-      
+
       item = items[first ? 0 : items.length - 1];
       item.setAttribute(&apos;tabindex&apos;, &apos;0&apos;);
       item.focus();
     }
   }
-  
+
   /** @private */
   _focusSiblingItem(event, next) {
     const item = this._getFocusableItem();
     if (item) {
       event.preventDefault();
-      
+
       const siblingItem = getSiblingsOf(item, &apos;tr[is=&quot;coral-table-row&quot;]&apos;, next ? &apos;next&apos; : &apos;prev&apos;);
       if (siblingItem) {
         item.removeAttribute(&apos;tabindex&apos;);
@@ -2484,42 +2481,41 @@ class Table extends BaseComponent(HTMLTableElement) {
       }
     }
   }
-  
+
   /** @private */
   _selectSiblingItem(next) {
     if (this.selectable &amp;&amp; this.multiple) {
       const selectedItems = this.selectedItems;
       let lastSelectedItem = this._lastSelectedItems.items[this._lastSelectedItems.items.length - 1];
-      
+
       if (selectedItems.length) {
         // Prevent selection if we reached the edge
         if (next &amp;&amp; lastSelectedItem.matches(&apos;:last-of-type&apos;) || !next &amp;&amp; lastSelectedItem.matches(&apos;:first-of-type&apos;)) {
           return;
         }
-        
+
         // Target sibling item
         const sibling = getSiblingsOf(lastSelectedItem, &apos;tr[is=&quot;coral-table-row&quot;]&apos;, next ? &apos;next&apos; : &apos;prev&apos;);
         if (!sibling.hasAttribute(&apos;selected&apos;)) {
           lastSelectedItem = sibling;
         }
-        
+
         // Store last selection
         this._lastSelectedItems.direction = next ? &apos;down&apos; : &apos;up&apos;;
-        
+
         // Toggle selection
         lastSelectedItem.selected = !lastSelectedItem.selected;
-      }
-      else if (getRows([this.body]).length) {
+      } else if (getRows([this.body]).length) {
         const focusableItem = this._getFocusableItem();
-  
+
         // Store last selection
         this._lastSelectedItems.direction = next ? &apos;down&apos; : &apos;up&apos;;
-  
+
         // Select focusable item by default if no items selected
         focusableItem.selected = true;
       }
     }
-    
+
     // Focus last selected item
     window.requestAnimationFrame(() =&gt; {
       const itemToFocus = this._lastSelectedItems.items[this._lastSelectedItems.items.length - 1];
@@ -2528,82 +2524,80 @@ class Table extends BaseComponent(HTMLTableElement) {
       }
     });
   }
-  
+
   /** @private */
   _getFocusableItem() {
     return this.body &amp;&amp; this.body.querySelector(&apos;tr[is=&quot;coral-table-row&quot;][tabindex=&quot;0&quot;]&apos;);
   }
-  
+
   /** @private */
   _getFocusableHeaderCell() {
     return this.head &amp;&amp; this.head.querySelector(&apos;th[is=&quot;coral-table-headercell&quot;][tabindex=&quot;0&quot;], coral-table-headercell-label[tabindex=&quot;0&quot;]&apos;);
   }
-  
+
   /** @private */
   _addLastSelectedItem(item) {
     if (this._lastSelectedItems.items.indexOf(item) === -1) {
       this._lastSelectedItems.items.push(item);
-    }
-    else {
+    } else {
       // Push it at the end
       this._removeLastSelectedItem(item);
       this._addLastSelectedItem(item);
     }
   }
-  
+
   /** @private */
   _removeLastSelectedItem(item) {
     this._lastSelectedItems.items.splice(this._lastSelectedItems.items.indexOf(item), 1);
   }
-  
+
   /** @private */
   _focusItem(item, forceFocus) {
     this._toggleElementTabIndex(item, this._getFocusableItem(), forceFocus);
   }
-  
+
   /** @private */
   _onFocusFirstItem(event) {
     this._focusEdgeItem(event, true);
   }
-  
+
   /** @private */
   _onFocusLastItem(event) {
     this._focusEdgeItem(event, false);
   }
-  
+
   /** @private */
   _onFocusNextItem(event) {
     this._focusSiblingItem(event, true);
   }
-  
+
   /** @private */
   _onFocusPreviousItem(event) {
     this._focusSiblingItem(event, false);
   }
-  
+
   /** @private */
   _onSelectNextItem() {
     this._selectSiblingItem(true);
   }
-  
+
   /** @private */
   _onSelectPreviousItem() {
     this._selectSiblingItem(false);
   }
 
   /**
-  * Call the layout method of table component
-  *
-  * @param {Boolean} forced
-  * If true call the layout method immediately, else wait for timeout
-  */
+   * Call the layout method of table component
+   *
+   * @param {Boolean} forced
+   * If true call the layout method immediately, else wait for timeout
+   */
   resetLayout(forced) {
     forced = transform.boolean(forced);
     if (forced === true) {
       this._doResetLayout();
       this._preventResetLayout = false;
-    }
-    else {
+    } else {
       this._resetLayout();
     }
   }
@@ -2621,12 +2615,12 @@ class Table extends BaseComponent(HTMLTableElement) {
     if (this._preventResetLayout) {
       return;
     }
-    
+
     // Debounce
     if (this._timeout !== null) {
       window.clearTimeout(this._timeout);
     }
-    
+
     this._timeout = window.setTimeout(() =&gt; {
       this._timeout = null;
       this._doResetLayout();
@@ -2634,7 +2628,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       this.classList.add(IS_READY);
     }, this._wait);
   }
-  
+
   /** @private */
   _resizeStickyHead() {
     const table = this;
@@ -2647,111 +2641,110 @@ class Table extends BaseComponent(HTMLTableElement) {
       });
     }
   }
-  
+
   /** @private */
   _resizeContainer() {
     const table = this;
     const head = table.head;
-    
+
     if (head &amp;&amp; head.sticky) {
       let calculatedHeadSize = 0;
       let previousRowHeight = 0;
-      
+
       // Reset head layout
       getRows([head]).forEach((row, i) =&gt; {
         const headerCells = getHeaderCells(row);
-        
+
         if (headerCells.length) {
           const computedStyle = window.getComputedStyle(headerCells[0].content);
           let rowHeight = 0;
-          
+
           const stickyHeaderCellMinHeight = parseFloat(computedStyle.minHeight);
           // Divider &apos;row&apos; or &apos;cell&apos;  adds a border top
           const borderTop = parseFloat(computedStyle.borderTopWidth);
-          
+
           headerCells.forEach((headerCell) =&gt; {
             // Reset to default
             headerCell.content.style.height = &apos;&apos;;
             // The highest header cell defines the row height
             rowHeight = Math.max(rowHeight, headerCell.content.getBoundingClientRect().height);
           });
-          
+
           // Add the row height to the table head height
           calculatedHeadSize += rowHeight;
-          
+
           headerCells.forEach((headerCell) =&gt; {
             // Expand the header cell height to the row height
             if (rowHeight - borderTop !== stickyHeaderCellMinHeight) {
               headerCell.content.style.height = `${rowHeight}px`;
             }
-            
+
             // Vertically align text in sticky cell by getting the label height
             if (headerCell.content.textContent.trim().length &amp;&amp; !headerCell.content.querySelector(&apos;coral-checkbox[coral-table-select]&apos;)) {
               const stickyHeaderCellHeight = headerCell.content.getBoundingClientRect().height;
               const span = document.createElement(&apos;span&apos;);
-              
+
               // Prevents a recursive table relayout that is triggered from changing the header cell content
               table._preventResetLayout = true;
-              
+
               while (headerCell.content.firstChild) {
                 span.appendChild(headerCell.content.firstChild);
               }
               headerCell.content.appendChild(span);
-              
+
               const labelHeight = span.getBoundingClientRect().height;
               const paddingTop = (stickyHeaderCellHeight - labelHeight) / 2;
-              
+
               while (span.firstChild) {
                 headerCell.content.appendChild(span.firstChild);
               }
               headerCell.content.removeChild(span);
-              
+
               headerCell.content.style.paddingTop = `${paddingTop}px`;
-              
+
               window.requestAnimationFrame(() =&gt; {
                 table._preventResetLayout = false;
               });
             }
-            
+
             // Position the sticky cell
             previousRowHeight = previousRowHeight || rowHeight;
             headerCell.content.style.top = `${i &gt; 0 ? previousRowHeight * i + borderTop * (i - 1) : 0}px`;
           });
         }
       });
-      
+
       const containerComputedStyle = window.getComputedStyle(this._elements.container);
       const borderTopWidth = parseFloat(containerComputedStyle.borderTopWidth);
       const borderBottomWidth = parseFloat(containerComputedStyle.borderBottomWidth);
-  
+
       const containerBorderSize = borderTopWidth + borderBottomWidth;
       const containerMarginTop = `${calculatedHeadSize}px`;
       const containerHeight = `calc(100% - ${calculatedHeadSize + containerBorderSize}px)`;
       this._resetContainerLayout(containerMarginTop, containerHeight);
-    }
-    else {
+    } else {
       this._resetContainerLayout();
     }
   }
-  
+
   /** @private */
   _resetContainerLayout(marginTop, height) {
     this._elements.container.style.marginTop = marginTop || &apos;&apos;;
     this._elements.container.style.height = height || &apos;&apos;;
   }
-  
+
   /** @private */
   _resetHiddenColumns(resetLayout) {
     this.id = this.id || commons.getUID();
-    
+
     // Delete styles
     this._elements.hiddenStyle.innerHTML = &apos;&apos;;
-    
+
     // Render styles for each column
     getColumns(this.columns).forEach((column) =&gt; {
       if (column.hidden) {
         const columnIndex = getIndexOf(column) + 1;
-        
+
         this._elements.hiddenStyle.innerHTML += `
            #${this.id} ._coral-Table-cell:nth-child(${columnIndex}),
            #${this.id} ._coral-Table-headerCell:nth-child(${columnIndex}) {
@@ -2760,22 +2753,22 @@ class Table extends BaseComponent(HTMLTableElement) {
         `;
       }
     });
-    
+
     if (resetLayout) {
       this._resetLayout();
     }
   }
-  
+
   _resetAlignmentColumns() {
     this.id = this.id || commons.getUID();
-  
+
     // Delete styles
     this._elements.alignmentStyle.innerHTML = &apos;&apos;;
-  
+
     getColumns(this.columns).forEach((column) =&gt; {
       const columnAlignment = column.alignment;
       const columnIndex = getIndexOf(column) + 1;
-      
+
       this._elements.alignmentStyle.innerHTML += `
          #${this.id} ._coral-Table-cell:nth-child(${columnIndex}),
          #${this.id} ._coral-Table-headerCell:nth-child(${columnIndex}) {
@@ -2784,44 +2777,43 @@ class Table extends BaseComponent(HTMLTableElement) {
       `;
     });
   }
-  
+
   /** @private */
   _onScroll() {
     const table = this;
     const head = table.head;
-    
+
     // Ignore if only vertical scroll
     const scrollLeft = table._elements.container.scrollLeft;
     if (table._lastScrollLeft === scrollLeft) {
       return;
     }
     table._lastScrollLeft = scrollLeft;
-    
+
     if (head &amp;&amp; head.sticky) {
       // Trigger a reflow that will reposition the sticky cells for FF only.
       head.style.margin = &apos;1px&apos;;
-      
+
       window.requestAnimationFrame(() =&gt; {
         head.style.margin = &apos;&apos;;
-        
+
         // In other browsers e.g Chrome or IE, we need to adjust the position of the sticky cells manually
         if (!table._preventLayoutStickyCellOnScroll) {
           const firstHeaderCell = head.querySelector(&apos;tr[is=&quot;coral-table-row&quot;] th[is=&quot;coral-table-headercell&quot;]&apos;);
-          
+
           if (firstHeaderCell) {
             // Verify if the sticky cells need to be adjusted. If the first one didn&apos;t move, we can assume that they
             // all need to be adjusted. By default, the left offset is 1px because of the table border.
             if (table._layoutStickyCellOnScroll || firstHeaderCell.content.offsetLeft === 1) {
               table._layoutStickyCellOnScroll = true;
-              
+
               getRows([head]).forEach((row) =&gt; {
                 getHeaderCells(row).forEach((headerCell) =&gt; {
                   const paddingLeft = parseFloat(window.getComputedStyle(headerCell).paddingLeft);
                   headerCell.content.style.marginLeft = `-${scrollLeft + paddingLeft}px`;
                 });
               });
-            }
-            else {
+            } else {
               // We don&apos;t need to layout the sticky cells manually
               table._preventLayoutStickyCellOnScroll = true;
             }
@@ -2830,46 +2822,49 @@ class Table extends BaseComponent(HTMLTableElement) {
       });
     }
   }
-  
+
   // @compat
   _toggleSelectionCheckbox(row) {
     const cells = getContentCells(row);
     const renderCheckbox = (cell, process) =&gt; {
       // Support cloneNode
       cell._checkbox = cell._checkbox || cell.querySelector(&apos;coral-checkbox&apos;);
-      
+
       // Render checkbox if none
       if (!cell._checkbox) {
         cell._checkbox = new Checkbox();
       }
-      
+
       process(cell._checkbox);
-  
+
       // Add checkbox
       cell.insertBefore(cell._checkbox, cell.firstChild);
     };
-    
+
     cells.forEach((cell, i) =&gt; {
       const isRowSelect = i === 0 &amp;&amp; cell.hasAttribute(&apos;coral-table-rowselect&apos;);
       const isCellSelect = cell.hasAttribute(&apos;coral-table-cellselect&apos;) || cell.querySelector(&apos;coral-checkbox[coral-table-cellselect]&apos;);
-      
+
       if (isRowSelect || isCellSelect) {
         let handle;
-        if (isRowSelect) { handle = &apos;coral-table-rowselect&apos;; }
-        if (isCellSelect) { handle = &apos;coral-table-cellselect&apos;; }
-        
+        if (isRowSelect) {
+          handle = &apos;coral-table-rowselect&apos;;
+        }
+        if (isCellSelect) {
+          handle = &apos;coral-table-cellselect&apos;;
+        }
+
         renderCheckbox(cell, (checkbox) =&gt; {
           // Define selection handle
           if (isRowSelect) {
             cell.classList.add(&apos;_coral-Table-cell--check&apos;);
             cell.removeAttribute(handle);
             checkbox.setAttribute(handle, &apos;&apos;);
-          }
-          else {
+          } else {
             cell.setAttribute(handle, &apos;&apos;);
             checkbox.removeAttribute(handle);
           }
-    
+
           // Sync selection
           const isSelected = (isRowSelect ? row : cell).hasAttribute(&apos;selected&apos;);
           checkbox[isSelected ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;checked&apos;, &apos;&apos;);
@@ -2877,7 +2872,7 @@ class Table extends BaseComponent(HTMLTableElement) {
       }
     });
   }
-  
+
   /** @private */
   _setHeaderCellScope(headerCell, tableSection) {
     // Add appropriate scope depending on whether header cell is in THEAD or TBODY
@@ -2886,22 +2881,20 @@ class Table extends BaseComponent(HTMLTableElement) {
       if (this.head &amp;&amp; this.head.sticky) {
         headerCell.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
         headerCell._elements.content.setAttribute(&apos;role&apos;, &apos;columnheader&apos;);
-      }
-      else {
+      } else {
         headerCell.setAttribute(&apos;role&apos;, &apos;columnheader&apos;);
       }
-    } 
-    else {
+    } else {
       headerCell.setAttribute(&apos;role&apos;, &apos;rowheader&apos;);
     }
     headerCell.setAttribute(&apos;scope&apos;, scope);
   }
-  
+
   /**  @private */
   _handleMutations(mutations) {
     mutations.forEach((mutation) =&gt; {
       // Sync removed nodes
-      for (let k = 0; k &lt; mutation.removedNodes.length; k++) {
+      for (let k = 0 ; k &lt; mutation.removedNodes.length ; k++) {
         const removedNode = mutation.removedNodes[k];
 
         if (isTableBody(removedNode)) {
@@ -2909,7 +2902,7 @@ class Table extends BaseComponent(HTMLTableElement) {
           if (!this.body) {
             this.body = new TableBody();
           }
-          
+
           this._onBodyContentChanged({
             target: removedNode,
             detail: {
@@ -2920,28 +2913,27 @@ class Table extends BaseComponent(HTMLTableElement) {
         }
       }
     });
-  
+
     this._resetLayout();
   }
-  
+
   _getSelectableItems() {
     return this.items._getSelectableItems().filter(item =&gt; !item.querySelector(&apos;[coral-table-rowselect][disabled]&apos;));
   }
-  
+
   _toggleObserver(enable) {
     this._observer = this._observer || new MutationObserver(this._handleMutations.bind(this));
-    
+
     if (enable) {
       this._observer.observe(this, {
         childList: true,
         subtree: true
       });
-    }
-    else {
+    } else {
       this._observer.disconnect();
     }
   }
-  
+
   get _contentZones() {
     return {
       tbody: &apos;body&apos;,
@@ -2950,79 +2942,85 @@ class Table extends BaseComponent(HTMLTableElement) {
       colgroup: &apos;columns&apos;
     };
   }
-  
+
   /**
    Returns {@link Table} variants.
-   
+
    @return {TableVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+
   /**
    Returns divider options for {@link TableHead}, {@link TableBody} and {@link TableFoot}.
-   
+
    @return {TableSectionDividerEnum}
    */
-  static get divider() { return divider; }
-  
+  static get divider() {
+    return divider;
+  }
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       labelledby: &apos;labelledBy&apos;
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;variant&apos;, &apos;selectable&apos;, &apos;orderable&apos;, &apos;labelled&apos;, &apos;labelledby&apos;, &apos;multiple&apos;, &apos;lockable&apos;]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // Wrapper should have role=&quot;presentation&quot; because it wraps another table
     this.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
-    
+
     // Default reflected attribute
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-    
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
+
     const head = this._elements.head;
     const body = this._elements.body;
     const foot = this._elements.foot;
     const columns = this._elements.columns;
-  
+
     // Disable observer while rendering template
     this._toggleObserver(false);
     this._elements.head.setAttribute(&apos;_observe&apos;, &apos;off&apos;);
     this._elements.body.setAttribute(&apos;_observe&apos;, &apos;off&apos;);
-    
+
     // Render template
     const frag = document.createDocumentFragment();
     frag.appendChild(this._elements.container);
     frag.appendChild(this._elements.liveRegion);
-    
+
     // cloneNode support
     const wrapper = this.querySelector(&apos;._coral-Table-wrapper-container&apos;);
     if (wrapper) {
       wrapper.remove();
     }
-  
+
     let liveRegion = this.querySelector(&apos;._coral-Table-liveRegion&apos;);
     if (liveRegion) {
       liveRegion.remove();
     }
-    
+
     // Append frag
     this.appendChild(frag);
-    
+
     // Call content zone inserts
     this.head = head;
     this.body = body;
     this.foot = foot;
     this.columns = columns;
-  
+
     // Set header cell scope
     getRows([this._elements.table]).forEach((row) =&gt; {
       getHeaderCells(row).forEach((headerCell) =&gt; {
@@ -3050,89 +3048,89 @@ class Table extends BaseComponent(HTMLTableElement) {
         }
       }
     }
-    
+
     // Detect table size changes
     commons.addResizeListener(this, this._resetLayout);
-    
+
     // Disable table features if no items.
     const items = this._getSelectableItems();
     this._toggleInteractivity(items.length === 0);
-  
+
     // Sync selection state
     if (this.selectable) {
       const selectedItems = this.selectedItems;
-    
+
       // Sync select all handle if any
       this._syncSelectAllHandle(selectedItems, items);
-    
+
       // Sync used collections
       if (selectedItems.length) {
         this._oldSelection = selectedItems;
         this._lastSelectedItems.items = selectedItems;
       }
     }
-    
+
     // Sync sorted
     this._allowSorting = true;
     const column = this._isSorted();
     if (column) {
       column._doSort(true);
     }
-  
+
     // @compat
     if (this.body) {
       const rows = getRows([this.body]);
       // Use the first column as selection column
       rows.forEach(row =&gt; this._toggleSelectionCheckbox(row));
     }
-  
+
     // Enable observer again
     this._toggleObserver(true);
-    
+
     // Mark table as ready
     if (!this.head || this.head &amp;&amp; !this.head.hasAttribute(&apos;sticky&apos;)) {
       this.classList.add(IS_READY);
     }
   }
-  
+
   /**
    Triggered before a {@link Table} column gets sorted by user interaction. Can be used to cancel column sorting and define
    custom sorting.
-   
+
    @typedef {CustomEvent} coral-table:beforecolumnsort
-   
+
    @property {TableColumn} detail.column
    The column to be sorted.
    @property {String} detail.direction
    The requested sorting direction for the column.
    */
-  
+
   /**
    Triggered when a {@link Table} column is sorted.
-   
+
    @typedef {CustomEvent} coral-table:columnsort
-   
+
    @param {TableColumn} detail.column
    The sorted column.
    */
-  
+
   /**
    Triggered before a {@link Table} column is dragged. Can be used to cancel column dragging.
-   
+
    @typedef {CustomEvent} coral-table:beforecolumndrag
-   
+
    @property {TableColumn} detail.column
    The dragged column.
    @property {TableColumn} detail.before
    The column will be inserted before this sibling column.
    If &lt;code&gt;null&lt;/code&gt;, the column is inserted at the end.
    */
-  
+
   /**
    Triggered when a {@link Table} column is dragged.
-   
+
    @typedef {CustomEvent} coral-table:columndrag
-   
+
    @property {TableColumn} detail.column
    The dragged column.
    @property {TableColumn} detail.oldBefore
@@ -3142,24 +3140,24 @@ class Table extends BaseComponent(HTMLTableElement) {
    The column is inserted before this sibling column.
    If &lt;code&gt;null&lt;/code&gt;, the column is inserted at the end.
    */
-  
+
   /**
    Triggered before a {@link Table} row is ordered. Can be used to cancel row ordering.
-   
+
    @typedef {CustomEvent} coral-table:beforeroworder
-   
+
    @property {TableRow} detail.row
    The row to be ordered.
    @property {TableRow} detail.before
    The row will be inserted before this sibling row.
    If &lt;code&gt;null&lt;/code&gt;, the row is inserted at the end.
    */
-  
+
   /**
    Triggered when a {@link Table} row is ordered.
-   
+
    @typedef {CustomEvent} coral-table:roworder
-   
+
    @property {TableRow} detail.row
    The ordered row.
    @property {TableRow} detail.oldBefore
@@ -3169,30 +3167,30 @@ class Table extends BaseComponent(HTMLTableElement) {
    The row is inserted before this sibling row.
    If &lt;code&gt;null&lt;/code&gt;, the row is inserted at the end.
    */
-  
+
   /**
    Triggered when a {@linked Table} row is locked.
-   
+
    @typedef {CustomEvent} coral-table:rowlock
-   
+
    @property {TableRow} detail.row
    The locked row.
    */
-  
+
   /**
    Triggered when {@link Table} a row is locked.
-   
+
    @typedef {CustomEvent} coral-table:rowunlock
-   
+
    @property {TableRow} detail.row
    The unlocked row.
    */
-  
+
   /**
    Triggered when a {@link Table} row selection changed.
-   
+
    @typedef {CustomEvent} coral-table:rowchange
-   
+
    @property {Array.&lt;TableCell&gt;} detail.oldSelection
    The old item selection. When {@link TableRow#multiple}, it includes an Array.
    @property {Array.&lt;TableCell&gt;} detail.selection
@@ -3200,12 +3198,12 @@ class Table extends BaseComponent(HTMLTableElement) {
    @property {TableRow} detail.row
    The targeted row.
    */
-  
+
   /**
    Triggered when the {@link Table} selection changed.
-   
+
    @typedef {CustomEvent} coral-table:change
-   
+
    @property {Array.&lt;TableRow&gt;} detail.oldSelection
    The old item selection. When {@link Table#multiple}, it includes an Array.
    @property {Array.&lt;TableRow&gt;} detail.selection

@@ -203,7 +203,11 @@
 <a name='L145'></a><a href='#L145'>145</a>
 <a name='L146'></a><a href='#L146'>146</a>
 <a name='L147'></a><a href='#L147'>147</a>
-<a name='L148'></a><a href='#L148'>148</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -257,7 +261,6 @@
 <span class="cline-any cline-yes">348x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">348x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -326,7 +329,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -334,7 +336,6 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -350,7 +351,14 @@
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">36x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -381,39 +389,40 @@ class SideNavItem extends BaseLabellable(BaseComponent(HTMLAnchorElement)) {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Prepare templates
     this._elements = {
       content: this.querySelector('coral-sidenav-item-content') || document.createElement('coral-sidenav-item-content')
     };
-    
+&nbsp;
     item.call(this._elements);
-  
+&nbsp;
     super._observeLabel();
   }
-  
+&nbsp;
   /**
    The content of the sidenav item.
-   
+&nbsp;
    @type {SideNavItemContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+&nbsp;
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-sidenav-item-content',
-      insert: function(content) {
+      insert: function (content) {
         this._elements.container.appendChild(content);
       }
     });
   }
-  
+&nbsp;
   /**
    Specifies the icon name used inside the item. See {@link Icon} for valid icon names.
-   
+&nbsp;
    @type {String}
    @default ""
    @htmlattribute icon
@@ -421,16 +430,17 @@ class SideNavItem extends BaseLabellable(BaseComponent(HTMLAnchorElement)) {
   get icon() {
     return this._elements.icon.icon;
   }
+&nbsp;
   set icon(value) {
     this._elements.icon.icon = value;
     this._elements.icon.hidden = this._elements.icon.icon === '';
-  
+&nbsp;
     super._toggleIconAriaHidden();
   }
-  
+&nbsp;
   /**
    Whether the item is selected.
-   
+&nbsp;
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -439,41 +449,44 @@ class SideNavItem extends BaseLabellable(BaseComponent(HTMLAnchorElement)) {
   get selected() {
     return this._selected || false;
   }
+&nbsp;
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
-    
+&nbsp;
     this.classList.toggle('is-selected', this._selected);
-    
+&nbsp;
     this.trigger('coral-sidenav-item:_selectedchanged');
   }
-  
-  get _contentZones() { return {'coral-sidenav-item-label': 'content'}; }
-  
+&nbsp;
+  get _contentZones() {
+    return {'coral-sidenav-item-label': 'content'};
+  }
+&nbsp;
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['selected', 'icon']);
   }
-  
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-  
+&nbsp;
     // Create a fragment
     const fragment = document.createDocumentFragment();
-  
+&nbsp;
     // Render the main template
     fragment.appendChild(this._elements.container);
-  
+&nbsp;
     const content = this._elements.content;
-  
+&nbsp;
     // Remove it so we can process children
     if (content.parentNode) {
       content.parentNode.removeChild(content);
     }
-  
+&nbsp;
     // Process remaining elements as necessary
     while (this.firstChild) {
       const child = this.firstChild;
@@ -481,16 +494,15 @@ class SideNavItem extends BaseLabellable(BaseComponent(HTMLAnchorElement)) {
         child.nodeType === Node.ELEMENT_NODE &amp;&amp; child.getAttribute('handle') !== 'container') {
         // Add non-template elements to the content
         content.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else
         this.removeChild(child);
       }
     }
-  
+&nbsp;
     // Add the frag to the component
     this.appendChild(fragment);
-  
+&nbsp;
     // Assign the content zones, moving them into place in the process
     this.content = content;
   }
@@ -504,7 +516,7 @@ export default SideNavItem;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

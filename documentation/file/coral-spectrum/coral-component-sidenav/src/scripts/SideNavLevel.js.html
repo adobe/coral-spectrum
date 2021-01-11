@@ -449,18 +449,18 @@ class SideNavLevel extends BaseComponent(HTMLElement) {
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;_expanded&apos;]);
   }
-  
+
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === &apos;_expanded&apos;) {
       const isExpanded = value === &apos;on&apos;;
-      
+
       if (oldValue === value) {
         return;
       }
-  
+
       this.classList.toggle(&apos;is-expanded&apos;, isExpanded);
-  
+
       // Do animation in next frame to avoid a forced reflow
       window.requestAnimationFrame(() =&gt; {
         // Don&apos;t animate on initialization
@@ -469,31 +469,28 @@ class SideNavLevel extends BaseComponent(HTMLElement) {
           commons.transitionEnd(this, () =&gt; {
             if (isExpanded) {
               this.style.height = &apos;&apos;;
-            }
-            else {
+            } else {
               this.hidden = true;
             }
           });
-      
+
           // Force height to enable transition
           if (!isExpanded) {
             this.style.height = `${this.scrollHeight}px`;
-          }
-          else {
+          } else {
             this.hidden = false;
           }
-      
+
           // We read the offset height to force a reflow, this is needed to start the transition between absolute values
           // https://blog.alexmaccaw.com/css-transitions under Redrawing
           // eslint-disable-next-line no-unused-vars
           const offsetHeight = this.offsetHeight;
-      
+
           this.style.height = isExpanded ? `${this.scrollHeight}px` : 0;
-        }
-        else {
+        } else {
           // Make sure it&apos;s animated next time
           this._animate = true;
-      
+
           // Hide it on initialization if closed
           if (!isExpanded) {
             this.style.height = 0;
@@ -501,18 +498,17 @@ class SideNavLevel extends BaseComponent(HTMLElement) {
           }
         }
       });
-    }
-    else {
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // a11y
     this.setAttribute(&apos;role&apos;, &apos;region&apos;);
   }

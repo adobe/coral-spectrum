@@ -451,7 +451,7 @@ class ActionBar extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Attach events
     this._delegateEvents({
       &apos;key:up&apos;: &apos;_onFocusPreviousItem&apos;,
@@ -460,42 +460,43 @@ class ActionBar extends BaseComponent(HTMLElement) {
       &apos;key:right&apos;: &apos;_onFocusNextItem&apos;,
       &apos;global:resize&apos;: &apos;_onResizeWindow&apos;
     });
-  
+
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
       primary: this.querySelector(&apos;coral-actionbar-primary&apos;) || document.createElement(&apos;coral-actionbar-primary&apos;),
       secondary: this.querySelector(&apos;coral-actionbar-secondary&apos;) || document.createElement(&apos;coral-actionbar-secondary&apos;)
     };
-  
+
     // Reference on all items
     this._items = this.getElementsByTagName(&apos;coral-actionbar-item&apos;);
-    
+
     // Debounce wait time in milliseconds
     this._wait = 50;
-  
+
     // bind this._onLayout so it can be removed again
     this._onLayout = this._onLayout.bind(this);
     this._debounceOnLayout = this._debounceOnLayout.bind(this);
-  
+
     // use the smart strategy instead of re-rendering every frame
     this._recalculateLayoutOnMutation();
   }
-  
+
   /**
    The primary (left) container of the ActionBar.
-   
+
    @type {ActionBarPrimary}
    @contentzone
    */
   get primary() {
     return this._getContentZone(this._elements.primary);
   }
+
   set primary(value) {
     this._setContentZone(&apos;primary&apos;, value, {
       handle: &apos;primary&apos;,
       tagName: &apos;coral-actionbar-primary&apos;,
-      insert: function(content) {
+      insert: function (content) {
         // primary has to be before secondary if available
         this.insertBefore(content, this.secondary);
       }
@@ -504,33 +505,34 @@ class ActionBar extends BaseComponent(HTMLElement) {
 
   /**
    The secondary (right) container of the ActionBar.
-   
+
    @type {ActionBarSecondary}
    @contentzone
    */
   get secondary() {
     return this._getContentZone(this._elements.secondary);
   }
+
   set secondary(value) {
     this._setContentZone(&apos;secondary&apos;, value, {
       handle: &apos;secondary&apos;,
       tagName: &apos;coral-actionbar-secondary&apos;,
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
   }
-  
+
   /** @ignore */
   _recalculateLayoutOnMutation() {
     // recalculate layout on dom element size change + on dom mutation
     // http://www.backalleycoder.com/2013/03/18/cross-browser-event-based-element-resize-detection/
-    
+
     // relayout any time the dom changes
     this._observer = new MutationObserver(() =&gt; {
       this._debounceOnLayout();
     });
-    
+
     // Watch for changes
     this._observer.observe(this, {
       attributes: true,
@@ -539,42 +541,42 @@ class ActionBar extends BaseComponent(HTMLElement) {
       subtree: true
     });
   }
-  
+
   /** @ignore */
   _onFocusPreviousItem(event) {
     // stops the page from scrolling
     event.preventDefault();
-    
+
     const previousItem = this._getPreviousSelectableWrappedItem(event.target);
     if (previousItem !== null) {
       previousItem.focus();
     }
   }
-  
+
   /** @ignore */
   _onFocusNextItem(event) {
     // stops the page from scrolling
     event.preventDefault();
-    
+
     const nextWrappedItem = this._getNextSelectableWrappedItem(event.target);
     if (nextWrappedItem !== null) {
       nextWrappedItem.focus();
     }
   }
-  
+
   /** @ignore */
   _onResizeWindow() {
     // just close all popovers for now when screen is resized
     // there might be more popovers, then the &apos;more&apos; popovers
     const popovers = this.getElementsByTagName(&apos;coral-popover&apos;);
-    for (let i = 0; i &lt; popovers.length; i++) {
+    for (let i = 0 ; i &lt; popovers.length ; i++) {
       popovers[i].removeAttribute(&apos;open&apos;);
     }
-    
+
     // force a relayout (needed especially if framerate during resize drops e.g.: in FF)
     this._debounceOnLayout();
   }
-  
+
   /** @ignore */
   _onLayout() {
     if (!this.primary || !this.primary._elements || !this.primary._elements.overlay ||
@@ -582,14 +584,14 @@ class ActionBar extends BaseComponent(HTMLElement) {
       // while containers are not cached or no items are rendered do nothing
       return;
     }
-    
+
     if (this.primary._elements.overlay.open === true || this.secondary._elements.overlay.open === true) {
       // while popovers are open do not relayout
       return;
     }
-    
+
     const ERROR_MARGIN = 78;
-    
+
     const primaryMore = this.primary._elements.moreButton;
     const secondaryMore = this.secondary._elements.moreButton;
     const leftItems = this.primary.items.getAll();
@@ -599,14 +601,14 @@ class ActionBar extends BaseComponent(HTMLElement) {
     const widthCache = this._newWidthCache();
     const leftMoreButtonWidth = leftItems.length &gt; 0 ? widthCache.getOuterWidth(primaryMore) : 0;
     const rightMoreButtonWidth = rightItems.length &gt; 0 ? widthCache.getOuterWidth(secondaryMore) : 0;
-    
+
     // Make it possible to set left/right padding to the containers
     const borderWidthLeftContainer = this.primary.offsetWidth - this.primary.getBoundingClientRect().width;
     const borderWidthRightContainer = this.secondary.offsetWidth - this.secondary.getBoundingClientRect().width;
-    
+
     const primaryLeftOffset = this.primary.offsetLeft;
     const secondaryRightOffset = this.offsetWidth - (this.secondary.offsetLeft + this.secondary.offsetWidth);
-    
+
     let availableWidth = this.offsetWidth - primaryLeftOffset - secondaryRightOffset - leftMoreButtonWidth -
       rightMoreButtonWidth - borderWidthLeftContainer - borderWidthRightContainer - ERROR_MARGIN;
     let currentUsedWidth = 0;
@@ -616,11 +618,11 @@ class ActionBar extends BaseComponent(HTMLElement) {
     let moreButtonRightVisible = false;
     let showItem = false;
     let itemWidth = 0;
-    
-    for (let i = 0; i &lt; leftItems.length || i &lt; rightItems.length; i++) {
+
+    for (let i = 0 ; i &lt; leftItems.length || i &lt; rightItems.length ; i++) {
       itemLeft = i &lt; leftItems.length ? leftItems[i] : null;
       itemRight = i &lt; rightItems.length ? rightItems[i] : null;
-      
+
       // first calculate visibility of left item
       showItem = false;
       if (itemLeft !== null) {
@@ -628,36 +630,33 @@ class ActionBar extends BaseComponent(HTMLElement) {
           // item is hidden on purpose (we don&apos;t use it for layouting but do also not move offscreen) needed as it
           // might already have been moved offscreen before
           this._moveToScreen(itemLeft);
-        }
-        else {
+        } else {
           // if item is not hidden on purpose (hiding by actionBar due to space problems does not count) =&gt; layout
           // element
           if (!moreButtonLeftVisible &amp;&amp; (this.primary.threshold &lt;= 0 || leftVisibleItems &lt; this.primary.threshold)) {
             // if threshold is not reached so far
             itemWidth = widthCache.getOuterWidth(itemLeft);
-            
+
             if (currentUsedWidth + itemWidth &lt; availableWidth) {
               // if there is still enough space to show another item
               showItem = true;
-            }
-            else if (leftVisibleItems === leftItems.length - 1 &amp;&amp;
+            } else if (leftVisibleItems === leftItems.length - 1 &amp;&amp;
               currentUsedWidth + itemWidth &lt; availableWidth + leftMoreButtonWidth
             ) {
               // if this is the last item and so far there have been no items hidden =&gt; don&apos;t show more button
               showItem = true;
             }
           }
-          
+
           if (showItem) {
             leftVisibleItems += 1;
             currentUsedWidth += itemWidth;
             this._moveToScreen(itemLeft);
-          }
-          else {
+          } else {
             this._hideItem(itemLeft);
             moreButtonLeftVisible = true;
           }
-          
+
           if (leftVisibleItems === leftItems.length) {
             // left more button not needed =&gt; more free space available
             availableWidth += leftMoreButtonWidth;
@@ -665,7 +664,7 @@ class ActionBar extends BaseComponent(HTMLElement) {
           }
         }
       }
-      
+
       // then calculate visibility of right item
       showItem = false;
       if (itemRight !== null) {
@@ -673,36 +672,33 @@ class ActionBar extends BaseComponent(HTMLElement) {
           // item is hidden on purpose (we don&apos;t use it for layouting but do also not move offscreen) needed as it
           // might already have been moved offscreen before
           this._moveToScreen(itemRight);
-        }
-        else {
+        } else {
           // if item is not hidden on purpose (hiding by actionBar due to space problems does not count) =&gt; layout
           // element
           if (!moreButtonRightVisible &amp;&amp; (this.secondary.threshold &lt;= 0 || rightVisibleItems &lt; this.secondary.threshold)) {
             // if threshold is not reached so far
             itemWidth = widthCache.getOuterWidth(itemRight);
-            
+
             if (currentUsedWidth + itemWidth &lt; availableWidth) {
               // if there is still enough space to show another item
               showItem = true;
-            }
-            else if (rightVisibleItems === rightItems.length - 1 &amp;&amp;
+            } else if (rightVisibleItems === rightItems.length - 1 &amp;&amp;
               currentUsedWidth + itemWidth &lt; availableWidth + rightMoreButtonWidth
             ) {
               // if this is the last item and so far there have been no items hidden =&gt; don&apos;t show more button
               showItem = true;
             }
           }
-          
+
           if (showItem) {
             rightVisibleItems += 1;
             currentUsedWidth += itemWidth;
             this._moveToScreen(itemRight);
-          }
-          else {
+          } else {
             this._hideItem(itemRight);
             moreButtonRightVisible = true;
           }
-          
+
           if (rightVisibleItems === rightItems.length) {
             // left more button not needed =&gt; more free space available
             availableWidth += rightMoreButtonWidth;
@@ -711,126 +707,120 @@ class ActionBar extends BaseComponent(HTMLElement) {
         }
       }
     }
-  
+
     // Handle tabs
     const primarySelectable = this.primary.items._getAllSelectable();
     const secondarySelectable = this.secondary.items._getAllSelectable();
-    for (let i = 0; i &lt; this._items.length; i++) {
+    for (let i = 0 ; i &lt; this._items.length ; i++) {
       this._toggleItemTabbable(this._items[i], false);
     }
-    
+
     // LEFT: Show or hide more buttons
     if (moreButtonLeftVisible) {
       this._moveToScreen(primaryMore, true);
-      
+
       if (primarySelectable.length === 0) {
         this._toggleItemTabbable(primaryMore, true);
-      }
-      else {
+      } else {
         this._toggleItemTabbable(primaryMore, false);
         this._toggleItemTabbable(primarySelectable[0], true);
       }
-    }
-    else {
+    } else {
       this._moveToScreen(primaryMore, false);
       this._toggleItemTabbable(primaryMore, false);
       this._toggleItemTabbable(primarySelectable[0], true);
     }
-  
+
     // RIGHT: Show or hide more buttons
     if (moreButtonRightVisible) {
       this._moveToScreen(secondaryMore, true);
-  
+
       if (secondarySelectable.length === 0) {
         this._toggleItemTabbable(secondaryMore, true);
-      }
-      else {
+      } else {
         this._toggleItemTabbable(secondaryMore, false);
         this._toggleItemTabbable(secondarySelectable[0], true);
       }
-    }
-    else {
+    } else {
       this._moveToScreen(secondaryMore, false);
       this._toggleItemTabbable(secondaryMore, false);
-      
+
       const tabbableItem = this.secondary.items._getAllSelectable()[0];
       if (tabbableItem) {
         this._toggleItemTabbable(tabbableItem, true);
       }
     }
-  
+
     // re-calculate layout on element resize
     if (!this._resizeListenerAttached) {
       commons.addResizeListener(this, this._debounceOnLayout);
       commons.addResizeListener(this.primary, this._debounceOnLayout);
       commons.addResizeListener(this.secondary, this._debounceOnLayout);
-  
+
       this._resizeListenerAttached = true;
     }
   }
-  
+
   /** @ignore */
   _getNextSelectableWrappedItem(currentItem) {
     if (currentItem.parentNode.tagName === &apos;CORAL-ACTIONBAR-ITEM&apos;) {
       // currentItem is wrapped
       currentItem = currentItem.parentNode;
     }
-    
+
     const selectableItems = this._getAllSelectableItems(currentItem);
     const length = selectableItems.length;
     const index = selectableItems.indexOf(currentItem);
-    
+
     if (index &gt;= 0 &amp;&amp; length &gt; index + 1) {
       // if there is a next selectable element return it
       return getFirstSelectableWrappedItem(selectableItems[index + 1]);
-    }
-    else {
-      for(let i = 0; i &lt; length; i++) {
+    } else {
+      for (let i = 0 ; i &lt; length ; i++) {
         if (selectableItems[i].contains(currentItem) &amp;&amp; length &gt; i + 1) {
           return getFirstSelectableWrappedItem(selectableItems[i + 1]);
         }
       }
     }
-    
+
     return null;
   }
-  
+
   /** @ignore */
   _getPreviousSelectableWrappedItem(currentItem) {
     if (currentItem.parentNode.tagName === &apos;CORAL-ACTIONBAR-ITEM&apos;) {
       // currentItem is wrapped
       currentItem = currentItem.parentNode;
     }
-    
+
     const selectableItems = this._getAllSelectableItems(currentItem);
     const index = selectableItems.indexOf(currentItem);
-    
+
     if (index &gt; 0) {
       // if there is a previous selectable element return it
       return getFirstSelectableWrappedItem(selectableItems[index - 1]);
-    }
-    else {
-      for(let i = 1; i &lt; selectableItems.length; i++) {
+    } else {
+      for (let i = 1 ; i &lt; selectableItems.length ; i++) {
         if (selectableItems[i].contains(currentItem)) {
           return getFirstSelectableWrappedItem(selectableItems[i - 1]);
         }
       }
     }
-    
+
     return null;
   }
-  
+
   /** @ignore */
   _getAllSelectableItems(currentItem) {
     let selectableItems = [];
-    
+
     if (this.primary._elements.overlay.open === true || this.secondary._elements.overlay.open === true) {
       // if popover is open only items in popover can be selected
       const popoverItems = this.primary._elements.overlay.open === true ? this.primary._itemsInPopover :
         this.secondary._itemsInPopover;
       let item = null;
-      
-      for (let i = 0; i &lt; popoverItems.length; i++) {
+
+      for (let i = 0 ; i &lt; popoverItems.length ; i++) {
         item = popoverItems[i];
         if (!item.hasAttribute(&apos;disabled&apos;) &amp;&amp;
           !item.hasAttribute(&apos;hidden&apos;) &amp;&amp;
@@ -840,68 +830,64 @@ class ActionBar extends BaseComponent(HTMLElement) {
           selectableItems.push(item);
         }
       }
-    }
-    else {
+    } else {
       // concat selectable items from left side of the bar and right side of the bar
       const leftSelectableItems = this.primary.items._getAllSelectable();
       const rightSelectableItems = this.secondary.items._getAllSelectable();
       if (currentItem) {
         if (this.primary.contains(currentItem)) {
           selectableItems = leftSelectableItems;
-        }
-        else if (this.secondary.contains(currentItem)) {
+        } else if (this.secondary.contains(currentItem)) {
           selectableItems = rightSelectableItems;
         }
-      }
-      else {
+      } else {
         selectableItems = leftSelectableItems.concat(rightSelectableItems);
       }
     }
-    
+
     return selectableItems;
   }
-  
+
   /** @ignore */
   _newWidthCache() {
     return {
       _items: [],
       _outerWidth: [],
-      getOuterWidth: function(item) {
+      getOuterWidth: function (item) {
         let index = this._items.indexOf(item);
         if (index &lt; 0) {
           // if item was not cached in current frame =&gt; cache it
           this._items.push(item);
-          
+
           const width = item.offsetWidth;
           this._outerWidth.push(width);
           index = this._outerWidth.length - 1;
         }
-        
+
         return this._outerWidth[index];
       }
     };
   }
-  
+
   /** @ignore */
   _forceWebkitRedraw(el) {
     const isWebkit = &apos;WebkitAppearance&apos; in document.documentElement.style;
-    
+
     if (isWebkit &amp;&amp; el.style.display !== &apos;none&apos;) {
       el.style.display = &apos;none&apos;;
-      
+
       // no need to store this anywhere, the reference would be enough
       this._cachedOffsetHeight = el.offsetHeight;
-      
+
       el.style.display = &apos;&apos;;
     }
   }
-  
+
   /** @ignore */
   _hideItem(item, hide) {
     if (hide === false) {
       this._moveToScreen(item);
-    }
-    else if (!item.hasAttribute(&apos;coral-actionbar-offscreen&apos;)) {
+    } else if (!item.hasAttribute(&apos;coral-actionbar-offscreen&apos;)) {
       // actually just move element offscreen to be able to measure the size while calculating the layout
       item.setAttribute(&apos;coral-actionbar-offscreen&apos;, &apos;&apos;);
       item.style.visibility = &apos;hidden&apos;;
@@ -909,13 +895,12 @@ class ActionBar extends BaseComponent(HTMLElement) {
       this._forceWebkitRedraw(item);
     }
   }
-  
+
   /** @ignore */
   _moveToScreen(item, show) {
     if (show === false) {
       this._hideItem(item);
-    }
-    else if (item.hasAttribute(&apos;coral-actionbar-offscreen&apos;)) {
+    } else if (item.hasAttribute(&apos;coral-actionbar-offscreen&apos;)) {
       // actually just move element onscreen again (see _hideItem)
       item.removeAttribute(&apos;coral-actionbar-offscreen&apos;);
       item.style.visibility = &apos;&apos;;
@@ -923,74 +908,74 @@ class ActionBar extends BaseComponent(HTMLElement) {
       this._forceWebkitRedraw(item);
     }
   }
-  
+
   /** @ignore */
   _toggleItemTabbable(item, tabbable) {
     this._ignoreLayout = true;
     // item might be wrapped (for now remove/add tabindex only on the first wrapped item)
     item = getFirstSelectableWrappedItem(item);
-    
+
     if (item !== null) {
       item.setAttribute(&apos;tabindex&apos;, tabbable ? 0 : -1);
     }
   }
-  
+
   /** @ignore */
   _debounceOnLayout() {
     if (this._ignoreLayout) {
       this._ignoreLayout = false;
       return;
     }
-    
+
     // Debounce
     if (this._timeout !== null) {
       window.clearTimeout(this._timeout);
     }
-  
+
     this._timeout = window.setTimeout(() =&gt; {
       this._timeout = null;
       this._onLayout();
     }, this._wait);
   }
-  
+
   _moveDirectItemChildren() {
     const items = Array.prototype.filter.call(this.children, child =&gt; child.nodeName === &apos;CORAL-ACTIONBAR-ITEM&apos;);
     const frag = document.createDocumentFragment();
-    
+
     // Move them to the frag
     items.forEach((item) =&gt; {
       frag.appendChild(item);
     });
-    
+
     // Add the frag to primary content zone
     this._elements.primary.appendChild(frag);
   }
-  
+
   get _contentZones() {
     return {
       &apos;coral-actionbar-primary&apos;: &apos;primary&apos;,
       &apos;coral-actionbar-secondary&apos;: &apos;secondary&apos;
     };
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // Move direct items into primary content zone
     this._moveDirectItemChildren();
-  
+
     // Cleanup resize helpers object (cloneNode support)
     const resizeHelpers = this.querySelectorAll(&apos;object&apos;);
-    for (let i = 0; i &lt; resizeHelpers.length; ++i) {
+    for (let i = 0 ; i &lt; resizeHelpers.length ; ++i) {
       const resizeElement = resizeHelpers[i];
       if (resizeElement.parentNode === this) {
         this.removeChild(resizeElement);
       }
     }
-  
+
     const primary = this._elements.primary;
     const secondary = this._elements.secondary;
 
@@ -1003,26 +988,25 @@ class ActionBar extends BaseComponent(HTMLElement) {
 
     // we need to know if the content zone was provided to stop the voracious behavior
     let primaryProvided = primary.parentNode === this;
-  
+
     // as a way to transition to the new content zones, we need to provide support for the old container tag. we copy
     // everything from these containers into the corresponding content zones, including the configurations
     const containers = Array.prototype.slice.call(this.getElementsByTagName(&apos;coral-actionbar-container&apos;));
-  
+
     let legacyContainer;
     let targetContainer;
-    for (let j = 0, containersCount = containers.length; j &lt; containersCount; j++) {
+    for (let j = 0, containersCount = containers.length ; j &lt; containersCount ; j++) {
       legacyContainer = containers[j];
-    
+
       // move first container content to new primary element
       if (j === 0) {
         targetContainer = primary;
         // overrides the previous configuration as we support older containers
         primaryProvided = true;
-      }
-      else if (j === 1) {
+      } else if (j === 1) {
         targetContainer = secondary;
       }
-    
+
       // it may happen that more than 2 containers were provided, in such case we simply ignore it
       if (targetContainer) {
         // we need to copy the existing configuration to the new content zone
@@ -1032,23 +1016,23 @@ class ActionBar extends BaseComponent(HTMLElement) {
         if (legacyContainer.hasAttribute(&apos;morebuttontext&apos;)) {
           targetContainer.setAttribute(&apos;morebuttontext&apos;, legacyContainer.getAttribute(&apos;morebuttontext&apos;));
         }
-      
+
         // @todo: are we copying the more button?
         while (legacyContainer.firstChild) {
           targetContainer.appendChild(legacyContainer.firstChild);
         }
       }
-    
+
       this.removeChild(legacyContainer);
     }
-  
+
     // to prevent the content zone being voracious, we only move the children if primary was not explicitely provided
     if (!primaryProvided) {
       while (this.firstChild) {
         primary.appendChild(this.firstChild);
       }
     }
-    
+
     // Call content zone inserts
     this.primary = this._elements.primary;
     this.secondary = this._elements.secondary;

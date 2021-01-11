@@ -425,7 +425,21 @@
 <a name='L367'></a><a href='#L367'>367</a>
 <a name='L368'></a><a href='#L368'>368</a>
 <a name='L369'></a><a href='#L369'>369</a>
-<a name='L370'></a><a href='#L370'>370</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L370'></a><a href='#L370'>370</a>
+<a name='L371'></a><a href='#L371'>371</a>
+<a name='L372'></a><a href='#L372'>372</a>
+<a name='L373'></a><a href='#L373'>373</a>
+<a name='L374'></a><a href='#L374'>374</a>
+<a name='L375'></a><a href='#L375'>375</a>
+<a name='L376'></a><a href='#L376'>376</a>
+<a name='L377'></a><a href='#L377'>377</a>
+<a name='L378'></a><a href='#L378'>378</a>
+<a name='L379'></a><a href='#L379'>379</a>
+<a name='L380'></a><a href='#L380'>380</a>
+<a name='L381'></a><a href='#L381'>381</a>
+<a name='L382'></a><a href='#L382'>382</a>
+<a name='L383'></a><a href='#L383'>383</a>
+<a name='L384'></a><a href='#L384'>384</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -501,7 +515,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">270x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -671,7 +684,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -711,7 +723,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -728,7 +739,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10252x</span>
+<span class="cline-any cline-yes">8292x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">24x</span>
@@ -794,6 +805,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -825,25 +853,25 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-  
+&nbsp;
     this._delegateEvents(commons.extend(this._events, {
       click: '_onClick',
       mousedown: '_onMouseDown'
     }));
-    
+&nbsp;
     // Prepare templates
     this._elements = {
       // Try to find the label content zone
       label: this.querySelector('coral-radio-label') || document.createElement('coral-radio-label')
     };
     base.call(this._elements, {commons, i18n});
-  
+&nbsp;
     // Pre-define labellable element
     this._labellableElement = this._elements.input;
-  
+&nbsp;
     // Check if the label is empty whenever we get a mutation
     this._observer = new MutationObserver(this._hideLabelIfEmpty.bind(this));
-  
+&nbsp;
     // Watch for changes to the label element's children
     this._observer.observe(this._elements.labelWrapper, {
       // Catch changes to childList
@@ -854,10 +882,10 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
       subtree: true
     });
   }
-  
+&nbsp;
   /**
    Checked state for the radio, &lt;code&gt;true&lt;/code&gt; is checked and &lt;code&gt;false&lt;/code&gt; is unchecked.
-   
+&nbsp;
    @type {Boolean}
    @default false
    @htmlattribute checked
@@ -867,35 +895,37 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get checked() {
     return this._checked || false;
   }
+&nbsp;
   set checked(value) {
     this._checked = transform.booleanAttr(value);
     this._reflectAttribute('checked', this._checked);
-    
+&nbsp;
     this._elements.input.checked = this._checked;
-  
+&nbsp;
     // handles related radios
     this._syncRelatedRadios();
   }
-  
+&nbsp;
   /**
    The radios's label element.
-   
+&nbsp;
    @type {RadioLabel}
    @contentzone
    */
   get label() {
     return this._getContentZone(this._elements.label);
   }
+&nbsp;
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: 'coral-radio-label',
-      insert: function(label) {
+      insert: function (label) {
         this._elements.labelWrapper.appendChild(label);
       }
     });
   }
-  
+&nbsp;
   /**
    Name used to submit the data in a form.
    @type {String}
@@ -906,15 +936,16 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._elements.input.name;
   }
+&nbsp;
   set name(value) {
     this._reflectAttribute('name', value);
-    
+&nbsp;
     this._elements.input.name = value;
   }
-  
+&nbsp;
   /**
    The value this radio should submit when checked. Changing this value will not trigger an event.
-   
+&nbsp;
    @type {String}
    @default "on"
    @htmlattribute value
@@ -922,10 +953,11 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get value() {
     return this._elements.input.value || 'on';
   }
+&nbsp;
   set value(value) {
     this._elements.input.value = value;
   }
-  
+&nbsp;
   /**
    Whether this field is disabled or not.
    @type {Boolean}
@@ -936,32 +968,34 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+&nbsp;
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
-    
-    this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
-    this.classList.toggle('is-disabled', this._disabled);
-    this._elements.input.disabled = this._disabled;
-  }
-  
-  /**<span class="fstat-no" title="function not covered" ></span>
-   Whether this fie<span class="cstat-no" title="statement not covered" >ld is required or not</span>.
-   @ty<span class="cstat-no" title="statement not covered" >pe {Boolean}<span class="fstat-no" title="function not covered" ></span></span>
-   @defa<span class="cstat-no" title="statement not covered" >ult false</span>
-   @htmlat<span class="cstat-no" title="statement not covered" >tribute required</span>
+<span class="fstat-no" title="function not covered" ></span>
+    this[this._disa<span class="cstat-no" title="statement not covered" >bled ? 'setAttribute'</span> : 'removeAttribute']('aria-disabled', this._disabled);
+    th<span class="cstat-no" title="statement not covered" >is.classList.toggle('i<span class="fstat-no" title="function not covered" >s-</span>disabled', this._disabled);</span>
+    this<span class="cstat-no" title="statement not covered" >._elements.input.disabled = this._disabled;</span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /**
+   Whether this field is required or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute required
    @htmlattributereflected
    */
   get required() {
     return this._required || false;
   }
+&nbsp;
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
-    
+&nbsp;
     this._elements.input.required = this._required;
   }
-  
+&nbsp;
   /**
    Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
    @type {Boolean}
@@ -972,26 +1006,28 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+&nbsp;
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
-  
+&nbsp;
     this.classList.toggle('is-readOnly', this._readOnly);
     this._elements.input.tabIndex = this._readOnly ? -1 : 0;
   }
-  
+&nbsp;
   /**
    Inherited from {@link BaseFormField#labelled}.
    */
   get labelled() {
     return super.labelled;
   }
+&nbsp;
   set labelled(value) {
     super.labelled = value;
-    
+&nbsp;
     this._hideLabelIfEmpty();
   }
-  
+&nbsp;
   /**
    Inherited from {@link BaseComponent#trackingElement}.
    */
@@ -1002,28 +1038,33 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
       (this.name ? `${this.name}=${this.value}` : '') || (this.label || this).textContent.replace(/\s{2,}/g, ' ').trim() :
       this._trackingElement;
   }
+&nbsp;
   set trackingElement(value) {
     super.trackingElement = value;
   }
-  
+&nbsp;
   /*
    Indicates to the formField that the 'checked' property needs to be set in this component.
-   
+&nbsp;
    @protected
    */
-  get _componentTargetProperty() { return 'checked'; }
-  
+  get _componentTargetProperty() {
+    return 'checked';
+  }
+&nbsp;
   /*
    Indicates to the formField that the 'checked' property has to be extracted from the event.
-   
+&nbsp;
    @protected
    */
-  get _eventTargetProperty() { return 'checked'; }
-  
+  get _eventTargetProperty() {
+    return 'checked';
+  }
+&nbsp;
   /**
    Takes care of keeping the checked property up to date, by unchecking every radio that has the same name. This is
    only done if the radio is already in the DOM, it has a name and it is checked, otherwise this is not needed.
- 
+&nbsp;
    @ignore
    */
   _syncRelatedRadios() {
@@ -1033,8 +1074,8 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
       // queries the document for all the coral-radios with the same name
       const items = document.querySelectorAll(`${this.tagName}[name=${JSON.stringify(this.name)}]`);
       const itemCount = items.length;
-    
-      for (let i = 0; i &lt; itemCount; i++) {
+&nbsp;
+      for (let i = 0 ; i &lt; itemCount ; i++) {
         if (items[i] !== this) {
           // we uncheck all other radios with the same name
           items[i].removeAttribute('checked');
@@ -1042,38 +1083,38 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
       }
     }
   }
-  
+&nbsp;
   /**
    Hide the label if it's empty.
- 
+&nbsp;
    @ignore
    */
   _hideLabelIfEmpty() {
     const label = this._elements.label;
-  
+&nbsp;
     // If it's empty and has no non-textnode children, hide the label
     const hiddenValue = !(label.children.length === 0 &amp;&amp; label.textContent.replace(/\s*/g, '') === '');
-  
+&nbsp;
     // Toggle the screen reader text
     this._elements.labelWrapper.style.margin = !hiddenValue ? '0' : '';
     this._elements.screenReaderOnly.hidden = hiddenValue || this.labelled;
   }
-  
+&nbsp;
   /**
    @private
    */
   _onClick(event) {
     // Handle the click() just like the native radio
     if (!this.checked) {
-      if (event.target === this) {
+      if (event.target === this) {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
         this.checked = true;
         this.trigger('change');
       }
-  
+&nbsp;
       this._trackEvent('checked', 'coral-radio', event);
     }
   }
-  
+&nbsp;
   /**
    Forces radio to receive focus on mousedown
    @ignore
@@ -1081,81 +1122,82 @@ class Radio extends BaseFormField(BaseComponent(HTMLElement)) {
   _onMouseDown() {
     const target = this._elements.input;
     requestAnimationFrame(() =&gt; {
-      if (target !== document.activeElement<span class="branch-1 cbranch-no" title="branch not covered" >) {</span>
+      if (target !== document.activeElement) {
         target.focus();
       }
     });
   }
-  
+&nbsp;
   /**
    Inherited from {@link BaseFormField#clear}.
    */
   clear() {
     this.checked = false;
   }
-  
+&nbsp;
   /**
    Inherited from {@link BaseFormField#reset}.
    */
   reset() {
     this.checked = this._initialCheckedState;
   }
-  
-  get _contentZones() { return {'coral-radio-label': 'label'}; }
-  
-  /** @ignore */
-  static get observedAttributes() {
-    return super.observedAttributes.concat(['checked']);
+&nbsp;
+  get _contentZones() {
+    return {'coral-radio-label': 'label'};
   }
-  
-  /** @ignore */
+&nbsp;
+  /** @ignore */<span class="fstat-no" title="function not covered" ></span>
+  stat<span class="cstat-no" title="statement not covered" >ic get observedAttributes() {</span>
+    return super.observedAttributes.concat(['checked']);
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /** <span class="cstat-no" title="statement not covered" >@ignore */</span>
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-  
+&nbsp;
     // Create a fragment
     const frag = document.createDocumentFragment();
-  
+&nbsp;
     const templateHandleNames = ['input', 'checkmark', 'labelWrapper'];
-  
+&nbsp;
     // Render the main template
     frag.appendChild(this._elements.input);
-    frag.appendChi<span class="fstat-no" title="function not covered" >ld(t</span>his._elements.checkmark);
-    fr<span class="cstat-no" title="statement not covered" >ag.appendChild(this._elements.labelWrapper);</span>
-    
+    frag.appendChild(this._elements.checkmark);
+    frag.appendChild(this._elements.labelWrapper);
+<span class="fstat-no" title="function not covered" ></span>
     co<span class="cstat-no" title="statement not covered" >nst label = this._elements.label;</span>
-  
+&nbsp;
     //<span class="cstat-no" title="statement not covered" > Remove it so we can process children</span>
     if (label &amp;&amp; label.parentNode) {
-      label.parentNode.removeChild(label);
-    }
-  
+<span class="cstat-no" title="statement not covered" >      label.parentNode.removeChild(label);</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
         child.nodeType === Node.ELEMENT_NODE &amp;&amp; templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the label
         label.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else (e.g labelWrapper)
         this.removeChild(child);
-      }<span class="fstat-no" title="function not covered" ></span>
-    }<span class="cstat-no" title="statement not covered" ></span>
-  
-    //<span class="cstat-no" title="statement not covered" > Add the frag to the component</span>
+      }
+    }
+&nbsp;
+    // Add the frag to the component
     this.appendChild(frag);
-  <span class="cstat-no" title="statement not covered" ></span>
-    //<span class="cstat-no" title="statement not covered" > Assign the content zones, moving them into place in the </span>process
+&nbsp;
+    // Assign the content zones, moving them into place in the process
     this.label = label;
-  
+&nbsp;
     // Cache the initial checked state of the radio button (in order to implement reset)
     this._initialCheckedState = this.checked;
-  
+&nbsp;
     // handles the case where the attached component was checked
     this._syncRelatedRadios();
-  
+<span class="branch-1 cbranch-no" title="branch not covered" ></span>
     // Check if we need to hide the label
     // We must do this because IE does not catch mutations when nodes are not in the DOM
     this._hideLabelIfEmpty();
@@ -1170,7 +1212,7 @@ export default Radio;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

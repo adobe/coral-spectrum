@@ -233,8 +233,7 @@
 <a name='L175'></a><a href='#L175'>175</a>
 <a name='L176'></a><a href='#L176'>176</a>
 <a name='L177'></a><a href='#L177'>177</a>
-<a name='L178'></a><a href='#L178'>178</a>
-<a name='L179'></a><a href='#L179'>179</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L178'></a><a href='#L178'>178</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -248,7 +247,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1036x</span>
+<span class="cline-any cline-yes">1054x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -260,13 +259,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1902x</span>
+<span class="cline-any cline-yes">1906x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1779x</span>
+<span class="cline-any cline-yes">1808x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -335,13 +334,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">10894x</span>
+<span class="cline-any cline-yes">10886x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10894x</span>
-<span class="cline-any cline-yes">20051x</span>
+<span class="cline-any cline-yes">10886x</span>
+<span class="cline-any cline-yes">20063x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10894x</span>
+<span class="cline-any cline-yes">10886x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -353,13 +352,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">4421x</span>
-<span class="cline-any cline-yes">4421x</span>
-<span class="cline-any cline-yes">4483x</span>
-<span class="cline-any cline-yes">4483x</span>
+<span class="cline-any cline-yes">4417x</span>
+<span class="cline-any cline-yes">4417x</span>
+<span class="cline-any cline-yes">4479x</span>
+<span class="cline-any cline-yes">4479x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4421x</span>
+<span class="cline-any cline-yes">4417x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -377,7 +376,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1923x</span>
+<span class="cline-any cline-yes">1919x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -404,7 +403,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -442,14 +440,14 @@ const getIndexOf = (el) =&gt; {
   if (!parent) {
     return -1;
   }
-  
+&nbsp;
   return Array.prototype.indexOf.call(parent.children, el);
 };
 &nbsp;
 /** @ignore */
 const getSiblingsOf = (el, selector, type) =&gt; {
   const stack = [];
-  
+&nbsp;
   // Returns siblings of el
   if (!type) {
   <span class="missing-if-branch" title="if path not taken" >I</span>  ['previousElementSibling', 'nextElementSibling'].forEach((direction) =&gt; {
@@ -461,20 +459,19 @@ const getSiblingsOf = (el, selector, type) =&gt; {
         }
       }
     });
-  }
-  else {
+  } else {
     const direction = type.indexOf('next') === 0 ? 'nextElementSibling' : 'previousElementSibling';
-    
+&nbsp;
     // All following siblings of el up to but not including the element matched by the selector
     if (type.indexOf('Until') !== -1) {
-      const matches = function() {
+      const matches = function () {
         if (typeof selector === 'string') {
           return el[direction].matches(selector);
         }
-        <span class="missing-if-branch" title="else path not taken" >E</span>
-        return el[direction] === selector;
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>return el[direction] === selector;
       };
-      
+&nbsp;
       while (el[direction] &amp;&amp; !matches()) {
         stack.push(el = el[direction]);
       }
@@ -494,14 +491,14 @@ const getSiblingsOf = (el, selector, type) =&gt; {
       return sibling &amp;&amp; sibling.matches(selector) ? sibling : null;
     }
   }
-  
+&nbsp;
   return stack;
 };
 &nbsp;
 /** @ignore */
 const listToArray = (list) =&gt; {
   const res = [];
-  for (let i = 0, listCount = res.length = list.length; i &lt; listCount; i++) {
+  for (let i = 0, listCount = res.length = list.length ; i &lt; listCount ; i++) {
     res[i] = list[i];
   }
   return res;
@@ -513,13 +510,13 @@ const getColumns = (colgroup) =&gt; listToArray(colgroup.querySelectorAll('col[i
 /** @ignore */
 const getRows = (sections) =&gt; {
   let rows = [];
-  
+&nbsp;
   sections.forEach((section) =&gt; {
     if (section) {
       rows = rows.concat(listToArray(section.querySelectorAll('tr[is="coral-table-row"]')));
     }
   });
-  
+&nbsp;
   return rows;
 };
 &nbsp;
@@ -533,13 +530,13 @@ const getContentCells = (row) =&gt; listToArray(row.querySelectorAll('td[is="cor
 const getHeaderCells = (row) =&gt; listToArray(row.querySelectorAll('th[is="coral-table-headercell"]'));
 &nbsp;
 /** @ignore */
-cons<span class="missing-if-branch" title="else path not taken" >E</span>t getCellByIndex = (row, index) =&gt; getCells(row).filter(cell =&gt; getIndexOf(cell) === index)[0] || null;
-&nbsp;
+const getCellByIndex = (row, index) =&gt; getCells(row).filter(cell =&gt; getIndexOf(cell) === index)[0] || null;
+<span class="missing-if-branch" title="else path not taken" >E</span>
 /**
  Enumeration for {@link TableHead}, {@link TableBody} and {@link TableFoot} divider values.
- 
+&nbsp;
  @typedef {Object} TableSectionDividerEnum
- 
+&nbsp;
  @property {String} NONE
  No divider.
  @property {String} ROW
@@ -558,9 +555,9 @@ const divider = {
 &nbsp;
 /**
  Enumeration for {@link TableColumn} alignment options.
- 
+&nbsp;
  @typedef {Object} TableColumnAlignmentEnum
- 
+&nbsp;
  @property {String} LEFT
  Left alignment.
  @property {String} CENTER
@@ -597,7 +594,7 @@ export {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

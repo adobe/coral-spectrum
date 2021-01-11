@@ -232,7 +232,13 @@
 <a name='L174'></a><a href='#L174'>174</a>
 <a name='L175'></a><a href='#L175'>175</a>
 <a name='L176'></a><a href='#L176'>176</a>
-<a name='L177'></a><a href='#L177'>177</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a>
+<a name='L183'></a><a href='#L183'>183</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -314,7 +320,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -375,7 +380,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -397,7 +401,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -407,6 +410,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">74x</span>
 <span class="cline-any cline-yes">74x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">532x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
@@ -427,9 +439,9 @@ const CLASSNAME = '_coral-Banner';
 &nbsp;
 /**
  Enumeration for {@link Banner} variants.
- 
+&nbsp;
  @typedef {Object} BannerVariantEnum
- 
+&nbsp;
  @property {String} ERROR
  A banner to indicate that an error has occurred.
  @property {String} WARNING
@@ -460,17 +472,17 @@ class Banner extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Fetch content zones
     this._elements = {
       header: this.querySelector('coral-banner-header') || document.createElement('coral-banner-header'),
       content: this.querySelector('coral-banner-content') || document.createElement('coral-banner-content')
     };
   }
-  
+&nbsp;
   /**
    The banner variant style to use. See {@link BannerVariantEnum}.
-   
+&nbsp;
    @type {String}
    @default BannerVariantEnum.INFO
    @htmlattribute variant
@@ -479,104 +491,110 @@ class Banner extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.INFO;
   }
+&nbsp;
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.INFO;
     this._reflectAttribute('variant', this._variant);
-    
+&nbsp;
     // Remove all variant classes
     this.classList.remove(...ALL_VARIANT_CLASSES);
-    
+&nbsp;
     // Set new variant class
     this.classList.add(`${CLASSNAME}--${this._variant}`);
   }
-  
+&nbsp;
   /**
    The banner's header.
-   
+&nbsp;
    @type {BannerHeader}
    @contentzone
    */
   get header() {
     return this._getContentZone(this._elements.header);
   }
+&nbsp;
   set header(value) {
     this._setContentZone('header', value, {
       handle: 'header',
       tagName: 'coral-banner-header',
-      insert: function(header) {
+      insert: function (header) {
         header.classList.add(`${CLASSNAME}-header`);
         this.insertBefore(header, this.firstChild);
       }
-    });
-  }
-  
-  /**<span class="missing-if-branch" title="if path not taken" >I</span>
-   The banne<span class="cstat-no" title="statement not covered" >r's content.</span>
-   
+    });<span class="missing-if-branch" title="if path not taken" >I</span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /**
+   The banner's content.
+&nbsp;
    @type {BannerContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+&nbsp;
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-banner-content',
-      insert: function(content) {
+      insert: function (content) {
         content.classList.add(`${CLASSNAME}-content`);
         this.appendChild(content);
       }
-    });
+    });<span class="branch-2 cbranch-no" title="branch not covered" ></span>
   }
-  
+&nbsp;
   get _contentZones() {
-    return {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    return {
       'coral-banner-header': 'header',
       'coral-banner-content': 'content'
     };
   }
-  
+&nbsp;
   /**
    Returns {@link Banner} variants.
-   
+&nbsp;
    @return {BannerVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+&nbsp;
   /** @ignore */
   static get observedAttributes() {
     return ['variant'];
   }
-  
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-  
+&nbsp;
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.INFO; }
-    
+    if (!this._variant) {
+      this.variant = variant.INFO;
+    }
+&nbsp;
     const header = this._elements.header;
     const content = this._elements.content;
-  
+&nbsp;
     // When the content zone was not created, we need to make sure that everything is added inside it as a content.
     if (!content.parentNode) {
       while (this.firstChild) {
         const child = this.firstChild;
-        
+&nbsp;
         // Don't move header into content
         if (child === header) {
           child.remove();
-        }
-        else {
+        } else {
           content.appendChild(this.firstChild);
         }
       }
     }
-    
+&nbsp;
     // Assign content zones
     this.header = this._elements.header;
     this.content = this._elements.content;
@@ -591,7 +609,7 @@ export default Banner;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

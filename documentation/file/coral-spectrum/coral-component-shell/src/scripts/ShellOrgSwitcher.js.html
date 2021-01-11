@@ -441,7 +441,7 @@ const CLASSNAME = &apos;_coral-Shell-orgSwitcher&apos;;
 
 /**
  Minimum number of entries required to show search control.
- 
+
  @type {Number}
  @ignore
  */
@@ -457,7 +457,7 @@ class ShellOrgSwitcher extends List {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Events
     this._delegateEvents({
       &apos;coral-search:clear&apos;: &apos;_showAll&apos;,
@@ -468,23 +468,23 @@ class ShellOrgSwitcher extends List {
       &apos;coral-shell-organization:_selectedchanged&apos;: &apos;_onItemSelectedChanged&apos;,
       &apos;coral-shell-suborganization:_selectedchanged&apos;: &apos;_onSubItemSelectedChanged&apos;
     });
-    
+
     // Templates
     this._elements = {
       footer: this.querySelector(&apos;coral-shell-orgswitcher-footer&apos;) || document.createElement(&apos;coral-shell-orgswitcher-footer&apos;)
     };
     orgSwitcher.call(this._elements, {commons, i18n});
-  
+
     // Used for eventing
     this._oldSelection = null;
-    
+
     // Item handling
     this.items._startHandlingItems(true);
   }
-  
+
   /**
    The item collection.
-   
+
    @type {SelectableCollection}
    @readonly
    */
@@ -500,13 +500,13 @@ class ShellOrgSwitcher extends List {
         onItemRemoved: this._onCollectionChange
       });
     }
-  
+
     return this._items;
   }
-  
+
   /**
    The search field placeholder.
-   
+
    @default &apos;&apos;
    @type {String}
    @htmlattribute placeholder
@@ -514,49 +514,51 @@ class ShellOrgSwitcher extends List {
   get placeholder() {
     return this._elements.search.placeholder;
   }
+
   set placeholder(value) {
     this._elements.search.placeholder = value;
   }
-  
+
   /**
    Content zone where the buttons are located.
-   
+
    @type {ShellOrgSwitcherFooter}
    @contentzone
    */
   get footer() {
     return this._getContentZone(this._elements.footer);
   }
+
   set footer(value) {
     this._setContentZone(&apos;content&apos;, value, {
       handle: &apos;footer&apos;,
       tagName: &apos;coral-shell-orgswitcher-footer&apos;,
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
   }
-  
+
   /** @private */
   get _itemTagName() {
     // Used for Collection
     return &apos;coral-shell-organization&apos;;
   }
-  
+
   /** @private */
   _onItemSelectedChanged(event) {
     event.stopImmediatePropagation();
-    
+
     const item = event.target;
     this._validateSelection(item);
   }
-  
+
   /** @private */
   _onSubItemSelectedChanged(event) {
     event.stopImmediatePropagation();
-    
+
     const item = event.target;
-    
+
     // If a sub organization is selected, deselect all selected organization items
     if (item.hasAttribute(&apos;selected&apos;)) {
       this.items._getAllSelected().forEach((itemElement) =&gt; {
@@ -565,83 +567,83 @@ class ShellOrgSwitcher extends List {
           itemElement.removeAttribute(&apos;selected&apos;);
         }
       });
-  
+
       this._preventTriggeringEvents = false;
     }
   }
-  
+
   /** @private */
   _onOrganizationChange() {
     this._triggerChangeEvent();
   }
-  
+
   /**
    Returns the selected workspace.
-   
+
    @type {HTMLElement}
    @readonly
    */
   get selectedItem() {
     return this.items._getLastSelected();
   }
-  
+
   /** @private */
   _selectFirst(event) {
     event.stopPropagation();
-  
+
     const first = this.items.first();
     if (first) {
       first.setAttribute(&apos;selected&apos;, &apos;&apos;);
     }
   }
-  
+
   /** @private */
   _validateSelection(item) {
     // gets the current selection
     const selection = this.items._getAllSelected();
     const selectionCount = selection.length;
-    
+
     if (selectionCount &gt; 1) {
-      for (let i = 0; i &lt; selectionCount; i++) {
+      for (let i = 0 ; i &lt; selectionCount ; i++) {
         if (selection[i] !== item) {
           // Don&apos;t trigger change events
           this._preventTriggeringEvents = true;
           selection[i].removeAttribute(&apos;selected&apos;);
         }
       }
-      
+
       // We can trigger change events again
       this._preventTriggeringEvents = false;
     }
-    
+
     this._triggerChangeEvent();
   }
-  
+
   /** @private */
   _triggerChangeEvent() {
     const selectedItem = this.selectedItem;
     const oldSelection = this._oldSelection;
-    
+
     if (!this._preventTriggeringEvents &amp;&amp; selectedItem !== oldSelection) {
       this.trigger(&apos;coral-shell-orgswitcher:change&apos;, {
         oldSelection: oldSelection,
         selection: selectedItem
       });
-      
+
       this._oldSelection = selectedItem;
     }
   }
-  
+
   /** @private */
   _showAll(event) {
     event.stopPropagation();
-  
+
     this._elements.resultMessage.hidden = true;
-  
+
     // Show all items
     this.items.getAll().forEach((item) =&gt; {
       item.hidden = false;
-    
+
       if (item.items) {
         // Show all sub-items
         item.items.getAll().forEach((itemElement) =&gt; {
@@ -650,44 +652,44 @@ class ShellOrgSwitcher extends List {
       }
     });
   }
-  
+
   /** @private */
   _performSearch(event) {
     event.stopPropagation();
-    
+
     const searchTerm = this._elements.search.value.toLowerCase();
-    
+
     this._elements.resultMessage.hidden = true;
-    
+
     // Hide items that don&apos;t match
     let resultCount = 0;
-    
+
     this.items.getAll().forEach((item) =&gt; {
       let matched = item.content.textContent.toLowerCase().indexOf(searchTerm) !== -1;
-      
+
       let childMatched = false;
       if (item.items) {
         item.items.getAll().forEach((itemElement) =&gt; {
           const elementMatch = itemElement.content.textContent.toLowerCase().indexOf(searchTerm) !== -1;
           childMatched = childMatched || elementMatch;
-  
+
           itemElement.hidden = !elementMatch;
         });
       }
-      
+
       matched = matched || childMatched;
       item.hidden = !matched;
-      
+
       if (matched) {
         resultCount++;
       }
     });
-    
+
     if (resultCount === 0) {
       this._elements.resultMessage.hidden = false;
     }
   }
-  
+
   /** @private */
   _moveItems() {
     this.setAttribute(&apos;id&apos;, this.id || commons.getUID());
@@ -695,35 +697,38 @@ class ShellOrgSwitcher extends List {
       this._elements.items.appendChild(item);
     });
   }
-  
+
   /** @private */
   _onCollectionChange(item) {
     // Move all items into the right place
     this._moveItems();
-  
+
     // Select the last selected item
     this._validateSelection(item);
-  
+
     // if mincountforsearch is set and number of organizations are less than or equal to it, hide the search
     if (this.items.length &lt;= SEARCH_VISIBILITY_THRESHOLD) {
       this._elements.search.hide();
-    }
-    else {
+    } else {
       this._elements.search.show();
     }
   }
-  
-  get _contentZones() { return {&apos;coral-shell-orgswitcher-footer&apos;: &apos;footer&apos;}; }
-  
+
+  get _contentZones() {
+    return {&apos;coral-shell-orgswitcher-footer&apos;: &apos;footer&apos;};
+  }
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat([&apos;placeholder&apos;]); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat([&apos;placeholder&apos;]);
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Move the items into the right place
     this._moveItems();
 
@@ -736,27 +741,26 @@ class ShellOrgSwitcher extends List {
       this._elements.search = this.querySelector(&apos;._coral-Shell-orgSwitcher-search&apos;);
       this._elements.resultMessage = this.querySelector(&apos;._coral-Shell-orgSwitcher-resultMessage&apos;);
       this._items._container = this._elements.items;
-    }
-    else {
+    } else {
       this.appendChild(this._elements.container);
     }
-    
+
     // Call content zone insert
     this.footer = this._elements.footer;
-  
+
     // Don&apos;t trigger events once connected
     this._preventTriggeringEvents = true;
     this._validateSelection();
     this._preventTriggeringEvents = false;
-  
+
     this._oldSelection = this.selectedItem;
   }
-  
+
   /**
    Triggered when the {@link ShellOrgSwitcher} selected organization has changed.
-   
+
    @typedef {CustomEvent} coral-shell-orgswitcher:change
-   
+
    @property {HTMLElement} detail.oldSelection
    The prior selected organization item.
    @property {HTMLElement} detail.selection

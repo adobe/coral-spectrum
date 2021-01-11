@@ -441,9 +441,9 @@ const CLASSNAME = &apos;_coral-ActionBar-container&apos;;
 
 /**
  Enumeration for {@link ActionBarContainer} positions.
- 
+
  @typedef {Object} ActionBarContainerPositionEnum
- 
+
  @property {String} PRIMARY
  Primary (left) ActionBar container.
  @property {String} SECONDARY
@@ -463,21 +463,21 @@ const position = {
  @htmltag coral-actionbar-container
  @extends {HTMLElement}
  @extends {BaseComponent}
- 
+
  @deprecated
  */
 class ActionBarContainer extends BaseActionBarContainer(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-  
+
     commons._log(&apos;warn&apos;, `Coral.ActionBar.Container: coral-actionbar-container has been deprecated.
     Please use coral-actionbar-primary and coral-actionbar-secondary instead`);
   }
-  
+
   /**
    The container position inside the actionbar.
-   
+
    @private
    @type {String}
    @readonly
@@ -486,74 +486,74 @@ class ActionBarContainer extends BaseActionBarContainer(BaseComponent(HTMLElemen
   get _position() {
     if (this.parentNode) {
       const containers = this.parentNode.getElementsByTagName(&apos;coral-actionbar-container&apos;);
-    
+
       if (containers.length &gt; 0 &amp;&amp; containers[0] === this) {
         return position.PRIMARY;
-      }
-      else if (containers.length &gt; 1 &amp;&amp; containers[1] === this) {
+      } else if (containers.length &gt; 1 &amp;&amp; containers[1] === this) {
         return position.SECONDARY;
       }
     }
-  
+
     return position.INVALID;
   }
-  
+
   /** @ignore */
   _attachMoreButtonToContainer() {
     if (this.parentNode &amp;&amp; this.parentNode.secondary === this) {
       this.insertBefore(this._elements.moreButton, this.firstChild);
-    }
-    else {
+    } else {
       // add the button to the left/primary contentzone
       this.appendChild(this._elements.moreButton);
     }
   }
-  
+
   /**
    Returns {@link ActionBarContainer} positions.
-   
+
    @return {ActionBarContainerPositionEnum}
    */
-  static get position() { return position; }
-  
+  static get position() {
+    return position;
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Cleanup resize helpers object (cloneNode support)
     const resizeHelpers = this.getElementsByTagName(&apos;object&apos;);
-    for (let i = 0; i &lt; resizeHelpers.length; ++i) {
+    for (let i = 0 ; i &lt; resizeHelpers.length ; ++i) {
       const resizeElement = resizeHelpers[i];
       if (resizeElement.parentNode === this) {
         this.removeChild(resizeElement);
       }
     }
-  
+
     // Cleanup &apos;More&apos; button
     this._elements.moreButton = this.querySelector(&apos;[coral-actionbar-more]&apos;);
     if (this._elements.moreButton) {
       this.removeChild(this._elements.moreButton);
     }
-  
+
     // Cleanup &apos;More&apos; popover
     this._elements.overlay = this.querySelector(&apos;[coral-actionbar-popover]&apos;);
     if (this._elements.overlay) {
       this.removeChild(this._elements.overlay);
     }
-  
+
     // Init &apos;More&apos; button
     this._elements.moreButton.label.textContent = this.moreButtonText;
     // &apos;More&apos; button might be moved later in dom when Container is attached to parent
     this.appendChild(this._elements.moreButton);
-  
+
     // Init &apos;More&apos; popover
     this._elements.overlay.target = this._elements.moreButton;
-  
+
     // Insert popover always as firstChild to ensure element order (cloneNode support)
     this.insertBefore(this._elements.overlay, this.firstChild);
-  
+
     this._attachMoreButtonToContainer();
   }
 }

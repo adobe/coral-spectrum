@@ -187,8 +187,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1402x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -203,10 +201,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">44981x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">43430x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -218,11 +213,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">14726x</span>
-<span class="cline-any cline-yes">14726x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14674x</span>
+<span class="cline-any cline-yes">14674x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -252,7 +244,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">395075x</span>
+<span class="cline-any cline-yes">7830x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">387245x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -270,81 +270,81 @@
 class Transformation {
   /**
    Transform the provided value into a boolean. Follows the behavior of JavaScript thruty/falsy.
-   
+&nbsp;
    @param {*} value
    The value to convert to Boolean.
-   
+&nbsp;
    @returns {Boolean} The corresponding boolean value.
    */
   boolean(value) {
     return !!value;
   }
-  
+&nbsp;
   /**
    Transform the provided value into a boolean. Follows the behavior of the HTML specification, in which the existence of
    the attribute indicates &lt;code&gt;true&lt;/code&gt; regardless of the attribute's value. If the value is a boolean, it ignores
    the transformation.
-   
+&nbsp;
    @param {*} value
    The value to convert to Boolean.
-   
+&nbsp;
    @returns {Boolean} The corresponding boolean value.
    */
   booleanAttr(value) {
     return typeof value === 'boolean' ? value : !(value === null || typeof value === 'undefined');
   }
-  
+&nbsp;
   /**
    Transforms the provided value into a floating point number.
-   
+&nbsp;
    @param {*} value
    The value to convert to a Number.
-   
+&nbsp;
    @returns {?Number} The corresponding number or &lt;code&gt;null&lt;/code&gt; if the passed value cannot be converted to a number.
    */
   number(value) {
     value = parseFloat(value);
     return isNaN(value) ? null : value;
   }
-  
+&nbsp;
   /**
    Transforms the provided value into a floating number. The conversion is strict in the sense that if non numeric values
    are detected, &lt;code&gt;null&lt;/code&gt; is returned instead.
-   
+&nbsp;
    @param {*} value
    The value to be converted to a Number.
-   
+&nbsp;
    @retuns {?Number} The corresponding number or &lt;code&gt;null&lt;/code&gt; if the passed value cannot be converted to number.
    */
   float(value) {
     if (/^(-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/.test(value)) {
       return Number(value);
     }
-  
+&nbsp;
     return null;
   }
-  
+&nbsp;
   /**
    Transform the provided value into a string. When given &lt;code&gt;null&lt;/code&gt; or &lt;code&gt;undefined&lt;/code&gt; it will be
    converted to an empty string("").
-   
+&nbsp;
    @param {*} value
    The value to convert to String.
-   
+&nbsp;
    @returns {String} The corresponding string value.
    */
   string(value) {
     if (value === null || typeof value === 'undefined') {
       return '';
     }
-  
+&nbsp;
     return typeof value === 'string' ? value : String(value);
   }
 }
 &nbsp;
 /**
  A type transform utility.
- 
+&nbsp;
  @type {Transformation}
  */
 const transform = new Transformation();
@@ -357,7 +357,7 @@ export default transform;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

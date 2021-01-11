@@ -267,7 +267,11 @@
 <a name='L209'></a><a href='#L209'>209</a>
 <a name='L210'></a><a href='#L210'>210</a>
 <a name='L211'></a><a href='#L211'>211</a>
-<a name='L212'></a><a href='#L212'>212</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L212'></a><a href='#L212'>212</a>
+<a name='L213'></a><a href='#L213'>213</a>
+<a name='L214'></a><a href='#L214'>214</a>
+<a name='L215'></a><a href='#L215'>215</a>
+<a name='L216'></a><a href='#L216'>216</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -396,7 +400,6 @@
 <span class="cline-any cline-yes">116x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">116x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -442,7 +445,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -467,7 +469,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -478,7 +479,14 @@
 <span class="cline-any cline-yes">98x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">98x</span>
-<span class="cline-any cline-yes">98x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">98x</span>
+<span class="cline-any cline-yes">98x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -503,7 +511,7 @@ import {commons, transform} from '../../../coral-utils';
 class RangedSlider extends Slider {
   /**
    Ranged sliders are always filled.
-   
+&nbsp;
    @type {Boolean}
    @default true
    @htmlattribute filled
@@ -512,78 +520,82 @@ class RangedSlider extends Slider {
   get filled() {
     return true;
   }
+&nbsp;
   set filled(value) {
     if (!transform.booleanAttr(value)) {
       commons._log('warn', 'Coral.RangedSlider: filled can not be set to false.');
     }
   }
-  
+&nbsp;
   /**
    This field's current value.
-   @type {String}
-   @default ""<span class="fstat-no" title="function not covered" ></span>
-   @ht<span class="cstat-no" title="statement not covered" >mlattribute value</span>
+   @type {String}<span class="fstat-no" title="function not covered" ></span>
+   @de<span class="cstat-no" title="statement not covered" >fault ""</span>
+   @htmlattribute value
    */
   get value() {
     return this.startValue;
   }
-  set value(value) {
-    this.startValue <span class="fstat-no" title="function not covered" >= value;</span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-  
+<span class="fstat-no" title="function not covered" ></span>
+  set <span class="cstat-no" title="statement not covered" >value(value) {</span>
+    this.startValue = value;
+  }
+&nbsp;
   /**
    The starting value of the range.
-   
-   @type {String}
-   @default '1'<span class="fstat-no" title="function not covered" ></span>
-   @emits {chang<span class="cstat-no" title="statement not covered" >e}</span>
-   @htmlattribute startValue
+<span class="fstat-no" title="function not covered" ></span>
+   @type {String<span class="cstat-no" title="statement not covered" >}</span>
+   @default '1'
+   @em<span class="cstat-no" title="statement not covered" >its {change}</span>
+   @html<span class="cstat-no" title="statement not covered" >attribute startValue</span>
    */<span class="cstat-no" title="statement not covered" ></span>
-  get st<span class="cstat-no" title="statement not covered" >artValue() {</span>
-    return<span class="cstat-no" title="statement not covered" > this.values[0] || '1'</span>;
-  }
-  set startValue(value) {
-    // S<span class="cstat-no" title="statement not covered" >nap value to step</span>
-    value = String(this._snapValueToStep(transform.number(value), this.min, this.max, this.step));
-  <span class="cstat-no" title="statement not covered" ></span>
+  get startValue() {
+    return this.values[0] || '1';
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  set st<span class="cstat-no" title="statement not covered" >artValue(value) {</span>
+    // Snap value to step
+    valu<span class="cstat-no" title="statement not covered" >e = String(this._snapValueToStep(transform.number(value), this.min, this.max, this.step));</span>
+<span class="cstat-no" title="statement not covered" ></span>
     const values = this.values;
-    valu<span class="cstat-no" title="statement not covered" >es[0] = value;</span>
-    this.v<span class="cstat-no" title="statement not covered" >alues = values;</span>
-  
-    // in order to keep the reset value in sync, we need to handle the "startvalue" attribute of the inner input
-    cons<span class="cstat-no" title="statement not covered" >t input = this._elements.inputs[0];</span>
+    values[0] = value;
+    this<span class="cstat-no" title="statement not covered" >.values = values;</span>
+&nbsp;
+    // i<span class="cstat-no" title="statement not covered" >n order to keep the reset value in sync, we need to handle the</span> "startvalue" attribute of the inner input
+    const input = this._elements.inputs[0];
     const valueAttribute = this.getAttribute('startvalue') || this.getAttribute('value');
-    inpu<span class="cstat-no" title="statement not covered" >t[valueAttribute ? 'setAttribute' : 'removeAttribute']('value'</span>, valueAttribute);
-  }
-  
+    input[valueAttrib<span class="cstat-no" title="statement not covered" >ute ? 'setAttribute' : 'removeAtt</span>ribute']('value', valueAttribute);
+  }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
   /**<span class="cstat-no" title="statement not covered" ></span>
-   The<span class="cstat-no" title="statement not covered" > ending value of the </span>range.
-   <span class="cstat-no" title="statement not covered" ></span>
+   The ending value of<span class="cstat-no" title="statement not covered" > the range.</span>
+&nbsp;
    @ty<span class="cstat-no" title="statement not covered" >pe {String}</span>
-   @default '100'<span class="cstat-no" title="statement not covered" ></span>
+   @defa<span class="cstat-no" title="statement not covered" >ult '100'</span>
    @emits {change}
-   @ht<span class="cstat-no" title="statement not covered" >mlattribute endValue</span>
-   */<span class="cstat-no" title="statement not covered" ></span>
+   @htmlattribute endValue
+   */
   get endValue() {
     return this.values[1] || '100';
   }
+&nbsp;
   set endValue(value) {
     // Snap value to step
     value = String(this._snapValueToStep(transform.number(value), this.min, this.max, this.step));
-  
+&nbsp;
     const values = this.values;
     values[1] = value;
     this.values = values;
-  
+&nbsp;
     // in order to keep the reset value in sync, we need to handle the "endvalue" attribute of the inner input
     const input = this._elements.inputs[1];
     const valueAttribute = this.getAttribute('endvalue');
     input[valueAttribute ? 'setAttribute' : 'removeAttribute']('value', valueAttribute);
   }
-  
+&nbsp;
   /**
    The current values of the ranged slider.
-   
+&nbsp;
    @type {Array.&lt;String&gt;}
    @default [{@link Coral.RangedSlider#startValue},{@link Coral.RangedSlider#endValue}]
    @emits {change}
@@ -591,56 +603,56 @@ class RangedSlider extends Slider {
   get values() {
     return this._values;
   }
+&nbsp;
   set values(values) {
     this._values = values;
   }
-  
+&nbsp;
   /** @private */
   _getHighestValue() {
     return Math.max.apply(null, this.values);
   }
-  
+&nbsp;
   /** @private */
   _getLowestValue() {
     return Math.min.apply(null, this.values);
   }
-  
+&nbsp;
   /** @override */
   _updateValue(handle, val) {
     const idx = this._elements.handles.indexOf(handle);
-  
+&nbsp;
     if (idx === 0) {
       if (val &gt; parseFloat(this.values[1])) {
         val = this.values[1];
       }
       this._elements.rightInput.min = val;
       this._elements.rightHandle.setAttribute('aria-valuemin', val);
-    }
-    else {
+    } else {
       if (val &lt; parseFloat(this.values[0])) {
         val = this.values[0];
       }
       this._elements.leftInput.max = val;
       this._elements.leftHandle.setAttribute('aria-valuemax', val);
     }
-  
+&nbsp;
     const resValue = [this.values[0], this.values[1]];
     resValue[idx] = val;
-  
+&nbsp;
     const oldValues = this.values;
     this.values = resValue;
     const newValues = this.values;
-  
+&nbsp;
     if (oldValues.join(':') !== newValues.join(':')) {
       this.trigger('change');
     }
   }
-  
+&nbsp;
   /** @override */
   _getTemplate() {
     return range;
   }
-  
+&nbsp;
   /**
    Inherited from {@link BaseFormField#clear}.
    */
@@ -648,41 +660,41 @@ class RangedSlider extends Slider {
     this.startValue = this.min;
     this.endValue = this.max;
   }
-  
+<span class="branch-1 cbranch-no" title="branch not covered" ></span>
   /**
    Inherited from {@link BaseFormField#reset}.
    */
   reset() {
     // since the 'value' property is not reflected, form components use it to restore the initial value. When a
-    // component has support fo<span class="branch-1 cbranch-no" title="branch not covered" >r va</span>lues, this method needs to be overwritten
+    // component has support for values, this method needs to be overwritten
     const initialStartValue = this.getAttribute('startvalue') || this.getAttribute('value');
     const initialEndValue = this.getAttribute('endvalue');
-    
+&nbsp;
     this.startValue = transform.string(initialStartValue);
     this.endValue = transform.string(initialEndValue);
   }
-  
+&nbsp;
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       startvalue: 'startValue',
       endvalue: 'endValue'
     });
   }
-  
+&nbsp;
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat([
-      'startvalue',
+    return super.o<span class="fstat-no" title="function not covered" >bser</span>vedAttributes.concat([
+<span class="cstat-no" title="statement not covered" >      'startvalue',</span>
       'endvalue'
     ]);
   }
-  
+&nbsp;
   /** @ignore */
-  render() {<span class="fstat-no" title="function not covered" ></span>
-    su<span class="cstat-no" title="statement not covered" >per.render();</span>
-    
+  render() {
+    super.render();
+&nbsp;
     this.classList.add('_coral-Slider--range');
-    
+&nbsp;
     // Set filled attribute by default
     this.setAttribute('filled', '');
   }
@@ -696,7 +708,7 @@ export default RangedSlider;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

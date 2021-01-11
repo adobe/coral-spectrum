@@ -283,7 +283,12 @@
 <a name='L225'></a><a href='#L225'>225</a>
 <a name='L226'></a><a href='#L226'>226</a>
 <a name='L227'></a><a href='#L227'>227</a>
-<a name='L228'></a><a href='#L228'>228</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L228'></a><a href='#L228'>228</a>
+<a name='L229'></a><a href='#L229'>229</a>
+<a name='L230'></a><a href='#L230'>230</a>
+<a name='L231'></a><a href='#L231'>231</a>
+<a name='L232'></a><a href='#L232'>232</a>
+<a name='L233'></a><a href='#L233'>233</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -358,9 +363,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -497,7 +500,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">770x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">770x</span>
@@ -510,7 +512,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">906x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">910x</span>
+<span class="cline-any cline-yes">168x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -529,9 +539,9 @@ const CLASSNAME = '_coral-Menu';
 &nbsp;
 /**
  Enumeration for {@link BaseList} interactions.
- 
+&nbsp;
  @typedef {Object} ListInteractionEnum
- 
+&nbsp;
  @property {String} ON
  Keyboard interaction is enabled.
  @property {String} OFF
@@ -550,7 +560,7 @@ const BaseList = (superClass) =&gt; class extends superClass {
   /** @ignore */
   constructor() {
     super();
-  
+&nbsp;
     this._events = {
       'mouseenter': '_onMouseEnter',
       // Keyboard interaction
@@ -564,10 +574,10 @@ const BaseList = (superClass) =&gt; class extends superClass {
       'key:end [coral-list-item]': '_focusLastItem'
     };
   }
-  
+&nbsp;
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+&nbsp;
    @type {SelectableCollection}
    @readonly
    */
@@ -581,158 +591,163 @@ const BaseList = (superClass) =&gt; class extends superClass {
         host: this
       });
     }
-  
+&nbsp;
     return this._items;
   }
-  
+&nbsp;
   /** @private */
   get _itemTagName() {
     // Used for Collection
     return 'coral-list-item';
   }
-  
+&nbsp;
   /**
    Whether interaction with the component is enabled. See {@link ListInteractionEnum}.
-   
+&nbsp;
    @type {String}
    @default ListInteractionEnum.ON
    @htmlattribute interaction
-   @htmlattributereflected
+   @html<span class="missing-if-branch" title="else path not taken" >E</span>attributereflected
    */
-  get in<span class="missing-if-branch" title="else path not taken" >E</span>teraction() {
+  get interaction() {
     return this._interaction || interaction.ON;
   }
+&nbsp;
   set interaction(value) {
     value = transform.string(value).toLowerCase();
     this._interaction = validate.enumeration(interaction)(value) &amp;&amp; value || interaction.ON;
-    this._reflectAttribute('interaction', this._interaction);
-  }
-  
-  /**<span class="fstat-no" title="function not covered" ></span>
-   Retur<span class="cstat-no" title="statement not covered" >ns true if the event is at the matched target.</span>
-   <span class="cstat-no" title="statement not covered" ></span>
+    this._reflectAttri<span class="fstat-no" title="function not covered" >bute('interact</span>ion', this._interaction);
+  }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  /**
+   Returns true if the event is at the matched target.
+&nbsp;
    @private
    */
   _eventIsAtTarget(event) {
-    const target = event.target;
-    const listItem = event.matchedTarget;
-  
-    const isAtTarget =<span class="fstat-no" title="function not covered" > target === list</span>Item;
-    <span class="cstat-no" title="statement not covered" ></span>
-    if (is<span class="cstat-no" title="statement not covered" >AtTarget</span>) {
+    const target = eve<span class="fstat-no" title="function not covered" >nt.target;</span>
+    cons<span class="cstat-no" title="statement not covered" >t listItem = event.matchedTarget;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+    const isAtTarget = target === listItem;
+&nbsp;
+    if (isAtTarget) <span class="cstat-no" title="statement not covered" >{</span>
       // Don't let arrow keys etc scroll the page
-      event.preventDefault();
-    }<span class="cstat-no" title="statement not covered" ></span>
-    
-    retu<span class="cstat-no" title="statement not covered" >rn isAtTarget;</span>
-  }
-  
-  _onMouseEnter() {
-    if (this.contains(document.activeElement)) {
-      document.activeElement.blur();
-    }<span class="fstat-no" title="function not covered" ></span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-  <span class="cstat-no" title="statement not covered" ></span>
-  /** @private */
-  _focusFirstItem(event) {
-    if (this.interac<span class="cstat-no" title="statement not covered" >tion === interaction.OFF ||</span> !this._eventIsAtTarget(event)) {
-      return;
-    }<span class="cstat-no" title="statement not covered" ></span>
-  
-    const items = this._getSelectableItems();
-    items[0].focus();
-  }
-  
-  /** @private */<span class="fstat-no" title="function not covered" ></span>
-  _focus<span class="cstat-no" title="statement not covered" >LastItem(event) {</span>
-    if (th<span class="cstat-no" title="statement not covered" >is.inter</span>action === interaction.OFF || !this._eventIsAtTarget(event)) {
-      return;
+      ev<span class="cstat-no" title="statement not covered" >ent.preventDefault</span>();
     }
-  <span class="cstat-no" title="statement not covered" ></span>
-    const items = this._getSelectableItems();
-    items[items.leng<span class="cstat-no" title="statement not covered" >th - 1].focus();</span>
+&nbsp;
+    return isAtTarget;
   }
-  <span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  _onMouseEnter() {<span class="fstat-no" title="function not covered" ></span>
+    if (<span class="cstat-no" title="statement not covered" >this.contains(document.activeElement)) {</span>
+      docu<span class="cstat-no" title="statement not covered" >ment.act</span>iveElement.blur();
+    }
+  }
+<span class="cstat-no" title="statement not covered" ></span>
   /** @private */
-  _focus<span class="cstat-no" title="statement not covered" >NextItem(event) {</span>
+  _focus<span class="cstat-no" title="statement not covered" >FirstItem(event) {</span>
     if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
-      retu<span class="cstat-no" title="statement not covered" >rn;</span>
+      return;
     }
-  
-    cons<span class="cstat-no" title="statement not covered" >t target = event.matchedTarget;</span>
-    const <span class="cstat-no" title="statement not covered" >items = this._getSelectabl</span>eItems();
+&nbsp;
+    const items = this._getSelectableItems();
+    items[0].focus();<span class="fstat-no" title="function not covered" ></span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  /** @private */
+  _focusLastItem(event) {
+    if (this.interact<span class="cstat-no" title="statement not covered" >ion === interaction.</span>OFF || !this._eventIsAtTarget(event)) {
+      return;
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    const items = th<span class="cstat-no" title="statement not covered" >is._getSelectableItems</span>();
+    items[items.length - 1].focus();
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /** @pri<span class="cstat-no" title="statement not covered" >vate */</span>
+  _focusNextItem(event) {
+    if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
+      re<span class="cstat-no" title="statement not covered" >turn;</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    const <span class="cstat-no" title="statement not covered" >target = event.mat</span>chedTarget;
+    const items = this._getSelectableItems();
     const index = items.indexOf(target);
-    <span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
     if (index === -1) {
       // Invalid state
       return;
     }
-    
-    if (index &lt; items.length - 1) {
+<span class="missing-if-branch" title="if path not taken" >I</span>
+    if (in<span class="cstat-no" title="statement not covered" >dex &lt; it</span>ems.length - 1) {
       items[index + 1].focus();
-    }<span class="missing-if-branch" title="if path not taken" >I</span>
-    else {<span class="cstat-no" title="statement not covered" ></span>
+    } else {
       items[0].focus();
     }
   }
-  
+&nbsp;
   /** @private */
   _focusPreviousItem(event) {
-    if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
+    if (<span class="missing-if-branch" title="if path not taken" >I</span>this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
       return;
-    }<span class="missing-if-branch" title="if path not taken" >I</span>
-  
-    const <span class="cstat-no" title="statement not covered" >target =</span> event.matchedTarget;
-    const items = this._getSelectableItems();
-    const index = items.indexOf(target);
-    <span class="missing-if-branch" title="if path not taken" >I</span>
-    if (in<span class="cstat-no" title="statement not covered" >dex === -1) {</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    const target = event.matchedTarget;
+    cons<span class="missing-if-branch" title="if path not taken" >I</span>t items = this._getSelectableItems();
+    const <span class="cstat-no" title="statement not covered" >index = items.indexOf(targ</span>et);
+&nbsp;
+    if (index === -1) {
       // Invalid state
       return;
     }
-    
+&nbsp;
     if (index &gt; 0) {
       items[index - 1].focus();
-    }
-    else {
+    } else {
       items[items.length - 1].focus();
     }
   }
-  
+&nbsp;
   /** @private */
   _getSelectableItems() {
     // Also checks if item is visible
     return this.items._getSelectableItems().filter(item =&gt; !item.hasAttribute('hidden') &amp;&amp; item.offsetParent);
   }
-  
-  /** @ignore */
-  focus(<span class="missing-if-branch" title="else path not taken" >E</span>) {
+&nbsp;
+  /** @i<span class="missing-if-branch" title="else path not taken" >E</span>gnore */
+  focus() {
     if (!this.contains(document.activeElement)) {
-      const items = this._getSelectableItems();
-      if (<span class="missing-if-branch" title="else path not taken" >E</span>items.length &gt; 0) {
+      cons<span class="missing-if-branch" title="else path not taken" >E</span>t items = this._getSelectableItems();
+      if (items.length &gt; 0) {
         items[0].focus();
       }
     }
   }
-  
+&nbsp;
   /**
    Returns {@link BaseList} interaction options.
-   
+&nbsp;
    @return {ListInteractionEnum}
    */
-  static get interaction() { return interaction; }
-  
+  static get interaction() {
+    return interaction;
+  }
+&nbsp;
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['interaction']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['interaction']);
+  }
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-    
+&nbsp;
     // Default reflected attributes
-    if (!this._interaction) { this.interaction = interaction.ON; }
+    if (!this._interaction) {
+      this.interaction = interaction.ON;
+    }
   }
 };
 &nbsp;
@@ -744,7 +759,7 @@ export default BaseList;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

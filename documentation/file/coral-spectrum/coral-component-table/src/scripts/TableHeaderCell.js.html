@@ -448,12 +448,12 @@ class TableHeaderCell extends BaseComponent(HTMLTableCellElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Templates
     this._elements = {
       content: this.querySelector(&apos;coral-table-headercell-content&apos;) || document.createElement(&apos;coral-table-headercell-content&apos;)
     };
-  
+
     // Watch for content changes in sticky header cell
     this._stickyCellObserver = new MutationObserver(this._handleMutations.bind(this));
     this._stickyCellObserver.observe(this._elements.content, {
@@ -461,58 +461,61 @@ class TableHeaderCell extends BaseComponent(HTMLTableCellElement) {
       subtree: true
     });
   }
-  
+
   /**
    The header cell&apos;s content.
-   
+
    @type {TableHeaderCellContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone(&apos;content&apos;, value, {
       handle: &apos;content&apos;,
       tagName: &apos;coral-table-headercell-content&apos;,
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
   }
-  
+
   /** @private */
   _handleMutations() {
     this.trigger(&apos;coral-table-headercell:_contentchanged&apos;);
   }
-  
-  get _contentZones() { return {&apos;coral-table-headercell-content&apos;: &apos;content&apos;}; }
-  
+
+  get _contentZones() {
+    return {&apos;coral-table-headercell-content&apos;: &apos;content&apos;};
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Fetch or create the content zone element
     const content = this._elements.content;
-    
+
     if (!content.parentNode) {
       // Move component children into the content
       while (this.firstChild) {
         content.appendChild(this.firstChild);
       }
     }
-    
+
     // Assign the content zone so the insert function will be called
     this.content = content;
   }
-  
+
   /**
    Triggered when the {@link TableHeaderCell} content changed.
- 
+
    @typedef {CustomEvent} coral-table-headercell:_contentchanged
-   
+
    @private
    */
 }

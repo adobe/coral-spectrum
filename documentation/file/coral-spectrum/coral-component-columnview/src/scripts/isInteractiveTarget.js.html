@@ -435,7 +435,7 @@
 
 /**
  * Helper function to test whether event.target is explicitly marked as interactive.
- * 
+ *
  * Interactive elements included in an Item should respond to keyboard events without the event being handled by the Item as well.
  *
  * @private
@@ -444,7 +444,8 @@ const isInteractiveTarget = (target) =&gt; {
   return target.hasAttribute(&apos;coral-interactive&apos;) || target.closest(&apos;[coral-interactive]&apos;) !== null;
 };
 
-export default isInteractiveTarget;</code></pre>
+export default isInteractiveTarget;
+</code></pre>
 
 </div>
 

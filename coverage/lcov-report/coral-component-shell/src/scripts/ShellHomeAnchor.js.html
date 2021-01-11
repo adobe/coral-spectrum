@@ -195,7 +195,10 @@
 <a name='L137'></a><a href='#L137'>137</a>
 <a name='L138'></a><a href='#L138'>138</a>
 <a name='L139'></a><a href='#L139'>139</a>
-<a name='L140'></a><a href='#L140'>140</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -246,7 +249,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">52x</span>
 <span class="cline-any cline-yes">52x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -323,7 +325,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">144x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -334,7 +335,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">80x</span>
 <span class="cline-any cline-yes">40x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">436x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -364,39 +370,40 @@ class ShellHomeAnchor extends BaseComponent(HTMLAnchorElement) {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
       label: this.querySelector('coral-shell-homeanchor-label') || document.createElement('coral-shell-homeanchor-label')
     };
-  
+&nbsp;
     // Create icon by default
     homeAnchorIcon.call(this._elements);
   }
-  
+&nbsp;
   /**
    The label of the anchor.
-   
+&nbsp;
    @type {ShellHomeAnchorLabel}
    @contentzone
    */
   get label() {
     return this._getContentZone(this._elements.label);
   }
+&nbsp;
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: 'coral-shell-homeanchor-label',
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
   }
-  
+&nbsp;
   /**
    Specifies the icon name used in the anchor. See {@link Coral.Icon} for valid icon names.
-   
+&nbsp;
    @type {String}
    @default ""
    @htmlattribute icon
@@ -404,9 +411,10 @@ class ShellHomeAnchor extends BaseComponent(HTMLAnchorElement) {
   get icon() {
     return this._elements.icon.icon;
   }
+&nbsp;
   set icon(value) {
     this._elements.icon.icon = value;
-  
+&nbsp;
     // removes the icon element from the DOM.
     if (this.icon === '') {
       this._elements.icon.remove();
@@ -414,58 +422,59 @@ class ShellHomeAnchor extends BaseComponent(HTMLAnchorElement) {
     // adds the icon back since it was blown away by textContent
     else if (!this.contains(this._elements.icon)) {
       this.insertBefore(this._elements.icon, this.firstChild);
-    }
+    }<span class="missing-if-branch" title="else path not taken" >E</span>
   }
-  
-  get _contentZ<span class="missing-if-branch" title="else path not taken" >E</span>ones() { return {'coral-shell-homeanchor-label': 'label'}; }
-  
+&nbsp;
+  get _contentZones() {
+    return {'coral-shell-homeanchor-label': 'label'};
+  }
+&nbsp;
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['icon']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['icon']);
+  }
+<span class="cstat-no" title="statement not covered" ></span>
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-  
-    // Cre<span class="cstat-no" title="statement not covered" >ate doc fragment</span>
+&nbsp;
+    // Create doc fragment
     const fragment = document.createDocumentFragment();
-    
+&nbsp;
     const label = this._elements.label;
-  
-    // Remove it so we can process children
-    if (label.parentNode) {
+&nbsp;
+    // Remove it s<span class="fstat-no" title="function not covered" >o we</span> can process children
+    if<span class="cstat-no" title="statement not covered" > (label.parentNode) {</span>
       this.removeChild(label);
     }
-  
+&nbsp;
     // Move any remaining elements into the label
     while (this.firstChild) {
-      const child <span class="fstat-no" title="function not covered" >= th</span>is.firstChild;
-    <span class="cstat-no" title="statement not covered" ></span>
+      const child = this.firstChild;
+&nbsp;
       if (child.nodeType === Node.TEXT_NODE) {
         // Move text elements to the label
         label.appendChild(child);
-      }
-      else if (child.nodeName === 'CORAL-ICON') {
+      } else if (child.nodeName === 'CORAL-ICON') {
         if (!fragment.childNodes.length) {
           // Conserve existing icon element to content
           this._elements.icon = child;
           fragment.appendChild(child);
-        }
-        else {
+        } else {
           // Remove cloned icon
           this.removeChild(child);
         }
-      }
-      else {
+      } else {
         // Remove anything else
         this.removeChild(child);
       }
     }
-    
+&nbsp;
     // Add fragment back
     this.appendChild(fragment);
-    
+&nbsp;
     // Insert icon and label insert
     this.icon = this.icon;
     this.label = label;
@@ -480,7 +489,7 @@ export default ShellHomeAnchor;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

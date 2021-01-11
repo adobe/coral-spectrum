@@ -437,9 +437,9 @@ import {transform, validate} from &apos;../../../coral-utils&apos;;
 
 /**
  Enumeration for {@link QuickActionsItem} type values.
- 
+
  @typedef {Object} QuickActionsItemTypeEnum
- 
+
  @property {String} BUTTON
  Default button type
  @property {String} ANCHOR
@@ -461,10 +461,10 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // QuickActions will add button/anchorbutton references to it
     this._elements = {};
-  
+
     this._observer = new MutationObserver(this._onMutation.bind(this));
     this._observer.observe(this, {
       characterData: true,
@@ -472,11 +472,12 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
       subtree: true
     });
   }
-  
+
   // @compat
   get content() {
     return this;
   }
+
   set content(value) {
     // Support configs
     if (typeof value === &apos;object&apos;) {
@@ -486,10 +487,10 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /**
    When &lt;code&gt;type&lt;/code&gt; is {@link Coral.QuickActions.Item.type.ANCHOR}, the href will be used for the anchor.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute href
@@ -499,17 +500,23 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
   get href() {
     return this._href || &apos;&apos;;
   }
+
   set href(value) {
-    this._href = transform.string(value);
+    let _href = transform.string(value);
+
+    if(this._href === _href) {
+      return;
+    }
+    this._href = _href;
     this._reflectAttribute(&apos;href&apos;, this._href);
-    
+
     this.trigger(&apos;coral-quickactions-item:_hrefchanged&apos;);
   }
-  
+
   /**
    Specifies the name of the icon to be shown in the QuickActions Item. See {@link Icon} for valid icon
    names.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute icon
@@ -519,17 +526,23 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
   get icon() {
     return this._icon || &apos;&apos;;
   }
+
   set icon(value) {
-    this._icon = transform.string(value);
+    let _icon = transform.string(value);
+
+    if(this._icon === _icon) {
+      return;
+    }
+    this._icon = _icon;
     this._reflectAttribute(&apos;icon&apos;, this._icon);
-    
+
     this.trigger(&apos;coral-quickactions-item:_iconchanged&apos;);
   }
-  
+
   /**
    The type of item that will be used. Setting {@link QuickActionsItemTypeEnum}.ANCHOR will allow users to
    navigate using the quickactions proving the correct hypermedia to the users.
-   
+
    @type {String}
    @default QuickActionsItemTypeEnum.BUTTON
    @htmlattribute type
@@ -538,14 +551,20 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
   get type() {
     return this._type || type.BUTTON;
   }
+
   set type(value) {
-    value = transform.string(value).toLowerCase();
-    this._type = validate.enumeration(type)(value) &amp;&amp; value || type.BUTTON;
+    let _value = transform.string(value).toLowerCase();
+    let _type = validate.enumeration(type)(_value) &amp;&amp; _value || type.BUTTON;
+
+    if(this._type === _type) {
+      return;
+    }
+    this._type = _type;
     this._reflectAttribute(&apos;type&apos;, this._type);
-    
+
     this.trigger(&apos;coral-quickactions-item:_typechanged&apos;);
   }
-  
+
   /**
    Inherited from {@link BaseComponent#trackingElement}.
    */
@@ -555,68 +574,75 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
       (this.textContent &amp;&amp; this.textContent.replace(/\s{2,}/g, &apos; &apos;).trim() || this.icon) :
       this._trackingElement;
   }
+
   set trackingElement(value) {
     super.trackingElement = value;
   }
-  
+
   /**
    Handles mutations on the Item.
-   
+
    @emits {coral-quickactions-item:_contentchanged}
-   
+
    @private
    */
   _onMutation() {
     this.trigger(&apos;coral-quickactions-item:_contentchanged&apos;);
   }
-  
+
   /**
    Returns {@link QuickActionsItem} type options.
-   
+
    @return {QuickActionsItemTypeEnum}
    */
-  static get type() { return type; }
-  
+  static get type() {
+    return type;
+  }
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat([&apos;href&apos;, &apos;icon&apos;, &apos;type&apos;]); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat([&apos;href&apos;, &apos;icon&apos;, &apos;type&apos;]);
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     // Default reflected attributes
-    if (!this._type) { this.type = type.BUTTON; }
+    if (!this._type) {
+      this.type = type.BUTTON;
+    }
   }
-  
+
   /**
    Triggered when an icon of a {@link QuickActionsItem} was changed.
-   
+
    @typedef {CustomEvent} coral-quickactions-item:_iconchanged
-   
+
    @private
    */
-  
+
   /**
    Triggered when the content of a {@link QuickActionsItem} was changed.
-   
+
    @typedef {CustomEvent} coral-quickactions-item:_contentchanged
-   
+
    @private
    */
-  
+
   /**
    Triggered when the href of a {@link QuickActionsItem} was changed.
-   
+
    @typedef {CustomEvent} coral-quickactions-item:_hrefchanged
-   
+
    @private
    */
-  
+
   /**
    Triggered when the type of a {@link QuickActionsItem} was changed.
-   
+
    @typedef {CustomEvent} coral-quickactions-item:_typechanged
-   
+
    @private
    */
 }

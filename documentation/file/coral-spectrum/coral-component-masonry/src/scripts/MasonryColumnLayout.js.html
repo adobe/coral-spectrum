@@ -438,7 +438,7 @@ import {Keys} from &apos;../../../coral-utils&apos;;
 
 /**
  Base class for column-based masonry layouts.
- 
+
  @class Coral.Masonry.ColumnLayout
  @classdesc A Masonry Column layout
  @extends {MasonryLayout}
@@ -446,21 +446,21 @@ import {Keys} from &apos;../../../coral-utils&apos;;
 class MasonryColumnLayout extends MasonryLayout {
   /**
    Takes a {Masonry} instance as argument.
-   
+
    @param {Masonry} masonry
    */
   constructor(masonry) {
     super(masonry);
-  
+
     this._columns = [];
-  
+
     const up = this._moveFocusVertically.bind(this, true);
     const down = this._moveFocusVertically.bind(this, false);
     const left = this._moveFocusHorizontally.bind(this, true);
     const right = this._moveFocusHorizontally.bind(this, false);
     const home = this._moveFocusHomeEnd.bind(this, true);
     const end = this._moveFocusHomeEnd.bind(this, false);
-  
+
     const keys = this._keys = new Keys(masonry, {
       context: this
     });
@@ -471,10 +471,10 @@ class MasonryColumnLayout extends MasonryLayout {
     keys.on(&apos;home&apos;, home);
     keys.on(&apos;end&apos;, end);
   }
-  
+
   /**
    Hook to remove layout specific style and data from the item.
-   
+
    @param item
    @private
    */
@@ -482,21 +482,21 @@ class MasonryColumnLayout extends MasonryLayout {
   _resetItem(item) {
     // To override
   }
-  
+
   /**
    Initialize layout variables.
-   
+
    @private
    */
   _init(items) {
     const firstItem = items[0];
     const masonry = this._masonry;
     this._columnWidth = getPositiveNumberProperty(masonry, &apos;columnWidth&apos;, &apos;columnwidth&apos;, 200);
-    
+
     this._zeroOffsetLeft = -csspx(firstItem, &apos;marginLeft&apos;);
     // with padding
     this._masonryInnerWidth = masonry.clientWidth;
-    
+
     const spacing = this._masonry.spacing;
     if (typeof spacing === &apos;number&apos;) {
       this._horSpacing = spacing;
@@ -505,8 +505,7 @@ class MasonryColumnLayout extends MasonryLayout {
       this._offsetTop = spacing - csspx(firstItem, &apos;marginTop&apos;);
       this._verPadding = 2 * spacing;
       this._masonryAvailableWidth = masonry.clientWidth - spacing;
-    }
-    else {
+    } else {
       this._horSpacing = csspx(firstItem, &apos;marginLeft&apos;) + csspx(firstItem, &apos;marginRight&apos;);
       this._verSpacing = csspx(firstItem, &apos;marginTop&apos;) + csspx(firstItem, &apos;marginBottom&apos;);
       this._offsetLeft = csspx(masonry, &apos;paddingLeft&apos;);
@@ -514,42 +513,42 @@ class MasonryColumnLayout extends MasonryLayout {
       this._verPadding = this._offsetTop + this._verSpacing + csspx(masonry, &apos;paddingBottom&apos;);
       this._masonryAvailableWidth = masonry.clientWidth - this._offsetLeft - csspx(masonry, &apos;paddingRight&apos;);
     }
-    
+
     // Initialize column objects
     const columnCount = Math.max(1, Math.floor(this._masonryAvailableWidth / (this._columnWidth + this._horSpacing)));
     this._columns.length = columnCount;
-    for (let ci = 0; ci &lt; columnCount; ci++) {
+    for (let ci = 0 ; ci &lt; columnCount ; ci++) {
       this._columns[ci] = {
         height: this._offsetTop,
         items: []
       };
     }
-    
+
     // Prepare layout data
-    for (let ii = 0; ii &lt; items.length; ii++) {
+    for (let ii = 0 ; ii &lt; items.length ; ii++) {
       const item = items[ii];
-      
+
       let layoutData = item._layoutData;
       if (!layoutData) {
         item._layoutData = layoutData = {};
       }
-      
+
       // Read colspan
       layoutData.colspan = Math.min(getPositiveNumberProperty(item, &apos;colspan&apos;, &apos;colspan&apos;, 1), this._columns.length);
     }
   }
-  
+
   /**
    Updates the width of all items.
-   
+
    @param items
    @private
    */
   _writeStyles(items) {
-    for (let i = 0; i &lt; items.length; i++) {
+    for (let i = 0 ; i &lt; items.length ; i++) {
       const item = items[i];
       const layoutData = item._layoutData;
-      
+
       // Update width
       const itemWidth = Math.round(this._getItemWidth(layoutData.colspan));
       if (layoutData.width !== itemWidth) {
@@ -559,7 +558,7 @@ class MasonryColumnLayout extends MasonryLayout {
       this._writeItemStyle(item);
     }
   }
-  
+
   /**
    @param colspan column span of the item
    @return the width of the item for the given colspan
@@ -569,10 +568,10 @@ class MasonryColumnLayout extends MasonryLayout {
   _getItemWidth(colspan) {
     // To override
   }
-  
+
   /**
    Hook to execute layout specific item preparation.
-   
+
    @param item
    @private
    */
@@ -580,48 +579,48 @@ class MasonryColumnLayout extends MasonryLayout {
   _writeItemStyle(item) {
     // To override
   }
-  
+
   /**
    Reads the dimension of all items.
-   
+
    @param items
    @private
    */
   _readStyles(items) {
     // Record size of items in a separate loop to avoid unneccessary reflows
-    for (let i = 0; i &lt; items.length; i++) {
+    for (let i = 0 ; i &lt; items.length ; i++) {
       const item = items[i];
       const layoutData = item._layoutData;
       layoutData.height = Math.round(item.getBoundingClientRect().height);
       layoutData.ignored = layoutData.detached || !item.offsetParent;
     }
   }
-  
+
   /**
    Update the position of all items.
-   
+
    @param items
    @private
    */
   _positionItems(items) {
     let j;
-    
-    for (let i = 0; i &lt; items.length; i++) {
+
+    for (let i = 0 ; i &lt; items.length ; i++) {
       const item = items[i];
       const layoutData = item._layoutData;
       // Skip ignored items
       if (layoutData.ignored) {
         continue;
       }
-      
+
       // Search for column with the least height
       const maxLength = this._columns.length - (layoutData.colspan - 1);
       let minColumnIndex = -1;
       let minColumnHeight;
-      for (j = 0; j &lt; maxLength; j++) {
+      for (j = 0 ; j &lt; maxLength ; j++) {
         // can be negative if set spacing &lt; item css margin
         let columnHeight = this._offsetTop;
-        for (let y = 0; y &lt; layoutData.colspan; y++) {
+        for (let y = 0 ; y &lt; layoutData.colspan ; y++) {
           columnHeight = Math.max(columnHeight, this._columns[j + y].height);
         }
         if (minColumnIndex === -1 || columnHeight &lt; minColumnHeight) {
@@ -629,30 +628,30 @@ class MasonryColumnLayout extends MasonryLayout {
           minColumnHeight = columnHeight;
         }
       }
-      
+
       const top = minColumnHeight;
       const left = Math.round(this._getItemLeft(minColumnIndex));
-      
+
       // Check if position has changed
       if (layoutData.left !== left || layoutData.top !== top) {
         layoutData.columnIndex = minColumnIndex;
         layoutData.itemIndex = this._columns[minColumnIndex].items.length;
         layoutData.left = left;
         layoutData.top = top;
-        
+
         setTransform(item, `translate(${left}px, ${top}px)`);
       }
-      
+
       // Remember new column height to position all other items
       const newColumnHeight = top + layoutData.height + this._verSpacing;
-      for (j = 0; j &lt; layoutData.colspan; j++) {
+      for (j = 0 ; j &lt; layoutData.colspan ; j++) {
         const column = this._columns[minColumnIndex + j];
         column.height = newColumnHeight;
         column.items.push(item);
       }
     }
   }
-  
+
   /**
    @param columnIndex
    @return the left position for the given column index
@@ -662,7 +661,7 @@ class MasonryColumnLayout extends MasonryLayout {
   _getItemLeft(columnIndex) {
     // To override
   }
-  
+
   /**
    @returns {number} the height of the content (independent of the current gird container height)
    @private
@@ -670,10 +669,10 @@ class MasonryColumnLayout extends MasonryLayout {
   _getContentHeight() {
     return this._columns.reduce((height, column) =&gt; Math.max(height, column.height), 0) - this._offsetTop;
   }
-  
+
   /**
    Hook which is called after the positioning is done.
-   
+
    @param contentHeight
    @private
    */
@@ -681,10 +680,10 @@ class MasonryColumnLayout extends MasonryLayout {
   _postLayout(contentHeight) {
     // To override
   }
-  
+
   /**
    Moves the focus vertically.
-   
+
    @private
    */
   _moveFocusVertically(up, event) {
@@ -692,17 +691,16 @@ class MasonryColumnLayout extends MasonryLayout {
     if (!currentLayoutData) {
       return;
     }
-    
+
     // Choose item above or below
     const nextItemIndex = currentLayoutData.itemIndex + (up ? -1 : 1);
     let nextItem = this._columns[currentLayoutData.columnIndex].items[nextItemIndex];
-    
+
     if (nextItem) {
       nextItem.focus();
       // prevent scrolling at the same time
       event.preventDefault();
-    } 
-    else {
+    } else {
       // in case there is no item in the same column, we should move to first item in next column for down
       // and last item of previous column for up key
       let columnIndex = currentLayoutData.columnIndex;
@@ -714,8 +712,7 @@ class MasonryColumnLayout extends MasonryLayout {
             nextItem = prevColumn.items[prevColumn.items.length - 1]; // last item of previous column
           }
         }
-      }  
-      else {
+      } else {
         // down key is pressed, go to first item of next column if exists
         let columnCount = this._columns.length;
         let nextColumnIndex = columnIndex + currentLayoutData.colspan;
@@ -729,10 +726,10 @@ class MasonryColumnLayout extends MasonryLayout {
       }
     }
   }
-  
+
   /**
    Moves the focus horizontally.
-   
+
    @private
    */
   _moveFocusHorizontally(left, event) {
@@ -740,7 +737,7 @@ class MasonryColumnLayout extends MasonryLayout {
     if (!currentLayoutData) {
       return;
     }
-    
+
     let nextItem;
     let items = this._masonry.items.getAll();
     let collectionItemIndex = items.indexOf(event.target);
@@ -749,8 +746,7 @@ class MasonryColumnLayout extends MasonryLayout {
       if (collectionItemIndex &gt; 0) {
         nextItem = items[collectionItemIndex - 1];
       }
-    }
-    else if (collectionItemIndex &lt; items.length - 1) {
+    } else if (collectionItemIndex &lt; items.length - 1) {
       nextItem = items[collectionItemIndex + 1];
     }
 
@@ -759,10 +755,10 @@ class MasonryColumnLayout extends MasonryLayout {
       event.preventDefault(); // prevent scrolling at the same time
     }
   }
-  
+
   /**
    Moves the focus to first or last item based on the visual order.
-   
+
    @private
    */
   _moveFocusHomeEnd(home, event) {
@@ -770,18 +766,17 @@ class MasonryColumnLayout extends MasonryLayout {
     if (!currentLayoutData) {
       return;
     }
-    
+
     let nextItem;
     const columns = this._columns;
-    
+
     // when home is pressed, we take the first item of the first column
     if (home) {
       nextItem = columns[0] &amp;&amp; columns[0].items[0];
-    }
-    else {
+    } else {
       // when end is pressed, we take the last item of the last column; since some columns are empty, we need to
       // iterate backwards to find the first column that has items
-      for (let i = columns.length - 1; i &gt; -1; i--) {
+      for (let i = columns.length - 1 ; i &gt; -1 ; i--) {
         // since we found a column with items, we take the last item as the next one
         if (columns[i].items.length &gt; 0) {
           nextItem = columns[i].items[columns[i].items.length - 1];
@@ -789,18 +784,18 @@ class MasonryColumnLayout extends MasonryLayout {
         }
       }
     }
-    
+
     if (nextItem) {
       nextItem.focus();
       // we prevent the scrolling
       event.preventDefault();
     }
   }
-  
+
   /** @inheritdoc */
   layout(secondTry) {
     const masonry = this._masonry;
-    
+
     const items = masonry.items.getAll();
     if (items.length &gt; 0) {
       // For best possible performance none of these function calls must both read and write attributes in a loop to
@@ -809,55 +804,53 @@ class MasonryColumnLayout extends MasonryLayout {
       this._writeStyles(items);
       this._readStyles(items);
       this._positionItems(items);
-    }
-    else {
+    } else {
       this._columns.length = 0;
     }
-    
+
     // Update the height of the masonry (otherwise it has a height of 0px due to the absolutely positioned items)
     const contentHeight = this._getContentHeight();
     masonry.style.height = `${contentHeight - this._verSpacing + this._verPadding}px`;
-    
+
     // Check if the masonry has changed its width due to the changed height (can happen because of appearing/disappearing scrollbars)
     if (!secondTry &amp;&amp; this._masonryInnerWidth !== masonry.clientWidth) {
       this.layout(true);
-    }
-    else {
+    } else {
       // Post layout hook for sub classes
       this._postLayout(contentHeight);
     }
   }
-  
+
   /** @inheritdoc */
   destroy() {
     this._keys.destroy();
-    
+
     const items = this._masonry.items.getAll();
-    for (let i = 0; i &lt; items.length; i++) {
+    for (let i = 0 ; i &lt; items.length ; i++) {
       const item = items[i];
       item._layoutData = undefined;
       setTransform(item, &apos;&apos;);
       this._resetItem(item);
     }
   }
-  
+
   /** @inheritdoc */
   detach(item) {
     item._layoutData.detached = true;
   }
-  
+
   /** @inheritdoc */
   reattach(item) {
     const layoutData = item._layoutData;
     layoutData.detached = false;
-    
+
     const rect = item.getBoundingClientRect();
     // Disable transition while repositioning
     setTransition(item, &apos;none&apos;);
     item.style.left = &apos;&apos;;
     item.style.top = &apos;&apos;;
     setTransform(item, &apos;&apos;);
-    
+
     const nullRect = item.getBoundingClientRect();
     layoutData.left = rect.left - nullRect.left;
     layoutData.top = rect.top - nullRect.top;
@@ -867,23 +860,23 @@ class MasonryColumnLayout extends MasonryLayout {
     // Enable transition again
     setTransition(item, &apos;&apos;);
   }
-  
+
   /** @inheritdoc */
   itemAt(x, y) {
     // TODO it would be more efficient to pick first the right column
     const items = this._masonry.items.getAll();
-    
-    for (let i = 0; i &lt; items.length; i++) {
+
+    for (let i = 0 ; i &lt; items.length ; i++) {
       const item = items[i];
       const layoutData = item._layoutData;
-      
+
       if (layoutData &amp;&amp; !layoutData.ignored &amp;&amp; (
         layoutData.left &lt;= x &amp;&amp; layoutData.left + layoutData.width &gt;= x &amp;&amp;
         layoutData.top &lt;= y &amp;&amp; layoutData.top + layoutData.height &gt;= y)) {
         return item;
       }
     }
-    
+
     return null;
   }
 }

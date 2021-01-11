@@ -452,38 +452,39 @@ class Step extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Fetch or create content zone
     this._elements = {
       label: this.querySelector(&apos;coral-step-label&apos;) || document.createElement(&apos;coral-step-label&apos;)
     };
     step.call(this._elements);
   }
-  
+
   /**
    The label of the step.
-   
+
    @type {StepLabel}
    @contentzone
    */
   get label() {
     return this._getContentZone(this._elements.label);
   }
+
   set label(value) {
     this._setContentZone(&apos;label&apos;, value, {
       handle: &apos;label&apos;,
       tagName: &apos;coral-step-label&apos;,
-      insert: function(label) {
+      insert: function (label) {
         label.classList.add(&apos;_coral-Steplist-label&apos;);
         this._elements.link.insertBefore(label, this._elements.stepMarkerContainer);
       }
     });
   }
-  
+
   /**
    Whether the item is selected. When &lt;code&gt;true&lt;/code&gt;, the item will appear as the active element in the
    StepList. The item must be a child of a StepList before this property is set to &lt;code&gt;true&lt;/code&gt;.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -492,23 +493,23 @@ class Step extends BaseComponent(HTMLElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute(&apos;selected&apos;, this._selected);
-  
+
     this.classList.toggle(&apos;is-selected&apos;, this.selected);
     this.removeAttribute(&apos;aria-selected&apos;);
 
     if (this.selected) {
       this._elements.link.setAttribute(&apos;aria-current&apos;, &apos;step&apos;);
-    }
-    else {
+    } else {
       this._elements.link.removeAttribute(&apos;aria-current&apos;);
     }
 
     const stepList = this.parentElement;
     let realTarget;
-  
+
     // in case the Step is selected, we need to communicate it to the panels
     if (this._selected) {
       realTarget = getTarget(this.target);
@@ -519,14 +520,14 @@ class Step extends BaseComponent(HTMLElement) {
       // we use the target defined at the StepList level
       else if (stepList &amp;&amp; stepList.target) {
         realTarget = getTarget(stepList.target);
-      
+
         if (realTarget) {
           // we get the position of this step inside the steplist
           const currentIndex = stepList.items.getAll().indexOf(this);
-        
+
           // we select the item with the same index
           const targetItem = (realTarget.items ? realTarget.items.getAll() : realTarget.children)[currentIndex];
-        
+
           // we select the item if it exists
           if (targetItem) {
             targetItem.setAttribute(&apos;selected&apos;, &apos;&apos;);
@@ -534,13 +535,13 @@ class Step extends BaseComponent(HTMLElement) {
         }
       }
     }
-    
+
     this.trigger(&apos;coral-step:_selectedchanged&apos;);
   }
 
   /**
    Whether the item is disabled
-   
+
    @type {Boolean}
    @default false
    @htmlattribute disabled
@@ -549,6 +550,7 @@ class Step extends BaseComponent(HTMLElement) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
@@ -560,24 +562,24 @@ class Step extends BaseComponent(HTMLElement) {
   }
 
   /**
-    Reflects the &lt;code&gt;aria-label&lt;/code&gt; attribute to the marker dot for cases where no visible label is provided for the Step.
-    @type {?String}
-    @default &apos;&apos;
-    @htmlattribute labelled
-    @htmlattributereflected
-    @memberof Coral.Step#
-  */
+   Reflects the &lt;code&gt;aria-label&lt;/code&gt; attribute to the marker dot for cases where no visible label is provided for the Step.
+   @type {?String}
+   @default &apos;&apos;
+   @htmlattribute labelled
+   @htmlattributereflected
+   @memberof Coral.Step#
+   */
   get labelled() {
     return this._labelled || this.getAttribute(&apos;labelled&apos;) || this._elements.stepMarkerContainer.getAttribute(&apos;aria-label&apos;) || &apos;&apos;;
   }
+
   set labelled(value) {
     this._labelled = transform.string(value);
     this._reflectAttribute(&apos;labelled&apos;, value || false);
     if (this._labelled !== &apos;&apos;) {
       this._elements.stepMarkerContainer.setAttribute(&apos;aria-label&apos;, this._labelled);
       this._elements.stepMarkerContainer.removeAttribute(&apos;aria-hidden&apos;);
-    }
-    else {
+    } else {
       this._elements.stepMarkerContainer.removeAttribute(&apos;aria-label&apos;);
       if (!this.labelledBy) {
         this._elements.stepMarkerContainer.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
@@ -586,25 +588,25 @@ class Step extends BaseComponent(HTMLElement) {
   }
 
   /**
-    Reflects the &lt;code&gt;aria-labelledby&lt;/code&gt; attribute to the marker dot for cases where no visible label is provided for the Step, 
-    and the Step is labelled by an external element.
-    @type {?String}
-    @default &apos;&apos;
-    @htmlattribute labelledby
-    @htmlattributereflected
-    @memberof Coral.Step#
-  */
+   Reflects the &lt;code&gt;aria-labelledby&lt;/code&gt; attribute to the marker dot for cases where no visible label is provided for the Step,
+   and the Step is labelled by an external element.
+   @type {?String}
+   @default &apos;&apos;
+   @htmlattribute labelledby
+   @htmlattributereflected
+   @memberof Coral.Step#
+   */
   get labelledBy() {
     return this._labelledBy || this.getAttribute(&apos;labelledby&apos;) || this._elements.stepMarkerContainer.getAttribute(&apos;aria-labelledby&apos;) || &apos;&apos;;
   }
+
   set labelledBy(value) {
     this._labelledBy = transform.string(value);
     this._reflectAttribute(&apos;labelledby&apos;, value || false);
     if (this._labelledBy !== &apos;&apos;) {
       this._elements.stepMarkerContainer.setAttribute(&apos;aria-labelledby&apos;, this._labelledBy);
       this._elements.stepMarkerContainer.removeAttribute(&apos;aria-hidden&apos;);
-    }
-    else {
+    } else {
       this._elements.stepMarkerContainer.removeAttribute(&apos;aria-labelledby&apos;);
       if (!this.labelled) {
         this._elements.stepMarkerContainer.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
@@ -612,32 +614,32 @@ class Step extends BaseComponent(HTMLElement) {
     }
   }
 
-    /**
-    Reflects the &lt;code&gt;aria-describedby&lt;/code&gt; attribute to the link element.
-    @type {?String}
-    @default &apos;&apos;
-    @htmlattribute describedby
-    @htmlattributereflected
-    @memberof Coral.Step#
-  */
+  /**
+   Reflects the &lt;code&gt;aria-describedby&lt;/code&gt; attribute to the link element.
+   @type {?String}
+   @default &apos;&apos;
+   @htmlattribute describedby
+   @htmlattributereflected
+   @memberof Coral.Step#
+   */
   get describedBy() {
     return this._describedBy || this.getAttribute(&apos;describedby&apos;) || this._elements.link.getAttribute(&apos;aria-describedby&apos;) || &apos;&apos;;
   }
+
   set describedBy(value) {
     this._describedBy = transform.string(value);
     this._reflectAttribute(&apos;describedby&apos;, value || false);
     if (this._describedBy !== &apos;&apos;) {
       this._elements.link.setAttribute(&apos;aria-describedby&apos;, this._describedBy);
-    }
-    else {
+    } else {
       this._elements.link.removeAttribute(&apos;aria-describedby&apos;);
     }
   }
-  
+
   /**
    The target element that will be selected when this Step is selected. It accepts a CSS selector or a DOM element.
    If a CSS Selector is provided, the first matching element will be used.
-   
+
    @type {?HTMLElement|String}
    @default null
    @htmlattribute target
@@ -645,11 +647,12 @@ class Step extends BaseComponent(HTMLElement) {
   get target() {
     return this._target || null;
   }
+
   set target(value) {
     if (value === null || typeof value === &apos;string&apos; || value instanceof Node) {
       this._target = value;
       const realTarget = getTarget(this._target);
-  
+
       // we add proper accessibility if available
       if (realTarget) {
         // creates a 2 way binding for accessibility
@@ -658,7 +661,7 @@ class Step extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /**
    Inherited from {@link BaseComponent#trackingElement}.
    */
@@ -668,22 +671,23 @@ class Step extends BaseComponent(HTMLElement) {
       (this.label || this).textContent.replace(/\s{2,}/g, &apos; &apos;).trim() :
       this._trackingElement;
   }
+
   set trackingElement(value) {
     super.trackingElement = value;
   }
-  
+
   _isHybrid() {
     const label = this.label;
     const maxWidth = this.label.clientWidth;
-    
+
     // Required to be able to measure full width
     label.style.position = &apos;relative&apos;;
     label.style.whiteSpace = &apos;inherit&apos;;
     label.style.display = &apos;inline&apos;;
-  
+
     // Mark it for hybrid mode
     this._labelIsHidden = label.getBoundingClientRect().width &gt; maxWidth;
-    
+
     // Restore defaults
     label.style.position = &apos;&apos;;
     label.style.whiteSpace = &apos;&apos;;
@@ -709,17 +713,15 @@ class Step extends BaseComponent(HTMLElement) {
       if (this.disabled) {
         this._elements.link.removeAttribute(&apos;tabindex&apos;);
         this._elements.link.setAttribute(&apos;aria-disabled&apos;, true);
-      }
-      else {
+      } else {
         this._elements.link.removeAttribute(&apos;aria-disabled&apos;);
         this._elements.link.setAttribute(&apos;tabindex&apos;, this.selected ? &apos;0&apos; : &apos;-1&apos;);
       }
-    }
-    else {
+    } else {
       // when off, removing the tabindex allows the component to never get focus
       this._elements.link.removeAttribute(&apos;tabindex&apos;);
       this._elements.link.removeAttribute(&apos;role&apos;);
-    }    
+    }
   }
 
   /** @private */
@@ -727,8 +729,10 @@ class Step extends BaseComponent(HTMLElement) {
     this.setAttribute(&apos;aria-setsize&apos;, totalSteps);
     this.setAttribute(&apos;aria-posinset&apos;, currentStep);
   }
-  
-  get _contentZones() { return {&apos;coral-step-label&apos;: &apos;label&apos;}; }
+
+  get _contentZones() {
+    return {&apos;coral-step-label&apos;: &apos;label&apos;};
+  }
 
   /** @ignore */
   static get _attributePropertyMap() {
@@ -737,14 +741,16 @@ class Step extends BaseComponent(HTMLElement) {
       describedby: &apos;describedBy&apos;,
     });
   }
-  
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat([&apos;selected&apos;, &apos;target&apos;, &apos;disabled&apos;, &apos;labelled&apos;, &apos;labelledby&apos;, &apos;describedby&apos;]); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat([&apos;selected&apos;, &apos;target&apos;, &apos;disabled&apos;, &apos;labelled&apos;, &apos;labelledby&apos;, &apos;describedby&apos;]);
+  }
+
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-    
+
     const overlay = this._elements.overlay;
     // Cannot be open by default when rendered
     overlay.removeAttribute(&apos;open&apos;);
@@ -753,22 +759,22 @@ class Step extends BaseComponent(HTMLElement) {
       overlay._parent.appendChild(overlay);
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Generate a unique ID for the Step panel if one isn&apos;t already present
     // This will be used for accessibility purposes
     this.setAttribute(&apos;id&apos;, this.id || commons.getUID());
-    
+
     // A11y
     this.setAttribute(&apos;role&apos;, &apos;listitem&apos;);
-    
+
     const frag = document.createDocumentFragment();
-  
+
     // Discard the template-created link, accessibilityLabel, stepMarkerContainer, and line if one is provided by markup
     this._elements.link = this.querySelector(&apos;[handle=&quot;link&quot;]&apos;) || this._elements.link;
     this._elements.accessibilityLabel = this.querySelector(&apos;[handle=&quot;accessibilityLabel&quot;]&apos;) || this._elements.accessibilityLabel;
@@ -777,42 +783,41 @@ class Step extends BaseComponent(HTMLElement) {
 
     // Discard the template-created tooltip if one is provided by markup
     this._elements.overlay = this.querySelector(&apos;coral-tooltip&apos;) || this._elements.overlay;
-    
+
     // Render main template
     frag.appendChild(this._elements.link);
     this._elements.link.appendChild(this._elements.stepMarkerContainer);
     this._elements.link.appendChild(this._elements.overlay);
     frag.appendChild(this._elements.line);
-    
+
     const templateHandleNames = [&apos;link&apos;, &apos;accessibilityLabel&apos;, &apos;stepMarkerContainer&apos;, &apos;overlay&apos;, &apos;line&apos;];
-  
+
     const label = this._elements.label;
-    
+
     // Remove it so we can process children
     if (label.parentNode) {
       label.remove();
     }
-    
+
     while (this.firstChild) {
       const child = this.firstChild;
-      
+
       if (child.nodeType === Node.TEXT_NODE ||
         child.nodeType === Node.ELEMENT_NODE &amp;&amp; templateHandleNames.indexOf(child.getAttribute(&apos;handle&apos;)) === -1) {
         label.appendChild(child);
-      }
-      else {
+      } else {
         this.removeChild(child);
       }
     }
-  
+
     // Link tooltip target
     this._elements.overlay.target = this._elements.stepMarkerContainer;
-    
+
     this.appendChild(frag);
-    
+
     // Assign the content zone so the insert function will be called
     this.label = label;
-    
+
     // Measure hybrid potential
     this._isHybrid();
 
@@ -823,11 +828,11 @@ class Step extends BaseComponent(HTMLElement) {
       this._syncTabIndex(stepList.interaction === StepList.interaction.ON);
     }
   }
-  
+
   /** @ignore */
   disconnectedCallback() {
     super.disconnectedCallback();
-    
+
     const overlay = this._elements.overlay;
     // In case it was moved out don&apos;t forget to remove it
     if (!this.contains(overlay)) {

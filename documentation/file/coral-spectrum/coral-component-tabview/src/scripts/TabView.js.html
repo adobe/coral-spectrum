@@ -439,9 +439,9 @@ import {commons} from &apos;../../../coral-utils&apos;;
 
 /**
  Enumeration for {@link TabView} orientations.
- 
+
  @typedef {Object} TabViewOrientationEnum
- 
+
  @property {String} HORIZONTAL
  Tabs on top of the panels. This is the default.
  @property {String} VERTICAL
@@ -468,14 +468,14 @@ class TabView extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
       tabList: this.querySelector(&apos;coral-tablist&apos;) || document.createElement(&apos;coral-tablist&apos;),
       panelStack: this.querySelector(&apos;coral-panelstack&apos;) || document.createElement(&apos;coral-panelstack&apos;)
     };
-    
+
     // Events
     this._delegateEvents({
       &apos;coral-tablist:change &gt; coral-tablist&apos;: &apos;_onTabListChange&apos;,
@@ -486,10 +486,10 @@ class TabView extends BaseComponent(HTMLElement) {
       &apos;coral-collection:remove &gt; coral-panelstack&apos;: &apos;_syncTabListAndPanelStack&apos;
     });
   }
-  
+
   /**
    The TabView&apos;s orientation. See {@link TabViewOrientationEnum}.
-   
+
    @type {String}
    @default TabViewOrientationEnum.HORIZONTAL
    @htmlattribute orientation
@@ -498,62 +498,65 @@ class TabView extends BaseComponent(HTMLElement) {
   get orientation() {
     return this._elements.tabList.getAttribute(&apos;orientation&apos;) || orientation.HORIZONTAL;
   }
+
   set orientation(value) {
     // We rely on the tablist orientation enum so don&apos;t need to double check enums
     this._elements.tabList.setAttribute(&apos;orientation&apos;, value);
     this._reflectAttribute(&apos;orientation&apos;, this.orientation);
-  
+
     this.classList[this.orientation === orientation.VERTICAL ? &apos;add&apos; : &apos;remove&apos;](`${CLASSNAME}--vertical`);
   }
-  
+
   /**
    The TabList which handles all the tabs.
-   
+
    @type {TabList}
    @contentzone
    */
   get tabList() {
     return this._getContentZone(this._elements.tabList);
   }
+
   set tabList(value) {
     // Support nested coral-tablist
     if (value instanceof HTMLElement &amp;&amp; !value.parentNode || value.parentNode === this) {
       this._setContentZone(&apos;tabList&apos;, value, {
         handle: &apos;tabList&apos;,
         tagName: &apos;coral-tablist&apos;,
-        insert: function(tabs) {
+        insert: function (tabs) {
           tabs.setAttribute(&apos;tracking&apos;, &apos;off&apos;);
           this.insertBefore(tabs, this._elements.panelStack || null);
         }
       });
     }
   }
-  
+
   /**
    The PanelStack which contains all the panels.
-   
+
    @type {PanelStack}
    @contentzone
    */
   get panelStack() {
     return this._getContentZone(this._elements.panelStack);
   }
+
   set panelStack(value) {
     // Support nested coral-panelstack
     if (value instanceof HTMLElement &amp;&amp; !value.parentNode || value.parentNode === this) {
       this._setContentZone(&apos;panelStack&apos;, value, {
         handle: &apos;panelStack&apos;,
         tagName: &apos;coral-panelstack&apos;,
-        insert: function(panels) {
+        insert: function (panels) {
           this.appendChild(panels);
         }
       });
     }
   }
-  
+
   /**
    Detects a change in the TabList and triggers an event.
-   
+
    @private
    */
   _onTabListChange(event) {
@@ -562,75 +565,80 @@ class TabView extends BaseComponent(HTMLElement) {
       oldSelection: event.detail.oldSelection
     });
   }
-  
+
   /** @private */
   _onPanelStackChange(event) {
     // everytime the panelstack changes, we verify that the tablist and panelstack are up to date
     if (event.detail.selection) {
       const tabSelector = event.detail.selection.getAttribute(&apos;aria-labelledby&apos;);
       const tab = document.getElementById(tabSelector);
-    
+
       // we select the tab if this was not the case
       if (tab) {
         if (!tab.hasAttribute(&apos;selected&apos;)) {
           tab.setAttribute(&apos;selected&apos;, &apos;&apos;);
-        }
-        else {
+        } else {
           this._trackEvent(&apos;display&apos;, &apos;coral-tab&apos;, event, event.detail.selection);
         }
       }
     }
   }
-  
+
   /** @private */
   _syncTabListAndPanelStack() {
     this._elements.tabList.target = this._elements.tabList.target;
   }
-  
+
   get _contentZones() {
     return {
       &apos;coral-tablist&apos;: &apos;tabList&apos;,
       &apos;coral-panelstack&apos;: &apos;panelStack&apos;
     };
   }
-  
+
   /**
    Returns {@link TabView} orientation options.
-   
+
    @return {TabViewOrientationEnum}
    */
-  static get orientation() { return orientation; }
-  
+  static get orientation() {
+    return orientation;
+  }
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat([&apos;orientation&apos;]); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat([&apos;orientation&apos;]);
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // Default reflected attributes
-    if (!this._orientation) { this.orientation = this.orientation; }
-  
+    if (!this._orientation) {
+      this.orientation = this.orientation;
+    }
+
     // Fetch or create the content zone elements
     const tabs = this._elements.tabList;
     const panels = this._elements.panelStack;
-  
+
     // Bind the tablist and panel stack together, using the panel id
     panels.id = panels.id || commons.getUID();
     tabs.setAttribute(&apos;target&apos;, `#${panels.id}`);
-  
+
     // Assign the content zones.
     this.panelStack = panels;
     this.tabList = tabs;
   }
-  
+
   /**
    Triggered when the {@link TabView} selected tab panel item has changed.
- 
+
    @typedef {CustomEvent} coral-tabview:change
-   
+
    @property {Tab} event.detail.selection
    The new selected tab panel item.
    @param {Tab} event.detail.oldSelection

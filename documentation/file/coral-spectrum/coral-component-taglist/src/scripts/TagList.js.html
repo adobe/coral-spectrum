@@ -449,7 +449,7 @@ const ITEM_TAGNAME = &apos;coral-tag&apos;;
  @returns {String} the value that will be submitted for this item.
  @private
  */
-const itemValueFromDOM = function(item) {
+const itemValueFromDOM = function (item) {
   const attr = item.getAttribute(&apos;value&apos;);
   // checking explicitly for null allows to differentiate between non set values and empty strings
   return attr !== null ? attr : item.textContent.replace(/\s{2,}/g, &apos; &apos;).trim();
@@ -467,7 +467,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Attach events
     this._delegateEvents(commons.extend(this._events, {
       &apos;capture:focus coral-tag&apos;: &apos;_onItemFocus&apos;,
@@ -480,35 +480,36 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
       &apos;key:pageup coral-tag&apos;: &apos;_onPreviousItemFocus&apos;,
       &apos;key:home coral-tag&apos;: &apos;_onFirstItemFocus&apos;,
       &apos;key:end coral-tag&apos;: &apos;_onLastItemFocus&apos;,
-      
+
       // Accessibility
       &apos;capture:focus coral-tag:not(.is-disabled)&apos;: &apos;_onItemFocusIn&apos;,
       &apos;capture:blur coral-tag:not(.is-disabled)&apos;: &apos;_onItemFocusOut&apos;,
-      
+
       // Private
       &apos;coral-tag:_valuechanged&apos;: &apos;_onTagValueChanged&apos;,
       &apos;coral-tag:_connected&apos;: &apos;_onTagConnected&apos;
     }));
-  
+
     // Pre-define labellable element
     this._labellableElement = this;
-  
+
     this._itemToFocusAfterDelete = null;
   }
-  
+
   /**
    Changing the values will redefine the component&apos;s items.
-   
+
    @type {Array.&lt;String&gt;}
    @emits {change}
    */
   get values() {
     return this.items.getAll().map((item) =&gt; item.value);
   }
+
   set values(values) {
     if (Array.isArray(values)) {
       this.items.clear();
-      
+
       values.forEach((value) =&gt; {
         const item = new Tag().set({
           label: {
@@ -516,17 +517,17 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
           },
           value: value
         });
-    
+
         this._attachInputToItem(item);
-    
+
         this.items.add(item);
       });
     }
   }
-  
+
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+
    @type {Collection}
    @readonly
    */
@@ -540,7 +541,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     }
     return this._items;
   }
-  
+
   /**
    Name used to submit the data in a form.
    @type {String}
@@ -551,17 +552,18 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._name || &apos;&apos;;
   }
+
   set name(value) {
     this._name = transform.string(value);
     this._reflectAttribute(&apos;name&apos;, value);
-  
+
     this.items.getAll().forEach((item) =&gt; {
       if (item._input) {
         item._input.name = this._name;
       }
     });
   }
-  
+
   /**
    This field&apos;s current value.
    @type {String}
@@ -572,9 +574,10 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     const all = this.items.getAll();
     return all.length ? all[0].value : &apos;&apos;;
   }
+
   set value(value) {
     this.items.clear();
-  
+
     if (value) {
       const item = new Tag().set({
         label: {
@@ -582,13 +585,13 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
         },
         value: value
       });
-      
+
       this._attachInputToItem(item);
-    
+
       this.items.add(item);
     }
   }
-  
+
   /**
    Whether this field is disabled or not.
    @type {Boolean}
@@ -599,33 +602,35 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
-    
+
     this.items.getAll().forEach((item) =&gt; {
       item.classList.toggle(&apos;is-disabled&apos;, this._disabled);
       if (item._input) {
         item._input.disabled = this._disabled;
       }
     });
-    
+
     // a11y
     this[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
   }
-  
+
   // JSDoc inherited
   get invalid() {
     return super.invalid;
   }
+
   set invalid(value) {
     super.invalid = value;
-  
+
     this.items.getAll().forEach((item) =&gt; {
       item.classList.toggle(&apos;is-invalid&apos;, this._invalid);
     });
   }
-  
+
   /**
    Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
    @type {Boolean}
@@ -636,15 +641,16 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute(&apos;readonly&apos;, this._readOnly);
-    
+
     this.items.getAll().forEach((item) =&gt; {
       item.closable = !this._readOnly;
     });
   }
-  
+
   /**
    Whether this field is required or not.
    @type {Boolean}
@@ -655,11 +661,12 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute(&apos;required&apos;, this._required);
   }
-  
+
   /** @private */
   _attachInputToItem(item) {
     if (!item._input) {
@@ -668,50 +675,50 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
       // We do this so it is recognized by Coral.Tag and handled if cloned
       item._input.setAttribute(&apos;handle&apos;, &apos;input&apos;);
     }
-  
+
     const input = item._input;
-  
+
     input.disabled = this.disabled;
     input.name = this.name;
     input.value = item.value;
-  
+
     if (!item.contains(input)) {
       item.appendChild(input);
     }
   }
-  
+
   /** @private */
   _prepareItem(attachedItem) {
     const items = this.items.getAll();
-    
+
     // Prevents to add duplicates based on the tag value
     const duplicate = items.some((tag) =&gt; {
       if (itemValueFromDOM(tag) === itemValueFromDOM(attachedItem) &amp;&amp; tag !== attachedItem) {
         (items.indexOf(tag) &lt; items.indexOf(attachedItem) ? attachedItem : tag).remove();
         return true;
       }
-      
+
       return false;
     });
-    
+
     if (duplicate) {
       return;
     }
-    
+
     // create corresponding input field
     this._attachInputToItem(attachedItem);
-    
+
     // Set tag defaults
     attachedItem.setAttribute(&apos;color&apos;, Tag.color.DEFAULT);
     attachedItem.setAttribute(&apos;size&apos;, Tag.size.SMALL);
-    
+
     // adds the role to support accessibility
     attachedItem.setAttribute(&apos;role&apos;, &apos;row&apos;);
     if (!this.disabled) {
       attachedItem.setAttribute(&apos;tabindex&apos;, &apos;-1&apos;);
     }
     attachedItem[this.readOnly ? &apos;removeAttribute&apos; : &apos;setAttribute&apos;](&apos;closable&apos;, &apos;&apos;);
-    
+
     // add tabindex to first item if none existing
     if (!this.disabled &amp;&amp; !this.querySelector(`${ITEM_TAGNAME}[tabindex=&quot;0&quot;]`)) {
       const first = items[0];
@@ -719,16 +726,16 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
         first.setAttribute(&apos;tabindex&apos;, &apos;0&apos;);
       }
     }
-    
+
     // Keep a reference on the host in case the tag gets removed
     attachedItem._host = this;
-    
+
     // triggers the Coral.Collection event
     this.trigger(&apos;coral-collection:add&apos;, {
       item: attachedItem
     });
   }
-  
+
   /** @private */
   _onItemDisconnected(detachedItem) {
     // Cleans the tag from TagList specific values
@@ -750,48 +757,45 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
         if (document.activeElement.tagName === &apos;BODY&apos;) {
           if (this.items.length &gt; 0) {
             self.items.first().focus();
-          }
-          else {
+          } else {
             // make the TagList focusable
             self.tabIndex = -1;
             self.classList.add(&apos;u-coral-screenReaderOnly&apos;);
             self.style.outline = &apos;0&apos;;
             self.innerHTML = &apos; &apos;;
-            const onBlurFocusManagement = function() {
+            const onBlurFocusManagement = function () {
               self.removeAttribute(&apos;tabindex&apos;);
               self.classList.remove(&apos;u-coral-screenReaderOnly&apos;);
               self.style.outline = &apos;&apos;;
               self.innerHTML = &apos;&apos;;
               self._vent.off(&apos;blur.focusManagement&apos;);
             };
-            self._vent.on(&apos;blur.focusManagement&apos;, null, onBlurFocusManagement); 
+            self._vent.on(&apos;blur.focusManagement&apos;, null, onBlurFocusManagement);
             if (!parentElement.contains(document.activeElement)) {
               self.focus();
-            }
-            else {
+            } else {
               onBlurFocusManagement();
             }
           }
         }
       });
-    }
-    else if (this._itemToFocusAfterDelete) {
+    } else if (this._itemToFocusAfterDelete) {
       this._itemToFocusAfterDelete.focus();
     }
-    
+
     // triggers the Coral.Collection event
     this.trigger(&apos;coral-collection:remove&apos;, {
       item: detachedItem
     });
   }
-  
+
   /** @private */
   _onItemFocus(event) {
     if (!this.disabled) {
       this.setAttribute(&apos;aria-live&apos;, &apos;polite&apos;);
-      
+
       const tag = event.matchedTarget;
-      
+
       // add tabindex to first item and remove from previous focused item
       this.items.getAll().forEach((item) =&gt; {
         if (item !== tag) {
@@ -799,50 +803,49 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
         }
       });
       tag.setAttribute(&apos;tabindex&apos;, &apos;0&apos;);
-      
+
       this._setItemToFocusOnDelete(tag);
     }
   }
-  
+
   /** @private */
   _onItemBlur(event) {
     if (!this.disabled) {
       this.setAttribute(&apos;aria-live&apos;, &apos;off&apos;);
-      
+
       const tag = event.matchedTarget;
-      
+
       this._setItemToFocusOnDelete(tag);
     }
   }
-  
+
   /** @private */
   _onSiblingItemFocus(event, sibling) {
     if (!this.disabled) {
       event.preventDefault();
-      
+
       let item = event.target[sibling];
       while (item) {
         if (item.tagName.toLowerCase() === ITEM_TAGNAME &amp;&amp; !item.hidden) {
           item.focus();
           break;
-        }
-        else {
+        } else {
           item = item[sibling];
         }
       }
     }
   }
-  
+
   /** @private */
   _onNextItemFocus(event) {
     this._onSiblingItemFocus(event, &apos;nextElementSibling&apos;);
   }
-  
+
   /** @private */
   _onPreviousItemFocus(event) {
     this._onSiblingItemFocus(event, &apos;previousElementSibling&apos;);
   }
-  
+
   /** @private */
   _onFirstItemFocus(event) {
     event.preventDefault();
@@ -851,7 +854,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
       this.items.getAll()[0].focus();
     }
   }
-  
+
   /** @private */
   _onLastItemFocus(event) {
     event.preventDefault();
@@ -860,73 +863,72 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
       this.items.getAll()[length - 1].focus();
     }
   }
-  
+
   _onItemFocusIn(event) {
     event.matchedTarget.classList.add(&apos;focus-ring&apos;);
   }
-  
+
   _onItemFocusOut(event) {
     event.matchedTarget.classList.remove(&apos;focus-ring&apos;);
   }
-  
+
   /** @private */
   _onTagButtonClicked(item, event) {
     this.trigger(&apos;change&apos;);
-  
+
     this._trackEvent(&apos;remove&apos;, &apos;coral-tag&apos;, event, item);
   }
-  
+
   /** @private */
   _onTagValueChanged(event) {
     event.stopImmediatePropagation();
-    
+
     const tag = event.target;
     if (tag._input) {
       tag._input.value = tag.value;
     }
   }
-  
+
   /** @private */
   _setItemToFocusOnDelete(tag) {
     let itemToFocusAfterDelete = tag.nextElementSibling;
-    
+
     // Next item will be focusable if the focused tag is removed
     while (itemToFocusAfterDelete) {
       if (itemToFocusAfterDelete.tagName.toLowerCase() === ITEM_TAGNAME &amp;&amp; !itemToFocusAfterDelete.hidden) {
         this._itemToFocusAfterDelete = itemToFocusAfterDelete;
         return;
       }
-      
+
       itemToFocusAfterDelete = itemToFocusAfterDelete.nextElementSibling;
     }
-    
+
     itemToFocusAfterDelete = tag.previousElementSibling;
     // Previous item will be focusable if the focused tag is removed
     while (itemToFocusAfterDelete) {
       if (itemToFocusAfterDelete.tagName.toLowerCase() === ITEM_TAGNAME &amp;&amp; !itemToFocusAfterDelete.hidden) {
         this._itemToFocusAfterDelete = itemToFocusAfterDelete;
         break;
-      }
-      else {
+      } else {
         itemToFocusAfterDelete = itemToFocusAfterDelete.previousElementSibling;
       }
     }
-    
+
     window.requestAnimationFrame(() =&gt; {
       if (tag.parentElement !== null &amp;&amp; !this.contains(document.activeElement)) {
         itemToFocusAfterDelete = undefined;
       }
     });
   }
-  
+
   /** @private */
   _onTagConnected(event) {
     event.stopImmediatePropagation();
-    
+
     const item = event.target;
     this._prepareItem(item);
   }
-  
+
   /**
    Inherited from {@link BaseFormField#reset}.
    */
@@ -934,7 +936,7 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
     // reset the values to the initial values
     this.values = this._initialValues;
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -946,28 +948,27 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
       &apos;color&apos;
     ]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // adds the role to support accessibility
     this.setAttribute(&apos;role&apos;, &apos;grid&apos;);
-  
+
     this.setAttribute(&apos;aria-live&apos;, &apos;off&apos;);
     this.setAttribute(&apos;aria-atomic&apos;, &apos;false&apos;);
     this.setAttribute(&apos;aria-relevant&apos;, &apos;additions&apos;);
-  
+
     // Since tagList can have multiple values, we have to store them all to be able to reset them
     if (this.hasAttribute(&apos;value&apos;)) {
       this._initialValues = [this.getAttribute(&apos;value&apos;)];
-    }
-    else {
+    } else {
       this._initialValues = this.items.getAll().map((item) =&gt; itemValueFromDOM(item));
     }
-    
+
     // Prepare items
     this.items.getAll().forEach((item) =&gt; {
       this._prepareItem(item);

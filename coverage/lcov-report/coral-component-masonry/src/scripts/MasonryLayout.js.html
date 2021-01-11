@@ -164,7 +164,8 @@
 <a name='L106'></a><a href='#L106'>106</a>
 <a name='L107'></a><a href='#L107'>107</a>
 <a name='L108'></a><a href='#L108'>108</a>
-<a name='L109'></a><a href='#L109'>109</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -198,10 +199,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">62x</span>
+<span class="cline-any cline-yes">67x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">62x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">67x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -269,8 +269,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">87x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
@@ -286,13 +288,13 @@
 &nbsp;
 /**
  Base class for masonry layouts.
- 
+&nbsp;
  Whenever a change is detected, the {@link Coral.Masonry.Layout#layout} method is called. This method must then
  ensure that all the items are positioned correctly.
- 
+&nbsp;
  Layout-specific keyboard support must be handled by adding event listeners to the masonry in the constructor. Such
  event listeners must be removed in the {@link Coral.Masonry.Layout#destroy} method.
- 
+&nbsp;
  @param masonry
  @class Coral.Masonry.Layout
  */
@@ -305,80 +307,81 @@ class MasonryLayout {
   constructor(masonry) {
     this._masonry = masonry;
   }
-  
+&nbsp;
   /**
    Layout name. Uses the constructor given name by default if defined.
-   
+&nbsp;
    @type {String}
    */
   get name() {
     return this._name || this.constructor._name;
   }
+&nbsp;
   set name(value) {
     this._name = value;
   }
-  
+&nbsp;
   /**
    Lays out the masonry items according to the implementation.
    */
-  layout() {
+  layout() {<span class="fstat-no" title="function not covered" ></span>
     // To override
-  }<span class="fstat-no" title="function not covered" ></span>
-  
+  }
+&nbsp;
   /**
    Removes all layout-specific attributes, style, data and event listeners from the masonry and its items.
    */
   destroy() {
-    // To override
+    // To override<span class="fstat-no" title="function not covered" ></span>
   }
-  <span class="fstat-no" title="function not covered" ></span>
+&nbsp;
   /**
    Removes the item from the control of the layout. This can be used to position the item differently,
    for example for drag&amp;drop.
-   
+&nbsp;
    @param {MasonryItem} item
    */
   // eslint-disable-next-line no-unused-vars
   detach(item) {
-    // To override
+    // To override<span class="fstat-no" title="function not covered" ></span>
   }
-  
-  /**<span class="fstat-no" title="function not covered" ></span>
+&nbsp;
+  /**
    Adds the item to the control of the layout again. The layout has to ensure that the item will be transitioned to
    its normal position flawlessly.
-   
+&nbsp;
    @param {MasonryItem} item
    */
   // eslint-disable-next-line no-unused-vars
   reattach(item) {
-    // To override
+    // To override<span class="fstat-no" title="function not covered" ></span>
   }
-  
+&nbsp;
   /**
-   Returns the item <span class="fstat-no" title="function not covered" >at the gi</span>ven position. The position coordinates are relative to the masonry.
-   
+   Returns the item at the given position. The position coordinates are relative to the masonry.
+&nbsp;
    If an item is being transitioned when this method is called, then it must choose the item based on the final
    instead of the current position.
-   
+&nbsp;
    @param {number} x
    @param {number} y
    @return {?Coral.Masonry.Item}
    */
   // eslint-disable-next-line no-unused-vars
-  itemAt(x, y) {
+  itemAt(x, y) {<span class="fstat-no" title="function not covered" ></span>
     // To override
   }
-  
+&nbsp;
   /**
    Defines the name of the Layout
-   <span class="fstat-no" title="function not covered" ></span>
+&nbsp;
    @param {String} name
    */
   static defineName(name) {
     this._name = name;
   }
-}
-&nbsp;
+}<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
 export default MasonryLayout;
 &nbsp;</pre></td></tr></table></pre>
 
@@ -387,7 +390,7 @@ export default MasonryLayout;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

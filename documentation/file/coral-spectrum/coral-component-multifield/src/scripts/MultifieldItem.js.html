@@ -452,7 +452,7 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Prepare templates
     this._elements = {
       // Create or fetch the content zones
@@ -464,21 +464,22 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
     this._elements.content.setAttribute(&apos;id&apos;, `${uid}-content`);
     item.call(this._elements, {i18n, uid});
   }
-  
+
   /**
    The item content.
-   
+
    @type {MultifieldItemContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone(&apos;content&apos;, value, {
       handle: &apos;content&apos;,
       tagName: &apos;coral-multifield-item-content&apos;,
-      insert: function(content) {
+      insert: function (content) {
         // Insert the content zone before the move and remove buttons
         this.insertBefore(content, this.firstChild);
       }
@@ -487,22 +488,22 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
 
   /**
    Whether the item is set to be reorder using the keyboard
-   
+
    @type {boolean}
    @private
    */
   get _dragging() {
     return this.__dragging || false;
   }
+
   set _dragging(value) {
     this.__dragging = transform.boolean(value);
     if (this.__dragging) {
-      // Setting role=&quot;application&quot; to the move button forces 
-      // NVDA and JAWS screen readers into forms mode, 
+      // Setting role=&quot;application&quot; to the move button forces
+      // NVDA and JAWS screen readers into forms mode,
       // so arrow keys can be used to reorder.
       this._elements.move.setAttribute(&apos;role&apos;, &apos;application&apos;);
-    }
-    else {
+    } else {
       // when reordering stops, restore the default role for the move button
       this._elements.move.removeAttribute(&apos;role&apos;);
     }
@@ -511,34 +512,36 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
     this._elements.move.setAttribute(&apos;aria-pressed&apos;, this.__dragging);
     this._elements.move.selected = this.__dragging;
   }
-  
-  get _contentZones() { return {&apos;coral-multifield-item-content&apos;: &apos;content&apos;}; }
-  
+
+  get _contentZones() {
+    return {&apos;coral-multifield-item-content&apos;: &apos;content&apos;};
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // a11y
     this.setAttribute(&apos;role&apos;, &apos;listitem&apos;);
-  
+
     // Create a fragment
     const fragment = document.createDocumentFragment();
-  
+
     const templateHandleNames = [&apos;move&apos;, &apos;remove&apos;];
-    
+
     // Render the main template
     fragment.appendChild(this._elements.remove);
     fragment.appendChild(this._elements.move);
-  
+
     const content = this._elements.content;
-  
+
     // Remove it so we can process children
     if (content.parentNode) {
       this.removeChild(content);
     }
-  
+
     // Process remaining elements as necessary
     while (this.firstChild) {
       const child = this.firstChild;
@@ -546,19 +549,18 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
         child.nodeType === Node.ELEMENT_NODE &amp;&amp; templateHandleNames.indexOf(child.getAttribute(&apos;handle&apos;)) === -1) {
         // Add non-template elements to the label
         content.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else
         this.removeChild(child);
       }
     }
-  
+
     // Add the frag to the component
     this.appendChild(fragment);
-  
+
     // Assign the content zones, moving them into place in the process
     this.content = content;
-  
+
     // Attach drag events
     const dragAction = new DragAction(this);
     dragAction.axis = &apos;vertical&apos;;

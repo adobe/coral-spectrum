@@ -251,7 +251,10 @@
 <a name='L193'></a><a href='#L193'>193</a>
 <a name='L194'></a><a href='#L194'>194</a>
 <a name='L195'></a><a href='#L195'>195</a>
-<a name='L196'></a><a href='#L196'>196</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L196'></a><a href='#L196'>196</a>
+<a name='L197'></a><a href='#L197'>197</a>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -380,7 +383,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1060x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -423,7 +425,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">382x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -445,8 +446,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">356x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">356x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">402x</span>
+<span class="cline-any cline-yes">402x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -479,15 +485,15 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Events
     this._delegateEvents(this._events);
-    
+&nbsp;
     // Templates
     this._elements = {};
     colorButton.call(this._elements);
   }
-  
+&nbsp;
   /**
    Whether the Item is selected.
    @type {Boolean}
@@ -498,31 +504,32 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   get selected() {
     return this._selected || false;
   }
+&nbsp;
   set selected(value) {
     value = transform.booleanAttr(value);
-    
+&nbsp;
     if (!value || value &amp;&amp; !this.disabled) {
       this._selected = value;
       this._reflectAttribute('selected', this.disabled ? false : this._selected);
       this.removeAttribute('aria-selected', this._selected);
-      
+&nbsp;
       this.classList.toggle('is-selected', this._selected);
       this._elements.colorButton.setAttribute('aria-selected', this._selected);
 &nbsp;
       this._elements.colorButton.tabIndex = this.tabIndex;
       this.removeAttribute('tabindex');
-  
+&nbsp;
       this._elements.colorButton[this._selected ? 'setAttribute' : 'removeAttribute']('aria-label',
         `${i18n.get('checked')} ${this._elements.colorButton.label.textContent}`);
-      
+&nbsp;
       this.trigger('coral-colorinput-swatch:_selectedchanged');
     }
   }
-  
+&nbsp;
   /**
    The Coral.ColorInput.Item that the swatch is a visual representation of. It accepts a DOM element or a CSS selector.
    If a CSS selector is provided, the first matching element will be used.
-   
+&nbsp;
    @type {HTMLElement|String}
    @default null
    @htmlattribute targetcolor
@@ -530,31 +537,31 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   get targetColor() {
     return this._targetColor || null;
   }
-  set targetColor(value) {
-    if (typeof value === 'string') {
-      <span class="missing-if-branch" title="if path not taken" >I</span>value = this.querySelector(value);
-    }<span class="cstat-no" title="statement not covered" ></span>
-  
+&nbsp;
+  set <span class="missing-if-branch" title="if path not taken" >I</span>targetColor(value) {
+    if (<span class="cstat-no" title="statement not covered" >typeof value === </span>'string') {
+      value = this.querySelector(value);
+    }
+&nbsp;
     // Store new value
     this._targetColor = value;
-  
+&nbsp;
     let cssColorValue = '';
     let hexColorValue = '';
-  
+&nbsp;
     if (this._targetColor) {
       const color = new Color();
       color.value = this._targetColor.value;
-      cssColorValue = color.rgbaValue;
+      <span class="missing-if-branch" title="else path not taken" >E</span>cssColorValue = color.rgbaValue;
       hexColorValue = color.hexValue;
-    }<span class="missing-if-branch" title="else path not taken" >E</span>
-  
+    }
+<span class="branch-0 cbranch-no" title="branch not covered" ></span>
     // Update background color and text label for color swatch
-    if (cssColorValue) {<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+    if (cssColorValue) {
       this._elements.colorButton.style.backgroundColor = cssColorValue;
       this._elements.colorButton.label.textContent = hexColorValue;
       this.setAttribute('data-value', hexColorValue);
-    }
-    else {
+    } else {
       this._elements.colorButton.classList.add('_coral-ColorInput-swatch-novalue');
       this._elements.colorButton.label.textContent = i18n.get('unset');
       this.setAttribute('data-value', '');
@@ -563,7 +570,7 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
 &nbsp;
   /**
    Whether the color preview is disabled or not.
-   
+&nbsp;
    @type {Boolean}
    @default false
    @htmlattribute disabled
@@ -572,30 +579,32 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   get disabled() {
     return this._elements.colorButton.disabled;
   }
+&nbsp;
   set disabled(value) {
     this._elements.colorButton.disabled = value;
     this._reflectAttribute('disabled', this.disabled);
   }
-&nbsp;
-  /**
-   The tabindex of the color preview button. 
-   So <span class="missing-if-branch" title="if path not taken" >I</span>that we don't wind up with nested focusable elements,
-   the i<span class="cstat-no" title="statement not covered" >nternal colorButton should should r</span>eceive the tabIndex property, 
+<span class="missing-if-branch" title="if path not taken" >I</span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
+   The tabindex of the color preview button.
+   So that we don't wind up with nested focusable elements,
+   the internal colorButton should should receive the tabIndex property,
    while the coral-colorinput-swatch should reflect the value using the _tabindex attribute.
-   
+&nbsp;
    @type {Integer}
    @default -1
-   @htmlattribute tabindex
+   @ht<span class="missing-if-branch" title="else path not taken" >E</span>mlattribute tabindex
    @htmlattributereflected
    */
-  get <span class="missing-if-branch" title="else path not taken" >E</span>tabIndex() {
+  get tabIndex() {
     return this._elements.colorButton.tabIndex;
   }
+&nbsp;
   set tabIndex(value) {
     this._elements.colorButton.tabIndex = value;
     this.removeAttribute('tabindex');
   }
-  
+&nbsp;
   /** @ignore */
   _onColorInputChange() {
     if (this.targetColor) {
@@ -603,39 +612,39 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
       this.selected = this.targetColor.selected;
     }
   }
-  
+&nbsp;
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       tabindex: 'tabIndex',
       targetcolor: 'targetColor'
     });
   }
-  
+&nbsp;
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'selected',
       'tabindex',
-      'disabled',
-      'targetcolor'
+      'disabled',<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      'targetcolor'</span>
     ]);
-  }
-  
-  /** @ignore */<span class="fstat-no" title="function not covered" ></span>
-  rend<span class="cstat-no" title="statement not covered" >er() {</span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /** @ignore */
+  render() {
     super.render();
-    <span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
     this.classList.add(CLASSNAME, 'u-coral-clearFix');
-    
+&nbsp;
     // adds the role to support accessibility
     this.setAttribute('role', 'presentation');
-    
+&nbsp;
     // Support cloneNode
     const button = this.querySelector('[handle="colorButton"]');
     if (button) {
       button.remove();
     }
-  
+&nbsp;
     this.appendChild(this._elements.colorButton);
   }
 }
@@ -648,7 +657,7 @@ export default ColorInputSwatch;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

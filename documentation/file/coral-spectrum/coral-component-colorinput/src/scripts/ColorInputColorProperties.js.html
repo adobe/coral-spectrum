@@ -455,7 +455,7 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
   /** @ignore */
   constructor() {
     super();
-    
+
     this._delegateEvents(commons.extend(this._events, {
       &apos;change [handle=&quot;redSlider&quot;]&apos;: &apos;_onRedSliderChange&apos;,
       &apos;change [handle=&quot;greenSlider&quot;]&apos;: &apos;_onGreenSliderChange&apos;,
@@ -464,117 +464,114 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
       &apos;change ._coral-ColorInput-editHex&apos;: &apos;_onChangeHex&apos;,
       &apos;change ._coral-ColorInput-editRgba&apos;: &apos;_onChangeRgba&apos;
     }));
-    
+
     // Templates
     this._elements = {};
     propertiesSubview.call(this._elements, {commons, i18n});
   }
-  
+
   /** @ignore */
   _onColorInputChange() {
     const newColor = this._colorinput.valueAsColor;
     const colorPreview = this._elements.colorPreview2;
     let rgba;
-  
+
     if (!newColor) {
       // update the colorPreview background color, state, and label
       colorPreview.setAttribute(&apos;aria-pressed&apos;, &apos;true&apos;);
       colorPreview.setAttribute(&apos;aria-label&apos;, i18n.get(&apos;Color not set&apos;));
-    
+
       // reset Hex value to empty
       this._elements.hexInput.value = &apos;&apos;;
-    }
-    else {
+    } else {
       rgba = newColor.rgba;
-    
+
       // update the colorPreview background color, state, and label
       colorPreview.style.backgroundColor = newColor.rgbValue;
       colorPreview.setAttribute(&apos;aria-pressed&apos;, &apos;false&apos;);
       colorPreview.setAttribute(&apos;aria-label&apos;, i18n.get(&apos;{value}, Color&apos;, {
         value: parseFloat(rgba.a) === 1 ? newColor.value : newColor.rgbaValue
       }));
-    
+
       // update the Hex input value
       this._elements.hexInput.value = newColor.hexValue.substr(1);
     }
-  
+
     const prefixes = [&apos;red&apos;, &apos;green&apos;, &apos;blue&apos;, &apos;alpha&apos;];
     const prefixesLength = prefixes.length;
     let prefix;
     let abbr;
     let isAlpha;
     let val;
-  
+
     // update rgba slider and input values
-    for (let i = 0; i &lt; prefixesLength; i++) {
+    for (let i = 0 ; i &lt; prefixesLength ; i++) {
       prefix = prefixes[i];
       abbr = prefix.substr(0, 1);
       isAlpha = i === prefixesLength - 1;
-    
+
       // default slider and input value
       val = isAlpha ? 100 : 127;
-    
+
       // with new color, get appropriate RGBA value
       if (newColor) {
         if (!rgba) {
           val = &apos;&apos;;
-        }
-        else if (isAlpha) {
+        } else if (isAlpha) {
           val = parseInt(rgba[abbr] * 100, 10);
-        }
-        else {
+        } else {
           val = rgba[abbr];
         }
       }
-    
+
       // update the slider and input values
       this._elements[`${prefix}Slider`].value = this._elements[`${prefix}Input`].value = val;
     }
-  
+
     if (colorPreview === document.activeElement) {
       // force blur and focus on colorButton so that new color or state is announced
       colorPreview.blur();
-    
+
       // delay focus by 100ms so that screen reader has time to adjust to label with updated color value
       window.setTimeout(() =&gt; {
         colorPreview.focus();
       }, 100);
     }
   }
-  
+
   /** @ignore */
   _onRedSliderChange(event) {
     this._elements.redInput.value = this._elements.redSlider.value;
     this._onChangeRgba(event);
   }
-  
+
   /** @ignore */
   _onGreenSliderChange(event) {
     this._elements.greenInput.value = this._elements.greenSlider.value;
     this._onChangeRgba(event);
   }
-  
+
   /** @ignore */
   _onBlueSliderChange(event) {
     this._elements.blueInput.value = this._elements.blueSlider.value;
     this._onChangeRgba(event);
   }
-  
+
   /** @ignore */
   _onAlphaSliderChange(event) {
     this._elements.alphaInput.value = this._elements.alphaSlider.value;
     this._onChangeRgba(event);
   }
-  
+
   /** @ignore */
   _onChangeHex(event) {
     event.stopPropagation();
-  
+
     // Value of hexInput field is without &apos;#&apos;.
     const value = `#${this._elements.hexInput.value}`;
     const color = new Color();
     color.value = value;
-    
+
     if (color.hex === null) {
       // no valid color value
       this._elements.hexInput.value = &apos;&apos;;
@@ -583,42 +580,41 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
         this.constructor._lastValidColor = this._colorinput.valueAsColor;
       }
       this._colorinput._setActiveColor(null);
-    }
-    else {
+    } else {
       this._colorinput._setActiveColor(color);
     }
   }
-  
+
   /** @ignore */
   _onChangeRgba(event) {
     event.stopPropagation();
-    
+
     const r = parseInt(this._elements.redInput.value, 10);
     const g = parseInt(this._elements.greenInput.value, 10);
     const b = parseInt(this._elements.blueInput.value, 10);
     const a = parseInt(this._elements.alphaInput.value, 10);
-    
+
     let colorValid = true;
     if (isNaN(r) || r &lt; 0 || r &gt; 255) {
       colorValid = false;
       this._elements.redInput.value = &apos;&apos;;
     }
-    
+
     if (isNaN(g) || g &lt; 0 || g &gt; 255) {
       colorValid = false;
       this._elements.greenInput.value = &apos;&apos;;
     }
-    
+
     if (isNaN(b) || b &lt; 0 || b &gt; 255) {
       colorValid = false;
       this._elements.blueInput.value = &apos;&apos;;
     }
-    
+
     if (isNaN(a) || a &lt; 0 || a &gt; 100) {
       colorValid = false;
       this._elements.alphaInput.value = &apos;&apos;;
     }
-    
+
     if (colorValid) {
       const color = new Color();
       color.rgba = {
@@ -630,19 +626,19 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
       this._colorinput._setActiveColor(color);
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Support cloneNode
     const subview = this.querySelector(&apos;._coral-ColorInput-propertiesSubview&apos;);
     if (subview) {
       subview.remove();
     }
-    
+
     this.appendChild(this._elements.propertiesSubview);
   }
 }

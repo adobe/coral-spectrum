@@ -439,11 +439,11 @@ import getTarget from &apos;./getTarget&apos;;
 
 /**
  Enumeration for {@link StepList} interaction options.
- 
+
  @todo support &quot;click only past steps&quot; mode
- 
+
  @typedef {Object} StepListInteractionEnum
- 
+
  @property {String} ON
  Steps can be clicked to visit them.
  @property {String} OFF
@@ -456,9 +456,9 @@ const interaction = {
 
 /**
  Enumeration for {@link StepList} sizes.
- 
+
  @typedef {Object} StepListSizeEnum
- 
+
  @property {String} SMALL
  A small-sized StepList.
  @property {String} LARGE
@@ -483,15 +483,15 @@ class StepList extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     this._delegateEvents({
       &apos;click &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_onStepClick&apos;,
-  
+
       &apos;capture:focus &gt; coral-step&apos;: &apos;_onStepMouseEnter&apos;,
       &apos;capture:mouseenter &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_onStepMouseEnter&apos;,
       &apos;capture:blur &gt; coral-step&apos;: &apos;_onStepMouseLeave&apos;,
       &apos;capture:mouseleave &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_onStepMouseLeave&apos;,
-  
+
       &apos;key:enter &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_onStepKeyboardSelect&apos;,
       &apos;key:space &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_onStepKeyboardSelect&apos;,
       &apos;key:home &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_onHomeKey&apos;,
@@ -502,21 +502,21 @@ class StepList extends BaseComponent(HTMLElement) {
       &apos;key:pageup &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_selectPreviousItem&apos;,
       &apos;key:left &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_selectPreviousItem&apos;,
       &apos;key:up &gt; coral-step &gt; [handle=&quot;link&quot;]&apos;: &apos;_selectPreviousItem&apos;,
-      
+
       // private
       &apos;coral-step:_selectedchanged&apos;: &apos;_onItemSelectedChanged&apos;
     });
-  
+
     // Used for eventing
     this._oldSelection = null;
-    
+
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
   }
-  
+
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+
    @type {SelectableCollection}
    @readonly
    */
@@ -530,25 +530,25 @@ class StepList extends BaseComponent(HTMLElement) {
         onItemRemoved: this._validateSelection
       });
     }
-    
+
     return this._items;
   }
-  
+
   /**
    Returns the selected step.
-   
+
    @type {HTMLElement}
    @readonly
    */
   get selectedItem() {
     return this.items._getLastSelected();
   }
-  
+
   /**
    The target component that will be linked to the StepList. It accepts either a CSS selector or a DOM element. If
    a CSS Selector is provided, the first matching element will be used. Items will be selected based on the index.
    If both target and {@link Coral.Step#target} are set, the second will have higher priority.
-   
+
    @type {?HTMLElement|String}
    @default null
    @htmlattribute target
@@ -556,28 +556,29 @@ class StepList extends BaseComponent(HTMLElement) {
   get target() {
     return this._target || null;
   }
+
   set target(value) {
     if (value === null || typeof value === &apos;string&apos; || value instanceof Node) {
       this._target = value;
-      
+
       // we do this in the sync in case the target was not yet in the DOM
       window.requestAnimationFrame(() =&gt; {
         const realTarget = getTarget(this._target);
-  
+
         // we add proper accessibility if available
         if (realTarget) {
           const stepItems = this.items.getAll();
           const panelItems = realTarget.items ? realTarget.items.getAll() : realTarget.children;
-    
+
           // we need to add a11y to all components, regardless of whether they can be perfectly paired
           const maxItems = Math.max(stepItems.length, panelItems.length);
-    
+
           let step;
           let panel;
-          for (let i = 0; i &lt; maxItems; i++) {
+          for (let i = 0 ; i &lt; maxItems ; i++) {
             step = stepItems[i];
             panel = panelItems[i];
-      
+
             // if the step has its own target, we assume the target component will handle its own accessibility.
             // if the target is an empty string we simply ignore it
             if (step &amp;&amp; step.target &amp;&amp; step.target.trim() !== &apos;&apos;) {
@@ -587,21 +588,19 @@ class StepList extends BaseComponent(HTMLElement) {
             if (panel) {
               panel.setAttribute(&apos;role&apos;, &apos;region&apos;);
             }
-      
+
             if (step &amp;&amp; panel) {
               // sets the required ids
               step.id = step.id || commons.getUID();
               panel.id = panel.id || commons.getUID();
-        
+
               // creates a 2 way binding for accessibility
               step.setAttribute(&apos;aria-controls&apos;, panel.id);
               panel.setAttribute(&apos;aria-labelledby&apos;, step.id);
-            }
-            else if (step) {
+            } else if (step) {
               // cleans the aria since there is no matching panel
               step.removeAttribute(&apos;aria-controls&apos;);
-            }
-            else {
+            } else {
               // cleans the aria since there is no matching Step
               panel.removeAttribute(&apos;aria-labelledby&apos;);
             }
@@ -610,12 +609,12 @@ class StepList extends BaseComponent(HTMLElement) {
       });
     }
   }
-  
+
   /**
    The size of the StepList. It accepts both lower and upper case sizes. Currently only &quot;S&quot; and &quot;L&quot; (the default)
    are available.
    See {@link StepListSizeEnum}.
-   
+
    @type {String}
    @default StepListSizeEnum.LARGE
    @htmlattribute size
@@ -624,11 +623,12 @@ class StepList extends BaseComponent(HTMLElement) {
   get size() {
     return this._size || size.LARGE;
   }
+
   set size(value) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) &amp;&amp; value || size.LARGE;
     this._reflectAttribute(&apos;size&apos;, this._size);
-  
+
     this.classList.toggle(`${CLASSNAME}--small`, this._size === size.SMALL);
 
     if (!this.items.length) {
@@ -641,7 +641,7 @@ class StepList extends BaseComponent(HTMLElement) {
       const steps = this.items.getAll();
       const stepsCount = steps.length;
 
-      for (let i = 0; i &lt; stepsCount; i++) {
+      for (let i = 0 ; i &lt; stepsCount ; i++) {
         const step = steps[i];
         const label = step._elements.label;
         if (!step.labelled &amp;&amp; label.textContent.length) {
@@ -655,16 +655,15 @@ class StepList extends BaseComponent(HTMLElement) {
 
     if (typeof lastItem._syncTabIndex === &apos;function&apos;) {
       _syncItemLabelled();
-    }
-    else {
+    } else {
       commons.ready(lastItem, _syncItemLabelled);
     }
   }
-  
+
   /**
    Whether Steps should be interactive or not. When interactive, a Step can be clicked to jump to it.
    See {@link StepListInteractionEnum}.
-   
+
    @type {String}
    @default StepListInteractionEnum.OFF
    @htmlattribute interaction
@@ -673,24 +672,25 @@ class StepList extends BaseComponent(HTMLElement) {
   get interaction() {
     return this._interaction || interaction.OFF;
   }
+
   set interaction(value) {
     value = transform.string(value).toLowerCase();
     this._interaction = validate.enumeration(interaction)(value) &amp;&amp; value || interaction.OFF;
     this._reflectAttribute(&apos;interaction&apos;, this._interaction);
-  
+
     const isInteractive = this._interaction === interaction.ON;
     this.classList.toggle(`${CLASSNAME}--interactive`, isInteractive);
 
     if (!this.items.length) {
       return;
     }
-  
+
     // update tab index for all children
     const _syncItemProps = () =&gt; {
       const steps = this.items.getAll();
       const stepsCount = steps.length;
 
-      for (let i = 0; i &lt; stepsCount; i++) {
+      for (let i = 0 ; i &lt; stepsCount ; i++) {
         // update tab index for all children
         steps[i]._syncTabIndex(isInteractive);
         //update posin set and total size for all steps
@@ -702,38 +702,37 @@ class StepList extends BaseComponent(HTMLElement) {
 
     if (typeof lastItem._syncTabIndex === &apos;function&apos;) {
       _syncItemProps();
-    }
-    else {
+    } else {
       commons.ready(lastItem, _syncItemProps);
     }
   }
-  
+
   /** @private */
   _syncItemTabIndex(item) {
     item._syncTabIndex(this.interaction === interaction.ON);
   }
-  
+
   /** @private */
   _onItemSelectedChanged(event) {
     event.stopImmediatePropagation();
-  
+
     const item = event.target;
-    
+
     this._syncItemTabIndex(item);
     this._validateSelection(item);
   }
-  
+
   /** @private */
   _validateSelection(item) {
     // gets the current selection
     const selection = this.items._getAllSelected();
     const selectionCount = selection.length;
-    
+
     // if no item is currently selected, we need to find a candidate
     if (selectionCount === 0) {
       // gets the first candidate for selection
       const selectable = this.items._getFirstSelectable();
-      
+
       if (selectable) {
         selectable.setAttribute(&apos;selected&apos;, &apos;&apos;);
       }
@@ -742,40 +741,40 @@ class StepList extends BaseComponent(HTMLElement) {
     else if (selectionCount &gt; 1) {
       // By default, the last one stays selected
       item = item || selection[selection.length - 1];
-      
-      for (let i = 0; i &lt; selectionCount; i++) {
+
+      for (let i = 0 ; i &lt; selectionCount ; i++) {
         if (selection[i] !== item) {
           // Don&apos;t trigger change events
           this._preventTriggeringEvents = true;
           selection[i].removeAttribute(&apos;selected&apos;);
         }
       }
-  
+
       // We can trigger change events again
       this._preventTriggeringEvents = false;
     }
-  
+
     // sets the state-related classes every time the selection changes
     this._setStateClasses();
-  
+
     this._triggerChangeEvent();
   }
-  
+
   /** @private */
   _triggerChangeEvent() {
     const selectedItem = this.selectedItem;
     const oldSelection = this._oldSelection;
-    
+
     if (!this._preventTriggeringEvents &amp;&amp; selectedItem !== oldSelection) {
       this.trigger(&apos;coral-steplist:change&apos;, {
         oldSelection: oldSelection,
         selection: selectedItem
       });
-      
+
       this._oldSelection = selectedItem;
     }
   }
-  
+
   /** @private */
   _setStateClasses() {
     let selectedItemIndex = Infinity;
@@ -785,7 +784,7 @@ class StepList extends BaseComponent(HTMLElement) {
         // Mark which one is selected
         selectedItemIndex = index;
       }
-    
+
       // Add/remove classes based on index
       item.classList.toggle(&apos;is-complete&apos;, index &lt; selectedItemIndex);
 
@@ -798,34 +797,33 @@ class StepList extends BaseComponent(HTMLElement) {
 
       if (index &lt; selectedItemIndex) {
         accessibilityLabel = i18n.get(&apos;completed: &apos;);
-      }
-      else if (index === selectedItemIndex) {
+      } else if (index === selectedItemIndex) {
         accessibilityLabel = i18n.get(&apos;current: &apos;);
       }
 
       item._elements.accessibilityLabel.innerHTML = accessibilityLabel;
     });
   }
-  
+
   /** @private */
   _onStepKeyboardSelect(event) {
     if (this.interaction === interaction.ON) {
       event.preventDefault();
       event.stopPropagation();
-      
+
       const item = event.matchedTarget.closest(&apos;coral-step&apos;);
       this._selectAndFocusItem(item);
 
       this._trackEvent(&apos;click&apos;, &apos;coral-steplist-item&apos;, event, item);
     }
   }
-  
+
   /** @private */
   _onStepClick(event) {
     if (this.interaction === interaction.ON) {
       event.preventDefault();
       event.stopPropagation();
-      
+
       const item = event.matchedTarget.closest(&apos;coral-step&apos;);
 
       // Disabled item should not get selected
@@ -834,11 +832,11 @@ class StepList extends BaseComponent(HTMLElement) {
       }
 
       this._selectAndFocusItem(item);
-  
+
       this._trackEvent(&apos;click&apos;, &apos;coral-steplist-item&apos;, event, item);
     }
   }
-  
+
   /** @private */
   _onStepMouseEnter() {
     if (this.size === size.SMALL) {
@@ -851,7 +849,7 @@ class StepList extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /** @private */
   _onStepMouseLeave(event) {
     if (this.size === size.SMALL) {
@@ -859,45 +857,45 @@ class StepList extends BaseComponent(HTMLElement) {
       step._elements.overlay.open = false;
     }
   }
-  
+
   /** @private */
   _onHomeKey(event) {
     if (this.interaction === interaction.ON) {
       event.preventDefault();
-      
+
       const item = this.items._getFirstSelectable();
       this._selectAndFocusItem(item);
     }
   }
-  
+
   /** @private */
   _onEndKey(event) {
     if (this.interaction === interaction.ON) {
       event.preventDefault();
-    
+
       const item = this.items._getLastSelectable();
       this._selectAndFocusItem(item);
     }
   }
-  
+
   /** @private */
   _selectNextItem(event) {
     if (this.interaction === interaction.ON) {
       event.preventDefault();
-    
+
       this.next();
     }
   }
-  
+
   /** @private */
   _selectPreviousItem(event) {
     if (this.interaction === interaction.ON) {
       event.preventDefault();
-    
+
       this.previous();
     }
   }
-  
+
   /** @private */
   _selectAndFocusItem(item) {
     if (item) {
@@ -905,10 +903,10 @@ class StepList extends BaseComponent(HTMLElement) {
       item.focus();
     }
   }
-  
+
   /**
    Show the next Step.
-   
+
    @emits {coral-steplist:change}
    */
   next() {
@@ -918,10 +916,10 @@ class StepList extends BaseComponent(HTMLElement) {
       this._selectAndFocusItem(item);
     }
   }
-  
+
   /**
    Show the previous Step.
-   
+
    @emits {coral-steplist:change}
    */
   previous() {
@@ -931,34 +929,44 @@ class StepList extends BaseComponent(HTMLElement) {
       this._selectAndFocusItem(item);
     }
   }
-  
+
   /**
    Returns {@link StepList} sizes.
-   
+
    @return {StepListSizeEnum}
    */
-  static get size() { return size; }
-  
+  static get size() {
+    return size;
+  }
+
   /**
    Returns {@link StepList} interaction options.
-   
+
    @return {StepListInteractionEnum}
    */
-  static get interaction() { return interaction; }
-  
+  static get interaction() {
+    return interaction;
+  }
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat([&apos;target&apos;, &apos;size&apos;, &apos;interaction&apos;]); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat([&apos;target&apos;, &apos;size&apos;, &apos;interaction&apos;]);
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // Default reflected attributes
-    if (!this._interaction) { this.interaction = interaction.OFF; }
-    if (!this._size) { this.size = size.LARGE; }
-    
+    if (!this._interaction) {
+      this.interaction = interaction.OFF;
+    }
+    if (!this._size) {
+      this.size = size.LARGE;
+    }
+
     // A11y
     this.setAttribute(&apos;role&apos;, &apos;list&apos;);
 
@@ -966,20 +974,20 @@ class StepList extends BaseComponent(HTMLElement) {
     if (!this.hasAttribute(&apos;aria-label&apos;) &amp;&amp; !this.hasAttribute(&apos;aria-labelledby&apos;)) {
       this.setAttribute(&apos;aria-label&apos;, i18n.get(&apos;Step List&apos;));
     }
-  
+
     // Don&apos;t trigger events once connected
     this._preventTriggeringEvents = true;
     this._validateSelection();
     this._preventTriggeringEvents = false;
-  
+
     this._oldSelection = this.selectedItem;
   }
-  
+
   /**
    Triggered when the {@link StepList} selected {@link Step} has changed.
-   
+
    @typedef {CustomEvent} coral-steplist:change
-   
+
    @property {Step} detail.selection
    The newly selected Step.
    @property {Step} detail.oldSelection

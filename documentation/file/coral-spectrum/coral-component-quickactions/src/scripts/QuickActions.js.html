@@ -447,9 +447,9 @@ const BUTTON_FOCUSABLE_SELECTOR = &apos;._coral-QuickActions-item:not([disabled]
 
 /**
  Enumeration for {@link QuickActions} interaction options.
- 
+
  @typedef {Object} QuickActionsInteractionEnum
- 
+
  @property {String} ON
  Show when the target is hovered or focused and hide when the mouse is moved out or focus is lost.
  @property {String} OFF
@@ -462,9 +462,9 @@ const interaction = {
 
 /**
  Enumeration for {@link QuickActions} anchored overlay target options.
- 
+
  @typedef {Object} QuickActionsTargetEnum
- 
+
  @property {String} PARENT
  Use the parent element in the DOM.
  @property {String} PREVIOUS
@@ -480,9 +480,9 @@ const target = {
 
 /**
  Enumeration for {@link QuickActions} placement options.
- 
+
  @typedef {Object} QuickActionsPlacementEnum
- 
+
  @property {String} TOP
  QuickActions inset to the top of the target.
  @property {String} CENTER
@@ -512,7 +512,7 @@ class QuickActions extends Overlay {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Override defaults
     this._overlayAnimationTime = Overlay.FADETIME;
     this._alignMy = Overlay.align.CENTER_TOP;
@@ -527,16 +527,16 @@ class QuickActions extends Overlay {
     if (!this.id) {
       this.id = commons.getUID();
     }
-  
+
     // Flag
     this._openedBefore = false;
-  
+
     // Debounce timer
     this._timeout = null;
-    
+
     // Template
     base.call(this._elements, {commons, i18n});
-  
+
     const events = {
       &apos;global:resize&apos;: &apos;_onWindowResize&apos;,
       &apos;mouseout&apos;: &apos;_onMouseOut&apos;,
@@ -553,20 +553,20 @@ class QuickActions extends Overlay {
 
       &apos;capture:focus&apos;: &apos;_onFocus&apos;,
       &apos;capture:blur&apos;: &apos;_onBlur&apos;,
-    
+
       // Buttons
       &apos;click &gt; ._coral-QuickActions-item:not([handle=&quot;moreButton&quot;])&apos;: &apos;_onButtonClick&apos;,
       &apos;click &gt; ._coral-QuickActions-item[handle=&quot;moreButton&quot;]&apos;: &apos;_onMoreButtonClick&apos;,
-    
+
       // Items
       &apos;coral-quickactions-item:_contentchanged&apos;: &apos;_onItemChange&apos;,
       &apos;coral-quickactions-item:_iconchanged&apos;: &apos;_onItemChange&apos;,
       &apos;coral-quickactions-item:_hrefchanged&apos;: &apos;_onItemChange&apos;,
       &apos;coral-quickactions-item:_typechanged&apos;: &apos;_onItemTypeChange&apos;
     };
-  
+
     const overlayId = this._elements.overlay.id;
-    
+
     // Overlay
     events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = &apos;_onOverlayBeforeOpen&apos;;
     events[`global:capture:coral-overlay:beforeclose #${overlayId}`] = &apos;_onOverlayBeforeClose&apos;;
@@ -576,32 +576,32 @@ class QuickActions extends Overlay {
     events[`global:capture:coral-overlay:_animate #${overlayId}`] = &apos;_onAnimate&apos;;
     events[`global:capture:mouseout #${overlayId}`] = &apos;_onMouseOut&apos;;
     events[`global:capture:click #${overlayId} [coral-list-item]`] = &apos;_onButtonListItemClick&apos;;
-  
+
     // Cache bound event handler functions
     this._onTargetMouseEnter = this._onTargetMouseEnter.bind(this);
     this._onTargetKeyUp = this._onTargetKeyUp.bind(this);
     this._onTargetMouseLeave = this._onTargetMouseLeave.bind(this);
-  
+
     // Events
     this._delegateEvents(events);
-  
+
     // delegates the item handling to the collection
     this.items._startHandlingItems(true);
   }
-  
+
   /**
    Returns the inner overlay to allow customization.
-   
+
    @type {Popover}
    @readonly
    */
   get overlay() {
     return this._elements.overlay;
   }
-  
+
   /**
    The Item collection.
-   
+
    @type {Collection}
    @readonly
    */
@@ -615,15 +615,15 @@ class QuickActions extends Overlay {
         onCollectionChange: this._onCollectionChange
       });
     }
-  
+
     return this._items;
   }
-  
+
   /**
    The number of items that are visible in QuickActions (excluding the show more actions button) before a collapse
    is enforced. A value &lt;= 0 disables this feature and shows as many items as possible. Regardless of this
    property, the QuickActions will still fit within their target&apos;s width.
-   
+
    @type {Number}
    @default 4
    @htmlattribute threshold
@@ -632,16 +632,17 @@ class QuickActions extends Overlay {
   get threshold() {
     return typeof this._threshold === &apos;number&apos; ? this._threshold : 4;
   }
+
   set threshold(value) {
     this._threshold = transform.number(value);
     this._reflectAttribute(&apos;threshold&apos;, this._threshold);
   }
-  
+
   /**
    The placement of the QuickActions. The value may be one of &apos;top&apos;, &apos;center&apos; and &apos;bottom&apos; and indicates the vertical
    alignment of the QuickActions relative to their container.
    See {@link OverlayPlacementEnum}.
-   
+
    @type {String}
    @default OverlayPlacementEnum.TOP
    @htmlattribute placement
@@ -649,16 +650,17 @@ class QuickActions extends Overlay {
   get placement() {
     return super.placement;
   }
+
   set placement(value) {
     value = transform.string(value).toLowerCase();
     this._placement = validate.enumeration(placement)(value) &amp;&amp; value || placement.TOP;
-    
+
     this.reposition();
   }
-  
+
   /**
    Whether the QuickActions should show when the target is interacted with. See {@link QuickActionsInteractionEnum}.
-   
+
    @type {String}
    @default QuickActionsInteractionEnum.ON
    @name interaction
@@ -667,29 +669,30 @@ class QuickActions extends Overlay {
   get interaction() {
     return super.interaction;
   }
+
   set interaction(value) {
     super.interaction = value;
-  
+
     if (this.interaction === interaction.ON) {
       this._addTargetEventListeners();
-    }
-    else {
+    } else {
       this._removeTargetEventListeners();
     }
   }
-  
+
   /**
    Inherited from {@link Overlay#target}.
    */
   get target() {
     return super.target;
   }
+
   set target(value) {
     super.target = value;
-  
+
     const targetElement = this._getTarget(value);
     const targetHasChanged = targetElement !== this._previousTarget;
-  
+
     if (targetElement &amp;&amp; targetHasChanged) {
       // Remove listeners from the previous target
       if (this._previousTarget) {
@@ -714,41 +717,42 @@ class QuickActions extends Overlay {
       this._previousTarget = targetElement;
     }
   }
-  
+
   /**
    Inherited from {@link Overlay#open}.
    */
   get open() {
     return super.open;
   }
+
   set open(value) {
-    // If opening and stealing focus, on close, focus should be returned 
+    // If opening and stealing focus, on close, focus should be returned
     // to the element that had focus before QuickActions were opened.
-    if (value &amp;&amp; 
+    if (value &amp;&amp;
       this._focusOnShow !== this.constructor.focusOnShow.OFF) {
       this.returnFocusTo(document.activeElement);
     }
 
     super.open = value;
-    
+
     this._openedOnce = true;
-    
+
     // Position once we can read items layout in the next frame
     window.requestAnimationFrame(() =&gt; {
       if (this.open &amp;&amp; !this._openedBefore) {
         // we iterate over all the items initializing them in the correct order
         const items = this.items.getAll();
-        for (let i = 0, itemCount = items.length; i &lt; itemCount; i++) {
+        for (let i = 0, itemCount = items.length ; i &lt; itemCount ; i++) {
           this._attachItem(items[i], i);
         }
-  
+
         this._openedBefore = true;
       }
-  
+
       if (this.open) {
         this._layout();
       }
-  
+
       // we toggle &quot;is-selected&quot; on the target to indicate that the over is open
       const targetElement = this._getTarget();
       if (targetElement) {
@@ -756,51 +760,49 @@ class QuickActions extends Overlay {
       }
     });
   }
-  
+
   _getButtonWidth() {
     if (this.closest(&apos;.coral--large&apos;)) {
       // 40px button width + 10px left margin
       return 50;
-    }
-    else {
+    } else {
       // 32px button width + 8px left margin
       return 40;
     }
   }
-  
+
   /** @ignore */
   _getTarget(targetValue) {
     // Use passed target
     targetValue = targetValue || this.target;
-    
+
     if (targetValue instanceof Node) {
       // Just return the provided Node
       return targetValue;
     }
-    
+
     // Dynamically get the target node based on target
     let newTarget = null;
     if (typeof targetValue === &apos;string&apos;) {
       if (targetValue === target.PARENT) {
         newTarget = this.parentNode;
-      }
-      else {
+      } else {
         // Delegate to Coral.Overlay for _prev, _next and general selector
         newTarget = super._getTarget(targetValue);
       }
     }
-    
+
     return newTarget;
   }
-  
+
   /** @ignore */
   _addTargetEventListeners(targetElement) {
     targetElement = targetElement || this._getTarget();
-    
+
     if (!targetElement) {
       return;
     }
-    
+
     // Interaction-sensitive listeners
     if (this.interaction === interaction.ON) {
       // We do not have to worry about the EventListener being called twice as duplicates are discarded
@@ -810,27 +812,27 @@ class QuickActions extends Overlay {
       targetElement.addEventListener(&apos;mouseleave&apos;, this._onTargetMouseLeave);
     }
   }
-  
+
   /** @ignore */
   _removeTargetEventListeners(targetElement) {
     targetElement = targetElement || this._getTarget();
-    
+
     if (!targetElement) {
       return;
     }
-    
+
     targetElement.removeEventListener(&apos;mouseenter&apos;, this._onTargetMouseEnter);
     targetElement.removeEventListener(&apos;keyup&apos;, this._onTargetKeyUp);
     targetElement.removeEventListener(&apos;keydown&apos;, this._onTargetKeyDown);
     targetElement.removeEventListener(&apos;mouseleave&apos;, this._onTargetMouseLeave);
   }
-  
+
   /**
    Toggles whether or not an item is tabbable.
-   
+
    @param {HTMLElement} item
    The item to process.
-   
+
    @param {Boolean} tabbable
    Whether the item should be marked tabbable.
    @ignore
@@ -841,30 +843,29 @@ class QuickActions extends Overlay {
         if (item.hasAttribute(&apos;tabIndex&apos;)) {
           item.removeAttribute(&apos;tabIndex&apos;);
         }
-      }
-      else {
+      } else {
         item.setAttribute(&apos;tabIndex&apos;, &apos;-1&apos;);
       }
     }
   }
-  
+
   /**
    Gets the subsequent or previous focusable neighbour relative to an Item button.
-   
+
    @param {HTMLElement} current
    The current button element from which to find the next selectable neighbour.
    @param {Boolean} [previous]
    Whether to look for a previous neighbour rather than a subsequent one.
-   
+
    @returns {HTMLElement|undefined} The focusable neighbour. Undefined if no suitable neighbour found.
-   
+
    @private
    */
   _getFocusableNeighbour(current, previous) {
     // we need to convert the result to an array in order to use .indexOf()
     const focusableButtons = Array.prototype.slice.call(this._getFocusableButtons());
     const index = focusableButtons.indexOf(current);
-    
+
     if (index &gt;= 0) {
       if (!previous) {
         // Pick the next focusable button
@@ -878,29 +879,29 @@ class QuickActions extends Overlay {
       }
     }
   }
-  
+
   /**
    Gets the buttons, optionally excluding the more button.
-   
+
    @param {Boolean} excludeMore
    Whether to exclude the more button.
-   
+
    @returns {NodeList} The NodeList containing all the buttons.
-   
+
    @private
    */
   _getButtons(excludeMore) {
     let buttonSelector = &apos;._coral-QuickActions-item&apos;;
     buttonSelector = excludeMore ? `${buttonSelector}:not([handle=&quot;moreButton&quot;])` : buttonSelector;
-    
+
     return this.querySelectorAll(buttonSelector);
   }
-  
+
   /**
    An element is focusable if it is visible and not disabled.
-   
+
    @returns {NodeList} A NodeList containing the focusable buttons.
-   
+
    @private
    */
   _getFocusableButtons() {
@@ -908,10 +909,10 @@ class QuickActions extends Overlay {
     // is hidden, instead of using a more expensive :focusable selector
     return this.querySelectorAll(BUTTON_FOCUSABLE_SELECTOR);
   }
-  
+
   /**
    Gets the first focusable button.
-   
+
    @returns {HTMLElement|undefined}
    The first focusable button, undefined if none found.
    @ignore
@@ -919,10 +920,10 @@ class QuickActions extends Overlay {
   _getFirstFocusableButton() {
     return this.querySelector(BUTTON_FOCUSABLE_SELECTOR);
   }
-  
+
   /**
    Gets the last focusable button.
-   
+
    @returns {HTMLElement|undefined}
    The last focusable button, undefined if none found.
    @ignore
@@ -931,19 +932,19 @@ class QuickActions extends Overlay {
     const focusableButtons = this._getFocusableButtons();
     return focusableButtons[focusableButtons.length - 1];
   }
-  
+
   /** @ignore */
   _proxyClick(item) {
     const event = item.trigger(&apos;click&apos;);
-    
+
     if (!event.defaultPrevented &amp;&amp; this.interaction === interaction.ON) {
       this._hideAll();
     }
   }
-  
+
   /**
    Gets data from an Item.
-   
+
    @param {HTMLElement} item
    The Item to get the data from.
    @returns {Object}
@@ -958,7 +959,7 @@ class QuickActions extends Overlay {
       icon: item.getAttribute(&apos;icon&apos;) || &apos;&apos;
     };
   }
-  
+
   /** @ignore */
   _attachItem(item, index) {
     // since the button has already been initialized we make sure it is up to date
@@ -966,15 +967,15 @@ class QuickActions extends Overlay {
       this._updateItem(item);
       return;
     }
-    
+
     // if the index was not provided, we need to calculate it
     if (typeof index === &apos;undefined&apos;) {
       index = Array.prototype.indexOf.call(this.items.getAll(), item);
     }
-    
+
     const itemData = this._getItemData(item);
     const type = QuickActionsItem.type;
-    
+
     let button;
     if (item.type === type.BUTTON) {
       button = new Button().set({
@@ -983,8 +984,7 @@ class QuickActions extends Overlay {
         type: &apos;button&apos;,
         tracking: &apos;off&apos;
       }, true);
-    }
-    else if (item.type === type.ANCHOR) {
+    } else if (item.type === type.ANCHOR) {
       button = new AnchorButton().set({
         icon: itemData.icon,
         iconsize: Icon.size.SMALL,
@@ -992,262 +992,256 @@ class QuickActions extends Overlay {
         tracking: &apos;off&apos;
       }, true);
     }
-    
+
     button.variant = Button.variant.QUIET_ACTION;
     button.classList.add(&apos;_coral-QuickActions-item&apos;);
     button.setAttribute(&apos;tabindex&apos;, &apos;-1&apos;);
     button.setAttribute(&apos;title&apos;, itemData.textContent.trim());
     button.setAttribute(&apos;aria-label&apos;, itemData.textContent.trim());
     button.setAttribute(&apos;role&apos;, &apos;menuitem&apos;);
-    
+
     this.insertBefore(button, this.children[index]);
-    
+
     // ButtonList Item
     let buttonListItem;
     if (item.type === type.BUTTON) {
       buttonListItem = new ButtonList.Item();
-    }
-    else if (item.type === type.ANCHOR) {
+    } else if (item.type === type.ANCHOR) {
       buttonListItem = new AnchorList.Item();
       buttonListItem.href = item.href;
     }
-    
+
     const buttonListItemParent = this._elements.buttonList;
-    
+
     buttonListItemParent.insertBefore(buttonListItem, buttonListItemParent.children[index]);
     buttonListItem.tabIndex = -1;
     buttonListItem.content.innerHTML = itemData.htmlContent;
     buttonListItem.icon = itemData.icon;
     buttonListItem.setAttribute(&apos;role&apos;, &apos;menuitem&apos;);
-    
+
     item._elements.button = button;
     item._elements.buttonListItem = buttonListItem;
     buttonListItem._elements.quickActionsItem = item;
     button._elements.quickActionsItem = item;
   }
-  
+
   /**
    Layout calculation; collapses QuickActions as necessary.
    */
   _layout() {
     // Set the width of the QuickActions to match that of the target
     this._setWidth();
-    
+
     const buttons = this._getButtons(true);
-    
+
     if (!buttons.length) {
       return;
     }
-    
+
     const buttonListItems = this._elements.buttonList.items.getAll();
-    
+
     // Temporarily display the QuickActions so we can do the calculation
     const display = this.style.display;
     let temporarilyShown = false;
-    
+
     if (!this.open) {
       this.style.left -= 10000;
       this.style.top -= 10000;
       this.style.display = &apos;block&apos;;
       temporarilyShown = true;
     }
-    
+
     const totalAvailableWidth = this.offsetWidth;
-    
+
     let totalFittingButtons = 0;
     let widthUsed = 0;
     const buttonWidth = this._getButtonWidth();
     while (totalAvailableWidth &gt; widthUsed) {
       widthUsed += buttonWidth;
-      
+
       if (totalAvailableWidth &gt; widthUsed) {
         totalFittingButtons++;
       }
     }
-  
+
     // Remove one to avoid taking full width space
     totalFittingButtons--;
-    
+
     const threshold = this.threshold;
     const handleThreshold = threshold &gt; 0;
     const moreButtonsThanThreshold = handleThreshold &amp;&amp; buttons.length &gt; threshold;
     const collapse = buttons.length &gt; totalFittingButtons || moreButtonsThanThreshold;
-    
+
     // +1 to account for the more button
     const collapseToThreshold = collapse &amp;&amp; handleThreshold &amp;&amp; threshold + 1 &lt; totalFittingButtons;
-    
+
     let totalButtons;
     if (collapse) {
       if (collapseToThreshold) {
         totalButtons = threshold + 1;
-      }
-      else {
+      } else {
         totalButtons = totalFittingButtons;
       }
-    }
-    else {
+    } else {
       totalButtons = buttons.length;
     }
-    
+
     // Show all Buttons and ButtonList Items
-    for (let i = 0; i &lt; buttons.length; i++) {
+    for (let i = 0 ; i &lt; buttons.length ; i++) {
       this._toggleTabbable(buttons[i], false);
       buttons[i].hidden = false;
       if (buttonListItems[i]) {
         buttonListItems[i].hidden = false;
       }
     }
-    
+
     this._toggleTabbable(this._elements.moreButton, false);
-    
+
     if (collapse) {
       if (totalButtons &gt; 0) {
         // Hide the buttons we&apos;re collapsing
-        for (let j = totalButtons - 1; j &lt; buttons.length; j++) {
+        for (let j = totalButtons - 1 ; j &lt; buttons.length ; j++) {
           buttons[j].hide();
         }
-        
+
         // Hide the ButtonList items
-        for (let k = 0; k &lt; totalButtons - 1; k++) {
+        for (let k = 0 ; k &lt; totalButtons - 1 ; k++) {
           buttonListItems[k].hide();
         }
-        
+
         // Mark the first button as tabbable
         this._toggleTabbable(buttons[0], true);
-      }
-      else {
+      } else {
         this._toggleTabbable(this._elements.moreButton, true);
       }
-      
+
       this._elements.moreButton.show();
-    }
-    else {
+    } else {
       // Mark the first button as tabbable
       this._toggleTabbable(buttons[0], true);
       this._elements.moreButton.hide();
     }
-  
+
     this._setWidth(true);
-    
+
     // Reset the QuickActions display
     if (temporarilyShown) {
       this.style.left += 10000;
       this.style.top += 10000;
       this.style.display = display;
     }
-    
+
     // Do a reposition of the overlay
     this.reposition();
   }
-  
+
   /**
    Sets the width of QuickActions from the target.
-   
+
    @ignore
    */
   _setWidth(buttonWidthBased) {
     let width = 0;
     const targetElement = this._getTarget();
-    
+
     if (targetElement) {
       const maxWidth = targetElement.offsetWidth;
-      
+
       if (buttonWidthBased) {
         const visibleButtons = this.querySelectorAll(&apos;._coral-QuickActions-item:not([hidden])&apos;);
         const buttonWidth = this._getButtonWidth();
-        
+
         if (visibleButtons.length) {
-          for (let i = 0; i &lt; visibleButtons.length &amp;&amp; width &lt;= maxWidth; i++) {
+          for (let i = 0 ; i &lt; visibleButtons.length &amp;&amp; width &lt;= maxWidth ; i++) {
             width += buttonWidth;
           }
-    
+
           this.style.width = `${width}px`;
         }
-      }
-      else {
+      } else {
         this.style.width = `${maxWidth}px`;
       }
     }
   }
-  
+
   /** @ignore */
   _setButtonListHeight() {
     // Set height of ButtonList
     this._elements.buttonList.style.height = &apos;&apos;;
-    
+
     // Measure actual height
     const style = window.getComputedStyle(this._elements.buttonList);
     const height = parseInt(style.height, 10);
     const maxHeight = parseInt(style.maxHeight, 10);
-    
+
     if (height &lt; maxHeight) {
       // Make it scrollable
       this._elements.buttonList.style.height = `${height - 1}px`;
     }
   }
-  
+
   /** @ignore */
   _isInternalToComponent(element) {
     const targetElement = this._getTarget();
-    
+
     return element &amp;&amp; (this.contains(element) || this._elements.overlay.contains(element) || targetElement &amp;&amp; targetElement.contains(element));
   }
-  
+
   /** @ignore */
   _onWindowResize() {
     this._layout();
   }
-  
+
   _handleEscape(event) {
     if (typeof this._isTop === &apos;undefined&apos;) {
       this._isTop = this._isTopOverlay();
     }
-    
+
     // Debounce
     if (this._timeout !== null) {
       window.clearTimeout(this._timeout);
     }
-    
+
     this._timeout = window.setTimeout(() =&gt; {
       if (this._isTop) {
         super._handleEscape(event);
       }
-  
+
       this._isTop = undefined;
     });
   }
-  
+
   /** @ignore */
   _onMouseOut(event) {
     const toElement = event.toElement || event.relatedTarget;
-    
+
     // Hide if we mouse leave to any element external to the component and its target
     if (!this._isInternalToComponent(toElement) &amp;&amp; this.interaction === interaction.ON) {
       this._hideAll();
     }
   }
-  
+
   _hideAll() {
     this.hide();
     this._elements.overlay.hide();
   }
-  
+
   /** @ignore */
   _onTargetMouseEnter(event) {
     const fromElement = event.fromElement || event.relatedTarget;
-    
+
     // Open if we aren&apos;t already
     if (!this.open &amp;&amp; !this._isInternalToComponent(fromElement)) {
       this.show();
-  
+
       this._trackEvent(&apos;display&apos;, &apos;coral-quickactions&apos;, event);
     }
   }
-  
+
   /** @ignore */
   _onTargetKeyUp(event) {
     const keyCode = event.keyCode;
-    
+
     // shift + F10 or ctrl + space (http://www.w3.org/WAI/PF/aria-practices/#popupmenu)
     if (event.shiftKey &amp;&amp; keyCode === 121 || event.ctrlKey &amp;&amp; keyCode === 32) {
       if (!this.open) {
@@ -1261,93 +1255,90 @@ class QuickActions extends Overlay {
           this.returnFocus = this.constructor.returnFocus.ON;
           this.focusOnShow = this.constructor.focusOnShow.ON;
         }
-        
+
         this.show();
       }
     }
   }
-  
+
   _onTargetKeyDown(event) {
     const keyCode = event.keyCode;
-    
+
     // shift + F10 or ctrl + space (http://www.w3.org/WAI/PF/aria-practices/#popupmenu)
     if (event.shiftKey &amp;&amp; keyCode === 121 || event.ctrlKey &amp;&amp; keyCode === 32) {
       // Prevent default context menu show or page scroll behaviour
       event.preventDefault();
     }
   }
-  
+
   /** @ignore */
   _onTargetMouseLeave(event) {
     const toElement = event.toElement || event.relatedTarget;
-    
+
     // Do not hide if we entered the quick actions
     if (!this._isInternalToComponent(toElement)) {
       this._hideAll();
     }
   }
-  
+
   /** @ignore */
   _onHomeKeypress(event) {
     // prevents the page from scrolling
     event.preventDefault();
-    
+
     const firstFocusableButton = this._getFirstFocusableButton();
-    
+
     // Jump focus to the first focusable button
     if (firstFocusableButton) {
       firstFocusableButton.focus();
     }
   }
-  
+
   /** @ignore */
   _onEndKeypress(event) {
     // prevents the page from scrolling
     event.preventDefault();
-    
+
     const lastFocusableButton = this._getLastFocusableButton();
-    
+
     // Jump focus to the last focusable button
     if (lastFocusableButton) {
       lastFocusableButton.focus();
     }
   }
-  
+
   /** @ignore */
   _onButtonKeypressNext(event) {
     event.preventDefault();
-  
+
     if (document.activeElement === this) {
       const firstFocusableButton = this._getFirstFocusableButton();
-      
+
       if (firstFocusableButton) {
         firstFocusableButton.focus();
       }
-    }
-    else {
+    } else {
       // Handle key presses that imply focus of the next focusable button
       const nextButton = this._getFocusableNeighbour(event.matchedTarget);
       if (nextButton) {
         nextButton.focus();
-      }
-      else if (event.key === &apos;ArrowDown&apos; &amp;&amp; document.activeElement === this._elements.moreButton) {
+      } else if (event.key === &apos;ArrowDown&apos; &amp;&amp; document.activeElement === this._elements.moreButton) {
         this._elements.moreButton.click();
       }
     }
   }
-  
+
   /** @ignore */
   _onButtonKeypressPrevious(event) {
     event.preventDefault();
-  
+
     if (document.activeElement === this) {
       const lastFocusableButton = this._getLastFocusableButton();
-      
+
       if (lastFocusableButton) {
         lastFocusableButton.focus();
       }
-    }
-    else {
+    } else {
       // Handle key presses that imply focus of the previous focusable button
       const previousButton = this._getFocusableNeighbour(event.matchedTarget, true);
       if (previousButton) {
@@ -1355,33 +1346,33 @@ class QuickActions extends Overlay {
       }
     }
   }
-  
+
   /** @ignore */
   _onButtonClick(event) {
     event.stopPropagation();
-    
+
     if (this._preventClick) {
       return;
     }
-    
+
     const button = event.matchedTarget;
     const item = button._elements.quickActionsItem;
     this._proxyClick(item);
-    
+
     // Prevent double click or alternate selection during animation
     window.setTimeout(() =&gt; {
       this._preventClick = false;
     }, this._overlayAnimationTime);
-    
+
     this._preventClick = true;
-  
+
     this._trackEvent(&apos;click&apos;, &apos;coral-quickactions-item&apos;, event, item);
   }
-  
+
   _onMoreButtonClick(event) {
     const button = event.matchedTarget;
     const item = button._elements.quickActionsItem;
-  
+
     this._trackEvent(&apos;click&apos;, &apos;coral-quickactions-more&apos;, event, item);
   }
 
@@ -1415,21 +1406,20 @@ class QuickActions extends Overlay {
       }
     }
   }
-  
+
   /** @ignore */
   _onOverlayBeforeOpen(event) {
     if (event.target === this) {
       // Reset double-click prevention flag
       this._preventClick = false;
       this._layout();
-    }
-    else if (event.target === this._elements.overlay) {
+    } else if (event.target === this._elements.overlay) {
       // do not allow internal Overlay events to escape QuickActions
       event.stopImmediatePropagation();
       this._setButtonListHeight();
     }
   }
-  
+
   /** @ignore */
   _onOverlayBeforeClose(event) {
     if (event.target === this._elements.overlay) {
@@ -1437,7 +1427,7 @@ class QuickActions extends Overlay {
       event.stopImmediatePropagation();
     }
   }
-  
+
   /** @ignore */
   _onOverlayOpen(event) {
     if (event.target === this._elements.overlay) {
@@ -1447,12 +1437,12 @@ class QuickActions extends Overlay {
       this._elements.moreButton.setAttribute(&apos;aria-expanded&apos;, &apos;true&apos;);
     }
   }
-  
+
   /** @ignore */
   _onOverlayClose(event) {
     if (event.target === this) {
       this._elements.overlay.open = false;
-      
+
       // Return the trapFocus and returnFocus properties to their state before open.
       // Handles the keyboard launch and interaction enabled case, which implies focus trap and focus return.
       // Wait a frame as this is called before the &apos;open&apos; property sync. Otherwise, returnFocus is set prematurely.
@@ -1464,7 +1454,7 @@ class QuickActions extends Overlay {
           }
           this._previousTrapFocus = undefined;
         }
-        
+
         if (this._previousReturnFocus) {
           this.returnFocus = this._previousReturnFocus;
           this._previousReturnFocus = undefined;
@@ -1475,14 +1465,13 @@ class QuickActions extends Overlay {
           this._previousFocusOnShow = undefined;
         }
       });
-    }
-    else if (event.target === this._elements.overlay) {
+    } else if (event.target === this._elements.overlay) {
       // do not allow internal Overlay events to escape QuickActions
       event.stopImmediatePropagation();
       this._elements.moreButton.setAttribute(&apos;aria-expanded&apos;, &apos;false&apos;);
     }
   }
-  
+
   /** @ignore */
   _onOverlayPositioned(event) {
     if (event.target === this._elements.overlay) {
@@ -1490,78 +1479,77 @@ class QuickActions extends Overlay {
       event.stopImmediatePropagation();
     }
   }
-  
+
   _onAnimate(event) {
     if (event.target === this) {
       if (this.placement === placement.BOTTOM) {
         this.style.marginTop = `${-parseFloat(this.lengthOffset) + 8}px`;
-      }
-      else {
+      } else {
         this.style.marginTop = `${parseFloat(this.lengthOffset) - 8}px`;
       }
     }
   }
-  
+
   /** @ignore */
   _onButtonListItemClick(event) {
     // stops propagation so that this event remains internal to the component
     event.stopImmediatePropagation();
-    
+
     const buttonListItem = event.matchedTarget;
-    
+
     if (!buttonListItem) {
       return;
     }
-    
+
     const item = buttonListItem._elements.quickActionsItem;
     this._proxyClick(item);
-  
+
     this._trackEvent(&apos;click&apos;, &apos;coral-quickactions-item&apos;, event, item);
   }
-  
+
   /** @ignore */
   _onItemRemoved(item) {
     this._removeItemElements(item);
   }
-  
+
   /** @ignore */
   _onCollectionChange(addedNodes) {
     // Delay the item initialization if the component has not been opened before
     if (!this._openedBefore) {
       return;
     }
-    
+
     // we use the items to be able to find out the index of the added item in reference to the whole collection
     const items = this.items.getAll();
     let index;
-    for (let i = 0, addedNodesCount = addedNodes.length; i &lt; addedNodesCount; i++) {
+    for (let i = 0, addedNodesCount = addedNodes.length ; i &lt; addedNodesCount ; i++) {
       // we need to know the item&apos;s position in relation to the others
       index = Array.prototype.indexOf.call(items, addedNodes[i]);
       this._attachItem(addedNodes[i], index);
     }
-    
+
     this._layout();
   }
-  
+
   /** @ignore */
   _onItemChange(event) {
     // stops propagation so that this event remains internal to the component
     event.stopImmediatePropagation();
-    
+
     this._updateItem(event.target);
   }
-  
+
   /** @ignore */
   _onItemTypeChange(event) {
     // stops propagation so that this event remains internal to the component
     event.stopImmediatePropagation();
-    
+
     const item = event.target;
     this._removeItemElements(item);
     this._attachItem(item);
     this._layout();
   }
-  
+
   /** @ignore */
   _removeItemElements(item) {
     // Remove the associated Button and ButtonList elements
@@ -1570,19 +1558,19 @@ class QuickActions extends Overlay {
       item._elements.button._elements.quickActionsItem = undefined;
       item._elements.button = undefined;
     }
-    
+
     if (item._elements.buttonListItem) {
       item._elements.buttonListItem.remove();
       item._elements.buttonListItem._elements.quickActionsItem = null;
       item._elements.buttonListItem = undefined;
     }
   }
-  
+
   /** @ignore */
   _updateItem(item) {
     const itemData = this._getItemData(item);
     const type = QuickActionsItem.type;
-    
+
     const button = item._elements.button;
     if (button) {
       button.icon = itemData.icon;
@@ -1590,7 +1578,7 @@ class QuickActions extends Overlay {
       button.setAttribute(&apos;aria-label&apos;, itemData.textContent.trim());
       button[item.type === type.ANCHOR ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;href&apos;, item.href);
     }
-    
+
     const buttonListItem = item._elements.buttonListItem;
     if (buttonListItem) {
       buttonListItem.content.innerHTML = itemData.htmlContent;
@@ -1598,73 +1586,74 @@ class QuickActions extends Overlay {
       buttonListItem.icon = itemData.icon;
     }
   }
-  
+
   // Maps placement CENTER with RIGHT
   _toggleCenterPlacement(toggle) {
     if (toggle) {
       if (this.placement === placement.CENTER) {
         this._placement = Overlay.placement.RIGHT;
-        
+
         this._oldInner = this._inner;
         this._inner = false;
         this._oldLengthOffset = this._lengthOffset;
         this._lengthOffset = &apos;-50%r - 50%p&apos;;
       }
-    }
-    else if (this._placement === Overlay.placement.RIGHT) {
+    } else if (this._placement === Overlay.placement.RIGHT) {
       this._placement = placement.CENTER;
-      
+
       // Restore
       this._inner = this._oldInner;
       this._lengthOffset = this._oldLengthOffset;
     }
   }
-  
+
   /** @ignore */
   reposition() {
     // Override to support placement.CENTER
     this._toggleCenterPlacement(true);
     super.reposition();
     this._toggleCenterPlacement(false);
-  
+
     if (this._openedOnce) {
       // PopperJS inner property issue https://github.com/FezVrasta/popper.js/issues/400
       if (this.placement === placement.BOTTOM) {
         this.style.marginTop = `-${parseFloat(this.lengthOffset)}px`;
-      }
-      else if (this.placement === placement.TOP) {
+      } else if (this.placement === placement.TOP) {
         this.style.marginTop = `${parseFloat(this.lengthOffset)}px`;
-      }
-      else if (this.placement === placement.CENTER) {
+      } else if (this.placement === placement.CENTER) {
         this.style.marginTop = `${parseFloat(this.lengthOffset) - 4}px`;
       }
     }
   }
-  
+
   // Override placement and target
   /**
    Returns {@link QuickActions} placement options.
-   
+
    @return {QuickActionsPlacementEnum}
    */
-  static get placement() { return placement; }
-  
+  static get placement() {
+    return placement;
+  }
+
   /**
    Returns {@link QuickActions} target options.
-   
+
    @return {QuickActionsTargetEnum}
    */
-  static get target() { return target; }
-  
+  static get target() {
+    return target;
+  }
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;threshold&apos;]);
   }
-  
+
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-    
+
     const overlay = this._elements.overlay;
     // Cannot be open by default when rendered
     overlay.removeAttribute(&apos;open&apos;);
@@ -1673,16 +1662,16 @@ class QuickActions extends Overlay {
       overlay._parent.appendChild(overlay);
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // Define QuickActions as a menu
     this.setAttribute(&apos;role&apos;, &apos;menu&apos;);
-    
+
     // Support cloneNode
     [&apos;moreButton&apos;, &apos;overlay&apos;].forEach((handleName) =&gt; {
       const handle = this.querySelector(`[handle=&quot;${handleName}&quot;]`);
@@ -1690,22 +1679,22 @@ class QuickActions extends Overlay {
         handle.remove();
       }
     });
-    
+
     // Render template
     const frag = document.createDocumentFragment();
     frag.appendChild(this._elements.moreButton);
     frag.appendChild(this._elements.overlay);
-  
+
     // Link target
     this._elements.overlay.target = this._elements.moreButton;
-    
+
     this.appendChild(frag);
   }
-  
+
   /** @ignore */
   disconnectedCallback() {
     super.disconnectedCallback();
-    
+
     const overlay = this._elements.overlay;
     // In case it was moved out don&apos;t forget to remove it
     if (!this.contains(overlay)) {

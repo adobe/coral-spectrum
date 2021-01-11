@@ -451,22 +451,23 @@ class MasonryItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-  
+
     // Represents ownership (necessary when the item is moved which triggers callbacks)
     this._masonry = null;
-    
+
     // Default value
     this._dragAction = null;
-    
+
     // Template
     this._elements = {};
     quickactions.call(this._elements);
   }
-  
+
   // @compat
   get content() {
     return this;
   }
+
   set content(value) {
     // Support configs
     if (typeof value === &apos;object&apos;) {
@@ -476,10 +477,10 @@ class MasonryItem extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /**
    Whether the item is selected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -488,39 +489,40 @@ class MasonryItem extends BaseComponent(HTMLElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute(&apos;selected&apos;, this._selected);
-  
+
     this.setAttribute(&apos;aria-selected&apos;, this._selected);
     this.classList.toggle(&apos;is-selected&apos;, this._selected);
-    
+
     this._elements.check[this._selected ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;checked&apos;, &apos;&apos;);
-    
+
     this.trigger(&apos;coral-masonry-item:_selectedchanged&apos;);
   }
-  
+
   /**
    Animates the insertion of the item.
-   
+
    @private
    */
   _insert() {
     if (this.classList.contains(&apos;is-beforeInserting&apos;)) {
       this.classList.remove(&apos;is-beforeInserting&apos;);
       this.classList.add(&apos;is-inserting&apos;);
-      
+
       commons.transitionEnd(this, () =&gt; {
         this.classList.remove(&apos;is-inserting&apos;);
       });
     }
   }
-  
+
   /** @private */
   _setTabbable(tabbable) {
     this.setAttribute(&apos;tabindex&apos;, tabbable ? 0 : -1);
   }
-  
+
   /** @private */
   _updateDragAction(enabled) {
     let handle;
@@ -528,8 +530,7 @@ class MasonryItem extends BaseComponent(HTMLElement) {
       // Find handle
       if (this.getAttribute(&apos;coral-masonry-draghandle&apos;) !== null) {
         handle = this;
-      }
-      else {
+      } else {
         handle = this.querySelector(&apos;[coral-masonry-draghandle]&apos;);
         if (!handle) {
           // Disable drag&amp;drop if handle wasn&apos;t found
@@ -537,23 +538,24 @@ class MasonryItem extends BaseComponent(HTMLElement) {
         }
       }
     }
-    
+
     if (enabled) {
       if (!this._dragAction) {
         this._dragAction = new DragAction(this);
         this._dragAction.dropZone = this.parentNode;
       }
       this._dragAction.handle = handle;
-    }
-    else if (this._dragAction) {
+    } else if (this._dragAction) {
       this._dragAction.destroy();
       this._dragAction = null;
     }
   }
-  
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat([&apos;selected&apos;, &apos;_removing&apos;, &apos;_orderable&apos;]); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat([&apos;selected&apos;, &apos;_removing&apos;, &apos;_orderable&apos;]);
+  }
+
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === &apos;_removing&apos;) {
@@ -561,35 +563,34 @@ class MasonryItem extends BaseComponent(HTMLElement) {
       window.requestAnimationFrame(() =&gt; {
         this.classList.toggle(&apos;is-removing&apos;, value !== null);
       });
-    }
-    else if (name === &apos;_orderable&apos;) {
+    } else if (name === &apos;_orderable&apos;) {
       this._updateDragAction(value !== null);
-    }
-    else {
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
-  
+
   /** @ignore */
   connectedCallback() {
-    if (!this.isConnected) {
+    if (this._skipConnectedCallback()) {
       return;
     }
 
     super.connectedCallback();
+
     // Inform masonry immediately
     this.trigger(&apos;coral-masonry-item:_connected&apos;);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // @a11y
     this.setAttribute(&apos;tabindex&apos;, &apos;-1&apos;);
-    
+
     // Support cloneNode
     const template = this.querySelector(&apos;._coral-Masonry-item-quickActions&apos;);
     if (template) {
@@ -599,7 +600,7 @@ class MasonryItem extends BaseComponent(HTMLElement) {
     // todo workaround to not give user possibility to tab into checkbox
     this._elements.check._labellableElement.tabIndex = -1;
   }
-  
+
   /** @ignore */
   disconnectedCallback() {
     if (this.isConnected) {

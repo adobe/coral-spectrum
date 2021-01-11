@@ -440,9 +440,9 @@ const CLASSNAME = &apos;coral-RadioGroup&apos;;
 
 /**
  Enumeration for {@link BaseFieldGroup} orientations.
- 
+
  @typedef {Object} BaseFieldGroupOrientationEnum
- 
+
  @property {String} HORIZONTAL
  Horizontal default orientation.
  @property {String} VERTICAL
@@ -460,7 +460,7 @@ const orientation = {
 class BaseFieldGroup extends superClass {
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+
    @type {SelectableCollection}
    @readonly
    */
@@ -472,13 +472,13 @@ class BaseFieldGroup extends superClass {
         host: this
       });
     }
-    
+
     return this._items;
   }
-  
+
   /**
    Orientation of the field group. See {@link BaseFieldGroupOrientationEnum}.
-   
+
    @type {String}
    @default BaseFieldGroupOrientationEnum.HORIZONTAL
    @htmlattribute orientation
@@ -487,52 +487,59 @@ class BaseFieldGroup extends superClass {
   get orientation() {
     return this._orientation || orientation.HORIZONTAL;
   }
+
   set orientation(value) {
     value = transform.string(value).toLowerCase();
     this._orientation = validate.enumeration(this.constructor.orientation)(value) &amp;&amp; value || orientation.HORIZONTAL;
     this._reflectAttribute(&apos;orientation&apos;, this._orientation);
-    
+
     this.classList.toggle(`${CLASSNAME}--vertical`, this._orientation === orientation.VERTICAL);
   }
-  
+
   /**
    Returns the first selected field group item in the Field Group. The value &lt;code&gt;null&lt;/code&gt; is returned if no item is
    selected.
-   
+
    @type {HTMLElement}
    @readonly
    */
   get selectedItem() {
     return this.items._getFirstSelected(&apos;checked&apos;);
   }
-  
+
   /** @private */
   get _itemTagName() {
     // Used for Collection
     return &apos;coral-fieldgroup-item&apos;;
   }
-  
+
   /**
    Returns {@link BaseFieldGroup} orientation options.
-   
+
    @return {BaseFieldGroupEnum}
    */
-  static get orientation() { return orientation; }
-  
+  static get orientation() {
+    return orientation;
+  }
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat([&apos;orientation&apos;]); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat([&apos;orientation&apos;]);
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // a11y
     this.setAttribute(&apos;role&apos;, &apos;group&apos;);
-    
+
     // Default reflected attributes
-    if (!this._orientation) { this.orientation = orientation.HORIZONTAL; }
+    if (!this._orientation) {
+      this.orientation = orientation.HORIZONTAL;
+    }
   }
 };
 

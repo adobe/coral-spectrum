@@ -447,17 +447,15 @@ function isDateInRange(date, startDate, endDate) {
   if (!date) {
     return false;
   }
-  
+
   if (startDate === null &amp;&amp; endDate === null) {
     return true;
-  }
-  else if (startDate === null) {
+  } else if (startDate === null) {
     return date.toDate() &lt;= endDate;
-  }
-  else if (endDate === null) {
+  } else if (endDate === null) {
     return date.toDate() &gt;= startDate;
   }
-  
+
   return startDate &lt;= date.toDate() &amp;&amp; date.toDate() &lt;= endDate;
 }
 
@@ -465,11 +463,10 @@ function isDateInRange(date, startDate, endDate) {
 function toMoment(value, format) {
   if (value === &apos;today&apos;) {
     return new DateTime.Moment().startOf(&apos;day&apos;);
-  }
-  else if (DateTime.Moment.isMoment(value)) {
+  } else if (DateTime.Moment.isMoment(value)) {
     return value.isValid() ? value.clone() : null;
   }
-  
+
   // if the value provided is a date it does not make sense to provide a format to parse the date
   const result = new DateTime.Moment(value, value instanceof Date ? null : format);
   return result.isValid() ? result.startOf(&apos;day&apos;) : null;
@@ -480,22 +477,22 @@ function validateAsChangedAndValidMoment(newValue, oldValue) {
   // if the value is undefined we change it to null since moment considers both to be different
   newValue = newValue || null;
   oldValue = oldValue || null;
-  
+
   if (newValue !== oldValue &amp;&amp; !new DateTime.Moment(newValue).isSame(oldValue, &apos;day&apos;)) {
     return newValue === null || newValue.isValid();
   }
-  
+
   return false;
 }
 
 /**
  Slides in new month tables, slides out old tables, and then cleans up the leftovers when it is done.
- 
+
  @ignore
  */
 function TableAnimator(host) {
   this.host = host;
-  
+
   this._addContainerIfNotPresent = (width, height) =&gt; {
     if (!this.container) {
       // Get a fresh container for the animation:
@@ -509,19 +506,19 @@ function TableAnimator(host) {
       this.host.appendChild(this.container);
     }
   };
-  
+
   this._removeContainerIfEmpty = () =&gt; {
     if (this.container &amp;&amp; this.container.children.length === 0) {
       this.host.removeChild(this.container);
       this.container = null;
     }
   };
-  
+
   this.slide = (newTable, direction) =&gt; {
     const replace = direction === undefined;
     const isLeft = direction === &apos;left&apos;;
     const oldTable = this.oldTable;
-    
+
     // Should the replace flag be raised, or no old table be present, then do a non-transitioned (re)place and exit
     if (replace || !oldTable) {
       if (oldTable) {
@@ -531,45 +528,45 @@ function TableAnimator(host) {
       this.oldTable = newTable;
       return;
     }
-    
+
     const boundingClientRect = oldTable.getBoundingClientRect();
     const width = boundingClientRect.width;
     let height = boundingClientRect.height;
     this._addContainerIfNotPresent(width, height);
-    
+
     // Add both the old and the new table to the container:
     this.container.appendChild(oldTable);
     this.container.appendChild(newTable);
-    
+
     // Set the existing table to start from being in full view, and mark it to transition on `left` changing
     oldTable.classList.add(&apos;_coral-Calendar-table--transit&apos;);
-    
+
     commons.transitionEnd(oldTable, () =&gt; {
       oldTable.parentNode.removeChild(oldTable);
       this._removeContainerIfEmpty();
     });
-    
+
     // Set the new table to start out of view (either left or right depending on the direction of the slide), and mark
     // it to transition on `left` changing
     newTable.classList.add(&apos;_coral-Calendar-table--transit&apos;);
     newTable.style.left = `${isLeft ? width : -width}px`;
-    
+
     // When the transition is done, have the transition class lifted
     commons.transitionEnd(newTable, () =&gt; {
       newTable.classList.remove(&apos;_coral-Calendar-table--transit&apos;);
       this.host.appendChild(newTable);
       this._removeContainerIfEmpty();
     });
-    
+
     // Force a redraw by querying the browser for its offsetWidth. Without this, the re-positioning code later on
     // would not lead to a transition. Note that there&apos;s no significance to the resulting value being assigned to
     // &apos;height&apos;
     height = this.container.offsetWidth;
-    
+
     // Set the `left` positions to transition to:
     oldTable.style.left = `${isLeft ? -width : width}px`;
     newTable.style.left = 0;
-    
+
     this.oldTable = newTable;
   };
 }
@@ -606,10 +603,10 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Default value
     this._value = null;
-    
+
     this._delegateEvents(commons.extend(this._events, {
       &apos;click ._coral-Calendar-nextMonth,._coral-Calendar-prevMonth&apos;: &apos;_onNextOrPreviousMonthClick&apos;,
       &apos;click ._coral-Calendar-body ._coral-Calendar-date&apos;: &apos;_onDayClick&apos;,
@@ -622,7 +619,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
       &apos;key:end ._coral-Calendar-body&apos;: &apos;_onHomeOrEndKey&apos;,
       &apos;key:pageup&apos;: &apos;_onPageUpKey&apos;,
       &apos;key:pagedown&apos;: &apos;_onPageDownKey&apos;,
-  
+
       // On OSX we use Command+Page Up
       &apos;key:meta+pageup&apos;: &apos;_onCtrlPageUpKey&apos;,
       // On OSX we use Command+Page Down
@@ -631,31 +628,31 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
       &apos;key:ctrl+pageup&apos;: &apos;_onCtrlPageUpKey&apos;,
       // On Windows, we use CTRL+Page Down
       &apos;key:ctrl+pagedown&apos;: &apos;_onCtrlPageDownKey&apos;,
-  
+
       &apos;key:enter ._coral-Calendar-body&apos;: &apos;_onEnterKey&apos;,
       &apos;key:return ._coral-Calendar-body&apos;: &apos;_onEnterKey&apos;,
       &apos;key:space ._coral-Calendar-body&apos;: &apos;_onEnterKey&apos;
     }));
-    
+
     // Prepare templates
     this._elements = {};
     calendar.call(this._elements, {commons, i18n, Icon});
-  
+
     // Pre-define labellable element
     this._labellableElement = this;
 
     // Internal keeper of the month that is currently on display.
     this._cursor = null;
-  
+
     // Internal keeper for the id of the currently focused date cell or the cell that would receive focus when the
     // calendar body receives focus.
     this._activeDescendant = null;
     this._animator = new TableAnimator(this._elements.body);
   }
-  
+
   /**
    Defines the start day for the week, 0 = Sunday, 1 = Monday etc., as depicted on the calendar days grid.
-   
+
    @type {Number}
    @default 0
    @htmlattribute startday
@@ -664,26 +661,27 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     if (this._startDay) {
       return this._startDay;
     }
-    
+
     if (typeof DateTime.Moment.localeData(i18n.locale).firstDayOfWeek !== &apos;undefined&apos;) {
       return DateTime.Moment.localeData(i18n.locale).firstDayOfWeek();
     }
-    
+
     return 0;
   }
+
   set startDay(value) {
     if (value &gt;= 0 &amp;&amp; value &lt; 7) {
       this._startDay = value;
-  
+
       this._renderCalendar();
     }
   }
-  
+
   /**
    The format used to display the current month and year.
    &apos;MMMM YYYY&apos; is supported by default. Include momentjs to support additional format string options see
    http://momentjs.com/docs/#/displaying/.
-   
+
    @type {String}
    @default &quot;MMMM YYYY&quot;
    @htmlattribute headerformat
@@ -691,14 +689,15 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get headerFormat() {
     return this._headerFormat || &apos;MMMM YYYY&apos;;
   }
+
   set headerFormat(value) {
     this._headerFormat = transform.string(value);
     this._renderCalendar();
   }
-  
+
   /**
    The minimal selectable date in the Calendar view. When passed a string, it needs to be &apos;YYYY-MM-DD&apos; formatted.
-   
+
    @type {String|Date}
    @default null
    @htmlattribute min
@@ -706,19 +705,20 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get min() {
     return this._min ? this._min.toDate() : null;
   }
+
   set min(value) {
     value = toMoment(value, this.valueFormat);
-    
+
     if (validateAsChangedAndValidMoment(value, this._min)) {
       this._min = value;
       this._renderCalendar();
     }
   }
-  
+
   /**
    The max selectable date in the Calendar view. When passed a string, it needs to be &apos;YYYY-MM-DD&apos;
    formatted.
-   
+
    @type {String|Date}
    @default null
    @htmlattribute max
@@ -726,20 +726,21 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get max() {
     return this._max ? this._max.toDate() : null;
   }
+
   set max(value) {
     value = toMoment(value, this.valueFormat);
-    
+
     if (validateAsChangedAndValidMoment(value, this._max)) {
       this._max = value;
       this._renderCalendar();
     }
   }
-  
+
   /**
    The format to use on expressing the selected date as a string on the &lt;code&gt;value&lt;/code&gt; attribute.
    &apos;YYYY-MM-DD&apos; is supported by default. Include momentjs to support additional format string options see
    http://momentjs.com/docs/#/displaying/.
-   
+
    @type {String}
    @default &quot;YYYY-MM-DD&quot;
    @htmlattribute valueformat
@@ -748,49 +749,49 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get valueFormat() {
     return this._valueFormat || INTERNAL_FORMAT;
   }
+
   set valueFormat(value) {
     value = transform.string(value);
-    
+
     const setValueFormat = (newValue) =&gt; {
       this._valueFormat = newValue;
       this._reflectAttribute(&apos;valueformat&apos;, this._valueFormat);
     };
-  
+
     // Once the valueFormat is set, we make sure the value is also correct
     if (!this._valueFormat &amp;&amp; this._originalValue) {
       setValueFormat(value);
       this.value = this._originalValue;
-    }
-    else {
+    } else {
       setValueFormat(value);
       this._elements.input.value = this.value;
     }
   }
-  
+
   /**
    The value returned, or set, as a Date. If the value is &apos;&apos; it will return &lt;code&gt;null&lt;/code&gt;.
-   
+
    @type {Date}
    @default null
    */
   get valueAsDate() {
     return this._value ? this._value.toDate() : null;
   }
+
   set valueAsDate(value) {
     if (value instanceof Date) {
       this._valueAsDate = new DateTime.Moment(value);
       this.value = this._valueAsDate;
-    }
-    else {
+    } else {
       this._valueAsDate = null;
       this.value = &apos;&apos;;
     }
   }
-  
+
   /**
    The current value. When set to &apos;today&apos;, the value is coerced into the clients local date expressed as string
    formatted in accordance to the set &lt;code&gt;valueFormat&lt;/code&gt;.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute value
@@ -798,24 +799,25 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get value() {
     return this._value ? this._value.format(this.valueFormat) : &apos;&apos;;
   }
+
   set value(value) {
     // This is used to change the value if valueformat is also set but afterwards
     this._originalValue = value;
-    
+
     value = toMoment(value, this.valueFormat);
-    
+
     if (validateAsChangedAndValidMoment(value, this._value)) {
       this._value = value;
       this._elements.input.value = this.value;
-      
+
       // resets the view cursor, so the selected month will be in view
       this._cursor = null;
-      
+
       this._renderCalendar();
       this.required = this.required;
     }
   }
-  
+
   /**
    Name used to submit the data in a form.
    @type {String}
@@ -826,12 +828,13 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._elements.input.name;
   }
+
   set name(value) {
     this._reflectAttribute(&apos;name&apos;, value);
-    
+
     this._elements.input.name = value;
   }
-  
+
   /**
    Whether this field is required or not.
    @type {Boolean}
@@ -842,13 +845,14 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute(&apos;required&apos;, this._required);
-    
+
     this.classList.toggle(&apos;is-required&apos;, this._required &amp;&amp; this._value === null);
   }
-  
+
   /**
    Whether this field is disabled or not.
    @type {Boolean}
@@ -859,31 +863,33 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
-    
+
     this.classList.toggle(&apos;is-disabled&apos;, this._disabled);
     this._elements.prev.disabled = this._disabled;
     this._elements.next.disabled = this._disabled;
     this._elements.body[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
     this._elements.body[this._disabled ? &apos;removeAttribute&apos; : &apos;setAttribute&apos;](&apos;tabindex&apos;, &apos;0&apos;);
-  
+
     this._renderCalendar();
   }
-  
+
   /**
    Inherited from {@link BaseFormField#invalid}.
    */
   get invalid() {
     return super.invalid;
   }
+
   set invalid(value) {
     super.invalid = value;
-    
+
     this._renderCalendar();
   }
-  
+
   /**
    Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
    @type {Boolean}
@@ -894,175 +900,173 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute(&apos;readonly&apos;, this._readOnly);
-    
+
     this._elements.prev.disabled = this._readOnly;
     this._elements.next.disabled = this._readOnly;
     this._elements.body[this._readOnly ? &apos;removeAttribute&apos; : &apos;setAttribute&apos;](&apos;tabindex&apos;, &apos;0&apos;);
     this.classList.toggle(&apos;is-readOnly&apos;, this._readOnly);
   }
-  
+
   /** @ignore */
   _renderCalendar(slide) {
     const cursor = this._requireCursor();
     const displayYear = cursor.year();
     const displayMonth = cursor.month();
     const oldTable = this._animator.oldTable;
-    
+
     this._elements.heading.innerHTML = new DateTime.Moment([displayYear, displayMonth, 1]).format(this.headerFormat);
-    
+
     const newTable = this._renderTable(displayYear, displayMonth + 1);
-    
+
     if (oldTable) {
       commons.transitionEnd(newTable, () =&gt; {
         this._setActiveDescendant();
       });
     }
-    
+
     this._animator.slide(newTable, slide);
-    
+
     const el = this._elements.body.querySelector(&apos;.is-selected&apos;);
-    
+
     // This will be overwritten later if there is any other function setting the attribute
     this._activeDescendant = el ? el.id : null;
-    
+
     this._setActiveDescendant();
   }
-  
+
   /**
    Returns &lt;code&gt;true&lt;/code&gt; if moment specified is before &lt;code&gt;min&lt;/code&gt;.
-   
+
    @param {moment} currentMoment
    A moment to test.
    @param {String} unit
    Year, Month, Week, Day
    @returns {Boolean}
    &lt;code&gt;true&lt;/code&gt; if moment specified is before &lt;code&gt;min&lt;/code&gt;
-   
+
    @ignore
    */
   _isBeforeMin(currentMoment, unit) {
     const min = this.min ? new DateTime.Moment(this.min) : null;
     return min &amp;&amp; currentMoment.isBefore(min, unit);
   }
-  
+
   /**
    Returns &lt;code&gt;true&lt;/code&gt; if moment specified is after &lt;code&gt;max&lt;/code&gt;.
-   
+
    @param {moment} currentMoment
    A moment to test.
    @param {String} unit
    Year, Month, Week, Day
    @returns {Boolean}
    &lt;code&gt;true&lt;/code&gt; if moment specified is after &lt;code&gt;max&lt;/code&gt;
-   
+
    @ignore
    */
   _isAfterMax(currentMoment, unit) {
     const max = this.max ? new DateTime.Moment(this.max) : null;
     return max &amp;&amp; currentMoment.isAfter(max, unit);
   }
-  
+
   /**
    Returns &lt;code&gt;true&lt;/code&gt; if moment specified is greater than or equal to &lt;code&gt;min&lt;/code&gt; and less than or equal to &lt;code&gt;max&lt;/code&gt;.
-   
+
    @param {moment} currentMoment
    A moment to test.
    @param {String} unit
    Year, Month, Week, Day
    @returns {Boolean}
    &lt;code&gt;true&lt;/code&gt; if moment specified falls within &lt;code&gt;min&lt;/code&gt;/&lt;code&gt;max&lt;/code&gt; date range.
-   
+
    @ignore
    */
   _isInRange(currentMoment, unit) {
     return !(this._isBeforeMin(currentMoment, unit) || this._isAfterMax(currentMoment, unit));
   }
-  
+
   /**
    Updates the aria-activedescendant property for the calendar grid to communicate the currently focused date, or the
    date that should get focus when the grid receives focus, to assistive technology.
-   
+
    @ignore
    */
   _setActiveDescendant() {
     let el;
-    
+
     if (!this._activeDescendant || !this._elements.body.querySelector(`#${this._activeDescendant} [data-date]`)) {
       this._activeDescendant = null;
-      
+
       el = this._elements.body.querySelector(&apos;.is-selected&apos;);
       this._activeDescendant = el &amp;&amp; el.id;
-      
+
       if (!this._activeDescendant || !this._elements.body.querySelector(`#${this._activeDescendant} [data-date]`)) {
         const currentMoment = this._value;
-        
+
         if (currentMoment) {
           const dates = this._elements.body.querySelectorAll(&apos;[data-date]&apos;);
           if (dates.length) {
             if (this._isBeforeMin(currentMoment)) {
               el = dates[0];
-            }
-            else if (this._isAfterMax(currentMoment)) {
+            } else if (this._isAfterMax(currentMoment)) {
               el = dates[dates.length - 1];
             }
           }
-        }
-        else {
+        } else {
           el = this._elements.body.querySelector(&apos;.is-focused&apos;) || this._elements.body.querySelector(&apos;.is-today&apos;);
         }
-        
+
         if (el) {
           this._activeDescendant = el.parentElement.id;
         }
       }
     }
-    
+
     el = this._elements.body.querySelector(&apos;.is-focused&apos;);
     if (el) {
       el.classList.remove(&apos;is-focused&apos;);
     }
-    
+
     this._elements.body[this._activeDescendant ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-activedescendant&apos;, this._activeDescendant);
-    
+
     this._updateTableCaption();
-    
+
     if (!this._activeDescendant) {
       return;
     }
-    
+
     el = document.getElementById(this._activeDescendant);
     const newTable = this.querySelector(&apos;._coral-Calendar-table--transit&apos;);
     const isTransitioning = newTable !== null;
-    
+
     if (el) {
       if (isTransitioning) {
         window.requestAnimationFrame(() =&gt; {
           el.querySelector(&apos;._coral-Calendar-date&apos;).classList.add(&apos;is-focused&apos;);
         });
-      }
-      else {
+      } else {
         // Focus the selected date
         el.querySelector(&apos;._coral-Calendar-date&apos;).classList.add(&apos;is-focused&apos;);
       }
     }
   }
-  
+
   /**
    Updates the table caption which serves as a live region to announce the currently focused date to assistive
    technology, improving compatibility across operating systems, browsers and screen readers.
-   
+
    @ignore
    */
   _updateTableCaption() {
     const caption = this._elements.body.querySelector(&apos;caption&apos;);
-    
+
     if (!caption) {
       return;
     }
-    
+
     if (caption.firstChild) {
       caption.removeChild(caption.firstChild);
     }
@@ -1072,17 +1076,17 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
       caption.appendChild(captionText);
     }
   }
-  
+
   /** @ignore */
   _renderTable(year, month) {
     const firstDate = new DateTime.Moment([year, month - 1, 1]);
     let monthStartsAt = (firstDate.day() - this.startDay) % 7;
     const dateLocal = this._value ? this._value.clone().startOf(&apos;day&apos;) : null;
-    
+
     if (monthStartsAt &lt; 0) {
       monthStartsAt += 7;
     }
-    
+
     const data = {
       i18n: i18n,
       commons: commons,
@@ -1094,7 +1098,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
           dayFullName: dayMoment.format(&apos;dddd&apos;)
         };
       }, this),
-  
+
       // eslint-disable-next-line no-unused-vars, arrow-body-style
       weeks: ARRAYOF6.map((currentWeekIndex, weekIndex) =&gt; {
         // eslint-disable-next-line no-unused-vars
@@ -1107,17 +1111,17 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
           const cursor = new DateTime.Moment([year, month - 1]);
           // we use add() since &apos;day&apos; could be a negative value
           cursor.add(day, &apos;days&apos;);
-    
+
           const isCurrentMonth = cursor.month() + 1 === parseFloat(month);
           const dayOfWeek = new DateTime.Moment().day((dayIndex + this.startDay) % 7).format(&apos;dddd&apos;);
           const isToday = cursor.isSame(new DateTime.Moment(), &apos;day&apos;);
-    
+
           const cursorLocal = cursor.clone().startOf(&apos;day&apos;);
-    
+
           if (isToday) {
             cssClass.push(&apos;is-today&apos;);
           }
-    
+
           if (dateLocal &amp;&amp; cursorLocal.isSame(dateLocal, &apos;day&apos;)) {
             ariaSelected = true;
             cssClass.push(&apos;is-selected&apos;);
@@ -1126,22 +1130,20 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
               cssClass.push(&apos;is-invalid&apos;);
             }
           }
-    
+
           if (isCurrentMonth) {
             cssClass.push(&apos;is-currentMonth&apos;);
             if (!this.disabled &amp;&amp; isDateInRange(cursor, this.min, this.max)) {
               result.dateAttr = cursorLocal.format(INTERNAL_FORMAT);
               result.weekIndex = cursor.week();
               result.formattedDate = cursor.format(&apos;LL&apos;);
-            }
-            else {
+            } else {
               cssClass.push(&apos;is-disabled&apos;);
             }
-          }
-          else {
+          } else {
             cssClass.push(&apos;is-outsideMonth&apos;);
           }
-    
+
           result.isDisabled = this.disabled || !result.dateAttr;
           result.dateText = cursor.date();
           result.cssClass = cssClass.join(&apos; &apos;);
@@ -1150,18 +1152,18 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
           result.ariaInvalid = ariaInvalid;
           result.dateLabel = dayOfWeek;
           result.weekIndex = cursor.week();
-    
+
           return result;
         }, this);
       }, this)
     };
-    
+
     const handles = {};
     table.call(handles, data);
-    
+
     return handles.table;
   }
-  
+
   /** @ignore */
   _requireCursor() {
     let cursor = this._cursor;
@@ -1170,18 +1172,18 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
       cursor = (this._value ? this._value.clone().startOf(&apos;day&apos;) : new DateTime.Moment()).startOf(&apos;month&apos;);
       this._cursor = cursor;
     }
-    
+
     return cursor;
   }
-  
+
   /**
    Navigate to previous or next timeUnit interval.
-   
+
    @param {String} unit
    Year, Month, Week, Day
    @param {Boolean} isNext
    Whether to navigate forward or backward.
-   
+
    @private
    */
   _gotoPreviousOrNextTimeUnit(unit, isNext) {
@@ -1192,29 +1194,27 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     let currentMoment;
     let newMoment;
     let difference;
-    
+
     if (el) {
       currentActive = el.dataset.date;
       currentMoment = new DateTime.Moment(currentActive);
       newMoment = currentMoment[operator](1, unit);
-      
+
       // make sure new moment is in range before transitioning
       if (this._isInRange(newMoment, unit)) {
         difference = Math.abs(new DateTime.Moment(currentActive).diff(newMoment, &apos;days&apos;));
         this._getToNewMoment(direction, operator, difference);
         this._setActiveDescendant();
       }
-    }
-    else {
+    } else {
       this._requireCursor();
-      
+
       // if cursor is out of range
       if (!this._isInRange(this._cursor, unit)) {
         // advance to closest value in range
         if (this._isBeforeMin(this._cursor)) {
           newMoment = this.min;
-        }
-        else if (this._isAfterMax(this._cursor)) {
+        } else if (this._isAfterMax(this._cursor)) {
           newMoment = this.max;
         }
         newMoment = new DateTime.Moment(newMoment);
@@ -1223,12 +1223,12 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
         this._setActiveDescendant();
         return;
       }
-      
+
       this._cursor[operator](1, unit);
       this._renderCalendar(direction);
     }
   }
-  
+
   /**
    Checks if the Calendar is valid or not. This is done by checking that the current value is between the
    provided &lt;code&gt;min&lt;/code&gt; and &lt;code&gt;max&lt;/code&gt; values. This check is only performed on user interaction.
@@ -1236,34 +1236,33 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
    */
   _validateCalendar() {
     const isInvalid = !(this._value === null || isDateInRange(this._value, this.min, this.max));
-    
+
     if (this.invalid !== isInvalid) {
       this.invalid = isInvalid;
     }
   }
-  
+
   /** @ignore */
   _onNextOrPreviousMonthClick(event) {
     event.preventDefault();
-    
+
     this._gotoPreviousOrNextTimeUnit(timeUnit.MONTH, this._elements.next === event.matchedTarget);
     event.matchedTarget.focus();
     this._validateCalendar();
   }
-  
+
   /** @ignore */
   _getToNewMoment(direction, operator, difference) {
     const el = this._elements.body.querySelector(&apos;._coral-Calendar-date.is-focused&apos;);
     let currentActive;
-    
+
     if (el) {
       currentActive = el.dataset.date;
-    }
-    else {
+    } else {
       this._requireCursor();
       currentActive = this._cursor.format(INTERNAL_FORMAT);
     }
-    
+
     const currentMoment = new DateTime.Moment(currentActive);
     const currentMonth = currentMoment.month();
     const currentYear = currentMoment.year();
@@ -1271,25 +1270,24 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     const newMonth = newMoment.month();
     const newYear = newMoment.year();
     const newMomentValue = newMoment.format(INTERNAL_FORMAT);
-    
+
     if (newMonth !== currentMonth) {
       this._requireCursor();
       this._cursor[operator](1, &apos;months&apos;);
       this._renderCalendar(direction);
-    }
-    else if (newMonth === currentMonth &amp;&amp; newYear !== currentYear) {
+    } else if (newMonth === currentMonth &amp;&amp; newYear !== currentYear) {
       this._requireCursor();
       this._cursor[operator](1, &apos;years&apos;);
       this._renderCalendar(direction);
     }
-  
+
     const dateQuery = `._coral-Calendar-date[data-date^=${JSON.stringify(newMomentValue)}]`;
     const newDescendant = this._elements.body.querySelector(dateQuery);
     if (newDescendant) {
       this._activeDescendant = newDescendant.parentNode.getAttribute(&apos;id&apos;);
     }
   }
-  
+
   /** @ignore */
   _onDayMouseDown(event) {
     this._activeDescendant = event.target.parentNode.id;
@@ -1297,75 +1295,75 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements.body.focus();
     this._validateCalendar();
   }
-  
+
   /** @ignore */
   _onDayClick(event) {
     event.preventDefault();
-    
+
     this._elements.body.focus();
-    
+
     const date = new DateTime.Moment(event.target.dataset.date, INTERNAL_FORMAT);
     let dateLocal;
-    
+
     // Carry over any user set time info
     if (this._value) {
       dateLocal = this._value.clone();
     }
-    
+
     // Set attribute so a change event will be triggered if the user has selected a different date
     if (validateAsChangedAndValidMoment(date, dateLocal)) {
       this.value = date;
       this.trigger(&apos;change&apos;);
     }
-    
+
     this._validateCalendar();
   }
-  
+
   /** @ignore */
   _onEnterKey(event) {
     event.preventDefault();
-    
+
     const el = this._elements.body.querySelector(&apos;._coral-Calendar-date.is-focused&apos;);
-    
+
     if (el) {
       el.click();
     }
-    
+
     this._validateCalendar();
   }
-  
+
   /** @ignore */
   _onUpKey(event) {
     event.preventDefault();
-    
+
     this._gotoPreviousOrNextTimeUnit(timeUnit.WEEK, false);
     this._validateCalendar();
   }
-  
+
   /** @ignore */
   _onDownKey(event) {
     event.preventDefault();
-    
+
     this._gotoPreviousOrNextTimeUnit(timeUnit.WEEK, true);
     this._validateCalendar();
   }
-  
+
   /** @ignore */
   _onRightKey(event) {
     event.preventDefault();
-    
+
     this._gotoPreviousOrNextTimeUnit(timeUnit.DAY, true);
     this._validateCalendar();
   }
-  
+
   /** @ignore */
   _onLeftKey(event) {
     event.preventDefault();
-    
+
     this._gotoPreviousOrNextTimeUnit(timeUnit.DAY, false);
     this._validateCalendar();
   }
-  
+
   /** @ignore */
   _onHomeOrEndKey(event) {
     event.preventDefault();
@@ -1373,7 +1371,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     const direction = &apos;&apos;;
     const operator = isHome ? &apos;subtract&apos; : &apos;add&apos;;
     const el = this._elements.body.querySelector(&apos;._coral-Calendar-date.is-focused&apos;);
-    
+
     if (el) {
       const currentActive = el.dataset.date;
       const currentMoment = new DateTime.Moment(currentActive);
@@ -1381,49 +1379,49 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
       this._getToNewMoment(direction, operator, difference);
       this._setActiveDescendant();
     }
-    
+
     this._validateCalendar();
   }
-  
+
   /** @ignore */
   _onPageDownKey(event) {
     event.preventDefault();
     this._gotoPreviousOrNextTimeUnit(timeUnit.MONTH, true);
     this._validateCalendar();
   }
-  
+
   /** @ignore */
   _onPageUpKey(event) {
     event.preventDefault();
     this._gotoPreviousOrNextTimeUnit(timeUnit.MONTH, false);
     this._validateCalendar();
   }
-  
+
   /** @ignore */
   _onCtrlPageDownKey(event) {
     event.preventDefault();
     this._gotoPreviousOrNextTimeUnit(timeUnit.YEAR, true);
     this._validateCalendar();
   }
-  
+
   /** @ignore */
   _onCtrlPageUpKey(event) {
     event.preventDefault();
     this._gotoPreviousOrNextTimeUnit(timeUnit.YEAR, false);
     this._validateCalendar();
   }
-  
+
   /**
    sets focus to appropriate descendant
    */
   focus() {
-      const focusedElement = this._elements.body.querySelector(&apos;.is-focused&apos;);
-      if (focusedElement !== document.activeElement &amp;&amp; !this.disabled) {
-        this._setActiveDescendant();
-        this._elements.body.focus();
-      }
+    const focusedElement = this._elements.body.querySelector(&apos;.is-focused&apos;);
+    if (focusedElement !== document.activeElement &amp;&amp; !this.disabled) {
+      this._setActiveDescendant();
+      this._elements.body.focus();
+    }
   }
-  
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       startday: &apos;startDay&apos;,
@@ -1431,7 +1429,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
       valueformat: &apos;valueFormat&apos;
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -1442,32 +1440,34 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
       &apos;valueformat&apos;,
     ]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     this.setAttribute(&apos;role&apos;, &apos;group&apos;);
-    
+
     // Default reflected attribute
-    if (!this._valueFormat) { this.valueFormat = INTERNAL_FORMAT; }
-    
+    if (!this._valueFormat) {
+      this.valueFormat = INTERNAL_FORMAT;
+    }
+
     const frag = document.createDocumentFragment();
-    
+
     // Render template
     frag.appendChild(this._elements.input);
     frag.appendChild(this._elements.header);
     frag.appendChild(this._elements.body);
-    
+
     /// Clean Up (cloneNode support)
     while (this.firstChild) {
       this.removeChild(this.firstChild);
     }
-    
+
     this.appendChild(frag);
-    
+
     // Render the calendar body if it&apos;s empty
     if (!this._elements.body.firstElementChild) {
       this._renderCalendar();

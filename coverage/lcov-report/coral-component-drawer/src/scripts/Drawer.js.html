@@ -322,7 +322,17 @@
 <a name='L264'></a><a href='#L264'>264</a>
 <a name='L265'></a><a href='#L265'>265</a>
 <a name='L266'></a><a href='#L266'>266</a>
-<a name='L267'></a><a href='#L267'>267</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L267'></a><a href='#L267'>267</a>
+<a name='L268'></a><a href='#L268'>268</a>
+<a name='L269'></a><a href='#L269'>269</a>
+<a name='L270'></a><a href='#L270'>270</a>
+<a name='L271'></a><a href='#L271'>271</a>
+<a name='L272'></a><a href='#L272'>272</a>
+<a name='L273'></a><a href='#L273'>273</a>
+<a name='L274'></a><a href='#L274'>274</a>
+<a name='L275'></a><a href='#L275'>275</a>
+<a name='L276'></a><a href='#L276'>276</a>
+<a name='L277'></a><a href='#L277'>277</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -412,7 +422,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -476,9 +485,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1438x</span>
+<span class="cline-any cline-yes">1198x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -487,7 +494,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -521,7 +527,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -535,7 +540,6 @@
 <span class="cline-any cline-yes">100x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">100x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -588,6 +592,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">96x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">96x</span>
+<span class="cline-any cline-yes">70x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">960x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -607,9 +627,9 @@ import {commons, transform, validate, i18n} from '../../../coral-utils';
 &nbsp;
 /**
  Enumeration for {@link Drawer} directions.
- 
+&nbsp;
  @typedef {Object} DrawerDirectionEnum
- 
+&nbsp;
  @property {String} DOWN
  A drawer with a toggle button on the bottom.
  @property {String} UP
@@ -640,22 +660,22 @@ class Drawer extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Templates
     this._elements = {
       content: this.querySelector('coral-drawer-content') || document.createElement('coral-drawer-content')
     };
     base.call(this._elements, {commons, i18n});
-    
+&nbsp;
     // Events
     this._delegateEvents({
       'click ._coral-Drawer-toggleButton': '_onClick'
     });
   }
-  
+&nbsp;
   /**
    Whether this item is disabled or not. This will stop every user interaction with the item.
-   
+&nbsp;
    @type {Boolean}
    @default false
    @htmlattribute disabled
@@ -664,17 +684,18 @@ class Drawer extends BaseComponent(HTMLElement) {
   get disabled() {
     return this._disabled || false;
   }
+&nbsp;
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
-  
+&nbsp;
     this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
     this._elements.toggle.hidden = this._disabled;
   }
-  
+&nbsp;
   /**
    The drawer's content element.
-   
+&nbsp;
    @type {DrawerContent}
    @htmlttribute content
    @contentzone
@@ -682,19 +703,20 @@ class Drawer extends BaseComponent(HTMLElement) {
   get content() {
     return this._getContentZone(this._elements.content);
   }
+&nbsp;
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-drawer-content',
-      insert: function(content) {
+      insert: function (content) {
         this._elements.contentWrapper.appendChild(content);
       }
     });
   }
-  
+&nbsp;
   /**
    The drawer's direction. See {@link DrawerDirectionEnum}.
-   
+&nbsp;
    @type {String}
    @default DrawerDirectionEnum.DOWN
    @htmlattribute direction
@@ -703,18 +725,19 @@ class Drawer extends BaseComponent(HTMLElement) {
   get direction() {
     return this._direction || direction.DOWN;
   }
+&nbsp;
   set direction(value) {
     value = transform.string(value).toLowerCase();
     this._direction = validate.enumeration(direction)(value) &amp;&amp; value || direction.DOWN;
     this._reflectAttribute('direction', this._direction);
-  
+&nbsp;
     this.classList.remove(...ALL_DIRECTION_CLASSES);
     this.classList.add(`${CLASSNAME}--${this._direction}`);
   }
-  
+&nbsp;
   /**
    Whether the Drawer is expanded or not.
-   
+&nbsp;
    @type {Boolean}
    @default false
    @htmlattribute open
@@ -723,102 +746,110 @@ class Drawer extends BaseComponent(HTMLElement) {
   get open() {
     return this._open || false;
   }
+&nbsp;
   set open(value) {
     const silenced = this._silenced;
-    
+&nbsp;
     this._open = transform.booleanAttr(value);
     this._reflectAttribute('open', this._open);
-  
+&nbsp;
     this._elements.toggleButton.setAttribute('aria-expanded', this._open);
-  
+&nbsp;
     // eslint-disable-next-line no-unused-vars
     let offsetHeight;
-    
+&nbsp;
     // Handle slider animation
     const slider = this._elements.slider;
-    
+&nbsp;
     // Don't animate on initialization
     if (this._animate) {
       commons.transitionEnd(slider, () =&gt; {
         // Keep it silenced
         this._silenced = silenced;
-        
+&nbsp;
         // Remove height as we want the drawer to naturally grow if content is added later
-        if (this._open) {
+        if (this._open) {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
           slider.style.height = '';
         }
-      
+&nbsp;
         // Trigger once transition is finished
         this.trigger(`coral-drawer:${(this._open ? 'open' : 'close')}`);
         this._silenced = false;
-      });<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-    
+      });
+&nbsp;
       if (!this._open) {
         // Force height to enable transition
         slider.style.height = `${slider.scrollHeight}px`;
       }
-      
+&nbsp;
       // Do transition in next task as browser might batch up the height property change before painting
       window.setTimeout(() =&gt; {
         slider.style.height = this._open ? `${slider.scrollHeight}px` : 0;
       }, 10);
-    }
-    else {
+    } else {
       // Make sure it's animated next time
       this._animate = true;
-    
+&nbsp;
       // Hide it on initialization if closed
       if (!this._open) {
         slider.style.height = 0;
       }
     }
   }
-  
+&nbsp;
   /** @private */
   _onClick() {
     this.open = !this.open;
   }
-  
-  get _contentZones() { return {'coral-drawer-content': 'content'}; }
-  
+&nbsp;
+  get _contentZones() {
+    return {'coral-drawer-content': 'content'};
+  }
+&nbsp;
   /**
    Returns {@link Drawer} direction options.
-   
-   @return {DrawerDirectionEnum}
+&nbsp;
+   @return {DrawerDirectionEnum}<span class="branch-2 cbranch-no" title="branch not covered" ></span>
    */
-  static get direction() { return direction; }
-  
+  static get direction() {
+    return direction;
+  }
+&nbsp;
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'disabled',
       'direction',
       'open'
-    ]);<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    ]);
   }
-  
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME, 'coral-Well');
-    
+&nbsp;
     // Default reflected attributes
-    if (!this._direction) { this.direction = direction.DOWN; }
-    if (!this._open) { this.open = false; }
-  
+    if (!this._direction) {
+      this.direction = direction.DOWN;
+    }
+    if (!this._open) {
+      this.open = false;
+    }
+&nbsp;
     // Create a fragment
     const fragment = document.createDocumentFragment();
-  
+&nbsp;
     const templateHandleNames = ['slider', 'toggle'];
-  
+&nbsp;
     // Render the template
     fragment.appendChild(this._elements.slider);
     fragment.appendChild(this._elements.toggle);
-  
+&nbsp;
     // Fetch or create the content content zone element
     const content = this._elements.content;
-  
+&nbsp;
     // Move any remaining elements into the content sub-component
     while (this.firstChild) {
       const child = this.firstChild;
@@ -826,29 +857,28 @@ class Drawer extends BaseComponent(HTMLElement) {
         child.nodeType === Node.ELEMENT_NODE &amp;&amp; templateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the label
         content.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else
         this.removeChild(child);
       }
     }
-  
+&nbsp;
     // Add the frag to the component
     this.appendChild(fragment);
-  
+&nbsp;
     // Assign the content zone
     this.content = content;
   }
-  
+&nbsp;
   /**
    Triggered when the {@link Drawer} is opened.
-   
+&nbsp;
    @typedef {CustomEvent} coral-drawer:open
    */
-  
+&nbsp;
   /**
    Triggered when the {@link Drawer} is closed.
-   
+&nbsp;
    @typedef {CustomEvent} coral-drawer:close
    */
 }
@@ -861,7 +891,7 @@ export default Drawer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

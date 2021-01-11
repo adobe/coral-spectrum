@@ -448,37 +448,38 @@ class Panel extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Templates
     this._elements = {
       content: this.querySelector(&apos;coral-panel-content&apos;) || document.createElement(&apos;coral-panel-content&apos;)
     };
   }
-  
+
   /**
    The content of the panel.
-   
+
    @type {PanelContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone(&apos;content&apos;, value, {
       handle: &apos;content&apos;,
       tagName: &apos;coral-panel-content&apos;,
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
   }
-  
+
   /**
    Whether the item is selected. When true, the item will appear as the active element in the PanelStack. The item
    must be a child of a PanelStack before this property is set to true. This property cannot be programmatically set
    to false.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -487,44 +488,53 @@ class Panel extends BaseComponent(HTMLElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
-    this._selected = transform.booleanAttr(value);
+    let _selected = transform.booleanAttr(value);
+
+    if(this._selected === _selected) {
+      return;
+    }
+
+    this._selected = _selected;
     this._reflectAttribute(&apos;selected&apos;, this._selected);
-    
+
     this.classList.toggle(&apos;is-selected&apos;, this._selected);
     this.setAttribute(&apos;aria-hidden&apos;, !this.selected);
-    
+
     this.trigger(&apos;coral-panel:_selectedchanged&apos;);
   }
-  
-  get _contentZones() { return {&apos;coral-panel-content&apos;: &apos;content&apos;}; }
-  
+
+  get _contentZones() {
+    return {&apos;coral-panel-content&apos;: &apos;content&apos;};
+  }
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;selected&apos;]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // Adds the role to support accessibility when role is not already defined.
     if (!this.hasAttribute(&apos;role&apos;)) {
       this.setAttribute(&apos;role&apos;, &apos;region&apos;);
     }
-  
+
     // Fetch the content zone elements
     const content = this._elements.content;
-  
+
     // Move the content into the content zone if none specified
     if (!content.parentNode) {
       while (this.firstChild) {
         content.appendChild(this.firstChild);
       }
     }
-  
+
     // Assign the content zone so the insert function will be called
     this.content = content;
   }

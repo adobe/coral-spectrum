@@ -318,9 +318,7 @@
 <a name='L260'></a><a href='#L260'>260</a>
 <a name='L261'></a><a href='#L261'>261</a>
 <a name='L262'></a><a href='#L262'>262</a>
-<a name='L263'></a><a href='#L263'>263</a>
-<a name='L264'></a><a href='#L264'>264</a>
-<a name='L265'></a><a href='#L265'>265</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L263'></a><a href='#L263'>263</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -392,7 +390,6 @@
 <span class="cline-any cline-yes">58x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">58x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -488,7 +485,6 @@
 <span class="cline-any cline-yes">66x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">66x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -613,7 +609,7 @@ class ShellWorkspaces extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Events
     this._delegateEvents({
       'key:down [is="coral-shell-workspace"]': '_focusNextItem',
@@ -628,7 +624,7 @@ class ShellWorkspaces extends BaseComponent(HTMLElement) {
       'coral-shell-workspace:_selectedchanged': '_onItemSelectedChanged',
       'change ._coral-Shell-workspaces-select': '_onSelectChanged'
     });
-    
+&nbsp;
     // Template
     this._elements = {
       select: new Select().set({
@@ -636,17 +632,17 @@ class ShellWorkspaces extends BaseComponent(HTMLElement) {
       })
     };
     this._elements.select.classList.add('_coral-Shell-workspaces-select');
-  
+&nbsp;
     // Used for eventing
     this._oldSelection = null;
-  
+&nbsp;
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
   }
-  
+&nbsp;
   /**
    The item collection.
-   
+&nbsp;
    @type {SelectableCollection}
    @readonly
    */
@@ -661,31 +657,31 @@ class ShellWorkspaces extends BaseComponent(HTMLElement) {
         onItemRemoved: this._validateSelection
       });
     }
-  
+&nbsp;
     return this._items;
   }
-  
+&nbsp;
   /**
    Returns the selected workspace.
-   
+&nbsp;
    @type {HTMLElement}
    @readonly
    */
   get selectedItem() {
     return this.items._getLastSelected();
   }
-  
+&nbsp;
   /** @private */
   _validateSelection(item) {
     // gets the current selection
     const selection = this.items._getAllSelected();
     const selectionCount = selection.length;
-    
+&nbsp;
     // if no item is currently selected, we need to find a candidate
     if (selectionCount === 0) {
       // gets the first candidate for selection
-      const selectable = this.items._getFirstSelectable();
-      <span class="branch-1 cbranch-no" title="branch not covered" ></span>
+      const selectable = <span class="branch-1 cbranch-no" title="branch not covered" >this.items._getFirstSelectable()</span>;
+&nbsp;
       if (selectable) {
         selectable.setAttribute('selected', '');
       }
@@ -694,155 +690,153 @@ class ShellWorkspaces extends BaseComponent(HTMLElement) {
     else if (selectionCount &gt; 1) {
       // By default, the last one stays selected
       item = item || selection[selection.length - 1];
-      
-      for (let i = 0; i &lt; selectionCount; i++) {
+&nbsp;
+      for (let i = 0 ; i &lt; selectionCount ; i++) {
         if (selection[i] !== item) {
           // Don't trigger change events
           this._preventTriggeringEvents = true;
           selection[i].removeAttribute('selected');
         }
       }
-      
+&nbsp;
       // We can trigger change events again
       this._preventTriggeringEvents = false;
     }
-  
+&nbsp;
     // Sync select items under the hood
     this._renderSelectItems();
-    
+&nbsp;
     this._triggerChangeEvent();
   }
-  
+&nbsp;
   _renderSelectItems() {
     this._elements.select.items.clear();
-    
+&nbsp;
     this.items.getAll().forEach((item) =&gt; {
       this._elements.select.items.add({
         content: {
           innerHTML: item.innerHTML
         },
         selected: item.hasAttribute('selected'),
-        _workspace: item
-      });<span class="fstat-no" title="function not covered" ></span>
+        _workspace: <span class="fstat-no" title="function not covered" >item</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
     })<span class="cstat-no" title="statement not covered" >;</span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-  
+  }
+&nbsp;
   _onSelectChanged(event) {
     event.stopImmediatePropagation();
-    
+&nbsp;
     this._elements.select.selectedItem._workspace.selected = true;
   }
-  
+&nbsp;
   /** @private */
   _triggerChangeEvent() {
     const selectedItem = this.selectedItem;
     const oldSelection = this._oldSelection;
-    
+&nbsp;
     if (!this._preventTriggeringEvents &amp;&amp; selectedItem !== oldSelection) {
       this.trigger('coral-shell-workspaces:change', {
         oldSelection: oldSelection,
         selection: selectedItem
       });
-      
+&nbsp;
       this._oldSelection = selectedItem;
     }
   }
-  
+&nbsp;
   /** @private */
   _onItemSelectedChanged(event) {
     event.stopImmediatePropagation();
-    
+&nbsp;
     const item = event.target;
     this._validateSelection(item);
   }
-  
+&nbsp;
   /**
    Returns true if the event is at the matched target.
-   
+&nbsp;
    @private
    */
   _eventIsAtTarget(event) {
     const target = event.target;
     const listItem = event.matchedTarget;
-  
+<span class="missing-if-branch" title="else path not taken" >E</span>
     const isAtTarget = target === listItem;
-  <span class="missing-if-branch" title="else path not taken" >E</span>
+&nbsp;
     if (isAtTarget) {
       // Don't let arrow keys etc scroll the page
       event.preventDefault();
       event.stopPropagation();
     }
-  
+&nbsp;
     return isAtTarget;
   }
-  
+&nbsp;
   /** @private */
-  _focusNextItem(event) {
-    if (!this._eventIsAtTarget(event)) {
-      <span class="missing-if-branch" title="if path not taken" >I</span>return;
-    }<span class="cstat-no" title="statement not covered" ></span>
-  
+  _foc<span class="missing-if-branch" title="if path not taken" >I</span>usNextItem(event) {
+    if (<span class="cstat-no" title="statement not covered" >!this._e</span>ventIsAtTarget(event)) {
+      return;
+    }
+&nbsp;
     const target = event.matchedTarget;
-    if (target.nextElementSibling) {
+    if<span class="missing-if-branch" title="else path not taken" >E</span> (target.nextElementSibling) {
       target.nextElementSibling.focus();
-    }<span class="missing-if-branch" title="else path not taken" >E</span>
-    else {
-      this.items.first().focus();
-    }<span class="cstat-no" title="statement not covered" ></span>
+    } else {
+      th<span class="cstat-no" title="statement not covered" >is.items.first().focus();</span>
+    }
   }
-  
+&nbsp;
   /** @private */
   _focusPreviousItem(event) {
     if (!this._eventIsAtTarget(event)) {
       return;
-    }
-  <span class="missing-if-branch" title="if path not taken" >I</span>
-    cons<span class="cstat-no" title="statement not covered" >t target</span> = event.matchedTarget;
+    }<span class="missing-if-branch" title="if path not taken" >I</span>
+<span class="cstat-no" title="statement not covered" ></span>
+    const target = event.matchedTarget;
     if (target.previousElementSibling) {
       target.previousElementSibling.focus();
-    }
-    else {
+    } else {
       <span class="missing-if-branch" title="if path not taken" >I</span>this.items.last().focus();
     }<span class="cstat-no" title="statement not covered" ></span>
   }
-  
+&nbsp;
   /** @private */
   _focusFirstItem(event) {
     if (!this._eventIsAtTarget(event)) {
       return;
     }
-    
+&nbsp;
     this.items.first().focus();
   }<span class="missing-if-branch" title="if path not taken" >I</span>
-  <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
   /** @private */
   _focusLastItem(event) {
     if (!this._eventIsAtTarget(event)) {
       return;
     }
-  
+&nbsp;
     this.items.last().focus();
   }
-  
+&nbsp;
   /** <span class="missing-if-branch" title="if path not taken" >I</span>@ignore */
   render<span class="cstat-no" title="statement not covered" >() {</span>
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-  
+&nbsp;
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;
     this._validateSelection();
     this._preventTriggeringEvents = false;
-  
+&nbsp;
     this._oldSelection = this.selectedItem;
-    
+&nbsp;
     // Support cloneNode
     const template = this.querySelector('._coral-Shell-workspaces-select');
     if (template) {
       template.remove();
     }
-    
+&nbsp;
     this.appendChild(this._elements.select);
   }
 }
@@ -855,7 +849,7 @@ export default ShellWorkspaces;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

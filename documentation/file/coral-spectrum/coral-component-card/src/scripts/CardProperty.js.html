@@ -450,36 +450,37 @@ class CardProperty extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Prepare templates
     this._elements = {
       content: this.querySelector(&apos;coral-card-property-content&apos;) || document.createElement(&apos;coral-card-property-content&apos;)
     };
     icon.call(this._elements);
   }
-  
+
   /**
    The property&apos;s content zone
-   
+
    @type {CardPropertyContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone(&apos;content&apos;, value, {
       handle: &apos;content&apos;,
       tagName: &apos;coral-card-property-content&apos;,
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
   }
-  
+
   /**
    Specifies the icon name used inside the property. See {@link Icon} for valid icon names.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute icon
@@ -487,22 +488,22 @@ class CardProperty extends BaseComponent(HTMLElement) {
   get icon() {
     return this._elements.icon.icon;
   }
+
   set icon(value) {
     this._elements.icon.icon = value;
-  
+
     // removes the icon element from the DOM since there is no valid icon. this causes the content to have the
     // correct styling
     if (this.icon === &apos;&apos;) {
       this._elements.icon.remove();
-    }
-    else if (!this._elements.icon.parentNode) {
+    } else if (!this._elements.icon.parentNode) {
       this.insertBefore(this._elements.icon, this.firstChild);
     }
   }
 
   /**
    Specifies the alternative text to be used for the icon.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute iconalt
@@ -510,13 +511,14 @@ class CardProperty extends BaseComponent(HTMLElement) {
   get iconAlt() {
     return this._elements.icon ? this._elements.icon.getAttribute(&apos;alt&apos;) : undefined;
   }
+
   set iconAlt(value) {
     this._elements.icon &amp;&amp; this._elements.icon.setAttribute(&apos;alt&apos;, value);
   }
 
   /**
    Specifies the title attribute to be used for the icon.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute icontitle
@@ -524,11 +526,14 @@ class CardProperty extends BaseComponent(HTMLElement) {
   get iconTitle() {
     return this._elements.icon ? this._elements.icon.getAttribute(&apos;title&apos;) : undefined;
   }
+
   set iconTitle(value) {
     this._elements.icon &amp;&amp; this._elements.icon.setAttribute(&apos;title&apos;, value);
   }
-  
-  get _contentZones() { return {&apos;coral-card-property-content&apos;: &apos;content&apos;}; }
+
+  get _contentZones() {
+    return {&apos;coral-card-property-content&apos;: &apos;content&apos;};
+  }
 
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
@@ -536,46 +541,47 @@ class CardProperty extends BaseComponent(HTMLElement) {
       icontitle: &apos;iconTitle&apos;,
     });
   }
-  
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat([&apos;icon&apos;, &apos;iconalt&apos;, &apos;icontitle&apos;]); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat([&apos;icon&apos;, &apos;iconalt&apos;, &apos;icontitle&apos;]);
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME, &apos;coral-Body--small&apos;);
-  
+
     // Create a fragment
     const frag = document.createDocumentFragment();
-  
+
     // Render the main template
     if (this.icon) {
       frag.appendChild(this._elements.icon);
     }
-  
+
     const content = this._elements.content;
-  
+
     // Remove it so we can process children
     if (content.parentNode) {
       content.parentNode.removeChild(content);
     }
-  
+
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
         child.nodeType === Node.ELEMENT_NODE &amp;&amp; child.getAttribute(&apos;handle&apos;) !== &apos;icon&apos;) {
         // Add non-template elements to the label
         content.appendChild(child);
-      }
-      else {
+      } else {
         this.removeChild(child);
       }
     }
-  
+
     // Add the frag to the component
     this.appendChild(frag);
-  
+
     // Assign the content zones, moving them into place in the process
     this.content = content;
   }

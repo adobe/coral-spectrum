@@ -444,9 +444,9 @@ const CLASSNAME_INPUT = &apos;_coral-Slider-input&apos;;
 
 /**
  Enumeration for {@link Slider} orientations.
- 
+
  @typedef {Object} SliderOrientationEnum
- 
+
  @property {String} HORIZONTAL
  Horizontal slider.
  @property {String} VERTICAL
@@ -469,7 +469,7 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-  
+
     this._delegateEvents(commons.extend(this._events, {
       &apos;key:up ._coral-Slider-handle&apos;: &apos;_handleKey&apos;,
       &apos;key:right ._coral-Slider-handle&apos;: &apos;_handleKey&apos;,
@@ -479,60 +479,61 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
       &apos;key:pageDown ._coral-Slider-handle&apos;: &apos;_handleKey&apos;,
       &apos;key:home ._coral-Slider-handle&apos;: &apos;_handleKey&apos;,
       &apos;key:end ._coral-Slider-handle&apos;: &apos;_handleKey&apos;,
-      
+
       &apos;input&apos;: &apos;_onInputChangeHandler&apos;,
-  
+
       &apos;touchstart&apos;: &apos;_onMouseDown&apos;,
       &apos;mousedown&apos;: &apos;_onMouseDown&apos;,
-  
+
       &apos;capture:focus&apos;: &apos;_focus&apos;,
       &apos;capture:blur&apos;: &apos;_blur&apos;
     }));
-    
+
     // Prepare templates
     this._elements = {};
     this._getTemplate().call(this._elements, {commons});
-  
+
     // Pre-define labellable element
     this._labellableElement = this._elements.leftInput;
-  
+
     // Content zone
     this._elements.content = this.querySelector(&apos;coral-slider-content&apos;) || document.createElement(&apos;coral-slider-content&apos;);
-  
+
     // Additional shortcuts
     const handleContainer = this._elements.controls;
     this._elements.handles = Array.prototype.slice.call(handleContainer.querySelectorAll(`.${CLASSNAME_HANDLE}`));
     this._elements.inputs = Array.prototype.slice.call(handleContainer.querySelectorAll(`.${CLASSNAME_INPUT}`));
-  
+
     // Binding
     this._onInteraction = this._onInteraction.bind(this);
-    
+
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
   }
-  
+
   /**
    The slider&apos;s content.
-   
+
    @type {SliderContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone(&apos;content&apos;, value, {
       handle: &apos;content&apos;,
       tagName: &apos;coral-slider-content&apos;,
-      insert: function(content) {
+      insert: function (content) {
         this._elements.labelContent.appendChild(content);
       }
     });
   }
-  
+
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+
    @type {Collection}
    @readonly
    */
@@ -546,10 +547,10 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     }
     return this._items;
   }
-  
+
   /**
    Increment value of one step.
-   
+
    @type {Number}
    @default 1
    @htmlattribute step
@@ -558,21 +559,22 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get step() {
     return this._getValueOf(&apos;step&apos;, 1);
   }
+
   set step(value) {
     value = transform.number(value);
     if (value &gt; 0) {
       this._step = value;
       this._reflectAttribute(&apos;step&apos;, this._step);
-      
+
       this._elements.inputs.forEach((input) =&gt; {
         input.setAttribute(&apos;step&apos;, this._step);
       });
     }
   }
-  
+
   /**
    The minimum value.
-   
+
    @type {Number}
    @default 1
    @htmlattribute min
@@ -581,18 +583,19 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get min() {
     return this._getValueOf(&apos;min&apos;, 1);
   }
+
   set min(value) {
     this._min = transform.number(value);
     this._reflectAttribute(&apos;min&apos;, this._min);
-    
+
     this._elements.inputs.forEach((input) =&gt; {
       input.setAttribute(&apos;min&apos;, this._min);
     });
   }
-  
+
   /**
    The maximum value.
-   
+
    @type {Number}
    @default 100
    @htmlattribute max
@@ -601,30 +604,32 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get max() {
     return this._getValueOf(&apos;max&apos;, 100);
   }
+
   set max(value) {
     this._max = transform.number(value);
     this._reflectAttribute(&apos;max&apos;, this._max);
-    
+
     this._elements.inputs.forEach((input) =&gt; {
       input.setAttribute(&apos;max&apos;, this._max);
     });
   }
-  
+
   /**
    @ignore
-   
+
    Not supported anymore. Use &quot;showValue&quot; instead.
    */
   get tooltips() {
     return this.showValue;
   }
+
   set tooltips(value) {
     this.showValue = value;
   }
-  
+
   /**
    Display the slider value.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute showvalue
@@ -633,16 +638,17 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get showValue() {
     return this._showValue || false;
   }
+
   set showValue(value) {
     this._showValue = transform.booleanAttr(value);
     this._reflectAttribute(&apos;showvalue&apos;, this._showValue);
-    
+
     this._elements.labelValue.hidden = !this._showValue;
   }
-  
+
   /**
    Orientation of the slider. See {@link SliderOrientationEnum}.
-   
+
    @type {String}
    @default SliderOrientationEnum.HORIZONTAL
    @htmlattribute orientation
@@ -651,15 +657,16 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get orientation() {
     return this._orientation || orientation.HORIZONTAL;
   }
+
   set orientation(value) {
     value = transform.string(value).toLowerCase();
     this._orientation = validate.enumeration(orientation)(value) &amp;&amp; value || orientation.HORIZONTAL;
     this._reflectAttribute(&apos;orientation&apos;, this._orientation);
   }
-  
+
   /**
    Fill a value or value range using a highlight color.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute filled
@@ -668,26 +675,28 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get filled() {
     return this._filled || false;
   }
+
   set filled(value) {
     this._filled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;filled&apos;, this._filled);
-    
+
     this.classList.toggle(`${CLASSNAME}--filled`, this._filled);
   }
-  
+
   /**
    The value returned as a Number. Value is &lt;code&gt;NaN&lt;/code&gt; if conversion to Number is not possible.
-   
+
    @type {Number}
    @default NaN
    */
   get valueAsNumber() {
     return parseFloat(this.value);
   }
+
   set valueAsNumber(value) {
     this.value = transform.float(value);
   }
-  
+
   /**
    Name used to submit the data in a form.
    @type {String}
@@ -698,14 +707,15 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._elements.inputs[0].name;
   }
+
   set name(value) {
     this._reflectAttribute(&apos;name&apos;, value);
-    
+
     this._elements.inputs.forEach((input) =&gt; {
       input.name = this.getAttribute(&apos;name&apos;);
     });
   }
-  
+
   /**
    This field&apos;s current value.
    @type {String}
@@ -715,33 +725,33 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get value() {
     return this._elements.inputs[0].value;
   }
+
   set value(value) {
     value = transform.number(value);
-    
+
     // setting the value should always set the first value
     if (this._elements.handles.length === 1) {
       const input = this._elements.inputs[0];
-      
+
       value = this._snapValueToStep(value, this.min, this.max, this.step);
-      
+
       input.value = value;
       if (input.value) {
         input.setAttribute(&apos;aria-valuenow&apos;, value);
         input.setAttribute(&apos;aria-valuetext&apos;, this._getLabel(value));
-      }
-      else {
+      } else {
         input.removeAttribute(&apos;aria-valuenow&apos;);
         input.removeAttribute(&apos;aria-valuetext&apos;);
       }
-      
+
       this._moveHandles();
-      
+
       // in order to keep the reset value in sync, we need to handle the &quot;value&quot; attribute of the inner input
       const valueAttribute = this.getAttribute(&apos;value&apos;);
       input[valueAttribute ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;value&apos;, valueAttribute);
     }
   }
-  
+
   /**
    Whether this field is disabled or not.
    @type {Boolean}
@@ -752,17 +762,18 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
-    
+
     this.classList.toggle(&apos;is-disabled&apos;, this._disabled);
     this[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
     this._elements.inputs.forEach((input) =&gt; {
       input.disabled = this._disabled;
     });
   }
-  
+
   /**
    Whether this field is required or not.
    @type {Boolean}
@@ -773,15 +784,16 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute(&apos;required&apos;, this._required);
-    
+
     this._elements.inputs.forEach((input) =&gt; {
       input.required = this._required;
     });
   }
-  
+
   /**
    Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
    @type {Boolean}
@@ -792,68 +804,69 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute(&apos;readonly&apos;, this._readOnly);
-    
+
     this._elements.inputs.forEach((input) =&gt; {
       input.readOnly = this._readOnly;
     });
   }
-  
+
   /**
    Inherited from {@link BaseFormField#labelledBy}.
    */
   get labelledBy() {
     return super.labelledBy;
   }
+
   set labelledBy(value) {
     super.labelledBy = value;
-    
+
     if (this._elements.inputs.length &gt; 1) {
       const input = this._elements.inputs[1];
       const labelledBy = this.labelledBy;
-      
+
       input[labelledBy ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-labelledby&apos;, labelledBy);
     }
   }
-  
+
   /** @private */
   get _values() {
     return this._elements.inputs.map((input) =&gt; String(parseInt(input.value, 10)));
   }
+
   set _values(values) {
     if (values &amp;&amp; values.length === this._elements.handles.length) {
       this._elements.inputs.forEach((input, i) =&gt; {
         const value = values[i] = this._snapValueToStep(values[i], this.min, this.max, this.step);
-      
+
         input.value = value;
         if (input.value) {
           input.setAttribute(&apos;aria-valuenow&apos;, value);
           input.setAttribute(&apos;aria-valuetext&apos;, this._getLabel(value));
-        }
-        else {
+        } else {
           input.removeAttribute(&apos;aria-valuenow&apos;);
           input.removeAttribute(&apos;aria-valuetext&apos;);
         }
       });
-    
+
       this._moveHandles();
     }
   }
-  
+
   /** @private */
   _getValueOf(name, defaultValue) {
     if (typeof this[`_${name}`] === &apos;number&apos;) {
       return this[`_${name}`];
-    }
-    else if (this.hasAttribute(name)) {
+    } else if (this.hasAttribute(name)) {
       return parseFloat(this.getAttribute(name));
     }
-    
+
     return defaultValue;
   }
-  
+
   /**
    handles any mousedown/touchstart on the whole slider
    @private
@@ -862,45 +875,45 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     if (this.disabled) {
       return;
     }
-    
+
     // do not accept right mouse button clicks
     if (event instanceof MouseEvent) {
       if ((event.which || event.button) !== 1) {
         return;
       }
     }
-    
+
     event.preventDefault();
-    
+
     this._currentHandle = event.target.closest(`.${CLASSNAME_HANDLE}`);
-    
+
     // If no handle was touched:
     // the closest handle needs to jump to the closest valid position
     if (!this._currentHandle) {
       const p = this._getPoint(event);
       const val = this._getValueFromCoord(p.pageX, p.pageY, true);
-      
+
       this._currentHandle = this._findNearestHandle(p.pageX, p.pageY);
       this._updateValue(this._currentHandle, val);
       this._setHandleFocus(this._currentHandle);
     }
-    
+
     this._currentHandle.classList.add(&apos;is-dragged&apos;);
     document.body.classList.add(&apos;u-coral-closedHand&apos;);
-    
+
     this._draggingHandler = this._handleDragging.bind(this);
     this._mouseUpHandler = this._mouseUp.bind(this);
-    
+
     events.on(&apos;mousemove.Slider&apos;, this._draggingHandler);
     events.on(&apos;mouseup.Slider&apos;, this._mouseUpHandler);
-    
+
     events.on(&apos;touchmove.Slider&apos;, this._draggingHandler);
     events.on(&apos;touchend.Slider&apos;, this._mouseUpHandler);
     events.on(&apos;touchcancel.Slider&apos;, this._mouseUpHandler);
-    
+
     this._setHandleFocus(this._currentHandle);
   }
-  
+
   /**
    @private
    @return {Object} which contains the real coordinates
@@ -908,40 +921,39 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   _getPoint(event) {
     if (event.changedTouches &amp;&amp; event.changedTouches.length &gt; 0) {
       return event.changedTouches[0];
-    }
-    else if (event.touches &amp;&amp; event.touches.length &gt; 0) {
+    } else if (event.touches &amp;&amp; event.touches.length &gt; 0) {
       return event.touches[0];
     }
-    
+
     return event;
   }
-  
+
   /**
    will set the focus either on the handle element
    or its input if range is supported
-   
+
    @protected
    */
   _setHandleFocus(handle) {
     handle.querySelector(`.${CLASSNAME_INPUT}`).focus();
   }
-  
+
   /**
    Handles keyboard interaction with the handlers.
    In case input[type=range] is supported, the focus
    will be on the input and keyboard handling will happen natively
-   
+
    @private
    */
   _handleKey(event) {
     event.preventDefault();
-    
+
     this._focus(event);
-    
+
     const handle = event.matchedTarget;
     const idx = this._elements.handles.indexOf(handle);
     let v = parseInt(this._values[idx], 10);
-  
+
     // increase
     if (event.keyCode === Keys.keyToCode(&apos;up&apos;) ||
       event.keyCode === Keys.keyToCode(&apos;right&apos;) ||
@@ -962,91 +974,90 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     else if (event.keyCode === Keys.keyToCode(&apos;end&apos;)) {
       v = this.max;
     }
-    
+
     this._updateValue(handle, v);
   }
-  
+
   /**
    Finds the nearest handle based on X/Y coordinates
-   
+
    @private
    */
   _findNearestHandle(mouseX, mouseY) {
     let closestDistance = Infinity;
     let closestHandle;
-    
+
     function calculateDistance(elem, x, y) {
       const box = elem.getBoundingClientRect();
       const top = box.top + window.pageYOffset;
       const left = box.left + window.pageXOffset;
-      
+
       return Math.floor(
         Math.sqrt(Math.pow(x - (left + box.width / 2), 2) + Math.pow(y - (top + box.height / 2), 2))
       );
     }
-    
+
     // Find the nearest handle
     this._elements.handles.forEach((handle) =&gt; {
       const distance = calculateDistance(handle, mouseX, mouseY);
-      
+
       if (distance &lt; closestDistance) {
         closestDistance = distance;
         closestHandle = handle;
       }
     });
-    
+
     return closestHandle;
   }
-  
+
   /**
    Moves the handles to right position
    based on the data in this._values
-   
+
    @private
    */
   _moveHandles() {
     const calculatePercent = (value) =&gt; (value - this.min) / (this.max - this.min) * 100;
     const labelValue = [];
-    
+
     // Set the handle position as a percentage based on the stored values
     if (this._elements.handles.length === 1) {
       const handle = this._elements.handles[0];
       const percent = calculatePercent(this._values[0]);
       handle.style.left = `${percent}%`;
-      
+
       handle.previousElementSibling.style.width = `${percent}%`;
       handle.nextElementSibling.style.width = `${100 - percent}%`;
-  
+
       labelValue.push(this._getLabel(this._values[0]));
-    }
-    else {
+    } else {
       const leftHandle = this._elements.handles[0];
       const leftPercent = calculatePercent(this._values[0]);
       leftHandle.style.left = `${leftPercent}%`;
-      
+
       const rightHandle = this._elements.handles[1];
       const rightPercent = calculatePercent(this._values[1]);
       rightHandle.style.left = `${rightPercent}%`;
-  
+
       leftHandle.previousElementSibling.style.width = `${leftPercent}%`;
       leftHandle.nextElementSibling.style.left = `${leftPercent}%`;
-      
+
       const middlePercent = 100 - rightPercent;
       leftHandle.nextElementSibling.style.right = `${middlePercent}%`;
       rightHandle.nextElementSibling.style.width = `${middlePercent}%`;
-  
+
       labelValue.push(this._getLabel(this._values[0]));
       labelValue.push(this._getLabel(this._values[1]));
     }
-    
+
     this._elements.labelValue.textContent = labelValue.length &gt; 1 ? labelValue.join(&apos; - &apos;) : labelValue[0];
   }
-  
+
   /**
    Handles &quot;onchange&quot; events from the input.
    This is only neede in case of IE10 which doesn&apos;t handle &quot;oninput event&quot;.
    In that case, the _onInputChangeHandler will be called from this handler.
-   
+
    @private
    */
   _onInputChange(event) {
@@ -1054,34 +1065,34 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
       this._onInputChangeHandler(event);
     }
   }
-  
+
   /**
    Handles &quot;oninput&quot; events from the input.
    This makes ensures native inputs like
    - direct keyboard interaction with input[type=range]
    - accessibility features with input[type=range]
-   
+
    Note we are not using the &quot;_onInputChange&quot; directly because Firefox
    will trigger the &quot;change&quot; event only after the focus has been lost.
-   
+
    @private
    */
   _onInputChangeHandler(event) {
     // stops the current event
     event.stopPropagation();
-    
+
     const handle = event.target.closest(`.${CLASSNAME_HANDLE}`);
-    
+
     if (event.target === document.activeElement) {
       this._focus(event);
     }
-    
+
     this._updateValue(handle, event.target.value, true);
   }
-  
+
   /**
    Handles &quot;focusin&quot; event from  either an input or its handle.
-   
+
    @private
    */
   _focus(event) {
@@ -1089,14 +1100,14 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     // the event.target could be either the handle or its child input.
     // Use closest() to locate the actual handle.
     event.target.closest(`.${CLASSNAME_HANDLE}`).classList.add(&apos;is-focused&apos;);
-    
+
     events.on(&apos;touchstart.Slider&apos;, this._onInteraction);
     events.on(&apos;mousedown.Slider&apos;, this._onInteraction);
   }
-  
+
   /**
    Handles the blur
-   
+
    @private
    */
   _onInteraction(event) {
@@ -1105,10 +1116,10 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     }
     event.target.blur();
   }
-  
+
   /**
    Handles &quot;focusout&quot; event from  either an input or its handle.
-   
+
    @private
    */
   _blur(event) {
@@ -1116,24 +1127,24 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     // the event.target could be either the handle or its child input.
     // Use closest() to locate the actual handle.
     event.target.closest(`.${CLASSNAME_HANDLE}`).classList.remove(&apos;is-focused&apos;);
-    
+
     events.off(&apos;touchstart.Slider&apos;);
     events.off(&apos;mousedown.Slider&apos;);
   }
-  
+
   /**
    handles mousemove/touchmove after a succesful start on an handle
-   
+
    @private
    */
   _handleDragging(event) {
     const p = this._getPoint(event);
-    
+
     this._updateValue(this._currentHandle, this._getValueFromCoord(p.pageX, p.pageY));
-    
+
     event.preventDefault();
   }
-  
+
   /**
    updates the value for a handle
    @param handle
@@ -1146,36 +1157,36 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     // this is prepared to work for multiple handles
     const idx = this._elements.handles.indexOf(handle);
     const values = this._values;
-    
+
     values[idx] = val;
-    
+
     const oldValues = this._values;
     this._values = values;
     const newValues = this._values;
-    
+
     if (forceEvent || oldValues.join(&apos;:&apos;) !== newValues.join(&apos;:&apos;)) {
       this.trigger(&apos;change&apos;);
     }
   }
-  
+
   /** @private */
   // eslint-disable-next-line no-unused-vars
   _getValueFromCoord(posX, posY, restrictBounds) {
     const boundingClientRect = this.getBoundingClientRect();
     const elementWidth = boundingClientRect.width;
     const percent = (posX - boundingClientRect.left) / elementWidth;
-    
+
     // if the bounds are restricted, as with _handleClick, we shouldn&apos;t change the value.
     if (restrictBounds &amp;&amp; (percent &lt; 0 || percent &gt; 1)) {
       return NaN;
     }
-    
+
     const rawValue = this.min + (this.max - this.min) * percent;
-    
+
     // Snap value to nearest step
     return this._snapValueToStep(rawValue, this.min, this.max, this.step);
   }
-  
+
   /** @private */
   _snapValueToStep(rawValue, min, max, step) {
     step = parseFloat(step);
@@ -1183,29 +1194,27 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     const floatString = step.toString().replace(/^(?:\d+)(?:\.(\d+))?$/g, &apos;$1&apos;);
     const precision = floatString.length;
     let snappedValue;
-    
+
     if (Math.abs(remainder) * 2 &gt;= step) {
       snappedValue = rawValue - Math.abs(remainder) + step;
-    }
-    else {
+    } else {
       snappedValue = rawValue - remainder;
     }
-    
+
     if (snappedValue &lt; min) {
       snappedValue = min;
-    }
-    else if (snappedValue &gt; max) {
+    } else if (snappedValue &gt; max) {
       snappedValue = min + Math.floor((max - min) / step) * step;
     }
-    
+
     // correct floating point behavior by rounding to step precision
     if (precision &gt; 0) {
       snappedValue = parseFloat(snappedValue.toFixed(precision));
     }
-    
+
     return snappedValue;
   }
-  
+
   /**
    end operation of a dragging flow
    @private
@@ -1216,21 +1225,21 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
       this._currentHandle.classList.remove(&apos;is-dragged&apos;);
     }
     document.body.classList.remove(&apos;u-coral-closedHand&apos;);
-    
+
     events.off(&apos;mousemove.Slider&apos;, this._draggingHandler);
     events.off(&apos;touchmove.Slider&apos;, this._draggingHandler);
     events.off(&apos;mouseup.Slider&apos;, this._mouseUpHandler);
     events.off(&apos;touchend.Slider&apos;, this._mouseUpHandler);
     events.off(&apos;touchcancel.Slider&apos;, this._mouseUpHandler);
-    
+
     this._currentHandle = null;
     this._draggingHandler = null;
     this._mouseUpHandler = null;
   }
-  
+
   /**
    Gets the label for a passed value.
-   
+
    @param value
    @return {String|Number} the known label from the item or the value itself
    @protected
@@ -1238,38 +1247,42 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   _getLabel(value) {
     const items = this.items.getAll();
     let item;
-    
-    for (let i = 0; i &lt; items.length; i++) {
+
+    for (let i = 0 ; i &lt; items.length ; i++) {
       if (transform.number(items[i].getAttribute(&apos;value&apos;)) === transform.number(value)) {
         item = items[i];
         break;
       }
     }
-    
+
     // Use the innerHTML of the item if one was found
     return item ? item.innerHTML : value;
   }
-  
+
   // To be overridden by RangedSlider
   _getTemplate() {
     return base;
   }
-  
-  get _contentZones() { return {&apos;coral-slider-content&apos;: &apos;content&apos;}; }
-  
+
+  get _contentZones() {
+    return {&apos;coral-slider-content&apos;: &apos;content&apos;};
+  }
+
   /**
    Returns {@link Slider} orientation options.
-   
+
    @return {SliderOrientationEnum}
    */
-  static get orientation() { return orientation; }
-  
+  static get orientation() {
+    return orientation;
+  }
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       showvalue: &apos;showValue&apos;
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -1282,58 +1295,65 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
       &apos;filled&apos;
     ]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Default reflected attributes
-    if (!this._min) { this.min = this.min; }
-    if (!this._max) { this.max = this.max; }
-    if (!this._step) { this.step = this.step; }
-    if (!this._orientation) { this.orientation = orientation.HORIZONTAL; }
-    
+    if (!this._min) {
+      this.min = this.min;
+    }
+    if (!this._max) {
+      this.max = this.max;
+    }
+    if (!this._step) {
+      this.step = this.step;
+    }
+    if (!this._orientation) {
+      this.orientation = orientation.HORIZONTAL;
+    }
+
     // A11y
     this.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
-  
+
     // Support cloneNode
     const template = this.querySelectorAll(&apos;._coral-Slider-labelContainer, ._coral-Slider-controls&apos;);
-    for (let i = 0; i &lt; template.length; i++) {
+    for (let i = 0 ; i &lt; template.length ; i++) {
       template[i].remove();
     }
-    
+
     // Render the main template
     const frag = document.createDocumentFragment();
     frag.appendChild(this._elements.label);
     frag.appendChild(this._elements.controls);
-    
+
     const content = this._elements.content;
-    
+
     // If no default content zone was provided, move everything there
     if (!content.parentNode) {
       // Process remaining elements as necessary
       while (this.firstChild) {
         const child = this.firstChild;
-    
+
         if (child.nodeName === &apos;CORAL-SLIDER-ITEM&apos;) {
           // Add items to the fragment
           frag.appendChild(child);
-        }
-        else {
+        } else {
           // Add anything else to the content
           content.appendChild(child);
         }
       }
     }
-  
+
     // Add the frag to the component
     this.appendChild(frag);
-  
+
     // Assign the content zone so the insert function will be called
     this.content = content;
-  
+
     // Defaults
     this._moveHandles();
   }

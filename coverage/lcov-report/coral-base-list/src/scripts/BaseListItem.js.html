@@ -199,7 +199,13 @@
 <a name='L141'></a><a href='#L141'>141</a>
 <a name='L142'></a><a href='#L142'>142</a>
 <a name='L143'></a><a href='#L143'>143</a>
-<a name='L144'></a><a href='#L144'>144</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -257,18 +263,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3006x</span>
+<span class="cline-any cline-yes">3023x</span>
 <span class="cline-any cline-yes">988x</span>
 <span class="cline-any cline-yes">988x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">988x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3006x</span>
+<span class="cline-any cline-yes">3023x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -298,7 +303,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2308x</span>
+<span class="cline-any cline-yes">2325x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1056x</span>
@@ -326,8 +331,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7666x</span>
+<span class="cline-any cline-yes">6226x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">146x</span>
@@ -342,6 +346,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">988x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">988x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -368,25 +380,26 @@ const BaseListItem = (superClass) =&gt; class extends BaseLabellable(superClass)
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Templates
     this._elements = {
       // Fetch or create the content zone element
       content: this.querySelector('coral-list-item-content') || document.createElement('coral-list-item-content')
     };
-  
+&nbsp;
     super._observeLabel();
   }
-  
+&nbsp;
   /**
    The content of the help item.
-   
+&nbsp;
    @type {ListItemContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+&nbsp;
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
@@ -401,7 +414,7 @@ const BaseListItem = (superClass) =&gt; class extends BaseLabellable(superClass)
 &nbsp;
   /**
    Whether this item is disabled.
-   
+&nbsp;
    @default false
    @type {Boolean}
    @htmlattribute disabled
@@ -410,17 +423,18 @@ const BaseListItem = (superClass) =&gt; class extends BaseLabellable(superClass)
   get disabled() {
     return this._disabled || false;
   }
+&nbsp;
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
-  
+&nbsp;
     this.classList.toggle('is-disabled', this._disabled);
     this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
   }
-  
+&nbsp;
   /**
    The icon to display. See {@link Icon}.
-   
+&nbsp;
    @type {String}
    @default ""
    @htmlattribute icon
@@ -429,20 +443,20 @@ const BaseListItem = (superClass) =&gt; class extends BaseLabellable(superClass)
     const el = this._getIconElement();
     return el.icon;
   }
+&nbsp;
   set icon(value) {
     const el = this._getIconElement();
     if (transform.string(value) === '') {
       el.remove();
-    }
-    else {
+    } else {
       this.insertBefore(el, this.firstChild);
     }
-    
+&nbsp;
     el.icon = value;
-    
+&nbsp;
     super._toggleIconAriaHidden();
   }
-  
+&nbsp;
   _getIconElement() {
     if (!this._elements.icon) {
       this._elements.icon = this.querySelector('._coral-Menu-item-icon') || new Icon();
@@ -451,25 +465,29 @@ const BaseListItem = (superClass) =&gt; class extends BaseLabellable(superClass)
     }
     return this._elements.icon;
   }
-  
-  get _contentZones() { return {'coral-list-item-content': 'content'}; }
-  
+&nbsp;
+  get _contentZones() {
+    return {'coral-list-item-content': 'content'};
+  }
+&nbsp;
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['disabled', 'icon']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['disabled', 'icon']);
+  }
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-  
+&nbsp;
     this.classList.add(CLASSNAME);
-  
+&nbsp;
     // The attribute that makes different types of list items co-exist
     // This is also used for event delegation
     this.setAttribute('coral-list-item', '');
-  
+&nbsp;
     // Fetch or create the content content zone element
     const content = this._elements.content;
-  
+&nbsp;
     // This stops the content zone from being voracious
     if (!content.parentNode) {
       // move the contents of the item into the content zone
@@ -477,7 +495,7 @@ const BaseListItem = (superClass) =&gt; class extends BaseLabellable(superClass)
         content.appendChild(this.firstChild);
       }
     }
-  
+&nbsp;
     // Assign the content zones, moving them into place in the process
     this.icon = this.icon;
     this.content = content;
@@ -492,7 +510,7 @@ export default BaseListItem;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

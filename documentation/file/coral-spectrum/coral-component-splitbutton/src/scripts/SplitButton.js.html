@@ -441,9 +441,9 @@ import {transform, validate, commons} from &apos;../../../coral-utils&apos;;
 
 /**
  Enumeration for {@link SplitButton} variants.
- 
+
  @typedef {Object} SplitButtonVariantEnum
- 
+
  @property {String} DEFAULT
  The default button look and feel.
  @property {String} CTA
@@ -465,7 +465,7 @@ const CLASSNAME = &apos;_coral-SplitButton&apos;;
  These elements should be marked with following attributes:
  - &lt;code&gt;[coral-splitbutton-action]&lt;/code&gt; for the main action button.
  - &lt;code&gt;[coral-splitbutton-trigger]&lt;/code&gt; for the trigger button.
- 
+
  @htmltag coral-splitbutton
  @extends {HTMLElement}
  @extends {BaseComponent}
@@ -474,23 +474,23 @@ class SplitButton extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Watch for inner button changes
     this._observer = new MutationObserver(() =&gt; {
       this._updateLeftVariant();
       this._updateInnerButtons();
       this._updateInnerButtonsVariant(this.variant);
     });
-    
+
     this._observer.observe(this, {
       subtree: true,
       childList: true
     });
   }
-  
+
   /**
    The button&apos;s variant. See {@link SplitButtonVariantEnum}.
-   
+
    @type {String}
    @default SplitButtonVariantEnum.DEFAULT
    @htmlattribute variant
@@ -499,43 +499,49 @@ class SplitButton extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.DEFAULT;
     this._reflectAttribute(&apos;variant&apos;, this._variant);
-  
+
     this._updateInnerButtonsVariant(this._variant);
   }
-  
+
   _getInnerButtons() {
     const action = this.querySelector(&apos;[coral-splitbutton-action]&apos;);
     const trigger = this.querySelector(&apos;[coral-splitbutton-trigger]&apos;);
     return {action, trigger};
   }
-  
+
   _updateLeftVariant() {
-    for (let i = 0; i &lt; this.children.length; i++) {
+    for (let i = 0 ; i &lt; this.children.length ; i++) {
       const child = this.children[i];
       if (child.hasAttribute(&apos;coral-splitbutton-trigger&apos;)) {
         this.classList.add(&apos;_coral-SplitButton--left&apos;);
         return;
-      }
-      else if (child.hasAttribute(&apos;coral-splitbutton-action&apos;)) {
+      } else if (child.hasAttribute(&apos;coral-splitbutton-action&apos;)) {
         this.classList.remove(&apos;_coral-SplitButton--left&apos;);
         return;
       }
     }
   }
-  
+
   _updateInnerButtonsVariant(variant) {
     const {action, trigger} = this._getInnerButtons();
-    if (action) {action.setAttribute(&apos;variant&apos;, variant);}
-    if (trigger) {trigger.setAttribute(&apos;variant&apos;, variant);}
+    if (action) {
+      action.setAttribute(&apos;variant&apos;, variant);
+    }
+    if (trigger) {
+      trigger.setAttribute(&apos;variant&apos;, variant);
+    }
   }
-  
+
   _updateInnerButtons() {
     const {action, trigger} = this._getInnerButtons();
-    if (action) {action.classList.add(&apos;_coral-SplitButton-action&apos;);}
+    if (action) {
+      action.classList.add(&apos;_coral-SplitButton-action&apos;);
+    }
     if (trigger) {
       trigger.classList.add(&apos;_coral-SplitButton-trigger&apos;);
       // a11y assume a popover is targeting the trigger
@@ -546,29 +552,35 @@ class SplitButton extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /**
    Returns {@link SplitButton} variants.
-   
+
    @return {SplitButtonVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat([&apos;variant&apos;]); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat([&apos;variant&apos;]);
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // a11y
     this.setAttribute(&apos;role&apos;, &apos;group&apos;);
-    
+
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-    
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
+
     // Update styles
     this._updateLeftVariant();
     this._updateInnerButtons();

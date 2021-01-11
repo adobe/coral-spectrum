@@ -450,33 +450,33 @@ class AnchorList extends BaseList(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-  
+
     // Events
     this._delegateEvents(commons.extend(this._events, {
       &apos;click [coral-list-item]&apos;: &apos;_onItemClick&apos;
     }));
   }
-  
+
   /** @private */
   get _itemTagName() {
     // Used for Collection
     return &apos;coral-anchorlist-item&apos;;
   }
-  
+
   /** @private */
   get _itemBaseTagName() {
     // Used for Collection
     return &apos;a&apos;;
   }
-  
+
   _onItemClick(event) {
     this._trackEvent(&apos;click&apos;, &apos;coral-anchorlist-item&apos;, event, event.matchedTarget);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
   }
 }

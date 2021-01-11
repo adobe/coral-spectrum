@@ -444,9 +444,9 @@ const XHR_EVENT_NAMES = [&apos;loadstart&apos;, &apos;progress&apos;, &apos;load
 
 /**
  Enumeration for {@link FileUpload} HTTP methods that can be used to upload files.
- 
+
  @typedef {Object} FileUploadMethodEnum
- 
+
  @property {String} POST
  Send a POST request. Used when creating a resource.
  @property {String} PUT
@@ -472,7 +472,7 @@ const method = {
  - &lt;code&gt;[coral-fileupload-abortfile=&quot;filename.txt&quot;]&lt;/code&gt;. Click to abort a specific file, leaving it in the queue.
  - &lt;code&gt;[coral-fileupload-removefile=&quot;filename.txt&quot;]&lt;/code&gt;. Click to remove a specific file from the queue.
  - &lt;code&gt;[coral-fileupload-uploadfile=&quot;filename.txt&quot;]&lt;/code&gt;. Click to start uploading a specific file.
- 
+
  @htmltag coral-fileupload
  @extends {HTMLElement}
  @extends {BaseComponent}
@@ -482,7 +482,7 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Events
     this._delegateEvents(commons.extend(this._events, {
       // Clickable hooks
@@ -493,34 +493,34 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       &apos;click [coral-fileupload-abortfile]&apos;: &apos;_onAbortFileClick&apos;,
       &apos;click [coral-fileupload-removefile]&apos;: &apos;_onRemoveFileClick&apos;,
       &apos;click [coral-fileupload-uploadfile]&apos;: &apos;_onUploadFileClick&apos;,
-  
+
       // Drag &amp; Drop zones
       &apos;dragenter [coral-fileupload-dropzone]&apos;: &apos;_onDragAndDrop&apos;,
       &apos;dragover [coral-fileupload-dropzone]&apos;: &apos;_onDragAndDrop&apos;,
       &apos;dragleave [handle=&quot;input&quot;]&apos;: &apos;_onDragAndDrop&apos;,
       &apos;drop [handle=&quot;input&quot;]&apos;: &apos;_onDragAndDrop&apos;,
-  
+
       // Accessibility
       &apos;capture:focus [coral-fileupload-select]&apos;: &apos;_onButtonFocusIn&apos;,
       &apos;capture:focus [handle=&quot;input&quot;]&apos;: &apos;_onInputFocusIn&apos;,
       &apos;capture:blur [handle=&quot;input&quot;]&apos;: &apos;_onInputFocusOut&apos;
     }));
-    
+
     // Prepare templates
     this._elements = {};
     base.call(this._elements, {commons});
-  
+
     // Pre-define labellable element
     this._labellableElement = this._elements.input;
-    
+
     // Used for items
     this._uploadQueue = [];
-  
+
     // this should refer to the fileupload
     this._doAddDragClass = this._doAddDragClass.bind(this);
     this._doRemoveDragClass = this._doRemoveDragClass.bind(this);
     this._positionInputOnDropZone = this._positionInputOnDropZone.bind(this);
-    
+
     // Reposition the input under the specified dropzone
     this._observer = new MutationObserver(this._positionInputOnDropZone);
     this._observer.observe(this, {
@@ -530,7 +530,7 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       subtree: true
     });
   }
-  
+
   /**
    Name used to submit the data in a form.
    @type {String}
@@ -541,12 +541,13 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._elements.input.name;
   }
+
   set name(value) {
     this._reflectAttribute(&apos;name&apos;, value);
-    
+
     this._elements.input.name = value;
   }
-  
+
   /**
    This field&apos;s current value.
    @type {String}
@@ -555,21 +556,21 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
    */
   get value() {
     const item = this._uploadQueue ? this._getQueueItem(0) : null;
-  
+
     // The first selected filename, or the empty string if no files are selected.
     return item ? `C:\\fakepath\\${item.file.name}` : &apos;&apos;;
   }
+
   set value(value) {
     if (value === &apos;&apos; || value === null) {
       this._clearQueue();
       this._clearFileInputValue();
-    }
-    else {
+    } else {
       // Throws exception if value is different than an empty string or null
       throw new Error(&apos;Coral.FileUpload accepts a filename, which may only be programmatically set to empty string.&apos;);
     }
   }
-  
+
   /**
    Whether this field is disabled or not.
    @type {Boolean}
@@ -580,27 +581,29 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._elements.input.disabled;
   }
+
   set disabled(value) {
     this._elements.input.disabled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;disabled&apos;, this.disabled);
-  
+
     this.classList.toggle(&apos;is-disabled&apos;, this.disabled);
     this._setElementState();
   }
-  
+
   /**
    Inherited from {@link BaseFormField#invalid}.
    */
   get invalid() {
     return super.invalid;
   }
+
   set invalid(value) {
     super.invalid = value;
-  
+
     this._elements.input.setAttribute(&apos;aria-invalid&apos;, this.invalid);
     this._setElementState();
   }
-  
+
   /**
    Whether this field is required or not.
    @type {Boolean}
@@ -611,14 +614,15 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._elements.input.required;
   }
+
   set required(value) {
     this._elements.input.required = transform.booleanAttr(value);
     this._reflectAttribute(&apos;required&apos;, this.required);
-    
+
     this.classList.toggle(&apos;is-required&apos;, this.required);
     this._setElementState();
   }
-  
+
   /**
    Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
    @type {Boolean}
@@ -629,69 +633,71 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute(&apos;readonly&apos;, this._readOnly);
-    
+
     this._setElementState();
   }
-  
+
   /**
    The names of the currently selected files.
    When {@link Coral.FileUpload#multiple} is &lt;code&gt;false&lt;/code&gt;, this will be an array of length 1.
-   
+
    @type {Array.&lt;String&gt;}
    */
   get values() {
     let values = this._uploadQueue.map((item) =&gt; `C:\\fakepath\\${item.file.name}`);
-  
+
     if (values.length &amp;&amp; !this.multiple) {
       values = [values[0]];
     }
-  
+
     return values;
   }
+
   set values(values) {
     if (Array.isArray(values)) {
       if (values.length) {
         this.value = values[0];
-      }
-      else {
+      } else {
         this.value = &apos;&apos;;
       }
     }
   }
-  
+
   /**
    Inherited from {@link BaseFormField#labelledBy}.
    */
   get labelledBy() {
     return super.labelledBy;
   }
+
   set labelledBy(value) {
     super.labelledBy = value;
-  
+
     // The specified labelledBy property.
     const labelledBy = this.labelledBy;
-  
+
     // An array of element ids to label control, the last being the select button element id.
     const ids = [];
-  
+
     const button = this.querySelector(&apos;[coral-fileupload-select]&apos;);
-  
+
     if (button) {
       ids.push(button.id);
     }
-  
+
     // If a labelledBy property exists,
     if (labelledBy) {
       // prepend the labelledBy value to the ids array
       ids.unshift(labelledBy);
     }
-  
+
     // Set aria-labelledby attribute on the labellable element joining ids array into space-delimited list of ids.
     this._elements.input.setAttribute(&apos;aria-labelledby&apos;, ids.join(&apos; &apos;));
-  
+
     if (labelledBy) {
       // Set label for attribute
       const labelElement = document.getElementById(labelledBy);
@@ -705,47 +711,48 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       this._labelElement.removeAttribute(&apos;for&apos;);
     }
   }
-  
+
   /**
    Array of additional parameters as key:value to send in addition of files.
    A parameter must contain a &lt;code&gt;name&lt;/code&gt; key:value and optionally a &lt;code&gt;value&lt;/code&gt; key:value.
-   
+
    @type {Array.&lt;Object&gt;}
    @default []
    */
   get parameters() {
     return this._parameters || [];
   }
+
   set parameters(values) {
     // Verify that every item has a name
     const isValid = Array.isArray(values) &amp;&amp; values.every((el) =&gt; el &amp;&amp; el.name);
-    
+
     if (isValid) {
       this._parameters = values;
-  
+
       if (!this.async) {
         Array.prototype.forEach.call(this.querySelectorAll(&apos;input[type=&quot;hidden&quot;]&apos;), (input) =&gt; {
           input.parentNode.removeChild(input);
         });
-    
+
         // Add extra parameters
         this.parameters.forEach((param) =&gt; {
           const input = document.createElement(&apos;input&apos;);
           input.type = &apos;hidden&apos;;
           input.name = param.name;
           input.value = param.value;
-      
+
           this.appendChild(input);
         });
       }
     }
   }
-  
+
   /**
    Whether files should be uploaded asynchronously via XHR or synchronously e.g. within a
    &lt;code&gt;&amp;lt;form&amp;gt;&lt;/code&gt; tag. One option excludes the other. Setting a new &lt;code&gt;async&lt;/code&gt; value removes all
    files from the queue.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute async
@@ -754,29 +761,30 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   get async() {
     return this._async || false;
   }
+
   set async(value) {
     this._async = transform.booleanAttr(value);
     this._reflectAttribute(&apos;async&apos;, this._async);
-  
+
     // Sync extra parameters in case of form submission
     if (!this._async) {
       this.parameters = this.parameters;
     }
-  
+
     // Clear file selection
     if (this._uploadQueue) {
       this._clearQueue();
       this._clearFileInputValue();
     }
   }
-  
+
   /**
    The URL where the upload request should be sent. When used within a &lt;code&gt;&amp;lt;form&amp;gt;&lt;/code&gt; tag to upload
    synchronously, the action of the form is used. If an element is clicked that has a
    &lt;code&gt;[coral-fileupload-submit]&lt;/code&gt; attribute as well as a &lt;code&gt;[formaction]&lt;/code&gt; attribute, the action of
    the clicked element will be used. Set this property before calling {@link Coral.FileUpload#upload} to reset the
    action set by a click.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute action
@@ -785,14 +793,15 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   get action() {
     return this._action || &apos;&apos;;
   }
+
   set action(value) {
     this._action = transform.string(value);
     this._reflectAttribute(&apos;action&apos;, this._action);
-  
+
     // Reset button action as action was set explicitly
     this._buttonAction = null;
   }
-  
+
   /**
    The HTTP method to use when uploading files asynchronously. When used within a &lt;code&gt;&amp;lt;form&amp;gt;&lt;/code&gt; tag to
    upload synchronously, the method of the form is used. If an element is clicked that has a
@@ -800,7 +809,7 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
    the clicked element will be used. Set this property before calling {@link FileUpload#upload} to reset the
    method set by a click.
    See {@link FileUploadMethodEnum}.
-   
+
    @type {String}
    @default FileUploadMethodEnum.POST
    @htmlattribute method
@@ -809,18 +818,19 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   get method() {
     return this._method || method.POST;
   }
+
   set method(value) {
     value = transform.string(value).toUpperCase();
     this._method = validate.enumeration(method)(value) &amp;&amp; value || method.POST;
     this._reflectAttribute(&apos;method&apos;, this._method);
-    
+
     // Reset button method as method was set explcitly
     this._buttonMethod = null;
   }
-  
+
   /**
    Whether more than one file can be chosen at the same time to upload.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute multiple
@@ -829,14 +839,15 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   get multiple() {
     return this._elements.input.multiple;
   }
+
   set multiple(value) {
     this._elements.input.multiple = transform.booleanAttr(value);
     this._reflectAttribute(&apos;multiple&apos;, this.multiple);
   }
-  
+
   /**
    File size limit in bytes for one file. The value of 0 indicates unlimited, which is also the default.
-   
+
    @type {Number}
    @htmlattribute sizelimit
    @htmlattributereflected
@@ -845,16 +856,17 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   get sizeLimit() {
     return this._sizeLimit || 0;
   }
+
   set sizeLimit(value) {
     this._sizeLimit = transform.number(value);
     this._reflectAttribute(&apos;sizelimit&apos;, this._sizeLimit);
   }
-  
+
   /**
    MIME types allowed for uploading (proper MIME types, wildcard &apos;*&apos; and file extensions are supported). To specify
    more than one value, separate the values with a comma (e.g.
    &lt;code&gt;&amp;lt;input accept=&quot;audio/*,video/*,image/*&quot; /&amp;gt;&lt;/code&gt;.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute accept
@@ -863,14 +875,15 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   get accept() {
     return this._elements.input.accept;
   }
+
   set accept(value) {
     this._elements.input.accept = value;
     this._reflectAttribute(&apos;accept&apos;, this.accept);
   }
-  
+
   /**
    Whether the upload should start immediately after file selection.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute autostart
@@ -879,14 +892,15 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   get autoStart() {
     return this._autoStart || false;
   }
+
   set autoStart(value) {
     this._autoStart = transform.booleanAttr(value);
     this._reflectAttribute(&apos;autostart&apos;, this._autoStart);
   }
-  
+
   /**
    Files to be uploaded.
-   
+
    @readonly
    @default []
    @type {Array.&lt;Object&gt;}
@@ -894,19 +908,19 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   get uploadQueue() {
     return this._uploadQueue;
   }
-  
+
   /** @private */
   _onButtonFocusIn(event) {
     // Get the input
     const input = this._elements.input;
-    
+
     // Get the button
     const button = event.matchedTarget;
-    
+
     // Move the input to after the button
     // This lets the next focused item be the correct one according to tab order
     button.parentNode.insertBefore(input, button.nextElementSibling);
-    
+
     if (event.relatedTarget !== input) {
       // Make sure the input gets focused on FF
       window.setTimeout(() =&gt; {
@@ -914,7 +928,7 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       }, 100);
     }
   }
-  
+
   /** @private */
   _onInputFocusIn() {
     // Get the input
@@ -924,10 +938,10 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
     if (button) {
       // Remove from the tab order so shift+tab works
       button.tabIndex = -1;
-      
+
       // So shifting focus backwards with screen reader doesn&apos;t create a focus trap
       button.setAttribute(&apos;aria-hidden&apos;, true);
-      
+
       // Mark the button as focused
       button.classList.add(&apos;is-focused&apos;);
 
@@ -938,14 +952,14 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       });
     }
   }
-  
+
   /** @private */
   _onInputFocusOut() {
     // Unmark all the focused buttons
     const button = this.querySelector(&apos;[coral-fileupload-select].is-focused&apos;);
     button.classList.remove(&apos;is-focused&apos;);
     button.classList.remove(&apos;focus-ring&apos;);
-    
+
     // Wait a frame so that shifting focus backwards with screen reader doesn&apos;t create a focus trap
     window.requestAnimationFrame(() =&gt; {
       button.tabIndex = 0;
@@ -954,26 +968,25 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       button.removeAttribute(&apos;aria-hidden&apos;);
     });
   }
-  
+
   /** @private */
   _onAbortFileClick(event) {
     if (!this.async) {
       throw new Error(&apos;Coral.FileUpload does not support aborting file(s) upload on synchronous mode.&apos;);
     }
-    
+
     // Get file to abort
     const fileName = event.target.getAttribute(&apos;coral-fileupload-abortfile&apos;);
     if (fileName) {
       this._abortFile(fileName);
     }
   }
-  
+
   /** @private */
   _onRemoveFileClick(event) {
     if (!this.async) {
       throw new Error(&apos;Coral.FileUpload does not support removing a file from the queue on synchronous mode.&apos;);
-    }
-    else {
+    } else {
       // Get file to remove
       const fileName = event.target.getAttribute(&apos;coral-fileupload-removefile&apos;);
       if (fileName) {
@@ -981,111 +994,110 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       }
     }
   }
-  
+
   /** @private */
   _onUploadFileClick(event) {
     if (!this.async) {
       throw new Error(&apos;Coral.FileUpload does not support uploading a file from the queue on synchronous mode.&apos;);
     }
-    
+
     // Get file to upload
     const fileName = event.target.getAttribute(&apos;coral-fileupload-uploadfile&apos;);
     if (fileName) {
       this.upload(fileName);
     }
   }
-  
+
   /** @private */
   _onDragAndDrop(event) {
     // Set dragging classes
     if (event.type === &apos;dragenter&apos; || event.type === &apos;dragover&apos;) {
       this._addDragClass();
-    }
-    else if (event.type === &apos;dragleave&apos; || event.type === &apos;drop&apos;) {
+    } else if (event.type === &apos;dragleave&apos; || event.type === &apos;drop&apos;) {
       this._removeDragClass();
     }
-    
+
     this.trigger(`coral-fileupload:${event.type}`);
   }
-  
+
   /** @private */
   _addDragClass() {
     window.clearTimeout(this._removeClassTimeout);
     this._removeClassTimeout = window.setTimeout(this._doAddDragClass, 10);
   }
-  
+
   /** @private */
   _doAddDragClass() {
     this.classList.add(&apos;is-dragging&apos;);
-    
+
     const dropZone = this.querySelector(&apos;[coral-fileupload-dropzone]&apos;);
     if (dropZone) {
       dropZone.classList.add(&apos;is-dragging&apos;);
     }
-    
+
     // Put the input on top to enable file drop
     this._elements.input.classList.remove(&apos;is-unselectable&apos;);
   }
-  
+
   /** @private */
   _removeDragClass() {
     window.clearTimeout(this._removeClassTimeout);
     this._removeClassTimeout = window.setTimeout(this._doRemoveDragClass, 10);
   }
-  
+
   /** @private */
   _doRemoveDragClass() {
     this.classList.remove(&apos;is-dragging&apos;);
-    
+
     const dropZone = this.querySelector(&apos;[coral-fileupload-dropzone]&apos;);
     if (dropZone) {
       dropZone.classList.remove(&apos;is-dragging&apos;);
     }
-    
+
     // Disable user interaction with the input
     this._elements.input.classList.add(&apos;is-unselectable&apos;);
   }
-  
+
   /**
    Handles clicks to submit buttons
-   
+
    @private
    */
   _onSubmitButtonClick(event) {
     const target = event.matchedTarget;
-    
+
     // Override or reset the action/method given the button&apos;s configuration
     this._buttonAction = target.getAttribute(&apos;formaction&apos;);
-    
+
     // Make sure the method provided by the button is valid
     const buttonMethod = transform.string(target.getAttribute(&apos;formmethod&apos;)).toUpperCase();
     this._buttonMethod = validate.enumeration(method)(buttonMethod) &amp;&amp; buttonMethod || null;
-    
+
     // Start the file upload
     this.upload();
   }
-  
+
   /**
    Handles changes to the input element.
-   
+
    @private
    */
   _onInputChange(event) {
     // Stop the current event
     event.stopPropagation();
-    
+
     if (this.disabled) {
       return;
     }
-    
+
     let files = [];
     const items = [];
-    
+
     // Retrieve files for select event
     if (event.target.files &amp;&amp; event.target.files.length) {
       this._clearQueue();
       files = event.target.files;
-      
+
       // Verify if multiple file upload is allowed
       if (!this.multiple) {
         files = [files[0]];
@@ -1095,21 +1107,20 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
     else if (event.dataTransfer &amp;&amp; event.dataTransfer.files &amp;&amp; event.dataTransfer.files.length) {
       this._clearQueue();
       files = event.dataTransfer.files;
-      
+
       // Verify if multiple file upload is allowed
       if (!this.multiple) {
         files = [files[0]];
       }
-    }
-    else {
+    } else {
       return;
     }
-    
+
     // Initialize items
-    for (let i = 0; i &lt; files.length; i++) {
+    for (let i = 0 ; i &lt; files.length ; i++) {
       items.push(new FileUploadItem(files[i]));
     }
-    
+
     // Verify if file is allowed to be uploaded and trigger events accordingly
     items.forEach((item) =&gt; {
       // If file is not found in uploadQueue using filename
@@ -1121,34 +1132,33 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
         // Check mime type
         else if (this.accept &amp;&amp; !item._isMimeTypeAllowed(this.accept)) {
           this.trigger(&apos;coral-fileupload:filemimetyperejected&apos;, {item});
-        }
-        else {
+        } else {
           // Add item to queue
           this._uploadQueue.push(item);
-  
+
           this.trigger(&apos;coral-fileupload:fileadded&apos;, {item});
         }
       }
     });
-    
+
     if (this.autoStart) {
       this.upload();
     }
-    
+
     // Explicitly re-emit the change event
     if (this._triggerChangeEvent) {
       this.trigger(&apos;change&apos;);
     }
-    
+
     // Clear file input once files are added to the queue to make sure next file selection will trigger a change event
     if (this.async) {
       this._clearFileInputValue();
     }
   }
-  
+
   /**
    Sets the disabled/readonly state of elements with the associated special attributes
-   
+
    @private
    */
   _setElementState() {
@@ -1169,29 +1179,29 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       item[this.disabled || this.readOnly ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;disabled&apos;, &apos;&apos;);
     });
   }
-  
+
   /** @private */
   _clearQueue() {
     this._uploadQueue.slice().forEach((item) =&gt; {
       this._clearFile(item.file.name);
     });
   }
-  
+
   /**
    Clear file selection on the file input
-   
+
    @private
    */
   _clearFileInputValue() {
     this._elements.input.value = &apos;&apos;;
   }
-  
+
   /**
    Remove a file from the upload queue.
-   
+
    @param {String} filename
    The filename of the file to remove.
-   
+
    @private
    */
   _clearFile(filename) {
@@ -1199,20 +1209,20 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
     if (item) {
       // Abort file upload
       this._abortFile(filename);
-      
+
       // Remove file from queue
       this._uploadQueue.splice(this._getQueueIndex(filename), 1);
-      
+
       this.trigger(&apos;coral-fileupload:fileremoved&apos;, {item});
     }
   }
-  
+
   /**
    Uploads a file in the queue. If an array is provided as the first argument, it is used as the parameters.
-   
+
    @param filename {String}
    The name of the file to upload.
-   
+
    @private
    */
   _uploadFile(filename) {
@@ -1222,20 +1232,20 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       this._ajaxUpload(item);
     }
   }
-  
+
   /** @private */
   _showFileDialog() {
     // Show the dialog
     // This ONLY works when the call stack traces back to another click event!
     this._elements.input.click();
   }
-  
+
   /**
    Abort specific file upload.
-   
+
    @param {String} filename
    The filename identifies the file to abort.
-   
+
    @private
    */
   _abortFile(filename) {
@@ -1245,40 +1255,40 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       item._xhr = null;
     }
   }
-  
+
   /**
    Handles the ajax upload.
-   
+
    @private
    */
   _ajaxUpload(item) {
     // Use the action/method provided by the last button click, if provided
     const action = this._buttonAction || this.action;
     const requestMethod = this._buttonMethod ? this._buttonMethod.toUpperCase() : this.method;
-    
+
     // We merge the global parameters with the specific file parameters and send them all together
     const parameters = this.parameters.concat(item.parameters);
-    
+
     const formData = new FormData();
-    
+
     parameters.forEach((additionalParameter) =&gt; {
       formData.append(additionalParameter.name, additionalParameter.value);
     });
-    
+
     formData.append(&apos;_charset_&apos;, &apos;utf-8&apos;);
     formData.append(this.name, item._originalFile);
-    
+
     // Store the XHR on the item itself
     item._xhr = new XMLHttpRequest();
-    
+
     // Opening before being able to set response type to avoid IE11 InvalidStateError
     item._xhr.open(requestMethod, action);
-    
+
     // Reflect specific xhr properties
     item._xhr.timeout = item.timeout;
     item._xhr.responseType = item.responseType;
     item._xhr.withCredentials = item.withCredentials;
-    
+
     XHR_EVENT_NAMES.forEach((name) =&gt; {
       // Progress event is the only event among other ProgressEvents that can trigger multiple times.
       // Hence it&apos;s the only one that gives away usable progress information.
@@ -1289,35 +1299,35 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
           action: action,
           method: requestMethod
         };
-        
+
         if (isProgressEvent) {
           detail.lengthComputable = event.lengthComputable;
           detail.loaded = event.loaded;
           detail.total = event.total;
         }
-  
+
         this.trigger(`coral-fileupload:${name}`, detail);
       });
     });
-    
+
     item._xhr.send(formData);
   }
-  
+
   /** @private */
   _getLabellableElement() {
     return this;
   }
-  
+
   /** @private */
   _getQueueItemByFilename(filename) {
     return this._getQueueItem(this._getQueueIndex(filename));
   }
-  
+
   /** @private */
   _getQueueItem(index) {
     return index &gt; -1 ? this._uploadQueue[index] : null;
   }
-  
+
   /** @private */
   _getQueueIndex(filename) {
     let index = -1;
@@ -1326,40 +1336,39 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
         index = i;
         return true;
       }
-      
+
       return false;
     });
     return index;
   }
-  
+
   /** @private */
   _getTargetChangeInput() {
     return this._elements.input;
   }
-  
+
   /** @ignore */
   _positionInputOnDropZone() {
     const input = this._elements.input;
     const dropZone = this.querySelector(&apos;[coral-fileupload-dropzone]&apos;);
-    
+
     if (dropZone) {
       const size = dropZone.getBoundingClientRect();
-      
+
       input.style.top = `${parseInt(dropZone.offsetTop, 10)}px`;
       input.style.left = `${parseInt(dropZone.offsetLeft, 10)}px`;
       input.style.width = `${parseInt(size.width, 10)}px`;
       input.style.height = `${parseInt(size.height, 10)}px`;
-    }
-    else {
+    } else {
       input.style.width = &apos;0&apos;;
       input.style.height = &apos;0&apos;;
     }
   }
-  
+
   /**
    Uploads the given filename, or all the files into the queue. It accepts extra parameters that are sent with the
    file.
-   
+
    @param {String} [filename]
    The name of the file to upload.
    */
@@ -1368,7 +1377,7 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       if (typeof filename === &apos;string&apos;) {
         throw new Error(&apos;Coral.FileUpload does not support uploading a file from the queue on synchronous mode.&apos;);
       }
-      
+
       let form = this.closest(&apos;form&apos;);
       if (!form) {
         form = document.createElement(&apos;form&apos;);
@@ -1376,38 +1385,36 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
         form.enctype = &apos;multipart/form-data&apos;;
         form.action = this.action;
         form.hidden = true;
-        
+
         form.appendChild(this._elements.input);
-        
+
         Array.prototype.forEach.call(this.querySelectorAll(&apos;input[type=&quot;hidden&quot;]&apos;), (hiddenInput) =&gt; {
           form.appendChild(hiddenInput);
         });
-        
+
         // Make sure the form is connected before submission
         this.appendChild(form);
       }
-      
+
       const input = document.createElement(&apos;input&apos;);
       input.type = &apos;hidden&apos;;
       input.name = &apos;_charset_&apos;;
       input.value = &apos;utf-8&apos;;
-      
+
       form.submit();
-    }
-    else if (typeof filename === &apos;string&apos;) {
+    } else if (typeof filename === &apos;string&apos;) {
       this._uploadFile(filename);
-    }
-    else {
+    } else {
       this._uploadQueue.forEach((item) =&gt; {
         this._abortFile(item.file.name);
         this._ajaxUpload(item);
       });
     }
   }
-  
+
   /**
    Remove a file or all files from the upload queue.
-   
+
    @param {String} [filename]
    The filename of the file to remove. If a filename is not provided, all files will be removed.
    */
@@ -1418,18 +1425,16 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       }
       this._clearQueue();
       this._clearFileInputValue();
-    }
-    else if (typeof filename === &apos;string&apos;) {
+    } else if (typeof filename === &apos;string&apos;) {
       this._clearFile(filename);
-    }
-    else {
+    } else {
       this._clearQueue();
     }
   }
-  
+
   /**
    Abort upload of a given file or all files in the queue.
-   
+
    @param {String} [filename]
    The filename of the file to abort. If a filename is not provided, all files will be aborted.
    */
@@ -1437,26 +1442,25 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
     if (!this.async) {
       throw new Error(&apos;Coral.FileUpload does not support aborting file(s) upload on synchronous mode.&apos;);
     }
-    
+
     if (typeof filename === &apos;string&apos;) {
       // Abort a single file
       this._abortFile(filename);
-    }
-    else {
+    } else {
       // Abort all files
       this._uploadQueue.forEach((item) =&gt; {
         this._abortFile(item.file.name);
       });
     }
   }
-  
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       sizelimit: &apos;sizeLimit&apos;,
       autostart: &apos;autoStart&apos;
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -1469,20 +1473,20 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       &apos;autostart&apos;
     ]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     const button = this.querySelector(&apos;[coral-fileupload-select]&apos;);
     if (button) {
       button.id = button.id || commons.getUID();
     }
     // If no labelledby is specified, ensure input is at labelledby the select button
     this.labelledBy = this.labelledBy;
-    
+
     // Fetch additional parameters if any
     const parameters = [];
     Array.prototype.forEach.call(this.querySelectorAll(&apos;input[type=&quot;hidden&quot;]&apos;), (input) =&gt; {
@@ -1492,17 +1496,17 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       });
     });
     this.parameters = parameters;
-  
+
     // Remove the input if it&apos;s already there
     // A fresh input is preferred to value = &apos;&apos; as it may not work in all browsers
     const inputElement = this.querySelector(&apos;[handle=&quot;input&quot;]&apos;);
     if (inputElement) {
       inputElement.parentNode.removeChild(inputElement);
     }
-    
+
     // Add the input to the component
     this.appendChild(this._elements.input);
-    
+
     // IE11 requires one more frame or the resize listener &lt;object&gt; will appear as an overlaying white box
     window.requestAnimationFrame(() =&gt; {
       // Handles the repositioning of the input to allow dropping files

@@ -490,11 +490,12 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   get label() {
     return this._getContentZone(this._elements.label);
   }
+
   set label(value) {
     this._setContentZone(&apos;label&apos;, value, {
       handle: &apos;label&apos;,
       tagName: &apos;coral-tab-label&apos;,
-      insert: function(label) {
+      insert: function (label) {
         label.classList.add(`${CLASSNAME}Label`);
         this.appendChild(label);
 
@@ -514,6 +515,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     const iconElement = this._elements.icon;
     return iconElement ? iconElement.icon : &apos;&apos;;
   }
+
   set icon(value) {
     const iconElement = this._elements.icon;
     iconElement.icon = value;
@@ -548,6 +550,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   get invalid() {
     return this._invalid || false;
   }
+
   set invalid(value) {
     this._invalid = transform.booleanAttr(value);
     this._reflectAttribute(&apos;invalid&apos;, this._invalid);
@@ -556,8 +559,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     this.setAttribute(&apos;aria-invalid&apos;, this._invalid);
     if (this._invalid) {
       this._elements.invalidIcon.removeAttribute(&apos;hidden&apos;);
-    }
-    else {
+    } else {
       this._elements.invalidIcon.setAttribute(&apos;hidden&apos;, &apos;true&apos;);
     }
   }
@@ -574,6 +576,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
@@ -601,11 +604,16 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   get selected() {
     return this._selected || false;
   }
-  set selected(value) {
-    value = transform.booleanAttr(value);
 
-    if (!value || value &amp;&amp; !this.disabled) {
-      this._selected = value;
+  set selected(value) {
+    let _selected = transform.booleanAttr(value);
+
+    if(this._selected === _selected) {
+      return;
+    }
+
+    if (!_selected || _selected &amp;&amp; !this.disabled) {
+      this._selected = _selected;
       this._reflectAttribute(&apos;selected&apos;, this.disabled ? false : this._selected);
 
       this.classList.toggle(&apos;is-selected&apos;, this._selected);
@@ -631,6 +639,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
   get target() {
     return typeof this._target === &apos;string&apos; ? this._target : this._target || null;
   }
+
   set target(value) {
     if (value === null || typeof value === &apos;string&apos; || value instanceof Node) {
       this._target = value;
@@ -658,6 +667,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
       (this.label || this).textContent.replace(/\s{2,}/g, &apos; &apos;).trim() :
       this._trackingElement;
   }
+
   set trackingElement(value) {
     super.trackingElement = value;
   }
@@ -714,7 +724,9 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     return iconElement;
   }
 
-  get _contentZones() { return {&apos;coral-tab-label&apos;: &apos;label&apos;}; }
+  get _contentZones() {
+    return {&apos;coral-tab-label&apos;: &apos;label&apos;};
+  }
 
   /** @ignore */
   static get observedAttributes() {
@@ -769,8 +781,7 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
         child.nodeType === Node.ELEMENT_NODE &amp;&amp; child.getAttribute(&apos;handle&apos;) !== &apos;icon&apos;) {
         // Add non-template elements to the label
         label.appendChild(child);
-      }
-      else {
+      } else {
         this.removeChild(child);
       }
     }

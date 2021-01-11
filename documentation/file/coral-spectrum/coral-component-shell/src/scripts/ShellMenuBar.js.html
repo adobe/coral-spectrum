@@ -450,13 +450,13 @@ class ShellMenuBar extends BaseComponent(HTMLElement) {
     super();
 
     this.setAttribute(&apos;role&apos;, &apos;list&apos;);
-    
+
     this.items._startHandlingItems(true);
   }
-  
+
   /**
    The item collection.
-   
+
    @type {Collection}
    @readonly
    */
@@ -468,14 +468,14 @@ class ShellMenuBar extends BaseComponent(HTMLElement) {
         itemTagName: &apos;coral-shell-menubar-item&apos;
       });
     }
-  
+
     return this._items;
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
   }
 }

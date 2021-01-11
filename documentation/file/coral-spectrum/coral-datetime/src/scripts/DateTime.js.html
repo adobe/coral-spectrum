@@ -449,86 +449,79 @@ const transform2digit = (value) =&gt; {
 let globalLocale = document.documentElement.lang || window.navigator.language || &apos;en-US&apos;;
 
 // Uses Intl.DateTimeFormat to return a formatted date string
-const formatDate = function(date, locale, options) {
+const formatDate = function (date, locale, options) {
   let formattedDateString = &apos;&apos;;
   try {
     const key = `${JSON.stringify(locale)}${JSON.stringify(options)}`;
     const dateTimeFormat = dateTimeFormats[key];
-  
+
     // Use existing DateTimeFormat or create new one
     if (!dateTimeFormat) {
       dateTimeFormats[key] = new window.Intl.DateTimeFormat(locale, options);
     }
-  
+
     // Format to string
     formattedDateString = dateTimeFormats[key].format(date);
-  }
-  catch (e) {
+  } catch (e) {
     console.warn(e.message);
   }
-  
+
   return formattedDateString;
 };
 
 /**
  The DateTime API is used as fallback to {@link momentJS}.
- 
+
  @param {DateTime|Date|Array&lt;Number&gt;|String} value
  The initial date value. If none provided, the current day is used instead.
  */
 class DateTime {
   /**
-  @see https://momentjs.com/docs/#/parsing/now/
-  */
+   @see https://momentjs.com/docs/#/parsing/now/
+   */
   constructor(value) {
     if (value instanceof this.constructor) {
       // Copy properties
       this._locale = value._locale;
       this._value = value._value;
       this._date = value._date;
-    }
-    else {
+    } else {
       this._locale = globalLocale;
       this._value = value;
-      
+
       // Support Array
       if (Array.isArray(value)) {
         this._date = value.length ? new Date(value[0], value[1] || 0, value[2] || 1) : new Date();
-      }
-      else if (typeof value === &apos;string&apos;) {
+      } else if (typeof value === &apos;string&apos;) {
         const isTime = value.indexOf(&apos;:&apos;) === 2;
-  
+
         // For time, we only need to set hours and minutes using current date
         if (isTime) {
           const time = value.split(&apos;:&apos;);
           const hours = parseInt(time[0], 10);
           const minutes = parseInt(time[1], 10);
-    
+
           if (hours &gt;= 0 &amp;&amp; hours &lt;= 23 &amp;&amp; minutes &gt;= 0 &amp;&amp; minutes &lt;= 59) {
             this._date = new Date();
             this._date.setHours(time[0]);
             this._date.setMinutes(time[1]);
-          }
-          else {
+          } else {
             this._date = new Date(&apos;Invalid Date&apos;);
           }
-        }
-        else {
+        } else {
           // If string is invalid, the date will be invalid too
           // &quot;replace&quot; fixes the one day off issue
           this._date = new Date(this._value.replace(/-/g, &apos;/&apos;).replace(/T.+/, &apos;&apos;));
         }
-      }
-      else if (this._value === null) {
+      } else if (this._value === null) {
         this._date = new Date(&apos;Invalid Date&apos;);
-      }
-      else {
+      } else {
         // Create a Date instance from the value or use current day if value is missing
         this._date = this._value ? new Date(this._value) : new Date();
       }
     }
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/i18n/instance-locale/
    */
@@ -536,17 +529,17 @@ class DateTime {
     if (value) {
       this._locale = value;
     }
-    
+
     return this._locale;
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/displaying/as-javascript-date/
    */
   toDate() {
     return this._date;
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/parsing/moment-clone/
    */
@@ -555,94 +548,85 @@ class DateTime {
     clone._date = this._date;
     return clone;
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/displaying/format/
    */
   format(format) {
     let formattedDateString = &apos;&apos;;
-    
+
     if (!format) {
       format = DEFAULT_FORMAT;
     }
-    
+
     if (format === DEFAULT_FORMAT) {
       formattedDateString += this._date.getFullYear();
       formattedDateString += &apos;-&apos;;
       formattedDateString += transform2digit(this._date.getMonth() + 1);
       formattedDateString += &apos;-&apos;;
       formattedDateString += transform2digit(this._date.getDate());
-    }
-    else if (format === &apos;MMMM YYYY&apos;) {
+    } else if (format === &apos;MMMM YYYY&apos;) {
       formattedDateString += formatDate(this._date, this._locale, {month: &apos;long&apos;});
       formattedDateString += &apos; &apos;;
       formattedDateString += this._date.getFullYear();
-    }
-    else if (format === &apos;LL&apos;) {
+    } else if (format === &apos;LL&apos;) {
       formattedDateString += formatDate(this._date, this._locale, {
         month: &apos;long&apos;,
         year: &apos;numeric&apos;,
         day: &apos;2-digit&apos;
       });
-    }
-    else if (format === &apos;dd&apos;) {
+    } else if (format === &apos;dd&apos;) {
       formattedDateString += formatDate(this._date, this._locale, {weekday: &apos;short&apos;});
-    }
-    else if (format === &apos;dddd&apos;) {
+    } else if (format === &apos;dddd&apos;) {
       formattedDateString += formatDate(this._date, this._locale, {weekday: &apos;long&apos;});
-    }
-    else if (format === &apos;HH:mm&apos;) {
+    } else if (format === &apos;HH:mm&apos;) {
       formattedDateString += transform2digit(this._date.getHours());
       formattedDateString += &apos;:&apos;;
       formattedDateString += transform2digit(this._date.getMinutes());
-    }
-    else if (format === &apos;HH&apos;) {
+    } else if (format === &apos;HH&apos;) {
       formattedDateString += transform2digit(this._date.getHours());
-    }
-    else if (format === &apos;mm&apos;) {
+    } else if (format === &apos;mm&apos;) {
       formattedDateString += transform2digit(this._date.getMinutes());
-    }
-    else if (format === &apos;YYYY-MM-DD[T]HH:mmZ&apos;) {
+    } else if (format === &apos;YYYY-MM-DD[T]HH:mmZ&apos;) {
       formattedDateString += this._date.getFullYear();
       formattedDateString += &apos;-&apos;;
       formattedDateString += transform2digit(this._date.getMonth() + 1);
       formattedDateString += &apos;-&apos;;
       formattedDateString += transform2digit(this._date.getDate());
-      
+
       formattedDateString += &apos;T&apos;;
-  
+
       formattedDateString += transform2digit(this._date.getHours());
       formattedDateString += &apos;:&apos;;
       formattedDateString += transform2digit(this._date.getMinutes());
-  
+
       const timezone = -1 * (this._date.getTimezoneOffset() / 60);
       let abs = Math.abs(timezone);
       abs = abs &lt; 10 ? `0${abs}` : abs.toString();
-      
+
       formattedDateString += timezone &lt; 0 ? `-${abs}:00` : `+${abs}:00`;
-    }
-    else {
+    } else {
       format = typeof format === &apos;object&apos; ? format : {};
       formattedDateString = formatDate(this._date, this._locale, format);
     }
-    
+
     return formattedDateString;
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/get-set/year/
    */
   year() {
     return this._date.getFullYear();
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/get-set/month/
    */
   month() {
     return this._date.getMonth();
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/get-set/week/
    */
@@ -654,90 +638,88 @@ class DateTime {
     const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
     return Math.ceil(((date - yearStart) / 86400000 + 1) / 7);
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/get-set/day/
    */
   day(day) {
     if (typeof day === &apos;number&apos;) {
       this._date.setDate(this._date.getDate() - (this._date.getDay() || 7) + day);
-      
+
       return this;
     }
-    
+
     return this._date.getDay();
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/get-set/hour/
    */
   hours(hours) {
     if (typeof hours === &apos;number&apos;) {
       this._date.setHours(hours);
-      
+
       return this;
     }
-    
+
     return this._date.getHours();
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/get-set/minute/
    */
   minutes(minutes) {
     if (typeof minutes === &apos;number&apos;) {
       this._date.setMinutes(minutes);
-  
+
       return this;
     }
-    
+
     return this._date.getMinutes();
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/get-set/date/
    */
   date() {
     return this._date.getDate();
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/manipulating/add/
    */
   add(value, type) {
     if (type.indexOf(&apos;month&apos;) === 0) {
       this._date.setMonth(this._date.getMonth() + value);
-    }
-    else if (type.indexOf(&apos;day&apos;) === 0) {
+    } else if (type.indexOf(&apos;day&apos;) === 0) {
       this._date.setDate(this._date.getDate() + value);
     }
-    
+
     return this;
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/manipulating/subtract/
    */
   subtract(value, type) {
     if (type.indexOf(&apos;month&apos;) === 0) {
       this._date.setMonth(this._date.getMonth() - value);
-    }
-    else if (type.indexOf(&apos;day&apos;) === 0) {
+    } else if (type.indexOf(&apos;day&apos;) === 0) {
       this._date.setDate(this._date.getDate() - value);
     }
-    
+
     return this;
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/displaying/difference/
    */
   diff(obj) {
     const diff = this._date.getTime() - obj._date.getTime();
-    
+
     return diff / 86400000;
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/manipulating/start-of/
    */
@@ -745,17 +727,15 @@ class DateTime {
     if (value === &apos;day&apos;) {
       // Today
       this._date = new Date(this._date.getFullYear(), this._date.getMonth(), this._date.getDate());
-    }
-    else if (value === &apos;month&apos;) {
+    } else if (value === &apos;month&apos;) {
       this._date = new Date(this._date.getFullYear(), this._date.getMonth(), 1);
-    }
-    else if (value === &apos;year&apos;) {
+    } else if (value === &apos;year&apos;) {
       this._date = new Date(new Date().getFullYear(), 0, 1);
     }
-    
+
     return this;
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/query/is-before/
    */
@@ -763,10 +743,10 @@ class DateTime {
     if (coralDate &amp;&amp; coralDate._date) {
       return unit ? coralDate[unit]() &gt; this[unit]() : coralDate._date &gt; this._date;
     }
-    
+
     return false;
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/query/is-after/
    */
@@ -774,34 +754,32 @@ class DateTime {
     if (coralDate &amp;&amp; coralDate._date) {
       return unit ? coralDate[unit]() &lt; this[unit]() : coralDate._date &lt; this._date;
     }
-    
+
     return false;
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/query/is-same/
    */
   isSame(obj, type) {
     if (type === &apos;hour&apos;) {
       return obj &amp;&amp; obj.clone()._date.getHours() === this.clone()._date.getHours();
-    }
-    else if (type === &apos;minute&apos;) {
+    } else if (type === &apos;minute&apos;) {
       return obj &amp;&amp; obj.clone()._date.getMinutes() === this.clone()._date.getMinutes();
-    }
-    else if (type === &apos;day&apos;) {
+    } else if (type === &apos;day&apos;) {
       return obj &amp;&amp; obj.clone().startOf(&apos;day&apos;)._date.getTime() === this.clone().startOf(&apos;day&apos;)._date.getTime();
     }
-    
+
     return obj &amp;&amp; obj.clone()._date.getTime() === this.clone()._date.getTime();
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/parsing/is-valid/
    */
   isValid() {
     return this._date.toString() !== &apos;Invalid Date&apos;;
   }
-  
+
   /**
    @ignore
    Not supported so we return an empty object
@@ -809,7 +787,7 @@ class DateTime {
   static localeData() {
     return {};
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/i18n/changing-locale/
    */
@@ -817,17 +795,17 @@ class DateTime {
     if (value) {
       globalLocale = value;
     }
-    
+
     return globalLocale;
   }
-  
+
   /**
    @see https://momentjs.com/docs/#/query/is-a-moment/
    */
   static isMoment(obj) {
     return obj instanceof this;
   }
-  
+
   /**
    @return {momentJS|DateTime}
    */

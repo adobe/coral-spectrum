@@ -473,7 +473,12 @@
 <a name='L415'></a><a href='#L415'>415</a>
 <a name='L416'></a><a href='#L416'>416</a>
 <a name='L417'></a><a href='#L417'>417</a>
-<a name='L418'></a><a href='#L418'>418</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L418'></a><a href='#L418'>418</a>
+<a name='L419'></a><a href='#L419'>419</a>
+<a name='L420'></a><a href='#L420'>420</a>
+<a name='L421'></a><a href='#L421'>421</a>
+<a name='L422'></a><a href='#L422'>422</a>
+<a name='L423'></a><a href='#L423'>423</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -556,7 +561,6 @@
 <span class="cline-any cline-yes">1492x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1492x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -595,7 +599,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4990x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -680,7 +683,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -691,7 +693,6 @@
 <span class="cline-any cline-yes">1486x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1486x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -749,7 +750,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1170x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -785,8 +785,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2568x</span>
+<span class="cline-any cline-yes">2572x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">196x</span>
@@ -863,7 +862,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2220x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -890,6 +888,18 @@
 <span class="cline-any cline-yes">80x</span>
 <span class="cline-any cline-yes">80x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">324x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">38280x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -913,9 +923,9 @@ const CLASSNAME = '_coral-AssetList-item';
 &nbsp;
 /**
  Enumeration for {@link ColumnViewItem} variants.
- 
+&nbsp;
  @typedef {Object} ColumnViewItemVariantEnum
- 
+&nbsp;
  @property {String} DEFAULT
  Default item variant. Contains no special decorations.
  @property {String} DRILLDOWN
@@ -942,7 +952,7 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-  
+&nbsp;
     // Content zone
     this._elements = {
       content: this.querySelector('coral-columnview-item-content') || document.createElement('coral-columnview-item-content'),
@@ -954,55 +964,57 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       // Templates
       accessibilityState.call(this._elements, {commons});
     }
-  
+&nbsp;
     super._observeLabel();
   }
-  
+&nbsp;
   /**
    The content of the item.
-   
+&nbsp;
    @type {ColumnViewItemContent}
    @contentzone
    *<span class="missing-if-branch" title="else path not taken" >E</span>/
   get content() {
     return this._getContentZone(this._elements.content);
   }
+&nbsp;
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-columnview-item-content',
-      insert: function(content) {
+      insert: function (content) {
         content.classList.add(`${CLASSNAME}Label`);
         // Insert before chevron
         this.insertBefore(content, this.querySelector('._coral-AssetList-itemChildIndicator'));
       }
     });
   }
-  
+&nbsp;
   /**
    The thumbnail of the item. It is used to hold an icon or an image.
-   
+&nbsp;
    @type {ColumnViewItemThumbnail}
    @contentzone
    */
   get thumbnail() {
     return this._getContentZone(this._elements.thumbnail);
   }
+&nbsp;
   set thumbnail(value) {
     this._setContentZone('thumbnail', value, {
       handle: 'thumbnail',
       tagName: 'coral-columnview-item-thumbnail',
-      insert: function(thumbnail) {
+      insert: function (thumbnail) {
         thumbnail.classList.add(`${CLASSNAME}Thumbnail`);
         // Insert before content
         this.insertBefore(thumbnail, this.content || null);
       }
-    });
-  }
-  
-  /**<span class="missing-if-branch" title="if path not taken" >I</span>
-   The item's va<span class="cstat-no" title="statement not covered" >riant. See {@link ColumnViewItemVariantEnu</span>m}.
-   
+    });<span class="missing-if-branch" title="if path not taken" >I</span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /**
+   The item's variant. See {@link ColumnViewItemVariantEnum}.
+&nbsp;
    @type {String}
    @default ColumnViewItemVariantEnum.DEFAULT
    @htmlattribute variant
@@ -1011,76 +1023,76 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+&nbsp;
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-  
+&nbsp;
     if (this._variant === variant.DRILLDOWN) {
       // Render chevron on demand
       const childIndicator = this.querySelector('._coral-AssetList-itemChildIndicator');
       if (!childIndicator) {
         this.insertAdjacentHTML('beforeend', Icon._renderSVG('spectrum-css-icon-ChevronRightMedium', ['_coral-AssetList-itemChildIndicator', '_coral-UIIcon-ChevronRightMedium']));
       }
-      
+&nbsp;
       this.classList.add('is-branch');
 &nbsp;
-      // @a11y Update aria-expanded. Active drilldowns should be expanded. 
-      // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
-      // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when 
-      // navigating between items. 
+      // @a11y Update aria-expanded. Active drilldowns should be expanded.
+      // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+      // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
+      // navigating between items.
       if (this.selected || (isChromeMacOS &amp;&amp; this.getAttribute('aria-level') === '1')) {
         this.removeAttribute('aria-expanded');
-      }
-      else {
+      } else {
         this.setAttribute('aria-expanded', this.active);
       }
-    }
-    else {
+    } else {
       this.classList.remove('is-branch');
       this.removeAttribute('aria-expanded');
     }
   }
-  
+&nbsp;
   /**
    Specifies the icon that will be placed inside the thumbnail. The size of the icon is always controlled by the
    component.
-   
+<span class="cstat-no" title="statement not covered" ></span>
    @type {String}
    @default ""
-   @htmlat<span class="cstat-no" title="statement not covered" >tribute icon</span>
+   @htmlattribute icon
    @htmlattributereflected
    */
   get icon() {
     return this._icon || '';
   }
+&nbsp;
   set icon(value) {
     this._icon = transform.string(value);
     this._reflectAttribute('icon', this._icon);
-  
+&nbsp;
     // ignored if it is an empty string
     if (this._icon) {
       // creates a new icon element
       if (!this._elements.icon) {
         this._elements.icon = new Icon();
       }
-    
+&nbsp;
       this._elements.icon.icon = this.icon;
       this._elements.icon.size = Icon.size.SMALL;
-    
+&nbsp;
       // removes all the items, since the icon attribute has precedence
       this._elements.thumbnail.innerHTML = '';
-    
+&nbsp;
       // adds the newly created icon
       this._elements.thumbnail.appendChild(this._elements.icon);
     }
-  
+&nbsp;
     super._toggleIconAriaHidden();
   }
-  
+&nbsp;
   /**
    Whether the item is selected.
-   
+&nbsp;
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -1089,45 +1101,45 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   get selected() {
     return this._selected || false;
   }
+&nbsp;
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
     this.trigger('coral-columnview-item:_selectedchanged');
-  
+&nbsp;
     // wait a frame before updating attributes
     commons.nextFrame(() =&gt; {
       this.classList.toggle('is-selected', this._selected);
       this.setAttribute('aria-selected', this._selected);
 &nbsp;
       // @a11y Update aria-expanded. Active drilldowns should be expanded.
-      // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
-      // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when 
-      // navigating between items. 
+      // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+      // to announce drilldown items as "row 1 expanded<span class="branch-1 cbranch-no" title="branch not covered" >" or </span>"row 1 collapsed" when
+      // navigating between items.
       if (this.variant === variant.DRILLDOWN) {
         if (this._selected || (isChromeMacOS &amp;&amp; this.getAttribute('aria-level') === '1')) {
           this.removeAttribute('aria-expanded');
-        }
-        else {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+        } else {
           this.setAttribute('aria-expanded', this.active);
         }
       }
 &nbsp;
       let accessibilityState = this._elements.accessibilityState;
-      
+&nbsp;
       if (this._selected) {
 &nbsp;
         // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
-        this.removeAttribute('aria-owns');
+        this.removeAttribute('<span class="branch-1 cbranch-no" title="branch not covered" >aria-owns');</span>
         this.removeAttribute('aria-describedby');
 &nbsp;
         // @a11y Update content to ensure that checked state is announced by assistive technology when the item receives focus
-        accessibilityState.innerHTML = i18n.get(', checked');
+        accessibilityState.innerHTML = i18n.get(', checked');<span class="branch-2 cbranch-no" title="branch not covered" ></span>
 &nbsp;
-        // @a11y append live r<span class="branch-1 cbranch-no" title="branch not covered" >egion content el</span>ement
+        // @a11y append live region content element
         if (!this.contains(accessibilityState)) {
           this.appendChild(accessibilityState);
         }
-      }<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+      }
       // @a11y If deselecting from checked state,
       else {
 &nbsp;
@@ -1138,23 +1150,23 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
 &nbsp;
         // @a11y Update content to remove checked state
         this._elements.accessibilityState.innerHTML = '';
-      }
-&nbsp;
+      }<span class="branch-2 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="if path not taken" >I</span></span>
+<span class="cstat-no" title="statement not covered" ></span>
       // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
       let ariaLabelledby = this._elements.thumbnail.id + ' ' + this._elements.content.id;
       this.setAttribute('aria-labelledby', this.selected ? `${ariaLabelledby} ${accessibilityState.id}` : ariaLabelledby);
 &nbsp;
-      //<span class="missing-if-branch" title="if path not taken" >I</span> Sync checkbox item selector<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-      cons<span class="cstat-no" title="statement not covered" >t itemSelector = this.querySelector('co</span>ral-checkbox[coral-columnview-itemselect]');
+      // Sync checkbox item selector
+      const itemSelector = this.querySelector('coral-checkbox[coral-columnview-itemselect]');
       if (itemSelector) {
         itemSelector[this._selected ? 'setAttribute' : 'removeAttribute']('checked', '');
       }
     });
   }
-  
+&nbsp;
   /**
    Whether the item is active.
-   
+&nbsp;
    @type {Boolean}
    @default false
    @htmlattribut active
@@ -1163,22 +1175,22 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   get active() {
     return this._active || false;
   }
+&nbsp;
   set active(value) {
     this._active = transform.booleanAttr(value);
     this._reflectAttribute('active', this._active);
-  
-    this.classList.toggle('is-navigated', this._active);
-    this.setAttribute('aria-selected', this.hasAttribute('_selectable') ? this.selected : this._active);
 &nbsp;
+    th<span class="missing-if-branch" title="else path not taken" >E</span>is.classList.toggle('is-navigated', this._active);
+    this.setAttribute('aria-selected', this.hasAttribute('_selectable') ? this.selected : this._active);
+<span class="missing-if-branch" title="else path not taken" >E</span>
     // @a11y Update aria-expanded. Active drilldowns should be expanded.
-    // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
-    // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when 
-    // navigating between items. 
-    if (this.variant === variant.DRILLDOWN) { 
-      <span class="missing-if-branch" title="else path not taken" >E</span>if (this._selected || (isChromeMacOS &amp;&amp; this.getAttribute('aria-level') === '1')) {
+    // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+    // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
+    // navigating between items.
+    if (this.variant === variant.DRILLDOWN) {
+      if (this._selected || (isChromeMacOS &amp;&amp; this.getAttribute('aria-level') === '1')) {
         this.removeAttribute('aria-expanded');
-      }<span class="missing-if-branch" title="else path not taken" >E</span>
-      else {
+      } else {
         this.setAttribute('aria-expanded', this.active);
       }
     }
@@ -1188,17 +1200,17 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       this.removeAttribute('aria-owns');
       this.removeAttribute('aria-describedby');
     }
-    
+&nbsp;
     this.trigger('coral-columnview-item:_activechanged');
   }
-  
+&nbsp;
   get _contentZones() {
     return {
       'coral-columnview-item-content': 'content',
       'coral-columnview-item-thumbnail': 'thumbnail'
     };
   }
-  
+&nbsp;
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === '_selectable') {
@@ -1210,51 +1222,52 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       else {
         this.classList.add('is-selectable');
         let itemSelector = this.querySelector('[coral-columnview-itemselect]');
-  
+&nbsp;
         // Render checkbox on demand
         if (!itemSelector) {
           itemSelector = new Checkbox();
           itemSelector.setAttribute('coral-columnview-itemselect', '');
-          if (this.classList.contains('is-selected')){
-            itemSelector.setAttribute('checked', '');
+          if (this.classList.contains('is-selected')) {
+            itemSelector.setAttribute('checked', ''<span class="branch-2 cbranch-no" title="branch not covered" >);</span>
           }
           itemSelector._elements.input.tabIndex = -1;
           itemSelector.setAttribute('labelledby', this._elements.content.id);
-      
+&nbsp;
           // Add the item selector as first child
           this.insertBefore(itemSelector, this.firstChild);
         }
-      }<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-    }
-    else {
+      }
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
-  
+&nbsp;
   /**
    Returns {@link ColumnViewItem} variants.
-   
+&nbsp;
    @return {ColumnViewItemVariantEnum}
-   */
-  static get variant() { return variant; }
-  
+   */<span class="missing-if-branch" title="else path not taken" >E</span>
+  static get variant() {
+    return variant;
+  }
+&nbsp;
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'variant',
-      'ico<span class="missing-if-branch" title="else path not taken" >E</span>n',
+      'icon',
       'selected',
       'active',
       '_selectable'
     ]);
   }
-  
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-  
+&nbsp;
     // @a11y
     this.setAttribute('role', 'treeitem');
 &nbsp;
@@ -1264,26 +1277,28 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     if (!this.hasAttribute('tabindex')) {
       this.tabIndex = this.active || this.selected ? 0 : -1;
     }
-    
+&nbsp;
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-    
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
+&nbsp;
     const thumbnail = this._elements.thumbnail;
     const content = this._elements.content;
-    
+&nbsp;
     const contentZoneProvided = content.parentNode || thumbnail.parentNode;
-    
+&nbsp;
     if (!contentZoneProvided) {
       // move the contents of the item into the content zone
       while (this.firstChild) {
         content.appendChild(this.firstChild);
       }
     }
-  
+&nbsp;
     // Assign content zones
     this.content = content;
     this.thumbnail = thumbnail;
-&nbsp;
+<span class="branch-2 cbranch-no" title="branch not covered" ></span>
     // @a11y thumbnail img element should have alt attribute
     const thumbnailImg = thumbnail.querySelector('img:not([alt])');
     if (thumbnailImg) {
@@ -1295,7 +1310,7 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
 &nbsp;
     content.id = content.id || commons.getUID();
 &nbsp;
-    // @a11y Add live region element to ensure <span class="branch-2 cbranch-no" title="branch not covered" >announcement of selected state</span>
+    // @a11y Add live region element to ensure announcement of selected state
     const accessibilityState = this._elements.accessibilityState;
 &nbsp;
     // @a11y accessibility state string should announce in document lang, rather than item lang.
@@ -1314,7 +1329,7 @@ export default ColumnViewItem;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

@@ -444,9 +444,9 @@ const isItem = node =&gt; node.nodeName === &apos;A&apos; &amp;&amp; node.getAtt
 
 /**
  Enumeration for {@link SideNav} variants.
- 
+
  @typedef {Object} SideNavVariantEnum
- 
+
  @property {String} DEFAULT
  A default sidenav.
  @property {String} MULTI_LEVEL
@@ -469,32 +469,32 @@ class SideNav extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-  
+
     // Attach events
     this._delegateEvents({
       // Interaction
       &apos;click a[is=&quot;coral-sidenav-item&quot;]&apos;: &apos;_onItemClick&apos;,
-      
+
       // Accessibility
       &apos;capture:focus a[is=&quot;coral-sidenav-item&quot;].focus-ring&apos;: &apos;_onItemFocusIn&apos;,
       &apos;capture:blur a[is=&quot;coral-sidenav-item&quot;]&apos;: &apos;_onItemFocusOut&apos;,
-      
+
       // Private
       &apos;coral-sidenav-item:_selectedchanged&apos;: &apos;_onItemSelectedChanged&apos;
     });
-    
+
     // Used for eventing
     this._oldSelection = null;
-    
+
     // Level Collection
     this._levels = this.getElementsByTagName(&apos;coral-sidenav-level&apos;);
-  
+
     // Heading Collection
     this._headings = this.getElementsByTagName(&apos;coral-sidenav-heading&apos;);
-    
+
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
-  
+
     // Initialize content MO
     this._observer = new MutationObserver(this._handleMutations.bind(this));
     this._observer.observe(this, {
@@ -502,10 +502,10 @@ class SideNav extends BaseComponent(HTMLElement) {
       subtree: true
     });
   }
-  
+
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+
    @type {Collection}
    @readonly
    */
@@ -522,21 +522,21 @@ class SideNav extends BaseComponent(HTMLElement) {
     }
     return this._items;
   }
-  
+
   /**
    Returns the first selected item in the sidenav. The value &lt;code&gt;null&lt;/code&gt; is returned if no element is
    selected.
-   
+
    @type {SideNavItem}
    @readonly
    */
   get selectedItem() {
     return this.items._getFirstSelected();
   }
-  
+
   /**
    The sidenav&apos;s variant. See {@link SideNavVariantEnum}.
-   
+
    @type {String}
    @default SideNavVariantEnum.DEFAULT
    @htmlattribute variant
@@ -545,58 +545,59 @@ class SideNav extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.DEFAULT;
     this._reflectAttribute(&apos;variant&apos;, this._variant);
-    
+
     this.classList.toggle(`${CLASSNAME}--multiLevel`, this._variant === variant.MULTI_LEVEL);
-    
+
     if (this.variant === variant.MULTI_LEVEL) {
       // Don&apos;t hide the selected item level
       const selectedItem = this.selectedItem;
       const ignoreLevel = selectedItem &amp;&amp; selectedItem.parentNode;
-      
+
       // Hide every other level that doesn&apos;t contain the selected item
-      for (let i = 0; i &lt; this._levels.length; i++) {
+      for (let i = 0 ; i &lt; this._levels.length ; i++) {
         if (this._levels[i] !== ignoreLevel) {
           this._levels[i].setAttribute(&apos;_expanded&apos;, &apos;off&apos;);
         }
       }
     }
   }
-  
+
   _onItemClick(event) {
     const item = event.matchedTarget;
-    
+
     if (!item.selected) {
       item.selected = true;
     }
   }
-  
+
   _onItemFocusIn(event) {
     const item = event.matchedTarget;
-    
+
     item._elements.container.classList.add(&apos;focus-ring&apos;);
   }
-  
+
   _onItemFocusOut(event) {
     const item = event.matchedTarget;
-  
+
     item._elements.container.classList.remove(&apos;focus-ring&apos;);
   }
-  
+
   _onItemSelectedChanged(event) {
     event.stopImmediatePropagation();
-    
+
     this._validateSelection(event.target);
   }
-  
+
   _validateSelection(item) {
     const selectedItems = this.items._getAllSelected();
     // Last selected item wins if multiple selection while not allowed
     item = item || selectedItems[selectedItems.length - 1];
-  
+
     // Deselect other selected items
     if (item &amp;&amp; item.hasAttribute(&apos;selected&apos;) &amp;&amp; selectedItems.length &gt; 1) {
       selectedItems.forEach((selectedItem) =&gt; {
@@ -606,7 +607,7 @@ class SideNav extends BaseComponent(HTMLElement) {
           selectedItem.removeAttribute(&apos;selected&apos;);
         }
       });
-    
+
       // We can trigger change events again
       this._preventTriggeringEvents = false;
     }
@@ -617,24 +618,24 @@ class SideNav extends BaseComponent(HTMLElement) {
     // Notify of change
     this._triggerChangeEvent();
   }
-  
+
   _expandLevels() {
     const selectedItem = this.selectedItem;
     if (selectedItem) {
       let level = selectedItem.closest(&apos;coral-sidenav-level&apos;);
-  
+
       // Expand until root
       while (level) {
         level.setAttribute(&apos;_expanded&apos;, &apos;on&apos;);
-    
+
         const prev = level.previousElementSibling;
         if (prev &amp;&amp; prev.matches(&apos;a[is=&quot;coral-sidenav-item&quot;]&apos;)) {
           prev.setAttribute(&apos;aria-expanded&apos;, &apos;true&apos;);
         }
-    
+
         level = level.parentNode &amp;&amp; level.parentNode.closest(&apos;coral-sidenav-level&apos;);
       }
-  
+
       // Expand corresponding item level
       level = selectedItem.nextElementSibling;
       if (level &amp;&amp; level.tagName === &apos;CORAL-SIDENAV-LEVEL&apos;) {
@@ -643,51 +644,48 @@ class SideNav extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   _triggerChangeEvent() {
     const selectedItem = this.selectedItem;
     const oldSelection = this._oldSelection;
-    
+
     if (!this._preventTriggeringEvents &amp;&amp; selectedItem !== oldSelection) {
       this.trigger(&apos;coral-sidenav:change&apos;, {
         oldSelection: oldSelection,
         selection: selectedItem
       });
-    
+
       this._oldSelection = selectedItem;
     }
   }
-  
+
   _syncLevel(el, isRemoved) {
     if (isRemoved) {
       if (el.id &amp;&amp; isLevel(el)) {
         const item = this.querySelector(`a[is=&quot;coral-sidenav-item&quot;][aria-controls=&quot;${el.id}&quot;]`);
         item &amp;&amp; item.removeAttribute(&apos;aria-controls&apos;);
-      }
-      else if (el.id &amp;&amp; (isHeading(el) || isItem(el))) {
+      } else if (el.id &amp;&amp; (isHeading(el) || isItem(el))) {
         const level = this.querySelector(`coral-sidenav-level[aria-labelledby=&quot;${el.id}&quot;]`);
         level &amp;&amp; level.removeAttribute(&apos;aria-labelledby&apos;);
         this._syncLevel(level);
       }
-    }
-    else if (isLevel(el)) {
+    } else if (isLevel(el)) {
       const prev = el.previousElementSibling;
       if (prev &amp;&amp; (isHeading(prev) || isItem(prev))) {
         prev.id = prev.id || commons.getUID();
         el.setAttribute(&apos;aria-labelledby&apos;, prev.id);
-    
+
         if (isItem(prev)) {
           el.id = el.id || commons.getUID();
           prev.setAttribute(&apos;aria-controls&apos;, el.id);
         }
       }
-    }
-    else if (isHeading(el) || isItem(el)) {
+    } else if (isHeading(el) || isItem(el)) {
       const next = el.nextElementSibling;
       if (next &amp;&amp; isLevel(next)) {
         el.id = el.id || commons.getUID();
         next.setAttribute(&apos;aria-labelledby&apos;, el.id);
-    
+
         if (isItem(el)) {
           next.id = next.id || commons.getUID();
           el.setAttribute(&apos;aria-controls&apos;, next.id);
@@ -695,86 +693,92 @@ class SideNav extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   _syncHeading(heading) {
     heading.classList.add(`${CLASSNAME}-heading`);
     heading.setAttribute(&apos;role&apos;, &apos;heading&apos;);
   }
-  
+
   _handleMutations(mutations) {
     mutations.forEach((mutation) =&gt; {
       // Sync added levels and headings
-      for (let i = 0; i &lt; mutation.addedNodes.length; i++) {
+      for (let i = 0 ; i &lt; mutation.addedNodes.length ; i++) {
         const addedNode = mutation.addedNodes[i];
-        
+
         // a11y
         this._syncLevel(addedNode);
-        
+
         // a11y
         if (isHeading(addedNode)) {
           this._syncHeading(addedNode);
         }
-  
+
         if (isLevel(addedNode)) {
           this._validateSelection(addedNode.querySelector(&apos;a[is=&quot;coral-sidenav-item&quot;][selected]&apos;));
         }
       }
-      
+
       // Sync removed levels
-      for (let k = 0; k &lt; mutation.removedNodes.length; k++) {
+      for (let k = 0 ; k &lt; mutation.removedNodes.length ; k++) {
         const removedNode = mutation.removedNodes[k];
-        
+
         this._syncLevel(removedNode, true);
-        
+
         if (isLevel(removedNode)) {
           this._validateSelection();
         }
       }
     });
   }
-  
+
   /**
    Returns {@link SideNav} variants.
-   
+
    @return {SideNavVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat([&apos;variant&apos;]); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat([&apos;variant&apos;]);
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-  
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
+
     // a11y
-    for (let i = 0; i &lt; this._levels.length; i++) {
+    for (let i = 0 ; i &lt; this._levels.length ; i++) {
       this._syncLevel(this._levels[i]);
     }
-  
+
     // a11y
-    for (let i = 0; i &lt; this._headings.length; i++) {
+    for (let i = 0 ; i &lt; this._headings.length ; i++) {
       this._syncHeading(this._headings[i]);
     }
-    
+
     // Don&apos;t trigger events once connected
     this._preventTriggeringEvents = true;
     this._validateSelection();
     this._preventTriggeringEvents = false;
-    
+
     this._oldSelection = this.selectedItem;
   }
-  
+
   /**
    Triggered when {@link SideNav} selected item has changed.
-   
+
    @typedef {CustomEvent} coral-sidenav:change
-   
+
    @property {SideNavItem} detail.oldSelection
    The prior selected item.
    @property {SideNavItem} detail.selection

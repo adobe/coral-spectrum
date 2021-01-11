@@ -453,9 +453,9 @@ const MIN_REG_EXP = new RegExp(&apos;m{1,2}&apos;);
 
 /**
  Enumeration for {@link Clock} variants.
- 
+
  @typedef {Object} ClockVariantEnum
- 
+
  @property {String} DEFAULT
  A default, gray Clock.
  @property {String} QUIET
@@ -488,28 +488,28 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-  
+
     // Default value
     this._value = &apos;&apos;;
-    
+
     // Events
     this._delegateEvents(commons.extend(this._events, {
       &apos;change [handle=&quot;period&quot;]&apos;: &apos;_onPeriodChange&apos;
     }));
-    
+
     // Prepare templates
     this._elements = {};
     this._template = base.call(this._elements, {commons, i18n});
-  
+
     // Pre-define labellable element
     this._labellableElement = this;
   }
-  
+
   /**
    The format used to display the selected time to the user. If the user manually types a time, this format
    will be used to parse the value. &apos;HH:mm&apos; is supported by default. Include momentjs to support additional format
    string options see http://momentjs.com/docs/#/displaying/.
-   
+
    @type {String}
    @default &quot;HH:mm&quot;
    @htmlattribute displayformat
@@ -518,19 +518,20 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get displayFormat() {
     return this._displayFormat || DEFAULT_TIME_FORMAT;
   }
+
   set displayFormat(value) {
     this._displayFormat = this._extractTimeFormat(transform.string(value).trim(), TIME_REG_EXP, DEFAULT_TIME_FORMAT);
     this._reflectAttribute(&apos;displayformat&apos;, this._displayFormat);
-    
+
     this._syncDisplay();
   }
-  
+
   /**
    The format to use on expressing the time as a string on the &lt;code&gt;value&lt;/code&gt; attribute. The value
    will be sent to the server using this format. If an empty string is provided, then the default value per type
    will be used. &apos;HH:mm&apos; is supported by default. Include momentjs to support additional format string options
    see http://momentjs.com/docs/#/displaying/.
-   
+
    @type {String}
    @default &quot;HH:mm&quot;
    @htmlattribute valueformat
@@ -539,39 +540,40 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get valueFormat() {
     return this._valueFormat || DEFAULT_TIME_FORMAT;
   }
+
   set valueFormat(value) {
     const setValueFormat = (newValue) =&gt; {
       this._valueFormat = this._extractTimeFormat(transform.string(newValue).trim(), TIME_REG_EXP, DEFAULT_TIME_FORMAT);
       this._reflectAttribute(&apos;valueformat&apos;, this._valueFormat);
     };
-  
+
     // Once the valueFormat is set, we make sure the value is also correct
     if (!this._valueFormat &amp;&amp; this._originalValue) {
       setValueFormat(value);
       this.value = this._originalValue;
-    }
-    else {
+    } else {
       setValueFormat(value);
       this._elements.input.value = this.value;
     }
   }
-  
+
   /**
    The current value as a Date. If the value is &quot;&quot; or an invalid date, &lt;code&gt;null&lt;/code&gt; will be returned.
-   
+
    @type {Date}
    @default null
    */
   get valueAsDate() {
     return this._value ? new Date(this._value.toDate().getTime()) : null;
   }
+
   set valueAsDate(value) {
     this.value = value instanceof Date ? new DateTime.Moment(value, null, true).format(this.valueFormat) : &apos;&apos;;
   }
-  
+
   /**
    The clock&apos;s variant. See {@link ClockVariantEnum}.
-   
+
    @type {String}
    @default ClockVariantEnum.DEFAULT
    @htmlattribute variant
@@ -580,24 +582,25 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.DEFAULT;
     this._reflectAttribute(&apos;variant&apos;, this._variant);
-  
+
     // passes down the variant to the underlying components
     this._elements.hours.variant = this._variant;
     this._elements.minutes.variant = this._variant;
     this._elements.period.variant = this._variant;
-  
+
     // removes every existing variant
     this.classList.remove(...ALL_VARIANT_CLASSES);
-  
+
     if (this._variant !== variant.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._variant}`);
     }
   }
-  
+
   /**
    Name used to submit the data in a form.
    @type {String}
@@ -608,12 +611,13 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get name() {
     return this._elements.input.name;
   }
+
   set name(value) {
     this._reflectAttribute(&apos;name&apos;, value);
-    
+
     this._elements.input.name = value;
   }
-  
+
   /**
    Whether this field is disabled or not.
    @type {Boolean}
@@ -624,32 +628,34 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
-    
+
     this[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
     this.classList.toggle(&apos;is-disabled&apos;, this._disabled);
-    
+
     this._elements.hours.disabled = this._disabled;
     this._elements.minutes.disabled = this._disabled;
     // stops the form submission
     this._elements.input.disabled = this._disabled;
   }
-  
+
   /**
    Inherited from {@link BaseFormField#invalid}.
    */
   get invalid() {
     return super.invalid;
   }
+
   set invalid(value) {
     super.invalid = value;
-  
+
     this._elements.hours.invalid = this._invalid;
     this._elements.minutes.invalid = this._invalid;
   }
-  
+
   /**
    Whether this field is required or not.
    @type {Boolean}
@@ -660,15 +666,16 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute(&apos;required&apos;, this._required);
-  
+
     this._elements.hours.required = this._required;
     this._elements.minutes.required = this._required;
     this._elements.input.required = this._required;
   }
-  
+
   /**
    Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
    @type {Boolean}
@@ -679,15 +686,16 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute(&apos;readonly&apos;, this._readOnly);
-  
+
     this._elements.hours.readOnly = this._readOnly;
     this._elements.minutes.readOnly = this._readOnly;
     this._elements.input.readOnly = this._readOnly;
   }
-  
+
   /**
    This field&apos;s current value.
    @type {String}
@@ -697,32 +705,33 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   get value() {
     return this._getValueAsString(this._value, this.valueFormat);
   }
+
   set value(value) {
     value = typeof value === &apos;string&apos; ? value : &apos;&apos;;
     // This is used to change the value if valueformat is also set but afterwards
     this._originalValue = value;
-    
+
     // we do strict conversion of the values
     const time = new DateTime.Moment(value, this.valueFormat, true);
     this._value = time.isValid() ? time : &apos;&apos;;
     this._elements.input.value = this.value;
-  
+
     this._syncValueAsText();
     this._syncDisplay();
   }
-  
+
   /**
    Inherited from {@link BaseFormField#labelledBy}.
    */
   get labelledBy() {
     // Get current aria-labelledby attribute on the labellable element.
     let labelledBy = this.getAttribute(&apos;aria-labelledby&apos;);
-  
+
     // If a labelledBy attribute has been defined,
     if (labelledBy) {
       // and strip the valueAsText element id from the end of the aria-labelledby string.
       labelledBy = labelledBy.replace(this._elements.valueAsText.id, &apos;&apos;).trim();
-    
+
       // If the resulting labelledBy string is empty, return null.
       if (!labelledBy.length) {
         labelledBy = null;
@@ -730,61 +739,61 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
     }
     return labelledBy;
   }
+
   set labelledBy(value) {
     super.labelledBy = value;
-  
+
     // The specified labelledBy property.
     const labelledBy = this.labelledBy;
-  
+
     // An array of element ids to label control, the last being the valueAsText element id.
     const ids = [this._elements.valueAsText.id];
-  
+
     // If a labelledBy property exists,
     if (labelledBy) {
       // prepend the labelledBy value to the ids array
       ids.unshift(labelledBy);
-  
+
       // Set aria-labelledby attribute on the labellable element joining ids array into space-delimited list of ids.
       this.setAttribute(&apos;aria-labelledby&apos;, ids.join(&apos; &apos;));
-    }
-    else {
+    } else {
       // labelledBy property is null, remove the aria-labelledby attribute.
       this.removeAttribute(&apos;aria-labelledby&apos;);
     }
   }
-  
+
   /**
    Ignore the date part and use the time part only
-   
+
    @private
    */
   _extractTimeFormat(format, regExp, defaultFormat) {
     const match = regExp.exec(format);
     return match &amp;&amp; match.length &amp;&amp; match[0] !== &apos;&apos; ? match[0] : defaultFormat;
   }
-  
+
   /**
    Sync time display based on the format
-   
+
    @private
    */
   _syncDisplay() {
     const hourFormat = this._extractTimeFormat(this.displayFormat, HOUR_REG_EXP, DEFAULT_HOUR_FORMAT);
     const minuteFormat = this._extractTimeFormat(this.displayFormat, MIN_REG_EXP, DEFAULT_MINUTE_FORMAT);
-    
+
     this._elements.hours.placeholder = hourFormat;
     this._elements.minutes.placeholder = minuteFormat;
-    
+
     this._elements.hours.value = this._getValueAsString(this._value, hourFormat);
     this._elements.minutes.value = this._getValueAsString(this._value, minuteFormat);
-    
+
     this._syncPeriod();
     this._syncValueAsText();
   }
-  
+
   /**
    Sync period selector based on the format
-   
+
    @private
    */
   _syncPeriod() {
@@ -793,159 +802,155 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
     const am = i18n.get(&apos;am&apos;);
     const pm = i18n.get(&apos;pm&apos;);
     const items = period.items.getAll();
-    
+
     if (time &amp;&amp; time.isValid()) {
       if (time.hours() &lt; 12) {
         period.value = &apos;am&apos;;
-      }
-      else {
+      } else {
         period.value = &apos;pm&apos;;
       }
     }
-    
+
     // Check for am/pm
     if (this.displayFormat.indexOf(&apos;a&apos;) !== -1) {
       items[0].textContent = am;
       items[1].textContent = pm;
       this._togglePeriod(true);
-    }
-    else if (this.displayFormat.indexOf(&apos;A&apos;) !== -1) {
+    } else if (this.displayFormat.indexOf(&apos;A&apos;) !== -1) {
       items[0].textContent = am.toUpperCase();
       items[1].textContent = pm.toUpperCase();
       this._togglePeriod(true);
-    }
-    else {
+    } else {
       this._togglePeriod(false);
     }
   }
-  
+
   /** @private */
   _togglePeriod(show) {
     this.classList.toggle(`${CLASSNAME}--extended`, show);
     this._elements.period.hidden = !show;
   }
-  
+
   /** @private */
   _onPeriodChange(event) {
     // stops the event from leaving the component
     event.stopImmediatePropagation();
-    
+
     const time = this._value;
     const period = this._elements.period;
-    
+
     // we check if a change event needs to be triggered since it was produced via user interaction
     if (time &amp;&amp; time.isValid()) {
       if (this.displayFormat.indexOf(&apos;h&apos;) !== -1) {
         if (period.value === &apos;am&apos;) {
           time.subtract(12, &apos;h&apos;);
-        }
-        else {
+        } else {
           time.add(12, &apos;h&apos;);
         }
       }
-      
+
       this.value = time.format(this.valueFormat);
       this.trigger(&apos;change&apos;);
     }
   }
-  
+
   _syncValueAsText() {
     this._elements.valueAsText.textContent = this._getValueAsString(this._value, this.displayFormat);
-    
+
     if (!this.getAttribute(&apos;aria-labelledby&apos;)) {
       this.labelledBy = this.labelledBy;
     }
   }
-  
+
   /**
    Kills the internal _onInputChange from BaseFormField because it does not check the target.
-   
+
    @private
    */
   _onInputChange(event) {
     // stops the event from leaving the component
     event.stopImmediatePropagation();
-    
+
     let newTime = new DateTime.Moment();
     const oldTime = this._value;
-    
+
     let hours = parseInt(this._elements.hours.value, 10);
     const minutes = parseInt(this._elements.minutes.value, 10);
-    
+
     if (window.isNaN(hours) || window.isNaN(minutes)) {
       newTime = &apos;&apos;;
-    }
-    else {
+    } else {
       if (!this._elements.period.hidden &amp;&amp;
         this.displayFormat.indexOf(&apos;h&apos;) !== -1 &amp;&amp;
         this._elements.period.value === &apos;pm&apos;) {
         hours += 12;
       }
-      
+
       newTime.hours(hours);
       newTime.minutes(minutes);
     }
-    
+
     // we check if a change event needs to be triggered since it was produced via user interaction
     if (newTime &amp;&amp; newTime.isValid()) {
       // @polyfill ie
       this.invalid = false;
-      
+
       if (!newTime.isSame(oldTime, &apos;hour&apos;) || !newTime.isSame(oldTime, &apos;minute&apos;)) {
         this.value = newTime.format(this.valueFormat);
         this.trigger(&apos;change&apos;);
       }
-    }
-    else {
+    } else {
       // @polyfill ie
       this.invalid = true;
       // does not sync the inputs so allow the user to continue typing the date
       this._value = &apos;&apos;;
-      
+
       if (newTime !== oldTime) {
         this.trigger(&apos;change&apos;);
       }
     }
   }
-  
+
   /**
    Helper class that converts the internal moment value into a String using the provided date format. If the value is
    invalid, empty string will be returned.
-   
+
    @param {?Moment} value
    The value representing the date. It has to be a moment object or &lt;code&gt;null&lt;/code&gt;
    @param {String} format
    The Date format to be used.
-   
+
    @returns {String} a String representing the value in the given format.
-   
+
    @ignore
    */
   _getValueAsString(value, format) {
     return value &amp;&amp; value.isValid() ? value.format(format) : &apos;&apos;;
   }
-  
+
   focus() {
     // Sets focus to appropriate descendant
     if (!this.contains(document.activeElement)) {
       this._elements.hours.focus();
     }
   }
-  
+
   /**
    Returns {@link Clock} variants.
-   
+
    @return {ClockVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       displayformat: &apos;displayFormat&apos;,
       valueformat: &apos;valueFormat&apos;
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -954,29 +959,35 @@ class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
       &apos;variant&apos;
     ]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // a11y
     this.setAttribute(&apos;role&apos;, &apos;group&apos;);
-    
+
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-    if (!this._valueFormat) { this.valueFormat = DEFAULT_TIME_FORMAT; }
-    if (!this._displayFormat) { this.displayFormat = DEFAULT_TIME_FORMAT; }
-  
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
+    if (!this._valueFormat) {
+      this.valueFormat = DEFAULT_TIME_FORMAT;
+    }
+    if (!this._displayFormat) {
+      this.displayFormat = DEFAULT_TIME_FORMAT;
+    }
+
     // clean up to be able to clone it
     while (this.firstChild) {
       this.removeChild(this.firstChild);
     }
-    
+
     // Render template
     this.appendChild(this._template);
-    
+
     this._syncDisplay();
   }
 }

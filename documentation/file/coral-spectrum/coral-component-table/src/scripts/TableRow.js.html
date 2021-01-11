@@ -484,6 +484,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   get locked() {
     return this._locked || false;
   }
+
   set locked(value) {
     this._locked = transform.booleanAttr(value);
     this._reflectAttribute(&apos;locked&apos;, this._locked);
@@ -502,10 +503,11 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     // Prevent selection if disabled
     if (this.hasAttribute(&apos;coral-table-rowselect&apos;) &amp;&amp; this.hasAttribute(&apos;disabled&apos;) ||
-    this.querySelector(&apos;[coral-table-rowselect][disabled]&apos;)) {
+      this.querySelector(&apos;[coral-table-rowselect][disabled]&apos;)) {
       return;
     }
 
@@ -531,6 +533,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   get selectable() {
     return this._selectable || false;
   }
+
   set selectable(value) {
     this._selectable = transform.booleanAttr(value);
     this._reflectAttribute(&apos;selectable&apos;, this._selectable);
@@ -551,6 +554,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   get multiple() {
     return this._multiple || false;
   }
+
   set multiple(value) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute(&apos;multiple&apos;, this._multiple);
@@ -631,7 +635,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
     const selectHandle = this.querySelector(&apos;[coral-table-rowselect]&apos;);
 
     // @a11y Only update aria-selected if the table row can be selected
-    if(!(this.hasAttribute(&apos;coral-table-rowselect&apos;) || selectHandle)) {
+    if (!(this.hasAttribute(&apos;coral-table-rowselect&apos;) || selectHandle)) {
       this.removeAttribute(&apos;aria-selected&apos;);
       return;
     }
@@ -769,7 +773,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
       return (
         cell.id &amp;&amp;
         !(
-          cell.hasAttribute(&apos;coral-table-roworder&apos;) || cell.querySelector(&apos;[coral-table-roworder]&apos;)  ||
+          cell.hasAttribute(&apos;coral-table-roworder&apos;) || cell.querySelector(&apos;[coral-table-roworder]&apos;) ||
           cell.hasAttribute(&apos;coral-table-rowlock&apos;) || cell.querySelector(&apos;[coral-table-rowlock]&apos;) ||
           cell.hasAttribute(&apos;coral-row-remove&apos;) || cell.querySelector(&apos;[coral-table-remove]&apos;)
         )
@@ -847,9 +851,9 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
         // @a11y provide a more explicit label for the checkbox than just &quot;Select&quot;
         if (this.hasAttribute(&apos;aria-labelledby&apos;)) {
           let ids = this.getAttribute(&apos;aria-labelledby&apos;)
-          .split(&apos; &apos;)
-          .filter(id =&gt; selectHandle._elements.input.id !== id &amp;&amp; this._elements.accessibilityState.id !== id)
-          .join(&apos; &apos;);
+            .split(&apos; &apos;)
+            .filter(id =&gt; selectHandle._elements.input.id !== id &amp;&amp; this._elements.accessibilityState.id !== id)
+            .join(&apos; &apos;);
           selectHandle.labelledBy = selectHandle._elements.input.id + &apos; &apos; + ids;
         }
       }
@@ -860,8 +864,7 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   _toggleSelectable(selectable) {
     if (selectable) {
       this._setHandle(&apos;coral-table-rowselect&apos;);
-    }
-    else {
+    } else {
       // Clear selection but leave the handle if any
       this.set(&apos;selected&apos;, false, true);
     }
@@ -922,14 +925,11 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   attributeChangedCallback(name, oldValue, value) {
     if (name === &apos;_selectable&apos;) {
       this._toggleSelectable(value !== null);
-    }
-    else if (name === &apos;_orderable&apos;) {
+    } else if (name === &apos;_orderable&apos;) {
       this._toggleOrderable(value !== null);
-    }
-    else if (name === &apos;_lockable&apos;) {
+    } else if (name === &apos;_lockable&apos;) {
       this._toggleLockable(value !== null);
-    }
-    else {
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }

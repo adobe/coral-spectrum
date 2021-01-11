@@ -437,10 +437,10 @@ import MasonryColumnLayout from &apos;./MasonryColumnLayout&apos;;
 /**
  Layout with variable width items. The minimal width of the items is defined with the &lt;code&gt;columnwidth&lt;/code&gt;
  attribute.
- 
+
  @example
  &lt;coral-masonry layout=&quot;dashboard&quot; columnwidth=&quot;300&quot;&gt;
- 
+
  @class Coral.Masonry.VariableLayout
  @extends {MasonryColumnLayout}
  */
@@ -449,7 +449,7 @@ class MasonryVariableLayout extends MasonryColumnLayout {
   _getItemWidth(colspan) {
     return this._masonryAvailableWidth / this._columns.length * colspan - this._horSpacing;
   }
-  
+
   /** @inheritdoc */
   _getItemLeft(columnIndex) {
     return this._offsetLeft + this._masonryAvailableWidth * columnIndex / this._columns.length;

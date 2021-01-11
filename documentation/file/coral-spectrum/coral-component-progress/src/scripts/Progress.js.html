@@ -438,9 +438,9 @@ import {commons, transform, validate} from &apos;../../../coral-utils&apos;;
 
 /**
  Enumeration for {@link Progress} sizes.
- 
+
  @typedef {Object} ProgressSizeEnum
- 
+
  @property {String} SMALL
  A small progress bar.
  @property {String} MEDIUM
@@ -456,9 +456,9 @@ const size = {
 
 /**
  Enumeration for {@link Progress} label positions.
- 
+
  @typedef {Object} ProgressLabelPositionEnum
- 
+
  @property {String} LEFT
  Show the label to the left of the bar.
  @property {String} SIDE
@@ -489,14 +489,14 @@ class Progress extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Prepare templates
     this._elements = {
       // Fetch or create the content content zone element
       label: this.querySelector(&apos;coral-progress-label&apos;) || document.createElement(&apos;coral-progress-label&apos;)
     };
     base.call(this._elements);
-  
+
     // Watch for label changes
     this._observer = new MutationObserver(this._toggleLabelVisibility.bind(this));
     this._observer.observe(this._elements.label, {
@@ -505,10 +505,10 @@ class Progress extends BaseComponent(HTMLElement) {
       subtree: true
     });
   }
-  
+
   /**
    The current progress in percent.
-   
+
    @type {Number}
    @default 0
    @emits {coral-progress:change}
@@ -518,42 +518,41 @@ class Progress extends BaseComponent(HTMLElement) {
   get value() {
     return this.indeterminate ? 0 : this._value || 0;
   }
+
   set value(value) {
     value = transform.number(value) || 0;
-    
+
     // Stay within bounds
     if (value &gt; 100) {
       value = 100;
-    }
-    else if (value &lt; 0) {
+    } else if (value &lt; 0) {
       value = 0;
     }
-    
+
     this._value = value;
     this._reflectAttribute(&apos;value&apos;, this._value);
-  
+
     if (!this.indeterminate) {
       this._elements.status.style.width = `${this.value}%`;
-      
+
       // ARIA: Reflect value for screenreaders
       this.setAttribute(&apos;aria-valuenow&apos;, this._value);
-    
+
       if (this.showPercent) {
         // Only update label text in percent mode
         this._setPercentage(`${this._value}%`);
       }
-    }
-    else {
+    } else {
       this._elements.status.style.width = &apos;&apos;;
     }
-    
+
     this.trigger(&apos;coral-progress:change&apos;);
   }
-  
+
   /**
    Whether to hide the current value and show an animation. Set to true for operations whose progress cannot be
    determined.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute indeterminate
@@ -562,35 +561,35 @@ class Progress extends BaseComponent(HTMLElement) {
   get indeterminate() {
     return this._indeterminate || false;
   }
+
   set indeterminate(value) {
     this._indeterminate = transform.booleanAttr(value);
     this._reflectAttribute(&apos;indeterminate&apos;, this._indeterminate);
-  
+
     if (this._indeterminate) {
       this.classList.add(`${CLASSNAME}--indeterminate`);
-    
+
       // ARIA: Remove attributes
       this.removeAttribute(&apos;aria-valuenow&apos;);
       this.removeAttribute(&apos;aria-valuemin&apos;);
       this.removeAttribute(&apos;aria-valuemax&apos;);
-      
+
       this.value = 0;
-    }
-    else {
+    } else {
       this.classList.remove(`${CLASSNAME}--indeterminate`);
-    
+
       // ARIA: Add attributes
       this.setAttribute(&apos;aria-valuemin&apos;, &apos;0&apos;);
       this.setAttribute(&apos;aria-valuemax&apos;, &apos;100&apos;);
-  
+
       this.value = this._oldValue;
     }
   }
-  
+
   /**
    The vertical and text size of this progress bar. To adjust the width, simply set the CSS width property.
    See {@link ProgressSizeEnum}.
-   
+
    @type {String}
    @default ProgressSizeEnum.MEDIUM
    @htmlattribute size
@@ -599,18 +598,19 @@ class Progress extends BaseComponent(HTMLElement) {
   get size() {
     return this._size || size.MEDIUM;
   }
+
   set size(value) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) &amp;&amp; value || size.MEDIUM;
     this._reflectAttribute(&apos;size&apos;, this._size);
-    
+
     this.classList.toggle(`${CLASSNAME}--small`, this._size === size.SMALL);
   }
-  
+
   /**
    Boolean attribute to toggle showing progress percent as the label content.
    Default is true.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute showpercent
@@ -618,42 +618,44 @@ class Progress extends BaseComponent(HTMLElement) {
   get showPercent() {
     return this._showPercent || false;
   }
+
   set showPercent(value) {
     this._showPercent = transform.booleanAttr(value);
     this._reflectAttribute(&apos;showpercent&apos;, this._showPercent);
-  
+
     if (this._showPercent) {
       const content = this.indeterminate ? &apos;&apos; : `${this.value}%`;
       this._setPercentage(content);
     }
-    
+
     this._toggleLabelVisibility();
   }
-  
+
   /**
    Used to access to the {@link Coral.Progress.Label} element. Keep in mind that the width of a custom label is
    limited for {@link Coral.Progress.labelPosition.LEFT} and {@link Coral.Progress.labelPosition.RIGHT}.
-   
+
    @type {ProgressLabel}
    @contentzone
    */
   get label() {
     return this._getContentZone(this._elements.label);
   }
+
   set label(value) {
     this._setContentZone(&apos;label&apos;, value, {
       handle: &apos;label&apos;,
       tagName: &apos;coral-progress-label&apos;,
-      insert: function(label) {
+      insert: function (label) {
         label.classList.add(`${CLASSNAME}-label`);
         this.appendChild(label);
       }
     });
   }
-  
+
   /**
    Label position. See {@link ProgressLabelPositionEnum}.
-   
+
    @type {String}
    @default ProgressLabelPositionEnum.LEFT
    @htmlattribute labelposition
@@ -662,38 +664,38 @@ class Progress extends BaseComponent(HTMLElement) {
   get labelPosition() {
     return this._labelPosition || labelPosition.LEFT;
   }
+
   set labelPosition(value) {
     value = transform.string(value).toLowerCase();
     this._labelPosition = validate.enumeration(labelPosition)(value) &amp;&amp; value || labelPosition.LEFT;
     this._reflectAttribute(&apos;labelposition&apos;, this._labelPosition);
-    
+
     this.classList.toggle(&apos;_coral-BarLoader--sideLabel&apos;, this._labelPosition === labelPosition.SIDE);
-    
+
     const elements = this.labelPosition === labelPosition.SIDE ? [&apos;label&apos;, &apos;bar&apos;, &apos;percentage&apos;] : [&apos;label&apos;, &apos;percentage&apos;, &apos;bar&apos;];
     // @spectrum should be supported with classes
     elements.forEach((el, i) =&gt; {
       this._elements[el].style.order = i;
     });
-    
+
     this._toggleLabelVisibility();
   }
-  
+
   /** @ignore */
   _toggleLabelVisibility() {
     const percentage = this._elements.percentage;
     const label = this._elements.label;
     const isSidePositioned = this.labelPosition === labelPosition.SIDE;
-    
+
     // Handle percentage
     if (this.showPercent) {
       percentage.style.visibility = &apos;visible&apos;;
       percentage.setAttribute(&apos;aria-hidden&apos;, &apos;false&apos;);
-      
+
       if (isSidePositioned) {
         percentage.hidden = false;
       }
-    }
-    else {
+    } else {
       percentage.style.visibility = &apos;hidden&apos;;
       percentage.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
 
@@ -701,65 +703,70 @@ class Progress extends BaseComponent(HTMLElement) {
         percentage.hidden = true;
       }
     }
-  
+
     // Handle label
     if (label.textContent.length &gt; 0) {
       label.style.visibility = &apos;visible&apos;;
       label.setAttribute(&apos;aria-hidden&apos;, &apos;false&apos;);
-    
+
       if (isSidePositioned) {
         label.hidden = false;
       }
-    
+
       if (!this.showPercent) {
         // Update the value for accessibility as it was cleared when the label was hidden
         this.setAttribute(&apos;aria-valuetext&apos;, label.textContent);
       }
-    }
-    else {
+    } else {
       label.style.visibility = &apos;hidden&apos;;
       label.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
-    
+
       if (isSidePositioned) {
         label.hidden = true;
       }
-    
+
       // Remove the value for accessibility so the screenreader knows we&apos;re unlabelled
       this.removeAttribute(&apos;aria-valuetext&apos;);
     }
   }
-  
+
   /** @ignore */
   _setPercentage(content) {
     this._elements.percentage.textContent = content;
-    
+
     // ARIA
     this[this.showPercent ? &apos;removeAttribute&apos; : &apos;setAttribute&apos;](&apos;aria-valuetext&apos;, content);
   }
-  
-  get _contentZones() { return {&apos;coral-progress-label&apos;: &apos;label&apos;}; }
-  
+
+  get _contentZones() {
+    return {&apos;coral-progress-label&apos;: &apos;label&apos;};
+  }
+
   /**
    Returns {@link Progress} label position options.
-   
+
    @return {ProgressLabelPositionEnum}
    */
-  static get labelPosition() { return labelPosition; }
-  
+  static get labelPosition() {
+    return labelPosition;
+  }
+
   /**
    Returns {@link Progress} sizes.
-   
+
    @return {ProgressSizeEnum}
    */
-  static get size() { return size; }
-  
+  static get size() {
+    return size;
+  }
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       showpercent: &apos;showPercent&apos;,
       labelposition: &apos;labelPosition&apos;
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -770,44 +777,50 @@ class Progress extends BaseComponent(HTMLElement) {
       &apos;labelposition&apos;
     ]);
   }
-  
+
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === &apos;indeterminate&apos; &amp;&amp; transform.booleanAttr(value)) {
       // Remember current value in case indeterminate is toggled
       this._oldValue = this._value || 0;
     }
-    
+
     super.attributeChangedCallback(name, oldValue, value);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // Default reflected attributes
-    if (!this._value) { this.value = this.value; }
-    if (!this._size) { this.size = size.MEDIUM; }
-    if (!this._labelPosition) { this.labelPosition = labelPosition.LEFT; }
-  
+    if (!this._value) {
+      this.value = this.value;
+    }
+    if (!this._size) {
+      this.size = size.MEDIUM;
+    }
+    if (!this._labelPosition) {
+      this.labelPosition = labelPosition.LEFT;
+    }
+
     // Create a fragment
     const fragment = document.createDocumentFragment();
-  
+
     const templateHandleNames = [&apos;bar&apos;, &apos;percentage&apos;];
-    
+
     // Render the template
     fragment.appendChild(this._elements.percentage);
     fragment.appendChild(this._elements.bar);
-    
+
     const label = this._elements.label;
-  
+
     // Remove it so we can process children
     if (label.parentNode) {
       label.parentNode.removeChild(label);
     }
-  
+
     // Move any remaining elements into the content sub-component
     while (this.firstChild) {
       const child = this.firstChild;
@@ -815,32 +828,31 @@ class Progress extends BaseComponent(HTMLElement) {
         child.nodeType === Node.ELEMENT_NODE &amp;&amp; templateHandleNames.indexOf(child.getAttribute(&apos;handle&apos;)) === -1) {
         // Add non-template elements to the label
         label.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else
         this.removeChild(child);
       }
     }
-  
+
     // Add the frag to the component
     this.appendChild(fragment);
-  
+
     // Assign the content zone
     this.label = label;
-  
+
     // Toggle label based on content
     this._toggleLabelVisibility();
-  
+
     // ARIA
     this.setAttribute(&apos;role&apos;, &apos;progressbar&apos;);
     this.setAttribute(&apos;aria-valuenow&apos;, &apos;0&apos;);
     this.setAttribute(&apos;aria-valuemin&apos;, &apos;0&apos;);
     this.setAttribute(&apos;aria-valuemax&apos;, &apos;100&apos;);
   }
-  
+
   /**
    Triggered when the {@link Progress} value is changed.
-   
+
    @typedef {CustomEvent} coral-progress:change
    */
 }

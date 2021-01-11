@@ -449,15 +449,15 @@ class ShellSolutionSwitcher extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-  
+
     // Template
     this._elements = {};
     solutionSwitcher.call(this._elements);
-    
+
     // Listen for mutations
     const observer = new MutationObserver((mutations) =&gt; {
       mutations.forEach((mutation) =&gt; {
-        for (let i = 0; i &lt; mutation.addedNodes.length; i++) {
+        for (let i = 0 ; i &lt; mutation.addedNodes.length ; i++) {
           const addedNode = mutation.addedNodes[i];
           // Move non secondary solutions to the container
           if (addedNode.nodeName === &apos;CORAL-SHELL-SOLUTIONS&apos; &amp;&amp; !addedNode.hasAttribute(&apos;secondary&apos;)) {
@@ -466,16 +466,16 @@ class ShellSolutionSwitcher extends BaseComponent(HTMLElement) {
         }
       });
     });
-  
+
     observer.observe(this, {
       // Only care about direct children
       childList: true
     });
   }
-  
+
   /**
    The item collection.
-   
+
    @type {Collection}
    @readonly
    */
@@ -487,31 +487,31 @@ class ShellSolutionSwitcher extends BaseComponent(HTMLElement) {
         itemTagName: &apos;coral-shell-solutions&apos;
       });
     }
-  
+
     return this._items;
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // force darkest theme
     this.classList.add(&apos;coral--darkest&apos;);
-    
+
     const container = this.querySelector(&apos;._coral-Shell-solutions-container&apos;) || this._elements.container;
-    
+
     // Remove it so we can process solutions
     if (container.parentNode) {
       container.remove();
     }
-  
+
     // Move non secondary solutions to the container
     Array.prototype.forEach.call(this.querySelectorAll(&apos;coral-shell-solutions:not([secondary])&apos;), (item) =&gt; {
       container.appendChild(item);
     });
-  
+
     // Put the container as first child
     this.insertBefore(container, this.firstChild);
   }

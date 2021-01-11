@@ -474,49 +474,49 @@ const resolveIconsPath = (iconsPath) =&gt; {
 
 /**
  Regex used to match URLs. Assume it&apos;s a URL if it has a slash, colon, or dot.
- 
+
  @ignore
  */
 const URL_REGEX = /\/|:|\./g;
 
 /**
  Regex used to match unresolved templates e.g. for data-binding
- 
+
  @ignore
  */
 const TEMPLATE_REGEX = /.*\{\{.+\}\}.*/g;
 
 /**
  Regex used to split camel case icon names into more screen-reader friendly alt text.
- 
+
  @ignore
  */
 const SPLIT_CAMELCASE_REGEX = /([a-z])([A-Z0-9])/g;
 
 /**
  Regex used to match the sized spectrum icon prefix
- 
+
  @ignore
  */
 const SPECTRUM_ICONS_IDENTIFIER_REGEX = /^spectrum(?:-css)?-icon(?:-\d{1,3})?-/gi;
 
 /**
  Regex used match the variant postfix for an icon
- 
+
  @ignore
  */
 const ICONS_VARIANT_POSTFIX_REGEX = /(Outline)?(Filled)?(Small|Medium|Large)?(Color)?_?(Active|Dark|Light)?$/;
 
 /**
  Translation hint used for localizing default alt text for an icon
- 
+
  @ignore
  */
 const ICON_ALT_TRANSLATION_HINT = &apos;default icon alt text&apos;;
 
 /**
  Returns capitalized string. This is used to map the icons with their SVG counterpart.
- 
+
  @ignore
  @param {String} s
  @return {String}
@@ -525,9 +525,9 @@ const capitalize = s =&gt; s.charAt(0).toUpperCase() + s.slice(1);
 
 /**
  Enumeration for {@link Icon} sizes.
- 
+
  @typedef {Object} IconSizeEnum
- 
+
  @property {String} EXTRA_EXTRA_SMALL
  Extra extra small size icon, typically 9px size.
  @property {String} EXTRA_SMALL
@@ -556,9 +556,9 @@ const size = {
 
 /**
  Enumeration for {@link Icon} autoAriaLabel value.
- 
+
  @typedef {Object} IconAutoAriaLabelEnum
- 
+
  @property {String} ON
  The aria-label attribute is automatically set based on the icon name.
  @property {String} OFF
@@ -601,28 +601,29 @@ class Icon extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     this._elements = {};
   }
-  
+
   /**
    Whether aria-label is set automatically. See {@link IconAutoAriaLabelEnum}.
-   
+
    @type {String}
    @default IconAutoAriaLabelEnum.OFF
    */
   get autoAriaLabel() {
     return this._autoAriaLabel || autoAriaLabel.OFF;
   }
+
   set autoAriaLabel(value) {
     value = transform.string(value).toLowerCase();
     this._autoAriaLabel = validate.enumeration(autoAriaLabel)(value) &amp;&amp; value || autoAriaLabel.OFF;
     this._updateAltText();
   }
-  
+
   /**
    Icon name.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute icon
@@ -631,26 +632,27 @@ class Icon extends BaseComponent(HTMLElement) {
   get icon() {
     return this._icon || &apos;&apos;;
   }
+
   set icon(value) {
     const icon = transform.string(value).trim();
-    
+
     // Avoid rendering the same icon
     if (icon !== this._icon || this.hasAttribute(&apos;_context&apos;)) {
       this._icon = icon;
       this._reflectAttribute(&apos;icon&apos;, this._icon);
-      
+
       // Ignore unresolved templates
       if (this._icon.match(TEMPLATE_REGEX)) {
         return;
       }
-      
+
       // Use the existing img
       if (this._hasRawImage) {
         this._elements.image.classList.add(CLASSNAME, `${CLASSNAME}--image`);
         this._updateAltText();
         return;
       }
-  
+
       // Remove image and SVG elements
       [&apos;image&apos;, &apos;svg&apos;].forEach((type) =&gt; {
         const el = this._elements[type] || this.querySelector(`.${CLASSNAME}--${type}`);
@@ -658,7 +660,7 @@ class Icon extends BaseComponent(HTMLElement) {
           el.remove();
         }
       });
-  
+
       // Sets the desired icon
       if (this._icon) {
         // Detect if it&apos;s a URL
@@ -668,19 +670,18 @@ class Icon extends BaseComponent(HTMLElement) {
           this._elements.image.className = `${CLASSNAME} ${CLASSNAME}--image`;
           this._elements.image.src = this.icon;
           this.appendChild(this._elements.image);
-        }
-        else {
+        } else {
           this._updateIcon();
         }
       }
-  
+
       this._updateAltText();
     }
   }
-  
+
   /**
    Size of the icon. It accepts both lower and upper case sizes. See {@link IconSizeEnum}.
-   
+
    @type {String}
    @default IconSizeEnum.SMALL
    @htmlattribute size
@@ -689,61 +690,70 @@ class Icon extends BaseComponent(HTMLElement) {
   get size() {
     return this._size || size.SMALL;
   }
+
   set size(value) {
     const oldSize = this._size;
-    
+
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) &amp;&amp; value || size.SMALL;
     this._reflectAttribute(&apos;size&apos;, this._size);
-    
+
     // removes all the existing sizes
     this.classList.remove(...ALL_SIZE_CLASSES);
     // adds the new size
     this.classList.add(`${CLASSNAME}--size${this._size}`);
-    
+
     // We need to update the icon if the size changed
     if (oldSize &amp;&amp; oldSize !== this._size &amp;&amp; this.contains(this._elements.svg)) {
       this._elements.svg.remove();
       this._updateIcon();
     }
-    
+
     this._updateAltText();
   }
-  
+
   /** @private */
-  get title() { return this.getAttribute(&apos;title&apos;); }
-  set title(value) { this.setAttribute(&apos;title&apos;, value); }
-  
+  get title() {
+    return this.getAttribute(&apos;title&apos;);
+  }
+
+  set title(value) {
+    this.setAttribute(&apos;title&apos;, value);
+  }
+
   /** @private */
-  get alt() { return this.getAttribute(&apos;alt&apos;); }
-  set alt(value) { this.setAttribute(&apos;alt&apos;, value); }
-  
+  get alt() {
+    return this.getAttribute(&apos;alt&apos;);
+  }
+
+  set alt(value) {
+    this.setAttribute(&apos;alt&apos;, value);
+  }
+
   _updateIcon() {
     let iconId = this.icon;
-    
+
     // If icon name is passed, we have to build the icon Id based on the icon name
     if (iconId.indexOf(SPECTRUM_ICONS_IDENTIFIER) !== 0) {
       const iconMapped = ICON_MAP[iconId];
       let iconName;
-      
+
       // Restore default state
       this.removeAttribute(&apos;_context&apos;);
-      
+
       if (iconMapped) {
         if (iconMapped.spectrumIcon) {
           // Use the default mapped icon
           iconName = iconMapped.spectrumIcon;
-        }
-        else {
+        } else {
           // Verify if icon should be light or dark by looking up parents theme
           const closest = this.closest(&apos;.coral--light, .coral--dark, .coral--lightest, .coral--darkest&apos;);
-          
+
           if (closest) {
             if (closest.classList.contains(&apos;coral--light&apos;) || closest.classList.contains(&apos;coral--lightest&apos;)) {
               // Use light icon
               iconName = iconMapped.spectrumIconLight;
-            }
-            else {
+            } else {
               // Use dark icon
               iconName = iconMapped.spectrumIconDark;
             }
@@ -752,16 +762,15 @@ class Icon extends BaseComponent(HTMLElement) {
           else {
             iconName = iconMapped.spectrumIconLight;
           }
-          
+
           // Mark icon as contextual icon because the icon name is defined based on the theme
           this.setAttribute(&apos;_context&apos;, &apos;&apos;);
         }
-        
+
         // Inform user about icon name changes
         if (iconName) {
           commons._log(&apos;warn&apos;, `Coral.Icon: the icon ${iconId} has been deprecated. Please use ${iconName} instead.`);
-        }
-        else {
+        } else {
           commons._log(&apos;warn&apos;, `Coral.Icon: the icon ${iconId} has been removed. Please contact Icons@Adobe.`);
         }
       }
@@ -769,28 +778,27 @@ class Icon extends BaseComponent(HTMLElement) {
       else {
         iconName = capitalize(iconId);
       }
-      
+
       // Verify if icon name is a colored icon
       if (SPECTRUM_COLORED_ICONS_IDENTIFIER.some(identifier =&gt; iconName.indexOf(identifier) !== -1)) {
         // Colored icons are 24 by default
         iconId = `spectrum-icon-24-${iconName}`;
-      }
-      else {
+      } else {
         const sizeAttribute = this.getAttribute(&apos;size&apos;);
         const iconSize = sizeMap[sizeAttribute &amp;&amp; sizeAttribute.toUpperCase() || size.SMALL];
         iconId = `spectrum-icon-${iconSize}-${iconName}`;
       }
     }
-    
+
     // Insert SVG Icon using HTML because DOMly doesn&apos;t support document.createElementNS for &lt;use&gt; element
     this.insertAdjacentHTML(&apos;beforeend&apos;, this.constructor._renderSVG(iconId));
-    
+
     this._elements.svg = this.lastElementChild;
   }
-  
+
   /**
    Updates the aria-label or img alt attribute depending on value of alt, title, icon and autoAriaLabel.
-   
+
    In cases where the alt attribute has been removed or set to an empty string,
    for example, when the alt property is undefined and we add the attribute alt=&apos;&apos;
    to explicitly override the default behavior, or when we remove an alt attribute
@@ -801,22 +809,20 @@ class Icon extends BaseComponent(HTMLElement) {
     const hasAutoAriaLabel = this.autoAriaLabel === autoAriaLabel.ON;
     const img = this._elements.image;
     const isImage = this.contains(img);
- 
-    // alt should be prioritized over title   
+
+    // alt should be prioritized over title
     let altText = typeof this.alt === &apos;string&apos; ? this.alt : this.title;
 
     if (typeof value === &apos;string&apos;) {
       altText = this.alt || value;
-    }
-    else if (isImage) {
+    } else if (isImage) {
       altText = altText || img.getAttribute(&apos;alt&apos;) || img.getAttribute(&apos;title&apos;) || &apos;&apos;;
-    } 
-    else if (hasAutoAriaLabel) {
+    } else if (hasAutoAriaLabel) {
       let iconName = this.icon.replace(SPECTRUM_ICONS_IDENTIFIER_REGEX, &apos;&apos;);
       iconName = iconName.replace(ICONS_VARIANT_POSTFIX_REGEX, &apos;&apos;);
       altText = i18n.get(iconName.replace(SPLIT_CAMELCASE_REGEX, &apos;$1 $2&apos;).toLowerCase(), ICON_ALT_TRANSLATION_HINT);
     }
-  
+
     // If no other role has been set, provide the appropriate
     // role depending on whether or not the icon is an arbitrary image URL.
     const role = this.getAttribute(&apos;role&apos;);
@@ -829,30 +835,28 @@ class Icon extends BaseComponent(HTMLElement) {
     if (isImage) {
       hasAutoAriaLabel &amp;&amp; this.removeAttribute(&apos;aria-label&apos;);
       img.setAttribute(&apos;alt&apos;, altText);
-    }
-    else if (altText === &apos;&apos;) {
+    } else if (altText === &apos;&apos;) {
       this.removeAttribute(&apos;aria-label&apos;);
       if (!roleOverride) {
         this.removeAttribute(&apos;role&apos;);
       }
-    }
-    else if (altText) {
+    } else if (altText) {
       this.setAttribute(&apos;aria-label&apos;, altText);
     }
   }
-  
+
   /**
    Whether SVG icons are referenced as external resource (on/off)
-   
+
    @return {String}
    */
   static _iconsExternal() {
     return iconsExternal;
   }
-  
+
   /**
    Returns the SVG markup.
-   
+
    @param {String} iconId
    @param {Array.&lt;String&gt;} additionalClasses
    @return {String}
@@ -860,9 +864,9 @@ class Icon extends BaseComponent(HTMLElement) {
   static _renderSVG(iconId, additionalClasses = []) {
     additionalClasses.unshift(CLASSNAME);
     additionalClasses.unshift(`${CLASSNAME}--svg`);
-    
+
     let iconPath = `#${iconId}`;
-    
+
     // If not colored icons
     if (this._iconsExternal() === &apos;on&apos; &amp;&amp; !SPECTRUM_COLORED_ICONS_IDENTIFIER.some(identifier =&gt; iconId.indexOf(identifier) !== -1)) {
       // Generate spectrum-css-icons path
@@ -874,31 +878,35 @@ class Icon extends BaseComponent(HTMLElement) {
         iconPath = resourcesPath ? `${resourcesPath}${SPECTRUM_ICONS}.svg#${iconId}` : `${resolveIconsPath(SPECTRUM_ICONS_PATH)}#${iconId}`;
       }
     }
-    
+
     return `
       &lt;svg focusable=&quot;false&quot; aria-hidden=&quot;true&quot; class=&quot;${additionalClasses.join(&apos; &apos;)}&quot;&gt;
         &lt;use xlink:href=&quot;${iconPath}&quot;&gt;&lt;/use&gt;
       &lt;/svg&gt;
     `;
   }
-  
+
   /**
    Returns {@link Icon} sizes.
-   
+
    @return {IconSizeEnum}
    */
-  static get size() { return size; }
-  
+  static get size() {
+    return size;
+  }
+
   /**
    Returns {@link Icon} autoAriaLabel options.
-   
+
    @return {IconAutoAriaLabelEnum}
    */
-  static get autoAriaLabel() { return autoAriaLabel; }
-  
+  static get autoAriaLabel() {
+    return autoAriaLabel;
+  }
+
   /**
    Loads the SVG icons. It&apos;s requesting the icons based on the JS file path by default.
-   
+
    @param {String} [url] SVG icons url.
    */
   static load(url) {
@@ -907,65 +915,62 @@ class Icon extends BaseComponent(HTMLElement) {
       if (iconsExternal === &apos;js&apos;) {
         iconsPath = iconsPath.replace(&apos;.svg&apos;, &apos;.js&apos;);
       }
-      
+
       return `${path.split(&apos;/&apos;).slice(0, -iconsPath.split(&apos;/&apos;).length).join(&apos;/&apos;)}/${iconsPath}`;
     };
-    
+
     if (url === SPECTRUM_ICONS) {
       url = resolveIconsPath(SPECTRUM_ICONS_PATH);
-    }
-    else if (url === SPECTRUM_ICONS_COLOR) {
+    } else if (url === SPECTRUM_ICONS_COLOR) {
       url = resolveIconsPath(SPECTRUM_ICONS_COLOR_PATH);
-    }
-    else if (url === SPECTRUM_CSS_ICONS) {
+    } else if (url === SPECTRUM_CSS_ICONS) {
       url = resolveIconsPath(SPECTRUM_CSS_ICONS_PATH);
     }
-  
+
     loadIcons(url);
   }
-  
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       autoarialabel: &apos;autoAriaLabel&apos;
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;autoarialabel&apos;, &apos;icon&apos;, &apos;size&apos;, &apos;alt&apos;, &apos;title&apos;]);
   }
-  
+
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === &apos;alt&apos; || name === &apos;title&apos;) {
       this._updateAltText(value);
-    }
-    else {
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
-  
+
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-  
+
     // Contextual icons need to be checked again
     if (this.hasAttribute(&apos;_context&apos;)) {
       this.icon = this.icon;
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // Set default size
     if (!this._size) {
       this.size = size.SMALL;
     }
-    
+
     const img = this.querySelector(`img:not(.${CLASSNAME}--image)`);
     if (img) {
       this._elements.image = img;
@@ -982,7 +987,7 @@ let extension = &apos;.svg&apos;;
 if (Icon._iconsExternal() === &apos;off&apos; || Icon._iconsExternal() === &apos;js&apos;) {
   iconCollections.push(SPECTRUM_CSS_ICONS);
   iconCollections.push(SPECTRUM_ICONS);
-  
+
   if (Icon._iconsExternal() === &apos;js&apos;) {
     extension = &apos;.js&apos;;
   }

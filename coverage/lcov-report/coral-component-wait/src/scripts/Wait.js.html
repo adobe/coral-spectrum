@@ -347,7 +347,20 @@
 <a name='L289'></a><a href='#L289'>289</a>
 <a name='L290'></a><a href='#L290'>290</a>
 <a name='L291'></a><a href='#L291'>291</a>
-<a name='L292'></a><a href='#L292'>292</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L292'></a><a href='#L292'>292</a>
+<a name='L293'></a><a href='#L293'>293</a>
+<a name='L294'></a><a href='#L294'>294</a>
+<a name='L295'></a><a href='#L295'>295</a>
+<a name='L296'></a><a href='#L296'>296</a>
+<a name='L297'></a><a href='#L297'>297</a>
+<a name='L298'></a><a href='#L298'>298</a>
+<a name='L299'></a><a href='#L299'>299</a>
+<a name='L300'></a><a href='#L300'>300</a>
+<a name='L301'></a><a href='#L301'>301</a>
+<a name='L302'></a><a href='#L302'>302</a>
+<a name='L303'></a><a href='#L303'>303</a>
+<a name='L304'></a><a href='#L304'>304</a>
+<a name='L305'></a><a href='#L305'>305</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -427,7 +440,6 @@
 <span class="cline-any cline-yes">1854x</span>
 <span class="cline-any cline-yes">1854x</span>
 <span class="cline-any cline-yes">1854x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -499,7 +511,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -545,7 +556,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -553,7 +563,6 @@
 <span class="cline-any cline-yes">94x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">94x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -587,7 +596,6 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -638,7 +646,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16x</span>
-<span class="cline-any cline-yes">16x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">136x</span>
+<span class="cline-any cline-yes">136x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">152x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -656,9 +682,9 @@ import base from '../templates/base';
 &nbsp;
 /**
  Enumeration for {@link Wait} variants.
- 
+&nbsp;
  @typedef {Object} WaitVariantEnum
- 
+&nbsp;
  @property {String} DEFAULT
  The default variant.
  @property {String} DOTS
@@ -671,9 +697,9 @@ const variant = {
 &nbsp;
 /**
  Enumeration for {@link Wait} sizes.
- 
+&nbsp;
  @typedef {Object} WaitSizeEnum
- 
+&nbsp;
  @property {String} SMALL
  A small wait indicator.
  @property {String} MEDIUM
@@ -701,15 +727,16 @@ const CLASSNAME = '_coral-CircleLoader';
 class Wait extends BaseComponent(HTMLElement) {
   constructor() {
     super();
-  
+&nbsp;
     // Prepare templates
     this._elements = {};
     base.call(this._elements);
   }
+&nbsp;
   /**
    The size of the wait indicator. Currently 'S' (the default), 'M' and 'L' are available.
    See {@link WaitSizeEnum}.
-   
+&nbsp;
    @type {String}
    @default WaitSizeEnum.MEDIUM
    @htmlattribute size
@@ -718,6 +745,7 @@ class Wait extends BaseComponent(HTMLElement) {
   get size() {
     return this._size || size.MEDIUM;
   }
+&nbsp;
   set size(value) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) &amp;&amp; value || size.MEDIUM;
@@ -729,7 +757,7 @@ class Wait extends BaseComponent(HTMLElement) {
     // small css change
     this.classList.toggle(`${CLASSNAME}--small`, this._size === size.SMALL);
   }
-  
+&nbsp;
   /**
    Whether the component is centered or not. The container needs to have the style &lt;code&gt;position: relative&lt;/code&gt;
    for the centering to work correctly.
@@ -741,16 +769,17 @@ class Wait extends BaseComponent(HTMLElement) {
   get centered() {
     return this._centered || false;
   }
+&nbsp;
   set centered(value) {
     this._centered = transform.booleanAttr(value);
     this._reflectAttribute('centered', this._centered);
-  
+&nbsp;
     this.classList.toggle(`${CLASSNAME}--centered`, this._centered);
   }
-  
+&nbsp;
   /**
    The wait's variant. See {@link WaitVariantEnum}.
-   
+&nbsp;
    @type {String}
    @default WaitVariantEnum.DEFAULT
    @htmlattribute variant
@@ -759,16 +788,17 @@ class Wait extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+&nbsp;
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
   }
-  
+&nbsp;
   /**
    Whether to hide the current value and show an animation. Set to true for operations whose progress cannot be
    determined.
-   
+&nbsp;
    @type {Boolean}
    @default false
    @htmlattribute indeterminate
@@ -777,34 +807,34 @@ class Wait extends BaseComponent(HTMLElement) {
   get indeterminate() {
     return this._indeterminate || false;
   }
+&nbsp;
   set indeterminate(value) {
     this._indeterminate = transform.booleanAttr(value);
     this._reflectAttribute('indeterminate', this._indeterminate);
-    
+&nbsp;
     if (this._indeterminate) {
       this.classList.add(`${CLASSNAME}--indeterminate`);
-      
+&nbsp;
       // ARIA: Remove attributes
       this.removeAttribute('aria-valuenow');
       this.removeAttribute('aria-valuemin');
       this.removeAttribute('aria-valuemax');
-      
+<span class="branch-2 cbranch-no" title="branch not covered" ></span>
       this.value = 0;
-    }
-    else {
+    } else {
       this.classList.remove(`${CLASSNAME}--indeterminate`);
-      
+&nbsp;
       // ARIA: Add attributes
-      this.setAttribute('aria-valuemin', '0');<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+      this.setAttribute('aria-valuemin', '0');
       this.setAttribute('aria-valuemax', '100');
-      
+&nbsp;
       this.value = this._oldValue;
     }
   }
-  
+&nbsp;
   /**
    The current progress in percent. If no value is set on initialization, wait is forced into indeterminate state.
-   
+&nbsp;
    @type {Number}
    @default 0
    @emits {coral-wait:change}
@@ -814,116 +844,125 @@ class Wait extends BaseComponent(HTMLElement) {
   get value() {
     return this.hasAttribute('indeterminate') ? 0 : this._value || 0;
   }
+&nbsp;
   set value(value) {
     value = transform.number(value) || 0;
-    
+&nbsp;
     // Stay within bounds
     if (value &gt; 100) {
       value = 100;
-    }
-    else if (value &lt; 0) {
+    } else if (value &lt; 0) {
       value = 0;
     }
-    
+&nbsp;
     this._value = value;
     this._reflectAttribute('value', this._value);
-  
+&nbsp;
     const subMask1 = this._elements.subMask1;
     const subMask2 = this._elements.subMask2;
-    
+<span class="branch-1 cbranch-no" title="branch not covered" ></span>
     if (!this.hasAttribute('indeterminate')) {
       let angle;
-      
-      if (value &gt; 0 &amp;&amp; value &lt;= 50) {
+&nbsp;
+      if (value &gt; 0 &amp;&amp; value &lt;= 50) {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
         angle = -180 + value / 50 * 180;
         subMask1.style.transform = `rotate(${angle}deg)`;
-        subMask2.style.transfo<span class="branch-1 cbranch-no" title="branch not covered" >rm = 'rotate(-18</span>0deg)';
-      }
-      else if (value &gt; 50) {
+        subMask2.style.transform = 'rotate(-180deg)';
+      } else if (value &gt; 50) {
         angle = -180 + (value - 50) / 50 * 180;
-        subMask1.style.transform = 'rotate(0deg)';<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+        subMask1.style.transform = 'rotate(0deg)';
         subMask2.style.transform = `rotate(${angle}deg)`;
-      }
-      else {
+      } else {
         subMask1.style.transform = '';
         subMask2.style.transform = '';
       }
-  
+&nbsp;
       // ARIA: Reflect value for screenreaders
       this.setAttribute('aria-valuenow', this._value);
       this.setAttribute('aria-valuemin', '0');
       this.setAttribute('aria-valuemax', '100');
-    }
-    else {
+    } else {
       subMask1.style.transform = '';
       subMask2.style.transform = '';
     }
-    
+&nbsp;
     this.trigger('coral-wait:change');
   }
-  
+&nbsp;
   /**
    Returns {@link Wait} sizes.
-   
+&nbsp;
    @return {WaitSizeEnum}
    */
-  static get size() { return size; }
-  
+  static get size() {
+    return size;
+  }
+&nbsp;
   /**
    Returns {@link Wait} variants.
-   
+&nbsp;
    @return {WaitVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+&nbsp;
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['size', 'centered', 'variant', 'value', 'indeterminate']);
   }
-  
+&nbsp;
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === 'indeterminate' &amp;&amp; transform.booleanAttr(value)) {
       // Remember current value in case indeterminate is toggled back
       this._oldValue = this._value || 0;
     }
-    
+&nbsp;
     super.attributeChangedCallback(name, oldValue, value);
   }
-  
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-    
+&nbsp;
     // ARIA
     this.setAttribute('role', 'progressbar');
-    
+&nbsp;
     // Default reflected attributes
-    if (!this._size) { this.size = size.MEDIUM; }
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-    
+    if (!this._size) {
+      this.size = size.MEDIUM;
+    }
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
+&nbsp;
     // If no value is specified, indeterminate is set
-    if (!this._value) { this.indeterminate = true; }
-    
+    if (!this._value) {
+      this.indeterminate = true;
+    }
+&nbsp;
     // Centering reads the size
-    if (this.centered) { this.centered = this.centered; }
-  
+    if (this.centered) {
+      this.centered = this.centered;
+    }
+&nbsp;
     // Support cloneNode
     const template = this.querySelectorAll('._coral-CircleLoader-track, ._coral-CircleLoader-fills');
-    for (let i = 0; i &lt; template.length; i++) {
+    for (let i = 0 ; i &lt; template.length ; i++) {
       template[i].remove();
     }
-  
+&nbsp;
     // Render template
     this.appendChild(this._elements.track);
     this.appendChild(this._elements.fills);
   }
-  
+&nbsp;
   /**
    Triggered when the {@link Wait} value is changed.
-   
+&nbsp;
    @typedef {CustomEvent} coral-wait:change
    */
 }
@@ -936,7 +975,7 @@ export default Wait;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

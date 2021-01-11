@@ -1,7 +1,7 @@
 {
   "type": "File",
   "start": 0,
-  "end": 850,
+  "end": 849,
   "loc": {
     "start": {
       "line": 1,
@@ -15,7 +15,7 @@
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 850,
+    "end": 849,
     "loc": {
       "start": {
         "line": 1,
@@ -30,8 +30,8 @@
     "body": [
       {
         "type": "ExportDefaultDeclaration",
-        "start": 775,
-        "end": 849,
+        "start": 774,
+        "end": 848,
         "loc": {
           "start": {
             "line": 21,
@@ -44,8 +44,8 @@
         },
         "declaration": {
           "type": "ArrowFunctionExpression",
-          "start": 790,
-          "end": 848,
+          "start": 789,
+          "end": 847,
           "loc": {
             "start": {
               "line": 21,
@@ -63,8 +63,8 @@
           "params": [],
           "body": {
             "type": "CallExpression",
-            "start": 796,
-            "end": 848,
+            "start": 795,
+            "end": 847,
             "loc": {
               "start": {
                 "line": 21,
@@ -77,8 +77,8 @@
             },
             "callee": {
               "type": "MemberExpression",
-              "start": 796,
-              "end": 818,
+              "start": 795,
+              "end": 817,
               "loc": {
                 "start": {
                   "line": 21,
@@ -91,8 +91,8 @@
               },
               "object": {
                 "type": "Identifier",
-                "start": 796,
-                "end": 804,
+                "start": 795,
+                "end": 803,
                 "loc": {
                   "start": {
                     "line": 21,
@@ -109,8 +109,8 @@
               },
               "property": {
                 "type": "Identifier",
-                "start": 805,
-                "end": 818,
+                "start": 804,
+                "end": 817,
                 "loc": {
                   "start": {
                     "line": 21,
@@ -130,8 +130,8 @@
             "arguments": [
               {
                 "type": "StringLiteral",
-                "start": 819,
-                "end": 847,
+                "start": 818,
+                "end": 846,
                 "loc": {
                   "start": {
                     "line": 21,
@@ -170,9 +170,9 @@
             },
             {
               "type": "CommentBlock",
-              "value": "*\n @class Coral.Shell.Help.Separator\n @classdesc Shell's help separator\n @htmltag coral-shell-help-separator\n @return {HTMLElement}\n \n @deprecated\n ",
+              "value": "*\n @class Coral.Shell.Help.Separator\n @classdesc Shell's help separator\n @htmltag coral-shell-help-separator\n @return {HTMLElement}\n\n @deprecated\n ",
               "start": 622,
-              "end": 774,
+              "end": 773,
               "loc": {
                 "start": {
                   "line": 13,
@@ -206,9 +206,9 @@
           },
           {
             "type": "CommentBlock",
-            "value": "*\n @class Coral.Shell.Help.Separator\n @classdesc Shell's help separator\n @htmltag coral-shell-help-separator\n @return {HTMLElement}\n \n @deprecated\n ",
+            "value": "*\n @class Coral.Shell.Help.Separator\n @classdesc Shell's help separator\n @htmltag coral-shell-help-separator\n @return {HTMLElement}\n\n @deprecated\n ",
             "start": 622,
-            "end": 774,
+            "end": 773,
             "loc": {
               "start": {
                 "line": 13,
@@ -244,9 +244,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n @class Coral.Shell.Help.Separator\n @classdesc Shell's help separator\n @htmltag coral-shell-help-separator\n @return {HTMLElement}\n \n @deprecated\n ",
+      "value": "*\n @class Coral.Shell.Help.Separator\n @classdesc Shell's help separator\n @htmltag coral-shell-help-separator\n @return {HTMLElement}\n\n @deprecated\n ",
       "start": 622,
-      "end": 774,
+      "end": 773,
       "loc": {
         "start": {
           "line": 13,
@@ -278,9 +278,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n @class Coral.Shell.Help.Separator\n @classdesc Shell's help separator\n @htmltag coral-shell-help-separator\n @return {HTMLElement}\n \n @deprecated\n ",
+      "value": "*\n @class Coral.Shell.Help.Separator\n @classdesc Shell's help separator\n @htmltag coral-shell-help-separator\n @return {HTMLElement}\n\n @deprecated\n ",
       "start": 622,
-      "end": 774,
+      "end": 773,
       "loc": {
         "start": {
           "line": 13,
@@ -307,8 +307,8 @@
         "updateContext": null
       },
       "value": "export",
-      "start": 775,
-      "end": 781,
+      "start": 774,
+      "end": 780,
       "loc": {
         "start": {
           "line": 21,
@@ -335,8 +335,8 @@
         "updateContext": null
       },
       "value": "default",
-      "start": 782,
-      "end": 789,
+      "start": 781,
+      "end": 788,
       "loc": {
         "start": {
           "line": 21,
@@ -360,8 +360,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 790,
-      "end": 791,
+      "start": 789,
+      "end": 790,
       "loc": {
         "start": {
           "line": 21,
@@ -385,8 +385,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 791,
-      "end": 792,
+      "start": 790,
+      "end": 791,
       "loc": {
         "start": {
           "line": 21,
@@ -411,8 +411,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 793,
-      "end": 795,
+      "start": 792,
+      "end": 794,
       "loc": {
         "start": {
           "line": 21,
@@ -437,8 +437,8 @@
         "binop": null
       },
       "value": "document",
-      "start": 796,
-      "end": 804,
+      "start": 795,
+      "end": 803,
       "loc": {
         "start": {
           "line": 21,
@@ -463,8 +463,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 804,
-      "end": 805,
+      "start": 803,
+      "end": 804,
       "loc": {
         "start": {
           "line": 21,
@@ -489,8 +489,8 @@
         "binop": null
       },
       "value": "createElement",
-      "start": 805,
-      "end": 818,
+      "start": 804,
+      "end": 817,
       "loc": {
         "start": {
           "line": 21,
@@ -514,8 +514,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 818,
-      "end": 819,
+      "start": 817,
+      "end": 818,
       "loc": {
         "start": {
           "line": 21,
@@ -541,8 +541,8 @@
         "updateContext": null
       },
       "value": "coral-shell-help-separator",
-      "start": 819,
-      "end": 847,
+      "start": 818,
+      "end": 846,
       "loc": {
         "start": {
           "line": 21,
@@ -566,8 +566,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 847,
-      "end": 848,
+      "start": 846,
+      "end": 847,
       "loc": {
         "start": {
           "line": 21,
@@ -592,8 +592,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 848,
-      "end": 849,
+      "start": 847,
+      "end": 848,
       "loc": {
         "start": {
           "line": 21,
@@ -618,8 +618,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 850,
-      "end": 850,
+      "start": 849,
+      "end": 849,
       "loc": {
         "start": {
           "line": 22,

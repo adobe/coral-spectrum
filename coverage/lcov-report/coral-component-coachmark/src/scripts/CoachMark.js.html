@@ -259,7 +259,17 @@
 <a name='L201'></a><a href='#L201'>201</a>
 <a name='L202'></a><a href='#L202'>202</a>
 <a name='L203'></a><a href='#L203'>203</a>
-<a name='L204'></a><a href='#L204'>204</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a>
+<a name='L206'></a><a href='#L206'>206</a>
+<a name='L207'></a><a href='#L207'>207</a>
+<a name='L208'></a><a href='#L208'>208</a>
+<a name='L209'></a><a href='#L209'>209</a>
+<a name='L210'></a><a href='#L210'>210</a>
+<a name='L211'></a><a href='#L211'>211</a>
+<a name='L212'></a><a href='#L212'>212</a>
+<a name='L213'></a><a href='#L213'>213</a>
+<a name='L214'></a><a href='#L214'>214</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -341,7 +351,6 @@
 <span class="cline-any cline-yes">82x</span>
 <span class="cline-any cline-yes">82x</span>
 <span class="cline-any cline-yes">82x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -430,7 +439,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -452,7 +460,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -462,7 +469,20 @@
 <span class="cline-any cline-yes">74x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">74x</span>
-<span class="cline-any cline-yes">74x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">74x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -483,9 +503,9 @@ import {transform, validate} from '../../../coral-utils';
 &nbsp;
 /**
  Enumeration for {@link CoachMark} sizes.
- 
+&nbsp;
  @typedef {Object} CoachMarkSizeEnum
- 
+&nbsp;
  @property {String} SMALL
  A small sized coach mark.
  @property {String} MEDIUM
@@ -498,9 +518,9 @@ const size = {
 &nbsp;
 /**
  Enumeration for {@link CoachMark} variants.
- 
+&nbsp;
  @typedef {Object} CoachMarkVariantEnum
- 
+&nbsp;
  @property {String} DEFAULT
  The default styled coach mark.
  @property {String} LIGHT
@@ -527,22 +547,23 @@ class CoachMark extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Templates
     this._elements = {};
     this._template = base.call(this._elements);
   }
-  
+&nbsp;
   /**
    The element the coach mark should position relative to. It accepts values from {@link OverlayTargetEnum}, as
    well as a DOM element or a CSS selector. If a CSS selector is provided, the first matching element will be used.
-   
+&nbsp;
    @type {?HTMLElement|String}
    @default null
    */
   get target() {
     return this._target || null;
   }
+&nbsp;
   set target(value) {
     // We don't want to validate that the value must change here
     // If a selector is provided, we'll take the first element matching that selector
@@ -550,40 +571,39 @@ class CoachMark extends BaseComponent(HTMLElement) {
     // They should be able to set target = 'selector' again and get a different element
     if (value === null || typeof value === 'string' || value instanceof Node) {
       this._target = value;
-      
+&nbsp;
       requestAnimationFrame(() =&gt; {
         const targetElement = Overlay._getTarget(this);
-  
+&nbsp;
         if (targetElement) {
           // Initialize popper only if we have a target
           this._popper = this._popper || new PopperJS(targetElement, this);
-    
+&nbsp;
           // Update target only if valid
           if (targetElement) {
             this._popper.reference = targetElement;
           }
-    
+&nbsp;
           this._popper.options.placement = 'top';
-    
+&nbsp;
           this._popper.modifiers.forEach((modifier) =&gt; {
             if (modifier.name === 'offset') {
-              const lengthOffset = targetElement.clientHeight/2 + this.clientHeight/2;
+              const lengthOffset = targetElement.clientHeight / 2 + this.clientHeight / 2;
               modifier.offset = `0, -${lengthOffset}`;
-            }
-            else if (modifier.name === 'preventOverflow') {
+            } else if (modifier.name === 'preventOverflow') {
               modifier.padding = 0;
             }
           });
-    
+&nbsp;
           this._popper.update();
         }
       });
     }
   }
-  
+&nbsp;
   /**
    The coach mark size. See {@link CoachMarkSizeEnum}.
-   
+&nbsp;
    @type {String}
    @default CoachMarkSizeEnum.MEDIUM
    @htmlattribute size
@@ -592,17 +612,18 @@ class CoachMark extends BaseComponent(HTMLElement) {
   get size() {
     return this._size || size.MEDIUM;
   }
+<span class="missing-if-branch" title="else path not taken" >E</span>
   set size(value) {
-    va<span class="missing-if-branch" title="else path not taken" >E</span>lue = transform.string(value).toUpperCase();
+    value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) &amp;&amp; value || size.MEDIUM;
     this._reflectAttribute('size', this._size);
-  
+<span class="missing-if-branch" title="else path not taken" >E</span>
     this.classList.toggle(`${CLASSNAME}--quiet`, this._size === size.SMALL);
-  }<span class="missing-if-branch" title="else path not taken" >E</span>
-  
-  /**
+  }
+&nbsp;
+  /**<span class="missing-if-branch" title="else path not taken" >E</span>
    The coach mark variant. See {@link CoachMarkVariantEnum}.
-   <span class="missing-if-branch" title="else path not taken" >E</span>
+&nbsp;
    @type {String}
    @default CoachMarkVariantEnum.DEFAULT
    @htmlattribute variant
@@ -611,56 +632,65 @@ class CoachMark extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+&nbsp;
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-    
+&nbsp;
     this.classList.toggle(`${CLASSNAME}--light`, this._variant === variant.LIGHT);
     this.classList.toggle(`${CLASSNAME}--dark`, this._variant === variant.DARK);
   }
-  
+&nbsp;
   /**
    Returns {@link CoachMark} sizes options.
-   
+&nbsp;
    @return {CoachMarkSizeEnum}
    */
-  static get size() { return size; }
-  
+  static get size() {
+    return size;
+  }
+&nbsp;
   /**
    Returns {@link CoachMark} variant options.
-   
+&nbsp;
    @return {CoachMarkVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    return variant;
+  }
+&nbsp;
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'size',
-      'variant',<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+      'variant',
       'target'
     ]);
   }
-  
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-    
+&nbsp;
     // Default reflected attributes
-    if (!this._size) { this.size = size.MEDIUM; }
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-  
+    if (!this._size) {
+      this.size = size.MEDIUM;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    }
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
+&nbsp;
     // Support cloneNode
     const template = this.getElementsByClassName('_coral-CoachMarkIndicator-ring');
     while (template.length) {
       template[0].remove();
     }
-  
+&nbsp;
     // Render template
-    this.appendChild(this._template);<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    this.appendChild(this._template);
   }
 }
 &nbsp;
@@ -672,7 +702,7 @@ export default CoachMark;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

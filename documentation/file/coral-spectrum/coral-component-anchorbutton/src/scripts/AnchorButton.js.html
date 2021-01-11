@@ -455,20 +455,20 @@ class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Events
     this._delegateEvents(commons.extend(this._events, {
       keydown: &apos;_onKeyDown&apos;,
       keyup: &apos;_onKeyUp&apos;
     }));
-    
+
     // cannot use the events hash because events on disabled items are not reported
     this.addEventListener(&apos;click&apos;, this._onDisabledClick.bind(this));
   }
-  
+
   /**
    Disables the button from user interaction.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute disabled
@@ -477,19 +477,20 @@ class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
-    
+
     this.classList.toggle(&apos;is-disabled&apos;, this._disabled);
     this.setAttribute(&apos;tabindex&apos;, this._disabled ? &apos;-1&apos; : &apos;0&apos;);
     this[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
   }
-  
+
   /**
    Keyboard handling per the WAI-ARIA button widget design pattern:
    https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_button_role
- 
+
    @ignore
    */
   _onKeyDown(event) {
@@ -499,7 +500,7 @@ class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
       this.classList.add(&apos;is-selected&apos;);
     }
   }
-  
+
   /** @ignore */
   _onKeyUp(event) {
     if (event.keyCode === SPACE) {
@@ -507,26 +508,28 @@ class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
       this.classList.remove(&apos;is-selected&apos;);
     }
   }
-  
+
   /** @ignore */
   _onDisabledClick(event) {
     if (this.disabled) {
       event.preventDefault();
     }
   }
-  
+
   // Override content zone name
-  get _contentZones() { return {&apos;coral-anchorbutton-label&apos;: &apos;label&apos;}; }
-  
+  get _contentZones() {
+    return {&apos;coral-anchorbutton-label&apos;: &apos;label&apos;};
+  }
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;disabled&apos;]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     // a11y
     this.setAttribute(&apos;role&apos;, &apos;button&apos;);
     if (!this.disabled) {

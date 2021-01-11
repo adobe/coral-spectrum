@@ -442,7 +442,7 @@ class MultifieldCollection extends Collection {
         // creates an instance of an item from the object
         item = document.createElement(this._itemTagName).set(item);
       }
-    
+
       if (!insertBefore) {
         insertBefore = this.last();
         if (insertBefore) {
@@ -450,10 +450,10 @@ class MultifieldCollection extends Collection {
           insertBefore = insertBefore.nextElementSibling;
         }
       }
-    
+
       // inserts the element in the specified container
       this._container.insertBefore(item, insertBefore || this._container.firstChild);
-    
+
       return item;
     }
   }

@@ -332,7 +332,14 @@
 <a name='L274'></a><a href='#L274'>274</a>
 <a name='L275'></a><a href='#L275'>275</a>
 <a name='L276'></a><a href='#L276'>276</a>
-<a name='L277'></a><a href='#L277'>277</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L277'></a><a href='#L277'>277</a>
+<a name='L278'></a><a href='#L278'>278</a>
+<a name='L279'></a><a href='#L279'>279</a>
+<a name='L280'></a><a href='#L280'>280</a>
+<a name='L281'></a><a href='#L281'>281</a>
+<a name='L282'></a><a href='#L282'>282</a>
+<a name='L283'></a><a href='#L283'>283</a>
+<a name='L284'></a><a href='#L284'>284</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -395,7 +402,6 @@
 <span class="cline-any cline-yes">216x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">216x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -572,8 +578,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1414x</span>
 <span class="cline-any cline-yes">216x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -585,7 +589,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1414x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -608,6 +611,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -638,7 +652,7 @@ class ShellOrganization extends List.Item {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Events
     this._delegateEvents({
       'click': '_onClick',
@@ -647,21 +661,21 @@ class ShellOrganization extends List.Item {
       // Private
       'coral-shell-suborganization:_selectedchanged': '_onItemSelectedChanged'
     });
-    
+&nbsp;
     const template = {};
     organization.call(template, {Icon});
     commons.extend(this._elements, template);
-  
+&nbsp;
     // Used for eventing
     this._oldSelection = null;
-  
+&nbsp;
     // Item handling
     this.items._startHandlingItems(true);
   }
-  
+&nbsp;
   /**
    The item collection.
-   
+&nbsp;
    @type {SelectableCollection}
    @readonly
    */
@@ -676,23 +690,23 @@ class ShellOrganization extends List.Item {
         onItemRemoved: this._onItemRemoved
       });
     }
-  
+&nbsp;
     return this._items;
   }
-  
+&nbsp;
   /**
    Returns the selected workspace.
-   
+&nbsp;
    @type {HTMLElement}
    @readonly
    */
   get selectedItem() {
     return this.items._getLastSelected();
   }
-  
+&nbsp;
   /**
    Whether this organization is selected.
-   
+&nbsp;
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -701,31 +715,32 @@ class ShellOrganization extends List.Item {
   get selected() {
     return this._selected || false;
   }
+&nbsp;
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
-    
-    this.setAttribute('aria-selected', this._selected);
-    this.classList.toggle('is-selected', this._selected);
-    this._elements.c<span class="fstat-no" title="function not covered" >heckmark.hidden</span> = !this._selected;
-  <span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    this.setAttribut<span class="fstat-no" title="function not covered" >e('aria-selecte</span>d', this._selected);
+    th<span class="cstat-no" title="statement not covered" >is.classList.toggle</span>('is-selected', this._selected);
+    this._elements.checkmark.hidden = !this._selected;
+<span class="cstat-no" title="statement not covered" ></span>
     if (this.items) {
-<span class="cstat-no" title="statement not covered" >      const selectedItem = this.selec</span>tedItem;
-    
+      const selectedItem = this.selectedItem;
+&nbsp;
       this.classList.toggle('is-child-selected', selectedItem);
-    
+&nbsp;
       if (!this._selected &amp;&amp; selectedItem) {
         // Always de-select children when de-selected
         selectedItem.removeAttribute('selected');
       }
     }
-    
+&nbsp;
     this.trigger(`${this.tagName.toLowerCase()}:_selectedchanged`);
   }
-  
+&nbsp;
   /**
    The name of this organization.
-   
+&nbsp;
    @type {String}
    @default ""
    @htmlattribute name
@@ -734,11 +749,12 @@ class ShellOrganization extends List.Item {
   get name() {
     return this._name || '';
   }
+&nbsp;
   set name(value) {
     this._name = transform.string(value);
     this._reflectAttribute('name', this._name);
   }
-  
+&nbsp;
   /** @private */
   _onItemSelectedChanged(event) {
     // Validate the selection only if we're an organization
@@ -748,59 +764,59 @@ class ShellOrganization extends List.Item {
       this._validateSelection(item);
     }
   }
-  
+&nbsp;
   /** @private */
   _onItemAdded(item) {
     // Move all items into the right place
     this._moveItems();
-    
+&nbsp;
     this._validateSelection(item);
   }
-  
+&nbsp;
   /** @private */
   _onItemRemoved(item) {
     this._setParent();
-  
+&nbsp;
     this._validateSelection(item);
   }
-  
+&nbsp;
   /** @private */
   _validateSelection(item) {
     // gets the current selection
     const selection = this.items._getAllSelected();
     const selectionCount = selection.length;
-    
+&nbsp;
     if (selectionCount &gt; 1) {
-      for (let i = 0; i &lt; selectionCount; i++) {
+      for (let i = 0 ; i &lt; selectionCount ; i++) {
         if (selection[i] !== item) {
           // Don't trigger change events
           this._preventTriggeringEvents = true;
           selection[i].removeAttribute('selected');
         }
       }
-      
+&nbsp;
       // We can trigger change events again
       this._preventTriggeringEvents = false;
     }
-    
+&nbsp;
     this._triggerChangeEvent();
   }
-  
-  /** @private */
+<span class="fstat-no" title="function not covered" ></span>
+  /** <span class="cstat-no" title="statement not covered" >@private */</span>
   _triggerChangeEvent() {
-    const selectedIt<span class="fstat-no" title="function not covered" >em = this</span>.selectedItem;
-    co<span class="cstat-no" title="statement not covered" >nst oldSelection = this._oldSelection;</span>
-    
-    if (<span class="cstat-no" title="statement not covered" >!this._p</span>reventTriggeringEvents &amp;&amp; selectedItem !== oldSelection) {
+    cons<span class="cstat-no" title="statement not covered" >t select</span>edItem = this.selectedItem;
+    const oldSelection = this._oldSelection;
+&nbsp;
+    if<span class="cstat-no" title="statement not covered" > (!this._preventTrigge</span>ringEvents &amp;&amp; selectedItem !== oldSelection) {
       this.trigger(`${this.tagName.toLowerCase()}:change`, {
         oldSelection: oldSelection,
-<span class="cstat-no" title="statement not covered" >        selection: selectedI</span>tem
+        selection: selectedItem
       });
-      
+&nbsp;
       this._oldSelection = selectedItem;
     }
   }
-  
+&nbsp;
   /** @private */
   _moveItems() {
     Array.prototype.forEach.call(this.querySelectorAll('coral-shell-suborganization'), (item) =&gt; {
@@ -809,76 +825,81 @@ class ShellOrganization extends List.Item {
       }
     });
   }
-  
+&nbsp;
   /** @private */
   _setParent() {
     const hasChildren = this.items.length !== 0;
-    
+&nbsp;
     if (hasChildren) {
       this.removeAttribute('role');
       this.removeAttribute('tabindex');
-    }
-    else {
+    } else {
       // Be accessible
       this.setAttribute('role', 'button');
       this.setAttribute('tabindex', 0);
     }
-    
+&nbsp;
     this.classList.toggle('is-parent', hasChildren);
   }
-  
+&nbsp;
   /** @private */
   _onClick() {
     if (this.items.length !== 0) {
       // You can't be selected if you have sub-organizations
       return;
     }
-    
+&nbsp;
     this.selected = true;
   }
-  
+&nbsp;
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['name', 'selected']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['name', 'selected']);
+  }
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-  
+&nbsp;
     // Move items into the right place
     this._moveItems();
-  
+&nbsp;
     this.setAttribute('id', this.id || commons.getUID());
-    
+&nbsp;
     // Support cloneNode
     const items = this.querySelector(`#${this.id} &gt; ._coral-Shell-orgSwitcher-subitems`);
-    if (items) {items.remove();}
+    if (items) {
+      items.remove();
+    }
     const checkmark = this.querySelector(`#${this.id} &gt; ._coral-Shell-orgSwitcher-checkmark`);
-    if (checkmark) {checkmark.remove();}
-    
+    if (checkmark) {
+      checkmark.remove();
+    }
+&nbsp;
     // Render template
     const frag = document.createDocumentFragment();
-  
+&nbsp;
     frag.appendChild(this._elements.checkmark);
     frag.appendChild(this._elements.items);
     this.appendChild(frag);
-    
+&nbsp;
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;
     this._validateSelection();
     this._preventTriggeringEvents = false;
-  
+&nbsp;
     this._oldSelection = this.selectedItem;
-  
+&nbsp;
     this._setParent();
   }
-  
-  /**
+<span class="fstat-no" title="function not covered" ></span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
    Triggered when a {@link ShellOrganization} selection changed.
-   
+&nbsp;
    @typedef {CustomEvent} coral-shell-organization:_selectedchanged
-   
+&nbsp;
    @private
    */
 }
@@ -891,7 +912,7 @@ export default ShellOrganization;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

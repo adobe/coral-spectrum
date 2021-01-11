@@ -444,9 +444,9 @@ const UP_ARROW = 38;
 
 /**
  Enumeration for {@link Accordion} variants.
- 
+
  @typedef {Object} AccordionVariantEnum
- 
+
  @property {String} DEFAULT
  Default look and feel.
  @property {String} QUIET
@@ -474,11 +474,11 @@ class Accordion extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Attach events
     this._delegateEvents({
       &apos;click coral-accordion-item:not([disabled]) ._coral-Accordion-itemHeader&apos;: &apos;_onItemClick&apos;,
-  
+
       &apos;key:space ._coral-Accordion-itemHeader&apos;: &apos;_onToggleItemKey&apos;,
       &apos;key:return ._coral-Accordion-itemHeader&apos;: &apos;_onToggleItemKey&apos;,
       &apos;key:pageup ._coral-Accordion-itemHeader&apos;: &apos;_focusPreviousItem&apos;,
@@ -490,21 +490,21 @@ class Accordion extends BaseComponent(HTMLElement) {
       &apos;key:home ._coral-Accordion-itemHeader&apos;: &apos;_onHomeKey&apos;,
       &apos;key:end ._coral-Accordion-itemHeader&apos;: &apos;_onEndKey&apos;,
       &apos;keydown ._coral-Accordion-itemHeader&apos;: &apos;_onItemContentKeyDown&apos;,
-      
+
       // private
       &apos;coral-accordion-item:_selectedchanged&apos;: &apos;_onItemSelectedChanged&apos;
     });
-    
+
     // Used for eventing
     this._oldSelection = [];
-  
+
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
   }
-  
+
   /**
    The Accordion&apos;s variant. See {@link AccordionVariantEnum}.
-   
+
    @type {String}
    @default AccordionVariantEnum.DEFAULT
    @htmlattribute variant
@@ -513,15 +513,16 @@ class Accordion extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.DEFAULT;
     this._reflectAttribute(&apos;variant&apos;, this._variant);
   }
-  
+
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+
    @type {Collection}
    @readonly
    */
@@ -539,7 +540,7 @@ class Accordion extends BaseComponent(HTMLElement) {
     }
     return this._items;
   }
-  
+
   /**
    Indicates whether the accordion accepts multiple selected items.
    @type {Boolean}
@@ -550,13 +551,14 @@ class Accordion extends BaseComponent(HTMLElement) {
   get multiple() {
     return this._multiple || false;
   }
+
   set multiple(value) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute(&apos;multiple&apos;, this._multiple);
-    
+
     this._validateSelection();
   }
-  
+
   /**
    Returns an Array containing the set selected items.
    @type {Array.&lt;AccordionItem&gt;}
@@ -565,7 +567,7 @@ class Accordion extends BaseComponent(HTMLElement) {
   get selectedItems() {
     return this.items._getAllSelected();
   }
-  
+
   /**
    Returns the first selected item in the Accordion. The value &lt;code&gt;null&lt;/code&gt; is returned if no element is
    selected.
@@ -577,13 +579,13 @@ class Accordion extends BaseComponent(HTMLElement) {
   }
 
   /**
-    The heading level for Accordion items within the Accordion
+   The heading level for Accordion items within the Accordion
 
-    @type {Number}
-    @default 3
-    @htmlattribute level
-    @htmlattributereflected
-  */
+   @type {Number}
+   @default 3
+   @htmlattribute level
+   @htmlattributereflected
+   */
   get level() {
     return this._level || 3;
   }
@@ -596,50 +598,51 @@ class Accordion extends BaseComponent(HTMLElement) {
       this.items.getAll().forEach(item =&gt; item.setAttribute(&apos;level&apos;, this._level));
     }
   }
-  
+
   /** @private **/
   get _tabTarget() {
     return this.__tabTarget || null;
   }
+
   set _tabTarget(value) {
     this.__tabTarget = value;
-    
+
     // Set all but the current set _tabTarget to not be a tab target:
     this.items.getAll().forEach((item) =&gt; {
       item._isTabTarget = item === value;
     });
   }
-  
+
   /** @private */
   _onHomeKey(event) {
     event.preventDefault();
     event.stopPropagation();
-    
+
     this._focusItem(this.items._getFirstSelectable());
   }
-  
+
   /** @private */
   _onEndKey(event) {
     event.preventDefault();
     event.stopPropagation();
-    
+
     this._focusItem(this.items._getLastSelectable());
   }
-  
+
   /**
    References:
    http://www.w3.org/WAI/PF/aria-practices/#accordion &amp;
-   
+
    Handlers for when focus is on an element inside of the panel:
    http://test.cita.illinois.edu/aria/tabpanel/tabpanel2.php
-   
+
    @private
    */
   _onItemContentKeyDown(event) {
     // Required since sometimes the value is a number
     const key = parseFloat(event.keyCode);
     const item = event.matchedTarget.parentNode;
-    
+
     switch (key) {
       case UP_ARROW:
       case LEFT_ARROW:
@@ -647,7 +650,7 @@ class Accordion extends BaseComponent(HTMLElement) {
         if ((event.metaKey || event.ctrlKey) &amp;&amp; Keys.filterInputs(event)) {
           event.preventDefault();
           event.stopPropagation();
-          
+
           this._focusItem(item);
         }
         break;
@@ -657,7 +660,7 @@ class Accordion extends BaseComponent(HTMLElement) {
         if (event.metaKey || event.ctrlKey) {
           event.preventDefault();
           event.stopPropagation();
-          
+
           const prevItem = this.items._getPreviousSelectable(item);
           this._toggleItemSelection(prevItem);
           this._focusItem(prevItem);
@@ -669,7 +672,7 @@ class Accordion extends BaseComponent(HTMLElement) {
         if (event.metaKey || event.ctrlKey) {
           event.preventDefault();
           event.stopPropagation();
-          
+
           const nextItem = this.items._getNextSelectable(item);
           this._toggleItemSelection(nextItem);
           this._focusItem(nextItem);
@@ -677,66 +680,66 @@ class Accordion extends BaseComponent(HTMLElement) {
         break;
     }
   }
-  
+
   /** @private */
   _focusPreviousItem(event) {
     event.preventDefault();
     event.stopPropagation();
-    
+
     this._focusItem(this.items._getPreviousSelectable(event.target.closest(&apos;coral-accordion-item&apos;)));
   }
-  
+
   /** @private */
   _focusNextItem(event) {
     event.preventDefault();
     event.stopPropagation();
-    
+
     this._focusItem(this.items._getNextSelectable(event.target.closest(&apos;coral-accordion-item&apos;)));
   }
-  
+
   /** @private */
   _onItemClick(event) {
     // Clickable elements included in an item header shouldn&apos;t automatically trigger the selection of that item
     if (event.target.hasAttribute(&apos;coral-interactive&apos;) || event.target.closest(&apos;[coral-interactive]&apos;)) {
       return;
     }
-    
+
     // The click was performed on the header so we select the item (parentNode) the selection is toggled
     const item = event.target.closest(&apos;coral-accordion-item&apos;);
     if (item) {
       event.preventDefault();
       event.stopPropagation();
-      
+
       this._toggleItemSelection(item);
       this._focusItem(item);
     }
   }
-  
+
   /** @private */
   _onToggleItemKey(event) {
     event.preventDefault();
     event.stopPropagation();
-    
+
     const item = event.target.closest(&apos;coral-accordion-item&apos;);
     this._toggleItemSelection(item);
     this._focusItem(item);
   }
-  
+
   /** @private */
   _onItemSelectedChanged(event) {
     event.stopImmediatePropagation();
-    
+
     this._validateSelection(event.target);
   }
-  
+
   /** @private */
   _validateSelection(item) {
     const selectedItems = this.selectedItems;
-    
+
     if (!this.multiple) {
       // Last selected item wins if multiple selection while not allowed
       item = item || selectedItems[selectedItems.length - 1];
-      
+
       if (item &amp;&amp; item.hasAttribute(&apos;selected&apos;) &amp;&amp; selectedItems.length &gt; 1) {
         selectedItems.forEach((selectedItem) =&gt; {
           if (selectedItem !== item) {
@@ -745,27 +748,27 @@ class Accordion extends BaseComponent(HTMLElement) {
             selectedItem.removeAttribute(&apos;selected&apos;);
           }
         });
-        
+
         // We can trigger change events again
         this._preventTriggeringEvents = false;
       }
     }
-    
+
     // set items level appropriately
     if (item &amp;&amp; item.getAttribute(&apos;level&apos;) !== this.level) {
       item.setAttribute(&apos;level&apos;, this.level);
     }
 
     this._resetTabTarget();
-    
+
     this._triggerChangeEvent();
   }
-  
+
   /** @private */
   _triggerChangeEvent() {
     const selectedItems = this.selectedItems;
     const oldSelection = this._oldSelection;
-    
+
     if (!this._preventTriggeringEvents &amp;&amp; this._arraysAreDifferent(selectedItems, oldSelection)) {
       // We differentiate whether multiple is on or off and return an array or HTMLElement respectively
       if (this.multiple) {
@@ -773,111 +776,114 @@ class Accordion extends BaseComponent(HTMLElement) {
           oldSelection: oldSelection,
           selection: selectedItems
         });
-      }
-      else {
+      } else {
         // Return all items if we just switched from multiple=true to multiple=false and we had &gt;1 selected items
         this.trigger(&apos;coral-accordion:change&apos;, {
           oldSelection: oldSelection.length &gt; 1 ? oldSelection : oldSelection[0] || null,
           selection: selectedItems[0] || null
         });
       }
-    
+
       this._oldSelection = selectedItems;
     }
   }
-  
+
   /** @private */
   _arraysAreDifferent(selection, oldSelection) {
     let diff = [];
-  
+
     if (oldSelection.length === selection.length) {
       diff = oldSelection.filter((item) =&gt; selection.indexOf(item) === -1);
     }
-  
+
     // since we guarantee that they are arrays, we can start by comparing their size
     return oldSelection.length !== selection.length || diff.length !== 0;
   }
-  
+
   /**
    Determine what item should get focus (if any) when the user tries to tab into the accordion. This should be the
    first selected panel, or the first selectable panel otherwise. When neither is available, to Accordion cannot be
    tabbed into.
-   
+
    @private
    */
   _resetTabTarget() {
     if (!this._resetTabTargetScheduled) {
       this._resetTabTargetScheduled = true;
-      
+
       window.requestAnimationFrame(() =&gt; {
         this._resetTabTargetScheduled = false;
-        
+
         // since hidden items cannot have focus, we need to make sure the tabTarget is not hidden
         const selectedItems = this.items._getAllSelected();
-  
+
         this._tabTarget = selectedItems.length ? selectedItems[0] : this.items._getFirstSelectable();
       });
     }
   }
-  
+
   /** @private */
   _toggleItemSelection(item) {
     if (item) {
       item[item.hasAttribute(&apos;selected&apos;) ? &apos;removeAttribute&apos; : &apos;setAttribute&apos;](&apos;selected&apos;, &apos;&apos;);
     }
   }
-  
+
   /** @private */
   _focusItem(item) {
     if (item) {
       item._elements.button.focus();
     }
-    
+
     this._tabTarget = item;
   }
-  
+
   /**
    Returns {@link Accordion} variants.
-   
+
    @return {AccordionVariantEnum}
    */
-  static get variant() { return variant; }
+  static get variant() {
+    return variant;
+  }
 
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;variant&apos;, &apos;multiple&apos;, &apos;level&apos;]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-  
+
     this.classList.add(CLASSNAME);
-  
+
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-    
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
+
     // WAI-ARIA 1.1
     this.setAttribute(&apos;role&apos;, &apos;region&apos;);
-    
+
     // Don&apos;t trigger events once connected
     this._preventTriggeringEvents = true;
     this._validateSelection();
     this._preventTriggeringEvents = false;
-    
+
     this._oldSelection = this.selectedItems;
-    
+
     // Don&apos;t trigger animations on rendering
     window.requestAnimationFrame(() =&gt; {
       this.classList.add(`${CLASSNAME}--animated`);
     });
   }
-  
+
   /**
    Triggered when {@link Accordion} selected item has changed.
-   
+
    @typedef {CustomEvent} coral-accordion:change
-   
+
    @property {AccordionItem} detail.oldSelection
    The prior selected item(s).
    @property {AccordionItem} detail.selection

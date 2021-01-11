@@ -272,7 +272,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -295,7 +294,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">18x</span>
@@ -334,6 +332,8 @@
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -355,9 +355,9 @@ const CLASSNAME = '_coral-ActionBar-container';
 &nbsp;
 /**
  Enumeration for {@link ActionBarContainer} positions.
- 
+&nbsp;
  @typedef {Object} ActionBarContainerPositionEnum
- 
+&nbsp;
  @property {String} PRIMARY
  Primary (left) ActionBar container.
  @property {String} SECONDARY
@@ -377,21 +377,21 @@ const position = {
  @htmltag coral-actionbar-container
  @extends {HTMLElement}
  @extends {BaseComponent}
- 
+&nbsp;
  @deprecated
  */
 class ActionBarContainer extends BaseActionBarContainer(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-  
+&nbsp;
     commons._log('warn', `Coral.ActionBar.Container: coral-actionbar-container has been deprecated.
     Please use coral-actionbar-primary and coral-actionbar-secondary instead`);
   }
-  
+&nbsp;
   /**
    The container position inside the actionbar.
-   
+&nbsp;
    @private
    @type {String}
    @readonly
@@ -400,74 +400,74 @@ class ActionBarContainer extends BaseActionBarContainer(BaseComponent(HTMLElemen
   get _position() {
     if (this.parentNode) {
       const containers = this.parentNode.getElementsByTagName('coral-actionbar-container');
-    
+&nbsp;
       if (containers.length &gt; 0 &amp;&amp; containers[0] === this) {
         return position.PRIMARY;
-      }
-      else if (containers.length &gt; 1 &amp;&amp; containers[1] === this) {
+      } else if (containers.length &gt; 1 &amp;&amp; containers[1] === this) {
         return position.SECONDARY;
       }
     }
-  
+&nbsp;
     return position.INVALID;
   }
-  
+&nbsp;
   /** @ignore */
   _attachMoreButtonToContainer() {
     if (this.parentNode &amp;&amp; this.parentNode.secondary === this) {
       this.insertBefore(this._elements.moreButton, this.firstChild);
-    }
-    el<span class="missing-if-branch" title="if path not taken" >I</span>se {
-      //<span class="cstat-no" title="statement not covered" > add the button to the left/primary contentzone</span>
-      this.appendChild(this._elements.moreButton);
+    } else {
+      <span class="missing-if-branch" title="if path not taken" >I</span>// add the button to the left/primary contentzone
+      th<span class="cstat-no" title="statement not covered" >is.appendChild(this._elements.moreButton);</span>
     }
   }
-  
+&nbsp;
   /**
    Returns {@link ActionBarContainer} positions.
-   
+&nbsp;
    @return {ActionBarContainerPositionEnum}
    */
-  static get position() { return position; }
-  
+  static get position() {
+    return position;
+  }
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-  
+&nbsp;
     // Cleanup resize helpers object (cloneNode support)
     const resizeHelpers = this.getElementsByTagName('object');
-    for (let i = 0; i &lt; resizeHelpers.length; ++i) {
+    for (let i = 0 ; i &lt; resizeHelpers.length ; ++i) {
       const resizeElement = resizeHelpers[i];
-      if (resizeElement.parentNode === this) {
+      if (resizeElement.pare<span class="cstat-no" title="statement not covered" >ntNode === this) </span>{
         this.removeChild(resizeElement);
       }<span class="cstat-no" title="statement not covered" ></span>
-    }
-  <span class="cstat-no" title="statement not covered" ></span>
-    // Cle<span class="cstat-no" title="statement not covered" >anup 'More' button</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    // Cleanup 'More' button
     this._elements.moreButton = this.querySelector('[coral-actionbar-more]');
     if (this._elements.moreButton) {
       this.removeChild(this._elements.moreButton);
     }
-  
+<span class="missing-if-branch" title="else path not taken" >E</span>
     // Cleanup 'More' popover
-    th<span class="missing-if-branch" title="else path not taken" >E</span>is._elements.overlay = this.querySelector('[coral-actionbar-popover]');
+    this._elements.overlay = this.querySelector('[coral-actionbar-popover]');
     if (this._elements.overlay) {
       this.removeChild(this._elements.overlay);
     }
-  
-    // Init 'More' button
+&nbsp;
+    //<span class="missing-if-branch" title="else path not taken" >E</span> Init 'More' button
     this._elements.moreButton.label.textContent = this.moreButtonText;
-    //<span class="missing-if-branch" title="else path not taken" >E</span> 'More' button might be moved later in dom when Container is attached to parent
+    // 'More' button might be moved later in dom when Container is attached to parent
     this.appendChild(this._elements.moreButton);
-  
+&nbsp;
     // Init 'More' popover
     this._elements.overlay.target = this._elements.moreButton;
-  
+&nbsp;
     // Insert popover always as firstChild to ensure element order (cloneNode support)
     this.insertBefore(this._elements.overlay, this.firstChild);
-  
+&nbsp;
     this._attachMoreButtonToContainer();
   }
 }
@@ -480,7 +480,7 @@ export default ActionBarContainer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

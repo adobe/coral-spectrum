@@ -445,7 +445,7 @@ import {commons, transform} from &apos;../../../coral-utils&apos;;
 class RangedSlider extends Slider {
   /**
    Ranged sliders are always filled.
-   
+
    @type {Boolean}
    @default true
    @htmlattribute filled
@@ -454,12 +454,13 @@ class RangedSlider extends Slider {
   get filled() {
     return true;
   }
+
   set filled(value) {
     if (!transform.booleanAttr(value)) {
       commons._log(&apos;warn&apos;, &apos;Coral.RangedSlider: filled can not be set to false.&apos;);
     }
   }
-  
+
   /**
    This field&apos;s current value.
    @type {String}
@@ -469,13 +470,14 @@ class RangedSlider extends Slider {
   get value() {
     return this.startValue;
   }
+
   set value(value) {
     this.startValue = value;
   }
-  
+
   /**
    The starting value of the range.
-   
+
    @type {String}
    @default &apos;1&apos;
    @emits {change}
@@ -484,23 +486,24 @@ class RangedSlider extends Slider {
   get startValue() {
     return this.values[0] || &apos;1&apos;;
   }
+
   set startValue(value) {
     // Snap value to step
     value = String(this._snapValueToStep(transform.number(value), this.min, this.max, this.step));
-  
+
     const values = this.values;
     values[0] = value;
     this.values = values;
-  
+
     // in order to keep the reset value in sync, we need to handle the &quot;startvalue&quot; attribute of the inner input
     const input = this._elements.inputs[0];
     const valueAttribute = this.getAttribute(&apos;startvalue&apos;) || this.getAttribute(&apos;value&apos;);
     input[valueAttribute ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;value&apos;, valueAttribute);
   }
-  
+
   /**
    The ending value of the range.
-   
+
    @type {String}
    @default &apos;100&apos;
    @emits {change}
@@ -509,23 +512,24 @@ class RangedSlider extends Slider {
   get endValue() {
     return this.values[1] || &apos;100&apos;;
   }
+
   set endValue(value) {
     // Snap value to step
     value = String(this._snapValueToStep(transform.number(value), this.min, this.max, this.step));
-  
+
     const values = this.values;
     values[1] = value;
     this.values = values;
-  
+
     // in order to keep the reset value in sync, we need to handle the &quot;endvalue&quot; attribute of the inner input
     const input = this._elements.inputs[1];
     const valueAttribute = this.getAttribute(&apos;endvalue&apos;);
     input[valueAttribute ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;value&apos;, valueAttribute);
   }
-  
+
   /**
    The current values of the ranged slider.
-   
+
    @type {Array.&lt;String&gt;}
    @default [{@link Coral.RangedSlider#startValue},{@link Coral.RangedSlider#endValue}]
    @emits {change}
@@ -533,56 +537,56 @@ class RangedSlider extends Slider {
   get values() {
     return this._values;
   }
+
   set values(values) {
     this._values = values;
   }
-  
+
   /** @private */
   _getHighestValue() {
     return Math.max.apply(null, this.values);
   }
-  
+
   /** @private */
   _getLowestValue() {
     return Math.min.apply(null, this.values);
   }
-  
+
   /** @override */
   _updateValue(handle, val) {
     const idx = this._elements.handles.indexOf(handle);
-  
+
     if (idx === 0) {
       if (val &gt; parseFloat(this.values[1])) {
         val = this.values[1];
       }
       this._elements.rightInput.min = val;
       this._elements.rightHandle.setAttribute(&apos;aria-valuemin&apos;, val);
-    }
-    else {
+    } else {
       if (val &lt; parseFloat(this.values[0])) {
         val = this.values[0];
       }
       this._elements.leftInput.max = val;
       this._elements.leftHandle.setAttribute(&apos;aria-valuemax&apos;, val);
     }
-  
+
     const resValue = [this.values[0], this.values[1]];
     resValue[idx] = val;
-  
+
     const oldValues = this.values;
     this.values = resValue;
     const newValues = this.values;
-  
+
     if (oldValues.join(&apos;:&apos;) !== newValues.join(&apos;:&apos;)) {
       this.trigger(&apos;change&apos;);
     }
   }
-  
+
   /** @override */
   _getTemplate() {
     return range;
   }
-  
+
   /**
    Inherited from {@link BaseFormField#clear}.
    */
@@ -590,7 +594,7 @@ class RangedSlider extends Slider {
     this.startValue = this.min;
     this.endValue = this.max;
   }
-  
+
   /**
    Inherited from {@link BaseFormField#reset}.
    */
@@ -599,18 +603,18 @@ class RangedSlider extends Slider {
     // component has support for values, this method needs to be overwritten
     const initialStartValue = this.getAttribute(&apos;startvalue&apos;) || this.getAttribute(&apos;value&apos;);
     const initialEndValue = this.getAttribute(&apos;endvalue&apos;);
-    
+
     this.startValue = transform.string(initialStartValue);
     this.endValue = transform.string(initialEndValue);
   }
-  
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       startvalue: &apos;startValue&apos;,
       endvalue: &apos;endValue&apos;
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -618,13 +622,13 @@ class RangedSlider extends Slider {
       &apos;endvalue&apos;
     ]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(&apos;_coral-Slider--range&apos;);
-    
+
     // Set filled attribute by default
     this.setAttribute(&apos;filled&apos;, &apos;&apos;);
   }

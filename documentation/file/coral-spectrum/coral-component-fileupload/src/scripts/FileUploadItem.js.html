@@ -437,9 +437,9 @@ import {transform, validate} from &apos;../../../coral-utils&apos;;
 
 /**
  Enumeration for {@link FileUploadItem} response types.
- 
+
  @typedef {Object} FileUploadItemResponseTypeEnum
- 
+
  @property {String} TEXT
  String type.
  @property {String} ARRAY_BUFFER
@@ -478,17 +478,17 @@ const MIME_TYPE_VIDEO = &apos;video/*&apos;;
 class FileUploadItem {
   /**
    Takes a {File} as argument.
-   
+
    @param {File} file
    */
   constructor(file) {
     this._originalFile = file;
     this._xhr = null;
   }
-  
+
   /**
    The File.
-   
+
    @name file
    @readonly
    @type {File}
@@ -496,11 +496,11 @@ class FileUploadItem {
   get file() {
     return this._originalFile;
   }
-  
+
   /**
    Array of additional parameters as key:value to be uploaded with the file.
    A parameter must contain a &lt;code&gt;name&lt;/code&gt; key:value and optionally a &lt;code&gt;value&lt;/code&gt; key:value.
-   
+
    @name parameters
    @type {Array.&lt;Object&gt;}
    @default []
@@ -508,17 +508,18 @@ class FileUploadItem {
   get parameters() {
     return this._parameters || [];
   }
+
   set parameters(value) {
     const isValid = Array.isArray(value) &amp;&amp; value.every((el) =&gt; el &amp;&amp; el.name);
-  
+
     if (isValid) {
       this._parameters = value;
     }
   }
-  
+
   /**
    The item xhr &lt;code&gt;withCredentials&lt;/code&gt; property.
-   
+
    @name withCredentials
    @type {Boolean}
    @default false
@@ -526,13 +527,14 @@ class FileUploadItem {
   get withCredentials() {
     return this._withCredentials || false;
   }
+
   set withCredentials(value) {
     this._withCredentials = transform.boolean(value);
   }
-  
+
   /**
    The item xhr &lt;code&gt;timeout&lt;/code&gt; property.
-   
+
    @name timeout
    @type {Number}
    @default 0
@@ -540,6 +542,7 @@ class FileUploadItem {
   get timeout() {
     return this._timeout || 0;
   }
+
   set timeout(value) {
     const timeout = transform.number(value);
     if (timeout !== null) {
@@ -549,10 +552,10 @@ class FileUploadItem {
       }
     }
   }
-  
+
   /**
    The item xhr &lt;code&gt;responseType&lt;/code&gt; property. See {@link FileUploadItemResponseTypeEnum}.
-   
+
    @name responseType
    @default {FileUploadItemResponseTypeEnum.TEXT}
    @type {String}
@@ -560,6 +563,7 @@ class FileUploadItem {
   get responseType() {
     return this._responseType || responseType.TEXT;
   }
+
   set responseType(value) {
     value = transform.string(value).toLowerCase();
     this._responseType = validate.enumeration(responseType)(value) &amp;&amp; value || responseType.TEXT;
@@ -567,10 +571,10 @@ class FileUploadItem {
       this._xhr.responseType = value;
     }
   }
-  
+
   /**
    The item xhr &lt;code&gt;readyState&lt;/code&gt; property.
-   
+
    @name readyState
    @readonly
    @default 0
@@ -579,10 +583,10 @@ class FileUploadItem {
   get readyState() {
     return this._xhr ? this._xhr.readyState : this._readyState || 0;
   }
-  
+
   /**
    The item xhr &lt;code&gt;responseType&lt;/code&gt; property. Depends on {@link Coral.FileUpload.Item#responseType}.
-   
+
    @name response
    @readonly
    @default &quot;&quot;
@@ -591,10 +595,10 @@ class FileUploadItem {
   get response() {
     return this._xhr ? this._xhr.response : this._response || &apos;&apos;;
   }
-  
+
   /**
    The item xhr &lt;code&gt;responseText&lt;/code&gt; property.
-   
+
    @name responseText
    @readonly
    @default &quot;&quot;
@@ -603,10 +607,10 @@ class FileUploadItem {
   get responseText() {
     return this._xhr ? this._xhr.responseText : this._responseText || &apos;&apos;;
   }
-  
+
   /**
    The item xhr &lt;code&gt;responseXML&lt;/code&gt; property.
-   
+
    @name responseXML
    @readonly
    @default null
@@ -615,10 +619,10 @@ class FileUploadItem {
   get responseXML() {
     return this._xhr ? this._xhr.responseXML : this._responseXML || null;
   }
-  
+
   /**
    The item xhr &lt;code&gt;status&lt;/code&gt; property.
-   
+
    @name status
    @readonly
    @default 0
@@ -627,10 +631,10 @@ class FileUploadItem {
   get status() {
     return this._xhr ? this._xhr.status : this._status || 0;
   }
-  
+
   /**
    The item xhr &lt;code&gt;statusText&lt;/code&gt; property.
-   
+
    @name statusText
    @readonly
    @default &quot;&quot;
@@ -639,22 +643,22 @@ class FileUploadItem {
   get statusText() {
     return this._xhr ? this._xhr.statusText : this._statusText || &apos;&apos;;
   }
-  
+
   /** @private */
   _isMimeTypeAllowed(acceptedMimeTypes) {
     let isAllowed = false;
-    
+
     // Unrecognized browser mime types have a file type of &apos;&apos;.
     const fileType = this.file.type || &apos;application/unknown&apos;;
-    
+
     if (!fileType.match(MIME_TYPE_REGEXP)) {
       // File mime type is erroneous
       return false;
     }
-    
+
     return acceptedMimeTypes.split(&apos;,&apos;).some((allowedMimeType) =&gt; {
       allowedMimeType = allowedMimeType.trim();
-      
+
       if (allowedMimeType === &apos;*&apos; ||
         allowedMimeType === &apos;.*&apos; ||
         allowedMimeType === &apos;*/*&apos; ||
@@ -662,51 +666,46 @@ class FileUploadItem {
         // Explicit wildcard case: allow any file
         // Allow unknown mime types
         isAllowed = true;
-      }
-      else if (allowedMimeType.match(MIME_TYPE_REGEXP)) {
+      } else if (allowedMimeType.match(MIME_TYPE_REGEXP)) {
         if (allowedMimeType === MIME_TYPE_AUDIO) {
           isAllowed = fileType.indexOf(MIME_TYPE_AUDIO.slice(0, -1)) === 0;
-        }
-        else if (allowedMimeType === MIME_TYPE_IMAGE) {
+        } else if (allowedMimeType === MIME_TYPE_IMAGE) {
           isAllowed = fileType.indexOf(MIME_TYPE_IMAGE.slice(0, -1)) === 0;
-        }
-        else if (allowedMimeType === MIME_TYPE_VIDEO) {
+        } else if (allowedMimeType === MIME_TYPE_VIDEO) {
           isAllowed = fileType.indexOf(MIME_TYPE_VIDEO.slice(0, -1)) === 0;
-        }
-        else {
+        } else {
           // Proper mime type case: directly compare with file mime type
           isAllowed = fileType === allowedMimeType;
         }
-      }
-      else if (allowedMimeType.match(FILE_EXTENSION_REGEXP)) {
+      } else if (allowedMimeType.match(FILE_EXTENSION_REGEXP)) {
         // File extension case
         const allowedMimeTypes = MIME_TYPES[allowedMimeType];
-  
+
         // Depending on OS and browser, a file extension can map to different mime types
         // e.g .csv maps to &quot;text/csv&quot; on Mac OS and to &quot;application/vnd.ms-excel&quot; on Windows
         if (Array.isArray(allowedMimeTypes)) {
           isAllowed = allowedMimeTypes.some((mimeType) =&gt; fileType === mimeType);
-        }
-        else {
+        } else {
           isAllowed = fileType === MIME_TYPES[allowedMimeType];
         }
-      }
-      else if (allowedMimeType.match(SHORTCUT_REGEXP)) {
+      } else if (allowedMimeType.match(SHORTCUT_REGEXP)) {
         // &quot;Shortcut&quot; case: only compare first part of the file mime type with the shortcut
         isAllowed = fileType.split(&apos;/&apos;)[0] === allowedMimeType;
       }
-      
+
       // Break the loop if file mime type is allowed
       return isAllowed;
     });
   }
-  
+
   /**
    Returns {@link FileUploadItem} response types.
-   
+
    @return {FileUploadItemResponseTypeEnum}
    */
-  static get responseType() { return responseType; }
+  static get responseType() {
+    return responseType;
+  }
 }
 
 export default FileUploadItem;

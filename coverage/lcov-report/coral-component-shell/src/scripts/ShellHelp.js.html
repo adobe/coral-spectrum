@@ -375,7 +375,8 @@
 <a name='L317'></a><a href='#L317'>317</a>
 <a name='L318'></a><a href='#L318'>318</a>
 <a name='L319'></a><a href='#L319'>319</a>
-<a name='L320'></a><a href='#L320'>320</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L320'></a><a href='#L320'>320</a>
+<a name='L321'></a><a href='#L321'>321</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -440,7 +441,6 @@
 <span class="cline-any cline-yes">56x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">56x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -585,7 +585,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -694,7 +693,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">66x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -730,24 +732,24 @@ class ShellHelp extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Prepare templates
     this._elements = {};
     help.call(this._elements, {commons, i18n});
-    
+&nbsp;
     // Events
     this._delegateEvents({
       'coral-search:clear': '_showItems',
       'coral-search:submit': '_performSearch'
     });
-    
+&nbsp;
     // Item handling
     this.items._startHandlingItems(true);
   }
-  
+&nbsp;
   /**
    The item collection.
-   
+&nbsp;
    @type {Collection}
    @readonly
    */
@@ -761,13 +763,13 @@ class ShellHelp extends BaseComponent(HTMLElement) {
         container: this._elements.items
       });
     }
-  
+&nbsp;
     return this._items;
   }
-  
+&nbsp;
   /**
    The search field placeholder.
-   
+&nbsp;
    @type {String}
    @default ""
    @htmlattribute placeholder
@@ -775,55 +777,56 @@ class ShellHelp extends BaseComponent(HTMLElement) {
   get placeholder() {
     return this._elements.search.placeholder;
   }
+&nbsp;
   set placeholder(value) {
     this._elements.search.placeholder = value;
   }
-  
+&nbsp;
   /** @private */
   _moveItems() {
     this.setAttribute('id', this.id || commons.getUID());
-    
+&nbsp;
     const selector = `#${this.id} &gt; a[is="coral-shell-help-item"], coral-shell-help-separator`;
     Array.prototype.forEach.call(this.querySelectorAll(selector), (item) =&gt; {
       this._elements.items.appendChild(item);
     });
   }
-  
+&nbsp;
   /** @private */
   _performSearch(event) {
     event.stopPropagation();
-    
+&nbsp;
     // Show loading
     this._elements.items.hidden = true;
     this._showLoading();
     this._elements.resultMessage.hidden = true;
     this._elements.results.hidden = true;
-    
+&nbsp;
     // Trigger event
     const searchTerm = this._elements.search.value;
     this.trigger('coral-shell-help:search', {
       value: searchTerm
     });
   }
-  
+&nbsp;
   /** @private */
   _showItems(event) {
     event.stopPropagation();
-    
+&nbsp;
     // Hide search results
     this._elements.results.hidden = true;
-    
+&nbsp;
     // Hide loading
     this._hideLoading();
-    
+&nbsp;
     // Hide no-results
     this._elements.resultMessage.hidden = true;
-    
-    // Show items
-    this._elements.items.hidden = false;
-  }<span class="missing-if-branch" title="if path not taken" >I</span>
-<span class="cstat-no" title="statement not covered" ></span>
-  /** @p<span class="cstat-no" title="statement not covered" >rivate */</span>
+&nbsp;
+    //<span class="missing-if-branch" title="if path not taken" >I</span> Show items
+    this<span class="cstat-no" title="statement not covered" >._elements.items.hidden = false;</span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /** @private */
   _clearTimeout(timeoutName) {
     if (this[timeoutName]) {
       window.clearTimeout(this[timeoutName]);
@@ -840,19 +843,19 @@ class ShellHelp extends BaseComponent(HTMLElement) {
     el.hidden = false;
 &nbsp;
     // Add message text after 150ms delay to give screen readers enough
-    // time to recognize the live region and respond to the text update 
+    // time to recognize the live region and respond to the text update
     this._clearTimeout(timeoutName);
     this[timeoutName] = window.setTimeout(() =&gt; el.appendChild(message), 150);
   }
 &nbsp;
   /** @private */
-  _showLoading() {
-    if (!this._elements.loading.hidden) {
-      <span class="missing-if-branch" title="if path not taken" >I</span>return;
-    }<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
+  _sho<span class="missing-if-branch" title="if path not taken" >I</span>wLoading() {
+    if (<span class="cstat-no" title="statement not covered" >!this._e</span>lements.loading.hidden) {
+      return;
+    }
+<span class="missing-if-branch" title="else path not taken" >E</span>
     if (this._elements.loading.contains(this._elements.loadingMessage)) {
-      <span class="missing-if-branch" title="else path not taken" >E</span>this._elements.loadingMessage = this._elements.loading.removeChild(this._elements.loadingMessage);
+      this._elements.loadingMessage = this._elements.loading.removeChild(this._elements.loadingMessage);
     }
 &nbsp;
     this._showMessage('loading', this._elements.loadingMessage);
@@ -861,34 +864,34 @@ class ShellHelp extends BaseComponent(HTMLElement) {
   /** @private */
   _hideLoading() {
     if (this._elements.loading.hidden) {
-      return;
+      <span class="missing-if-branch" title="else path not taken" >E</span>return;
     }
-<span class="missing-if-branch" title="else path not taken" >E</span>
-    this._elements.loading.hidden = true;
 &nbsp;
+    this._elements.loading.hidden = true;
+<span class="cstat-no" title="statement not covered" ></span>
     // clear the timeout
     th<span class="cstat-no" title="statement not covered" >is._clearTimeout('_loadingTimeout');</span>
     if (this._elements.loading.contains(this._elements.loadingMessage)) {
-<span class="cstat-no" title="statement not covered" >      this._elements.loadingMessage = this._e</span>lements.loading.removeChild(this._elements.loadingMessage);
-    }
-  }<span class="cstat-no" title="statement not covered" ></span>
-  <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      this._elements.loadingMessage = this._elements.loading.removeChild(this._elements.loadingMessage);</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+  }
+&nbsp;
   /**
    Indicate to the user that an error has occurred
    */
   showError() {
     // Hide loading
     this._hideLoading();
-    
+&nbsp;
     this._elements.resultMessage.innerHTML = '';
 &nbsp;
     // Show the error message
     this._showMessage('resultMessage', helpSearchError.call(this._elements, {i18n}));
   }
-  
+&nbsp;
   /**
    Show a set of search results.
-   
+&nbsp;
    @param {Array.&lt;ShellHelpResult&gt;} results
    A set of search result objects.
    @param {Number} total
@@ -908,88 +911,88 @@ class ShellHelp extends BaseComponent(HTMLElement) {
 &nbsp;
     if (!results || total === 0) {
       // Clear existing result message
-      this._elements.resultMessage.innerHTML = '';
-      // Indicate to the user that no results were found
-      this._showMessage('resultMessage', noHelpResults.call(this._elements, {i18n}));
-    }<span class="missing-if-branch" title="if path not taken" >I</span>
-    else<span class="cstat-no" title="statement not covered" > {</span>
-      //<span class="cstat-no" title="statement not covered" > Clear existing results</span>
+      <span class="missing-if-branch" title="if path not taken" >I</span>this._elements.resultMessage.innerHTML = '';
+      //<span class="cstat-no" title="statement not covered" > Indicate to the user that no results were foun</span>d
+      th<span class="cstat-no" title="statement not covered" >is._showMessage('resultMessage', noHel</span>pResults.call(this._elements, {i18n}));
+    } else {
+      // Clear existing results
       this._elements.results.innerHTML = '';
       // Populate results
       results.forEach((result) =&gt; {
         // Tweak: make the space between bullets larger with a non-breaking space
         const separator = ' &amp; ';
         const description = result.tags.join(separator);
-        
+&nbsp;
         const item = new AnchorList.Item().set({
           href: result.href,
           target: result.target
         });
-        
+&nbsp;
         item.classList.add('_coral-Shell-help-result-item');
-        
+&nbsp;
         item.content = helpResult.call(this._elements, {
           title: result.title,
           description: description
         }).firstElementChild;
-        
+&nbsp;
         this._elements.results.appendChild(item);
       });
-      
+&nbsp;
       // Show results
       this._elements.results.hidden = false;
-      
+&nbsp;
       // Show total
       if (total &gt; 1) {
         const seeAllItem = new AnchorList.Item().set({
           href: allResultsURL,
           content: {
-            innerHTML: i18n.get('See all {0} results', total)
+        <span class="missing-if-branch" title="else path not taken" >E</span>    innerHTML: i18n.get('See all {0} results', total)
           },
-        <span class="missing-if-branch" title="else path not taken" >E</span>  target: '_blank'
+          target: '_blank'
         });
-  
+&nbsp;
         // Look like a link
         seeAllItem.content.classList.add('coral-Link');
-        
+&nbsp;
         this._elements.results.appendChild(seeAllItem);
       }
     }
   }
-  
+&nbsp;
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['placeholder']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['placeholder']);
+  }
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(...CLASSNAMES);
-  
+&nbsp;
     // Move the items into the right place
     this._moveItems();
-    
+&nbsp;
     const contentWrapper = this.querySelector('[handle="contentWrapper"]');
-  
+&nbsp;
     // Support cloneNode
     if (contentWrapper) {
       this._elements.contentWrapper = contentWrapper;
-  
+&nbsp;
       ['search', 'result', 'items', 'results', 'resultMessage', 'loading'].forEach((handle) =&gt; {
         this._elements[handle] = this.querySelector(`[handle="${handle}"]`);
       });
       this._items._container = this._elements.items;
-    }
-    else {
+    } else {
       this.appendChild(this._elements.contentWrapper);
     }
   }
-  
+&nbsp;
   /**
    A search result object.
-   
+&nbsp;
    @typedef {Object} ShellHelpResult
-   
+&nbsp;
    @property {String} title
    The title of the search result.
    @property {String} href
@@ -999,12 +1002,12 @@ class ShellHelp extends BaseComponent(HTMLElement) {
    @property {Array.&lt;String&gt;} tags
    A set of tags associated with the search result.
    */
-  
+&nbsp;
   /**
    Triggered when the user submits a search term
-   
+&nbsp;
    @event Coral.Shell.Help#coral-shell-help:search
-   
+&nbsp;
    @param {Object} event
    Event object.
    @param {HTMLElement} event.detail.value
@@ -1020,7 +1023,7 @@ export default ShellHelp;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

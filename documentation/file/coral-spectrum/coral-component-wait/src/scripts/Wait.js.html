@@ -438,9 +438,9 @@ import base from &apos;../templates/base&apos;;
 
 /**
  Enumeration for {@link Wait} variants.
- 
+
  @typedef {Object} WaitVariantEnum
- 
+
  @property {String} DEFAULT
  The default variant.
  @property {String} DOTS
@@ -453,9 +453,9 @@ const variant = {
 
 /**
  Enumeration for {@link Wait} sizes.
- 
+
  @typedef {Object} WaitSizeEnum
- 
+
  @property {String} SMALL
  A small wait indicator.
  @property {String} MEDIUM
@@ -483,15 +483,16 @@ const CLASSNAME = &apos;_coral-CircleLoader&apos;;
 class Wait extends BaseComponent(HTMLElement) {
   constructor() {
     super();
-  
+
     // Prepare templates
     this._elements = {};
     base.call(this._elements);
   }
+
   /**
    The size of the wait indicator. Currently &apos;S&apos; (the default), &apos;M&apos; and &apos;L&apos; are available.
    See {@link WaitSizeEnum}.
-   
+
    @type {String}
    @default WaitSizeEnum.MEDIUM
    @htmlattribute size
@@ -500,6 +501,7 @@ class Wait extends BaseComponent(HTMLElement) {
   get size() {
     return this._size || size.MEDIUM;
   }
+
   set size(value) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) &amp;&amp; value || size.MEDIUM;
@@ -511,7 +513,7 @@ class Wait extends BaseComponent(HTMLElement) {
     // small css change
     this.classList.toggle(`${CLASSNAME}--small`, this._size === size.SMALL);
   }
-  
+
   /**
    Whether the component is centered or not. The container needs to have the style &lt;code&gt;position: relative&lt;/code&gt;
    for the centering to work correctly.
@@ -523,16 +525,17 @@ class Wait extends BaseComponent(HTMLElement) {
   get centered() {
     return this._centered || false;
   }
+
   set centered(value) {
     this._centered = transform.booleanAttr(value);
     this._reflectAttribute(&apos;centered&apos;, this._centered);
-  
+
     this.classList.toggle(`${CLASSNAME}--centered`, this._centered);
   }
-  
+
   /**
    The wait&apos;s variant. See {@link WaitVariantEnum}.
-   
+
    @type {String}
    @default WaitVariantEnum.DEFAULT
    @htmlattribute variant
@@ -541,16 +544,17 @@ class Wait extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.DEFAULT;
     this._reflectAttribute(&apos;variant&apos;, this._variant);
   }
-  
+
   /**
    Whether to hide the current value and show an animation. Set to true for operations whose progress cannot be
    determined.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute indeterminate
@@ -559,34 +563,34 @@ class Wait extends BaseComponent(HTMLElement) {
   get indeterminate() {
     return this._indeterminate || false;
   }
+
   set indeterminate(value) {
     this._indeterminate = transform.booleanAttr(value);
     this._reflectAttribute(&apos;indeterminate&apos;, this._indeterminate);
-    
+
     if (this._indeterminate) {
       this.classList.add(`${CLASSNAME}--indeterminate`);
-      
+
       // ARIA: Remove attributes
       this.removeAttribute(&apos;aria-valuenow&apos;);
       this.removeAttribute(&apos;aria-valuemin&apos;);
       this.removeAttribute(&apos;aria-valuemax&apos;);
-      
+
       this.value = 0;
-    }
-    else {
+    } else {
       this.classList.remove(`${CLASSNAME}--indeterminate`);
-      
+
       // ARIA: Add attributes
       this.setAttribute(&apos;aria-valuemin&apos;, &apos;0&apos;);
       this.setAttribute(&apos;aria-valuemax&apos;, &apos;100&apos;);
-      
+
       this.value = this._oldValue;
     }
   }
-  
+
   /**
    The current progress in percent. If no value is set on initialization, wait is forced into indeterminate state.
-   
+
    @type {Number}
    @default 0
    @emits {coral-wait:change}
@@ -596,116 +600,125 @@ class Wait extends BaseComponent(HTMLElement) {
   get value() {
     return this.hasAttribute(&apos;indeterminate&apos;) ? 0 : this._value || 0;
   }
+
   set value(value) {
     value = transform.number(value) || 0;
-    
+
     // Stay within bounds
     if (value &gt; 100) {
       value = 100;
-    }
-    else if (value &lt; 0) {
+    } else if (value &lt; 0) {
       value = 0;
     }
-    
+
     this._value = value;
     this._reflectAttribute(&apos;value&apos;, this._value);
-  
+
     const subMask1 = this._elements.subMask1;
     const subMask2 = this._elements.subMask2;
-    
+
     if (!this.hasAttribute(&apos;indeterminate&apos;)) {
       let angle;
-      
+
       if (value &gt; 0 &amp;&amp; value &lt;= 50) {
         angle = -180 + value / 50 * 180;
         subMask1.style.transform = `rotate(${angle}deg)`;
         subMask2.style.transform = &apos;rotate(-180deg)&apos;;
-      }
-      else if (value &gt; 50) {
+      } else if (value &gt; 50) {
         angle = -180 + (value - 50) / 50 * 180;
         subMask1.style.transform = &apos;rotate(0deg)&apos;;
         subMask2.style.transform = `rotate(${angle}deg)`;
-      }
-      else {
+      } else {
         subMask1.style.transform = &apos;&apos;;
         subMask2.style.transform = &apos;&apos;;
       }
-  
+
       // ARIA: Reflect value for screenreaders
       this.setAttribute(&apos;aria-valuenow&apos;, this._value);
       this.setAttribute(&apos;aria-valuemin&apos;, &apos;0&apos;);
       this.setAttribute(&apos;aria-valuemax&apos;, &apos;100&apos;);
-    }
-    else {
+    } else {
       subMask1.style.transform = &apos;&apos;;
       subMask2.style.transform = &apos;&apos;;
     }
-    
+
     this.trigger(&apos;coral-wait:change&apos;);
   }
-  
+
   /**
    Returns {@link Wait} sizes.
-   
+
    @return {WaitSizeEnum}
    */
-  static get size() { return size; }
-  
+  static get size() {
+    return size;
+  }
+
   /**
    Returns {@link Wait} variants.
-   
+
    @return {WaitVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;size&apos;, &apos;centered&apos;, &apos;variant&apos;, &apos;value&apos;, &apos;indeterminate&apos;]);
   }
-  
+
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === &apos;indeterminate&apos; &amp;&amp; transform.booleanAttr(value)) {
       // Remember current value in case indeterminate is toggled back
       this._oldValue = this._value || 0;
     }
-    
+
     super.attributeChangedCallback(name, oldValue, value);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // ARIA
     this.setAttribute(&apos;role&apos;, &apos;progressbar&apos;);
-    
+
     // Default reflected attributes
-    if (!this._size) { this.size = size.MEDIUM; }
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-    
+    if (!this._size) {
+      this.size = size.MEDIUM;
+    }
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
+
     // If no value is specified, indeterminate is set
-    if (!this._value) { this.indeterminate = true; }
-    
+    if (!this._value) {
+      this.indeterminate = true;
+    }
+
     // Centering reads the size
-    if (this.centered) { this.centered = this.centered; }
-  
+    if (this.centered) {
+      this.centered = this.centered;
+    }
+
     // Support cloneNode
     const template = this.querySelectorAll(&apos;._coral-CircleLoader-track, ._coral-CircleLoader-fills&apos;);
-    for (let i = 0; i &lt; template.length; i++) {
+    for (let i = 0 ; i &lt; template.length ; i++) {
       template[i].remove();
     }
-  
+
     // Render template
     this.appendChild(this._elements.track);
     this.appendChild(this._elements.fills);
   }
-  
+
   /**
    Triggered when the {@link Wait} value is changed.
-   
+
    @typedef {CustomEvent} coral-wait:change
    */
 }

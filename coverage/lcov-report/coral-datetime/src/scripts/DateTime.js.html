@@ -451,29 +451,7 @@
 <a name='L393'></a><a href='#L393'>393</a>
 <a name='L394'></a><a href='#L394'>394</a>
 <a name='L395'></a><a href='#L395'>395</a>
-<a name='L396'></a><a href='#L396'>396</a>
-<a name='L397'></a><a href='#L397'>397</a>
-<a name='L398'></a><a href='#L398'>398</a>
-<a name='L399'></a><a href='#L399'>399</a>
-<a name='L400'></a><a href='#L400'>400</a>
-<a name='L401'></a><a href='#L401'>401</a>
-<a name='L402'></a><a href='#L402'>402</a>
-<a name='L403'></a><a href='#L403'>403</a>
-<a name='L404'></a><a href='#L404'>404</a>
-<a name='L405'></a><a href='#L405'>405</a>
-<a name='L406'></a><a href='#L406'>406</a>
-<a name='L407'></a><a href='#L407'>407</a>
-<a name='L408'></a><a href='#L408'>408</a>
-<a name='L409'></a><a href='#L409'>409</a>
-<a name='L410'></a><a href='#L410'>410</a>
-<a name='L411'></a><a href='#L411'>411</a>
-<a name='L412'></a><a href='#L412'>412</a>
-<a name='L413'></a><a href='#L413'>413</a>
-<a name='L414'></a><a href='#L414'>414</a>
-<a name='L415'></a><a href='#L415'>415</a>
-<a name='L416'></a><a href='#L416'>416</a>
-<a name='L417'></a><a href='#L417'>417</a>
-<a name='L418'></a><a href='#L418'>418</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L396'></a><a href='#L396'>396</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -866,28 +844,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
@@ -919,392 +875,370 @@ const transform2digit = (value) =&gt; {
 let globalLocale = document.documentElement.lang || window.navigator.language || 'en-US';
 <span class="branch-2 cbranch-no" title="branch not covered" ></span>
 // Uses Intl.DateTimeFormat to return a formatted date string
-const formatDate = functio<span class="fstat-no" title="function not covered" >n(date, loc</span>ale, options) {
+const formatDate = functio<span class="fstat-no" title="function not covered" >n (date, lo</span>cale, options) {
   let formattedDateString = <span class="cstat-no" title="statement not covered" >'';</span>
   try {
 <span class="cstat-no" title="statement not covered" >    const key = `${JSON.stringify(locale)}${JSON.stringify(options)}`;</span>
     const date<span class="cstat-no" title="statement not covered" >TimeFormat = dateTimeFormats[key];</span>
-  <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
     // Use existing DateTimeFormat or create new one
 <span class="cstat-no" title="statement not covered" >    if (!dateTimeFormat) {</span>
 <span class="cstat-no" title="statement not covered" >      dateTimeFormats[key] = new window.Intl.DateTimeFormat(locale, options);</span>
     }
-  
+&nbsp;
     // Format to string
 <span class="cstat-no" title="statement not covered" >    formattedDateString = dateTimeFormats[key].format(date);</span>
+  } catch (e) {
+<span class="cstat-no" title="statement not covered" >    console.warn(e.message);</span>
   }
-  ca<span class="cstat-no" title="statement not covered" >tch (e) {</span>
-    console.warn(e.message);
-  }
-  <span class="cstat-no" title="statement not covered" ></span>
-  return formattedDateString;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return formattedDateString;</span>
 };
 &nbsp;
 /**
  The DateTime API is used as fallback to {@link momentJS}.
- 
+&nbsp;
  @param {DateTime|Date|Array&lt;Number&gt;|String} value
  The initial date value. If none provided, the current day is used instead.
  */
 class DateTime {
   /**
-  @see https://momentjs.com/docs/#/parsing/now/
-  */
-  construct<span class="fstat-no" title="function not covered" >or(value)</span> {
-<span class="cstat-no" title="statement not covered" >    if (value instanceof this.constru</span>ctor) {
-      // Copy properties
-<span class="cstat-no" title="statement not covered" >      this._locale = value._locale;</span>
-      this._value = value._value;
-<span class="cstat-no" title="statement not covered" >      this._date = value._date;</span>
-    }<span class="cstat-no" title="statement not covered" ></span>
-    el<span class="cstat-no" title="statement not covered" >se {</span>
-      this._locale = globalLocale;
+   @see https://momentjs.com/docs/#/parsing/now/
+   */
+  constructor(value) {
+    if (val<span class="fstat-no" title="function not covered" >ue instan</span>ceof this.constructor) {
+<span class="cstat-no" title="statement not covered" >      // Copy properties</span>
+      this._locale = value._locale;
+<span class="cstat-no" title="statement not covered" >      this._value = value._value;</span>
+      this._date = value._date;
+    } <span class="cstat-no" title="statement not covered" >else {</span>
+<span class="cstat-no" title="statement not covered" >      this._locale = globalLocale;</span>
 <span class="cstat-no" title="statement not covered" >      this._value = value;</span>
-      <span class="cstat-no" title="statement not covered" ></span>
-      // Support Array
-<span class="cstat-no" title="statement not covered" >      if (Array.isArray(value)) {</span>
-<span class="cstat-no" title="statement not covered" >        this._date = value.length ? new Date(value[0], value[1] || 0, value[2] || 1) : new Date();</span>
-      }<span class="cstat-no" title="statement not covered" ></span>
-      else if (typeof<span class="cstat-no" title="statement not covered" > value === 'string') {</span>
-        const isTime = value.indexOf(':') === 2;
-  <span class="cstat-no" title="statement not covered" ></span>
-        // For time, <span class="cstat-no" title="statement not covered" >we only need to s</span>et hours and minutes using current date
-        if (isTime) {<span class="cstat-no" title="statement not covered" ></span>
-          const time = v<span class="cstat-no" title="statement not covered" >alue.split(':');</span>
-          const hours = parseInt(time[0], 10);
-<span class="cstat-no" title="statement not covered" >          const minutes = parseInt(time[1], 10);</span>
-    <span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      // Support Array</span>
+<span class="cstat-no" title="statement not covered" >      if (Array.isArray(val</span>ue)) {
+        this._date = value.length ? new Date(value[0], value[1] || 0, value[2] || 1) : new Date();
+<span class="cstat-no" title="statement not covered" >      } else if (typeof value === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >        const isTime = value.indexOf(':') === 2;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+        // For time, <span class="cstat-no" title="statement not covered" >we only need to set hours</span> and minutes using current date
+        if (isTime) {
+<span class="cstat-no" title="statement not covered" >          const time = value.split(':');</span>
+          const hours<span class="cstat-no" title="statement not covered" > = parseInt(time[</span>0], 10);
+          const minute<span class="cstat-no" title="statement not covered" >s = parseInt(time[1], </span>10);
+<span class="cstat-no" title="statement not covered" ></span>
           if (hours &gt;= 0 &amp;&amp; hours &lt;= 23 &amp;&amp; minutes &gt;= 0 &amp;&amp; minutes &lt;= 59) {
 <span class="cstat-no" title="statement not covered" >            this._date = new Date();</span>
-            this._date.setHours(time[0]);
-<span class="cstat-no" title="statement not covered" >            this._date.setMinutes(time[1]);</span>
-          }
-          el<span class="cstat-no" title="statement not covered" >se {</span>
+<span class="cstat-no" title="statement not covered" >            this._date.setHours(time[</span>0]);
+            this._date.setMinutes(time[1]);
+          } <span class="cstat-no" title="statement not covered" >else {</span>
             this._date = new Date('Invalid Date');
-          }
-        }
-        else {
-<span class="cstat-no" title="statement not covered" >          // If string is invalid, the date will be invalid too</span>
+          }<span class="cstat-no" title="statement not covered" ></span>
+        } else {
+          //<span class="cstat-no" title="statement not covered" > If string is invalid, the date will be</span> invalid too
           // "replace" fixes the one day off issue
-          thi<span class="cstat-no" title="statement not covered" >s._date = new Date(this._value.replace(/-/g, '/').replace(/T.+/, ''));</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-      }
-      else if (this._value === null) {
-<span class="cstat-no" title="statement not covered" >        this._date = new Date('Invalid Date');</span>
-      }
-      else {
-        // Create a Date instance from the value or use current day if value is missing
-        this._date = this._value ? new Date(this._value) : new Date();
+          this._date = new Date(this._value.replace(/-/g, '/').replace(/T.+/, ''));
+        }
+      } else if (this._value === null) {
+        th<span class="cstat-no" title="statement not covered" >is._date = new Date('Invalid Date');</span>
+      } else {
+        // Cr<span class="cstat-no" title="statement not covered" >eate a Date instance from the value or use current day if value is missing</span>
+<span class="cstat-no" title="statement not covered" >        this._date = this._value ? new Date(thi</span>s._value) : new Date();
       }
     }
-  }
-  
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
   /**
    @see https://momentjs.com/docs/#/i18n/instance-locale/
-   */<span class="fstat-no" title="function not covered" ></span>
-  loca<span class="cstat-no" title="statement not covered" >le(value) {</span>
-    if (<span class="cstat-no" title="statement not covered" >value) {</span>
+   */
+  locale(value) {
+    if (value) {
       this._locale = value;
     }
-    <span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
     return this._locale;
-  }
-  
-  /**
+  }<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
    @see https://momentjs.com/docs/#/displaying/as-javascript-date/
    */
-  toDate() {
-    return this._dat<span class="fstat-no" title="function not covered" >e;</span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-  
+  toDa<span class="cstat-no" title="statement not covered" >te() {</span>
+    return this._date;
+  }
+&nbsp;
   /**
    @see https://momentjs.com/docs/#/parsing/moment-clone/
    */
   clone() {
-    const clone = new this.constructor(this._value);
-    clone._date = this._date;
-    return clone;<span class="fstat-no" title="function not covered" ></span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-  <span class="cstat-no" title="statement not covered" ></span>
-  /**<span class="cstat-no" title="statement not covered" ></span>
+    const clone = ne<span class="fstat-no" title="function not covered" >w this.</span>constructor(this._value);
+    cl<span class="cstat-no" title="statement not covered" >one._date = this._d</span>ate;
+    return clone;
+  }
+&nbsp;
+  /**
    @see https://momentjs.com/docs/#/displaying/format/
    */
   format(format) {
-    let formattedDateString = '';
-    
-    if (!format) {
-      format = DEFAULT_FORMAT;
-    }<span class="fstat-no" title="function not covered" ></span>
-    <span class="cstat-no" title="statement not covered" ></span>
+    let formattedDat<span class="fstat-no" title="function not covered" >eStrin</span>g = '';
+<span class="cstat-no" title="statement not covered" ></span>
+    if<span class="cstat-no" title="statement not covered" > (!format) {</span>
+<span class="cstat-no" title="statement not covered" >      format = DEFAU</span>LT_FORMAT;
+    }
+&nbsp;
     if (format === DEFAULT_FORMAT) {
-<span class="cstat-no" title="statement not covered" >      formattedDateString += this._date.getFullYear();</span>
-      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += '-';</span>
+      formattedDateString += this._date.getFullYear();
+      formattedDateString += '-';
       formattedDateString += transform2digit(this._date.getMonth() + 1);
       formattedDateString += '-';
-<span class="cstat-no" title="statement not covered" >      formattedDateString += transform2digit(this._date.getDate());</span>
-    }<span class="cstat-no" title="statement not covered" ></span>
-    else<span class="cstat-no" title="statement not covered" > if (format === 'MMMM YYYY')</span> {
-      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += formatDate(this._date, this._locale, {month: '</span>long'});
-      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += ' ';</span>
-      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += this._date.getFullYear();</span>
-    }<span class="cstat-no" title="statement not covered" ></span>
-    else<span class="cstat-no" title="statement not covered" > if (format === 'LL') {</span>
+      formattedDateS<span class="fstat-no" title="function not covered" >tring +</span>= transform2digit(this._date.getDate());
+    } else if (format === 'MMMM <span class="cstat-no" title="statement not covered" >YYY</span>Y') {
+      formattedDateString += formatDate(this._date, this._locale, {month: 'long'});
+<span class="cstat-no" title="statement not covered" >      formattedDateString += ' ';</span>
+      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += this.</span>_date.getFullYear();
+    } else if (format === 'LL') {
       formattedDateString += formatDate(this._date, this._locale, {
-        month: 'long',
+<span class="cstat-no" title="statement not covered" >        month: 'long',</span>
 <span class="cstat-no" title="statement not covered" >        year: 'numeric',</span>
 <span class="cstat-no" title="statement not covered" >        day: '2-digit'</span>
-      });<span class="cstat-no" title="statement not covered" ></span>
-    }<span class="cstat-no" title="statement not covered" ></span>
-    else if (format === 'dd') {
-      formattedDateString += formatDate(this._date, this._locale, {weekday: 'short'});
-    }
-    else if (format === 'dddd') {
-      formatt<span class="cstat-no" title="statement not covered" >edDateString += formatDate(this._date, this._locale, {weekday: 'long'});</span>
-    }<span class="cstat-no" title="statement not covered" ></span>
-    else if (format === 'HH:mm') {
+      })<span class="cstat-no" title="statement not covered" >;</span>
+    } el<span class="cstat-no" title="statement not covered" >se if (format === 'dd') {</span>
+      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += formatDate(this._date, this._locale, {wee</span>kday: 'short'});
+    } else if<span class="cstat-no" title="statement not covered" > (format === 'dddd') {</span>
+      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += formatDate(this._date, this._locale, {weekday: 'long'});</span>
+    } else if (format === 'HH:mm') {
+      formattedDateString += transform2digit(this._date.getHours());
+      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += ':';</span>
+      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += transform2digit(this._date.g</span>etMinutes());
+    } else if<span class="cstat-no" title="statement not covered" > (format === 'HH') {</span>
+      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += transform2digit(this._date.getHours());</span>
+    } else if (format === 'mm') {
+      formattedDateString += transform2digit(this._date.getMinutes());
+    } else if (format === 'YYYY-MM-DD[T]HH:mmZ') {
+      formattedDateString += this._date.getFullYear();
+      formatt<span class="cstat-no" title="statement not covered" >edDateString += '-';</span>
+      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += transform2digit(this._date.getMonth() + 1);</span>
+      formattedDateString += '-';
+      formattedDateString += transform2digit(this._date.getDate());
+<span class="cstat-no" title="statement not covered" ></span>
+      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += 'T';</span>
+&nbsp;
       formattedDateString += transform2digit(this._date.getHours());
       formatt<span class="cstat-no" title="statement not covered" >edDateString += ':';</span>
       fo<span class="cstat-no" title="statement not covered" >rmattedDateString += transform2digit(this._date.getMinutes());</span>
-    }
-    else if (format === 'HH') {
-      formatt<span class="cstat-no" title="statement not covered" >edDateString += transform2digit(this._date.getHours());</span>
-    }<span class="cstat-no" title="statement not covered" ></span>
-    else<span class="cstat-no" title="statement not covered" > if (format === 'mm') {</span>
-      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += transform2digit(this._date.getMinutes());</span>
-    }<span class="cstat-no" title="statement not covered" ></span>
-    else<span class="cstat-no" title="statement not covered" > if (format === 'YYYY-MM-DD[T]HH:mmZ') {</span>
-      formatt<span class="cstat-no" title="statement not covered" >edDateString += this._date.getFullYear();</span>
-      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += '-';</span>
-      formatt<span class="cstat-no" title="statement not covered" >edDateString += transform2digit(this._date.getMonth() + 1);</span>
-      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += '-';</span>
-      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += transfo</span>rm2digit(this._date.getDate());
-      <span class="cstat-no" title="statement not covered" ></span>
-      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += 'T';</span>
-  <span class="cstat-no" title="statement not covered" ></span>
-      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += transfo</span>rm2digit(this._date.getHours());
-      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += ':';</span>
-      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += transfo</span>rm2digit(this._date.getMinutes());
-  <span class="cstat-no" title="statement not covered" ></span>
-      const timezone = <span class="cstat-no" title="statement not covered" >-1 * (this._date.getTimezoneOffset() / 60);</span>
-      let abs = Ma<span class="cstat-no" title="statement not covered" >th.abs(timezone);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+      co<span class="cstat-no" title="statement not covered" >nst timezone = -1 * (this._date.getTimezoneOffset() / 60);</span>
+      let abs<span class="cstat-no" title="statement not covered" > = Math.abs(timezone);</span>
       ab<span class="cstat-no" title="statement not covered" >s = abs &lt; 10 ? `0${abs}` : abs.toString();</span>
-      <span class="cstat-no" title="statement not covered" ></span>
-      formattedDateString += timezone &lt; 0 ? `-${abs}:00` : `+${abs}:00`;
+<span class="cstat-no" title="statement not covered" ></span>
+      fo<span class="cstat-no" title="statement not covered" >rmattedDateString += timezone &lt; 0 ? `-${abs}:00` : `+${abs}:00`;</span>
+    } else {<span class="cstat-no" title="statement not covered" ></span>
+      fo<span class="cstat-no" title="statement not covered" >rmat = typeof format === 'object' ? format : {};</span>
+      fo<span class="cstat-no" title="statement not covered" >rmattedDateString = formatDa</span>te(this._date, this._locale, format);
     }<span class="cstat-no" title="statement not covered" ></span>
-    else<span class="cstat-no" title="statement not covered" > {</span>
-      format = typeof format === 'object' ? format : {};
-      formattedDateString = formatDate(this._date, this._locale, format);
-    }<span class="cstat-no" title="statement not covered" ></span>
-    
-    return formattedDateString;
-  }
-  
-  /**
-   @see https://momentjs.com/docs/#/get-set/year/
-   */
-  year() {<span class="fstat-no" title="function not covered" ></span>
-    re<span class="cstat-no" title="statement not covered" >turn this._date.getFullYear();</span>
-  }
-  
-  /**
-   @see https://momentjs.com/docs/#/get-set/month/
+<span class="cstat-no" title="statement not covered" ></span>
+    retu<span class="cstat-no" title="statement not covered" >rn formattedDateString;</span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
+   @see <span class="cstat-no" title="statement not covered" >https://momentjs.com/docs/#/get-set/year/</span>
+   */<span class="cstat-no" title="statement not covered" ></span>
+  year() {<span class="cstat-no" title="statement not covered" ></span>
+    retu<span class="cstat-no" title="statement not covered" >rn this._date.getFullYear();</span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /**<span class="cstat-no" title="statement not covered" ></span>
+   @see <span class="cstat-no" title="statement not covered" >https://momentjs.com/docs/#/get-set/month/</span>
    */
   month() {
-    return this._date.getMonth();
-  }<span class="fstat-no" title="function not covered" ></span>
-  <span class="cstat-no" title="statement not covered" ></span>
+    re<span class="cstat-no" title="statement not covered" >turn this._date.getMonth();</span>
+  }
+&nbsp;
   /**
    @see https://momentjs.com/docs/#/get-set/week/
    */
   week() {
     // Source : https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php
-    const date = new Date(Date.UTC(this._date.getFullYear(), this._date.getMonth(), this._date.getDate()));
-    const dayNum = date.getUTCDay() || 7;
-    date.setUTCDate(<span class="fstat-no" title="function not covered" >date.</span>getUTCDate() + 4 - dayNum);
+    const date = new<span class="fstat-no" title="function not covered" > Date</span>(Date.UTC(this._date.getFullYear(), this._date.getMonth(), this._date.getDate()));
+    co<span class="cstat-no" title="statement not covered" >nst dayNum = date.getUTCDay() || </span>7;
+    date.setUTCDate(date.getUTCDate() + 4 - dayNum);
     const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
-    return Math.c<span class="cstat-no" title="statement not covered" >eil(((date - yearStart) / 86400000 + 1) / 7);</span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-  <span class="cstat-no" title="statement not covered" ></span>
-  /**<span class="cstat-no" title="statement not covered" ></span>
-   @se<span class="cstat-no" title="statement not covered" >e https://momentjs.com/docs/#/get-set/day/</span>
-   */
-  day(day) {
+    return Math.ceil(((date - yearStart) / 86400000 + 1) / 7);
+  }
+&nbsp;
+  /**
+   @see https://momentjs.com/docs/#/get-set/day/
+   */<span class="fstat-no" title="function not covered" ></span>
+  day(<span class="cstat-no" title="statement not covered" >day) {</span>
     if (typeof day === 'number') {
       this._date.setDate(this._date.getDate() - (this._date.getDay() || 7) + day);
-      
+&nbsp;
       return this;
     }
-    <span class="fstat-no" title="function not covered" ></span>
-    re<span class="cstat-no" title="statement not covered" >turn this._date.getDay();</span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-  
-  /**<span class="cstat-no" title="statement not covered" ></span>
-   @see https://momentjs.com/docs/#/get-set/hour/
-   */
-  hour<span class="cstat-no" title="statement not covered" >s(hours) {</span>
-    if (typeof hours === 'number') {
-      this._date.setHours(hours);
-      
-      return this;
-    }
-    
-    return this._date.getHours();
+&nbsp;
+    return this._date.getDay();
   }<span class="fstat-no" title="function not covered" ></span>
-  <span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
   /**<span class="cstat-no" title="statement not covered" ></span>
-   @see https://momentjs.com/docs/#/get-set/minute/
+   @see https://mom<span class="cstat-no" title="statement not covered" >entjs.com/docs/#/get-s</span>et/hour/
    */<span class="cstat-no" title="statement not covered" ></span>
-  minutes(minutes) {
-    if (typeof minutes === 'number') {
-<span class="cstat-no" title="statement not covered" >      this._date.setMinutes(minutes)</span>;
-  
+  hours(hours) {<span class="cstat-no" title="statement not covered" ></span>
+    if<span class="cstat-no" title="statement not covered" > (typeof hours === 'number') {</span>
+      this._date.setHours(hours);
+&nbsp;
       return this;
     }
-    
+&nbsp;
+    return this._date.getHours();
+  }
+<span class="fstat-no" title="function not covered" ></span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
+   @see <span class="cstat-no" title="statement not covered" >https://momentjs.com/docs/#/get-set/minute/</span>
+   */
+  minute<span class="cstat-no" title="statement not covered" >s(minutes) {</span>
+    if (typeof minutes === 'number') {
+      this._date.setMinutes(minutes);
+<span class="cstat-no" title="statement not covered" ></span>
+      return this;
+    }
+&nbsp;
     return this._date.getMinutes();
   }
-  
-  /**<span class="fstat-no" title="function not covered" ></span>
-   @se<span class="cstat-no" title="statement not covered" >e https://momentjs.com/docs/#/get-set/date/</span>
+&nbsp;
+  /**
+   @see https://mome<span class="fstat-no" title="function not covered" >ntjs.c</span>om/docs/#/get-set/date/
    */<span class="cstat-no" title="statement not covered" ></span>
-  date() {
-    retu<span class="cstat-no" title="statement not covered" >rn this._date</span>.getDate();
-  }
-  
-  /**<span class="cstat-no" title="statement not covered" ></span>
-   @see https://momentjs.com/docs/#/manipulating/add/
+  date()<span class="cstat-no" title="statement not covered" > {</span>
+    return this._date.getDate();
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /**
+   @se<span class="cstat-no" title="statement not covered" >e https://momentjs.com/docs/#/</span>manipulating/add/
    */
   add(value, type) {
     if (type.indexOf('month') === 0) {
       this._date.setMonth(this._date.getMonth() + value);
+    } else if (type.indexOf('day') === 0) {
+      this._date.setDate(this._date.getDate() + value);
     }
-    else if (type.indexOf('day') === 0) {
-      this._date.set<span class="fstat-no" title="function not covered" >Date(</span>this._date.getDate() + value);
-    }<span class="cstat-no" title="statement not covered" ></span>
-    
-    return this;
-  }
-  
-  /**
+<span class="fstat-no" title="function not covered" ></span>
+    re<span class="cstat-no" title="statement not covered" >turn this;</span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /**<span class="cstat-no" title="statement not covered" ></span>
    @see https://momentjs.com/docs/#/manipulating/subtract/
    */
-  subtract(value, ty<span class="fstat-no" title="function not covered" >pe) </span>{
-    if<span class="cstat-no" title="statement not covered" > (type.indexOf('month') === 0) {</span>
-      th<span class="cstat-no" title="statement not covered" >is._date.setMonth(this._date.getMonth() - value);</span>
-    }<span class="cstat-no" title="statement not covered" ></span>
-    else<span class="cstat-no" title="statement not covered" > if (type.indexOf('day') === 0) {</span>
+  subt<span class="cstat-no" title="statement not covered" >ract(value, type) {</span>
+    if (type.indexOf('month') === 0) {
+      this._date.setMonth(this._date.getMonth() - value);
+    } else if (type.indexOf('day') === 0) {
       this._date.setDate(this._date.getDate() - value);
     }
-    <span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
     return this;
-  }
-  
+  }<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
   /**
    @see https://momentjs.com/docs/#/displaying/difference/
    */
   diff(obj) {
-    const diff = thi<span class="fstat-no" title="function not covered" >s._date.g</span>etTime() - obj._date.getTime();
-    <span class="cstat-no" title="statement not covered" ></span>
-    retu<span class="cstat-no" title="statement not covered" >rn diff / 86400000;</span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-  <span class="cstat-no" title="statement not covered" ></span>
-  /**
-   @see https://momentjs.com/docs/#/manipulating/start-of/
+    const diff = this._date.getTime() - obj._date.getTime();
+&nbsp;
+    return diff / 86400000;
+  }<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
+   @see https<span class="cstat-no" title="statement not covered" >://momentjs.com/docs/#/manipulating/start-of/</span>
    */<span class="cstat-no" title="statement not covered" ></span>
   startOf(value) {
     if (value === 'day') {
-      // Today
+<span class="cstat-no" title="statement not covered" >      // Today</span>
       this._date = new Date(this._date.getFullYear(), this._date.getMonth(), this._date.getDate());
-    }
-    else if (value === 'month') {
+    } else if (value === 'month') {
       this._date = new Date(this._date.getFullYear(), this._date.getMonth(), 1);
-    }<span class="fstat-no" title="function not covered" ></span>
-    else if (valu<span class="cstat-no" title="statement not covered" >e === 'year') {</span>
+    } else if (value === 'year') {
       this._date = new Date(new Date().getFullYear(), 0, 1);
-    }<span class="cstat-no" title="statement not covered" ></span>
-    
-    return this;
-  }
-  
-  /**
-   @see https://momentjs.com/docs/#/query/is-before/
-   */
-  isBefore(coralDate<span class="fstat-no" title="function not covered" >, unit) </span>{
-    if<span class="cstat-no" title="statement not covered" > (coralDate &amp;&amp; coralDate._date) {</span>
-      return unit ? coralDate[unit]() &gt; this[unit]() : coralDate._date &gt; this._date;
-    }<span class="cstat-no" title="statement not covered" ></span>
-    <span class="cstat-no" title="statement not covered" ></span>
-    retu<span class="cstat-no" title="statement not covered" >rn false;</span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-  <span class="cstat-no" title="statement not covered" ></span>
-  /**
-   @see https://momentjs.com/docs/#/query/is-after/
-   */<span class="cstat-no" title="statement not covered" ></span>
-  isAfter(coralDate, unit) {
-    if (coralDate &amp;&amp; coralDate._date) {
-      return unit ? coralDate[unit]() &lt; this[unit]() : coralDate._date &lt; this._date;
     }
-    
+&nbsp;
+    return this;<span class="fstat-no" title="function not covered" ></span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
+   @see <span class="cstat-no" title="statement not covered" >https://momentjs.com/docs/#/query/is-before/</span>
+   */
+  isBefore(coralDate, unit) {
+    if<span class="cstat-no" title="statement not covered" > (coralDate &amp;</span>&amp; coralDate._date) {
+      return unit ? coralDate[unit]() &gt; this[unit]() : coralDate._date &gt; this._date;
+    }
+&nbsp;
     return false;
   }
-  <span class="fstat-no" title="function not covered" ></span>
-  /**<span class="cstat-no" title="statement not covered" ></span>
-   @see <span class="cstat-no" title="statement not covered" >https://momentjs.com/docs/#/query/is-same/</span>
-   */
-  isSame(obj, type) {
-    if<span class="cstat-no" title="statement not covered" > (type === 'ho</span>ur') {
-      return obj &amp;&amp; obj.clone()._date.getHours() === this.clone()._date.getHours();
+&nbsp;
+  /**
+   @see https://mome<span class="fstat-no" title="function not covered" >ntjs.</span>com/docs/#/query/is-after/
+   */<span class="cstat-no" title="statement not covered" ></span>
+  isAfter(coralDate, unit) {
+    if<span class="cstat-no" title="statement not covered" > (coralDate &amp;&amp; coralDate</span>._date) {
+      return unit ? coralDate[unit]() &lt; this[unit]() : coralDate._date &lt; this._date;
     }
-    else if (type === 'minute') {
-      return obj &amp;&amp; obj.clone()._date.getMinutes() === this.clone()._date.getMinutes();
-    }
-    else if (type === 'day') {
-      return obj &amp;&amp; obj.clone().startOf('day')._date.getTime() === this.clone().startOf('day')._date.getTime();
-    }<span class="fstat-no" title="function not covered" ></span>
-    <span class="cstat-no" title="statement not covered" ></span>
-    retu<span class="cstat-no" title="statement not covered" >rn obj &amp;&amp; obj.clone()._date.getTime() === this.clone()._date.getTime();</span>
+&nbsp;
+    return false;
   }
-  
-  /**<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /**
+   @see https://mome<span class="fstat-no" title="function not covered" >ntjs.com</span>/docs/#/query/is-same/
+   */<span class="cstat-no" title="statement not covered" ></span>
+  isSame(obj, type) {
+    if (<span class="cstat-no" title="statement not covered" >type === 'hour') {</span>
+      return <span class="cstat-no" title="statement not covered" >obj &amp;&amp; obj.clone()._date.getHours() === this.clone()._date.getHours();</span>
+    } el<span class="cstat-no" title="statement not covered" >se if (type === 'minute') {</span>
+      return <span class="cstat-no" title="statement not covered" >obj &amp;&amp; obj.clone()._date.getMinutes() === this.clone()._date.getMinutes();</span>
+    } el<span class="cstat-no" title="statement not covered" >se if (type === 'day') {</span>
+      return obj &amp;&amp; obj.clone().startOf('day')._date.getTime() === this.clone().startOf('day')._date.getTime();
+    }
+<span class="cstat-no" title="statement not covered" ></span>
+    return obj &amp;&amp; obj.clone()._date.getTime() === this.clone()._date.getTime();
+  }
+&nbsp;
+  /**
    @see https://momentjs.com/docs/#/parsing/is-valid/
    */
   isValid() {
-    return this._date.toString() !== 'Invalid Date';
-  }
-  
-  /**
-   @ignore<span class="fstat-no" title="function not covered" ></span>
-   Not<span class="cstat-no" title="statement not covered" > supported so we return an empty object</span>
-   */<span class="cstat-no" title="statement not covered" ></span>
-  static loca<span class="cstat-no" title="statement not covered" >leData() {</span>
-    retu<span class="cstat-no" title="statement not covered" >rn {};</span>
+    return this._dat<span class="fstat-no" title="function not covered" >e.toStrin</span>g() !== 'Invalid Date';
   }<span class="cstat-no" title="statement not covered" ></span>
-  <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  /**
+   @ignore
+   Not<span class="cstat-no" title="statement not covered" > supported so </span>we return an empty object
+   */
+  static localeData() {
+    return {};
+  }
+&nbsp;
   /**
    @see https://momentjs.com/docs/#/i18n/changing-locale/
-   */<span class="cstat-no" title="statement not covered" ></span>
-  static locale(value) {
-    if (value) {
+   */<span class="fstat-no" title="function not covered" ></span>
+  stat<span class="cstat-no" title="statement not covered" >ic locale(value) {</span>
+    if (<span class="cstat-no" title="statement not covered" >value) {</span>
       globalLocale = value;
     }
-    
+<span class="cstat-no" title="statement not covered" ></span>
     return globalLocale;
   }
-  <span class="fstat-no" title="function not covered" ></span>
-  /**<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /**
    @see https://momentjs.com/docs/#/query/is-a-moment/
    */
   static isMoment(obj) {
-    return obj instanceof this;
-  }
-  
-  /**
-   @return {momentJS|DateTime}
-   */<span class="fstat-no" title="function not covered" ></span>
-  stat<span class="cstat-no" title="statement not covered" >ic get Mome</span>nt() {
+    return obj insta<span class="fstat-no" title="function not covered" >nceof t</span>his;
+  }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
+   @retu<span class="cstat-no" title="statement not covered" >rn {momentJS|DateTime}</span>
+   */<span class="cstat-no" title="statement not covered" ></span>
+  static<span class="cstat-no" title="statement not covered" > get Moment() {</span>
     return window.moment || this;
   }
-}
+}<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
 export default DateTime;
 &nbsp;</pre></td></tr></table></pre>
@@ -1314,7 +1248,7 @@ export default DateTime;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

@@ -214,7 +214,8 @@
 <a name='L156'></a><a href='#L156'>156</a>
 <a name='L157'></a><a href='#L157'>157</a>
 <a name='L158'></a><a href='#L158'>158</a>
-<a name='L159'></a><a href='#L159'>159</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -310,7 +311,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">50x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">50x</span>
@@ -318,7 +318,6 @@
 <span class="cline-any cline-yes">50x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">50x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -371,6 +370,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
@@ -391,9 +393,9 @@ const CLASSNAME = '_coral-CharacterCount';
 &nbsp;
 /**
  Enumeration for {@link CharacterCount} targets.
- 
+&nbsp;
  @typedef {Object} CharacterCountTargetEnum
- 
+&nbsp;
  @property {String} PREVIOUS
  Relates the CharacterCount to the previous sibling.
  @property {String} NEXT
@@ -415,7 +417,7 @@ class CharacterCount extends BaseComponent(HTMLElement) {
   /**
    The target Textfield or Textarea for this component. It accepts values from {@link CharacterCountTargetEnum},
    as well as any DOM element or CSS selector.
-   
+&nbsp;
    @type {HTMLElement|String}
    @default CharacterCountTargetEnum.PREVIOUS
    @htmlattribute target
@@ -423,32 +425,30 @@ class CharacterCount extends BaseComponent(HTMLElement) {
   get target() {
     return this._target || target.PREVIOUS;
   }
+&nbsp;
   set target(value) {
     if (typeof value === 'string' || value instanceof Node) {
       this._target = value;
-  
+&nbsp;
       // Remove previous event listener
       if (this._targetEl) {
         this._targetEl.removeEventListener('input', this._refreshCharCount.bind(this));
       }
-  
+&nbsp;
       // Get the target DOM element
       if (value === target.NEXT) {
         this._targetEl = this.nextElementSibling;
-      }
-      else if (value === target.PREVIOUS) {
+      } else if (value === target.PREVIOUS) {
         this._targetEl = this.previousElementSibling;
-      }
-      else if (typeof value === 'string') {
+      } else if (typeof value === 'string') {
         this._targetEl = document.querySelector(value);
-      }
-      else {
+      } else {
         this._targetEl = value;
       }
-  
+&nbsp;
       if (this._targetEl) {
         this._targetEl.addEventListener('input', this._refreshCharCount.bind(this));
-    
+&nbsp;
         // Try to get maxlength from target element
         if (this._targetEl.getAttribute('maxlength')) {
           this.maxLength = this._targetEl.getAttribute('maxlength');
@@ -456,10 +456,10 @@ class CharacterCount extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+&nbsp;
   /**
    Maximum character length for the TextField/TextArea (will be read from target field markup if able).
-   
+&nbsp;
    @type {Number}
    @default null
    @htmlattribute maxlength
@@ -468,62 +468,65 @@ class CharacterCount extends BaseComponent(HTMLElement) {
   get maxLength() {
     return this._maxLength || null;
   }
+&nbsp;
   set maxLength(value) {
     this._maxLength = transform.number(value);
     this._reflectAttribute('maxlength', this._maxLength);
-    
+&nbsp;
     this._refreshCharCount();
   }
-  
+&nbsp;
   /** @ignore */
   _getCharCount() {
     let elementLength = 0;
     if (this._targetEl &amp;&amp; this._targetEl.value) {
       elementLength = this._targetEl.value.length;
     }
-    
+&nbsp;
     return this._maxLength ? this._maxLength - elementLength : elementLength;
   }
-  
+&nbsp;
   /** @ignore */
   _refreshCharCount() {
     const currentCount = this._getCharCount();
     /** @ignore */
     this.innerHTML = currentCount;
     const isMaxExceeded = currentCount &lt; 0;
-    if (this._targetEl) {
-      <span class="missing-if-branch" title="else path not taken" >E</span>this._targetEl.classList.toggle('<span class="branch-1 cbranch-no" title="branch not covered" >is-invalid', isMaxExce</span>eded);
+    if<span class="missing-if-branch" title="else path not taken" >E</span> (this._targetEl) {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+      this._targetEl.classList.toggle('is-invalid', isMaxExceeded);
       this.classList.toggle('is-invalid', isMaxExceeded);
     }
   }
-  
+&nbsp;
   /**
    Returns {@link CharacterCount} target options.
-   
-   @retu<span class="missing-if-branch" title="if path not taken" >I</span>rn {CharacterCountTargetEnum}
-   */<span class="cstat-no" title="statement not covered" ></span>
-  static get target() { return target; }
-  
-  static get _a<span class="missing-if-branch" title="else path not taken" >E</span>ttributePropertyMap() {
+<span class="missing-if-branch" title="if path not taken" >I</span>
+   @return<span class="cstat-no" title="statement not covered" > {CharacterCountTargetEnum}</span>
+   */
+  static get target() {
+    return targ<span class="missing-if-branch" title="else path not taken" >E</span>et;
+  }
+&nbsp;
+  static g<span class="cstat-no" title="statement not covered" >et _attributePropertyMap</span>() {
     return commons.extend(super._attributePropertyMap, {
       maxlength: 'maxLength'
-    });<span class="cstat-no" title="statement not covered" ></span>
+    });
   }
-  
+&nbsp;
   /** @ignore */
-  static get observedAttributes() {
-    return super.observedAttributes.concat(['target', 'maxlength']);
+  static g<span class="missing-if-branch" title="if path not taken" >I</span>et observedAttributes() {
+    return s<span class="cstat-no" title="statement not covered" >uper.observedAttributes.concat(['target', 'maxlength']);</span>
   }
-  <span class="missing-if-branch" title="if path not taken" >I</span>
-  /** @ignor<span class="cstat-no" title="statement not covered" >e */</span>
+&nbsp;
+  /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME, 'coral-Body--S');
-    
+&nbsp;
     // Set defaults
     this.target = this.target;
-  
+&nbsp;
     // Refresh once connected
     this._refreshCharCount();
   }
@@ -537,7 +540,7 @@ export default CharacterCount;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

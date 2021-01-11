@@ -361,7 +361,21 @@
 <a name='L303'></a><a href='#L303'>303</a>
 <a name='L304'></a><a href='#L304'>304</a>
 <a name='L305'></a><a href='#L305'>305</a>
-<a name='L306'></a><a href='#L306'>306</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L306'></a><a href='#L306'>306</a>
+<a name='L307'></a><a href='#L307'>307</a>
+<a name='L308'></a><a href='#L308'>308</a>
+<a name='L309'></a><a href='#L309'>309</a>
+<a name='L310'></a><a href='#L310'>310</a>
+<a name='L311'></a><a href='#L311'>311</a>
+<a name='L312'></a><a href='#L312'>312</a>
+<a name='L313'></a><a href='#L313'>313</a>
+<a name='L314'></a><a href='#L314'>314</a>
+<a name='L315'></a><a href='#L315'>315</a>
+<a name='L316'></a><a href='#L316'>316</a>
+<a name='L317'></a><a href='#L317'>317</a>
+<a name='L318'></a><a href='#L318'>318</a>
+<a name='L319'></a><a href='#L319'>319</a>
+<a name='L320'></a><a href='#L320'>320</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -469,7 +483,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">96x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -599,7 +612,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -607,7 +619,6 @@
 <span class="cline-any cline-yes">78x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">78x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -627,7 +638,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">80x</span>
 <span class="cline-any cline-yes">80x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -662,11 +672,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">80x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4788x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -684,9 +712,9 @@ import {transform, validate} from '../../../coral-utils';
 &nbsp;
 /**
  Enumeration for {@link Alert} variants.
- 
+&nbsp;
  @typedef {Object} AlertVariantEnum
- 
+&nbsp;
  @property {String} ERROR
  An alert with a warning icon to indicate that an error has occurred.
  @property {String} WARNING
@@ -708,9 +736,9 @@ const variant = {
 &nbsp;
 /**
  Enumeration for {@link Alert} sizes.
- 
+&nbsp;
  @typedef {Object} AlertSizeEnum
- 
+&nbsp;
  @property {String} SMALL
  A small alert, usually employed for single line alerts without headers.
  @property {String} LARGE
@@ -745,7 +773,7 @@ class Alert extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
@@ -753,16 +781,16 @@ class Alert extends BaseComponent(HTMLElement) {
       content: this.querySelector('coral-alert-content') || document.createElement('coral-alert-content'),
       footer: this.querySelector('coral-alert-footer') || document.createElement('coral-alert-footer')
     };
-    
+&nbsp;
     // Events
     this._delegateEvents({
       'click [coral-close]': '_onCloseClick'
     });
   }
-  
+&nbsp;
   /**
    The alert variant style to use. See {@link AlertVariantEnum}.
-   
+&nbsp;
    @type {String}
    @default AlertVariantEnum.INFO
    @htmlattribute variant
@@ -771,13 +799,14 @@ class Alert extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.INFO;
   }
+&nbsp;
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.INFO;
     this._reflectAttribute('variant', this._variant);
-    
+&nbsp;
     this._insertTemplate();
-    
+&nbsp;
     // Remove all variant classes
     this.classList.remove(...ALL_VARIANT_CLASSES);
 &nbsp;
@@ -786,10 +815,10 @@ class Alert extends BaseComponent(HTMLElement) {
     // This lets popover get our styles for free
     this.classList.add(`${CLASSNAME}--${this._variant}`);
   }
-  
+&nbsp;
   /**
    The size of the alert. It accepts both lower and upper case sizes. See {@link AlertVariantEnum}.
-   
+&nbsp;
    @type {String}
    @default AlertSizeEnum.SMALL
    @htmlattribute size
@@ -798,74 +827,78 @@ class Alert extends BaseComponent(HTMLElement) {
   get size() {
     return this._size || size.SMALL;
   }
+&nbsp;
   set size(value) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) &amp;&amp; value || size.SMALL;
     this._reflectAttribute('size', this._size);
   }
-  
+&nbsp;
   /**
    The alert header element.
-   
+&nbsp;
    @type {AlertHeader}
    @contentzone
    */
   get header() {
     return this._getContentZone(this._elements.header);
   }
+&nbsp;
   set header(value) {
     this._setContentZone('header', value, {
       handle: 'header',
       tagName: 'coral-alert-header',
-      insert: function(header) {
+      insert: function (header) {
         header.classList.add(`${CLASSNAME}-header`);
         this.insertBefore(header, this.firstChild);
       }
     });
   }
-  
+&nbsp;
   /**
    The alert content element.
-   
+&nbsp;
    @type {AlertContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+&nbsp;
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-alert-content',
-      insert: function(content) {
+      insert: function (content) {
         content.classList.add(`${CLASSNAME}-content`);
         // After the header
         this.insertBefore(content, this.header.nextElementSibling);
       }
     });
   }
-  
+&nbsp;
   /**
    The alert footer element.
-   
+&nbsp;
    @type {AlertFooter}
    @contentzone
    */
   get footer() {
     return this._getContentZone(this._elements.footer);
   }
+&nbsp;
   set footer(value) {
     this._setContentZone('footer', value, {
       handle: 'footer',
       tagName: 'coral-alert-footer',
-      insert: function(footer) {
+      insert: function (footer) {
         footer.classList.add(`${CLASSNAME}-footer`);
         // After the content
         this.insertBefore(footer, this.content.nextElementSibling);
       }
     });
   }
-  
+&nbsp;
   /**
    @ignore
    @todo maybe this should be base or something
@@ -873,70 +906,80 @@ class Alert extends BaseComponent(HTMLElement) {
   _onCloseClick(event) {
     const dismissTarget = event.matchedTarget;
     const dismissValue = dismissTarget.getAttribute('coral-close');
-    if (!dismissValue || this.matches(dismissValue)) {
+    if (!dismissValue || this.matches(dismissValue)) {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
       this.hidden = true;
       event.stopPropagation();
     }
-  
+&nbsp;
     this._trackEvent('close', 'coral-alert', event);
-  }<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-  
+  }
+&nbsp;
   _insertTemplate() {
     if (this._elements.icon) {
       this._elements.icon.remove();
     }
-  
+&nbsp;
     let variantValue = this.variant;
-    
+&nbsp;
     // Warning icon is same as ERROR icon
     if (variantValue === variant.WARNING || variantValue === variant.ERROR) {
       variantValue = 'alert';
     }
-    
+&nbsp;
     // Inject the SVG icon
     const iconName = capitalize(variantValue);
     this.insertAdjacentHTML('afterbegin', Icon._renderSVG(`spectrum-css-icon-${iconName}Medium`, ['_coral-Alert-icon', `_coral-UIIcon-${iconName}Medium`]));
     this._elements.icon = this.querySelector('._coral-Alert-icon');
   }
-  
+&nbsp;
   get _contentZones() {
     return {
       'coral-alert-header': 'header',
-      'coral-alert-content': 'content',
+      'coral-alert-content': 'content',<span class="branch-2 cbranch-no" title="branch not covered" ></span>
       'coral-alert-footer': 'footer'
     };
   }
-  
+&nbsp;
   /**
    Returns {@link Alert} variants.
-   <span class="branch-2 cbranch-no" title="branch not covered" ></span>
+&nbsp;
    @return {AlertVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+&nbsp;
   /**
    Returns {@link Alert} sizes.
-   
+&nbsp;
    @return {AlertSizeEnum}
    */
-  static get size() { return size; }
-  
+  static get size() {
+    return size;
+  }
+&nbsp;
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['variant', 'size']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['variant', 'size']);
+  }
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-    
+&nbsp;
     // a11y
     this.setAttribute('role', 'alert');
-    
+&nbsp;
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.INFO; }
-    if (!this._size) { this.size = size.SMALL; }
-    
+    if (!this._variant) {
+      this.variant = variant.INFO;
+    }
+    if (!this._size) {
+      this.size = size.SMALL;
+    }
+&nbsp;
     for (const contentZone in this._contentZones) {
       const element = this._elements[this._contentZones[contentZone]];
       // Remove it so we can process children
@@ -944,26 +987,25 @@ class Alert extends BaseComponent(HTMLElement) {
         element.parentNode.removeChild(element);
       }
     }
-    
+&nbsp;
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
         child.nodeType === Node.ELEMENT_NODE &amp;&amp; !child.classList.contains('_coral-Alert-icon')) {
         // Add non-template elements to the content
         this._elements.content.appendChild(child);
-      }
-      else {
+      } else {
         // Remove anything else element
         this.removeChild(child);
       }
     }
-    
+&nbsp;
     this._insertTemplate();
-  
+&nbsp;
     // Assign the content zones so the insert functions will be called
     for (const contentZone in this._contentZones) {
       const contentZoneName = this._contentZones[contentZone];
-      
+&nbsp;
       /** @ignore */
       this[contentZoneName] = this._elements[contentZoneName];
     }
@@ -978,7 +1020,7 @@ export default Alert;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

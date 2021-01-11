@@ -451,10 +451,11 @@ class ShellMenu extends Popover {
     // Force &apos;coral-shell&apos;
     return document.querySelector(&apos;coral-shell&apos;) || &apos;coral-shell&apos;;
   }
+
   set within(value) {
     super.within = value;
   }
-  
+
   /**
    Inherited from {@link Popover#placement}.
    */
@@ -462,13 +463,14 @@ class ShellMenu extends Popover {
     // Force bottom placement
     return this.constructor.placement.BOTTOM;
   }
+
   set placement(value) {
     super.placement = value;
   }
-  
+
   /**
    Whether the overlay should use all available space.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute full
@@ -477,24 +479,25 @@ class ShellMenu extends Popover {
   get full() {
     return this._full || false;
   }
+
   set full(value) {
     this._full = transform.booleanAttr(value);
     this._reflectAttribute(&apos;full&apos;, this._full);
-  
+
     this.classList.toggle(`${CLASSNAME}--full`, this._full);
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;full&apos;]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     this.trigger(&apos;coral-shell-menu:_connected&apos;);
   }
 }

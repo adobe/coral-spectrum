@@ -125,17 +125,17 @@
   /**
    MIT License
    Copyright (c) 2018 Juan Valencia
-   
+
    Permission is hereby granted, free of charge, to any person obtaining a copy
    of this software and associated documentation files (the "Software"), to deal
    in the Software without restriction, including without limitation the rights
    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
    copies of the Software, and to permit persons to whom the Software is
    furnished to do so, subject to the following conditions:
-   
+
    The above copyright notice and this permission notice shall be included in all
    copies or substantial portions of the Software.
-   
+
    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -6340,7 +6340,7 @@
   /**
    Converts CSS time to milliseconds. It supports both s and ms units. If the provided value has an unrecogenized unit,
    zero will be returned.
-   
+
    @private
    @param {String} time
    The time string to convert to milliseconds.
@@ -6366,7 +6366,7 @@
   }
   /**
    @private
-   
+
    @param first
    @param second
    @return {Function}
@@ -6387,12 +6387,12 @@
   }
   /**
    Check if the provided object is a function
-   
+
    @ignore
-   
+
    @param {*} object
    The object to test
-   
+
    @returns {Boolean} Whether the provided object is a function.
    */
 
@@ -6447,8 +6447,7 @@
      - <code>[data-coral-icons-external]</code>: Whether SVG icons are always referenced as external resource. Possible values are "on" (default), "off" or "js" to load icons from a script.
      - <code>[data-coral-typekit]</code>: custom typekit id used to load the fonts.
      - <code>[data-coral-logging]</code>: defines logging level. Possible values are "on" (default) or "off".
-     
-     @returns {Object}
+      @returns {Object}
      The global options object.
      */
 
@@ -6458,8 +6457,7 @@
 
       /**
        Utility function for logging.
-       
-       @param {String} level
+        @param {String} level
        Logging level
        @param {String} args
        Logging message
@@ -6475,13 +6473,11 @@
       }
       /**
        Copy the properties from all provided objects into the first object.
-       
-       @param {Object} dest
+        @param {Object} dest
        The object to copy properties to
        @param {...Object} source
        An object to copy properties from. Additional objects can be passed as subsequent arguments.
-       
-       @returns {Object}
+        @returns {Object}
        The destination object, <code>dest</code>
        */
 
@@ -6503,16 +6499,14 @@
       /**
        Copy the properties from the source object to the destination object, but calls the callback if the property is
        already present on the destination object.
-       
-       @param {Object} dest
+        @param {Object} dest
        The object to copy properties to
        @param {...Object} source
        An object to copy properties from. Additional objects can be passed as subsequent arguments.
        @param {CommonsHandleCollision} [handleCollision]
        Called if the property being copied is already present on the destination.
        The return value will be used as the property value.
-       
-       @returns {Object}
+        @returns {Object}
        The destination object, <code>dest</code>
        */
 
@@ -6554,11 +6548,9 @@
       }
       /**
        Return a new object with the swapped keys and values of the provided object.
-       
-       @param {Object} obj
+        @param {Object} obj
        The object to copy.
-       
-       @returns {Object}
+        @returns {Object}
        An object with its keys as the values and values as the keys of the source object.
        */
 
@@ -6575,8 +6567,7 @@
       }
       /**
        Execute the provided callback on the next animation frame.
-       
-       @param {Function} onNextFrame
+        @param {Function} onNextFrame
        The callback to execute.
        */
 
@@ -6658,8 +6649,7 @@
       }
       /**
        Register a Coral component as Custom Element V1
-       
-       @param {String} name
+        @param {String} name
        Custom element namespace
        @param {Function} constructor
        Constructor for the custom element
@@ -6675,13 +6665,11 @@
       }
       /**
        Checks if Coral components and all nested Coral components are defined as Custom Elements.
-       
-       @param {HTMLElement} element
+        @param {HTMLElement} element
        The element that should be watched.
        @param {CommonsReadyCallback} onDefined
        The callback to call when all components are ready.
-       
-       @see https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements
+        @see https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements
        */
 
     }, {
@@ -6740,15 +6728,13 @@
       }
       /**
        Assign an object given a nested path
-       
-       @param {Object} root
+        @param {Object} root
        The root object on which the path should be traversed.
        @param {String} path
        The path at which the object should be assignment.
        @param {String} obj
        The object to assign at path.
-       
-       @throws Will throw an error if the path is not present on the object.
+        @throws Will throw an error if the path is not present on the object.
        */
 
     }, {
@@ -6779,16 +6765,13 @@
       }
       /**
        Get the value of the property at the given nested path.
-       
-       @param {Object} root
+        @param {Object} root
        The root object on which the path should be traversed.
        @param {String} path
        The path of the sub-property to return.
-       
-       @returns {*}
+        @returns {*}
        The value of the provided property.
-       
-       @throws Will throw an error if the path is not present on the object.
+        @throws Will throw an error if the path is not present on the object.
        */
 
     }, {
@@ -6817,8 +6800,7 @@
       }
       /**
        Apply a mixin to the given object.
-       
-       @param {Object} target
+        @param {Object} target
        The object to apply the mixin to.
        @param {Object|Function} mixin
        The mixin to apply.
@@ -6841,10 +6823,8 @@
       }
       /**
        Mix a set of mixins to a target object.
-       
-       @private
-       
-       @param {Object} target
+        @private
+        @param {Object} target
        The target prototype or instance on which to apply mixins.
        @param {Object|CoralMixin|Array<Object|CoralMixin>} mixins
        A mixin or set of mixins to apply.
@@ -6865,8 +6845,7 @@
       }
       /**
        Get a unique ID.
-       
-       @returns {String} unique identifier.
+        @returns {String} unique identifier.
        */
 
     }, {
@@ -6876,14 +6855,12 @@
       }
       /**
        Call all of the provided functions, in order, returning the return value of the specified function.
-       
-       @param {...Function} func
+        @param {...Function} func
        A function to call
        @param {Number} [nth=0]
        A zero-based index indicating the noth argument to return the value of.
        If the nth argument is not a function, <code>null</code> will be returned.
-       
-       @returns {Function} The aggregate function.
+        @returns {Function} The aggregate function.
        */
 
     }, {
@@ -6940,8 +6917,7 @@
       }
       /**
        Adds a resize listener to the given element.
-       
-       @param {HTMLElement} element
+        @param {HTMLElement} element
        The element to add the resize event to.
        @param {Function} onResize
        The resize callback.
@@ -6963,8 +6939,7 @@
       }
       /**
        Removes a resize listener from the given element.
-       
-       @param {HTMLElement} element
+        @param {HTMLElement} element
        The element to remove the resize event from.
        @param {Function} onResize
        The resize callback.
@@ -6992,8 +6967,7 @@
       }
       /**
        Caution: the selector doesn't verify if elements are visible.
-       
-       @type {String}
+        @type {String}
        @readonly
        @see https://www.w3.org/TR/html5/editing.html#focus-management
        */
@@ -7020,8 +6994,7 @@
       }
       /**
        Caution: the selector doesn't verify if elements are visible.
-       
-       @type {String}
+        @type {String}
        @readonly
        @see https://www.w3.org/TR/html5/editing.html#sequential-focus-navigation-and-the-tabindex-attribute
        */
@@ -7037,9 +7010,9 @@
   }();
   /**
    Called when a property already exists on the destination object.
-   
+
    @typedef {function} CommonsHandleCollision
-   
+
    @param {*} oldValue
    The value currently present on the destination object.
    @param {*} newValue
@@ -7050,15 +7023,15 @@
    The destination object.
    @param {*} source
    The source object.
-   
+
    @returns {*} The value to use. If <code>undefined</code>, the old value will be used.
    */
 
   /**
    Execute the callback once a CSS transition has ended.
-   
+
    @typedef {function} CommonsTransitionEndCallback
-   
+
    @param event
    The event passed to the callback.
    @param {HTMLElement} event.target
@@ -7071,7 +7044,7 @@
 
   /**
    Execute the callback once a component and sub-components are ready. See {@link Commons.ready}.
-   
+
    @typedef {function} CommonsReadyCallback
    @param {HTMLElement} element
    The element that is ready.
@@ -7079,11 +7052,11 @@
 
   /**
    A functional mixin.
-   
+
    @typedef {Object} CoralMixin
-   
+
    @private
-   
+
    @param {Object} target
    The target prototype or instance to apply the mixin to.
    @param {Object} options
@@ -7094,7 +7067,7 @@
 
   /**
    A utility belt.
-   
+
    @type {Commons}
    */
 
@@ -7117,8 +7090,7 @@
     }
     /**
      Add an event listener.
-    
-     @param {String} eventName
+      @param {String} eventName
      The event name to listen for, including optional namespace(s).
      @param {String} [selector]
      The selector to use for event delegation.
@@ -7139,8 +7111,7 @@
       }
       /**
        Remove an event listener.
-       
-       @param {String} [eventName]
+        @param {String} [eventName]
        The event name to stop listening for, including optional namespace(s).
        @param {String} [selector]
        The selector that was used for event delegation.
@@ -7160,8 +7131,7 @@
       }
       /**
        Dispatch a custom event at the root element.
-       
-       @param {String} eventName
+        @param {String} eventName
        The name of the event to dispatch.
        @param {Object} [options]
        CustomEvent options.
@@ -7194,7 +7164,7 @@
   }();
   /**
    An enhanced event helper.
-   
+
    @type {Events}
    */
 
@@ -7294,9 +7264,9 @@
 
   /**
    Enumeration for {@link i18n} locales.
-   
+
    @typedef {Object} I18nLocalesEnum
-   
+
    @property {String} en
    English (U.S.)
    @property {String} en-us
@@ -7422,7 +7392,7 @@
   };
   /**
    Used to store i18n strings.
-   
+
    @type {Object}
    @property {String} strings.generic
    */
@@ -7456,8 +7426,7 @@
     }
     /**
      Sets a localized string.
-     
-     @param {String} key the key to set
+      @param {String} key the key to set
      @param {String} value the value associated with the given key.
      @example
      Coral.i18n.set('English string', 'Translated string');
@@ -7469,8 +7438,7 @@
 
     /**
      Sets multiple localized strings.
-     
-     @param {Array<String, String>} map  a key-value map to add to the strings dictionary.
+      @param {Array<String, String>} map  a key-value map to add to the strings dictionary.
      @example
      Coral.i18n.set([
      ['English string 1', 'Translated string 1'],
@@ -7488,8 +7456,7 @@
 
     /**
      Sets a localized string, using translation hint.
-     
-     @param {String} key the key to set
+      @param {String} key the key to set
      @param {String} value the value associated with the given key.
      @param {String} translation_hint the translation hint associated with the given key.
      @example
@@ -7507,8 +7474,7 @@
 
     /**
      Sets multiple localized strings, using translation hints.
-     
-     @param {Array<String, String, String>} map
+      @param {Array<String, String, String>} map
      A key-value object map to add to the strings dictionary.
      @example
      Coral.i18n.set([
@@ -7591,8 +7557,7 @@
       }
       /**
        Gets a localized string, using named arguments, and translation hint.
-       
-       @param {String} key the key of the string to retrieve
+        @param {String} key the key of the string to retrieve
        @param {Object} args one more named arguments
        @param {String} translation_hint context information for translators
        @returns {String} the localized string with arguments
@@ -7605,8 +7570,7 @@
 
       /**
        Gets a localized string, using arguments, and translation hint.
-       
-       @param {String} key the key of the string to retrieve
+        @param {String} key the key of the string to retrieve
        @param {String} args one more arguments
        @param {String} translation_hint context information for translators
        @returns {String} the localized string with arguments
@@ -7619,8 +7583,7 @@
 
       /**
        Gets a localized string, using translation hint.
-       
-       @param {String} key the key of the string to retrieve
+        @param {String} key the key of the string to retrieve
        @param {String} translation_hint context information for translators
        @returns {String} the localized string
        @example
@@ -7630,8 +7593,7 @@
 
       /**
        Gets a localized string, using named arguments.
-       
-       @param {String} key the key of the string to retrieve
+        @param {String} key the key of the string to retrieve
        @param {Object} args one more named arguments
        @returns {String} the localized string with arguments
        @example
@@ -7641,8 +7603,7 @@
 
       /**
        Gets a localized string, using arguments.
-       
-       @param {String} key the key of the string to retrieve
+        @param {String} key the key of the string to retrieve
        @param {String} args one more arguments
        @returns {String} the localized string with arguments
        @example
@@ -7652,8 +7613,7 @@
 
       /**
        Gets a localized string.
-       
-       @param {String} key the key of the string to retrieve
+        @param {String} key the key of the string to retrieve
        @returns {String} the localized string
        @example
        Coral.i18n.get('English string'); // => 'Translated String'
@@ -7767,7 +7727,7 @@
   var locale = locales[docLang] || 'en-US';
   /**
    An i18n service.
-   
+
    @type {I18nProvider}
    */
 
@@ -7888,7 +7848,7 @@
   var needsContextRE = /^[\x20\t\r\n\f]*[>+~]/;
   /**
    The set of tags to ignore hot keys when focused within for the default filter.
-   
+
    @ignore
    */
 
@@ -7935,9 +7895,9 @@
   }
   /**
    Convert a key to its character code representation.
-   
+
    @ignore
-   
+
    @param key
    @return {*|Number}
    */
@@ -8088,10 +8048,8 @@
       }
       /**
        Reset the state of this instance. This resets the currently pressed keys.
-       
-       @function reset
-       
-       @returns {Keys} this, chainable.
+        @function reset
+        @returns {Keys} this, chainable.
        */
 
     }, {
@@ -8284,8 +8242,7 @@
       }
       /**
        Add a key combo listener.
-       
-       @function on
+        @function on
        @param {String} keyCombo
        The key combination to listen for, such as <code>'ctrl-f'</code>.
        @param {String} [selector]
@@ -8295,8 +8252,7 @@
        @param {Function} listener
        The listener to execute when this key combination is pressed. Executes on keydown, or, if too many keys are
        pressed and one is released, resulting in the correct key combination, executes on keyup.
-       
-       @returns {Keys} this, chainable.
+        @returns {Keys} this, chainable.
        */
 
     }, {
@@ -8420,16 +8376,14 @@
       }
       /**
        Remove a key combo listener.
-       
-       @function off
+        @function off
        @param {String} keyCombo
        The key combination to listen for, such as <code>'ctrl-f'</code>.
        @param {String} [selector]
        A selector to use for event delegation.
        @param {Function} listener
        The listener that was passed to on.
-       
-       @returns {Keys} this, chainable.
+        @returns {Keys} this, chainable.
        */
 
     }, {
@@ -8486,12 +8440,10 @@
       }
       /**
        Destroy this instance. This removes all event listeners, references, and state.
-       
-       @function destroy
+        @function destroy
        @param {Boolean} globalsOnly
        Whether only global listeners should be removed
-       
-       @returns {Keys} this, chainable.
+        @returns {Keys} this, chainable.
        */
 
     }, {
@@ -8512,12 +8464,10 @@
       /**
        Initialize an instance created without the <code>new</code> keyword or revive a destroyed instance. This method
        will be called automatically if an instance is created with <code>new Coral.keys</code>.
-       
-       @function init
+        @function init
        @param {Boolean} globalsOnly
        Whether only global listeners should be added
-       
-       @returns {Keys} this, chainable.
+        @returns {Keys} this, chainable.
        */
 
     }, {
@@ -8545,11 +8495,9 @@
       }
       /**
        The default keycombo event filter function. Ignores key combos triggered on input, select, and textarea.
-       
-       @param event
+        @param event
        The event passed
-       
-       @returns {Boolean} True, if event.target is not editable and event.target.tagname is not restricted
+        @returns {Boolean} True, if event.target is not editable and event.target.tagname is not restricted
        */
 
     }, {
@@ -8585,12 +8533,10 @@
       }
       /**
        Convert a key to its character code representation.
-       
-       @param {String} key
+        @param {String} key
        The key character that needs to be converted. If the String contains more than one character, an error will be
        produced.
-       
-       @returns {Number} The character code of the given String.
+        @returns {Number} The character code of the given String.
        */
 
     }, {
@@ -8615,7 +8561,7 @@
   }();
   /**
    A key listener for global hotkeys is exposed for document eventing handling.
-   
+
    @type {Keys}
    */
   // Register against the documentElement, <html>, so event delegation works
@@ -8652,11 +8598,9 @@
 
       /**
        Transform the provided value into a boolean. Follows the behavior of JavaScript thruty/falsy.
-       
-       @param {*} value
+        @param {*} value
        The value to convert to Boolean.
-       
-       @returns {Boolean} The corresponding boolean value.
+        @returns {Boolean} The corresponding boolean value.
        */
       value: function boolean(value) {
         return !!value;
@@ -8665,11 +8609,9 @@
        Transform the provided value into a boolean. Follows the behavior of the HTML specification, in which the existence of
        the attribute indicates <code>true</code> regardless of the attribute's value. If the value is a boolean, it ignores
        the transformation.
-       
-       @param {*} value
+        @param {*} value
        The value to convert to Boolean.
-       
-       @returns {Boolean} The corresponding boolean value.
+        @returns {Boolean} The corresponding boolean value.
        */
 
     }, {
@@ -8679,11 +8621,9 @@
       }
       /**
        Transforms the provided value into a floating point number.
-       
-       @param {*} value
+        @param {*} value
        The value to convert to a Number.
-       
-       @returns {?Number} The corresponding number or <code>null</code> if the passed value cannot be converted to a number.
+        @returns {?Number} The corresponding number or <code>null</code> if the passed value cannot be converted to a number.
        */
 
     }, {
@@ -8695,11 +8635,9 @@
       /**
        Transforms the provided value into a floating number. The conversion is strict in the sense that if non numeric values
        are detected, <code>null</code> is returned instead.
-       
-       @param {*} value
+        @param {*} value
        The value to be converted to a Number.
-       
-       @retuns {?Number} The corresponding number or <code>null</code> if the passed value cannot be converted to number.
+        @retuns {?Number} The corresponding number or <code>null</code> if the passed value cannot be converted to number.
        */
 
     }, {
@@ -8714,11 +8652,9 @@
       /**
        Transform the provided value into a string. When given <code>null</code> or <code>undefined</code> it will be
        converted to an empty string("").
-       
-       @param {*} value
+        @param {*} value
        The value to convert to String.
-       
-       @returns {String} The corresponding string value.
+        @returns {String} The corresponding string value.
        */
 
     }, {
@@ -8736,7 +8672,7 @@
   }();
   /**
    A type transform utility.
-   
+
    @type {Transformation}
    */
 
@@ -8757,13 +8693,11 @@
 
       /**
        Ensures that the value has changed.
-       
-       @param {*} newValue
+        @param {*} newValue
        The new value.
        @param {*} oldValue
        The existing value.
-       
-       @returns {Boolean} <code>true</code> if the values are different.
+        @returns {Boolean} <code>true</code> if the values are different.
        */
       value: function valueMustChange(newValue, oldValue) {
         // We can use exact equality here as validation functions are called after transform. Thus, the input value will be
@@ -8773,15 +8707,13 @@
       /**
        Ensures that the new value is within the enumeration. The enumeration can be given as an array of values or as a
        key/value Object. Take into consideration that enumerations are case sensitive.
-       
-       @example // Enumeration as Array
+        @example // Enumeration as Array
        Coral.validate.enumeration(['xs', 's', 'm', 'l']);
        @example // Enumeration as Object
        Coral.validate.enumeration({EXTRA_SMALL : 'xs', SMALL : 's', MEDIUM : 'm', LARGE : 'l'});
        @param {Object} enumeration
        Object that represents an enum.
-       
-       @returns {ValidationFunction}
+        @returns {ValidationFunction}
        a validation function that ensures that the given value is within the enumeration.
        */
 
@@ -8802,20 +8734,20 @@
   /**
    Signature of the function used to validate new input. It accepts a newValue and an oldValue which are used to
    determine if the newValue is valid.
-   
+
    @typedef {function} ValidationFunction
-   
+
    @param {*} newValue
    The new value to validate.
    @param {*} oldValue
    The existing value.
-   
+
    @returns {Boolean} <code>true</code> if the validation succeeded, otherwise <code>false</code>.
    */
 
   /**
    A property transform utility.
-   
+
    @type {Validation}
    */
 
@@ -8837,14 +8769,14 @@
   /**
    Signature function used to track the usage of Coral components. By default, there is no out of the box
    implementation as tracking is agnostic of the underlying technology.
-   
+
    You need to implement a new tracker and add it with: <code>Coral.tracking.addListener(fn(){ });</code>
-   
+
    The <code>fn()</code> callback will receive multiple arguments:
    * <code>trackData</code> - an object with fixed structure e.g. <code>{type: "button", eventType: "click", element: "save settings", feature: "sites"}</code>
    * <code>event</code> - the CustomEvent or MouseEvent details object.
    * <code>component</code> - the component reference object.
-   
+
    Using the above data you can map it to your own analytics tracker.
    */
   var Tracking = /*#__PURE__*/function () {
@@ -8854,15 +8786,13 @@
 
       /**
        All registered trackers.
-       
-       @type {Array<Function>}
+        @type {Array<Function>}
        */
       this._trackers = [];
     }
     /**
      Returns <code>true</code> if the tracking is disabled for the given component, otherwise false.
-     
-     @param {HTMLElement} component
+      @param {HTMLElement} component
      @returns {Boolean}
      */
 
@@ -8874,8 +8804,7 @@
       }
       /**
        Get tracking annotations from the parent Component to which the event was bound.
-       
-       @param {BaseComponent} component
+        @param {BaseComponent} component
        @returns {{trackingElement: String, trackingElement: String}}
        */
 
@@ -8900,8 +8829,7 @@
       }
       /**
        Returns a tracking data object that can be used to compile data to send to an actual Analytics tracker.
-       
-       @param {String} eventType
+        @param {String} eventType
        @param {String} targetType
        @param {CustomEvent} event
        @param {BaseComponent} component
@@ -8934,8 +8862,7 @@
       }
       /**
        Add a tracking callback. This will be invoked every time a tracking event is emitted.
-       
-       @param {TrackingCallback} trackingCallback
+        @param {TrackingCallback} trackingCallback
        The callback to execute.
        */
 
@@ -8954,8 +8881,7 @@
       }
       /**
        Removes a tracker.
-       
-       @param {TrackingCallback} trackingCallback
+        @param {TrackingCallback} trackingCallback
        */
 
     }, {
@@ -8967,8 +8893,7 @@
       }
       /**
        Notify all trackers subscribed.
-       
-       @param {String} eventType
+        @param {String} eventType
        Eg. click, select, etc.
        @param {String} targetType
        Eg. cycle button, cycle button item, etc.
@@ -9003,9 +8928,9 @@
   /**
    Executes the callback when ever there is an interaction inside the component that needs to be tracked. This can be used
    to get insight on how users interact with the page and the features that available.
-   
+
    @typedef {function} TrackingCallback
-   
+
    @param {Object} trackData
    Object containing the data to be tracked. It contains the properties <code>type</code>, <code>eventType</code>,
    <code>element</code> and <code>feature</code>.
@@ -9017,7 +8942,7 @@
 
   /**
    Tracking API to get insight on component usage.
-   
+
    @type {Tracking}
    */
 
@@ -9029,7 +8954,7 @@
   var ELEMENT_NODE = Node.ELEMENT_NODE;
   /**
    Return the method corresponding to the method name or the function, if passed.
-   
+
    @ignore
    */
 
@@ -9074,7 +8999,7 @@
   Component.prototype._properties = {};
   /**
    Return this component's name.
-   
+
    @ignore
    */
 
@@ -9088,7 +9013,7 @@
   /**
    Events map. Key is Backbone-style event description, value is string indicating method name or function. Handlers
    are always called with <code>this</code> as the element.
-   
+
    @type {Object}
    @protected
    */
@@ -9098,7 +9023,7 @@
   /**
    Called when the component is being constructed. This method applies the CSS class, renders the component, binds
    events, and sets initial property values.
-   
+
    {@link Component#_initialize} is called after the above operations are complete.
    @protected
    */
@@ -9242,9 +9167,9 @@
   };
   /**
    Detects when items are added and removed to make sure that the state of the content zone is accurate.
-   
+
    @param {Array.<MutationRecord>} records
-   
+
    @private
    */
 
@@ -9296,7 +9221,7 @@
   };
   /**
    Called after the element has been constructed, template rendered, and attributes applied.
-   
+
    @function _initialize
    @protected
    @memberof Component#
@@ -9304,7 +9229,7 @@
 
   /**
    The CSS class name to apply to the element.
-   
+
    @type {String}
    @member _className
    @protected
@@ -9313,7 +9238,7 @@
 
   /**
    Called during construction, is responsible for rendering any required sub-elements.
-   
+
    @function _render
    @protected
    @memberof Component#
@@ -9322,7 +9247,7 @@
   /**
    The filter function for keyboard events. By default, any child element can trigger keyboard events. You can pass
    {@link Coral.Keys.filterInputs} to avoid listening to key events triggered from within inputs.
-   
+
    @function _filterKeys
    @protected
    @memberof Component#
@@ -9334,7 +9259,7 @@
   };
   /**
    Called when this element is inserted into the DOM.
-   
+
    @fires Component#coral-component:attached
    @private
    */
@@ -9347,7 +9272,7 @@
   };
   /**
    Called when this element is removed from the DOM.
-   
+
    @fires Component#coral-component:detached
    @private
    */
@@ -9361,7 +9286,7 @@
   /**
    Apply attribute changes by invoking setters. This creates a one-way relationship between attributes and properties.
    Changing an attribute updates the property, but changing the property does not update the attribute.
-   
+
    @private
    */
 
@@ -9401,7 +9326,7 @@
   /**
    Queue a DOM sync for the next animation frame. In order for this to work as expected, sync methods should never
    rely on the result of another value being synced.
-   
+
    @protected
    */
 
@@ -9431,12 +9356,12 @@
   };
   /**
    Sync the specified property to the DOM.
-   
+
    @param {String} propName
    The name of the property to sync.
    @param {Boolean} [leaveInQueue=false]
    Whether the property should be left in the queue.
-   
+
    @protected
    */
 
@@ -9461,7 +9386,7 @@
   };
   /**
    Sync all changed properties to the DOM.
-   
+
    @protected
    */
 
@@ -9478,9 +9403,9 @@
   };
   /**
    Add local event and key combo listeners for this component, store global event/key combo listeners for later.
-   
+
    @private
-   
+
    @returns {Component} this, chainable.
    */
 
@@ -9609,9 +9534,9 @@
   };
   /**
    Remove global event listeners for this component.
-   
+
    @private
-   
+
    @returns {Component} this, chainable.
    */
 
@@ -9643,9 +9568,9 @@
   };
   /**
    Add global event listeners for this component.
-   
+
    @private
-   
+
    @returns {Component} this, chainable.
    */
 
@@ -9677,7 +9602,7 @@
   };
   /**
    Add an event listener.
-   
+
    @param {String} eventName
    The event name to listen for.
    @param {String} [selector]
@@ -9686,7 +9611,7 @@
    The function that will be called when the event is triggered.
    @param {Boolean} [useCapture=false]
    Whether or not to listen during the capturing or bubbling phase.
-   
+
    @returns {Component} this, chainable.
    */
 
@@ -9698,7 +9623,7 @@
   };
   /**
    Remove an event listener.
-   
+
    @param {String} eventName
    The event name to stop listening for.
    @param {String} [selector]
@@ -9707,7 +9632,7 @@
    The function that was passed to <code>on()</code>.
    @param {Boolean} [useCapture]
    Only remove listeners with <code>useCapture</code> set to the value passed in.
-   
+
    @returns {Component} this, chainable.
    */
 
@@ -9719,7 +9644,7 @@
   };
   /**
    Trigger an event.
-   
+
    @param {String} eventName
    The event name to trigger.
    @param {Object} [props]
@@ -9728,7 +9653,7 @@
    Set to <code>false</code> to prevent the event from bubbling.
    @param {Boolean} [cancelable=true]
    Set to <code>false</code> to prevent the event from being cancelable.
-   
+
    @returns {CustomEvent} CustomEvent object
    */
 
@@ -9821,31 +9746,31 @@
   };
   /**
    Set a single property.
-   
+
    @name Component#set
    @function
-   
+
    @param {String} property
    The name of the property to set.
    @param {*} value
    The value to set the property to.
    @param {Boolean} silent
    If true, events should not be triggered as a result of this set.
-   
+
    @returns {Component} this, chainable.
    */
 
   /**
    Set multiple properties.
-   
+
    @name Component#set
    @function
-   
+
    @param {Object.<String, *>} properties
    An object of property/value pairs to set.
    @param {Boolean} silent
    If true, events should not be triggered as a result of this set.
-   
+
    @returns {Component} this, chainable.
    */
 
@@ -9876,10 +9801,10 @@
   };
   /**
    Get the value of a property.
-   
+
    @param {String} property
    The name of the property to fetch the value of.
-   
+
    @returns {*} Property value.
    */
 
@@ -9889,7 +9814,7 @@
   };
   /**
    Show this component.
-   
+
    @returns {Component} this, chainable
    */
 
@@ -9904,7 +9829,7 @@
   };
   /**
    Hide this component.
-   
+
    @returns {Component} this, chainable
    */
 
@@ -9940,7 +9865,7 @@
    */
   /**
    A property descriptor.
-   
+
    @typedef {Object} Coral~PropertyDescriptor
    @property {Function} [transform=null]
    The value transformation function. Values passed to setters will be ran through this function first.
@@ -10109,7 +10034,7 @@
   /**
    Create and store the methods back to the property descriptor, then store the descriptor on the prototype.
    This enables overriding descriptor parts.
-   
+
    @ignore
    */
 
@@ -10165,10 +10090,10 @@
   }
   /**
    Create a generic getter.
-   
+
    @param {String} propName
    The property name whose getter should be invoked.
-   
+
    @ignore
    */
 
@@ -10181,12 +10106,12 @@
   }
   /**
    Create a genertic setter.
-   
+
    @param {String} propName
    The name of the property.
-   
+
    @alias register.makeSetter
-   
+
    @returns {Function} The setter function.
    */
 
@@ -10240,8 +10165,7 @@
     var tempVarName = '_' + propName;
     /**
      Gets the corresponding underscore prefixed "private" property by the same name.
-     
-     @function Coral~defaultGet
+      @function Coral~defaultGet
      @returns The prefixed property
      */
 
@@ -10254,8 +10178,7 @@
     var tempVarName = '_' + propName;
     /**
      Sets the corresponding underscore prefixed "private" property by the same name.
-     
-     @param {*} value  The value to set
+      @param {*} value  The value to set
      @function Coral~defaultSet
      */
 
@@ -10265,12 +10188,12 @@
   }
   /**
    Define a set of {@link Coral~PropertyDescriptors} on the passed object
-   
+
    @param {Object} proto
    The object to define properties on, usually a prototype.
    @param {Object.<String, Coral~PropertyDescriptor>} properties
    A map of property names to their corresponding descriptors.
-   
+
    @alias register.defineProperties
    */
 
@@ -10288,14 +10211,14 @@
   }
   /**
    Define a single {@link Coral~PropertyDescriptors} on the passed object
-   
+
    @param {Object} proto
    The object to define properties on, usually a prototype.
    @param {String} propName
    The name of the property.
    @param {Coral~PropertyDescriptor} descriptor
    A property descriptor
-   
+
    @alias register.defineProperty
    */
 
@@ -10343,10 +10266,10 @@
   }
   /**
    Register a Coral component, setting up inheritance, mixins, properties, and the associated custom element.
-   
+
    @memberof Coral
    @static
-   
+
    @param {Object} options
    Component options.
    @param {Object} options.namespace
@@ -10522,7 +10445,7 @@
    Augment a set of property descriptors with another set.
    The <code>dest</code> property descriptors map is modified in place.
    The individual property descriptors (values of <code>dest</code>) are not modified.
-   
+
    @param {Object<String,Coral~PropertyDescriptor>} dest
    The set of property descriptors to agument.
    @param {Object<String,Coral~PropertyDescriptor>} source
@@ -10601,7 +10524,7 @@
    This factory should be used when you need the property of an sub-object to be set or queued for sync when a local
    property changes.
    This is especially useful for setting the innerHTML or other properties of sub-elements.
-   
+
    @param {Coral~PropertyDescriptor} descriptor
    The property descriptor
    @param {String} path
@@ -10609,7 +10532,7 @@
    to the <code>innerHTML</code> of the element with the handle <code>header</code>
    @param {Boolean} [needsDOMSync=false]
    Whether the property set should happen asynchronously on the next animation frame.
-   
+
    @returns {Function} The descriptor factory.
    */
 
@@ -10665,13 +10588,13 @@
   };
   /**
    A factory that creates descriptor factories that proxy a local property/attribute to a sub-element's attribute.
-   
+
    This is useful when you want to proxy a property/attrubute to a sub-element as an attribute set/removal.
    For instance, you may want to proxy the <code>aria-labelledby</code> property of a field component to the actual
    input inside of the component for accessibility purposes.
-   
+
    When using this property factory, be sure to specify a property name not implemented by the browser already.
-   
+
    @param {Coral~PropertyDescriptor} descriptor
    The property descriptor.
    @param {String} descriptor.attribute
@@ -10707,7 +10630,7 @@
   };
   /**
    A factory that creates descriptor factories for content zones.
-   
+
    @param {Coral~PropertyDescriptor} descriptor
    The property descriptor.
    @param {String} descriptor.handle
@@ -10825,9 +10748,9 @@
   var delegateEventSplitter$1 = /^(\S+)\s*(.*)$/;
   /**
    Enumeration representing the tracking options.
-   
+
    @typedef {Object} TrackingEnum
-   
+
    @property {String} ON
    Enables tracking of the component interactions.
    @property {String} OFF
@@ -11171,8 +11094,7 @@
       /**
        Tracking of events. This provides insight on the usage of the components. It accepts "ON" and "OFF". In order to
        successfully track the events, {Tracking} needs to be configured.
-       
-       @type {String}
+        @type {String}
        @default TrackingEnum.ON
        @htmlattribute tracking
        */
@@ -11290,13 +11212,11 @@
         /**
          Notifies external listeners about an internal interaction. This method is used internally in every
          component's method that we want to track.
-         
-         @param {String} eventType The event type. Eg. click, select, etc.
+          @param {String} eventType The event type. Eg. click, select, etc.
          @param {String} targetType The element type being used. Eg. cyclebutton, cyclebuttonitem, etc.
          @param {CustomEvent} event
          @param {BaseComponent} childComponent - Optional, in case the event occurred on a child component.
-         
-         @returns {BaseComponent}
+          @returns {BaseComponent}
          */
 
       }, {
@@ -11310,8 +11230,7 @@
         }
         /**
          Returns the component name.
-         
-         @return {String}
+          @return {String}
          */
 
       }, {
@@ -11321,7 +11240,7 @@
         }
         /**
          Add an event listener.
-           @param {String} eventName
+          @param {String} eventName
          The event name to listen for.
          @param {String} [selector]
          The selector to use for event delegation.
@@ -11341,8 +11260,7 @@
         }
         /**
          Remove an event listener.
-         
-         @param {String} eventName
+          @param {String} eventName
          The event name to stop listening for.
          @param {String} [selector]
          The selector that was used for event delegation.
@@ -11362,8 +11280,7 @@
         }
         /**
          Trigger an event.
-         
-         @param {String} eventName
+          @param {String} eventName
          The event name to trigger.
          @param {Object} [props]
          Additional properties to make available to handlers as <code>event.detail</code>.
@@ -11423,13 +11340,11 @@
         }
         /**
          Set multiple properties.
-         
-         @param {Object.<String, *>} properties
+          @param {Object.<String, *>} properties
          An object of property/value pairs to set.
          @param {Boolean} silent
          If true, events should not be triggered as a result of this set.
-         
-         @returns {BaseComponent} this, chainable.
+          @returns {BaseComponent} this, chainable.
          */
 
       }, {
@@ -11490,8 +11405,7 @@
         }
         /**
          Get the value of a property.
-         
-         @param {String} property
+          @param {String} property
          The name of the property to fetch the value of.
          @returns {*} Property value.
          */
@@ -11503,8 +11417,7 @@
         }
         /**
          Show this component.
-         
-         @returns {BaseComponent} this, chainable
+          @returns {BaseComponent} this, chainable
          */
 
       }, {
@@ -11537,9 +11450,20 @@
           return this;
         }
         /**
+         * checks whether connectedCallback needs to be executed or not ,skip if component is not in connected state
+         * or connectedCallback already executed for the component or we are ignore the connectedCallback for some reason
+         *
+         * @returns {Boolean} return true for skipped cases
+         */
+
+      }, {
+        key: "_skipConnectedCallback",
+        value: function _skipConnectedCallback() {
+          return !this.isConnected || this._disconnected === false || this._ignoreConnectedCallback === true;
+        }
+        /**
          Returns {@link BaseComponent} tracking options.
-         
-         @return {TrackingEnum}
+          @return {TrackingEnum}
          */
 
       }, {
@@ -11563,8 +11487,9 @@
           // A component that is reattached should respond to global events again
           if (this._disconnected) {
             delegateGlobalEvents.call(this);
-            this._disconnected = false;
           }
+
+          this._disconnected = false;
 
           if (!this._rendered) {
             this.render();
@@ -11598,8 +11523,7 @@
         /**
          The string representing the feature being tracked. This provides additional context to the analytics trackers
          about the feature that the element enables.
-         
-         @type {String}
+          @type {String}
          @default ""
          @htmlattribute trackingfeature
          */
@@ -11615,8 +11539,7 @@
         /**
          The string representing the element name being tracked. This providex additional context to the trackers about the
          element that was interacted with.
-         
-         @type {String}
+          @type {String}
          @default ""
          @htmlattribute trackingelement
          */
@@ -11709,8 +11632,7 @@
       }
       /**
        Whether this field is disabled or not.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute disabled
        @htmlattributereflected
@@ -11719,8 +11641,7 @@
 
       /**
        Whether the current value of this field is invalid or not.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute invalid
        @htmlattributereflected
@@ -11729,8 +11650,7 @@
 
       /**
        Name used to submit the data in a form.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute name
        @htmlattributereflected
@@ -11740,8 +11660,7 @@
       /**
        Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
        This is ignored for checkbox, radio or fileupload.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute readonly
        @htmlattributereflected
@@ -11750,8 +11669,7 @@
 
       /**
        Whether this field is required or not.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute required
        @htmlattributereflected
@@ -11760,8 +11678,7 @@
 
       /**
        This field's current value.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute value
        @abstract
@@ -11769,8 +11686,7 @@
 
       /**
        Whether the current value of this field is invalid or not.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute invalid
        @htmlattributereflected
@@ -11934,8 +11850,7 @@
         }
         /**
          Reflects the <code>aria-describedby</code> attribute to the labellable element e.g. inner input.
-         
-         @type {String}
+          @type {String}
          @default null
          @htmlattribute describedby
          */
@@ -11952,8 +11867,7 @@
         }
         /**
          Reflects the <code>aria-label</code> attribute to the labellable element e.g. inner input.
-         
-         @type {String}
+          @type {String}
          @default null
          @htmlattribute labelled
          */
@@ -12075,9 +11989,9 @@
 
   /**
    Enumeration for {@link Textfield} variants.
-   
+
    @typedef {Object} TextfieldVariantEnum
-   
+
    @property {String} DEFAULT
    A default textfield.
    @property {String} QUIET
@@ -12127,8 +12041,7 @@
     }
     /**
      The textfield's variant. See {@link TextfieldVariantEnum}.
-     
-     @type {String}
+      @type {String}
      @default TextfieldVariantEnum.DEFAULT
      @htmlattribute variant
      @htmlattributereflected
@@ -12170,8 +12083,7 @@
       }
       /**
        Returns {@link Textfield} variants.
-       
-       @return {TextfieldVariantEnum}
+        @return {TextfieldVariantEnum}
        */
 
     }], [{
@@ -12990,7 +12902,7 @@
   };
   /**
    Regex used to match URLs. Assume it's a URL if it has a slash, colon, or dot.
-   
+
    @ignore
    */
 
@@ -12998,42 +12910,42 @@
   var URL_REGEX = /\/|:|\./g;
   /**
    Regex used to match unresolved templates e.g. for data-binding
-   
+
    @ignore
    */
 
   var TEMPLATE_REGEX = /.*\{\{.+\}\}.*/g;
   /**
    Regex used to split camel case icon names into more screen-reader friendly alt text.
-   
+
    @ignore
    */
 
   var SPLIT_CAMELCASE_REGEX = /([a-z])([A-Z0-9])/g;
   /**
    Regex used to match the sized spectrum icon prefix
-   
+
    @ignore
    */
 
   var SPECTRUM_ICONS_IDENTIFIER_REGEX = /^spectrum(?:-css)?-icon(?:-\d{1,3})?-/gi;
   /**
    Regex used match the variant postfix for an icon
-   
+
    @ignore
    */
 
   var ICONS_VARIANT_POSTFIX_REGEX = /(Outline)?(Filled)?(Small|Medium|Large)?(Color)?_?(Active|Dark|Light)?$/;
   /**
    Translation hint used for localizing default alt text for an icon
-   
+
    @ignore
    */
 
   var ICON_ALT_TRANSLATION_HINT = 'default icon alt text';
   /**
    Returns capitalized string. This is used to map the icons with their SVG counterpart.
-   
+
    @ignore
    @param {String} s
    @return {String}
@@ -13044,9 +12956,9 @@
   };
   /**
    Enumeration for {@link Icon} sizes.
-   
+
    @typedef {Object} IconSizeEnum
-   
+
    @property {String} EXTRA_EXTRA_SMALL
    Extra extra small size icon, typically 9px size.
    @property {String} EXTRA_SMALL
@@ -13075,9 +12987,9 @@
   };
   /**
    Enumeration for {@link Icon} autoAriaLabel value.
-   
+
    @typedef {Object} IconAutoAriaLabelEnum
-   
+
    @property {String} ON
    The aria-label attribute is automatically set based on the icon name.
    @property {String} OFF
@@ -13133,8 +13045,7 @@
     }
     /**
      Whether aria-label is set automatically. See {@link IconAutoAriaLabelEnum}.
-     
-     @type {String}
+      @type {String}
      @default IconAutoAriaLabelEnum.OFF
      */
 
@@ -13205,8 +13116,7 @@
       }
       /**
        Updates the aria-label or img alt attribute depending on value of alt, title, icon and autoAriaLabel.
-       
-       In cases where the alt attribute has been removed or set to an empty string,
+        In cases where the alt attribute has been removed or set to an empty string,
        for example, when the alt property is undefined and we add the attribute alt=''
        to explicitly override the default behavior, or when we remove an alt attribute
        thus restoring the default behavior, we make sure to update the alt text.
@@ -13218,7 +13128,7 @@
       value: function _updateAltText(value) {
         var hasAutoAriaLabel = this.autoAriaLabel === autoAriaLabel.ON;
         var img = this._elements.image;
-        var isImage = this.contains(img); // alt should be prioritized over title   
+        var isImage = this.contains(img); // alt should be prioritized over title
 
         var altText = typeof this.alt === 'string' ? this.alt : this.title;
 
@@ -13257,8 +13167,7 @@
       }
       /**
        Whether SVG icons are referenced as external resource (on/off)
-       
-       @return {String}
+        @return {String}
        */
 
     }, {
@@ -13319,8 +13228,7 @@
       }
       /**
        Icon name.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute icon
        @htmlattributereflected
@@ -13382,8 +13290,7 @@
       }
       /**
        Size of the icon. It accepts both lower and upper case sizes. See {@link IconSizeEnum}.
-       
-       @type {String}
+        @type {String}
        @default IconSizeEnum.SMALL
        @htmlattribute size
        @htmlattributereflected
@@ -13444,8 +13351,7 @@
       }
       /**
        Returns the SVG markup.
-       
-       @param {String} iconId
+        @param {String} iconId
        @param {Array.<String>} additionalClasses
        @return {String}
        */
@@ -13474,8 +13380,7 @@
       }
       /**
        Returns {@link Icon} sizes.
-       
-       @return {IconSizeEnum}
+        @return {IconSizeEnum}
        */
 
     }, {
@@ -13483,8 +13388,7 @@
 
       /**
        Loads the SVG icons. It's requesting the icons based on the JS file path by default.
-       
-       @param {String} [url] SVG icons url.
+        @param {String} [url] SVG icons url.
        */
       value: function load(url) {
         var resolveIconsPath = function resolveIconsPath(iconsPath) {
@@ -13514,8 +13418,7 @@
       }
       /**
        Returns {@link Icon} autoAriaLabel options.
-       
-       @return {IconAutoAriaLabelEnum}
+        @return {IconAutoAriaLabelEnum}
        */
 
     }, {
@@ -14546,9 +14449,9 @@
 
   /**
    Enumeration for {@link Button}, {@link AnchorButton} icon sizes.
-   
+
    @typedef {Object} ButtonIconSizeEnum
-   
+
    @property {String} EXTRA_EXTRA_SMALL
    Extra extra small size icon, typically 9px size.
    @property {String} EXTRA_SMALL
@@ -14570,9 +14473,9 @@
   }
   /**
    Enumeration for {@link Button}, {@link AnchorButton} variants.
-   
+
    @typedef {Object} ButtonVariantEnum
-   
+
    @property {String} CTA
    A button that is meant to grab the user's attention.
    @property {String} PRIMARY
@@ -14636,9 +14539,9 @@
   };
   /**
    Enumeration for {@link BaseButton} sizes.
-   
+
    @typedef {Object} ButtonSizeEnum
-   
+
    @property {String} MEDIUM
    A medium button is the default, normal sized button.
    @property {String} LARGE
@@ -14651,9 +14554,9 @@
   };
   /**
    Enumeration for {@link BaseButton} icon position options.
-   
+
    @typedef {Object} ButtonIconPositionEnum
-   
+
    @property {String} RIGHT
    Position should be right of the button label.
    @property {String} LEFT
@@ -14850,18 +14753,14 @@
         }
         /**
          Triggered when {@link BaseButton#selected} changed.
-         
-         @typedef {CustomEvent} coral-button:_selectedchanged
-         
-         @private
+          @typedef {CustomEvent} coral-button:_selectedchanged
+          @private
          */
 
         /**
          Triggered when {@link BaseButton#value} changed.
-         
-         @typedef {CustomEvent} coral-button:_valuechanged
-         
-         @private
+          @typedef {CustomEvent} coral-button:_valuechanged
+          @private
          */
 
       }, {
@@ -14894,8 +14793,7 @@
          Position of the icon relative to the label. If no <code>iconPosition</code> is provided, it will be set on the
          left side by default.
          See {@link ButtonIconPositionEnum}.
-         
-         @type {String}
+          @type {String}
          @default ButtonIconPositionEnum.LEFT
          @htmlattribute iconposition
          @htmlattributereflected
@@ -14916,8 +14814,7 @@
         }
         /**
          Specifies the icon name used inside the button. See {@link Icon} for valid icon names.
-         
-         @type {String}
+          @type {String}
          @default ""
          @htmlattribute icon
          */
@@ -14938,8 +14835,7 @@
         }
         /**
          Size of the icon. It accepts both lower and upper case sizes. See {@link ButtonIconSizeEnum}.
-         
-         @type {String}
+          @type {String}
          @default ButtonIconSizeEnum.SMALL
          @htmlattribute iconsize
          */
@@ -14963,8 +14859,7 @@
         }
         /**
          Whether aria-label is set automatically. See {@link IconAutoAriaLabelEnum}.
-         
-         @type {String}
+          @type {String}
          @default IconAutoAriaLabelEnum.OFF
          @htmlattribute autoarialabel
          */
@@ -14989,8 +14884,7 @@
         /**
          The size of the button. It accepts both lower and upper case sizes. See {@link ButtonSizeEnum}.
          Currently only "MEDIUM" is supported.
-         
-         @type {String}
+          @type {String}
          @default ButtonSizeEnum.MEDIUM
          @htmlattribute size
          @htmlattributereflected
@@ -15009,8 +14903,7 @@
         }
         /**
          Whether the button is selected.
-         
-         @type {Boolean}
+          @type {Boolean}
          @default false
          @htmlattribute selected
          @htmlattributereflected
@@ -15044,8 +14937,7 @@
         }
         /**
          Expands the button to the full width of the parent.
-         
-         @type {Boolean}
+          @type {Boolean}
          @default false
          @htmlattribute block
          @htmlattributereflected
@@ -15065,8 +14957,7 @@
         }
         /**
          The button's variant. See {@link ButtonVariantEnum}.
-         
-         @type {String}
+          @type {String}
          @default ButtonVariantEnum.DEFAULT
          @htmlattribute variant
          @htmlattributereflected
@@ -15132,8 +15023,7 @@
         }
         /**
          Returns {@link BaseButton} sizes.
-         
-         @return {ButtonSizeEnum}
+          @return {ButtonSizeEnum}
          */
 
       }], [{
@@ -15143,8 +15033,7 @@
         }
         /**
          Returns {@link BaseButton} variants.
-         
-         @return {ButtonVariantEnum}
+          @return {ButtonVariantEnum}
          */
 
       }, {
@@ -15154,8 +15043,7 @@
         }
         /**
          Returns {@link BaseButton} icon positions.
-         
-         @return {ButtonIconPositionEnum}
+          @return {ButtonIconPositionEnum}
          */
 
       }, {
@@ -15165,8 +15053,7 @@
         }
         /**
          Returns {@link BaseButton} icon sizes.
-         
-         @return {ButtonIconSizeEnum}
+          @return {ButtonIconSizeEnum}
          */
 
       }, {
@@ -15270,9 +15157,9 @@
   var CLASSNAME$3 = '_coral-Textfield';
   /**
    Enumeration for {@link Textarea} variants.
-   
+
    @typedef {Object} TextareaVariantEnum
-   
+
    @property {String} DEFAULT
    A default textarea.
    @property {String} QUIET
@@ -15322,8 +15209,7 @@
     }
     /**
      The textarea's variant. See {@link TextareaVariantEnum}.
-     
-     @type {String}
+      @type {String}
      @default TextareaVariantEnum.DEFAULT
      @htmlattribute variant
      @htmlattributereflected
@@ -15360,8 +15246,7 @@
       }
       /**
        Returns {@link Textarea} variants.
-       
-       @return {TextareaVariantEnum}
+        @return {TextareaVariantEnum}
        */
 
     }, {
@@ -15555,21 +15440,21 @@
 
   /**
    Unique id used to idenfity the collection.
-   
+
    @private
    */
 
   var nextID$1 = 0;
   /**
    Attribute used to identify the items of a collection.
-   
+
    @private
    */
 
   var COLLECTION_ID = 'coral-collection-id-';
   /**
    Selector used to determine if nested items should be allowed.
-   
+
    @private
    */
 
@@ -15582,14 +15467,14 @@
   /**
    Helper function used to determine if the item should be filtered. If the filter is <code>undefined</code>, then the
    item will pass the filter.
-   
+
    @param {HTMLElement} item
    The item that should be filtered.
    @param {Function} filter
    Function used to filter the item
-   
+
    @returns {Boolean} true if the item passes the filter, otherwise false.
-   
+
    @private
    */
 
@@ -15676,8 +15561,7 @@
     }
     /**
      Number of items inside the Collection.
-     
-     @type {Number}
+      @type {Number}
      @default 0
      */
 
@@ -15689,16 +15573,13 @@
        Adds an item to the Collection. The item can be either a <code>HTMLElement</code> or an Object with the item
        properties. If the index is not provided the element appended to the end. If <code>options.onItemAdded</code> was
        provided, it will be called after the element is added from the DOM.
-       
-       @param {HTMLElement|Object} item
+        @param {HTMLElement|Object} item
        The item to add to the Collection.
        @param {HTMLElement} [insertBefore]
        Existing item used as a reference to insert the new item before. If the value is <code>null</code>, then the new
        item will be added at the end.
-       
-       @emits {coral-collection:add}
-       
-       @returns {HTMLElement} the item added.
+        @emits {coral-collection:add}
+        @returns {HTMLElement} the item added.
        */
       value: function add(item, insertBefore) {
         // container and itemtagname are the minimum options that need to be provided to automatically handle this function
@@ -15729,8 +15610,7 @@
       }
       /**
        Removes all the items from the Collection.
-       
-       @returns {Array.<HTMLElement>} an Array with all the removed items.
+        @returns {Array.<HTMLElement>} an Array with all the removed items.
        */
 
     }, {
@@ -15747,8 +15627,7 @@
       }
       /**
        Returns an array with all the items inside the Collection. Each element is of type <code>HTMLElement</code>.
-       
-       @returns {Array.<HTMLElement>} an Array with all the items inside the collection.
+        @returns {Array.<HTMLElement>} an Array with all the items inside the collection.
        */
 
     }, {
@@ -15772,13 +15651,10 @@
       /**
        Removes the given item from the Collection. If <code>options.onItemRemoved</code> was provided, it will be called
        after the element is removed from the DOM.
-       
-       @param {HTMLElement} item
+        @param {HTMLElement} item
        The item to add to the Collection.
-       
-       @emits {coral-collection:remove}
-       
-       @returns {HTMLElement} the item removed.
+        @emits {coral-collection:remove}
+        @returns {HTMLElement} the item removed.
        */
 
     }, {
@@ -15796,8 +15672,7 @@
       }
       /**
        Returns the first item of the collection.
-       
-       @returns {?HTMLElement} the first item of the collection.
+        @returns {?HTMLElement} the first item of the collection.
        */
 
     }, {
@@ -15808,8 +15683,7 @@
       }
       /**
        Returns the last item of the collection.
-       
-       @returns {?HTMLElement} the last item of the collection.
+        @returns {?HTMLElement} the last item of the collection.
        */
 
     }, {
@@ -15822,13 +15696,10 @@
       /**
        Checks if the given Node belongs to the current collection. It is said that a Node belongs to a given collection
        if it passes <code>options.filter</code> and it matches <code>options.itemSelector</code>.
-       
-       @param {Node} node
+        @param {Node} node
        The node to check if it belongs to the collection.
-       
-       @returns {Boolean} true if the node is part of the collection, otherwise false.
-       
-       @protected
+        @returns {Boolean} true if the node is part of the collection, otherwise false.
+        @protected
        */
 
     }, {
@@ -15840,12 +15711,10 @@
       }
       /**
        Handles the attachment of an item to the collection. It triggers automatically the collection event.
-       
-       @param {HTMLElement} item
+        @param {HTMLElement} item
        The item that was attached to the collection.
-         @emits {coral-collection:add}
-       
-       @protected
+        @emits {coral-collection:add}
+        @protected
        */
 
     }, {
@@ -15863,13 +15732,10 @@
       }
       /**
        Handles the detachment of a item to the collection. It triggers automatically the collection event.
-       
-       @param {HTMLElement} item
+        @param {HTMLElement} item
        The item that was detached of the collection
-       
-       @emits {coral-collection:remove}
-       
-       @protected
+        @emits {coral-collection:remove}
+        @protected
        */
 
     }, {
@@ -15889,12 +15755,10 @@
        Enables the automatic detection of collection items. The collection will take care of triggering the appropriate
        collection event when an item is added or removed, as well the related callbacks. Components can decide to skip the
        initialization of the starting items by providing <code>skipInitialItems</code> as <code>false</code>.
-       
-       @param {Boolean} [skipInitialItems=false]
+        @param {Boolean} [skipInitialItems=false]
        If <code>true</code>, <code>onItemAdded</code> will be called for every starting item. A collection event will not
        be triggered for these items.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -15944,8 +15808,7 @@
       }
       /**
        Stops handling the items.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -15959,11 +15822,9 @@
        Handles every time that an element is added or removed from the <code>options.container</code>. By default the
        collection events will be triggered. If <code>options.onItemAdded</code> or <code>options.onItemRemoved</code> were
        provided, they will be called where it applies.
-       
-       @param Array.<Object> mutations
+        @param Array.<Object> mutations
        Array that contains the <code>MutationRecord> relevant to every registered mutation.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -16021,58 +15882,47 @@
       /**
        Triggered when an item is added to the {@link Collection}. {@link Collection} events are not synchronous so the DOM
        may reflect a different reality although every addition or removal will be reported.
-       
-       @typedef {CustomEvent} coral-collection:add
-       
-       @property {HTMLElement} detail.item
+        @typedef {CustomEvent} coral-collection:add
+        @property {HTMLElement} detail.item
        The item that was added.
        */
 
       /**
        Triggered when an item is removed from a {@link Collection}. {@link Collection} events are not synchronous so the DOM
        may reflect a different reality although every addition or removal will be reported.
-       
-       @typedef {CustomEvent} coral-collection:remove
-       
-       @property {HTMLElement} detail.item
+        @typedef {CustomEvent} coral-collection:remove
+        @property {HTMLElement} detail.item
        The item that was removed.
        */
 
       /**
        Signature of the function called to determine if an element should be included in the {@link Collection}. If the function
        returns <code>true</code> for the given element it will be part of the collection, otherwise it will be excluded.
-       
-       @typedef {function} CollectionFilter
-       
-       @param {HTMLElement} element
+        @typedef {function} CollectionFilter
+        @param {HTMLElement} element
        The item to check whether it should be part of the collection.
-       
-       @returns {Boolean} true if should be part of the collection, otherwise false.
+        @returns {Boolean} true if should be part of the collection, otherwise false.
        */
 
       /**
        Signature of the function called when ever an item is added to the {@link Collection}.
-       
-       @typedef {function} CollectionOnItemAdded
-       
-       @param {HTMLElement} item
+        @typedef {function} CollectionOnItemAdded
+        @param {HTMLElement} item
        The item that was added to the collection.
        */
 
       /**
        Signature of the function called when ever an item is removed from the {@link Collection}.
-         @typedef {function} CollectionOnItemRemoved
-       
-       @param {HTMLElement} item
+        @typedef {function} CollectionOnItemRemoved
+        @param {HTMLElement} item
        The item that was added to the collection.
        */
 
       /**
        Signature of the function called when there is a change in the {@link Collection}. The items that where added and removed
        will be provided.
-         @typedef {function} CollectionOnChange
-       
-       @param {Array.<HTMLElement>} addedNodes
+        @typedef {function} CollectionOnChange
+        @param {Array.<HTMLElement>} addedNodes
        An array that contains the items that were added to the collection.
        @param {Array.<HTMLElement>} removedNodes
        An array that contains the items that were removed from the collection.
@@ -16123,11 +15973,9 @@
      Returns the selectable items. Items that are disabled quality for selection. On the other hand, hidden items
      can be selected as this is the default behavior in HTML. Please note that an already selected item could be
      returned, since the selection could be toggled.
-     
-     @returns {Array.<HTMLElement>}
+      @returns {Array.<HTMLElement>}
      an array of items whose selection could be toggled.
-     
-     @protected
+      @protected
      */
 
 
@@ -16140,11 +15988,9 @@
        Returns the first selectable item. Items that are disabled quality for selection. On the other hand, hidden items
        can be selected as this is the default behavior in HTML. Please note that an already selected item could be
        returned, since the selection could be toggled.
-       
-       @returns {HTMLElement}
+        @returns {HTMLElement}
        an item whose selection could be toggled.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -16156,11 +16002,9 @@
        Returns the last selectable item. Items that are disabled quality for selection. On the other hand, hidden items
        can be selected as this is the default behavior in HTML. Please note that an already selected item could be
        returned, since the selection could be toggled.
-       
-       @returns {HTMLElement}
+        @returns {HTMLElement}
        an item whose selection could be toggled.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -16172,13 +16016,11 @@
       }
       /**
        Returns the previous selectable item.
-         @param {HTMLElement} item
+        @param {HTMLElement} item
        The reference item.
-       
-       @returns {HTMLElement}
+        @returns {HTMLElement}
        an item whose selection could be toggled.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -16202,14 +16044,11 @@
       }
       /**
        Returns the next selectable item.
-       
-       @param {HTMLElement} item
+        @param {HTMLElement} item
        The reference item.
-       
-       @returns {HTMLElement}
+        @returns {HTMLElement}
        an item whose selection could be toggled.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -16233,13 +16072,10 @@
       /**
        Returns the first item that is selected in the Collection. It allows to configure the attribute used for selection
        so that components that use 'selected' and 'active' can share the same implementation.
-       
-       @param {String} [selectedAttribute=selected]
+        @param {String} [selectedAttribute=selected]
        the attribute that will be used to check for selection.
-       
-       @returns HTMLElement the first selected item.
-       
-       @protected
+        @returns HTMLElement the first selected item.
+        @protected
        */
 
     }, {
@@ -16256,13 +16092,10 @@
       /**
        Returns the last item that is selected in the Collection. It allows to configure the attribute used for selection
        so that components that use 'selected' and 'active' can share the same implementation.
-       
-       @param {String} [selectedAttribute=selected]
+        @param {String} [selectedAttribute=selected]
        the attribute that will be used to check for selection.
-       
-       @returns HTMLElment the last selected item.
-       
-       @protected
+        @returns HTMLElment the last selected item.
+        @protected
        */
 
     }, {
@@ -16281,13 +16114,10 @@
       }
       /**
        Returns an array that contains all the items that are selected.
-       
-       @param {String} [selectedAttribute=selected]
+        @param {String} [selectedAttribute=selected]
        the attribute that will be used to check for selection.
-       
-       @protected
-       
-       @returns Array.<HTMLElement> an array with all the selected items.
+        @protected
+        @returns Array.<HTMLElement> an array with all the selected items.
        */
 
     }, {
@@ -16305,11 +16135,9 @@
        Deselects all the items except the first selected item in the Collection. By default the <code>selected</code>
        attribute will be removed. The attribute to remove is configurable via the <code>selectedAttribute</code> parameter.
        The selected attribute will be removed no matter if the item is <code>disabled</code> or <code>hidden</code>.
-       
-       @param {String} [selectedAttribute=selected]
+        @param {String} [selectedAttribute=selected]
        the attribute that will be used to check for selection. This attribute will be removed from the matching elements.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -16335,11 +16163,9 @@
       /**
        Deselects all the items except the last selected item in the Collecton. By default the <code>selected</code>
        attribute will be removed. The attribute to remove is configurable via the <code>selectedAttribute</code> parameter.
-       
-       @param {String} [selectedAttribute=selected]
+        @param {String} [selectedAttribute=selected]
        the attribute that will be used to check for selection. This attribute will be removed from the matching elements.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -16367,17 +16193,13 @@
        Deselects all the items except the given item. The provided attribute will be remove from all matching items. By
        default the <code>selected</code> attribute will be removed. The attribute to remove is configurable via the
        <code>selectedAttribute</code> parameter.
-       
-       @name Coral.SelectableCollection#_deselectAllExcept
+        @name Coral.SelectableCollection#_deselectAllExcept
        @function
-       
-       @param {HTMLElement} [itemOrSelectedAttribute]
+        @param {HTMLElement} [itemOrSelectedAttribute]
        The item to keep selected. If the item is not provided, all elements will be deselected.
-       
-       @param {String} [selectedAttribute=selected]
+        @param {String} [selectedAttribute=selected]
        the attribute that will be used to check for selection. This attribute will be removed from the matching elements.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -16536,9 +16358,9 @@
   var LABEL_CLASSNAME = '_coral-Label';
   /**
    Enumeration for {@link Tag} sizes. Only colored tags can have different sizes.
-   
+
    @typedef {Object} TagSizeEnum
-   
+
    @property {String} SMALL
    A small sized tag.
    @property {String} MEDIUM
@@ -16554,9 +16376,9 @@
   };
   /**
    Enumeration for {@link Tag} colors.
-   
+
    @typedef {Object} TagColorEnum
-   
+
    @property {String} DEFAULT
    @property {String} GREY
    @property {String} BLUE
@@ -16673,8 +16495,7 @@
     }
     /**
      The tag's label element.
-     
-     @type {TagLabel}
+      @type {TagLabel}
      @contentzone
      */
 
@@ -16683,8 +16504,7 @@
       key: "_toggleTagVariant",
 
       /**
-        Toggle between Tag and Label styles
-       
+       Toggle between Tag and Label styles
         @private
        */
       value: function _toggleTagVariant() {
@@ -16731,8 +16551,7 @@
       }
       /**
        Updates the aria-label property from the button and label elements.
-       
-          @ignore
+        @ignore
        */
 
     }, {
@@ -16787,6 +16606,10 @@
     }, {
       key: "connectedCallback",
       value: function connectedCallback() {
+        if (this._skipConnectedCallback()) {
+          return;
+        }
+
         _get(_getPrototypeOf(Tag.prototype), "connectedCallback", this).call(this); // Used to inform the tag list that it's added
 
 
@@ -16845,16 +16668,14 @@
       }
       /**
        Triggered when the {@link Tag} value is changed.
-         @typedef {CustomEvent} coral-tag:_valuechanged
-       
-       @private
+        @typedef {CustomEvent} coral-tag:_valuechanged
+        @private
        */
 
       /**
        Triggered when the {@link Tag} is added to the document.
-         @typedef {CustomEvent} coral-tag:_connected
-       
-       @private
+        @typedef {CustomEvent} coral-tag:_connected
+        @private
        */
 
     }, {
@@ -16876,8 +16697,7 @@
       }
       /**
        Whether this component can be closed.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute closable
        @htmlattributereflected
@@ -16908,8 +16728,7 @@
       }
       /**
        Value of the tag. If not explicitly set, the value of <code>Node.textContent</code> is returned.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute value
        @htmlattributereflected
@@ -16921,7 +16740,13 @@
         return typeof this._value === 'string' ? this._value : this.textContent.replace(/\s{2,}/g, ' ').trim();
       },
       set: function set(value) {
-        this._value = transform.string(value);
+        var _value = transform.string(value);
+
+        if (this._value === _value) {
+          return;
+        }
+
+        this._value = _value;
 
         this._reflectAttribute('value', this._value);
 
@@ -16929,8 +16754,7 @@
       }
       /**
        A quiet tag to differentiate it from default tag.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute quiet
        @htmlattributereflected
@@ -16951,8 +16775,7 @@
       }
       /**
        A multiline tag for block-level layout with multiline text.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute multiline
        @htmlattributereflected
@@ -16972,8 +16795,7 @@
       }
       /**
        The tag's size. See {@link {TagSizeEnum}. Only colored tags can have different sizes.
-       
-       @type {String}
+        @type {String}
        @default TagSizeEnum.MEDIUM
        @htmlattribute size
        @htmlattributereflected
@@ -16994,8 +16816,7 @@
       }
       /**
        The tags's color. See {@link TagColorEnum}.
-       
-       @type {String}
+        @type {String}
        @default Coral.Tag.color.DEFAULT
        @htmlattribute color
        @htmlattributereflected
@@ -17037,8 +16858,7 @@
       }
       /**
        Returns {@link Tag} sizes.
-       
-       @return {TagSizeEnum}
+        @return {TagSizeEnum}
        */
 
     }], [{
@@ -17048,8 +16868,7 @@
       }
       /**
        Returns {@link Tag} colors.
-       
-       @return {TagColorEnum}
+        @return {TagColorEnum}
        */
 
     }, {
@@ -17156,8 +16975,7 @@
     }
     /**
      Changing the values will redefine the component's items.
-     
-     @type {Array.<String>}
+      @type {Array.<String>}
      @emits {change}
      */
 
@@ -17526,8 +17344,7 @@
       }
       /**
        The Collection Interface that allows interacting with the items that the component contains.
-       
-       @type {Collection}
+        @type {Collection}
        @readonly
        */
 
@@ -17792,9 +17609,9 @@
   var CLASSNAME$6 = '_coral-Menu';
   /**
    Enumeration for {@link BaseList} interactions.
-   
+
    @typedef {Object} ListInteractionEnum
-   
+
    @property {String} ON
    Keyboard interaction is enabled.
    @property {String} OFF
@@ -17839,8 +17656,7 @@
       }
       /**
        The Collection Interface that allows interacting with the items that the component contains.
-       
-       @type {SelectableCollection}
+        @type {SelectableCollection}
        @readonly
        */
 
@@ -17850,8 +17666,7 @@
 
         /**
          Returns true if the event is at the matched target.
-         
-         @private
+          @private
          */
         value: function _eventIsAtTarget(event) {
           var target = event.target;
@@ -17975,8 +17790,7 @@
         }
         /**
          Returns {@link BaseList} interaction options.
-         
-         @return {ListInteractionEnum}
+          @return {ListInteractionEnum}
          */
 
       }, {
@@ -18017,8 +17831,7 @@
         }
         /**
          Whether interaction with the component is enabled. See {@link ListInteractionEnum}.
-         
-         @type {String}
+          @type {String}
          @default ListInteractionEnum.ON
          @htmlattribute interaction
          @htmlattributereflected
@@ -18084,8 +17897,7 @@
       }
       /**
        The content of the help item.
-       
-       @type {ListItemContent}
+        @type {ListItemContent}
        @contentzone
        */
 
@@ -18149,8 +17961,7 @@
         }
         /**
          Whether this item is disabled.
-         
-         @default false
+          @default false
          @type {Boolean}
          @htmlattribute disabled
          @htmlattributereflected
@@ -18171,8 +17982,7 @@
         }
         /**
          The icon to display. See {@link Icon}.
-         
-         @type {String}
+          @type {String}
          @default ""
          @htmlattribute icon
          */
@@ -18665,9 +18475,9 @@
 
   /**
    Enumeration for {@link Wait} variants.
-   
+
    @typedef {Object} WaitVariantEnum
-   
+
    @property {String} DEFAULT
    The default variant.
    @property {String} DOTS
@@ -18680,9 +18490,9 @@
   };
   /**
    Enumeration for {@link Wait} sizes.
-   
+
    @typedef {Object} WaitSizeEnum
-   
+
    @property {String} SMALL
    A small wait indicator.
    @property {String} MEDIUM
@@ -18726,8 +18536,7 @@
     /**
      The size of the wait indicator. Currently 'S' (the default), 'M' and 'L' are available.
      See {@link WaitSizeEnum}.
-     
-     @type {String}
+      @type {String}
      @default WaitSizeEnum.MEDIUM
      @htmlattribute size
      @htmlattributereflected
@@ -18788,8 +18597,7 @@
       }
       /**
        Triggered when the {@link Wait} value is changed.
-       
-       @typedef {CustomEvent} coral-wait:change
+        @typedef {CustomEvent} coral-wait:change
        */
 
     }, {
@@ -18831,8 +18639,7 @@
       }
       /**
        The wait's variant. See {@link WaitVariantEnum}.
-       
-       @type {String}
+        @type {String}
        @default WaitVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -18852,8 +18659,7 @@
       /**
        Whether to hide the current value and show an animation. Set to true for operations whose progress cannot be
        determined.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute indeterminate
        @htmlattributereflected
@@ -18886,8 +18692,7 @@
       }
       /**
        The current progress in percent. If no value is set on initialization, wait is forced into indeterminate state.
-       
-       @type {Number}
+        @type {Number}
        @default 0
        @emits {coral-wait:change}
        @htmlattribute value
@@ -18944,8 +18749,7 @@
       }
       /**
        Returns {@link Wait} sizes.
-       
-       @return {WaitSizeEnum}
+        @return {WaitSizeEnum}
        */
 
     }], [{
@@ -18955,8 +18759,7 @@
       }
       /**
        Returns {@link Wait} variants.
-       
-       @return {WaitVariantEnum}
+        @return {WaitVariantEnum}
        */
 
     }, {
@@ -19013,7 +18816,7 @@
    The distance, in pixels, from the bottom of the SelectList at which we trigger a scrollbottom event. For example, a
    value of 50 would indicate a scrollbottom event should be triggered when the user scrolls to within 50 pixels of the
    bottom.
-   
+
    @type {Number}
    @ignore
    */
@@ -19021,7 +18824,7 @@
   var SCROLL_BOTTOM_THRESHOLD = 50;
   /**
    The number of milliseconds for which scroll events should be debounced.
-   
+
    @type {Number}
    @ignore
    */
@@ -19095,8 +18898,7 @@
      The Collection Interface that allows interacting with the {@link SelectListGroup} elements that the
      SelectList contains. This includes items nested inside groups. To manage items contained within a specific
      group, see {@link SelectListGroup#items}.
-     
-     @type {SelectableCollection}
+      @type {SelectableCollection}
      @readonly
      */
 
@@ -19209,8 +19011,7 @@
       }
       /**
        Handles keypress event for alphanumeric search.
-       
-       @param {KeyboardEvent} event
+        @param {KeyboardEvent} event
        The keyboard event.
        @private
        */
@@ -19298,8 +19099,7 @@
        Determine what item should get focus (if any) when the user tries to tab into the SelectList. This should be the
        first selected item, or the first selectable item otherwise. When neither is available, it cannot be tabbed into
        the SelectList.
-       
-       @private
+        @private
        */
 
     }, {
@@ -19338,8 +19138,7 @@
       }
       /**
        @emits {coral-selectlist:scrollbottom}
-       
-       @private
+        @private
        */
 
     }, {
@@ -19470,25 +19269,20 @@
       /**
        Triggered when the user scrolls to near the bottom of the {@link SelectList}. This can be useful for when additional items can
        be loaded asynchronously (i.e., infinite scrolling).
-       
-       @typedef {CustomEvent} coral-selectlist:scrollbottom
+        @typedef {CustomEvent} coral-selectlist:scrollbottom
        */
 
       /**
        Triggered before the {@link SelectList} selected item is changed on user interaction. Can be used to cancel selection.
-       
-       @typedef {CustomEvent} coral-selectlist:change
-       
-       @property {SelectListItem} event.detail.item
+        @typedef {CustomEvent} coral-selectlist:change
+        @property {SelectListItem} event.detail.item
        The selected item.
        */
 
       /**
        Triggered when the {@link SelectList} selected item has changed.
-       
-       @typedef {CustomEvent} coral-selectlist:change
-       
-       @property {SelectListItem} detail.oldSelection
+        @typedef {CustomEvent} coral-selectlist:change
+        @property {SelectListItem} detail.oldSelection
        The prior selected item(s).
        @property {SelectListItem} detail.selection
        The newly selected item(s).
@@ -19511,8 +19305,7 @@
       }
       /**
        The Collection Interface that allows interacting with the items that the component contains.
-       
-       @type {SelectableCollection}
+        @type {SelectableCollection}
        @readonly
        */
 
@@ -19533,8 +19326,7 @@
       }
       /**
        The selected item in the SelectList.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @readonly
        */
 
@@ -19545,8 +19337,7 @@
       }
       /**
        The selected items of the SelectList.
-       
-       @type {Array.<HTMLElement>}
+        @type {Array.<HTMLElement>}
        @readonly
        */
 
@@ -19579,8 +19370,7 @@
       }
       /**
        Whether items are being loaded for the SelectList. Toggling this merely shows or hides a loading indicator.
-       
-       @default false
+        @default false
        @type {Boolean}
        @htmlattribute loading
        @htmlattributereflected
@@ -19671,8 +19461,7 @@
 
       /**
        The label of the group. It reflects the <code>label</code> attribute to the DOM.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute label
        @htmlattributereflected
@@ -19689,8 +19478,7 @@
       }
       /**
        The Collection Interface that allows interacting with the items that the component contains.
-       
-       @type {SelectableCollection}
+        @type {SelectableCollection}
        @readonly
        */
 
@@ -19774,8 +19562,7 @@
     }
     /**
      Value of the item. If not explicitly set, the value of <code>Node.textContent</code> is returned.
-     
-     @type {String}
+      @type {String}
      @default ""
      @htmlattribute value
      @htmlattributereflected
@@ -19796,8 +19583,7 @@
       }
       /**
        Whether the item is selected.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute selected
        @htmlattributereflected
@@ -19849,8 +19635,7 @@
       }
       /**
        The content element for the item.
-       
-       @type {SelectListItemContent}
+        @type {SelectListItemContent}
        @contentzone
        */
 
@@ -19906,8 +19691,7 @@
       }
       /**
        The icon to display. See {@link Icon}.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute icon
        */
@@ -19936,7 +19720,13 @@
         return this._selected || false;
       },
       set: function set(value) {
-        this._selected = transform.booleanAttr(value);
+        var _selected = transform.booleanAttr(value);
+
+        if (this._selected === _selected) {
+          return;
+        }
+
+        this._selected = _selected;
 
         this._reflectAttribute('selected', this.disabled ? false : this._selected);
 
@@ -19952,8 +19742,7 @@
       }
       /**
        Whether this item is disabled.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute disabled
        @htmlattributereflected
@@ -20177,9 +19966,9 @@
 
   /**
    Enumeration for {@link BaseOverlay} trap options.
-   
+
    @typedef {Object} OverlayTrapFocusEnum
-   
+
    @property {String} ON
    Focus is trapped such that the use cannot focus outside of the overlay.
    @property {String} OFF
@@ -20191,9 +19980,9 @@
   };
   /**
    Enumeration for {@link BaseOverlay} scroll focus options.
-   
+
    @typedef {Object} OverlayScrollOnFocusEnum
-   
+
    @property {String} ON
    Scroll the document to bring the newly-focused element into view.
    @property {String} OFF
@@ -20206,9 +19995,9 @@
   };
   /**
    Enumeration for {@link BaseOverlay} return focus options.
-   
+
    @typedef {Object} OverlayReturnFocusEnum
-   
+
    @property {String} ON
    When the overlay is closed, the element that was focused before the it was shown will be focused again.
    @property {String} OFF
@@ -20221,9 +20010,9 @@
   };
   /**
    Enumeration for {@link BaseOverlay} focus behavior options.
-   
+
    @typedef {Object} OverlayFocusOnShowEnum
-   
+
    @property {String} ON
    When the overlay is opened, it will be focused.
    @property {String} OFF
@@ -20237,7 +20026,7 @@
   /**
    The time it should take for {@link BaseOverlay} to fade in milliseconds.
    Important: This should be greater than or equal to the CSS transition time.
-   
+
    @typedef {Number} OverlayFadeTime
    */
 
@@ -21068,9 +20857,9 @@
           this._returnFocus = validate.enumeration(returnFocus)(value) && value || returnFocus.OFF;
         }
         /**
-        returns element that will receive focus when overlay is closed
-        @returns {HTMLElement}element passed via returnFocusTo()
-        */
+         returns element that will receive focus when overlay is closed
+         @returns {HTMLElement}element passed via returnFocusTo()
+         */
 
       }, {
         key: "returnFocusToElement",
@@ -21078,9 +20867,9 @@
           return this._returnFocusToElement;
         }
         /**
-        returns element that will receive focus when overlay is hidden
-        @returns {HTMLElement} element cached
-        */
+         returns element that will receive focus when overlay is hidden
+         @returns {HTMLElement} element cached
+         */
 
       }, {
         key: "elementToFocusWhenHidden",
@@ -23967,9 +23756,9 @@
   /**
    Enumeration for {@link Overlay} alignment pairs.
    @deprecated
-   
+
    @typedef {Object} OverlayAlignEnum
-   
+
    @property {String} LEFT_TOP
    Use the top of the left side as an anchor point.
    @property {String} LEFT_CENTER
@@ -24003,9 +23792,9 @@
   };
   /**
    Enumeration for {@link Overlay} collision detection strategies.
-   
+
    @typedef {Object} OverlayCollisionEnum
-   
+
    @property {String} FLIP
    Flips the element to the opposite side of the target and the collision detection is run again to see if it will fit. Whichever side allows more of the element to be visible will be used.
    @property {String} FIT
@@ -24024,9 +23813,9 @@
   };
   /**
    Enumeration for {@link Overlay} anchored overlay targets.
-   
+
    @typedef {Object} OverlayTargetEnum
-   
+
    @property {String} PREVIOUS
    Use the previous sibling element in the DOM.
    @property {String} NEXT
@@ -24039,9 +23828,9 @@
   };
   /**
    Enumeration for {@link Overlay} placement values.
-   
+
    @typedef {Object} OverlayPlacementEnum
-   
+
    @property {String} LEFT
    An overlay anchored to the left of the target.
    @property {String} RIGHT
@@ -24060,9 +23849,9 @@
   };
   /**
    Enumeration for {@link Overlay} interaction values.
-   
+
    @typedef {Object} OverlayInteractionEnum
-   
+
    @property {String} ON
    Keyboard interaction is enabled.
    @property {String} OFF
@@ -24110,8 +23899,7 @@
     /**
      The element the overlay should position relative to. It accepts values from {@link OverlayTargetEnum}, as
      well as a DOM element or a CSS selector. If a CSS selector is provided, the first matching element will be used.
-     
-     @type {?HTMLElement|String}
+      @type {?HTMLElement|String}
      @default null
      */
 
@@ -24219,8 +24007,7 @@
       }
       /**
        Hides the overlay if it's on the top. When <code>interaction</code> is OFF it is ignored.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -24238,8 +24025,7 @@
       }
       /**
        Re-position the overlay if it's currently open.
-       
-       @function
+        @function
        @param {Boolean} forceReposition
        Whether to force repositioning even if closed.
        */
@@ -24293,8 +24079,7 @@
       }
       /**
        Get the element the overlay is anchored to.
-       
-       @param {HTMLElement} [el]
+        @param {HTMLElement} [el]
        The reference element.
        @param {HTMLElement|String} [target]
        A specific target value to use.
@@ -24309,7 +24094,7 @@
       value: function connectedCallback() {
         var _this5 = this;
 
-        if (this._ignoreConnectedCallback) {
+        if (this._skipConnectedCallback()) {
           return;
         }
 
@@ -24349,8 +24134,7 @@
       }
       /**
        Triggered after the {@link Overlay} is positioned.
-       
-       @typedef {CustomEvent} coral-overlay:positioned
+        @typedef {CustomEvent} coral-overlay:positioned
        */
 
     }, {
@@ -24385,12 +24169,10 @@
       }
       /**
        The point on the overlay we should anchor from when positioning. See {@link OverlayAlignEnum}.
-       
-       @type {String}
+        @type {String}
        @default OverlayAlignEnum.CENTER_CENTER
        @htmlattribute alignmy
-       
-       @deprecated
+        @deprecated
        */
 
     }, {
@@ -24406,12 +24188,10 @@
       }
       /**
        The point on the target we should anchor to when positioning. See {@link OverlayAlignEnum}.
-       
-       @type {String}
+        @type {String}
        @default Coral.Overlay.align.CENTER_CENTER
        @htmlattribute alignat
-       
-       @deprecated
+        @deprecated
        */
 
     }, {
@@ -24427,8 +24207,7 @@
       }
       /**
        The distance the overlay should be from its target.
-       
-       @type {Number}
+        @type {Number}
        @default 0
        @htmlattribute offset
        */
@@ -24449,8 +24228,7 @@
       }
       /**
        Whether the overlay flows toward the inner of the target element. By default, it's placed outside the target element.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute inner
        */
@@ -24466,8 +24244,7 @@
       }
       /**
        The distance the overlay should be from its target along the length axis.
-       
-       @type {String}
+        @type {String}
        @default '0px'
        @htmlattribute lengthoffset
        */
@@ -24483,8 +24260,7 @@
       }
       /**
        The distance the overlay should be from its target along the breadth axis.
-       
-       @type {String}
+        @type {String}
        @default '0px'
        @htmlattribute breadthoffset
        */
@@ -24500,8 +24276,7 @@
       }
       /**
        The placement of the overlay. See {@link OverlayPlacementEnum}.
-       
-       @type {String}
+        @type {String}
        @default OverlayPlacementEnum.RIGHT
        @htmlattribute placement
        */
@@ -24520,8 +24295,7 @@
        The bounding element for the overlay. The overlay will be sized and positioned such that it is contained within
        this element. It accepts both a DOM Element or a CSS selector. If a CSS selector is provided, the first matching
        element will be used.
-       
-       @type {HTMLElement|String}
+        @type {HTMLElement|String}
        @default 'scrollParent'
        */
 
@@ -24539,8 +24313,7 @@
       /**
        Amount of pixel used to define a minimum distance between the boundaries and the overlay.
        This makes sure the overlay always has a little padding between the edges of its container.
-       
-       @type {Number}
+        @type {Number}
        @default 5
        @htmlattribute withinOffset
        */
@@ -24560,8 +24333,7 @@
       }
       /**
        The collision handling strategy when positioning the overlay relative to a target. See {@link OverlayCollisionEnum}.
-       
-       @type {String}
+        @type {String}
        @default OverlayCollisionEnum.FLIP
        @htmlattribute collision
        */
@@ -24583,8 +24355,7 @@
       }
       /**
        Whether keyboard interaction is enabled. See {@link OverlayInteractionEnum}.
-       
-       @type {String}
+        @type {String}
        @default OverlayInteractionEnum.ON
        */
 
@@ -24599,8 +24370,7 @@
       }
       /**
        Whether the overlay is allowed to change its DOM position for better positioning based on its context.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        */
 
@@ -24656,10 +24426,8 @@
       }
       /**
        @deprecated
-       
-       Returns {@link Overlay} align options.
-       
-       @return {OverlayAlignEnum}
+        Returns {@link Overlay} align options.
+        @return {OverlayAlignEnum}
        */
 
     }, {
@@ -24669,8 +24437,7 @@
       }
       /**
        Returns {@link Overlay} collision options.
-       
-       @return {OverlayCollisionEnum}
+        @return {OverlayCollisionEnum}
        */
 
     }, {
@@ -24680,8 +24447,7 @@
       }
       /**
        Returns {@link Overlay} target options.
-       
-       @return {OverlayTargetEnum}
+        @return {OverlayTargetEnum}
        */
 
     }, {
@@ -24691,8 +24457,7 @@
       }
       /**
        Returns {@link Overlay} placement options.
-       
-       @return {OverlayPlacementEnum}
+        @return {OverlayPlacementEnum}
        */
 
     }, {
@@ -24702,8 +24467,7 @@
       }
       /**
        Returns {@link Overlay} interaction options.
-       
-       @return {OverlayInteractionEnum}
+        @return {OverlayInteractionEnum}
        */
 
     }, {
@@ -24833,9 +24597,9 @@
   var DEFAULT_SCROLL_BY = 10;
   /**
    Enumeration for {@link DragAction} axis restrictions.
-   
+
    @typedef {Object} DragActionAxisEnum
-   
+
    @property {String} FREE
    Allows vertically and horizontally dragging.
    @property {String} VERTICAL
@@ -24993,8 +24757,7 @@
   var DragAction = /*#__PURE__*/function () {
     /**
      Takes the {HTMLElement} to be dragged as argument.
-     
-     @param {HTMLElement} dragElement
+      @param {HTMLElement} dragElement
      */
     function DragAction(dragElement) {
       _classCallCheck(this, DragAction);
@@ -25053,8 +24816,7 @@
     }
     /**
      The draggable element.
-     
-     @name dragElement
+      @name dragElement
      @readonly
      @type {String|HTMLElement}
      @htmlattribute coral-dragaction
@@ -25347,8 +25109,7 @@
       }
       /**
        Remove draggable actions
-       
-       @function destroy
+        @function destroy
        @param {Boolean} restorePosition
        Whether to restore the draggable element to its initial position
        */
@@ -25400,8 +25161,7 @@
       }
       /**
        Returns {@link DragAction} axis restrictions.
-       
-       @return {DragActionAxisEnum}
+        @return {DragActionAxisEnum}
        */
 
     }, {
@@ -25411,8 +25171,7 @@
       }
       /**
        The handle allowing to drag the element.
-       
-       @name handle
+        @name handle
        @type {String|HTMLElement}
        @htmlattribute coral-dragaction-handle
        */
@@ -25478,8 +25237,7 @@
       }
       /**
        The dropZone to drop the dragged element.
-       
-       @name dropZone
+        @name dropZone
        @type {String|HTMLElement}
        @htmlattribute coral-dragaction-dropzone
        */
@@ -25502,8 +25260,7 @@
       }
       /**
        The axis to constrain drag movement. See {@link DragActionAxisEnum}.
-       
-       @name axis
+        @name axis
        @type {String}
        @default DragActionAxisEnum.FREE
        @htmlattribute coral-dragaction-axis
@@ -25520,8 +25277,7 @@
       }
       /**
        Whether to scroll the container when the draggable element is moved beyond the viewport.
-       
-       @name scroll
+        @name scroll
        @default false
        @type {Boolean}
        @htmlattribute coral-dragaction-scroll
@@ -25537,8 +25293,7 @@
       }
       /**
        Whether to constrain the draggable element to its container viewport.
-       
-       @name containment
+        @name containment
        @default false
        @type {Boolean}
        @htmlattribute coral-dragaction-containment
@@ -25563,9 +25318,8 @@
       }
       /**
        Triggered when the {@link DragAction#dragElement} starts to be dragged.
-         @typedef {CustomEvent} coral-dragaction:dragstart
-       
-       @property {HTMLElement} dragElement
+        @typedef {CustomEvent} coral-dragaction:dragstart
+        @property {HTMLElement} dragElement
        The dragged element
        @property {Number} pageX
        The mouse position relative to the left edge of the document.
@@ -25575,9 +25329,8 @@
 
       /**
        Triggered when the {@link DragAction#dragElement} is being dragged.
-         @typedef {CustomEvent} coral-dragaction:drag
-       
-       @property {HTMLElement} dragElement
+        @typedef {CustomEvent} coral-dragaction:drag
+        @property {HTMLElement} dragElement
        The dragged element
        @property {Number} pageX
        The mouse position relative to the left edge of the document.
@@ -25587,9 +25340,8 @@
 
       /**
        Triggered when the {@link DragAction#dragElement} stops to be dragged.
-         @typedef {CustomEvent} coral-dragaction:dragend
-       
-       @property {HTMLElement} dragElement
+        @typedef {CustomEvent} coral-dragaction:dragend
+        @property {HTMLElement} dragElement
        The dragged element
        @property {Number} pageX
        The mouse position relative to the left edge of the document.
@@ -25599,9 +25351,8 @@
 
       /**
        Triggered when the {@link DragAction#dragElement} enters a drop element.
-         @typedef {CustomEvent} coral-dragaction:dragenter
-       
-       @property {HTMLElement} dragElement
+        @typedef {CustomEvent} coral-dragaction:dragenter
+        @property {HTMLElement} dragElement
        The dragged element
        @property {HTMLElement} dropElement
        The drop element
@@ -25613,9 +25364,8 @@
 
       /**
        Triggered when the {@link DragAction#dragElement} is over a drop element.
-         @typedef {CustomEvent} coral-dragaction:dragover
-       
-       @property {HTMLElement} dragElement
+        @typedef {CustomEvent} coral-dragaction:dragover
+        @property {HTMLElement} dragElement
        The dragged element
        @property {HTMLElement} dropElement
        The drop element
@@ -25627,9 +25377,8 @@
 
       /**
        Triggered when the {@link DragAction#dragElement} leaves a drop element.
-         @typedef {CustomEvent} coral-dragaction:dragleave
-       
-       @property {HTMLElement} dragElement
+        @typedef {CustomEvent} coral-dragaction:dragleave
+        @property {HTMLElement} dragElement
        The dragged element
        @property {HTMLElement} dropElement
        The drop element
@@ -25641,9 +25390,8 @@
 
       /**
        Triggered when the {@link DragAction#dragElement} is dropped on a drop element.
-         @typedef {CustomEvent} coral-dragaction:drop
-       
-       @property {HTMLElement} dragElement
+        @typedef {CustomEvent} coral-dragaction:drop
+        @property {HTMLElement} dragElement
        The dragged element
        @property {HTMLElement} dropElement
        The drop element
@@ -25733,9 +25481,9 @@
 
   /**
    Enumeration for {@link Dialog} closable options.
-   
+
    @typedef {Object} DialogClosableEnum
-   
+
    @property {String} ON
    Show a close button on the dialog and close the dialog when clicked.
    @property {String} OFF
@@ -25748,9 +25496,9 @@
   };
   /**
    Enumeration for {@link Dialog} keyboard interaction options.
-   
+
    @typedef {Object} DialogInteractionEnum
-   
+
    @property {String} ON
    Keyboard interaction is enabled.
    @property {String} OFF
@@ -25763,9 +25511,9 @@
   };
   /**
    Enumeration for {@link Dialog} variants.
-   
+
    @typedef {Object} DialogVariantEnum
-   
+
    @property {String} DEFAULT
    A default dialog without header icon.
    @property {String} ERROR
@@ -25790,9 +25538,9 @@
   };
   /**
    Enumeration for {@link Dialog} backdrops.
-   
+
    @typedef {Object} DialogBackdropEnum
-   
+
    @property {String} NONE
    No backdrop.
    @property {String} MODAL
@@ -25879,8 +25627,7 @@
     }
     /**
      Whether keyboard interaction is enabled. See {@link DialogInteractionEnum}.
-     
-     @type {DialogInteractionEnum}
+      @type {DialogInteractionEnum}
      @default DialogInteractionEnum.ON
      */
 
@@ -26021,8 +25768,7 @@
       }
       /**
        Centers the dialog in the middle of the screen.
-       
-       @returns {Dialog} this, chainable.
+        @returns {Dialog} this, chainable.
        */
 
     }, {
@@ -26184,8 +25930,7 @@
       }
       /**
        The dialog header element.
-       
-       @type {DialogHeader}
+        @type {DialogHeader}
        @contentzone
        */
 
@@ -26214,8 +25959,7 @@
       }
       /**
        The dialog content element.
-       
-       @type {DialogContent}
+        @type {DialogContent}
        @contentzone
        */
 
@@ -26238,8 +25982,7 @@
       }
       /**
        The dialog footer element.
-       
-       @type {DialogFooter}
+        @type {DialogFooter}
        @contentzone
        */
 
@@ -26261,8 +26004,7 @@
       }
       /**
        The backdrop configuration for this dialog. See {@link DialogBackdropEnum}.
-       
-       @type {String}
+        @type {String}
        @default DialogBackdropEnum.MODAL
        @htmlattribute backdrop
        */
@@ -26286,8 +26028,7 @@
       }
       /**
        The dialog's variant. See {@link DialogVariantEnum}.
-       
-       @type {String}
+        @type {String}
        @default DialogVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -26340,7 +26081,7 @@
         this.content.id = this.content.id || commons.getUID(); // In an alertdialog with a content region, if the alertdialog is not otherwise described.
 
         if (this._variant !== variant$4.DEFAULT) {
-          // with no header, 
+          // with no header,
           if (!hasHeader) {
             // label the alertdialog with a reference to the content
             this.setAttribute('aria-labelledby', this.content.id);
@@ -26355,8 +26096,7 @@
       }
       /**
        Whether the dialog should be displayed full screen (without borders or margin).
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute fullscreen
        @htmlattributereflected
@@ -26444,8 +26184,7 @@
       }
       /**
        Whether the dialog should have a close button. See {@link DialogClosableEnum}.
-       
-       @type {String}
+        @type {String}
        @default DialogClosableEnum.OFF
        @htmlattribute closable
        @htmlattributereflected
@@ -26466,8 +26205,7 @@
       }
       /**
        Whether the dialog can moved around by dragging the title.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute movable
        @htmlattributereflected
@@ -26524,8 +26262,7 @@
       }
       /**
        Returns {@link Dialog} variants.
-       
-       @return {DialogVariantEnum}
+        @return {DialogVariantEnum}
        */
 
     }], [{
@@ -26535,8 +26272,7 @@
       }
       /**
        Returns {@link Dialog} backdrops.
-       
-       @return {DialogBackdropEnum}
+        @return {DialogBackdropEnum}
        */
 
     }, {
@@ -26546,8 +26282,7 @@
       }
       /**
        Returns {@link Dialog} close options.
-       
-       @return {DialogClosableEnum}
+        @return {DialogClosableEnum}
        */
 
     }, {
@@ -26557,8 +26292,7 @@
       }
       /**
        Returns {@link Dialog} interaction options.
-       
-       @return {DialogInteractionEnum}
+        @return {DialogInteractionEnum}
        */
 
     }, {
@@ -26711,9 +26445,9 @@
   };
   /**
    Enumeration for {@link Popover} closable state.
-   
+
    @typedef {Object} PopoverClosableEnum
-   
+
    @property {String} ON
    Show a close button on the popover and close the popover when clicked.
    @property {String} OFF
@@ -26728,9 +26462,9 @@
   };
   /**
    Enumeration for {@link Popover} variants.
-   
+
    @typedef {Object} PopoverVariantEnum
-   
+
    @property {String} DEFAULT
    A default popover without header icon.
    @property {String} ERROR
@@ -26827,8 +26561,7 @@
     }
     /**
      The popover's content element.
-     
-     @contentzone
+      @contentzone
      @name content
      @type {PopoverContent}
      */
@@ -27103,8 +26836,7 @@
       }
       /**
        The popover's header element.
-       
-       @contentzone
+        @contentzone
        @name header
        @type {PopoverHeader}
        */
@@ -27134,8 +26866,7 @@
       }
       /**
        The popover's footer element.
-       
-       @type {PopoverFooter}
+        @type {PopoverFooter}
        @contentzone
        */
 
@@ -27164,8 +26895,7 @@
       }
       /**
        The popover's variant. See {@link PopoverVariantEnum}.
-       
-       @type {String}
+        @type {String}
        @default PopoverVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -27216,8 +26946,7 @@
       }
       /**
        Whether the popover should have a close button. See {@link PopoverClosableEnum}.
-       
-       @type {String}
+        @type {String}
        @default PopoverClosableEnum.OFF
        @htmlattribute closable
        @htmlattributereflected
@@ -27283,8 +27012,7 @@
       }
       /**
        @ignore
-       
-       Not supported anymore.
+        Not supported anymore.
        */
 
     }, {
@@ -27306,8 +27034,7 @@
       }
       /**
        Returns {@link Popover} variants.
-       
-       @return {PopoverVariantEnum}
+        @return {PopoverVariantEnum}
        */
 
     }], [{
@@ -27317,8 +27044,7 @@
       }
       /**
        Returns {@link Popover} close options.
-       
-       @return {PopoverClosableEnum}
+        @return {PopoverClosableEnum}
        */
 
     }, {
@@ -29197,7 +28923,13 @@
         return this._selected || false;
       },
       set: function set(value) {
-        this._selected = transform.booleanAttr(value);
+        var _selected = transform.booleanAttr(value);
+
+        if (this._selected === _selected) {
+          return;
+        }
+
+        this._selected = _selected;
 
         this._reflectAttribute('selected', this._selected);
 
@@ -29228,7 +28960,13 @@
         return val;
       },
       set: function set(value) {
-        this._value = transform.string(value);
+        var _value = transform.string(value);
+
+        if (this._value === _value) {
+          return;
+        }
+
+        this._value = _value;
 
         this._reflectAttribute('value', this._value);
 
@@ -29440,8 +29178,7 @@
     }
     /**
      Checked state for the radio, <code>true</code> is checked and <code>false</code> is unchecked.
-     
-     @type {Boolean}
+      @type {Boolean}
      @default false
      @htmlattribute checked
      @htmlattributereflected
@@ -29455,7 +29192,7 @@
       /**
        Takes care of keeping the checked property up to date, by unchecking every radio that has the same name. This is
        only done if the radio is already in the DOM, it has a name and it is checked, otherwise this is not needed.
-         @ignore
+        @ignore
        */
       value: function _syncRelatedRadios() {
         // if the radio has a name defined and it is checked, we need to ensure that other radios that share the name
@@ -29475,7 +29212,7 @@
       }
       /**
        Hide the label if it's empty.
-         @ignore
+        @ignore
        */
 
     }, {
@@ -29600,8 +29337,7 @@
       }
       /**
        The radios's label element.
-       
-       @type {RadioLabel}
+        @type {RadioLabel}
        @contentzone
        */
 
@@ -29639,8 +29375,7 @@
       }
       /**
        The value this radio should submit when checked. Changing this value will not trigger an event.
-       
-       @type {String}
+        @type {String}
        @default "on"
        @htmlattribute value
        */
@@ -29746,8 +29481,7 @@
       }
       /*
        Indicates to the formField that the 'checked' property needs to be set in this component.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -29757,8 +29491,7 @@
       }
       /*
        Indicates to the formField that the 'checked' property has to be extracted from the event.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -29830,9 +29563,9 @@
   var CLASSNAME$n = 'coral-RadioGroup';
   /**
    Enumeration for {@link BaseFieldGroup} orientations.
-   
+
    @typedef {Object} BaseFieldGroupOrientationEnum
-   
+
    @property {String} HORIZONTAL
    Horizontal default orientation.
    @property {String} VERTICAL
@@ -29880,8 +29613,7 @@
 
         /**
          The Collection Interface that allows interacting with the items that the component contains.
-         
-         @type {SelectableCollection}
+          @type {SelectableCollection}
          @readonly
          */
         get: function get() {
@@ -29897,8 +29629,7 @@
         }
         /**
          Orientation of the field group. See {@link BaseFieldGroupOrientationEnum}.
-         
-         @type {String}
+          @type {String}
          @default BaseFieldGroupOrientationEnum.HORIZONTAL
          @htmlattribute orientation
          @htmlattributereflected
@@ -29920,8 +29651,7 @@
         /**
          Returns the first selected field group item in the Field Group. The value <code>null</code> is returned if no item is
          selected.
-         
-         @type {HTMLElement}
+          @type {HTMLElement}
          @readonly
          */
 
@@ -29940,8 +29670,7 @@
         }
         /**
          Returns {@link BaseFieldGroup} orientation options.
-         
-         @return {BaseFieldGroupEnum}
+          @return {BaseFieldGroupEnum}
          */
 
       }], [{
@@ -29964,9 +29693,9 @@
 
   /**
    Enumeration for {@link RadioGroup} orientations.
-   
+
    @typedef {Object} RadioGroupOrientationEnum
-   
+
    @property {String} HORIZONTAL
    Horizontal default orientation.
    @property {String} VERTICAL
@@ -30005,8 +29734,7 @@
 
       /**
        Orientation of the radio group. See {@link RadioGroupOrientationEnum}.
-       
-       @type {String}
+        @type {String}
        @default RadioGroupOrientationEnum.HORIZONTAL
        @htmlattribute orientation
        @htmlattributereflected
@@ -30029,8 +29757,7 @@
       }
       /**
        Returns {@link RadioGroup} orientation options.
-       
-       @return {RadioGroupEnum}
+        @return {RadioGroupEnum}
        */
 
     }], [{
@@ -30402,8 +30129,8 @@
       /**
        If the value is 'any' there is no allowed step, that means we incremenet with the default (as if the step was not
        defined).
-         @returns {Number} the valid step according to the specs.
-         @ignore
+        @returns {Number} the valid step according to the specs.
+        @ignore
        */
 
     }, {
@@ -30414,7 +30141,7 @@
       /**
        Checks if the current NumberInput is valid or not. This is done by checking that the current value is between the
        provided <code>min</code> and <code>max</code> values. This check is only performed on user interaction.
-         @ignore
+        @ignore
        */
 
     }, {
@@ -30425,7 +30152,7 @@
       /**
        Sets the correct state of the buttons based on <code>disabled</code>, <code>min</code>, <code>max</code> and
        <code>readOnly</code> properties.
-         @ignore
+        @ignore
        */
 
     }, {
@@ -30436,11 +30163,11 @@
       }
       /**
        Triggers a change event. This is only done if the provided values are different.
-         @param {String} newValue
+        @param {String} newValue
        The new value of the component.
        @param {String} oldValue
        The old value of the component.
-         @private
+        @private
        */
 
     }, {
@@ -30456,7 +30183,7 @@
        or from a mouse interaction. An event originating from a mouse interaction should shift the focus to the input,
        while an event originating from a touch interaction should not change the focus. On a touch screen, if the user
        presses the increment or decrement button, focus should not shift to the input and open the software keyboard.
-         @ignore
+        @ignore
        */
 
     }, {
@@ -30471,7 +30198,7 @@
        input if it does not currently have focus. We make an exception for touch devices, because a better user
        experience is for the focus to remain on an increment or decrement button without shifting focus and opening the
        soft keyboard.
-         @ignore
+        @ignore
        */
 
     }, {
@@ -30486,7 +30213,7 @@
       /**
        Handles the click on the step up button. It causes the NumberInput to step up its value and returns the focus back
        to the input. This way the clicked button does not get focus.
-         @emits {change}
+        @emits {change}
        @ignore
        */
 
@@ -30510,7 +30237,7 @@
       /**
        Handles the click on the step down button. It causes the NumberInput to step down its value and returns the focus
        back to the input. This way the clicked button does not get focus.
-         @emits {change}
+        @emits {change}
        @ignore
        */
 
@@ -30534,8 +30261,7 @@
       /**
        Handles the home key press. If a max has been set, the value will be modified to match it, otherwise the key is
        ignored.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -30563,8 +30289,7 @@
       /**
        Handles the end key press. If a min has been set, the value will be modified to match it, otherwise the key is
        ignored.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -30591,8 +30316,7 @@
       }
       /**
        Handles the up action by steping up the NumberInput. It prevents the default action.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -30608,8 +30332,7 @@
       }
       /**
        Handles the down action by steping down the NumberInput. It prevents the default action.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -30625,8 +30348,7 @@
       }
       /**
        Handles the Mousewheel to increment/decrement values.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -30654,8 +30376,7 @@
       }
       /**
        Overrides the method from formField to be able to add validation after the user has changed the value.
-       
-       @private
+        @private
        */
 
     }, {
@@ -30675,8 +30396,7 @@
       }
       /**
        Handles focus event.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -30692,8 +30412,7 @@
       }
       /**
        Handles blur event.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -30826,8 +30545,7 @@
       }
       /**
        The value returned as a Number. Value is <code>NaN</code> if conversion to Number is not possible.
-       
-       @type {Number}
+        @type {Number}
        @default NaN
        */
 
@@ -30858,8 +30576,7 @@
        The minimum value for the NumberInput. If a value below the minimum is set, the NumberInput will be marked as
        invalid but the value will be preserved. Stepping down the NumberInput via {@link Coral.NumberInput#stepDown}
        or the decrement button respects the minimum value. It reflects the <code>min</code> attribute to the DOM.
-       
-       @type {?Number}
+        @type {?Number}
        @default null
        @htmlattribute min
        @htmlattributereflected
@@ -30896,8 +30613,7 @@
        The maximum value for the NumberInput. If a value above the maximum is set, the NumberInput will be marked as
        invalid but the value will be preserved. Stepping up the NumberInput via {@link Coral.NumberInput#stepUp} or
        the increment button respects the maximum value. It reflects the <code>max</code> attribute to the DOM.
-       
-       @type {?Number}
+        @type {?Number}
        @default null
        @htmlattribute max
        @htmlattributereflected
@@ -30934,8 +30650,7 @@
        The amount to increment by when stepping up or down. It can be the string <code>any</code> or any positive
        floating point number. If this is not set to <code>any<code>, the control accepts only values at multiples of
        the step value greater than the minimum.
-       
-       @type {Number|String}
+        @type {Number|String}
        @default 1
        @htmlattribute step
        @htmlattributereflected
@@ -31070,8 +30785,7 @@
       }
       /**
        Short hint that describes the expected value of the NumberInput. It is displayed when the NumberInput is empty.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute placeholder
        @htmlattributereflected
@@ -31802,8 +31516,7 @@
     }
     /**
      Checked state for the checkbox.
-     
-     @type {Boolean}
+      @type {Boolean}
      @default false
      @htmlattribute checked
      @htmlattributereflected
@@ -31967,8 +31680,7 @@
       }
       /**
        Indicates that the checkbox is neither on nor off.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute indeterminate
        @htmlattributereflected
@@ -31991,8 +31703,7 @@
       }
       /**
        The checkbox's label element.
-       
-       @type {CheckboxLabel}
+        @type {CheckboxLabel}
        @contentzone
        */
 
@@ -32030,8 +31741,7 @@
       }
       /**
        The value that will be submitted when the checkbox is checked. Changing this value will not trigger an event.
-       
-       @type {String}
+        @type {String}
        @default "on"
        @htmlattribute value
        */
@@ -32122,8 +31832,8 @@
         this._hideLabelIfEmpty();
       }
       /**
-      Inherited from {@link BaseFormField#labelledBy}.
-      */
+       Inherited from {@link BaseFormField#labelledBy}.
+       */
 
     }, {
       key: "labelledBy",
@@ -32151,8 +31861,7 @@
       }
       /*
        Indicates to the formField that the 'checked' property needs to be set in this component.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -32162,8 +31871,7 @@
       }
       /*
        Indicates to the formField that the 'checked' property has to be extracted from the event.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -32262,8 +31970,7 @@
       }
       /**
        Returns an Array containing the selected field group items.
-       
-       @type {Array.<HTMLElement>}
+        @type {Array.<HTMLElement>}
        @readonly
        */
 
@@ -32337,7 +32044,7 @@
   };
   /**
    The DateTime API is used as fallback to {@link momentJS}.
-   
+
    @param {DateTime|Date|Array<Number>|String} value
    The initial date value. If none provided, the current day is used instead.
    */
@@ -32345,8 +32052,8 @@
 
   var DateTime = /*#__PURE__*/function () {
     /**
-    @see https://momentjs.com/docs/#/parsing/now/
-    */
+     @see https://momentjs.com/docs/#/parsing/now/
+     */
     function DateTime(value) {
       _classCallCheck(this, DateTime);
 
@@ -32758,9 +32465,9 @@
   var UP_ARROW = 38;
   /**
    Enumeration for {@link Accordion} variants.
-   
+
    @typedef {Object} AccordionVariantEnum
-   
+
    @property {String} DEFAULT
    Default look and feel.
    @property {String} QUIET
@@ -32823,8 +32530,7 @@
     }
     /**
      The Accordion's variant. See {@link AccordionVariantEnum}.
-     
-     @type {String}
+      @type {String}
      @default AccordionVariantEnum.DEFAULT
      @htmlattribute variant
      @htmlattributereflected
@@ -32854,11 +32560,9 @@
       /**
        References:
        http://www.w3.org/WAI/PF/aria-practices/#accordion &
-       
-       Handlers for when focus is on an element inside of the panel:
+        Handlers for when focus is on an element inside of the panel:
        http://test.cita.illinois.edu/aria/tabpanel/tabpanel2.php
-       
-       @private
+        @private
        */
 
     }, {
@@ -33059,8 +32763,7 @@
        Determine what item should get focus (if any) when the user tries to tab into the accordion. This should be the
        first selected panel, or the first selectable panel otherwise. When neither is available, to Accordion cannot be
        tabbed into.
-       
-       @private
+        @private
        */
 
     }, {
@@ -33101,8 +32804,7 @@
       }
       /**
        Returns {@link Accordion} variants.
-       
-       @return {AccordionVariantEnum}
+        @return {AccordionVariantEnum}
        */
 
     }, {
@@ -33136,10 +32838,8 @@
       }
       /**
        Triggered when {@link Accordion} selected item has changed.
-       
-       @typedef {CustomEvent} coral-accordion:change
-       
-       @property {AccordionItem} detail.oldSelection
+        @typedef {CustomEvent} coral-accordion:change
+        @property {AccordionItem} detail.oldSelection
        The prior selected item(s).
        @property {AccordionItem} detail.selection
        The newly selected item(s).
@@ -33158,8 +32858,7 @@
       }
       /**
        The Collection Interface that allows interacting with the items that the component contains.
-       
-       @type {Collection}
+        @type {Collection}
        @readonly
        */
 
@@ -33224,12 +32923,12 @@
         return this.items._getFirstSelected();
       }
       /**
-        The heading level for Accordion items within the Accordion
-         @type {Number}
-        @default 3
-        @htmlattribute level
-        @htmlattributereflected
-      */
+       The heading level for Accordion items within the Accordion
+        @type {Number}
+       @default 3
+       @htmlattribute level
+       @htmlattributereflected
+       */
 
     }, {
       key: "level",
@@ -33344,8 +33043,7 @@
     }
     /**
      The label of this accordion item.
-     
-     @type {AccordionItemLabel}
+      @type {AccordionItemLabel}
      @contentzone
      */
 
@@ -33360,7 +33058,7 @@
       }
       /**
        Handles the focus of the item.
-         @ignore
+        @ignore
        */
 
     }, {
@@ -33417,8 +33115,7 @@
       }
       /**
        The content of this accordion item.
-       
-       @type {AccordionItemContent}
+        @type {AccordionItemContent}
        @contentzone
        */
 
@@ -33445,8 +33142,7 @@
       /**
        Whether the item is selected. If the item has an element with the `coral-interactive` attribute and is clicked,
        then the toggling of the accordion item will not occur.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute selected
        @htmlattributereflected
@@ -33460,7 +33156,15 @@
       set: function set(value) {
         var _this2 = this;
 
-        this._selected = this.hasAttribute('disabled') ? false : transform.booleanAttr(value);
+        var _value = transform.booleanAttr(value);
+
+        var _selected = this.hasAttribute('disabled') ? false : _value;
+
+        if (this._selected === _selected) {
+          return;
+        }
+
+        this._selected = _selected;
 
         this._reflectAttribute('selected', this._selected); // Read it before applying is-open which adds additional padding
 
@@ -33513,12 +33217,12 @@
         this.selected = this.selected;
       }
       /**
-        The heading level for the Accordion item 
-         @type {Number}
-        @default 3
-        @htmlattribute level
-        @htmlattributereflected
-      */
+       The heading level for the Accordion item
+        @type {Number}
+       @default 3
+       @htmlattribute level
+       @htmlattributereflected
+       */
 
     }, {
       key: "level",
@@ -33541,12 +33245,12 @@
 
 
           if (value !== 3) {
-            // override the aria-level on the h3 element. 
+            // override the aria-level on the h3 element.
             this._elements.heading.setAttribute('aria-level', this._level);
 
             return;
           }
-        } // If the value is the default or invalid, remove the aria-level override from the h3 element. 
+        } // If the value is the default or invalid, remove the aria-level override from the h3 element.
 
 
         this._elements.heading.removeAttribute('aria-level');
@@ -33823,8 +33527,7 @@
     }
     /**
      The primary (left) container of the ActionBar.
-     
-     @type {ActionBarPrimary}
+      @type {ActionBarPrimary}
      @contentzone
      */
 
@@ -34399,8 +34102,7 @@
       }
       /**
        The secondary (right) container of the ActionBar.
-       
-       @type {ActionBarSecondary}
+        @type {ActionBarSecondary}
        @contentzone
        */
 
@@ -34582,8 +34284,7 @@
     }
     /**
      Disables the button from user interaction.
-     
-     @type {Boolean}
+      @type {Boolean}
      @default false
      @htmlattribute disabled
      @htmlattributereflected
@@ -34596,7 +34297,7 @@
       /**
        Keyboard handling per the WAI-ARIA button widget design pattern:
        https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_button_role
-         @ignore
+        @ignore
        */
       value: function _onKeyDown(event) {
         if (event.keyCode === SPACE) {
@@ -35038,8 +34739,7 @@
       }
       /**
        Returns the inner overlay to allow customization.
-       
-       @type {Popover}
+        @type {Popover}
        @readonly
        */
 
@@ -35067,8 +34767,7 @@
         /**
          Called after popover.open is set to true, but before the transition of the popover is done. Show elements inside
          the actionbar, that are hidden due to space problems.
-         
-         @ignore
+          @ignore
          */
 
       }, {
@@ -35261,8 +34960,7 @@
         }
         /**
          The Collection Interface that allows interacting with the items that the component contains.
-         
-         @type {ActionBarContainerCollection}
+          @type {ActionBarContainerCollection}
          @readonly
          */
 
@@ -35283,8 +34981,7 @@
         /**
          The amount of items that are maximally visible inside the container. Using a value <= 0 will disable this
          feature and show as many items as possible.
-         
-         @type {Number}
+          @type {Number}
          @default -1
          @htmlattribute threshold
          @htmlattributereflected
@@ -35303,8 +35000,7 @@
         /**
          If there are more ActionBarItems inside the ActionBar than currently can be shown, then a "more" Button with the
          following text will be rendered (and some ActionBarItems will be hidden inside of a Popover).
-         
-         @type {String}
+          @type {String}
          @default ""
          @htmlattribute morebuttontext
          */
@@ -35492,9 +35188,9 @@
   var CLASSNAME$x = '_coral-ActionBar-container';
   /**
    Enumeration for {@link ActionBarContainer} positions.
-   
+
    @typedef {Object} ActionBarContainerPositionEnum
-   
+
    @property {String} PRIMARY
    Primary (left) ActionBar container.
    @property {String} SECONDARY
@@ -35514,7 +35210,7 @@
    @htmltag coral-actionbar-container
    @extends {HTMLElement}
    @extends {BaseComponent}
-   
+
    @deprecated
    */
 
@@ -35537,8 +35233,7 @@
     }
     /**
      The container position inside the actionbar.
-     
-     @private
+      @private
      @type {String}
      @readonly
      @default ActionBarContainerPositionEnum.INVALID
@@ -35559,8 +35254,7 @@
       }
       /**
        Returns {@link ActionBarContainer} positions.
-       
-       @return {ActionBarContainerPositionEnum}
+        @return {ActionBarContainerPositionEnum}
        */
 
     }, {
@@ -35665,9 +35359,9 @@
 
   /**
    Enumeration for {@link Alert} variants.
-   
+
    @typedef {Object} AlertVariantEnum
-   
+
    @property {String} ERROR
    An alert with a warning icon to indicate that an error has occurred.
    @property {String} WARNING
@@ -35689,9 +35383,9 @@
   };
   /**
    Enumeration for {@link Alert} sizes.
-   
+
    @typedef {Object} AlertSizeEnum
-   
+
    @property {String} SMALL
    A small alert, usually employed for single line alerts without headers.
    @property {String} LARGE
@@ -35753,8 +35447,7 @@
     }
     /**
      The alert variant style to use. See {@link AlertVariantEnum}.
-     
-     @type {String}
+      @type {String}
      @default AlertVariantEnum.INFO
      @htmlattribute variant
      @htmlattributereflected
@@ -35871,8 +35564,7 @@
       }
       /**
        The size of the alert. It accepts both lower and upper case sizes. See {@link AlertVariantEnum}.
-       
-       @type {String}
+        @type {String}
        @default AlertSizeEnum.SMALL
        @htmlattribute size
        @htmlattributereflected
@@ -35891,8 +35583,7 @@
       }
       /**
        The alert header element.
-       
-       @type {AlertHeader}
+        @type {AlertHeader}
        @contentzone
        */
 
@@ -35913,8 +35604,7 @@
       }
       /**
        The alert content element.
-       
-       @type {AlertContent}
+        @type {AlertContent}
        @contentzone
        */
 
@@ -35936,8 +35626,7 @@
       }
       /**
        The alert footer element.
-       
-       @type {AlertFooter}
+        @type {AlertFooter}
        @contentzone
        */
 
@@ -35968,8 +35657,7 @@
       }
       /**
        Returns {@link Alert} variants.
-       
-       @return {AlertVariantEnum}
+        @return {AlertVariantEnum}
        */
 
     }], [{
@@ -35979,8 +35667,7 @@
       }
       /**
        Returns {@link Alert} sizes.
-       
-       @return {AlertSizeEnum}
+        @return {AlertSizeEnum}
        */
 
     }, {
@@ -36244,8 +35931,7 @@
     }
     /**
      Value of the item. <code>textContent</code> is used if not provided.
-     
-     @type {String}
+      @type {String}
      @default ""
      @htmlattribute value
      @htmlattributereflected
@@ -36270,7 +35956,13 @@
         return typeof this._value === 'undefined' ? this.getAttribute('value') || this.textContent.replace(/\s{2,}/g, ' ').trim() : this._value;
       },
       set: function set(value) {
-        this._value = transform.string(value);
+        var _value = transform.string(value);
+
+        if (this._value === _value) {
+          return;
+        }
+
+        this._value = _value;
 
         this._reflectAttribute('value', this._value);
 
@@ -36293,8 +35985,7 @@
       }
       /**
        Whether this item is selected.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute selected
        @htmlattributereflected
@@ -36306,7 +35997,13 @@
         return this._selected || false;
       },
       set: function set(value) {
-        this._selected = transform.booleanAttr(value);
+        var _selected = transform.booleanAttr(value);
+
+        if (this._selected === _selected) {
+          return;
+        }
+
+        this._selected = _selected;
 
         this._reflectAttribute('selected', this._selected);
 
@@ -36314,8 +36011,7 @@
       }
       /**
        Whether this item is disabled.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute disabled
        @htmlattributereflected
@@ -36473,9 +36169,9 @@
   var SCROLL_DEBOUNCE$1 = 100;
   /**
    Enumeration for {@link Autocomplete} variants.
-   
+
    @typedef {Object} AutocompleteVariantEnum
-   
+
    @property {String} DEFAULT
    A default, gray Autocomplete.
    @property {String} QUIET
@@ -36488,9 +36184,9 @@
   };
   /**
    Enumeration for {@link Autocomplete} match options.
-   
+
    @typedef {Object} AutocompleteMatchEnum
-   
+
    @property {String} STARTSWITH
    Include only matches that start with the user provided value.
    @property {String} CONTAINS
@@ -36602,8 +36298,7 @@
     }
     /**
      Returns the inner overlay to allow customization.
-     
-     @type {Popover}
+      @type {Popover}
      @readonly
      */
 
@@ -36621,8 +36316,7 @@
       }
       /**
        Set the name accordingly for multiple/single mode so the form submits contain only the right fields.
-       
-       @private
+        @private
        */
 
     }, {
@@ -36649,8 +36343,7 @@
       }
       /**
        Stop watching for mutations. This should be done before manually updating observed properties.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -36684,8 +36377,7 @@
       }
       /**
        Handle mutations to children and childList. This is used to keep the options in sync with DOM changes.
-       
-       @private
+        @private
        */
 
     }, {
@@ -36704,8 +36396,7 @@
       }
       /**
        Update the option set and selected options from the DOM.
-       
-       @private
+        @private
        */
 
     }, {
@@ -36717,8 +36408,7 @@
       }
       /**
        Create the set of options from nodes in the DOM.
-       
-       @private
+        @private
        */
 
     }, {
@@ -36825,13 +36515,11 @@
       }
       /**
        De-select every item except the provided item.
-       
-       @param {HTMLElement} exceptItem
+        @param {HTMLElement} exceptItem
        The item not to select
        @param {Array.<HTMLElement>} [items]
        The set of items to consider when deselecting. If not provided, the current set of selected items is used.
-       
-       @private
+        @private
        */
 
     }, {
@@ -36851,8 +36539,7 @@
       }
       /**
        Add a tag to the taglist.
-       
-       @private
+        @private
        */
 
     }, {
@@ -36900,8 +36587,7 @@
       }
       /**
        Remove a tag from the taglist.
-       
-       @private
+        @private
        */
 
     }, {
@@ -36947,8 +36633,7 @@
       }
       /**
        Remove all tags from the taglist.
-       
-       @private
+        @private
        */
 
     }, {
@@ -36969,8 +36654,7 @@
       }
       /**
        Reset values without affecting the DOM.
-       
-       @private
+        @private
        */
 
     }, {
@@ -37443,8 +37127,7 @@
       }
       /**
        This ensures the collection API is up to date with selected items, even if they come from suggestions.
-       
-       @private
+        @private
        */
 
     }, {
@@ -37528,8 +37211,7 @@
       }
       /**
        Handle selections in the selectList.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -37570,8 +37252,7 @@
       }
       /**
        Don't let the internal change event bubble and confuse users
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -37587,8 +37268,7 @@
       }
       /**
        Handle tags that are removed by the user.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -37622,8 +37302,7 @@
       }
       /**
        Handles value changes on a child item.
-       
-       @private
+        @private
        */
 
     }, {
@@ -37637,8 +37316,7 @@
       }
       /**
        Handles content changes on a child item.
-       
-       @private
+        @private
        */
 
     }, {
@@ -37651,8 +37329,7 @@
       }
       /**
        Handles selected changes on a child item.
-       
-       @private
+        @private
        */
 
     }, {
@@ -37686,15 +37363,12 @@
       }
       /**
        Check if the given option partially matches the given value.
-       
-       @param {HTMLElement} option
+        @param {HTMLElement} option
        The option to test
        @param {String} value
        The value to test
-       
-       @returns {Boolean} true if the value matches, false if not.
-       
-       @protected
+        @returns {Boolean} true if the value matches, false if not.
+        @protected
        */
 
     }, {
@@ -37705,15 +37379,12 @@
       }
       /**
        Check if the given option starts with the given value.
-       
-       @param {HTMLElement} option
+        @param {HTMLElement} option
        The option to test
        @param {String} value
        The value to test
-       
-       @returns {Boolean} true if the value matches, false if not.
-       
-       @protected
+        @returns {Boolean} true if the value matches, false if not.
+        @protected
        */
 
     }, {
@@ -37724,15 +37395,12 @@
       }
       /**
        Check if the given option exactly matches the given value.
-       
-       @param {HTMLElement} option
+        @param {HTMLElement} option
        The option to test
        @param {String} value
        The value to test
-       
-       @returns {Boolean} true if the value matches, false if not.
-       
-       @protected
+        @returns {Boolean} true if the value matches, false if not.
+        @protected
        */
 
     }, {
@@ -37743,8 +37411,7 @@
       }
       /**
        Updates label on toggle button to communicate number of suggestions in list.
-       
-       @param {Number} num
+        @param {Number} num
        The number of suggestions available
        @private
        */
@@ -37792,10 +37459,8 @@
       }
       /**
        A suggestion object.
-       
-       @typedef {Object} AutocompleteSuggestion
-       
-       @property {String} value
+        @typedef {Object} AutocompleteSuggestion
+        @property {String} value
        The form submission value to use when this suggestion is selected.
        @property {String} [content=value]
        The content to disable in the suggestion dropdown.
@@ -37803,8 +37468,7 @@
 
       /**
        Add the provided list of suggestions and clear loading status.
-       
-       @param {Array.<AutocompleteSuggestion>} suggestions
+        @param {Array.<AutocompleteSuggestion>} suggestions
        The list of suggestions to show.
        @param {Boolean} clear
        If true, existing suggestions will be cleared.
@@ -37916,8 +37580,7 @@
       }
       /**
        Matches the accessibility to the state of the popover.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -37947,8 +37610,7 @@
       }
       /**
        Returns {@link Autocomplete} match options.
-       
-       @return {AutocompleteMatchEnum}
+        @return {AutocompleteMatchEnum}
        */
 
     }, {
@@ -38044,18 +37706,15 @@
        Triggered when the {@link Autocomplete} could accept external data to be loaded by the user.
        If <code>preventDefault()</code> is called, then a loading indicator will be shown.
        {@link Autocomplete#loading} should be set to false to indicate that the data has been successfully loaded.
-       
-       @typedef {CustomEvent} coral-autocomplete:showsuggestions
-       
-       @property {String} detail.value
+        @typedef {CustomEvent} coral-autocomplete:showsuggestions
+        @property {String} detail.value
        The user input.
        */
 
       /**
        Triggered when the {@link Autocomplete} hides the suggestions.
        This is typically used to cancel a load request because the suggestions will not be shown anymore.
-       
-       @typedef {CustomEvent} coral-autocomplete:hidesuggestions
+        @typedef {CustomEvent} coral-autocomplete:hidesuggestions
        */
 
     }, {
@@ -38065,8 +37724,7 @@
       }
       /**
        The item collection.
-       
-       @type {SelectableCollection}
+        @type {SelectableCollection}
        @readonly
        */
 
@@ -38086,8 +37744,7 @@
       /**
        Indicates if the autocomplete is a single or multiple mode. In multiple mode, the user can select multiple
        values.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute multiple
        @htmlattributereflected
@@ -38117,8 +37774,7 @@
       }
       /**
        Amount of time, in milliseconds, to wait after typing a character before the suggestion is shown.
-       
-       @type {Number}
+        @type {Number}
        @default 200
        @htmlattribute delay
        */
@@ -38138,11 +37794,9 @@
       /**
        Set to <code>true</code> to restrict the selected value to one of the given options from the suggestions.
        When set to <code>false</code>, users can enter anything.
-       
-       <strong>NOTE:</strong> This API is under review and may be removed or changed in a subsequent release.
+        <strong>NOTE:</strong> This API is under review and may be removed or changed in a subsequent release.
        @ignore
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute forceselection
        @htmlattributereflected
@@ -38160,8 +37814,7 @@
       }
       /**
        A hint to the user of what can be entered.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute placeholder
        @htmlattributereflected
@@ -38179,8 +37832,7 @@
       }
       /**
        Max length for the Input field
-       
-       @type {Number}
+        @type {Number}
        @htmlattribute maxlength
        @htmlattributereflected
        */
@@ -38197,8 +37849,7 @@
       }
       /**
        The Autocomplete's variant. See {@link AutocompleteVariantEnum}.
-       
-       @type {AutocompleteVariantEnum}
+        @type {AutocompleteVariantEnum}
        @default AutocompleteVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -38231,7 +37882,7 @@
       }
       /**
        The match mode. See {@link AutocompleteMatchEnum}.
-         @type {String}
+        @type {String}
        @default AutocompleteMatchEnum.CONTAINS
        @htmlattribute match
        */
@@ -38258,8 +37909,7 @@
       }
       /**
        Indicates that the component is currently loading remote data. This will set the wait indicator inside the list.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute loading
        */
@@ -38318,8 +37968,7 @@
       /**
        The current value, as submitted during form submission.
        When {@link Coral.Autocomplete#multiple} is <code>true</code>, the first selected value will be returned.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute value
        */
@@ -38337,8 +37986,7 @@
       /**
        The current values, as submitted during form submission.
        When {@link Coral.Autocomplete#multiple} is <code>false</code>, this will be an array of length 1.
-       
-       @type {Array.<String>}
+        @type {Array.<String>}
        */
 
     }, {
@@ -38558,8 +38206,7 @@
       }
       /**
        @ignore
-       
-       Not supported anymore.
+        Not supported anymore.
        */
 
     }, {
@@ -38579,8 +38226,7 @@
       }
       /**
        Returns {@link Autocomplete} variants.
-       
-       @return {AutocompleteVariantEnum}
+        @return {AutocompleteVariantEnum}
        */
 
     }, {
@@ -38633,9 +38279,9 @@
   var CLASSNAME$A = '_coral-Banner';
   /**
    Enumeration for {@link Banner} variants.
-   
+
    @typedef {Object} BannerVariantEnum
-   
+
    @property {String} ERROR
    A banner to indicate that an error has occurred.
    @property {String} WARNING
@@ -38685,8 +38331,7 @@
     }
     /**
      The banner variant style to use. See {@link BannerVariantEnum}.
-     
-     @type {String}
+      @type {String}
      @default BannerVariantEnum.INFO
      @htmlattribute variant
      @htmlattributereflected
@@ -38746,8 +38391,7 @@
       }
       /**
        The banner's header.
-       
-       @type {BannerHeader}
+        @type {BannerHeader}
        @contentzone
        */
 
@@ -38768,8 +38412,7 @@
       }
       /**
        The banner's content.
-       
-       @type {BannerContent}
+        @type {BannerContent}
        @contentzone
        */
 
@@ -38798,8 +38441,7 @@
       }
       /**
        Returns {@link Banner} variants.
-       
-       @return {BannerVariantEnum}
+        @return {BannerVariantEnum}
        */
 
     }], [{
@@ -38894,9 +38536,9 @@
 
   /**
    Enumeration for {@link ButtonGroup} selection options.
-   
+
    @typedef {Object} ButtonGroupSelectionModeEnum
-   
+
    @property {String} NONE
    None is default, selection of buttons doesn't happen based on click.
    @property {String} SINGLE
@@ -38978,8 +38620,7 @@
     }
     /**
      The Collection Interface that allows interacting with the items that the component contains.
-     
-     @type {SelectableCollection}
+      @type {SelectableCollection}
      @readonly
      */
 
@@ -39290,13 +38931,11 @@
       /**
        Toggles the selected state of the item. When <code>selected</code> is provided, it is set as the current state. If
        the value is ommited, then the selected is toggled.
-       
-       @param {HTMLElement} item
+        @param {HTMLElement} item
        Item whose selection needs to be updated.
        @param {Boolean} [selected]
        Whether the item is selected. If it is not provided, then it is toggled.
-       
-       @private
+        @private
        */
 
     }, {
@@ -39505,8 +39144,7 @@
       }
       /**
        Returns {@link ButtonGroup} selection options.
-       
-       @return {ButtonGroupSelectionModeEnum}
+        @return {ButtonGroupSelectionModeEnum}
        */
 
     }, {
@@ -39569,8 +39207,7 @@
       }
       /**
        Selection mode of Button group
-       
-       @type {String}
+        @type {String}
        @default ButtonGroupSelectionModeEnum.NONE
        @htmlattribute selectionmode
        @htmlattributereflected
@@ -39650,8 +39287,7 @@
       }
       /**
        Returns an Array containing the selected buttons.
-       
-       @type {Array.<HTMLElement>}
+        @type {Array.<HTMLElement>}
        @readonly
        */
 
@@ -39668,8 +39304,7 @@
       /**
        Returns the first selected button in the Button Group. The value <code>null</code> is returned if no button is
        selected.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @readonly
        */
 
@@ -39680,8 +39315,7 @@
       }
       /**
        Current selected values as submitted during form submission.
-       
-       @type {Array.<String>}
+        @type {Array.<String>}
        */
 
     }, {
@@ -40355,7 +39989,7 @@
   }
   /**
    Slides in new month tables, slides out old tables, and then cleans up the leftovers when it is done.
-   
+
    @ignore
    */
 
@@ -40529,8 +40163,7 @@
     }
     /**
      Defines the start day for the week, 0 = Sunday, 1 = Monday etc., as depicted on the calendar days grid.
-     
-     @type {Number}
+      @type {Number}
      @default 0
      @htmlattribute startday
      */
@@ -40569,15 +40202,13 @@
       }
       /**
        Returns <code>true</code> if moment specified is before <code>min</code>.
-       
-       @param {moment} currentMoment
+        @param {moment} currentMoment
        A moment to test.
        @param {String} unit
        Year, Month, Week, Day
        @returns {Boolean}
        <code>true</code> if moment specified is before <code>min</code>
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -40588,15 +40219,13 @@
       }
       /**
        Returns <code>true</code> if moment specified is after <code>max</code>.
-       
-       @param {moment} currentMoment
+        @param {moment} currentMoment
        A moment to test.
        @param {String} unit
        Year, Month, Week, Day
        @returns {Boolean}
        <code>true</code> if moment specified is after <code>max</code>
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -40607,15 +40236,13 @@
       }
       /**
        Returns <code>true</code> if moment specified is greater than or equal to <code>min</code> and less than or equal to <code>max</code>.
-       
-       @param {moment} currentMoment
+        @param {moment} currentMoment
        A moment to test.
        @param {String} unit
        Year, Month, Week, Day
        @returns {Boolean}
        <code>true</code> if moment specified falls within <code>min</code>/<code>max</code> date range.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -40626,8 +40253,7 @@
       /**
        Updates the aria-activedescendant property for the calendar grid to communicate the currently focused date, or the
        date that should get focus when the grid receives focus, to assistive technology.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -40695,8 +40321,7 @@
       /**
        Updates the table caption which serves as a live region to announce the currently focused date to assistive
        technology, improving compatibility across operating systems, browsers and screen readers.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -40823,13 +40448,11 @@
       }
       /**
        Navigate to previous or next timeUnit interval.
-       
-       @param {String} unit
+        @param {String} unit
        Year, Month, Week, Day
        @param {Boolean} isNext
        Whether to navigate forward or backward.
-       
-       @private
+        @private
        */
 
     }, {
@@ -41192,8 +40815,7 @@
        The format used to display the current month and year.
        'MMMM YYYY' is supported by default. Include momentjs to support additional format string options see
        http://momentjs.com/docs/#/displaying/.
-       
-       @type {String}
+        @type {String}
        @default "MMMM YYYY"
        @htmlattribute headerformat
        */
@@ -41210,8 +40832,7 @@
       }
       /**
        The minimal selectable date in the Calendar view. When passed a string, it needs to be 'YYYY-MM-DD' formatted.
-       
-       @type {String|Date}
+        @type {String|Date}
        @default null
        @htmlattribute min
        */
@@ -41233,8 +40854,7 @@
       /**
        The max selectable date in the Calendar view. When passed a string, it needs to be 'YYYY-MM-DD'
        formatted.
-       
-       @type {String|Date}
+        @type {String|Date}
        @default null
        @htmlattribute max
        */
@@ -41257,8 +40877,7 @@
        The format to use on expressing the selected date as a string on the <code>value</code> attribute.
        'YYYY-MM-DD' is supported by default. Include momentjs to support additional format string options see
        http://momentjs.com/docs/#/displaying/.
-       
-       @type {String}
+        @type {String}
        @default "YYYY-MM-DD"
        @htmlattribute valueformat
        @htmlattributereflected
@@ -41291,8 +40910,7 @@
       }
       /**
        The value returned, or set, as a Date. If the value is '' it will return <code>null</code>.
-       
-       @type {Date}
+        @type {Date}
        @default null
        */
 
@@ -41313,8 +40931,7 @@
       /**
        The current value. When set to 'today', the value is coerced into the clients local date expressed as string
        formatted in accordance to the set <code>valueFormat</code>.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute value
        */
@@ -41498,9 +41115,9 @@
   var COLOR_HINT_REG_EXP = /^#[0-9A-F]{6}$/i;
   /**
    Enumeration for {@link Card} variants.
-   
+
    @typedef {Object} CardVariantEnum
-   
+
    @property {String} DEFAULT
    Default card variant that shows the asset, overlay and content in their default positions.
    @property {String} QUIET
@@ -41568,8 +41185,7 @@
     }
     /**
      The Asset of the card.
-     
-     @type {CardAsset}
+      @type {CardAsset}
      @contentzone
      */
 
@@ -41664,8 +41280,7 @@
        Hints the height of the asset that is going to be loaded. This prepares the size so that when the image is
        loaded no reflow is triggered. Both <code>assetHeight</code> and <code>assetWidth</code> need to be specified
        for this feature to take effect.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute assetheight
        */
@@ -41705,8 +41320,7 @@
        Hints the width of the asset that is going to be loaded. This prepares the size so that when the image is
        loaded no reflow is triggered. Both <code>assetHeight</code> and <code>assetWidth</code> need to be specified
        for this feature to take effect.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute assetwidth
        */
@@ -41741,8 +41355,7 @@
       }
       /**
        The Content of the card.
-       
-       @type {CardContent}
+        @type {CardContent}
        @contentzone
        */
 
@@ -41769,8 +41382,7 @@
       }
       /**
        The information area of the card, which is placed over all the content. It is typically used for alerts.
-       
-       @type {CardInfo}
+        @type {CardInfo}
        @contentzone
        */
 
@@ -41791,8 +41403,7 @@
       /**
        Fixes the width of the card. By default cards will take the width of their containers allowing them to interact
        nicely with grids. Whenever they are used standalone fixing the width might be desired.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute fixedwidth
        @htmlattributereflected
@@ -41812,8 +41423,7 @@
       }
       /**
        The Overlay of the card.
-       
-       @type {CardOverlay}
+        @type {CardOverlay}
        @contentzone
        */
 
@@ -41833,8 +41443,7 @@
       }
       /**
        Whether the card is stacked or not. This is used to represent several assets grouped together.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute stacked
        @htmlattributereflected
@@ -41855,8 +41464,7 @@
       /**
        The card's variant. It determines which sections of the Card and in which position they are shown.
        See {@link CardVariantEnum}.
-       
-       @type {String}
+        @type {String}
        @default CardVariantEnum.DEFAULT
        @htmlattribute variant
        */
@@ -41894,8 +41502,7 @@
       }
       /**
        Returns {@link Card} variants.
-       
-       @return {CardVariantEnum}
+        @return {CardVariantEnum}
        */
 
     }], [{
@@ -41968,8 +41575,7 @@
     }
     /**
      The property's content zone
-     
-     @type {CardPropertyContent}
+      @type {CardPropertyContent}
      @contentzone
      */
 
@@ -42027,8 +41633,7 @@
       }
       /**
        Specifies the icon name used inside the property. See {@link Icon} for valid icon names.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute icon
        */
@@ -42050,8 +41655,7 @@
       }
       /**
        Specifies the alternative text to be used for the icon.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute iconalt
        */
@@ -42066,8 +41670,7 @@
       }
       /**
        Specifies the title attribute to be used for the icon.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute icontitle
        */
@@ -42375,9 +41978,9 @@
   var CLASSNAME$F = '_coral-CharacterCount';
   /**
    Enumeration for {@link CharacterCount} targets.
-   
+
    @typedef {Object} CharacterCountTargetEnum
-   
+
    @property {String} PREVIOUS
    Relates the CharacterCount to the previous sibling.
    @property {String} NEXT
@@ -42440,8 +42043,7 @@
       }
       /**
        Returns {@link CharacterCount} target options.
-       
-       @return {CharacterCountTargetEnum}
+        @return {CharacterCountTargetEnum}
        */
 
     }, {
@@ -42463,8 +42065,7 @@
       /**
        The target Textfield or Textarea for this component. It accepts values from {@link CharacterCountTargetEnum},
        as well as any DOM element or CSS selector.
-       
-       @type {HTMLElement|String}
+        @type {HTMLElement|String}
        @default CharacterCountTargetEnum.PREVIOUS
        @htmlattribute target
        */
@@ -42502,8 +42103,7 @@
       }
       /**
        Maximum character length for the TextField/TextArea (will be read from target field markup if able).
-       
-       @type {Number}
+        @type {Number}
        @default null
        @htmlattribute maxlength
        @htmlattributereflected
@@ -42805,9 +42405,9 @@
   var MIN_REG_EXP = new RegExp('m{1,2}');
   /**
    Enumeration for {@link Clock} variants.
-   
+
    @typedef {Object} ClockVariantEnum
-   
+
    @property {String} DEFAULT
    A default, gray Clock.
    @property {String} QUIET
@@ -42870,8 +42470,7 @@
      The format used to display the selected time to the user. If the user manually types a time, this format
      will be used to parse the value. 'HH:mm' is supported by default. Include momentjs to support additional format
      string options see http://momentjs.com/docs/#/displaying/.
-     
-     @type {String}
+      @type {String}
      @default "HH:mm"
      @htmlattribute displayformat
      @htmlattributereflected
@@ -42883,8 +42482,7 @@
 
       /**
        Ignore the date part and use the time part only
-       
-       @private
+        @private
        */
       value: function _extractTimeFormat(format, regExp, defaultFormat) {
         var match = regExp.exec(format);
@@ -42892,8 +42490,7 @@
       }
       /**
        Sync time display based on the format
-       
-       @private
+        @private
        */
 
     }, {
@@ -42914,8 +42511,7 @@
       }
       /**
        Sync period selector based on the format
-       
-       @private
+        @private
        */
 
     }, {
@@ -42992,8 +42588,7 @@
       }
       /**
        Kills the internal _onInputChange from BaseFormField because it does not check the target.
-       
-       @private
+        @private
        */
 
     }, {
@@ -43040,15 +42635,12 @@
       /**
        Helper class that converts the internal moment value into a String using the provided date format. If the value is
        invalid, empty string will be returned.
-       
-       @param {?Moment} value
+        @param {?Moment} value
        The value representing the date. It has to be a moment object or <code>null</code>
        @param {String} format
        The Date format to be used.
-       
-       @returns {String} a String representing the value in the given format.
-       
-       @ignore
+        @returns {String} a String representing the value in the given format.
+        @ignore
        */
 
     }, {
@@ -43066,8 +42658,7 @@
       }
       /**
        Returns {@link Clock} variants.
-       
-       @return {ClockVariantEnum}
+        @return {ClockVariantEnum}
        */
 
     }, {
@@ -43120,8 +42711,7 @@
        will be sent to the server using this format. If an empty string is provided, then the default value per type
        will be used. 'HH:mm' is supported by default. Include momentjs to support additional format string options
        see http://momentjs.com/docs/#/displaying/.
-       
-       @type {String}
+        @type {String}
        @default "HH:mm"
        @htmlattribute valueformat
        @htmlattributereflected
@@ -43152,8 +42742,7 @@
       }
       /**
        The current value as a Date. If the value is "" or an invalid date, <code>null</code> will be returned.
-       
-       @type {Date}
+        @type {Date}
        @default null
        */
 
@@ -43167,8 +42756,7 @@
       }
       /**
        The clock's variant. See {@link ClockVariantEnum}.
-       
-       @type {String}
+        @type {String}
        @default ClockVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -43429,9 +43017,9 @@
 
   /**
    Enumeration for {@link CoachMark} sizes.
-   
+
    @typedef {Object} CoachMarkSizeEnum
-   
+
    @property {String} SMALL
    A small sized coach mark.
    @property {String} MEDIUM
@@ -43444,9 +43032,9 @@
   };
   /**
    Enumeration for {@link CoachMark} variants.
-   
+
    @typedef {Object} CoachMarkVariantEnum
-   
+
    @property {String} DEFAULT
    The default styled coach mark.
    @property {String} LIGHT
@@ -43489,8 +43077,7 @@
     /**
      The element the coach mark should position relative to. It accepts values from {@link OverlayTargetEnum}, as
      well as a DOM element or a CSS selector. If a CSS selector is provided, the first matching element will be used.
-     
-     @type {?HTMLElement|String}
+      @type {?HTMLElement|String}
      @default null
      */
 
@@ -43565,8 +43152,7 @@
       }
       /**
        The coach mark size. See {@link CoachMarkSizeEnum}.
-       
-       @type {String}
+        @type {String}
        @default CoachMarkSizeEnum.MEDIUM
        @htmlattribute size
        @htmlattributereflected
@@ -43587,8 +43173,7 @@
       }
       /**
        The coach mark variant. See {@link CoachMarkVariantEnum}.
-       
-       @type {String}
+        @type {String}
        @default CoachMarkVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -43610,8 +43195,7 @@
       }
       /**
        Returns {@link CoachMark} sizes options.
-       
-       @return {CoachMarkSizeEnum}
+        @return {CoachMarkSizeEnum}
        */
 
     }], [{
@@ -43621,8 +43205,7 @@
       }
       /**
        Returns {@link CoachMark} variant options.
-       
-       @return {CoachMarkVariantEnum}
+        @return {CoachMarkVariantEnum}
        */
 
     }, {
@@ -43667,11 +43250,11 @@
   };
   /**
    Transforms part of a color (r,g,b) into a hex value.
-   
+
    @static
    @param {Number} x
    value between 0-255
-   
+
    @return {String} Hex representation
    @ignore
    */
@@ -43696,11 +43279,11 @@
   /**
    Parse an rgb value into an object.
    e.g.: 'rgb(0,0,0)' => {r:0, g:0, b:0}
-   
+
    @static
    @param {String} rgbStr
    The string representing the rgb value
-   
+
    @return {Object} {r, g, b} Returns null if string could not be parsed
    @ignore
    */
@@ -43734,7 +43317,7 @@
   /**
    Serialize an rgb object into a string.
    e.g.: {r:0, g:0, b:0} => 'rgb(0,0,0)'
-   
+
    @static
    @param {Object} rgb
    @return {String} rgbStr The string representing the rgb value
@@ -43752,11 +43335,11 @@
   /**
    Parse an rgba value into an object.
    e.g.: 'rgba(0,0,0,0.5)' => {r:0, g:0, b:0, a:0.5}
-   
+
    @static
    @param {String} rgbaStr
    The string representing the rgba value.
-   
+
    @return {Object} {r, g, b, a} Returns null if string could not be parsed
    @ignore
    */
@@ -43792,7 +43375,7 @@
   /**
    Serialize an rgba object into a string.
    e.g.: {r:0, g:0, b:0, a:0.5} => 'rgb(0,0,0,0.5)'
-   
+
    @static
    @param {Object} rgba
    @return {String} rgbaStr The string representing the rgba value
@@ -43810,11 +43393,11 @@
   /**
    Parse an cmyk value into an object.
    e.g.: 'cmyk(0, 100, 50, 0)' => {c:0, m:100, y:50, k:0}
-   
+
    @static
    @param {String} cmykStr
    The string representing the cmyk value.
-   
+
    @return {Object} {c, m, y, k} Returns null if string could not be parsed
    @ignore
    */
@@ -43850,7 +43433,7 @@
   /**
    Serialize an cmyk object into a string.
    e.g.: {c:0, m:100, y:50, k:0} => 'cmyk(0, 100, 50, 0)'
-   
+
    @static
    @param {Object} cmyk
    @return {String} cmykStr The string representing the cmyk value
@@ -43873,7 +43456,7 @@
   /**
    Parse an hex value into a number. Corrects a hex value, if it is represented by 3 or 6 characters with or without
    '#'.
-   
+
    @static
    @param {String} hexStr The string representing the hex value
    @return {Number} Returns a number representing the parsed hex value
@@ -43899,11 +43482,11 @@
   }
   /**
    Transforms a hex color into RGB representation.
-   
+
    @static
    @param {Number} hex
    The color hex representation.
-   
+
    @return {Object} {r, g, b}
    @ignore
    */
@@ -43925,7 +43508,7 @@
   }
   /**
    Serialize a hex number into a string.
-   
+
    @static
    @param {Number} hex
    @return {String}
@@ -43945,7 +43528,7 @@
   }
   /**
    Transforms a RGB color into HEX representation.
-   
+
    @static
    @param {Object} rgb
    @return {Number} hex The color hex representation
@@ -43963,7 +43546,7 @@
   /**
    Transforms a cmyk color into RGB representation. Converting CMYK to RGB will incur slight loss because both color
    spaces are not absolute and there will be some round-off error in the conversion process.
-   
+
    @static
    @param {Object} cmyk
    @return {Object} {r, g, b}
@@ -43996,7 +43579,7 @@
   /**
    Transforms a rgb color into cmyk representation. Converting CMYK to RGB will incur slight loss because both color
    spaces are not absolute and there will be some round-off error in the conversion process.
-   
+
    @static
    @param {Object} rgb
    @return {Object} {c, m, y, k}
@@ -44037,11 +43620,11 @@
   /**
    Parse an hsb value into an object.
    e.g.: 'hsb(360,100,0)' => {h:360, s:100, b:0}
-   
+
    @static
    @param {String} hsbStr
    The string representing the hsb value.
-   
+
    @return {Object} {h, s, b} Returns null if string could not be parsed
    @ignore
    */
@@ -44076,7 +43659,7 @@
   /**
    Serialize an hsb object into a string.
    e.g.: {h:0, s:0, b:0} => 'hsb(0,0,0)'
-   
+
    @static
    @param {Object} hsb
    @return {String} hsb The string representing the hsb value
@@ -44100,7 +43683,7 @@
    h (hue has value between 0-360 degree)
    s (saturation has a value between 0-100 percent)
    b (brightness has a value between 0-100 percent)
-   
+
    @static
    @param {Object} hsb
    @return {Object} {r, g, b}
@@ -44169,7 +43752,7 @@
   }
   /**
    Transforms a RGB color into HSB (same as HSV) representation.
-   
+
    @static
    @param {Object} rgb
    @return {Object} {h, s, b}
@@ -44222,11 +43805,11 @@
   /**
    Parse an hsl value into an object.
    e.g.: 'hsl(360,100,0)' => {h:360, s:100, b:0}
-   
+
    @static
    @param {String} hslStr
    The string representing the hsl value.
-   
+
    @return {Object} {h, s, l} Returns null if string could not be parsed
    @ignore
    */
@@ -44261,7 +43844,7 @@
   /**
    Serialize an hsl object into a string.
    e.g.: {h:0, s:0, l:0} => 'hsl(0,0%,0%)'
-   
+
    @static
    @param {Object} hsl
    @return {String} hsb The string representing the hsb value
@@ -44285,7 +43868,7 @@
    h (hue has value between 0-360 degree)
    s (saturation has a value between 0-100 percent)
    l (lightness has a value between 0-100 percent)
-   
+
    @static
    @param {Object} hsl
    @return {Object} {r, g, b}
@@ -44348,7 +43931,7 @@
   }
   /**
    Transforms an RGB color into HSL representation.
-   
+
    @static
    @param {Object} rgb
    @return {Object} {h, s, l}
@@ -44403,11 +43986,11 @@
   /**
    Parse an hsla value into an object.
    e.g.: 'hsla(360,100%,0%,0.5)' => {h:360, s:100, l:0, 0.5}
-   
+
    @static
    @param {String} hslaStr
    The string representing the hsl value.
-   
+
    @return {Object} {h, s, l, a} Returns null if string could not be parsed
    @ignore
    */
@@ -44444,7 +44027,7 @@
   /**
    Serialize an hsla object into a string.
    e.g.: {h:0, s:0, l:0, a:0.5} => 'hsl(0,0%,0%,0.5)'
-   
+
    @static
    @param {Object} hsla
    @return {String} hsb The string representing the hsb value
@@ -44482,8 +44065,7 @@
     /**
      The value of the color. This value can be set in different formats (HEX, RGB, RGBA, HSB, HSL, HSLA and CMYK).
      Corrects a hex value, if it is represented by 3 or 6 characters with or without '#'.
-     
-     e.g:
+      e.g:
      HEX:  #FFFFFF
      RGB:  rgb(16,16,16)
      RGBA: rgba(215,40,40,0.9)
@@ -44491,8 +44073,7 @@
      HSL:  hsl(360,100%,100%)
      HSLA: hsla(360,100%,100%,0.9)
      CMYK: cmyk(0,100,50,0)
-     
-     @type {String}
+      @type {String}
      @default ""
      */
 
@@ -44502,8 +44083,7 @@
 
       /**
        Clone this color.
-       
-       @type {Color}
+        @type {Color}
        */
       value: function clone() {
         var clone = new this.constructor();
@@ -44513,15 +44093,13 @@
       }
       /**
        Test if this Color is similar to another color.
-       
-       @type {Boolean}
+        @type {Boolean}
        @param {Color} compareColor
        The color to compare this color too.
-       
-       @param {Boolean} [allowSlightColorDifference=true]
+        @param {Boolean} [allowSlightColorDifference=true]
        While converting between color spaces slight loses might happen => we should normally consider colors equal,
        even if they are minimally different.
-         */
+        */
 
     }, {
       key: "isSimilarTo",
@@ -44558,11 +44136,10 @@
       }
       /**
        Calculates an array of lighter colors.
-       
-       @type {Array<Coral.Color>}
+        @type {Array<Coral.Color>}
        @param {Number} amount
        Amount of tint colors to generate.
-         */
+        */
 
     }, {
       key: "calculateTintColors",
@@ -44594,11 +44171,10 @@
       }
       /**
        Calculates an array of darker colors.
-       
-       @type {Array<Coral.Color>}
+        @type {Array<Coral.Color>}
        @param {Number} amount
        Amount of shade colors to generate.
-         */
+        */
 
     }, {
       key: "calculateShadeColors",
@@ -44685,8 +44261,7 @@
       }
       /**
        The alpha value of the color (value between 0-1).
-       
-       @type {Number}
+        @type {Number}
        @default 1
        */
 
@@ -44705,8 +44280,7 @@
       /**
        The rgb values of the color (value between 0-255).
        e.g.: {r:0, g:0, b:0}
-       
-       @type {Object}
+        @type {Object}
        @default null
        */
 
@@ -44743,8 +44317,7 @@
       /**
        The serialized rgb values of the color (r,g,b values between 0-255).
        e.g: 'rgb(0,0,0)'
-       
-       @type {String}
+        @type {String}
        @default ""
        */
 
@@ -44759,8 +44332,7 @@
       /**
        The rgba values of the color (r,g,b values between 0-255 and a between 0-1).
        e.g: {r:0, g:0, b:0, a:1}
-       
-       @type {Object}
+        @type {Object}
        @default null
        */
 
@@ -44786,8 +44358,7 @@
       /**
        The serialized rgba values of the color (r,g,b values between 0-255 and alpha between 0-1).
        e.g: 'rgba(0,0,0,1)'
-       
-       @type {String}
+        @type {String}
        @default ""
        */
 
@@ -44801,8 +44372,7 @@
       }
       /**
        The hex value of the color.
-       
-       @type {Number}
+        @type {Number}
        @default null
        */
 
@@ -44818,8 +44388,7 @@
       /**
        The serialized hex value of the color.
        e.g: '#94CD4B'
-       
-       @type {String}
+        @type {String}
        @default ""
        */
 
@@ -44834,8 +44403,7 @@
       /**
        The cmyk values of the color (all values between 0-100).
        e.g: {c:0, m:100, y:0, k:100}
-       
-       @type {Object}
+        @type {Object}
        @default null
        */
 
@@ -44875,8 +44443,7 @@
       /**
        The serialized cmyk values of the color (all values between 0-100).
        e.g: 'cmyk(100,100,100,100)'
-       
-       @type {String}
+        @type {String}
        @default ""
        */
 
@@ -44893,8 +44460,7 @@
        h (hue has value between 0-360 degree)
        s (saturation has a value between 0-100 percent)
        b (brightness has a value between 0-100 percent)
-       
-       @type {Object}
+        @type {Object}
        @default null
        */
 
@@ -44934,8 +44500,7 @@
       /**
        The serialized hsb values of the color (s and b values between 0-100, h between 0-360).
        e.g: 'hsb(360,100,100)'
-       
-       @type {String}
+        @type {String}
        @default ""
        */
 
@@ -44952,8 +44517,7 @@
        h (hue has value between 0-360 degree)
        s (saturation has a value between 0-100 percent)
        l (lightness has a value between 0-100 percent)
-       
-       @type {Object}
+        @type {Object}
        @default null
        */
 
@@ -44993,8 +44557,7 @@
       /**
        The serialized hsl values of the color (s and l values between 0-100 in percent, h between 0-360).
        e.g: 'hsl(360,100%,100%)'
-       
-       @type {String}
+        @type {String}
        @default ""
        */
 
@@ -45012,8 +44575,7 @@
        s (saturation has a value between 0-100 percent)
        l (lightness has a value between 0-100 percent)
        a (alpha has a value between 0-1)
-       
-       @type {Object}
+        @type {Object}
        @default null
        */
 
@@ -45043,8 +44605,7 @@
        l (lightness has a value between 0-100 percent)
        a (alpha has a value between 0-1)
        e.g: 'hsla(360,50%,50%,0.9)'
-       
-       @type {String}
+        @type {String}
        @default ""
        */
 
@@ -45096,8 +44657,7 @@
       /**
        The value of the color. This value can be set in different formats (HEX, RGB, RGBA, HSB, HSL, HSLA and CMYK).
        Corrects a hex value, if it is represented by 3 or 6 characters with or without '#'.
-       
-       e.g:
+        e.g:
        HEX:  #FFFFFF
        RGB:  rgb(16,16,16)
        RGBA: rgba(215,40,40,0.9)
@@ -45105,8 +44665,7 @@
        HSL: hsl(360,100,100)
        HSLA: hsla(360,100%,100%, 0.9)
        CMYK: cmyk(0,100,50,0)
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute value
        @htmlattributereflected
@@ -45331,9 +44890,9 @@
   var CLASSNAME_INPUT = '_coral-Slider-input';
   /**
    Enumeration for {@link Slider} orientations.
-   
+
    @typedef {Object} SliderOrientationEnum
-   
+
    @property {String} HORIZONTAL
    Horizontal slider.
    @property {String} VERTICAL
@@ -45406,8 +44965,7 @@
     }
     /**
      The slider's content.
-     
-     @type {SliderContent}
+      @type {SliderContent}
      @contentzone
      */
 
@@ -45492,8 +45050,7 @@
       /**
        will set the focus either on the handle element
        or its input if range is supported
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -45505,8 +45062,7 @@
        Handles keyboard interaction with the handlers.
        In case input[type=range] is supported, the focus
        will be on the input and keyboard handling will happen natively
-       
-       @private
+        @private
        */
 
     }, {
@@ -45539,8 +45095,7 @@
       }
       /**
        Finds the nearest handle based on X/Y coordinates
-       
-       @private
+        @private
        */
 
     }, {
@@ -45571,8 +45126,7 @@
       /**
        Moves the handles to right position
        based on the data in this._values
-       
-       @private
+        @private
        */
 
     }, {
@@ -45615,8 +45169,7 @@
        Handles "onchange" events from the input.
        This is only neede in case of IE10 which doesn't handle "oninput event".
        In that case, the _onInputChangeHandler will be called from this handler.
-       
-       @private
+        @private
        */
 
     }, {
@@ -45631,11 +45184,9 @@
        This makes ensures native inputs like
        - direct keyboard interaction with input[type=range]
        - accessibility features with input[type=range]
-       
-       Note we are not using the "_onInputChange" directly because Firefox
+        Note we are not using the "_onInputChange" directly because Firefox
        will trigger the "change" event only after the focus has been lost.
-       
-       @private
+        @private
        */
 
     }, {
@@ -45653,8 +45204,7 @@
       }
       /**
        Handles "focusin" event from  either an input or its handle.
-       
-       @private
+        @private
        */
 
     }, {
@@ -45669,8 +45219,7 @@
       }
       /**
        Handles the blur
-       
-       @private
+        @private
        */
 
     }, {
@@ -45684,8 +45233,7 @@
       }
       /**
        Handles "focusout" event from  either an input or its handle.
-       
-       @private
+        @private
        */
 
     }, {
@@ -45700,8 +45248,7 @@
       }
       /**
        handles mousemove/touchmove after a succesful start on an handle
-       
-       @private
+        @private
        */
 
     }, {
@@ -45812,8 +45359,7 @@
       }
       /**
        Gets the label for a passed value.
-       
-       @param value
+        @param value
        @return {String|Number} the known label from the item or the value itself
        @protected
        */
@@ -45918,8 +45464,7 @@
       }
       /**
        The Collection Interface that allows interacting with the items that the component contains.
-       
-       @type {Collection}
+        @type {Collection}
        @readonly
        */
 
@@ -45938,8 +45483,7 @@
       }
       /**
        Increment value of one step.
-       
-       @type {Number}
+        @type {Number}
        @default 1
        @htmlattribute step
        @htmlattributereflected
@@ -45967,8 +45511,7 @@
       }
       /**
        The minimum value.
-       
-       @type {Number}
+        @type {Number}
        @default 1
        @htmlattribute min
        @htmlattributereflected
@@ -45992,8 +45535,7 @@
       }
       /**
        The maximum value.
-       
-       @type {Number}
+        @type {Number}
        @default 100
        @htmlattribute max
        @htmlattributereflected
@@ -46017,8 +45559,7 @@
       }
       /**
        @ignore
-       
-       Not supported anymore. Use "showValue" instead.
+        Not supported anymore. Use "showValue" instead.
        */
 
     }, {
@@ -46031,8 +45572,7 @@
       }
       /**
        Display the slider value.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute showvalue
        @htmlattributereflected
@@ -46052,8 +45592,7 @@
       }
       /**
        Orientation of the slider. See {@link SliderOrientationEnum}.
-       
-       @type {String}
+        @type {String}
        @default SliderOrientationEnum.HORIZONTAL
        @htmlattribute orientation
        @htmlattributereflected
@@ -46072,8 +45611,7 @@
       }
       /**
        Fill a value or value range using a highlight color.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute filled
        @htmlattributereflected
@@ -46093,8 +45631,7 @@
       }
       /**
        The value returned as a Number. Value is <code>NaN</code> if conversion to Number is not possible.
-       
-       @type {Number}
+        @type {Number}
        @default NaN
        */
 
@@ -46295,8 +45832,7 @@
       }
       /**
        Returns {@link Slider} orientation options.
-       
-       @return {SliderOrientationEnum}
+        @return {SliderOrientationEnum}
        */
 
     }], [{
@@ -46380,8 +45916,7 @@
       /**
        The slider's item value.
        This should contain a number formatted as a string (e.g.: "10") or an empty string.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute value
        @htmlattributereflected
@@ -46634,8 +46169,7 @@
 
       /**
        Ranged sliders are always filled.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default true
        @htmlattribute filled
        @htmlattributereflected
@@ -46665,8 +46199,7 @@
       }
       /**
        The starting value of the range.
-       
-       @type {String}
+        @type {String}
        @default '1'
        @emits {change}
        @htmlattribute startValue
@@ -46690,8 +46223,7 @@
       }
       /**
        The ending value of the range.
-       
-       @type {String}
+        @type {String}
        @default '100'
        @emits {change}
        @htmlattribute endValue
@@ -46715,8 +46247,7 @@
       }
       /**
        The current values of the ranged slider.
-       
-       @type {Array.<String>}
+        @type {Array.<String>}
        @default [{@link Coral.RangedSlider#startValue},{@link Coral.RangedSlider#endValue}]
        @emits {change}
        */
@@ -46892,8 +46423,7 @@
       /**
        The gradient shown as slider background as space separated values (at least 2 values needed).
        e.g: #ff0000 #ffff00 #00ff00 #00ffff #0000ff #ff00ff #ff0000
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute gradient
        */
@@ -47526,8 +47056,7 @@
       /**
        The Coral.ColorInput.Item that the swatch is a visual representation of. It accepts a DOM element or a CSS selector.
        If a CSS selector is provided, the first matching element will be used.
-       
-       @type {HTMLElement|String}
+        @type {HTMLElement|String}
        @default null
        @htmlattribute targetcolor
        */
@@ -47568,8 +47097,7 @@
       }
       /**
        Whether the color preview is disabled or not.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute disabled
        @htmlattributereflected
@@ -47586,12 +47114,11 @@
         this._reflectAttribute('disabled', this.disabled);
       }
       /**
-       The tabindex of the color preview button. 
+       The tabindex of the color preview button.
        So that we don't wind up with nested focusable elements,
-       the internal colorButton should should receive the tabIndex property, 
+       the internal colorButton should should receive the tabIndex property,
        while the coral-colorinput-swatch should reflect the value using the _tabindex attribute.
-       
-       @type {Integer}
+        @type {Integer}
        @default -1
        @htmlattribute tabindex
        @htmlattributereflected
@@ -47718,8 +47245,7 @@
     }
     /**
      The Collection Interface that allows interacting with the items that the component contains.
-     
-     @type {SelectableCollection}
+      @type {SelectableCollection}
      @readonly
      */
 
@@ -48027,8 +47553,7 @@
       }
       /**
        The selected item.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @readonly
        */
 
@@ -48217,9 +47742,9 @@
   var CLASSNAME$N = '_coral-ColorInput';
   /**
    Enumeration for {@link ColorInput} variants.
-   
+
    @typedef {Object} ColorInputVariantEnum
-   
+
    @property {String} DEFAULT
    Use ColorInput as a formfield (default).
    @property {String} SWATCH
@@ -48232,9 +47757,9 @@
   };
   /**
    Enumeration for {@link ColorInput} auto generated colors options.
-   
+
    @typedef {Object} ColorInputAutoGenerateColorsEnum
-   
+
    @property {String} OFF
    Disable auto generation.
    @property {String} SHADES
@@ -48250,9 +47775,9 @@
   };
   /**
    Enumeration for {@link ColorInput} swatches display options.
-   
+
    @typedef {Object} ColorInputShowSwatchesEnum
-   
+
    @property {String} ON
    Display swatches view (default).
    @property {String} OFF
@@ -48265,9 +47790,9 @@
   };
   /**
    Enumeration for {@link ColorInput} color properties display options.
-   
+
    @typedef {Object} ColorInputShowPropertiesEnum
-   
+
    @property {String} ON
    Display color properties view (default).
    @property {String} OFF
@@ -48280,9 +47805,9 @@
   };
   /**
    Enumeration for {@link ColorInput} default colors display options.
-   
+
    @typedef {Object} ColorInputShowDefaultColorsEnum
-   
+
    @property {String} ON
    Display default colors (default).
    @property {String} OFF
@@ -48352,8 +47877,7 @@
     }
     /**
      Returns the inner overlay to allow customization.
-     
-     @type {Popover}
+      @type {Popover}
      @readonly
      */
 
@@ -48509,8 +48033,7 @@
       }
       /**
        Checks if the current input is valid or not. This check will only be performed on user interaction.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -48680,8 +48203,7 @@
       }
       /**
        Returns {@link ColorInput} variants.
-       
-       @return {ColorInputVariantEnum}
+        @return {ColorInputVariantEnum}
        */
 
     }, {
@@ -48764,8 +48286,7 @@
       }
       /**
        The Collection Interface that allows interacting with the items that the component contains.
-       
-       @type {SelectableCollection}
+        @type {SelectableCollection}
        @readonly
        */
 
@@ -48786,8 +48307,7 @@
       }
       /**
        The selected item in the ColorInput.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @readonly
        */
 
@@ -48798,8 +48318,7 @@
       }
       /**
        The ColorInput variant. See {@link ColorInputVariantEnum}.
-       
-       @default ColorInputVariantEnum.DEFAULT
+        @default ColorInputVariantEnum.DEFAULT
        @type {String}
        @htmlattribute variant
        @htmlattributereflected
@@ -48835,8 +48354,7 @@
       /**
        Convenient property to get/set the the current color. If the value is no valid color it will return
        <code>null</code> (The getter will return a copy of the current selected color).
-       
-       @type {Color}
+        @type {Color}
        */
 
     }, {
@@ -48885,8 +48403,7 @@
       /**
        Should shades (darker colors) or tints (lighter colors) automatically be generated.
        See {@link ColorInputAutoGenerateColorsEnum}.
-       
-       @default Coral.ColorInput.autoGenerateColors.OFF
+        @default Coral.ColorInput.autoGenerateColors.OFF
        @type {String}
        @htmlattribute autogeneratecolors
        */
@@ -48904,8 +48421,7 @@
       }
       /**
        Whether swatches view should be displayed. See {@link ColorInputSwatches}.
-       
-       @default ColorInputShowSwatchesEnum.ON
+        @default ColorInputShowSwatchesEnum.ON
        @type {ColorInputSwatches}
        @htmlattribute showswatches
        */
@@ -48923,8 +48439,7 @@
       }
       /**
        Whether properties view should be displayed. See {@link ColorInputColorProperties}.
-       
-       @default ColorInputShowPropertiesEnum.ON
+        @default ColorInputShowPropertiesEnum.ON
        @type {String}
        @htmlattribute showproperties
        */
@@ -48942,8 +48457,7 @@
       }
       /**
        Whether default colors should be displayed. Link {@link ColorInputShowDefaultColorsEnum}.
-       
-       @default ColorInputShowDefaultColorsEnum.ON
+        @default ColorInputShowDefaultColorsEnum.ON
        @type {String}
        @htmlattribute showdefaultcolors
        */
@@ -48969,8 +48483,7 @@
       /**
        Short hint that describes the expected value of the ColorInput. It is displayed when the ColorInput is empty
        and the variant is {@link Coral.ColorInput.variant.DEFAULT}
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute placeholder
        @htmlattributereflected
@@ -48989,15 +48502,13 @@
       /**
        The value of the color. This value can be set in 5 different formats (HEX, RGB, RGBA, HSB and CMYK). Corrects a
        hex value, if it is represented by 3 or 6 characters with or without '#'
-       
-       e.g:
+        e.g:
        HEX:  #FFFFFF
        RGB:  rgb(16,16,16)
        RGBA: rgba(215,40,40,0.9)
        RGBA: hsb(360,100,100)
        CMYK: cmyk(0,100,50,0)
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute value
        */
@@ -49158,8 +48669,7 @@
       }
       /**
        Returns {@link ColorInput} auto generated colors options.
-       
-       @return {ColorInputAutoGenerateColorsEnum}
+        @return {ColorInputAutoGenerateColorsEnum}
        */
 
     }, {
@@ -49169,8 +48679,7 @@
       }
       /**
        Returns {@link ColorInput} swatches display options.
-       
-       @return {ColorInputShowSwatchesEnum}
+        @return {ColorInputShowSwatchesEnum}
        */
 
     }, {
@@ -49180,8 +48689,7 @@
       }
       /**
        Returns {@link ColorInput} color properties display options.
-       
-       @return {ColorInputShowDefaultColorsEnum}
+        @return {ColorInputShowDefaultColorsEnum}
        */
 
     }, {
@@ -49191,8 +48699,7 @@
       }
       /**
        Returns {@link ColorInput} default colors display options.
-       
-       @return {ColorInputShowPropertiesEnum}
+        @return {ColorInputShowPropertiesEnum}
        */
 
     }, {
@@ -49606,7 +49113,7 @@
 
   /**
    * Helper function to test whether event.target is explicitly marked as interactive.
-   * 
+   *
    * Interactive elements included in an Item should respond to keyboard events without the event being handled by the Item as well.
    *
    * @private
@@ -49629,9 +49136,9 @@
 
   /**
    Enumeration for {@link ColumnView} selection options.
-   
+
    @typedef {Object} ColumnViewSelectionModeEnum
-   
+
    @property {String} NONE
    None is default, selection of items does not happen based on click.
    @property {String} SINGLE
@@ -49756,8 +49263,7 @@
     }
     /**
      Collection that holds all the columns inside the ColumnView.
-     
-     @type {ColumnViewCollection}
+      @type {ColumnViewCollection}
      @readonly
      */
 
@@ -49807,10 +49313,8 @@
       }
       /**
        Requests external data to be loaded.
-       
-       @emits {coral-columnview:loaditems}
-       
-       @private
+        @emits {coral-columnview:loaditems}
+        @private
        */
 
     }, {
@@ -49831,10 +49335,10 @@
         });
       }
       /**
-        Handle when first selectable item is added and make sure it is tabbable.
-        @param {HTMLElement} [item]
-        @private
-      */
+       Handle when first selectable item is added and make sure it is tabbable.
+       @param {HTMLElement} [item]
+       @private
+       */
 
     }, {
       key: "_onItemAdd",
@@ -49846,11 +49350,11 @@
         });
       }
       /**
-        Handle when item is removed, make sure that at least one element is tabbable, or if there are no items, and add listener to handle when item is added.
-        @param {HTMLElement} [item]
-          Item that was removed.
-        @private
-      */
+       Handle when item is removed, make sure that at least one element is tabbable, or if there are no items, and add listener to handle when item is added.
+       @param {HTMLElement} [item]
+       Item that was removed.
+       @private
+       */
 
     }, {
       key: "_onItemRemoved",
@@ -50467,14 +49971,12 @@
       }
       /**
        Scrolls the given {@link Coral.ColumnView.Column} into view.
-       
-       @param {HTMLElement} column
+        @param {HTMLElement} column
        The column that needs to be scrolled into view.
        @param {Boolean} clearEmptyColumns
        Remove empty columns once animation is done.
        @param {Boolean} triggerEvent
-       
-       @private
+        @private
        */
 
     }, {
@@ -50515,10 +50017,8 @@
       }
       /**
        Handling of the column view after selecting an item.
-       
-       @param {HTMLElement} column
-       
-       @private
+        @param {HTMLElement} column
+        @private
        */
 
     }, {
@@ -50531,10 +50031,8 @@
       }
       /**
        Empties all the columns to the right of the provided column.
-       
-       @param {HTMLElement} column
-       
-       @private
+        @param {HTMLElement} column
+        @private
        */
 
     }, {
@@ -50552,11 +50050,9 @@
       /**
        Remove all empty columns with a smooth transition. Optionally the navigate event is triggered when all the extra
        columns are removed from the DOM.
-       
-       @param {Boolean} triggerEvent
+        @param {Boolean} triggerEvent
        Whether the navigate event must be triggered.
-       
-       @private
+        @private
        */
 
     }, {
@@ -50671,8 +50167,7 @@
       /**
        Determines if something of the internal state of the component has changed. Active item event is always triggered
        first and then the selection event.
-       
-       @private
+        @private
        */
 
     }, {
@@ -50721,13 +50216,10 @@
        Triggers the navigation event. Navigation would happen when a) a new column is added, and it is ready to be
        used or b) columns are removed and the active changed. In case the column is actually a preview column, the event
        will only be triggered when there is no selection (meanning a real navigation was performed).
-       
-       @param {HTMLElement} column
+        @param {HTMLElement} column
        Last column of the ColumnView.
-       
-       @emits {coral-columnview:navigate}
-       
-       @private
+        @emits {coral-columnview:navigate}
+        @private
        */
 
     }, {
@@ -50771,8 +50263,8 @@
         if (this._addTimeout || this._removeTimeout) {
           clearTimeout(this._addTimeout);
           clearTimeout(this._removeTimeout);
-        } // we use setTimeout instead of nextFrame to give screen reader 
-        // more time to respond to live region update in order to announce 
+        } // we use setTimeout instead of nextFrame to give screen reader
+        // more time to respond to live region update in order to announce
         // complete text content when the state changes.
 
 
@@ -50871,8 +50363,7 @@
       /**
        Sets the next column given a reference column. This will handle cleaning the DOM and removing any columns as
        required.
-       
-       @param {HTMLElement} newColumn
+        @param {HTMLElement} newColumn
        The new column to add to the column view. It will be placed next to the <code>referenceColumn</code> if
        provided.
        @param {HTMLElement} referenceColumn
@@ -50880,8 +50371,7 @@
        DOM.
        @param {Boolean} [scrollToColumn = true]
        Whether the columnview show scroll to have the <code>newColumn</code> visible.
-       
-       @emits {coral-columnview:navigate}
+        @emits {coral-columnview:navigate}
        */
 
     }, {
@@ -50929,8 +50419,7 @@
       }
       /**
        Returns {@link ColumnView} selection options.
-       
-       @return {ColumnViewSelectionModeEnum}
+        @return {ColumnViewSelectionModeEnum}
        */
 
     }, {
@@ -50965,10 +50454,8 @@
        <code>preventDefault()</code> is called, then a loading indicator will be shown.
        {@link ColumnViewColumn#loading} should be set to false to indicate that the data has been successfully
        loaded.
-       
-       @typedef {CustomEvent} coral-columnview:loaditems
-       
-       @property {ColumnViewColumn} detail.column
+        @typedef {CustomEvent} coral-columnview:loaditems
+        @property {ColumnViewColumn} detail.column
        The column that is requesting more items. While doing pagination, it will become the target of the loaded items.
        @property {Number} detail.start
        Indicates the current amount of items in the <code>column</code> to do pagination. If <code>item</code> is
@@ -50981,10 +50468,8 @@
       /**
        Triggered when the selection inside the {@link ColumnViewColumn} changes. In case both the selection and the active item change,
        the <code>coral-columnview:activeitemchange</code> will be triggered first.
-       
-       @typedef {CustomEvent} coral-columnview:change
-       
-       @property {ColumnViewColumn} detail.column
+        @typedef {CustomEvent} coral-columnview:change
+        @property {ColumnViewColumn} detail.column
        The column whose selection changed.
        @property {ColumnViewItem|Array.<ColumnViewItem>} detail.selection
        The new selection of the Column.
@@ -50994,10 +50479,8 @@
 
       /**
        Triggered when the active item of the {@link ColumnViewColumn} changes.
-       
-       @typedef {CustomEvent} coral-columnview:activeitemchange
-       
-       @property {ColumnViewColumn} detail.column
+        @typedef {CustomEvent} coral-columnview:activeitemchange
+        @property {ColumnViewColumn} detail.column
        The column whose active item has changed.
        @property {ColumnViewItem} detail.activeItem
        The currently active item of the column.
@@ -51007,10 +50490,8 @@
 
       /**
        Triggered when the {@link ColumnView} navigation is complete and the new columns are ready.
-       
-       @typedef {CustomEvent} coral-columnview:navigate
-       
-       @property {ColumnViewColumn} detail.column
+        @typedef {CustomEvent} coral-columnview:navigate
+        @property {ColumnViewColumn} detail.column
        The last Column of the ColumnView that is used to determine the path. If the navigate was triggered because a
        new {@link ColumnViewColumn} was added, then it will match that column. In case the path was
        reduced, the column will match the last column.
@@ -51033,11 +50514,9 @@
       }
       /**
        Collection used to represent the coral-columnview-item across all columns.
-       
-       @type {ColumnViewCollection}
+        @type {ColumnViewCollection}
        @readonly
-       
-       @private
+        @private
        */
 
     }, {
@@ -51055,8 +50534,7 @@
       }
       /**
        Selection mode of the ColumnView. See {@link ColumnViewSelectionModeEnum}.
-       
-       @type {String}
+        @type {String}
        @default ColumnViewSelectionModeEnum.NONE
        @htmlattribute selectionmode
        @htmlattributereflected
@@ -51090,8 +50568,7 @@
       }
       /**
        First selected item of the ColumnView.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @readonly
        */
 
@@ -51103,8 +50580,7 @@
       /**
        Array containing the set selected items. The items will match only one column since selection across columns is
        not allowed.
-       
-       @type {Array.<HTMLElement>}
+        @type {Array.<HTMLElement>}
        @readonly
        */
 
@@ -51115,8 +50591,7 @@
       }
       /**
        Active Item that corresponds to the last item in the path.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @readonly
        */
 
@@ -51217,8 +50692,7 @@
     }
     /**
      The current active item.
-     
-     @type {HTMLElement}
+      @type {HTMLElement}
      @readonly
      @default null
      */
@@ -51296,8 +50770,7 @@
       /**
        Handles the item activation, this causes the current item to get active and sets the next column to the item's
        src.
-       
-       @private
+        @private
        */
 
     }, {
@@ -51325,8 +50798,7 @@
       /**
        Handles selecting multiple items in the same column. Selection could result in none, a single or multiple selected
        items.
-       
-       @private
+        @private
        */
 
     }, {
@@ -51405,8 +50877,7 @@
       }
       /**
        Handles the column click. When the column body is clicked, we need to deselect everything up to that column.
-       
-       @private
+        @private
        */
 
     }, {
@@ -51490,8 +50961,7 @@
       }
       /**
        Loads additional Items if the current items of the column to not exceed its height and a path this.next is given.
-       
-       @private
+        @private
        */
 
     }, {
@@ -51508,13 +50978,11 @@
       }
       /**
        Loads additional items. If the given item is not <code>active</code>, no data will be requested.
-       
-       @param {Number} count
+        @param {Number} count
        Amount of items in the column.
        @param {?HTMLElement} item
        Item that triggered the load.
-       
-       @private
+        @private
        */
 
     }, {
@@ -51530,8 +50998,7 @@
       }
       /**
        Updates the active and selected options from the DOM.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -51662,8 +51129,7 @@
       /**
        The content of the column. This container is where the items should be added and is responsible for handling the
        scrolling.
-       
-       @type {ColumnViewColumnContent}
+        @type {ColumnViewColumnContent}
        @contentzone
        */
 
@@ -51684,8 +51150,7 @@
       }
       /**
        The Collection Interface that allows interacting with the items that the component contains.
-       
-       @type {ColumnViewCollection}
+        @type {ColumnViewCollection}
        @readonly
        */
 
@@ -51707,8 +51172,7 @@
       /**
        Returns the first selected item in the ColumnView. The value <code>null</code> is returned if no element is
        selected.
-       
-       @type {?HTMLElement}
+        @type {?HTMLElement}
        @readonly
        */
 
@@ -51719,8 +51183,7 @@
       }
       /**
        Returns an Array containing the set selected items inside this Column.
-       
-       @type {Array.<HTMLElement>}
+        @type {Array.<HTMLElement>}
        @readonly
        */
 
@@ -51733,8 +51196,7 @@
        Private property that indicates the selection mode. If the <code>Coral.ColumnView.Column</code> is not inside
        a <code>Coral.ColumnView</code> this value will be <code>undefined</code>.
        See {@link ColumnViewSelectionModeEnum}.
-       
-       @type {String}
+        @type {String}
        @htmlattribute _selectionmode
        @htmlattributereflected
        @private
@@ -51761,8 +51223,7 @@
       }
       /**
        Returns an Array containing the last selected items inside this Column in selected order.
-       
-       @type {Array.<HTMLElement>}
+        @type {Array.<HTMLElement>}
        @private
        */
 
@@ -51825,9 +51286,9 @@
   var CLASSNAME$Q = '_coral-AssetList-item';
   /**
    Enumeration for {@link ColumnViewItem} variants.
-   
+
    @typedef {Object} ColumnViewItemVariantEnum
-   
+
    @property {String} DEFAULT
    Default item variant. Contains no special decorations.
    @property {String} DRILLDOWN
@@ -51883,8 +51344,7 @@
     }
     /**
      The content of the item.
-     
-     @type {ColumnViewItemContent}
+      @type {ColumnViewItemContent}
      @contentzone
      */
 
@@ -51923,8 +51383,7 @@
       }
       /**
        Returns {@link ColumnViewItem} variants.
-       
-       @return {ColumnViewItemVariantEnum}
+        @return {ColumnViewItemVariantEnum}
        */
 
     }, {
@@ -51997,8 +51456,7 @@
       }
       /**
        The thumbnail of the item. It is used to hold an icon or an image.
-       
-       @type {ColumnViewItemThumbnail}
+        @type {ColumnViewItemThumbnail}
        @contentzone
        */
 
@@ -52020,8 +51478,7 @@
       }
       /**
        The item's variant. See {@link ColumnViewItemVariantEnum}.
-       
-       @type {String}
+        @type {String}
        @default ColumnViewItemVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -52046,10 +51503,10 @@
             this.insertAdjacentHTML('beforeend', Icon._renderSVG('spectrum-css-icon-ChevronRightMedium', ['_coral-AssetList-itemChildIndicator', '_coral-UIIcon-ChevronRightMedium']));
           }
 
-          this.classList.add('is-branch'); // @a11y Update aria-expanded. Active drilldowns should be expanded. 
-          // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
-          // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when 
-          // navigating between items. 
+          this.classList.add('is-branch'); // @a11y Update aria-expanded. Active drilldowns should be expanded.
+          // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+          // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
+          // navigating between items.
 
           if (this.selected || isChromeMacOS && this.getAttribute('aria-level') === '1') {
             this.removeAttribute('aria-expanded');
@@ -52064,8 +51521,7 @@
       /**
        Specifies the icon that will be placed inside the thumbnail. The size of the icon is always controlled by the
        component.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute icon
        @htmlattributereflected
@@ -52100,8 +51556,7 @@
       }
       /**
        Whether the item is selected.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute selected
        @htmlattributereflected
@@ -52125,9 +51580,9 @@
           _this2.classList.toggle('is-selected', _this2._selected);
 
           _this2.setAttribute('aria-selected', _this2._selected); // @a11y Update aria-expanded. Active drilldowns should be expanded.
-          // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
-          // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when 
-          // navigating between items. 
+          // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+          // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
+          // navigating between items.
 
 
           if (_this2.variant === variant$g.DRILLDOWN) {
@@ -52178,8 +51633,7 @@
       }
       /**
        Whether the item is active.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribut active
        @htmlattributereflected
@@ -52197,9 +51651,9 @@
 
         this.classList.toggle('is-navigated', this._active);
         this.setAttribute('aria-selected', this.hasAttribute('_selectable') ? this.selected : this._active); // @a11y Update aria-expanded. Active drilldowns should be expanded.
-        // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends 
-        // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when 
-        // navigating between items. 
+        // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+        // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
+        // navigating between items.
 
         if (this.variant === variant$g.DRILLDOWN) {
           if (this._selected || isChromeMacOS && this.getAttribute('aria-level') === '1') {
@@ -52315,8 +51769,7 @@
     }
     /**
      The content of the Preview.
-     
-     @type {ColumnViewPreviewContent}
+      @type {ColumnViewPreviewContent}
      @contentzone
      */
 
@@ -52351,13 +51804,13 @@
     }, {
       key: "_makeAccessible",
       value: function _makeAccessible() {
-        // @a11y For item values with a label, identify the value as a focusable, readOnly textbox labeled by the label. 
+        // @a11y For item values with a label, identify the value as a focusable, readOnly textbox labeled by the label.
         var elements = this.content.querySelectorAll('coral-columnview-preview-label + coral-columnview-preview-value');
         var length = elements.length;
         var i;
         var element;
         var elementLabel; // @a11y If the previous column has selected items,
-        // do not include item values in the tab order, 
+        // do not include item values in the tab order,
         // so that a keyboard user can quickly advance to a subsequent toolbar.
 
         var tabIndex = this.parentElement && this.parentElement.tagName === 'CORAL-COLUMNVIEW' && this.parentElement.selectedItems.length ? -1 : 0;
@@ -52384,7 +51837,7 @@
           element = elements[i];
           element.setAttribute('role', 'separator');
           element.setAttribute('aria-orientation', 'horizontal');
-        } // @a11y If the preview asset image does not include an alt attribute, set alt="", so that screen readers do not announce the image url. 
+        } // @a11y If the preview asset image does not include an alt attribute, set alt="", so that screen readers do not announce the image url.
 
 
         elements = this.content.querySelectorAll('coral-columnview-preview-asset > img:not([alt])');
@@ -52678,9 +52131,9 @@
 
   /**
    Enum for {CycleButtonItem} display options.
-   
+
    @typedef {Object} CycleButtonItemDisplayModeEnum
-   
+
    @property {String} ICON
    Icon display mode.
    @property {String} TEXT
@@ -52735,8 +52188,7 @@
 
       /**
        The Item's icon. See {@link Coral.Icon} for valid icon names.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute icon
        @htmlattributereflected
@@ -52745,7 +52197,13 @@
         return this._icon || '';
       },
       set: function set(value) {
-        this._icon = transform.string(value);
+        var _icon = transform.string(value);
+
+        if (this._icon === _icon) {
+          return;
+        }
+
+        this._icon = _icon;
 
         this._reflectAttribute('icon', this._icon);
 
@@ -52768,8 +52226,7 @@
       }
       /**
        Whether the Item is disabled. When set to true, this will prevent every user interacting with it.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute disabled
        @htmlattributereflected
@@ -52811,10 +52268,14 @@
         return this._selected || false;
       },
       set: function set(value) {
-        value = transform.booleanAttr(value);
+        var _selected = transform.booleanAttr(value);
 
-        if (!value || value && !this.disabled) {
-          this._selected = value;
+        if (this._selected === _selected) {
+          return;
+        }
+
+        if (!_selected || _selected && !this.disabled) {
+          this._selected = _selected;
 
           this._reflectAttribute('selected', this.disabled ? false : this._selected);
 
@@ -52829,8 +52290,7 @@
        information, then fallback to show whichever is available. The appearance of collapsed items in the popover are
        not affected by this property.
        See {@link CycleButtonItemDisplayModeEnum}.
-       
-       @type {String}
+        @type {String}
        @default CycleButtonItemDisplayModeEnum.INHERIT
        @htmlattribute displaymode
        @htmlattributereflected
@@ -52842,8 +52302,15 @@
         return this._displayMode || displayMode.INHERIT;
       },
       set: function set(value) {
-        value = transform.string(value).toLowerCase();
-        this._displayMode = validate.enumeration(displayMode)(value) && value || displayMode.INHERIT;
+        var _value = transform.string(value).toLowerCase();
+
+        var _displayMode = validate.enumeration(displayMode)(_value) && _value || displayMode.INHERIT;
+
+        if (this._displayMode === _displayMode) {
+          return;
+        }
+
+        this._displayMode = _displayMode;
 
         this._reflectAttribute('displaymode', this._displayMode);
 
@@ -52864,8 +52331,7 @@
       }
       /**
        Returns {@link CycleButtonItem} display options.
-       
-       @return {CycleButtonItemDisplayModeEnum}
+        @return {CycleButtonItemDisplayModeEnum}
        */
 
     }], [{
@@ -52974,9 +52440,9 @@
 
   /**
    Enumeration for {@link CycleButton} display options.
-   
+
    @typedef {Object} CycleButtonDisplayModeEnum
-   
+
    @property {String} ICON
    Icon display mode.
    @property {String} TEXT
@@ -52992,7 +52458,7 @@
   };
   /**
    Regex used to remove whitespace from selectedItem label for use as an aria-label for accessibility.
-   
+
    @ignore
    */
 
@@ -53075,8 +52541,7 @@
     }
     /**
      Returns the inner overlay to allow customization.
-     
-     @type {Popover}
+      @type {Popover}
      @readonly
      */
 
@@ -53241,8 +52706,7 @@
       }
       /**
        Render the provided item as selected according to resolved icon and displayMode properties.
-       
-       @private
+        @private
        */
 
     }, {
@@ -53302,8 +52766,7 @@
       }
       /**
        Update currently selected item if it's <code>icon</code> or <code>displayMode</code> properties have changed.
-       
-       @private
+        @private
        */
 
     }, {
@@ -53664,8 +53127,7 @@
       }
       /**
        Returns {@link CycleButton} display options.
-       
-       @return {CycleButtonDisplayModeEnum}
+        @return {CycleButtonDisplayModeEnum}
        */
 
     }, {
@@ -53793,10 +53255,8 @@
       }
       /**
        Triggered when the {@link CycleButton} selected item has changed.
-       
-       @typedef {CustomEvent} coral-cyclebutton:change
-       
-       @property {CycleButtonItem} detail.oldSelection
+        @typedef {CustomEvent} coral-cyclebutton:change
+        @property {CycleButtonItem} detail.oldSelection
        The prior selected item(s).
        @property {CycleButtonItem} detail.selection
        The newly selected item(s).
@@ -53809,8 +53269,7 @@
       }
       /**
        The Collection Interface that allows interacting with the items that the component contains.
-       
-       @type {SelectableCollection}
+        @type {SelectableCollection}
        @readonly
        */
 
@@ -53831,8 +53290,7 @@
       }
       /**
        The selected item in the CycleButton.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @readonly
        */
 
@@ -53844,8 +53302,7 @@
       /**
        General icon of the CycleButton. The icon will be displayed no matter the selection. If the selected item has
        its own icon, it will be overwritten.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute icon
        @htmlattributereflected
@@ -53870,8 +53327,7 @@
       /**
        Number of items that can be directly cycled through before collapsing. If <code>0</code> is used, the items
        will never be collapsed.
-       
-       @type {Number}
+        @type {Number}
        @default 3
        @htmlattribute threshold
        @htmlattributereflected
@@ -53893,8 +53349,7 @@
       }
       /**
        The Collection Interface that allows interaction with the {@link CycleButtonAction} elements.
-       
-       @type {SelectableCollection}
+        @type {SelectableCollection}
        @readonly
        */
 
@@ -53918,8 +53373,7 @@
        collapsed items in the popover are not affected by this property. The displayMode property can be set on an
        item to override the component level value when that item is selected.
        See {@link CycleButtonDisplayModeEnum}.
-       
-       @type {String}
+        @type {String}
        @default CycleButtonDisplayModeEnum.ICON
        @htmlattribute displaymode
        @htmlattributereflected
@@ -54001,8 +53455,7 @@
 
       /**
        The Action's icon. See {@link Coral.Icon} for valid icon names.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute icon
        @htmlattributereflected
@@ -55339,9 +54792,9 @@
 
   /**
    Enumeration for {@link Drawer} directions.
-   
+
    @typedef {Object} DrawerDirectionEnum
-   
+
    @property {String} DOWN
    A drawer with a toggle button on the bottom.
    @property {String} UP
@@ -55398,8 +54851,7 @@
     }
     /**
      Whether this item is disabled or not. This will stop every user interaction with the item.
-     
-     @type {Boolean}
+      @type {Boolean}
      @default false
      @htmlattribute disabled
      @htmlattributereflected
@@ -55458,14 +54910,12 @@
       }
       /**
        Triggered when the {@link Drawer} is opened.
-       
-       @typedef {CustomEvent} coral-drawer:open
+        @typedef {CustomEvent} coral-drawer:open
        */
 
       /**
        Triggered when the {@link Drawer} is closed.
-       
-       @typedef {CustomEvent} coral-drawer:close
+        @typedef {CustomEvent} coral-drawer:close
        */
 
     }, {
@@ -55483,8 +54933,7 @@
       }
       /**
        The drawer's content element.
-       
-       @type {DrawerContent}
+        @type {DrawerContent}
        @htmlttribute content
        @contentzone
        */
@@ -55505,8 +54954,7 @@
       }
       /**
        The drawer's direction. See {@link DrawerDirectionEnum}.
-       
-       @type {String}
+        @type {String}
        @default DrawerDirectionEnum.DOWN
        @htmlattribute direction
        @htmlattributereflected
@@ -55531,8 +54979,7 @@
       }
       /**
        Whether the Drawer is expanded or not.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute open
        @htmlattributereflected
@@ -55597,8 +55044,7 @@
       }
       /**
        Returns {@link Drawer} direction options.
-       
-       @return {DrawerDirectionEnum}
+        @return {DrawerDirectionEnum}
        */
 
     }], [{
@@ -56493,9 +55939,9 @@
 
   /**
    Enumeration for {@link FileUploadItem} response types.
-   
+
    @typedef {Object} FileUploadItemResponseTypeEnum
-   
+
    @property {String} TEXT
    String type.
    @property {String} ARRAY_BUFFER
@@ -56534,8 +55980,7 @@
   var FileUploadItem = /*#__PURE__*/function () {
     /**
      Takes a {File} as argument.
-     
-     @param {File} file
+      @param {File} file
      */
     function FileUploadItem(file) {
       _classCallCheck(this, FileUploadItem);
@@ -56545,8 +55990,7 @@
     }
     /**
      The File.
-     
-     @name file
+      @name file
      @readonly
      @type {File}
      */
@@ -56607,8 +56051,7 @@
       }
       /**
        Returns {@link FileUploadItem} response types.
-       
-       @return {FileUploadItemResponseTypeEnum}
+        @return {FileUploadItemResponseTypeEnum}
        */
 
     }, {
@@ -56619,8 +56062,7 @@
       /**
        Array of additional parameters as key:value to be uploaded with the file.
        A parameter must contain a <code>name</code> key:value and optionally a <code>value</code> key:value.
-       
-       @name parameters
+        @name parameters
        @type {Array.<Object>}
        @default []
        */
@@ -56641,8 +56083,7 @@
       }
       /**
        The item xhr <code>withCredentials</code> property.
-       
-       @name withCredentials
+        @name withCredentials
        @type {Boolean}
        @default false
        */
@@ -56657,8 +56098,7 @@
       }
       /**
        The item xhr <code>timeout</code> property.
-       
-       @name timeout
+        @name timeout
        @type {Number}
        @default 0
        */
@@ -56681,8 +56121,7 @@
       }
       /**
        The item xhr <code>responseType</code> property. See {@link FileUploadItemResponseTypeEnum}.
-       
-       @name responseType
+        @name responseType
        @default {FileUploadItemResponseTypeEnum.TEXT}
        @type {String}
        */
@@ -56702,8 +56141,7 @@
       }
       /**
        The item xhr <code>readyState</code> property.
-       
-       @name readyState
+        @name readyState
        @readonly
        @default 0
        @type {Number}
@@ -56716,8 +56154,7 @@
       }
       /**
        The item xhr <code>responseType</code> property. Depends on {@link Coral.FileUpload.Item#responseType}.
-       
-       @name response
+        @name response
        @readonly
        @default ""
        @type {String|ArrayBuffer|Blob|Document}
@@ -56730,8 +56167,7 @@
       }
       /**
        The item xhr <code>responseText</code> property.
-       
-       @name responseText
+        @name responseText
        @readonly
        @default ""
        @type {String}
@@ -56744,8 +56180,7 @@
       }
       /**
        The item xhr <code>responseXML</code> property.
-       
-       @name responseXML
+        @name responseXML
        @readonly
        @default null
        @type {HTMLElement}
@@ -56758,8 +56193,7 @@
       }
       /**
        The item xhr <code>status</code> property.
-       
-       @name status
+        @name status
        @readonly
        @default 0
        @type {Number}
@@ -56772,8 +56206,7 @@
       }
       /**
        The item xhr <code>statusText</code> property.
-       
-       @name statusText
+        @name statusText
        @readonly
        @default ""
        @type {String}
@@ -56814,9 +56247,9 @@
   var XHR_EVENT_NAMES = ['loadstart', 'progress', 'load', 'error', 'loadend', 'readystatechange', 'abort', 'timeout'];
   /**
    Enumeration for {@link FileUpload} HTTP methods that can be used to upload files.
-   
+
    @typedef {Object} FileUploadMethodEnum
-   
+
    @property {String} POST
    Send a POST request. Used when creating a resource.
    @property {String} PUT
@@ -56842,7 +56275,7 @@
    - <code>[coral-fileupload-abortfile="filename.txt"]</code>. Click to abort a specific file, leaving it in the queue.
    - <code>[coral-fileupload-removefile="filename.txt"]</code>. Click to remove a specific file from the queue.
    - <code>[coral-fileupload-uploadfile="filename.txt"]</code>. Click to start uploading a specific file.
-   
+
    @htmltag coral-fileupload
    @extends {HTMLElement}
    @extends {BaseComponent}
@@ -57086,8 +56519,7 @@
       }
       /**
        Handles clicks to submit buttons
-       
-       @private
+        @private
        */
 
     }, {
@@ -57104,8 +56536,7 @@
       }
       /**
        Handles changes to the input element.
-       
-       @private
+        @private
        */
 
     }, {
@@ -57190,8 +56621,7 @@
       }
       /**
        Sets the disabled/readonly state of elements with the associated special attributes
-       
-       @private
+        @private
        */
 
     }, {
@@ -57220,8 +56650,7 @@
       }
       /**
        Clear file selection on the file input
-       
-       @private
+        @private
        */
 
     }, {
@@ -57231,11 +56660,9 @@
       }
       /**
        Remove a file from the upload queue.
-       
-       @param {String} filename
+        @param {String} filename
        The filename of the file to remove.
-       
-       @private
+        @private
        */
 
     }, {
@@ -57257,11 +56684,9 @@
       }
       /**
        Uploads a file in the queue. If an array is provided as the first argument, it is used as the parameters.
-       
-       @param filename {String}
+        @param filename {String}
        The name of the file to upload.
-       
-       @private
+        @private
        */
 
     }, {
@@ -57286,11 +56711,9 @@
       }
       /**
        Abort specific file upload.
-       
-       @param {String} filename
+        @param {String} filename
        The filename identifies the file to abort.
-       
-       @private
+        @private
        */
 
     }, {
@@ -57306,8 +56729,7 @@
       }
       /**
        Handles the ajax upload.
-       
-       @private
+        @private
        */
 
     }, {
@@ -57426,8 +56848,7 @@
       /**
        Uploads the given filename, or all the files into the queue. It accepts extra parameters that are sent with the
        file.
-       
-       @param {String} [filename]
+        @param {String} [filename]
        The name of the file to upload.
        */
 
@@ -57474,8 +56895,7 @@
       }
       /**
        Remove a file or all files from the upload queue.
-       
-       @param {String} [filename]
+        @param {String} [filename]
        The filename of the file to remove. If a filename is not provided, all files will be removed.
        */
 
@@ -57498,8 +56918,7 @@
       }
       /**
        Abort upload of a given file or all files in the queue.
-       
-       @param {String} [filename]
+        @param {String} [filename]
        The filename of the file to abort. If a filename is not provided, all files will be aborted.
        */
 
@@ -57682,8 +57101,7 @@
       /**
        The names of the currently selected files.
        When {@link Coral.FileUpload#multiple} is <code>false</code>, this will be an array of length 1.
-       
-       @type {Array.<String>}
+        @type {Array.<String>}
        */
 
     }, {
@@ -57755,8 +57173,7 @@
       /**
        Array of additional parameters as key:value to send in addition of files.
        A parameter must contain a <code>name</code> key:value and optionally a <code>value</code> key:value.
-       
-       @type {Array.<Object>}
+        @type {Array.<Object>}
        @default []
        */
 
@@ -57796,8 +57213,7 @@
        Whether files should be uploaded asynchronously via XHR or synchronously e.g. within a
        <code>&lt;form&gt;</code> tag. One option excludes the other. Setting a new <code>async</code> value removes all
        files from the queue.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute async
        @htmlattributereflected
@@ -57831,8 +57247,7 @@
        <code>[coral-fileupload-submit]</code> attribute as well as a <code>[formaction]</code> attribute, the action of
        the clicked element will be used. Set this property before calling {@link Coral.FileUpload#upload} to reset the
        action set by a click.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute action
        @htmlattributereflected
@@ -57858,8 +57273,7 @@
        the clicked element will be used. Set this property before calling {@link FileUpload#upload} to reset the
        method set by a click.
        See {@link FileUploadMethodEnum}.
-       
-       @type {String}
+        @type {String}
        @default FileUploadMethodEnum.POST
        @htmlattribute method
        @htmlattributereflected
@@ -57881,8 +57295,7 @@
       }
       /**
        Whether more than one file can be chosen at the same time to upload.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute multiple
        @htmlattributereflected
@@ -57900,8 +57313,7 @@
       }
       /**
        File size limit in bytes for one file. The value of 0 indicates unlimited, which is also the default.
-       
-       @type {Number}
+        @type {Number}
        @htmlattribute sizelimit
        @htmlattributereflected
        @default 0
@@ -57921,8 +57333,7 @@
        MIME types allowed for uploading (proper MIME types, wildcard '*' and file extensions are supported). To specify
        more than one value, separate the values with a comma (e.g.
        <code>&lt;input accept="audio/*,video/*,image/*" /&gt;</code>.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute accept
        @htmlattributereflected
@@ -57940,8 +57351,7 @@
       }
       /**
        Whether the upload should start immediately after file selection.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute autostart
        @htmlattributereflected
@@ -57959,8 +57369,7 @@
       }
       /**
        Files to be uploaded.
-       
-       @readonly
+        @readonly
        @default []
        @type {Array.<Object>}
        */
@@ -58061,8 +57470,7 @@
 
       /**
        Animates the insertion of the item.
-       
-       @private
+        @private
        */
       value: function _insert() {
         var _this2 = this;
@@ -58141,7 +57549,7 @@
     }, {
       key: "connectedCallback",
       value: function connectedCallback() {
-        if (!this.isConnected) {
+        if (this._skipConnectedCallback()) {
           return;
         }
 
@@ -58205,8 +57613,7 @@
       }
       /**
        Whether the item is selected.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute selected
        @htmlattributereflected
@@ -58242,9 +57649,9 @@
   var CLASSNAME$X = '_coral-Masonry';
   /**
    Enumeration for {@link Masonry} selection options.
-   
+
    @typedef {Object} MasonrySelectionModeEnum
-   
+
    @property {String} NONE
    None is default, selection of Masonry items doesn't happen based on click.
    @property {String} SINGLE
@@ -58260,9 +57667,9 @@
   };
   /**
    Enumeration for {@link Masonry} layouts.
-   
+
    @typedef {Object} MasonryLayoutsEnum
-   
+
    @property {String} FIXED_CENTERED
    A Layout with fixed width centered items.
    @property {String} FIXED_SPREAD
@@ -58410,8 +57817,7 @@
     }
     /**
      Allows to interact with the masonry items.
-     
-     @type {SelectableCollection}
+      @type {SelectableCollection}
      @readonly
      */
 
@@ -58425,8 +57831,7 @@
       }
       /**
        Allows to interact with the masonry layout instance.
-       
-       @type {MasonryLayout}
+        @type {MasonryLayout}
        @readonly
        */
 
@@ -58613,8 +58018,7 @@
       }
       /**
        Schedules a layout for the next animation frame. Even if called many times, the layout happens still just once.
-       
-       @private
+        @private
        */
 
     }, {
@@ -58656,8 +58060,7 @@
       }
       /**
        Callback which has to be called when the dimensions have changed or the masonry turned visible.
-       
-       @private
+        @private
        */
 
     }, {
@@ -58679,8 +58082,7 @@
       }
       /**
        Performs a layout. Should only be called by {@link #_scheduleLayout} if possible.
-       
-       @private
+        @private
        */
 
     }, {
@@ -58900,8 +58302,7 @@
       /**
        @return {Boolean} true if the new position isn't further away from the center of the placeholder than the
        previous position.
-       
-       @private
+        @private
        */
 
     }, {
@@ -59007,8 +58408,7 @@
       }
       /**
        Registry for masonry layouts.
-       
-       @type {Object.<string,Layout>}
+        @type {Object.<string,Layout>}
        @private
        @readonly
        */
@@ -59061,10 +58461,8 @@
       }
       /**
        Triggered when a {@link Masonry} item is reordered.
-       
-       @typedef {CustomEvent} coral-masonry:order
-       
-       @property {MasonryItem} detail.item
+        @typedef {CustomEvent} coral-masonry:order
+        @property {MasonryItem} detail.item
        The reordered item
        @property {?MasonryItem} detail.oldBefore
        The previous item before the reordering.
@@ -59074,10 +58472,8 @@
 
       /**
        Triggered when {@link Masonry} selected item has changed.
-       
-       @typedef {CustomEvent} coral-masonry:change
-       
-       @property {MasonryItem} detail.oldSelection
+        @typedef {CustomEvent} coral-masonry:change
+        @property {MasonryItem} detail.oldSelection
        The prior selected item(s).
        @property {MasonryItem} detail.selection
        The newly selected item(s).
@@ -59101,8 +58497,7 @@
       }
       /**
        Selection mode of Masonry
-       
-       @type {String}
+        @type {String}
        @default MasonrySelectionModeEnum.NONE
        @htmlattribute selectionmode
        @htmlattributereflected
@@ -59137,8 +58532,7 @@
       /**
        The layout name for this masonry. Must be one of {@link Coral.Masonry.layouts}.
        See {@link MasonryLayoutsEnum}.
-       
-       @type {String}
+        @type {String}
        @default MasonryLayoutsEnum.FIXED_CENTERED
        @htmlattribute layout
        @htmlattributereflected
@@ -59172,8 +58566,7 @@
       }
       /**
        The first selected item or <code>null</code> if no item is selected.
-       
-       @type {MasonryItem}
+        @type {MasonryItem}
        @readonly
        */
 
@@ -59184,8 +58577,7 @@
       }
       /**
        An array of all selected items.
-       
-       @type {Array.<MasonryItem>}
+        @type {Array.<MasonryItem>}
        @readonly
        */
 
@@ -59198,8 +58590,7 @@
       /**
        The spacing between the items and the masonry container in pixel. If this property is not set, then it falls
        back to the CSS padding of the masonry and margin of the items.
-       
-       @type {?Number}
+        @type {?Number}
        @default null
        @htmlattribute spacing
        */
@@ -59217,8 +58608,7 @@
       }
       /**
        Whether or not it is possible to order items with drag & drop.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute orderable
        */
@@ -59239,13 +58629,13 @@
       /**
        Attribute to enable/disable auto aria grid role assignment. Value must be one of {@link MasonryAriaGridEnum}.
        Setting this property to {@link MasonryAriaGridEnum.ON} will do following to enable support for accessibility:
-        - Preserve current role attribute of the parent element of {@link Masonry}, and set new role as grid.
-        - Preserve current role attribute of the {@link Masonry}, and set new role as row.
-        - Set role attribute of all child {@link MasonryItem} to gridcell.
+       - Preserve current role attribute of the parent element of {@link Masonry}, and set new role as grid.
+       - Preserve current role attribute of the {@link Masonry}, and set new role as row.
+       - Set role attribute of all child {@link MasonryItem} to gridcell.
         Setting the property to {@link MasonryAriaGridEnum.OFF} will do following:
-        - Restore preserved (if any) role attribute of the parent element of {@link Masonry}.
-        - Restore preserved role attribute of the {@link Masonry}.
-        - Remove role attribute of all child {@link MasonryItem}.
+       - Restore preserved (if any) role attribute of the parent element of {@link Masonry}.
+       - Restore preserved role attribute of the {@link Masonry}.
+       - Remove role attribute of all child {@link MasonryItem}.
         Setting the attribute to other than allowed values will fallback to {@link MasonryAriaGridEnum.OFF}.
         @type {String}
        @default {@link MasonryAriaGridEnum.OFF}
@@ -59294,8 +58684,7 @@
       }
       /**
        Specifies aria-label value
-       
-       @type {?String}
+        @type {?String}
        @htmlattribute aria-label
        @htmlattributereflected
        */
@@ -59326,8 +58715,7 @@
       }
       /**
        Specifies aria-labelledby value
-       
-       @type {?String}
+        @type {?String}
        @htmlattribute aria-labelledby
        @htmlattributereflected
        */
@@ -59362,8 +58750,7 @@
       /**
        Registers a layout with the given name.
        The name can then be set at {@link Coral.Masonry.layout} to render a masonry with the this registered layout.
-       
-       @param {String} name of the layout
+        @param {String} name of the layout
        @param {Layout} Layout class which extends {@link Coral.Masonry.Layout}
        */
       value: function registerLayout(name, Layout) {
@@ -59372,8 +58759,7 @@
       }
       /**
        Returns {@link Masonry} layouts.
-       
-       @return {MasonryLayoutsEnum}
+        @return {MasonryLayoutsEnum}
        */
 
     }, {
@@ -59392,8 +58778,7 @@
       }
       /**
        Returns {@link Masonry} selection mode options.
-       
-       @return {MasonrySelectionModeEnum}
+        @return {MasonrySelectionModeEnum}
        */
 
     }, {
@@ -59437,13 +58822,13 @@
 
   /**
    Base class for masonry layouts.
-   
+
    Whenever a change is detected, the {@link Coral.Masonry.Layout#layout} method is called. This method must then
    ensure that all the items are positioned correctly.
-   
+
    Layout-specific keyboard support must be handled by adding event listeners to the masonry in the constructor. Such
    event listeners must be removed in the {@link Coral.Masonry.Layout#destroy} method.
-   
+
    @param masonry
    @class Coral.Masonry.Layout
    */
@@ -59460,8 +58845,7 @@
     }
     /**
      Layout name. Uses the constructor given name by default if defined.
-     
-     @type {String}
+      @type {String}
      */
 
 
@@ -59484,8 +58868,7 @@
       /**
        Removes the item from the control of the layout. This can be used to position the item differently,
        for example for drag&drop.
-       
-       @param {MasonryItem} item
+        @param {MasonryItem} item
        */
       // eslint-disable-next-line no-unused-vars
 
@@ -59496,8 +58879,7 @@
       /**
        Adds the item to the control of the layout again. The layout has to ensure that the item will be transitioned to
        its normal position flawlessly.
-       
-       @param {MasonryItem} item
+        @param {MasonryItem} item
        */
       // eslint-disable-next-line no-unused-vars
 
@@ -59507,11 +58889,9 @@
 
       /**
        Returns the item at the given position. The position coordinates are relative to the masonry.
-       
-       If an item is being transitioned when this method is called, then it must choose the item based on the final
+        If an item is being transitioned when this method is called, then it must choose the item based on the final
        instead of the current position.
-       
-       @param {number} x
+        @param {number} x
        @param {number} y
        @return {?Coral.Masonry.Item}
        */
@@ -59523,8 +58903,7 @@
 
       /**
        Defines the name of the Layout
-       
-       @param {String} name
+        @param {String} name
        */
 
     }, {
@@ -59617,7 +58996,7 @@
 
   /**
    Base class for column-based masonry layouts.
-   
+
    @class Coral.Masonry.ColumnLayout
    @classdesc A Masonry Column layout
    @extends {MasonryLayout}
@@ -59630,8 +59009,7 @@
 
     /**
      Takes a {Masonry} instance as argument.
-     
-     @param {Masonry} masonry
+      @param {Masonry} masonry
      */
     function MasonryColumnLayout(masonry) {
       var _this;
@@ -59666,8 +59044,7 @@
     }
     /**
      Hook to remove layout specific style and data from the item.
-     
-     @param item
+      @param item
      @private
      */
     // eslint-disable-next-line no-unused-vars
@@ -59679,8 +59056,7 @@
 
       /**
        Initialize layout variables.
-       
-       @private
+        @private
        */
 
     }, {
@@ -59736,8 +59112,7 @@
       }
       /**
        Updates the width of all items.
-       
-       @param items
+        @param items
        @private
        */
 
@@ -59771,8 +59146,7 @@
 
       /**
        Hook to execute layout specific item preparation.
-       
-       @param item
+        @param item
        @private
        */
       // eslint-disable-next-line no-unused-vars
@@ -59783,8 +59157,7 @@
 
       /**
        Reads the dimension of all items.
-       
-       @param items
+        @param items
        @private
        */
 
@@ -59801,8 +59174,7 @@
       }
       /**
        Update the position of all items.
-       
-       @param items
+        @param items
        @private
        */
 
@@ -59884,8 +59256,7 @@
       }
       /**
        Hook which is called after the positioning is done.
-       
-       @param contentHeight
+        @param contentHeight
        @private
        */
       // eslint-disable-next-line no-unused-vars
@@ -59896,8 +59267,7 @@
 
       /**
        Moves the focus vertically.
-       
-       @private
+        @private
        */
 
     }, {
@@ -59949,8 +59319,7 @@
       }
       /**
        Moves the focus horizontally.
-       
-       @private
+        @private
        */
 
     }, {
@@ -59983,8 +59352,7 @@
       }
       /**
        Moves the focus to first or last item based on the visual order.
-       
-       @private
+        @private
        */
 
     }, {
@@ -60126,10 +59494,10 @@
   /**
    Layout with fixed width centered items. The width of the items is defined with the <code>columnwidth</code>
    attribute.
-   
+
    @example
    <coral-masonry layout="fixed-centered" columnwidth="300">
-   
+
    @class Coral.Masonry.FixedCenteredLayout
    @extends {MasonryColumnLayout}
    */
@@ -60179,10 +59547,10 @@
   /**
    Layout with fixed width and evenly spread items. The width of the items is defined with the <code>columnwidth</code>
    attribute.
-   
+
    @example
    <coral-masonry layout="fixed-spread" columnwidth="300">
-   
+
    @class Coral.Masonry.FixedSpreadLayout
    @extends {MasonryColumnLayout}
    */
@@ -60236,10 +59604,10 @@
   /**
    Layout with variable width items. The minimal width of the items is defined with the <code>columnwidth</code>
    attribute.
-   
+
    @example
    <coral-masonry layout="dashboard" columnwidth="300">
-   
+
    @class Coral.Masonry.VariableLayout
    @extends {MasonryColumnLayout}
    */
@@ -60277,10 +59645,10 @@
   /**
    Layout with variable width items which are expanded in their height to fill gaps (which are common with colspan).
    The minimal width of the items is defined with the <code>columnwidth</code> attribute.
-   
+
    @example
    <coral-masonry layout="dashboard" columnwidth="300">
-   
+
    @class Coral.Masonry.DashboardLayout
    @extends {MasonryVariableLayout}
    */
@@ -60647,8 +60015,7 @@
     }
     /**
      The Collection Interface that allows interacting with the Coral.Multifield items that the component contains.
-     
-     @type {MultifieldCollection}
+      @type {MultifieldCollection}
      @readonly
      */
 
@@ -60728,7 +60095,7 @@
           this._trackEvent('click', 'remove item button', event);
         }
       }
-      /** 
+      /**
        * Toggles keyboard accessible dragging of the current multifield item.
        * @ignore
        */
@@ -60763,7 +60130,7 @@
           this._before = null;
         }
       }
-      /** 
+      /**
        * Clicking dragHandle toggles keyboard accessible dragging of the current multifield item.
        * @ignore
        */
@@ -60777,7 +60144,7 @@
 
         this._toggleItemDragging(multiFieldItem, !multiFieldItem._dragging);
       }
-      /** 
+      /**
        * When the drag handle blurs, cancel dragging, leaving item where it is.
        * @ignore
        */
@@ -60795,7 +60162,7 @@
           }
         });
       }
-      /** 
+      /**
        * Moves multiField item selected for dragging up one index position in the multifield collection.
        * @ignore
        */
@@ -60822,7 +60189,7 @@
         dragElement._dragging = true;
         dragHandle.focus();
       }
-      /** 
+      /**
        * Moves multiField item selected for dragging down one index position in the multifield collection.
        * @ignore
        */
@@ -60850,7 +60217,7 @@
         dragElement._dragging = true;
         dragHandle.focus();
       }
-      /** 
+      /**
        * Moves multiField item selected for dragging to start of multifield collection.
        * @ignore
        */
@@ -60877,7 +60244,7 @@
         dragElement._dragging = true;
         dragHandle.focus();
       }
-      /** 
+      /**
        * Moves multiField item selected for dragging to end of multifield collection.
        * @ignore
        */
@@ -60904,7 +60271,7 @@
         dragElement._dragging = true;
         dragHandle.focus();
       }
-      /** 
+      /**
        * Cancels keyboard drag and drop operation, restoring item to its previous location.
        * @ignore
        */
@@ -61070,7 +60437,7 @@
         items.forEach(function (item, i) {
           item.setAttribute('aria-posinset', i + 1);
           item.setAttribute('aria-setsize', setsize);
-          item.setAttribute('aria-label', i18n.get('({0} of {1})', i + 1, setsize)); // so long as item content is not another multifield, 
+          item.setAttribute('aria-label', i18n.get('({0} of {1})', i + 1, setsize)); // so long as item content is not another multifield,
           // add aria-labelledby so that the item is labelled by its content and itself.
 
           if (!item.querySelector('coral-multifield')) {
@@ -61124,10 +60491,8 @@
       }
       /**
        Triggered when the {@link Multifield} item are reordered.
-       
-       @typedef {CustomEvent} coral-multifield:beforeitemorder
-       
-       @property {MultifieldItem} detail.item
+        @typedef {CustomEvent} coral-multifield:beforeitemorder
+        @property {MultifieldItem} detail.item
        The item to be ordered.
        @property {MultifieldItem} detail.oldBefore
        Ordered item next sibling before the swap. If <code>null</code>, the item was the last item.
@@ -61137,10 +60502,8 @@
 
       /**
        Triggered when the {@link Multifield} item are reordered.
-       
-       @typedef {CustomEvent} coral-multifield:itemorder
-       
-       @property {MultifieldItem} detail.item
+        @typedef {CustomEvent} coral-multifield:itemorder
+        @property {MultifieldItem} detail.item
        The ordered item.
        @property {MultifieldItem} detail.oldBefore
        Ordered item next sibling before the swap. If <code>null</code>, the item was the last item.
@@ -61170,8 +60533,7 @@
        <code>coral-multifield-add</code> is clicked. It supports the <code>template</code> tag. While specifying the
        template from markup, it should include the <code>coral-multifield-template</code> attribute.
        NOTE: On IE11, only <code>template.content</code> is supported to add/remove elements to the template.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @contentzone
        */
 
@@ -61288,8 +60650,7 @@
     }
     /**
      The item content.
-     
-     @type {MultifieldItemContent}
+      @type {MultifieldItemContent}
      @contentzone
      */
 
@@ -61355,8 +60716,7 @@
       }
       /**
        Whether the item is set to be reorder using the keyboard
-       
-       @type {boolean}
+        @type {boolean}
        @private
        */
 
@@ -61369,8 +60729,8 @@
         this.__dragging = transform.boolean(value);
 
         if (this.__dragging) {
-          // Setting role="application" to the move button forces 
-          // NVDA and JAWS screen readers into forms mode, 
+          // Setting role="application" to the move button forces
+          // NVDA and JAWS screen readers into forms mode,
           // so arrow keys can be used to reorder.
           this._elements.move.setAttribute('role', 'application');
         } else {
@@ -61478,8 +60838,7 @@
     }
     /**
      The Collection Interface that allows interacting with the items that the component contains.
-     
-     @type {SelectableCollection}
+      @type {SelectableCollection}
      @readonly
      */
 
@@ -61554,10 +60913,8 @@
       }
       /**
        Triggered when {@link PanelStack} selected panel has changed.
-       
-       @typedef {CustomEvent} coral-panelstack:change
-       
-       @property {Panel} detail.selection
+        @typedef {CustomEvent} coral-panelstack:change
+        @property {Panel} detail.selection
        The new selected panel.
        @property {Panel} detail.oldSelection
        The prior selected panel.
@@ -61582,8 +60939,7 @@
       }
       /**
        The selected item of the PanelStack.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @readonly
        */
 
@@ -61626,8 +60982,7 @@
     }
     /**
      The content of the panel.
-     
-     @type {PanelContent}
+      @type {PanelContent}
      @contentzone
      */
 
@@ -61675,8 +61030,7 @@
        Whether the item is selected. When true, the item will appear as the active element in the PanelStack. The item
        must be a child of a PanelStack before this property is set to true. This property cannot be programmatically set
        to false.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute selected
        @htmlattributereflected
@@ -61688,7 +61042,13 @@
         return this._selected || false;
       },
       set: function set(value) {
-        this._selected = transform.booleanAttr(value);
+        var _selected = transform.booleanAttr(value);
+
+        if (this._selected === _selected) {
+          return;
+        }
+
+        this._selected = _selected;
 
         this._reflectAttribute('selected', this._selected);
 
@@ -61784,9 +61144,9 @@
 
   /**
    Enumeration for {@link Progress} sizes.
-   
+
    @typedef {Object} ProgressSizeEnum
-   
+
    @property {String} SMALL
    A small progress bar.
    @property {String} MEDIUM
@@ -61802,9 +61162,9 @@
   };
   /**
    Enumeration for {@link Progress} label positions.
-   
+
    @typedef {Object} ProgressLabelPositionEnum
-   
+
    @property {String} LEFT
    Show the label to the left of the bar.
    @property {String} SIDE
@@ -61862,8 +61222,7 @@
     }
     /**
      The current progress in percent.
-     
-     @type {Number}
+      @type {Number}
      @default 0
      @emits {coral-progress:change}
      @htmlattribute value
@@ -62003,8 +61362,7 @@
       }
       /**
        Triggered when the {@link Progress} value is changed.
-       
-       @typedef {CustomEvent} coral-progress:change
+        @typedef {CustomEvent} coral-progress:change
        */
 
     }, {
@@ -62043,8 +61401,7 @@
       /**
        Whether to hide the current value and show an animation. Set to true for operations whose progress cannot be
        determined.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute indeterminate
        @htmlattributereflected
@@ -62078,8 +61435,7 @@
       /**
        The vertical and text size of this progress bar. To adjust the width, simply set the CSS width property.
        See {@link ProgressSizeEnum}.
-       
-       @type {String}
+        @type {String}
        @default ProgressSizeEnum.MEDIUM
        @htmlattribute size
        @htmlattributereflected size
@@ -62101,8 +61457,7 @@
       /**
        Boolean attribute to toggle showing progress percent as the label content.
        Default is true.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute showpercent
        */
@@ -62128,8 +61483,7 @@
       /**
        Used to access to the {@link Coral.Progress.Label} element. Keep in mind that the width of a custom label is
        limited for {@link Coral.Progress.labelPosition.LEFT} and {@link Coral.Progress.labelPosition.RIGHT}.
-       
-       @type {ProgressLabel}
+        @type {ProgressLabel}
        @contentzone
        */
 
@@ -62150,8 +61504,7 @@
       }
       /**
        Label position. See {@link ProgressLabelPositionEnum}.
-       
-       @type {String}
+        @type {String}
        @default ProgressLabelPositionEnum.LEFT
        @htmlattribute labelposition
        @htmlattributereflected
@@ -62188,8 +61541,7 @@
       }
       /**
        Returns {@link Progress} label position options.
-       
-       @return {ProgressLabelPositionEnum}
+        @return {ProgressLabelPositionEnum}
        */
 
     }], [{
@@ -62199,8 +61551,7 @@
       }
       /**
        Returns {@link Progress} sizes.
-       
-       @return {ProgressSizeEnum}
+        @return {ProgressSizeEnum}
        */
 
     }, {
@@ -62268,9 +61619,9 @@
 
   /**
    Enumeration for {@link QuickActionsItem} type values.
-   
+
    @typedef {Object} QuickActionsItemTypeEnum
-   
+
    @property {String} BUTTON
    Default button type
    @property {String} ANCHOR
@@ -62320,18 +61671,15 @@
 
       /**
        Handles mutations on the Item.
-       
-       @emits {coral-quickactions-item:_contentchanged}
-       
-       @private
+        @emits {coral-quickactions-item:_contentchanged}
+        @private
        */
       value: function _onMutation() {
         this.trigger('coral-quickactions-item:_contentchanged');
       }
       /**
        Returns {@link QuickActionsItem} type options.
-       
-       @return {QuickActionsItemTypeEnum}
+        @return {QuickActionsItemTypeEnum}
        */
 
     }, {
@@ -62348,34 +61696,26 @@
       }
       /**
        Triggered when an icon of a {@link QuickActionsItem} was changed.
-       
-       @typedef {CustomEvent} coral-quickactions-item:_iconchanged
-       
-       @private
+        @typedef {CustomEvent} coral-quickactions-item:_iconchanged
+        @private
        */
 
       /**
        Triggered when the content of a {@link QuickActionsItem} was changed.
-       
-       @typedef {CustomEvent} coral-quickactions-item:_contentchanged
-       
-       @private
+        @typedef {CustomEvent} coral-quickactions-item:_contentchanged
+        @private
        */
 
       /**
        Triggered when the href of a {@link QuickActionsItem} was changed.
-       
-       @typedef {CustomEvent} coral-quickactions-item:_hrefchanged
-       
-       @private
+        @typedef {CustomEvent} coral-quickactions-item:_hrefchanged
+        @private
        */
 
       /**
        Triggered when the type of a {@link QuickActionsItem} was changed.
-       
-       @typedef {CustomEvent} coral-quickactions-item:_typechanged
-       
-       @private
+        @typedef {CustomEvent} coral-quickactions-item:_typechanged
+        @private
        */
 
     }, {
@@ -62394,8 +61734,7 @@
       }
       /**
        When <code>type</code> is {@link Coral.QuickActions.Item.type.ANCHOR}, the href will be used for the anchor.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute href
        @htmlattributereflected
@@ -62408,7 +61747,13 @@
         return this._href || '';
       },
       set: function set(value) {
-        this._href = transform.string(value);
+        var _href = transform.string(value);
+
+        if (this._href === _href) {
+          return;
+        }
+
+        this._href = _href;
 
         this._reflectAttribute('href', this._href);
 
@@ -62417,8 +61762,7 @@
       /**
        Specifies the name of the icon to be shown in the QuickActions Item. See {@link Icon} for valid icon
        names.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute icon
        @htmlattributereflected
@@ -62431,7 +61775,13 @@
         return this._icon || '';
       },
       set: function set(value) {
-        this._icon = transform.string(value);
+        var _icon = transform.string(value);
+
+        if (this._icon === _icon) {
+          return;
+        }
+
+        this._icon = _icon;
 
         this._reflectAttribute('icon', this._icon);
 
@@ -62440,8 +61790,7 @@
       /**
        The type of item that will be used. Setting {@link QuickActionsItemTypeEnum}.ANCHOR will allow users to
        navigate using the quickactions proving the correct hypermedia to the users.
-       
-       @type {String}
+        @type {String}
        @default QuickActionsItemTypeEnum.BUTTON
        @htmlattribute type
        @htmlattributereflected
@@ -62453,8 +61802,15 @@
         return this._type || type$1.BUTTON;
       },
       set: function set(value) {
-        value = transform.string(value).toLowerCase();
-        this._type = validate.enumeration(type$1)(value) && value || type$1.BUTTON;
+        var _value = transform.string(value).toLowerCase();
+
+        var _type = validate.enumeration(type$1)(_value) && _value || type$1.BUTTON;
+
+        if (this._type === _type) {
+          return;
+        }
+
+        this._type = _type;
 
         this._reflectAttribute('type', this._type);
 
@@ -62539,9 +61895,9 @@
   var BUTTON_FOCUSABLE_SELECTOR = '._coral-QuickActions-item:not([disabled]):not([hidden])';
   /**
    Enumeration for {@link QuickActions} interaction options.
-   
+
    @typedef {Object} QuickActionsInteractionEnum
-   
+
    @property {String} ON
    Show when the target is hovered or focused and hide when the mouse is moved out or focus is lost.
    @property {String} OFF
@@ -62554,9 +61910,9 @@
   };
   /**
    Enumeration for {@link QuickActions} anchored overlay target options.
-   
+
    @typedef {Object} QuickActionsTargetEnum
-   
+
    @property {String} PARENT
    Use the parent element in the DOM.
    @property {String} PREVIOUS
@@ -62572,9 +61928,9 @@
   };
   /**
    Enumeration for {@link QuickActions} placement options.
-   
+
    @typedef {Object} QuickActionsPlacementEnum
-   
+
    @property {String} TOP
    QuickActions inset to the top of the target.
    @property {String} CENTER
@@ -62682,8 +62038,7 @@
     }
     /**
      Returns the inner overlay to allow customization.
-     
-     @type {Popover}
+      @type {Popover}
      @readonly
      */
 
@@ -62764,11 +62119,9 @@
       }
       /**
        Toggles whether or not an item is tabbable.
-       
-       @param {HTMLElement} item
+        @param {HTMLElement} item
        The item to process.
-       
-       @param {Boolean} tabbable
+        @param {Boolean} tabbable
        Whether the item should be marked tabbable.
        @ignore
        */
@@ -62788,15 +62141,12 @@
       }
       /**
        Gets the subsequent or previous focusable neighbour relative to an Item button.
-       
-       @param {HTMLElement} current
+        @param {HTMLElement} current
        The current button element from which to find the next selectable neighbour.
        @param {Boolean} [previous]
        Whether to look for a previous neighbour rather than a subsequent one.
-       
-       @returns {HTMLElement|undefined} The focusable neighbour. Undefined if no suitable neighbour found.
-       
-       @private
+        @returns {HTMLElement|undefined} The focusable neighbour. Undefined if no suitable neighbour found.
+        @private
        */
 
     }, {
@@ -62820,13 +62170,10 @@
       }
       /**
        Gets the buttons, optionally excluding the more button.
-       
-       @param {Boolean} excludeMore
+        @param {Boolean} excludeMore
        Whether to exclude the more button.
-       
-       @returns {NodeList} The NodeList containing all the buttons.
-       
-       @private
+        @returns {NodeList} The NodeList containing all the buttons.
+        @private
        */
 
     }, {
@@ -62838,10 +62185,8 @@
       }
       /**
        An element is focusable if it is visible and not disabled.
-       
-       @returns {NodeList} A NodeList containing the focusable buttons.
-       
-       @private
+        @returns {NodeList} A NodeList containing the focusable buttons.
+        @private
        */
 
     }, {
@@ -62853,8 +62198,7 @@
       }
       /**
        Gets the first focusable button.
-       
-       @returns {HTMLElement|undefined}
+        @returns {HTMLElement|undefined}
        The first focusable button, undefined if none found.
        @ignore
        */
@@ -62866,8 +62210,7 @@
       }
       /**
        Gets the last focusable button.
-       
-       @returns {HTMLElement|undefined}
+        @returns {HTMLElement|undefined}
        The last focusable button, undefined if none found.
        @ignore
        */
@@ -62892,8 +62235,7 @@
       }
       /**
        Gets data from an Item.
-       
-       @param {HTMLElement} item
+        @param {HTMLElement} item
        The Item to get the data from.
        @returns {Object}
        The Item data.
@@ -63092,8 +62434,7 @@
       }
       /**
        Sets the width of QuickActions from the target.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -63662,8 +63003,7 @@
 
       /**
        Returns {@link QuickActions} placement options.
-       
-       @return {QuickActionsPlacementEnum}
+        @return {QuickActionsPlacementEnum}
        */
 
     }, {
@@ -63730,8 +63070,7 @@
       }
       /**
        The Item collection.
-       
-       @type {Collection}
+        @type {Collection}
        @readonly
        */
 
@@ -63754,8 +63093,7 @@
        The number of items that are visible in QuickActions (excluding the show more actions button) before a collapse
        is enforced. A value <= 0 disables this feature and shows as many items as possible. Regardless of this
        property, the QuickActions will still fit within their target's width.
-       
-       @type {Number}
+        @type {Number}
        @default 4
        @htmlattribute threshold
        @htmlattributereflected
@@ -63775,8 +63113,7 @@
        The placement of the QuickActions. The value may be one of 'top', 'center' and 'bottom' and indicates the vertical
        alignment of the QuickActions relative to their container.
        See {@link OverlayPlacementEnum}.
-       
-       @type {String}
+        @type {String}
        @default OverlayPlacementEnum.TOP
        @htmlattribute placement
        */
@@ -63793,8 +63130,7 @@
       }
       /**
        Whether the QuickActions should show when the target is interacted with. See {@link QuickActionsInteractionEnum}.
-       
-       @type {String}
+        @type {String}
        @default QuickActionsInteractionEnum.ON
        @name interaction
        @htmlattribute interaction
@@ -63867,7 +63203,7 @@
       set: function set(value) {
         var _this6 = this;
 
-        // If opening and stealing focus, on close, focus should be returned 
+        // If opening and stealing focus, on close, focus should be returned
         // to the element that had focus before QuickActions were opened.
         if (value && this._focusOnShow !== this.constructor.focusOnShow.OFF) {
           this.returnFocusTo(document.activeElement);
@@ -63908,8 +63244,7 @@
       }
       /**
        Returns {@link QuickActions} target options.
-       
-       @return {QuickActionsTargetEnum}
+        @return {QuickActionsTargetEnum}
        */
 
     }, {
@@ -64291,8 +63626,7 @@
     }
     /**
      The menu collection.
-     
-     @type {Collection}
+      @type {Collection}
      @readonly
      */
 
@@ -64347,8 +63681,7 @@
       }
       /**
        The shell header zone.
-       
-       @type {ShellHeader}
+        @type {ShellHeader}
        @contentzone
        */
 
@@ -64368,8 +63701,7 @@
       }
       /**
        The shell content zone.
-       
-       @type {ShellContent}
+        @type {ShellContent}
        @contentzone
        */
 
@@ -64457,8 +63789,7 @@
     }
     /**
      The label of the panel.
-     
-     @type {HTMLElement}
+      @type {HTMLElement}
      @contentzone
      */
 
@@ -64515,8 +63846,7 @@
       }
       /**
        The main content zone of the panel.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @contentzone
        */
 
@@ -64536,8 +63866,7 @@
       }
       /**
        The content zone where the actions are placed.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @contentzone
        */
 
@@ -64615,8 +63944,7 @@
     }
     /**
      The label of the anchor.
-     
-     @type {ShellHomeAnchorLabel}
+      @type {ShellHomeAnchorLabel}
      @contentzone
      */
 
@@ -64681,8 +64009,7 @@
       }
       /**
        Specifies the icon name used in the anchor. See {@link Coral.Icon} for valid icon names.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute icon
        */
@@ -64856,9 +64183,9 @@
   var CLASSNAME$15 = '_coral-Search';
   /**
    Enumeration for {@link Search} variants.
-   
+
    @typedef {Object} SearchVariantEnum
-   
+
    @property {String} DEFAULT
    A default, gray search input.
    @property {String} QUIET
@@ -64929,8 +64256,7 @@
       }
       /**
        Handles the up action by steping up the Search. It prevents the default action.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -64948,8 +64274,7 @@
       }
       /**
        Handles the keydown action.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -64959,8 +64284,7 @@
       }
       /**
        Updates the clear button's display status.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -64970,8 +64294,7 @@
       }
       /**
        Clears the text in the input box.
-       
-       @ignore
+        @ignore
        */
 
     }, {
@@ -65006,8 +64329,7 @@
       }
       /**
        Returns {@link Search} variants.
-       
-       @return {SearchVariantEnum}
+        @return {SearchVariantEnum}
        */
 
     }, {
@@ -65048,20 +64370,17 @@
       }
       /**
        Triggered when {@link Search} input is given.
-       
-       @typedef {CustomEvent} coral-search:input
+        @typedef {CustomEvent} coral-search:input
        */
 
       /**
        Triggered when the user presses {@link Search} enter.
-       
-       @typedef {CustomEvent} coral-search:submit
+        @typedef {CustomEvent} coral-search:submit
        */
 
       /**
        Triggered when the {@link Search} is cleared.
-       
-       @typedef {CustomEvent} coral-search:clear
+        @typedef {CustomEvent} coral-search:clear
        */
 
     }, {
@@ -65076,8 +64395,7 @@
       }
       /**
        The submitted input value. Changing this value will not trigger an event.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute value
        */
@@ -65173,8 +64491,7 @@
       }
       /**
        Short hint that describes the expected value of the Search. It is displayed when the Search is empty.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute placeholder
        @htmlattributereflected
@@ -65211,8 +64528,7 @@
       }
       /**
        The search's variant. See {@link SearchVariantEnum}.
-       
-       @type {String}
+        @type {String}
        @default SearchVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -65233,8 +64549,7 @@
       }
       /**
        @ignore
-       
-       Not supported anymore.
+        Not supported anymore.
        */
 
     }, {
@@ -65469,8 +64784,7 @@
     }
     /**
      The item collection.
-     
-     @type {Collection}
+      @type {Collection}
      @readonly
      */
 
@@ -65542,7 +64856,7 @@
         var timeoutName = "_".concat(elementName, "Timeout"); // Show message element
 
         el.hidden = false; // Add message text after 150ms delay to give screen readers enough
-        // time to recognize the live region and respond to the text update 
+        // time to recognize the live region and respond to the text update
 
         this._clearTimeout(timeoutName);
 
@@ -65600,8 +64914,7 @@
       }
       /**
        Show a set of search results.
-       
-       @param {Array.<ShellHelpResult>} results
+        @param {Array.<ShellHelpResult>} results
        A set of search result objects.
        @param {Number} total
        The total number of results.
@@ -65699,10 +65012,8 @@
       }
       /**
        A search result object.
-       
-       @typedef {Object} ShellHelpResult
-       
-       @property {String} title
+        @typedef {Object} ShellHelpResult
+        @property {String} title
        The title of the search result.
        @property {String} href
        The URL of the search result.
@@ -65714,10 +65025,8 @@
 
       /**
        Triggered when the user submits a search term
-       
-       @event Coral.Shell.Help#coral-shell-help:search
-       
-       @param {Object} event
+        @event Coral.Shell.Help#coral-shell-help:search
+        @param {Object} event
        Event object.
        @param {HTMLElement} event.detail.value
        The user-provided input value aka the search-term
@@ -65740,8 +65049,7 @@
       }
       /**
        The search field placeholder.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute placeholder
        */
@@ -65814,7 +65122,7 @@
    @classdesc Shell's help separator
    @htmltag coral-shell-help-separator
    @return {HTMLElement}
-   
+
    @deprecated
    */
   var ShellHelpSeparator = (function () {
@@ -65878,8 +65186,7 @@
       }
       /**
        Whether the overlay should use all available space.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute full
        @htmlattributereflected
@@ -65939,8 +65246,7 @@
     }
     /**
      The item collection.
-     
-     @type {Collection}
+      @type {Collection}
      @readonly
      */
 
@@ -65996,9 +65302,9 @@
 
   /**
    Enumeration for {@link ShellMenuBarItem} icon variants.
-   
+
    @typedef {Object} ShellMenuBarItemIconVariantEnum
-   
+
    @property {String} DEFAULT
    A default menubar item.
    @property {String} CIRCLE
@@ -66010,23 +65316,23 @@
     CIRCLE: 'circle'
   };
   /**
-    Enumeration for valid aria-haspopup values.
+   Enumeration for valid aria-haspopup values.
 
-    @typedef {Object} ShellMenuBarItemHasPopupRoleEnum
-    @property {String} MENU
-    ShellMenuBarItem opens a menu.
-    @property {String} LISTBOX
-    ShellMenuBarItem opens a list box.
-    @property {String} TREE
-    ShellMenuBarItem opens a tree.
-    @property {String} GRID
-    ShellMenuBarItem opens a grid.
-    @property {String} DIALOG
-    ShellMenuBarItem opens a dialog.
-    @property {Null} DEFAULT
-    Defaults to null.
+   @typedef {Object} ShellMenuBarItemHasPopupRoleEnum
+   @property {String} MENU
+   ShellMenuBarItem opens a menu.
+   @property {String} LISTBOX
+   ShellMenuBarItem opens a list box.
+   @property {String} TREE
+   ShellMenuBarItem opens a tree.
+   @property {String} GRID
+   ShellMenuBarItem opens a grid.
+   @property {String} DIALOG
+   ShellMenuBarItem opens a dialog.
+   @property {Null} DEFAULT
+   Defaults to null.
 
-  */
+   */
 
   var hasPopupRole = {
     MENU: 'menu',
@@ -66084,8 +65390,7 @@
     /**
      Specifies the icon name used inside the menu item.
      See {@link Icon} for valid icon names.
-     
-     @type {String}
+      @type {String}
      @default ""
      @htmlattribute icon
      */
@@ -66156,8 +65461,7 @@
       }
       /**
        Returns {@link ShellMenuBarItem} icon variants.
-       
-       @return {ShellMenuBarItemIconVariantEnum}
+        @return {ShellMenuBarItemIconVariantEnum}
        */
 
     }, {
@@ -66205,14 +65509,12 @@
       }
       /**
        Triggered after the {@link ShellMenuBarItem} is opened with <code>show()</code> or <code>instance.open = true</code>
-       
-       @typedef {CustomEvent} coral-shell-menubar-item:open
+        @typedef {CustomEvent} coral-shell-menubar-item:open
        */
 
       /**
        Triggered after the {@link ShellMenuBarItem} is closed with <code>hide()</code> or <code>instance.open = false</code>
-       
-       @typedef {CustomEvent} coral-shell-menubar-item:close
+        @typedef {CustomEvent} coral-shell-menubar-item:close
        */
 
     }, {
@@ -66225,8 +65527,7 @@
       }
       /**
        Size of the icon. It accepts both lower and upper case sizes. See {@link ButtonIconSizeEnum}.
-       
-       @type {String}
+        @type {String}
        @default ButtonIconSizeEnum.SMALL
        @htmlattribute iconsize
        @htmlattributereflected
@@ -66244,8 +65545,7 @@
       }
       /**
        The menubar item's iconVariant. See {@link ShellMenuBarItemIconVariantEnum}.
-       
-       @type {String}
+        @type {String}
        @default ShellMenuBarItemIconVariantEnum.DEFAULT
        @htmlattribute iconvariant
        */
@@ -66270,8 +65570,7 @@
       }
       /**
        The notification badge content.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute badge
        */
@@ -66288,13 +65587,11 @@
       }
       /**
        Whether the menu is open or not.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute open
        @htmlattributereflected
-       
-       @emits {coral-shell-menubar-item:open}
+        @emits {coral-shell-menubar-item:open}
        @emits {coral-shell-menubar-item:close}
        */
 
@@ -66329,8 +65626,7 @@
       }
       /**
        The menubar item's label content zone.
-       
-       @type {ButtonLabel}
+        @type {ButtonLabel}
        @contentzone
        */
 
@@ -66351,8 +65647,7 @@
       /**
        The menu that this menu item should show. If a CSS selector is provided, the first matching element will be
        used.
-       
-       @type {?HTMLElement|String}
+        @type {?HTMLElement|String}
        @default null
        @htmlattribute menu
        */
@@ -66386,11 +65681,11 @@
         }
       }
       /**
-        Whether the item opens a popup dialog or menu. Accepts either "menu", "listbox", "tree", "grid", or "dialog".
-        @type {?String}
-        @default ShellMenuBarItemHasPopupRoleEnum.DEFAULT
-        @htmlattribute haspopup
-      */
+       Whether the item opens a popup dialog or menu. Accepts either "menu", "listbox", "tree", "grid", or "dialog".
+       @type {?String}
+       @default ShellMenuBarItemHasPopupRoleEnum.DEFAULT
+       @htmlattribute haspopup
+       */
 
     }, {
       key: "hasPopup",
@@ -66476,9 +65771,9 @@
   var CLASSNAME$1a = '_coral-Shell-user';
   /**
    Enumeration for {@link ShellUser} avatar options. Avatar assets should use one of those provided, when no asset is set
-   
+
    @typedef {Object} ShellUserAvatarEnum
-   
+
    @property {String} DEFAULT
    Default avatar, show user icon from icon font.
    */
@@ -66523,8 +65818,7 @@
     /**
      Specifies the asset used inside the avatar view.
      See {@link Icon} for valid usage and icon names.
-     
-     @type {String}
+      @type {String}
      @default ShellUserAvatarEnum.DEFAULT
      @htmlattribute avatar
      */
@@ -66582,8 +65876,7 @@
       }
       /**
        The name content zone of the user-menu.
-       
-       @type {ShellUserName}
+        @type {ShellUserName}
        @contentzone
        */
 
@@ -66603,8 +65896,7 @@
       }
       /**
        The heading content zone of the user-menu.
-       
-       @type {ShellUserHeading}
+        @type {ShellUserHeading}
        @contentzone
        */
 
@@ -66624,8 +65916,7 @@
       }
       /**
        The subheading content zone of the user-menu.
-       
-       @type {ShellUserSubheading}
+        @type {ShellUserSubheading}
        @contentzone
        */
 
@@ -66645,8 +65936,7 @@
       }
       /**
        The main content zone of the user-menu.
-       
-       @type {ShellUserContent}
+        @type {ShellUserContent}
        @contentzone
        */
 
@@ -66671,8 +65961,7 @@
       }
       /**
        The footer content zone of the user-menu.
-       
-       @type {ShellUserFooter}
+        @type {ShellUserFooter}
        @contentzone
        */
 
@@ -66710,8 +65999,7 @@
       }
       /**
        Returns {@link ShellUser} avatar options.
-       
-       @return {ShellUserAvatarEnum}
+        @return {ShellUserAvatarEnum}
        */
 
     }, {
@@ -66888,8 +66176,7 @@
     }
     /**
      The item collection.
-     
-     @type {SelectableCollection}
+      @type {SelectableCollection}
      @readonly
      */
 
@@ -66984,8 +66271,7 @@
       }
       /**
        Returns true if the event is at the matched target.
-       
-       @private
+        @private
        */
 
     }, {
@@ -67101,8 +66387,7 @@
       }
       /**
        Returns the selected workspace.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @readonly
        */
 
@@ -67147,8 +66432,7 @@
     }
     /**
      Whether this workspace is selected.
-     
-     @type {Boolean}
+      @type {Boolean}
      @default false
      @htmlattribute selected
      @htmlattributereflected
@@ -67177,10 +66461,8 @@
       }
       /**
        Triggered when a {@link ShellWorkspace} selection changed.
-       
-       @typedef {CustomEvent} coral-shell-workspace:_selectedchanged
-       
-       @private
+        @typedef {CustomEvent} coral-shell-workspace:_selectedchanged
+        @private
        */
 
     }, {
@@ -67262,8 +66544,7 @@
     }
     /**
      The item collection.
-     
-     @type {Collection}
+      @type {Collection}
      @readonly
      */
 
@@ -67394,8 +66675,7 @@
 
       /**
        The item collection.
-       
-       @type {Collection}
+        @type {Collection}
        @readonly
        */
       get: function get() {
@@ -67412,8 +66692,7 @@
       }
       /**
        Whether the solution list is secondary.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute secondary
        @htmlattributereflected
@@ -67457,7 +66736,7 @@
    @classdesc Shell's solution sub-cloud name
    @htmltag coral-shell-solutions-header
    @return {HTMLElement}
-   
+
    @deprecated
    */
 
@@ -67511,8 +66790,7 @@
     }
     /**
      Specifies the icon name used inside the button. See {@link Icon} for valid icon names.
-     
-     @type {String}
+      @type {String}
      @default ""
      @htmlattribute icon
      */
@@ -67561,8 +66839,7 @@
       }
       /**
        The solution's label content zone.
-       
-       @type {ShellSolutionLabel}
+        @type {ShellSolutionLabel}
        @contentzone
        */
 
@@ -67582,8 +66859,7 @@
       }
       /**
        Whether a solution is linked or not
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute linked
        @htmlattributereflected
@@ -67706,7 +66982,7 @@
   var CLASSNAME$1g = '_coral-Shell-orgSwitcher';
   /**
    Minimum number of entries required to show search control.
-   
+
    @type {Number}
    @ignore
    */
@@ -67759,8 +67035,7 @@
     }
     /**
      The item collection.
-     
-     @type {SelectableCollection}
+      @type {SelectableCollection}
      @readonly
      */
 
@@ -67805,8 +67080,7 @@
       }
       /**
        Returns the selected workspace.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @readonly
        */
 
@@ -67983,10 +67257,8 @@
       }
       /**
        Triggered when the {@link ShellOrgSwitcher} selected organization has changed.
-       
-       @typedef {CustomEvent} coral-shell-orgswitcher:change
-       
-       @property {HTMLElement} detail.oldSelection
+        @typedef {CustomEvent} coral-shell-orgswitcher:change
+        @property {HTMLElement} detail.oldSelection
        The prior selected organization item.
        @property {HTMLElement} detail.selection
        The newly selected organization item.
@@ -68011,8 +67283,7 @@
       }
       /**
        The search field placeholder.
-       
-       @default ''
+        @default ''
        @type {String}
        @htmlattribute placeholder
        */
@@ -68027,8 +67298,7 @@
       }
       /**
        Content zone where the buttons are located.
-       
-       @type {ShellOrgSwitcherFooter}
+        @type {ShellOrgSwitcherFooter}
        @contentzone
        */
 
@@ -68169,8 +67439,7 @@
     }
     /**
      The item collection.
-     
-     @type {SelectableCollection}
+      @type {SelectableCollection}
      @readonly
      */
 
@@ -68335,10 +67604,8 @@
       }
       /**
        Triggered when a {@link ShellOrganization} selection changed.
-       
-       @typedef {CustomEvent} coral-shell-organization:_selectedchanged
-       
-       @private
+        @typedef {CustomEvent} coral-shell-organization:_selectedchanged
+        @private
        */
 
     }, {
@@ -68359,8 +67626,7 @@
       }
       /**
        Returns the selected workspace.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @readonly
        */
 
@@ -68371,8 +67637,7 @@
       }
       /**
        Whether this organization is selected.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute selected
        @htmlattributereflected
@@ -68406,8 +67671,7 @@
       }
       /**
        The name of this organization.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute name
        @htmlattributereflected
@@ -68573,9 +67837,9 @@
   };
   /**
    Enumeration for {@link SideNav} variants.
-   
+
    @typedef {Object} SideNavVariantEnum
-   
+
    @property {String} DEFAULT
    A default sidenav.
    @property {String} MULTI_LEVEL
@@ -68640,8 +67904,7 @@
     }
     /**
      The Collection Interface that allows interacting with the items that the component contains.
-     
-     @type {Collection}
+      @type {Collection}
      @readonly
      */
 
@@ -68827,8 +68090,7 @@
       }
       /**
        Returns {@link SideNav} variants.
-       
-       @return {SideNavVariantEnum}
+        @return {SideNavVariantEnum}
        */
 
     }, {
@@ -68864,10 +68126,8 @@
       }
       /**
        Triggered when {@link SideNav} selected item has changed.
-       
-       @typedef {CustomEvent} coral-sidenav:change
-       
-       @property {SideNavItem} detail.oldSelection
+        @typedef {CustomEvent} coral-sidenav:change
+        @property {SideNavItem} detail.oldSelection
        The prior selected item.
        @property {SideNavItem} detail.selection
        The newly selected item.
@@ -68892,8 +68152,7 @@
       /**
        Returns the first selected item in the sidenav. The value <code>null</code> is returned if no element is
        selected.
-       
-       @type {SideNavItem}
+        @type {SideNavItem}
        @readonly
        */
 
@@ -68904,8 +68163,7 @@
       }
       /**
        The sidenav's variant. See {@link SideNavVariantEnum}.
-       
-       @type {String}
+        @type {String}
        @default SideNavVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -69017,8 +68275,7 @@
     }
     /**
      The content of the sidenav item.
-     
-     @type {SideNavItemContent}
+      @type {SideNavItemContent}
      @contentzone
      */
 
@@ -69075,8 +68332,7 @@
       }
       /**
        Specifies the icon name used inside the item. See {@link Icon} for valid icon names.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute icon
        */
@@ -69094,8 +68350,7 @@
       }
       /**
        Whether the item is selected.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute selected
        @htmlattributereflected
@@ -69302,9 +68557,9 @@
 
   /**
    Enumeration for {@link SplitButton} variants.
-   
+
    @typedef {Object} SplitButtonVariantEnum
-   
+
    @property {String} DEFAULT
    The default button look and feel.
    @property {String} CTA
@@ -69325,7 +68580,7 @@
    These elements should be marked with following attributes:
    - <code>[coral-splitbutton-action]</code> for the main action button.
    - <code>[coral-splitbutton-trigger]</code> for the trigger button.
-   
+
    @htmltag coral-splitbutton
    @extends {HTMLElement}
    @extends {BaseComponent}
@@ -69361,8 +68616,7 @@
     }
     /**
      The button's variant. See {@link SplitButtonVariantEnum}.
-     
-     @type {String}
+      @type {String}
      @default SplitButtonVariantEnum.DEFAULT
      @htmlattribute variant
      @htmlattributereflected
@@ -69433,8 +68687,7 @@
       }
       /**
        Returns {@link SplitButton} variants.
-       
-       @return {SplitButtonVariantEnum}
+        @return {SplitButtonVariantEnum}
        */
 
     }, {
@@ -69503,9 +68756,9 @@
 
   /**
    Enumeration for {@link Status} variants.
-   
+
    @typedef {Object} StatusVariantEnum
-   
+
    @property {String} NEUTRAL
    A default semantic neutral status.
    @property {String} WARNING
@@ -69527,9 +68780,9 @@
   };
   /**
    Enumeration for {@link Status} colors.
-   
+
    @typedef {Object} StatusColorEnum
-   
+
    @property {String} DEFAULT
    @property {String} CELERY
    @property {String} YELLOW
@@ -69573,7 +68826,7 @@
    @class Coral.Status
    @classdesc A Status component to describe the condition of another entity. They can be used to convey semantic meaning
    such as statuses and categories.
-   
+
    @htmltag coral-status
    @extends {HTMLElement}
    @extends {BaseComponent}
@@ -69601,8 +68854,7 @@
     }
     /**
      Whether the status is disabled or not.
-     
-     @type {Boolean}
+      @type {Boolean}
      @default false
      @htmlattribute disabled
      @htmlattributereflected
@@ -69654,7 +68906,7 @@
       /**
        The status variant. See {@link StatusVariantEnum}.
        When a status has a semantic meaning, it should use semantic colors.
-         @type {String}
+        @type {String}
        @default StatusVariantEnum.NEUTRAL
        @htmlattribute variant
        @htmlattributereflected
@@ -69681,8 +68933,7 @@
        The status color. See {@link StatusColorEnum}.
        When a status is used to color code categories and labels commonly found in data visualization, they should use
        colors.
-       
-       The ideal usage for colors is when there are 8 or fewer categories or labels being color coded.
+        The ideal usage for colors is when there are 8 or fewer categories or labels being color coded.
        Use them in the following order to ensure the greatest possible color differences for multiple forms of color
        blindness:
        - Indigo
@@ -69693,9 +68944,8 @@
        - Seafoam
        - Chartreuse
        - Purple
-         If a color is set, it'll override any semantic variant.
-       
-       @type {String}
+        If a color is set, it'll override any semantic variant.
+        @type {String}
        @default StatusColorEnum.DEFAULT
        @htmlattribute color
        @htmlattributereflected
@@ -69722,8 +68972,7 @@
       }
       /**
        The status label element.
-       
-       @type {StatusLabel}
+        @type {StatusLabel}
        @contentzone
        */
 
@@ -69750,8 +68999,7 @@
       }
       /**
        Returns {@link Status} variants.
-       
-       @return {StatusVariantEnum}
+        @return {StatusVariantEnum}
        */
 
     }], [{
@@ -69761,8 +69009,7 @@
       }
       /**
        Returns {@link Status} colors.
-       
-       @return {StatusColorEnum}
+        @return {StatusColorEnum}
        */
 
     }, {
@@ -69834,7 +69081,7 @@
 
   /**
    Gets the target panel of the item.
-   
+
    @private
    @param {HTMLElement|String} [targetValue]
    A specific target value to use.
@@ -69858,11 +69105,11 @@
 
   /**
    Enumeration for {@link StepList} interaction options.
-   
+
    @todo support "click only past steps" mode
-   
+
    @typedef {Object} StepListInteractionEnum
-   
+
    @property {String} ON
    Steps can be clicked to visit them.
    @property {String} OFF
@@ -69875,9 +69122,9 @@
   };
   /**
    Enumeration for {@link StepList} sizes.
-   
+
    @typedef {Object} StepListSizeEnum
-   
+
    @property {String} SMALL
    A small-sized StepList.
    @property {String} LARGE
@@ -69940,8 +69187,7 @@
     }
     /**
      The Collection Interface that allows interacting with the items that the component contains.
-     
-     @type {SelectableCollection}
+      @type {SelectableCollection}
      @readonly
      */
 
@@ -70168,8 +69414,7 @@
       }
       /**
        Show the next Step.
-       
-       @emits {coral-steplist:change}
+        @emits {coral-steplist:change}
        */
 
     }, {
@@ -70185,8 +69430,7 @@
       }
       /**
        Show the previous Step.
-       
-       @emits {coral-steplist:change}
+        @emits {coral-steplist:change}
        */
 
     }, {
@@ -70202,8 +69446,7 @@
       }
       /**
        Returns {@link StepList} sizes.
-       
-       @return {StepListSizeEnum}
+        @return {StepListSizeEnum}
        */
 
     }, {
@@ -70240,10 +69483,8 @@
       }
       /**
        Triggered when the {@link StepList} selected {@link Step} has changed.
-       
-       @typedef {CustomEvent} coral-steplist:change
-       
-       @property {Step} detail.selection
+        @typedef {CustomEvent} coral-steplist:change
+        @property {Step} detail.selection
        The newly selected Step.
        @property {Step} detail.oldSelection
        The previously selected Step.
@@ -70266,8 +69507,7 @@
       }
       /**
        Returns the selected step.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @readonly
        */
 
@@ -70280,8 +69520,7 @@
        The target component that will be linked to the StepList. It accepts either a CSS selector or a DOM element. If
        a CSS Selector is provided, the first matching element will be used. Items will be selected based on the index.
        If both target and {@link Coral.Step#target} are set, the second will have higher priority.
-       
-       @type {?HTMLElement|String}
+        @type {?HTMLElement|String}
        @default null
        @htmlattribute target
        */
@@ -70345,8 +69584,7 @@
        The size of the StepList. It accepts both lower and upper case sizes. Currently only "S" and "L" (the default)
        are available.
        See {@link StepListSizeEnum}.
-       
-       @type {String}
+        @type {String}
        @default StepListSizeEnum.LARGE
        @htmlattribute size
        @htmlattributereflected
@@ -70401,8 +69639,7 @@
       /**
        Whether Steps should be interactive or not. When interactive, a Step can be clicked to jump to it.
        See {@link StepListInteractionEnum}.
-       
-       @type {String}
+        @type {String}
        @default StepListInteractionEnum.OFF
        @htmlattribute interaction
        @htmlattributereflected
@@ -70458,8 +69695,7 @@
       }
       /**
        Returns {@link StepList} interaction options.
-       
-       @return {StepListInteractionEnum}
+        @return {StepListInteractionEnum}
        */
 
     }, {
@@ -70561,8 +69797,7 @@
     }
     /**
      The label of the step.
-     
-     @type {StepLabel}
+      @type {StepLabel}
      @contentzone
      */
 
@@ -70737,8 +69972,7 @@
       /**
        Whether the item is selected. When <code>true</code>, the item will appear as the active element in the
        StepList. The item must be a child of a StepList before this property is set to <code>true</code>.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute selected
        @htmlattributereflected
@@ -70792,8 +70026,7 @@
       }
       /**
        Whether the item is disabled
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute disabled
        @htmlattributereflected
@@ -70817,13 +70050,13 @@
         }
       }
       /**
-        Reflects the <code>aria-label</code> attribute to the marker dot for cases where no visible label is provided for the Step.
-        @type {?String}
-        @default ''
-        @htmlattribute labelled
-        @htmlattributereflected
-        @memberof Coral.Step#
-      */
+       Reflects the <code>aria-label</code> attribute to the marker dot for cases where no visible label is provided for the Step.
+       @type {?String}
+       @default ''
+       @htmlattribute labelled
+       @htmlattributereflected
+       @memberof Coral.Step#
+       */
 
     }, {
       key: "labelled",
@@ -70848,14 +70081,14 @@
         }
       }
       /**
-        Reflects the <code>aria-labelledby</code> attribute to the marker dot for cases where no visible label is provided for the Step, 
-        and the Step is labelled by an external element.
-        @type {?String}
-        @default ''
-        @htmlattribute labelledby
-        @htmlattributereflected
-        @memberof Coral.Step#
-      */
+       Reflects the <code>aria-labelledby</code> attribute to the marker dot for cases where no visible label is provided for the Step,
+       and the Step is labelled by an external element.
+       @type {?String}
+       @default ''
+       @htmlattribute labelledby
+       @htmlattributereflected
+       @memberof Coral.Step#
+       */
 
     }, {
       key: "labelledBy",
@@ -70880,13 +70113,13 @@
         }
       }
       /**
-      Reflects the <code>aria-describedby</code> attribute to the link element.
-      @type {?String}
-      @default ''
-      @htmlattribute describedby
-      @htmlattributereflected
-      @memberof Coral.Step#
-      */
+       Reflects the <code>aria-describedby</code> attribute to the link element.
+       @type {?String}
+       @default ''
+       @htmlattribute describedby
+       @htmlattributereflected
+       @memberof Coral.Step#
+       */
 
     }, {
       key: "describedBy",
@@ -70907,8 +70140,7 @@
       /**
        The target element that will be selected when this Step is selected. It accepts a CSS selector or a DOM element.
        If a CSS Selector is provided, the first matching element will be used.
-       
-       @type {?HTMLElement|String}
+        @type {?HTMLElement|String}
        @default null
        @htmlattribute target
        */
@@ -71305,8 +70537,7 @@
     }
     /**
      Whether the switch is on or off.
-     
-     @type {Boolean}
+      @type {Boolean}
      @default false
      @htmlattribute checked
      @htmlattributereflected
@@ -71319,8 +70550,7 @@
 
       /**
        Hide the label if it's empty.
-       
-       @ignore
+        @ignore
        */
       value: function _hideLabelIfEmpty() {
         var label = this._elements.label; // If it's empty and has no non-textnode children, hide the label
@@ -71418,8 +70648,7 @@
       }
       /**
        The switch's label element.
-       
-       @type {SwitchLabel}
+        @type {SwitchLabel}
        @contentzone
        */
 
@@ -71457,8 +70686,7 @@
       }
       /**
        The value that will be submitted when the checkbox is checked. Changing this value will not trigger an event.
-       
-       @type {String}
+        @type {String}
        @default "on"
        @htmlattribute value
        */
@@ -71550,8 +70778,7 @@
       }
       /*
        Indicates to the formField that the 'checked' property needs to be set in this component.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -71561,8 +70788,7 @@
       }
       /*
        Indicates to the formField that the 'checked' property has to be extracted from the event.
-       
-       @protected
+        @protected
        */
 
     }, {
@@ -71950,9 +71176,9 @@
   };
   /**
    Enumeration for {@link TableHead}, {@link TableBody} and {@link TableFoot} divider values.
-   
+
    @typedef {Object} TableSectionDividerEnum
-   
+
    @property {String} NONE
    No divider.
    @property {String} ROW
@@ -71972,9 +71198,9 @@
   };
   /**
    Enumeration for {@link TableColumn} alignment options.
-   
+
    @typedef {Object} TableColumnAlignmentEnum
-   
+
    @property {String} LEFT
    Left alignment.
    @property {String} CENTER
@@ -71992,9 +71218,9 @@
   var CLASSNAME$1r = '_coral-Table-column';
   /**
    Enumeration for {@link TableColumn} sortable direction options.
-   
+
    @typedef {Object} TableColumnSortableDirectionEnum
-   
+
    @property {String} DEFAULT
    Default. No sorting applied.
    @property {String} ASCENDING
@@ -72010,9 +71236,9 @@
   };
   /**
    Enumeration for {@link TableColumn} sortable type options.
-   
+
    @typedef {Object} TableColumnSortableTypeEnum
-   
+
    @property {String} ALPHANUMERIC
    Alphanumeric type. If sorting is based on {@link TableCell#value}, use {String}.
    @property {String} NUMBER
@@ -72081,8 +71307,7 @@
       }
       /**
        Returns {@link TableColumn} sortable direction options.
-       
-       @return {TableColumnSortableDirectionEnum}
+        @return {TableColumnSortableDirectionEnum}
        */
 
     }, {
@@ -72108,60 +71333,50 @@
       }
       /**
        Triggered when {@link TableColumn#alignment} changed.
-       
-       @typedef {CustomEvent} coral-table-column:_alignmentchanged
-       
-       @private
+        @typedef {CustomEvent} coral-table-column:_alignmentchanged
+        @private
        */
 
       /**
        Triggered when {@link TableColumn#fixedWidth} changed.
-       
-       @typedef {CustomEvent} coral-table-column:_fixedwidthchanged
-       
-       @private
+        @typedef {CustomEvent} coral-table-column:_fixedwidthchanged
+        @private
        */
 
       /**
        Triggered when {@link TableColumn#orderable} changed.
-         @typedef {CustomEvent} coral-table-column:_orderablechanged
-       
-       @private
+        @typedef {CustomEvent} coral-table-column:_orderablechanged
+        @private
        */
 
       /**
        Triggered when {@link TableColumn#sortable} changed.
-         @typedef {CustomEvent} coral-table-column:_sortablechanged
-       
-       @private
+        @typedef {CustomEvent} coral-table-column:_sortablechanged
+        @private
        */
 
       /**
        Triggered when {@link TableColumn#sortableDirection} changed.
-         @typedef {CustomEvent} coral-table-column:_sortabledirectionchanged
-       
-       @private
+        @typedef {CustomEvent} coral-table-column:_sortabledirectionchanged
+        @private
        */
 
       /**
        Triggered when {@link TableColumn#hidden} changed.
-         @typedef {CustomEvent} coral-table-column:_hiddenchanged
-       
-       @private
+        @typedef {CustomEvent} coral-table-column:_hiddenchanged
+        @private
        */
 
       /**
        Triggered before {@link TableColumn#sortableDirection} changed.
-         @typedef {CustomEvent} coral-table-column:_beforecolumnsort
-       
-       @private
+        @typedef {CustomEvent} coral-table-column:_beforecolumnsort
+        @private
        */
 
       /**
        Triggered when {@link TableColumn#sortableDirection} changed.
-         @typedef {CustomEvent} coral-table-column:_sort
-       
-       @private
+        @typedef {CustomEvent} coral-table-column:_sort
+        @private
        */
 
     }, {
@@ -72169,8 +71384,7 @@
 
       /**
        The column cells alignment. The alignment should take the {@link i18n} configuration into account.
-       
-       @type {String}
+        @type {String}
        @default TableColumnAlignmentEnum.LEFT
        @htmlattribute alignment
        @htmlattributereflected
@@ -72196,8 +71410,7 @@
       }
       /**
        Whether the column has a fixed width.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute fixedwidth
        @htmlattributereflected
@@ -72221,8 +71434,7 @@
       }
       /**
        Whether the column is hidden.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute hidden
        @htmlattributereflected
@@ -72247,8 +71459,7 @@
       /**
        Whether the table column is orderable.
        Note that this does not affect the underlying data, only presentation.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute orderable
        @htmlattributereflected
@@ -72272,8 +71483,7 @@
       }
       /**
        Whether the column is sortable by user interaction.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute sortable
        @htmlattributereflected
@@ -72300,8 +71510,7 @@
        based on the default table sorting.
        Instead, a custom sorting can be performed when triggered by user interaction. This can be defined by listening to
        the {@link coral-table:beforecolumnsort} event.
-       
-       @type {String}
+        @type {String}
        @default TableColumnSortableTypeEnum.ALPHANUMERIC
        @htmlattribute sortabletype
        @htmlattributereflected
@@ -72321,8 +71530,7 @@
       /**
        The sorting direction. Sorts the column cells based on {@link TableCell#value}.
        If not present, the sort is based on the cell text content. See {@link TableColumnSortableDirectionEnum}.
-       
-       @type {String}
+        @type {String}
        @default TableColumnSortableDirectionEnum.DEFAULT
        @htmlattribute sortabledirection
        @htmlattributereflected
@@ -72357,8 +71565,7 @@
       }
       /**
        Returns {@link TableColumn} sortable type options.
-       
-       @return {TableColumnSortableTypeEnum}
+        @return {TableColumnSortableTypeEnum}
        */
 
     }, {
@@ -72368,8 +71575,7 @@
       }
       /**
        Returns {@link TableColumn} alignment options.
-       
-       @return {TableColumnAlignmentEnum}
+        @return {TableColumnAlignmentEnum}
        */
 
     }, {
@@ -72510,18 +71716,14 @@
       }
       /**
        Triggered before {@link TableCell#selected} is changed.
-       
-       @typedef {CustomEvent} coral-table-cell:_beforeselectedchanged
-       
-       @private
+        @typedef {CustomEvent} coral-table-cell:_beforeselectedchanged
+        @private
        */
 
       /**
        Triggered when {@link TableCell#selected} changed.
-       
-       @typedef {CustomEvent} coral-table-cell:_selectedchanged
-       
-       @private
+        @typedef {CustomEvent} coral-table-cell:_selectedchanged
+        @private
        */
 
     }, {
@@ -72541,8 +71743,7 @@
       }
       /**
        Whether the table cell is selected.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute selected
        @htmlattributereflected
@@ -72573,8 +71774,7 @@
       /**
        The cell's value. It is used to compare cells during a column sort. If not set, the sorting will be performed on the
        cell content. The content will be parse accordingly based on the column's <code>sortabletype</code> property.
-       
-       @type {String}
+        @type {String}
        @default ""
        @htmlattribute value
        @htmlattributereflected
@@ -73232,8 +72432,7 @@
       }
       /**
        The table section divider. See {@link TableSectionDividerEnum}.
-       
-       @type {String}
+        @type {String}
        @default TableSectionDividerEnum.ROW
        @htmlattributereflected
        @htmlattribute divider
@@ -73353,8 +72552,7 @@
      is smaller than its content.
      Table exposes the <code>coral-table-scroll</code> attribute that allows in sticky mode to define the table
      scrolling container max-height. This is particularly useful if the table contains dynamic content.
-     
-     @type {Boolean}
+      @type {Boolean}
      @default false
      @htmlattribute sticky
      @htmlattributereflected
@@ -73372,16 +72570,14 @@
       }
       /**
        Triggered when the {@link TableHead} content changed.
-         @typedef {CustomEvent} coral-table-head:_contentchanged
-       
-       @private
+        @typedef {CustomEvent} coral-table-head:_contentchanged
+        @private
        */
 
       /**
        Triggered when {@link TableHead#sticky} changed.
-         @typedef {CustomEvent} coral-table-head:_stickychanged
-       
-       @private
+        @typedef {CustomEvent} coral-table-head:_stickychanged
+        @private
        */
 
     }, {
@@ -73457,18 +72653,14 @@
       }
       /**
        Triggered when the {@link TableBody} content changed.
-       
-       @typedef {CustomEvent} coral-table-body:_contentchanged
-       
-       @private
+        @typedef {CustomEvent} coral-table-body:_contentchanged
+        @private
        */
 
       /**
        Triggered when the {@link TableBody} is initialized without rows.
-       
-       @typedef {CustomEvent} coral-table-body:_empty
-       
-       @private
+        @typedef {CustomEvent} coral-table-body:_empty
+        @private
        */
 
     }]);
@@ -73557,9 +72749,9 @@
   var CLASSNAME$1x = '_coral-Table-wrapper';
   /**
    Enumeration for {@link Table} variants
-   
+
    @typedef {Object} TableVariantEnum
-   
+
    @property {String} DEFAULT
    A default table.
    @property {String} QUIET
@@ -73715,8 +72907,7 @@
     }
     /**
      The head of the table.
-     
-     @type {TableHead}
+      @type {TableHead}
      @contentzone
      */
 
@@ -75456,11 +74647,11 @@
         this._selectSiblingItem(false);
       }
       /**
-      * Call the layout method of table component
-      *
-      * @param {Boolean} forced
-      * If true call the layout method immediately, else wait for timeout
-      */
+       * Call the layout method of table component
+       *
+       * @param {Boolean} forced
+       * If true call the layout method immediately, else wait for timeout
+       */
 
     }, {
       key: "resetLayout",
@@ -75954,10 +75145,8 @@
       /**
        Triggered before a {@link Table} column gets sorted by user interaction. Can be used to cancel column sorting and define
        custom sorting.
-       
-       @typedef {CustomEvent} coral-table:beforecolumnsort
-       
-       @property {TableColumn} detail.column
+        @typedef {CustomEvent} coral-table:beforecolumnsort
+        @property {TableColumn} detail.column
        The column to be sorted.
        @property {String} detail.direction
        The requested sorting direction for the column.
@@ -75965,19 +75154,15 @@
 
       /**
        Triggered when a {@link Table} column is sorted.
-       
-       @typedef {CustomEvent} coral-table:columnsort
-       
-       @param {TableColumn} detail.column
+        @typedef {CustomEvent} coral-table:columnsort
+        @param {TableColumn} detail.column
        The sorted column.
        */
 
       /**
        Triggered before a {@link Table} column is dragged. Can be used to cancel column dragging.
-       
-       @typedef {CustomEvent} coral-table:beforecolumndrag
-       
-       @property {TableColumn} detail.column
+        @typedef {CustomEvent} coral-table:beforecolumndrag
+        @property {TableColumn} detail.column
        The dragged column.
        @property {TableColumn} detail.before
        The column will be inserted before this sibling column.
@@ -75986,10 +75171,8 @@
 
       /**
        Triggered when a {@link Table} column is dragged.
-       
-       @typedef {CustomEvent} coral-table:columndrag
-       
-       @property {TableColumn} detail.column
+        @typedef {CustomEvent} coral-table:columndrag
+        @property {TableColumn} detail.column
        The dragged column.
        @property {TableColumn} detail.oldBefore
        The column next sibling before the swap.
@@ -76001,10 +75184,8 @@
 
       /**
        Triggered before a {@link Table} row is ordered. Can be used to cancel row ordering.
-       
-       @typedef {CustomEvent} coral-table:beforeroworder
-       
-       @property {TableRow} detail.row
+        @typedef {CustomEvent} coral-table:beforeroworder
+        @property {TableRow} detail.row
        The row to be ordered.
        @property {TableRow} detail.before
        The row will be inserted before this sibling row.
@@ -76013,10 +75194,8 @@
 
       /**
        Triggered when a {@link Table} row is ordered.
-       
-       @typedef {CustomEvent} coral-table:roworder
-       
-       @property {TableRow} detail.row
+        @typedef {CustomEvent} coral-table:roworder
+        @property {TableRow} detail.row
        The ordered row.
        @property {TableRow} detail.oldBefore
        The row next sibling before the swap.
@@ -76028,28 +75207,22 @@
 
       /**
        Triggered when a {@linked Table} row is locked.
-       
-       @typedef {CustomEvent} coral-table:rowlock
-       
-       @property {TableRow} detail.row
+        @typedef {CustomEvent} coral-table:rowlock
+        @property {TableRow} detail.row
        The locked row.
        */
 
       /**
        Triggered when {@link Table} a row is locked.
-       
-       @typedef {CustomEvent} coral-table:rowunlock
-       
-       @property {TableRow} detail.row
+        @typedef {CustomEvent} coral-table:rowunlock
+        @property {TableRow} detail.row
        The unlocked row.
        */
 
       /**
        Triggered when a {@link Table} row selection changed.
-       
-       @typedef {CustomEvent} coral-table:rowchange
-       
-       @property {Array.<TableCell>} detail.oldSelection
+        @typedef {CustomEvent} coral-table:rowchange
+        @property {Array.<TableCell>} detail.oldSelection
        The old item selection. When {@link TableRow#multiple}, it includes an Array.
        @property {Array.<TableCell>} detail.selection
        The item selection. When {@link Coral.Table.Row#multiple}, it includes an Array.
@@ -76059,10 +75232,8 @@
 
       /**
        Triggered when the {@link Table} selection changed.
-       
-       @typedef {CustomEvent} coral-table:change
-       
-       @property {Array.<TableRow>} detail.oldSelection
+        @typedef {CustomEvent} coral-table:change
+        @property {Array.<TableRow>} detail.oldSelection
        The old item selection. When {@link Table#multiple}, it includes an Array.
        @property {Array.<TableRow>} detail.selection
        The item selection. When {@link Table#multiple}, it includes an Array.
@@ -76087,8 +75258,7 @@
       }
       /**
        The body of the table. Multiple bodies are not supported.
-       
-       @type {TableBody}
+        @type {TableBody}
        @contentzone
        */
 
@@ -76112,8 +75282,7 @@
       }
       /**
        The foot of the table.
-       
-       @type {TableFoot}
+        @type {TableFoot}
        @contentzone
        */
 
@@ -76134,8 +75303,7 @@
       }
       /**
        The columns of the table.
-       
-       @type {TableColumn}
+        @type {TableColumn}
        @contentzone
        */
 
@@ -76155,8 +75323,7 @@
       }
       /**
        The table's variant. See {@link TableVariantEnum}.
-       
-       @type {String}
+        @type {String}
        @default TableVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -76181,8 +75348,7 @@
       }
       /**
        Whether the items are selectable.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute selectable
        @htmlattributereflected
@@ -76223,8 +75389,7 @@
       }
       /**
        Whether the table is orderable. If the table is sorted, ordering handles are hidden.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute orderable
        @htmlattributereflected
@@ -76250,8 +75415,7 @@
       }
       /**
        Whether multiple items can be selected.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute multiple
        @htmlattributereflected
@@ -76300,8 +75464,7 @@
       /**
        Whether the table rows can be locked/unlocked. If rows are locked, they float to the top of the table and aren't
        affected by column sorting.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute lockable
        @htmlattributereflected
@@ -76327,8 +75490,7 @@
       }
       /**
        Specifies <code>aria-labelledby</code> value.
-       
-       @type {?String}
+        @type {?String}
        @default null
        @htmlattribute labelledby
        */
@@ -76345,8 +75507,7 @@
       }
       /**
        Specifies <code>aria-label</code> value.
-       
-       @type {String}
+        @type {String}
        @default null
        @htmlattribute labelled
        */
@@ -76363,8 +75524,7 @@
       }
       /**
        Returns an Array containing the selected items.
-       
-       @type {Array.<HTMLElement>}
+        @type {Array.<HTMLElement>}
        @readonly
        */
 
@@ -76376,8 +75536,7 @@
       /**
        Returns the first selected item of the table. The value <code>null</code> is returned if no element is
        selected.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @readonly
        */
 
@@ -76388,8 +75547,7 @@
       }
       /**
        The Collection Interface that allows interacting with the items that the component contains.
-       
-       @type {SelectableCollection}
+        @type {SelectableCollection}
        @readonly
        */
 
@@ -76420,8 +75578,7 @@
       }
       /**
        Returns {@link Table} variants.
-       
-       @return {TableVariantEnum}
+        @return {TableVariantEnum}
        */
 
     }], [{
@@ -76431,8 +75588,7 @@
       }
       /**
        Returns divider options for {@link TableHead}, {@link TableBody} and {@link TableFoot}.
-       
-       @return {TableSectionDividerEnum}
+        @return {TableSectionDividerEnum}
        */
 
     }, {
@@ -76497,8 +75653,7 @@
     }
     /**
      The header cell's content.
-     
-     @type {TableHeaderCellContent}
+      @type {TableHeaderCellContent}
      @contentzone
      */
 
@@ -76533,9 +75688,8 @@
       }
       /**
        Triggered when the {@link TableHeaderCell} content changed.
-         @typedef {CustomEvent} coral-table-headercell:_contentchanged
-       
-       @private
+        @typedef {CustomEvent} coral-table-headercell:_contentchanged
+        @private
        */
 
     }, {
@@ -76670,11 +75824,11 @@
 
   /**
    Gets the target panel of the item.
-   
+
    @private
    @param {HTMLElement|String} [targetValue]
    A specific target value to use.
-   
+
    @returns {?HTMLElement}
    */
   function getTarget$1(targetValue) {
@@ -76985,10 +76139,14 @@
         return this._selected || false;
       },
       set: function set(value) {
-        value = transform.booleanAttr(value);
+        var _selected = transform.booleanAttr(value);
 
-        if (!value || value && !this.disabled) {
-          this._selected = value;
+        if (this._selected === _selected) {
+          return;
+        }
+
+        if (!_selected || _selected && !this.disabled) {
+          this._selected = _selected;
 
           this._reflectAttribute('selected', this.disabled ? false : this._selected);
 
@@ -77098,9 +76256,9 @@
 
   /**
    Enumeration for {@link TabList} sizes.
-   
+
    @typedef {Object} TabListSizeEnum
-   
+
    @property {String} SMALL
    A small-sized tablist.
    @property {String} MEDIUM
@@ -77116,9 +76274,9 @@
   };
   /**
    Enumeration for {@link TabList} orientations.
-   
+
    @typedef {Object} TabListOrientationEnum
-   
+
    @property {String} HORIZONTAL
    Horizontal TabList, this is the default value.
    @property {String} VERTICAL
@@ -77186,8 +76344,7 @@
     }
     /**
      The Collection Interface that allows interacting with the items that the component contains.
-     
-     @type {SelectableCollection}
+      @type {SelectableCollection}
      @readonly
      */
 
@@ -77361,13 +76518,8 @@
       value: function _setLine() {
         var _this3 = this;
 
-        // Debounce
-        if (this._timeout !== null) {
-          window.clearTimeout(this._timeout);
-        }
-
-        this._timeout = window.setTimeout(function () {
-          _this3._timeout = null;
+        !(this._setLineInQueue === true) && window.requestAnimationFrame(function () {
+          delete _this3._setLineInQueue;
           var selectedItem = _this3.selectedItem; // Position line under the selected item
 
           if (selectedItem) {
@@ -77401,7 +76553,8 @@
           }
 
           _this3._previousOrientation = _this3.orientation;
-        }, this._wait);
+        });
+        this._setLineInQueue = true;
       }
       /** @private */
 
@@ -77421,8 +76574,7 @@
       }
       /**
        Returns {@link TabList} sizes.
-       
-       @return {TabListSizeEnum}
+        @return {TabListSizeEnum}
        */
 
     }, {
@@ -77466,9 +76618,8 @@
       }
       /**
        Triggered when the {@link TabList} selected item has changed.
-         @typedef {CustomEvent} coral-tablist:change
-       
-       @property {Tab} event.detail.oldSelection
+        @typedef {CustomEvent} coral-tablist:change
+        @property {Tab} event.detail.oldSelection
        The prior selected item(s).
        @property {Tab} event.detail.selection
        The newly selected item(s).
@@ -77491,8 +76642,7 @@
       }
       /**
        The selected item in the TabList.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @readonly
        */
 
@@ -77505,8 +76655,7 @@
        The target component that will be linked to the TabList. It accepts either a CSS selector or a DOM element. If a
        CSS Selector is provided, the first matching element will be used. Items will be selected based on the index. If
        both target and {@link Coral.Tab#target} are set, the second will have higher priority.
-       
-       @type {?HTMLElement|String}
+        @type {?HTMLElement|String}
        @default null
        @htmlattribute target
        */
@@ -77522,7 +76671,8 @@
         if (value === null || typeof value === 'string' || value instanceof Node) {
           this._target = value; // we do in case the target was not yet in the DOM
 
-          window.requestAnimationFrame(function () {
+          !(this._setTargetInQueue === true) && window.requestAnimationFrame(function () {
+            delete _this4._setTargetInQueue;
             var realTarget = getTarget$1(_this4._target); // we add proper accessibility if available
 
             if (realTarget) {
@@ -77562,14 +76712,14 @@
               }
             }
           });
+          this._setTargetInQueue = true;
         }
       }
       /**
        The size of the TabList. It accepts both lower and upper case sizes. Currently only "M" (the default) and "L"
        are available.
        See {@link TabListSizeEnum}.
-       
-       @type {String}
+        @type {String}
        @default TabListSizeEnum.MEDIUM
        @htmlattribute size
        @htmlattributereflected
@@ -77597,8 +76747,7 @@
       }
       /**
        Orientation of the TabList. See {@link TabListOrientationEnum}.
-       
-       @type {String}
+        @type {String}
        @default TabListOrientationEnum.HORIZONTAL
        @htmlattribute orientation
        @htmlattributereflected
@@ -77632,8 +76781,7 @@
       }
       /**
        Returns {@link TabList} orientation options.
-       
-       @return {TabListOrientationEnum}
+        @return {TabListOrientationEnum}
        */
 
     }, {
@@ -77673,9 +76821,9 @@
 
   /**
    Enumeration for {@link TabView} orientations.
-   
+
    @typedef {Object} TabViewOrientationEnum
-   
+
    @property {String} HORIZONTAL
    Tabs on top of the panels. This is the default.
    @property {String} VERTICAL
@@ -77729,8 +76877,7 @@
     }
     /**
      The TabView's orientation. See {@link TabViewOrientationEnum}.
-     
-     @type {String}
+      @type {String}
      @default TabViewOrientationEnum.HORIZONTAL
      @htmlattribute orientation
      @htmlattributereflected
@@ -77742,8 +76889,7 @@
 
       /**
        Detects a change in the TabList and triggers an event.
-       
-       @private
+        @private
        */
       value: function _onTabListChange(event) {
         this.trigger('coral-tabview:change', {
@@ -77802,9 +76948,8 @@
       }
       /**
        Triggered when the {@link TabView} selected tab panel item has changed.
-         @typedef {CustomEvent} coral-tabview:change
-       
-       @property {Tab} event.detail.selection
+        @typedef {CustomEvent} coral-tabview:change
+        @property {Tab} event.detail.selection
        The new selected tab panel item.
        @param {Tab} event.detail.oldSelection
        The prior selected tab panel item.
@@ -77825,8 +76970,7 @@
       }
       /**
        The TabList which handles all the tabs.
-       
-       @type {TabList}
+        @type {TabList}
        @contentzone
        */
 
@@ -77850,8 +76994,7 @@
       }
       /**
        The PanelStack which contains all the panels.
-       
-       @type {PanelStack}
+        @type {PanelStack}
        @contentzone
        */
 
@@ -77882,8 +77025,7 @@
       }
       /**
        Returns {@link TabView} orientation options.
-       
-       @return {TabViewOrientationEnum}
+        @return {TabViewOrientationEnum}
        */
 
     }], [{
@@ -77961,9 +77103,9 @@
 
   /**
    Enumeration for {@link Toast} variants.
-   
+
    @typedef {Object} ToastVariantEnum
-   
+
    @property {String} DEFAULT
    A neutral toast.
    @property {String} ERROR
@@ -77982,9 +77124,9 @@
   };
   /**
    Enumeration for {@link Toast} placement values.
-   
+
    @typedef {Object} ToastPlacementEnum
-   
+
    @property {String} LEFT
    A toast anchored to the bottom left of screen.
    @property {String} CENTER
@@ -78116,8 +77258,7 @@
      Whether the Toast will be dismissed automatically after a certain period. The minimum and default value is 5 seconds.
      The dismissible behavior can be disabled by setting the value to <code>0</code>.
      If an actionable toast is set to auto-dismiss, make sure that the action is still accessible elsewhere in the application.
-     
-     @type {?Number}
+      @type {?Number}
      @default 5000
      @htmlattribute autodismiss
      */
@@ -78337,8 +77478,7 @@
        Restricted to {@link Button} or {@link AnchorButton} elements.
        Actionable toasts should not have a button with a redundant action. For example “dismiss” would be redundant as all
        toasts already have a close button.
-       
-       @type {HTMLElement}
+        @type {HTMLElement}
        @readonly
        */
 
@@ -78430,8 +77570,7 @@
       }
       /**
        The Toast variant. See {@link ToastVariantEnum}.
-       
-       @type {String}
+        @type {String}
        @default ToastVariantEnum.DEFAULT
        @htmlattribute variant
        @htmlattributereflected
@@ -78463,8 +77602,7 @@
       }
       /**
        The Toast content element.
-       
-       @type {ToastContent}
+        @type {ToastContent}
        @contentzone
        */
 
@@ -78486,8 +77624,7 @@
       }
       /**
        The Toast placement. See {@link ToastPlacementEnum}.
-       
-       @type {String}
+        @type {String}
        @default ToastPlacementEnum.CENTER
        @htmlattribute placement
        */
@@ -78517,8 +77654,7 @@
       }
       /**
        Returns {@link Toast} placement options.
-       
-       @return {ToastPlacementEnum}
+        @return {ToastPlacementEnum}
        */
 
     }, {
@@ -78528,8 +77664,7 @@
       }
       /**
        Returns {@link Toast} variants.
-       
-       @return {ToastVariantEnum}
+        @return {ToastVariantEnum}
        */
 
     }, {
@@ -78635,9 +77770,9 @@
   var CLASSNAME$1D = '_coral-TreeView-item';
   /**
    Enumeration for {@link TreeItem} variants.
-   
+
    @typedef {Object} TreeItemVariantEnum
-   
+
    @property {String} DRILLDOWN
    Default variant with icon to expand/collapse subtree.
    @property {String} LEAF
@@ -78699,8 +77834,7 @@
     }
     /**
      The parent tree. Returns <code>null</code> if item is the root.
-     
-     @type {HTMLElement}
+      @type {HTMLElement}
      @readonly
      */
 
@@ -78741,7 +77875,7 @@
       }
       /**
        Handles the focus of the item.
-         @ignore
+        @ignore
        */
 
     }, {
@@ -78753,8 +77887,7 @@
       }
       /**
        Returns {@link TreeItem} variants.
-       
-       @return {TreeItemVariantEnum}
+        @return {TreeItemVariantEnum}
        */
 
     }, {
@@ -78848,30 +77981,26 @@
       }
       /**
        Triggered when {@link TreeItem#selected} changed.
-         @typedef {CustomEvent} coral-tree-item:_selectedchanged
-       
-       @private
+        @typedef {CustomEvent} coral-tree-item:_selectedchanged
+        @private
        */
 
       /**
        Triggered when {@link TreeItem#expanded} changed.
-         @typedef {CustomEvent} coral-tree-item:_expandedchanged
-       
-       @private
+        @typedef {CustomEvent} coral-tree-item:_expandedchanged
+        @private
        */
 
       /**
        Triggered when {@link TreeItem#hidden} changed.
-         @typedef {CustomEvent} coral-tree-item:_hiddenchanged
-       
-       @private
+        @typedef {CustomEvent} coral-tree-item:_hiddenchanged
+        @private
        */
 
       /**
        Triggered when {@link TreeItem#disabled} changed.
-         @typedef {CustomEvent} coral-tree-item:_disabledchanged
-       
-       @private
+        @typedef {CustomEvent} coral-tree-item:_disabledchanged
+        @private
        */
 
     }, {
@@ -78881,8 +78010,7 @@
       }
       /**
        The content of this tree item.
-       
-       @type {TreeItemContent}
+        @type {TreeItemContent}
        @contentzone
        */
 
@@ -78902,8 +78030,7 @@
       }
       /**
        The Collection Interface that allows interacting with the items that the component contains.
-       
-       @type {Collection}
+        @type {Collection}
        @readonly
        */
 
@@ -78927,8 +78054,7 @@
       }
       /**
        Whether the item is expanded. Expanded cannot be set to <code>true</code> if the item is disabled.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute expanded
        @htmlattributereflected
@@ -79015,8 +78141,7 @@
       }
       /**
        The item's variant. See {@link TreeItemVariantEnum}.
-       
-       @type {String}
+        @type {String}
        @default TreeItemVariant.DRILLDOWN
        @htmlattribute variant
        @htmlattributereflected
@@ -79039,8 +78164,7 @@
       }
       /**
        Whether the item is selected.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute selected
        @htmlattributereflected
@@ -79071,8 +78195,7 @@
       }
       /**
        Whether this item is disabled.
-       
-       @type {Boolean}
+        @type {Boolean}
        @default false
        @htmlattribute disabled
        @htmlattributereflected
@@ -79211,8 +78334,7 @@
     }
     /**
      The Collection Interface that allows interacting with the items that the component contains.
-     
-     @type {SelectableCollection}
+      @type {SelectableCollection}
      @readonly
      */
 
@@ -79685,9 +78807,8 @@
       }
       /**
        Triggered when the {@link Tree} selection changed.
-         @typedef {CustomEvent} coral-tree:change
-       
-       @property {Array.<TreeItem>} detail.oldSelection
+        @typedef {CustomEvent} coral-tree:change
+        @property {Array.<TreeItem>} detail.oldSelection
        The old selected item.
        @property {Array.<TreeItem>} detail.selection
        The selected items.
@@ -79695,17 +78816,15 @@
 
       /**
        Triggered when a {@link Tree} item expanded.
-         @typedef {CustomEvent} coral-tree:expand
-       
-       @property {TreeItem} detail.item
+        @typedef {CustomEvent} coral-tree:expand
+        @property {TreeItem} detail.item
        The expanded item.
        */
 
       /**
        Triggered when a {@link Tree} item collapsed.
-         @typedef {CustomEvent} coral-tree:collapse
-       
-       @property {TreeItem} detail.item
+        @typedef {CustomEvent} coral-tree:collapse
+        @property {TreeItem} detail.item
        The collapsed item.
        */
 
@@ -79876,8 +78995,7 @@
     }
     /**
      The set of controlled PanelStacks. Each PanelStack must have the <code>coral-wizardview-panelstack</code> attribute.
-     
-     @type {Collection}
+      @type {Collection}
      @readonly
      */
 
@@ -79887,8 +79005,7 @@
 
       /**
        Called by the Collection when an item is added
-       
-       @private
+        @private
        */
       value: function _onItemAdded(item) {
         this._selectItemByIndex(item, this._getSelectedIndex());
@@ -79900,8 +79017,7 @@
       }
       /**
        Handles the next button click.
-       
-       @private
+        @private
        */
 
     }, {
@@ -79918,8 +79034,7 @@
       }
       /**
        Handles the previous button click.
-       
-       @private
+        @private
        */
 
     }, {
@@ -79936,8 +79051,7 @@
       }
       /**
        Detects a change in the StepList and triggers an event.
-       
-       @private
+        @private
        */
 
     }, {
@@ -79988,13 +79102,11 @@
       }
       /**
        Select the step according to the provided index.
-       
-       @param {*} component
+        @param {*} component
        The StepList or PanelStack to select the step on.
        @param {Number} index
        The index of the step that should be selected.
-       
-       @private
+        @private
        */
 
     }, {
@@ -80056,8 +79168,7 @@
       }
       /**
        Sets the correct selected item in every PanelStack.
-       
-       @private
+        @private
        */
 
     }, {
@@ -80083,8 +79194,7 @@
       }
       /**
        Selects the correct step in every StepList.
-       
-       @private
+        @private
        */
 
     }, {
@@ -80110,8 +79220,7 @@
       }
       /**
        Shows the next step. If the WizardView is already in the last step nothing will happen.
-       
-       @emits {coral-wizardview:change}
+        @emits {coral-wizardview:change}
        */
 
     }, {
@@ -80130,8 +79239,7 @@
       }
       /**
        Shows the previous step. If the WizardView is already in the first step nothing will happen.
-       
-       @emits {coral-wizardview:change}
+        @emits {coral-wizardview:change}
        */
 
     }, {
@@ -80171,9 +79279,8 @@
       }
       /**
        Triggered when the {@link WizardView} selected step list item has changed.
-         @typedef {CustomEvent} coral-wizardview:change
-       
-       @property {Step} event.detail.selection
+        @typedef {CustomEvent} coral-wizardview:change
+        @property {Step} event.detail.selection
        The new selected step list item.
        @property {Step} event.detail.oldSelection
        The prior selected step list item.
@@ -80197,8 +79304,7 @@
       }
       /**
        The set of controlling StepLists. Each StepList must have the <code>coral-wizardview-steplist</code> attribute.
-       
-       @type {Collection}
+        @type {Collection}
        @readonly
        */
 
@@ -80239,7 +79345,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.10.10";
+  var version$1 = "4.10.11";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -98522,9 +97628,9 @@
   var CLASS_NAME = '_coral-Playground';
   /**
    Enumeration for {@link Playground} screens.
-   
+
    @typedef {Object} PlaygroundScreenEnum
-   
+
    @property {String} FULLSCREEN
    Editor covers the whole screen.
    @property {String} HORIZONTAL
@@ -98572,8 +97678,7 @@
 
     /**
      Takes an optional configuration object for initialization.
-     
-     @param {?Object} config
+      @param {?Object} config
      */
     function Playground() {
       var _this;
@@ -98622,8 +97727,7 @@
     }
     /**
      Whether the preview is updated automatically on code change.
-     
-     @type {Boolean}
+      @type {Boolean}
      @default false
      @htmlattribute livereload
      */
@@ -98680,7 +97784,7 @@
 
       /**
        Runs the code.
-         @param {String} code
+        @param {String} code
        */
       value: function run(code) {
         this._elements.loading.hidden = false;
@@ -98688,8 +97792,7 @@
       }
       /**
        Returns the query hash for sharing.
-       
-       @return {String}
+        @return {String}
        */
 
     }, {
@@ -98707,8 +97810,7 @@
       }
       /**
        Returns {@link Playground} screens.
-       
-       @return {PlaygroundScreenEnum}
+        @return {PlaygroundScreenEnum}
        */
 
     }, {
@@ -98758,8 +97860,7 @@
       }
       /**
        The playground screen see {@link PlaygroundScreenEnum}.
-       
-       @type {String}
+        @type {String}
        @default PlaygroundScreenEnum.SPLIT_VERTICAL
        @htmlattribute screen
        */
@@ -98789,8 +97890,7 @@
       }
       /**
        The editor code.
-       
-       @type {String}
+        @type {String}
        */
 
     }, {
@@ -98831,7 +97931,7 @@
       }
       /**
        Reads a query hash and returns a configuration that can be consumed by a {@link Playground} instance.
-         @param {String} query
+        @param {String} query
        @return {Object}
        */
 

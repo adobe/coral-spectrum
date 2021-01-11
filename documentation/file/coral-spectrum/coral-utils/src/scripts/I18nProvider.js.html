@@ -434,9 +434,9 @@
 
 /**
  Enumeration for {@link i18n} locales.
- 
+
  @typedef {Object} I18nLocalesEnum
- 
+
  @property {String} en
  English (U.S.)
  @property {String} en-us
@@ -563,7 +563,7 @@ const locales = {
 
 /**
  Used to store i18n strings.
- 
+
  @type {Object}
  @property {String} strings.generic
  */
@@ -583,20 +583,20 @@ class I18nProvider {
    */
   constructor(options) {
     options = options || {};
-  
+
     // Default locale
     this._locale = &apos;en-US&apos;;
-    
+
     if (options.locale) {
       this._locale = options.locale;
     }
-    
+
     this._evaluate = /(\{.+?\})/g;
   }
-  
+
   /**
    Sets a localized string.
-   
+
    @param {String} key the key to set
    @param {String} value the value associated with the given key.
    @example
@@ -606,10 +606,10 @@ class I18nProvider {
    Coral.i18n.set(&apos;English string: {name}&apos;, &apos;Translated string: {name}&apos;);
    Coral.i18n.set(&apos;English string: {name1}, {name2}, and {name3}&apos;, &apos;Translated string: {name3}, {name1}, and {name2}&apos;);
    */
-  
+
   /**
    Sets multiple localized strings.
-   
+
    @param {Array&lt;String, String&gt;} map  a key-value map to add to the strings dictionary.
    @example
    Coral.i18n.set([
@@ -625,10 +625,10 @@ class I18nProvider {
    [&apos;English string 2: {name1}, {name2}, and {name3}&apos;, &apos;Translated string 2: {name3}, {name1}, and {name2}&apos;]
    ]);
    */
-  
+
   /**
    Sets a localized string, using translation hint.
-   
+
    @param {String} key the key to set
    @param {String} value the value associated with the given key.
    @param {String} translation_hint the translation hint associated with the given key.
@@ -644,10 +644,10 @@ class I18nProvider {
    Coral.i18n.set(&apos;English string: {name1}, {name2}, and {name3}&apos;, &apos;Translated string 1: {name3}, {name1}, and {name2}&apos;, &apos;Translation hint 1&apos;);
    Coral.i18n.set(&apos;English string: {name1}, {name2}, and {name3}&apos;, &apos;Translated string 2: {name3}, {name1}, and {name2}&apos;, &apos;Translation hint 2&apos;);
    */
-  
+
   /**
    Sets multiple localized strings, using translation hints.
-   
+
    @param {Array&lt;String, String, String&gt;} map
    A key-value object map to add to the strings dictionary.
    @example
@@ -667,30 +667,28 @@ class I18nProvider {
   // eslint-disable-next-line func-names
   set(...args) {
     strings.generic[this._locale] = strings.generic[this._locale] || {};
-    
+
     let key, value, translationHint;
     if (args.length === 0) {
       // Return empty string if called without arguments
       return &apos;&apos;;
-    }
-    else if (args.length === 1) {
+    } else if (args.length === 1) {
       if (!args[0]) {
         throw new Error(&apos;Coral.i18n.set: Single argument must be an array of arrays of key/value/(translation hint).&apos;);
       }
       // multiple keys
       else if (typeof args[0] === &apos;object&apos; &amp;&amp; typeof args[0][0] === &apos;object&apos;) {
-        for (let i = 0; i &lt; args[0].length; i++) {
+        for (let i = 0 ; i &lt; args[0].length ; i++) {
           key = args[0][i][0];
           value = args[0][i][1];
           translationHint = args[0][i][2];
-          
+
           if (translationHint) {
             key = `${key}/[translation hint:${translationHint.replace(/&amp;period;/g, &apos;.&apos;)}]`;
           }
           strings.generic[this._locale][key] = value;
         }
-      }
-      else {
+      } else {
         throw new Error(&apos;Coral.i18n.set: Single argument must be an array of key-value pairs.&apos;);
       }
     }
@@ -700,8 +698,7 @@ class I18nProvider {
         key = args[0];
         value = args[1];
         strings.generic[this._locale][key] = value;
-      }
-      else {
+      } else {
         throw new Error(&apos;Coral.i18n.set: Both arguments must be non-empty string values.&apos;);
       }
     }
@@ -711,27 +708,25 @@ class I18nProvider {
         key = args[0];
         value = args[1];
         translationHint = args[2];
-        
+
         if (translationHint !== &apos;null&apos;) {
           key = `${key}/[translation hint:${translationHint.replace(/&amp;period;/g, &apos;.&apos;)}]`;
         }
-        
+
         strings.generic[this._locale][key] = value;
-      }
-      else {
+      } else {
         throw new Error(&apos;Coral.i18n.set: All arguments must be of string type.&apos;);
       }
-    }
-    else {
+    } else {
       throw new Error(&apos;Coral.i18n.set: Too many arguments provided.&apos;);
     }
-    
+
     return this;
   }
-  
+
   /**
    Gets a localized string, using named arguments, and translation hint.
-   
+
    @param {String} key the key of the string to retrieve
    @param {Object} args one more named arguments
    @param {String} translation_hint context information for translators
@@ -742,10 +737,10 @@ class I18nProvider {
    Coral.i18n.get(&apos;English string: {name1}, {name2}, and {name3}&apos;, { name1: &apos;foo&apos;, name2: &apos;bar&apos;, name3: &apos;qux&apos; }, &apos;Translation hint 1&apos;); // =&gt; &apos;Translated string 1: qux, foo, and bar&apos;
    Coral.i18n.get(&apos;English string: {name1}, {name2}, and {name3}&apos;, { name1: &apos;foo&apos;, name2: &apos;bar&apos;, name3: &apos;qux&apos; }, &apos;Translation hint 2&apos;); // =&gt; &apos;Translated string 2: qux, foo, and bar&apos;
    */
-  
+
   /**
    Gets a localized string, using arguments, and translation hint.
-   
+
    @param {String} key the key of the string to retrieve
    @param {String} args one more arguments
    @param {String} translation_hint context information for translators
@@ -756,10 +751,10 @@ class I18nProvider {
    Coral.i18n.get(&apos;English string: {0}, {1}, and {2}&apos;, 10, 20, 30, &apos;Translation hint 1&apos;); // =&gt; &apos;Translated string 1: 30, 10, and 20&apos;
    Coral.i18n.get(&apos;English string: {0}, {1}, and {2}&apos;, 10, 20, 30, &apos;Translation hint 2&apos;); // =&gt; &apos;Translated string 2: 30, 10, and 20&apos;
    */
-  
+
   /**
    Gets a localized string, using translation hint.
-   
+
    @param {String} key the key of the string to retrieve
    @param {String} translation_hint context information for translators
    @returns {String} the localized string
@@ -767,10 +762,10 @@ class I18nProvider {
    Coral.i18n.get(&apos;English string&apos;, &apos;Translation hint 1&apos;); // =&gt; &apos;Translated string 1&apos;
    Coral.i18n.get(&apos;English string&apos;, &apos;Translation hint 2&apos;); // =&gt; &apos;Translated string 2&apos;
    */
-  
+
   /**
    Gets a localized string, using named arguments.
-   
+
    @param {String} key the key of the string to retrieve
    @param {Object} args one more named arguments
    @returns {String} the localized string with arguments
@@ -778,10 +773,10 @@ class I18nProvider {
    Coral.i18n.get(&apos;English string: {name}&apos;, { name: &apos;foo&apos; }); // =&gt; &apos;Translated string: foo&apos;
    Coral.i18n.get(&apos;English string: {name1}, {name2}, and {name3}&apos;, { name1: &apos;foo&apos;, name2: &apos;bar&apos;, name3: &apos;qux&apos; }); // =&gt; &apos;Translated string: qux, foo, and bar&apos;
    */
-  
+
   /**
    Gets a localized string, using arguments.
-   
+
    @param {String} key the key of the string to retrieve
    @param {String} args one more arguments
    @returns {String} the localized string with arguments
@@ -791,7 +786,7 @@ class I18nProvider {
    */
   /**
    Gets a localized string.
-   
+
    @param {String} key the key of the string to retrieve
    @returns {String} the localized string
    @example
@@ -803,63 +798,61 @@ class I18nProvider {
       // Return empty string if called without arguments
       return &apos;&apos;;
     }
-    
+
     // The first argument is always the key
     // Aladdin server stores periods in keys as HTML entities, so we need to match this
     let key = args[0].replace(&apos;.&apos;, &apos;&amp;period;&apos;);
-    
+
     // The number of required variables can be determined by parsing the string
     const placeholderMatches = key.match(this._evaluate);
     const variablePlaceholderCount = placeholderMatches ? placeholderMatches.length : 0;
-    
+
     // The hint we&apos;ll use to translate
     let translationHint = &apos;&apos;;
-    
+
     let variables = {};
     let variableCount = 0;
     let i;
-    
+
     // Verify the number of provided arguments matches the placeholder count
     if (args[1] !== null &amp;&amp; typeof args[1] === &apos;object&apos;) {
       variables = args[1];
-      
+
       // Check if provided variables object is complete
       let placeholderName = &apos;&apos;;
-      for (i = 0; i &lt; placeholderMatches.length; i++) {
+      for (i = 0 ; i &lt; placeholderMatches.length ; i++) {
         placeholderName = placeholderMatches[i].slice(1).slice(0, -1);
         if (variables[placeholderName] === null || typeof variables[placeholderName] === &apos;undefined&apos;) {
           throw new Error(`Coral.i18n.get: Named key &quot;${placeholderName}&quot; not present in provided object.`);
         }
       }
-      
+
       // If an additional argument is present, it&apos;s the translation hint
       if (typeof args[2] === &apos;string&apos;) {
         translationHint = args[2];
       }
-    }
-    else {
+    } else {
       // Assume no translation hint
       variableCount = args.length - 1;
-      
+
       if (variableCount === variablePlaceholderCount + 1) {
         // If we&apos;ve got an extra argument, assume it&apos;s a translation hint
         translationHint = args[args.length - 1];
-      }
-      else if (variableCount !== variablePlaceholderCount) {
+      } else if (variableCount !== variablePlaceholderCount) {
         throw new Error(`Coral.i18n.get: Number of variable placeholders (${variablePlaceholderCount}) does not match number of variables (${variableCount}).`);
       }
-      
+
       // Build variables object
-      for (i = 0; i &lt; variableCount; i++) {
+      for (i = 0 ; i &lt; variableCount ; i++) {
         variables[i] = args[i + 1];
       }
     }
-    
+
     // Include translation hint
     if (translationHint) {
       key = `${key}/[translation hint:${translationHint}]`;
     }
-    
+
     // Fetch the string
     let str = key;
     for (const component in strings) {
@@ -868,22 +861,22 @@ class I18nProvider {
         str = strings[component][this._locale][key] || str;
       }
     }
-    
+
     // Optimization for a string with no placeholder
     // e.g. Coral.i18n.get(&apos;English string&apos;);
     if (variablePlaceholderCount === 0) {
       return str;
     }
-    
+
     // Replace all variables
     return str.replace(this._evaluate, (name) =&gt; {
       name = name.slice(1).slice(0, -1);
       return variables[name];
     });
-    
+
     // @todo use .toLocaleString(Coral.i18n.locale) in a future release
   }
-  
+
   /**
    I18n current locale value. See {@link I18nLocalesEnum}.
    @type {String}
@@ -891,6 +884,7 @@ class I18nProvider {
   get locale() {
     return this._locale;
   }
+
   set locale(newLocale) {
     this._locale = newLocale;
   }
@@ -902,7 +896,7 @@ const locale = locales[docLang] || &apos;en-US&apos;;
 
 /**
  An i18n service.
- 
+
  @type {I18nProvider}
  */
 const i18n = new I18nProvider({locale});

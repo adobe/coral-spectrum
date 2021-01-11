@@ -444,9 +444,9 @@ import {transform, validate, commons} from &apos;../../../coral-utils&apos;;
 
 /**
  Enumeration for {@link CycleButton} display options.
- 
+
  @typedef {Object} CycleButtonDisplayModeEnum
- 
+
  @property {String} ICON
  Icon display mode.
  @property {String} TEXT
@@ -462,7 +462,7 @@ const displayMode = {
 
 /**
  Regex used to remove whitespace from selectedItem label for use as an aria-label for accessibility.
- 
+
  @ignore
  */
 const WHITESPACE_REGEX = /[\t\n\r ]+/g;
@@ -486,17 +486,17 @@ class CycleButton extends BaseComponent(HTMLElement) {
     super();
 
     this._id = this.id || commons.getUID();
-    
+
     // Templates
     this._elements = {};
     base.call(this._elements, {Icon, commons, id: this._id});
-    
+
     const events = {
       &apos;click button[is=&quot;coral-button&quot;]&apos;: &apos;_onMouseDown&apos;,
       &apos;click ._coral-CycleSelect-button&apos;: &apos;_onItemClick&apos;,
       &apos;click coral-cyclebutton-item&apos;: &apos;_onItemClick&apos;,
       &apos;key:down ._coral-CycleSelect-button[aria-expanded=false]&apos;: &apos;_onItemClick&apos;,
-      
+
       // private
       &apos;coral-cyclebutton-item:_selectedchanged&apos;: &apos;_onItemSelectedChanged&apos;,
       &apos;coral-cyclebutton-item:_validateselection&apos;: &apos;_onValidateSelection&apos;,
@@ -514,45 +514,45 @@ class CycleButton extends BaseComponent(HTMLElement) {
 
       &apos;capture:focus coral-selectlist-item, [coral-list-item]&apos;: &apos;_onItemFocus&apos;,
       &apos;capture:blur coral-selectlist-item, [coral-list-item]&apos;: &apos;_onItemBlur&apos;,
-      
+
       &apos;coral-overlay:open&apos;: &apos;_onOverlayOpen&apos;,
       &apos;coral-overlay:close&apos;: &apos;_onOverlayClose&apos;
     };
-  
+
     const overlay = this._elements.overlay;
     const overlayId = overlay.id;
-    
+
     // Overlay
     events[`global:capture:click #${overlayId} button[is=&quot;coral-buttonlist-item&quot;]`] = &apos;_onActionClick&apos;;
     events[`global:capture:coral-selectlist:beforechange #${overlayId}`] = &apos;_onSelectListBeforeChange&apos;;
     events[`global:capture:coral-selectlist:change #${overlayId}`] = &apos;_onSelectListChange&apos;;
     // Keyboard interaction
     events[`global:keypress #${overlayId}`] = &apos;_onOverlayKeyPress&apos;;
-    
+
     // Attach events
     this._delegateEvents(events);
-    
+
     // Used for eventing
     this._oldSelection = null;
-    
+
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
     this.actions._startHandlingItems(true);
   }
-  
+
   /**
    Returns the inner overlay to allow customization.
-   
+
    @type {Popover}
    @readonly
    */
   get overlay() {
     return this._elements.overlay;
   }
-  
+
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+
    @type {SelectableCollection}
    @readonly
    */
@@ -568,21 +568,21 @@ class CycleButton extends BaseComponent(HTMLElement) {
     }
     return this._items;
   }
-  
+
   /**
    The selected item in the CycleButton.
-   
+
    @type {HTMLElement}
    @readonly
    */
   get selectedItem() {
     return this.items._getLastSelected();
   }
-  
+
   /**
    General icon of the CycleButton. The icon will be displayed no matter the selection. If the selected item has
    its own icon, it will be overwritten.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute icon
@@ -591,20 +591,21 @@ class CycleButton extends BaseComponent(HTMLElement) {
   get icon() {
     return this._icon || &apos;&apos;;
   }
+
   set icon(value) {
     this._icon = transform.string(value);
     this._reflectAttribute(&apos;icon&apos;, this._icon);
-    
+
     const selectedItem = this.selectedItem;
     if (selectedItem) {
       this._renderSelectedItem(selectedItem);
     }
   }
-  
+
   /**
    Number of items that can be directly cycled through before collapsing. If &lt;code&gt;0&lt;/code&gt; is used, the items
    will never be collapsed.
-   
+
    @type {Number}
    @default 3
    @htmlattribute threshold
@@ -613,6 +614,7 @@ class CycleButton extends BaseComponent(HTMLElement) {
   get threshold() {
     return typeof this._threshold === &apos;number&apos; ? this._threshold : 3;
   }
+
   set threshold(value) {
     value = transform.number(value);
     if (value &gt; -1) {
@@ -620,10 +622,10 @@ class CycleButton extends BaseComponent(HTMLElement) {
       this._checkExtended();
     }
   }
-  
+
   /**
    The Collection Interface that allows interaction with the {@link CycleButtonAction} elements.
-   
+
    @type {SelectableCollection}
    @readonly
    */
@@ -638,14 +640,14 @@ class CycleButton extends BaseComponent(HTMLElement) {
     }
     return this._actions;
   }
-  
+
   /**
    The CycleButton&apos;s displayMode. This defines how the selected item is displayed. If the selected item does not
    have the necessary icon or text information then fallback to show whichever is available. The appearance of
    collapsed items in the popover are not affected by this property. The displayMode property can be set on an
    item to override the component level value when that item is selected.
    See {@link CycleButtonDisplayModeEnum}.
-   
+
    @type {String}
    @default CycleButtonDisplayModeEnum.ICON
    @htmlattribute displaymode
@@ -654,11 +656,12 @@ class CycleButton extends BaseComponent(HTMLElement) {
   get displayMode() {
     return this._displayMode || displayMode.ICON;
   }
+
   set displayMode(value) {
     value = transform.string(value).toLowerCase();
     this._displayMode = validate.enumeration(displayMode)(value) &amp;&amp; value || displayMode.ICON;
     this._reflectAttribute(&apos;displaymode&apos;, this._displayMode);
-  
+
     const selectedItem = this.selectedItem;
     if (selectedItem) {
       this._renderSelectedItem(selectedItem);
@@ -669,42 +672,41 @@ class CycleButton extends BaseComponent(HTMLElement) {
   _hasMenuItemRadioGroup() {
     return this.items.getAll().length &gt; 0 &amp;&amp; this.actions.getAll().length &gt; 0;
   }
-  
+
   /** @private */
   _onItemAdded(item) {
     if (!this.selectedItem) {
       item.setAttribute(&apos;selected&apos;, &apos;&apos;);
-    }
-    else {
+    } else {
       this._validateSelection(item);
     }
-  
+
     this._checkExtended();
   }
-  
+
   /** @private */
   _onItemRemoved() {
     if (!this.selectedItem) {
       this._selectFirstItem();
     }
-  
+
     this._checkExtended();
   }
-  
+
   /** @private */
   _onItemSelectedChanged(event) {
     event.stopImmediatePropagation();
-    
+
     this._validateSelection(event.target);
   }
-  
+
   /** @private */
   _onValidateSelection(event) {
     event.stopImmediatePropagation();
-    
+
     this._validateSelection();
   }
-  
+
   /** @private */
   _selectFirstItem() {
     const item = this.items._getFirstSelectable();
@@ -712,11 +714,11 @@ class CycleButton extends BaseComponent(HTMLElement) {
       item.setAttribute(&apos;selected&apos;, &apos;&apos;);
     }
   }
-  
+
   /** @private */
   _validateSelection(item) {
     const selectedItems = this.items._getAllSelected();
-    
+
     if (item) {
       // Deselected item
       if (!item.hasAttribute(&apos;selected&apos;) &amp;&amp; !selectedItems.length) {
@@ -735,15 +737,14 @@ class CycleButton extends BaseComponent(HTMLElement) {
             selectedItem.removeAttribute(&apos;selected&apos;);
           }
         });
-        
+
         // We can trigger change events again
         this._preventTriggeringEvents = false;
       }
-    }
-    else if (selectedItems.length &gt; 1) {
+    } else if (selectedItems.length &gt; 1) {
       // If multiple items are selected, the last one wins
       item = selectedItems[selectedItems.length - 1];
-      
+
       selectedItems.forEach((selectedItem) =&gt; {
         if (selectedItem !== item) {
           // Don&apos;t trigger change events
@@ -751,7 +752,7 @@ class CycleButton extends BaseComponent(HTMLElement) {
           selectedItem.removeAttribute(&apos;selected&apos;);
         }
       });
-      
+
       // We can trigger change events again
       this._preventTriggeringEvents = false;
     }
@@ -759,40 +760,40 @@ class CycleButton extends BaseComponent(HTMLElement) {
     else if (!selectedItems.length) {
       this._selectFirstItem();
     }
-  
+
     this._renderSelectedItem(this.selectedItem);
-    
+
     this._triggerChangeEvent();
   }
-  
+
   /** @private */
   _triggerChangeEvent() {
     const selectedItem = this.selectedItem;
     const oldSelection = this._oldSelection;
-    
+
     if (!this._preventTriggeringEvents &amp;&amp; selectedItem !== oldSelection) {
       this.trigger(&apos;coral-cyclebutton:change&apos;, {
         oldSelection: oldSelection,
         selection: selectedItem
       });
-      
+
       this._oldSelection = selectedItem;
     }
   }
-  
+
   _onMouseDown(event) {
     event.preventDefault();
     event.stopPropagation();
     this._trackEvent(&apos;click&apos;, &apos;coral-cyclebutton&apos;, event);
   }
-  
+
   /** @private */
   _onItemClick(event) {
     event.preventDefault();
-    
+
     const items = this.items.getAll();
     const itemCount = items.length;
-    
+
     // When we have more than a specified number of items, use the overlay selection. If threshold is 0, then we never
     // show the popover. If there are actions, we always show the popover.
     if (this._isExtended()) {
@@ -803,26 +804,26 @@ class CycleButton extends BaseComponent(HTMLElement) {
     else if (itemCount &gt; 1) {
       const neighbor = this.selectedItem.nextElementSibling;
       const nextItem = neighbor.nodeName === &apos;CORAL-CYCLEBUTTON-ITEM&apos; ? neighbor : items[0];
-      
+
       this._selectCycleItem(nextItem);
       this._focusItem(this._elements.button);
     }
   }
-  
+
   /**
    Render the provided item as selected according to resolved icon and displayMode properties.
-   
+
    @private
    */
   _renderSelectedItem(item) {
     if (!item || !item.content) {
       return;
     }
-  
+
     // resolve effective values by checking for item and component level properties
     let effectiveDisplayMode = this.displayMode;
     const effectiveIcon = item.icon || this.icon || &apos;&apos;;
-  
+
     if (item.displayMode !== CycleButtonItem.displayMode.INHERIT) {
       effectiveDisplayMode = item.displayMode;
     }
@@ -830,12 +831,12 @@ class CycleButton extends BaseComponent(HTMLElement) {
       // if icon or text missing then we fallback to showing whichever is available
       effectiveDisplayMode = displayMode.ICON_TEXT;
     }
-  
+
     // manipulate button sub-component depending on display mode
     if (effectiveDisplayMode === displayMode.ICON) {
       this._elements.button.icon = effectiveIcon;
       this._elements.button.label.innerHTML = &apos;&apos;;
-    
+
       // @a11y
       const ariaLabel = item.content.textContent.replace(WHITESPACE_REGEX, &apos; &apos;);
       this._elements.button.setAttribute(&apos;aria-label&apos;, ariaLabel);
@@ -843,8 +844,7 @@ class CycleButton extends BaseComponent(HTMLElement) {
       if (ariaLabel &amp;&amp; effectiveIcon !== &apos;&apos; &amp;&amp; this._elements.button._elements.icon) {
         this._elements.button._elements.icon.setAttribute(&apos;aria-hidden&apos;, true);
       }
-    }
-    else {
+    } else {
       // handle display modes that include text
       if (effectiveDisplayMode === displayMode.TEXT) {
         this._elements.button.icon = &apos;&apos;;
@@ -856,16 +856,16 @@ class CycleButton extends BaseComponent(HTMLElement) {
         }
       }
       this._elements.button.label.innerHTML = item.content.innerHTML;
-    
+
       // @a11y we do not require aria attributes since we already show text
       this._elements.button.removeAttribute(&apos;aria-label&apos;);
       this._elements.button.removeAttribute(&apos;title&apos;);
     }
   }
-  
+
   /**
    Update currently selected item if it&apos;s &lt;code&gt;icon&lt;/code&gt; or &lt;code&gt;displayMode&lt;/code&gt; properties have changed.
-   
+
    @private
    */
   _onSelectedItemPropertyChange(event) {
@@ -884,82 +884,81 @@ class CycleButton extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /** @private */
   _onSelectListChange(event) {
     event.stopImmediatePropagation();
     event.preventDefault();
-  
+
     let origNode;
     const selectListItem = event.detail.selection;
     if (selectListItem) {
       origNode = selectListItem._originalItem;
-      
+
       this._selectCycleItem(origNode);
-      
+
       if (!this._isPopulatingLists) {
         // Hide the overlay, cleanup will be done before overlay.show()
         this._hideOverlay();
       }
     }
-  
+
     this._trackEvent(&apos;selected&apos;, &apos;coral-cyclebutton-item&apos;, event, origNode);
   }
-  
+
   _onOverlayKeyPress(event) {
     // Focus on item which text starts with pressed keys
     this._elements.selectList._onKeyPress(event);
   }
-  
+
   /** @private */
   _onActionClick(event) {
     event.stopPropagation();
-    
+
     const item = event.matchedTarget;
     const proxyEvent = item._originalItem.trigger(&apos;click&apos;);
-    
+
     if (!proxyEvent.defaultPrevented) {
       this._hideOverlay();
     }
-  
+
     this._trackEvent(&apos;selected&apos;, &apos;coral-cyclebutton-action&apos;, event, item);
   }
-  
+
   /** @private */
   _isExtended() {
     const hasActions = this.actions.getAll().length &gt; 0;
     return this.threshold &gt; 0 &amp;&amp; this.items.getAll().length &gt;= this.threshold || hasActions;
   }
-  
+
   /** @private */
   _checkExtended() {
     const isExtended = this._isExtended();
     this.classList.toggle(`${CLASSNAME}--extended`, isExtended);
-    
+
     // @a11y
     if (isExtended) {
       this._elements.button.setAttribute(&apos;aria-controls&apos;, this._elements.overlay.id);
       this._elements.button.setAttribute(&apos;aria-haspopup&apos;, true);
       this._elements.button.setAttribute(&apos;aria-expanded&apos;, false);
-  
+
       // Assign the button as the target for the overlay
       this._elements.overlay.target = this._elements.button;
       this._elements.overlay.hidden = false;
-  
+
       // Regions within the overlay should have role=presentation
       this._elements.overlay.content.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
-    }
-    else {
+    } else {
       this._elements.button.removeAttribute(&apos;aria-controls&apos;);
       this._elements.button.removeAttribute(&apos;aria-haspopup&apos;);
       this._elements.button.removeAttribute(&apos;aria-expanded&apos;);
-  
+
       // Remove target and hide overlay
       this._elements.overlay.target = null;
       this._elements.overlay.hidden = true;
     }
   }
-  
+
   /** @ignore */
   _focusItem(item) {
     if (item) {
@@ -976,14 +975,13 @@ class CycleButton extends BaseComponent(HTMLElement) {
       const index = items.indexOf(el);
       if (index &gt; 0) {
         this._focusItem(items[index - 1]);
-      }
-      else if (document.activeElement !== el) {
+      } else if (document.activeElement !== el) {
         // make sure ButtonList doesn&apos;t wrap focus
         this._focusItem(el);
       }
     }
   }
-  
+
   /** @private */
   _onFocusNextItem(event) {
     event.preventDefault();
@@ -993,8 +991,7 @@ class CycleButton extends BaseComponent(HTMLElement) {
       const index = items.indexOf(el);
       if (index &lt; items.length - 1) {
         this._focusItem(items[index + 1]);
-      }
-      else if (document.activeElement !== el) {
+      } else if (document.activeElement !== el) {
         // make sure ButtonList doesn&apos;t wrap focus
         this._focusItem(el);
       }
@@ -1025,8 +1022,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
         !item.hasAttribute(&apos;hidden&apos;) &amp;&amp;
         !item.hasAttribute(&apos;disabled&apos;) &amp;&amp;
         item.offsetParent !== null &amp;&amp;
-        (item.offsetWidth &gt; 0 || item.offsetHeight &gt; 0 );
-    });
+        (item.offsetWidth &gt; 0 || item.offsetHeight &gt; 0);
+      });
   }
 
   /** @private */
@@ -1050,40 +1047,40 @@ class CycleButton extends BaseComponent(HTMLElement) {
     // @a11y
     this._elements.button.setAttribute(&apos;aria-expanded&apos;, true);
   }
-  
+
   /** @ignore */
-  _hideOverlay() {  
+  _hideOverlay() {
     this._elements.overlay.hide();
   }
-  
+
   /** @ignore */
   _getSelectListItem(item) {
     const selectListItem = new SelectList.Item();
-  
+
     // Needs to be reflected on the generated Item.
     selectListItem.trackingElement = item.trackingElement;
-  
+
     // We do first the content, so that the icon is not destroyed
     const selectListItemContent = new SelectList.Item.Content();
     selectListItemContent.innerHTML = item.content.innerHTML;
     selectListItem.content = selectListItemContent;
-    
+
     // Specify the icon
     if (item.icon) {
       selectListItem.icon = item.icon;
     }
-    
+
     selectListItem.disabled = item.disabled;
     selectListItem.selected = item.selected;
     selectListItem.role = item.role;
     selectListItem.setAttribute(&apos;aria-checked&apos;, item.selected);
-    
+
     selectListItem._originalItem = item;
     item._selectListItem = selectListItem;
-    
+
     return selectListItem;
   }
-  
+
   /** @ignore */
   _getActionListItem(action) {
     const actionListItem = new ButtonList.Item();
@@ -1096,13 +1093,13 @@ class CycleButton extends BaseComponent(HTMLElement) {
     // Needs to be reflected on the generated Action.
     actionListItem.trackingElement = action.trackingElement;
     actionListItem.content.innerHTML = action.content.innerHTML;
-    
+
     actionListItem._originalItem = action;
     action._buttonListItem = actionListItem;
-    
+
     return actionListItem;
   }
-  
+
   /** @ignore */
   _populateLists() {
     const selectList = this._elements.selectList;
@@ -1119,12 +1116,12 @@ class CycleButton extends BaseComponent(HTMLElement) {
     // we empty the existing items before populating the lists again
     selectList.items.clear();
     actionList.items.clear();
-    
+
     // adds the items to the selectList
-    for (let i = 0; i &lt; itemCount; i++) {
+    for (let i = 0 ; i &lt; itemCount ; i++) {
       const item = items[i];
       selectListItem = this._getSelectListItem(item);
-      
+
       selectListItem.icon = item.icon;
       selectListItem.role = item.role;
       selectListItem.setAttribute(&apos;aria-checked&apos;, item.selected);
@@ -1134,15 +1131,15 @@ class CycleButton extends BaseComponent(HTMLElement) {
         disabled: item.disabled,
         selected: item.selected
       }, true);
-  
+
       selectList.items.add(selectListItem);
     }
-    
+
     // adds any additional actions to the actions buttonList
     if (actionCount &gt; 0) {
-      for (let j = 0; j &lt; actionCount; j++) {
+      for (let j = 0 ; j &lt; actionCount ; j++) {
         const action = actions[j];
-        
+
         actionListItem = this._getActionListItem(action);
         actionListItem.disabled = action.disabled;
         actionListItem.icon = action.icon;
@@ -1151,15 +1148,14 @@ class CycleButton extends BaseComponent(HTMLElement) {
 
         actionList.items.add(actionListItem);
       }
-      
+
       this._elements.actionList.removeAttribute(&apos;hidden&apos;);
 
       if (itemCount &gt; 0) {
         this._elements.separator.removeAttribute(&apos;hidden&apos;);
         this._elements.selectList.setAttribute(&apos;role&apos;, &apos;group&apos;);
       }
-    }
-    else {
+    } else {
       this._elements.actionList.setAttribute(&apos;hidden&apos;, &apos;&apos;);
       this._elements.separator.setAttribute(&apos;hidden&apos;, &apos;&apos;);
       this._elements.selectList.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
@@ -1169,61 +1165,62 @@ class CycleButton extends BaseComponent(HTMLElement) {
       this._isPopulatingLists = false;
     });
   }
-  
+
   /** @private */
   _selectCycleItem(item) {
     item.setAttribute(&apos;selected&apos;, &apos;&apos;);
   }
-  
+
   /** @ignore */
-  _showOverlay() {    
+  _showOverlay() {
     this._populateLists();
-    
+
     this._elements.overlay.show();
   }
-  
+
   /**
    Returns {@link CycleButton} display options.
-   
+
    @return {CycleButtonDisplayModeEnum}
    */
-  static get displayMode() { return displayMode; }
-  
+  static get displayMode() {
+    return displayMode;
+  }
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       displaymode: &apos;displayMode&apos;
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;icon&apos;, &apos;threshold&apos;, &apos;displaymode&apos;, &apos;aria-label&apos;, &apos;aria-labelledby&apos;]);
   }
-  
+
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     // The accessibility name for the button element
     if (name === &apos;aria-label&apos;) {
       const hasMenuItemRadioGroup = this._hasMenuItemRadioGroup();
-  
+
       // aria-labelledby takes precedence over aria-label
       if (this.getAttribute(&apos;aria-labelledby&apos;)) {
         // Button should be labeled by the container and the button, with the selected value, itself
         this._elements.button.setAttribute(&apos;aria-labelledby&apos;, `${this.id} ${this._elements.button.id}`);
-    
+
         // Overlay should be labeled by the container with aria-label
         this._elements.overlay.setAttribute(&apos;aria-labelledby&apos;, this.id);
-    
+
         // With both items and actions, the items should be grouped and the group should be labeled
         // SelectList menuitemradio group should be labeled by the container with aria-label,
         // Otherwise the selectList should not be labeled independantly from the menu
         this._elements.selectList[hasMenuItemRadioGroup ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-labelledby&apos;, this.id);
-      }
-      else {
+      } else {
         //  With no aria-label, clean up aria-labelledby on _elements
         this._elements.button.removeAttribute(&apos;aria-labelledby&apos;);
         this._elements.overlay.setAttribute(&apos;aria-labelledby&apos;, this._elements.button.id);
-    
+
         // With both items and actions, the items should be grouped and the group should be labeled
         // SelectList menuitemradio group should be labeled by the button, with the selected value, itself,
         // Otherwise the selectList should not be labeled independantly from the menu
@@ -1237,16 +1234,15 @@ class CycleButton extends BaseComponent(HTMLElement) {
         this._elements.overlay.setAttribute(&apos;aria-labelledby&apos;, value || this._elements.button.id);
         this._elements.selectList[this._hasMenuItemRadioGroup() ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-labelledby&apos;, value || this._elements.button.id);
       }
-    }
-    else {
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
-  
+
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-    
+
     const overlay = this._elements.overlay;
     // Cannot be open by default when rendered
     overlay.removeAttribute(&apos;open&apos;);
@@ -1255,54 +1251,58 @@ class CycleButton extends BaseComponent(HTMLElement) {
       overlay._parent.appendChild(overlay);
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
 
     if (!this.id) {
       this.id = this._id;
-    } 
-    
+    }
+
     this.classList.add(CLASSNAME);
-    
+
     // Default reflected attributes
-    if (typeof this._threshold === &apos;undefined&apos;) { this.threshold = 3; }
-    if (!this._displayMode) { this.displayMode = displayMode.ICON; }
-    
+    if (typeof this._threshold === &apos;undefined&apos;) {
+      this.threshold = 3;
+    }
+    if (!this._displayMode) {
+      this.displayMode = displayMode.ICON;
+    }
+
     // adds the role to support accessibility
     this.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
     // checks the component&apos;s extended mode
     this._checkExtended();
-  
+
     [&apos;button&apos;, &apos;overlay&apos;].forEach((handleName) =&gt; {
       const handle = this.querySelector(`[handle=&quot;${handleName}&quot;]`);
       if (handle) {
         handle.remove();
       }
     });
-  
+
     const frag = document.createDocumentFragment();
-  
+
     // Render the base layout
     frag.appendChild(this._elements.button);
     frag.appendChild(this._elements.overlay);
-    
+
     // Inserting the template before the items
     this.appendChild(frag);
-    
+
     // Don&apos;t trigger events once connected
     this._preventTriggeringEvents = true;
     this._validateSelection();
     this._preventTriggeringEvents = false;
-    
+
     this._oldSelection = this.selectedItem;
   }
-  
+
   /** @ignore */
   disconnectedCallback() {
     super.disconnectedCallback();
-    
+
     const overlay = this._elements.overlay;
     // In case it was moved out don&apos;t forget to remove it
     if (!this.contains(overlay)) {
@@ -1310,12 +1310,12 @@ class CycleButton extends BaseComponent(HTMLElement) {
       overlay.remove();
     }
   }
-  
+
   /**
    Triggered when the {@link CycleButton} selected item has changed.
-   
+
    @typedef {CustomEvent} coral-cyclebutton:change
-   
+
    @property {CycleButtonItem} detail.oldSelection
    The prior selected item(s).
    @property {CycleButtonItem} detail.selection

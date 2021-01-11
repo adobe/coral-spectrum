@@ -448,23 +448,23 @@ class PanelStack extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Attach events
     this._delegateEvents({
       // private
       &apos;coral-panel:_selectedchanged&apos;: &apos;_onItemSelectedChanged&apos;
     });
-    
+
     // Used for eventing
     this._oldSelection = null;
-    
+
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
   }
-  
+
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+
    @type {SelectableCollection}
    @readonly
    */
@@ -482,28 +482,28 @@ class PanelStack extends BaseComponent(HTMLElement) {
     }
     return this._items;
   }
-  
+
   /**
    The selected item of the PanelStack.
-   
+
    @type {HTMLElement}
    @readonly
    */
   get selectedItem() {
     return this.items._getLastSelected();
   }
-  
+
   /** @private */
   _onItemSelectedChanged(event) {
     event.stopImmediatePropagation();
-    
+
     this._validateSelection(event.target);
   }
-  
+
   /** @private */
   _validateSelection(item) {
     const selectedItems = this.items._getAllSelected();
-    
+
     // Last selected item wins if multiple selection while not allowed
     item = item || selectedItems[selectedItems.length - 1];
 
@@ -515,50 +515,50 @@ class PanelStack extends BaseComponent(HTMLElement) {
           selectedItem.removeAttribute(&apos;selected&apos;);
         }
       });
-  
+
       // We can trigger change events again
       this._preventTriggeringEvents = false;
     }
-    
+
     this._triggerChangeEvent();
   }
-  
+
   /** @private */
   _triggerChangeEvent() {
     const selectedItem = this.selectedItem;
     const oldSelection = this._oldSelection;
-    
+
     if (!this._preventTriggeringEvents &amp;&amp; selectedItem !== oldSelection) {
       this.trigger(&apos;coral-panelstack:change&apos;, {
         oldSelection: oldSelection,
         selection: selectedItem
       });
-      
+
       this._oldSelection = selectedItem;
     }
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     this.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
-    
+
     // Don&apos;t trigger events once connected
     this._preventTriggeringEvents = true;
     this._validateSelection();
     this._preventTriggeringEvents = false;
-    
+
     this._oldSelection = this.selectedItem;
   }
-  
+
   /**
    Triggered when {@link PanelStack} selected panel has changed.
-   
+
    @typedef {CustomEvent} coral-panelstack:change
-   
+
    @property {Panel} detail.selection
    The new selected panel.
    @property {Panel} detail.oldSelection

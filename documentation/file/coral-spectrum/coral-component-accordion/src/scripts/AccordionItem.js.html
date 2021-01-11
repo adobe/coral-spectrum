@@ -450,68 +450,70 @@ class AccordionItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Prepare templates
     this._elements = {
       // Create or fetch the content zones
       label: this.querySelector(&apos;coral-accordion-item-label&apos;) || document.createElement(&apos;coral-accordion-item-label&apos;),
       content: this.querySelector(&apos;coral-accordion-item-content&apos;) || document.createElement(&apos;coral-accordion-item-content&apos;)
     };
-  
+
     base.call(this._elements, {Icon});
   }
-  
+
   /**
    The label of this accordion item.
-   
+
    @type {AccordionItemLabel}
    @contentzone
    */
   get label() {
     return this._getContentZone(this._elements.label);
   }
+
   set label(value) {
     this._setContentZone(&apos;label&apos;, value, {
       handle: &apos;label&apos;,
       tagName: &apos;coral-accordion-item-label&apos;,
-      insert: function(label) {
+      insert: function (label) {
         this._setAria(this._elements.button, this._elements.content);
-        
+
         this._elements.button.appendChild(label);
       }
     });
   }
-  
+
   /**
    The content of this accordion item.
-   
+
    @type {AccordionItemContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone(&apos;content&apos;, value, {
       handle: &apos;content&apos;,
       tagName: &apos;coral-accordion-item-content&apos;,
-      insert: function(content) {
+      insert: function (content) {
         content.classList.add(`${CLASSNAME}Content`);
-  
+
         // WAI-ARIA 1.1
         content.setAttribute(&apos;role&apos;, &apos;region&apos;);
-        
+
         this._setAria(this._elements.button, content);
-        
+
         this.appendChild(content);
       }
     });
   }
-  
+
   /**
    Whether the item is selected. If the item has an element with the `coral-interactive` attribute and is clicked,
    then the toggling of the accordion item will not occur.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -520,16 +522,24 @@ class AccordionItem extends BaseComponent(HTMLElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
-    this._selected = this.hasAttribute(&apos;disabled&apos;) ? false : transform.booleanAttr(value);
+    let _value = transform.booleanAttr(value);
+    let _selected = this.hasAttribute(&apos;disabled&apos;) ? false : _value;
+
+    if(this._selected === _selected) {
+      return;
+    }
+
+    this._selected = _selected;
     this._reflectAttribute(&apos;selected&apos;, this._selected);
-    
+
     // Read it before applying is-open which adds additional padding
     const scrollHeight = this._elements.content.scrollHeight;
-    
+
     this.classList.toggle(&apos;is-open&apos;, this._selected);
     this._elements.button.setAttribute(&apos;aria-expanded&apos;, this._selected);
-    
+
     if (!this._selected) {
       this._elements.content.style.height = `${scrollHeight}px`;
       // We read the offset height to force a reflow, this is needed to start the transition between absolute values
@@ -537,7 +547,7 @@ class AccordionItem extends BaseComponent(HTMLElement) {
       // eslint-disable-next-line no-unused-vars
       const offsetHeight = this._elements.content.offsetHeight;
     }
-    
+
     this._elements.content.style.height = this._selected ? `${scrollHeight}px` : &apos;0&apos;;
 
     if (this._selected) {
@@ -545,10 +555,10 @@ class AccordionItem extends BaseComponent(HTMLElement) {
         this._elements.content.style.height = &apos;&apos;;
       });
     }
-  
+
     this.trigger(&apos;coral-accordion-item:_selectedchanged&apos;);
   }
-  
+
   /**
    Whether this item is disabled.
    @type {Boolean}
@@ -559,120 +569,123 @@ class AccordionItem extends BaseComponent(HTMLElement) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
-  
+
     this.classList.toggle(&apos;is-disabled&apos;, this._disabled);
     this._elements.button[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;disabled&apos;, &apos;&apos;);
-  
+
     this.selected = this.selected;
   }
 
 
   /**
-    The heading level for the Accordion item 
+   The heading level for the Accordion item
 
-    @type {Number}
-    @default 3
-    @htmlattribute level
-    @htmlattributereflected
-  */
- get level() {
-  return this._level || 3;
-}
-
-set level(value) {
-  value = transform.number(value);
-  // If the value has changed,
-  if (!validate.valueMustChange(value, this._level)) {
-    return;
+   @type {Number}
+   @default 3
+   @htmlattribute level
+   @htmlattributereflected
+   */
+  get level() {
+    return this._level || 3;
   }
-  // and the value is greater than 0
-  if (value &gt; 0) {
-    // set the value and reflect the attribute.
-    this._level = value;
-    this._reflectAttribute(&apos;level&apos;, this._level);
-    
-    // If the new value is not equal to the default,
-    if (value !== 3) {
-      // override the aria-level on the h3 element. 
-      this._elements.heading.setAttribute(&apos;aria-level&apos;, this._level);
+
+  set level(value) {
+    value = transform.number(value);
+    // If the value has changed,
+    if (!validate.valueMustChange(value, this._level)) {
       return;
     }
+    // and the value is greater than 0
+    if (value &gt; 0) {
+      // set the value and reflect the attribute.
+      this._level = value;
+      this._reflectAttribute(&apos;level&apos;, this._level);
+
+      // If the new value is not equal to the default,
+      if (value !== 3) {
+        // override the aria-level on the h3 element.
+        this._elements.heading.setAttribute(&apos;aria-level&apos;, this._level);
+        return;
+      }
+    }
+
+    // If the value is the default or invalid, remove the aria-level override from the h3 element.
+    this._elements.heading.removeAttribute(&apos;aria-level&apos;);
   }
 
-  // If the value is the default or invalid, remove the aria-level override from the h3 element. 
-  this._elements.heading.removeAttribute(&apos;aria-level&apos;);
-}
-  
   /** @private **/
   get _isTabTarget() {
     return this.__isTabTarget || false;
   }
+
   set _isTabTarget(value) {
     this.__isTabTarget = value;
-    
+
     if (this.disabled) {
       this._elements.button.removeAttribute(&apos;tabindex&apos;);
-    }
-    else {
+    } else {
       this._elements.button.setAttribute(&apos;tabindex&apos;, this.__isTabTarget ? &apos;0&apos; : &apos;-1&apos;);
     }
   }
-  
+
   _setAria(button, content) {
     button.id = button.id || commons.getUID();
     content.id = content.id || commons.getUID();
-  
+
     button.setAttribute(&apos;aria-controls&apos;, content.id);
     content.setAttribute(&apos;aria-labelledby&apos;, button.id);
   }
-  
+
   /**
    Handles the focus of the item.
- 
+
    @ignore
    */
   focus() {
     this._elements.label.focus();
   }
-  
-  get _contentZones() { return {&apos;coral-accordion-item-label&apos;: &apos;label&apos;, &apos;coral-accordion-item-content&apos;: &apos;content&apos;}; }
-  
+
+  get _contentZones() {
+    return {&apos;coral-accordion-item-label&apos;: &apos;label&apos;, &apos;coral-accordion-item-content&apos;: &apos;content&apos;};
+  }
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;selected&apos;, &apos;disabled&apos;, &apos;level&apos;]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-  
+
     this.classList.add(CLASSNAME);
-  
+
     // a11y
     this.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
-  
+
     // Support cloneNode
     const template = this.querySelector(&apos;._coral-Accordion-itemHeading&apos;);
     if (template) {
       template.remove();
     }
-    
+
     // Move content into the content zone if not specified
     if (!this._elements.content.parentNode) {
       while (this.firstChild) {
         this._elements.content.appendChild(this.firstChild);
       }
     }
-    
+
     this.appendChild(this._elements.heading);
-  
+
     // Assign the content zones, moving them into place in the process
     this.label = this._elements.label;
     this.content = this._elements.content;
-    
+
     // Defaults
     this.selected = this.selected;
   }

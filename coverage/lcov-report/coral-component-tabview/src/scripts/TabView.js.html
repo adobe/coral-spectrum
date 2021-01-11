@@ -275,7 +275,15 @@
 <a name='L217'></a><a href='#L217'>217</a>
 <a name='L218'></a><a href='#L218'>218</a>
 <a name='L219'></a><a href='#L219'>219</a>
-<a name='L220'></a><a href='#L220'>220</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L220'></a><a href='#L220'>220</a>
+<a name='L221'></a><a href='#L221'>221</a>
+<a name='L222'></a><a href='#L222'>222</a>
+<a name='L223'></a><a href='#L223'>223</a>
+<a name='L224'></a><a href='#L224'>224</a>
+<a name='L225'></a><a href='#L225'>225</a>
+<a name='L226'></a><a href='#L226'>226</a>
+<a name='L227'></a><a href='#L227'>227</a>
+<a name='L228'></a><a href='#L228'>228</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -362,9 +370,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -438,7 +444,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">326x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -448,7 +453,6 @@
 <span class="cline-any cline-yes">118x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">118x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -483,7 +487,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -494,6 +497,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">86x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2670x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -513,9 +529,9 @@ import {commons} from '../../../coral-utils';
 &nbsp;
 /**
  Enumeration for {@link TabView} orientations.
- 
+&nbsp;
  @typedef {Object} TabViewOrientationEnum
- 
+&nbsp;
  @property {String} HORIZONTAL
  Tabs on top of the panels. This is the default.
  @property {String} VERTICAL
@@ -542,14 +558,14 @@ class TabView extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
       tabList: this.querySelector('coral-tablist') || document.createElement('coral-tablist'),
       panelStack: this.querySelector('coral-panelstack') || document.createElement('coral-panelstack')
     };
-    
+&nbsp;
     // Events
     this._delegateEvents({
       'coral-tablist:change &gt; coral-tablist': '_onTabListChange',
@@ -560,10 +576,10 @@ class TabView extends BaseComponent(HTMLElement) {
       'coral-collection:remove &gt; coral-panelstack': '_syncTabListAndPanelStack'
     });
   }
-  
+&nbsp;
   /**
    The TabView's orientation. See {@link TabViewOrientationEnum}.
-   
+&nbsp;
    @type {String}
    @default TabViewOrientationEnum.HORIZONTAL
    @htmlattribute orientation
@@ -572,139 +588,147 @@ class TabView extends BaseComponent(HTMLElement) {
   get orientation() {
     return this._elements.tabList.getAttribute('orientation') || orientation.HORIZONTAL;
   }
+&nbsp;
   set orientation(value) {
     // We rely on the tablist orientation enum so don't need to double check enums
     this._elements.tabList.setAttribute('orientation', value);
     this._reflectAttribute('orientation', this.orientation);
-  
+&nbsp;
     this.classList[this.orientation === orientation.VERTICAL ? 'add' : 'remove'](`${CLASSNAME}--vertical`);
   }
-  
+&nbsp;
   /**
    The TabList which handles all the tabs.
-   
+&nbsp;
    @type {TabList}
    @contentzone
    */
   get tabList() {
     return this._getContentZone(this._elements.tabList);
   }
+&nbsp;
   set tabList(value) {
     // Support nested coral-tablist
     if (value instanceof HTMLElement &amp;&amp; !value.parentNode || value.parentNode === this) {
       this._setContentZone('tabList', value, {
         handle: 'tabList',
         tagName: 'coral-tablist',
-        insert: function(tabs) {
+        insert: function (tabs) {
           tabs.setAttribute('tracking', 'off');
           this.insertBefore(tabs, this._elements.panelStack || null);
+      <span class="missing-if-branch" title="else path not taken" >E</span>  }
+      });
+    }
+  }
+&nbsp;
+  /**<span class="missing-if-branch" title="if path not taken" >I</span>
+   The Panel<span class="cstat-no" title="statement not covered" >Stack which contains all the panel</span>s.
+&nbsp;
+   @type {PanelStack}
+   @contentzone
+   */
+  get panelStack() {
+    return this._getContentZone(this._elements.panelStack);
+  }
+&nbsp;
+  set panelStack(value) {
+    // Support nested coral-panelstack
+    if (value instan<span class="fstat-no" title="function not covered" >ceof HTMLElement &amp;&amp; !value</span>.parentNode || value.parentNode === this) {
+<span class="cstat-no" title="statement not covered" >      this._setContentZone('panelStack', value, {</span>
+        handle: 'panelStack',
+        tagName: 'coral-panelstack',
+        insert: function (panels) {
+          this.appendChild(panels);
         }
       });
     }
   }
-  <span class="missing-if-branch" title="else path not taken" >E</span>
+&nbsp;
   /**
-   The PanelStack which contains all the panels.
-   
-   @type {PanelStack}
-   @conten<span class="missing-if-branch" title="if path not taken" >I</span>tzone
-   */<span class="cstat-no" title="statement not covered" ></span>
-  get panelStack() {
-    return this._getContentZone(this._elements.panelStack);
-  }
-  set panelStack(value) {
-    // Support nested coral-panelstack
-    if (value instanceof HTMLElement &amp;&amp; !value.parentNode || value.parentNode === this) {
-      this._setContentZone('panelStack', value, {
-        handle: 'panelStack',
-        tagName: 'coral-panelstack',
-        insert: function(panels) {
-          this.appen<span class="fstat-no" title="function not covered" >dChild(panels);</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-      });
-    }
-  }
-  
-  /**
-   Detects a change in the TabList and triggers an event.
-   
+   Det<span class="missing-if-branch" title="else path not taken" >E</span>ects a change in the TabList and triggers an event.
+&nbsp;
    @private
    */
   _onTabListChange(event) {
-    th<span class="missing-if-branch" title="else path not taken" >E</span>is.trigger('coral-tabview:change', {
+    this.trigger('coral-tabview:change', {
       selection: event.detail.selection,
       oldSelection: event.detail.oldSelection
-    });
+    });<span class="branch-1 cbranch-no" title="branch not covered" ></span>
   }
-  
+&nbsp;
   /** @private */
   _onPanelStackChange(event) {
-    // everytime the panelstack<span class="branch-1 cbranch-no" title="branch not covered" > changes, we veri</span>fy that the tablist and panelstack are up to date
+    // everytime the panelstack changes, we verify that the tablist and panelstack are up to date
     if (event.detail.selection) {
       const tabSelector = event.detail.selection.getAttribute('aria-labelledby');
       const tab = document.getElementById(tabSelector);
-    
+&nbsp;
       // we select the tab if this was not the case
       if (tab) {
         if (!tab.hasAttribute('selected')) {
           tab.setAttribute('selected', '');
-        }
-        else {
+        } else {
           this._trackEvent('display', 'coral-tab', event, event.detail.selection);
         }
       }
     }
   }
-  
+&nbsp;
   /** @private */
   _syncTabListAndPanelStack() {
     this._elements.tabList.target = this._elements.tabList.target;
   }
-  
+&nbsp;
   get _contentZones() {
     return {
       'coral-tablist': 'tabList',
       'coral-panelstack': 'panelStack'
     };
   }
-  
+&nbsp;
   /**
    Returns {@link TabView} orientation options.
-   
+&nbsp;
    @return {TabViewOrientationEnum}
    */
-  static get orientation() { return orientation; }
-  
+  static get orientation() {
+    return orientation;
+  }
+&nbsp;
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['orientation']); }
-  
-  /** @ignore */
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['orientation']);
+  }
+&nbsp;
+  /** @ignore */<span class="branch-1 cbranch-no" title="branch not covered" ></span>
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-    
+&nbsp;
     // Default reflected attributes
-    if (!this._orientation) { this.orientation = this.orientation; }
-  
+    if (!this._orientation) {
+      this.orientation = this.orientation;
+    }
+&nbsp;
     // Fetch or create the content zone elements
-    const tabs = this._elements.tabList;<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+    const tabs = this._elements.tabList;
     const panels = this._elements.panelStack;
-  
+&nbsp;
     // Bind the tablist and panel stack together, using the panel id
     panels.id = panels.id || commons.getUID();
     tabs.setAttribute('target', `#${panels.id}`);
-  
+&nbsp;
     // Assign the content zones.
     this.panelStack = panels;
     this.tabList = tabs;
   }
-  
+&nbsp;
   /**
    Triggered when the {@link TabView} selected tab panel item has changed.
- 
+&nbsp;
    @typedef {CustomEvent} coral-tabview:change
-   
+&nbsp;
    @property {Tab} event.detail.selection
    The new selected tab panel item.
    @param {Tab} event.detail.oldSelection
@@ -720,7 +744,7 @@ export default TabView;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

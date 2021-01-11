@@ -365,7 +365,20 @@
 <a name='L307'></a><a href='#L307'>307</a>
 <a name='L308'></a><a href='#L308'>308</a>
 <a name='L309'></a><a href='#L309'>309</a>
-<a name='L310'></a><a href='#L310'>310</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L310'></a><a href='#L310'>310</a>
+<a name='L311'></a><a href='#L311'>311</a>
+<a name='L312'></a><a href='#L312'>312</a>
+<a name='L313'></a><a href='#L313'>313</a>
+<a name='L314'></a><a href='#L314'>314</a>
+<a name='L315'></a><a href='#L315'>315</a>
+<a name='L316'></a><a href='#L316'>316</a>
+<a name='L317'></a><a href='#L317'>317</a>
+<a name='L318'></a><a href='#L318'>318</a>
+<a name='L319'></a><a href='#L319'>319</a>
+<a name='L320'></a><a href='#L320'>320</a>
+<a name='L321'></a><a href='#L321'>321</a>
+<a name='L322'></a><a href='#L322'>322</a>
+<a name='L323'></a><a href='#L323'>323</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -452,9 +465,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -564,7 +575,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -604,7 +614,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -621,7 +630,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6312x</span>
+<span class="cline-any cline-yes">4872x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">26x</span>
@@ -672,6 +681,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">256x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
@@ -705,26 +731,26 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Make sure the events from the FormField are attached
     this._delegateEvents(commons.extend(this._events, {
       'capture:focus ._coral-ToggleSwitch-input': '_onFocus',
       'capture:blur ._coral-ToggleSwitch-input': '_onBlur'
     }));
-    
+&nbsp;
     // Prepare templates
     this._elements = {
       // Try to find the label content zone
       label: this.querySelector('coral-switch-label') || document.createElement('coral-switch-label')
     };
     base.call(this._elements, {commons, i18n});
-  
+&nbsp;
     // Pre-define labellable element
     this._labellableElement = this._elements.input;
-  
+&nbsp;
     // Check if the label is empty whenever we get a mutation
     this._observer = new MutationObserver(this._hideLabelIfEmpty.bind(this));
-  
+&nbsp;
     // Watch for changes to the label element's children
     this._observer.observe(this._elements.labelWrapper, {
       // Catch changes to childList
@@ -735,10 +761,10 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
       subtree: true
     });
   }
-  
+&nbsp;
   /**
    Whether the switch is on or off.
-   
+&nbsp;
    @type {Boolean}
    @default false
    @htmlattribute checked
@@ -748,51 +774,54 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
   get checked() {
     return this._checked || false;
   }
+&nbsp;
   set checked(value) {
     this._checked = transform.booleanAttr(value);
     this._reflectAttribute('checked', this._checked);
-    
+&nbsp;
     this._elements.input.checked = this._checked;
   }
-  
+&nbsp;
   /**
    The switch's label element.
-   
+&nbsp;
    @type {SwitchLabel}
    @contentzone
    */
   get label() {
     return this._getContentZone(this._elements.label);
   }
+&nbsp;
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: 'coral-switch-label',
-      insert: function(label) {
+      insert: function (label) {
         this._elements.labelWrapper.appendChild(label);
       }
     });
   }
-  
+&nbsp;
   /**
    Name used to submit the data in a form.
-   @type {String}
-   @default ""
+   @type {String}<span class="fstat-no" title="function not covered" ></span>
+   @de<span class="cstat-no" title="statement not covered" >fault ""</span>
    @htmlattribute name
    @htmlattributereflected
-   */<span class="fstat-no" title="function not covered" ></span>
-  get <span class="cstat-no" title="statement not covered" >name() {</span>
-    return this._elements.input.name;
+   */
+  get name() {<span class="fstat-no" title="function not covered" ></span>
+    re<span class="cstat-no" title="statement not covered" >turn this._elements.input.name;</span>
   }
+&nbsp;
   set name(value) {
-    this._reflectAtt<span class="fstat-no" title="function not covered" >ribute('</span>name', value);
-    <span class="cstat-no" title="statement not covered" ></span>
+    this._reflectAttribute('name', value);
+&nbsp;
     this._elements.input.name = value;
   }
-  
+&nbsp;
   /**
    The value that will be submitted when the checkbox is checked. Changing this value will not trigger an event.
-   
+&nbsp;
    @type {String}
    @default "on"
    @htmlattribute value
@@ -800,10 +829,11 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
   get value() {
     return this._elements.input.value || 'on';
   }
+&nbsp;
   set value(value) {
     this._elements.input.value = value;
   }
-  
+&nbsp;
   /**
    Whether this field is disabled or not.
    @type {Boolean}
@@ -814,15 +844,16 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
   get disabled() {
     return this._disabled || false;
   }
+&nbsp;
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
-    
+&nbsp;
     this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
     this.classList.toggle('is-disabled', this._disabled);
     this._elements.input.disabled = this._disabled;
   }
-  
+&nbsp;
   /**
    Whether this field is required or not.
    @type {Boolean}
@@ -833,13 +864,14 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
   get required() {
     return this._required || false;
   }
+&nbsp;
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
-    
+&nbsp;
     this._elements.input.required = this._required;
   }
-  
+&nbsp;
   /**
    Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
    @type {Boolean}
@@ -850,137 +882,144 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
   get readOnly() {
     return this._readOnly || false;
   }
+&nbsp;
   set readOnly(value) {
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
-    
+&nbsp;
     this.classList.toggle('is-readOnly', this._readOnly);
     this._elements.input.tabIndex = this._readOnly ? -1 : 0;
   }
-  
+&nbsp;
   /**
    Inherited from {@link BaseFormField#labelled}.
    */
   get labelled() {
     return super.labelled;
   }
+&nbsp;
   set labelled(value) {
     super.labelled = value;
-    
+&nbsp;
     this._hideLabelIfEmpty();
   }
-  
+&nbsp;
   /*
    Indicates to the formField that the 'checked' property needs to be set in this component.
-   
+&nbsp;
    @protected
    */
-  get _componentTargetProperty() { return 'checked'; }
-  
+  get _componentTargetProperty() {
+    return 'checked';
+  }
+&nbsp;
   /*
    Indicates to the formField that the 'checked' property has to be extracted from the event.
-   
+&nbsp;
    @protected
    */
-  get _eventTargetProperty() { return 'checked'; }
-  
+  get _eventTargetProperty() {
+    return 'checked';
+  }
+&nbsp;
   /**
    Hide the label if it's empty.
-   
+&nbsp;
    @ignore
    */
   _hideLabelIfEmpty() {
     const label = this._elements.label;
-  
+&nbsp;
     // If it's empty and has no non-textnode children, hide the label
     const hiddenValue = !(label.children.length === 0 &amp;&amp; label.textContent.replace(/\s*/g, '') === '');
-  
+&nbsp;
     // Toggle the screen reader text
     this._elements.labelWrapper.style.margin = !hiddenValue ? '0' : '';
     this._elements.screenReaderOnly.hidden = hiddenValue || this.labelled;
-  }
-  
+  }<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+&nbsp;
   _onFocus() {
     this._elements.input.classList.add('focus-ring');
   }
-  
+&nbsp;
   _onBlur() {
     this._elements.input.classList.remove('focus-ring');
   }
-  
-  get _contentZones() { return {'coral-switch-label': 'label'}; }
-  
+&nbsp;
+  get _contentZones() {
+    return {'coral-switch-label': 'label'};
+  }
+&nbsp;
   /**
    Inherited from {@link BaseFormField#clear}.
    */
   clear() {
-    this.checked = false;<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+    this.checked = false;
   }
-  
+&nbsp;
   /**
    Inherited from {@link BaseFormField#reset}.
    */
   reset() {
     this.checked = this._initialCheckedState;
   }
-  
+&nbsp;
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['checked']);
   }
-  
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-  
+&nbsp;
     // Create a fragment
-    const frag = document.createDocumentFragment();
-  
+    const frag = d<span class="fstat-no" title="function not covered" >ocum</span>ent.createDocumentFragment();
+<span class="cstat-no" title="statement not covered" ></span>
     const templateHandleNames = ['input', 'switch', 'labelWrapper'];
-  
+<span class="cstat-no" title="statement not covered" ></span>
     // Render the template
-    frag.appendChild(this._elements.input);
+    fr<span class="cstat-no" title="statement not covered" >ag.appendChild(this._elements.input);</span>
     frag.appendChild(this._elements.switch);
     frag.appendChild(this._elements.labelWrapper);
-  
+&nbsp;
     const label = this._elements.label;
-  
+&nbsp;
     // Remove it so we can process children
     if (label &amp;&amp; label.parentNode) {
       label.parentNode.removeChild(label);
     }
-  
+&nbsp;
     // Clean up
     while (this.firstChild) {
-      const child <span class="fstat-no" title="function not covered" >= th</span>is.firstChild;
-<span class="cstat-no" title="statement not covered" >      // Only works if all root template elements hav</span>e a handle attribute
-      if (child.nodeType === Node.TEXT_NODE ||
-<span class="cstat-no" title="statement not covered" >        child.nodeType === Node.ELEMENT_NODE &amp;&amp; templateHa</span>ndleNames.indexOf(child.getAttribute('handle')) === -1) {
+      const child = this.firstChild;
+      // Only works if all root template elements have a handle attribute
+      if (child.no<span class="fstat-no" title="function not covered" >deTy</span>pe === Node.TEXT_NODE ||
+<span class="cstat-no" title="statement not covered" >        child.nodeType === Node.ELEMENT_NODE &amp;&amp; templ</span>ateHandleNames.indexOf(child.getAttribute('handle')) === -1) {
         // Add non-template elements to the content
 <span class="cstat-no" title="statement not covered" >        label.appendChild(child);</span>
-      }
-      else {
-        // Remove anything else
-        this.removeChild(child);
+      } else {
+<span class="cstat-no" title="statement not covered" >        // Remove anything else</span>
+<span class="cstat-no" title="statement not covered" >        this.removeChild(child);</span>
       }
     }
-  
+&nbsp;
     // Append the fragment to the component
     this.appendChild(frag);
-  
+&nbsp;
     // Assign the content zones, moving them into place in the process
     this.label = label;
-  
+&nbsp;
     // Cache the initial checked state of the switch (in order to implement reset)
-    this._initialC<span class="fstat-no" title="function not covered" >heck</span>edState = this.checked;
-  <span class="cstat-no" title="statement not covered" ></span>
+    this._initialCheckedState = this.checked;
+&nbsp;
     // Check if we need to hide the label
-    //<span class="cstat-no" title="statement not covered" > We must do this because IE does not catch mutations</span> when nodes are not in the DOM
+    // We must do this because IE does not catch mutations when nodes are not in the DOM
     this._hideLabelIfEmpty();
-  }<span class="cstat-no" title="statement not covered" ></span>
-}<span class="cstat-no" title="statement not covered" ></span>
+  }
+}
 &nbsp;
 export default Switch;
 &nbsp;</pre></td></tr></table></pre>
@@ -990,7 +1029,7 @@ export default Switch;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

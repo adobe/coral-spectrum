@@ -188,7 +188,15 @@
 <a name='L130'></a><a href='#L130'>130</a>
 <a name='L131'></a><a href='#L131'>131</a>
 <a name='L132'></a><a href='#L132'>132</a>
-<a name='L133'></a><a href='#L133'>133</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -237,7 +245,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">276x</span>
 <span class="cline-any cline-yes">276x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -297,7 +304,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -318,6 +324,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">144x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">144x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">144x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
@@ -349,7 +365,7 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
@@ -357,10 +373,10 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
     };
     solutionIcon.call(this._elements);
   }
-  
+&nbsp;
   /**
    Specifies the icon name used inside the button. See {@link Icon} for valid icon names.
-   
+&nbsp;
    @type {String}
    @default ""
    @htmlattribute icon
@@ -368,32 +384,34 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
   get icon() {
     return this._elements.icon.icon;
   }
+&nbsp;
   set icon(value) {
     this._elements.icon.icon = value;
   }
-  
+&nbsp;
   /**
    The solution's label content zone.
-   
+&nbsp;
    @type {ShellSolutionLabel}
    @contentzone
    */
   get label() {
     return this._getContentZone(this._elements.label);
   }
+&nbsp;
   set label(value) {
     this._setContentZone('label', value, {
       handle: 'label',
       tagName: 'coral-shell-solution-label',
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
-  }
-  
+  }<span class="missing-if-branch" title="else path not taken" >E</span>
+&nbsp;
   /**
-   Whe<span class="missing-if-branch" title="else path not taken" >E</span>ther a solution is linked or not
-   
+   Whether a solution is linked or not
+&nbsp;
    @type {Boolean}
    @default false
    @htmlattribute linked
@@ -402,64 +420,70 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
   get linked() {
     return this._linked || false;
   }
+&nbsp;
   set linked(value) {
     this._linked = transform.booleanAttr(value);
     this._reflectAttribute('linked', this._linked);
-    
+&nbsp;
     this.classList.toggle(`${CLASSNAME}--linked`, this._linked);
   }
-  
-  get _contentZones() { return {'coral-shell-solution-label': 'label'}; }
-  
+&nbsp;
+  get _contentZones() {
+    return {'coral<span class="fstat-no" title="function not covered" >-she</span>ll-solution-label': 'label'};
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['icon', 'linked']); }
-  
-  /** @ignore */<span class="fstat-no" title="function not covered" ></span>
-  rend<span class="cstat-no" title="statement not covered" >er() {</span>
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['icon', 'linked']);
+  }
+&nbsp;
+  /** @ignore */
+  render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-  
-    const fragment = document.createDocumentFragment();
-  
+&nbsp;
+    const fragment<span class="fstat-no" title="function not covered" > = d</span>ocument.createDocumentFragment();
+<span class="cstat-no" title="statement not covered" ></span>
     // Render template
     fragment.appendChild(this._elements.icon);
-  
+&nbsp;
     const label = this._elements.label;
-    
+&nbsp;
     // Remove it so we can process children
-    if (label) { label.remove(); }
-  <span class="fstat-no" title="function not covered" ></span>
-    //<span class="cstat-no" title="statement not covered" > Move any remaining elements into the content sub-c</span>omponent
+    if (label) {
+      label.remove();
+    }
+&nbsp;
+    // Move any remaining elements into the content sub-component
     while (this.firstChild) {
       const child = this.firstChild;
-      
+&nbsp;
       if (child.nodeType === Node.TEXT_NODE ||
         child.nodeType === Node.ELEMENT_NODE &amp;&amp; child.getAttribute('handle') !== 'icon') {
         label.appendChild(child);
-      }
-      else {
+      } else {
         this.removeChild(child);
       }
-    }
-  
+    }<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
     // Add template to component
     this.appendChild(fragment);
-    
+&nbsp;
     // Call the content zone insert
     this.label = label;
   }
 }
 &nbsp;
 export default ShellSolution;
-<span class="fstat-no" title="function not covered" ></span></pre></td></tr></table></pre>
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

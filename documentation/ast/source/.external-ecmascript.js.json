@@ -1,7 +1,7 @@
 {
   "type": "File",
   "start": 0,
-  "end": 7983,
+  "end": 7981,
   "loc": {
     "start": {
       "line": 1,
@@ -15,7 +15,7 @@
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 7983,
+    "end": 7981,
     "loc": {
       "start": {
         "line": 1,
@@ -1058,8 +1058,8 @@
       {
         "type": "CommentBlock",
         "value": "*\n * @external {HTMLTableSectionElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTableSectionElement\n ",
-        "start": 7241,
-        "end": 7357,
+        "start": 7240,
+        "end": 7356,
         "loc": {
           "start": {
             "line": 229,
@@ -1074,8 +1074,8 @@
       {
         "type": "CommentBlock",
         "value": "*\n * @external {HTMLTableCellElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTableCellElement\n ",
-        "start": 7360,
-        "end": 7470,
+        "start": 7358,
+        "end": 7468,
         "loc": {
           "start": {
             "line": 233,
@@ -1090,8 +1090,8 @@
       {
         "type": "CommentBlock",
         "value": "*\n * @external {HTMLTableRowElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTableRowElement\n ",
-        "start": 7472,
-        "end": 7580,
+        "start": 7470,
+        "end": 7578,
         "loc": {
           "start": {
             "line": 237,
@@ -1106,8 +1106,8 @@
       {
         "type": "CommentBlock",
         "value": "*\n * @external {HTMLTableColElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTableColElement\n ",
-        "start": 7582,
-        "end": 7690,
+        "start": 7580,
+        "end": 7688,
         "loc": {
           "start": {
             "line": 241,
@@ -1122,8 +1122,8 @@
       {
         "type": "CommentBlock",
         "value": "*\n * @external {HTMLTextAreaElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTextAreaElement\n ",
-        "start": 7692,
-        "end": 7800,
+        "start": 7690,
+        "end": 7798,
         "loc": {
           "start": {
             "line": 245,
@@ -1138,8 +1138,8 @@
       {
         "type": "CommentBlock",
         "value": "*\n * @external {HTMLInputElement} https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement\n ",
-        "start": 7802,
-        "end": 7904,
+        "start": 7800,
+        "end": 7902,
         "loc": {
           "start": {
             "line": 249,
@@ -1154,8 +1154,8 @@
       {
         "type": "CommentLine",
         "value": " External Libraries",
-        "start": 7906,
-        "end": 7927,
+        "start": 7904,
+        "end": 7925,
         "loc": {
           "start": {
             "line": 253,
@@ -1170,8 +1170,8 @@
       {
         "type": "CommentBlock",
         "value": "*\n * @external {momentJS} https://momentjs.com/\n ",
-        "start": 7929,
-        "end": 7982,
+        "start": 7927,
+        "end": 7980,
         "loc": {
           "start": {
             "line": 255,
@@ -2213,8 +2213,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n * @external {HTMLTableSectionElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTableSectionElement\n ",
-      "start": 7241,
-      "end": 7357,
+      "start": 7240,
+      "end": 7356,
       "loc": {
         "start": {
           "line": 229,
@@ -2229,8 +2229,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n * @external {HTMLTableCellElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTableCellElement\n ",
-      "start": 7360,
-      "end": 7470,
+      "start": 7358,
+      "end": 7468,
       "loc": {
         "start": {
           "line": 233,
@@ -2245,8 +2245,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n * @external {HTMLTableRowElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTableRowElement\n ",
-      "start": 7472,
-      "end": 7580,
+      "start": 7470,
+      "end": 7578,
       "loc": {
         "start": {
           "line": 237,
@@ -2261,8 +2261,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n * @external {HTMLTableColElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTableColElement\n ",
-      "start": 7582,
-      "end": 7690,
+      "start": 7580,
+      "end": 7688,
       "loc": {
         "start": {
           "line": 241,
@@ -2277,8 +2277,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n * @external {HTMLTextAreaElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTextAreaElement\n ",
-      "start": 7692,
-      "end": 7800,
+      "start": 7690,
+      "end": 7798,
       "loc": {
         "start": {
           "line": 245,
@@ -2293,8 +2293,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n * @external {HTMLInputElement} https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement\n ",
-      "start": 7802,
-      "end": 7904,
+      "start": 7800,
+      "end": 7902,
       "loc": {
         "start": {
           "line": 249,
@@ -2309,8 +2309,8 @@
     {
       "type": "CommentLine",
       "value": " External Libraries",
-      "start": 7906,
-      "end": 7927,
+      "start": 7904,
+      "end": 7925,
       "loc": {
         "start": {
           "line": 253,
@@ -2325,8 +2325,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n * @external {momentJS} https://momentjs.com/\n ",
-      "start": 7929,
-      "end": 7982,
+      "start": 7927,
+      "end": 7980,
       "loc": {
         "start": {
           "line": 255,
@@ -3367,8 +3367,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n * @external {HTMLTableSectionElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTableSectionElement\n ",
-      "start": 7241,
-      "end": 7357,
+      "start": 7240,
+      "end": 7356,
       "loc": {
         "start": {
           "line": 229,
@@ -3383,8 +3383,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n * @external {HTMLTableCellElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTableCellElement\n ",
-      "start": 7360,
-      "end": 7470,
+      "start": 7358,
+      "end": 7468,
       "loc": {
         "start": {
           "line": 233,
@@ -3399,8 +3399,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n * @external {HTMLTableRowElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTableRowElement\n ",
-      "start": 7472,
-      "end": 7580,
+      "start": 7470,
+      "end": 7578,
       "loc": {
         "start": {
           "line": 237,
@@ -3415,8 +3415,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n * @external {HTMLTableColElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTableColElement\n ",
-      "start": 7582,
-      "end": 7690,
+      "start": 7580,
+      "end": 7688,
       "loc": {
         "start": {
           "line": 241,
@@ -3431,8 +3431,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n * @external {HTMLTextAreaElement} https://developer.mozilla.org/en/docs/Web/API/HTMLTextAreaElement\n ",
-      "start": 7692,
-      "end": 7800,
+      "start": 7690,
+      "end": 7798,
       "loc": {
         "start": {
           "line": 245,
@@ -3447,8 +3447,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n * @external {HTMLInputElement} https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement\n ",
-      "start": 7802,
-      "end": 7904,
+      "start": 7800,
+      "end": 7902,
       "loc": {
         "start": {
           "line": 249,
@@ -3463,8 +3463,8 @@
     {
       "type": "CommentLine",
       "value": " External Libraries",
-      "start": 7906,
-      "end": 7927,
+      "start": 7904,
+      "end": 7925,
       "loc": {
         "start": {
           "line": 253,
@@ -3479,8 +3479,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n * @external {momentJS} https://momentjs.com/\n ",
-      "start": 7929,
-      "end": 7982,
+      "start": 7927,
+      "end": 7980,
       "loc": {
         "start": {
           "line": 255,
@@ -3505,8 +3505,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 7983,
-      "end": 7983,
+      "start": 7981,
+      "end": 7981,
       "loc": {
         "start": {
           "line": 258,

@@ -450,41 +450,41 @@ class ActionBarSecondary extends ActionBarContainer(BaseComponent(HTMLElement)) 
   _returnElementsFromPopover() {
     let item = null;
     let wrappedItem = null;
-    
-    for (let i = 0; i &lt; this._itemsInPopover.length; i++) {
+
+    for (let i = 0 ; i &lt; this._itemsInPopover.length ; i++) {
       item = this._itemsInPopover[i];
-  
+
       item.style.visibility = &apos;hidden&apos;;
-  
+
       // remove tabindex again
       wrappedItem = getFirstSelectableWrappedItem(item);
       if (wrappedItem &amp;&amp; wrappedItem.hasAttribute(&apos;tabindex&apos;)) {
         wrappedItem.setAttribute(&apos;tabindex&apos;, -1);
       }
-      
+
       this.insertBefore(item, this.firstChild.nextSibling);
 
       // Reset popover id, target
       if (item._button &amp;&amp; item._popover) {
         item._popover.id = item._popoverId;
-        if(item._popover.target) {
+        if (item._popover.target) {
           item._popover.target = item._button;
         }
       }
     }
   }
-  
+
   /** @ignore */
   _attachMoreButtonToContainer() {
     this.insertBefore(this._elements.moreButton, this.firstChild);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     this._attachMoreButtonToContainer();
   }
 }

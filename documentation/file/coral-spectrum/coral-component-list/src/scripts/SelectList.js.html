@@ -444,7 +444,7 @@ const KEYPRESS_TIMEOUT_DURATION = 1000;
  The distance, in pixels, from the bottom of the SelectList at which we trigger a scrollbottom event. For example, a
  value of 50 would indicate a scrollbottom event should be triggered when the user scrolls to within 50 pixels of the
  bottom.
- 
+
  @type {Number}
  @ignore
  */
@@ -452,7 +452,7 @@ const SCROLL_BOTTOM_THRESHOLD = 50;
 
 /**
  The number of milliseconds for which scroll events should be debounced.
- 
+
  @type {Number}
  @ignore
  */
@@ -477,15 +477,15 @@ class SelectList extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Attach events
     this._delegateEvents({
       &apos;scroll&apos;: &apos;_onScroll&apos;,
       &apos;mouseenter&apos;: &apos;_onMouseEnter&apos;,
       &apos;capture:blur&apos;: &apos;_onBlur&apos;,
-  
+
       &apos;click coral-selectlist-item&apos;: &apos;_onItemClick&apos;,
-  
+
       &apos;key:space coral-selectlist-item&apos;: &apos;_onToggleItemKey&apos;,
       &apos;key:return coral-selectlist-item&apos;: &apos;_onToggleItemKey&apos;,
       &apos;key:pageup coral-selectlist-item&apos;: &apos;_focusPreviousItem&apos;,
@@ -497,36 +497,36 @@ class SelectList extends BaseComponent(HTMLElement) {
       &apos;key:home coral-selectlist-item&apos;: &apos;_onHomeKey&apos;,
       &apos;key:end coral-selectlist-item&apos;: &apos;_onEndKey&apos;,
       &apos;keypress coral-selectlist-item&apos;: &apos;_onKeyPress&apos;,
-      
+
       // private
       &apos;coral-selectlist-item:_selectedchanged&apos;: &apos;_onItemSelectedChanged&apos;
     });
-    
+
     this._keypressTimeoutDuration = KEYPRESS_TIMEOUT_DURATION;
-    
+
     // Templates
     this._elements = {};
     loadIndicator.call(this._elements);
-    
+
     // Used for eventing
     this._oldSelection = [];
-  
+
     // Used for interaction
     this._keypressTimeoutID = null;
     this._keypressSearchString = &apos;&apos;;
-  
+
     // we correctly bind the scroll event
     this._onDebouncedScroll = this._onDebouncedScroll.bind(this);
-    
+
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
   }
-  
+
   /**
    The Collection Interface that allows interacting with the {@link SelectListGroup} elements that the
    SelectList contains. This includes items nested inside groups. To manage items contained within a specific
    group, see {@link SelectListGroup#items}.
-   
+
    @type {SelectableCollection}
    @readonly
    */
@@ -542,10 +542,10 @@ class SelectList extends BaseComponent(HTMLElement) {
     }
     return this._groups;
   }
-  
+
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+
    @type {SelectableCollection}
    @readonly
    */
@@ -561,27 +561,27 @@ class SelectList extends BaseComponent(HTMLElement) {
     }
     return this._items;
   }
-  
+
   /**
    The selected item in the SelectList.
-   
+
    @type {HTMLElement}
    @readonly
    */
   get selectedItem() {
     return this.items._getAllSelected()[0] || null;
   }
-  
+
   /**
    The selected items of the SelectList.
-   
+
    @type {Array.&lt;HTMLElement&gt;}
    @readonly
    */
   get selectedItems() {
     return this.items._getAllSelected();
   }
-  
+
   /**
    Indicates whether the SelectList accepts multiple selected items.
    @type {Boolean}
@@ -592,18 +592,19 @@ class SelectList extends BaseComponent(HTMLElement) {
   get multiple() {
     return this._multiple || false;
   }
+
   set multiple(value) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute(&apos;multiple&apos;, this._multiple);
-  
+
     this[this._multiple ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-multiselectable&apos;, this._multiple);
-    
+
     this._validateSelection();
   }
-  
+
   /**
    Whether items are being loaded for the SelectList. Toggling this merely shows or hides a loading indicator.
-   
+
    @default false
    @type {Boolean}
    @htmlattribute loading
@@ -612,130 +613,130 @@ class SelectList extends BaseComponent(HTMLElement) {
   get loading() {
     return this._loading || false;
   }
+
   set loading(value) {
     this._loading = transform.booleanAttr(value);
     this._reflectAttribute(&apos;loading&apos;, this._loading);
-  
+
     const load = this._elements.loadIndicator;
-  
+
     if (this.loading) {
       // we decide first if we need to scroll to the bottom since adding the load will change the dimentions
       const scrollToBottom = this.scrollTop &gt;= this.scrollHeight - this.clientHeight;
-    
+
       // inserts the item at the end
       this.appendChild(load);
-    
+
       // we make the load indicator visible
       if (scrollToBottom) {
         /** @ignore */
         this.scrollTop = this.scrollHeight;
       }
-    }
-    else {
+    } else {
       load.remove();
     }
   }
-  
+
   /** @private **/
   get _tabTarget() {
     return this.__tabTarget || null;
   }
-  
+
   set _tabTarget(value) {
     this.__tabTarget = value;
-    
+
     // Set all but the current set _tabTarget to not be a tab target:
     this.items._getSelectableItems().forEach((item) =&gt; {
       item.setAttribute(&apos;tabindex&apos;, !value || item === value ? 0 : -1);
     });
   }
-  
+
   /** @private */
   _toggleItemSelection(item) {
     if (item) {
       const beforeChangeEvent = this.trigger(&apos;coral-selectlist:beforechange&apos;, {item});
-  
+
       if (!beforeChangeEvent.defaultPrevented) {
         item[item.hasAttribute(&apos;selected&apos;) ? &apos;removeAttribute&apos; : &apos;setAttribute&apos;](&apos;selected&apos;, &apos;&apos;);
       }
     }
   }
-  
+
   /** @private */
   _onBlur() {
     // required otherwise the latest item that had the focus would get it again instead of the selected item
     this._resetTabTarget();
   }
-  
+
   /** @private */
   _onItemClick(event) {
     event.preventDefault();
     event.stopPropagation();
-  
+
     const item = event.matchedTarget;
     this._toggleItemSelection(item);
     this._focusItem(item);
   }
-  
+
   /** @private */
   _focusItem(item) {
     if (item) {
       item.focus();
     }
-    
+
     this._tabTarget = item;
   }
-  
+
   /** @private */
   _onToggleItemKey(event) {
     event.preventDefault();
     event.stopPropagation();
-    
+
     const item = event.target;
-    
+
     this._toggleItemSelection(item);
     this._focusItem(item);
   }
-  
+
   /** @private */
   _focusPreviousItem(event) {
     event.preventDefault();
 
     this._focusItem(this.items._getPreviousSelectable(event.target));
   }
-  
+
   /** @private */
   _focusNextItem(event) {
     event.preventDefault();
 
     this._focusItem(this.items._getNextSelectable(event.target));
   }
-  
+
   _focusFirstItem() {
     this._focusItem(this.items._getFirstSelectable());
   }
-  
+
   _focusLastItem() {
     this._focusItem(this.items._getLastSelectable());
   }
-  
+
   /** @private */
   _onHomeKey(event) {
     event.preventDefault();
-    
+
     this._focusFirstItem();
   }
-  
+
   /** @private */
   _onEndKey(event) {
     event.preventDefault();
-    
+
     this._focusLastItem();
   }
-  
+
   /**
    Handles keypress event for alphanumeric search.
-   
+
    @param {KeyboardEvent} event
    The keyboard event.
    @private
@@ -743,48 +744,46 @@ class SelectList extends BaseComponent(HTMLElement) {
   _onKeyPress(event) {
     // The string entered when the key was pressed
     const newString = String.fromCharCode(event.which);
-    
+
     // Clear the timeout before the _keypressSearchString is cleared
     window.clearTimeout(this._keypressTimeoutID);
-    
+
     // If the character entered does not match the last character entered, append it to the _keypressSearchString
     if (newString !== this._keypressSearchString) {
       this._keypressSearchString += newString;
     }
-    
+
     // Set a timeout so that _keypressSearchString is cleared after 1 second
     this._keypressTimeoutID = window.setTimeout(() =&gt; {
       this._keypressSearchString = &apos;&apos;;
     }, this._keypressTimeoutDuration);
-    
+
     // Search within selectable items
     const selectableItems = this.items._getSelectableItems().filter(item =&gt; !item.hasAttribute(&apos;hidden&apos;) &amp;&amp; item.offsetParent);
-    
+
     // Remember the index of the focused item within the array of selectable items
     const currentIndex = selectableItems.indexOf(this._tabTarget);
-    
+
     this._keypressSearchString = this._keypressSearchString.trim().toLowerCase();
-    
+
     let start;
     // If the currentIndex is -1, meaning no item has focus, start from the beginning
     if (currentIndex === -1) {
       start = 0;
-    }
-    else if (this._keypressSearchString.length === 1) {
+    } else if (this._keypressSearchString.length === 1) {
       // Otherwise, if there is only one character to compare, start comparing from the next item after the currently
       // focused item. This allows us to iterate through items beginning with the same character
       start = currentIndex + 1;
-    }
-    else {
+    } else {
       start = currentIndex;
     }
-    
+
     let newFocusItem;
     let comparison;
     let item;
-    
+
     // Compare _keypressSearchString against item text until a match is found
-    for (let i = start; i &lt; selectableItems.length; i++) {
+    for (let i = start ; i &lt; selectableItems.length ; i++) {
       item = selectableItems[i];
       comparison = item.textContent.trim().toLowerCase();
       if (comparison.indexOf(this._keypressSearchString) === 0) {
@@ -792,10 +791,10 @@ class SelectList extends BaseComponent(HTMLElement) {
         break;
       }
     }
-    
+
     // If no match is found, continue searching for a match starting from the top
     if (!newFocusItem) {
-      for (let j = 0; j &lt; start; j++) {
+      for (let j = 0 ; j &lt; start ; j++) {
         item = selectableItems[j];
         comparison = item.textContent.trim().toLowerCase();
         if (comparison.indexOf(this._keypressSearchString) === 0) {
@@ -804,11 +803,11 @@ class SelectList extends BaseComponent(HTMLElement) {
         }
       }
     }
-    
+
     // If a match has been found, focus the matched item
     if (newFocusItem !== undefined) {
       this._focusItem(newFocusItem);
-      
+
       // Keyboard is being used so apply focus-ring
       const focusedItem = this.querySelector(&apos;.focus-ring&apos;);
       if (focusedItem) {
@@ -822,7 +821,7 @@ class SelectList extends BaseComponent(HTMLElement) {
    Determine what item should get focus (if any) when the user tries to tab into the SelectList. This should be the
    first selected item, or the first selectable item otherwise. When neither is available, it cannot be tabbed into
    the SelectList.
-   
+
    @private
    */
   _resetTabTarget(forceFirst = false) {
@@ -831,25 +830,25 @@ class SelectList extends BaseComponent(HTMLElement) {
     if (items.length === 0) {
       items = this.items._getSelectableItems().filter(item =&gt; !item.hasAttribute(&apos;hidden&apos;) &amp;&amp; item.offsetParent);
     }
-    
+
     this._tabTarget = forceFirst ? items[0] : (items.find(item =&gt; item.tabIndex === 0) || items[0]);
   }
-  
+
   /** @private */
   _onScroll() {
     window.clearTimeout(this._scrollTimeout);
     this._scrollTimeout = window.setTimeout(this._onDebouncedScroll, SCROLL_DEBOUNCE);
   }
-  
+
   _onMouseEnter() {
     if (this.contains(document.activeElement)) {
       document.activeElement.blur();
     }
   }
-  
+
   /**
    @emits {coral-selectlist:scrollbottom}
-   
+
    @private
    */
   _onDebouncedScroll() {
@@ -857,22 +856,22 @@ class SelectList extends BaseComponent(HTMLElement) {
       this.trigger(&apos;coral-selectlist:scrollbottom&apos;);
     }
   }
-  
+
   /** @private */
   _onItemSelectedChanged(event) {
     event.stopImmediatePropagation();
-    
+
     this._validateSelection(event.target);
   }
-  
+
   /** @private */
   _validateSelection(item) {
     const selectedItems = this.selectedItems;
-    
+
     if (!this.multiple) {
       // Last selected item wins if multiple selection while not allowed
       item = item || selectedItems[selectedItems.length - 1];
-      
+
       if (item &amp;&amp; item.hasAttribute(&apos;selected&apos;) &amp;&amp; selectedItems.length &gt; 1) {
         selectedItems.forEach((selectedItem) =&gt; {
           if (selectedItem !== item) {
@@ -881,22 +880,22 @@ class SelectList extends BaseComponent(HTMLElement) {
             selectedItem.removeAttribute(&apos;selected&apos;);
           }
         });
-        
+
         // We can trigger change events again
         this._preventTriggeringEvents = false;
       }
     }
-    
+
     this._resetTabTarget();
-    
+
     this._triggerChangeEvent();
   }
-  
+
   /** @private */
   _triggerChangeEvent() {
     const selectedItems = this.selectedItems;
     const oldSelection = this._oldSelection;
-    
+
     if (!this._preventTriggeringEvents &amp;&amp; this._arraysAreDifferent(selectedItems, oldSelection)) {
       // We differentiate whether multiple is on or off and return an array or HTMLElement respectively
       if (this.multiple) {
@@ -904,31 +903,30 @@ class SelectList extends BaseComponent(HTMLElement) {
           oldSelection: oldSelection,
           selection: selectedItems
         });
-      }
-      else {
+      } else {
         // Return all items if we just switched from multiple=true to multiple=false and we had &gt;1 selected items
         this.trigger(&apos;coral-selectlist:change&apos;, {
           oldSelection: oldSelection.length &gt; 1 ? oldSelection : oldSelection[0] || null,
           selection: selectedItems[0] || null
         });
       }
-      
+
       this._oldSelection = selectedItems;
     }
   }
-  
+
   /** @private */
   _arraysAreDifferent(selection, oldSelection) {
     let diff = [];
-    
+
     if (oldSelection.length === selection.length) {
       diff = oldSelection.filter((item) =&gt; selection.indexOf(item) === -1);
     }
-    
+
     // since we guarantee that they are arrays, we can start by comparing their size
     return oldSelection.length !== selection.length || diff.length !== 0;
   }
-  
+
   /** @ignore */
   focus() {
     // Avoids moving the focus once it is already inside the component
@@ -937,54 +935,54 @@ class SelectList extends BaseComponent(HTMLElement) {
       this._focusItem(this._tabTarget);
     }
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;loading&apos;, &apos;multiple&apos;]);
   }
-  
+
   /** @ignore */
   render() {
     this.classList.add(CLASSNAME);
-    
+
     // adds the role to support accessibility
     if (!this.hasAttribute(&apos;role&apos;)) {
       this.setAttribute(&apos;role&apos;, &apos;listbox&apos;);
     }
-    
+
     if (!this.hasAttribute(&apos;aria-label&apos;)) {
       this.setAttribute(&apos;aria-label&apos;, i18n.get(&apos;List&apos;));
     }
-    
+
     // Don&apos;t trigger events once connected
     this._preventTriggeringEvents = true;
     this._validateSelection();
     this._preventTriggeringEvents = false;
-    
+
     this._oldSelection = this.selectedItems;
   }
-  
+
   /**
    Triggered when the user scrolls to near the bottom of the {@link SelectList}. This can be useful for when additional items can
    be loaded asynchronously (i.e., infinite scrolling).
-   
+
    @typedef {CustomEvent} coral-selectlist:scrollbottom
    */
-  
+
   /**
    Triggered before the {@link SelectList} selected item is changed on user interaction. Can be used to cancel selection.
-   
+
    @typedef {CustomEvent} coral-selectlist:change
-   
+
    @property {SelectListItem} event.detail.item
    The selected item.
    */
-  
+
   /**
    Triggered when the {@link SelectList} selected item has changed.
-   
+
    @typedef {CustomEvent} coral-selectlist:change
-   
+
    @property {SelectListItem} detail.oldSelection
    The prior selected item(s).
    @property {SelectListItem} detail.selection

@@ -449,7 +449,7 @@ const setTransition = (el, value) =&gt; {
 /** @ignore */
 const getFirstRowFilledColumns = (columns, items) =&gt; {
   let filledColumns = 0;
-  for (let i = 0; i &lt; items.length; i++) {
+  for (let i = 0 ; i &lt; items.length ; i++) {
     const item = items[i];
     filledColumns += item._layoutData.colspan;
     if (filledColumns &gt;= columns.length) {

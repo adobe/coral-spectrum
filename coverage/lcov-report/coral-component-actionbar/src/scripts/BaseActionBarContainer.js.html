@@ -406,7 +406,8 @@
 <a name='L348'></a><a href='#L348'>348</a>
 <a name='L349'></a><a href='#L349'>349</a>
 <a name='L350'></a><a href='#L350'>350</a>
-<a name='L351'></a><a href='#L351'>351</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L351'></a><a href='#L351'>351</a>
+<a name='L352'></a><a href='#L352'>352</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -504,7 +505,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -523,7 +523,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">588x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -730,8 +729,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1903x</span>
+<span class="cline-any cline-yes">1900x</span>
 <span class="cline-any cline-yes">260x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -739,7 +737,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1903x</span>
+<span class="cline-any cline-yes">1900x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -753,8 +751,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">874x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">878x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">110x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">110x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
@@ -781,16 +783,15 @@ const REG_EXP = /_coral([^\s]+)/g;
 &nbsp;
 const copyAttributes = (from, to) =&gt; {
   const excludedAttributes = ['is', 'id', 'variant', 'size'];
-  
-  for (let i = 0; i &lt; from.attributes.length; i++) {
+&nbsp;
+  for (let i = 0 ; i &lt; from.attributes.length ; i++) {
     const attr = from.attributes[i];
-    
+&nbsp;
     if (excludedAttributes.indexOf(attr.nodeName) === -1) {
       if (attr.nodeName === 'class') {
         // Filter out private Coral classes
         to.setAttribute(attr.nodeName, `${to.className} ${attr.nodeValue.replace(REG_EXP, '')}`);
-      }
-      else {
+      } else {
         to.setAttribute(attr.nodeName, attr.nodeValue);
       }
     }
@@ -805,7 +806,7 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Templates
     this._elements = {};
     this._itemsInPopover = [];
@@ -815,10 +816,10 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
       items: this._itemsInPopover,
       copyAttributes
     });
-  
+&nbsp;
     // Return focus to overlay by default
     this._elements.overlay.focusOnShow = this._elements.overlay;
-  
+&nbsp;
     const overlayId = this._elements.overlay.id;
     const events = {};
     events[`global:capture:coral-overlay:beforeopen #${overlayId}`] = '_onOverlayBeforeOpen';
@@ -826,27 +827,27 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
     // Keyboard interaction
     events[`global:key:down #${overlayId}`] = '_onOverlayKeyDown';
     events[`global:key:up #${overlayId}`] = '_onOverlayKeyUp';
-  
+&nbsp;
     // Events
     this._delegateEvents(events);
-  
+&nbsp;
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
   }
-  
+&nbsp;
   /**
    Returns the inner overlay to allow customization.
-   
+&nbsp;
    @type {Popover}
    @readonly
    */
   get overlay() {
     return this._elements.overlay;
   }
-  
+&nbsp;
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+&nbsp;
    @type {ActionBarContainerCollection}
    @readonly
    */
@@ -862,11 +863,11 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
 &nbsp;
     return this._items;
   }
-  
+&nbsp;
   /**
    The amount of items that are maximally visible inside the container. Using a value &lt;= 0 will disable this
    feature and show as many items as possible.
-   
+&nbsp;
    @type {Number}
    @default -1
    @htmlattribute threshold
@@ -875,32 +876,34 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
   get threshold() {
     return typeof this._threshold === 'number' ? this._threshold : -1;
   }
+&nbsp;
   set threshold(value) {
     this._threshold = transform.number(value);
     this._reflectAttribute('threshold', this._threshold);
   }
-  
+&nbsp;
   /**
    If there are more ActionBarItems inside the ActionBar than currently can be shown, then a "more" Button with the
    following text will be rendered (and some ActionBarItems will be hidden inside of a Popover).
-   
-   @type {String}
-   @default ""
-   @html<span class="missing-if-branch" title="if path not taken" >I</span>attribute morebuttontext
-   */<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+   @type<span class="missing-if-branch" title="if path not taken" >I</span> {String}
+   @defaul<span class="cstat-no" title="statement not covered" >t ""</span>
+   @htmlattribute morebuttontext
+   */
   get moreButtonText() {
     return this._moreButtonText || '';
   }
+&nbsp;
   set moreButtonText(value) {
     this._moreButtonText = transform.string(value);
-  
+&nbsp;
     if (this._elements.moreButton) {
       // moreButton might not have been created so far
       this._elements.moreButtonLabel.innerHTML = this._moreButtonText;
       this._elements.moreButton[this._moreButtonText.trim() === '' ? 'setAttribute' : 'removeAttribute']('title', i18n.get('More'));
     }
   }
-  
+&nbsp;
   /**
    Style item content
    */
@@ -908,20 +911,20 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
     const button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
     if (button) {
       button.classList.add('_coral-ActionBar-button');
-      
+&nbsp;
       const oldVariant = button.getAttribute('variant');
       if (oldVariant === Button.variant.ACTION || oldVariant === Button.variant.QUIET_ACTION) {
         return;
       }
-      
+&nbsp;
       button.setAttribute('variant', oldVariant === Button.variant.QUIET ? Button.variant.QUIET_ACTION : Button.variant.ACTION);
     }
   }
-  
+&nbsp;
   /**
    Called after popover.open is set to true, but before the transition of the popover is done. Show elements inside
    the actionbar, that are hidden due to space problems.
-   
+&nbsp;
    @ignore
    */
   _onOverlayBeforeOpen(event) {
@@ -929,115 +932,115 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
     if (event.target !== this._elements.overlay) {
       return;
     }
-    
+&nbsp;
     this._itemsInPopover = this.items._getAllOffScreen();
-    
+&nbsp;
     if (this._itemsInPopover.length &lt; 1) {
       return;
-    }
-&nbsp;
-    // Set focus to first focusable descendant of the overlay by default
-    this<span class="missing-if-branch" title="if path not taken" >I</span>._elements.overlay.focusOnShow = 'on';
+    }<span class="missing-if-branch" title="if path not taken" >I</span>
 <span class="cstat-no" title="statement not covered" ></span>
+    // Set focus to first focusable descendant of the overlay by default
+    this._elements.overlay.focusOnShow = 'on';
+&nbsp;
     this._itemsInPopover.forEach((item) =&gt; {
       item.style.visibility = '';
       // Store the button and popover on the item
       item._button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
       item._popover = item.querySelector('coral-popover');
-      if(item._popover) {
+      if (item._popover) {
         item._popoverId = item._popover.id;
       }
     });
-    
+&nbsp;
     // Whether a ButtonList or AnchorList should be rendered
     this._itemsInPopover.isButtonList = this._itemsInPopover.every(item =&gt; item._button &amp;&amp; item._button.tagName === 'BUTTON');
     this._itemsInPopover.isAnchorList = this._itemsInPopover.every(item =&gt; item._button &amp;&amp; item._button.tagName === 'A');
-    
+&nbsp;
     // show the current popover (hidden needed to disable fade time of popover)
     this._elements.overlay.hidden = false;
-    
-    // render popover content
+&nbsp;
+    // ren<span class="cstat-no" title="statement not covered" >der popover content</span>
     const popover = this._elements.overlay;
     popover.content.innerHTML = '';
-    popove<span class="cstat-no" title="statement not covered" >r.content.appendChild(overlayCo</span>ntent.call(this._elements, {
+    popover.content.appendChild(overlayContent.call(this._elements, {
       items: this._itemsInPopover,
       copyAttributes
     }));
   }
-  
+&nbsp;
   /**
    Called after popover.open is set to false, but before the transition of the popover is done.
    Make items visible again, that now do fit into the actionbar.
    @ignore
-   */
-  _onOverlayBeforeClose(event) {
+   */<span class="fstat-no" title="function not covered" ></span>
+  _onOve<span class="cstat-no" title="statement not covered" >rlayBeforeClose(event) {</span>
     // there might be popovers in popover =&gt; ignore them
-    if (event.target !<span class="fstat-no" title="function not covered" >== this._elements.</span>overlay) {
+    if (<span class="cstat-no" title="statement not covered" >event.target !== this._elements.overlay) {</span>
       re<span class="cstat-no" title="statement not covered" >turn;</span>
     }
-    <span class="cstat-no" title="statement not covered" ></span>
-    cons<span class="cstat-no" title="statement not covered" >t focusedItem = document.activeElement.parentNode;</span>
 &nbsp;
-    // we need to check if item has 'hasAttribute' because it is not present on the document
+    const focusedItem = document.activeElement.parentNode;
+<span class="fstat-no" title="function not covered" ></span>
+    // w<span class="cstat-no" title="statement not covered" >e need to check if item </span>has 'hasAttribute' because it is not present on the document
     const isFocusedItemInsideActionBar = this.parentNode.contains(focusedItem);
-    const isFocusedIte<span class="fstat-no" title="function not covered" >mOffscreen = foc</span>usedItem.hasAttribute &amp;&amp; focusedItem.hasAttribute('coral-actionbar-offscreen');
-    if (<span class="cstat-no" title="statement not covered" >isFocusedItemInsideActio</span>nBar &amp;&amp; isFocusedItemOffscreen) {
+    cons<span class="cstat-no" title="statement not covered" >t isFocusedItemOffscreen = focusedItem.hasAttribute &amp;&amp; focusedItem.hasAttribut</span>e('coral-actionbar-offscreen');
+    if (<span class="cstat-no" title="statement not covered" >isFocusedItemInsideActionBar &amp;&amp; isFocusedItemOffscreen) {</span>
       // if currently an element is focused, that should not be visible (or is no actionbar-item) =&gt; select 'more'
-      //<span class="cstat-no" title="statement not covered" > button</span>
-      th<span class="cstat-no" title="statement not covered" >is._elements.moreButton.focus();</span>
+      // button
+      this._elements.moreButton.focus();
     }
-    
+&nbsp;
     // hide the popover(needed to disable fade time of popover)
     this._elements.overlay.hidden = true;
     this._elements.overlay.focusOnShow = this._elements.overlay;
-    
+&nbsp;
     // close any popovers, that might be inside the 'more' popover
     const childPopovers = this._elements.overlay.getElementsByTagName('coral-popover');
-    for (let i = 0; i &lt; childPopovers.length; i++) {
+    for (let i = 0 ; i &lt; childPopovers.length ; i++) {
       childPopovers[i].open = false;
     }
-    
+&nbsp;
     // return all elements from popover
     this._returnElementsFromPopover();
-    
+&nbsp;
     // clear cached items from popover
     this._itemsInPopover = [];
 &nbsp;
     // clear overlay
     this._elements.overlay.content.innerHTML = '';
   }
-  
+&nbsp;
   _onOverlayKeyDown(event) {
     event.preventDefault();
-    
+&nbsp;
     // Focus first item
-    this._elements.anchorList &amp;&amp; this._elements.anchorList._focusFirstItem(event);
+    this._elements.anchorList <span class="cstat-no" title="statement not covered" >&amp;&amp; this._elements</span>.anchorList._focusFirstItem(event);
     this._elements.buttonList &amp;&amp; this._elements.buttonList._focusFirstItem(event);
-  }
-  <span class="cstat-no" title="statement not covered" ></span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
   _onOverlayKeyUp(event) {
-    event.<span class="cstat-no" title="statement not covered" >preventDefault();</span>
-    <span class="cstat-no" title="statement not covered" ></span>
+    event.preventDefault();
+&nbsp;
     // Focus last item
     this._elements.anchorList &amp;&amp; this._elements.anchorList._focusLastItem(event);
     this._elements.buttonList &amp;&amp; this._elements.buttonList._focusLastItem(event);
   }
-  
+&nbsp;
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       morebuttontext: 'moreButtonText'
     });
   }
-  
+&nbsp;
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['morebuttontext', 'threshold']);
   }
-  
+&nbsp;
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-    
+&nbsp;
     const overlay = this._elements.overlay;
     // Cannot be open by default when rendered
     overlay.removeAttribute('open');
@@ -1046,56 +1049,56 @@ const BaseActionBarContainer = (superClass) =&gt; class extends superClass {
       overlay._parent.appendChild(overlay);
     }
   }
-  
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-  
+&nbsp;
     // Cleanup resize helpers object (cloneNode support)
     const resizeHelpers = this.getElementsByTagName('object');
-    for (let i = 0; i &lt; resizeHelpers.length; ++i) {
+    for (let i = 0 ; i &lt; resizeHelpers.length ; ++i) {
       const resizeElement = resizeHelpers[i];
       if (resizeElement.parentNode === this) {
         this.removeChild(resizeElement);
       }
     }
-  
+&nbsp;
     // Cleanup 'More' button
     const more = this.querySelector('[coral-actionbar-more]');
     if (more) {
       this.removeChild(more);
-    }
-  
+    }<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
     // Cleanup 'More' popover
-    const popover = <span class="fstat-no" title="function not covered" >this</span>.querySelector('[coral-actionbar-popover]');
-    if (<span class="cstat-no" title="statement not covered" >popover) {</span>
+    const popover = this.querySelector('[coral-actionbar-popover]');
+    if (popover) {
       this.removeChild(popover);
     }
-  
+&nbsp;
     // Copy more text
     this._elements.moreButton.label.textContent = this.moreButtonText;
-    
+&nbsp;
     // Init 'More' popover
     this._elements.overlay.target = this._elements.moreButton;
-    
+&nbsp;
     // Create empty frag
     const frag = document.createDocumentFragment();
-  
+&nbsp;
     // 'More' button might be moved later in dom when Container is attached to parent
     frag.appendChild(this._elements.moreButton);
     frag.appendChild(this._elements.overlay);
-  
+&nbsp;
     // Render template
     this.appendChild(frag);
-  
+&nbsp;
     // Style the items to match action items
     this.items.getAll().forEach(item =&gt; this._styleItem(item));
   }
-  
+&nbsp;
   /** @ignore */
   disconnectedCallback() {
     super.disconnectedCallback();
-    
+&nbsp;
     const overlay = this._elements.overlay;
     // In case it was moved out don't forget to remove it
     if (!this.contains(overlay)) {
@@ -1113,7 +1116,7 @@ export default BaseActionBarContainer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

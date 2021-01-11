@@ -437,7 +437,7 @@ import {SPECTRUM_ICONS_COLOR} from &apos;./iconCollection&apos;;
 function handleError(string) {
   string = `Coral.Icon#load: ${string}`;
   const error = new Error(string);
-  
+
   console.error(error.toString());
 }
 
@@ -447,35 +447,31 @@ function injectSVG(svgURL) {
     handleError(`failed to fetch icons, server returned ${this.status}`);
     return;
   }
-  
+
   // Parse the SVG
   const parser = new DOMParser();
   try {
     const doc = parser.parseFromString(this.responseText, &apos;image/svg+xml&apos;);
     const svg = doc.firstChild;
-  
+
     // Make sure a real SVG was returned
     if (svg &amp;&amp; svg.tagName === &apos;svg&apos;) {
       if (svgURL.indexOf(SPECTRUM_ICONS_COLOR) !== -1) {
         // Insert it into the body
         if (document.body) {
           document.body.appendChild(svg);
-        }
-        else {
+        } else {
           document.addEventListener(&apos;DOMContentLoaded&apos;, () =&gt; {
             document.body.appendChild(svg);
           });
         }
-      }
-      else {
+      } else {
         document.head.appendChild(svg);
       }
-    }
-    else {
+    } else {
       handleError(&apos;parsed SVG document contained something other than an SVG&apos;);
     }
-  }
-  catch (err) {
+  } catch (err) {
     handleError(`error parsing SVG: ${err}`);
   }
 }
@@ -488,8 +484,7 @@ function loadIcons(svgURL) {
     script.type = &apos;text/javascript&apos;;
     script.src = svgURL;
     document.head.appendChild(script);
-  }
-  else {
+  } else {
     // Request the SVG icons
     const req = new XMLHttpRequest();
     req.open(&apos;GET&apos;, svgURL, true);

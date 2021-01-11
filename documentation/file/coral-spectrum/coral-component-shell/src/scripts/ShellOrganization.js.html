@@ -450,7 +450,7 @@ class ShellOrganization extends List.Item {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Events
     this._delegateEvents({
       &apos;click&apos;: &apos;_onClick&apos;,
@@ -459,21 +459,21 @@ class ShellOrganization extends List.Item {
       // Private
       &apos;coral-shell-suborganization:_selectedchanged&apos;: &apos;_onItemSelectedChanged&apos;
     });
-    
+
     const template = {};
     organization.call(template, {Icon});
     commons.extend(this._elements, template);
-  
+
     // Used for eventing
     this._oldSelection = null;
-  
+
     // Item handling
     this.items._startHandlingItems(true);
   }
-  
+
   /**
    The item collection.
-   
+
    @type {SelectableCollection}
    @readonly
    */
@@ -488,23 +488,23 @@ class ShellOrganization extends List.Item {
         onItemRemoved: this._onItemRemoved
       });
     }
-  
+
     return this._items;
   }
-  
+
   /**
    Returns the selected workspace.
-   
+
    @type {HTMLElement}
    @readonly
    */
   get selectedItem() {
     return this.items._getLastSelected();
   }
-  
+
   /**
    Whether this organization is selected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -513,31 +513,32 @@ class ShellOrganization extends List.Item {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute(&apos;selected&apos;, this._selected);
-    
+
     this.setAttribute(&apos;aria-selected&apos;, this._selected);
     this.classList.toggle(&apos;is-selected&apos;, this._selected);
     this._elements.checkmark.hidden = !this._selected;
-  
+
     if (this.items) {
       const selectedItem = this.selectedItem;
-    
+
       this.classList.toggle(&apos;is-child-selected&apos;, selectedItem);
-    
+
       if (!this._selected &amp;&amp; selectedItem) {
         // Always de-select children when de-selected
         selectedItem.removeAttribute(&apos;selected&apos;);
       }
     }
-    
+
     this.trigger(`${this.tagName.toLowerCase()}:_selectedchanged`);
   }
-  
+
   /**
    The name of this organization.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute name
@@ -546,11 +547,12 @@ class ShellOrganization extends List.Item {
   get name() {
     return this._name || &apos;&apos;;
   }
+
   set name(value) {
     this._name = transform.string(value);
     this._reflectAttribute(&apos;name&apos;, this._name);
   }
-  
+
   /** @private */
   _onItemSelectedChanged(event) {
     // Validate the selection only if we&apos;re an organization
@@ -560,59 +562,59 @@ class ShellOrganization extends List.Item {
       this._validateSelection(item);
     }
   }
-  
+
   /** @private */
   _onItemAdded(item) {
     // Move all items into the right place
     this._moveItems();
-    
+
     this._validateSelection(item);
   }
-  
+
   /** @private */
   _onItemRemoved(item) {
     this._setParent();
-  
+
     this._validateSelection(item);
   }
-  
+
   /** @private */
   _validateSelection(item) {
     // gets the current selection
     const selection = this.items._getAllSelected();
     const selectionCount = selection.length;
-    
+
     if (selectionCount &gt; 1) {
-      for (let i = 0; i &lt; selectionCount; i++) {
+      for (let i = 0 ; i &lt; selectionCount ; i++) {
         if (selection[i] !== item) {
           // Don&apos;t trigger change events
           this._preventTriggeringEvents = true;
           selection[i].removeAttribute(&apos;selected&apos;);
         }
       }
-      
+
       // We can trigger change events again
       this._preventTriggeringEvents = false;
     }
-    
+
     this._triggerChangeEvent();
   }
-  
+
   /** @private */
   _triggerChangeEvent() {
     const selectedItem = this.selectedItem;
     const oldSelection = this._oldSelection;
-    
+
     if (!this._preventTriggeringEvents &amp;&amp; selectedItem !== oldSelection) {
       this.trigger(`${this.tagName.toLowerCase()}:change`, {
         oldSelection: oldSelection,
         selection: selectedItem
       });
-      
+
       this._oldSelection = selectedItem;
     }
   }
-  
+
   /** @private */
   _moveItems() {
     Array.prototype.forEach.call(this.querySelectorAll(&apos;coral-shell-suborganization&apos;), (item) =&gt; {
@@ -621,76 +623,81 @@ class ShellOrganization extends List.Item {
       }
     });
   }
-  
+
   /** @private */
   _setParent() {
     const hasChildren = this.items.length !== 0;
-    
+
     if (hasChildren) {
       this.removeAttribute(&apos;role&apos;);
       this.removeAttribute(&apos;tabindex&apos;);
-    }
-    else {
+    } else {
       // Be accessible
       this.setAttribute(&apos;role&apos;, &apos;button&apos;);
       this.setAttribute(&apos;tabindex&apos;, 0);
     }
-    
+
     this.classList.toggle(&apos;is-parent&apos;, hasChildren);
   }
-  
+
   /** @private */
   _onClick() {
     if (this.items.length !== 0) {
       // You can&apos;t be selected if you have sub-organizations
       return;
     }
-    
+
     this.selected = true;
   }
-  
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat([&apos;name&apos;, &apos;selected&apos;]); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat([&apos;name&apos;, &apos;selected&apos;]);
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     // Move items into the right place
     this._moveItems();
-  
+
     this.setAttribute(&apos;id&apos;, this.id || commons.getUID());
-    
+
     // Support cloneNode
     const items = this.querySelector(`#${this.id} &gt; ._coral-Shell-orgSwitcher-subitems`);
-    if (items) {items.remove();}
+    if (items) {
+      items.remove();
+    }
     const checkmark = this.querySelector(`#${this.id} &gt; ._coral-Shell-orgSwitcher-checkmark`);
-    if (checkmark) {checkmark.remove();}
-    
+    if (checkmark) {
+      checkmark.remove();
+    }
+
     // Render template
     const frag = document.createDocumentFragment();
-  
+
     frag.appendChild(this._elements.checkmark);
     frag.appendChild(this._elements.items);
     this.appendChild(frag);
-    
+
     // Don&apos;t trigger events once connected
     this._preventTriggeringEvents = true;
     this._validateSelection();
     this._preventTriggeringEvents = false;
-  
+
     this._oldSelection = this.selectedItem;
-  
+
     this._setParent();
   }
-  
+
   /**
    Triggered when a {@link ShellOrganization} selection changed.
-   
+
    @typedef {CustomEvent} coral-shell-organization:_selectedchanged
-   
+
    @private
    */
 }

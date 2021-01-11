@@ -452,7 +452,7 @@ class Tree extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Attach events
     this._delegateEvents({
       &apos;click ._coral-TreeView-itemLink&apos;: &apos;_onItemClick&apos;,
@@ -479,17 +479,17 @@ class Tree extends BaseComponent(HTMLElement) {
       &apos;coral-tree-item:_afterexpandedchanged&apos;: &apos;_onExpandedChanged&apos;,
       &apos;coral-tree-item:_hiddenchanged&apos;: &apos;_onFocusableChanged&apos;
     });
-    
+
     // Used for eventing
     this._oldSelection = [];
-    
+
     // Init the collection mutation observer
     this.items._startHandlingItems(true);
-  
+
     // Listen for mutations for Torq compatibility
     const observer = new MutationObserver((mutations) =&gt; {
       mutations.forEach((mutation) =&gt; {
-        for (let i = 0; i &lt; mutation.addedNodes.length; i++) {
+        for (let i = 0 ; i &lt; mutation.addedNodes.length ; i++) {
           const addedNode = mutation.addedNodes[i];
           if (addedNode.tagName === &apos;CORAL-TREE-ITEM&apos;) {
             // Move tree items to their container
@@ -506,10 +506,10 @@ class Tree extends BaseComponent(HTMLElement) {
       subtree: true
     });
   }
-  
+
   /**
    The Collection Interface that allows interacting with the items that the component contains.
-   
+
    @type {SelectableCollection}
    @readonly
    */
@@ -523,7 +523,7 @@ class Tree extends BaseComponent(HTMLElement) {
     }
     return this._items;
   }
-  
+
   /**
    Indicates whether the tree accepts multiple selected items.
    @type {Boolean}
@@ -534,15 +534,16 @@ class Tree extends BaseComponent(HTMLElement) {
   get multiple() {
     return this._multiple || false;
   }
+
   set multiple(value) {
     this._multiple = transform.booleanAttr(value);
     this._reflectAttribute(&apos;multiple&apos;, this._multiple);
-    
+
     this.setAttribute(&apos;aria-multiselectable&apos;, this._multiple);
-    
+
     this._validateSelection();
   }
-  
+
   /**
    Returns an Array containing the set selected items.
    @type {Array.&lt;HTMLElement&gt;}
@@ -551,7 +552,7 @@ class Tree extends BaseComponent(HTMLElement) {
   get selectedItems() {
     return this.items._getAllSelected();
   }
-  
+
   /**
    Returns the first selected item in the Tree. The value &lt;code&gt;null&lt;/code&gt; is returned if no element is
    selected.
@@ -561,22 +562,22 @@ class Tree extends BaseComponent(HTMLElement) {
   get selectedItem() {
     return this.items._getAllSelected()[0] || null;
   }
-  
+
   /** @private */
   _onItemSelectedChanged(event) {
     event.stopImmediatePropagation();
-    
+
     this._validateSelection(event.target);
   }
-  
+
   /** @private */
   _validateSelection(item) {
     const selectedItems = this.selectedItems;
-    
+
     if (!this.multiple) {
       // Last selected item wins if multiple selection while not allowed
       item = item || selectedItems[selectedItems.length - 1];
-      
+
       if (item &amp;&amp; item.hasAttribute(&apos;selected&apos;) &amp;&amp; selectedItems.length &gt; 1) {
         selectedItems.forEach((selectedItem) =&gt; {
           if (selectedItem !== item) {
@@ -585,20 +586,20 @@ class Tree extends BaseComponent(HTMLElement) {
             selectedItem.removeAttribute(&apos;selected&apos;);
           }
         });
-        
+
         // We can trigger change events again
         this._preventTriggeringEvents = false;
       }
     }
-    
+
     this._triggerChangeEvent();
   }
-  
+
   /** @private */
   _triggerChangeEvent() {
     const selectedItems = this.selectedItems;
     const oldSelection = this._oldSelection;
-    
+
     if (!this._preventTriggeringEvents &amp;&amp; this._arraysAreDifferent(selectedItems, oldSelection)) {
       // We differentiate whether multiple is on or off and return an array or HTMLElement respectively
       if (this.multiple) {
@@ -606,63 +607,62 @@ class Tree extends BaseComponent(HTMLElement) {
           oldSelection: oldSelection,
           selection: selectedItems
         });
-      }
-      else {
+      } else {
         // Return all items if we just switched from multiple=true to multiple=false and we had &gt;1 selected items
         this.trigger(&apos;coral-tree:change&apos;, {
           oldSelection: oldSelection.length &gt; 1 ? oldSelection : oldSelection[0] || null,
           selection: selectedItems[0] || null
         });
       }
-      
+
       this._oldSelection = selectedItems;
     }
   }
-  
+
   /** @private */
   _arraysAreDifferent(selection, oldSelection) {
     let diff = [];
-    
+
     if (oldSelection.length === selection.length) {
       diff = oldSelection.filter((item) =&gt; selection.indexOf(item) === -1);
     }
-    
+
     // since we guarantee that they are arrays, we can start by comparing their size
     return oldSelection.length !== selection.length || diff.length !== 0;
   }
-  
+
   /** @private */
   _toggleItemAttribute(item, attributeName) {
     if (item) {
       item[item.hasAttribute(attributeName) ? &apos;removeAttribute&apos; : &apos;setAttribute&apos;](attributeName, &apos;&apos;);
     }
   }
-  
+
   /** @private */
   _onCollectionChange(event) {
     // Prevent triggering collection event twice. Only coral-tree collection events are propagated.
     event.stopImmediatePropagation();
   }
-  
+
   /** @private */
   _onItemClick(event) {
     // Clickable item inside Tree Item should not trigger selection of item
     if (event.target.hasAttribute(&apos;coral-interactive&apos;) || event.target.closest(&apos;[coral-interactive]&apos;)) {
       return;
     }
-    
+
     // If the indicator is clicked, expand/collapse the tree item
     if (event.target.closest(&apos;._coral-TreeView-indicator&apos;)) {
       this._onExpandCollapseClick(event);
       return;
     }
-  
+
     // The click was performed on the header so we select the item (parentNode) the selection is toggled
     const item = event.target.closest(&apos;coral-tree-item&apos;);
     if (item &amp;&amp; !item.hasAttribute(&apos;disabled&apos;)) {
       event.preventDefault();
       event.stopPropagation();
-    
+
       // We ignore the selection if the item is disabled
       this._toggleItemAttribute(item, &apos;selected&apos;);
       const focusable = this._getFocusable();
@@ -673,12 +673,12 @@ class Tree extends BaseComponent(HTMLElement) {
       item._elements.header.focus();
     }
   }
-  
+
   /** @private */
   _onExpandCollapseClick(event) {
     event.preventDefault();
     event.stopPropagation();
-  
+
     // The click was performed on the icon to expand/collapse  the sub tree
     const item = event.target.closest(&apos;coral-tree-item&apos;);
     if (item) {
@@ -686,7 +686,7 @@ class Tree extends BaseComponent(HTMLElement) {
       if (item.hasAttribute(&apos;disabled&apos;)) {
         return;
       }
-    
+
       // Toggle the expanded of the item:
       this._toggleItemAttribute(item, &apos;expanded&apos;);
     }
@@ -709,8 +709,7 @@ class Tree extends BaseComponent(HTMLElement) {
         // If the item is not expanded, expand the item
         item.expanded = !item.expanded;
         item._elements.header.classList.add(&apos;focus-ring&apos;);
-      }
-      else if (item.items.length &gt; 0) {
+      } else if (item.items.length &gt; 0) {
         // If the item is expanded, and contains items, focus the next item
         this._onFocusNextItem(event);
       }
@@ -718,7 +717,7 @@ class Tree extends BaseComponent(HTMLElement) {
   }
 
   /** @private */
-  _onCollapseItem(event) {   
+  _onCollapseItem(event) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -734,8 +733,7 @@ class Tree extends BaseComponent(HTMLElement) {
         // If the item is not expanded, expand the item
         item.expanded = !item.expanded;
         item._elements.header.classList.add(&apos;focus-ring&apos;);
-      }
-      else if (item.parent) {
+      } else if (item.parent) {
         item._elements.header.setAttribute(&apos;tabindex&apos;, &apos;-1&apos;);
         item._elements.header.classList.remove(&apos;focus-ring&apos;);
         item.parent.focus();
@@ -743,27 +741,26 @@ class Tree extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /** @private */
   _focusSiblingItem(item, next) {
     const focusableItems = this._getFocusableItems();
-  
+
     // There&apos;s not enough items to change focus
     if (focusableItems.length &lt; 2) {
       return;
     }
-  
+
     let index = focusableItems.indexOf(item) + (next ? 1 : -1);
     let siblingItem = null;
-  
+
     // If we reached the edge, target the other edge
     if (index &gt; focusableItems.length - 1) {
       siblingItem = focusableItems[0];
-    }
-    else if (index &lt; 0) {
+    } else if (index &lt; 0) {
       siblingItem = focusableItems[focusableItems.length - 1];
     }
-  
+
     // Find the sibling item
     while (!siblingItem) {
       siblingItem = focusableItems[index];
@@ -772,25 +769,24 @@ class Tree extends BaseComponent(HTMLElement) {
         if (next) {
           index++;
           siblingItem = index &gt; focusableItems.length - 1 ? item : null;
-        }
-        else {
+        } else {
           index--;
           siblingItem = index &lt; 0 ? item : null;
         }
       }
     }
-  
+
     // Change focus
     if (siblingItem !== item) {
       item._elements.header.setAttribute(&apos;tabindex&apos;, &apos;-1&apos;);
       item._elements.header.classList.remove(&apos;focus-ring&apos;);
-      
+
       siblingItem._elements.header.setAttribute(&apos;tabindex&apos;, &apos;0&apos;);
       siblingItem._elements.header.classList.add(&apos;focus-ring&apos;);
       siblingItem._elements.header.focus();
     }
   }
-  
+
   /** @private */
   _focusEdgeItem(last) {
     // Query the focusable item
@@ -798,7 +794,7 @@ class Tree extends BaseComponent(HTMLElement) {
     if (focusable) {
       const focusableItems = this._getFocusableItems();
       const edgeItem = focusableItems[last ? focusableItems.length - 1 : 0];
-    
+
       // Change focus
       if (edgeItem !== focusable) {
         focusable.setAttribute(&apos;tabindex&apos;, &apos;-1&apos;);
@@ -807,69 +803,69 @@ class Tree extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /** @private */
   _onFocusNextItem(event) {
     event.preventDefault();
     event.stopPropagation();
-  
+
     const item = event.target.closest(&apos;coral-tree-item&apos;);
     if (item) {
       this._focusSiblingItem(item, true);
     }
   }
-  
+
   /** @private */
   _onFocusPreviousItem(event) {
     event.preventDefault();
     event.stopPropagation();
-    
+
     const item = event.target.closest(&apos;coral-tree-item&apos;);
     if (item) {
       this._focusSiblingItem(item, false);
     }
   }
-  
+
   /** @private */
   _onFocusFirstItem(event) {
     event.preventDefault();
     event.stopPropagation();
-    
+
     this._focusEdgeItem(false);
   }
-  
+
   /** @private */
   _onFocusLastItem(event) {
     event.preventDefault();
     event.stopPropagation();
-  
+
     this._focusEdgeItem(true);
   }
-  
+
   /** @private */
   _onFocusableChanged(event) {
     event.preventDefault();
     event.stopPropagation();
-  
+
     if (event.target.contains(this._getFocusable())) {
       this._resetFocusableItem();
     }
   }
 
-  
+
   /** @private */
   _onExpandedChanged(event) {
     event.stopImmediatePropagation();
-    
+
     const item = event.target;
     this.trigger(`coral-tree:${item.expanded ? &apos;expand&apos; : &apos;collapse&apos;}`, {item});
   }
-  
+
   /** @private */
   _getFocusable() {
     return this.querySelector(&apos;coral-tree-item &gt; ._coral-TreeView-itemLink[tabindex=&quot;0&quot;]&apos;);
   }
-  
+
   /** @private */
   _getFocusableItems() {
     return this.items.getAll().filter((item) =&gt; !item.closest(&apos;coral-tree-item[disabled]&apos;) &amp;&amp; !item.closest(&apos;coral-tree-item[hidden]&apos;));
@@ -882,7 +878,7 @@ class Tree extends BaseComponent(HTMLElement) {
       focused.classList.remove(&apos;focus-ring&apos;);
     }
   }
-  
+
   /** @private */
   _resetFocusableItem(item) {
     // Old focusable becomes unfocusable
@@ -891,14 +887,14 @@ class Tree extends BaseComponent(HTMLElement) {
       focusable.setAttribute(&apos;tabindex&apos;, &apos;-1&apos;);
       focusable.classList.remove(&apos;focus-ring&apos;);
     }
-  
+
     // Defined item or first item by default gets the focus
     item = item || this._getFocusableItems()[0];
     if (item) {
       item._elements.header.setAttribute(&apos;tabindex&apos;, &apos;0&apos;);
     }
   }
-  
+
   /** @private */
   _expandCollapseAll(expand) {
     const coralTreeItems = this.querySelectorAll(&apos;coral-tree-item&apos;);
@@ -906,7 +902,7 @@ class Tree extends BaseComponent(HTMLElement) {
       let item;
       const length = coralTreeItems.length;
       if (length &gt; 0) {
-        for (let index = 0; index &lt; length; index++) {
+        for (let index = 0 ; index &lt; length ; index++) {
           item = coralTreeItems[index];
           if (item) {
             item.expanded = expand;
@@ -915,74 +911,74 @@ class Tree extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+
   /**
    Expand all the Tree Items
    */
   expandAll() {
     this._expandCollapseAll(true);
   }
-  
+
   /**
    Collapse all the Tree Items
    */
   collapseAll() {
     this._expandCollapseAll(false);
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;multiple&apos;]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // a11y
     this.setAttribute(&apos;role&apos;, &apos;tree&apos;);
     this.setAttribute(&apos;aria-multiselectable&apos;, this.multiple);
-    
+
     // Enable keyboard interaction
     requestAnimationFrame(() =&gt; {
       this._resetFocusableItem();
     });
-    
+
     // Don&apos;t trigger events once connected
     this._preventTriggeringEvents = true;
     this._validateSelection();
     this._preventTriggeringEvents = false;
-    
+
     this._oldSelection = this.selectedItems;
   }
-  
+
   /**
    Triggered when the {@link Tree} selection changed.
- 
+
    @typedef {CustomEvent} coral-tree:change
-   
+
    @property {Array.&lt;TreeItem&gt;} detail.oldSelection
    The old selected item.
    @property {Array.&lt;TreeItem&gt;} detail.selection
    The selected items.
    */
-  
+
   /**
    Triggered when a {@link Tree} item expanded.
- 
+
    @typedef {CustomEvent} coral-tree:expand
-   
+
    @property {TreeItem} detail.item
    The expanded item.
    */
-  
+
   /**
    Triggered when a {@link Tree} item collapsed.
- 
+
    @typedef {CustomEvent} coral-tree:collapse
-   
+
    @property {TreeItem} detail.item
    The collapsed item.
    */

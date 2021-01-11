@@ -459,6 +459,7 @@ class SelectItem extends BaseComponent(HTMLElement) {
   get content() {
     return this;
   }
+
   set content(value) {
     // Support configs
     if (typeof value === &apos;object&apos;) {
@@ -481,6 +482,7 @@ class SelectItem extends BaseComponent(HTMLElement) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
@@ -499,8 +501,15 @@ class SelectItem extends BaseComponent(HTMLElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
-    this._selected = transform.booleanAttr(value);
+    let _selected = transform.booleanAttr(value);
+
+    if(this._selected === _selected) {
+      return;
+    }
+
+    this._selected = _selected;
     this._reflectAttribute(&apos;selected&apos;, this._selected);
 
     this.trigger(&apos;coral-select-item:_selectedchanged&apos;);
@@ -520,16 +529,21 @@ class SelectItem extends BaseComponent(HTMLElement) {
       if (this.getAttribute(&apos;value&apos;) === null) {
         // keep spaces to only 1 max and trim to mimic native select option behavior
         val = this.textContent.replace(/\s{2,}/g, &apos; &apos;).trim();
-      }
-      else {
+      } else {
         val = this.getAttribute(&apos;value&apos;);
       }
     }
 
     return val;
   }
+
   set value(value) {
-    this._value = transform.string(value);
+    let _value = transform.string(value);
+    if(this._value === _value) {
+      return;
+    }
+
+    this._value = _value;
     this._reflectAttribute(&apos;value&apos;, this._value);
 
     this.trigger(&apos;coral-select-item:_valuechanged&apos;);
@@ -544,6 +558,7 @@ class SelectItem extends BaseComponent(HTMLElement) {
       this.value || this.textContent.replace(/\s{2,}/g, &apos; &apos;).trim() :
       this._trackingElement;
   }
+
   set trackingElement(value) {
     super.trackingElement = value;
   }

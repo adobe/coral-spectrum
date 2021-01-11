@@ -401,7 +401,11 @@
 <a name='L343'></a><a href='#L343'>343</a>
 <a name='L344'></a><a href='#L344'>344</a>
 <a name='L345'></a><a href='#L345'>345</a>
-<a name='L346'></a><a href='#L346'>346</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L346'></a><a href='#L346'>346</a>
+<a name='L347'></a><a href='#L347'>347</a>
+<a name='L348'></a><a href='#L348'>348</a>
+<a name='L349'></a><a href='#L349'>349</a>
+<a name='L350'></a><a href='#L350'>350</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -476,7 +480,6 @@
 <span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">48x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -522,7 +525,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -714,8 +716,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">766x</span>
 <span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -739,13 +739,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -767,7 +775,7 @@ const CLASSNAME = '_coral-Shell-orgSwitcher';
 &nbsp;
 /**
  Minimum number of entries required to show search control.
- 
+&nbsp;
  @type {Number}
  @ignore
  */
@@ -783,7 +791,7 @@ class ShellOrgSwitcher extends List {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Events
     this._delegateEvents({
       'coral-search:clear': '_showAll',
@@ -794,23 +802,23 @@ class ShellOrgSwitcher extends List {
       'coral-shell-organization:_selectedchanged': '_onItemSelectedChanged',
       'coral-shell-suborganization:_selectedchanged': '_onSubItemSelectedChanged'
     });
-    
+&nbsp;
     // Templates
     this._elements = {
       footer: this.querySelector('coral-shell-orgswitcher-footer') || document.createElement('coral-shell-orgswitcher-footer')
     };
     orgSwitcher.call(this._elements, {commons, i18n});
-  
+&nbsp;
     // Used for eventing
     this._oldSelection = null;
-    
+&nbsp;
     // Item handling
     this.items._startHandlingItems(true);
   }
-  
+&nbsp;
   /**
    The item collection.
-   
+&nbsp;
    @type {SelectableCollection}
    @readonly
    */
@@ -826,13 +834,13 @@ class ShellOrgSwitcher extends List {
         onItemRemoved: this._onCollectionChange
       });
     }
-  
+&nbsp;
     return this._items;
   }
-  
+&nbsp;
   /**
    The search field placeholder.
-   
+&nbsp;
    @default ''
    @type {String}
    @htmlattribute placeholder
@@ -840,134 +848,136 @@ class ShellOrgSwitcher extends List {
   get placeholder() {
     return this._elements.search.placeholder;
   }
+&nbsp;
   set placeholder(value) {
     this._elements.search.placeholder = value;
   }
-  
+&nbsp;
   /**
    Content zone where the buttons are located.
-   
+&nbsp;
    @type {ShellOrgSwitcherFooter}
    @contentzone
    */
-  get footer() {
-    return this._getContentZone(this._elements.footer);
-  }<span class="missing-if-branch" title="if path not taken" >I</span>
-  set footer<span class="cstat-no" title="statement not covered" >(value) {</span>
-    this._se<span class="cstat-no" title="statement not covered" >tContentZone('content', value, {</span>
+  get foot<span class="missing-if-branch" title="if path not taken" >I</span>er() {
+    return t<span class="cstat-no" title="statement not covered" >his._getContentZone(this._elements.foote</span>r);
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  set footer(value) {
+    this._setContentZone('content', value, {
       handle: 'footer',
       tagName: 'coral-shell-orgswitcher-footer',
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
   }
-  
+&nbsp;
   /** @private */
   get _itemTagName() {
     // Used for Collection
     return 'coral-shell-organization';
   }
-  
+&nbsp;
   /** @private */
   _onItemSelectedChanged(event) {
     event.stopImmediatePropagation();
-    
+&nbsp;
     const item = event.target;
     this._validateSelection(item);
-  }
-  
-  /** @private */
+  }<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  /** @private */<span class="cstat-no" title="statement not covered" ></span>
   _onSubItemSelectedChanged(event) {
-    event.stopImmedi<span class="fstat-no" title="function not covered" >atePropagatio</span>n();
-    <span class="cstat-no" title="statement not covered" ></span>
-    const item = e<span class="cstat-no" title="statement not covered" >vent.target;</span>
-    
-    //<span class="cstat-no" title="statement not covered" > If a sub organization is selected, deselect all selected organization items</span>
-    if (<span class="cstat-no" title="statement not covered" >item.hasAttribute('selected')) {</span>
+    ev<span class="cstat-no" title="statement not covered" >ent.stopImmediatePropagation();</span>
+<span class="cstat-no" title="statement not covered" ></span>
+    const item = event.target;
+&nbsp;
+    // If a sub organization is selected, deselect all selected organization items
+    if (item.hasAttribute('selected')) {
       this.items._getAllSelected().forEach((itemElement) =&gt; {
         if (itemElement.tagName === 'CORAL-SHELL-ORGANIZATION') {
           this._preventTriggeringEvents = true;
           itemElement.removeAttribute('selected');
         }
       });
-  
+&nbsp;
       this._preventTriggeringEvents = false;
     }
   }
-  
+&nbsp;
   /** @private */
   _onOrganizationChange() {
     this._triggerChangeEvent();
   }
-  
+&nbsp;
   /**
    Returns the selected workspace.
-   
+&nbsp;
    @type {HTMLElement}
    @readonly
    */
   get selectedItem() {
     return this.items._getLastSelected();
   }
-  
+&nbsp;
   /** @private */
   _selectFirst(event) {
     event.stopPropagation();
-  
+&nbsp;
     const first = this.items.first();
     if (first) {
       first.setAttribute('selected', '');
     }
   }
-  
+&nbsp;
   /** @private */
   _validateSelection(item) {
     // gets the current selection
     const selection = this.items._getAllSelected();
     const selectionCount = selection.length;
-    
+&nbsp;
     if (selectionCount &gt; 1) {
-      for (let i = 0; i &lt; selectionCount; i++) {
-        if (selection[i] !== item) {
-          // Don't trigger change events
+      for (let i = 0<span class="fstat-no" title="function not covered" > ; i &lt; se</span>lectionCount ; i++) {
+<span class="cstat-no" title="statement not covered" >        if (selection[i] !== it</span>em) {
+<span class="cstat-no" title="statement not covered" >          // Don't trigger change events</span>
           this._preventTriggeringEvents = true;
-          selection[<span class="fstat-no" title="function not covered" >i].remove</span>Attribute('selected');
+<span class="cstat-no" title="statement not covered" >          selection[i].removeAttri<span class="fstat-no" title="function not covered" >bu</span>te('selected');</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-      
-<span class="cstat-no" title="statement not covered" >      // We can trigger change eve<span class="fstat-no" title="function not covered" >nt</span>s again</span>
-      th<span class="cstat-no" title="statement not covered" >is._preventTriggering</span>Events = false;
-    }
-    <span class="cstat-no" title="statement not covered" ></span>
+      }
+<span class="cstat-no" title="statement not covered" ></span>
+      // We can trigger change events again
+      this<span class="cstat-no" title="statement not covered" >._preventTriggeringEvents = <span class="fstat-no" title="function not covered" >fa</span>lse;</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
     this._triggerChangeEvent();
-  }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-  <span class="cstat-no" title="statement not covered" ></span>
+  }
+&nbsp;
   /** @private */
   _triggerChangeEvent() {
     const selectedItem = this.selectedItem;
     const oldSelection = this._oldSelection;
-    
+&nbsp;
     if (!this._preventTriggeringEvents &amp;&amp; selectedItem !== oldSelection) {
       this.trigger('coral-shell-orgswitcher:change', {
         oldSelection: oldSelection,
         selection: selectedItem
       });
-      
+&nbsp;
       this._oldSelection = selectedItem;
     }
   }
-  
+&nbsp;
   /** @private */
-  _showAll(event) {
-    event.stopPropagation();
-  
-    this._elements.resultMessage.hidden = true;
-  <span class="missing-if-branch" title="else path not taken" >E</span>
-    // Show all items<span class="fstat-no" title="function not covered" ></span>
-    this.items.getAll().forEach<span class="cstat-no" title="statement not covered" >((item) =&gt; {</span>
-      item.h<span class="cstat-no" title="statement not covered" >idden = false;</span>
-    <span class="cstat-no" title="statement not covered" ></span>
+  _showA<span class="missing-if-branch" title="else path not taken" >E</span>ll(event) {
+    event.stopPropagation();<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+    this._el<span class="cstat-no" title="statement not covered" >ements.resultMessage.hidden = true;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+    // Show all items
+    this.items.getAll().forEach((item) =&gt; {
+      item.hidden = false;
+&nbsp;
       if (item.items) {
         // Show all sub-items
         item.items.getAll().forEach((itemElement) =&gt; {
@@ -975,45 +985,45 @@ class ShellOrgSwitcher extends List {
         });
       }
     });
-  }
-  
+  }<span class="missing-if-branch" title="if path not taken" >I</span>
+<span class="cstat-no" title="statement not covered" ></span>
   /** @private */
   _performSearch(event) {
-    ev<span class="missing-if-branch" title="if path not taken" >I</span>ent.stopPropagation();
-    <span class="cstat-no" title="statement not covered" ></span>
+    event.stopPropagation();
+&nbsp;
     const searchTerm = this._elements.search.value.toLowerCase();
-    
+&nbsp;
     this._elements.resultMessage.hidden = true;
-    
+&nbsp;
     // Hide items that don't match
     let resultCount = 0;
-    
+&nbsp;
     this.items.getAll().forEach((item) =&gt; {
       let matched = item.content.textContent.toLowerCase().indexOf(searchTerm) !== -1;
-      
+&nbsp;
       let childMatched = false;
       if (item.items) {
         item.items.getAll().forEach((itemElement) =&gt; {
           const elementMatch = itemElement.content.textContent.toLowerCase().indexOf(searchTerm) !== -1;
           childMatched = childMatched || elementMatch;
-  
+&nbsp;
           itemElement.hidden = !elementMatch;
         });
       }
-      
+&nbsp;
       matched = matched || childMatched;
       item.hidden = !matched;
-      
+&nbsp;
       if (matched) {
         resultCount++;
       }
     });
-    
+&nbsp;
     if (resultCount === 0) {
       this._elements.resultMessage.hidden = false;
     }
   }
-  
+&nbsp;
   /** @private */
   _moveItems() {
     this.setAttribute('id', this.id || commons.getUID());
@@ -1021,35 +1031,38 @@ class ShellOrgSwitcher extends List {
       this._elements.items.appendChild(item);
     });
   }
-  
+&nbsp;
   /** @private */
   _onCollectionChange(item) {
     // Move all items into the right place
     this._moveItems();
-  
+&nbsp;
     // Select the last selected item
     this._validateSelection(item);
-  
+&nbsp;
     // if mincountforsearch is set and number of organizations are less than or equal to it, hide the search
     if (this.items.length &lt;= SEARCH_VISIBILITY_THRESHOLD) {
       this._elements.search.hide();
-    }
-    else {
+    } else {
       this._elements.search.show();
     }
   }
-  
-  get _contentZones() { return {'coral-shell-orgswitcher-footer': 'footer'}; }
-  
+&nbsp;
+  get _contentZones() {
+    return {'coral-shell-orgswitcher-footer': 'footer'};
+  }
+&nbsp;
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['placeholder']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['placeholder']);
+  }
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-  
+&nbsp;
     // Move the items into the right place
     this._moveItems();
 &nbsp;
@@ -1062,35 +1075,34 @@ class ShellOrgSwitcher extends List {
       this._elements.search = this.querySelector('._coral-Shell-orgSwitcher-search');
       this._elements.resultMessage = this.querySelector('._coral-Shell-orgSwitcher-resultMessage');
       this._items._container = this._elements.items;
-    }
-    else {
+    } else {
       this.appendChild(this._elements.container);
     }
-    
+&nbsp;
     // Call content zone insert
     this.footer = this._elements.footer;
-  
+&nbsp;
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;
     this._validateSelection();
     this._preventTriggeringEvents = false;
-  
-    this._oldSelection = this.selectedItem;
-  }
-  
-  /**
-   Triggered when the {@link ShellOrgSwitcher} selected organization has changed.
-   
-   @typedef {CustomEvent} coral-shell-orgswitcher:change
-   
-   @property {HTMLElement} detail.oldSelection
-   The prior selec<span class="fstat-no" title="function not covered" >ted </span>organization item.
-   @pr<span class="cstat-no" title="statement not covered" >operty {HTMLElement} detail.selection</span>
-   The newly selected organization item.
-   */<span class="fstat-no" title="function not covered" ></span>
-}<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
-export default ShellOrgSwitcher;
+    this._oldSelec<span class="fstat-no" title="function not covered" >tion</span> = this.selectedItem;
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /**<span class="fstat-no" title="function not covered" ></span>
+   Tri<span class="cstat-no" title="statement not covered" >ggered when the {@link ShellOrgSwitcher} se</span>lected organization has changed.
+&nbsp;
+   @typedef {CustomEvent} coral-shell-orgswitcher:change
+&nbsp;
+   @property {HTMLElement} detail.oldSelection
+   The prior selected organization item.
+   @property {HTMLElement} detail.selection
+   The newly selected organization item.
+   */
+}
+<span class="fstat-no" title="function not covered" ></span>
+export<span class="cstat-no" title="statement not covered" > default ShellOrgSwitcher;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -1098,7 +1110,7 @@ export default ShellOrgSwitcher;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

@@ -453,15 +453,15 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   /** @ignore */
   constructor() {
     super();
-    
+
     // Events
     this._delegateEvents(this._events);
-    
+
     // Templates
     this._elements = {};
     colorButton.call(this._elements);
   }
-  
+
   /**
    Whether the Item is selected.
    @type {Boolean}
@@ -472,31 +472,32 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
     value = transform.booleanAttr(value);
-    
+
     if (!value || value &amp;&amp; !this.disabled) {
       this._selected = value;
       this._reflectAttribute(&apos;selected&apos;, this.disabled ? false : this._selected);
       this.removeAttribute(&apos;aria-selected&apos;, this._selected);
-      
+
       this.classList.toggle(&apos;is-selected&apos;, this._selected);
       this._elements.colorButton.setAttribute(&apos;aria-selected&apos;, this._selected);
 
       this._elements.colorButton.tabIndex = this.tabIndex;
       this.removeAttribute(&apos;tabindex&apos;);
-  
+
       this._elements.colorButton[this._selected ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-label&apos;,
         `${i18n.get(&apos;checked&apos;)} ${this._elements.colorButton.label.textContent}`);
-      
+
       this.trigger(&apos;coral-colorinput-swatch:_selectedchanged&apos;);
     }
   }
-  
+
   /**
    The Coral.ColorInput.Item that the swatch is a visual representation of. It accepts a DOM element or a CSS selector.
    If a CSS selector is provided, the first matching element will be used.
-   
+
    @type {HTMLElement|String}
    @default null
    @htmlattribute targetcolor
@@ -504,31 +505,31 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   get targetColor() {
     return this._targetColor || null;
   }
+
   set targetColor(value) {
     if (typeof value === &apos;string&apos;) {
       value = this.querySelector(value);
     }
-  
+
     // Store new value
     this._targetColor = value;
-  
+
     let cssColorValue = &apos;&apos;;
     let hexColorValue = &apos;&apos;;
-  
+
     if (this._targetColor) {
       const color = new Color();
       color.value = this._targetColor.value;
       cssColorValue = color.rgbaValue;
       hexColorValue = color.hexValue;
     }
-  
+
     // Update background color and text label for color swatch
     if (cssColorValue) {
       this._elements.colorButton.style.backgroundColor = cssColorValue;
       this._elements.colorButton.label.textContent = hexColorValue;
       this.setAttribute(&apos;data-value&apos;, hexColorValue);
-    }
-    else {
+    } else {
       this._elements.colorButton.classList.add(&apos;_coral-ColorInput-swatch-novalue&apos;);
       this._elements.colorButton.label.textContent = i18n.get(&apos;unset&apos;);
       this.setAttribute(&apos;data-value&apos;, &apos;&apos;);
@@ -537,7 +538,7 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
 
   /**
    Whether the color preview is disabled or not.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute disabled
@@ -546,17 +547,18 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   get disabled() {
     return this._elements.colorButton.disabled;
   }
+
   set disabled(value) {
     this._elements.colorButton.disabled = value;
     this._reflectAttribute(&apos;disabled&apos;, this.disabled);
   }
 
   /**
-   The tabindex of the color preview button. 
+   The tabindex of the color preview button.
    So that we don&apos;t wind up with nested focusable elements,
-   the internal colorButton should should receive the tabIndex property, 
+   the internal colorButton should should receive the tabIndex property,
    while the coral-colorinput-swatch should reflect the value using the _tabindex attribute.
-   
+
    @type {Integer}
    @default -1
    @htmlattribute tabindex
@@ -565,11 +567,12 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
   get tabIndex() {
     return this._elements.colorButton.tabIndex;
   }
+
   set tabIndex(value) {
     this._elements.colorButton.tabIndex = value;
     this.removeAttribute(&apos;tabindex&apos;);
   }
-  
+
   /** @ignore */
   _onColorInputChange() {
     if (this.targetColor) {
@@ -577,14 +580,14 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
       this.selected = this.targetColor.selected;
     }
   }
-  
+
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
       tabindex: &apos;tabIndex&apos;,
       targetcolor: &apos;targetColor&apos;
     });
   }
-  
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
@@ -594,22 +597,22 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
       &apos;targetcolor&apos;
     ]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME, &apos;u-coral-clearFix&apos;);
-    
+
     // adds the role to support accessibility
     this.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
-    
+
     // Support cloneNode
     const button = this.querySelector(&apos;[handle=&quot;colorButton&quot;]&apos;);
     if (button) {
       button.remove();
     }
-  
+
     this.appendChild(this._elements.colorButton);
   }
 }

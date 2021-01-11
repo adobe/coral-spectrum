@@ -212,7 +212,19 @@
 <a name='L154'></a><a href='#L154'>154</a>
 <a name='L155'></a><a href='#L155'>155</a>
 <a name='L156'></a><a href='#L156'>156</a>
-<a name='L157'></a><a href='#L157'>157</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -295,7 +307,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">68x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -368,6 +379,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">60x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">60x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -389,9 +413,9 @@ import {transform, validate, commons} from '../../../coral-utils';
 &nbsp;
 /**
  Enumeration for {@link SplitButton} variants.
- 
+&nbsp;
  @typedef {Object} SplitButtonVariantEnum
- 
+&nbsp;
  @property {String} DEFAULT
  The default button look and feel.
  @property {String} CTA
@@ -413,7 +437,7 @@ const CLASSNAME = '_coral-SplitButton';
  These elements should be marked with following attributes:
  - &lt;code&gt;[coral-splitbutton-action]&lt;/code&gt; for the main action button.
  - &lt;code&gt;[coral-splitbutton-trigger]&lt;/code&gt; for the trigger button.
- 
+&nbsp;
  @htmltag coral-splitbutton
  @extends {HTMLElement}
  @extends {BaseComponent}
@@ -422,23 +446,23 @@ class SplitButton extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Watch for inner button changes
     this._observer = new MutationObserver(() =&gt; {
       this._updateLeftVariant();
       this._updateInnerButtons();
       this._updateInnerButtonsVariant(this.variant);
     });
-    
+&nbsp;
     this._observer.observe(this, {
       subtree: true,
       childList: true
     });
   }
-  
+&nbsp;
   /**
    The button's variant. See {@link SplitButtonVariantEnum}.
-   
+&nbsp;
    @type {String}
    @default SplitButtonVariantEnum.DEFAULT
    @htmlattribute variant
@@ -447,43 +471,49 @@ class SplitButton extends BaseComponent(HTMLElement) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+&nbsp;
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-  
+&nbsp;
     this._updateInnerButtonsVariant(this._variant);
   }
-  
+&nbsp;
   _getInnerButtons() {
     const action = this.querySelector('[coral-splitbutton-action]');
     const trigger = this.querySelector('[coral-splitbutton-trigger]');
     return {action, trigger};
   }
-  
+&nbsp;
   _updateLeftVariant() {
-    for (let i = 0; i &lt; this.children.length; i++) {
+    for (let i = 0 ; i &lt; this.children.length ; i++) {
       const child = this.children[i];
       if (child.hasAttribute('coral-splitbutton-trigger')) {
         this.classList.add('_coral-SplitButton--left');
         return;
-      }
-      else if (child.hasAttribute('coral-splitbutton-action')) {
+      } else if (child.hasAttribute('coral-splitbutton-action')) {
         this.classList.remove('_coral-SplitButton--left');
         return;
       }
     }
   }
-  
+&nbsp;
   _updateInnerButtonsVariant(variant) {
     const {action, trigger} = this._getInnerButtons();
-    if (action) {action.setAttribute('variant', variant);}
-    if (trigger) {trigger.setAttribute('variant', variant);}
+    if (action) {
+      action.setAttribute('variant', variant);
+    }
+    if (trigger<span class="missing-if-branch" title="else path not taken" >E</span>) {
+      trigger.setAttribute('variant', variant);
+    }
   }
-  
-  _updateInnerB<span class="missing-if-branch" title="else path not taken" >E</span>uttons() {
+&nbsp;
+  _updateInnerButtons() {
     const {action, trigger} = this._getInnerButtons();
-    if (action) {action.classList.add('_coral-SplitButton-action');}
+    if (action) {
+      action.classList.add('_coral-SplitButton-action');
+    }
     if (trigger) {
       trigger.classList.add('_coral-SplitButton-trigger');
       // a11y assume a popover is targeting the trigger
@@ -494,29 +524,35 @@ class SplitButton extends BaseComponent(HTMLElement) {
       }
     }
   }
-  
+&nbsp;
   /**
    Returns {@link SplitButton} variants.
-   
+&nbsp;
    @return {SplitButtonVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+&nbsp;
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat(['variant']); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['variant']);
+  }
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-    
+&nbsp;
     // a11y
     this.setAttribute('role', 'group');
-    
+&nbsp;
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
-    
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;
+    }
+&nbsp;
     // Update styles
     this._updateLeftVariant();
     this._updateInnerButtons();
@@ -531,7 +567,7 @@ export default SplitButton;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

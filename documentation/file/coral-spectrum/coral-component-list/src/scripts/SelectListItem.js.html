@@ -462,7 +462,7 @@ class SelectListItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-  
+
     // Templates
     this._elements = {
       // Fetch or create the content zone element
@@ -470,9 +470,10 @@ class SelectListItem extends BaseComponent(HTMLElement) {
     };
     checkIcon.call(this._elements, {Icon});
   }
+
   /**
    Value of the item. If not explicitly set, the value of &lt;code&gt;Node.textContent&lt;/code&gt; is returned.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute value
@@ -481,27 +482,29 @@ class SelectListItem extends BaseComponent(HTMLElement) {
   get value() {
     return typeof this._value === &apos;string&apos; ? this._value : this.textContent.replace(/\s{2,}/g, &apos; &apos;).trim();
   }
+
   set value(value) {
     this._value = transform.string(value);
     this._reflectAttribute(&apos;value&apos;, this._value);
   }
-  
+
   /**
    The content element for the item.
-   
+
    @type {SelectListItemContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+
   set content(value) {
     this._setContentZone(&apos;content&apos;, value, {
       handle: &apos;content&apos;,
       tagName: &apos;coral-selectlist-item-content&apos;,
-      insert: function(content) {
+      insert: function (content) {
         content.classList.add(`${CLASSNAME}Label`);
-  
+
         // Remove content icon before processing content zone
         const checkIcon = this._elements.checkIcon;
         let contentIcon;
@@ -512,8 +515,7 @@ class SelectListItem extends BaseComponent(HTMLElement) {
           const allContentMenuIcons = Array.prototype.slice.call(content.querySelectorAll(&apos;coral-icon._coral-Menu-item-icon&apos;));
           const contentIcons = allContentIcons.filter(icon =&gt; allContentMenuIcons.indexOf(icon) === -1);
           contentIcon = contentIcons.length &gt; 0 ? contentIcons[0] : undefined;
-        }
-        else {
+        } else {
           contentIcon = content.querySelector(&apos;coral-icon:not(._coral-Menu-item-icon)&apos;);
         }
         if (contentIcon &amp;&amp; contentIcon.icon) {
@@ -527,20 +529,19 @@ class SelectListItem extends BaseComponent(HTMLElement) {
             if (contentIcon.alt) {
               iconElement.alt = contentIcon.alt;
             }
-          }
-          else {
+          } else {
             iconElement.alt = &apos;&apos;;
           }
         }
-        
+
         this.insertBefore(content, this.contains(checkIcon) ? checkIcon : null);
       }
     });
   }
-  
+
   /**
    The icon to display. See {@link Icon}.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute icon
@@ -549,17 +550,17 @@ class SelectListItem extends BaseComponent(HTMLElement) {
     const el = this._getIconElement();
     return el.icon;
   }
+
   set icon(value) {
     const el = this._getIconElement();
     if (transform.string(value) === &apos;&apos;) {
       el.remove();
-    }
-    else {
+    } else {
       this.insertBefore(el, this.firstChild);
     }
     el.icon = value;
   }
-  
+
   _getIconElement() {
     if (!this._elements.icon) {
       this._elements.icon = this.querySelector(&apos;._coral-Menu-item-icon&apos;) || new Icon();
@@ -568,10 +569,10 @@ class SelectListItem extends BaseComponent(HTMLElement) {
     }
     return this._elements.icon;
   }
-  
+
   /**
    Whether the item is selected.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -580,25 +581,32 @@ class SelectListItem extends BaseComponent(HTMLElement) {
   get selected() {
     return this._selected || false;
   }
+
   set selected(value) {
-    this._selected = transform.booleanAttr(value);
+    let _selected = transform.booleanAttr(value);
+
+    if(this._selected === _selected) {
+      return;
+    }
+
+    this._selected = _selected;
     this._reflectAttribute(&apos;selected&apos;, this.disabled ? false : this._selected);
-    
+
     this.classList.toggle(&apos;is-selected&apos;, this._selected);
     if (this.hasAttribute(&apos;role&apos;) &amp;&amp;
       VALID_ARIA_SELECTED_ROLES_REGEXP.test(this.getAttribute(&apos;role&apos;))) {
       this.setAttribute(&apos;aria-selected&apos;, this._selected);
     }
-    
+
     // Toggle check icon
     this._elements.checkIcon.hidden = !this._selected;
-    
+
     this.trigger(&apos;coral-selectlist-item:_selectedchanged&apos;);
   }
-  
+
   /**
    Whether this item is disabled.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute disabled
@@ -607,52 +615,55 @@ class SelectListItem extends BaseComponent(HTMLElement) {
   get disabled() {
     return this._disabled || false;
   }
+
   set disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute(&apos;disabled&apos;, this._disabled);
-    
+
     this.classList.toggle(&apos;is-disabled&apos;, this._disabled);
     this[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
-    
+
     this.selected = this.selected;
   }
-  
-  get _contentZones() { return {&apos;coral-selectlist-item-content&apos;: &apos;content&apos;}; }
-  
+
+  get _contentZones() {
+    return {&apos;coral-selectlist-item-content&apos;: &apos;content&apos;};
+  }
+
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;selected&apos;, &apos;disabled&apos;, &apos;value&apos;]);
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     if (!this.hasAttribute(&apos;role&apos;)) {
       this.setAttribute(&apos;role&apos;, &apos;option&apos;);
     }
-  
+
     // Support cloneNode
     const template = this.querySelector(&apos;._coral-SelectList-icon&apos;);
     if (template) {
       template.remove();
     }
-    
+
     // Fetch or create the content content zone element
     const content = this._elements.content;
-  
+
     // Move any remaining elements into the content sub-component
     if (!content.parentNode) {
       while (this.firstChild) {
         content.appendChild(this.firstChild);
       }
     }
-  
+
     // Add template
     this.appendChild(this._elements.checkIcon);
-  
+
     // Assign the content zones, moving them into place in the process
     this.content = content;
   }

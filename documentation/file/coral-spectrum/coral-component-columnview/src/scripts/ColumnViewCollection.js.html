@@ -452,15 +452,15 @@ class ColumnViewCollection extends SelectableCollection {
         }
       });
   }
-  
+
   _deactivateAll() {
     this._deselectAllExcept(null, &apos;active&apos;);
   }
-  
+
   _deactivateAllExceptFirst() {
     this._deselectAllExceptFirst(&apos;active&apos;);
   }
-  
+
   _getAllActive() {
     return this._getAllSelected(&apos;active&apos;);
   }

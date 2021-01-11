@@ -452,25 +452,25 @@ class WizardView extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-  
+
     this._delegateEvents({
       &apos;capture:click coral-steplist[coral-wizardview-steplist] &gt; coral-step&apos;: &apos;_onStepClick&apos;,
       &apos;coral-steplist:change coral-steplist[coral-wizardview-steplist]&apos;: &apos;_onStepListChange&apos;,
       &apos;click [coral-wizardview-previous]&apos;: &apos;_onPreviousClick&apos;,
       &apos;click [coral-wizardview-next]&apos;: &apos;_onNextClick&apos;
     });
-  
+
     // Init the collection mutation observer
     this.stepLists._startHandlingItems(true);
     this.panelStacks._startHandlingItems(true);
-  
+
     // Disable tracking for specific elements that are attached to the component.
     this._observer = new MutationObserver((mutations) =&gt; {
       mutations.forEach((mutation) =&gt; {
         // Sync added nodes
-        for (let i = 0; i &lt; mutation.addedNodes.length; i++) {
+        for (let i = 0 ; i &lt; mutation.addedNodes.length ; i++) {
           const addedNode = mutation.addedNodes[i];
-      
+
           if (addedNode.setAttribute &amp;&amp;
             (
               addedNode.hasAttribute(&apos;coral-wizardview-next&apos;) ||
@@ -483,16 +483,16 @@ class WizardView extends BaseComponent(HTMLElement) {
         }
       });
     });
-  
+
     this._observer.observe(this, {
       childList: true,
       subtree: true
     });
   }
-  
+
   /**
    The set of controlled PanelStacks. Each PanelStack must have the &lt;code&gt;coral-wizardview-panelstack&lt;/code&gt; attribute.
-   
+
    @type {Collection}
    @readonly
    */
@@ -507,13 +507,13 @@ class WizardView extends BaseComponent(HTMLElement) {
         onItemAdded: this._onItemAdded
       });
     }
-  
+
     return this._panelStacks;
   }
-  
+
   /**
    The set of controlling StepLists. Each StepList must have the &lt;code&gt;coral-wizardview-steplist&lt;/code&gt; attribute.
-   
+
    @type {Collection}
    @readonly
    */
@@ -528,121 +528,120 @@ class WizardView extends BaseComponent(HTMLElement) {
         onItemAdded: this._onItemAdded
       });
     }
-  
+
     return this._stepLists;
   }
-  
+
   /**
    Called by the Collection when an item is added
-   
+
    @private
    */
   _onItemAdded(item) {
     this._selectItemByIndex(item, this._getSelectedIndex());
   }
-  
+
   _onStepClick(event) {
     this._trackEvent(&apos;click&apos;, &apos;coral-wizardview-steplist-step&apos;, event, event.matchedTarget);
   }
-  
+
   /**
    Handles the next button click.
-   
+
    @private
    */
   _onNextClick(event) {
     // we stop propagation in case the wizard views are nested
     event.stopPropagation();
-    
+
     this.next();
-  
+
     const stepList = this.stepLists.first();
     const step = stepList.items.getAll()[this._getSelectedIndex()];
     this._trackEvent(&apos;click&apos;, &apos;coral-wizardview-next&apos;, event, step);
   }
-  
+
   /**
    Handles the previous button click.
-   
+
    @private
    */
   _onPreviousClick(event) {
     // we stop propagation in case the wizard views are nested
     event.stopPropagation();
-    
+
     this.previous();
-  
+
     const stepList = this.stepLists.first();
     const step = stepList.items.getAll()[this._getSelectedIndex()];
     this._trackEvent(&apos;click&apos;, &apos;coral-wizardview-previous&apos;, event, step);
   }
-  
+
   /**
    Detects a change in the StepList and triggers an event.
-   
+
    @private
    */
   _onStepListChange(event) {
     // Stop propagation of the events to support nested panels
     event.stopPropagation();
-    
+
     // Get the step number
     const index = event.target.items.getAll().indexOf(event.detail.selection);
-    
+
     // Sync the other StepLists
     this._selectStep(index);
-    
+
     this.trigger(&apos;coral-wizardview:change&apos;, {
       selection: event.detail.selection,
       oldSelection: event.detail.oldSelection
     });
-  
+
     this._trackEvent(&apos;change&apos;, &apos;coral-wizardview&apos;, event);
   }
-  
+
   /** @private */
   _getSelectedIndex() {
     const stepList = this.stepLists.first();
     if (!stepList) {
       return -1;
     }
-    
+
     let stepIndex = -1;
     if (stepList.items) {
       stepIndex = stepList.items.getAll().indexOf(stepList.selectedItem);
-    }
-    else {
+    } else {
       // Manually get the selected step
       const steps = stepList.querySelectorAll(&apos;coral-step&apos;);
-      
+
       // Find the last selected step
-      for (let i = steps.length - 1; i &gt;= 0; i--) {
+      for (let i = steps.length - 1 ; i &gt;= 0 ; i--) {
         if (steps[i].hasAttribute(&apos;selected&apos;)) {
           stepIndex = i;
           break;
         }
       }
     }
-    
+
     return stepIndex;
   }
-  
+
   /**
    Select the step according to the provided index.
-   
+
    @param {*} component
    The StepList or PanelStack to select the step on.
    @param {Number} index
    The index of the step that should be selected.
-   
+
    @private
    */
   _selectItemByIndex(component, index) {
     let item = null;
-    
+
     // we need to set an id to be able to find direct children
     component.id = component.id || commons.getUID();
-    
+
     // if collection api is available we use it to find the correct item
     if (component.items) {
       // Get the corresponding item
@@ -652,101 +651,97 @@ class WizardView extends BaseComponent(HTMLElement) {
     else if (component.tagName === &apos;CORAL-STEPLIST&apos;) {
       // @polyfill IE - we use id since :scope is not supported
       item = component.querySelectorAll(`#${component.id} &gt; coral-step`)[index];
-    }
-    else if (component.tagName === &apos;CORAL-PANELSTACK&apos;) {
+    } else if (component.tagName === &apos;CORAL-PANELSTACK&apos;) {
       // @polyfill IE - we use id since :scope is not supported
       item = component.querySelectorAll(`#${component.id} &gt; coral-panel`)[index];
     }
-    
+
     if (item) {
       // we only select if not select to avoid mutations
       if (!item.hasAttribute(&apos;selected&apos;)) {
         item.setAttribute(&apos;selected&apos;, &apos;&apos;);
       }
     }
-    // if we did not find an item to select, it means that the &quot;index&quot; is not available in the component, therefore we
+      // if we did not find an item to select, it means that the &quot;index&quot; is not available in the component, therefore we
     // need to deselect all items
     else {
       // we use the component id to be able to find direct children
       if (component.tagName === &apos;CORAL-STEPLIST&apos;) {
         // @polyfill IE - we use id since :scope is not supported
         item = component.querySelector(`#${component.id} &gt; coral-step[selected]`);
-      }
-      else if (component.tagName === &apos;CORAL-PANELSTACK&apos;) {
+      } else if (component.tagName === &apos;CORAL-PANELSTACK&apos;) {
         // @polyfill IE - we use id since :scope is not supported
         item = component.querySelector(`#${component.id} &gt; coral-panel[selected]`);
       }
-      
+
       if (item) {
         item.removeAttribute(&apos;selected&apos;);
       }
     }
   }
-  
+
   /** @private */
   _selectStep(index) {
     // we apply the selection to all available steplists
     this.stepLists.getAll().forEach((stepList) =&gt; {
       this._selectItemByIndex(stepList, index);
     });
-    
+
     // we apply the selection to all available panelstacks
     this.panelStacks.getAll().forEach((panelStack) =&gt; {
       this._selectItemByIndex(panelStack, index);
     });
   }
-  
+
   /**
    Sets the correct selected item in every PanelStack.
-   
+
    @private
    */
   _syncPanelStackSelection(defaultIndex) {
     // Find out which step we&apos;re on by checking the first StepList
     let index = this._getSelectedIndex();
-    
+
     if (index === -1) {
       if (typeof defaultIndex !== &apos;undefined&apos;) {
         index = defaultIndex;
-      }
-      else {
+      } else {
         // No panel selected
         return;
       }
     }
-    
+
     this.panelStacks.getAll().forEach((panelStack) =&gt; {
       this._selectItemByIndex(panelStack, index);
     });
   }
-  
+
   /**
    Selects the correct step in every StepList.
-   
+
    @private
    */
   _syncStepListSelection(defaultIndex) {
     // Find out which step we&apos;re on by checking the first StepList
     let index = this._getSelectedIndex();
-    
+
     if (index === -1) {
       if (typeof defaultIndex !== &apos;undefined&apos;) {
         index = defaultIndex;
-      }
-      else {
+      } else {
         // No step selected
         return;
       }
     }
-    
+
     this.stepLists.getAll().forEach((stepList) =&gt; {
       this._selectItemByIndex(stepList, index);
     });
   }
-  
+
   /**
    Shows the next step. If the WizardView is already in the last step nothing will happen.
-   
+
    @emits {coral-wizardview:change}
    */
   next() {
@@ -754,17 +749,17 @@ class WizardView extends BaseComponent(HTMLElement) {
     if (!stepList) {
       return;
     }
-    
+
     // Change to the next step
     stepList.next();
-    
+
     // Select the step everywhere
     this._selectStep(stepList.items.getAll().indexOf(stepList.selectedItem));
   }
-  
+
   /**
    Shows the previous step. If the WizardView is already in the first step nothing will happen.
-   
+
    @emits {coral-wizardview:change}
    */
   previous() {
@@ -772,36 +767,36 @@ class WizardView extends BaseComponent(HTMLElement) {
     if (!stepList) {
       return;
     }
-    
+
     // Change to the previous step
     stepList.previous();
-    
+
     // Select the step everywhere
     this._selectStep(stepList.items.getAll().indexOf(stepList.selectedItem));
   }
-  
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-  
+
     this._syncStepListSelection(0);
     this._syncPanelStackSelection(0);
-  
+
     // Disable tracking for specific elements that are attached to the component.
     const selector = &apos;[coral-wizardview-next],[coral-wizardview-previous],[coral-wizardview-steplist],[coral-wizardview-panelstack]&apos;;
     const items = this.querySelectorAll(selector);
-    for (let i = 0; i &lt; items.length; i++) {
+    for (let i = 0 ; i &lt; items.length ; i++) {
       items[i].setAttribute(&apos;tracking&apos;, &apos;off&apos;);
     }
   }
-  
+
   /**
    Triggered when the {@link WizardView} selected step list item has changed.
- 
+
    @typedef {CustomEvent} coral-wizardview:change
-   
+
    @property {Step} event.detail.selection
    The new selected step list item.
    @property {Step} event.detail.oldSelection

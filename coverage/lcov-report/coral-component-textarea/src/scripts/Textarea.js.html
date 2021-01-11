@@ -198,7 +198,11 @@
 <a name='L140'></a><a href='#L140'>140</a>
 <a name='L141'></a><a href='#L141'>141</a>
 <a name='L142'></a><a href='#L142'>142</a>
-<a name='L143'></a><a href='#L143'>143</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -283,7 +287,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -322,7 +325,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">104x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">104x</span>
@@ -340,7 +342,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">116x</span>
-<span class="cline-any cline-yes">116x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">116x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">116x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">116x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -362,9 +370,9 @@ const CLASSNAME = '_coral-Textfield';
 &nbsp;
 /**
  Enumeration for {@link Textarea} variants.
- 
+&nbsp;
  @typedef {Object} TextareaVariantEnum
- 
+&nbsp;
  @property {String} DEFAULT
  A default textarea.
  @property {String} QUIET
@@ -395,15 +403,15 @@ class Textarea extends BaseFormField(BaseComponent(HTMLTextAreaElement)) {
   /** @ignore */
   constructor() {
     super();
-  
+&nbsp;
     this._delegateEvents(commons.extend(this._events, {
       input: '_onInput'
     }));
   }
-  
+&nbsp;
   /**
    The textarea's variant. See {@link TextareaVariantEnum}.
-   
+&nbsp;
    @type {String}
    @default TextareaVariantEnum.DEFAULT
    @htmlattribute variant
@@ -412,30 +420,30 @@ class Textarea extends BaseFormField(BaseComponent(HTMLTextAreaElement)) {
   get variant() {
     return this._variant || variant.DEFAULT;
   }
+&nbsp;
   set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-  
+&nbsp;
     // removes every existing variant
     this.classList.remove(...ALL_VARIANT_CLASSES);
 &nbsp;
     if (this._variant !== variant.DEFAULT) {
       this.classList.add(`${CLASSNAME}--${this._variant}`);
     }
-    
+&nbsp;
     // Restore the original height
     if (this._variant === variant.QUIET) {
       this._defaultHeight = this._defaultHeight || this.style.height;
-    }
-    else {
+    } else {
       this.style.height = this._defaultHeight;
       this._defaultHeight = undefined;
     }
 &nbsp;
     this._onInput();
   }
-  
+&nbsp;
   /**
    Inherited from {@link BaseFormField#reset}.
    */
@@ -443,11 +451,11 @@ class Textarea extends BaseFormField(BaseComponent(HTMLTextAreaElement)) {
     // The textarea uses the textContent to save the old value and not the value attribute
     /** @ignore */
     this.value = this.textContent;
-    
+&nbsp;
     // Reset height if quiet variant
     this._onInput();
   }
-  
+&nbsp;
   /** @private */
   _onInput() {
     if (this.variant === variant.QUIET) {
@@ -457,39 +465,43 @@ class Textarea extends BaseFormField(BaseComponent(HTMLTextAreaElement)) {
       });
     }
   }
-  
+&nbsp;
   /**
    Returns {@link Textarea} variants.
-   
+&nbsp;
    @return {TextareaVariantEnum}
    */
-  static get variant() { return variant; }
-  
+  static get variant() {
+    return variant;
+  }
+&nbsp;
   /** @ignore */
   static get observedAttributes() {
     return super._nativeObservedAttributes.concat(['variant']);
   }
-  
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME, `${CLASSNAME}--multiline`);
-    
+&nbsp;
     // Default reflected attributes
-    if (!this._variant) { this.variant = variant.DEFAULT; }
+    if (!this._variant) {
+      this.variant = variant.DEFAULT;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    }
   }
 }
 &nbsp;
 export default Textarea;
-<span class="branch-2 cbranch-no" title="branch not covered" ></span></pre></td></tr></table></pre>
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

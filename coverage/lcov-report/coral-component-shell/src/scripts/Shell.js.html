@@ -191,7 +191,9 @@
 <a name='L133'></a><a href='#L133'>133</a>
 <a name='L134'></a><a href='#L134'>134</a>
 <a name='L135'></a><a href='#L135'>135</a>
-<a name='L136'></a><a href='#L136'>136</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -240,7 +242,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">52x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -306,7 +307,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -326,7 +326,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">52x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -355,7 +359,7 @@ class Shell extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
@@ -363,10 +367,10 @@ class Shell extends BaseComponent(HTMLElement) {
       content: this.querySelector('coral-shell-content') || document.createElement('coral-shell-content')
     };
   }
-  
+&nbsp;
   /**
    The menu collection.
-   
+&nbsp;
    @type {Collection}
    @readonly
    */
@@ -378,81 +382,83 @@ class Shell extends BaseComponent(HTMLElement) {
         itemTagName: 'coral-shell-menu'
       });
     }
-    
+&nbsp;
     return this._menus;
   }
-  
+&nbsp;
   /**
    The shell header zone.
-   
+&nbsp;
    @type {ShellHeader}
    @contentzone
    */
   get header() {
     return this._getContentZone(this._elements.header);
   }
+&nbsp;
   set header(value) {
     this._setContentZone('header', value, {
       handle: 'header',
       tagName: 'coral-shell-header',
-      insert: function(header) {
+      insert: function (header) {
         this.insertBefore(header, this.firstChild);
       }
-    });
-  }
-  <span class="missing-if-branch" title="if path not taken" >I</span>
-  /**<span class="cstat-no" title="statement not covered" ></span>
+    });<span class="missing-if-branch" title="if path not taken" >I</span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /**
    The shell content zone.
-   
+&nbsp;
    @type {ShellContent}
    @contentzone
    */
   get content() {
     return this._getContentZone(this._elements.content);
   }
+&nbsp;
   set content(value) {
     this._setContentZone('content', value, {
       handle: 'content',
       tagName: 'coral-shell-content',
-      insert: function(content) {
+      insert: function (content) {
         this.appendChild(content);
       }
     });
   }
-  
+&nbsp;
   get _contentZones() {
     return {
       'coral-shell-header': 'header',
       'coral-shell-content': 'content'
     };
   }
-  
+&nbsp;
   /** @ignore */
   render() {
     super.render();
-    
+&nbsp;
     this.classList.add(CLASSNAME);
-    
+&nbsp;
     const header = this._elements.header;
     const menus = this.menus.getAll();
     const content = this._elements.content;
-  
+&nbsp;
     // If the the content zone is not provided, we need to make sure that it holds all children
     if (!content.parentNode) {
       // Remove header
       if (header.parentNode) {
         header.parentNode.removeChild(header);
       }
-      
+&nbsp;
       // Remove menus
       this.menus.clear();
-      
+&nbsp;
       // Move the rest into content
       while (this.firstChild) {
         content.appendChild(this.firstChild);
       }
     }
-  
+&nbsp;
     // Call the content zone insert
     this.header = header;
     menus.forEach((menu) =&gt; this.menus.add(menu));
@@ -468,7 +474,7 @@ export default Shell;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

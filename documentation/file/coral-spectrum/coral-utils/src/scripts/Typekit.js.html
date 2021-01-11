@@ -454,38 +454,37 @@ const config = {
 if (!window.Typekit) { // we load the typescript only once
   const h = document.getElementsByTagName(&apos;html&apos;)[0];
   h.classList.add(&apos;wf-loading&apos;);
-  
+
   const t = window.setTimeout(() =&gt; {
     h.classList.remove(&apos;wf-loading&apos;);
     h.classList.add(&apos;wf-inactive&apos;);
   }, config.scriptTimeout);
-  
+
   const tk = document.createElement(&apos;script&apos;);
   let d = false;
-  
+
   // Always load over https
   tk.src = `https://use.typekit.net/${config.kitId}.js`;
   tk.type = &apos;text/javascript&apos;;
   tk.async = &apos;true&apos;;
-  tk.onload = tk.onreadystatechange = function() {
+  tk.onload = tk.onreadystatechange = function () {
     const a = this.readyState;
     if (d || a &amp;&amp; a !== &apos;complete&apos; &amp;&amp; a !== &apos;loaded&apos;) {
       return;
     }
-    
+
     d = true;
     clearTimeout(t);
-    
+
     try {
       window.Typekit.load(config);
+    } catch (b) {
     }
-    catch (b) {}
   };
-  
+
   const s = document.getElementsByTagName(&apos;script&apos;)[0];
   s.parentNode.insertBefore(tk, s);
-}
-else {
+} else {
   // If Typekit is loaded externally, listen with a MO for active fonts
   const root = document.documentElement;
   if (root.className.indexOf(&apos;wf-inactive&apos;) !== -1 || root.className.indexOf(&apos;wf-loading&apos;) !== -1) {
@@ -495,7 +494,7 @@ else {
         events.dispatch(&apos;coral-commons:_webfontactive&apos;);
       }
     });
-  
+
     // Watch for class changes
     webFontLoadObserver.observe(root, {
       attributes: true,

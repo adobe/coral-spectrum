@@ -456,24 +456,24 @@ class ShellHelp extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
-    
+
     // Prepare templates
     this._elements = {};
     help.call(this._elements, {commons, i18n});
-    
+
     // Events
     this._delegateEvents({
       &apos;coral-search:clear&apos;: &apos;_showItems&apos;,
       &apos;coral-search:submit&apos;: &apos;_performSearch&apos;
     });
-    
+
     // Item handling
     this.items._startHandlingItems(true);
   }
-  
+
   /**
    The item collection.
-   
+
    @type {Collection}
    @readonly
    */
@@ -487,13 +487,13 @@ class ShellHelp extends BaseComponent(HTMLElement) {
         container: this._elements.items
       });
     }
-  
+
     return this._items;
   }
-  
+
   /**
    The search field placeholder.
-   
+
    @type {String}
    @default &quot;&quot;
    @htmlattribute placeholder
@@ -501,50 +501,51 @@ class ShellHelp extends BaseComponent(HTMLElement) {
   get placeholder() {
     return this._elements.search.placeholder;
   }
+
   set placeholder(value) {
     this._elements.search.placeholder = value;
   }
-  
+
   /** @private */
   _moveItems() {
     this.setAttribute(&apos;id&apos;, this.id || commons.getUID());
-    
+
     const selector = `#${this.id} &gt; a[is=&quot;coral-shell-help-item&quot;], coral-shell-help-separator`;
     Array.prototype.forEach.call(this.querySelectorAll(selector), (item) =&gt; {
       this._elements.items.appendChild(item);
     });
   }
-  
+
   /** @private */
   _performSearch(event) {
     event.stopPropagation();
-    
+
     // Show loading
     this._elements.items.hidden = true;
     this._showLoading();
     this._elements.resultMessage.hidden = true;
     this._elements.results.hidden = true;
-    
+
     // Trigger event
     const searchTerm = this._elements.search.value;
     this.trigger(&apos;coral-shell-help:search&apos;, {
       value: searchTerm
     });
   }
-  
+
   /** @private */
   _showItems(event) {
     event.stopPropagation();
-    
+
     // Hide search results
     this._elements.results.hidden = true;
-    
+
     // Hide loading
     this._hideLoading();
-    
+
     // Hide no-results
     this._elements.resultMessage.hidden = true;
-    
+
     // Show items
     this._elements.items.hidden = false;
   }
@@ -566,7 +567,7 @@ class ShellHelp extends BaseComponent(HTMLElement) {
     el.hidden = false;
 
     // Add message text after 150ms delay to give screen readers enough
-    // time to recognize the live region and respond to the text update 
+    // time to recognize the live region and respond to the text update
     this._clearTimeout(timeoutName);
     this[timeoutName] = window.setTimeout(() =&gt; el.appendChild(message), 150);
   }
@@ -598,23 +599,23 @@ class ShellHelp extends BaseComponent(HTMLElement) {
       this._elements.loadingMessage = this._elements.loading.removeChild(this._elements.loadingMessage);
     }
   }
-  
+
   /**
    Indicate to the user that an error has occurred
    */
   showError() {
     // Hide loading
     this._hideLoading();
-    
+
     this._elements.resultMessage.innerHTML = &apos;&apos;;
 
     // Show the error message
     this._showMessage(&apos;resultMessage&apos;, helpSearchError.call(this._elements, {i18n}));
   }
-  
+
   /**
    Show a set of search results.
-   
+
    @param {Array.&lt;ShellHelpResult&gt;} results
    A set of search result objects.
    @param {Number} total
@@ -637,8 +638,7 @@ class ShellHelp extends BaseComponent(HTMLElement) {
       this._elements.resultMessage.innerHTML = &apos;&apos;;
       // Indicate to the user that no results were found
       this._showMessage(&apos;resultMessage&apos;, noHelpResults.call(this._elements, {i18n}));
-    }
-    else {
+    } else {
       // Clear existing results
       this._elements.results.innerHTML = &apos;&apos;;
       // Populate results
@@ -646,25 +646,25 @@ class ShellHelp extends BaseComponent(HTMLElement) {
         // Tweak: make the space between bullets larger with a non-breaking space
         const separator = &apos; &amp; &apos;;
         const description = result.tags.join(separator);
-        
+
         const item = new AnchorList.Item().set({
           href: result.href,
           target: result.target
         });
-        
+
         item.classList.add(&apos;_coral-Shell-help-result-item&apos;);
-        
+
         item.content = helpResult.call(this._elements, {
           title: result.title,
           description: description
         }).firstElementChild;
-        
+
         this._elements.results.appendChild(item);
       });
-      
+
       // Show results
       this._elements.results.hidden = false;
-      
+
       // Show total
       if (total &gt; 1) {
         const seeAllItem = new AnchorList.Item().set({
@@ -674,48 +674,49 @@ class ShellHelp extends BaseComponent(HTMLElement) {
           },
           target: &apos;_blank&apos;
         });
-  
+
         // Look like a link
         seeAllItem.content.classList.add(&apos;coral-Link&apos;);
-        
+
         this._elements.results.appendChild(seeAllItem);
       }
     }
   }
-  
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat([&apos;placeholder&apos;]); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat([&apos;placeholder&apos;]);
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(...CLASSNAMES);
-  
+
     // Move the items into the right place
     this._moveItems();
-    
+
     const contentWrapper = this.querySelector(&apos;[handle=&quot;contentWrapper&quot;]&apos;);
-  
+
     // Support cloneNode
     if (contentWrapper) {
       this._elements.contentWrapper = contentWrapper;
-  
+
       [&apos;search&apos;, &apos;result&apos;, &apos;items&apos;, &apos;results&apos;, &apos;resultMessage&apos;, &apos;loading&apos;].forEach((handle) =&gt; {
         this._elements[handle] = this.querySelector(`[handle=&quot;${handle}&quot;]`);
       });
       this._items._container = this._elements.items;
-    }
-    else {
+    } else {
       this.appendChild(this._elements.contentWrapper);
     }
   }
-  
+
   /**
    A search result object.
-   
+
    @typedef {Object} ShellHelpResult
-   
+
    @property {String} title
    The title of the search result.
    @property {String} href
@@ -725,12 +726,12 @@ class ShellHelp extends BaseComponent(HTMLElement) {
    @property {Array.&lt;String&gt;} tags
    A set of tags associated with the search result.
    */
-  
+
   /**
    Triggered when the user submits a search term
-   
+
    @event Coral.Shell.Help#coral-shell-help:search
-   
+
    @param {Object} event
    Event object.
    @param {HTMLElement} event.detail.value

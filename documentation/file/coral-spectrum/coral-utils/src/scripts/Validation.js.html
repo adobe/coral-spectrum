@@ -440,12 +440,12 @@ import commons from &apos;./Commons&apos;;
 class Validation {
   /**
    Ensures that the value has changed.
-   
+
    @param {*} newValue
    The new value.
    @param {*} oldValue
    The existing value.
-   
+
    @returns {Boolean} &lt;code&gt;true&lt;/code&gt; if the values are different.
    */
   valueMustChange(newValue, oldValue) {
@@ -453,25 +453,25 @@ class Validation {
     // converted to the same type as a stored value
     return newValue !== oldValue;
   }
-  
+
   /**
    Ensures that the new value is within the enumeration. The enumeration can be given as an array of values or as a
    key/value Object. Take into consideration that enumerations are case sensitive.
-   
+
    @example // Enumeration as Array
    Coral.validate.enumeration([&apos;xs&apos;, &apos;s&apos;, &apos;m&apos;, &apos;l&apos;]);
    @example // Enumeration as Object
    Coral.validate.enumeration({EXTRA_SMALL : &apos;xs&apos;, SMALL : &apos;s&apos;, MEDIUM : &apos;m&apos;, LARGE : &apos;l&apos;});
    @param {Object} enumeration
    Object that represents an enum.
-   
+
    @returns {ValidationFunction}
    a validation function that ensures that the given value is within the enumeration.
    */
   enumeration(enumeration) {
     // Reverses the enumeration, so that we can check that the variable new value exists inside
     const enumReversed = commons.swapKeysAndValues(enumeration);
-  
+
     // Returns a new function that matches the newValue, oldValue signature
     return (newValue) =&gt; typeof enumReversed[newValue] !== &apos;undefined&apos;;
   }
@@ -480,20 +480,20 @@ class Validation {
 /**
  Signature of the function used to validate new input. It accepts a newValue and an oldValue which are used to
  determine if the newValue is valid.
- 
+
  @typedef {function} ValidationFunction
- 
+
  @param {*} newValue
  The new value to validate.
  @param {*} oldValue
  The existing value.
- 
+
  @returns {Boolean} &lt;code&gt;true&lt;/code&gt; if the validation succeeded, otherwise &lt;code&gt;false&lt;/code&gt;.
  */
 
 /**
  A property transform utility.
- 
+
  @type {Validation}
  */
 const validate = new Validation();

@@ -383,10 +383,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -409,14 +405,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1170x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">206x</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">202x</span>
+<span class="cline-any cline-yes">202x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">202x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -446,6 +446,7 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
   get content() {
     return this;
   }
+&nbsp;
   set content(value) {
     // Support configs
     if (typeof value === 'object') {
@@ -455,10 +456,10 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
       }
     }
   }
-  
+&nbsp;
   /**
    Whether the table cell is selected.
-   
+&nbsp;
    @type {Boolean}
    @default false
    @htmlattribute selected
@@ -466,29 +467,30 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
    */
   get selected() {
     return this._selected || false;
-  }
-  set se<span class="missing-if-branch" title="else path not taken" >E</span>lected(value) {
+  }<span class="missing-if-branch" title="else path not taken" >E</span>
+&nbsp;
+  set selected(value) {
     // Prevent selection if disabled
     if (this.hasAttribute('coral-table-cellselect') &amp;&amp; this.hasAttribute('disabled') ||
       this.querySelector('[coral-table-cellselect][disabled]')) {
       return;
     }
-    
+&nbsp;
     this.trigger('coral-table-cell:_beforeselectedchanged');
-    
+&nbsp;
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
-    
+&nbsp;
     this.trigger('coral-table-cell:_selectedchanged');
-  
+&nbsp;
     this._syncAriaSelectedState();
     this._syncSelectHandle();
   }
-  
+&nbsp;
   /**
    The cell's value. It is used to compare cells during a column sort. If not set, the sorting will be performed on the
    cell content. The content will be parse accordingly based on the column's &lt;code&gt;sortabletype&lt;/code&gt; property.
-   
+&nbsp;
    @type {String}
    @default ""
    @htmlattribute value
@@ -497,10 +499,11 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
   get value() {
     return this.getAttribute('value') || '';
   }
+&nbsp;
   set value(value) {
     this.setAttribute('value', transform.string(value));
   }
-  
+&nbsp;
   /** @private */
   _setHandle(handle) {
     requestAnimationFrame(() =&gt; {
@@ -517,13 +520,12 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
   _getHandle(handle) {
     return this.hasAttribute(handle) ? this : this.querySelector(`[${handle}]`);
   }
-  
-  /** @private */
+&nbsp;
+  /** @private */<span class="branch-1 cbranch-no" title="branch not covered" ></span>
   _toggleSelectable(selectable) {
     if (selectable) {
-      this._setHandle('coral-table-cellselect');<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-    }
-    else {
+      this._setHandle('coral-table-cellselect');
+    } else {
       // Remove the handle
       this.removeAttribute('coral-table-cellselect');
 &nbsp;
@@ -533,18 +535,17 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
 &nbsp;
     this._syncAriaSelectedState();
   }
-  
+&nbsp;
   /** @private */
   _syncAriaSelectedState() {
     this.classList.toggle('is-selected', this.selected);
     if (this._getHandle('coral-table-cellselect')) {
       this.setAttribute('aria-selected', this.selected);
-    }
-    else {
+    } else {
       this.removeAttribute('aria-selected');
     }
   }
-  
+&nbsp;
   /** @private */
   _syncSelectHandle() {
     // Check/uncheck the select handle
@@ -553,44 +554,43 @@ class TableCell extends BaseComponent(HTMLTableCellElement) {
       selectHandle[this.selected ? 'setAttribute' : 'removeAttribute']('checked', '');
     }
   }
-  
+&nbsp;
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['selected', '_selectable']);
   }
-  
+&nbsp;
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
     if (name === '_selectable') {
       this._toggleSelectable(value !== null);
+    } else {
+      super.attrib<span class="fstat-no" title="function not covered" >uteC</span>hangedCallback(name, oldValue, value);
     }
-    else {
-      super.attributeChangedCallback(name, oldValue, value);
-    }
-  }
-  
-  /** @ignore */<span class="fstat-no" title="function not covered" ></span>
-  render() {
-    su<span class="cstat-no" title="statement not covered" >per.render();</span>
-    <span class="cstat-no" title="statement not covered" ></span>
-    this.classList.add(CLASSNAME);
+  }<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
+  /** @ignore */
+  render()<span class="cstat-no" title="statement not covered" > {</span>
+    super.render();
+&nbsp;
+    this.classList.add(CLASSNAME);
+&nbsp;
     this.id = this.id || commons.getUID();
   }
-  
+&nbsp;
   /**
    Triggered before {@link TableCell#selected} is changed.
-   
+&nbsp;
    @typedef {CustomEvent} coral-table-cell:_beforeselectedchanged
-   
+&nbsp;
    @private
    */
-  
+&nbsp;
   /**
    Triggered when {@link TableCell#selected} changed.
-   
+&nbsp;
    @typedef {CustomEvent} coral-table-cell:_selectedchanged
-   
+&nbsp;
    @private
    */
 }
@@ -603,7 +603,7 @@ export default TableCell;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

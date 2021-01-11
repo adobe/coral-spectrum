@@ -280,11 +280,7 @@
 <a name='L222'></a><a href='#L222'>222</a>
 <a name='L223'></a><a href='#L223'>223</a>
 <a name='L224'></a><a href='#L224'>224</a>
-<a name='L225'></a><a href='#L225'>225</a>
-<a name='L226'></a><a href='#L226'>226</a>
-<a name='L227'></a><a href='#L227'>227</a>
-<a name='L228'></a><a href='#L228'>228</a>
-<a name='L229'></a><a href='#L229'>229</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L225'></a><a href='#L225'>225</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -508,11 +504,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -547,7 +539,7 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
   /** @ignore */
   constructor() {
     super();
-    
+&nbsp;
     this._delegateEvents(commons.extend(this._events, {
       'change [handle="redSlider"]': '_onRedSliderChange',
       'change [handle="greenSlider"]': '_onGreenSliderChange',
@@ -556,198 +548,194 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
       'change ._coral-ColorInput-editHex': '_onChangeHex',
       'change ._coral-ColorInput-editRgba': '_onChangeRgba'
     }));
-    
+&nbsp;
     // Templates
     this._elements = {};
     propertiesSubview.call(this._elements, {commons, i18n});
   }
-  
+&nbsp;
   /** @ignore */
   _onColorInputChange() {
     const newColor = this._colorinput.valueAsColor;
     const colorPreview = this._elements.colorPreview2;
     let rgba;
-  
+&nbsp;
     if (!newColor) {
       // update the colorPreview background color, state, and label
       colorPreview.setAttribute('aria-pressed', 'true');
       colorPreview.setAttribute('aria-label', i18n.get('Color not set'));
-    
+&nbsp;
       // reset Hex value to empty
       this._elements.hexInput.value = '';
-    }
-    else {
+    } else {
       rgba = newColor.rgba;
-    
+&nbsp;
       // update the colorPreview background color, state, and label
       colorPreview.style.backgroundColor = newColor.rgbValue;
       colorPreview.setAttribute('aria-pressed', 'false');
       colorPreview.setAttribute('aria-label', i18n.get('{value}, Color', {
         value: parseFloat(rgba.a) === 1 ? newColor.value : newColor.rgbaValue
       }));
-    
+&nbsp;
       // update the Hex input value
       this._elements.hexInput.value = newColor.hexValue.substr(1);
     }
-  
+&nbsp;
     const prefixes = ['red', 'green', 'blue', 'alpha'];
     const prefixesLength = prefixes.length;
     let prefix;
     let abbr;
     let isAlpha;
     let val;
-  
+&nbsp;
     // update rgba slider and input values
-    for (let i = 0; i &lt; prefixesLength; i++) {
+    for (let i = 0 ; i &lt; prefixesLength ; i++) {
       prefix = prefixes[i];
-      abbr = prefix.substr(0, 1);<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-      isAlpha = i === prefixesLength - 1;
-    
+      abbr = prefix.substr(0, 1);
+      isAlpha = i === prefixesLength - 1;<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+&nbsp;
       // default slider and input value
       val = isAlpha ? 100 : 127;
-    
+&nbsp;
       // with new color, get appropriate RGBA value
       if (newColor) {
         if (!rgba) {
           val = '';
-        }
-        else if (isAlpha) {
+        } else if (isAlpha) {
           val = parseInt(rgba[abbr] * 100, 10);
-        }
-        else {
+        } else {
           val = rgba[abbr];
         }
       }
-    
+&nbsp;
       // update the slider and input values
       this._elements[`${prefix}Slider`].value = this._elements[`${prefix}Input`].value = val;
-    }<span class="missing-if-branch" title="if path not taken" >I</span>
-  <span class="cstat-no" title="statement not covered" ></span>
+    }
+&nbsp;
     if (colorPreview === document.activeElement) {
-      // force blur and focus on colorButton so that new color or state is announced
-      colorPreview.blur();
-    
+      // f<span class="missing-if-branch" title="if path not taken" >I</span>orce blur and focus on colorButton so that new color or state is announced
+      colorP<span class="cstat-no" title="statement not covered" >review.blu</span>r();
+&nbsp;
       // delay focus by 100ms so that screen reader has time to adjust to label with updated color value
       window.setTimeout(() =&gt; {
         colorPreview.focus();
       }, 100);
     }
   }
-  
-  /** <span class="missing-if-branch" title="if path not taken" >I</span>@ignore */
-  _onRedSliderChange(event) {
-    this<span class="cstat-no" title="statement not covered" >._elements.redInput.v</span>alue = this._elements.redSlider.value;
-    this._onChangeRgba(event);
-  }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-  <span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
   /** @ignore */
-  _onGreenSliderChange(event) {
-    this._elements.greenInput.value = this._elements.greenSlider.value;
+  _onRedSliderChange(event) {
+    this._elements.redInput.value = this._elements.redSlider.value;
+    th<span class="missing-if-branch" title="if path not taken" >I</span>is._onChangeRgba(event);
+  }
+<span class="cstat-no" title="statement not covered" ></span>
+  /** @ignore */
+  _onGre<span class="cstat-no" title="statement not covered" >enSliderChange(eve<span class="fstat-no" title="function not covered" >nt</span>) {</span>
+    this._<span class="cstat-no" title="statement not covered" >elements.greenInput.va</span>lue = this._elements.greenSlider.value;
     this._onChangeRgba(event);
   }
-  
+&nbsp;
   /** @ignore */
-  _onBlueSliderChang<span class="fstat-no" title="function not covered" >e(event) {</span>
-    th<span class="cstat-no" title="statement not covered" >is._elements.blueInput.value = this._elements.blueSlider.value;</span>
-    this._onChangeRgba(event);
-  }<span class="cstat-no" title="statement not covered" ></span>
-  
-  /** @ignore */
-  _onAlphaSliderChange(event) {
-    this._elements.alphaInput.value = this._elements.alphaSlider.value;
+  _onBlueSliderChange(event) {
+    this._elements.blueInput.value = this._elements.blueSlider.value;
     this._onChangeRgba(event);
   }<span class="fstat-no" title="function not covered" ></span>
-  <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
   /** @ignore */
-  _onC<span class="cstat-no" title="statement not covered" >hangeHex(event) {</span>
-    event.stopPropagation();
-  
-    // Value of hexInput field is without '#'.
+  _onA<span class="cstat-no" title="statement not covered" >lphaSliderChange(event) {</span>
+    this._elements.alphaInput.value = this._elements.alphaSlider.value;
+    this._onChangeRgba(event);
+  }
+&nbsp;
+  /** @ignore */
+  _onChangeHex(event<span class="fstat-no" title="function not covered" >) {</span>
+    ev<span class="cstat-no" title="statement not covered" >ent.stopPropagation();</span>
+&nbsp;
+    //<span class="cstat-no" title="statement not covered" > Value of hexInput field is</span> without '#'.
     const value = `#${this._elements.hexInput.value}`;
     const color = new Color();
-    color.value = va<span class="fstat-no" title="function not covered" >lue;</span>
-    <span class="cstat-no" title="statement not covered" ></span>
+    color.value = value;
+&nbsp;
     if (color.hex === null) {
-<span class="cstat-no" title="statement not covered" >      // no valid color value</span>
-      this._elements.hexInput.value = '';
+      // no valid co<span class="fstat-no" title="function not covered" >lor value</span>
+<span class="cstat-no" title="statement not covered" >      this._elements.hexInput.value = '';</span>
       // Save last valid color
-      if (this._colorinput.valueAsColor !== null) {
+<span class="cstat-no" title="statement not covered" >      if (this._colorinput.valueA</span>sColor !== null) {
         this.constructor._lastValidColor = this._colorinput.valueAsColor;
       }
-      this._colorinp<span class="fstat-no" title="function not covered" >ut._setActiveColor(nu</span>ll);
-    }<span class="cstat-no" title="statement not covered" ></span>
-    else {
-<span class="cstat-no" title="statement not covered" >      this._colorinput._setActive</span>Color(color);
-    }
-  }
-  
-  /** @ignore */
+      this._colorinput._setActiveColor(null);
+    } else {
+      this._colorinput._setActiveColor(color);
+    }<span class="fstat-no" title="function not covered" ></span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /** <span class="cstat-no" title="statement not covered" >@ignore */</span>
   _onChangeRgba(event) {
-    event.stopPropag<span class="fstat-no" title="function not covered" >ation();</span>
-    <span class="cstat-no" title="statement not covered" ></span>
+    event.stopPropagation();
+&nbsp;
     const r = parseInt(this._elements.redInput.value, 10);
-    const g = pars<span class="cstat-no" title="statement not covered" >eInt(this._elements.greenInput.value, 10);</span>
-    const b = pars<span class="cstat-no" title="statement not covered" >eInt(this._e</span>lements.blueInput.value, 10);
-    co<span class="cstat-no" title="statement not covered" >nst a = parseInt(this</span>._elements.alphaInput.value, 10);
-    
-    le<span class="cstat-no" title="statement not covered" >t colorValid = true;</span>
-    if (isNaN(r) || r &lt; 0 || r &gt; 255) {
-      co<span class="cstat-no" title="statement not covered" >lorValid = false;</span>
+    const g = parseInt(this._elements.greenInput.value, 10);
+    const b = parseI<span class="fstat-no" title="function not covered" >nt(this._elem</span>ents.blueInput.value, 10);
+    co<span class="cstat-no" title="statement not covered" >nst a = parseInt(this._el</span>ements.alphaInput.value, 10);
+&nbsp;
+    let colorValid<span class="cstat-no" title="statement not covered" > = true;</span>
+    if (isNaN(r) |<span class="cstat-no" title="statement not covered" >| r &lt; 0 || r</span> &gt; 255) {
+<span class="cstat-no" title="statement not covered" >      colorValid = false;</span>
       this._elements.redInput.value = '';
     }<span class="cstat-no" title="statement not covered" ></span>
-    <span class="cstat-no" title="statement not covered" ></span>
-    if (isNaN(g) || g &lt; 0 || g &gt; 255) {
+&nbsp;
+    if (<span class="cstat-no" title="statement not covered" >isNaN(g) || g &lt; 0 || g &gt; 255) {</span>
       colorValid = false;
       th<span class="cstat-no" title="statement not covered" >is._elements.greenInput.value = '';</span>
-    }
-    <span class="cstat-no" title="statement not covered" ></span>
-    if (isNaN(b) || b &lt; 0 || b &gt; 255) {
-      colorValid = false;
-      this._elements.blueInput.value = '';
-    }
-    
-    if (isNaN(a) || a &lt; 0 || a &gt; 100) {
-      colorValid = f<span class="fstat-no" title="function not covered" >alse;</span>
-<span class="cstat-no" title="statement not covered" >      this._elements.alphaInput</span>.value = '';
     }<span class="cstat-no" title="statement not covered" ></span>
-    <span class="cstat-no" title="statement not covered" ></span>
-    if (colorV<span class="cstat-no" title="statement not covered" >alid) {</span>
-      const co<span class="cstat-no" title="statement not covered" >lor = new Color();</span>
-      color.rgba = {<span class="cstat-no" title="statement not covered" ></span>
-        r: r,
-<span class="cstat-no" title="statement not covered" >        g: g,</span>
-<span class="cstat-no" title="statement not covered" >        b: b,</span>
-<span class="cstat-no" title="statement not covered" >        a: a / 100</span>
-      };
-      this._colorinput._setActiveColor(color);
-    }<span class="cstat-no" title="statement not covered" ></span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-  <span class="cstat-no" title="statement not covered" ></span>
-  /** @ignore */
-  render() {
-    su<span class="cstat-no" title="statement not covered" >per.render();</span>
-    <span class="cstat-no" title="statement not covered" ></span>
-    this<span class="cstat-no" title="statement not covered" >.classList.add(CLASSNAME);</span>
-  
-    // Support cloneNode
-    co<span class="cstat-no" title="statement not covered" >nst subview = this.querySelector('._coral-ColorInput-propertiesSubview');</span>
-    if (<span class="cstat-no" title="statement not covered" >subview) {</span>
-      su<span class="cstat-no" title="statement not covered" >bview.remove();</span>
-    }
-    
-    th<span class="cstat-no" title="statement not covered" >is.appendChild(this._elements.propertiesSubview);</span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-}<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
-export default ColorInputColorProperties;
-&nbsp;</pre></td></tr></table></pre>
+    if (isNaN(b) || b &lt; 0 || b &gt; 255) {
+      co<span class="cstat-no" title="statement not covered" >lorValid = false;</span>
+      this._elements.blueInput.value = '';
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    if (isNaN(a) || a &lt; 0 || a &gt; 100) {
+      colorValid = false;
+      this._elements.alphaInput.value = '';
+    }
+&nbsp;
+    if (colorValid) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      const color = new Color()</span>;
+      color.rg<span class="cstat-no" title="statement not covered" >ba = {</span>
+        r: r,<span class="cstat-no" title="statement not covered" ></span>
+        g: g,<span class="cstat-no" title="statement not covered" ></span>
+        b: b,<span class="cstat-no" title="statement not covered" ></span>
+        a: a / 100<span class="cstat-no" title="statement not covered" ></span>
+      };
+<span class="cstat-no" title="statement not covered" >      this._colorinput._setActiveColor(color);</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /** @ignore */
+  rend<span class="cstat-no" title="statement not covered" >er() {</span>
+    supe<span class="cstat-no" title="statement not covered" >r.render();</span>
+<span class="cstat-no" title="statement not covered" ></span>
+    this.classList.add(CLASSNAME);
+&nbsp;
+    //<span class="cstat-no" title="statement not covered" > Support cloneNode</span>
+    cons<span class="cstat-no" title="statement not covered" >t subview = this.que</span>rySelector('._coral-ColorInput-propertiesSubview');
+    if (<span class="cstat-no" title="statement not covered" >subview) {</span>
+      subview.remove();
+    }
+<span class="cstat-no" title="statement not covered" ></span>
+    this<span class="cstat-no" title="statement not covered" >.appendChild(this._e</span>lements.propertiesSubview);
+  }<span class="cstat-no" title="statement not covered" ></span>
+}
+&nbsp;
+export<span class="cstat-no" title="statement not covered" > default ColorInputColorProperties;</span>
+<span class="cstat-no" title="statement not covered" ></span></pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Nov 12 2020 14:24:35 GMT+0000 (Coordinated Universal Time)
+                at Mon Jan 11 2021 11:43:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

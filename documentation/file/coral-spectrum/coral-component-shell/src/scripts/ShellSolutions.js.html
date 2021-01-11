@@ -448,7 +448,7 @@ const CLASSNAME = &apos;_coral-Shell-solutions&apos;;
 class ShellSolutions extends BaseComponent(HTMLElement) {
   /**
    The item collection.
-   
+
    @type {Collection}
    @readonly
    */
@@ -461,13 +461,13 @@ class ShellSolutions extends BaseComponent(HTMLElement) {
         itemBaseTagName: &apos;a&apos;
       });
     }
-  
+
     return this._items;
   }
-  
+
   /**
    Whether the solution list is secondary.
-   
+
    @type {Boolean}
    @default false
    @htmlattribute secondary
@@ -476,62 +476,68 @@ class ShellSolutions extends BaseComponent(HTMLElement) {
   get secondary() {
     return this._secondary || false;
   }
+
   set secondary(value) {
     this._secondary = transform.booleanAttr(value);
     this._reflectAttribute(&apos;secondary&apos;, this._secondary);
-  
+
     this.classList.toggle(`${CLASSNAME}--secondary`, this._secondary);
   }
-  
+
   _sortSolutions() {
     if (this.items.length &gt; 1) {
       const linked = [];
       const nonLinked = [];
       const isSecondary = this.hasAttribute(&apos;secondary&apos;);
-      
+
       this.items.getAll().forEach((item, i) =&gt; {
         // Exclude the first secondary item
         if (!(isSecondary &amp;&amp; i === 0)) {
           if (item.hasAttribute(&apos;linked&apos;)) {
             linked.push(item);
-          }
-          else {
+          } else {
             nonLinked.push(item);
           }
         }
       });
-  
+
       const alphabeticalSort = (a, b) =&gt; {
         const aText = a.textContent.trim().toLowerCase();
         const bText = b.textContent.trim().toLowerCase();
-    
-        if (aText &lt; bText) {return -1;}
-        if (aText &gt; bText) {return 1;}
+
+        if (aText &lt; bText) {
+          return -1;
+        }
+        if (aText &gt; bText) {
+          return 1;
+        }
         return 0;
       };
-  
+
       linked.sort(alphabeticalSort);
       nonLinked.sort(alphabeticalSort);
-  
+
       linked.forEach((item) =&gt; {
         this.appendChild(item);
       });
-  
+
       nonLinked.forEach((item) =&gt; {
         this.appendChild(item);
       });
     }
   }
-  
+
   /** @ignore */
-  static get observedAttributes() { return super.observedAttributes.concat([&apos;secondary&apos;]); }
-  
+  static get observedAttributes() {
+    return super.observedAttributes.concat([&apos;secondary&apos;]);
+  }
+
   /** @ignore */
   render() {
     super.render();
-    
+
     this.classList.add(CLASSNAME);
-    
+
     // Sort linked solutions then non linked solutions alphabetically
     this._sortSolutions();
   }
