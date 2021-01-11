@@ -55,7 +55,13 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
   }
 
   set icon(value) {
-    this._icon = transform.string(value);
+    let _icon = transform.string(value);
+
+    if(this._icon === _icon) {
+      return;
+    }
+
+    this._icon = _icon;
     this._reflectAttribute('icon', this._icon);
 
     this.trigger('coral-cyclebutton-item:_iconchanged');
@@ -117,10 +123,14 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
   }
 
   set selected(value) {
-    value = transform.booleanAttr(value);
+    let _selected = transform.booleanAttr(value);
 
-    if (!value || value && !this.disabled) {
-      this._selected = value;
+    if(this._selected === _selected) {
+      return;
+    }
+    
+    if (!_selected || _selected && !this.disabled) {
+      this._selected = _selected;
       this._reflectAttribute('selected', this.disabled ? false : this._selected);
 
       this.classList.toggle('is-selected', this._selected);
@@ -147,8 +157,14 @@ class CycleButtonItem extends BaseComponent(HTMLElement) {
   }
 
   set displayMode(value) {
-    value = transform.string(value).toLowerCase();
-    this._displayMode = validate.enumeration(displayMode)(value) && value || displayMode.INHERIT;
+    let _value = transform.string(value).toLowerCase();
+    let _displayMode = validate.enumeration(displayMode)(_value) && _value || displayMode.INHERIT;
+
+    if(this._displayMode === _displayMode) {
+      return;
+    }
+
+    this._displayMode = _displayMode;
     this._reflectAttribute('displaymode', this._displayMode);
 
     this.trigger('coral-cyclebutton-item:_displaymodechanged');

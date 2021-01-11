@@ -81,7 +81,13 @@ class SelectItem extends BaseComponent(HTMLElement) {
   }
 
   set selected(value) {
-    this._selected = transform.booleanAttr(value);
+    let _selected = transform.booleanAttr(value);
+
+    if(this._selected === _selected) {
+      return;
+    }
+
+    this._selected = _selected;
     this._reflectAttribute('selected', this._selected);
 
     this.trigger('coral-select-item:_selectedchanged');
@@ -110,7 +116,12 @@ class SelectItem extends BaseComponent(HTMLElement) {
   }
 
   set value(value) {
-    this._value = transform.string(value);
+    let _value = transform.string(value);
+    if(this._value === _value) {
+      return;
+    }
+
+    this._value = _value;
     this._reflectAttribute('value', this._value);
 
     this.trigger('coral-select-item:_valuechanged');

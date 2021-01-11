@@ -150,11 +150,12 @@ class MasonryItem extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   connectedCallback() {
-    if (!this.isConnected) {
+    if (this._skipConnectedCallback()) {
       return;
     }
 
     super.connectedCallback();
+
     // Inform masonry immediately
     this.trigger('coral-masonry-item:_connected');
   }

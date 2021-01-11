@@ -142,6 +142,45 @@ describe('Masonry.Item', function () {
           done();
         }, 100);
       });
+
+      it('should avoid connectedCallback when encounter skipped cases', function(done){
+        const spy = sinon.spy();
+        const el = helpers.build(window.__html__['Masonry.with.div.wrapper.html']);
+        const masonry = el.querySelector("coral-masonry");
+        const items = masonry.querySelectorAll("coral-masonry-item");
+        const item1 = items[0];
+        const item2 = items[1];
+
+        masonry.on('coral-masonry-item:_connected', spy, true);
+
+        const newItem = new Masonry.Item();
+        newItem.content.innerHTML = "Hi";
+        masonry.appendChild(newItem);
+
+        expect(spy.calledOnce).to.be.true;
+
+        spy.resetHistory();
+
+        item1._ignoreConnectedCallback = true;
+        masonry.appendChild(item1);
+
+        expect(spy.notCalled).to.be.true;
+
+        masonry.removeChild(item2);
+
+        // let the removing transition to end
+        commons.transitionEnd(item2, () => {
+          helpers.next(function() {
+            spy.resetHistory();
+            // assume item is in connected state.
+            item2._disconnected = false;
+            masonry.appendChild(item2);
+
+            expect(spy.notCalled).to.be.true;
+            done();
+          });
+        });
+      });
     });
 
     describe('#coral-masonry-draghandle', function () {

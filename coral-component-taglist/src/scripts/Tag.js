@@ -229,7 +229,12 @@ class Tag extends BaseComponent(HTMLElement) {
   }
 
   set value(value) {
-    this._value = transform.string(value);
+    let _value = transform.string(value);
+
+    if(this._value === _value) {
+      return;
+    }
+    this._value = _value;
     this._reflectAttribute('value', this._value);
 
     this.trigger('coral-tag:_valuechanged');
@@ -466,6 +471,10 @@ class Tag extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
+
     super.connectedCallback();
 
     // Used to inform the tag list that it's added

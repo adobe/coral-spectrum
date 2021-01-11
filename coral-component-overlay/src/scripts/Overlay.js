@@ -698,7 +698,7 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   connectedCallback() {
-    if (this._ignoreConnectedCallback) {
+    if (this._skipConnectedCallback()) {
       return;
     }
 

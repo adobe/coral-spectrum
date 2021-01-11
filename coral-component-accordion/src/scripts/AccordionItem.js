@@ -102,7 +102,14 @@ class AccordionItem extends BaseComponent(HTMLElement) {
   }
 
   set selected(value) {
-    this._selected = this.hasAttribute('disabled') ? false : transform.booleanAttr(value);
+    let _value = transform.booleanAttr(value);
+    let _selected = this.hasAttribute('disabled') ? false : _value;
+
+    if(this._selected === _selected) {
+      return;
+    }
+
+    this._selected = _selected;
     this._reflectAttribute('selected', this._selected);
 
     // Read it before applying is-open which adds additional padding
