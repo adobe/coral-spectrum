@@ -158,7 +158,7 @@ module.exports = function (config) {
 
     client: {
       // Set to true for debugging via e.g console.debug
-      captureConsole: true
+      captureConsole: true // todo: set to false
     }
   });
 };

@@ -15,7 +15,7 @@ module.exports = function (gulp) {
   const rollup = require('rollup').rollup;
   const cleanCSS = require('gulp-clean-css');
   const rename = require('gulp-rename');
-  const rollupConfig = require('../configs/rollup.conf.js')({min: false});
+  const rollupConfig = require('../configs/rollup.conf.js')({min: false}); // todo: set to true
 
   gulp.task('minify-css', function () {
     return gulp.src(['dist/css/coral.css'])
