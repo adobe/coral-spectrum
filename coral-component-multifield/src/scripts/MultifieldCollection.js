@@ -14,9 +14,6 @@ import {Collection} from '../../../coral-collection';
 
 class MultifieldCollection extends Collection {
   add(item, insertBefore) {
-    console.log("==================================dsfdghfj================================================================================");
-    console.log(this._itemTagName);
-    console.log("===================================asdfsg===============================================================================");
     // _container and _itemTagName are the minimum options that need to be provided to automatically handle this function
     if (this._container && this._itemTagName) {
       if (!(item instanceof HTMLElement)) {

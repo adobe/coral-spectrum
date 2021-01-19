@@ -92,8 +92,10 @@ describe('Toast', function () {
         };
 
         const div = document.createElement('div');
-        const button = document.createElement('button', {is: 'coral-button'});
-        const anchor = document.createElement('a', {is: 'coral-anchorbutton'});
+        const button = document.createElement('button');
+        button.setAttribute('is', 'coral-button');
+        const anchor = document.createElement('a');
+        anchor.setAttribute('is', 'coral-anchorbutton');
 
         el.action = div;
         expect(el.action).to.equal(null);
@@ -109,7 +111,8 @@ describe('Toast', function () {
       });
 
       it('should render the new action', function () {
-        const button = document.createElement('button', {is: 'coral-button'});
+        const button = document.createElement('button');
+        button.setAttribute('is', 'coral-button');
         el.action = button;
 
         expect(button.hasAttribute('coral-toast-action')).to.be.true;

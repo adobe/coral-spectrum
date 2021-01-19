@@ -71,7 +71,9 @@ describe('Table', function () {
     });
 
     it('should be possible using document.createElement', function () {
-      const el = helpers.build(document.createElement('table', {is: 'coral-table'}));
+      const table = document.createElement('table');
+      table.setAttribute('is', 'coral-table');
+      const el = helpers.build(table);
       expect(el.classList.contains('_coral-Table-wrapper')).to.be.true;
     });
 

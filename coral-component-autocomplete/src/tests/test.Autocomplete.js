@@ -12,7 +12,7 @@
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Autocomplete} from '../../../coral-component-autocomplete';
-import {i18n, commons} from '../../../coral-utils';
+import {i18n} from '../../../coral-utils';
 
 describe('Autocomplete', function () {
   describe('Namespace', function () {

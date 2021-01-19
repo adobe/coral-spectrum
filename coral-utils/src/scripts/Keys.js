@@ -340,7 +340,8 @@ class Keys {
       if (sequence.parts[sequence.currentPart] === this._currentKeyCombo) {
         // If the current key combo in the sequence was pressed, increment the pointer
         sequence.currentPart++;
-      } else {
+      }
+      else {
         // Reset the sequence if a key was encountered out of sequence
         sequence.currentPart = 0;
       }
@@ -549,12 +550,14 @@ class Keys {
       // ( keyCombo, listener )
       listener = selector;
       data = selector = undefined;
-    } else if (typeof listener === 'undefined') {
+    }
+    else if (typeof listener === 'undefined') {
       if (typeof selector === 'string') {
         // ( keyCombo, selector, listener )
         listener = data;
         data = undefined;
-      } else {
+      }
+      else {
         // ( keyCombo, data, listener )
         listener = data;
         data = selector;
@@ -595,7 +598,8 @@ class Keys {
         data: data,
         namespace: namespace
       });
-    } else {
+    }
+    else {
       const originalString = keyCombo.toString();
 
       // It's a key combo!
@@ -627,7 +631,8 @@ class Keys {
       if (typeof selector === 'undefined' && typeof listener === 'undefined' && typeof namespace === 'undefined') {
         // Unbind all listeners for this key combo
         listeners.length = 0;
-      } else if (typeof listener === 'undefined') {
+      }
+      else if (typeof listener === 'undefined') {
         // Unbind all listeners of a specific selector and or namespace
         for (i = 0 ; i < listeners.length ; i++) {
           // This comparison works because selector and namespace are undefined by default
@@ -636,7 +641,8 @@ class Keys {
             i--;
           }
         }
-      } else {
+      }
+      else {
         // Unbind a specific listener, optionally on a specific selector and specific namespace
         for (i = 0 ; i < listeners.length ; i++) {
           if (listeners[i].listener === listener &&
@@ -707,7 +713,8 @@ class Keys {
           i--;
         }
       }
-    } else {
+    }
+    else {
       keyCombo = this._keyComboToCodeString(keyCombo);
 
       this._offByKeyComboString(keyCombo, namespace, selector, listener);

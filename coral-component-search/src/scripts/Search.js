@@ -48,14 +48,15 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   constructor() {
     super();
 
-
     // Prepare templates
     this._elements = {};
-    base.call(this._elements, {i18n, Icon});
   }
 
   connectedCallback() {
     super.connectedCallback();
+
+    base.call(this._elements, {i18n, Icon});
+
     this._delegateEvents(commons.extend(this._events, {
       // @todo use Coral.keys when key combos don't interfere with single key execution
       'keydown [handle=input]': '_onEnterKey',

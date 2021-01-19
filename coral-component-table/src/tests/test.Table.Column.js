@@ -32,7 +32,9 @@ describe('Table.Column', function () {
     });
 
     it('should be possible using document.createElement', function () {
-      const el = helpers.build(document.createElement('col', {is: 'coral-table-column'}));
+      const col = document.createElement('col');
+      col.setAttribute('is', 'coral-table-column');
+      const el = helpers.build(col);
       expect(el.classList.contains('_coral-Table-column')).to.be.true;
     });
   });

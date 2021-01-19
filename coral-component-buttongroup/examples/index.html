@@ -116,14 +116,16 @@
             var buttonGroupFromJS = document.createElement('coral-buttongroup');
             buttonGroupFromJS.setAttribute('selectionmode', 'single');
 
-            var button1 = document.createElement('button', {is:'coral-button'});
+            var button1 = document.createElement('button');
+            button1.setAttribute('is', 'coral-button');
             button1.setAttribute('icon', 'add');
             button1.setAttribute('variant', 'secondary');
             button1.setAttribute('title', 'Add');
             button1.setAttribute('aria-label', 'Add');
             buttonGroupFromJS.appendChild(button1);
 
-            var button2 = document.createElement('button', {is:'coral-button'});
+            var button2 = document.createElement('button');
+            button2.setAttribute('is', 'coral-button');
             button2.setAttribute('icon', 'delete');
             button2.setAttribute('variant', 'secondary');
             button2.setAttribute('title', 'Delete');

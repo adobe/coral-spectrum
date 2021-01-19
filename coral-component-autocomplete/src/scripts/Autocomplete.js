@@ -87,6 +87,11 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
 
     // Template
     this._elements = {};
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
     base.call(this._elements, {Icon, commons, i18n});
 
     this._elements.tagList.reset = () => {

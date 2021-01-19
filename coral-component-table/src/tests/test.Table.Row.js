@@ -27,7 +27,9 @@ describe('Table.Row', function () {
     });
 
     it('should be possible using document.createElement', function () {
-      const el = helpers.build(document.createElement('tr', {is: 'coral-table-row'}));
+      const tr = document.createElement('tr');
+      tr.setAttribute('is', 'coral-table-row');
+      const el = helpers.build(tr);
       expect(el.classList.contains('_coral-Table-row')).to.be.true;
     });
   });

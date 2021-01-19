@@ -154,6 +154,10 @@ class Tag extends BaseComponent(HTMLElement) {
       // Create or fetch the label element.
       label: this.querySelector('coral-tag-label') || document.createElement('coral-tag-label')
     };
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
 
     // Attach events
     this._delegateEvents({

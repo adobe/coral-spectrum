@@ -56,13 +56,14 @@ if (!window.Typekit) { // we load the typescript only once
 
     try {
       window.Typekit.load(config);
-    } catch (b) {
     }
+    catch (b) {}
   };
 
   const s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(tk, s);
-} else {
+}
+else {
   // If Typekit is loaded externally, listen with a MO for active fonts
   const root = document.documentElement;
   if (root.className.indexOf('wf-inactive') !== -1 || root.className.indexOf('wf-loading') !== -1) {

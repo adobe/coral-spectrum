@@ -36,6 +36,17 @@ class ShellOrgSwitcher extends List {
   constructor() {
     super();
 
+    // Templates
+    this._elements = {
+      footer: this.querySelector('coral-shell-orgswitcher-footer') || document.createElement('coral-shell-orgswitcher-footer')
+    };
+
+    orgSwitcher.call(this._elements, {commons, i18n});
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
     // Events
     this._delegateEvents({
       'coral-search:clear': '_showAll',
@@ -46,12 +57,6 @@ class ShellOrgSwitcher extends List {
       'coral-shell-organization:_selectedchanged': '_onItemSelectedChanged',
       'coral-shell-suborganization:_selectedchanged': '_onSubItemSelectedChanged'
     });
-
-    // Templates
-    this._elements = {
-      footer: this.querySelector('coral-shell-orgswitcher-footer') || document.createElement('coral-shell-orgswitcher-footer')
-    };
-    orgSwitcher.call(this._elements, {commons, i18n});
 
     // Used for eventing
     this._oldSelection = null;

@@ -37,6 +37,11 @@ class ShellHelp extends BaseComponent(HTMLElement) {
 
     // Prepare templates
     this._elements = {};
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
     help.call(this._elements, {commons, i18n});
 
     // Events

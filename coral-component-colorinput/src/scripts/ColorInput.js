@@ -119,6 +119,11 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
 
     // Prepare templates
     this._elements = {};
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
     base.call(this._elements, {commons, i18n});
 
     const overlay = this._elements.overlay;

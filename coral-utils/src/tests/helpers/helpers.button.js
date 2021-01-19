@@ -748,6 +748,7 @@ const testButton = function (Constructor, tagName, baseTagName) {
         expect(trackerFnSpy.callCount).to.equal(1, 'Track event should have been called only once.');
       });
 
+      // todo
       it('should call the tracker callback fn with trackData when a click is triggered', function () {
         const el = build(new Constructor());
         el.setAttribute('trackingfeature', 'feature name');
@@ -831,6 +832,7 @@ const testButton = function (Constructor, tagName, baseTagName) {
         expect(trackerFnSpy.callCount).to.equal(0, 'Tracking was performed while being disabled.');
       });
 
+      // todo
       it('should fallback to the default trackingElement when not specified', function () {
         const el = build(new Constructor());
         el.setAttribute('trackingfeature', 'feature name');

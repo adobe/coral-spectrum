@@ -31,8 +31,10 @@ describe('SideNav.Item', function () {
     });
 
     it('should be possible using createElement', function () {
-      const el = helpers.build(document.createElement('coral-sidenav', {is: 'coral-sidenav-item'}));
-      testDefaultInstance(el);
+      const el = document.createElement('coral-sidenav');
+      el.setAttribute('is', 'coral-sidenav-item');
+      const instance = helpers.build(el);
+      testDefaultInstance(instance);
     });
 
     it('should be possible using markup', function () {

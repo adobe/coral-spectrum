@@ -409,7 +409,8 @@ describe('commons', function () {
     });
 
     it('should work with custom elements that use is=""', function (done) {
-      const el = document.createElement('button', {is: 'coral-element-button'});
+      const el = document.createElement('button');
+      el.setAttribute('is', 'coral-element-button');
 
       commons.ready(el, () => {
         expect(window.customElements.get('coral-element-button')).to.not.equal(undefined);
@@ -418,7 +419,8 @@ describe('commons', function () {
     });
 
     it('should pass the element to the callback', function (done) {
-      const el = document.createElement('button', {is: 'coral-element-button'});
+      const el = document.createElement('button');
+      el.setAttribute('is', 'coral-element-button');
 
       commons.ready(el, (passedEl) => {
         expect(el).to.equal(passedEl);
@@ -427,7 +429,9 @@ describe('commons', function () {
     });
 
     it('should pass window to the callback when no element is passed', function (done) {
-      const el = helpers.build(document.createElement('button', {is: 'coral-element-button'}));
+      const button = document.createElement('button');
+      button.setAttribute('is', 'coral-element-button');
+      const el = helpers.build(button);
 
       commons.ready((passedEl) => {
         expect(window).to.equal(passedEl);
@@ -437,7 +441,9 @@ describe('commons', function () {
 
     it('should work with normal custom elements and some that use is="..."', function (done) {
       helpers.target.appendChild(document.createElement('coral-element'));
-      helpers.target.appendChild(document.createElement('coral-element-button'), {is: 'coral-element-button'});
+      const button = document.createElement('coral-element-button');
+      button.setAttribute('is', 'coral-element-button');
+      helpers.target.appendChild(button);
       commons.ready(() => {
         expect(window.customElements.get('coral-element')).to.not.equal(undefined);
         expect(window.customElements.get('coral-element-item')).to.not.equal(undefined);

@@ -35,8 +35,10 @@ describe('SideNav', function () {
     });
 
     it('should be possible using createElement', function () {
-      const el = helpers.build(document.createElement('coral-sidenav', {is: 'coral-sidenav'}));
-      testDefaultInstance(el);
+      const el = document.createElement('coral-sidenav');
+      el.setAttribute('is', 'coral-sidenav');
+      const instance = helpers.build(el);
+      testDefaultInstance(instance);
     });
 
     it('should be possible using markup', function () {
@@ -200,13 +202,16 @@ describe('SideNav', function () {
 
         expect(el.items.length).to.equal(3);
 
-        const item = el.appendChild(document.createElement('a', {is: 'coral-sidenav-item'}));
+        const a1 = document.createElement('a');
+        a1.setAttribute('is', 'coral-sidenav-item');
+        const item = el.appendChild(a1);
         expect(el.items.length).to.equal(4);
 
         el.items.remove(item);
         expect(el.items.length).to.equal(3);
 
-        const selectedItem = document.createElement('a', {is: 'coral-sidenav-item'});
+        const selectedItem = document.createElement('a');
+        selectedItem.setAttribute('is', 'coral-sidenav-item');
         selectedItem.setAttribute('selected', '');
         el.appendChild(selectedItem);
 

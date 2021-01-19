@@ -27,7 +27,9 @@ describe('Table.Foot', function () {
     });
 
     it('should be possible using document.createElement', function () {
-      const el = helpers.build(document.createElement('tfoot', {is: 'coral-table-foot'}));
+      const tfoot = document.createElement('tfoot');
+      tfoot.setAttribute('is', 'coral-table-foot');
+      const el = helpers.build(tfoot);
       expect(el.classList.contains('_coral-Table-foot')).to.be.true;
     });
   });

@@ -67,6 +67,11 @@ class CycleButton extends BaseComponent(HTMLElement) {
 
     // Templates
     this._elements = {};
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
     base.call(this._elements, {Icon, commons, id: this._id});
 
     const events = {

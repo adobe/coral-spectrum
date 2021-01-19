@@ -21,7 +21,9 @@ describe('Table.Body', function () {
     });
 
     it('should be possible using document.createElement', function () {
-      const el = helpers.build(document.createElement('tbody', {is: 'coral-table-body'}));
+      const tbody = document.createElement('tbody');
+      tbody.setAttribute('is', 'coral-table-body');
+      const el = helpers.build(tbody);
       expect(el.classList.contains('_coral-Table-body')).to.be.true;
     });
   });

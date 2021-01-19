@@ -55,6 +55,17 @@ function filterItem(item, filter) {
   return typeof filter !== 'function' || filter(item);
 }
 
+const _set = (self, properties, value) => {
+  if (typeof properties === 'string') {
+    self[properties] = value;
+  } else {
+    for (var property in properties) {
+      value = properties[property];
+      self[property] = value;
+    }
+  }
+};
+
 /**
  Collection provides a standardized way to manipulate items in a component.
  */
@@ -167,11 +178,18 @@ class Collection {
     if (this._container && this._itemTagName) {
       if (!(item instanceof HTMLElement)) {
         // creates an instance of an item from the object
+        var el;
+
         if (this._itemBaseTagName) {
-          item = document.createElement(this._itemBaseTagName, {is: this._itemTagName}).set(item, true);
+          el = document.createElement(this._itemBaseTagName);
+          _set(el, item);
+          el.setAttribute('is', this._itemTagName);
         } else {
-          item = document.createElement(this._itemTagName).set(item, true);
+          el = document.createElement(this._itemTagName);
+          _set(el, item);
         }
+
+        item = el;
       }
 
       // inserts the element in the specified container

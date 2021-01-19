@@ -29,6 +29,12 @@ class ShellOrganization extends List.Item {
   constructor() {
     super();
 
+    this._elements = {};
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
     // Events
     this._delegateEvents({
       'click': '_onClick',

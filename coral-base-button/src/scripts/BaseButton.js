@@ -558,6 +558,7 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
   /** @ignore */
   render() {
     super.render();
+    this.setAttribute('is', 'coral-button');
 
     // Default reflected attributes
     if (!this._variant) {

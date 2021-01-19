@@ -110,6 +110,7 @@ class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
   /** @ignore */
   render() {
     super.render();
+    this.setAttribute('is', 'coral-anchorbutton');
 
     // a11y
     this.setAttribute('role', 'button');
