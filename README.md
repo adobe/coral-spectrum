@@ -1,3 +1,5 @@
+> Checkout [Spectrum Web Components](https://github.com/adobe/spectrum-web-components) which is a future-looking project to develop Adobe Spectrum design language based around web components, ES-Modules, and modern browser standards.
+
 # Coral Spectrum ![Build Status](https://github.com/adobe/coral-spectrum/workflows/Unit%20Tests%20and%20Accessibility%20CI/badge.svg)
 
 A JavaScript library of Web Components following Spectrum design patterns.
