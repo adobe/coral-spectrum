@@ -1,3 +1,10 @@
+## [4.10.13](https://github.com/adobe/coral-spectrum/compare/v4.10.12...v4.10.13) (2021-03-03)
+
+
+### Bug Fixes
+
+* updating AEM icon to marketing subcloud-icon ([#152](https://github.com/adobe/coral-spectrum/issues/152)) ([0a2bffc](https://github.com/adobe/coral-spectrum/commit/0a2bffc5d71b41728b40d58cc565f6a53efa7206))
+
 ## [4.10.12](https://github.com/adobe/coral-spectrum/compare/v4.10.11...v4.10.12) (2021-01-11)
 
 
