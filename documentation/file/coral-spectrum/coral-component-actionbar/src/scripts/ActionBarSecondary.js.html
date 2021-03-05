@@ -451,7 +451,7 @@ class ActionBarSecondary extends ActionBarContainer(BaseComponent(HTMLElement)) 
     let item = null;
     let wrappedItem = null;
 
-    for (let i = 0 ; i &lt; this._itemsInPopover.length ; i++) {
+    for (let i = this._itemsInPopover.length - 1 ; i &gt;= 0 ; i--) {
       item = this._itemsInPopover[i];
 
       item.style.visibility = &apos;hidden&apos;;

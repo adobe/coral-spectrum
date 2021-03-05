@@ -35141,7 +35141,7 @@
         var item = null;
         var wrappedItem = null;
 
-        for (var i = 0; i < this._itemsInPopover.length; i++) {
+        for (var i = this._itemsInPopover.length - 1; i >= 0; i--) {
           item = this._itemsInPopover[i];
           item.style.visibility = 'hidden'; // remove tabindex again
 
@@ -79345,7 +79345,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.10.12";
+  var version$1 = "4.10.13";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
