@@ -1,3 +1,10 @@
+## [4.10.14](https://github.com/adobe/coral-spectrum/compare/v4.10.13...v4.10.14) (2021-03-05)
+
+
+### Bug Fixes
+
+* don't change buttons order in actionbar More popover ([#154](https://github.com/adobe/coral-spectrum/issues/154)) ([333ea08](https://github.com/adobe/coral-spectrum/commit/333ea08f2c7b430316f4d772e689579ef9c69dd9))
+
 ## [4.10.13](https://github.com/adobe/coral-spectrum/compare/v4.10.12...v4.10.13) (2021-03-03)
 
 
