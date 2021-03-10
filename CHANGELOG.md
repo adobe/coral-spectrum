@@ -1,3 +1,10 @@
+## [4.10.15](https://github.com/adobe/coral-spectrum/compare/v4.10.14...v4.10.15) (2021-03-10)
+
+
+### Bug Fixes
+
+* removing duplicated ids from path ([77c0197](https://github.com/adobe/coral-spectrum/commit/77c0197a7fd5198696adc3da8dc95aa757b884cd))
+
 ## [4.10.14](https://github.com/adobe/coral-spectrum/compare/v4.10.13...v4.10.14) (2021-03-05)
 
 
