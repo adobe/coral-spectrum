@@ -1,3 +1,10 @@
+## [4.10.16](https://github.com/adobe/coral-spectrum/compare/v4.10.15...v4.10.16) (2021-03-12)
+
+
+### Bug Fixes
+
+* remove axe violation while using inline icons ([#159](https://github.com/adobe/coral-spectrum/issues/159)) ([41cbd00](https://github.com/adobe/coral-spectrum/commit/41cbd004012f890231c864eee3f5a691560b14c1))
+
 ## [4.10.15](https://github.com/adobe/coral-spectrum/compare/v4.10.14...v4.10.15) (2021-03-10)
 
 
