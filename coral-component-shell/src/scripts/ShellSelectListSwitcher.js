@@ -39,7 +39,7 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
         for (let i = 0 ; i < mutation.addedNodes.length ; i++) {
           const addedNode = mutation.addedNodes[i];
           // Move non secondary solutions to the container
-          if (addedNode.nodeName === 'CORAL-SELECTLIST' && !addedNode.hasAttribute('secondary')) {
+          if (addedNode.nodeName === 'CORAL-SHELL-SWITCHERLIST' && !addedNode.hasAttribute('secondary')) {
             this._elements.container.appendChild(addedNode);
           }
         }
@@ -61,9 +61,9 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
   get items() {
     // Construct the collection on first request
     if (!this._items) {
-      this._items = new Collection({
+      this._items = new SelectableCollection({
         host: this,
-        itemTagName: 'coral-selectlist',
+        itemTagName: 'coral-shell-switcherlist',
         onItemAdded: this._validateSelection,
         onItemRemoved: this._validateSelection
       });
@@ -79,7 +79,7 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
     this.classList.add(CLASSNAME);
 
 
-    const container = this.querySelector('._coral-Shell-selectList-container') || this._elements.container;
+    const container = this.querySelector('._coral-Shell-switcherList-container') || this._elements.container;
 
     // Remove it so we can process solutions
     if (container.parentNode) {
@@ -87,7 +87,7 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
     }
 
     // Move non secondary solutions to the container
-    Array.prototype.forEach.call(this.querySelectorAll('coral-selectlist:not([secondary])'), (item) => {
+    Array.prototype.forEach.call(this.querySelectorAll('coral-shell-switcherlist)'), (item) => {
       container.appendChild(item);
     });
 
