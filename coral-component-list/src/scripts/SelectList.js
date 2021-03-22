@@ -253,10 +253,6 @@ class SelectList extends BaseComponent(HTMLElement) {
 
     const item = event.matchedTarget;
     this._toggleItemSelection(item);
-    if (item.hasAttribute("href")) {
-    const href = item.getAttribute("href");
-    window.open(href, '_self');
-    }
     this._focusItem(item);
   }
 
