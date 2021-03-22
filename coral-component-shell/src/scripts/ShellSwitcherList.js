@@ -24,7 +24,23 @@ const CLASSNAME = '_coral-Shell-switcherList';
  @extends {HTMLElement}
  @extends {SelectList}
  */
-class ShellSwitcherList extends SelectList() {
+class ShellSwitcherList extends SelectList {
+
+    constructor(){
+      super();
+      this._delegateEvents({
+            'click coral-selectlist-item': '_onItemClick'
+      });
+
+    }
+
+    _onItemClick(event) {
+       const item = event.matchedTarget;
+       if (item.hasAttribute("href")) {
+       const href = item.getAttribute("href");
+       window.open(href, '_self');
+       }
+     }
 
     /** @ignore */
     render() {

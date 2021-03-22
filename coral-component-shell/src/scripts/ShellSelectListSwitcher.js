@@ -39,7 +39,7 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
         for (let i = 0 ; i < mutation.addedNodes.length ; i++) {
           const addedNode = mutation.addedNodes[i];
           // Move non secondary solutions to the container
-          if (addedNode.nodeName === 'CORAL-SHELL-SWITCHERLIST' && !addedNode.hasAttribute('secondary')) {
+          if (addedNode.nodeName === 'CORAL-SHELL-SWITCHERLIST') {
             this._elements.container.appendChild(addedNode);
           }
         }
@@ -87,7 +87,7 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
     }
 
     // Move non secondary solutions to the container
-    Array.prototype.forEach.call(this.querySelectorAll('coral-shell-switcherlist)'), (item) => {
+    Array.prototype.forEach.call(this.querySelectorAll('coral-shell-switcherlist'), (item) => {
       container.appendChild(item);
     });
 
