@@ -32,14 +32,15 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
     // Template
     this._elements = {};
     selectListSwitcher.call(this._elements);
-
+    this._delegateEvents({
+      'click coral-selectlist-item': '_onItemClick'
+    });
     // Listen for mutations
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         for (let i = 0 ; i < mutation.addedNodes.length ; i++) {
           const addedNode = mutation.addedNodes[i];
-          // Move non secondary solutions to the container
-          if (addedNode.nodeName === 'CORAL-SHELL-SWITCHERLIST') {
+          if (addedNode.nodeName === 'CORAL-SHELL-SWITCHERLIST-ITEM') {
             this._elements.container.appendChild(addedNode);
           }
         }
@@ -63,7 +64,8 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
     if (!this._items) {
       this._items = new SelectableCollection({
         host: this,
-        itemTagName: 'coral-shell-switcherlist',
+        itemTagName: 'coral-shell-switcherlist-item',
+        itemBaseTagName: 'coral-selectlist-item',
         onItemAdded: this._validateSelection,
         onItemRemoved: this._validateSelection
       });
@@ -71,26 +73,27 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
 
     return this._items;
   }
+  _onItemClick(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      const item = event.matchedTarget;
+      if (item.hasAttribute("href")) {
+         const href = item.getAttribute("href");
+         window.open(href, '_self');
+       }
+
+    }
 
   /** @ignore */
   render() {
     super.render();
 
     this.classList.add(CLASSNAME);
-
-
     const container = this.querySelector('._coral-Shell-switcherList-container') || this._elements.container;
 
-    // Remove it so we can process solutions
-    if (container.parentNode) {
-      container.remove();
-    }
-
-    // Move non secondary solutions to the container
-    Array.prototype.forEach.call(this.querySelectorAll('coral-shell-switcherlist'), (item) => {
+    Array.prototype.forEach.call(this.querySelectorAll('coral-shell-switcherlist-item'), (item) => {
       container.appendChild(item);
     });
-
     // Put the container as first child
     this.insertBefore(container, this.firstChild);
   }
