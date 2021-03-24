@@ -15,7 +15,7 @@ import {SelectableCollection} from '../../../coral-collection';
 import selectListSwitcher from '../templates/selectListSwitcher';
 import {SelectList} from '../../../coral-component-list';
 
-const CLASSNAME = '_coral-Shell-selectListSwitcher';
+const CLASSNAMES = ['_coral-Menu', '_coral-Shell-selectListSwitcher'];
 
 /**
  @class Coral.Shell.SelectListSwitcher
@@ -24,7 +24,7 @@ const CLASSNAME = '_coral-Shell-selectListSwitcher';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
+class ShellSelectListSwitcher extends SelectList {
   /** @ignore */
   constructor() {
     super();
@@ -33,8 +33,9 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
     this._elements = {};
     selectListSwitcher.call(this._elements);
     this._delegateEvents({
-      'click coral-selectlist-item': '_onItemClick'
+        'click coral-shell-switcherlist-item': '_onItemClick'
     });
+
     // Listen for mutations
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
@@ -52,10 +53,15 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
       childList: true
     });
   }
-
+  _onItemClick(event) {
+     const item = event.matchedTarget;
+     if (item.hasAttribute("href")) {
+     const href = item.getAttribute("href");
+     window.open(href, '_self');
+     }
+   }
   /**
    The item collection.
-
    @type {Collection}
    @readonly
    */
@@ -65,7 +71,6 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
       this._items = new SelectableCollection({
         host: this,
         itemTagName: 'coral-shell-switcherlist-item',
-        itemBaseTagName: 'coral-selectlist-item',
         onItemAdded: this._validateSelection,
         onItemRemoved: this._validateSelection
       });
@@ -73,22 +78,13 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
 
     return this._items;
   }
-  _onItemClick(event) {
-      event.preventDefault();
-      event.stopPropagation();
-      const item = event.matchedTarget;
-      if (item.hasAttribute("href")) {
-         const href = item.getAttribute("href");
-         window.open(href, '_self');
-       }
 
-    }
 
   /** @ignore */
   render() {
     super.render();
 
-    this.classList.add(CLASSNAME);
+    this.classList.add(...CLASSNAMES);
     const container = this.querySelector('._coral-Shell-switcherList-container') || this._elements.container;
 
     Array.prototype.forEach.call(this.querySelectorAll('coral-shell-switcherlist-item'), (item) => {
