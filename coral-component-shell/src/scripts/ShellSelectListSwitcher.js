@@ -24,7 +24,7 @@ const CLASSNAMES = ['_coral-Menu', '_coral-Shell-selectListSwitcher'];
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class ShellSelectListSwitcher extends SelectList {
+class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -33,7 +33,7 @@ class ShellSelectListSwitcher extends SelectList {
     this._elements = {};
     selectListSwitcher.call(this._elements);
     this._delegateEvents({
-        'click coral-shell-switcherlist-item': '_onItemClick'
+     'coral-selectlist:change':'_onSelectListChange'
     });
 
     // Listen for mutations
@@ -41,7 +41,7 @@ class ShellSelectListSwitcher extends SelectList {
       mutations.forEach((mutation) => {
         for (let i = 0 ; i < mutation.addedNodes.length ; i++) {
           const addedNode = mutation.addedNodes[i];
-          if (addedNode.nodeName === 'CORAL-SHELL-SWITCHERLIST-ITEM') {
+          if (addedNode.nodeName === 'CORAL-SELECTLIST-ITEM') {
             this._elements.container.appendChild(addedNode);
           }
         }
@@ -53,10 +53,11 @@ class ShellSelectListSwitcher extends SelectList {
       childList: true
     });
   }
-  _onItemClick(event) {
-     const item = event.matchedTarget;
-     if (item.hasAttribute("href")) {
-     const href = item.getAttribute("href");
+  _onSelectListChange(event) {
+     const list = event.target;
+     const item = list.getElementsByClassName("_coral-Menu-item is-selected");
+     if (item[0].hasAttribute("href")) {
+     const href = item[0].getAttribute("href");
      window.open(href, '_self');
      }
    }
@@ -70,7 +71,7 @@ class ShellSelectListSwitcher extends SelectList {
     if (!this._items) {
       this._items = new SelectableCollection({
         host: this,
-        itemTagName: 'coral-shell-switcherlist-item',
+        itemTagName: 'coral-selectlist-item',
         onItemAdded: this._validateSelection,
         onItemRemoved: this._validateSelection
       });
@@ -87,7 +88,7 @@ class ShellSelectListSwitcher extends SelectList {
     this.classList.add(...CLASSNAMES);
     const container = this.querySelector('._coral-Shell-switcherList-container') || this._elements.container;
 
-    Array.prototype.forEach.call(this.querySelectorAll('coral-shell-switcherlist-item'), (item) => {
+    Array.prototype.forEach.call(this.querySelectorAll('coral-selectlist-item'), (item) => {
       container.appendChild(item);
     });
     // Put the container as first child
