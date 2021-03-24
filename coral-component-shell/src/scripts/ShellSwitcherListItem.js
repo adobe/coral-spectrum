@@ -15,16 +15,16 @@ import {transform} from '../../../coral-utils';
 import {SelectList} from '../../../coral-component-list';
 import {SelectableCollection} from '../../../coral-collection';
 
-const CLASSNAME = '_coral-Shell-switcherList';
+const CLASSNAME = '_coral-Shell-switcherList-item';
 
 /**
  @class Coral.Shell.SwitcherList
- @classdesc A Shell SwitcherList component
- @htmltag coral-shell-switcherlist
+ @classdesc A Shell SwitcherListItem component
+ @htmltag coral-shell-switcherlist-item
  @extends {HTMLElement}
  @extends {SelectList}
  */
-class ShellSwitcherList extends SelectList.Item {
+class ShellSwitcherListItem extends SelectList.Item {
 
     /** @ignore */
     render() {
@@ -33,4 +33,4 @@ class ShellSwitcherList extends SelectList.Item {
     }
   }
 
-  export default ShellSwitcherList;
+  export default ShellSwitcherListItem;
