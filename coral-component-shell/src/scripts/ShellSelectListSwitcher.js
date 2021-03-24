@@ -16,6 +16,13 @@ import selectListSwitcher from '../templates/selectListSwitcher';
 import {SelectList} from '../../../coral-component-list';
 
 const CLASSNAMES = ['_coral-Menu', '_coral-Shell-selectListSwitcher'];
+  /*function cloneAttributes(element, sourceNode) {
+    let attr;
+    let attributes = Array.prototype.slice.call(sourceNode.attributes);
+    while(attr = attributes.pop()) {
+      element.setAttribute(attr.nodeName, attr.nodeValue);
+    }
+  }*/
 
 /**
  @class Coral.Shell.SelectListSwitcher
@@ -41,8 +48,11 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
       mutations.forEach((mutation) => {
         for (let i = 0 ; i < mutation.addedNodes.length ; i++) {
           const addedNode = mutation.addedNodes[i];
-          if (addedNode.nodeName === 'CORAL-SELECTLIST-ITEM') {
-            this._elements.container.appendChild(addedNode);
+          if (addedNode.nodeName === 'CORAL-SHELL-SWITCHERLIST-ITEM') {
+            var listItem = document.createElement('coral-selectlist-item');
+            listItem.setAttribute("href", addedNode.getAttribute("href"));
+            listItem.textContent = addedNode.textContent;
+            this._elements.container.appendChild(listItem);
           }
         }
       });
@@ -55,9 +65,9 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
   }
   _onSelectListChange(event) {
      const list = event.target;
-     const item = list.getElementsByClassName("_coral-Menu-item is-selected");
-     if (item[0].hasAttribute("href")) {
-     const href = item[0].getAttribute("href");
+     const item = list.selectedItem;
+     if (item.hasAttribute("href")) {
+     const href = item.getAttribute("href");
      window.open(href, '_self');
      }
    }
@@ -71,7 +81,7 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
     if (!this._items) {
       this._items = new SelectableCollection({
         host: this,
-        itemTagName: 'coral-selectlist-item',
+        itemTagName: 'coral-shell-switcherlist-item',
         onItemAdded: this._validateSelection,
         onItemRemoved: this._validateSelection
       });
@@ -80,7 +90,6 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
     return this._items;
   }
 
-
   /** @ignore */
   render() {
     super.render();
@@ -88,8 +97,11 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
     this.classList.add(...CLASSNAMES);
     const container = this.querySelector('._coral-Shell-switcherList-container') || this._elements.container;
 
-    Array.prototype.forEach.call(this.querySelectorAll('coral-selectlist-item'), (item) => {
-      container.appendChild(item);
+    Array.prototype.forEach.call(this.querySelectorAll('coral-shell-switcherlist-item'), (item) => {
+      var listItem = document.createElement('coral-selectlist-item');
+      listItem.setAttribute("href", item.getAttribute("href"));
+      listItem.textContent = item.textContent;
+      container.appendChild(listItem);
     });
     // Put the container as first child
     this.insertBefore(container, this.firstChild);
