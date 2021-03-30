@@ -21,3 +21,4 @@ import './test.Shell.User';
 import './test.Shell.Workspaces';
 import './test.Shell.SolutionSwitcher';
 import './test.Shell.OrgSwitcher';
+import './test.Shell.SelectListSwitcher';
