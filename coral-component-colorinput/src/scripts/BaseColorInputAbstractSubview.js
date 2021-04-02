@@ -10,11 +10,13 @@
  * governing permissions and limitations under the License.
  */
 
+import {Decorator} from '../../../coral-decorator';
+
 /**
  @base BaseColorInputAbstractSubview
  @classdesc An abstract subview class that other subviews should extend.
  */
-const BaseColorInputAbstractSubview = (superClass) => class extends superClass {
+const BaseColorInputAbstractSubview = (superClass) => Decorator(class extends superClass {
   /** @ignore */
   constructor() {
     super();
@@ -49,9 +51,6 @@ const BaseColorInputAbstractSubview = (superClass) => class extends superClass {
 
   /** @ignore */
   connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
     super.connectedCallback();
 
     const overlay = this.closest('._coral-ColorInput-overlay');
@@ -73,9 +72,6 @@ const BaseColorInputAbstractSubview = (superClass) => class extends superClass {
 
   /** @ignore */
   disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
     super.disconnectedCallback();
 
     if (this._colorinput) {
@@ -85,6 +81,6 @@ const BaseColorInputAbstractSubview = (superClass) => class extends superClass {
 
     this._colorinput = null;
   }
-};
+});
 
 export default BaseColorInputAbstractSubview;

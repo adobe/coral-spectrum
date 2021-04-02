@@ -16,6 +16,7 @@ import {Icon} from '../../../coral-component-icon';
 import {Button} from '../../../coral-component-button';
 import base from '../templates/base';
 import {transform, validate, commons} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link Toast} variants.
@@ -123,7 +124,7 @@ const isButton = node => (node.nodeName === 'BUTTON' && node.getAttribute('is') 
  @extends {BaseComponent}
  @extends {BaseOverlay}
  */
-class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
+const Toast = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -482,15 +483,6 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-
-    super.connectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
@@ -545,10 +537,6 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-
     super.disconnectedCallback();
 
     if (this._queued) {
@@ -566,6 +554,6 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
       }
     }
   }
-}
+});
 
 export default Toast;

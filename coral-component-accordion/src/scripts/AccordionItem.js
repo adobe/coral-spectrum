@@ -11,6 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
+import {Decorator} from '../../../coral-decorator';
 import base from '../templates/base';
 import {commons, transform, validate} from '../../../coral-utils';
 import {Icon} from '../../../coral-component-icon';
@@ -24,7 +25,7 @@ const CLASSNAME = '_coral-Accordion-item';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class AccordionItem extends BaseComponent(HTMLElement) {
+const AccordionItem = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -237,22 +238,6 @@ class AccordionItem extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
@@ -283,6 +268,6 @@ class AccordionItem extends BaseComponent(HTMLElement) {
     // Defaults
     this.selected = this.selected;
   }
-}
+});
 
 export default AccordionItem;

@@ -11,7 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
-
+import {Decorator} from '../../../coral-decorator';
 import {transform} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Slider-item';
@@ -23,7 +23,7 @@ const CLASSNAME = '_coral-Slider-item';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class SliderItem extends BaseComponent(HTMLElement) {
+const SliderItem = Decorator(class extends BaseComponent(HTMLElement) {
   /**
    The slider's item value.
    This should contain a number formatted as a string (e.g.: "10") or an empty string.
@@ -54,27 +54,11 @@ class SliderItem extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
     this.classList.add(CLASSNAME);
   }
-}
+});
 
 export default SliderItem;

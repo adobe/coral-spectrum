@@ -14,6 +14,7 @@ import {BaseComponent} from '../../../coral-base-component';
 import MasonryItem from './MasonryItem';
 import {SelectableCollection} from '../../../coral-collection';
 import {validate, transform, commons} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Masonry';
 
@@ -113,7 +114,7 @@ const getPreviousItem = (item) => {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Masonry extends BaseComponent(HTMLElement) {
+const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -737,7 +738,8 @@ class Masonry extends BaseComponent(HTMLElement) {
     // Update items, so that column indexes are correctly set
     this._updateAriaRoleForItems(this.ariaGrid);
     this._updateAriaColumnCountForParent(this.ariaGrid);
-
+    // set to false in case forced layouting is done between animation call
+    this._layoutScheduled = false;
     // Prevent endless observation loop (skip mutations which have been caused by the layout)
     this._observer.takeRecords();
   }
@@ -1040,22 +1042,6 @@ class Masonry extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
@@ -1123,6 +1109,6 @@ class Masonry extends BaseComponent(HTMLElement) {
    @property {MasonryItem} detail.selection
    The newly selected item(s).
    */
-}
+});
 
 export default Masonry;

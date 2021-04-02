@@ -17,6 +17,7 @@ import {BaseLabellable} from '../../../coral-base-labellable';
 import {transform} from '../../../coral-utils';
 import item from '../templates/item';
 import '../../../coral-component-icon';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  @class Coral.SideNav.Item
@@ -25,7 +26,7 @@ import '../../../coral-component-icon';
  @extends {HTMLAnchorElement}
  @extends {BaseComponent}
  */
-class SideNavItem extends BaseLabellable(BaseComponent(HTMLAnchorElement)) {
+const SideNavItem = Decorator(class extends BaseLabellable(BaseComponent(HTMLAnchorElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -109,22 +110,6 @@ class SideNavItem extends BaseLabellable(BaseComponent(HTMLAnchorElement)) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
@@ -162,6 +147,6 @@ class SideNavItem extends BaseLabellable(BaseComponent(HTMLAnchorElement)) {
     // Assign the content zones, moving them into place in the process
     this.content = content;
   }
-}
+});
 
 export default SideNavItem;

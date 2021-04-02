@@ -24,6 +24,7 @@ import '../../../coral-component-wait';
 import base from '../templates/base';
 import loadIndicator from '../templates/loadIndicator';
 import {transform, validate, commons, i18n} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Autocomplete';
 
@@ -80,7 +81,7 @@ const match = {
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
+const Autocomplete = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -1896,9 +1897,6 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
     super.connectedCallback();
 
     const overlay = this._elements.overlay;
@@ -1971,9 +1969,6 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
     super.disconnectedCallback();
 
     const overlay = this._elements.overlay;
@@ -2001,6 +1996,6 @@ class Autocomplete extends BaseFormField(BaseComponent(HTMLElement)) {
 
    @typedef {CustomEvent} coral-autocomplete:hidesuggestions
    */
-}
+});
 
 export default Autocomplete;

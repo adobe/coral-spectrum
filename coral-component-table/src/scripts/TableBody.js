@@ -13,6 +13,7 @@
 import {BaseComponent} from '../../../coral-base-component';
 import BaseTableSection from './BaseTableSection';
 import {getRows} from './TableUtil';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Table-body';
 
@@ -25,28 +26,12 @@ const CLASSNAME = '_coral-Table-body';
  @extends {BaseComponent}
  @extends {BaseTableSection}
  */
-class TableBody extends BaseTableSection(BaseComponent(HTMLTableSectionElement)) {
+const TableBody = Decorator(class extends BaseTableSection(BaseComponent(HTMLTableSectionElement)) {
   /** @ignore */
   constructor() {
     super();
 
     this._toggleObserver(true);
-  }
-
-  /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
   }
 
   /** @ignore */
@@ -75,6 +60,6 @@ class TableBody extends BaseTableSection(BaseComponent(HTMLTableSectionElement))
 
    @private
    */
-}
+});
 
 export default TableBody;

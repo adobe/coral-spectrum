@@ -14,6 +14,7 @@ import {BaseComponent} from '../../../coral-base-component';
 import {BaseOverlay} from '../../../coral-base-overlay';
 import PopperJS from 'popper.js';
 import {transform, validate, commons} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const DEPRECATED_ALIGN = 'Coral.Overlay: alignAt and alignMy have been deprecated. Please use the offset, inner and placement properties instead.';
 const DEPRECATED_FLIP_FIT = 'Coral.Overlay.collision.FLIP_FIT has been deprecated. Please use Coral.Overlay.collision.FLIP instead.';
@@ -137,7 +138,7 @@ const CLASSNAME = '_coral-Overlay';
  @extends {BaseComponent}
  @extends {BaseOverlay}
  */
-class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
+const Overlay = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -421,6 +422,11 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
   }
 
   set open(value) {
+    // if popper is not initialised initialise now,
+    // this maybe required if popper initialization was avoid while updating target.
+    if(!this._popper) {
+      this._initPopper();
+    }
     super.open = value;
     this._toggleSmartBehavior(this.open);
   }
@@ -704,10 +710,6 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-
     super.connectedCallback();
 
     // In case it was not added to the DOM, make sure popper is initialized by setting target
@@ -732,20 +734,11 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
     this.style.display = 'none';
   }
 
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-
-    super.disconnectedCallback();
-  }
-
   /**
    Triggered after the {@link Overlay} is positioned.
 
    @typedef {CustomEvent} coral-overlay:positioned
    */
-}
+});
 
 export default Overlay;

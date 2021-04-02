@@ -17,7 +17,7 @@ import SPECTRUM_ICONS_PATH from '../resources/spectrum-icons.svg';
 import SPECTRUM_ICONS_COLOR_PATH from '../resources/spectrum-icons-color.svg';
 import SPECTRUM_CSS_ICONS_PATH from '../resources/spectrum-css-icons.svg';
 import loadIcons from './loadIcons';
-
+import {Decorator} from '../../../coral-decorator';
 import {SPECTRUM_ICONS, SPECTRUM_ICONS_COLOR, SPECTRUM_CSS_ICONS} from './iconCollection';
 
 const SPECTRUM_ICONS_IDENTIFIER = 'spectrum-';
@@ -175,7 +175,7 @@ const sizeMap = {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Icon extends BaseComponent(HTMLElement) {
+const Icon = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -530,23 +530,12 @@ class Icon extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
     super.connectedCallback();
 
     // Contextual icons need to be checked again
     if (this.hasAttribute('_context')) {
       this.icon = this.icon;
     }
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
   }
 
   /** @ignore */
@@ -568,7 +557,7 @@ class Icon extends BaseComponent(HTMLElement) {
       this._hasRawImage = false;
     }
   }
-}
+});
 
 // Load icon collections by default
 const iconCollections = [SPECTRUM_ICONS_COLOR];

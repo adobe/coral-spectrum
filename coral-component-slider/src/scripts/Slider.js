@@ -15,6 +15,7 @@ import {BaseFormField} from '../../../coral-base-formfield';
 import {Collection} from '../../../coral-collection';
 import base from '../templates/base';
 import {transform, validate, events, commons, Keys} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Slider';
 const CLASSNAME_HANDLE = '_coral-Slider-handle';
@@ -43,7 +44,7 @@ const orientation = {
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
+const Slider = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -875,22 +876,6 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
@@ -951,6 +936,6 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
     // Defaults
     this._moveHandles();
   }
-}
+});
 
 export default Slider;

@@ -21,6 +21,7 @@ import '../../../coral-component-textfield';
 import base from '../templates/base';
 import overlayContent from '../templates/overlayContent';
 import {transform, commons, validate, i18n} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  Enum for {@link Datepicker} variant values.
@@ -105,7 +106,7 @@ const isNativeFormat = (format) => {
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
+const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -799,9 +800,6 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
     super.connectedCallback();
 
     const overlay = this._elements.overlay;
@@ -868,9 +866,6 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
     super.disconnectedCallback();
 
     const overlay = this._elements.overlay;
@@ -880,6 +875,6 @@ class Datepicker extends BaseFormField(BaseComponent(HTMLElement)) {
       overlay.remove();
     }
   }
-}
+});
 
 export default Datepicker;

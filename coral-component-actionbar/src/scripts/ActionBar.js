@@ -11,6 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
+import {Decorator} from '../../../coral-decorator';
 import '../../../coral-component-popover';
 import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
 import {commons} from '../../../coral-utils';
@@ -25,7 +26,7 @@ const CLASSNAME = '_coral-ActionBar';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class ActionBar extends BaseComponent(HTMLElement) {
+const ActionBar = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -537,22 +538,6 @@ class ActionBar extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
@@ -634,6 +619,6 @@ class ActionBar extends BaseComponent(HTMLElement) {
     // force one layout
     this._onLayout();
   }
-}
+});
 
 export default ActionBar;

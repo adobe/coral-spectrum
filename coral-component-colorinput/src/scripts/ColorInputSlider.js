@@ -14,6 +14,7 @@ import {Slider} from '../../../coral-component-slider';
 import '../../../coral-component-tooltip';
 import sliderBase from '../templates/sliderBase';
 import {transform} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAMES = ['_coral-ColorInput-slider', '_coral-Slider--color'];
 
@@ -23,7 +24,7 @@ const CLASSNAMES = ['_coral-ColorInput-slider', '_coral-Slider--color'];
  @htmltag coral-colorinput-slider
  @extends {Slider}
  */
-class ColorInputSlider extends Slider {
+const ColorInputSlider = Decorator(class extends Slider {
   /**
    The gradient shown as slider background as space separated values (at least 2 values needed).
    e.g: #ff0000 #ffff00 #00ff00 #00ffff #0000ff #ff00ff #ff0000
@@ -92,27 +93,11 @@ class ColorInputSlider extends Slider {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
     this.classList.add(...CLASSNAMES);
   }
-}
+});
 
 export default ColorInputSlider;

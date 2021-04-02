@@ -16,6 +16,7 @@ import ColumnViewCollection from './ColumnViewCollection';
 import isInteractiveTarget from './isInteractiveTarget';
 import selectionMode from './selectionMode';
 import {transform, validate, commons, i18n} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-MillerColumns';
 
@@ -50,7 +51,7 @@ const scrollTo = (element, to, duration, scrollCallback) => {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class ColumnView extends BaseComponent(HTMLElement) {
+const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -1314,22 +1315,6 @@ class ColumnView extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
@@ -1412,6 +1397,6 @@ class ColumnView extends BaseComponent(HTMLElement) {
    @property {ColumnViewItem} detail.activeItem
    The currently active item of the ColumnView.
    */
-}
+});
 
 export default ColumnView;

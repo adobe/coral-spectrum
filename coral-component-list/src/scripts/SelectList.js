@@ -15,6 +15,7 @@ import {SelectableCollection} from '../../../coral-collection';
 import '../../../coral-component-wait';
 import loadIndicator from '../templates/loadIndicator';
 import {transform, i18n} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const KEYPRESS_TIMEOUT_DURATION = 1000;
 
@@ -51,7 +52,7 @@ const CLASSNAME = '_coral-Menu';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class SelectList extends BaseComponent(HTMLElement) {
+const SelectList = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -520,22 +521,6 @@ class SelectList extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
-  /** @ignore */
   render() {
     this.classList.add(CLASSNAME);
 
@@ -582,6 +567,6 @@ class SelectList extends BaseComponent(HTMLElement) {
    @property {SelectListItem} detail.selection
    The newly selected item(s).
    */
-}
+});
 
 export default SelectList;

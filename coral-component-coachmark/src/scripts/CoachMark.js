@@ -16,6 +16,7 @@ import {Overlay} from '../../../coral-component-overlay';
 import '../../../coral-component-popover';
 import PopperJS from 'popper.js';
 import {transform, validate} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link CoachMark} sizes.
@@ -59,7 +60,7 @@ const CLASSNAME = '_coral-CoachMarkIndicator';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class CoachMark extends BaseComponent(HTMLElement) {
+const CoachMark = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -186,22 +187,6 @@ class CoachMark extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
@@ -224,6 +209,6 @@ class CoachMark extends BaseComponent(HTMLElement) {
     // Render template
     this.appendChild(this._template);
   }
-}
+});
 
 export default CoachMark;

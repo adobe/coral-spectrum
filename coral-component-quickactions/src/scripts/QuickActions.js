@@ -20,6 +20,7 @@ import QuickActionsItem from './QuickActionsItem';
 import '../../../coral-component-popover';
 import base from '../templates/base';
 import {transform, validate, commons, i18n} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const BUTTON_FOCUSABLE_SELECTOR = '._coral-QuickActions-item:not([disabled]):not([hidden])';
 
@@ -86,7 +87,7 @@ const CLASSNAME = '_coral-QuickActions';
  @htmltag coral-quickactions
  @extends {Overlay}
  */
-class QuickActions extends Overlay {
+const QuickActions = Decorator(class extends Overlay {
   /** @ignore */
   constructor() {
     super();
@@ -267,37 +268,42 @@ class QuickActions extends Overlay {
   }
 
   set target(value) {
+    const self = this;
     // avoid popper initialization while connecting for first time and not opened.
-    this._avoidPopperInit = this.open || this._popper ? false : true;
+    self._avoidPopperInit = self.open || self._popper ? false : true;
 
     super.target = value;
 
-    const targetElement = this._getTarget(value);
-    const targetHasChanged = targetElement !== this._previousTarget;
+    const targetElement = self._getTarget(value);
+    const prevTargetElement = self._previousTarget;
+    const targetHasChanged = targetElement !== prevTargetElement;
 
     if (targetElement && targetHasChanged) {
       // Remove listeners from the previous target
-      if (this._previousTarget) {
-        const previousTarget = this._getTarget(this._previousTarget);
+      if (prevTargetElement) {
+        const previousTarget = self._getTarget(prevTargetElement);
         if (previousTarget) {
-          this._removeTargetEventListeners(previousTarget);
+          self._removeTargetEventListeners(previousTarget);
           targetElement.removeAttribute('aria-haspopup');
           targetElement.removeAttribute('aria-owns');
         }
       }
 
       // Set up listeners for the new target
-      this._addTargetEventListeners();
+      self._addTargetEventListeners();
 
+      let ariaOwns = targetElement.getAttribute('aria-owns');
+      ariaOwns = ariaOwns && ariaOwns.length ? `${ariaOwns.trim()}  ${self.id}` : self.id;
+
+      targetElement.setAttribute('aria-owns', ariaOwns);
       // Mark the target as owning a popup
       targetElement.setAttribute('aria-haspopup', 'true');
-      let ariaOwns = targetElement.getAttribute('aria-owns');
-      ariaOwns = ariaOwns && ariaOwns.length ? `${ariaOwns.trim()}  ${this.id}` : this.id;
-      targetElement.setAttribute('aria-owns', ariaOwns);
 
       // Cache for use as previous target
-      this._previousTarget = targetElement;
+      self._previousTarget = targetElement;
     }
+
+    self._avoidPopperInit = false;
   }
 
   get observedMessages() {
@@ -316,10 +322,6 @@ class QuickActions extends Overlay {
   }
 
   set open(value) {
-    // if popper not initialized initialise them
-    if(!this._popper) {
-      this._initPopper();
-    }
     // If opening and stealing focus, on close, focus should be returned
     // to the element that had focus before QuickActions were opened.
     if (value &&
@@ -1249,10 +1251,9 @@ class QuickActions extends Overlay {
 
   /** @ignore */
   connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
+    this._avoidPopperInit = true;
     super.connectedCallback();
+    this._avoidPopperInit = false;
 
     const overlay = this._elements.overlay;
     // Cannot be open by default when rendered
@@ -1266,15 +1267,19 @@ class QuickActions extends Overlay {
   /** @ignore */
   render() {
     super.render();
+    const self = this;
+    const elements = self._elements;
+    const overlay = elements.overlay;
+    const moreButton = elements.moreButton;
 
-    this.classList.add(CLASSNAME);
+    self.classList.add(CLASSNAME);
 
     // Define QuickActions as a menu
-    this.setAttribute('role', 'menu');
+    self.setAttribute('role', 'menu');
 
     // Support cloneNode
     ['moreButton', 'overlay'].forEach((handleName) => {
-      const handle = this.querySelector(`[handle="${handleName}"]`);
+      const handle = self.querySelector(`[handle="${handleName}"]`);
       if (handle) {
         handle.remove();
       }
@@ -1282,20 +1287,19 @@ class QuickActions extends Overlay {
 
     // Render template
     const frag = document.createDocumentFragment();
-    frag.appendChild(this._elements.moreButton);
-    frag.appendChild(this._elements.overlay);
+    frag.appendChild(moreButton);
+    frag.appendChild(overlay);
 
     // Link target
-    this._elements.overlay.target = this._elements.moreButton;
-
-    this.appendChild(frag);
+    overlay._avoidPopperInit = true;
+    overlay.target = moreButton;
+    self.appendChild(frag);
+    // set this to false after overlay has been connected to avoid connected callback target setting
+    overlay._avoidPopperInit = false;
   }
 
   /** @ignore */
   disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
     super.disconnectedCallback();
 
     const overlay = this._elements.overlay;
@@ -1305,6 +1309,6 @@ class QuickActions extends Overlay {
       overlay.remove();
     }
   }
-}
+});
 
 export default QuickActions;

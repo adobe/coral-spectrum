@@ -13,6 +13,7 @@
 import {commons} from '../../../coral-utils';
 import {BaseComponent} from '../../../coral-base-component';
 import {BaseList} from '../../../coral-base-list';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-ButtonList';
 
@@ -24,7 +25,7 @@ const CLASSNAME = '_coral-ButtonList';
  @extends {BaseComponent}
  @extends {BaseList}
  */
-class ButtonList extends BaseList(BaseComponent(HTMLElement)) {
+const ButtonList = Decorator(class extends BaseList(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -52,27 +53,11 @@ class ButtonList extends BaseList(BaseComponent(HTMLElement)) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
     this.classList.add(CLASSNAME);
   }
-}
+});
 
 export default ButtonList;

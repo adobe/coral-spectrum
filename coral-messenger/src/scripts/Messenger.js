@@ -38,68 +38,56 @@ class Messenger {
 
   update(listener) {
     if(listener) {
-      let listenerRef = new WeakRef(listener);
-      this._listeners.push(listenerRef);
+      this._listeners.push(listener);
     }
   }
 
   postMessage(message, detail) {
-    let splicedIndex = [];
     let self = this;
     let element = self._element;
 
     if(self._connected) {
-      self._listeners.forEach((listenerRef, index) => {
-        let listener = listenerRef.deref();
-        if(listener) {
-          let observedMessages = listener.observedMessages;
-          let messageOptions = observedMessages[message];
+      self._listeners.forEach((listener, index) => {
+        let observedMessages = listener.observedMessages;
+        let messageOptions = observedMessages[message];
 
-          if(messageOptions) {
-            let selector;
-            let handler;
-            if(typeof messageOptions === 'string') {
-              selector = "*";
-              handler = messageOptions;
-            } else if(typeof messageOptions === 'object') {
-              selector = messageOptions.selector || "*";
-              handler = messageOptions.handler;
-            }
-
-            if(selector.indexOf(SCOPE_SELECTOR) === 0 ) {
-              if(!listener.id) {
-                listener.id = commons.getUID();
-              }
-              selector = selector.replace(SCOPE_SELECTOR, `#${listener.id} > `);
-            }
-
-            if(element.matches(selector)) {
-              let event = new Event({
-                target: element,
-                detail: detail,
-                type: message,
-                currentTarget: listener
-              });
-
-              listener[handler].call(listener, event);
-            }
+        if(messageOptions) {
+          let selector;
+          let handler;
+          if(typeof messageOptions === 'string') {
+            selector = "*";
+            handler = messageOptions;
+          } else if(typeof messageOptions === 'object') {
+            selector = messageOptions.selector || "*";
+            handler = messageOptions.handler;
           }
-        } else {
-          splicedIndex.push(index);
+
+          if(selector.indexOf(SCOPE_SELECTOR) === 0 ) {
+            if(!listener.id) {
+              listener.id = commons.getUID();
+            }
+            selector = selector.replace(SCOPE_SELECTOR, `#${listener.id} > `);
+          }
+
+          if(element.matches(selector)) {
+            let event = new Event({
+              target: element,
+              detail: detail,
+              type: message,
+              currentTarget: listener
+            });
+
+            listener[handler].call(listener, event);
+          }
         }
       });
     } else {
       this._element.trigger(message);
     }
-    splicedIndex.forEach((value) => {
-      this._listeners.splice(value, 1);
-    });
   }
 
   disconnect() {
     let self = this;
-    let element = self._element;
-
     self._connected = false;
     self._listeners = [];
   }
@@ -107,13 +95,14 @@ class Messenger {
 
 class Event {
   constructor(options) {
-    this._detail = options.detail;
-    this._target = options.target;
-    this._type = options.type;
-    this._currentTarget = options.currentTarget;
-    this._defaultPrevented = false;
-    this._propagationStopped = false;
-    this._immediatePropagationStopped = false;
+    const self = this;
+    self._detail = options.detail;
+    self._target = options.target;
+    self._type = options.type;
+    self._currentTarget = options.currentTarget;
+    self._defaultPrevented = false;
+    self._propagationStopped = false;
+    self._immediatePropagationStopped = false;
   }
 
   get detail() {

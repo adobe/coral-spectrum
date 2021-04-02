@@ -11,6 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  @class Coral.Card.PropertyList
@@ -19,24 +20,7 @@ import {BaseComponent} from '../../../coral-base-component';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class CardPropertyList extends BaseComponent(HTMLElement) {
-
-  /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
+const CardPropertyList = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   render() {
     super.render();
@@ -48,6 +32,6 @@ class CardPropertyList extends BaseComponent(HTMLElement) {
       this.textContent = '';
     }
   }
-}
+});
 
 export default CardPropertyList;

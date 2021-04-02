@@ -10,28 +10,22 @@
  * governing permissions and limitations under the License.
  */
 
-import {BaseComponent} from '../../../coral-base-component';
-import BaseTableSection from './BaseTableSection';
-import {Decorator} from '../../../coral-decorator';
-
-const CLASSNAME = '_coral-Table-foot';
-
-/**
- @class Coral.Table.Foot
- @classdesc A Table foot component
- @htmltag coral-table-foot
- @htmlbasetag tfoot
- @extends {HTMLTableSectionElement}
- @extends {BaseComponent}
- @extends {BaseTableSection}
- */
-const TableFoot = Decorator(class extends BaseTableSection(BaseComponent(HTMLTableSectionElement)) {
+const Decorator = (superClass) => class extends superClass {
   /** @ignore */
-  render() {
-    super.render();
-
-    this.classList.add(CLASSNAME);
+  connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
+    super.connectedCallback();
   }
-});
 
-export default TableFoot;
+  /** @ignore */
+  disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
+    super.disconnectedCallback();
+  }
+};
+
+export default Decorator;

@@ -11,6 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Menu-divider';
 
@@ -21,23 +22,7 @@ const CLASSNAME = '_coral-Menu-divider';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class ListDivider extends BaseComponent(HTMLElement) {
-  /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
+const ListDivider = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   render() {
     super.render();
@@ -47,6 +32,6 @@ class ListDivider extends BaseComponent(HTMLElement) {
     // a11y
     this.setAttribute('role', 'separator');
   }
-}
+});
 
 export default ListDivider;

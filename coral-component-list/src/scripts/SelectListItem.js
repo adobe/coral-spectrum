@@ -14,6 +14,7 @@ import {BaseComponent} from '../../../coral-base-component';
 import {transform} from '../../../coral-utils';
 import {Icon} from '../../../coral-component-icon';
 import checkIcon from '../templates/checkIcon';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Menu-item';
 
@@ -36,7 +37,7 @@ const VALID_ARIA_SELECTED_ROLES_REGEXP = new RegExp(`^(${VALID_ARIA_SELECTED_ROL
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class SelectListItem extends BaseComponent(HTMLElement) {
+const SelectListItem = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -214,22 +215,6 @@ class SelectListItem extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
@@ -261,6 +246,6 @@ class SelectListItem extends BaseComponent(HTMLElement) {
     // Assign the content zones, moving them into place in the process
     this.content = content;
   }
-}
+});
 
 export default SelectListItem;

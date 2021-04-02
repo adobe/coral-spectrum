@@ -20,6 +20,7 @@ import {Icon} from '../../../coral-component-icon';
 import '../../../coral-component-popover';
 import base from '../templates/base';
 import {transform, validate, commons, i18n, Keys} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link Select} variants.
@@ -79,7 +80,7 @@ const arrayDiff = function (a, b) {
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-class Select extends BaseFormField(BaseComponent(HTMLElement)) {
+const Select = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -1393,9 +1394,6 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
     super.connectedCallback();
 
     const overlay = this._elements.overlay;
@@ -1462,9 +1460,6 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
     super.disconnectedCallback();
 
     const overlay = this._elements.overlay;
@@ -1492,6 +1487,6 @@ class Select extends BaseFormField(BaseComponent(HTMLElement)) {
 
    @typedef {CustomEvent} coral-select:hideitems
    */
-}
+});
 
 export default Select;

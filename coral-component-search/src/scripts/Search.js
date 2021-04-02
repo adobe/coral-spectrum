@@ -17,6 +17,7 @@ import '../../../coral-component-button';
 import {Icon} from '../../../coral-component-icon';
 import base from '../templates/base';
 import {transform, validate, commons, i18n} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Search';
 
@@ -43,7 +44,7 @@ const variant = {
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-class Search extends BaseFormField(BaseComponent(HTMLElement)) {
+const Search = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -341,22 +342,6 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
@@ -409,6 +394,6 @@ class Search extends BaseFormField(BaseComponent(HTMLElement)) {
 
    @typedef {CustomEvent} coral-search:clear
    */
-}
+});
 
 export default Search;

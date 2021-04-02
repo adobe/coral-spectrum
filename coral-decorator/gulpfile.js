@@ -10,27 +10,4 @@
  * governing permissions and limitations under the License.
  */
 
-import {BaseComponent} from '../../../coral-base-component';
-import {BaseButton} from '../../../coral-base-button';
-import {Decorator} from '../../../coral-decorator';
-
-/**
- @class Coral.Button
- @classdesc A Button component containing text and/or an icon.
- @htmltag coral-button
- @htmlbasetag button
- @extends {HTMLButtonElement}
- @extends {BaseComponent}
- @extends {BaseButton}
- */
-const Button = Decorator(class extends BaseButton(BaseComponent(HTMLButtonElement)) {
-  /** @ignore */
-  constructor() {
-    super();
-
-    // Events
-    this._delegateEvents(this._events);
-  }
-});
-
-export default Button;
+require('../coral-gulp')(require('gulp'));

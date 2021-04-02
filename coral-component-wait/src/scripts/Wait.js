@@ -13,6 +13,7 @@
 import {BaseComponent} from '../../../coral-base-component';
 import {transform, validate} from '../../../coral-utils';
 import base from '../templates/base';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link Wait} variants.
@@ -58,7 +59,7 @@ const CLASSNAME = '_coral-CircleLoader';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Wait extends BaseComponent(HTMLElement) {
+const Wait = Decorator(class extends BaseComponent(HTMLElement) {
   constructor() {
     super();
 
@@ -257,22 +258,6 @@ class Wait extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
@@ -315,6 +300,6 @@ class Wait extends BaseComponent(HTMLElement) {
 
    @typedef {CustomEvent} coral-wait:change
    */
-}
+});
 
 export default Wait;

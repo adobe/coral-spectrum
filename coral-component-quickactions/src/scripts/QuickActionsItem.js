@@ -13,6 +13,7 @@
 import {BaseComponent} from '../../../coral-base-component';
 import {transform, validate} from '../../../coral-utils';
 import {Messenger} from '../../../coral-messenger';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link QuickActionsItem} type values.
@@ -36,7 +37,7 @@ const type = {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class QuickActionsItem extends BaseComponent(HTMLElement) {
+const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -183,9 +184,6 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
     // always call before super to avoid rendering before connection
     this._messenger.connect();
 
@@ -194,9 +192,6 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
     this._messenger.disconnect();
     super.disconnectedCallback();
   }
@@ -242,6 +237,6 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
 
    @private
    */
-}
+});
 
 export default QuickActionsItem;

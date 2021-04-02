@@ -13,6 +13,7 @@
 import {BaseComponent} from '../../../coral-base-component';
 import BaseTableSection from './BaseTableSection';
 import {transform} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Table-head';
 
@@ -25,7 +26,7 @@ const CLASSNAME = '_coral-Table-head';
  @extends {BaseComponent}
  @extends {BaseTableSection}
  */
-class TableHead extends BaseTableSection(BaseComponent(HTMLTableSectionElement)) {
+const TableHead = Decorator(class extends BaseTableSection(BaseComponent(HTMLTableSectionElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -64,22 +65,6 @@ class TableHead extends BaseTableSection(BaseComponent(HTMLTableSectionElement))
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
@@ -101,6 +86,6 @@ class TableHead extends BaseTableSection(BaseComponent(HTMLTableSectionElement))
 
    @private
    */
-}
+});
 
 export default TableHead;

@@ -16,6 +16,7 @@ import step from '../templates/step';
 import {transform, commons} from '../../../coral-utils';
 import getTarget from './getTarget';
 import StepList from './StepList';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Steplist-item';
 
@@ -26,7 +27,7 @@ const CLASSNAME = '_coral-Steplist-item';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Step extends BaseComponent(HTMLElement) {
+const Step = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -327,9 +328,6 @@ class Step extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
     super.connectedCallback();
 
     const overlay = this._elements.overlay;
@@ -412,9 +410,6 @@ class Step extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
     super.disconnectedCallback();
 
     const overlay = this._elements.overlay;
@@ -424,6 +419,6 @@ class Step extends BaseComponent(HTMLElement) {
       overlay.remove();
     }
   }
-}
+});
 
 export default Step;

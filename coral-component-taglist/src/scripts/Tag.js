@@ -15,6 +15,7 @@ import '../../../coral-component-button';
 import {Icon} from '../../../coral-component-icon';
 import base from '../templates/base';
 import {transform, validate, events, i18n, commons} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Tags-item';
 const LABEL_CLASSNAME = '_coral-Label';
@@ -145,7 +146,7 @@ const getOffsetCenter = (element) => {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Tag extends BaseComponent(HTMLElement) {
+const Tag = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -471,10 +472,6 @@ class Tag extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-
     super.connectedCallback();
 
     // Used to inform the tag list that it's added
@@ -521,9 +518,6 @@ class Tag extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
     super.disconnectedCallback();
 
     // Used to inform the tag list that it's removed synchronously
@@ -547,6 +541,6 @@ class Tag extends BaseComponent(HTMLElement) {
 
    @private
    */
-}
+});
 
 export default Tag;

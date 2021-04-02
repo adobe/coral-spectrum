@@ -11,6 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Table-headerCell';
 
@@ -22,7 +23,7 @@ const CLASSNAME = '_coral-Table-headerCell';
  @extends {HTMLTableCellElement}
  @extends {BaseComponent}
  */
-class TableHeaderCell extends BaseComponent(HTMLTableCellElement) {
+const TableHeaderCell = Decorator(class extends BaseComponent(HTMLTableCellElement) {
   /** @ignore */
   constructor() {
     super();
@@ -112,6 +113,6 @@ class TableHeaderCell extends BaseComponent(HTMLTableCellElement) {
 
    @private
    */
-}
+});
 
 export default TableHeaderCell;

@@ -14,6 +14,7 @@ import {BaseComponent} from '../../../coral-base-component';
 import {BaseFormField} from '../../../coral-base-formfield';
 import base from '../templates/base';
 import {transform, commons, i18n} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-ToggleSwitch';
 
@@ -25,7 +26,7 @@ const CLASSNAME = '_coral-ToggleSwitch';
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
+const Switch = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -268,22 +269,6 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-    super.connectedCallback();
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
-      return;
-    }
-    super.disconnectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
@@ -333,6 +318,6 @@ class Switch extends BaseFormField(BaseComponent(HTMLElement)) {
     // We must do this because IE does not catch mutations when nodes are not in the DOM
     this._hideLabelIfEmpty();
   }
-}
+});
 
 export default Switch;
