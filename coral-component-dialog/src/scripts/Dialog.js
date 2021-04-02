@@ -688,7 +688,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   connectedCallback() {
-    if (this._ignoreConnectedCallback) {
+    if (this._skipConnectedCallback()) {
       return;
     }
 
@@ -808,7 +808,7 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   disconnectedCallback() {
-    if (this._ignoreConnectedCallback) {
+    if (this._skipDisconnectedCallback()) {
       return;
     }
 

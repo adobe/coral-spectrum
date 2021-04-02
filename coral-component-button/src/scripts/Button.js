@@ -30,6 +30,22 @@ class Button extends BaseButton(BaseComponent(HTMLButtonElement)) {
     // Events
     this._delegateEvents(this._events);
   }
+
+  /** @ignore */
+  connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
+    super.connectedCallback();
+  }
+
+  /** @ignore */
+  disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
+    super.disconnectedCallback();
+  }
 }
 
 export default Button;

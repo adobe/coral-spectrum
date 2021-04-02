@@ -889,6 +889,9 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
     super.connectedCallback();
 
     const overlay = this._elements.overlay;
@@ -952,6 +955,9 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
     super.disconnectedCallback();
 
     const overlay = this._elements.overlay;

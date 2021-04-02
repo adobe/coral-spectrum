@@ -29,6 +29,22 @@ class List extends BaseList(BaseComponent(HTMLElement)) {
     // Events
     this._delegateEvents(this._events);
   }
+
+  /** @ignore */
+  connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
+    super.connectedCallback();
+  }
+
+  /** @ignore */
+  disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
+    super.disconnectedCallback();
+  }
 }
 
 export default List;

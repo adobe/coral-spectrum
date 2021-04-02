@@ -521,6 +521,9 @@ class Tag extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
     super.disconnectedCallback();
 
     // Used to inform the tag list that it's removed synchronously

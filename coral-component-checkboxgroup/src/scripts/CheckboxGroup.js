@@ -38,6 +38,22 @@ class CheckboxGroup extends BaseFieldGroup(BaseComponent(HTMLElement)) {
   get selectedItems() {
     return this.items._getAllSelected('checked');
   }
+
+  /** @ignore */
+  connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
+    super.connectedCallback();
+  }
+
+  /** @ignore */
+  disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
+    super.disconnectedCallback();
+  }
 }
 
 export default CheckboxGroup;

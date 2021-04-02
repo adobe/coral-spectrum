@@ -157,7 +157,8 @@ class Masonry extends BaseComponent(HTMLElement) {
 
       // private
       'coral-masonry-item:_connected': '_onItemConnected',
-      'coral-masonry-item:_selectedchanged': '_onItemSelectedChanged'
+      'coral-masonry-item:_selectedchanged': '_onItemSelectedChanged',
+      'coral-masonry-item:_addMessengerListener': '_addMessengerListener'
     });
 
     // Relayout when child elements change or are added/removed
@@ -802,10 +803,12 @@ class Masonry extends BaseComponent(HTMLElement) {
       return;
     }
 
-    if (!item.hasAttribute('_removing')) {
+    if (!item.hasAttribute('_removing') && !item.skipDisconnectAnimation) {
       // Attach again for remove transition
       item.setAttribute('_removing', '');
+      item._ignoreConnectedCallback = true;
       this.appendChild(item);
+      item._ignoreConnectedCallback = false;
       commons.transitionEnd(item, () => {
         item.remove();
       });
@@ -962,6 +965,13 @@ class Masonry extends BaseComponent(HTMLElement) {
     item._prevDragPos = null;
   }
 
+  get observedMessages() {
+    return {
+      'coral-masonry-item:_connected': '_onItemConnected',
+      'coral-masonry-item:_selectedchanged': '_onItemSelectedChanged',
+    };
+  }
+
   /**
    Registry for masonry layouts.
 
@@ -1027,6 +1037,22 @@ class Masonry extends BaseComponent(HTMLElement) {
       'aria-label',
       'aria-labelledby'
     ]);
+  }
+
+  /** @ignore */
+  connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
+    super.connectedCallback();
+  }
+
+  /** @ignore */
+  disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
+    super.disconnectedCallback();
   }
 
   /** @ignore */

@@ -15,6 +15,7 @@ import {DragAction} from '../../../coral-dragaction';
 import '../../../coral-component-checkbox';
 import quickactions from '../templates/quickactions';
 import {transform, commons} from '../../../coral-utils';
+import {Messenger} from '../../../coral-messenger';
 
 const CLASSNAME = '_coral-Masonry-item';
 
@@ -30,6 +31,7 @@ class MasonryItem extends BaseComponent(HTMLElement) {
   constructor() {
     super();
 
+    this._messenger = new Messenger({element: this});
     // Represents ownership (necessary when the item is moved which triggers callbacks)
     this._masonry = null;
 
@@ -64,6 +66,22 @@ class MasonryItem extends BaseComponent(HTMLElement) {
    @htmlattribute selected
    @htmlattributereflected
    */
+  get skipDisconnectAnimation() {
+    return this._skipDisconnectAnimation || false;
+  }
+
+  set skipDisconnectAnimation(value) {
+    this._skipDisconnectAnimation = transform.booleanAttr(value);
+  }
+
+  /**
+   Whether the item is selected.
+
+   @type {Boolean}
+   @default false
+   @htmlattribute selected
+   @htmlattributereflected
+   */
   get selected() {
     return this._selected || false;
   }
@@ -77,7 +95,7 @@ class MasonryItem extends BaseComponent(HTMLElement) {
 
     this._elements.check[this._selected ? 'setAttribute' : 'removeAttribute']('checked', '');
 
-    this.trigger('coral-masonry-item:_selectedchanged');
+    this._messenger.postMessage('coral-masonry-item:_selectedchanged');
   }
 
   /**
@@ -153,11 +171,11 @@ class MasonryItem extends BaseComponent(HTMLElement) {
     if (this._skipConnectedCallback()) {
       return;
     }
-
+    this._messenger.connect();
     super.connectedCallback();
 
     // Inform masonry immediately
-    this.trigger('coral-masonry-item:_connected');
+    this._messenger.postMessage('coral-masonry-item:_connected');
   }
 
   /** @ignore */
@@ -181,10 +199,10 @@ class MasonryItem extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   disconnectedCallback() {
-    if (this.isConnected) {
+    if (this._skipDisconnectedCallback()) {
       return;
     }
-
+    this._messenger.disconnect();
     super.disconnectedCallback();
 
     // Handle it in masonry immediately

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Coral.keys - Delegation Test</title>
+    <script src="../dist/js/coral.js"></script>
+
+  </head>
+
+  <body>
+
+    <div class="outer">
+      <div class="inner">
+        <button class="button">Focus me and type a!</button>
+      </div>
+    </div>
+
+    <dl id="results">
+    </dl>
+
+    <script>
+      var x = '✖';
+      var check = '✓';
+
+      var keys = new Coral.Keys('.outer');
+
+      var results = {
+        outer: false,
+        inner: false,
+        button: false
+      };
+
+      /*
+      keys.on('a', function(evt) {
+        console.log('Got bubbled key event on outer div');
+        results.outer = true;
+      });
+      */
+
+      keys.on('a', '.inner',  function(evt) {
+        console.log('Got bubbled key event on inner div');
+        results.inner = true;
+      });
+
+      /*
+      keys.on('a', '.button', function() {
+        console.log('Got direct event on button');
+        results.button = true;
+      });
+      */
+
+      var el = document.getElementById('results');
+      Coral.events.on('keyup', '.outer', function() {
+        el.innerHTML = '';
+        for (var prop in results) {
+          el.insertAdjacentHTML('beforeend', '<dt>'+prop+'</dt><dd>'+results[prop]+'</dd>');
+          results[prop] = false;
+        }
+      });
+    </script>
+
+  </body>
+</html>

@@ -222,6 +222,22 @@ class FileUploadItem {
     return this._xhr ? this._xhr.statusText : this._statusText || '';
   }
 
+  /** @ignore */
+  connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
+    super.connectedCallback();
+  }
+
+  /** @ignore */
+  disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
+    super.disconnectedCallback();
+  }
+
   /** @private */
   _isMimeTypeAllowed(acceptedMimeTypes) {
     let isAllowed = false;

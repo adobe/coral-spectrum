@@ -182,11 +182,21 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
           this.returnFocusTo(targetElement);
         }
 
+        this._targetElement = targetElement;
         // Initialize popper only if we have a target
-        this._popper = this._popper || new PopperJS(targetElement, this, {onUpdate: this._onUpdate.bind(this)});
+        if(this.open || this.) {
+          this._popper = this._popper || new PopperJS(targetElement, this, {onUpdate: this._onUpdate.bind(this)});
 
-        // Make sure popper options modifiers are up to date
-        this.reposition();
+          // Make sure popper options modifiers are up to date
+          this.reposition();
+        } else {
+          window.requestAnimationFrame(() => {
+            this._popper = this._popper || new PopperJS(targetElement, this, {onUpdate: this._onUpdate.bind(this)});
+
+            // Make sure popper options modifiers are up to date
+            this.reposition();
+          });
+        }
       }
     }
   }
@@ -424,7 +434,13 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
   set open(value) {
     super.open = value;
 
-    this._toggleSmartBehavior(this.open);
+    if(this._popper) {
+      this._toggleSmartBehavior(this.open);
+    } else {
+      window.requestAnimationFrame(() => {
+        this._toggleSmartBehavior(this.open);
+      });
+    }
   }
 
   _toggleSmartBehavior(toggle) {
@@ -728,7 +744,7 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   disconnectedCallback() {
-    if (this._ignoreConnectedCallback) {
+    if (this._skipDisconnectedCallback()) {
       return;
     }
 

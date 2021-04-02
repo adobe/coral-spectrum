@@ -152,6 +152,22 @@ class SelectItem extends BaseComponent(HTMLElement) {
   static get observedAttributes() {
     return super.observedAttributes.concat(['selected', 'disabled', 'value']);
   }
+
+  /** @ignore */
+  connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
+    super.connectedCallback();
+  }
+
+  /** @ignore */
+  disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
+    super.disconnectedCallback();
+  }
 }
 
 export default SelectItem;

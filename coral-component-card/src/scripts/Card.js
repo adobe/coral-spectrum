@@ -359,6 +359,22 @@ class Card extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
+  connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
+    super.connectedCallback();
+  }
+
+  /** @ignore */
+  disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
+    super.disconnectedCallback();
+  }
+
+  /** @ignore */
   render() {
     super.render();
 
@@ -417,7 +433,11 @@ class Card extends BaseComponent(HTMLElement) {
 
     // In case a lot of alerts are added, they will not overflow the card
     // Also check whether any alerts are available
-    this.classList.toggle(`${CLASSNAME}--overflow`, this.info.childNodes.length && this.info.scrollHeight > this.clientHeight);
+
+    requestAnimationFrame(()=> {
+      //
+      this.classList.toggle(`${CLASSNAME}--overflow`, this.info.childNodes.length && this.info.scrollHeight > this.clientHeight);
+    });
   }
 }
 

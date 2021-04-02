@@ -313,12 +313,23 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
     super.connectedCallback();
 
     // Query the tab target once the tab item is inserted in the DOM
     if (this.selected) {
       this._selectTarget();
     }
+  }
+
+  /** @ignore */
+  disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
+    super.disconnectedCallback();
   }
 
   /** @ignore */

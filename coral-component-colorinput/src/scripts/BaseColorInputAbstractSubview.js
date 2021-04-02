@@ -49,6 +49,9 @@ const BaseColorInputAbstractSubview = (superClass) => class extends superClass {
 
   /** @ignore */
   connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
     super.connectedCallback();
 
     const overlay = this.closest('._coral-ColorInput-overlay');
@@ -70,6 +73,9 @@ const BaseColorInputAbstractSubview = (superClass) => class extends superClass {
 
   /** @ignore */
   disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
     super.disconnectedCallback();
 
     if (this._colorinput) {

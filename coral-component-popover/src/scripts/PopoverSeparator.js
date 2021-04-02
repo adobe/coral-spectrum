@@ -24,7 +24,19 @@ const CLASSNAMES = ['coral-Rule', 'coral-Rule--subsection2'];
 class PopoverSeparator extends BaseComponent(HTMLElement) {
   /** @ignore */
   connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
+    super.connectedCallback();
     this.classList.add(...CLASSNAMES);
+  }
+
+  /** @ignore */
+  disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
+    super.disconnectedCallback();
   }
 }
 

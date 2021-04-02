@@ -1053,6 +1053,22 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
   }
 
   /** @ignore */
+  connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
+    super.connectedCallback();
+  }
+
+  /** @ignore */
+  disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
+    super.disconnectedCallback();
+  }
+
+  /** @ignore */
   render() {
     super.render();
 

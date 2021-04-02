@@ -73,6 +73,22 @@ class RadioGroup extends BaseFieldGroup(BaseComponent(HTMLElement)) {
   static get orientation() {
     return orientation;
   }
+
+  /** @ignore */
+  connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
+    super.connectedCallback();
+  }
+
+  /** @ignore */
+  disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
+    super.disconnectedCallback();
+  }
 }
 
 export default RadioGroup;

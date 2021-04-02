@@ -140,7 +140,8 @@ class QuickActions extends Overlay {
       'coral-quickactions-item:_contentchanged': '_onItemChange',
       'coral-quickactions-item:_iconchanged': '_onItemChange',
       'coral-quickactions-item:_hrefchanged': '_onItemChange',
-      'coral-quickactions-item:_typechanged': '_onItemTypeChange'
+      'coral-quickactions-item:_typechanged': '_onItemTypeChange',
+      'coral-quickactions-item:_addMessengerListener': '_addMessengerListener'
     };
 
     const overlayId = this._elements.overlay.id;
@@ -217,6 +218,51 @@ class QuickActions extends Overlay {
   }
 
   /**
+   The element the overlay should position relative to. It accepts values from {@link OverlayTargetEnum}, as
+   well as a DOM element or a CSS selector. If a CSS selector is provided, the first matching element will be used.
+
+   @type {?HTMLElement|String}
+   @default null
+   */
+  get target() {
+    return this._target || null;
+  }
+
+  set target(value) {
+    // We don't want to validate that the value must change here
+    // If a selector is provided, we'll take the first element matching that selector
+    // If the DOM is modified and the user wants a new target with the same selector,
+    // They should be able to set target = 'selector' again and get a different element
+    if (value === null || typeof value === 'string' || value instanceof Node) {
+      this._target = value;
+
+      const targetElement = this._getTarget();
+
+      if (targetElement) {
+        // To make it return focus to the right item, change the target
+        if (this._returnFocus === this.constructor.returnFocus.ON) {
+          this.returnFocusTo(targetElement);
+        }
+
+        // Initialize popper only if we have a target
+        if(this.open) {
+          this._popper = this._popper || new PopperJS(targetElement, this, {onUpdate: this._onUpdate.bind(this)});
+
+          // Make sure popper options modifiers are up to date
+          this.reposition();
+        } else {
+          window.requestAnimationFrame(() => {
+            this._popper = this._popper || new PopperJS(targetElement, this, {onUpdate: this._onUpdate.bind(this)});
+
+            // Make sure popper options modifiers are up to date
+            this.reposition();
+          });
+        }
+      }
+    }
+  }
+
+  /**
    The placement of the QuickActions. The value may be one of 'top', 'center' and 'bottom' and indicates the vertical
    alignment of the QuickActions relative to their container.
    See {@link OverlayPlacementEnum}.
@@ -266,6 +312,14 @@ class QuickActions extends Overlay {
   }
 
   set target(value) {
+
+    this._avoidPopperInit = this._
+    if(this.open) {
+      this._avoidPopperInit = false;
+    } else {
+       = true;
+    }
+
     super.target = value;
 
     const targetElement = this._getTarget(value);
@@ -296,6 +350,14 @@ class QuickActions extends Overlay {
     }
   }
 
+  get observedMessages() {
+    return {
+      'coral-quickactions-item:_contentchanged': '_onItemChange',
+      'coral-quickactions-item:_iconchanged': '_onItemChange',
+      'coral-quickactions-item:_hrefchanged': '_onItemChange',
+      'coral-quickactions-item:_typechanged': '_onItemTypeChange'
+    };
+  }
   /**
    Inherited from {@link Overlay#open}.
    */
@@ -591,11 +653,11 @@ class QuickActions extends Overlay {
 
     const buttonListItemParent = this._elements.buttonList;
 
-    buttonListItemParent.insertBefore(buttonListItem, buttonListItemParent.children[index]);
     buttonListItem.tabIndex = -1;
     buttonListItem.content.innerHTML = itemData.htmlContent;
     buttonListItem.icon = itemData.icon;
     buttonListItem.setAttribute('role', 'menuitem');
+    buttonListItemParent.insertBefore(buttonListItem, buttonListItemParent.children[index]);
 
     item._elements.button = button;
     item._elements.buttonListItem = buttonListItem;
@@ -1122,10 +1184,12 @@ class QuickActions extends Overlay {
     // stops propagation so that this event remains internal to the component
     event.stopImmediatePropagation();
 
-    const item = event.target;
-    this._removeItemElements(item);
-    this._attachItem(item);
-    this._layout();
+    if(this._openedBefore || this.open) {
+      const item = event.target;
+      this._removeItemElements(item);
+      this._attachItem(item);
+      this._layout();
+    }
   }
 
   /** @ignore */
@@ -1230,6 +1294,9 @@ class QuickActions extends Overlay {
 
   /** @ignore */
   connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
     super.connectedCallback();
 
     const overlay = this._elements.overlay;
@@ -1271,6 +1338,9 @@ class QuickActions extends Overlay {
 
   /** @ignore */
   disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
     super.disconnectedCallback();
 
     const overlay = this._elements.overlay;

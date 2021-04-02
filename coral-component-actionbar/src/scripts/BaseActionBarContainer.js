@@ -279,6 +279,9 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
 
   /** @ignore */
   connectedCallback() {
+    if (this._skipConnectedCallback()) {
+      return;
+    }
     super.connectedCallback();
 
     const overlay = this._elements.overlay;
@@ -337,6 +340,9 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
 
   /** @ignore */
   disconnectedCallback() {
+    if (this._skipDisconnectedCallback()) {
+      return;
+    }
     super.disconnectedCallback();
 
     const overlay = this._elements.overlay;
