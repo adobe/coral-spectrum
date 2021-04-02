@@ -218,51 +218,6 @@ class QuickActions extends Overlay {
   }
 
   /**
-   The element the overlay should position relative to. It accepts values from {@link OverlayTargetEnum}, as
-   well as a DOM element or a CSS selector. If a CSS selector is provided, the first matching element will be used.
-
-   @type {?HTMLElement|String}
-   @default null
-   */
-  get target() {
-    return this._target || null;
-  }
-
-  set target(value) {
-    // We don't want to validate that the value must change here
-    // If a selector is provided, we'll take the first element matching that selector
-    // If the DOM is modified and the user wants a new target with the same selector,
-    // They should be able to set target = 'selector' again and get a different element
-    if (value === null || typeof value === 'string' || value instanceof Node) {
-      this._target = value;
-
-      const targetElement = this._getTarget();
-
-      if (targetElement) {
-        // To make it return focus to the right item, change the target
-        if (this._returnFocus === this.constructor.returnFocus.ON) {
-          this.returnFocusTo(targetElement);
-        }
-
-        // Initialize popper only if we have a target
-        if(this.open) {
-          this._popper = this._popper || new PopperJS(targetElement, this, {onUpdate: this._onUpdate.bind(this)});
-
-          // Make sure popper options modifiers are up to date
-          this.reposition();
-        } else {
-          window.requestAnimationFrame(() => {
-            this._popper = this._popper || new PopperJS(targetElement, this, {onUpdate: this._onUpdate.bind(this)});
-
-            // Make sure popper options modifiers are up to date
-            this.reposition();
-          });
-        }
-      }
-    }
-  }
-
-  /**
    The placement of the QuickActions. The value may be one of 'top', 'center' and 'bottom' and indicates the vertical
    alignment of the QuickActions relative to their container.
    See {@link OverlayPlacementEnum}.
@@ -312,13 +267,8 @@ class QuickActions extends Overlay {
   }
 
   set target(value) {
-
-    this._avoidPopperInit = this._
-    if(this.open) {
-      this._avoidPopperInit = false;
-    } else {
-       = true;
-    }
+    // avoid popper initialization while connecting for first time and not opened.
+    this._avoidPopperInit = this.open || this._popper ? false : true;
 
     super.target = value;
 
@@ -366,6 +316,10 @@ class QuickActions extends Overlay {
   }
 
   set open(value) {
+    // if popper not initialized initialise them
+    if(!this._popper) {
+      this._initPopper();
+    }
     // If opening and stealing focus, on close, focus should be returned
     // to the element that had focus before QuickActions were opened.
     if (value &&
@@ -383,6 +337,7 @@ class QuickActions extends Overlay {
         // we iterate over all the items initializing them in the correct order
         const items = this.items.getAll();
         for (let i = 0, itemCount = items.length ; i < itemCount ; i++) {
+          this._removeItemElements(items[i]);
           this._attachItem(items[i], i);
         }
 

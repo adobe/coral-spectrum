@@ -182,20 +182,9 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
           this.returnFocusTo(targetElement);
         }
 
-        this._targetElement = targetElement;
-        // Initialize popper only if we have a target
-        if(this.open || this.) {
-          this._popper = this._popper || new PopperJS(targetElement, this, {onUpdate: this._onUpdate.bind(this)});
-
-          // Make sure popper options modifiers are up to date
-          this.reposition();
-        } else {
-          window.requestAnimationFrame(() => {
-            this._popper = this._popper || new PopperJS(targetElement, this, {onUpdate: this._onUpdate.bind(this)});
-
-            // Make sure popper options modifiers are up to date
-            this.reposition();
-          });
+        // initialise popper if popper already initialised or it is not explicitly avoid.
+        if(this._popper ||  !this._avoidPopperInit) {
+          this._initPopper(targetElement);
         }
       }
     }
@@ -433,14 +422,7 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
 
   set open(value) {
     super.open = value;
-
-    if(this._popper) {
-      this._toggleSmartBehavior(this.open);
-    } else {
-      window.requestAnimationFrame(() => {
-        this._toggleSmartBehavior(this.open);
-      });
-    }
+    this._toggleSmartBehavior(this.open);
   }
 
   _toggleSmartBehavior(toggle) {
@@ -549,6 +531,14 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
     return this.constructor._getTarget(this, targetValue);
   }
 
+  _initPopper(targetElement) {
+    targetElement = targetElement || this._getTarget();
+    if(targetElement) {
+      this._popper = this._popper || new PopperJS(targetElement, this, {onUpdate: this._onUpdate.bind(this)});
+      // Make sure popper options modifiers are up to date
+      this.reposition();
+    }
+  }
   /**
    Re-position the overlay if it's currently open.
 
