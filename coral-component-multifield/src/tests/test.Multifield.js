@@ -77,7 +77,7 @@ describe('Multifield', function () {
         expect(items2.length).to.be.equal(2);
       });
 
-      it('should disable items delete button when count less than or equal min value', function () {
+      it('should disable items delete button when count less than or equal min value', function (done) {
         var multifield1 = document.getElementById("multifield-min-3");
         var multifield2 = document.getElementById("multifield-min-2");
         var items1 = multifield1.items;
@@ -93,6 +93,7 @@ describe('Multifield', function () {
             var rmBtn = item.querySelector("._coral-Multifield-remove");
             expect(rmBtn.disabled).to.be.true;
           });
+          done();
         });
       });
 
@@ -118,16 +119,19 @@ describe('Multifield', function () {
         });
       });
 
-      it('toggle items delete button disabled state when items removed from button click', function () {
+      it('toggle items delete button disabled state when items removed from button click', function (done) {
         var multifield = document.getElementById("multifield-min-1");
         var items = multifield.items;
 
         items.getAll()[0].querySelector('._coral-Multifield-remove').click();
-
+        // MO takes 1 frame and disabling button will take place in next frame
         helpers.next(function() {
-          items.getAll().forEach(function(item) {
-            var rmBtn = item.querySelector("._coral-Multifield-remove");
-            expect(rmBtn.disabled).to.be.true;
+          helpers.next(function() {
+            items.getAll().forEach(function(item) {
+              var rmBtn = item.querySelector("._coral-Multifield-remove");
+              expect(rmBtn.disabled).to.be.true;
+            });
+            done();
           });
         });
       });

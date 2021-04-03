@@ -205,6 +205,10 @@ class Multifield extends BaseComponent(HTMLElement) {
     self._validatingMinItems = false;
   }
 
+  /**
+   * Schedule the toggling of remove button disabled state of all items in next frame if not forced.
+   * @ignore
+   */
   _scheduleToggleRemoveButtonDisable(forced, disable){
     const self = this;
     const items = self.items;

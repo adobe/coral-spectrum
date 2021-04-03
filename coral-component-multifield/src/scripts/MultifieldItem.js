@@ -65,11 +65,12 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
   }
 
   /**
-   The item content.
+    Specify whether the remove button is in disabled state or not.
 
-   @type {MultifieldItemContent}
-   @contentzone
-   */
+    @type {Boolean}
+    @default false
+    @private
+    */
   get _disableRemoveButton() {
     return this._elements.remove.disabled || false;
   }
