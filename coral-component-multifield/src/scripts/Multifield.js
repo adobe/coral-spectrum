@@ -232,7 +232,6 @@ class Multifield extends BaseComponent(HTMLElement) {
     items = !Array.isArray(items) ? [items] : items;
 
     items.forEach(function(item) {
-      customElements.upgradeElement(item);
       item._disableRemoveButton = disable;
     });
   }
