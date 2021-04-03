@@ -13,7 +13,7 @@
 import {BaseComponent} from '../../../coral-base-component';
 import MultifieldCollection from './MultifieldCollection';
 import '../../../coral-component-textfield';
-import {commons, i18n} from '../../../coral-utils';
+import {commons, i18n, validate, transform} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Multifield';
 const IS_DRAGGING_CLASS = 'is-dragging';
@@ -146,6 +146,61 @@ class Multifield extends BaseComponent(HTMLElement) {
       set: function (content) {
         // Additionally add support for template
         this._handleTemplateSupport(content);
+      }
+    });
+  }
+
+
+  get min() {
+    return this._min || 0;
+  }
+
+  set min(value) {
+    const self = this;
+    value = transform.number(value);
+
+    if(value && validate.valueMustChange(self._min, value)) {
+      self._min = value;
+      self._reflectAttribute('min', value);
+
+      if(self._disconnected === false) {
+        self._validateMinItems();
+      }
+    }
+  }
+
+  _validateMinItems() {
+    const self = this;
+    let items = self.items;
+    let currentLength = items.length;
+    let currentMin = self.min;
+
+    self._validatingMinItems = true;
+    if(currentLength <= currentMin) {
+      let itemsToBeAdded = self.min - items.length;
+
+      for(let i = 0; i < itemsToBeAdded; i++) {
+        self.items.add(document.createElement('coral-multifield-item'));
+      }
+
+      window.requestAnimationFrame(() => {
+        self._toggleItemsRemoveButtonDisable(items.getAll(), true);
+      });
+    } else {
+      self._toggleItemsRemoveButtonDisable(items.getAll(), false);
+    }
+    self._validatingMinItems = false;
+  }
+
+  _toggleItemsRemoveButtonDisable(items, disable) {
+    disable = transform.boolean(disable);
+    if(!Array.isArray(items)) {
+      items = [items];
+    }
+    items.forEach(function(item) {
+      var removeButton = item.querySelector("[coral-multifield-remove]");
+      if(removeButton && validate.valueMustChange(removeButton.disabled, disable)) {
+        removeButton.disabled = disable;
       }
     });
   }
@@ -484,15 +539,27 @@ class Multifield extends BaseComponent(HTMLElement) {
 
   /** @private */
   _onItemAdded(item) {
+    const self = this;
     // Update the item content with the template content
-    if (item.parentNode === this) {
-      this._renderTemplate(item);
-      this._updatePosInSet();
+    if (item.parentNode === self) {
+      self._renderTemplate(item);
+      self._updatePosInSet();
+    }
+    // only validate when required
+    if(!self._validatingMinItems && self.min > 0 && self.items.length === self.min + 1) {
+      self._validateMinItems();
     }
   }
 
+  /** @private */
   _onItemRemoved() {
-    this._updatePosInSet();
+    const self = this;
+    self._updatePosInSet();
+
+    // only validate when required
+    if(!self._validatingMinItems && self.min > 0 && self.items.length <= self.min) {
+      self._validateMinItems();
+    }
   }
 
   /**
@@ -539,6 +606,20 @@ class Multifield extends BaseComponent(HTMLElement) {
 
   get _contentZones() {
     return {template: 'template'};
+  }
+
+  /** @ignore */
+  static get observedAttributes() {
+    return super.observedAttributes.concat([
+      'min'
+    ]);
+  }
+
+  /** @ignore */
+  connectedCallback() {
+    super.connectedCallback();
+    // run min validation
+    this._validateMinItems();
   }
 
   /** @ignore */
