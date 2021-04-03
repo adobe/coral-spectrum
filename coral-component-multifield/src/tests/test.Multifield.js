@@ -55,6 +55,84 @@ describe('Multifield', function () {
   describe('API', function () {
     describe('#items', function () {
     });
+
+    describe('#min', function () {
+      beforeEach(function() {
+        helpers.build(window.__html__['Multifield.base.min.html']);
+      });
+
+      it('remaining items should be added when items count less than min value', function () {
+        var multifield = document.getElementById("multifield-min-3");
+        var items = multifield.items;
+        expect(items.length).to.be.equal(3);
+      });
+
+      it('no items should be added when items count equal or greater than min value', function () {
+        var multifield1 = document.getElementById("multifield-min-2");
+        var multifield2 = document.getElementById("multifield-min-1");
+        var items1 = multifield1.items;
+        var items2 = multifield2.items;
+
+        expect(items1.length).to.be.equal(2);
+        expect(items2.length).to.be.equal(2);
+      });
+
+      it('should disable items delete button when count less than or equal min value', function () {
+        var multifield1 = document.getElementById("multifield-min-3");
+        var multifield2 = document.getElementById("multifield-min-2");
+        var items1 = multifield1.items;
+        var items2 = multifield2.items;
+
+        helpers.next(function() {
+          items1.getAll().forEach(function(item) {
+            var rmBtn = item.querySelector("._coral-Multifield-remove");
+            expect(rmBtn.disabled).to.be.true;
+          });
+
+          items2.getAll().forEach(function(item) {
+            var rmBtn = item.querySelector("._coral-Multifield-remove");
+            expect(rmBtn.disabled).to.be.true;
+          });
+        });
+      });
+
+      it('should not disable items delete button when count greater than min value', function () {
+        var multifield = document.getElementById("multifield-min-1");
+        var items = multifield.items;
+
+        items.getAll().forEach(function(item) {
+          var rmBtn = item.querySelector("._coral-Multifield-remove");
+          expect(rmBtn.disabled).to.be.false;
+        });
+      });
+
+      it('toggle items delete button disabled state when items added from button click', function () {
+        var multifield = document.getElementById("multifield-min-3");
+        var items = multifield.items;
+
+        multifield.querySelector('[coral-multifield-add]').click();
+
+        items.getAll().forEach(function(item) {
+          var rmBtn = item.querySelector("._coral-Multifield-remove");
+          expect(rmBtn.disabled).to.be.false;
+        });
+      });
+
+      it('toggle items delete button disabled state when items removed from button click', function () {
+        var multifield = document.getElementById("multifield-min-1");
+        var items = multifield.items;
+
+        items.getAll()[0].querySelector('._coral-Multifield-remove').click();
+
+        helpers.next(function() {
+          items.getAll().forEach(function(item) {
+            var rmBtn = item.querySelector("._coral-Multifield-remove");
+            expect(rmBtn.disabled).to.be.true;
+          });
+        });
+      });
+    });
+
     describe('#template', function () {
     });
     describe('#coral-multifield-add', function () {

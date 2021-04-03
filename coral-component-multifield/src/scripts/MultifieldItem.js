@@ -65,6 +65,21 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
   }
 
   /**
+   The item content.
+
+   @type {MultifieldItemContent}
+   @contentzone
+   */
+  get _disableRemoveButton() {
+    return this._elements.remove.disabled || false;
+  }
+
+  set _disableRemoveButton(value) {
+    value = transform.boolean(value);
+    this._elements.remove.disabled = value;
+  }
+
+  /**
    Whether the item is set to be reorder using the keyboard
 
    @type {boolean}

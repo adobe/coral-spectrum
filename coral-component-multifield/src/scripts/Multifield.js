@@ -178,46 +178,58 @@ class Multifield extends BaseComponent(HTMLElement) {
   }
 
   /**
-   * Validates minimum items required. Will add items, if validation fails.
+   * Validates minimum items required. will add items, if validation fails.
    * @ignore
    */
   _validateMinItems() {
     const self = this;
-    let items = self.items;
+    const items = self.items;
     let currentLength = items.length;
     let currentMin = self.min;
+    let disable = false;
+    let force = true;
 
     self._validatingMinItems = true;
+
     if(currentLength <= currentMin) {
-      let itemsToBeAdded = self.min - items.length;
+      let itemsToBeAdded = currentMin - currentLength;
 
       for(let i = 0; i < itemsToBeAdded; i++) {
         self.items.add(document.createElement('coral-multifield-item'));
       }
-
-      window.requestAnimationFrame(() => {
-        self._toggleItemsRemoveButtonDisable(items.getAll(), true);
-      });
-    } else {
-      self._toggleItemsRemoveButtonDisable(items.getAll(), false);
+      disable = true;
+      force = false;
     }
+
+    self._scheduleToggleRemoveButtonDisable(force, disable);
     self._validatingMinItems = false;
+  }
+
+  _scheduleToggleRemoveButtonDisable(forced, disable){
+    const self = this;
+    const items = self.items;
+    if(forced) {
+      window.cancelAnimationFrame(self._toggleRemoveButtonDisableId);
+      self._toggleRemoveButtonDisable(items.getAll(), disable);
+    } else if(!self._toggleRemoveButtonDisableId){
+      self._toggleRemoveButtonDisableId = window.requestAnimationFrame(() => {
+        delete self._toggleRemoveButtonDisableId;
+        self._toggleRemoveButtonDisable(items.getAll(), disable);
+      });
+    }
   }
 
   /**
    * Toggle the delete button disabled state of passed items.
    * @ignore
    */
-  _toggleItemsRemoveButtonDisable(items, disable) {
+  _toggleRemoveButtonDisable(items, disable) {
     disable = transform.boolean(disable);
-    if(!Array.isArray(items)) {
-      items = [items];
-    }
+    items = !Array.isArray(items) ? [items] : items;
+
     items.forEach(function(item) {
-      var removeButton = item.querySelector("[coral-multifield-remove]");
-      if(removeButton && validate.valueMustChange(removeButton.disabled, disable)) {
-        removeButton.disabled = disable;
-      }
+      customElements.upgradeElement(item);
+      item._disableRemoveButton = disable;
     });
   }
 
@@ -561,8 +573,8 @@ class Multifield extends BaseComponent(HTMLElement) {
       self._renderTemplate(item);
       self._updatePosInSet();
     }
-    // only validate when required
-    if(!self._validatingMinItems && self.min > 0 && self.items.length === self.min + 1) {
+
+    if(!self._validatingMinItems && self.items.length === self.min + 1) {
       self._validateMinItems();
     }
   }
@@ -573,7 +585,7 @@ class Multifield extends BaseComponent(HTMLElement) {
     self._updatePosInSet();
 
     // only validate when required
-    if(!self._validatingMinItems && self.min > 0 && self.items.length <= self.min) {
+    if(!self._validatingMinItems && self.items.length <= self.min) {
       self._validateMinItems();
     }
   }
