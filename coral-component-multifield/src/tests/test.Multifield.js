@@ -85,13 +85,11 @@ describe('Multifield', function () {
 
         helpers.next(function() {
           items1.getAll().forEach(function(item) {
-            var rmBtn = item.querySelector("._coral-Multifield-remove");
-            expect(rmBtn.disabled).to.be.true;
+            expect(item._elements.remove.disabled).to.be.true;
           });
 
           items2.getAll().forEach(function(item) {
-            var rmBtn = item.querySelector("._coral-Multifield-remove");
-            expect(rmBtn.disabled).to.be.true;
+            expect(item._elements.remove.disabled).to.be.true;
           });
           done();
         });
@@ -102,8 +100,7 @@ describe('Multifield', function () {
         var items = multifield.items;
 
         items.getAll().forEach(function(item) {
-          var rmBtn = item.querySelector("._coral-Multifield-remove");
-          expect(rmBtn.disabled).to.be.false;
+          expect(item._elements.remove.disabled).to.be.false;
         });
       });
 
@@ -114,8 +111,7 @@ describe('Multifield', function () {
         multifield.querySelector('[coral-multifield-add]').click();
 
         items.getAll().forEach(function(item) {
-          var rmBtn = item.querySelector("._coral-Multifield-remove");
-          expect(rmBtn.disabled).to.be.false;
+          expect(item._elements.remove.disabled).to.be.false;
         });
       });
 
@@ -125,11 +121,11 @@ describe('Multifield', function () {
 
         items.getAll()[0].querySelector('._coral-Multifield-remove').click();
         // MO takes 1 frame and disabling button will take place in next frame
+        // hence check after 2 animation frame
         helpers.next(function() {
           helpers.next(function() {
             items.getAll().forEach(function(item) {
-              var rmBtn = item.querySelector("._coral-Multifield-remove");
-              expect(rmBtn.disabled).to.be.true;
+              expect(item._elements.remove.disabled).to.be.true;
             });
             done();
           });
