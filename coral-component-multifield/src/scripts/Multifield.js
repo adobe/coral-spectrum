@@ -150,7 +150,15 @@ class Multifield extends BaseComponent(HTMLElement) {
     });
   }
 
+  /**
+    Specifies the minimum number of items multifield should render.
+    If component contains less items, remaining items will be added.
 
+    @type {Number}
+    @default 0
+    @htmlattribute min
+    @htmlattributereflected
+    */
   get min() {
     return this._min || 0;
   }
@@ -169,6 +177,10 @@ class Multifield extends BaseComponent(HTMLElement) {
     }
   }
 
+  /**
+   * Validates minimum items required. Will add items, if validation fails.
+   * @ignore
+   */
   _validateMinItems() {
     const self = this;
     let items = self.items;
@@ -192,6 +204,10 @@ class Multifield extends BaseComponent(HTMLElement) {
     self._validatingMinItems = false;
   }
 
+  /**
+   * Toggle the delete button disabled state of passed items.
+   * @ignore
+   */
   _toggleItemsRemoveButtonDisable(items, disable) {
     disable = transform.boolean(disable);
     if(!Array.isArray(items)) {
