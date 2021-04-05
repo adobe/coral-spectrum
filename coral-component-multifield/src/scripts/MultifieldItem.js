@@ -71,13 +71,14 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
     @default false
     @private
     */
-  get _disableRemoveButton() {
-    return this._elements.remove.disabled || false;
+  get _deletable() {
+    return typeof this.__deletable === 'boolean' ? this.__deletable : true;
   }
 
-  set _disableRemoveButton(value) {
+  set _deletable(value) {
     value = transform.boolean(value);
-    this._elements.remove.disabled = value;
+    this.__deletable = value;
+    this._elements.remove.disabled = !value;
   }
 
   /**

@@ -57,78 +57,103 @@ describe('Multifield', function () {
     });
 
     describe('#min', function () {
-      beforeEach(function() {
-        helpers.build(window.__html__['Multifield.base.min.html']);
-      });
-
       it('remaining items should be added when items count less than min value', function () {
-        var multifield = document.getElementById("multifield-min-3");
-        var items = multifield.items;
-        expect(items.length).to.be.equal(3);
+        var el = helpers.build(window.__html__['Multifield.base.min.html']);
+        expect(el.items.length).to.be.equal(el.min);
       });
 
-      it('no items should be added when items count equal or greater than min value', function () {
-        var multifield1 = document.getElementById("multifield-min-2");
-        var multifield2 = document.getElementById("multifield-min-1");
-        var items1 = multifield1.items;
-        var items2 = multifield2.items;
-
-        expect(items1.length).to.be.equal(2);
-        expect(items2.length).to.be.equal(2);
+      it('remaining items should be added when min value increased to more than items count', function () {
+        var el = helpers.build(window.__html__['Multifield.base.min.html']);
+        el.min = 5;
+        expect(el.items.length).to.be.equal(5);
       });
 
-      it('should disable items delete button when count less than or equal min value', function (done) {
-        var multifield1 = document.getElementById("multifield-min-3");
-        var multifield2 = document.getElementById("multifield-min-2");
-        var items1 = multifield1.items;
-        var items2 = multifield2.items;
+      it('no items should be added when min value decreased to less than items count', function () {
+        var el = helpers.build(window.__html__['Multifield.base.min.html']);
+        var initialCount = el.items.length;
+        el.min = initialCount - 1;
+        expect(initialCount).to.be.equal(3);
+      });
 
+      it('no items should be added when min value is greater than or equal to items count', function () {
+        var el = helpers.build(`
+          <coral-multifield id="multifieldWithMin" min="1">
+            <coral-multifield-item>
+              <input type="text"/>
+            </coral-multifield-item>
+            <coral-multifield-item>
+              <input type="text"/>
+            </coral-multifield-item>
+            <template coral-multifield-template>
+              <input type="text"/>
+            </template>
+            <button coral-multifield-add type="button">Add a field</button>
+          </coral-multifield>`
+        );
+        expect(el.items.length).to.be.equal(2);
+      });
+
+      it('items should not be deletable when count less than or equal to min', function (done) {
+        var el = helpers.build(window.__html__['Multifield.base.min.html']);
+        var initialCount = el.items.length;
+
+        expect(initialCount).to.be.equal(el.min);
+
+        //initial min validation takes 1 frame
         helpers.next(function() {
-          items1.getAll().forEach(function(item) {
-            expect(item._elements.remove.disabled).to.be.true;
+          el.items.getAll().forEach(function(item) {
+            expect(item._deletable).to.be.false;
           });
 
-          items2.getAll().forEach(function(item) {
-            expect(item._elements.remove.disabled).to.be.true;
+          el.min = el.min + 1;
+
+          expect(initialCount + 1).to.be.equal(el.min);
+
+          el.items.getAll().forEach(function(item) {
+            expect(item._deletable).to.be.false;
+          });
+
+          done();
+        });
+      });
+
+      it('items should be deletable when count greater than min', function (done) {
+        var el = helpers.build(window.__html__['Multifield.base.min.html']);
+
+        // initial min validation takes 1 frame
+        helpers.next(function() {
+          el.min = el.min - 1;
+          el.items.getAll().forEach(function(item) {
+            expect(item._deletable).to.be.true;
           });
           done();
         });
       });
 
-      it('should not disable items delete button when count greater than min value', function () {
-        var multifield = document.getElementById("multifield-min-1");
-        var items = multifield.items;
-
-        items.getAll().forEach(function(item) {
-          expect(item._elements.remove.disabled).to.be.false;
-        });
-      });
-
-      it('toggle items delete button disabled state when items added from button click', function () {
-        var multifield = document.getElementById("multifield-min-3");
-        var items = multifield.items;
-
-        multifield.querySelector('[coral-multifield-add]').click();
-
-        items.getAll().forEach(function(item) {
-          expect(item._elements.remove.disabled).to.be.false;
-        });
-      });
-
-      it('toggle items delete button disabled state when items removed from button click', function (done) {
-        var multifield = document.getElementById("multifield-min-1");
-        var items = multifield.items;
-
-        items.getAll()[0].querySelector('._coral-Multifield-remove').click();
-        // MO takes 1 frame and disabling button will take place in next frame
-        // hence check after 2 animation frame
+      it('toggle items deletable state when items added from button click', function (done) {
+        var el = helpers.build(window.__html__['Multifield.base.min.html']);
+        el.querySelector('[coral-multifield-add]').click();
+        // MO execution
         helpers.next(function() {
-          helpers.next(function() {
-            items.getAll().forEach(function(item) {
-              expect(item._elements.remove.disabled).to.be.true;
-            });
-            done();
+          el.items.getAll().forEach(function(item) {
+            expect(item._deletable).to.be.true;
           });
+          done();
+        });
+      });
+
+      it('toggle items deletable state when items removed from button click and items count equal to min', function (done) {
+        var el = helpers.build(window.__html__['Multifield.base.min.html']);
+
+        el.min = 2;
+
+        el.items.getAll()[0].querySelector('._coral-Multifield-remove').click();
+        // MO execution
+        helpers.next(function() {
+          el.items.getAll().forEach(function(item) {
+            expect(item._deletable).to.be.false;
+          });
+          done();
         });
       });
     });

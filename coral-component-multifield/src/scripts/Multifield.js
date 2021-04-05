@@ -170,10 +170,7 @@ class Multifield extends BaseComponent(HTMLElement) {
     if(value && validate.valueMustChange(self._min, value)) {
       self._min = value;
       self._reflectAttribute('min', value);
-
-      if(self._disconnected === false) {
-        self._validateMinItems();
-      }
+      self._validateMinItems(true);
     }
   }
 
@@ -181,58 +178,47 @@ class Multifield extends BaseComponent(HTMLElement) {
    * Validates minimum items required. will add items, if validation fails.
    * @ignore
    */
-  _validateMinItems() {
-    const self = this;
-    const items = self.items;
-    let currentLength = items.length;
-    let currentMin = self.min;
-    let disable = false;
-    let force = true;
+  _validateMinItems(forced) {
+    // only validate when multifield is connected
+    if(this._disconnected === false) {
+      const self = this;
+      const items = self.items;
+      let currentLength = items.length;
+      let currentMin = self.min;
+      let deletable = true;
 
-    self._validatingMinItems = true;
+      if(currentLength <= currentMin) {
+        let itemsToBeAdded = currentMin - currentLength;
 
-    if(currentLength <= currentMin) {
-      let itemsToBeAdded = currentMin - currentLength;
-
-      for(let i = 0; i < itemsToBeAdded; i++) {
-        self.items.add(document.createElement('coral-multifield-item'));
+        for(let i = 0; i < itemsToBeAdded; i++) {
+          items.add(document.createElement('coral-multifield-item'));
+        }
+        deletable = !deletable;
       }
-      disable = true;
-      force = false;
-    }
 
-    self._scheduleToggleRemoveButtonDisable(force, disable);
-    self._validatingMinItems = false;
-  }
-
-  /**
-   * Schedule the toggling of remove button disabled state of all items in next frame if not forced.
-   * @ignore
-   */
-  _scheduleToggleRemoveButtonDisable(forced, disable){
-    const self = this;
-    const items = self.items;
-    if(forced) {
-      window.cancelAnimationFrame(self._toggleRemoveButtonDisableId);
-      self._toggleRemoveButtonDisable(items.getAll(), disable);
-    } else if(!self._toggleRemoveButtonDisableId){
-      self._toggleRemoveButtonDisableId = window.requestAnimationFrame(() => {
-        delete self._toggleRemoveButtonDisableId;
-        self._toggleRemoveButtonDisable(items.getAll(), disable);
-      });
+      if(forced) {
+        window.cancelAnimationFrame(self._updateItemsDeletableId);
+        delete self._updateItemsDeletableId;
+        self._updateItemsDeletable(items.getAll(), deletable);
+      } else if(!self._updateItemsDeletableId) {
+        self._updateItemsDeletableId = window.requestAnimationFrame(() => {
+          delete self._updateItemsDeletableId;
+          self._updateItemsDeletable(items.getAll(), deletable);
+        });
+      }
     }
   }
 
   /**
-   * Toggle the delete button disabled state of passed items.
+   * Change the deletable property of passed items to the specified deletable value
    * @ignore
    */
-  _toggleRemoveButtonDisable(items, disable) {
-    disable = transform.boolean(disable);
+  _updateItemsDeletable(items, deletable) {
+    deletable = transform.boolean(deletable);
     items = !Array.isArray(items) ? [items] : items;
 
     items.forEach(function(item) {
-      item._disableRemoveButton = disable;
+      item._deletable = deletable;
     });
   }
 
@@ -577,8 +563,8 @@ class Multifield extends BaseComponent(HTMLElement) {
       self._updatePosInSet();
     }
 
-    if(!self._validatingMinItems && self.items.length === self.min + 1) {
-      self._validateMinItems();
+    if(self.items.length === self.min + 1) {
+      self._validateMinItems(true);
     }
   }
 
@@ -588,8 +574,8 @@ class Multifield extends BaseComponent(HTMLElement) {
     self._updatePosInSet();
 
     // only validate when required
-    if(!self._validatingMinItems && self.items.length <= self.min) {
-      self._validateMinItems();
+    if(self.items.length <= self.min) {
+      self._validateMinItems(true);
     }
   }
 
@@ -647,13 +633,6 @@ class Multifield extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    super.connectedCallback();
-    // run min validation
-    this._validateMinItems();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
@@ -672,6 +651,8 @@ class Multifield extends BaseComponent(HTMLElement) {
 
     // update aria-posinset and aria-setsize for each item in the collection
     this._updatePosInSet();
+
+    this._validateMinItems();
   }
 
   /**
