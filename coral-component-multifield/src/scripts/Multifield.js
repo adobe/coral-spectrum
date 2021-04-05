@@ -170,15 +170,16 @@ class Multifield extends BaseComponent(HTMLElement) {
     if(value && validate.valueMustChange(self._min, value)) {
       self._min = value;
       self._reflectAttribute('min', value);
-      self._validateMinItems(true);
+      self._validateMinItems();
     }
   }
 
   /**
    * Validates minimum items required. will add items, if validation fails.
+   * @param schedule schedule validation in next frame
    * @ignore
    */
-  _validateMinItems(forced) {
+  _validateMinItems(schedule) {
     // only validate when multifield is connected
     if(this._disconnected === false) {
       const self = this;
@@ -196,7 +197,7 @@ class Multifield extends BaseComponent(HTMLElement) {
         deletable = !deletable;
       }
 
-      if(forced) {
+      if(!schedule) {
         window.cancelAnimationFrame(self._updateItemsDeletableId);
         delete self._updateItemsDeletableId;
         self._updateItemsDeletable(items.getAll(), deletable);
@@ -564,7 +565,7 @@ class Multifield extends BaseComponent(HTMLElement) {
     }
 
     if(self.items.length === self.min + 1) {
-      self._validateMinItems(true);
+      self._validateMinItems();
     }
   }
 
@@ -575,7 +576,7 @@ class Multifield extends BaseComponent(HTMLElement) {
 
     // only validate when required
     if(self.items.length <= self.min) {
-      self._validateMinItems(true);
+      self._validateMinItems();
     }
   }
 
@@ -652,7 +653,7 @@ class Multifield extends BaseComponent(HTMLElement) {
     // update aria-posinset and aria-setsize for each item in the collection
     this._updatePosInSet();
 
-    this._validateMinItems();
+    this._validateMinItems(true);
   }
 
   /**
