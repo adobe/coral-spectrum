@@ -17,13 +17,6 @@ import {SelectList} from '../../../coral-component-list';
 import {commons} from '../../../coral-utils';
 
 const CLASSNAMES = ['_coral-Menu', '_coral-Shell-selectListSwitcher'];
-  /*function cloneAttributes(element, sourceNode) {
-    let attr;
-    let attributes = Array.prototype.slice.call(sourceNode.attributes);
-    while(attr = attributes.pop()) {
-      element.setAttribute(attr.nodeName, attr.nodeValue);
-    }
-  }*/
 
 /**
  @class Coral.Shell.SelectListSwitcher
