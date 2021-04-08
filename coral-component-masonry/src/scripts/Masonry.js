@@ -156,10 +156,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
       'click coral-masonry-item': '_onItemClick',
       'key:space coral-masonry-item': '_onItemClick',
 
-      // private
-      'coral-masonry-item:_connected': '_onItemConnected',
-      'coral-masonry-item:_selectedchanged': '_onItemSelectedChanged',
-      'coral-masonry-item:_addMessengerListener': '_addMessengerListener'
+      // Messenger
+      'coral-masonry-item:_messengerconnected': '_onMessengerConnected'
     });
 
     // Relayout when child elements change or are added/removed
@@ -805,7 +803,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
       return;
     }
 
-    if (!item.hasAttribute('_removing') && !item.skipDisconnectAnimation) {
+    if (!item.hasAttribute('_removing') && item.showRemoveTransition) {
       // Attach again for remove transition
       item.setAttribute('_removing', '');
       item._ignoreConnectedCallback = true;

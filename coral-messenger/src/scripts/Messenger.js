@@ -14,26 +14,86 @@ import {commons} from '../../../coral-utils';
 
 const SCOPE_SELECTOR = ':scope > ';
 
-/**
- Utility belt.
- */
 class Messenger {
   /** @ignore */
-  constructor(options) {
+  constructor(element) {
     let self = this;
-    self._element = options.element;
-    self._listeners = [];
+    self._element = element;
     self._connected = false;
+    self._clearQueue();
+    self._clearListeners();
+  }
+
+  get isConnected() {
+    return this._connected === true;
+  }
+
+  get isElementConnected() {
+    return this._element.isConnected === true;
+  }
+
+  get isSilenced() {
+    return this._element._silenced === true;
+  }
+
+  get listeners() {
+    return this._listeners;
+  }
+
+  _validateConnection() {
+    let self = this;
+    let connected = self.isConnected;
+    let elementConnected = self.isElementConnected;
+
+    if(elementConnected && !connected) {
+      self.connect();
+    }
+
+    if(!elementConnected && connected) {
+      self.disconnect();
+    }
+  }
+
+  _addMessageToQueue(message) {
+    let self = this;
+    if(!self.isConnected) {
+      self._queue.push(message);
+    }
+  }
+
+  _executeQueue() {
+    let self = this;
+    self._queue.forEach(function(message) {
+      self.postMessage(message);
+    });
+    self._clearQueue();
+  }
+
+  _clearQueue() {
+    this._queue = [];
+  }
+
+  _clearListeners() {
+    this._listeners = [];
   }
 
   connect() {
     let self = this;
-    let element = self._element;
 
-    self._connected = true;
-    element.trigger(`${element.tagName.toLowerCase()}:_addMessengerListener`, {
-      handler : self.update.bind(self)
-    });
+    if(!self.isElementConnected) {
+      self.disconnect();
+      return;
+    }
+
+    if(!self.isConnected) {
+      let element = self._element;
+
+      self._connected = true;
+
+      element.trigger(`${element.tagName.toLowerCase()}:_messengerconnected`, {
+        handler : self.update.bind(self)
+      });
+    }
   }
 
   update(listener) {
@@ -46,50 +106,65 @@ class Messenger {
     let self = this;
     let element = self._element;
 
-    if(self._connected) {
-      self._listeners.forEach((listener, index) => {
-        let observedMessages = listener.observedMessages;
-        let messageOptions = observedMessages[message];
+    self._validateConnection();
 
-        if(messageOptions) {
-          let selector;
-          let handler;
-          if(typeof messageOptions === 'string') {
-            selector = "*";
-            handler = messageOptions;
-          } else if(typeof messageOptions === 'object') {
-            selector = messageOptions.selector || "*";
-            handler = messageOptions.handler;
-          }
-
-          if(selector.indexOf(SCOPE_SELECTOR) === 0 ) {
-            if(!listener.id) {
-              listener.id = commons.getUID();
-            }
-            selector = selector.replace(SCOPE_SELECTOR, `#${listener.id} > `);
-          }
-
-          if(element.matches(selector)) {
-            let event = new Event({
-              target: element,
-              detail: detail,
-              type: message,
-              currentTarget: listener
-            });
-
-            listener[handler].call(listener, event);
-          }
-        }
-      });
-    } else {
-      this._element.trigger(message);
+    if(element.isSilenced) {
+      return;
     }
+
+    if(!self.isConnected) {
+      self._addMessageToQueue();
+      return;
+    }
+
+    self._listeners.forEach((listener) => {
+      let observedMessages = listener.observedMessages;
+      let messageInfo = observedMessages[message];
+
+      if(messageInfo) {
+        let selector;
+        let handler;
+        if(typeof messageInfo === 'string') {
+          selector = "*";
+          handler = messageInfo;
+        } else if(typeof messageInfo === 'object') {
+          selector = messageInfo.selector || "*";
+          handler = messageInfo.handler;
+        }
+
+        if(selector.indexOf(SCOPE_SELECTOR) === 0 ) {
+          if(!listener.id) {
+            listener.id = commons.getUID();
+          }
+          selector = selector.replace(SCOPE_SELECTOR, `#${listener.id} > `);
+        }
+
+        if(element.matches(selector)) {
+          listener[handler].call(listener, new Event({
+            target: element,
+            detail: detail,
+            type: message,
+            currentTarget: listener
+          }));
+        }
+      }
+    });
   }
 
   disconnect() {
     let self = this;
-    self._connected = false;
-    self._listeners = [];
+
+    if(self.isElementConnected) {
+      self.connect();
+      return;
+    }
+
+    if(self.isConnected) {
+      let self = this;
+      self._connected = false;
+      self._clearListeners();
+      self._clearQueue();
+    }
   }
 }
 

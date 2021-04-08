@@ -42,12 +42,14 @@ const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
   constructor() {
     super();
 
-    this._messenger = new Messenger({element: this});
-    // QuickActions will add button/anchorbutton references to it
-    this._elements = {};
+    const self = this;
 
-    this._observer = new MutationObserver(this._onMutation.bind(this));
-    this._observer.observe(this, {
+    // QuickActions will add button/anchorbutton references to it
+    self._elements = {};
+    self._messenger = new Messenger(self);
+
+    self._observer = new MutationObserver(self._onMutation.bind(self));
+    self._observer.observe(self, {
       characterData: true,
       childList: true,
       subtree: true
@@ -83,13 +85,13 @@ const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   set href(value) {
-    let _href = transform.string(value);
+    const self = this;
+    value = transform.string(value);
 
-    if(this._href !== _href) {
-      this._href = _href;
-      this._reflectAttribute('href', this._href);
-
-      this._messenger.postMessage('coral-quickactions-item:_hrefchanged');
+    if(validate.valueMustChange(self._href, value)) {
+      self._href = value;
+      self._reflectAttribute('href', value);
+      self._messenger.postMessage('coral-quickactions-item:_hrefchanged');
     }
   }
 
@@ -108,13 +110,14 @@ const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   set icon(value) {
-    let _icon = transform.string(value);
+    const self = this;
+    value = transform.string(value);
 
-    if(this._icon !== _icon) {
-      this._icon = _icon;
-      this._reflectAttribute('icon', this._icon);
+    if(validate.valueMustChange(self._icon, value)) {
+      self._icon = value;
+      self._reflectAttribute('icon', value);
 
-      this._messenger.postMessage('coral-quickactions-item:_iconchanged');
+      self._messenger.postMessage('coral-quickactions-item:_iconchanged');
     }
   }
 
@@ -132,14 +135,15 @@ const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   set type(value) {
-    let _value = transform.string(value).toLowerCase();
-    let _type = validate.enumeration(type)(_value) && _value || type.BUTTON;
+    const self = this;
+    value = transform.string(value).toLowerCase();
+    value = validate.enumeration(type)(value) && value || type.BUTTON;
 
-    if(this._type !== _type) {
-      this._type = _type;
-      this._reflectAttribute('type', this._type);
+    if(validate.valueMustChange(self._type, value)) {
+      self._type = value;
+      self._reflectAttribute('type', value);
 
-      this._messenger.postMessage('coral-quickactions-item:_typechanged');
+      self._messenger.postMessage('coral-quickactions-item:_typechanged');
     }
   }
 
@@ -147,10 +151,11 @@ const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
    Inherited from {@link BaseComponent#trackingElement}.
    */
   get trackingElement() {
-    return typeof this._trackingElement === 'undefined' ?
+    const self = this;
+    return typeof self._trackingElement === 'undefined' ?
       // keep spaces to only 1 max and trim. this mimics native html behaviors
-      (this.textContent && this.textContent.replace(/\s{2,}/g, ' ').trim() || this.icon) :
-      this._trackingElement;
+      (self.textContent && self.textContent.replace(/\s{2,}/g, ' ').trim() || self.icon) :
+      self._trackingElement;
   }
 
   set trackingElement(value) {
@@ -192,17 +197,19 @@ const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   disconnectedCallback() {
-    this._messenger.disconnect();
     super.disconnectedCallback();
+    this._messenger.disconnect();
   }
 
   /** @ignore */
   render() {
     super.render();
 
+    const self = this;
+
     // Default reflected attributes
-    if (!this._type) {
-      this.type = type.BUTTON;
+    if (!self._type) {
+      self.type = type.BUTTON;
     }
   }
 

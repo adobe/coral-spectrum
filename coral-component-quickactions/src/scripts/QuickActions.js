@@ -137,12 +137,8 @@ const QuickActions = Decorator(class extends Overlay {
       'click > ._coral-QuickActions-item:not([handle="moreButton"])': '_onButtonClick',
       'click > ._coral-QuickActions-item[handle="moreButton"]': '_onMoreButtonClick',
 
-      // Items
-      'coral-quickactions-item:_contentchanged': '_onItemChange',
-      'coral-quickactions-item:_iconchanged': '_onItemChange',
-      'coral-quickactions-item:_hrefchanged': '_onItemChange',
-      'coral-quickactions-item:_typechanged': '_onItemTypeChange',
-      'coral-quickactions-item:_addMessengerListener': '_addMessengerListener'
+      //Messenger
+      'coral-quickactions-item:_messengerconnected': '_onMessengerConnected'
     };
 
     const overlayId = this._elements.overlay.id;
@@ -1251,9 +1247,7 @@ const QuickActions = Decorator(class extends Overlay {
 
   /** @ignore */
   connectedCallback() {
-    this._avoidPopperInit = true;
     super.connectedCallback();
-    this._avoidPopperInit = false;
 
     const overlay = this._elements.overlay;
     // Cannot be open by default when rendered

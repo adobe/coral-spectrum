@@ -14,7 +14,7 @@ import {BaseComponent} from '../../../coral-base-component';
 import {DragAction} from '../../../coral-dragaction';
 import '../../../coral-component-checkbox';
 import quickactions from '../templates/quickactions';
-import {transform, commons} from '../../../coral-utils';
+import {transform, commons, validate} from '../../../coral-utils';
 import {Messenger} from '../../../coral-messenger';
 import {Decorator} from '../../../coral-decorator';
 
@@ -31,17 +31,24 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
+    const self = this;
 
-    this._messenger = new Messenger({element: this});
+    self._messenger = new Messenger(self);
+
     // Represents ownership (necessary when the item is moved which triggers callbacks)
-    this._masonry = null;
+    self._masonry = null;
 
     // Default value
-    this._dragAction = null;
+    self._dragAction = null;
 
     // Template
-    this._elements = {};
-    quickactions.call(this._elements);
+    self._elements = {};
+
+    quickactions.call(self._elements);
+  }
+
+  get removing() {
+    return item.hasAttribute('_removing');
   }
 
   // @compat
@@ -60,19 +67,19 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   /**
-   Whether the item is selected.
+   Specify while disconnecting the item, should it show transition or not.
+   This is useful when replacing large items, this result in delay.
 
    @type {Boolean}
-   @default false
-   @htmlattribute selected
-   @htmlattributereflected
+   @default true
+   @private No need to update in public document.
    */
-  get skipDisconnectAnimation() {
-    return this._skipDisconnectAnimation || false;
+  get showRemoveTransition() {
+    return !(this._showRemoveTransition === false);
   }
 
-  set skipDisconnectAnimation(value) {
-    this._skipDisconnectAnimation = transform.booleanAttr(value);
+  set showRemoveTransition(value) {
+    this._showRemoveTransition = transform.booleanAttr(value);
   }
 
   /**
@@ -88,15 +95,20 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   set selected(value) {
-    this._selected = transform.booleanAttr(value);
-    this._reflectAttribute('selected', this._selected);
+    const self = this;
+    value = transform.booleanAttr(value);
 
-    this.setAttribute('aria-selected', this._selected);
-    this.classList.toggle('is-selected', this._selected);
+    if(validate.valueMustChange(self._selected, value)) {
+      self._selected = value;
+      self._reflectAttribute('selected', value);
 
-    this._elements.check[this._selected ? 'setAttribute' : 'removeAttribute']('checked', '');
+      self.setAttribute('aria-selected', value);
+      self.classList.toggle('is-selected', value);
 
-    this._messenger.postMessage('coral-masonry-item:_selectedchanged');
+      self._elements.check[value ? 'setAttribute' : 'removeAttribute']('checked', '');
+
+      self._messenger.postMessage('coral-masonry-item:_selectedchanged');
+    }
   }
 
   /**
@@ -105,12 +117,15 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
    @private
    */
   _insert() {
-    if (this.classList.contains('is-beforeInserting')) {
-      this.classList.remove('is-beforeInserting');
-      this.classList.add('is-inserting');
+    const self = this;
+    let classList = self.classList;
+
+    if (classList.contains('is-beforeInserting')) {
+      classList.remove('is-beforeInserting');
+      classList.add('is-inserting');
 
       commons.transitionEnd(this, () => {
-        this.classList.remove('is-inserting');
+        classList.remove('is-inserting');
       });
     }
   }
@@ -123,12 +138,14 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
   /** @private */
   _updateDragAction(enabled) {
     let handle;
+    const self = this;
+
     if (enabled) {
       // Find handle
-      if (this.getAttribute('coral-masonry-draghandle') !== null) {
-        handle = this;
+      if (self.getAttribute('coral-masonry-draghandle') !== null) {
+        handle = self;
       } else {
-        handle = this.querySelector('[coral-masonry-draghandle]');
+        handle = self.querySelector('[coral-masonry-draghandle]');
         if (!handle) {
           // Disable drag&drop if handle wasn't found
           enabled = false;
@@ -137,14 +154,14 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
     }
 
     if (enabled) {
-      if (!this._dragAction) {
-        this._dragAction = new DragAction(this);
-        this._dragAction.dropZone = this.parentNode;
+      if (!self._dragAction) {
+        self._dragAction = new DragAction(self);
+        self._dragAction.dropZone = self.parentNode;
       }
-      this._dragAction.handle = handle;
-    } else if (this._dragAction) {
-      this._dragAction.destroy();
-      this._dragAction = null;
+      self._dragAction.handle = handle;
+    } else if (self._dragAction) {
+      self._dragAction.destroy();
+      self._dragAction = null;
     }
   }
 
@@ -155,13 +172,14 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
+    const self = this;
     if (name === '_removing') {
       // Do it in the next frame so that the removing animation is visible
       window.requestAnimationFrame(() => {
-        this.classList.toggle('is-removing', value !== null);
+        self.classList.toggle('is-removing', value !== null);
       });
     } else if (name === '_orderable') {
-      this._updateDragAction(value !== null);
+      self._updateDragAction(value !== null);
     } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
@@ -169,41 +187,48 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   connectedCallback() {
-    this._messenger.connect();
+    const messenger = this._messenger;
+
+    messenger.connect();
+
     super.connectedCallback();
 
     // Inform masonry immediately
-    this._messenger.postMessage('coral-masonry-item:_connected');
+    messenger.postMessage('coral-masonry-item:_connected');
   }
 
   /** @ignore */
   render() {
     super.render();
+    const self = this;
 
-    this.classList.add(CLASSNAME);
+    self.classList.add(CLASSNAME);
 
     // @a11y
-    this.setAttribute('tabindex', '-1');
+    self.setAttribute('tabindex', '-1');
 
     // Support cloneNode
-    const template = this.querySelector('._coral-Masonry-item-quickActions');
+    const template = self.querySelector('._coral-Masonry-item-quickActions');
     if (template) {
       template.remove();
     }
-    this.insertBefore(this._elements.quickactions, this.firstChild);
+    self.insertBefore(self._elements.quickactions, self.firstChild);
     // todo workaround to not give user possibility to tab into checkbox
-    this._elements.check._labellableElement.tabIndex = -1;
+    self._elements.check._labellableElement.tabIndex = -1;
   }
 
   /** @ignore */
   disconnectedCallback() {
-    this._messenger.disconnect();
     super.disconnectedCallback();
 
+    const self = this;
+
+    self._messenger.disconnect();
+
     // Handle it in masonry immediately
-    const masonry = this._masonry;
+    const masonry = self._masonry;
     if (masonry) {
-      masonry._onItemDisconnected(this);
+      masonry._onItemDisconnected(self);
     }
   }
 });

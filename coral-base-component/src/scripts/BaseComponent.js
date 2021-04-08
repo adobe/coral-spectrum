@@ -767,10 +767,15 @@ const BaseComponent = (superClass) => class extends superClass {
     return this.isConnected || this._disconnected === true || this._ignoreConnectedCallback === true;
   }
 
-  _addMessengerListener(event) {
+  _onMessengerConnected(event) {
     event.stopImmediatePropagation();
+
     let handler = event.detail.handler;
-    handler(this);
+    if(typeof handler === 'function') {
+      handler(this);
+    } else {
+      throw new Error("Messenger handler should be a function");
+    }
   }
 
   get _ignoreConnectedCallback() {
