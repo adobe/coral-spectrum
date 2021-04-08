@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Adobe. All rights reserved.
+ * Copyright 2021 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -16,7 +16,7 @@ import selectListSwitcher from '../templates/selectListSwitcher';
 import {SelectList} from '../../../coral-component-list';
 import {commons} from '../../../coral-utils';
 
-const CLASSNAMES = ['_coral-Menu', '_coral-Shell-selectListSwitcher'];
+const CLASSNAME =  '_coral-Shell-selectListSwitcher';
 
 /**
  @class Coral.Shell.SelectListSwitcher
@@ -36,7 +36,8 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
     selectListSwitcher.call(this._elements);
 
     this._delegateEvents({
-      'coral-selectlist:change':'_onSelectListChange'
+      'coral-selectlist:change':'_onSelectListChange',
+      'coral-shell-switcherlist-item:change': '_onUpdateHref'
     });
   }
 
@@ -62,7 +63,9 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
     item.id = item.id || commons.getUID();
 
     let selectListItem = document.createElement('coral-selectlist-item');
-    selectListItem.setAttribute("href", item.getAttribute("href"));
+    if (item.hasAttribute("linked")){
+      selectListItem.setAttribute("href", item.getAttribute("href"));
+    }
     selectListItem.textContent = item.textContent;
     selectListItem.id = item.id + "selectlist-item";
 
@@ -71,7 +74,7 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
 
   _onItemRemoved(item) {
     let selectListItemId = item.id + "selectlist-item";
-    let selectListItem = this._elements.container.getElementById(selectItemId);
+    let selectListItem = this._elements.container.getElementById(selectListItemId);
 
     this._elements.container.items.remove(selectListItem);
   }
@@ -85,11 +88,20 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
      }
   }
 
+  _onUpdateHref(event){
+    const switcherListItem = event.target;
+    let selectListItemId = switcherListItem.id + "selectlist-item";
+    let selectListItem = this._elements.container.getElementById(selectListItemId);
+    if (switcherListItem.hasAttribute("linked")){
+        selectListItem.setAttribute("href", switcherListItem.getAttribute("href"));
+    }
+  }
+
   /** @ignore */
   render() {
     super.render();
 
-    this.classList.add(...CLASSNAMES);
+    this.classList.add(CLASSNAME);
     const container = this.querySelector('._coral-Shell-selectList-container') || this._elements.container;
     // Put the container as first child
     this.insertBefore(container, this.firstChild);

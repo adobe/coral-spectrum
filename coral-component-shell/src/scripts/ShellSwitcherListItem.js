@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Adobe. All rights reserved.
+ * Copyright 2021 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -12,8 +12,6 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {transform} from '../../../coral-utils';
-import {SelectList} from '../../../coral-component-list';
-import {SelectableCollection} from '../../../coral-collection';
 
 const CLASSNAME = '_coral-Shell-switcherList-item';
 
@@ -22,10 +20,30 @@ const CLASSNAME = '_coral-Shell-switcherList-item';
  @classdesc A Shell SwitcherListItem component
  @htmltag coral-shell-switcherlist-item
  @extends {HTMLElement}
- @extends {SelectList}
+ @extends {BaseComponent}
  */
 class ShellSwitcherListItem extends BaseComponent(HTMLElement) {
 
+/**
+   Whether a switcherItem is linked or not
+
+   @type {Boolean}
+   @default false
+   @htmlattribute linked
+   @htmlattributereflected
+   */
+  get linked() {
+    return this._linked || false;
+  }
+
+  set linked(value) {
+    this._linked = transform.booleanAttr(value);
+    this._reflectAttribute('linked', this._linked);
+  }
+  /** @ignore */
+  static get observedAttributes() {
+    return super.observedAttributes.concat(['linked']);
+  }
     /** @ignore */
     render() {
       super.render();
