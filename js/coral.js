@@ -52424,7 +52424,7 @@ var Coral = (function (exports) {
     var el14 = document.createTextNode("\n  ");
     el9.appendChild(el14);
     var el15 = this["actionList"] = document.createElement("coral-buttonlist");
-    el15.setAttribute("role", "group");
+    el15.setAttribute("role", "presentation");
     el15.setAttribute("tracking", "off");
     el15.className += " _coral-CycleSelect-buttonList";
     el15.setAttribute("handle", "actionList");
@@ -53017,7 +53017,7 @@ var Coral = (function (exports) {
 
         selectListItem.disabled = item.disabled;
         selectListItem.selected = item.selected;
-        selectListItem.role = item.role;
+        selectListItem.setAttribute('role', item.getAttribute('role'));
         selectListItem.setAttribute('aria-checked', item.selected);
         selectListItem._originalItem = item;
         item._selectListItem = selectListItem;
@@ -53031,7 +53031,7 @@ var Coral = (function (exports) {
         var actionListItem = new ButtonList.Item();
         actionListItem.icon = action.icon;
         actionListItem.disabled = action.disabled;
-        actionListItem.role = action.role;
+        actionListItem.setAttribute('role', action.getAttribute('role'));
         actionListItem.tabIndex = action.tabIndex; // Needs to be reflected on the generated Action.
 
         actionListItem.trackingElement = action.trackingElement;
@@ -53064,7 +53064,6 @@ var Coral = (function (exports) {
           var item = items[i];
           selectListItem = this._getSelectListItem(item);
           selectListItem.icon = item.icon;
-          selectListItem.role = item.role;
           selectListItem.setAttribute('aria-checked', item.selected);
 
           selectListItem._elements.icon.setAttribute('aria-hidden', true);
@@ -53083,7 +53082,6 @@ var Coral = (function (exports) {
             actionListItem = this._getActionListItem(action);
             actionListItem.disabled = action.disabled;
             actionListItem.icon = action.icon;
-            actionListItem.role = action.role;
 
             actionListItem._elements.icon.setAttribute('aria-hidden', true);
 
@@ -53094,15 +53092,11 @@ var Coral = (function (exports) {
 
           if (itemCount > 0) {
             this._elements.separator.removeAttribute('hidden');
-
-            this._elements.selectList.setAttribute('role', 'group');
           }
         } else {
           this._elements.actionList.setAttribute('hidden', '');
 
           this._elements.separator.setAttribute('hidden', '');
-
-          this._elements.selectList.setAttribute('role', 'presentation');
         }
 
         commons.nextFrame(function () {
@@ -53211,10 +53205,8 @@ var Coral = (function (exports) {
 
         if (!this._displayMode) {
           this.displayMode = displayMode$1.ICON;
-        } // adds the role to support accessibility
+        } // checks the component's extended mode
 
-
-        this.setAttribute('role', 'presentation'); // checks the component's extended mode
 
         this._checkExtended();
 
@@ -79345,7 +79337,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.10.15";
+  var version$1 = "4.10.16";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

@@ -677,7 +677,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
   _onItemAdded(item) {
     if (!this.selectedItem) {
       item.setAttribute(&apos;selected&apos;, &apos;&apos;);
-    } else {
+    }
+    else {
       this._validateSelection(item);
     }
 
@@ -741,7 +742,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
         // We can trigger change events again
         this._preventTriggeringEvents = false;
       }
-    } else if (selectedItems.length &gt; 1) {
+    }
+    else if (selectedItems.length &gt; 1) {
       // If multiple items are selected, the last one wins
       item = selectedItems[selectedItems.length - 1];
 
@@ -844,7 +846,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
       if (ariaLabel &amp;&amp; effectiveIcon !== &apos;&apos; &amp;&amp; this._elements.button._elements.icon) {
         this._elements.button._elements.icon.setAttribute(&apos;aria-hidden&apos;, true);
       }
-    } else {
+    }
+    else {
       // handle display modes that include text
       if (effectiveDisplayMode === displayMode.TEXT) {
         this._elements.button.icon = &apos;&apos;;
@@ -948,7 +951,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
 
       // Regions within the overlay should have role=presentation
       this._elements.overlay.content.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
-    } else {
+    }
+    else {
       this._elements.button.removeAttribute(&apos;aria-controls&apos;);
       this._elements.button.removeAttribute(&apos;aria-haspopup&apos;);
       this._elements.button.removeAttribute(&apos;aria-expanded&apos;);
@@ -975,7 +979,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
       const index = items.indexOf(el);
       if (index &gt; 0) {
         this._focusItem(items[index - 1]);
-      } else if (document.activeElement !== el) {
+      }
+      else if (document.activeElement !== el) {
         // make sure ButtonList doesn&apos;t wrap focus
         this._focusItem(el);
       }
@@ -991,7 +996,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
       const index = items.indexOf(el);
       if (index &lt; items.length - 1) {
         this._focusItem(items[index + 1]);
-      } else if (document.activeElement !== el) {
+      }
+      else if (document.activeElement !== el) {
         // make sure ButtonList doesn&apos;t wrap focus
         this._focusItem(el);
       }
@@ -1072,7 +1078,7 @@ class CycleButton extends BaseComponent(HTMLElement) {
 
     selectListItem.disabled = item.disabled;
     selectListItem.selected = item.selected;
-    selectListItem.role = item.role;
+    selectListItem.setAttribute(&apos;role&apos;, item.getAttribute(&apos;role&apos;));
     selectListItem.setAttribute(&apos;aria-checked&apos;, item.selected);
 
     selectListItem._originalItem = item;
@@ -1087,7 +1093,7 @@ class CycleButton extends BaseComponent(HTMLElement) {
 
     actionListItem.icon = action.icon;
     actionListItem.disabled = action.disabled;
-    actionListItem.role = action.role;
+    actionListItem.setAttribute(&apos;role&apos;, action.getAttribute(&apos;role&apos;));
     actionListItem.tabIndex = action.tabIndex;
 
     // Needs to be reflected on the generated Action.
@@ -1123,7 +1129,6 @@ class CycleButton extends BaseComponent(HTMLElement) {
       selectListItem = this._getSelectListItem(item);
 
       selectListItem.icon = item.icon;
-      selectListItem.role = item.role;
       selectListItem.setAttribute(&apos;aria-checked&apos;, item.selected);
       selectListItem._elements.icon.setAttribute(&apos;aria-hidden&apos;, true);
 
@@ -1143,7 +1148,6 @@ class CycleButton extends BaseComponent(HTMLElement) {
         actionListItem = this._getActionListItem(action);
         actionListItem.disabled = action.disabled;
         actionListItem.icon = action.icon;
-        actionListItem.role = action.role;
         actionListItem._elements.icon.setAttribute(&apos;aria-hidden&apos;, true);
 
         actionList.items.add(actionListItem);
@@ -1153,12 +1157,11 @@ class CycleButton extends BaseComponent(HTMLElement) {
 
       if (itemCount &gt; 0) {
         this._elements.separator.removeAttribute(&apos;hidden&apos;);
-        this._elements.selectList.setAttribute(&apos;role&apos;, &apos;group&apos;);
       }
-    } else {
+    }
+    else {
       this._elements.actionList.setAttribute(&apos;hidden&apos;, &apos;&apos;);
       this._elements.separator.setAttribute(&apos;hidden&apos;, &apos;&apos;);
-      this._elements.selectList.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
     }
 
     commons.nextFrame(() =&gt; {
@@ -1216,7 +1219,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
         // SelectList menuitemradio group should be labeled by the container with aria-label,
         // Otherwise the selectList should not be labeled independantly from the menu
         this._elements.selectList[hasMenuItemRadioGroup ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-labelledby&apos;, this.id);
-      } else {
+      }
+      else {
         //  With no aria-label, clean up aria-labelledby on _elements
         this._elements.button.removeAttribute(&apos;aria-labelledby&apos;);
         this._elements.overlay.setAttribute(&apos;aria-labelledby&apos;, this._elements.button.id);
@@ -1234,7 +1238,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
         this._elements.overlay.setAttribute(&apos;aria-labelledby&apos;, value || this._elements.button.id);
         this._elements.selectList[this._hasMenuItemRadioGroup() ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-labelledby&apos;, value || this._elements.button.id);
       }
-    } else {
+    }
+    else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
@@ -1270,8 +1275,6 @@ class CycleButton extends BaseComponent(HTMLElement) {
       this.displayMode = displayMode.ICON;
     }
 
-    // adds the role to support accessibility
-    this.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
     // checks the component&apos;s extended mode
     this._checkExtended();
 
