@@ -1,3 +1,10 @@
+## [4.10.17](https://github.com/adobe/coral-spectrum/compare/v4.10.16...v4.10.17) (2021-04-09)
+
+
+### Bug Fixes
+
+* **CUI-7441:** Coral.CycleButton: fix menuitemradio and menuitem roles ([#153](https://github.com/adobe/coral-spectrum/issues/153)) ([7bd0ffe](https://github.com/adobe/coral-spectrum/commit/7bd0ffeb4c44eb68ab6e416e40786c3515572aef)), closes [CycleButton.js#L653](https://github.com/CycleButton.js/issues/L653) [CycleButton.js#L668](https://github.com/CycleButton.js/issues/L668)
+
 ## [4.10.16](https://github.com/adobe/coral-spectrum/compare/v4.10.15...v4.10.16) (2021-03-12)
 
 
