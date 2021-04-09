@@ -23,3 +23,21 @@
 @require '@adobe/spectrum-css/dist/components/inputgroup/multiStops/lightest.css';
 @require '@adobe/spectrum-css/dist/components/inputgroup/multiStops/dark.css';
 @require '@adobe/spectrum-css/dist/components/inputgroup/multiStops/darkest.css';
+
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
+.coral--dark ._coral-Textfield::placeholder {
+  color: var(--spectrum-dark-global-color-gray-700);
+}
+
+.coral--darkest ._coral-Textfield::placeholder {
+  color: var(--spectrum-darkest-global-color-gray-700);
+}
+
+.coral--light ._coral-Textfield::placeholder {
+  color: var(--spectrum-light-global-color-gray-700);
+}
+
+.coral--lightest ._coral-Textfield::placeholder {
+  color: var(--spectrum-lightest-global-color-gray-700);
+}
