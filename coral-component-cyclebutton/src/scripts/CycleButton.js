@@ -255,7 +255,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
   _onItemAdded(item) {
     if (!this.selectedItem) {
       item.setAttribute('selected', '');
-    } else {
+    }
+    else {
       this._validateSelection(item);
     }
 
@@ -319,7 +320,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
         // We can trigger change events again
         this._preventTriggeringEvents = false;
       }
-    } else if (selectedItems.length > 1) {
+    }
+    else if (selectedItems.length > 1) {
       // If multiple items are selected, the last one wins
       item = selectedItems[selectedItems.length - 1];
 
@@ -422,7 +424,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
       if (ariaLabel && effectiveIcon !== '' && this._elements.button._elements.icon) {
         this._elements.button._elements.icon.setAttribute('aria-hidden', true);
       }
-    } else {
+    }
+    else {
       // handle display modes that include text
       if (effectiveDisplayMode === displayMode.TEXT) {
         this._elements.button.icon = '';
@@ -526,7 +529,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
 
       // Regions within the overlay should have role=presentation
       this._elements.overlay.content.setAttribute('role', 'presentation');
-    } else {
+    }
+    else {
       this._elements.button.removeAttribute('aria-controls');
       this._elements.button.removeAttribute('aria-haspopup');
       this._elements.button.removeAttribute('aria-expanded');
@@ -553,7 +557,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
       const index = items.indexOf(el);
       if (index > 0) {
         this._focusItem(items[index - 1]);
-      } else if (document.activeElement !== el) {
+      }
+      else if (document.activeElement !== el) {
         // make sure ButtonList doesn't wrap focus
         this._focusItem(el);
       }
@@ -569,7 +574,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
       const index = items.indexOf(el);
       if (index < items.length - 1) {
         this._focusItem(items[index + 1]);
-      } else if (document.activeElement !== el) {
+      }
+      else if (document.activeElement !== el) {
         // make sure ButtonList doesn't wrap focus
         this._focusItem(el);
       }
@@ -650,7 +656,7 @@ class CycleButton extends BaseComponent(HTMLElement) {
 
     selectListItem.disabled = item.disabled;
     selectListItem.selected = item.selected;
-    selectListItem.role = item.role;
+    selectListItem.setAttribute('role', item.getAttribute('role'));
     selectListItem.setAttribute('aria-checked', item.selected);
 
     selectListItem._originalItem = item;
@@ -665,7 +671,7 @@ class CycleButton extends BaseComponent(HTMLElement) {
 
     actionListItem.icon = action.icon;
     actionListItem.disabled = action.disabled;
-    actionListItem.role = action.role;
+    actionListItem.setAttribute('role', action.getAttribute('role'));
     actionListItem.tabIndex = action.tabIndex;
 
     // Needs to be reflected on the generated Action.
@@ -701,7 +707,6 @@ class CycleButton extends BaseComponent(HTMLElement) {
       selectListItem = this._getSelectListItem(item);
 
       selectListItem.icon = item.icon;
-      selectListItem.role = item.role;
       selectListItem.setAttribute('aria-checked', item.selected);
       selectListItem._elements.icon.setAttribute('aria-hidden', true);
 
@@ -721,7 +726,6 @@ class CycleButton extends BaseComponent(HTMLElement) {
         actionListItem = this._getActionListItem(action);
         actionListItem.disabled = action.disabled;
         actionListItem.icon = action.icon;
-        actionListItem.role = action.role;
         actionListItem._elements.icon.setAttribute('aria-hidden', true);
 
         actionList.items.add(actionListItem);
@@ -731,12 +735,11 @@ class CycleButton extends BaseComponent(HTMLElement) {
 
       if (itemCount > 0) {
         this._elements.separator.removeAttribute('hidden');
-        this._elements.selectList.setAttribute('role', 'group');
       }
-    } else {
+    }
+    else {
       this._elements.actionList.setAttribute('hidden', '');
       this._elements.separator.setAttribute('hidden', '');
-      this._elements.selectList.setAttribute('role', 'presentation');
     }
 
     commons.nextFrame(() => {
@@ -794,7 +797,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
         // SelectList menuitemradio group should be labeled by the container with aria-label,
         // Otherwise the selectList should not be labeled independantly from the menu
         this._elements.selectList[hasMenuItemRadioGroup ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.id);
-      } else {
+      }
+      else {
         //  With no aria-label, clean up aria-labelledby on _elements
         this._elements.button.removeAttribute('aria-labelledby');
         this._elements.overlay.setAttribute('aria-labelledby', this._elements.button.id);
@@ -812,7 +816,8 @@ class CycleButton extends BaseComponent(HTMLElement) {
         this._elements.overlay.setAttribute('aria-labelledby', value || this._elements.button.id);
         this._elements.selectList[this._hasMenuItemRadioGroup() ? 'setAttribute' : 'removeAttribute']('aria-labelledby', value || this._elements.button.id);
       }
-    } else {
+    }
+    else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
@@ -848,8 +853,6 @@ class CycleButton extends BaseComponent(HTMLElement) {
       this.displayMode = displayMode.ICON;
     }
 
-    // adds the role to support accessibility
-    this.setAttribute('role', 'presentation');
     // checks the component's extended mode
     this._checkExtended();
 

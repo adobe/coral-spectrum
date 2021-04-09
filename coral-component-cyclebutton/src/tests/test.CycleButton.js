@@ -735,8 +735,19 @@ describe('CycleButton', function () {
       el.querySelector('#btn1').click();
 
       expect(el._elements.actionList.hasAttribute('hidden')).to.be.false;
+      expect(el._elements.actionList.getAttribute('role')).to.equal('presentation');
       expect(el._elements.separator.hasAttribute('hidden')).to.be.false;
+      expect(el._elements.separator.getAttribute('role')).to.equal('separator');
+    });
 
+    it('should render appropriate role on selectList and actionList items', function () {
+      const el = helpers.build(SNIPPET_WITHACTIONS);
+      el.querySelector('#btn1').click();
+
+      expect(el._elements.selectList.getAttribute('role')).to.equal('group', 'selectList should have role="group"');
+      expect(el._elements.selectList.querySelectorAll('coral-selectlist-item[role="menuitemradio"]').length).to.equal(3, 'selectList items should have role="menuitemradio"');
+      expect(el._elements.actionList.getAttribute('role')).to.equal('presentation', 'actionList should have role="presentation"');
+      expect(el._elements.actionList.querySelectorAll('button[is="coral-buttonlist-item"][role="menuitem"]').length).to.equal(2, 'actionList items should have role="menuitem"');
     });
 
     it('should switch between inline/overlay selection when adding/removing nodes', function (done) {
