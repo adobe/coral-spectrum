@@ -32,6 +32,18 @@ describe('Shell.SelectListSwitcher', function () {
       expect(el instanceof Shell.SelectListSwitcher).to.equal(true);
     });
 
+    it('should support dynamic addition of items', function () {
+      var el = helpers.build(window.__html__['Shell.SelectListSwitcher.base.html']);
+      var switcherItem = document.createElement('coral-shell-switcherlist-item');
+      switcherItem.setAttribute("linked", true);
+      switcherItem.setAttribute("href", "http://www.adobe.com/go/aem6_5_primetime");
+      switcherItem.textContent = "PrimeTime";
+      el.appendChild(switcherItem);
+      var selectList = el.querySelector("coral-selectlist");
+      var selectListItem = selectList.querySelectorAll("coral-selectlist-item[href=\"http://www.adobe.com/go/aem6_5_primetime\"]");
+      expect(selectListItem).to.not.be.null;
+    });
+
     helpers.cloneComponent(
       'should be possible to clone using markup',
       window.__html__['Shell.SelectListSwitcher.base.html']
