@@ -13,16 +13,16 @@
 import {BaseComponent} from '../../../coral-base-component';
 import {transform} from '../../../coral-utils';
 
-const CLASSNAME = '_coral-Shell-switcherList-item';
+const CLASSNAME = '_coral-Shell-selectlistswitcher-item';
 
 /**
- @class Coral.Shell.SwitcherList
- @classdesc A Shell SwitcherListItem component
- @htmltag coral-shell-switcherlist-item
+ @class Coral.Shell.SelectListSwitcherItem
+ @classdesc A Shell SelectListSwitcherItem component
+ @htmltag coral-shell-selectListSwitcher-item
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class ShellSwitcherListItem extends BaseComponent(HTMLElement) {
+class ShellSelectListSwitcherItem extends BaseComponent(HTMLElement) {
 
 /**
    Whether a switcherItem is linked or not
@@ -51,4 +51,4 @@ class ShellSwitcherListItem extends BaseComponent(HTMLElement) {
     }
   }
 
-  export default ShellSwitcherListItem;
+  export default ShellSelectListSwitcherItem;
