@@ -50,7 +50,7 @@ import ShellSolutionsHeader from './src/scripts/ShellSolutionsHeader';
 import ShellSolution from './src/scripts/ShellSolution';
 import ShellSolutionLabel from './src/scripts/ShellSolutionLabel';
 import ShellSelectListSwitcher from './src/scripts/ShellSelectListSwitcher';
-import ShellSwitcherListItem from './src/scripts/ShellSwitcherListItem';
+import ShellSelectListSwitcherItem from './src/scripts/ShellSwitcherListItem';
 
 import ShellOrgSwitcher from './src/scripts/ShellOrgSwitcher';
 import ShellOrgSwitcherFooter from './src/scripts/ShellOrgSwitcherFooter';
@@ -84,7 +84,7 @@ commons._define('coral-shell-organization', ShellOrganization);
 commons._define('coral-shell-orgswitcher', ShellOrgSwitcher);
 commons._define('coral-shell', Shell);
 commons._define('coral-shell-selectlistswitcher', ShellSelectListSwitcher);
-commons._define('coral-shell-switcherlist-item', ShellSwitcherListItem);
+commons._define('coral-shell-selectlistswitcher-item', ShellSelectListSwitcherItem);
 
 Shell.Content = ShellContent;
 Shell.Header = ShellHeader;
@@ -114,6 +114,6 @@ Shell.OrgSwitcher.Footer = ShellOrgSwitcherFooter;
 Shell.Organization = ShellOrganization;
 Shell.Suborganization = ShellSuborganization;
 Shell.SelectListSwitcher = ShellSelectListSwitcher;
-Shell.SwitcherListItem = ShellSwitcherListItem;
+Shell.SelectListSwitcherItem = ShellSelectListSwitcherItem;
 
 export {Shell};
