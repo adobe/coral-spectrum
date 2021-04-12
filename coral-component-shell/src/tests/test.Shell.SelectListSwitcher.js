@@ -43,6 +43,14 @@ describe('Shell.SelectListSwitcher', function () {
       var selectListItem = selectList.querySelectorAll("coral-selectlist-item[href=\"http://www.adobe.com/go/aem6_5_primetime\"]");
       expect(selectListItem).to.not.be.null;
     });
+    it('should support href changes in items', function () {
+          var el = helpers.build(window.__html__['Shell.SelectListSwitcher.base.html']);
+          var switcherItem = el.querySelector("coral-shell-switcherlist-item[href=\"http://www.adobe.com/go/aem6_5_audiencemanager\"]");
+          switcherItem.setAttribute("href", "http://www.adobe.com/go/aem6_5_target");
+          var selectList = el.querySelector("coral-selectlist");
+          var selectListItem = selectList.querySelectorAll("coral-selectlist-item[href=\"http://www.adobe.com/go/aem6_5_target\"]");
+          expect(selectListItem).to.not.be.null;
+        });
 
     helpers.cloneComponent(
       'should be possible to clone using markup',
