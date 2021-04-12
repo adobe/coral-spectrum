@@ -50,7 +50,7 @@ import ShellSolutionsHeader from './src/scripts/ShellSolutionsHeader';
 import ShellSolution from './src/scripts/ShellSolution';
 import ShellSolutionLabel from './src/scripts/ShellSolutionLabel';
 import ShellSelectListSwitcher from './src/scripts/ShellSelectListSwitcher';
-import ShellSelectListSwitcherItem from './src/scripts/ShellSwitcherListItem';
+import ShellSelectListSwitcherItem from './src/scripts/ShellSelectListSwitcherItem';
 
 import ShellOrgSwitcher from './src/scripts/ShellOrgSwitcher';
 import ShellOrgSwitcherFooter from './src/scripts/ShellOrgSwitcherFooter';
