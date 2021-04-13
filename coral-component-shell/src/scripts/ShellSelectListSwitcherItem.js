@@ -18,31 +18,37 @@ const CLASSNAME = '_coral-Shell-selectlistswitcher-item';
 /**
  @class Coral.Shell.SelectListSwitcherItem
  @classdesc A Shell SelectListSwitcherItem component
- @htmltag coral-shell-selectListSwitcher-item
+ @htmltag coral-shell-selectlistswitcher-item
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
 class ShellSelectListSwitcherItem extends BaseComponent(HTMLElement) {
 
 /**
-   Whether a switcherItem is linked or not
-
-   @type {Boolean}
-   @default false
-   @htmlattribute linked
+   href property of item
+   @type {String}
+   @htmlattribute href
    @htmlattributereflected
    */
-  get linked() {
-    return this._linked || false;
+  get href() {
+    return this._href;
   }
 
-  set linked(value) {
-    this._linked = transform.booleanAttr(value);
-    this._reflectAttribute('linked', this._linked);
+  set href(value) {
+    var href = transform.string(value);
+    var update = false;
+    if(this._href !== undefined) {
+      update = true;
+    }
+    this._href = href;
+    this._reflectAttribute('href', this._href);
+    if(update) {
+      this.trigger('coral-shell-selectlistswitcher-item:change');
+    }
   }
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat(['linked']);
+    return super.observedAttributes.concat(['href']);
   }
     /** @ignore */
     render() {

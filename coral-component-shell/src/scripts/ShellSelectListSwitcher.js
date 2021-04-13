@@ -37,7 +37,7 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
 
     this._delegateEvents({
       'coral-selectlist:change':'_onSelectListChange',
-      'coral-shell-switcherlist-item:change': '_onUpdateHref'
+      'coral-shell-selectlistswitcher-item:change': '_onUpdateHref'
     });
   }
 
@@ -51,7 +51,7 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
     if (!this._items) {
       this._items = new SelectableCollection({
         host: this,
-        itemTagName: 'coral-shell-switcherlist-item',
+        itemTagName: 'coral-shell-selectlistswitcher-item',
         onItemAdded: this._onItemAdded,
         onItemRemoved: this._onItemRemoved
       });
@@ -63,18 +63,18 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
     item.id = item.id || commons.getUID();
 
     let selectListItem = document.createElement('coral-selectlist-item');
-    if (item.hasAttribute("linked")){
+    if (item.hasAttribute("href")){
       selectListItem.setAttribute("href", item.getAttribute("href"));
     }
     selectListItem.textContent = item.textContent;
-    selectListItem.id = item.id + "selectlist-item";
+    selectListItem.id = item.id + "-selectlist-item";
 
     this._elements.container.items.add(selectListItem);
   }
 
   _onItemRemoved(item) {
-    let selectListItemId = item.id + "selectlist-item";
-    let selectListItem = this._elements.container.getElementById(selectListItemId);
+    let selectListItemId = item.id + "-selectlist-item";
+    let selectListItem = this._elements.container.querySelector('#'+ selectListItemId);
 
     this._elements.container.items.remove(selectListItem);
   }
@@ -90,10 +90,10 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
 
   _onUpdateHref(event){
     const switcherListItem = event.target;
-    let selectListItemId = switcherListItem.id + "selectlist-item";
-    let selectListItem = this._elements.container.getElementById(selectListItemId);
-    if (switcherListItem.hasAttribute("linked")){
-        selectListItem.setAttribute("href", switcherListItem.getAttribute("href"));
+    let selectListItemId = switcherListItem.id + "-selectlist-item";
+    let selectListItem = this._elements.container.querySelector('#'+ selectListItemId);
+    if (switcherListItem.hasAttribute("href")){
+      selectListItem.setAttribute("href", switcherListItem.getAttribute("href"));
     }
   }
 
