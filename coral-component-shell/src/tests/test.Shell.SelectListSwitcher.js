@@ -17,7 +17,7 @@ describe('Shell.SelectListSwitcher', function () {
   describe('Namespace', function () {
     it('should be defined in the Shell namespace', function () {
       expect(Shell).to.have.property('SelectListSwitcher');
-      expect(Shell).to.have.property('SwitcherListItem');
+      expect(Shell).to.have.property('SelectListSwitcherItem');
     });
   });
 
@@ -34,7 +34,7 @@ describe('Shell.SelectListSwitcher', function () {
 
     it('should support dynamic addition of items', function () {
       var el = helpers.build(window.__html__['Shell.SelectListSwitcher.base.html']);
-      var switcherItem = document.createElement('coral-shell-switcherlist-item');
+      var switcherItem = document.createElement('coral-shell-selectlistswitcher-item');
       switcherItem.setAttribute("linked", true);
       switcherItem.setAttribute("href", "http://www.adobe.com/go/aem6_5_primetime");
       switcherItem.textContent = "PrimeTime";
@@ -45,7 +45,7 @@ describe('Shell.SelectListSwitcher', function () {
     });
     it('should support href changes in items', function () {
           var el = helpers.build(window.__html__['Shell.SelectListSwitcher.base.html']);
-          var switcherItem = el.querySelector("coral-shell-switcherlist-item[href=\"http://www.adobe.com/go/aem6_5_audiencemanager\"]");
+          var switcherItem = el.querySelector("coral-shell-selectlistswitcher-item[href=\"http://www.adobe.com/go/aem6_5_audiencemanager\"]");
           switcherItem.setAttribute("href", "http://www.adobe.com/go/aem6_5_target");
           var selectList = el.querySelector("coral-selectlist");
           var selectListItem = selectList.querySelectorAll("coral-selectlist-item[href=\"http://www.adobe.com/go/aem6_5_target\"]");
