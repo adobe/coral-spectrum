@@ -335,7 +335,6 @@ const QuickActions = Decorator(class extends Overlay {
         // we iterate over all the items initializing them in the correct order
         const items = this.items.getAll();
         for (let i = 0, itemCount = items.length ; i < itemCount ; i++) {
-          this._removeItemElements(items[i]);
           this._attachItem(items[i], i);
         }
 
@@ -1203,10 +1202,10 @@ const QuickActions = Decorator(class extends Overlay {
   }
 
   /** @ignore */
-  reposition() {
+  reposition(forceReposition) {
     // Override to support placement.CENTER
     this._toggleCenterPlacement(true);
-    super.reposition();
+    super.reposition(forceReposition);
     this._toggleCenterPlacement(false);
 
     if (this._openedOnce) {

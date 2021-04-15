@@ -144,39 +144,38 @@ describe('Masonry.Item', function () {
       });
 
       it('should avoid connectedCallback when encounter skipped cases', function(done){
-        const spy = sinon.spy();
         const el = helpers.build(window.__html__['Masonry.with.div.wrapper.html']);
         const masonry = el.querySelector("coral-masonry");
         const items = masonry.querySelectorAll("coral-masonry-item");
         const item1 = items[0];
         const item2 = items[1];
 
-        masonry.on('coral-masonry-item:_connected', spy, true);
-
         const newItem = new Masonry.Item();
+        const spy = sinon.spy(newItem._messenger, 'postMessage').withArgs('coral-masonry-item:_connected');
         newItem.content.innerHTML = "Hi";
         masonry.appendChild(newItem);
 
         expect(spy.calledOnce).to.be.true;
 
-        spy.resetHistory();
+        const spy1 = sinon.spy(item1._messenger, 'postMessage').withArgs('coral-masonry-item:_connected');
 
         item1._ignoreConnectedCallback = true;
+
         masonry.appendChild(item1);
 
-        expect(spy.notCalled).to.be.true;
+        expect(spy1.notCalled).to.be.true;
 
         masonry.removeChild(item2);
 
         // let the removing transition to end
         commons.transitionEnd(item2, () => {
           helpers.next(function() {
-            spy.resetHistory();
+          const spy2 = sinon.spy(item2._messenger, 'postMessage').withArgs('coral-masonry-item:_connected');
             // assume item is in connected state.
             item2._disconnected = false;
             masonry.appendChild(item2);
 
-            expect(spy.notCalled).to.be.true;
+            expect(spy2.notCalled).to.be.true;
             done();
           });
         });

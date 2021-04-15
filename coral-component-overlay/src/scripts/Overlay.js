@@ -542,7 +542,7 @@ const Overlay = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) 
     if(targetElement) {
       this._popper = this._popper || new PopperJS(targetElement, this, {onUpdate: this._onUpdate.bind(this)});
       // Make sure popper options modifiers are up to date
-      this.reposition();
+      this.reposition(true);
     }
   }
   /**

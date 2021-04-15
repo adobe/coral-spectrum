@@ -791,6 +791,13 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     }
   }
 
+  _removeItem(item) {
+      item.removeAttribute('_removing');
+      item._masonry = null;
+
+      this._onItemRemoved(item);
+  }
+
   /** @private */
   _onItemDisconnected(item) {
     // We don't care about transitions if the masonry is not in the body
@@ -811,14 +818,12 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
       item._ignoreConnectedCallback = false;
       commons.transitionEnd(item, () => {
         item.remove();
+        this._removeItem(item);
       });
     }
     // remove transition completed
     else {
-      item.removeAttribute('_removing');
-      item._masonry = null;
-
-      this._onItemRemoved(item);
+      this._removeItem(item);
     }
   }
 

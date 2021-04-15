@@ -740,22 +740,25 @@ describe('QuickActions', function () {
       event.initEvent('mouseenter', true, false);
       areaEl.dispatchEvent(event);
 
-      var firstBtn = actionsEl.firstElementChild;
-      firstBtn.click();
-      expect(trackerFnSpy.callCount).to.equal(2, 'Tracker should have been called twice.');
+      // when the user hover for first time, items takes an additional frame.
+      helpers.next(function() {
+        var firstBtn = actionsEl.firstElementChild;
+        firstBtn.click();
+        expect(trackerFnSpy.callCount).to.equal(2, 'Tracker should have been called twice.');
 
-      var spyCall = trackerFnSpy.getCall(1);
-      expect(spyCall.args.length).to.equal(4);
+        var spyCall = trackerFnSpy.getCall(1);
+        expect(spyCall.args.length).to.equal(4);
 
-      var trackData = spyCall.args[0];
-      expect(trackData).to.have.property('targetElement', 'Copy');
-      expect(trackData).to.have.property('targetType', 'coral-quickactions-item');
-      expect(trackData).to.have.property('eventType', 'click');
-      expect(trackData).to.have.property('rootElement', 'element name');
-      expect(trackData).to.have.property('rootFeature', 'feature name');
-      expect(trackData).to.have.property('rootType', 'coral-quickactions');
-      expect(spyCall.args[1]).to.be.an.instanceof(Event);
-      expect(spyCall.args[2]).to.be.an.instanceof(QuickActions);
+        var trackData = spyCall.args[0];
+        expect(trackData).to.have.property('targetElement', 'Copy');
+        expect(trackData).to.have.property('targetType', 'coral-quickactions-item');
+        expect(trackData).to.have.property('eventType', 'click');
+        expect(trackData).to.have.property('rootElement', 'element name');
+        expect(trackData).to.have.property('rootFeature', 'feature name');
+        expect(trackData).to.have.property('rootType', 'coral-quickactions');
+        expect(spyCall.args[1]).to.be.an.instanceof(Event);
+        expect(spyCall.args[2]).to.be.an.instanceof(QuickActions);
+      })
     });
 
     it('should call the tracker callback fn with expected parameters when the quickactions more button is clicked', function () {
@@ -766,22 +769,25 @@ describe('QuickActions', function () {
       event.initEvent('mouseenter', true, false);
       areaEl.dispatchEvent(event);
 
-      var moreBtn = actionsEl.querySelector('[handle="moreButton"]');
-      moreBtn.click();
-      expect(trackerFnSpy.callCount).to.equal(2, 'Tracker should have been called twice.');
+      // when the user hover for first time, items takes an additional frame.
+      helpers.next(function() {
+        var moreBtn = actionsEl.querySelector('[handle="moreButton"]');
+        moreBtn.click();
+        expect(trackerFnSpy.callCount).to.equal(2, 'Tracker should have been called twice.');
 
-      var spyCall = trackerFnSpy.getCall(1);
-      expect(spyCall.args.length).to.equal(4);
+        var spyCall = trackerFnSpy.getCall(1);
+        expect(spyCall.args.length).to.equal(4);
 
-      var trackData = spyCall.args[0];
-      expect(trackData).to.have.property('targetElement', 'element name');
-      expect(trackData).to.have.property('targetType', 'coral-quickactions-more');
-      expect(trackData).to.have.property('eventType', 'click');
-      expect(trackData).to.have.property('rootElement', 'element name');
-      expect(trackData).to.have.property('rootFeature', 'feature name');
-      expect(trackData).to.have.property('rootType', 'coral-quickactions');
-      expect(spyCall.args[1]).to.be.an.instanceof(Event);
-      expect(spyCall.args[2]).to.be.an.instanceof(QuickActions);
+        var trackData = spyCall.args[0];
+        expect(trackData).to.have.property('targetElement', 'element name');
+        expect(trackData).to.have.property('targetType', 'coral-quickactions-more');
+        expect(trackData).to.have.property('eventType', 'click');
+        expect(trackData).to.have.property('rootElement', 'element name');
+        expect(trackData).to.have.property('rootFeature', 'feature name');
+        expect(trackData).to.have.property('rootType', 'coral-quickactions');
+        expect(spyCall.args[1]).to.be.an.instanceof(Event);
+        expect(spyCall.args[2]).to.be.an.instanceof(QuickActions);
+      });
     });
 
     it('should call the tracker callback fn with expected parameters when the first button from the quickactions more list is clicked', function () {
@@ -792,25 +798,28 @@ describe('QuickActions', function () {
       event.initEvent('mouseenter', true, false);
       areaEl.dispatchEvent(event);
 
-      var moreBtn = actionsEl.querySelector('[handle="moreButton"]');
-      moreBtn.click();
-      // Note: I found no way to separate the children who appear in the list from the ones visible on hover.
-      var firstBtnFromList = actionsEl.overlay.querySelector('coral-buttonlist [coral-list-item]:nth-child(3)');
-      firstBtnFromList.click();
-      expect(trackerFnSpy.callCount).to.equal(3, 'Tracker should have been called three times.');
+      // when the user hover for first time, items takes an additional frame.
+      helpers.next(function() {
+        var moreBtn = actionsEl.querySelector('[handle="moreButton"]');
+        moreBtn.click();
+        // Note: I found no way to separate the children who appear in the list from the ones visible on hover.
+        var firstBtnFromList = actionsEl.overlay.querySelector('coral-buttonlist [coral-list-item]:nth-child(3)');
+        firstBtnFromList.click();
+        expect(trackerFnSpy.callCount).to.equal(3, 'Tracker should have been called three times.');
 
-      var spyCall = trackerFnSpy.getCall(2);
-      expect(spyCall.args.length).to.equal(4);
+        var spyCall = trackerFnSpy.getCall(2);
+        expect(spyCall.args.length).to.equal(4);
 
-      var trackData = spyCall.args[0];
-      expect(trackData).to.have.property('targetElement', 'Download');
-      expect(trackData).to.have.property('targetType', 'coral-quickactions-item');
-      expect(trackData).to.have.property('eventType', 'click');
-      expect(trackData).to.have.property('rootElement', 'element name');
-      expect(trackData).to.have.property('rootFeature', 'feature name');
-      expect(trackData).to.have.property('rootType', 'coral-quickactions');
-      expect(spyCall.args[1]).to.be.an.instanceof(Event);
-      expect(spyCall.args[2]).to.be.an.instanceof(QuickActions);
+        var trackData = spyCall.args[0];
+        expect(trackData).to.have.property('targetElement', 'Download');
+        expect(trackData).to.have.property('targetType', 'coral-quickactions-item');
+        expect(trackData).to.have.property('eventType', 'click');
+        expect(trackData).to.have.property('rootElement', 'element name');
+        expect(trackData).to.have.property('rootFeature', 'feature name');
+        expect(trackData).to.have.property('rootType', 'coral-quickactions');
+        expect(spyCall.args[1]).to.be.an.instanceof(Event);
+        expect(spyCall.args[2]).to.be.an.instanceof(QuickActions);
+      });
     });
   });
 });
