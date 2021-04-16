@@ -138,7 +138,7 @@ const CLASSNAME = '_coral-Overlay';
  @extends {BaseComponent}
  @extends {BaseOverlay}
  */
-const Overlay = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
+class ExtensibleOverlay extends BaseOverlay(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -740,6 +740,8 @@ const Overlay = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) 
 
    @typedef {CustomEvent} coral-overlay:positioned
    */
-});
+}
 
-export default Overlay;
+const Overlay = Decorator(ExtensibleOverlay);
+
+export {Overlay, ExtensibleOverlay};

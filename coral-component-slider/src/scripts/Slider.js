@@ -44,7 +44,8 @@ const orientation = {
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-const Slider = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) {
+
+class ExtensibleSlider extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -936,6 +937,10 @@ const Slider = Decorator(class extends BaseFormField(BaseComponent(HTMLElement))
     // Defaults
     this._moveHandles();
   }
-});
+}
 
-export default Slider;
+// decorated slider, extending this would result in two decoration.
+// Hence for extending ExtensibleSlider should be used
+const Slider = Decorator(ExtensibleSlider);
+
+export {ExtensibleSlider, Slider}

@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {Overlay} from '../../../coral-component-overlay';
+import {ExtensibleOverlay} from '../../../coral-component-overlay';
 import {Icon} from '../../../coral-component-icon';
 // Popover relies on Dialog styles partially
 import '../../../coral-component-dialog';
@@ -93,7 +93,7 @@ for (const placementKey in placement) {
  @htmltag coral-popover
  @extends {Overlay}
  */
-const Popover = Decorator(class extends Overlay {
+const Popover = Decorator(class extends ExtensibleOverlay {
   /** @ignore */
   constructor() {
     super();

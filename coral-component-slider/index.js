@@ -15,7 +15,7 @@ import '../coral-theme-spectrum';
 import '../coral-externals';
 import '../coral-compat';
 
-import Slider from './src/scripts/Slider';
+import {Slider, ExtensibleSlider} from './src/scripts/Slider';
 import SliderContent from './src/scripts/SliderContent';
 import SliderItem from './src/scripts/SliderItem';
 import RangedSlider from './src/scripts/RangedSlider';
@@ -32,4 +32,4 @@ commons._define('coral-slider', Slider);
 Slider.Content = SliderContent;
 Slider.Item = SliderItem;
 
-export {Slider, RangedSlider};
+export {Slider, RangedSlider, ExtensibleSlider};

@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import Slider from './Slider';
+import {ExtensibleSlider} from './Slider';
 import range from '../templates/range';
 import {commons, transform} from '../../../coral-utils';
 import {Decorator} from '../../../coral-decorator';
@@ -21,7 +21,7 @@ import {Decorator} from '../../../coral-decorator';
  @htmltag coral-rangedslider
  @extends {Slider}
  */
-const RangedSlider = Decorator(class extends Slider {
+const RangedSlider = Decorator(class extends ExtensibleSlider {
   /**
    Ranged sliders are always filled.
 

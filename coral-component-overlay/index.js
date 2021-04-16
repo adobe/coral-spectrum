@@ -15,7 +15,7 @@ import '../coral-theme-spectrum';
 import '../coral-externals';
 import '../coral-compat';
 
-import Overlay from './src/scripts/Overlay';
+import {Overlay, ExtensibleOverlay} from './src/scripts/Overlay';
 
 import './src/styles/index.css';
 
@@ -24,4 +24,4 @@ import {commons} from '../coral-utils';
 // Expose component on the Coral namespace
 commons._define('coral-overlay', Overlay);
 
-export {Overlay};
+export {Overlay, ExtensibleOverlay};

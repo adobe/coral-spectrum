@@ -14,7 +14,7 @@ import {Icon} from '../../../coral-component-icon';
 import {Button} from '../../../coral-component-button';
 import {AnchorButton} from '../../../coral-component-anchorbutton';
 import {ButtonList, AnchorList} from '../../../coral-component-list';
-import {Overlay} from '../../../coral-component-overlay';
+import {ExtensibleOverlay} from '../../../coral-component-overlay';
 import {Collection} from '../../../coral-collection';
 import QuickActionsItem from './QuickActionsItem';
 import '../../../coral-component-popover';
@@ -87,7 +87,7 @@ const CLASSNAME = '_coral-QuickActions';
  @htmltag coral-quickactions
  @extends {Overlay}
  */
-const QuickActions = Decorator(class extends Overlay {
+const QuickActions = Decorator(class extends ExtensibleOverlay {
   /** @ignore */
   constructor() {
     super();

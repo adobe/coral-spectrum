@@ -43,7 +43,7 @@ const copyAttributes = (from, to) => {
  @base BaseActionBarContainer
  @classdesc The base element for action bar containers
  */
-const BaseActionBarContainer = (superClass) => Decorator(class extends superClass {
+const BaseActionBarContainer = (superClass) => class extends superClass {
   /** @ignore */
   constructor() {
     super();

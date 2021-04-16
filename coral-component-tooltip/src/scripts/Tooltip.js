@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {Overlay} from '../../../coral-component-overlay';
+import {ExtensibleOverlay} from '../../../coral-component-overlay';
 import Vent from '@adobe/vent';
 import base from '../templates/base';
 import {commons, transform, validate} from '../../../coral-utils';
@@ -83,7 +83,7 @@ for (const key in Overlay.placement) {
  @htmltag coral-tooltip
  @extends {Overlay}
  */
-const Tooltip = Decorator(class extends Overlay {
+const Tooltip = Decorator(class extends ExtensibleOverlay {
   /** @ignore */
   constructor() {
     super();
