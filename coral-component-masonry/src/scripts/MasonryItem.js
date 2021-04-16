@@ -115,7 +115,7 @@ class MasonryItem extends BaseComponent(HTMLElement) {
    @private
    */
   _insert() {
-    if (classList.contains('is-beforeInserting')) {
+    if (this.classList.contains('is-beforeInserting')) {
       this.classList.remove('is-beforeInserting');
       this.classList.add('is-inserting');
 

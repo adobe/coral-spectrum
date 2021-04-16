@@ -182,8 +182,8 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
           this.returnFocusTo(targetElement);
         }
 
-        // initialise popper if popper already initialised or it is not explicitly avoid.
-        if(this._popper ||  !this._avoidPopperInit) {
+        // update popper if popper already initialised or it is not explicitly avoid.
+        if(this._popper || !this._avoidPopperInit) {
           this._initPopper(false, targetElement);
         }
       }
@@ -421,12 +421,13 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
   }
 
   set open(value) {
-    // if popper is not initialised initialise now,
-    // this maybe required if popper initialization was avoid while updating target.
+    // initialise popper if undefined, used when popper initialisation avoided while setting target.
     if(!this._popper) {
       this._initPopper(true);
     }
+
     super.open = value;
+
     this._toggleSmartBehavior(this.open);
   }
 

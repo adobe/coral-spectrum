@@ -1279,9 +1279,10 @@ class QuickActions extends Overlay {
     frag.appendChild(moreButton);
     frag.appendChild(overlay);
 
-    // Link target
-    overlay._avoidPopperInit = overlay.open ? false : true;
+    // avoid popper initialisation if popper neither exist nor overlay opened.
+    overlay._avoidPopperInit = overlay.open || overlay._popper ? false : true;
 
+    // Link target
     overlay.target = moreButton;
     this.appendChild(frag);
 

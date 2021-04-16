@@ -417,7 +417,6 @@ class Card extends BaseComponent(HTMLElement) {
 
     // In case a lot of alerts are added, they will not overflow the card
     // Also check whether any alerts are available
-
     requestAnimationFrame(()=> {
       this.classList.toggle(`${CLASSNAME}--overflow`, this.info.childNodes.length && this.info.scrollHeight > this.clientHeight);
     });
