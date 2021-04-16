@@ -15,6 +15,7 @@ import {BaseFormField} from '../../../coral-base-formfield';
 import Tag from './Tag';
 import {Collection} from '../../../coral-collection';
 import {transform, commons} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Tags';
 // Collection
@@ -41,7 +42,7 @@ const itemValueFromDOM = function (item) {
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
+const TagList = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -552,6 +553,6 @@ class TagList extends BaseFormField(BaseComponent(HTMLElement)) {
       this._prepareItem(item);
     });
   }
-}
+});
 
 export default TagList;

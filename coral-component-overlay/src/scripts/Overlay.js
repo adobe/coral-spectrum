@@ -14,6 +14,7 @@ import {BaseComponent} from '../../../coral-base-component';
 import {BaseOverlay} from '../../../coral-base-overlay';
 import PopperJS from 'popper.js';
 import {transform, validate, commons} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const DEPRECATED_ALIGN = 'Coral.Overlay: alignAt and alignMy have been deprecated. Please use the offset, inner and placement properties instead.';
 const DEPRECATED_FLIP_FIT = 'Coral.Overlay.collision.FLIP_FIT has been deprecated. Please use Coral.Overlay.collision.FLIP instead.';
@@ -137,7 +138,7 @@ const CLASSNAME = '_coral-Overlay';
  @extends {BaseComponent}
  @extends {BaseOverlay}
  */
-class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
+const Overlay = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -739,6 +740,6 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
 
    @typedef {CustomEvent} coral-overlay:positioned
    */
-}
+});
 
 export default Overlay;

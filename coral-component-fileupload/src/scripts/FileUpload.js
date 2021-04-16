@@ -15,6 +15,7 @@ import {BaseFormField} from '../../../coral-base-formfield';
 import FileUploadItem from './FileUploadItem';
 import base from '../templates/base';
 import {transform, commons, validate} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-FileUpload';
 
@@ -56,7 +57,7 @@ const method = {
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
+const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -1091,6 +1092,6 @@ class FileUpload extends BaseFormField(BaseComponent(HTMLElement)) {
       commons.addResizeListener(this, this._positionInputOnDropZone);
     });
   }
-}
+});
 
 export default FileUpload;

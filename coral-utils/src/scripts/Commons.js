@@ -11,7 +11,6 @@
  */
 
 import ResizeObserver from 'resize-observer-polyfill/dist/ResizeObserver';
-import {Decorator} from '../../../coral-decorator';
 
 // Used for unique IDs
 let nextID = 0;
@@ -363,9 +362,7 @@ class Commons {
    E.g for built-in custom elements
    */
   _define(name, constructor, options) {
-    // decorate element before defining.
-    let decorated = Decorator(constructor);
-    window.customElements.define(name, decorated, options);
+    window.customElements.define(name, constructor, options);
     CORAL_COMPONENTS.push(name);
   }
 

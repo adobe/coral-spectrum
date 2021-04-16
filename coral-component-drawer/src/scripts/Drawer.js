@@ -14,6 +14,7 @@ import {BaseComponent} from '../../../coral-base-component';
 import '../../../coral-component-button';
 import base from '../templates/base';
 import {commons, transform, validate, i18n} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link Drawer} directions.
@@ -46,7 +47,7 @@ for (const directionValue in direction) {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Drawer extends BaseComponent(HTMLElement) {
+const Drawer = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -271,6 +272,6 @@ class Drawer extends BaseComponent(HTMLElement) {
 
    @typedef {CustomEvent} coral-drawer:close
    */
-}
+});
 
 export default Drawer;

@@ -12,6 +12,7 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {BaseButton} from '../../../coral-base-button';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  @class Coral.Button
@@ -22,7 +23,7 @@ import {BaseButton} from '../../../coral-base-button';
  @extends {BaseComponent}
  @extends {BaseButton}
  */
-class Button extends BaseButton(BaseComponent(HTMLButtonElement)) {
+const Button = Decorator(class extends BaseButton(BaseComponent(HTMLButtonElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -30,6 +31,6 @@ class Button extends BaseButton(BaseComponent(HTMLButtonElement)) {
     // Events
     this._delegateEvents(this._events);
   }
-}
+});
 
 export default Button;

@@ -17,6 +17,7 @@ import {Icon} from '../../../coral-component-icon';
 import '../../../coral-component-button';
 import base from '../templates/base';
 import {commons, transform, validate, i18n} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link Dialog} closable options.
@@ -116,7 +117,7 @@ for (const variantValue in variant) {
  @extends {BaseComponent}
  @extends {BaseOverlay}
  */
-class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
+const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -796,6 +797,6 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     this.footer = footer;
     this.content = content;
   }
-}
+});
 
 export default Dialog;

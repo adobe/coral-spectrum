@@ -18,6 +18,7 @@ import '../../../coral-component-textfield';
 import './ColorInputSlider';
 import propertiesSubview from '../templates/colorProperties';
 import {commons, i18n} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-ColorInput-colorProperties';
 
@@ -29,7 +30,7 @@ const CLASSNAME = '_coral-ColorInput-colorProperties';
  @extends {BaseComponent}
  @extends {BaseColorInputAbstractSubview}
  */
-class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseComponent(HTMLElement)) {
+const ColorInputColorProperties = Decorator(class extends BaseColorInputAbstractSubview(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -219,6 +220,6 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
 
     this.appendChild(this._elements.propertiesSubview);
   }
-}
+});
 
 export default ColorInputColorProperties;

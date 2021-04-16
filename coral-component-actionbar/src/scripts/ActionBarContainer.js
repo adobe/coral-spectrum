@@ -11,6 +11,7 @@
  */
 
 import {commons} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 import {BaseComponent} from '../../../coral-base-component';
 import BaseActionBarContainer from './BaseActionBarContainer';
 import '../../../coral-component-list';
@@ -44,7 +45,7 @@ const position = {
 
  @deprecated
  */
-class ActionBarContainer extends BaseActionBarContainer(BaseComponent(HTMLElement)) {
+const ActionBarContainer = Decorator(class extends BaseActionBarContainer(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -134,6 +135,6 @@ class ActionBarContainer extends BaseActionBarContainer(BaseComponent(HTMLElemen
 
     this._attachMoreButtonToContainer();
   }
-}
+});
 
 export default ActionBarContainer;

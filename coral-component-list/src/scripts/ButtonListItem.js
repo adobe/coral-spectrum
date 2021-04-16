@@ -12,6 +12,7 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {BaseListItem} from '../../../coral-base-list';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-ButtonList-item';
 
@@ -23,7 +24,7 @@ const CLASSNAME = '_coral-ButtonList-item';
  @extends {BaseComponent}
  @extends {BaseListItem}
  */
-class ButtonListItem extends BaseListItem(BaseComponent(HTMLButtonElement)) {
+const ButtonListItem = Decorator(class extends BaseListItem(BaseComponent(HTMLButtonElement)) {
   /**
    Inherited from {@link BaseComponent#trackingElement}.
    */
@@ -44,6 +45,6 @@ class ButtonListItem extends BaseListItem(BaseComponent(HTMLButtonElement)) {
 
     this.classList.add(CLASSNAME);
   }
-}
+});
 
 export default ButtonListItem;

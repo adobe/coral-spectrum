@@ -16,6 +16,7 @@ import '../../../coral-component-anchorbutton';
 import '../../../coral-component-popover';
 import '../../../coral-component-list';
 import {transform, validate, commons} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link SplitButton} variants.
@@ -48,7 +49,7 @@ const CLASSNAME = '_coral-SplitButton';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class SplitButton extends BaseComponent(HTMLElement) {
+const SplitButton = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -163,6 +164,6 @@ class SplitButton extends BaseComponent(HTMLElement) {
     this._updateLeftVariant();
     this._updateInnerButtons();
   }
-}
+});
 
 export default SplitButton;

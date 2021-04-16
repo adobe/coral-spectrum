@@ -22,6 +22,7 @@ import '../../../coral-component-button';
 import {Checkbox} from '../../../coral-component-checkbox';
 import base from '../templates/base';
 import {SelectableCollection} from '../../../coral-collection';
+import {Decorator} from '../../../coral-decorator';
 import {
   isTableHeaderCell,
   isTableCell,
@@ -90,7 +91,7 @@ const KEY_SPACE = Keys.keyToCode('space');
  @extends {HTMLTableElement}
  @extends {BaseComponent}
  */
-class Table extends BaseComponent(HTMLTableElement) {
+const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
   /** @ignore */
   constructor() {
     super();
@@ -2787,6 +2788,6 @@ class Table extends BaseComponent(HTMLTableElement) {
    @property {Array.<TableRow>} detail.selection
    The item selection. When {@link Table#multiple}, it includes an Array.
    */
-}
+});
 
 export default Table;

@@ -19,6 +19,7 @@ import {ButtonList, SelectList} from '../../../coral-component-list';
 import {SelectableCollection} from '../../../coral-collection';
 import base from '../templates/base';
 import {transform, validate, commons} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link CycleButton} display options.
@@ -58,7 +59,7 @@ const CLASSNAME = '_coral-CycleSelect';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class CycleButton extends BaseComponent(HTMLElement) {
+const CycleButton = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -899,6 +900,6 @@ class CycleButton extends BaseComponent(HTMLElement) {
    @property {CycleButtonItem} detail.selection
    The newly selected item(s).
    */
-}
+});
 
 export default CycleButton;
