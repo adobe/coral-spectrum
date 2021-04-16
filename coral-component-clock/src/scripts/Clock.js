@@ -17,7 +17,6 @@ import '../../../coral-component-textfield';
 import '../../../coral-component-select';
 import base from '../templates/base';
 import {transform, commons, validate, i18n} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 // Default for display and value format
 const DEFAULT_HOUR_FORMAT = 'HH';
@@ -63,7 +62,7 @@ for (const variantValue in variant) {
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) {
+class Clock extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -569,6 +568,6 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
 
     this._syncDisplay();
   }
-});
+}
 
 export default Clock;

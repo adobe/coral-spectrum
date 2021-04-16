@@ -12,7 +12,6 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {BaseList} from '../../../coral-base-list';
-import {Decorator} from '../../../coral-decorator';
 
 /**
  @class Coral.List
@@ -22,7 +21,7 @@ import {Decorator} from '../../../coral-decorator';
  @extends {BaseComponent}
  @extends {BaseList}
  */
-const List = Decorator(class extends BaseList(BaseComponent(HTMLElement)) {
+class List extends BaseList(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -30,6 +29,6 @@ const List = Decorator(class extends BaseList(BaseComponent(HTMLElement)) {
     // Events
     this._delegateEvents(this._events);
   }
-});
+}
 
 export default List;

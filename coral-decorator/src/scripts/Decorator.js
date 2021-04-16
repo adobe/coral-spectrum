@@ -10,6 +10,12 @@
  * governing permissions and limitations under the License.
  */
 
+/**
+  Decorator will be used to intercept any call before passing it to actual element.
+  It should be used for final elements class, so any class which is final and
+  extends by any coral component in that export both undecorated and decorated element.
+  @private
+ */
 const Decorator = (superClass) => class extends superClass {
   /** @ignore */
   connectedCallback() {

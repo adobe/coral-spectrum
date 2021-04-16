@@ -17,7 +17,6 @@ import Color from './Color';
 import {SelectableCollection} from '../../../coral-collection';
 import swatchesHeader from '../templates/swatchesHeader';
 import {commons, i18n} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-ColorInput-swatches';
 
@@ -29,7 +28,7 @@ const CLASSNAME = '_coral-ColorInput-swatches';
  @extends {BaseComponent}
  @extends {BaseColorInputAbstractSubview}
  */
-const ColorInputSwatches = Decorator(class extends BaseColorInputAbstractSubview(BaseComponent(HTMLElement)) {
+class ColorInputSwatches extends BaseColorInputAbstractSubview(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -336,6 +335,6 @@ const ColorInputSwatches = Decorator(class extends BaseColorInputAbstractSubview
 
     this._oldSelection = this.selectedItem;
   }
-});
+}
 
 export default ColorInputSwatches;

@@ -14,7 +14,6 @@ import {BaseComponent} from '../../../coral-base-component';
 import '../../../coral-component-panelstack';
 import '../../../coral-component-tablist';
 import {commons} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link TabView} orientations.
@@ -43,7 +42,7 @@ const CLASSNAME = '_coral-TabView';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const TabView = Decorator(class extends BaseComponent(HTMLElement) {
+class TabView extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -223,6 +222,6 @@ const TabView = Decorator(class extends BaseComponent(HTMLElement) {
    @param {Tab} event.detail.oldSelection
    The prior selected tab panel item.
    */
-});
+}
 
 export default TabView;

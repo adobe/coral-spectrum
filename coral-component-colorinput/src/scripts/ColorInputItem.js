@@ -13,7 +13,6 @@
 import {BaseComponent} from '../../../coral-base-component';
 import Color from './Color';
 import {transform} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 /**
  @class Coral.ColorInput.Item
@@ -22,7 +21,7 @@ import {Decorator} from '../../../coral-decorator';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const ColorInputItem = Decorator(class extends BaseComponent(HTMLElement) {
+class ColorInputItem extends BaseComponent(HTMLElement) {
   /**
    The value of the color. This value can be set in different formats (HEX, RGB, RGBA, HSB, HSL, HSLA and CMYK).
    Corrects a hex value, if it is represented by 3 or 6 characters with or without '#'.
@@ -90,6 +89,6 @@ const ColorInputItem = Decorator(class extends BaseComponent(HTMLElement) {
     // adds the role to support accessibility
     this.setAttribute('role', 'option');
   }
-});
+}
 
 export default ColorInputItem;

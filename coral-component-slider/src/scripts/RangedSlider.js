@@ -13,7 +13,6 @@
 import Slider from './Slider';
 import range from '../templates/range';
 import {commons, transform} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 /**
  @class Coral.RangedSlider
@@ -21,7 +20,7 @@ import {Decorator} from '../../../coral-decorator';
  @htmltag coral-rangedslider
  @extends {Slider}
  */
-const RangedSlider = Decorator(class extends Slider {
+class RangedSlider extends Slider {
   /**
    Ranged sliders are always filled.
 
@@ -211,6 +210,6 @@ const RangedSlider = Decorator(class extends Slider {
     // Set filled attribute by default
     this.setAttribute('filled', '');
   }
-});
+}
 
 export default RangedSlider;

@@ -13,7 +13,6 @@
 import {BaseComponent} from '../../../coral-base-component';
 import {BaseFieldGroup} from '../../../coral-base-fieldgroup';
 import '../../../coral-component-checkbox';
-import {Decorator} from '../../../coral-decorator';
 
 /**
  @class Coral.CheckboxGroup
@@ -23,7 +22,7 @@ import {Decorator} from '../../../coral-decorator';
  @extends {BaseComponent}
  @extends {BaseFieldGroup}
  */
-const CheckboxGroup = Decorator(class extends BaseFieldGroup(BaseComponent(HTMLElement)) {
+class CheckboxGroup extends BaseFieldGroup(BaseComponent(HTMLElement)) {
   /** @private */
   get _itemTagName() {
     // Used for Collection
@@ -39,6 +38,6 @@ const CheckboxGroup = Decorator(class extends BaseFieldGroup(BaseComponent(HTMLE
   get selectedItems() {
     return this.items._getAllSelected('checked');
   }
-});
+}
 
 export default CheckboxGroup;

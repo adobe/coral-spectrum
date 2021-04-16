@@ -11,7 +11,6 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
-import {Decorator} from '../../../coral-decorator';
 import '../../../coral-component-popover';
 import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
 import {commons} from '../../../coral-utils';
@@ -26,7 +25,7 @@ const CLASSNAME = '_coral-ActionBar';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const ActionBar = Decorator(class extends BaseComponent(HTMLElement) {
+class ActionBar extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -619,6 +618,6 @@ const ActionBar = Decorator(class extends BaseComponent(HTMLElement) {
     // force one layout
     this._onLayout();
   }
-});
+}
 
 export default ActionBar;

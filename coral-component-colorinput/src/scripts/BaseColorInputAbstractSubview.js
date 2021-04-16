@@ -10,13 +10,11 @@
  * governing permissions and limitations under the License.
  */
 
-import {Decorator} from '../../../coral-decorator';
-
 /**
  @base BaseColorInputAbstractSubview
  @classdesc An abstract subview class that other subviews should extend.
  */
-const BaseColorInputAbstractSubview = (superClass) => Decorator(class extends superClass {
+const BaseColorInputAbstractSubview = (superClass) => class extends superClass {
   /** @ignore */
   constructor() {
     super();
@@ -81,6 +79,6 @@ const BaseColorInputAbstractSubview = (superClass) => Decorator(class extends su
 
     this._colorinput = null;
   }
-});
+}
 
 export default BaseColorInputAbstractSubview;

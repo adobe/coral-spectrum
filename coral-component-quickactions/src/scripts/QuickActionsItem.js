@@ -13,7 +13,6 @@
 import {BaseComponent} from '../../../coral-base-component';
 import {transform, validate} from '../../../coral-utils';
 import {Messenger} from '../../../coral-messenger';
-import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link QuickActionsItem} type values.
@@ -37,7 +36,7 @@ const type = {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
+class QuickActionsItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -244,6 +243,6 @@ const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
 
    @private
    */
-});
+}
 
 export default QuickActionsItem;

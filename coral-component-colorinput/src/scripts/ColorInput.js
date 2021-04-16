@@ -23,7 +23,6 @@ import './ColorInputColorProperties';
 import './ColorInputSwatches';
 import base from '../templates/base';
 import {validate, transform, commons, i18n} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-ColorInput';
 
@@ -113,7 +112,7 @@ const showDefaultColors = {
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) {
+class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -962,6 +961,6 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
       overlay.remove();
     }
   }
-});
+}
 
 export default ColorInput;

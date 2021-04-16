@@ -14,7 +14,6 @@ import {BaseComponent} from '../../../coral-base-component';
 import {SelectableCollection} from '../../../coral-collection';
 import {transform, validate, commons, i18n} from '../../../coral-utils';
 import getTarget from './getTarget';
-import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link StepList} interaction options.
@@ -58,7 +57,7 @@ const CLASSNAME = '_coral-Steplist';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const StepList = Decorator(class extends BaseComponent(HTMLElement) {
+class StepList extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -572,6 +571,6 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
    @property {Step} detail.oldSelection
    The previously selected Step.
    */
-});
+}
 
 export default StepList;

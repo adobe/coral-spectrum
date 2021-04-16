@@ -13,7 +13,6 @@
 import {BaseComponent} from '../../../coral-base-component';
 import {BaseFieldGroup} from '../../../coral-base-fieldgroup';
 import '../../../coral-component-radio';
-import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link RadioGroup} orientations.
@@ -41,7 +40,7 @@ const orientation = {
  @extends {BaseComponent}
  @extends {BaseFieldGroup}
  */
-const RadioGroup = Decorator(class extends BaseFieldGroup(BaseComponent(HTMLElement)) {
+class RadioGroup extends BaseFieldGroup(BaseComponent(HTMLElement)) {
   /**
    Orientation of the radio group. See {@link RadioGroupOrientationEnum}.
 
@@ -74,6 +73,6 @@ const RadioGroup = Decorator(class extends BaseFieldGroup(BaseComponent(HTMLElem
   static get orientation() {
     return orientation;
   }
-});
+}
 
 export default RadioGroup;

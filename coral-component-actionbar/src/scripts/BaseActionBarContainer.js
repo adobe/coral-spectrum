@@ -17,7 +17,6 @@ import moreOverlay from '../templates/moreOverlay';
 import moreButton from '../templates/moreButton';
 import overlayContent from '../templates/overlayContent';
 import {commons, transform, i18n} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 // Matches private Coral classes in class attribute
 const REG_EXP = /_coral([^\s]+)/g;
@@ -43,7 +42,7 @@ const copyAttributes = (from, to) => {
  @base BaseActionBarContainer
  @classdesc The base element for action bar containers
  */
-const BaseActionBarContainer = (superClass) => Decorator(class extends superClass {
+const BaseActionBarContainer = (superClass) => class extends superClass {
   /** @ignore */
   constructor() {
     super();

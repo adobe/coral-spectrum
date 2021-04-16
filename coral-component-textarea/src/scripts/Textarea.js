@@ -15,7 +15,6 @@ import {BaseFormField} from '../../../coral-base-formfield';
 // todo ideally there should be a coral-base-textfield to inherit from
 import '../../../coral-component-textfield';
 import {transform, validate, commons} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Textfield';
 
@@ -50,7 +49,7 @@ for (const variantValue in variant) {
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-const Textarea = Decorator(class extends BaseFormField(BaseComponent(HTMLTextAreaElement)) {
+class Textarea extends BaseFormField(BaseComponent(HTMLTextAreaElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -142,6 +141,6 @@ const Textarea = Decorator(class extends BaseFormField(BaseComponent(HTMLTextAre
       this.variant = variant.DEFAULT;
     }
   }
-});
+}
 
 export default Textarea;

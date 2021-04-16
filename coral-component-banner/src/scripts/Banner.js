@@ -12,7 +12,6 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {transform, validate} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Banner';
 
@@ -47,7 +46,7 @@ for (const variantValue in variant) {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const Banner = Decorator(class extends BaseComponent(HTMLElement) {
+class Banner extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -178,6 +177,6 @@ const Banner = Decorator(class extends BaseComponent(HTMLElement) {
     this.header = this._elements.header;
     this.content = this._elements.content;
   }
-});
+}
 
 export default Banner;

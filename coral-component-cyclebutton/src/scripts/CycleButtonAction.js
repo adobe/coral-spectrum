@@ -12,7 +12,6 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {transform} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 /**
  @class Coral.CycleButton.Action
@@ -21,7 +20,7 @@ import {Decorator} from '../../../coral-decorator';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const CycleButtonAction = Decorator(class extends BaseComponent(HTMLElement) {
+class CycleButtonAction extends BaseComponent(HTMLElement) {
   /**
    The Action's icon. See {@link Coral.Icon} for valid icon names.
 
@@ -81,6 +80,6 @@ const CycleButtonAction = Decorator(class extends BaseComponent(HTMLElement) {
     this.setAttribute('role', 'menuitem');
     this.tabIndex = -1;
   }
-});
+}
 
 export default CycleButtonAction;

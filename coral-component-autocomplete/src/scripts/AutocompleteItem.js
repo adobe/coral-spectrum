@@ -12,7 +12,6 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {transform} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 /**
  @class Coral.Autocomplete.Item
@@ -21,7 +20,7 @@ import {Decorator} from '../../../coral-decorator';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const AutocompleteItem = Decorator(class extends BaseComponent(HTMLElement) {
+class AutocompleteItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -130,6 +129,6 @@ const AutocompleteItem = Decorator(class extends BaseComponent(HTMLElement) {
   static get observedAttributes() {
     return super.observedAttributes.concat(['selected', 'disabled', 'value']);
   }
-});
+}
 
 export default AutocompleteItem;
