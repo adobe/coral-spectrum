@@ -223,6 +223,13 @@ class Messenger {
   }
 }
 
+/**
+ * This Event class is just a bogus class, current message callback aspect
+ * actual event as a parameter, since we are directly calling the method instead
+ * of triggering event, this would disguised class object will be passed,
+ * and avoid breaks.
+ * This just disguise most used functionality of event object
+ */
 class Event {
   constructor(options) {
     this._detail = options.detail;

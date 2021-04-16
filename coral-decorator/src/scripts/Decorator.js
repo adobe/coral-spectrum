@@ -12,8 +12,7 @@
 
 /**
   Decorator will be used to intercept any call before passing it to actual element.
-  It should be used for final elements class, so any class which is final and
-  extends by any coral component in that export both undecorated and decorated element.
+  kind of wrapper around each decorated component
   @private
  */
 const Decorator = (superClass) => class extends superClass {

@@ -1257,9 +1257,6 @@ class QuickActions extends Overlay {
   /** @ignore */
   render() {
     super.render();
-    const elements = this._elements;
-    const overlay = elements.overlay;
-    const moreButton = elements.moreButton;
 
     this.classList.add(CLASSNAME);
 
@@ -1276,18 +1273,19 @@ class QuickActions extends Overlay {
 
     // Render template
     const frag = document.createDocumentFragment();
-    frag.appendChild(moreButton);
-    frag.appendChild(overlay);
+    frag.appendChild(this._elements.moreButton);
+    frag.appendChild(this._elements.overlay);
 
     // avoid popper initialisation if popper neither exist nor overlay opened.
-    overlay._avoidPopperInit = overlay.open || overlay._popper ? false : true;
+    this._elements.overlay._avoidPopperInit = this._elements.overlay.open || this._elements.overlay._popper ? false : true;
 
     // Link target
-    overlay.target = moreButton;
+    this._elements.overlay.target = this._elements.moreButton;
+
     this.appendChild(frag);
 
     // set this to false after overlay has been connected to avoid connected callback target setting
-    delete overlay._avoidPopperInit;
+    delete this._elements.overlay._avoidPopperInit;
   }
 
   /** @ignore */

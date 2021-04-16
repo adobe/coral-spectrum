@@ -363,6 +363,7 @@ class Commons {
    E.g for built-in custom elements
    */
   _define(name, constructor, options) {
+    // decorate element before defining.
     let decorated = Decorator(constructor);
     window.customElements.define(name, decorated, options);
     CORAL_COMPONENTS.push(name);
