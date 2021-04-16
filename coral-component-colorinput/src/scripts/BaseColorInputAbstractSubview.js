@@ -79,6 +79,6 @@ const BaseColorInputAbstractSubview = (superClass) => class extends superClass {
 
     this._colorinput = null;
   }
-}
+};
 
 export default BaseColorInputAbstractSubview;

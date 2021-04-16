@@ -419,7 +419,6 @@ class Card extends BaseComponent(HTMLElement) {
     // Also check whether any alerts are available
 
     requestAnimationFrame(()=> {
-      //
       this.classList.toggle(`${CLASSNAME}--overflow`, this.info.childNodes.length && this.info.scrollHeight > this.clientHeight);
     });
   }

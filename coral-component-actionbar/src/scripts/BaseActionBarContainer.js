@@ -346,6 +346,6 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
       overlay.remove();
     }
   }
-});
+}
 
 export default BaseActionBarContainer;

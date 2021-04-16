@@ -10,7 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-// Utilities
 import Decorator from './src/scripts/Decorator';
 
 export {Decorator};

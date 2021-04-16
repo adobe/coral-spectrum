@@ -12,7 +12,6 @@
 
 import {commons} from '../coral-utils';
 
-// Utilities
 import Messenger from './src/scripts/Messenger';
 
 export {Messenger};

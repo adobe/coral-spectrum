@@ -30,11 +30,10 @@ const SCOPE_SELECTOR = ':scope > ';
 class Messenger {
   /** @ignore */
   constructor(element) {
-    let self = this;
-    self._element = element;
-    self._connected = false;
-    self._clearQueue();
-    self._clearListeners();
+    this._element = element;
+    this._connected = false;
+    this._clearQueue();
+    this._clearListeners();
   }
 
   /* checks whether Messenger is connected or not.
@@ -73,16 +72,15 @@ class Messenger {
     @private
    */
   _validateConnection() {
-    let self = this;
-    let connected = self.isConnected;
-    let elementConnected = self.isElementConnected;
+    let connected = this.isConnected;
+    let elementConnected = this.isElementConnected;
 
     if(elementConnected && !connected) {
-      self.connect();
+      this.connect();
     }
 
     if(!elementConnected && connected) {
-      self.disconnect();
+      this.disconnect();
     }
   }
 
@@ -91,9 +89,8 @@ class Messenger {
     @private
    */
   _addMessageToQueue(message) {
-    let self = this;
-    if(!self.isConnected) {
-      self._queue.push(message);
+    if(!this.isConnected) {
+      this._queue.push(message);
     }
   }
 
@@ -102,11 +99,10 @@ class Messenger {
     @private
    */
   _executeQueue() {
-    let self = this;
-    self._queue.forEach(function(message) {
-      self.postMessage(message);
+    this._queue.forEach(function(message) {
+      this.postMessage(message);
     });
-    self._clearQueue();
+    this._clearQueue();
   }
 
   /* empty the stored queue message
@@ -129,20 +125,18 @@ class Messenger {
     @private
    */
   connect() {
-    let self = this;
-
-    if(!self.isElementConnected) {
-      self.disconnect();
+    if(!this.isElementConnected) {
+      this.disconnect();
       return;
     }
 
-    if(!self.isConnected) {
-      let element = self._element;
+    if(!this.isConnected) {
+      let element = this._element;
 
-      self._connected = true;
+      this._connected = true;
 
       element.trigger(`${element.tagName.toLowerCase()}:_messengerconnected`, {
-        handler : self.update.bind(self)
+        handler : this.update.bind(this)
       });
     }
   }
@@ -164,21 +158,20 @@ class Messenger {
     @private
    */
   postMessage(message, detail) {
-    let self = this;
-    let element = self._element;
+    let element = this._element;
 
-    self._validateConnection();
+    this._validateConnection();
 
     if(element.isSilenced) {
       return;
     }
 
-    if(!self.isConnected) {
-      self._addMessageToQueue();
+    if(!this.isConnected) {
+      this._addMessageToQueue();
       return;
     }
 
-    self._listeners.forEach((listener) => {
+    this._listeners.forEach((listener) => {
       let observedMessages = listener.observedMessages;
       let messageInfo = observedMessages[message];
 
@@ -217,32 +210,28 @@ class Messenger {
     @private
    */
   disconnect() {
-    let self = this;
-
-    if(self.isElementConnected) {
-      self.connect();
+    if(this.isElementConnected) {
+      this.connect();
       return;
     }
 
-    if(self.isConnected) {
-      let self = this;
-      self._connected = false;
-      self._clearListeners();
-      self._clearQueue();
+    if(this.isConnected) {
+      this._connected = false;
+      this._clearListeners();
+      this._clearQueue();
     }
   }
 }
 
 class Event {
   constructor(options) {
-    const self = this;
-    self._detail = options.detail;
-    self._target = options.target;
-    self._type = options.type;
-    self._currentTarget = options.currentTarget;
-    self._defaultPrevented = false;
-    self._propagationStopped = false;
-    self._immediatePropagationStopped = false;
+    this._detail = options.detail;
+    this._target = options.target;
+    this._type = options.type;
+    this._currentTarget = options.currentTarget;
+    this._defaultPrevented = false;
+    this._propagationStopped = false;
+    this._immediatePropagationStopped = false;
   }
 
   get detail() {

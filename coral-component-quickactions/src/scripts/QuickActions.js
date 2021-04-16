@@ -263,42 +263,40 @@ class QuickActions extends Overlay {
   }
 
   set target(value) {
-    const self = this;
     // avoid popper initialization while connecting for first time and not opened.
-    self._avoidPopperInit = self.open || self._popper ? false : true;
+    this._avoidPopperInit = this.open || this._popper ? false : true;
 
     super.target = value;
 
-    const targetElement = self._getTarget(value);
-    const prevTargetElement = self._previousTarget;
+    const targetElement = this._getTarget(value);
+    const prevTargetElement = this._previousTarget;
     const targetHasChanged = targetElement !== prevTargetElement;
 
     if (targetElement && targetHasChanged) {
       // Remove listeners from the previous target
       if (prevTargetElement) {
-        const previousTarget = self._getTarget(prevTargetElement);
+        const previousTarget = this._getTarget(prevTargetElement);
         if (previousTarget) {
-          self._removeTargetEventListeners(previousTarget);
+          this._removeTargetEventListeners(previousTarget);
           targetElement.removeAttribute('aria-haspopup');
           targetElement.removeAttribute('aria-owns');
         }
       }
 
       // Set up listeners for the new target
-      self._addTargetEventListeners();
+      this._addTargetEventListeners();
 
       let ariaOwns = targetElement.getAttribute('aria-owns');
-      ariaOwns = ariaOwns && ariaOwns.length ? `${ariaOwns.trim()}  ${self.id}` : self.id;
+      ariaOwns = ariaOwns && ariaOwns.length ? `${ariaOwns.trim()}  ${this.id}` : this.id;
 
       targetElement.setAttribute('aria-owns', ariaOwns);
       // Mark the target as owning a popup
       targetElement.setAttribute('aria-haspopup', 'true');
 
       // Cache for use as previous target
-      self._previousTarget = targetElement;
+      this._previousTarget = targetElement;
     }
-
-    self._avoidPopperInit = false;
+    delete this._avoidPopperInit;
   }
 
   get observedMessages() {
@@ -1259,19 +1257,18 @@ class QuickActions extends Overlay {
   /** @ignore */
   render() {
     super.render();
-    const self = this;
-    const elements = self._elements;
+    const elements = this._elements;
     const overlay = elements.overlay;
     const moreButton = elements.moreButton;
 
-    self.classList.add(CLASSNAME);
+    this.classList.add(CLASSNAME);
 
     // Define QuickActions as a menu
-    self.setAttribute('role', 'menu');
+    this.setAttribute('role', 'menu');
 
     // Support cloneNode
     ['moreButton', 'overlay'].forEach((handleName) => {
-      const handle = self.querySelector(`[handle="${handleName}"]`);
+      const handle = this.querySelector(`[handle="${handleName}"]`);
       if (handle) {
         handle.remove();
       }
@@ -1283,11 +1280,13 @@ class QuickActions extends Overlay {
     frag.appendChild(overlay);
 
     // Link target
-    overlay._avoidPopperInit = true;
+    overlay._avoidPopperInit = overlay.open ? false : true;
+
     overlay.target = moreButton;
-    self.appendChild(frag);
+    this.appendChild(frag);
+
     // set this to false after overlay has been connected to avoid connected callback target setting
-    overlay._avoidPopperInit = false;
+    delete overlay._avoidPopperInit;
   }
 
   /** @ignore */

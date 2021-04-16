@@ -184,7 +184,7 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
 
         // initialise popper if popper already initialised or it is not explicitly avoid.
         if(this._popper ||  !this._avoidPopperInit) {
-          this._initPopper(targetElement);
+          this._initPopper(false, targetElement);
         }
       }
     }
@@ -424,7 +424,7 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
     // if popper is not initialised initialise now,
     // this maybe required if popper initialization was avoid while updating target.
     if(!this._popper) {
-      this._initPopper();
+      this._initPopper(true);
     }
     super.open = value;
     this._toggleSmartBehavior(this.open);
@@ -536,12 +536,12 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
     return this.constructor._getTarget(this, targetValue);
   }
 
-  _initPopper(targetElement) {
+  _initPopper(forceReposition, targetElement) {
     targetElement = targetElement || this._getTarget();
     if(targetElement) {
       this._popper = this._popper || new PopperJS(targetElement, this, {onUpdate: this._onUpdate.bind(this)});
       // Make sure popper options modifiers are up to date
-      this.reposition(true);
+      this.reposition(forceReposition);
     }
   }
   /**
