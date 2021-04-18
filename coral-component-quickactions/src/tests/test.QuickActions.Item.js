@@ -112,7 +112,7 @@ describe('QuickActions.Item', function () {
   describe('Events', function () {
     describe('#coral-quickactions-item:_contentchanged', function () {
       it('should be triggered when content is changed', function (done) {
-        var spy = sinon.spy(item._messenger, 'postMessage');
+        var spy = sinon.spy(item._messenger, 'postMessage').withArgs('coral-quickactions-item:_contentchanged');
 
         // Do the update
         item.content.textContent = 'New Content';
@@ -120,8 +120,6 @@ describe('QuickActions.Item', function () {
         // we need to wait for the mutation observer to kick in
         helpers.next(function () {
           expect(spy.callCount).to.equal(1, 'spy called once after changing the content');
-          expect(spy.getCall(0).args[0]).to.equal('coral-quickactions-item:_contentchanged',
-            'spy called once after changing the content');
           done();
         });
       });
@@ -129,14 +127,12 @@ describe('QuickActions.Item', function () {
 
     describe('#coral-quickactions-item:_hrefchanged', function () {
       it('should be triggered when icon is changed', function () {
-        var spy = sinon.spy(item._messenger, 'postMessage');
+        var spy = sinon.spy(item._messenger, 'postMessage').withArgs('coral-quickactions-item:_hrefchanged');
 
         // Do the update
         item.href = 'http://localhost';
 
         expect(spy.callCount).to.equal(1, 'spy called once after changing the icon');
-        expect(spy.getCall(0).args[0]).to.equal('coral-quickactions-item:_hrefchanged',
-          'spy called once after changing the href');
       });
     });
 
@@ -153,14 +149,12 @@ describe('QuickActions.Item', function () {
 
     describe('#coral-quickactions-item:_typechanged', function () {
       it('should be triggered when type is changed', function () {
-        var spy = sinon.spy(item._messenger, 'postMessage');
+        var spy = sinon.spy(item._messenger, 'postMessage').withArgs('coral-quickactions-item:_typechanged');
 
         // Do the update
         item.type = QuickActions.Item.type.ANCHOR;
 
         expect(spy.callCount).to.equal(1, 'spy called once after changing the icon');
-        expect(spy.getCall(0).args[0]).to.equal('coral-quickactions-item:_typechanged',
-          'spy called once after changing the type');
       });
     });
   });

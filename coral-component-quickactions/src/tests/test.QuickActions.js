@@ -732,7 +732,7 @@ describe('QuickActions', function () {
       expect(spyCall.args[2]).to.be.an.instanceof(QuickActions);
     });
 
-    it('should call the tracker callback fn with expected parameters when the quickactions are opened and a button is clicked', function () {
+    it('should call the tracker callback fn with expected parameters when the quickactions are opened and a button is clicked', function (done) {
       const el = helpers.build(window.__html__['QuickActions.tracking.html']);
       var areaEl = el.firstElementChild;
       var actionsEl = el.querySelector('coral-quickactions');
@@ -758,10 +758,11 @@ describe('QuickActions', function () {
         expect(trackData).to.have.property('rootType', 'coral-quickactions');
         expect(spyCall.args[1]).to.be.an.instanceof(Event);
         expect(spyCall.args[2]).to.be.an.instanceof(QuickActions);
+        done();
       })
     });
 
-    it('should call the tracker callback fn with expected parameters when the quickactions more button is clicked', function () {
+    it('should call the tracker callback fn with expected parameters when the quickactions more button is clicked', function (done) {
       const el = helpers.build(window.__html__['QuickActions.tracking.html']);
       var areaEl = el.firstElementChild;
       var actionsEl = el.querySelector('coral-quickactions');
@@ -787,10 +788,11 @@ describe('QuickActions', function () {
         expect(trackData).to.have.property('rootType', 'coral-quickactions');
         expect(spyCall.args[1]).to.be.an.instanceof(Event);
         expect(spyCall.args[2]).to.be.an.instanceof(QuickActions);
+        done();
       });
     });
 
-    it('should call the tracker callback fn with expected parameters when the first button from the quickactions more list is clicked', function () {
+    it('should call the tracker callback fn with expected parameters when the first button from the quickactions more list is clicked', function (done) {
       const el = helpers.build(window.__html__['QuickActions.tracking.html']);
       var areaEl = el.firstElementChild;
       var actionsEl = el.querySelector('coral-quickactions');
@@ -819,6 +821,7 @@ describe('QuickActions', function () {
         expect(trackData).to.have.property('rootType', 'coral-quickactions');
         expect(spyCall.args[1]).to.be.an.instanceof(Event);
         expect(spyCall.args[2]).to.be.an.instanceof(QuickActions);
+        done();
       });
     });
   });

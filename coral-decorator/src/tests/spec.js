@@ -10,9 +10,4 @@
  * governing permissions and limitations under the License.
  */
 
-import '../coral-externals';
-import '../coral-compat';
-
-import Decorator from './src/scripts/Decorator';
-
-export {Decorator};
+import './test.Decorator';
