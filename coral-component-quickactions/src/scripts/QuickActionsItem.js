@@ -45,7 +45,7 @@ const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
     // QuickActions will add button/anchorbutton references to it
     this._elements = {};
     // messenger
-    this._messenger = new Messenger(self);
+    this._messenger = new Messenger(this);
 
     this._observer = new MutationObserver(this._onMutation.bind(this));
     this._observer.observe(this, {

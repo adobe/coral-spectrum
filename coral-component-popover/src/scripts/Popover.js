@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ExtensibleOverlay} from '../../../coral-component-overlay';
+import {ExtensibleOverlay, Overlay} from '../../../coral-component-overlay';
 import {Icon} from '../../../coral-component-icon';
 // Popover relies on Dialog styles partially
 import '../../../coral-component-dialog';

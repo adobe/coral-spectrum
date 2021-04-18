@@ -943,4 +943,4 @@ class ExtensibleSlider extends BaseFormField(BaseComponent(HTMLElement)) {
 // Hence for extending ExtensibleSlider should be used
 const Slider = Decorator(ExtensibleSlider);
 
-export {ExtensibleSlider, Slider}
+export {ExtensibleSlider, Slider};

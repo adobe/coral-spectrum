@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {ExtensibleOverlay} from '../../../coral-component-overlay';
+import {ExtensibleOverlay, Overlay} from '../../../coral-component-overlay';
 import Vent from '@adobe/vent';
 import base from '../templates/base';
 import {commons, transform, validate} from '../../../coral-utils';

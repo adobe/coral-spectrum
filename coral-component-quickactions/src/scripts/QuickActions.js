@@ -14,7 +14,7 @@ import {Icon} from '../../../coral-component-icon';
 import {Button} from '../../../coral-component-button';
 import {AnchorButton} from '../../../coral-component-anchorbutton';
 import {ButtonList, AnchorList} from '../../../coral-component-list';
-import {ExtensibleOverlay} from '../../../coral-component-overlay';
+import {ExtensibleOverlay, Overlay} from '../../../coral-component-overlay';
 import {Collection} from '../../../coral-collection';
 import QuickActionsItem from './QuickActionsItem';
 import '../../../coral-component-popover';
@@ -1134,6 +1134,7 @@ const QuickActions = Decorator(class extends ExtensibleOverlay {
     // stops propagation so that this event remains internal to the component
     event.stopImmediatePropagation();
 
+    // delay this execution while opening quickaction to avoid performance delay
     if(this._openedBefore || this.open) {
       const item = event.target;
       this._removeItemElements(item);
