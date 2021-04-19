@@ -7663,6 +7663,18 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
           box-shadow: 0 0 0 1px rgb(227, 72, 80);
         }
 
+.coral--dark ._coral-Textfield::placeholder {
+  color: rgb(185, 185, 185);
+}
+.coral--darkest ._coral-Textfield::placeholder {
+  color: rgb(162, 162, 162);
+}
+.coral--light ._coral-Textfield::placeholder {
+  color: rgb(110, 110, 110);
+}
+.coral--lightest ._coral-Textfield::placeholder {
+  color: rgb(116, 116, 116);
+}
 
 /**
  * Copyright 2019 Adobe. All rights reserved.
@@ -14807,6 +14819,18 @@ coral-select-item {
 ._coral-Dropdown--native ._coral-Dropdown-select {
   display: block;
   opacity: 0.01;
+}
+.coral--dark ._coral-Dropdown-label.is-placeholder {
+  color: rgb(185, 185, 185);
+}
+.coral--darkest ._coral-Dropdown-label.is-placeholder {
+  color: rgb(162, 162, 162);
+}
+.coral--light ._coral-Dropdown-label.is-placeholder {
+  color: rgb(110, 110, 110);
+}
+.coral--lightest ._coral-Dropdown-label.is-placeholder {
+  color: rgb(116, 116, 116);
 }
 
 /**
