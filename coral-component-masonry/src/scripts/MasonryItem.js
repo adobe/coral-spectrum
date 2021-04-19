@@ -179,9 +179,23 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
+  _updateCallback(connected) {
+    super._updateCallback(connected);
+    if(connected) {
+      this._messenger.connect();
+      // In case an already connected element is switched to new parent,
+      // we need to ignore the connected callback in that case as well which is correct,
+      // as the item will be connected to new parent and messenger needs to be informed as well parent.
+      // Hence posting connected in update callback.
+      this._messenger.postMessage('coral-masonry-item:_connected');
+    } else {
+      this._messenger.disconnect();
+    }
+  }
+
+  /** @ignore */
   connectedCallback() {
     this._messenger.connect();
-
     super.connectedCallback();
 
     // Inform masonry immediately
@@ -211,13 +225,12 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
   disconnectedCallback() {
     super.disconnectedCallback();
 
-    this._messenger.disconnect();
-
     // Handle it in masonry immediately
     const masonry = this._masonry;
     if (masonry) {
       masonry._onItemDisconnected(this);
     }
+    this._messenger.disconnect();
   }
 });
 

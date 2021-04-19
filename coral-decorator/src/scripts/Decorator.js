@@ -16,9 +16,16 @@
   @private
  */
 const Decorator = (superClass) => class extends superClass {
+
+  /** @ignore */
+  _updateCallback(connected) {
+    super._updateCallback(connected);
+  }
+
   /** @ignore */
   connectedCallback() {
-    if (this._skipConnectedCallback()) {
+    if (!this.isConnected || this._disconnected === false || this._ignoreConnectedCallback === true) {
+      this._updateCallback(true);
       return;
     }
     super.connectedCallback();
@@ -26,9 +33,11 @@ const Decorator = (superClass) => class extends superClass {
 
   /** @ignore */
   disconnectedCallback() {
-    if (this._skipDisconnectedCallback()) {
+    if (this.isConnected || this._disconnected === true || this._ignoreConnectedCallback === true) {
+      this._updateCallback(false);
       return;
     }
+
     super.disconnectedCallback();
   }
 };

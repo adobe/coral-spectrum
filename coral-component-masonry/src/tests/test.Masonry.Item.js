@@ -158,24 +158,46 @@ describe('Masonry.Item', function () {
         expect(spy.calledOnce).to.be.true;
 
         const spy1 = sinon.spy(item1._messenger, 'postMessage').withArgs('coral-masonry-item:_connected');
-
+        const spy2 = sinon.spy(item1, '_updateCallback');
         item1._ignoreConnectedCallback = true;
-
         masonry.appendChild(item1);
+        item1._ignoreConnectedCallback = false;
+        expect(spy1.calledOnce).to.be.true;
+        // updateCallback should be called more than once
+        expect(spy2.called).to.be.true;
 
-        expect(spy1.notCalled).to.be.true;
+        const spy3 = sinon.spy(item2._messenger, 'postMessage').withArgs('coral-masonry-item:_connected');
+        const spy4 = sinon.spy(item2, '_updateCallback');
 
+        const spy5 = sinon.spy(newItem, 'connectedCallback');
+        newItem.showRemoveTransition = false;
+
+        // remove Child
         masonry.removeChild(item2);
+        masonry.removeChild(newItem);
+
+        // newItem should not wait for transition to end
+        expect(newItem._disconnected).to.be.true;
+        expect(newItem._masonry).to.be.null;
+        expect(spy5.notCalled).to.be.true;
 
         // let the removing transition to end
         commons.transitionEnd(item2, () => {
           helpers.next(function() {
-          const spy2 = sinon.spy(item2._messenger, 'postMessage').withArgs('coral-masonry-item:_connected');
+            // because of showing transition element is connected again
+            expect(spy3.calledOnce).to.be.true;
+            expect(spy4.called).to.be.true;
+            expect(item2._disconnected).to.be.true;
+            expect(item2._masonry).to.be.null;
+
+            spy3.resetHistory();
+            spy4.resetHistory();
             // assume item is in connected state.
             item2._disconnected = false;
             masonry.appendChild(item2);
 
-            expect(spy2.notCalled).to.be.true;
+            expect(spy3.calledOnce).to.be.true;
+            expect(spy4.calledOnce).to.be.true;
             done();
           });
         });

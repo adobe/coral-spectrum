@@ -183,10 +183,19 @@ const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    // always call before super to avoid rendering before connection
-    this._messenger.connect();
+  _updateCallback(connected) {
+    super._updateCallback(connected);
 
+    if(connected) {
+      this._messenger.connect();
+    } else {
+      this._messenger.disconnect();
+    }
+  }
+
+  /** @ignore */
+  connectedCallback() {
+    this._messenger.connect();
     super.connectedCallback();
   }
 

@@ -14,6 +14,22 @@ import {commons} from '../../../coral-utils';
 
 const SCOPE_SELECTOR = ':scope > ';
 
+/**
+ * Messenger will used to pass the messages from child component to its parent. Currently we are relying on
+ * events to do the job. When a large DOM is connected, these events as a bulk leads to delays.
+ * With the use of messenger we will directly call the parent method provided in the observed messages list.
+ * The current implmentation only supports one to many mapping i.e. one parent and many children and any
+ * in child property will result in execution of only one parent method. This should be used purely for
+ * coral internal events and not any DOM based or public events.
+ *
+ * Limitations :
+   - This doesnot support the case where any change in child property,
+     needs to be notified to two or more parents.
+     This is achievable, but not currently supported.
+   - Do not use messenger for generic events like click, hover, etc.
+  @private
+ */
+
 class Messenger {
   /** @ignore */
   constructor(element) {
@@ -23,94 +39,106 @@ class Messenger {
     this._clearListeners();
   }
 
+  /* checks whether Messenger is connected or not.
+    @returns {Boolean} true if connected
+    @private
+   */
   get isConnected() {
     return this._connected === true;
   }
 
-  get isElementConnected() {
-    return this._element.isConnected === true;
-  }
-
+  /* checks whether the event is silenced or not
+    @returns {Boolean} true if silenced
+    @private
+   */
   get isSilenced() {
     return this._element._silenced === true;
   }
 
+  /* specifies the list of listener attached to messenger.
+    @returns {Array} array of listeners
+    @private
+   */
   get listeners() {
     return this._listeners;
   }
 
-  _validateConnection() {
-    let connected = this.isConnected;
-    let elementConnected = this.isElementConnected;
-
-    if(elementConnected && !connected) {
-      this.connect();
-    }
-
-    if(!elementConnected && connected) {
-      this.disconnect();
-    }
-  }
-
-  _addMessageToQueue(message) {
+  /* add a message to the queue only if messenger is not connected
+    message will be added only if element is not connected.
+    @private
+   */
+  _addMessageToQueue(message, detail) {
     if(!this.isConnected) {
-      this._queue.push(message);
+      this._queue.push({
+        message: message,
+        detail: detail
+      });
     }
   }
 
+  /* executes the stored queue messages.
+    It will be executed when element is connected.
+    @private
+   */
   _executeQueue() {
-    this._queue.forEach(function(message) {
-      this.postMessage(message);
+    this._queue.forEach((options) => {
+      this._postMessage(options.message, options.detail);
     });
     this._clearQueue();
   }
 
+  /* empty the stored queue message
+    @private
+   */
   _clearQueue() {
     this._queue = [];
   }
 
+  /* clears the listeners
+    @private
+   */
   _clearListeners() {
     this._listeners = [];
   }
 
+  /* element should call this method when they are connected in DOM.
+     its the responsibility of the element to call this hook
+    @triggers `${element.tagName.toLowerCase()}:_messengerconnected`
+    @private
+   */
   connect() {
-    if(!this.isElementConnected) {
-      this.disconnect();
-      return;
-    }
-
     if(!this.isConnected) {
       let element = this._element;
 
       this._connected = true;
 
       element.trigger(`${element.tagName.toLowerCase()}:_messengerconnected`, {
-        handler : this.update.bind(this)
+        handler : this.registerListener.bind(this)
       });
+      // post all stored messages
+      this._executeQueue();
     }
   }
 
-  update(listener) {
+  /* add the listener to messenger
+     this handler will be passed when messengerconnect event is trigger
+     the handler needs to be executed by listeners.
+    @private
+   */
+  registerListener(listener) {
     if(listener) {
       this._listeners.push(listener);
     }
   }
 
-  postMessage(message, detail) {
+  /* post the provided message to all listener.
+    @param {String} message which should be posted
+    @param {Object} additional detail which needs to be posted.
+    @private
+   */
+  _postMessage(message, detail) {
     let element = this._element;
-
-    this._validateConnection();
-
-    if(element.isSilenced) {
-      return;
-    }
-
-    if(!this.isConnected) {
-      this._addMessageToQueue();
-      return;
-    }
-
-    this._listeners.forEach((listener) => {
+    this.listeners.forEach((listener) => {
       let observedMessages = listener.observedMessages;
       let messageInfo = observedMessages[message];
 
@@ -144,12 +172,30 @@ class Messenger {
     });
   }
 
-  disconnect() {
-    if(this.isElementConnected) {
-      this.connect();
+  /* post the provided message to all listener,
+     along with validating silencing and storing in queue
+    @param {String} message which should be posted
+    @param {Object} additional detail which needs to be posted.
+    @private
+   */
+  postMessage(message, detail) {
+    if(this.isSilenced) {
       return;
     }
 
+    if(!this.isConnected) {
+      this._addMessageToQueue(message, detail);
+      return;
+    }
+
+    this._postMessage(message, detail);
+  }
+
+  /* element should call this method when they are disconnected from DOM.
+    its the responsibility of the element to call this hook
+    @private
+   */
+  disconnect() {
     if(this.isConnected) {
       this._connected = false;
       this._clearListeners();
@@ -159,11 +205,11 @@ class Messenger {
 }
 
 /**
- * This Event class is just a bogus class, current message callback aspect
+ * This Event class is just a bogus class, current message callback aspects
  * actual event as a parameter, since we are directly calling the method instead
- * of triggering event, this would disguised class object will be passed,
- * and avoid breaks.
- * This just disguise most used functionality of event object
+ * of triggering event, will pass an instance of this disguised object,
+ * to avoid breaks.
+ * This just disguise the  most used functionality of event object
  */
 class Event {
   constructor(options) {
