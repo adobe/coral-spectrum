@@ -210,6 +210,7 @@ class Messenger {
  * of triggering event, will pass an instance of this disguised object,
  * to avoid breaks.
  * This just disguise the  most used functionality of event object
+ * @private
  */
 class Event {
   constructor(options) {
