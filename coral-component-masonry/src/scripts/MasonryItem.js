@@ -82,6 +82,15 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
     this._showRemoveTransition = transform.booleanAttr(value);
   }
 
+
+  /**
+   Specify whether the item is in removing state or not.
+   @type {Boolean}
+   */
+  get removing() {
+    return this.hasAttribute('_removing');
+  }
+
   /**
    Whether the item is selected.
 
