@@ -1,3 +1,10 @@
+## [4.10.18](https://github.com/adobe/coral-spectrum/compare/v4.10.17...v4.10.18) (2021-04-19)
+
+
+### Bug Fixes
+
+* **#165:** placeholder text color contrast ([#166](https://github.com/adobe/coral-spectrum/issues/166)) ([710d835](https://github.com/adobe/coral-spectrum/commit/710d83535bba6988cc9b283270c88dff0bbed4d0)), closes [#165](https://github.com/adobe/coral-spectrum/issues/165)
+
 ## [4.10.17](https://github.com/adobe/coral-spectrum/compare/v4.10.16...v4.10.17) (2021-04-09)
 
 
