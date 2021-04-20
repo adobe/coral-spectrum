@@ -26,4 +26,4 @@ import '@adobe/focus-ring-polyfill';
 import './polyfills/forcePolyfill.js';
 // Using custom polyfill built from https://github.com/joeldenning/custom-elements/tree/builtin instead.
 // customElements.enableCustomizedBuiltins is set to true by default here.
-import './polyfills/custom-elements.min.js';
+import '@ungap/custom-elements';
