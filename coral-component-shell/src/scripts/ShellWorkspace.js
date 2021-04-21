@@ -27,7 +27,11 @@ class ShellWorkspace extends BaseComponent(HTMLAnchorElement) {
   /** @ignore */
   constructor() {
     super();
-
+  
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-shell-workspace');
+    }
+    
     // Events
     this._delegateEvents({
       click: '_onClick'

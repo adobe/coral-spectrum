@@ -53,6 +53,10 @@ class Textfield extends BaseFormField(BaseComponent(HTMLInputElement)) {
   constructor() {
     super();
 
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-textfield');
+    }
+    
     this._delegateEvents(this._events);
   }
 

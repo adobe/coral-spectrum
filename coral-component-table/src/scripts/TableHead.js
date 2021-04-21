@@ -25,11 +25,15 @@ const CLASSNAME = '_coral-Table-head';
  @extends {BaseComponent}
  @extends {BaseTableSection}
  */
-class TableHead extends BaseTableSection(BaseComponent(HTMLTableSectionElement)) {
+class TableHead extends BaseTableSection(BaseComponent(HTMLTableSectionElement), 'coral-table-head') {
   /** @ignore */
   constructor() {
     super();
-
+  
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-table-head');
+    }
+    
     this._toggleObserver(true);
   }
 

@@ -29,7 +29,11 @@ class SideNavItem extends BaseLabellable(BaseComponent(HTMLAnchorElement)) {
   /** @ignore */
   constructor() {
     super();
-
+  
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-sidenav-item');
+    }
+    
     // Prepare templates
     this._elements = {
       content: this.querySelector('coral-sidenav-item-content') || document.createElement('coral-sidenav-item-content')

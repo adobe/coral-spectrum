@@ -28,6 +28,10 @@ class ShellHomeAnchor extends BaseComponent(HTMLAnchorElement) {
   /** @ignore */
   constructor() {
     super();
+  
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-shell-homeanchor');
+    }
 
     // Prepare templates
     this._elements = {

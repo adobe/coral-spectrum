@@ -37,7 +37,7 @@ class Multifield extends BaseComponent(HTMLElement) {
   constructor() {
     super();
 
-    this.setAttribute('id', this.id || commons.getUID());
+    this._id = this.id || commons.getUID();
 
     // Attach events
     const events = {
@@ -59,13 +59,13 @@ class Multifield extends BaseComponent(HTMLElement) {
       'change coral-multifield-item-content > input': '_onInputChange'
     };
 
-    events[`global:key:escape #${this.id} > [coral-multifield-move]`] = '_onMoveItemEsc';
+    events[`global:key:escape #${this._id} > [coral-multifield-move]`] = '_onMoveItemEsc';
 
     this._delegateEvents(events);
 
     // Templates
     this._elements = {
-      template: this.querySelector(`#${this.id} > template[coral-multifield-template]`) || document.createElement('template')
+      template: this.querySelector(`#${this._id} > template[coral-multifield-template]`) || document.createElement('template')
     };
     this._elements.template.setAttribute('coral-multifield-template', '');
 
@@ -545,6 +545,7 @@ class Multifield extends BaseComponent(HTMLElement) {
   render() {
     super.render();
 
+    this.id = this._id;
     this.classList.add(CLASSNAME, 'coral-Well');
 
     // a11y

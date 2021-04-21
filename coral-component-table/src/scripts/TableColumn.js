@@ -64,6 +64,15 @@ const sortableType = {
  @extends {BaseComponent}
  */
 class TableColumn extends BaseComponent(HTMLTableColElement) {
+  /** @ignore */
+  constructor() {
+    super();
+    
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-table-column');
+    }
+  }
+  
   /**
    The column cells alignment. The alignment should take the {@link i18n} configuration into account.
 

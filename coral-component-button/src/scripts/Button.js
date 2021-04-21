@@ -26,7 +26,11 @@ class Button extends BaseButton(BaseComponent(HTMLButtonElement)) {
   /** @ignore */
   constructor() {
     super();
-
+  
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-button');
+    }
+    
     // Events
     this._delegateEvents(this._events);
   }

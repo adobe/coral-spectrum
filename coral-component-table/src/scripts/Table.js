@@ -94,6 +94,10 @@ class Table extends BaseComponent(HTMLTableElement) {
   /** @ignore */
   constructor() {
     super();
+  
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-table');
+    }
 
     // Templates
     this._elements = {

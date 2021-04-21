@@ -24,6 +24,15 @@ const CLASSNAME = '_coral-Table-cell';
  @extends {BaseComponent}
  */
 class TableCell extends BaseComponent(HTMLTableCellElement) {
+  /** @ignore */
+  constructor() {
+    super();
+  
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-table-cell');
+    }
+  }
+  
   // @compat
   get content() {
     return this;

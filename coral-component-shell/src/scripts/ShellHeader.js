@@ -34,8 +34,6 @@ class ShellHeader extends BaseComponent(HTMLElement) {
       actions: this.querySelector('coral-shell-header-actions') || document.createElement('coral-shell-header-actions'),
       content: this.querySelector('coral-shell-header-content') || document.createElement('coral-shell-header-content')
     };
-
-    Overlay._OverlayManager.push(this);
   }
 
   /**
@@ -109,7 +107,9 @@ class ShellHeader extends BaseComponent(HTMLElement) {
   /** @ignore */
   render() {
     super.render();
-
+  
+    Overlay._OverlayManager.push(this);
+    
     this.classList.add(CLASSNAME);
     // appheader only exists on darkest theme
     this.classList.add('coral--darkest', 'u-coral-clearFix');

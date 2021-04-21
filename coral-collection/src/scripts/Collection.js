@@ -109,10 +109,10 @@ class Collection {
 
     // we provide support for the :scope selector and swap it for an id
     if (this._itemSelector && this._itemSelector.indexOf(SCOPE_SELECTOR) === 0) {
-      this._container.id = this._container.id || COLLECTION_ID + this._id;
+      this._container._id = this._container.id || COLLECTION_ID + this._id;
       // we create a special selector to make sure that the items are direct children of the container. given that
       // :scope is not fully supported by all browsers, we use an id to query
-      this._allItemsSelector = this._itemSelector.replace(SCOPE_SELECTOR, `#${this._container.id} > `);
+      this._allItemsSelector = this._itemSelector.replace(SCOPE_SELECTOR, `#${this._container._id} > `);
 
       // we remove the :scope from the selector to be able to use it to determine if the item matches the collection
       this._itemSelector = this._itemSelector.replace(SCOPE_SELECTOR, '');
@@ -213,6 +213,8 @@ class Collection {
   getAll() {
     // in order to perform the automatic getAll query, the _host and _allItemsSelector must be provided
     if (this._container && this._allItemsSelector) {
+      this._container.id = this._container.id || this._container._id;
+      
       let items = this._liveCollection ?
         // instead of querying the DOM, we just convert the live collection to an array, this way we obtain a
         // "snapshot" of the DOM

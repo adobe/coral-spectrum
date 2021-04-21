@@ -25,10 +25,14 @@ const CLASSNAME = '_coral-Table-body';
  @extends {BaseComponent}
  @extends {BaseTableSection}
  */
-class TableBody extends BaseTableSection(BaseComponent(HTMLTableSectionElement)) {
+class TableBody extends BaseTableSection(BaseComponent(HTMLTableSectionElement), 'coral-table-body') {
   /** @ignore */
   constructor() {
     super();
+  
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-table-body');
+    }
 
     this._toggleObserver(true);
   }

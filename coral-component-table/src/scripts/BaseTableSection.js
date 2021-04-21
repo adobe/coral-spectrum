@@ -24,12 +24,12 @@ for (const dividerValue in divider) {
  @base BaseTableSection
  @classdesc The base element for table sections
  */
-const BaseTableSection = (superClass) => class extends superClass {
+const BaseTableSection = (superClass, tagName) => class extends superClass {
   /** @ignore */
   constructor() {
     super();
 
-    this._tagName = this.getAttribute('is').toLowerCase();
+    this._tagName = tagName;
   }
 
   /**

@@ -26,7 +26,11 @@ class TableHeaderCell extends BaseComponent(HTMLTableCellElement) {
   /** @ignore */
   constructor() {
     super();
-
+  
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-table-headercell');
+    }
+    
     // Templates
     this._elements = {
       content: this.querySelector('coral-table-headercell-content') || document.createElement('coral-table-headercell-content')

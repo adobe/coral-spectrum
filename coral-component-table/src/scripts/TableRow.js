@@ -29,6 +29,10 @@ class TableRow extends BaseComponent(HTMLTableRowElement) {
   /** @ignore */
   constructor() {
     super();
+  
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-table-row');
+    }
 
     // Templates
     this._elements = {};

@@ -37,10 +37,9 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
       content: this.querySelector('coral-multifield-item-content') || document.createElement('coral-multifield-item-content')
     };
 
-    const uid = this.id || commons.getUID();
-    this.setAttribute('id', uid);
-    this._elements.content.setAttribute('id', `${uid}-content`);
-    item.call(this._elements, {i18n, uid});
+    this._id = this.id || commons.getUID();
+    this._elements.content.setAttribute('id', `${this._id}-content`);
+    item.call(this._elements, {i18n, uid: this._id});
   }
 
   /**
@@ -99,8 +98,9 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
   render() {
     super.render();
 
+    this.id = this._id;
     this.classList.add(CLASSNAME);
-
+    
     // a11y
     this.setAttribute('role', 'listitem');
 

@@ -27,7 +27,11 @@ class AnchorListItem extends BaseListItem(BaseComponent(HTMLAnchorElement)) {
   /** @ignore */
   constructor() {
     super();
-
+  
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-anchorlist-item');
+    }
+    
     // Events
     this._delegateEvents({
       click: '_onClick'

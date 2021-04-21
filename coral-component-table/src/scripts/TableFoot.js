@@ -24,7 +24,16 @@ const CLASSNAME = '_coral-Table-foot';
  @extends {BaseComponent}
  @extends {BaseTableSection}
  */
-class TableFoot extends BaseTableSection(BaseComponent(HTMLTableSectionElement)) {
+class TableFoot extends BaseTableSection(BaseComponent(HTMLTableSectionElement), 'coral-table-foot') {
+  /** @ignore */
+  constructor() {
+    super();
+  
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-table-foot');
+    }
+  }
+  
   /** @ignore */
   render() {
     super.render();

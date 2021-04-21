@@ -24,6 +24,15 @@ const CLASSNAME = '_coral-ButtonList-item';
  @extends {BaseListItem}
  */
 class ButtonListItem extends BaseListItem(BaseComponent(HTMLButtonElement)) {
+  /** @ignore */
+  constructor() {
+    super();
+  
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-buttonlist-item');
+    }
+  }
+  
   /**
    Inherited from {@link BaseComponent#trackingElement}.
    */

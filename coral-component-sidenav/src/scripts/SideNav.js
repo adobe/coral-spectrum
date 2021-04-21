@@ -47,6 +47,10 @@ class SideNav extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
+  
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-sidenav');
+    }
 
     // Attach events
     this._delegateEvents({

@@ -27,7 +27,11 @@ class ShellSolution extends BaseComponent(HTMLAnchorElement) {
   /** @ignore */
   constructor() {
     super();
-
+  
+    if (!this.hasAttribute('is')) {
+      this.setAttribute('is', 'coral-shell-solution');
+    }
+    
     // Prepare templates
     this._elements = {
       // Fetch or create the content zone elements
