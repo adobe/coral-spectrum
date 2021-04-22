@@ -64,7 +64,7 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
 
     let selectListItem = document.createElement('coral-selectlist-item');
     if (item.href){
-      selectListItem.setAttribute("href", item.getAttribute("href"));
+      selectListItem.setAttribute("href", item.href);
     }
     selectListItem.textContent = item.textContent;
     selectListItem.id = item.id + "-selectlist-item";
