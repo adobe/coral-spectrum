@@ -63,7 +63,7 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
     item.id = item.id || commons.getUID();
 
     let selectListItem = document.createElement('coral-selectlist-item');
-    if (item.hasAttribute("href")){
+    if (item.href){
       selectListItem.setAttribute("href", item.getAttribute("href"));
     }
     selectListItem.textContent = item.textContent;
@@ -92,7 +92,7 @@ class ShellSelectListSwitcher extends BaseComponent(HTMLElement) {
     const switcherListItem = event.target;
     let selectListItemId = switcherListItem.id + "-selectlist-item";
     let selectListItem = this._elements.container.querySelector('#'+ selectListItemId);
-    if (switcherListItem.hasAttribute("href")){
+    if (switcherListItem.href){
       selectListItem.setAttribute("href", switcherListItem.getAttribute("href"));
     }
   }

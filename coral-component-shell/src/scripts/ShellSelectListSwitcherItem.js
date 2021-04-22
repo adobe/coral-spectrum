@@ -37,7 +37,7 @@ class ShellSelectListSwitcherItem extends BaseComponent(HTMLElement) {
   set href(value) {
     var href = transform.string(value);
     var update = false;
-    if(this._href !== undefined) {
+    if(this._href) {
       update = true;
     }
     this._href = href;
