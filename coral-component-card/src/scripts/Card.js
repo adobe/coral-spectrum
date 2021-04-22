@@ -13,6 +13,7 @@
 import {BaseComponent} from '../../../coral-base-component';
 import base from '../templates/base';
 import {commons, transform, validate} from '../../../coral-utils';
+import fastdom from 'fastdom';
 
 const COLOR_HINT_REG_EXP = /^#[0-9A-F]{6}$/i;
 
@@ -118,22 +119,26 @@ class Card extends BaseComponent(HTMLElement) {
     window.requestAnimationFrame(() => {
       // both hint dimensions need to be set in order to use this feature
       if (!this._loaded && this._elements.asset && this.assetWidth && this._assetHeight) {
-        // gets the width without the border of the card
-        const clientRect = this.getBoundingClientRect();
-        const width = clientRect.right - clientRect.left;
-        // calculates the image ratio used to resize the height
-        const ratio = width / this.assetWidth;
-
-        // the image is considered "low resolution"
-        // @todo: check this after removal of lowResolution
-        if (ratio > 1) {
-          // 32 = $card-asset-lowResolution-padding * 2
-          this._elements.asset.style.height = `${this._assetHeight + 32}px`;
-        }
-        // for non-low resolution images, condensed and inverted cards do not require the height to be set
-        else if (this.variant !== variant.CONDENSED && this.variant !== variant.INVERTED) {
-          this._elements.asset.style.height = `${ratio * this._assetHeight}px`;
-        }
+        fastdom.measure(() => {
+          // gets the width without the border of the card
+          const clientRect = this.getBoundingClientRect();
+          const width = clientRect.right - clientRect.left;
+          // calculates the image ratio used to resize the height
+          const ratio = width / this.assetWidth;
+          
+          fastdom.mutate(() => {
+            // the image is considered "low resolution"
+            // @todo: check this after removal of lowResolution
+            if (ratio > 1) {
+              // 32 = $card-asset-lowResolution-padding * 2
+              this._elements.asset.style.height = `${this._assetHeight + 32}px`;
+            }
+            // for non-low resolution images, condensed and inverted cards do not require the height to be set
+            else if (this.variant !== variant.CONDENSED && this.variant !== variant.INVERTED) {
+              this._elements.asset.style.height = `${ratio * this._assetHeight}px`;
+            }
+          });
+        });
       }
     });
   }
@@ -170,7 +175,9 @@ class Card extends BaseComponent(HTMLElement) {
 
       // if the image is already loaded we do not add the color hint to the asset
       if (!this._loaded) {
-        this._elements.asset.style['background-color'] = this._colorHint;
+        fastdom.mutate(() => {
+          this._elements.asset.style['background-color'] = this._colorHint;
+        });
       }
     }
   }
@@ -237,8 +244,10 @@ class Card extends BaseComponent(HTMLElement) {
   set fixedWidth(value) {
     this._fixedWidth = transform.booleanAttr(value);
     this._reflectAttribute('fixedwidth', this._fixedWidth);
-
-    this.classList.toggle(`${CLASSNAME}--fixedWidth`, this._fixedWidth);
+    
+    fastdom.mutate(() => {
+      this.classList.toggle(`${CLASSNAME}--fixedWidth`, this._fixedWidth);
+    });
   }
 
   /**
@@ -276,8 +285,10 @@ class Card extends BaseComponent(HTMLElement) {
   set stacked(value) {
     this._stacked = transform.booleanAttr(value);
     this._reflectAttribute('stacked', this._stacked);
-
-    this.classList.toggle(`${CLASSNAME}--stacked`, this._stacked);
+    
+    fastdom.mutate(() => {
+      this.classList.toggle(`${CLASSNAME}--stacked`, this._stacked);
+    });
   }
 
   /**
@@ -296,14 +307,16 @@ class Card extends BaseComponent(HTMLElement) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
     this._reflectAttribute('variant', this._variant);
-
-    this.classList.remove(...ALL_VARIANT_CLASSES);
-
-    if (this._variant !== variant.DEFAULT) {
-      this.classList.add(`${CLASSNAME}--${this._variant}`);
-    }
-
-    this.assetHeight = this.assetHeight;
+    
+    fastdom.mutate(() => {
+      this.classList.remove(...ALL_VARIANT_CLASSES);
+      
+      if (this._variant !== variant.DEFAULT) {
+        this.classList.add(`${CLASSNAME}--${this._variant}`);
+      }
+      
+      this.assetHeight = this.assetHeight;
+    });
   }
 
   /** @ignore */
@@ -311,12 +324,15 @@ class Card extends BaseComponent(HTMLElement) {
     // @todo fix me for multiple images
     // sets the image as loaded
     this._loaded = true;
-
-    // removes the height style since the asset has been completely loaded
-    this._elements.asset.style.height = '';
-
-    // enables the transition
-    event.target.classList.remove('is-loading');
+    const target = event.target;
+    
+    fastdom.mutate(() => {
+      // removes the height style since the asset has been completely loaded
+      this._elements.asset.style.height = '';
+      
+      // enables the transition
+      target.classList.remove('is-loading');
+    });
   }
 
   get _contentZones() {
@@ -361,63 +377,70 @@ class Card extends BaseComponent(HTMLElement) {
   /** @ignore */
   render() {
     super.render();
-
-    this.classList.add(CLASSNAME);
-
-    // Default reflected attributes
-    if (!this._variant) {
-      this.variant = variant.DEFAULT;
-    }
-
-    const content = this._elements.content;
-    const asset = this._elements.asset;
-
-    // Prepares images to be loaded nicely
-    const images = asset.querySelectorAll('img');
-    const imagesCount = images.length;
-    for (let i = 0 ; i < imagesCount ; i++) {
-      const image = images[i];
-      if (!image.complete) {
-        image.classList.add('is-loading');
+    
+    fastdom.mutate(() => {
+      this.classList.add(CLASSNAME);
+      // Default reflected attributes
+      if (!this._variant) {
+        this.variant = variant.DEFAULT;
       }
-    }
-
-    for (const contentZone in this._contentZones) {
-      const element = this._elements[this._contentZones[contentZone]];
-      // Remove it so we can process children
-      if (element.parentNode) {
-        element.parentNode.removeChild(element);
+      
+      const content = this._elements.content;
+      const asset = this._elements.asset;
+      
+      // Prepares images to be loaded nicely
+      const images = asset.querySelectorAll('img');
+      const imagesCount = images.length;
+      for (let i = 0 ; i < imagesCount ; i++) {
+        const image = images[i];
+        if (!image.complete) {
+          image.classList.add('is-loading');
+        }
       }
-    }
-
-    // Moves everything into the main content zone
-    while (this.firstChild) {
-      const child = this.firstChild;
-      // Removes the empty spaces
-      if (child.nodeType === Node.TEXT_NODE && child.textContent.trim() !== '' ||
-        child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'wrapper') {
-        // Add non-template elements to the content
-        content.appendChild(child);
+      
+      for (const contentZone in this._contentZones) {
+        const element = this._elements[this._contentZones[contentZone]];
+        // Remove it so we can process children
+        if (element.parentNode) {
+          element.parentNode.removeChild(element);
+        }
       }
-      // Remove anything else element
-      else {
-        this.removeChild(child);
+      
+      // Moves everything into the main content zone
+      while (this.firstChild) {
+        const child = this.firstChild;
+        // Removes the empty spaces
+        if (child.nodeType === Node.TEXT_NODE && child.textContent.trim() !== '' ||
+          child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'wrapper') {
+          // Add non-template elements to the content
+          content.appendChild(child);
+        }
+        // Remove anything else element
+        else {
+          this.removeChild(child);
+        }
       }
-    }
-
-    // Assign the content zones so the insert functions will be called
-    this.overlay = this._elements.overlay;
-    this.content = content;
-    this.info = this._elements.info;
-
-    this.appendChild(this._elements.wrapper);
-
-    // The 'asset' setter knows to insert the element just before the wrapper node.
-    this.asset = asset;
-
-    // In case a lot of alerts are added, they will not overflow the card
-    // Also check whether any alerts are available
-    this.classList.toggle(`${CLASSNAME}--overflow`, this.info.childNodes.length && this.info.scrollHeight > this.clientHeight);
+      
+      // Assign the content zones so the insert functions will be called
+      this.overlay = this._elements.overlay;
+      this.content = content;
+      this.info = this._elements.info;
+      
+      this.appendChild(this._elements.wrapper);
+      
+      // The 'asset' setter knows to insert the element just before the wrapper node.
+      this.asset = asset;
+      
+      fastdom.measure(() => {
+        const overflow = this.info.scrollHeight > this.clientHeight;
+        
+        fastdom.mutate(() => {
+          // In case a lot of alerts are added, they will not overflow the card
+          // Also check whether any alerts are available
+          this.classList.toggle(`${CLASSNAME}--overflow`, this.info.childNodes.length && overflow);
+        });
+      });
+    });
   }
 }
 

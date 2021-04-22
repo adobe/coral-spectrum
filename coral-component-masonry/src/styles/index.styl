@@ -91,20 +91,6 @@ coral-masonry-item {
 // Transitions
 ._coral-Masonry.is-loaded > ._coral-Masonry-item {
   transition: transform var(--spectrum-global-animation-duration-1000) var(--spectrum-global-animation-ease-in-out);
-
-  &.is-beforeInserting {
-    opacity: 0;
-  }
-
-  &.is-inserting {
-    opacity: 1;
-    transition: opacity var(--spectrum-global-animation-duration-1000) var(--spectrum-global-animation-ease-in-out);
-  }
-
-  &.is-removing {
-    opacity: 0;
-    transition: opacity var(--spectrum-global-animation-duration-1000) var(--spectrum-global-animation-ease-in-out);
-  }
 }
 
 @require 'light';

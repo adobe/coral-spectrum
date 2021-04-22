@@ -11,6 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
+import fastdom from 'fastdom';
 
 /**
  @class Coral.Card.PropertyList
@@ -23,13 +24,15 @@ class CardPropertyList extends BaseComponent(HTMLElement) {
   /** @ignore */
   render() {
     super.render();
-
-    this.classList.add('u-coral-clearFix');
-
-    // Empty it if no items
-    if (this.innerHTML.trim() === '') {
-      this.textContent = '';
-    }
+    
+    fastdom.mutate(() => {
+      this.classList.add('u-coral-clearFix');
+      
+      // Empty it if no items
+      if (this.innerHTML.trim() === '') {
+        this.textContent = '';
+      }
+    });
   }
 }
 

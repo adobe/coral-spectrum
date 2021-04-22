@@ -82,10 +82,10 @@ document.addEventListener('error', (event) => {
 }, true);
 
 // Ignore children which are being removed
-const itemFilter = (element) => element && element.tagName === 'CORAL-MASONRY-ITEM' && !element.hasAttribute('_removing');
+const itemFilter = (element) => element && element.tagName === 'CORAL-MASONRY-ITEM';
 
 // Filter out items being removed
-const isRemovingOrRemoved = (item) => item.hasAttribute('_removing') || !item.parentNode;
+const isRemovingOrRemoved = (item) => !item.parentNode;
 
 /**
  * Returns the position of the second element relative to the first element.
@@ -154,9 +154,7 @@ class Masonry extends BaseComponent(HTMLElement) {
       // Selection
       'click coral-masonry-item': '_onItemClick',
       'key:space coral-masonry-item': '_onItemClick',
-
-      // private
-      'coral-masonry-item:_connected': '_onItemConnected',
+      
       'coral-masonry-item:_selectedchanged': '_onItemSelectedChanged'
     });
 
@@ -190,8 +188,8 @@ class Masonry extends BaseComponent(HTMLElement) {
         itemTagName: 'coral-masonry-item',
         // allows masonry to be nested
         itemSelector: ':scope > coral-masonry-item:not([_removing]):not([_placeholder])',
-        onItemAdded: this._validateSelection,
-        onItemRemoved: this._validateSelection
+        onItemAdded: this._onItemAdded,
+        onItemRemoved: this._onItemRemoved
       });
     }
 
@@ -689,15 +687,6 @@ class Masonry extends BaseComponent(HTMLElement) {
       this._layoutInstance = new LayoutClass(this);
     }
 
-    // Animate insertion. In the attachedCallback of the item, the is-beforeInserting class was already added. This
-    // class is now removed again which allows to transition between the is-beforeInserting and is-inserting class.
-    // By separating the code and batching the changes, the overhead is reduced significantly.
-    let i;
-    const newItems = this._newItems;
-    for (i = 0 ; i < newItems.length ; i++) {
-      newItems[i]._insert();
-    }
-
     // Position the items
     this._layoutInstance.layout();
     this._layouted = true;
@@ -707,11 +696,15 @@ class Masonry extends BaseComponent(HTMLElement) {
     // shown at the wrong position. There used to be two cases when this happened:
     // - When the masonry is first invisible and later shown because the resize event is triggered too late.
     // - In some browsers (e.g. Safari) always when items are added dynamically
-    for (i = 0 ; i < newItems.length ; i++) {
-      newItems[i].classList.add('is-managed');
+    const newItems = [...this._newItems];
+    for (let i = 0 ; i < newItems.length ; i++) {
+      // Matches --spectrum-global-animation-duration-1000 = 500ms
+      setTimeout(() => {
+        newItems[i].classList.add('is-managed');
+      }, 500);
     }
     // clear
-    newItems.length = 0;
+    this._newItems.length = 0;
 
     // Update loaded class. Cannot be done in _updateLoaded because it has to happen after the positioning.
     this.classList.toggle('is-loaded', this._loaded);
@@ -760,80 +753,39 @@ class Masonry extends BaseComponent(HTMLElement) {
     // A loaded image might have made an item bigger
     this._scheduleLayout();
   }
-
-  /** @private */
-  _onItemConnected(event) {
-    event.stopImmediatePropagation();
-
-    const item = event.target;
+  
+  _onItemAdded(item) {
     this._prepareItem(item);
+    
+    this._validateSelection(item);
   }
-
-  _prepareItem(item) {
-    // We don't care about transitions if the masonry is not in the body
-    if (!document.body.contains(this)) {
-      return;
-    }
-
-    // check if just moving
-    if (!item.hasAttribute('_removing') && this !== item._masonry && !item.hasAttribute('_placeholder')) {
-      item._masonry = this;
-
-      // Insert animation start style. This is separated from _insert because otherwise we would have to enforce a
-      // reflow between changing the classes for every item (which is slow).
-      item.classList.add('is-beforeInserting');
-
-      // Do it in the next frame so that the inserting animation is visible
-      window.requestAnimationFrame(() => {
-        this._onItemAdded(item);
-      });
-    }
-  }
-
-  /** @private */
-  _onItemDisconnected(item) {
-    // We don't care about transitions if the masonry is not in the body
-    if (!document.body.contains(this)) {
-      return;
-    }
-
+  
+  _onItemRemoved(item) {
     // Ignore the item being dropped after ordering
     if (item._dropping) {
       return;
     }
-
-    if (!item.hasAttribute('_removing')) {
-      // Attach again for remove transition
-      item.setAttribute('_removing', '');
-      this.appendChild(item);
-      commons.transitionEnd(item, () => {
-        item.remove();
-      });
-    }
-    // remove transition completed
-    else {
-      item.removeAttribute('_removing');
-      item._masonry = null;
-
-      this._onItemRemoved(item);
-    }
-  }
-
-  /** @private */
-  _onItemAdded(item) {
-    item._updateDragAction(this.orderable);
-    this._newItems.push(item);
-
-    // Hack to prevent flickering in some browsers which don't support custom elements natively (e.g. Safari)
-    if (this._attaching && item.nextElementSibling === null) {
-      this._doLayout('last item attached');
-    }
-  }
-
-  /** @private */
-  _onItemRemoved(item) {
-    item._updateDragAction(false);
+  
+    item._masonry = null;
     item.classList.remove('is-managed');
+    
+    this._validateSelection(item);
+  }
+
+  _prepareItem(item) {
+    // check if just moving
+    if (this !== item._masonry && !item.hasAttribute('_placeholder')) {
+      item._masonry = this;
+  
+      
+      item[this.orderable ? 'setAttribute' : 'removeAttribute']('_orderable', this.orderable);
+      this._newItems.push(item);
+  
+      // Hack to prevent flickering in some browsers which don't support custom elements natively (e.g. Safari)
+      if (this._attaching && item.nextElementSibling === null) {
+        this._doLayout('last item attached');
+      }
+    }
   }
 
   /** @private */
@@ -1062,15 +1014,6 @@ class Masonry extends BaseComponent(HTMLElement) {
     // Prepare items
     this.items.getAll().forEach((item) => {
       this._prepareItem(item);
-    });
-
-    // This indicates that the initial items are being attached
-    this._attaching = true;
-
-    window.requestAnimationFrame(() => {
-      this._attaching = false;
-      // Update loaded after all items have been attached
-      this._updateLoaded();
     });
   }
 

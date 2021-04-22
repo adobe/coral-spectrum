@@ -20,6 +20,7 @@ import QuickActionsItem from './QuickActionsItem';
 import '../../../coral-component-popover';
 import base from '../templates/base';
 import {transform, validate, commons, i18n} from '../../../coral-utils';
+import fastdom from 'fastdom';
 
 const BUTTON_FOCUSABLE_SELECTOR = '._coral-QuickActions-item:not([disabled]):not([hidden])';
 
@@ -1124,8 +1125,11 @@ class QuickActions extends Overlay {
 
     const item = event.target;
     this._removeItemElements(item);
-    this._attachItem(item);
-    this._layout();
+    
+    if (this.open) {
+      this._attachItem(item);
+      this._layout();
+    }
   }
 
   /** @ignore */
@@ -1231,54 +1235,71 @@ class QuickActions extends Overlay {
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
-
-    const overlay = this._elements.overlay;
-    // Cannot be open by default when rendered
-    overlay.removeAttribute('open');
-    // Restore in DOM
-    if (overlay._parent) {
-      overlay._parent.appendChild(overlay);
-    }
+    
+    fastdom.mutate(() => {
+      const overlay = this._elements.overlay;
+      if (overlay.hasAttribute('open')) {
+        // Cannot be open by default when rendered
+        overlay.removeAttribute('open');
+      }
+      // Restore in DOM
+      if (overlay._parent) {
+        overlay._parent.appendChild(overlay);
+      }
+    });
   }
 
   /** @ignore */
   render() {
-    super.render();
+    if (this.hasAttribute('open')) {
+      super.render();
 
-    this.classList.add(CLASSNAME);
+      this.classList.add(CLASSNAME);
 
-    // Define QuickActions as a menu
-    this.setAttribute('role', 'menu');
+      // Define QuickActions as a menu
+      this.setAttribute('role', 'menu');
 
-    // Support cloneNode
-    ['moreButton', 'overlay'].forEach((handleName) => {
-      const handle = this.querySelector(`[handle="${handleName}"]`);
-      if (handle) {
-        handle.remove();
-      }
-    });
+      // Support cloneNode
+      ['moreButton', 'overlay'].forEach((handleName) => {
+        const handle = this.querySelector(`[handle="${handleName}"]`);
+        if (handle) {
+          handle.remove();
+        }
+      });
 
-    // Render template
-    const frag = document.createDocumentFragment();
-    frag.appendChild(this._elements.moreButton);
-    frag.appendChild(this._elements.overlay);
+      // Render template
+      const frag = document.createDocumentFragment();
+      frag.appendChild(this._elements.moreButton);
+      frag.appendChild(this._elements.overlay);
 
-    // Link target
-    this._elements.overlay.target = this._elements.moreButton;
+      // Link target
+      this._elements.overlay.target = this._elements.moreButton;
 
-    this.appendChild(frag);
+      this.appendChild(frag);
+    }
+  }
+  
+  /** @ignore */
+  attributeChangedCallback(name, oldValue, value) {
+    if (name === 'open') {
+      this.render();
+    }
+    
+    super.attributeChangedCallback(name, oldValue, value);
   }
 
   /** @ignore */
   disconnectedCallback() {
     super.disconnectedCallback();
 
-    const overlay = this._elements.overlay;
-    // In case it was moved out don't forget to remove it
-    if (!this.contains(overlay)) {
-      overlay._parent = overlay._repositioned ? document.body : this;
-      overlay.remove();
-    }
+    fastdom.mutate(() => {
+      const overlay = this._elements.overlay;
+      // In case it was moved out don't forget to remove it
+      if (!this.contains(overlay)) {
+        overlay._parent = overlay._repositioned ? document.body : this;
+        overlay.remove();
+      }
+    });
   }
 }
 

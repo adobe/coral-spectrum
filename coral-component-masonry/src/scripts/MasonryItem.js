@@ -15,6 +15,7 @@ import {DragAction} from '../../../coral-dragaction';
 import '../../../coral-component-checkbox';
 import quickactions from '../templates/quickactions';
 import {transform, commons} from '../../../coral-utils';
+import fastdom from 'fastdom';
 
 const CLASSNAME = '_coral-Masonry-item';
 
@@ -72,28 +73,14 @@ class MasonryItem extends BaseComponent(HTMLElement) {
     this._selected = transform.booleanAttr(value);
     this._reflectAttribute('selected', this._selected);
 
-    this.setAttribute('aria-selected', this._selected);
-    this.classList.toggle('is-selected', this._selected);
-
-    this._elements.check[this._selected ? 'setAttribute' : 'removeAttribute']('checked', '');
-
-    this.trigger('coral-masonry-item:_selectedchanged');
-  }
-
-  /**
-   Animates the insertion of the item.
-
-   @private
-   */
-  _insert() {
-    if (this.classList.contains('is-beforeInserting')) {
-      this.classList.remove('is-beforeInserting');
-      this.classList.add('is-inserting');
-
-      commons.transitionEnd(this, () => {
-        this.classList.remove('is-inserting');
-      });
-    }
+    fastdom.mutate(() => {
+      this.setAttribute('aria-selected', this._selected);
+      this.classList.toggle('is-selected', this._selected);
+  
+      this._elements.check[this._selected ? 'setAttribute' : 'removeAttribute']('checked', '');
+  
+      this.trigger('coral-masonry-item:_selectedchanged');
+    });
   }
 
   /** @private */
@@ -131,67 +118,38 @@ class MasonryItem extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   static get observedAttributes() {
-    return super.observedAttributes.concat(['selected', '_removing', '_orderable']);
+    return super.observedAttributes.concat(['selected', '_orderable', '_draggable']);
   }
 
   /** @ignore */
   attributeChangedCallback(name, oldValue, value) {
-    if (name === '_removing') {
-      // Do it in the next frame so that the removing animation is visible
-      window.requestAnimationFrame(() => {
-        this.classList.toggle('is-removing', value !== null);
-      });
-    } else if (name === '_orderable') {
+    if (name === '_orderable') {
       this._updateDragAction(value !== null);
-    } else {
+    }
+    else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
-
-  /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-
-    super.connectedCallback();
-
-    // Inform masonry immediately
-    this.trigger('coral-masonry-item:_connected');
-  }
-
+  
   /** @ignore */
   render() {
     super.render();
 
-    this.classList.add(CLASSNAME);
-
-    // @a11y
-    this.setAttribute('tabindex', '-1');
-
-    // Support cloneNode
-    const template = this.querySelector('._coral-Masonry-item-quickActions');
-    if (template) {
-      template.remove();
-    }
-    this.insertBefore(this._elements.quickactions, this.firstChild);
-    // todo workaround to not give user possibility to tab into checkbox
-    this._elements.check._labellableElement.tabIndex = -1;
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this.isConnected) {
-      return;
-    }
-
-    super.disconnectedCallback();
-
-    // Handle it in masonry immediately
-    const masonry = this._masonry;
-    if (masonry) {
-      masonry._onItemDisconnected(this);
-    }
+    fastdom.mutate(() => {
+      this.classList.add(CLASSNAME);
+  
+      // @a11y
+      this.setAttribute('tabindex', '-1');
+  
+      // Support cloneNode
+      const template = this.querySelector('._coral-Masonry-item-quickActions');
+      if (template) {
+        template.remove();
+      }
+      this.insertBefore(this._elements.quickactions, this.firstChild);
+      // todo workaround to not give user possibility to tab into checkbox
+      this._elements.check._labellableElement.tabIndex = -1;
+    });
   }
 }
 

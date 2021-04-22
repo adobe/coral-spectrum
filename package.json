@@ -46,6 +46,7 @@
     "@adobe/vent": "1.0.0",
     "core-js": "3.6.4",
     "document-register-element": "1.14.3",
+    "fastdom": "^1.0.10",
     "normalize.css": "8.0.1",
     "popper.js": "1.16.1",
     "resize-observer-polyfill": "1.5.1"

@@ -14,6 +14,7 @@ import {BaseComponent} from '../../../coral-base-component';
 import {commons} from '../../../coral-utils';
 import '../../../coral-component-icon';
 import icon from '../templates/icon';
+import fastdom from 'fastdom';
 
 const CLASSNAME = '_coral-Card-property';
 
@@ -128,40 +129,42 @@ class CardProperty extends BaseComponent(HTMLElement) {
   /** @ignore */
   render() {
     super.render();
-
-    this.classList.add(CLASSNAME, 'coral-Body--small');
-
-    // Create a fragment
-    const frag = document.createDocumentFragment();
-
-    // Render the main template
-    if (this.icon) {
-      frag.appendChild(this._elements.icon);
-    }
-
-    const content = this._elements.content;
-
-    // Remove it so we can process children
-    if (content.parentNode) {
-      content.parentNode.removeChild(content);
-    }
-
-    while (this.firstChild) {
-      const child = this.firstChild;
-      if (child.nodeType === Node.TEXT_NODE ||
-        child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'icon') {
-        // Add non-template elements to the label
-        content.appendChild(child);
-      } else {
-        this.removeChild(child);
+    
+    fastdom.mutate(() => {
+      this.classList.add(CLASSNAME, 'coral-Body--small');
+      
+      // Create a fragment
+      const frag = document.createDocumentFragment();
+      
+      // Render the main template
+      if (this.icon) {
+        frag.appendChild(this._elements.icon);
       }
-    }
-
-    // Add the frag to the component
-    this.appendChild(frag);
-
-    // Assign the content zones, moving them into place in the process
-    this.content = content;
+      
+      const content = this._elements.content;
+      
+      // Remove it so we can process children
+      if (content.parentNode) {
+        content.parentNode.removeChild(content);
+      }
+      
+      while (this.firstChild) {
+        const child = this.firstChild;
+        if (child.nodeType === Node.TEXT_NODE ||
+          child.nodeType === Node.ELEMENT_NODE && child.getAttribute('handle') !== 'icon') {
+          // Add non-template elements to the label
+          content.appendChild(child);
+        } else {
+          this.removeChild(child);
+        }
+      }
+      
+      // Add the frag to the component
+      this.appendChild(frag);
+      
+      // Assign the content zones, moving them into place in the process
+      this.content = content;
+    });
   }
 }
 
