@@ -11,3 +11,4 @@
  */
 
 import './test.Multifield';
+import './test.Multifield.Item';

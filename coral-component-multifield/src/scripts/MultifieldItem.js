@@ -65,6 +65,23 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
   }
 
   /**
+    Specify whether the remove button is in disabled state or not.
+
+    @type {Boolean}
+    @default false
+    @private
+    */
+  get _deletable() {
+    return typeof this.__deletable === 'boolean' ? this.__deletable : true;
+  }
+
+  set _deletable(value) {
+    value = transform.boolean(value);
+    this.__deletable = value;
+    this._elements.remove.disabled = !value;
+  }
+
+  /**
    Whether the item is set to be reorder using the keyboard
 
    @type {boolean}

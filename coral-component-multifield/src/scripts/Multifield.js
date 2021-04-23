@@ -13,7 +13,7 @@
 import {BaseComponent} from '../../../coral-base-component';
 import MultifieldCollection from './MultifieldCollection';
 import '../../../coral-component-textfield';
-import {commons, i18n} from '../../../coral-utils';
+import {commons, i18n, validate, transform} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Multifield';
 const IS_DRAGGING_CLASS = 'is-dragging';
@@ -147,6 +147,79 @@ class Multifield extends BaseComponent(HTMLElement) {
         // Additionally add support for template
         this._handleTemplateSupport(content);
       }
+    });
+  }
+
+  /**
+    Specifies the minimum number of items multifield should render.
+    If component contains less items, remaining items will be added.
+
+    @type {Number}
+    @default 0
+    @htmlattribute min
+    @htmlattributereflected
+    */
+  get min() {
+    return this._min || 0;
+  }
+
+  set min(value) {
+    const self = this;
+    value = transform.number(value);
+
+    if(value && validate.valueMustChange(self._min, value)) {
+      self._min = value;
+      self._reflectAttribute('min', value);
+      self._validateMinItems();
+    }
+  }
+
+  /**
+   * Validates minimum items required. will add items, if validation fails.
+   * @param schedule schedule validation in next frame
+   * @ignore
+   */
+  _validateMinItems(schedule) {
+    // only validate when multifield is connected
+    if(this._disconnected === false) {
+      const self = this;
+      const items = self.items;
+      let currentLength = items.length;
+      let currentMin = self.min;
+      let deletable = true;
+
+      if(currentLength <= currentMin) {
+        let itemsToBeAdded = currentMin - currentLength;
+
+        for(let i = 0; i < itemsToBeAdded; i++) {
+          items.add(document.createElement('coral-multifield-item'));
+        }
+        deletable = !deletable;
+      }
+
+      if(!schedule) {
+        window.cancelAnimationFrame(self._updateItemsDeletableId);
+        delete self._updateItemsDeletableId;
+        self._updateItemsDeletable(items.getAll(), deletable);
+      } else if(!self._updateItemsDeletableId) {
+        self._updateItemsDeletableId = window.requestAnimationFrame(() => {
+          delete self._updateItemsDeletableId;
+          self._updateItemsDeletable(items.getAll(), deletable);
+        });
+      }
+    }
+  }
+
+  /**
+   * Change the deletable property of passed items to the specified deletable value
+   * @ignore
+   */
+  _updateItemsDeletable(items, deletable) {
+    deletable = transform.boolean(deletable);
+    items = !Array.isArray(items) ? [items] : items;
+
+    items.forEach(function(item) {
+      item._deletable = deletable;
     });
   }
 
@@ -484,15 +557,27 @@ class Multifield extends BaseComponent(HTMLElement) {
 
   /** @private */
   _onItemAdded(item) {
+    const self = this;
     // Update the item content with the template content
-    if (item.parentNode === this) {
-      this._renderTemplate(item);
-      this._updatePosInSet();
+    if (item.parentNode === self) {
+      self._renderTemplate(item);
+      self._updatePosInSet();
+    }
+
+    if(self.items.length === self.min + 1) {
+      self._validateMinItems();
     }
   }
 
+  /** @private */
   _onItemRemoved() {
-    this._updatePosInSet();
+    const self = this;
+    self._updatePosInSet();
+
+    // only validate when required
+    if(self.items.length <= self.min) {
+      self._validateMinItems();
+    }
   }
 
   /**
@@ -542,6 +627,13 @@ class Multifield extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
+  static get observedAttributes() {
+    return super.observedAttributes.concat([
+      'min'
+    ]);
+  }
+
+  /** @ignore */
   render() {
     super.render();
 
@@ -560,6 +652,8 @@ class Multifield extends BaseComponent(HTMLElement) {
 
     // update aria-posinset and aria-setsize for each item in the collection
     this._updatePosInSet();
+
+    this._validateMinItems(true);
   }
 
   /**
