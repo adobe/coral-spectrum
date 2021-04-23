@@ -60013,9 +60013,64 @@ var Coral = (function (exports) {
 
 
     _createClass(Multifield, [{
-      key: "_handleTemplateSupport",
+      key: "_validateMinItems",
 
+      /**
+       * Validates minimum items required. will add items, if validation fails.
+       * @param schedule schedule validation in next frame
+       * @ignore
+       */
+      value: function _validateMinItems(schedule) {
+        // only validate when multifield is connected
+        if (this._disconnected === false) {
+          var self = this;
+          var items = self.items;
+          var currentLength = items.length;
+          var currentMin = self.min;
+          var deletable = true;
+
+          if (currentLength <= currentMin) {
+            var itemsToBeAdded = currentMin - currentLength;
+
+            for (var i = 0; i < itemsToBeAdded; i++) {
+              items.add(document.createElement('coral-multifield-item'));
+            }
+
+            deletable = !deletable;
+          }
+
+          if (!schedule) {
+            window.cancelAnimationFrame(self._updateItemsDeletableId);
+            delete self._updateItemsDeletableId;
+
+            self._updateItemsDeletable(items.getAll(), deletable);
+          } else if (!self._updateItemsDeletableId) {
+            self._updateItemsDeletableId = window.requestAnimationFrame(function () {
+              delete self._updateItemsDeletableId;
+
+              self._updateItemsDeletable(items.getAll(), deletable);
+            });
+          }
+        }
+      }
+      /**
+       * Change the deletable property of passed items to the specified deletable value
+       * @ignore
+       */
+
+    }, {
+      key: "_updateItemsDeletable",
+      value: function _updateItemsDeletable(items, deletable) {
+        deletable = transform.boolean(deletable);
+        items = !Array.isArray(items) ? [items] : items;
+        items.forEach(function (item) {
+          item._deletable = deletable;
+        });
+      }
       /** @ignore */
+
+    }, {
+      key: "_handleTemplateSupport",
       value: function _handleTemplateSupport(template) {
         // @polyfill IE
         if (!TEMPLATE_SUPPORT && !template.content) {
@@ -60404,17 +60459,31 @@ var Coral = (function (exports) {
     }, {
       key: "_onItemAdded",
       value: function _onItemAdded(item) {
-        // Update the item content with the template content
-        if (item.parentNode === this) {
-          this._renderTemplate(item);
+        var self = this; // Update the item content with the template content
 
-          this._updatePosInSet();
+        if (item.parentNode === self) {
+          self._renderTemplate(item);
+
+          self._updatePosInSet();
+        }
+
+        if (self.items.length === self.min + 1) {
+          self._validateMinItems();
         }
       }
+      /** @private */
+
     }, {
       key: "_onItemRemoved",
       value: function _onItemRemoved() {
-        this._updatePosInSet();
+        var self = this;
+
+        self._updatePosInSet(); // only validate when required
+
+
+        if (self.items.length <= self.min) {
+          self._validateMinItems();
+        }
       }
       /**
        * update aria-posinset and aria-setsize for each item in the collection
@@ -60480,6 +60549,8 @@ var Coral = (function (exports) {
         }); // update aria-posinset and aria-setsize for each item in the collection
 
         this._updatePosInSet();
+
+        this._validateMinItems(true);
       }
       /**
        Triggered when the {@link Multifield} item are reordered.
@@ -60547,12 +60618,45 @@ var Coral = (function (exports) {
           }
         });
       }
+      /**
+        Specifies the minimum number of items multifield should render.
+        If component contains less items, remaining items will be added.
+         @type {Number}
+        @default 0
+        @htmlattribute min
+        @htmlattributereflected
+        */
+
+    }, {
+      key: "min",
+      get: function get() {
+        return this._min || 0;
+      },
+      set: function set(value) {
+        var self = this;
+        value = transform.number(value);
+
+        if (value && validate.valueMustChange(self._min, value)) {
+          self._min = value;
+
+          self._reflectAttribute('min', value);
+
+          self._validateMinItems();
+        }
+      }
     }, {
       key: "_contentZones",
       get: function get() {
         return {
           template: 'template'
         };
+      }
+      /** @ignore */
+
+    }], [{
+      key: "observedAttributes",
+      get: function get() {
+        return _get(_getPrototypeOf(Multifield), "observedAttributes", this).concat(['min']);
       }
     }]);
 
@@ -60705,6 +60809,23 @@ var Coral = (function (exports) {
             this.insertBefore(content, this.firstChild);
           }
         });
+      }
+      /**
+        Specify whether the remove button is in disabled state or not.
+         @type {Boolean}
+        @default false
+        @private
+        */
+
+    }, {
+      key: "_deletable",
+      get: function get() {
+        return typeof this.__deletable === 'boolean' ? this.__deletable : true;
+      },
+      set: function set(value) {
+        value = transform.boolean(value);
+        this.__deletable = value;
+        this._elements.remove.disabled = !value;
       }
       /**
        Whether the item is set to be reorder using the keyboard
@@ -79337,7 +79458,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.10.17";
+  var version$1 = "4.10.18";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

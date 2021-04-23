@@ -5388,6 +5388,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "coral-spectrum/coral-component-multifield/src/scripts/multifield.js~multifield#min",
+    "class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html#instance-member-min",
+    "coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield#min",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-component-multifield/src/scripts/multifield.js~multifield#template",
     "class/coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield.html#instance-member-template",
     "coral-spectrum/coral-component-multifield/src/scripts/Multifield.js~Multifield#template",
