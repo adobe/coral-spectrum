@@ -1,3 +1,10 @@
+## [4.10.19](https://github.com/adobe/coral-spectrum/compare/v4.10.18...v4.10.19) (2021-04-23)
+
+
+### Bug Fixes
+
+* **GRANITE-32443:** Add `min` property in coral-multifield component ([#162](https://github.com/adobe/coral-spectrum/issues/162)) ([819a6b4](https://github.com/adobe/coral-spectrum/commit/819a6b448fc182d2347667d1d765db926552a51c))
+
 ## [4.10.18](https://github.com/adobe/coral-spectrum/compare/v4.10.17...v4.10.18) (2021-04-19)
 
 
