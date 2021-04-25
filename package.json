@@ -44,6 +44,7 @@
     "@adobe/focus-ring-polyfill": "0.1.5",
     "@adobe/spectrum-css": "2.18.0",
     "@adobe/vent": "1.0.0",
+    "@ungap/custom-elements": "0.1.15",
     "core-js": "3.6.4",
     "document-register-element": "1.14.3",
     "normalize.css": "8.0.1",
