@@ -362,7 +362,7 @@ class Commons {
    E.g for built-in custom elements
    */
   _define(name, constructor, options) {
-    window.customElements.define(name, decorated, options);
+    window.customElements.define(name, constructor, options);
     CORAL_COMPONENTS.push(name);
   }
 
