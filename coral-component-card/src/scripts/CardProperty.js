@@ -14,7 +14,6 @@ import {BaseComponent} from '../../../coral-base-component';
 import {commons} from '../../../coral-utils';
 import '../../../coral-component-icon';
 import icon from '../templates/icon';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Card-property';
 
@@ -25,7 +24,7 @@ const CLASSNAME = '_coral-Card-property';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const CardProperty = Decorator(class extends BaseComponent(HTMLElement) {
+class CardProperty extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -164,6 +163,6 @@ const CardProperty = Decorator(class extends BaseComponent(HTMLElement) {
     // Assign the content zones, moving them into place in the process
     this.content = content;
   }
-});
+}
 
 export default CardProperty;

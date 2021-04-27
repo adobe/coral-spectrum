@@ -12,7 +12,6 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {commons, transform} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Table-cell';
 
@@ -24,7 +23,7 @@ const CLASSNAME = '_coral-Table-cell';
  @extends {HTMLTableCellElement}
  @extends {BaseComponent}
  */
-const TableCell = Decorator(class extends BaseComponent(HTMLTableCellElement) {
+class TableCell extends BaseComponent(HTMLTableCellElement) {
   // @compat
   get content() {
     return this;
@@ -176,6 +175,6 @@ const TableCell = Decorator(class extends BaseComponent(HTMLTableCellElement) {
 
    @private
    */
-});
+}
 
 export default TableCell;

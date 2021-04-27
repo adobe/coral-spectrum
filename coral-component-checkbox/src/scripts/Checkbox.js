@@ -15,7 +15,6 @@ import {BaseFormField} from '../../../coral-base-formfield';
 import {Icon} from '../../../coral-component-icon';
 import base from '../templates/base';
 import {transform, commons, i18n} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const IS_IE_OR_EDGE = navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0 ||
   window.navigator.userAgent.indexOf('Edge') !== -1;
@@ -30,7 +29,7 @@ const CLASSNAME = '_coral-Checkbox';
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-const Checkbox = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) {
+class Checkbox extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -420,6 +419,6 @@ const Checkbox = Decorator(class extends BaseFormField(BaseComponent(HTMLElement
     // We must do this because IE does not catch mutations when nodes are not in the DOM
     this._hideLabelIfEmpty();
   }
-});
+}
 
 export default Checkbox;

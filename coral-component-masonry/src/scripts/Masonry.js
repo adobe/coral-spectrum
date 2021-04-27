@@ -14,7 +14,6 @@ import {BaseComponent} from '../../../coral-base-component';
 import MasonryItem from './MasonryItem';
 import {SelectableCollection} from '../../../coral-collection';
 import {validate, transform, commons} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Masonry';
 
@@ -114,7 +113,7 @@ const getPreviousItem = (item) => {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
+class Masonry extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -1112,6 +1111,6 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
    @property {MasonryItem} detail.selection
    The newly selected item(s).
    */
-});
+}
 
 export default Masonry;

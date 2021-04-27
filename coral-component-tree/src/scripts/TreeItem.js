@@ -15,7 +15,6 @@ import {Collection} from '../../../coral-collection';
 import {Icon} from '../../../coral-component-icon';
 import treeItem from '../templates/treeItem';
 import {transform, commons, i18n, validate} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-TreeView-item';
 
@@ -51,7 +50,7 @@ const IS_TOUCH_DEVICE = 'ontouchstart' in window || navigator.maxTouchPoints > 0
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const TreeItem = Decorator(class extends BaseComponent(HTMLElement) {
+class TreeItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -478,6 +477,6 @@ const TreeItem = Decorator(class extends BaseComponent(HTMLElement) {
 
    @private
    */
-});
+}
 
 export default TreeItem;

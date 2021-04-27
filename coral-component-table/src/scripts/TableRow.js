@@ -14,7 +14,6 @@ import accessibilityState from '../templates/accessibilityState';
 import {BaseComponent} from '../../../coral-base-component';
 import {SelectableCollection} from '../../../coral-collection';
 import {transform, commons, i18n} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Table-row';
 
@@ -26,7 +25,7 @@ const CLASSNAME = '_coral-Table-row';
  @extends {HTMLTableRowElement}
  @extends {BaseComponent}
  */
-const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
+class TableRow extends BaseComponent(HTMLTableRowElement) {
   /** @ignore */
   constructor() {
     super();
@@ -565,6 +564,6 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
 
    @private
    */
-});
+}
 
 export default TableRow;

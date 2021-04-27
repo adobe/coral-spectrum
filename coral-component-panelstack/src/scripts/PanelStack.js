@@ -12,7 +12,6 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {SelectableCollection} from '../../../coral-collection';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-PanelStack';
 
@@ -23,7 +22,7 @@ const CLASSNAME = '_coral-PanelStack';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const PanelStack = Decorator(class extends BaseComponent(HTMLElement) {
+class PanelStack extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -143,6 +142,6 @@ const PanelStack = Decorator(class extends BaseComponent(HTMLElement) {
    @property {Panel} detail.oldSelection
    The prior selected panel.
    */
-});
+}
 
 export default PanelStack;

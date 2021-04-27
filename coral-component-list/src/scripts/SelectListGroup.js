@@ -13,7 +13,6 @@
 import {BaseComponent} from '../../../coral-base-component';
 import {SelectableCollection} from '../../../coral-collection';
 import {transform} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-SelectList-group';
 
@@ -24,7 +23,7 @@ const CLASSNAME = '_coral-SelectList-group';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const SelectListGroup = Decorator(class extends BaseComponent(HTMLElement) {
+class SelectListGroup extends BaseComponent(HTMLElement) {
   /**
    The label of the group. It reflects the <code>label</code> attribute to the DOM.
 
@@ -74,6 +73,6 @@ const SelectListGroup = Decorator(class extends BaseComponent(HTMLElement) {
 
     this.setAttribute('role', 'group');
   }
-});
+}
 
 export default SelectListGroup;

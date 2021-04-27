@@ -14,7 +14,6 @@ import {ExtensibleOverlay, Overlay} from '../../../coral-component-overlay';
 import Vent from '@adobe/vent';
 import base from '../templates/base';
 import {commons, transform, validate} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const arrowMap = {
   left: 'left',
@@ -83,7 +82,7 @@ for (const key in Overlay.placement) {
  @htmltag coral-tooltip
  @extends {Overlay}
  */
-const Tooltip = Decorator(class extends ExtensibleOverlay {
+const Tooltip = class extends ExtensibleOverlay {
   /** @ignore */
   constructor() {
     super();
@@ -428,6 +427,6 @@ const Tooltip = Decorator(class extends ExtensibleOverlay {
     // Assign the content zone so the insert function will be called
     this.content = content;
   }
-});
+}
 
 export default Tooltip;

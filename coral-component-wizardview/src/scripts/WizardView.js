@@ -15,7 +15,6 @@ import {Collection} from '../../../coral-collection';
 import '../../../coral-component-steplist';
 import '../../../coral-component-panelstack';
 import {commons} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-WizardView';
 
@@ -27,7 +26,7 @@ const CLASSNAME = '_coral-WizardView';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const WizardView = Decorator(class extends BaseComponent(HTMLElement) {
+class WizardView extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -381,6 +380,6 @@ const WizardView = Decorator(class extends BaseComponent(HTMLElement) {
    @property {Step} event.detail.oldSelection
    The prior selected step list item.
    */
-});
+}
 
 export default WizardView;

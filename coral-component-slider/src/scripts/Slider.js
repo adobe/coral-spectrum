@@ -15,7 +15,6 @@ import {BaseFormField} from '../../../coral-base-formfield';
 import {Collection} from '../../../coral-collection';
 import base from '../templates/base';
 import {transform, validate, events, commons, Keys} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Slider';
 const CLASSNAME_HANDLE = '_coral-Slider-handle';
@@ -44,7 +43,6 @@ const orientation = {
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-
 class ExtensibleSlider extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
@@ -939,8 +937,6 @@ class ExtensibleSlider extends BaseFormField(BaseComponent(HTMLElement)) {
   }
 }
 
-// decorated slider, extending this would result in two decoration.
-// Hence for extending ExtensibleSlider should be used
-const Slider = Decorator(ExtensibleSlider);
+const Slider = ExtensibleSlider /* Decorator(ExtensibleSlider); */
 
 export {ExtensibleSlider, Slider};

@@ -13,7 +13,6 @@
 import {BaseComponent} from '../../../coral-base-component';
 import {alignment} from './TableUtil';
 import {commons, transform, validate} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Table-column';
 
@@ -64,7 +63,7 @@ const sortableType = {
  @extends {HTMLTableColElement}
  @extends {BaseComponent}
  */
-const TableColumn = Decorator(class extends BaseComponent(HTMLTableColElement) {
+class TableColumn extends BaseComponent(HTMLTableColElement) {
   /**
    The column cells alignment. The alignment should take the {@link i18n} configuration into account.
 
@@ -374,6 +373,6 @@ const TableColumn = Decorator(class extends BaseComponent(HTMLTableColElement) {
 
    @private
    */
-});
+}
 
 export default TableColumn;

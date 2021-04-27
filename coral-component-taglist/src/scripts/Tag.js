@@ -15,7 +15,6 @@ import '../../../coral-component-button';
 import {Icon} from '../../../coral-component-icon';
 import base from '../templates/base';
 import {transform, validate, events, i18n, commons} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Tags-item';
 const LABEL_CLASSNAME = '_coral-Label';
@@ -146,7 +145,7 @@ const getOffsetCenter = (element) => {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const Tag = Decorator(class extends BaseComponent(HTMLElement) {
+class Tag extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -541,6 +540,6 @@ const Tag = Decorator(class extends BaseComponent(HTMLElement) {
 
    @private
    */
-});
+}
 
 export default Tag;

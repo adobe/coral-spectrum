@@ -16,7 +16,6 @@ import {BaseLabellable} from '../../../coral-base-labellable';
 import {Icon} from '../../../coral-component-icon';
 import {Checkbox} from '../../../coral-component-checkbox';
 import {commons, i18n, transform, validate} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-AssetList-item';
 
@@ -47,7 +46,7 @@ const isChromeMacOS = !!window && !!window.chrome && /Mac/i.test(window.navigato
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTMLElement)) {
+class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -418,6 +417,6 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
     // @a11y Item should be labelled by thumbnail, content, and accessibility state.
     this.setAttribute('aria-labelledby', thumbnail.id + ' ' + content.id);
   }
-});
+}
 
 export default ColumnViewItem;

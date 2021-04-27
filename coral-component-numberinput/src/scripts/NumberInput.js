@@ -17,7 +17,6 @@ import '../../../coral-component-textfield';
 import {Icon} from '../../../coral-component-icon';
 import base from '../templates/base';
 import {transform, commons, i18n} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Stepper';
 let clearLiveRegionTimeout;
@@ -84,7 +83,7 @@ const handleDecimalOperation = (operator, value1, value2) => {
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) {
+class NumberInput extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -834,6 +833,6 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
 
     this.appendChild(frag);
   }
-});
+}
 
 export default NumberInput;

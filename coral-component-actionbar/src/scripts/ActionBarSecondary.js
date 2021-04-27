@@ -11,7 +11,6 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
-import {Decorator} from '../../../coral-decorator';
 import getFirstSelectableWrappedItem from './getFirstSelectableWrappedItem';
 import ActionBarContainer from './BaseActionBarContainer';
 
@@ -24,7 +23,7 @@ const CLASSNAME = '_coral-ActionBar-secondary';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const ActionBarSecondary = Decorator(class extends ActionBarContainer(BaseComponent(HTMLElement)) {
+class ActionBarSecondary extends ActionBarContainer(BaseComponent(HTMLElement)) {
   /** @ignore */
   _returnElementsFromPopover() {
     let item = null;
@@ -66,6 +65,6 @@ const ActionBarSecondary = Decorator(class extends ActionBarContainer(BaseCompon
 
     this._attachMoreButtonToContainer();
   }
-});
+}
 
 export default ActionBarSecondary;

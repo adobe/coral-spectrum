@@ -15,7 +15,6 @@ import ColumnViewCollection from './ColumnViewCollection';
 import isInteractiveTarget from './isInteractiveTarget';
 import selectionMode from './selectionMode';
 import {commons, transform, validate} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-MillerColumns-item';
 
@@ -38,7 +37,7 @@ window.addEventListener('load', () => {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const ColumnViewColumn = Decorator(class extends BaseComponent(HTMLElement) {
+class ColumnViewColumn extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -611,6 +610,6 @@ const ColumnViewColumn = Decorator(class extends BaseComponent(HTMLElement) {
       });
     }
   }
-});
+}
 
 export default ColumnViewColumn;

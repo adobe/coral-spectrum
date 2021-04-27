@@ -11,7 +11,6 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
-import {Decorator} from '../../../coral-decorator';
 
 /**
  @class Coral.Card.PropertyList
@@ -20,7 +19,7 @@ import {Decorator} from '../../../coral-decorator';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const CardPropertyList = Decorator(class extends BaseComponent(HTMLElement) {
+class CardPropertyList extends BaseComponent(HTMLElement) {
   /** @ignore */
   render() {
     super.render();
@@ -32,6 +31,6 @@ const CardPropertyList = Decorator(class extends BaseComponent(HTMLElement) {
       this.textContent = '';
     }
   }
-});
+}
 
 export default CardPropertyList;

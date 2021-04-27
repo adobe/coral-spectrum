@@ -12,7 +12,6 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {commons, transform, validate} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 /**
  Enum for {CycleButtonItem} display options.
@@ -42,7 +41,7 @@ const displayMode = {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const CycleButtonItem = Decorator(class extends BaseComponent(HTMLElement) {
+class CycleButtonItem extends BaseComponent(HTMLElement) {
   /**
    The Item's icon. See {@link Coral.Icon} for valid icon names.
 
@@ -217,6 +216,6 @@ const CycleButtonItem = Decorator(class extends BaseComponent(HTMLElement) {
       this.displayMode = displayMode.INHERIT;
     }
   }
-});
+}
 
 export default CycleButtonItem;

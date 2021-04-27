@@ -20,7 +20,6 @@ import {Icon} from '../../../coral-component-icon';
 import '../../../coral-component-popover';
 import base from '../templates/base';
 import {transform, validate, commons, i18n, Keys} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link Select} variants.
@@ -80,7 +79,7 @@ const arrayDiff = function (a, b) {
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-const Select = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) {
+class Select extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -1487,6 +1486,6 @@ const Select = Decorator(class extends BaseFormField(BaseComponent(HTMLElement))
 
    @typedef {CustomEvent} coral-select:hideitems
    */
-});
+}
 
 export default Select;

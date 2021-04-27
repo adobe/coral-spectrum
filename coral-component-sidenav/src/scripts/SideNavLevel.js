@@ -12,7 +12,6 @@
 
 import {commons} from '../../../coral-utils';
 import {BaseComponent} from '../../../coral-base-component';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-SideNav';
 
@@ -23,7 +22,7 @@ const CLASSNAME = '_coral-SideNav';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const SideNavLevel = Decorator(class extends BaseComponent(HTMLElement) {
+class SideNavLevel extends BaseComponent(HTMLElement) {
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['_expanded']);
@@ -89,6 +88,6 @@ const SideNavLevel = Decorator(class extends BaseComponent(HTMLElement) {
     // a11y
     this.setAttribute('role', 'region');
   }
-});
+}
 
 export default SideNavLevel;

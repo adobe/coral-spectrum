@@ -12,7 +12,6 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {BaseListItem} from '../../../coral-base-list';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-AnchorList-item';
 
@@ -24,7 +23,7 @@ const CLASSNAME = '_coral-AnchorList-item';
  @extends {BaseComponent}
  @extends {BaseListItem}
  */
-const AnchorListItem = Decorator(class extends BaseListItem(BaseComponent(HTMLAnchorElement)) {
+class AnchorListItem extends BaseListItem(BaseComponent(HTMLAnchorElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -86,6 +85,6 @@ const AnchorListItem = Decorator(class extends BaseListItem(BaseComponent(HTMLAn
 
     this.classList.add(CLASSNAME);
   }
-});
+}
 
 export default AnchorListItem;

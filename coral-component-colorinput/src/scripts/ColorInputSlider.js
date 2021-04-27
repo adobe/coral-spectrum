@@ -10,11 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import {ExtensibleSlider} from '../../../coral-component-slider';
+import {ExtensibleSlider, Slider} from '../../../coral-component-slider';
 import '../../../coral-component-tooltip';
 import sliderBase from '../templates/sliderBase';
 import {transform} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAMES = ['_coral-ColorInput-slider', '_coral-Slider--color'];
 
@@ -24,7 +23,7 @@ const CLASSNAMES = ['_coral-ColorInput-slider', '_coral-Slider--color'];
  @htmltag coral-colorinput-slider
  @extends {Slider}
  */
-const ColorInputSlider = Decorator(class extends ExtensibleSlider {
+const ColorInputSlider = class extends ExtensibleSlider {
   /**
    The gradient shown as slider background as space separated values (at least 2 values needed).
    e.g: #ff0000 #ffff00 #00ff00 #00ffff #0000ff #ff00ff #ff0000
@@ -98,6 +97,6 @@ const ColorInputSlider = Decorator(class extends ExtensibleSlider {
 
     this.classList.add(...CLASSNAMES);
   }
-});
+}
 
 export default ColorInputSlider;

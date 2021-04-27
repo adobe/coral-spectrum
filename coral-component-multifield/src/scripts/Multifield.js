@@ -14,7 +14,6 @@ import {BaseComponent} from '../../../coral-base-component';
 import MultifieldCollection from './MultifieldCollection';
 import '../../../coral-component-textfield';
 import {commons, i18n} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Multifield';
 const IS_DRAGGING_CLASS = 'is-dragging';
@@ -33,7 +32,7 @@ const TEMPLATE_SUPPORT = 'content' in document.createElement('template');
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
+class Multifield extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -588,6 +587,6 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
    @property {MultifieldItem} detail.before
    Ordered item was inserted before this sibling item. If <code>null</code>, the item was inserted at the end.
    */
-});
+}
 
 export default Multifield;

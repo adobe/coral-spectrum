@@ -12,7 +12,6 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {transform} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 /**
  @class Coral.Select.Item
@@ -21,7 +20,7 @@ import {Decorator} from '../../../coral-decorator';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-const SelectItem = Decorator(class extends BaseComponent(HTMLElement) {
+class SelectItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -153,6 +152,6 @@ const SelectItem = Decorator(class extends BaseComponent(HTMLElement) {
   static get observedAttributes() {
     return super.observedAttributes.concat(['selected', 'disabled', 'value']);
   }
-});
+}
 
 export default SelectItem;

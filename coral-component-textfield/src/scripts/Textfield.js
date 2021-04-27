@@ -13,7 +13,6 @@
 import {BaseComponent} from '../../../coral-base-component';
 import {BaseFormField} from '../../../coral-base-formfield';
 import {transform, validate} from '../../../coral-utils';
-import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link Textfield} variants.
@@ -49,7 +48,7 @@ for (const variantValue in variant) {
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-const Textfield = Decorator(class extends BaseFormField(BaseComponent(HTMLInputElement)) {
+class Textfield extends BaseFormField(BaseComponent(HTMLInputElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -107,6 +106,6 @@ const Textfield = Decorator(class extends BaseFormField(BaseComponent(HTMLInputE
       this.variant = variant.DEFAULT;
     }
   }
-});
+}
 
 export default Textfield;
