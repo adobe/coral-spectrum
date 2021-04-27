@@ -47,10 +47,6 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
     quickactions.call(this._elements);
   }
 
-  get removing() {
-    return item.hasAttribute('_removing');
-  }
-
   // @compat
   get content() {
     return this;
