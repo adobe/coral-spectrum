@@ -92,7 +92,7 @@ for (const placementKey in placement) {
  @htmltag coral-popover
  @extends {Overlay}
  */
-const Popover = class extends ExtensibleOverlay {
+class Popover extends ExtensibleOverlay {
   /** @ignore */
   constructor() {
     super();

@@ -741,6 +741,6 @@ class ExtensibleOverlay extends BaseOverlay(BaseComponent(HTMLElement)) {
    */
 }
 
-const Overlay = ExtensibleOverlay /* Decorator(ExtensibleOverlay); */
+const Overlay = ExtensibleOverlay; /* Decorator(ExtensibleOverlay); */
 
 export {Overlay, ExtensibleOverlay};

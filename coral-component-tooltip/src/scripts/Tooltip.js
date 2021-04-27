@@ -82,7 +82,7 @@ for (const key in Overlay.placement) {
  @htmltag coral-tooltip
  @extends {Overlay}
  */
-const Tooltip = class extends ExtensibleOverlay {
+class Tooltip extends ExtensibleOverlay {
   /** @ignore */
   constructor() {
     super();

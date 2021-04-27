@@ -23,7 +23,7 @@ const CLASSNAMES = ['_coral-ColorInput-slider', '_coral-Slider--color'];
  @htmltag coral-colorinput-slider
  @extends {Slider}
  */
-const ColorInputSlider = class extends ExtensibleSlider {
+class ColorInputSlider extends ExtensibleSlider {
   /**
    The gradient shown as slider background as space separated values (at least 2 values needed).
    e.g: #ff0000 #ffff00 #00ff00 #00ffff #0000ff #ff00ff #ff0000

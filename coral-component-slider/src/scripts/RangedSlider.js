@@ -20,7 +20,7 @@ import {commons, transform} from '../../../coral-utils';
  @htmltag coral-rangedslider
  @extends {Slider}
  */
-const RangedSlider = class extends ExtensibleSlider {
+class RangedSlider extends ExtensibleSlider {
   /**
    Ranged sliders are always filled.
 
