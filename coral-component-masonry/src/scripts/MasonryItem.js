@@ -16,6 +16,7 @@ import '../../../coral-component-checkbox';
 import quickactions from '../templates/quickactions';
 import {transform, commons, validate} from '../../../coral-utils';
 import {Messenger} from '../../../coral-messenger';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Masonry-item';
 
@@ -26,7 +27,7 @@ const CLASSNAME = '_coral-Masonry-item';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class MasonryItem extends BaseComponent(HTMLElement) {
+const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -240,6 +241,6 @@ class MasonryItem extends BaseComponent(HTMLElement) {
     }
     this._messenger.disconnect();
   }
-}
+});
 
 export default MasonryItem;

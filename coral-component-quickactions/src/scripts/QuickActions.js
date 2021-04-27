@@ -20,6 +20,7 @@ import QuickActionsItem from './QuickActionsItem';
 import '../../../coral-component-popover';
 import base from '../templates/base';
 import {transform, validate, commons, i18n} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const BUTTON_FOCUSABLE_SELECTOR = '._coral-QuickActions-item:not([disabled]):not([hidden])';
 
@@ -86,7 +87,7 @@ const CLASSNAME = '_coral-QuickActions';
  @htmltag coral-quickactions
  @extends {Overlay}
  */
-const QuickActions = class extends ExtensibleOverlay {
+const QuickActions = Decorator(class extends ExtensibleOverlay {
   /** @ignore */
   constructor() {
     super();
@@ -1300,6 +1301,6 @@ const QuickActions = class extends ExtensibleOverlay {
       overlay.remove();
     }
   }
-}
+});
 
 export default QuickActions;
