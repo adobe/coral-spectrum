@@ -144,9 +144,9 @@ describe('Messenger', function () {
       child.type = "any";
       parent.appendChild(child);
 
-      expect(parent._onTypeChangedCallCount).to.be.equal(0, "should not call selection change");
+      expect(parent._onTypeChangedCallCount).to.be.equal(0, "should not type change");
       el.appendChild(parent);
-      expect(parent._onTypeChangedCallCount).to.be.equal(1, "should call selection changes once");
+      expect(parent._onTypeChangedCallCount).to.be.equal(1, "should call type changes once");
     });
 
     it("should not execute message listener when item is disconnected", function() {
@@ -157,9 +157,9 @@ describe('Messenger', function () {
       child.remove();
       child.type = "one";
 
-      expect(parent._onTypeChangedCallCount).to.be.equal(0, "should not call selection change");
+      expect(parent._onTypeChangedCallCount).to.be.equal(0, "should not call type change");
       parent.appendChild(child);
-      expect(parent._onTypeChangedCallCount).to.be.equal(1, "should call selection changes once");
+      expect(parent._onTypeChangedCallCount).to.be.equal(1, "should call type changes once");
     });
 
     it("should not execute message listener when selector not matched", function() {
@@ -193,11 +193,11 @@ describe('Messenger', function () {
       let oldValue = parent._onSelectionChangedCallCount
       child.set("selected", true, true);
 
-      expect(parent._onSelectionChangedCallCount).to.be.equal(oldValue, "parent should be present in child messenger");
+      expect(parent._onSelectionChangedCallCount).to.be.equal(oldValue, "should not call selection change");
 
       child.set("selected", true, false);
 
-      expect(parent._onSelectionChangedCallCount).to.be.equal(oldValue + 1, "parent should be present in child messenger");
+      expect(parent._onSelectionChangedCallCount).to.be.equal(oldValue + 1, "should call selection changes once");
     });
   });
 });
