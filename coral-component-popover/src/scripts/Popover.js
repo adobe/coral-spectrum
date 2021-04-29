@@ -16,6 +16,7 @@ import {Icon} from '../../../coral-component-icon';
 import '../../../coral-component-dialog';
 import base from '../templates/base';
 import {commons, transform, validate, i18n} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Popover';
 
@@ -92,7 +93,7 @@ for (const placementKey in placement) {
  @htmltag coral-popover
  @extends {Overlay}
  */
-class Popover extends ExtensibleOverlay {
+const Popover = Decorator(class extends ExtensibleOverlay {
   /** @ignore */
   constructor() {
     super();
@@ -593,6 +594,6 @@ class Popover extends ExtensibleOverlay {
     this.content = content;
     this.footer = footer;
   }
-}
+});
 
 export default Popover;

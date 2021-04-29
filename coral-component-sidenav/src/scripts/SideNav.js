@@ -13,6 +13,7 @@
 import {BaseComponent} from '../../../coral-base-component';
 import {SelectableCollection} from '../../../coral-collection';
 import {transform, validate, commons} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-SideNav';
 
@@ -43,7 +44,7 @@ const variant = {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class SideNav extends BaseComponent(HTMLElement) {
+const SideNav = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -362,6 +363,6 @@ class SideNav extends BaseComponent(HTMLElement) {
    @property {SideNavItem} detail.selection
    The newly selected item.
    */
-}
+});
 
 export default SideNav;

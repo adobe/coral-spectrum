@@ -17,6 +17,7 @@ import moreOverlay from '../templates/moreOverlay';
 import moreButton from '../templates/moreButton';
 import overlayContent from '../templates/overlayContent';
 import {commons, transform, i18n} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 // Matches private Coral classes in class attribute
 const REG_EXP = /_coral([^\s]+)/g;

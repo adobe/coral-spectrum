@@ -13,6 +13,7 @@
 import {BaseComponent} from '../../../coral-base-component';
 import {BaseButton} from '../../../coral-base-button';
 import {transform, commons} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 // Key code
 const SPACE = 32;
@@ -29,7 +30,7 @@ const SPACE = 32;
  @extends {BaseComponent}
  @extends {BaseButton}
  */
-class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
+const AnchorButton = Decorator(class extends BaseButton(BaseComponent(HTMLAnchorElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -116,6 +117,6 @@ class AnchorButton extends BaseButton(BaseComponent(HTMLAnchorElement)) {
       this.removeAttribute('aria-disabled');
     }
   }
-}
+});
 
 export default AnchorButton;

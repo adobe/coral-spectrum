@@ -16,6 +16,7 @@ import {Button} from '../../../coral-component-button';
 import {SelectableCollection} from '../../../coral-collection';
 import base from '../templates/base';
 import {transform, validate, commons} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link ButtonGroup} selection options.
@@ -61,7 +62,7 @@ const CLASSNAME = '_coral-ButtonGroup';
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
+const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -889,6 +890,6 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
     // Call onItemAdded and onCollectionChange on the existing items
     this.items._startHandlingItems();
   }
-}
+});
 
 export default ButtonGroup;

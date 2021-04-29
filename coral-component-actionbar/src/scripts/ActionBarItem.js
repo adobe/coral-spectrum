@@ -11,6 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-ActionBar-item';
 
@@ -21,7 +22,7 @@ const CLASSNAME = '_coral-ActionBar-item';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class ActionBarItem extends BaseComponent(HTMLElement) {
+const ActionBarItem = Decorator(class extends BaseComponent(HTMLElement) {
   // @compat
   get content() {
     return this;
@@ -43,6 +44,6 @@ class ActionBarItem extends BaseComponent(HTMLElement) {
 
     this.classList.add(CLASSNAME);
   }
-}
+});
 
 export default ActionBarItem;

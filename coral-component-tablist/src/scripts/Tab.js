@@ -16,6 +16,7 @@ import base from '../templates/base';
 import {transform, commons} from '../../../coral-utils';
 import {Icon} from '../../../coral-component-icon';
 import getTarget from './getTarget';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Tabs-item';
 
@@ -26,7 +27,7 @@ const CLASSNAME = '_coral-Tabs-item';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
+const Tab = Decorator(class extends BaseLabellable(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -370,6 +371,6 @@ class Tab extends BaseLabellable(BaseComponent(HTMLElement)) {
     // Assign the content zones, moving them into place in the process
     this.label = label;
   }
-}
+});
 
 export default Tab;

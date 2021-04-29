@@ -13,6 +13,7 @@
 import {BaseComponent} from '../../../coral-base-component';
 import base from '../templates/base';
 import {commons, transform, validate} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link Progress} sizes.
@@ -63,7 +64,7 @@ const CLASSNAME = '_coral-BarLoader';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Progress extends BaseComponent(HTMLElement) {
+const Progress = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -433,6 +434,6 @@ class Progress extends BaseComponent(HTMLElement) {
 
    @typedef {CustomEvent} coral-progress:change
    */
-}
+});
 
 export default Progress;

@@ -14,6 +14,7 @@ import {BaseComponent} from '../../../coral-base-component';
 import {SelectableCollection} from '../../../coral-collection';
 import TreeItem from './TreeItem';
 import {transform} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-TreeView';
 
@@ -26,7 +27,7 @@ const CLASSNAME = '_coral-TreeView';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Tree extends BaseComponent(HTMLElement) {
+const Tree = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -560,6 +561,6 @@ class Tree extends BaseComponent(HTMLElement) {
    @property {TreeItem} detail.item
    The collapsed item.
    */
-}
+});
 
 export default Tree;

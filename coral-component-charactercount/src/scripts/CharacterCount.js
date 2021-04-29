@@ -12,6 +12,7 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {commons, transform} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-CharacterCount';
 
@@ -37,7 +38,7 @@ const target = {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class CharacterCount extends BaseComponent(HTMLElement) {
+const CharacterCount = Decorator(class extends BaseComponent(HTMLElement) {
   /**
    The target Textfield or Textarea for this component. It accepts values from {@link CharacterCountTargetEnum},
    as well as any DOM element or CSS selector.
@@ -154,6 +155,6 @@ class CharacterCount extends BaseComponent(HTMLElement) {
     // Refresh once connected
     this._refreshCharCount();
   }
-}
+});
 
 export default CharacterCount;
