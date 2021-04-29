@@ -24,21 +24,31 @@ const Decorator = (superClass) => class extends superClass {
 
   /** @ignore */
   connectedCallback() {
-    if (!this.isConnected || this._disconnected === false || this._ignoreConnectedCallback === true) {
-      this._updateCallback(true);
+    if(!this.isConnected) {
+      // component is not connected do nothing
       return;
+    } else if (this._disconnected === false || this._ignoreConnectedCallback === true) {
+      // either component is being moved around DOM or callback are ignored.
+      this._updateCallback(true);
+    } else {
+      // normal flow
+      super.connectedCallback();
     }
-    super.connectedCallback();
   }
 
   /** @ignore */
   disconnectedCallback() {
-    if (this.isConnected || this._disconnected === true || this._ignoreConnectedCallback === true) {
-      this._updateCallback(false);
+    if(this._disconnected === true) {
+      // component is already disconnected do nothing
       return;
+    } else if(this.isConnected || this._ignoreConnectedCallback === true) {
+      // either component is being moved around DOM or callback are ignored.
+      // only update component.
+      this._updateCallback(true);
+    } else {
+      // normal flow
+      super.connectedCallback();
     }
-
-    super.disconnectedCallback();
   }
 };
 
