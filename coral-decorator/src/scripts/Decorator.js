@@ -39,7 +39,7 @@ const Decorator = (superClass) => class extends superClass {
 
   /** @ignore */
   disconnectedCallback() {
-    if(this._disconnected === true) {
+    if(!(this._disconnected === false)) {
       // component is already disconnected do nothing
       return;
     } else if(this.isConnected || this._ignoreConnectedCallback === true) {
