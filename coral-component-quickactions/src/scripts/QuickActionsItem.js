@@ -183,14 +183,15 @@ const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
-  _updateCallback(connected) {
-    super._updateCallback(connected);
+  _suspendCallback() {
+    super._suspendCallback();
+    this._messenger.disconnect();
+  }
 
-    if(connected) {
-      this._messenger.connect();
-    } else {
-      this._messenger.disconnect();
-    }
+  /** @ignore */
+  _resumeCallback() {
+    this._messenger.connect();
+    super._resumeCallback();
   }
 
   /** @ignore */

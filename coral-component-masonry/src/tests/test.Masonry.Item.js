@@ -158,16 +158,20 @@ describe('Masonry.Item', function () {
         expect(spy.calledOnce).to.be.true;
 
         const spy1 = sinon.spy(item1._messenger, 'postMessage').withArgs('coral-masonry-item:_connected');
-        const spy2 = sinon.spy(item1, '_updateCallback');
+        const suspendSpy1 = sinon.spy(item1, '_suspendCallback');
+        const resumeSpy1 = sinon.spy(item1, '_resumeCallback');
+
         item1._ignoreConnectedCallback = true;
         masonry.appendChild(item1);
         item1._ignoreConnectedCallback = false;
+
         expect(spy1.calledOnce).to.be.true;
-        // updateCallback should be called more than once
-        expect(spy2.called).to.be.true;
+        expect(suspendSpy1.calledOnce).to.be.true;
+        expect(resumeSpy1.calledOnce).to.be.true;
 
         const spy3 = sinon.spy(item2._messenger, 'postMessage').withArgs('coral-masonry-item:_connected');
-        const spy4 = sinon.spy(item2, '_updateCallback');
+        const suspendSpy3 = sinon.spy(item2, '_suspendCallback');
+        const resumeSpy3 = sinon.spy(item2, '_resumeCallback');
 
         const spy5 = sinon.spy(newItem, 'connectedCallback');
         newItem.showRemoveTransition = false;
@@ -186,18 +190,12 @@ describe('Masonry.Item', function () {
           helpers.next(function() {
             // because of showing transition element is connected again
             expect(spy3.calledOnce).to.be.true;
-            expect(spy4.called).to.be.true;
+            expect(resumeSpy3.calledOnce).to.be.true;
+            // suspend will not execute b/c trying to remove a disconnected element.
+            expect(suspendSpy3.called).to.be.false;
+
             expect(item2._disconnected).to.be.true;
             expect(item2._masonry).to.be.null;
-
-            spy3.resetHistory();
-            spy4.resetHistory();
-            // assume item is in connected state.
-            item2._disconnected = false;
-            masonry.appendChild(item2);
-
-            expect(spy3.calledOnce).to.be.true;
-            expect(spy4.calledOnce).to.be.true;
             done();
           });
         });

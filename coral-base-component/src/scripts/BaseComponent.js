@@ -824,12 +824,20 @@ const BaseComponent = (superClass) => class extends superClass {
   }
 
   /**
-   called when we need to re-initialise things, when
-   connected/disconnected callback are skipped.
-   @param connected, true when element connectedcallback is getting skipped, else false
+   called when we need to suspend state and properties, when
+   disconnected callback are skipped.
    @private
    */
-  _updateCallback(connected) {
+  _suspendCallback() {
+    // do nothing
+  }
+
+  /**
+   called when we need to re-initialise state and properties, when
+   connected callback are skipped.
+   @private
+   */
+  _resumeCallback() {
     // do nothing
   }
 
