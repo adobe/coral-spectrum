@@ -45,7 +45,7 @@ const Decorator = (superClass) => class extends superClass {
     } else if(this.isConnected || this._ignoreConnectedCallback === true) {
       // either component is being moved around DOM or callback are ignored.
       // only update component.
-      this._updateCallback(true);
+      this._updateCallback();
     } else {
       // normal flow
       super.disconnectedCallback();
