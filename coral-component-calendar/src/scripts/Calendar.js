@@ -28,9 +28,11 @@ function isDateInRange(date, startDate, endDate) {
 
   if (startDate === null && endDate === null) {
     return true;
-  } else if (startDate === null) {
+  }
+  else if (startDate === null) {
     return date.toDate() <= endDate;
-  } else if (endDate === null) {
+  }
+  else if (endDate === null) {
     return date.toDate() >= startDate;
   }
 
@@ -41,7 +43,8 @@ function isDateInRange(date, startDate, endDate) {
 function toMoment(value, format) {
   if (value === 'today') {
     return new DateTime.Moment().startOf('day');
-  } else if (DateTime.Moment.isMoment(value)) {
+  }
+  else if (DateTime.Moment.isMoment(value)) {
     return value.isValid() ? value.clone() : null;
   }
 
@@ -188,6 +191,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     this._delegateEvents(commons.extend(this._events, {
       'click ._coral-Calendar-nextMonth,._coral-Calendar-prevMonth': '_onNextOrPreviousMonthClick',
       'click ._coral-Calendar-body ._coral-Calendar-date': '_onDayClick',
+      'capture:focus ._coral-Calendar-body': '_onBodyFocus',
       'mousedown ._coral-Calendar-body ._coral-Calendar-date': '_onDayMouseDown',
       'key:up ._coral-Calendar-body': '_onUpKey',
       'key:right ._coral-Calendar-body': '_onRightKey',
@@ -206,6 +210,12 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
       'key:ctrl+pageup': '_onCtrlPageUpKey',
       // On Windows, we use CTRL+Page Down
       'key:ctrl+pagedown': '_onCtrlPageDownKey',
+
+      // Use alt+pageup/alt+pagedown and shift+pageup/shift+pagedown to jump by year
+      'key:alt+pageup': '_onCtrlPageUpKey',
+      'key:alt+pagedown': '_onCtrlPageDownKey',
+      'key:shift+pageup': '_onCtrlPageUpKey',
+      'key:shift+pagedown': '_onCtrlPageDownKey',
 
       'key:enter ._coral-Calendar-body': '_onEnterKey',
       'key:return ._coral-Calendar-body': '_onEnterKey',
@@ -340,7 +350,8 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     if (!this._valueFormat && this._originalValue) {
       setValueFormat(value);
       this.value = this._originalValue;
-    } else {
+    }
+    else {
       setValueFormat(value);
       this._elements.input.value = this.value;
     }
@@ -360,7 +371,8 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     if (value instanceof Date) {
       this._valueAsDate = new DateTime.Moment(value);
       this.value = this._valueAsDate;
-    } else {
+    }
+    else {
       this._valueAsDate = null;
       this.value = '';
     }
@@ -575,25 +587,28 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   _setActiveDescendant() {
     let el;
 
-    if (!this._activeDescendant || !this._elements.body.querySelector(`#${this._activeDescendant} [data-date]`)) {
+    const isActiveDescendantMissing = () => !this._activeDescendant || !this._elements.body.querySelector(`#${this._activeDescendant} [data-date]`);
+
+    if (isActiveDescendantMissing()) {
       this._activeDescendant = null;
 
       el = this._elements.body.querySelector('.is-selected');
       this._activeDescendant = el && el.id;
 
-      if (!this._activeDescendant || !this._elements.body.querySelector(`#${this._activeDescendant} [data-date]`)) {
+      if (isActiveDescendantMissing()) {
         const currentMoment = this._value;
 
         if (currentMoment) {
           const dates = this._elements.body.querySelectorAll('[data-date]');
-          if (dates.length) {
-            if (this._isBeforeMin(currentMoment)) {
-              el = dates[0];
-            } else if (this._isAfterMax(currentMoment)) {
-              el = dates[dates.length - 1];
-            }
+
+          if (this._isBeforeMin(currentMoment)) {
+            el = dates[0];
           }
-        } else {
+          else if (this._isAfterMax(currentMoment)) {
+            el = dates.length ? dates[dates.length - 1] : null;
+          }
+        }
+        else {
           el = this._elements.body.querySelector('.is-focused') || this._elements.body.querySelector('.is-today');
         }
 
@@ -617,18 +632,22 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
     }
 
     el = document.getElementById(this._activeDescendant);
+
+    if (!el) {
+      return;
+    }
+
     const newTable = this.querySelector('._coral-Calendar-table--transit');
     const isTransitioning = newTable !== null;
 
-    if (el) {
-      if (isTransitioning) {
-        window.requestAnimationFrame(() => {
-          el.querySelector('._coral-Calendar-date').classList.add('is-focused');
-        });
-      } else {
-        // Focus the selected date
+    if (isTransitioning) {
+      window.requestAnimationFrame(() => {
         el.querySelector('._coral-Calendar-date').classList.add('is-focused');
-      }
+      });
+    }
+    else {
+      // Focus the selected date
+      el.querySelector('._coral-Calendar-date').classList.add('is-focused');
     }
   }
 
@@ -715,10 +734,12 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
               result.dateAttr = cursorLocal.format(INTERNAL_FORMAT);
               result.weekIndex = cursor.week();
               result.formattedDate = cursor.format('LL');
-            } else {
+            }
+            else {
               cssClass.push('is-disabled');
             }
-          } else {
+          }
+          else {
             cssClass.push('is-outsideMonth');
           }
 
@@ -779,20 +800,30 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
       newMoment = currentMoment[operator](1, unit);
 
       // make sure new moment is in range before transitioning
-      if (this._isInRange(newMoment, unit)) {
-        difference = Math.abs(new DateTime.Moment(currentActive).diff(newMoment, 'days'));
-        this._getToNewMoment(direction, operator, difference);
-        this._setActiveDescendant();
+      if (!this._isInRange(newMoment)) {
+        // advance to closest value in range
+        if (this._isBeforeMin(newMoment)) {
+          newMoment = this.min;
+        }
+        else if (this._isAfterMax(newMoment)) {
+          newMoment = this.max;
+        }
+        newMoment = new DateTime.Moment(newMoment);
       }
-    } else {
+      difference = Math.abs(new DateTime.Moment(currentActive).diff(newMoment, 'days'));
+      this._getToNewMoment(direction, operator, difference);
+      this._setActiveDescendant();
+    }
+    else {
       this._requireCursor();
 
       // if cursor is out of range
-      if (!this._isInRange(this._cursor, unit)) {
+      if (!this._isInRange(this._cursor)) {
         // advance to closest value in range
         if (this._isBeforeMin(this._cursor)) {
           newMoment = this.min;
-        } else if (this._isAfterMax(this._cursor)) {
+        }
+        else if (this._isAfterMax(this._cursor)) {
           newMoment = this.max;
         }
         newMoment = new DateTime.Moment(newMoment);
@@ -824,7 +855,10 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   _onNextOrPreviousMonthClick(event) {
     event.preventDefault();
 
-    this._gotoPreviousOrNextTimeUnit(timeUnit.MONTH, this._elements.next === event.matchedTarget);
+    this._gotoPreviousOrNextTimeUnit(
+      event.altKey || event.metaKey || event.shiftKey ? timeUnit.YEAR : timeUnit.MONTH,
+      this._elements.next === event.matchedTarget
+    );
     event.matchedTarget.focus();
     this._validateCalendar();
   }
@@ -836,7 +870,8 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
 
     if (el) {
       currentActive = el.dataset.date;
-    } else {
+    }
+    else {
       this._requireCursor();
       currentActive = this._cursor.format(INTERNAL_FORMAT);
     }
@@ -853,7 +888,8 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
       this._requireCursor();
       this._cursor[operator](1, 'months');
       this._renderCalendar(direction);
-    } else if (newMonth === currentMonth && newYear !== currentYear) {
+    }
+    else if (newMonth === currentMonth && newYear !== currentYear) {
       this._requireCursor();
       this._cursor[operator](1, 'years');
       this._renderCalendar(direction);
@@ -913,6 +949,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   _onUpKey(event) {
     event.preventDefault();
+    event.stopPropagation();
 
     this._gotoPreviousOrNextTimeUnit(timeUnit.WEEK, false);
     this._validateCalendar();
@@ -921,6 +958,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   _onDownKey(event) {
     event.preventDefault();
+    event.stopPropagation();
 
     this._gotoPreviousOrNextTimeUnit(timeUnit.WEEK, true);
     this._validateCalendar();
@@ -929,6 +967,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   _onRightKey(event) {
     event.preventDefault();
+    event.stopPropagation();
 
     this._gotoPreviousOrNextTimeUnit(timeUnit.DAY, true);
     this._validateCalendar();
@@ -937,6 +976,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   _onLeftKey(event) {
     event.preventDefault();
+    event.stopPropagation();
 
     this._gotoPreviousOrNextTimeUnit(timeUnit.DAY, false);
     this._validateCalendar();
@@ -945,6 +985,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   _onHomeOrEndKey(event) {
     event.preventDefault();
+    event.stopPropagation();
     const isHome = event.keyCode === Keys.keyToCode('home');
     const direction = '';
     const operator = isHome ? 'subtract' : 'add';
@@ -964,6 +1005,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   _onPageDownKey(event) {
     event.preventDefault();
+    event.stopPropagation();
     this._gotoPreviousOrNextTimeUnit(timeUnit.MONTH, true);
     this._validateCalendar();
   }
@@ -971,6 +1013,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   _onPageUpKey(event) {
     event.preventDefault();
+    event.stopPropagation();
     this._gotoPreviousOrNextTimeUnit(timeUnit.MONTH, false);
     this._validateCalendar();
   }
@@ -978,6 +1021,7 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   _onCtrlPageDownKey(event) {
     event.preventDefault();
+    event.stopPropagation();
     this._gotoPreviousOrNextTimeUnit(timeUnit.YEAR, true);
     this._validateCalendar();
   }
@@ -985,8 +1029,17 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   _onCtrlPageUpKey(event) {
     event.preventDefault();
+    event.stopPropagation();
     this._gotoPreviousOrNextTimeUnit(timeUnit.YEAR, false);
     this._validateCalendar();
+  }
+
+  /** @ignore */
+  _onBodyFocus() {
+    if (Boolean(this._value)) {
+      this._setActiveDescendant();
+      this._validateCalendar();
+    }
   }
 
   /**
