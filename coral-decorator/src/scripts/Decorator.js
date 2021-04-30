@@ -48,7 +48,7 @@ const Decorator = (superClass) => class extends superClass {
       this._updateCallback(true);
     } else {
       // normal flow
-      super.connectedCallback();
+      super.disconnectedCallback();
     }
   }
 };
