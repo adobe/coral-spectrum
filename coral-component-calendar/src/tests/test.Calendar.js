@@ -648,6 +648,385 @@ describe('Calendar', function () {
 
         expect(changeSpy.callCount).to.equal(0);
       });
+
+      describe('Keyboard', function() {
+        it('should go to previous day on ArrowLeft', function(done) {
+          var now = new DateTime.Moment();
+          el.valueAsDate = now;
+  
+          helpers.next(function() {
+            helpers.keypress('left', el._elements.body);
+  
+            helpers.next(function() {
+              var dateEl = el._elements.body.querySelector('td.is-focused .coral3-Calendar-date');
+              if (dateEl) {
+                var currentActive = dateEl.dataset.date;
+                var currentMoment = moment(currentActive);
+                expect(currentMoment.date()).to.eql(now.subtract(1, 'day').date());
+              }
+  
+              done();
+            });
+          });
+        });
+
+        it('should go to next day on ArrowRight', function(done) {
+          var now = new DateTime.Moment();
+          el.valueAsDate = now;
+  
+          helpers.next(function() {
+            helpers.keypress('right', el._elements.body);
+  
+            helpers.next(function() {
+              var dateEl = el._elements.body.querySelector('td.is-focused .coral3-Calendar-date'); 
+              if (dateEl) {
+                var currentActive = dateEl.dataset.date;
+                var currentMoment = moment(currentActive);
+                expect(currentMoment.date()).to.eql(now.add(1, 'day').date());
+              }
+  
+              done();
+            });
+          });
+        });
+
+        it('should go to previous week on ArrowUp', function(done) {
+          var now = new DateTime.Moment();
+          el.valueAsDate = now;
+  
+          helpers.next(function() {
+            helpers.keypress('up', el._elements.body);
+  
+            helpers.next(function() {
+              var dateEl = el._elements.body.querySelector('td.is-focused .coral3-Calendar-date');
+              if (dateEl) {
+                var currentActive = dateEl.dataset.date;
+                var currentMoment = moment(currentActive);
+                expect(currentMoment.date()).to.eql(now.subtract(1, 'week').date());
+              }
+  
+              done();
+            });
+          });
+        });
+  
+        it('should go to next week on ArrowDown', function(done) {
+          var now = new DateTime.Moment();
+          el.valueAsDate = now;
+  
+          helpers.next(function() {
+            helpers.keypress('down', el._elements.body);
+  
+            helpers.next(function() {
+              var dateEl = el._elements.body.querySelector('td.is-focused .coral3-Calendar-date'); 
+              if (dateEl) {
+                var currentActive = dateEl.dataset.date;
+                var currentMoment = moment(currentActive);
+                expect(currentMoment.date()).to.eql(now.add(1, 'week').date());
+              }
+  
+              done();
+            });
+          });
+        });
+
+        it('should go to previous month on PageUp', function(done) {
+          var now = new DateTime.Moment();
+          el.valueAsDate = now;
+  
+          helpers.next(function() {
+            helpers.keypress('pageup', el);
+  
+            helpers.next(function() {
+              var dateEl = el._elements.body.querySelector('td.is-focused .coral3-Calendar-date'); 
+              if (dateEl) {
+                var currentActive = dateEl.dataset.date;
+                var currentMoment = moment(currentActive);
+                expect(currentMoment.month()).to.eql(now.subtract(1, 'month').month());
+              }
+  
+              done();
+            });
+          });
+        });
+  
+        it('should go to next month on PageDown', function(done) {
+          var now = new DateTime.Moment();
+          el.valueAsDate = now;
+  
+          helpers.next(function() {
+            helpers.keypress('pagedown', el);
+  
+            helpers.next(function() {
+              var dateEl = el._elements.body.querySelector('td.is-focused .coral3-Calendar-date'); 
+              if (dateEl) {
+                var currentActive = dateEl.dataset.date;
+                var currentMoment = moment(currentActive);
+                expect(currentMoment.month()).to.eql(now.add(1, 'month').month());
+              }
+  
+              done();
+            });
+          });
+        });
+
+
+        it('should go to previous year on Ctrl+PageUp', function(done) {
+          var now = new DateTime.Moment();
+          el.valueAsDate = now;
+
+          helpers.next(function() {
+            var event = document.createEvent('Event');
+            event.initEvent('keydown', true, true);
+            event.keyCode = 33;
+            event.which = 33;
+            event.ctrlKey = true;
+            el.dispatchEvent(event);
+
+            event = document.createEvent('Event');
+            event.initEvent('keyup', true, true);
+            event.keyCode = 33;
+            event.which = 33;
+            event.ctrlKey = true;
+            el.dispatchEvent(event);
+
+            helpers.next(function() {
+              var dateEl = el._elements.body.querySelector('td.is-focused .coral3-Calendar-date'); 
+              if (dateEl) {
+                var currentActive = dateEl.dataset.date;
+                var currentMoment = moment(currentActive);
+                expect(currentMoment.year()).to.eql(now.subtract(1, 'year').year());
+              }
+
+              done();
+            });
+          });
+        });
+
+        it('should go to next year on Ctrl+PageDown', function(done) {
+          var now = new DateTime.Moment();
+          el.valueAsDate = now;
+
+          helpers.next(function() {
+            var event = document.createEvent('Event');
+            event.initEvent('keydown', true, true);
+            event.keyCode = 34;
+            event.which = 34;
+            event.ctrlKey = true;
+            el.dispatchEvent(event);
+            
+            event = document.createEvent('Event');
+            event.initEvent('keyup', true, true);
+            event.keyCode = 34;
+            event.which = 34;
+            event.ctrlKey = true;
+            el.dispatchEvent(event);
+
+            helpers.next(function() {
+              var dateEl = el._elements.body.querySelector('td.is-focused .coral3-Calendar-date'); 
+              if (dateEl) {
+                var currentActive = dateEl.dataset.date;
+                var currentMoment = moment(currentActive);
+                expect(currentMoment.year()).to.eql(now.add(1, 'year').year());
+              }
+
+              done();
+            });
+          });
+        });
+
+        it('should go to previous year on Meta+PageUp', function(done) {
+          var now = new DateTime.Moment();
+          el.valueAsDate = now;
+
+          helpers.next(function() {
+            var event = document.createEvent('Event');
+            event.initEvent('keydown', true, true);
+            event.keyCode = 33;
+            event.which = 33;
+            event.metaKey = true;
+            el.dispatchEvent(event);
+
+            event = document.createEvent('Event');
+            event.initEvent('keyup', true, true);
+            event.keyCode = 33;
+            event.which = 33;
+            event.metaKey = true;
+            el.dispatchEvent(event);
+
+            helpers.next(function() {
+              var dateEl = el._elements.body.querySelector('td.is-focused .coral3-Calendar-date'); 
+              if (dateEl) {
+                var currentActive = dateEl.dataset.date;
+                var currentMoment = moment(currentActive);
+                expect(currentMoment.year()).to.eql(now.subtract(1, 'year').year());
+              }
+
+              done();
+            });
+          });
+        });
+
+        it('should go to next year on Meta+PageDown', function(done) {
+          var now = new DateTime.Moment();
+          el.valueAsDate = now;
+
+          helpers.next(function() {
+            var event = document.createEvent('Event');
+            event.initEvent('keydown', true, true);
+            event.keyCode = 34;
+            event.which = 34;
+            event.metaKey = true;
+            el.dispatchEvent(event);
+            
+            event = document.createEvent('Event');
+            event.initEvent('keyup', true, true);
+            event.keyCode = 34;
+            event.which = 34;
+            event.metaKey = true;
+            el.dispatchEvent(event);
+
+            helpers.next(function() {
+              var dateEl = el._elements.body.querySelector('td.is-focused .coral3-Calendar-date'); 
+              if (dateEl) {
+                var currentActive = dateEl.dataset.date;
+                var currentMoment = moment(currentActive);
+                expect(currentMoment.year()).to.eql(now.add(1, 'year').year());
+              }
+
+              done();
+            });
+          });
+        });
+
+        it('should go to previous year on Alt+PageUp', function(done) {
+          var now = new DateTime.Moment();
+          el.valueAsDate = now;
+
+          helpers.next(function() {
+            var event = document.createEvent('Event');
+            event.initEvent('keydown', true, true);
+            event.keyCode = 33;
+            event.which = 33;
+            event.altKey = true;
+            el.dispatchEvent(event);
+
+            event = document.createEvent('Event');
+            event.initEvent('keyup', true, true);
+            event.keyCode = 33;
+            event.which = 33;
+            event.altKey = true;
+            el.dispatchEvent(event);
+
+            helpers.next(function() {
+              var dateEl = el._elements.body.querySelector('td.is-focused .coral3-Calendar-date'); 
+              if (dateEl) {
+                var currentActive = dateEl.dataset.date;
+                var currentMoment = moment(currentActive);
+                expect(currentMoment.year()).to.eql(now.subtract(1, 'year').year());
+              }
+
+              done();
+            });
+          });
+        });
+
+        it('should go to next year on Alt+PageDown', function(done) {
+          var now = new DateTime.Moment();
+          el.valueAsDate = now;
+
+          helpers.next(function() {
+            var event = document.createEvent('Event');
+            event.initEvent('keydown', true, true);
+            event.keyCode = 34;
+            event.which = 34;
+            event.altKey = true;
+            el.dispatchEvent(event);
+            
+            event = document.createEvent('Event');
+            event.initEvent('keyup', true, true);
+            event.keyCode = 34;
+            event.which = 34;
+            event.altKey = true;
+            el.dispatchEvent(event);
+
+            helpers.next(function() {
+              var dateEl = el._elements.body.querySelector('td.is-focused .coral3-Calendar-date'); 
+              if (dateEl) {
+                var currentActive = dateEl.dataset.date;
+                var currentMoment = moment(currentActive);
+                expect(currentMoment.year()).to.eql(now.add(1, 'year').year());
+              }
+
+              done();
+            });
+          });
+        });
+
+        it('should go to previous year on Shift+PageUp', function(done) {
+          var now = new DateTime.Moment();
+          el.valueAsDate = now;
+
+          helpers.next(function() {
+            var event = document.createEvent('Event');
+            event.initEvent('keydown', true, true);
+            event.keyCode = 33;
+            event.which = 33;
+            event.shiftKey = true;
+            el.dispatchEvent(event);
+
+            event = document.createEvent('Event');
+            event.initEvent('keyup', true, true);
+            event.keyCode = 33;
+            event.which = 33;
+            event.shiftKey = true;
+            el.dispatchEvent(event);
+
+            helpers.next(function() {
+              var dateEl = el._elements.body.querySelector('td.is-focused .coral3-Calendar-date'); 
+              if (dateEl) {
+                var currentActive = dateEl.dataset.date;
+                var currentMoment = moment(currentActive);
+                expect(currentMoment.year()).to.eql(now.subtract(1, 'year').year());
+              }
+
+              done();
+            });
+          });
+        });
+
+        it('should go to next year on Shift+PageDown', function(done) {
+          var now = new DateTime.Moment();
+          el.valueAsDate = now;
+
+          helpers.next(function() {
+            var event = document.createEvent('Event');
+            event.initEvent('keydown', true, true);
+            event.keyCode = 34;
+            event.which = 34;
+            event.shiftKey = true;
+            el.dispatchEvent(event);
+            
+            event = document.createEvent('Event');
+            event.initEvent('keyup', true, true);
+            event.keyCode = 34;
+            event.which = 34;
+            event.shiftKey = true;
+            el.dispatchEvent(event);
+
+            helpers.next(function() {
+              var dateEl = el._elements.body.querySelector('td.is-focused .coral3-Calendar-date'); 
+              if (dateEl) {
+                var currentActive = dateEl.dataset.date;
+                var currentMoment = moment(currentActive);
+                expect(currentMoment.year()).to.eql(now.add(1, 'year').year());
+              }
+
+              done();
+            });
+          });
+        });
+      });
     });
 
     describe('Implementation Details', function () {

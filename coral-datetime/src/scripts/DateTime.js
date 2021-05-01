@@ -267,10 +267,26 @@ class DateTime {
    @see https://momentjs.com/docs/#/manipulating/add/
    */
   add(value, type) {
-    if (type.indexOf('month') === 0) {
-      this._date.setMonth(this._date.getMonth() + value);
-    } else if (type.indexOf('day') === 0) {
-      this._date.setDate(this._date.getDate() + value);
+    let multiplier = 1;
+    switch (type) {
+      case 'year':
+      case 'years':
+        multiplier = 12;
+      case 'month':
+      case 'months':
+        const dayOfMonth = this._date.getDate();
+        this._date.setMonth(this._date.getMonth() + multiplier * value);
+        if (this._date.getDate() != dayOfMonth) {
+          this._date.setDate(0);
+        }
+        break;
+      case 'week':
+      case 'weeks':
+        multiplier = 7;
+      case 'day':
+      case 'days':
+        this._date.setDate(this._date.getDate() + multiplier * value);
+        break;
     }
 
     return this;
@@ -280,20 +296,49 @@ class DateTime {
    @see https://momentjs.com/docs/#/manipulating/subtract/
    */
   subtract(value, type) {
-    if (type.indexOf('month') === 0) {
-      this._date.setMonth(this._date.getMonth() - value);
-    } else if (type.indexOf('day') === 0) {
-      this._date.setDate(this._date.getDate() - value);
+    let multiplier = 1;
+    switch (type) {
+      case 'year':
+      case 'years':
+        multiplier = 12;
+      case 'month':
+      case 'months':
+        const dayOfMonth = this._date.getDate();
+        this._date.setMonth(this._date.getMonth() - multiplier * value);
+        if (this._date.getDate() != dayOfMonth) {
+          this._date.setDate(0);
+        }
+        break;
+      case 'week':
+      case 'weeks':
+        multiplier = 7;
+      case 'day':
+      case 'days':
+        this._date.setDate(this._date.getDate() - multiplier * value);
+        break;
     }
 
     return this;
+  }
+
+
+  /**
+   @see https://momentjs.com/docs/#/displaying/days-in-month/
+  */
+  daysInMonth() {
+    return new Date(this._date.getFullYear(), this._date.getMonth() + 1, 0).getDate();
   }
 
   /**
    @see https://momentjs.com/docs/#/displaying/difference/
    */
   diff(obj) {
-    const diff = this._date.getTime() - obj._date.getTime();
+    let diff = this._date.getTime() - obj._date.getTime();
+
+    let timezoneDiff = this._date.getTimezoneOffset() - obj._date.getTimezoneOffset();
+    if (timezoneDiff !== 0) {
+      diff -= timezoneDiff * 60000;
+    }
 
     return diff / 86400000;
   }
