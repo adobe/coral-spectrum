@@ -1,3 +1,10 @@
+## [4.10.20](https://github.com/adobe/coral-spectrum/compare/v4.10.19...v4.10.20) (2021-05-01)
+
+
+### Bug Fixes
+
+* **#147:** CUI-7438 [Accessibility] Calendar keyboard navigation by Arrow, (Alt + ) PageUp/Down, etc ([#148](https://github.com/adobe/coral-spectrum/issues/148)) ([1e1e171](https://github.com/adobe/coral-spectrum/commit/1e1e171261021cec08920e8fdbafc1420c98e6b2)), closes [#147](https://github.com/adobe/coral-spectrum/issues/147) [#147](https://github.com/adobe/coral-spectrum/issues/147) [#147](https://github.com/adobe/coral-spectrum/issues/147)
+
 ## [4.10.19](https://github.com/adobe/coral-spectrum/compare/v4.10.18...v4.10.19) (2021-04-23)
 
 
