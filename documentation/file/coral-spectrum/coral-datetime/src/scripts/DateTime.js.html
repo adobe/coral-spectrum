@@ -689,10 +689,26 @@ class DateTime {
    @see https://momentjs.com/docs/#/manipulating/add/
    */
   add(value, type) {
-    if (type.indexOf(&apos;month&apos;) === 0) {
-      this._date.setMonth(this._date.getMonth() + value);
-    } else if (type.indexOf(&apos;day&apos;) === 0) {
-      this._date.setDate(this._date.getDate() + value);
+    let multiplier = 1;
+    switch (type) {
+      case &apos;year&apos;:
+      case &apos;years&apos;:
+        multiplier = 12;
+      case &apos;month&apos;:
+      case &apos;months&apos;:
+        const dayOfMonth = this._date.getDate();
+        this._date.setMonth(this._date.getMonth() + multiplier * value);
+        if (this._date.getDate() != dayOfMonth) {
+          this._date.setDate(0);
+        }
+        break;
+      case &apos;week&apos;:
+      case &apos;weeks&apos;:
+        multiplier = 7;
+      case &apos;day&apos;:
+      case &apos;days&apos;:
+        this._date.setDate(this._date.getDate() + multiplier * value);
+        break;
     }
 
     return this;
@@ -702,20 +718,49 @@ class DateTime {
    @see https://momentjs.com/docs/#/manipulating/subtract/
    */
   subtract(value, type) {
-    if (type.indexOf(&apos;month&apos;) === 0) {
-      this._date.setMonth(this._date.getMonth() - value);
-    } else if (type.indexOf(&apos;day&apos;) === 0) {
-      this._date.setDate(this._date.getDate() - value);
+    let multiplier = 1;
+    switch (type) {
+      case &apos;year&apos;:
+      case &apos;years&apos;:
+        multiplier = 12;
+      case &apos;month&apos;:
+      case &apos;months&apos;:
+        const dayOfMonth = this._date.getDate();
+        this._date.setMonth(this._date.getMonth() - multiplier * value);
+        if (this._date.getDate() != dayOfMonth) {
+          this._date.setDate(0);
+        }
+        break;
+      case &apos;week&apos;:
+      case &apos;weeks&apos;:
+        multiplier = 7;
+      case &apos;day&apos;:
+      case &apos;days&apos;:
+        this._date.setDate(this._date.getDate() - multiplier * value);
+        break;
     }
 
     return this;
+  }
+
+
+  /**
+   @see https://momentjs.com/docs/#/displaying/days-in-month/
+  */
+  daysInMonth() {
+    return new Date(this._date.getFullYear(), this._date.getMonth() + 1, 0).getDate();
   }
 
   /**
    @see https://momentjs.com/docs/#/displaying/difference/
    */
   diff(obj) {
-    const diff = this._date.getTime() - obj._date.getTime();
+    let diff = this._date.getTime() - obj._date.getTime();
+
+    let timezoneDiff = this._date.getTimezoneOffset() - obj._date.getTimezoneOffset();
+    if (timezoneDiff !== 0) {
+      diff -= timezoneDiff * 60000;
+    }
 
     return diff / 86400000;
   }

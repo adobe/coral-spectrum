@@ -8748,6 +8748,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "coral-spectrum/coral-datetime/src/scripts/datetime.js~datetime#daysinmonth",
+    "class/coral-spectrum/coral-datetime/src/scripts/DateTime.js~DateTime.html#instance-method-daysInMonth",
+    "coral-spectrum/coral-datetime/src/scripts/DateTime.js~DateTime#daysInMonth",
+    "method"
+  ],
+  [
     "coral-spectrum/coral-datetime/src/scripts/datetime.js~datetime#diff",
     "class/coral-spectrum/coral-datetime/src/scripts/DateTime.js~DateTime.html#instance-method-diff",
     "coral-spectrum/coral-datetime/src/scripts/DateTime.js~DateTime#diff",

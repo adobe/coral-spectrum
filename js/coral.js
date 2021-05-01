@@ -32293,10 +32293,34 @@ var Coral = (function (exports) {
     }, {
       key: "add",
       value: function add(value, type) {
-        if (type.indexOf('month') === 0) {
-          this._date.setMonth(this._date.getMonth() + value);
-        } else if (type.indexOf('day') === 0) {
-          this._date.setDate(this._date.getDate() + value);
+        var multiplier = 1;
+
+        switch (type) {
+          case 'year':
+          case 'years':
+            multiplier = 12;
+
+          case 'month':
+          case 'months':
+            var dayOfMonth = this._date.getDate();
+
+            this._date.setMonth(this._date.getMonth() + multiplier * value);
+
+            if (this._date.getDate() != dayOfMonth) {
+              this._date.setDate(0);
+            }
+
+            break;
+
+          case 'week':
+          case 'weeks':
+            multiplier = 7;
+
+          case 'day':
+          case 'days':
+            this._date.setDate(this._date.getDate() + multiplier * value);
+
+            break;
         }
 
         return this;
@@ -32308,13 +32332,46 @@ var Coral = (function (exports) {
     }, {
       key: "subtract",
       value: function subtract(value, type) {
-        if (type.indexOf('month') === 0) {
-          this._date.setMonth(this._date.getMonth() - value);
-        } else if (type.indexOf('day') === 0) {
-          this._date.setDate(this._date.getDate() - value);
+        var multiplier = 1;
+
+        switch (type) {
+          case 'year':
+          case 'years':
+            multiplier = 12;
+
+          case 'month':
+          case 'months':
+            var dayOfMonth = this._date.getDate();
+
+            this._date.setMonth(this._date.getMonth() - multiplier * value);
+
+            if (this._date.getDate() != dayOfMonth) {
+              this._date.setDate(0);
+            }
+
+            break;
+
+          case 'week':
+          case 'weeks':
+            multiplier = 7;
+
+          case 'day':
+          case 'days':
+            this._date.setDate(this._date.getDate() - multiplier * value);
+
+            break;
         }
 
         return this;
+      }
+      /**
+       @see https://momentjs.com/docs/#/displaying/days-in-month/
+      */
+
+    }, {
+      key: "daysInMonth",
+      value: function daysInMonth() {
+        return new Date(this._date.getFullYear(), this._date.getMonth() + 1, 0).getDate();
       }
       /**
        @see https://momentjs.com/docs/#/displaying/difference/
@@ -32324,6 +32381,12 @@ var Coral = (function (exports) {
       key: "diff",
       value: function diff(obj) {
         var diff = this._date.getTime() - obj._date.getTime();
+
+        var timezoneDiff = this._date.getTimezoneOffset() - obj._date.getTimezoneOffset();
+
+        if (timezoneDiff !== 0) {
+          diff -= timezoneDiff * 60000;
+        }
 
         return diff / 86400000;
       }
@@ -40122,6 +40185,7 @@ var Coral = (function (exports) {
       _this2._delegateEvents(commons.extend(_this2._events, {
         'click ._coral-Calendar-nextMonth,._coral-Calendar-prevMonth': '_onNextOrPreviousMonthClick',
         'click ._coral-Calendar-body ._coral-Calendar-date': '_onDayClick',
+        'capture:focus ._coral-Calendar-body': '_onBodyFocus',
         'mousedown ._coral-Calendar-body ._coral-Calendar-date': '_onDayMouseDown',
         'key:up ._coral-Calendar-body': '_onUpKey',
         'key:right ._coral-Calendar-body': '_onRightKey',
@@ -40139,6 +40203,11 @@ var Coral = (function (exports) {
         'key:ctrl+pageup': '_onCtrlPageUpKey',
         // On Windows, we use CTRL+Page Down
         'key:ctrl+pagedown': '_onCtrlPageDownKey',
+        // Use alt+pageup/alt+pagedown and shift+pageup/shift+pagedown to jump by year
+        'key:alt+pageup': '_onCtrlPageUpKey',
+        'key:alt+pagedown': '_onCtrlPageDownKey',
+        'key:shift+pageup': '_onCtrlPageUpKey',
+        'key:shift+pagedown': '_onCtrlPageDownKey',
         'key:enter ._coral-Calendar-body': '_onEnterKey',
         'key:return ._coral-Calendar-body': '_onEnterKey',
         'key:space ._coral-Calendar-body': '_onEnterKey'
@@ -40259,25 +40328,29 @@ var Coral = (function (exports) {
     }, {
       key: "_setActiveDescendant",
       value: function _setActiveDescendant() {
+        var _this4 = this;
+
         var el;
 
-        if (!this._activeDescendant || !this._elements.body.querySelector("#".concat(this._activeDescendant, " [data-date]"))) {
+        var isActiveDescendantMissing = function isActiveDescendantMissing() {
+          return !_this4._activeDescendant || !_this4._elements.body.querySelector("#".concat(_this4._activeDescendant, " [data-date]"));
+        };
+
+        if (isActiveDescendantMissing()) {
           this._activeDescendant = null;
           el = this._elements.body.querySelector('.is-selected');
           this._activeDescendant = el && el.id;
 
-          if (!this._activeDescendant || !this._elements.body.querySelector("#".concat(this._activeDescendant, " [data-date]"))) {
+          if (isActiveDescendantMissing()) {
             var currentMoment = this._value;
 
             if (currentMoment) {
               var dates = this._elements.body.querySelectorAll('[data-date]');
 
-              if (dates.length) {
-                if (this._isBeforeMin(currentMoment)) {
-                  el = dates[0];
-                } else if (this._isAfterMax(currentMoment)) {
-                  el = dates[dates.length - 1];
-                }
+              if (this._isBeforeMin(currentMoment)) {
+                el = dates[0];
+              } else if (this._isAfterMax(currentMoment)) {
+                el = dates.length ? dates[dates.length - 1] : null;
               }
             } else {
               el = this._elements.body.querySelector('.is-focused') || this._elements.body.querySelector('.is-today');
@@ -40304,18 +40377,21 @@ var Coral = (function (exports) {
         }
 
         el = document.getElementById(this._activeDescendant);
+
+        if (!el) {
+          return;
+        }
+
         var newTable = this.querySelector('._coral-Calendar-table--transit');
         var isTransitioning = newTable !== null;
 
-        if (el) {
-          if (isTransitioning) {
-            window.requestAnimationFrame(function () {
-              el.querySelector('._coral-Calendar-date').classList.add('is-focused');
-            });
-          } else {
-            // Focus the selected date
+        if (isTransitioning) {
+          window.requestAnimationFrame(function () {
             el.querySelector('._coral-Calendar-date').classList.add('is-focused');
-          }
+          });
+        } else {
+          // Focus the selected date
+          el.querySelector('._coral-Calendar-date').classList.add('is-focused');
         }
       }
       /**
@@ -40349,7 +40425,7 @@ var Coral = (function (exports) {
     }, {
       key: "_renderTable",
       value: function _renderTable(year, month) {
-        var _this4 = this;
+        var _this5 = this;
 
         var firstDate = new DateTime.Moment([year, month - 1, 1]);
         var monthStartsAt = (firstDate.day() - this.startDay) % 7;
@@ -40364,7 +40440,7 @@ var Coral = (function (exports) {
           commons: commons,
           // eslint-disable-next-line no-unused-vars
           dayNames: ARRAYOF7.map(function (currentIndex, index) {
-            var dayMoment = new DateTime.Moment().day((index + _this4.startDay) % 7);
+            var dayMoment = new DateTime.Moment().day((index + _this5.startDay) % 7);
             return {
               dayAbbr: dayMoment.format('dd'),
               dayFullName: dayMoment.format('dddd')
@@ -40375,7 +40451,7 @@ var Coral = (function (exports) {
             // eslint-disable-next-line no-unused-vars
             return ARRAYOF7.map(function (currentDayIndex, dayIndex) {
               var result = {};
-              var cssClass = _this4.disabled ? ['is-disabled'] : [];
+              var cssClass = _this5.disabled ? ['is-disabled'] : [];
               var ariaSelected = false;
               var ariaInvalid = false;
               var day = weekIndex * 7 + dayIndex - monthStartsAt;
@@ -40383,7 +40459,7 @@ var Coral = (function (exports) {
 
               cursor.add(day, 'days');
               var isCurrentMonth = cursor.month() + 1 === parseFloat(month);
-              var dayOfWeek = new DateTime.Moment().day((dayIndex + _this4.startDay) % 7).format('dddd');
+              var dayOfWeek = new DateTime.Moment().day((dayIndex + _this5.startDay) % 7).format('dddd');
               var isToday = cursor.isSame(new DateTime.Moment(), 'day');
               var cursorLocal = cursor.clone().startOf('day');
 
@@ -40395,7 +40471,7 @@ var Coral = (function (exports) {
                 ariaSelected = true;
                 cssClass.push('is-selected');
 
-                if (_this4.invalid) {
+                if (_this5.invalid) {
                   ariaInvalid = true;
                   cssClass.push('is-invalid');
                 }
@@ -40404,7 +40480,7 @@ var Coral = (function (exports) {
               if (isCurrentMonth) {
                 cssClass.push('is-currentMonth');
 
-                if (!_this4.disabled && isDateInRange(cursor, _this4.min, _this4.max)) {
+                if (!_this5.disabled && isDateInRange(cursor, _this5.min, _this5.max)) {
                   result.dateAttr = cursorLocal.format(INTERNAL_FORMAT);
                   result.weekIndex = cursor.week();
                   result.formattedDate = cursor.format('LL');
@@ -40415,7 +40491,7 @@ var Coral = (function (exports) {
                 cssClass.push('is-outsideMonth');
               }
 
-              result.isDisabled = _this4.disabled || !result.dateAttr;
+              result.isDisabled = _this5.disabled || !result.dateAttr;
               result.dateText = cursor.date();
               result.cssClass = cssClass.join(' ');
               result.isToday = isToday;
@@ -40424,7 +40500,7 @@ var Coral = (function (exports) {
               result.dateLabel = dayOfWeek;
               result.weekIndex = cursor.week();
               return result;
-            }, _this4);
+            }, _this5);
           }, this)
         };
         var handles = {};
@@ -40473,18 +40549,27 @@ var Coral = (function (exports) {
           currentMoment = new DateTime.Moment(currentActive);
           newMoment = currentMoment[operator](1, unit); // make sure new moment is in range before transitioning
 
-          if (this._isInRange(newMoment, unit)) {
-            difference = Math.abs(new DateTime.Moment(currentActive).diff(newMoment, 'days'));
+          if (!this._isInRange(newMoment)) {
+            // advance to closest value in range
+            if (this._isBeforeMin(newMoment)) {
+              newMoment = this.min;
+            } else if (this._isAfterMax(newMoment)) {
+              newMoment = this.max;
+            }
 
-            this._getToNewMoment(direction, operator, difference);
-
-            this._setActiveDescendant();
+            newMoment = new DateTime.Moment(newMoment);
           }
+
+          difference = Math.abs(new DateTime.Moment(currentActive).diff(newMoment, 'days'));
+
+          this._getToNewMoment(direction, operator, difference);
+
+          this._setActiveDescendant();
         } else {
           this._requireCursor(); // if cursor is out of range
 
 
-          if (!this._isInRange(this._cursor, unit)) {
+          if (!this._isInRange(this._cursor)) {
             // advance to closest value in range
             if (this._isBeforeMin(this._cursor)) {
               newMoment = this.min;
@@ -40529,7 +40614,7 @@ var Coral = (function (exports) {
       value: function _onNextOrPreviousMonthClick(event) {
         event.preventDefault();
 
-        this._gotoPreviousOrNextTimeUnit(timeUnit.MONTH, this._elements.next === event.matchedTarget);
+        this._gotoPreviousOrNextTimeUnit(event.altKey || event.metaKey || event.shiftKey ? timeUnit.YEAR : timeUnit.MONTH, this._elements.next === event.matchedTarget);
 
         event.matchedTarget.focus();
 
@@ -40640,6 +40725,7 @@ var Coral = (function (exports) {
       key: "_onUpKey",
       value: function _onUpKey(event) {
         event.preventDefault();
+        event.stopPropagation();
 
         this._gotoPreviousOrNextTimeUnit(timeUnit.WEEK, false);
 
@@ -40651,6 +40737,7 @@ var Coral = (function (exports) {
       key: "_onDownKey",
       value: function _onDownKey(event) {
         event.preventDefault();
+        event.stopPropagation();
 
         this._gotoPreviousOrNextTimeUnit(timeUnit.WEEK, true);
 
@@ -40662,6 +40749,7 @@ var Coral = (function (exports) {
       key: "_onRightKey",
       value: function _onRightKey(event) {
         event.preventDefault();
+        event.stopPropagation();
 
         this._gotoPreviousOrNextTimeUnit(timeUnit.DAY, true);
 
@@ -40673,6 +40761,7 @@ var Coral = (function (exports) {
       key: "_onLeftKey",
       value: function _onLeftKey(event) {
         event.preventDefault();
+        event.stopPropagation();
 
         this._gotoPreviousOrNextTimeUnit(timeUnit.DAY, false);
 
@@ -40684,6 +40773,7 @@ var Coral = (function (exports) {
       key: "_onHomeOrEndKey",
       value: function _onHomeOrEndKey(event) {
         event.preventDefault();
+        event.stopPropagation();
         var isHome = event.keyCode === Keys.keyToCode('home');
         var direction = '';
         var operator = isHome ? 'subtract' : 'add';
@@ -40708,6 +40798,7 @@ var Coral = (function (exports) {
       key: "_onPageDownKey",
       value: function _onPageDownKey(event) {
         event.preventDefault();
+        event.stopPropagation();
 
         this._gotoPreviousOrNextTimeUnit(timeUnit.MONTH, true);
 
@@ -40719,6 +40810,7 @@ var Coral = (function (exports) {
       key: "_onPageUpKey",
       value: function _onPageUpKey(event) {
         event.preventDefault();
+        event.stopPropagation();
 
         this._gotoPreviousOrNextTimeUnit(timeUnit.MONTH, false);
 
@@ -40730,6 +40822,7 @@ var Coral = (function (exports) {
       key: "_onCtrlPageDownKey",
       value: function _onCtrlPageDownKey(event) {
         event.preventDefault();
+        event.stopPropagation();
 
         this._gotoPreviousOrNextTimeUnit(timeUnit.YEAR, true);
 
@@ -40741,10 +40834,22 @@ var Coral = (function (exports) {
       key: "_onCtrlPageUpKey",
       value: function _onCtrlPageUpKey(event) {
         event.preventDefault();
+        event.stopPropagation();
 
         this._gotoPreviousOrNextTimeUnit(timeUnit.YEAR, false);
 
         this._validateCalendar();
+      }
+      /** @ignore */
+
+    }, {
+      key: "_onBodyFocus",
+      value: function _onBodyFocus() {
+        if (Boolean(this._value)) {
+          this._setActiveDescendant();
+
+          this._validateCalendar();
+        }
       }
       /**
        sets focus to appropriate descendant
@@ -40889,14 +40994,14 @@ var Coral = (function (exports) {
         return this._valueFormat || INTERNAL_FORMAT;
       },
       set: function set(value) {
-        var _this5 = this;
+        var _this6 = this;
 
         value = transform.string(value);
 
         var setValueFormat = function setValueFormat(newValue) {
-          _this5._valueFormat = newValue;
+          _this6._valueFormat = newValue;
 
-          _this5._reflectAttribute('valueformat', _this5._valueFormat);
+          _this6._reflectAttribute('valueformat', _this6._valueFormat);
         }; // Once the valueFormat is set, we make sure the value is also correct
 
 
@@ -79458,7 +79563,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.10.18";
+  var version$1 = "4.10.19";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -79578,8 +79683,8 @@ var Coral = (function (exports) {
   	"rollup-plugin-postcss": "^2.0.4",
   	"rollup-plugin-terser": "^5.2.0",
   	"rollup-pluginutils": "^2.8.2",
-  	semver: "^6.3.0",
   	"semantic-release": "^17.1.1",
+  	semver: "^6.3.0",
   	sinon: "^7.5.0",
   	"sinon-chai": "^3.4.0",
   	"stylus-svg": "^1.1.2",
