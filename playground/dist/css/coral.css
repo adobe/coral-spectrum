@@ -11140,22 +11140,9 @@ coral-icon._coral-Icon {
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 button[is="coral-button"] {
   background-color: transparent;
   border-color: transparent;
-}
-.coral--light ._coral-ActionButton--quiet:disabled {
-  color: rgb(110, 110, 110);
-}
-.coral--light ._coral-ActionButton--quiet.is-disabled {
-  color: rgb(110, 110, 110);
-}
-.coral--light ._coral-ActionButton:disabled ._coral-Icon {
-  color: rgb(110, 110, 110);
-}
-.coral--light ._coral-ActionButton.is-disabled ._coral-Icon {
-  color: rgb(110, 110, 110);
 }
 
 /**
