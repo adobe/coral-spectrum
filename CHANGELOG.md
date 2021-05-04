@@ -1,3 +1,15 @@
+## [4.10.21](https://github.com/adobe/coral-spectrum/compare/v4.10.20...v4.10.21) (2021-05-04)
+
+
+### Bug Fixes
+
+* **CQ-4290733:** Luminosity ratio fails for multiple controls, does not meets minimum luminosity ratio 4.5:1 ([#169](https://github.com/adobe/coral-spectrum/issues/169)) ([#172](https://github.com/adobe/coral-spectrum/issues/172)) ([3e33ff9](https://github.com/adobe/coral-spectrum/commit/3e33ff9640cf147c04adec22b6828501af94b084))
+
+
+### Reverts
+
+* Revert "CQ-4290733 : [Visual Requirements-AEM Dynamic Media-Image Set Editor]… (#169)" (#171) ([1e74a47](https://github.com/adobe/coral-spectrum/commit/1e74a4770ef2f300f9fc6439f078576455d6b7bc)), closes [#169](https://github.com/adobe/coral-spectrum/issues/169) [#171](https://github.com/adobe/coral-spectrum/issues/171)
+
 ## [4.10.20](https://github.com/adobe/coral-spectrum/compare/v4.10.19...v4.10.20) (2021-05-01)
 
 
