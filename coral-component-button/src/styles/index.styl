@@ -10,8 +10,20 @@
  * governing permissions and limitations under the License.
  */
 
+@require '../../../coral-theme-spectrum/src/styles/vars.css';
+
 // Avoid FOUC
 button[is="coral-button"] {
   background-color: transparent;
   border-color: transparent;
+}
+
+.coral--light ._coral-ActionButton--quiet:disabled,
+.coral--light ._coral-ActionButton--quiet.is-disabled {
+    color: var(--spectrum-light-global-color-gray-700);
+}
+
+.coral--light ._coral-ActionButton:disabled ._coral-Icon,
+.coral--light ._coral-ActionButton.is-disabled ._coral-Icon {
+    color: var(--spectrum-light-global-color-gray-700);
 }
