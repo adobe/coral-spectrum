@@ -30,7 +30,7 @@ const Decorator = (superClass) => class extends superClass {
   /** @ignore */
   connectedCallback() {
     if(!this.isConnected) {
-      // component is not connected do nothing
+      // component is not connected  do nothing
       return;
     } else if (this._disconnected === false || this._ignoreConnectedCallback === true) {
       // either component is being moved around DOM or callback are ignored, resume suspended component

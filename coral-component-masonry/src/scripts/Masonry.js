@@ -626,8 +626,6 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
         // Skip layout if a layout was forced in between
         if (this._layoutScheduled) {
           this._doLayout();
-          // Cancel potentially scheduled layout if the current layout was enforced by calling doLayout directly
-          this._layoutScheduled = false;
         }
       });
 

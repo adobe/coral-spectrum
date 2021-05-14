@@ -40,36 +40,36 @@ class Messenger {
   }
 
   /**
-   checks whether Messenger is connected or not.
-   @returns {Boolean} true if connected
-   @private
+   * checks whether Messenger is connected or not.
+   * @returns {Boolean} true if connected
+   * @private
    */
   get isConnected() {
     return this._connected === true;
   }
 
   /**
-   checks whether the event is silenced or not
-   @returns {Boolean} true if silenced
-   @private
+   * checks whether the event is silenced or not
+   * @returns {Boolean} true if silenced
+   * @private
    */
   get isSilenced() {
     return this._element._silenced === true;
   }
 
   /**
-   specifies the list of listener attached to messenger.
-   @returns {Array} array of listeners
-   @private
+   * specifies the list of listener attached to messenger.
+   * @returns {Array} array of listeners
+   * @private
    */
   get listeners() {
     return this._listeners;
   }
 
   /**
-   add a message to the queue only if messenger is not connected
-   message will be added only if element is not connected.
-   @private
+   * add a message to the queue only if messenger is not connected
+   * message will be added only if element is not connected.
+   * @private
    */
   _addMessageToQueue(message, detail) {
     if(!this.isConnected) {
@@ -81,9 +81,9 @@ class Messenger {
   }
 
   /**
-   executes the stored queue messages.
-   It will be executed when element is connected.
-   @private
+   * executes the stored queue messages.
+   * It will be executed when element is connected.
+   * @private
    */
   _executeQueue() {
     this._queue.forEach((options) => {
@@ -93,26 +93,26 @@ class Messenger {
   }
 
   /**
-   empty the stored queue message
-   @private
+   * empty the stored queue message
+   * @private
    */
   _clearQueue() {
     this._queue = [];
   }
 
   /**
-   clears the listeners
-   @private
+   * clears the listeners
+   * @private
    */
   _clearListeners() {
     this._listeners = [];
   }
 
   /**
-   element should call this method when they are connected in DOM.
-   its the responsibility of the element to call this hook
-   @triggers `${element.tagName.toLowerCase()}:_messengerconnected`
-   @private
+   * element should call this method when they are connected in DOM.
+   * its the responsibility of the element to call this hook
+   * @triggers `${element.tagName.toLowerCase()}:_messengerconnected`
+   * @private
    */
   connect() {
     if(!this.isConnected) {
@@ -129,10 +129,10 @@ class Messenger {
   }
 
   /**
-   add the listener to messenger
-   this handler will be passed when messengerconnect event is trigger
-   the handler needs to be executed by listeners.
-   @private
+   * add the listener to messenger
+   * this handler will be passed when messengerconnect event is trigger
+   * the handler needs to be executed by listeners.
+   * @private
    */
   registerListener(listener) {
     if(listener) {
@@ -141,10 +141,10 @@ class Messenger {
   }
 
   /**
-   post the provided message to all listener.
-   @param {String} message which should be posted
-   @param {Object} additional detail which needs to be posted.
-   @private
+   * post the provided message to all listener.
+   * @param {String} message which should be posted
+   * @param {Object} additional detail which needs to be posted.
+   * @private
    */
   _postMessage(message, detail) {
     let element = this._element;
@@ -183,11 +183,11 @@ class Messenger {
   }
 
   /**
-    post the provided message to all listener,
-    along with validating silencing and storing in queue
-    @param {String} message which should be posted
-    @param {Object} additional detail which needs to be posted.
-    @private
+    * post the provided message to all listener,
+    * along with validating silencing and storing in queue
+    * @param {String} message which should be posted
+    * @param {Object} additional detail which needs to be posted.
+    * @private
    */
   postMessage(message, detail) {
     if(this.isSilenced) {
@@ -205,14 +205,16 @@ class Messenger {
       // message will get store in queue.
       this.disconnect();
       this.postMessage(message, detail);
+      return;
     }
+
     this._postMessage(message, detail);
   }
 
   /**
-    element should call this method when they are disconnected from DOM.
-    Its the responsibility of the element to call this hook
-    @private
+    * element should call this method when they are disconnected from DOM.
+    * Its the responsibility of the element to call this hook
+    * @private
    */
   disconnect() {
     if(this.isConnected) {

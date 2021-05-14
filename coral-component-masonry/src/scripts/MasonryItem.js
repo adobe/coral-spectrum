@@ -75,7 +75,7 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   set showRemoveTransition(value) {
-    this._showRemoveTransition = transform.booleanAttr(value);
+    this._showRemoveTransition = transform.boolean(value);
   }
 
 
@@ -195,7 +195,7 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
     super._resumeCallback();
     // In case an already connected element is switched to new parent,
     // we would be ignoring the connected callback,
-    // as the item will be connected to new parent and new parent should be informed immediately
+    // as the item will be connected to new parent, the new parent should be informed immediately
     this._messenger.postMessage('coral-masonry-item:_connected');
   }
 

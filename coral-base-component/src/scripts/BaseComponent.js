@@ -303,13 +303,13 @@ const getConstructorName = function (constructor) {
 };
 
 /**
-  This will recursively change the ignoreConnectedCallback
-  value for coral-components, since a parent has ignored
-  the callback all its items should ignore the callback hooks
-  @ignore
+ * recursively update the _ignoreConnectedCallback value
+ * for children coral-component, if parent has ignored the callback
+ * its child should also ignore the callback hooks
+ * @private
  */
 const _recursiveIgnoreConnectedCallback = function(el, value) {
-  let children = el.children;
+  let children = Array.from(el.children);
   for (let i = 0; i < children.length; i++) {
     let child = children[i];
     // todo better check for coral-component
