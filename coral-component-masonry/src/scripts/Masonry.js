@@ -736,8 +736,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     // Update items, so that column indexes are correctly set
     this._updateAriaRoleForItems(this.ariaGrid);
     this._updateAriaColumnCountForParent(this.ariaGrid);
-    // set to false in case forced layouting is done between animation call
-    this._layoutScheduled = false;
+
     // Prevent endless observation loop (skip mutations which have been caused by the layout)
     this._observer.takeRecords();
   }
