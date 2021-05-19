@@ -1,3 +1,11 @@
+## [4.10.22](https://github.com/adobe/coral-spectrum/compare/v4.10.21...v4.10.22) (2021-05-19)
+
+
+### Bug Fixes
+
+* adding a selectlist based solution switcher  ([#168](https://github.com/adobe/coral-spectrum/issues/168)) ([4651c4d](https://github.com/adobe/coral-spectrum/commit/4651c4d49cde003561c7622caec4cebd484b0ce8))
+* updating spectrum product logos according new branding changes ([#173](https://github.com/adobe/coral-spectrum/issues/173)) ([c55ca46](https://github.com/adobe/coral-spectrum/commit/c55ca46e6443dcbeb5129379c79f9aaeb427aa65))
+
 ## [4.10.21](https://github.com/adobe/coral-spectrum/compare/v4.10.20...v4.10.21) (2021-05-04)
 
 
