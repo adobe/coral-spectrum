@@ -58,7 +58,7 @@
             <coral-shell-header-actions>
               <!-- Normal quiet button is used here if necessary -->
               <!--<a is="coral-anchorbutton" variant="quiet" href="#">Beta Feedback</a>-->
-              <coral-shell-menubar> 
+              <coral-shell-menubar>
                 <coral-shell-menubar-item menu="#menu_organizations">Microsoft</coral-shell-menubar-item>
                 <coral-shell-menubar-item menu="#menu_solutions" icon="apps" aria-label="Solutions" title="Solutions"></coral-shell-menubar-item>
                 <coral-shell-menubar-item menu="#menu_help" icon="helpOutline" aria-label="Help" title="Help"></coral-shell-menubar-item>
@@ -117,6 +117,14 @@
               </coral-shell-solutions>
             </coral-shell-solutionswitcher>
           </coral-shell-menu>
+          <coral-shell-menu id="menu_selectlistswitcher" placement="right" from="top">
+            <coral-shell-selectlistswitcher>
+              <coral-shell-selectlistswitcher-item  href="http://www.adobe.com/go/aem6_5_experiencecloud">Experience Cloud</coral-shell-selectlistswitcher-item>
+              <coral-shell-selectlistswitcher-item  href="http://www.adobe.com/go/aem6_5_advertisingcloud">Advertising Cloud</coral-shell-selectlistswitcher-item>
+              <coral-shell-selectlistswitcher-item  href="http://www.adobe.com/go/aem6_5_analytics">Analytics</coral-shell-selectlistswitcher-item>
+              <coral-shell-selectlistswitcher-item  href="http://www.adobe.com/go/aem6_5_audiencemanager">Audience Manager</coral-shell-selectlistswitcher-item>
+            </coral-shell-selectlistswitcher>
+          </coral-shell-menu>
           <coral-shell-menu id="menu_user">
             <coral-shell-user avatar="https://wwwimages2.adobe.com/content/dam/acom/en/leaders/photos/shantanu-narayen.jpg">
               <coral-shell-user-name>Shantanu Narayen</coral-shell-user-name>
@@ -142,7 +150,7 @@
               <a href="#" class="coral-Link scale" onclick="document.body.classList.remove('coral--large')">Medium</a> |
               <a href="#" class="coral-Link scale" onclick="document.body.classList.add('coral--large')">Large</a>
             </div>
-            
+
             <!-- Main application goes here -->
             <section class="u-coral-padding" id="workspace1">
               <h1 class="coral-Heading--XXL">Shell</h1>

@@ -67138,6 +67138,208 @@ var Coral = (function (exports) {
 
   var template$R = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
+    var el0 = this["container"] = document.createElement("coral-selectlist");
+    el0.setAttribute("handle", "container");
+    el0.className += " _coral-Shell-selectList-container";
+    frag.appendChild(el0);
+    var el1 = document.createTextNode("\n\n");
+    frag.appendChild(el1);
+    return frag;
+  };
+
+  var CLASSNAME$1g = '_coral-Shell-selectListSwitcher';
+  /**
+   @class Coral.Shell.SelectListSwitcher
+   @classdesc A Shell SelectList Switcher component
+   @htmltag coral-shell-selectlistswitcher
+   @extends {HTMLElement}
+   @extends {BaseComponent}
+   */
+
+  var ShellSelectListSwitcher = /*#__PURE__*/function (_BaseComponent) {
+    _inherits(ShellSelectListSwitcher, _BaseComponent);
+
+    var _super = _createSuper(ShellSelectListSwitcher);
+
+    /** @ignore */
+    function ShellSelectListSwitcher() {
+      var _this;
+
+      _classCallCheck(this, ShellSelectListSwitcher);
+
+      _this = _super.call(this); // Template
+
+      _this._elements = {};
+      template$R.call(_this._elements);
+
+      _this._delegateEvents({
+        'coral-selectlist:change': '_onSelectListChange',
+        'coral-shell-selectlistswitcher-item:change': '_onUpdateHref'
+      });
+
+      return _this;
+    }
+    /**
+     The item collection.
+     @type {Collection}
+     @readonly
+     */
+
+
+    _createClass(ShellSelectListSwitcher, [{
+      key: "_onItemAdded",
+      value: function _onItemAdded(item) {
+        item.id = item.id || commons.getUID();
+        var selectListItem = document.createElement('coral-selectlist-item');
+
+        if (item.href) {
+          selectListItem.setAttribute("href", item.href);
+        }
+
+        selectListItem.textContent = item.textContent;
+        selectListItem.id = item.id + "-selectlist-item";
+
+        this._elements.container.items.add(selectListItem);
+      }
+    }, {
+      key: "_onItemRemoved",
+      value: function _onItemRemoved(item) {
+        var selectListItemId = item.id + "-selectlist-item";
+
+        var selectListItem = this._elements.container.querySelector('#' + selectListItemId);
+
+        this._elements.container.items.remove(selectListItem);
+      }
+    }, {
+      key: "_onSelectListChange",
+      value: function _onSelectListChange(event) {
+        var selectList = event.target;
+        var selectListItem = selectList.selectedItem;
+
+        if (selectListItem.hasAttribute("href")) {
+          var href = selectListItem.getAttribute("href");
+          window.open(href, '_self');
+        }
+      }
+    }, {
+      key: "_onUpdateHref",
+      value: function _onUpdateHref(event) {
+        var switcherListItem = event.target;
+        var selectListItemId = switcherListItem.id + "-selectlist-item";
+
+        var selectListItem = this._elements.container.querySelector('#' + selectListItemId);
+
+        if (switcherListItem.href) {
+          selectListItem.setAttribute("href", switcherListItem.getAttribute("href"));
+        }
+      }
+      /** @ignore */
+
+    }, {
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(ShellSelectListSwitcher.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$1g);
+
+        var container = this.querySelector('._coral-Shell-selectList-container') || this._elements.container; // Put the container as first child
+
+
+        this.insertBefore(container, this.firstChild);
+
+        this.items._startHandlingItems();
+      }
+    }, {
+      key: "items",
+      get: function get() {
+        // Construct the collection on first request
+        if (!this._items) {
+          this._items = new SelectableCollection({
+            host: this,
+            itemTagName: 'coral-shell-selectlistswitcher-item',
+            onItemAdded: this._onItemAdded,
+            onItemRemoved: this._onItemRemoved
+          });
+        }
+
+        return this._items;
+      }
+    }]);
+
+    return ShellSelectListSwitcher;
+  }(BaseComponent(HTMLElement));
+
+  var CLASSNAME$1h = '_coral-Shell-selectlistswitcher-item';
+  /**
+   @class Coral.Shell.SelectListSwitcherItem
+   @classdesc A Shell SelectListSwitcherItem component
+   @htmltag coral-shell-selectlistswitcher-item
+   @extends {HTMLElement}
+   @extends {BaseComponent}
+   */
+
+  var ShellSelectListSwitcherItem = /*#__PURE__*/function (_BaseComponent) {
+    _inherits(ShellSelectListSwitcherItem, _BaseComponent);
+
+    var _super = _createSuper(ShellSelectListSwitcherItem);
+
+    function ShellSelectListSwitcherItem() {
+      _classCallCheck(this, ShellSelectListSwitcherItem);
+
+      return _super.apply(this, arguments);
+    }
+
+    _createClass(ShellSelectListSwitcherItem, [{
+      key: "render",
+
+      /** @ignore */
+      value: function render() {
+        _get(_getPrototypeOf(ShellSelectListSwitcherItem.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$1h);
+      }
+    }, {
+      key: "href",
+
+      /**
+         href property of item
+         @type {String}
+         @htmlattribute href
+         @htmlattributereflected
+         */
+      get: function get() {
+        return this._href;
+      },
+      set: function set(value) {
+        var href = transform.string(value);
+        var update = false;
+
+        if (this._href) {
+          update = true;
+        }
+
+        this._href = href;
+
+        this._reflectAttribute('href', this._href);
+
+        if (update) {
+          this.trigger('coral-shell-selectlistswitcher-item:change');
+        }
+      }
+      /** @ignore */
+
+    }], [{
+      key: "observedAttributes",
+      get: function get() {
+        return _get(_getPrototypeOf(ShellSelectListSwitcherItem), "observedAttributes", this).concat(['href']);
+      }
+    }]);
+
+    return ShellSelectListSwitcherItem;
+  }(BaseComponent(HTMLElement));
+
+  var template$S = function anonymous(data_0) {
+    var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
     var labelId = data.commons.getUID();
@@ -67197,7 +67399,7 @@ var Coral = (function (exports) {
     return frag;
   };
 
-  var CLASSNAME$1g = '_coral-Shell-orgSwitcher';
+  var CLASSNAME$1i = '_coral-Shell-orgSwitcher';
   /**
    Minimum number of entries required to show search control.
 
@@ -67240,7 +67442,7 @@ var Coral = (function (exports) {
       _this._elements = {
         footer: _this.querySelector('coral-shell-orgswitcher-footer') || document.createElement('coral-shell-orgswitcher-footer')
       };
-      template$R.call(_this._elements, {
+      template$S.call(_this._elements, {
         commons: commons,
         i18n: i18n
       }); // Used for eventing
@@ -67447,7 +67649,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(ShellOrgSwitcher.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1g); // Move the items into the right place
+        this.classList.add(CLASSNAME$1i); // Move the items into the right place
 
         this._moveItems();
 
@@ -67588,7 +67790,7 @@ var Coral = (function (exports) {
     return document.createElement('coral-shell-orgswitcher-footer');
   });
 
-  var template$S = function anonymous(data_0) {
+  var template$T = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["checkmark"] = document.createElement("span");
@@ -67614,7 +67816,7 @@ var Coral = (function (exports) {
     return frag;
   };
 
-  var CLASSNAME$1h = '_coral-Shell-orgSwitcher-item';
+  var CLASSNAME$1j = '_coral-Shell-orgSwitcher-item';
   /**
    @class Coral.Shell.Organization
    @classdesc A Shell Organization component
@@ -67644,7 +67846,7 @@ var Coral = (function (exports) {
       });
 
       var template = {};
-      template$S.call(template, {
+      template$T.call(template, {
         Icon: Icon
       });
       commons.extend(_this._elements, template); // Used for eventing
@@ -67787,7 +67989,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(ShellOrganization.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1h); // Move items into the right place
+        this.classList.add(CLASSNAME$1j); // Move items into the right place
 
         this._moveItems();
 
@@ -67915,7 +68117,7 @@ var Coral = (function (exports) {
     return ShellOrganization;
   }(List.Item);
 
-  var CLASSNAME$1i = '_coral-Shell-orgSwitcher-subitem';
+  var CLASSNAME$1k = '_coral-Shell-orgSwitcher-subitem';
   /**
    @class Coral.Shell.Suborganization
    @classdesc A Shell Sub organization component
@@ -67941,7 +68143,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(ShellSuborganization.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1i); // Set the icon size
+        this.classList.add(CLASSNAME$1k); // Set the icon size
 
         this._elements.icon.size = Icon.size.SMALL; // Be accessible
 
@@ -68012,6 +68214,10 @@ var Coral = (function (exports) {
 
   commons._define('coral-shell', Shell);
 
+  commons._define('coral-shell-selectlistswitcher', ShellSelectListSwitcher);
+
+  commons._define('coral-shell-selectlistswitcher-item', ShellSelectListSwitcherItem);
+
   Shell.Content = ShellContent;
   Shell.Header = ShellHeader;
   Shell.HomeAnchor = ShellHomeAnchor;
@@ -68039,8 +68245,10 @@ var Coral = (function (exports) {
   Shell.OrgSwitcher.Footer = ShellOrgSwitcherFooter;
   Shell.Organization = ShellOrganization;
   Shell.Suborganization = ShellSuborganization;
+  Shell.SelectListSwitcher = ShellSelectListSwitcher;
+  Shell.SelectListSwitcherItem = ShellSelectListSwitcherItem;
 
-  var CLASSNAME$1j = '_coral-SideNav';
+  var CLASSNAME$1l = '_coral-SideNav';
 
   var isLevel = function isLevel(node) {
     return node.nodeName === 'CORAL-SIDENAV-LEVEL';
@@ -68269,7 +68477,7 @@ var Coral = (function (exports) {
     }, {
       key: "_syncHeading",
       value: function _syncHeading(heading) {
-        heading.classList.add("".concat(CLASSNAME$1j, "-heading"));
+        heading.classList.add("".concat(CLASSNAME$1l, "-heading"));
         heading.setAttribute('role', 'heading');
       }
     }, {
@@ -68318,7 +68526,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(SideNav.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1j); // Default reflected attributes
+        this.classList.add(CLASSNAME$1l); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$j.DEFAULT;
@@ -68398,7 +68606,7 @@ var Coral = (function (exports) {
 
         this._reflectAttribute('variant', this._variant);
 
-        this.classList.toggle("".concat(CLASSNAME$1j, "--multiLevel"), this._variant === variant$j.MULTI_LEVEL);
+        this.classList.toggle("".concat(CLASSNAME$1l, "--multiLevel"), this._variant === variant$j.MULTI_LEVEL);
 
         if (this.variant === variant$j.MULTI_LEVEL) {
           // Don't hide the selected item level
@@ -68429,7 +68637,7 @@ var Coral = (function (exports) {
     return SideNav;
   }(BaseComponent(HTMLElement));
 
-  var template$T = function anonymous(data_0) {
+  var template$U = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.className += " _coral-SideNav-itemLink";
@@ -68460,7 +68668,7 @@ var Coral = (function (exports) {
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$1k = '_coral-SideNav-item';
+  var CLASSNAME$1m = '_coral-SideNav-item';
   /**
    @class Coral.SideNav.Item
    @classdesc A SideNav Item component.
@@ -68485,7 +68693,7 @@ var Coral = (function (exports) {
       _this._elements = {
         content: _this.querySelector('coral-sidenav-item-content') || document.createElement('coral-sidenav-item-content')
       };
-      template$T.call(_this._elements);
+      template$U.call(_this._elements);
 
       _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(SideNavItem.prototype)), "_observeLabel", _thisSuper).call(_thisSuper);
 
@@ -68505,7 +68713,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(SideNavItem.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1k); // Create a fragment
+        this.classList.add(CLASSNAME$1m); // Create a fragment
 
         var fragment = document.createDocumentFragment(); // Render the main template
 
@@ -68650,7 +68858,7 @@ var Coral = (function (exports) {
     return document.createElement('coral-sidenav-heading');
   });
 
-  var CLASSNAME$1l = '_coral-SideNav';
+  var CLASSNAME$1n = '_coral-SideNav';
   /**
    @class Coral.SideNav.Level
    @classdesc A SideNav Level component
@@ -68730,7 +68938,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(SideNavLevel.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1l); // a11y
+        this.classList.add(CLASSNAME$1n); // a11y
 
         this.setAttribute('role', 'region');
       }
@@ -68791,7 +68999,7 @@ var Coral = (function (exports) {
     CTA: 'cta',
     SECONDARY: 'secondary'
   };
-  var CLASSNAME$1m = '_coral-SplitButton';
+  var CLASSNAME$1o = '_coral-SplitButton';
   /**
    @class Coral.SplitButton
    @classdesc A Split Button component composed of an action and a trigger {@link AnchorButton} or {@link Button}.
@@ -68915,7 +69123,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(SplitButton.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1m); // a11y
+        this.classList.add(CLASSNAME$1o); // a11y
 
         this.setAttribute('role', 'group'); // Default reflected attributes
 
@@ -69023,7 +69231,7 @@ var Coral = (function (exports) {
     MAGENTA: 'magenta',
     PURPLE: 'purple'
   };
-  var CLASSNAME$1n = '_coral-StatusLight';
+  var CLASSNAME$1p = '_coral-StatusLight';
   var variantMapping = {
     SUCCESS: 'positive',
     ERROR: 'negative',
@@ -69032,13 +69240,13 @@ var Coral = (function (exports) {
   var ALL_VARIANT_CLASSES$b = [];
 
   for (var variantValue$9 in variant$l) {
-    ALL_VARIANT_CLASSES$b.push("".concat(CLASSNAME$1n, "--").concat(variantMapping[variantValue$9] || variant$l[variantValue$9]));
+    ALL_VARIANT_CLASSES$b.push("".concat(CLASSNAME$1p, "--").concat(variantMapping[variantValue$9] || variant$l[variantValue$9]));
   }
 
   var ALL_COLOR_CLASSES$1 = [];
 
   for (var colorValue$1 in color$1) {
-    ALL_COLOR_CLASSES$1.push("".concat(CLASSNAME$1n, "--").concat(color$1[colorValue$1]));
+    ALL_COLOR_CLASSES$1.push("".concat(CLASSNAME$1p, "--").concat(color$1[colorValue$1]));
   }
   /**
    @class Coral.Status
@@ -69086,7 +69294,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(Status.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1n); // Default reflected attributes
+        this.classList.add(CLASSNAME$1p); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$l.NEUTRAL;
@@ -69145,7 +69353,7 @@ var Coral = (function (exports) {
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$b);
 
-        this.classList.add("".concat(CLASSNAME$1n, "--").concat(variantMapping[this._variant.toUpperCase()] || this._variant));
+        this.classList.add("".concat(CLASSNAME$1p, "--").concat(variantMapping[this._variant.toUpperCase()] || this._variant));
       }
       /**
        The status color. See {@link StatusColorEnum}.
@@ -69185,7 +69393,7 @@ var Coral = (function (exports) {
         (_this$classList2 = this.classList).remove.apply(_this$classList2, ALL_COLOR_CLASSES$1);
 
         if (this._color !== color$1.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$1n, "--").concat(this._color));
+          this.classList.add("".concat(CLASSNAME$1p, "--").concat(this._color));
         }
       }
       /**
@@ -69354,7 +69562,7 @@ var Coral = (function (exports) {
     LARGE: 'L'
   }; // the StepList's base classname
 
-  var CLASSNAME$1o = '_coral-Steplist';
+  var CLASSNAME$1q = '_coral-Steplist';
   /**
    @class Coral.StepList
    @classdesc A StepList component that holds a collection of steps.
@@ -69674,7 +69882,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(StepList.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1o); // Default reflected attributes
+        this.classList.add(CLASSNAME$1q); // Default reflected attributes
 
         if (!this._interaction) {
           this.interaction = interaction$4.OFF;
@@ -69821,7 +70029,7 @@ var Coral = (function (exports) {
 
         this._reflectAttribute('size', this._size);
 
-        this.classList.toggle("".concat(CLASSNAME$1o, "--small"), this._size === size$7.SMALL);
+        this.classList.toggle("".concat(CLASSNAME$1q, "--small"), this._size === size$7.SMALL);
 
         if (!this.items.length) {
           return;
@@ -69877,7 +70085,7 @@ var Coral = (function (exports) {
         this._reflectAttribute('interaction', this._interaction);
 
         var isInteractive = this._interaction === interaction$4.ON;
-        this.classList.toggle("".concat(CLASSNAME$1o, "--interactive"), isInteractive);
+        this.classList.toggle("".concat(CLASSNAME$1q, "--interactive"), isInteractive);
 
         if (!this.items.length) {
           return;
@@ -69933,7 +70141,7 @@ var Coral = (function (exports) {
     return StepList;
   }(BaseComponent(HTMLElement));
 
-  var template$U = function anonymous(data_0) {
+  var template$V = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["link"] = document.createElement("a");
     el0.className += " _coral-Steplist-link";
@@ -69985,7 +70193,7 @@ var Coral = (function (exports) {
     return frag;
   };
 
-  var CLASSNAME$1p = '_coral-Steplist-item';
+  var CLASSNAME$1r = '_coral-Steplist-item';
   /**
    @class Coral.Step
    @classdesc A Step component
@@ -70010,7 +70218,7 @@ var Coral = (function (exports) {
       _this._elements = {
         label: _this.querySelector('coral-step-label') || document.createElement('coral-step-label')
       };
-      template$U.call(_this._elements);
+      template$V.call(_this._elements);
       return _this;
     }
     /**
@@ -70103,7 +70311,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(Step.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1p); // Generate a unique ID for the Step panel if one isn't already present
+        this.classList.add(CLASSNAME$1r); // Generate a unique ID for the Step panel if one isn't already present
         // This will be used for accessibility purposes
 
         this.setAttribute('id', this.id || commons.getUID()); // A11y
@@ -70665,7 +70873,7 @@ var Coral = (function (exports) {
     }
   };
 
-  var template$V = function anonymous(data_0) {
+  var template$W = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["input"] = document.createElement("input");
     el0.setAttribute("type", "checkbox");
@@ -70700,7 +70908,7 @@ var Coral = (function (exports) {
     return frag;
   };
 
-  var CLASSNAME$1q = '_coral-ToggleSwitch';
+  var CLASSNAME$1s = '_coral-ToggleSwitch';
   /**
    @class Coral.Switch
    @classdesc A Switch component is a toggle form field similar to a Checkbox component.
@@ -70733,7 +70941,7 @@ var Coral = (function (exports) {
         // Try to find the label content zone
         label: _this.querySelector('coral-switch-label') || document.createElement('coral-switch-label')
       };
-      template$V.call(_this._elements, {
+      template$W.call(_this._elements, {
         commons: commons,
         i18n: i18n
       }); // Pre-define labellable element
@@ -70815,7 +71023,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(Switch.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1q); // Create a fragment
+        this.classList.add(CLASSNAME$1s); // Create a fragment
 
         var frag = document.createDocumentFragment();
         var templateHandleNames = ['input', 'switch', 'labelWrapper']; // Render the template
@@ -71433,7 +71641,7 @@ var Coral = (function (exports) {
     RIGHT: 'right'
   };
 
-  var CLASSNAME$1r = '_coral-Table-column';
+  var CLASSNAME$1t = '_coral-Table-column';
   /**
    Enumeration for {@link TableColumn} sortable direction options.
 
@@ -71535,7 +71743,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(TableColumn.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1r); // Default reflected attributes
+        this.classList.add(CLASSNAME$1t); // Default reflected attributes
 
         if (!this._sortableType) {
           this.sortableType = sortableType.ALPHANUMERIC;
@@ -71822,7 +72030,7 @@ var Coral = (function (exports) {
     return TableColumn;
   }(BaseComponent(HTMLTableColElement));
 
-  var CLASSNAME$1s = '_coral-Table-cell';
+  var CLASSNAME$1u = '_coral-Table-cell';
   /**
    @class Coral.Table.Cell
    @classdesc A Table cell component
@@ -71929,7 +72137,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(TableCell.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1s);
+        this.classList.add(CLASSNAME$1u);
         this.id = this.id || commons.getUID();
       }
       /**
@@ -72016,7 +72224,7 @@ var Coral = (function (exports) {
     return TableCell;
   }(BaseComponent(HTMLTableCellElement));
 
-  var template$W = function anonymous(data_0) {
+  var template$X = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["accessibilityState"] = document.createElement("div");
     el0.setAttribute("handle", "accessibilityState");
@@ -72029,7 +72237,7 @@ var Coral = (function (exports) {
     return frag;
   };
 
-  var CLASSNAME$1t = '_coral-Table-row';
+  var CLASSNAME$1v = '_coral-Table-row';
   /**
    @class Coral.Table.Row
    @classdesc A Table row component
@@ -72053,7 +72261,7 @@ var Coral = (function (exports) {
       _this = _super.call(this); // Templates
 
       _this._elements = {};
-      template$W.call(_this._elements, {
+      template$X.call(_this._elements, {
         commons: commons
       }); // Required for coral-table-row:change event
 
@@ -72440,7 +72648,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(TableRow.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1t);
+        this.classList.add(CLASSNAME$1v);
 
         this._syncAriaLabelledby();
       }
@@ -72737,7 +72945,7 @@ var Coral = (function (exports) {
     }(superClass);
   };
 
-  var CLASSNAME$1u = '_coral-Table-head';
+  var CLASSNAME$1w = '_coral-Table-head';
   /**
    @class Coral.Table.Head
    @classdesc A Table head component
@@ -72784,7 +72992,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(TableHead.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1u);
+        this.classList.add(CLASSNAME$1w);
       }
       /**
        Triggered when the {@link TableHead} content changed.
@@ -72827,7 +73035,7 @@ var Coral = (function (exports) {
     return TableHead;
   }(BaseTableSection(BaseComponent(HTMLTableSectionElement)));
 
-  var CLASSNAME$1v = '_coral-Table-body';
+  var CLASSNAME$1x = '_coral-Table-body';
   /**
    @class Coral.Table.Body
    @classdesc A Table body component
@@ -72863,7 +73071,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(TableBody.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1v);
+        this.classList.add(CLASSNAME$1x);
 
         if (getRows([this]).length === 0) {
           this.trigger('coral-table-body:_empty');
@@ -72886,7 +73094,7 @@ var Coral = (function (exports) {
     return TableBody;
   }(BaseTableSection(BaseComponent(HTMLTableSectionElement)));
 
-  var CLASSNAME$1w = '_coral-Table-foot';
+  var CLASSNAME$1y = '_coral-Table-foot';
   /**
    @class Coral.Table.Foot
    @classdesc A Table foot component
@@ -72915,14 +73123,14 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(TableFoot.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1w);
+        this.classList.add(CLASSNAME$1y);
       }
     }]);
 
     return TableFoot;
   }(BaseTableSection(BaseComponent(HTMLTableSectionElement)));
 
-  var template$X = function anonymous(data_0) {
+  var template$Y = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["liveRegion"] = document.createElement("div");
     el0.setAttribute("handle", "liveRegion");
@@ -72964,7 +73172,7 @@ var Coral = (function (exports) {
     return frag;
   };
 
-  var CLASSNAME$1x = '_coral-Table-wrapper';
+  var CLASSNAME$1z = '_coral-Table-wrapper';
   /**
    Enumeration for {@link Table} variants
 
@@ -72986,7 +73194,7 @@ var Coral = (function (exports) {
   var ALL_VARIANT_CLASSES$c = [];
 
   for (var variantValue$a in variant$m) {
-    ALL_VARIANT_CLASSES$c.push("".concat(CLASSNAME$1x, "--").concat(variant$m[variantValue$a]));
+    ALL_VARIANT_CLASSES$c.push("".concat(CLASSNAME$1z, "--").concat(variant$m[variantValue$a]));
   }
 
   var IS_DISABLED = 'is-disabled';
@@ -73034,7 +73242,7 @@ var Coral = (function (exports) {
         foot: _this.querySelector('tfoot[is="coral-table-foot"]') || new TableFoot(),
         columns: _this.querySelector('colgroup') || document.createElement('colgroup')
       };
-      template$X.call(_this._elements, {
+      template$Y.call(_this._elements, {
         commons: commons
       }); // Events
 
@@ -74512,7 +74720,7 @@ var Coral = (function (exports) {
             });
           }); // Make sure sticky styling is applied
 
-          table.classList.toggle("".concat(CLASSNAME$1x, "--sticky"), head.sticky); // Layout sticky head
+          table.classList.toggle("".concat(CLASSNAME$1z, "--sticky"), head.sticky); // Layout sticky head
 
           table._preventResetLayout = false;
 
@@ -75241,7 +75449,7 @@ var Coral = (function (exports) {
 
         _get(_getPrototypeOf(Table.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1x); // Wrapper should have role="presentation" because it wraps another table
+        this.classList.add(CLASSNAME$1z); // Wrapper should have role="presentation" because it wraps another table
 
         this.setAttribute('role', 'presentation'); // Default reflected attribute
 
@@ -75562,7 +75770,7 @@ var Coral = (function (exports) {
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$c);
 
-        this.classList.add("".concat(CLASSNAME$1x, "--").concat(this._variant));
+        this.classList.add("".concat(CLASSNAME$1z, "--").concat(this._variant));
       }
       /**
        Whether the items are selectable.
@@ -75833,7 +76041,7 @@ var Coral = (function (exports) {
     return Table;
   }(BaseComponent(HTMLTableElement));
 
-  var CLASSNAME$1y = '_coral-Table-headerCell';
+  var CLASSNAME$1A = '_coral-Table-headerCell';
   /**
    @class Coral.Table.HeaderCell
    @classdesc A Table header cell component
@@ -75890,7 +76098,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(TableHeaderCell.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1y); // Fetch or create the content zone element
+        this.classList.add(CLASSNAME$1A); // Fetch or create the content zone element
 
         var content = this._elements.content;
 
@@ -76015,7 +76223,7 @@ var Coral = (function (exports) {
   Table.Body = TableBody;
   Table.Foot = TableFoot;
 
-  var template$Y = function anonymous(data_0) {
+  var template$Z = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("handle", "icon");
@@ -76065,7 +76273,7 @@ var Coral = (function (exports) {
     return newTarget;
   }
 
-  var CLASSNAME$1z = '_coral-Tabs-item';
+  var CLASSNAME$1B = '_coral-Tabs-item';
   /**
    @class Coral.Tab
    @classdesc A Tab component
@@ -76091,7 +76299,7 @@ var Coral = (function (exports) {
         label: _this.querySelector('coral-tab-label') || document.createElement('coral-tab-label'),
         invalidIcon: _this.querySelector('._coral-Tabs-itemInvalidIcon') || _this._createInvalidIcon()
       };
-      template$Y.call(_this._elements); // Listen for mutations
+      template$Z.call(_this._elements); // Listen for mutations
 
       _this._observer = new MutationObserver(function () {
         // Change icon size if the label is empty
@@ -76196,7 +76404,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(Tab.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1z); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$1B); // adds the role to support accessibility
 
         this.setAttribute('role', 'tab'); // Generate a unique ID for the tab panel if one isn't already present
         // This will be used for accessibility purposes
@@ -76245,7 +76453,7 @@ var Coral = (function (exports) {
           handle: 'label',
           tagName: 'coral-tab-label',
           insert: function insert(label) {
-            label.classList.add("".concat(CLASSNAME$1z, "Label"));
+            label.classList.add("".concat(CLASSNAME$1B, "Label"));
             this.appendChild(label);
 
             this._toggleEllipsis();
@@ -76460,7 +76668,7 @@ var Coral = (function (exports) {
     return document.createElement('coral-tab-label');
   });
 
-  var template$Z = function anonymous(data_0) {
+  var template$_ = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["line"] = document.createElement("div");
     el0.setAttribute("handle", "line");
@@ -76506,7 +76714,7 @@ var Coral = (function (exports) {
     VERTICAL: 'vertical'
   }; // the tablist's base classname
 
-  var CLASSNAME$1A = '_coral-Tabs';
+  var CLASSNAME$1C = '_coral-Tabs';
   /**
    @class Coral.TabList
    @classdesc A TabList component holds a collection of tabs.
@@ -76529,7 +76737,7 @@ var Coral = (function (exports) {
       _this = _super.call(this); // Templates
 
       _this._elements = {};
-      template$Z.call(_this._elements); // Attach events
+      template$_.call(_this._elements); // Attach events
 
       _this._delegateEvents({
         'click > coral-tab': '_onTabClick',
@@ -76802,7 +77010,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(TabList.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1A); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$1C); // adds the role to support accessibility
 
         this.setAttribute('role', 'tablist');
         this.setAttribute('aria-multiselectable', 'false'); // Default reflected attributes
@@ -76955,12 +77163,12 @@ var Coral = (function (exports) {
         this._reflectAttribute('size', this._size); // Remove all variant classes
 
 
-        this.classList.remove("".concat(CLASSNAME$1A, "--compact"), "".concat(CLASSNAME$1A, "--quiet"));
+        this.classList.remove("".concat(CLASSNAME$1C, "--compact"), "".concat(CLASSNAME$1C, "--quiet"));
 
         if (this._size === size$8.SMALL) {
-          this.classList.add("".concat(CLASSNAME$1A, "--compact"));
+          this.classList.add("".concat(CLASSNAME$1C, "--compact"));
         } else if (this._size === size$8.LARGE) {
-          this.classList.add("".concat(CLASSNAME$1A, "--quiet"));
+          this.classList.add("".concat(CLASSNAME$1C, "--quiet"));
         }
       }
       /**
@@ -76987,8 +77195,8 @@ var Coral = (function (exports) {
 
         this._reflectAttribute('orientation', this._orientation);
 
-        this.classList.toggle("".concat(CLASSNAME$1A, "--vertical"), this._orientation === orientation$3.VERTICAL);
-        this.classList.toggle("".concat(CLASSNAME$1A, "--horizontal"), this._orientation === orientation$3.HORIZONTAL);
+        this.classList.toggle("".concat(CLASSNAME$1C, "--vertical"), this._orientation === orientation$3.VERTICAL);
+        this.classList.toggle("".concat(CLASSNAME$1C, "--horizontal"), this._orientation === orientation$3.HORIZONTAL);
 
         this._setLine();
       }
@@ -77053,7 +77261,7 @@ var Coral = (function (exports) {
     VERTICAL: 'vertical'
   }; // the tabview's base classname
 
-  var CLASSNAME$1B = '_coral-TabView';
+  var CLASSNAME$1D = '_coral-TabView';
   /**
    @class Coral.TabView
    @classdesc A TabView component is the wrapping container used to create the typical Tabbed pattern.
@@ -77148,7 +77356,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(TabView.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1B); // Default reflected attributes
+        this.classList.add(CLASSNAME$1D); // Default reflected attributes
 
         if (!this._orientation) {
           this.orientation = this.orientation;
@@ -77184,7 +77392,7 @@ var Coral = (function (exports) {
 
         this._reflectAttribute('orientation', this.orientation);
 
-        this.classList[this.orientation === orientation$4.VERTICAL ? 'add' : 'remove']("".concat(CLASSNAME$1B, "--vertical"));
+        this.classList[this.orientation === orientation$4.VERTICAL ? 'add' : 'remove']("".concat(CLASSNAME$1D, "--vertical"));
       }
       /**
        The TabList which handles all the tabs.
@@ -77277,7 +77485,7 @@ var Coral = (function (exports) {
 
   commons._define('coral-tabview', TabView);
 
-  var template$_ = function anonymous(data_0) {
+  var template$$ = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["body"] = document.createElement("div");
     el0.className += " _coral-Toast-body";
@@ -77358,12 +77566,12 @@ var Coral = (function (exports) {
     CENTER: 'center',
     RIGHT: 'right'
   };
-  var CLASSNAME$1C = '_coral-Toast'; // An array of all possible variant
+  var CLASSNAME$1E = '_coral-Toast'; // An array of all possible variant
 
   var ALL_VARIANT_CLASSES$d = [];
 
   for (var variantValue$b in variant$n) {
-    ALL_VARIANT_CLASSES$d.push("".concat(CLASSNAME$1C, "--").concat(variant$n[variantValue$b]));
+    ALL_VARIANT_CLASSES$d.push("".concat(CLASSNAME$1E, "--").concat(variant$n[variantValue$b]));
   }
 
   var PRIORITY_QUEUE = [];
@@ -77451,7 +77659,7 @@ var Coral = (function (exports) {
         // Fetch or create the content zone element
         content: _this.querySelector('coral-toast-content') || document.createElement('coral-toast-content')
       };
-      template$_.call(_this._elements);
+      template$$.call(_this._elements);
 
       _this._delegateEvents({
         'global:resize': '_debounceLayout',
@@ -77598,7 +77806,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(Toast.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1C); // Default reflected attributes
+        this.classList.add(CLASSNAME$1E); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$n.DEFAULT;
@@ -77813,7 +78021,7 @@ var Coral = (function (exports) {
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$d); // Set new variant class
 
 
-        this.classList.add("".concat(CLASSNAME$1C, "--").concat(this._variant)); // Set the role attribute to alert or status depending on
+        this.classList.add("".concat(CLASSNAME$1E, "--").concat(this._variant)); // Set the role attribute to alert or status depending on
         // the variant so that the element turns into a live region
 
         this.setAttribute('role', this._variant);
@@ -77834,7 +78042,7 @@ var Coral = (function (exports) {
           handle: 'content',
           tagName: 'coral-toast-content',
           insert: function insert(content) {
-            content.classList.add("".concat(CLASSNAME$1C, "-content")); // After the header
+            content.classList.add("".concat(CLASSNAME$1E, "-content")); // After the header
 
             this._elements.body.insertBefore(content, this._elements.body.firstChild);
           }
@@ -77947,7 +78155,7 @@ var Coral = (function (exports) {
 
   Toast.Content = ToastContent;
 
-  var template$$ = function anonymous(data_0) {
+  var template$10 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["header"] = document.createElement("div");
@@ -77985,7 +78193,7 @@ var Coral = (function (exports) {
     return frag;
   };
 
-  var CLASSNAME$1D = '_coral-TreeView-item';
+  var CLASSNAME$1F = '_coral-TreeView-item';
   /**
    Enumeration for {@link TreeItem} variants.
 
@@ -78007,7 +78215,7 @@ var Coral = (function (exports) {
   var ALL_VARIANT_CLASSES$e = [];
 
   for (var variantValue$c in variant$o) {
-    ALL_VARIANT_CLASSES$e.push("".concat(CLASSNAME$1D, "--").concat(variant$o[variantValue$c]));
+    ALL_VARIANT_CLASSES$e.push("".concat(CLASSNAME$1F, "--").concat(variant$o[variantValue$c]));
   }
 
   var IS_TOUCH_DEVICE = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
@@ -78036,7 +78244,7 @@ var Coral = (function (exports) {
         // Create or fetch the content zones
         content: _this.querySelector('coral-tree-item-content') || document.createElement('coral-tree-item-content')
       };
-      template$$.call(_this._elements, {
+      template$10.call(_this._elements, {
         Icon: Icon,
         commons: commons
       });
@@ -78115,7 +78323,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(TreeItem.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1D);
+        this.classList.add(CLASSNAME$1F);
         var header = this._elements.header;
         var subTreeContainer = this._elements.subTreeContainer;
         var content = this._elements.content;
@@ -78378,7 +78586,7 @@ var Coral = (function (exports) {
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$e);
 
-        this.classList.add("".concat(CLASSNAME$1D, "--").concat(this._variant));
+        this.classList.add("".concat(CLASSNAME$1F, "--").concat(this._variant));
       }
       /**
        Whether the item is selected.
@@ -78474,7 +78682,7 @@ var Coral = (function (exports) {
     return TreeItem;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1E = '_coral-TreeView';
+  var CLASSNAME$1G = '_coral-TreeView';
   /**
    @class Coral.Tree
    @classdesc A Tree component is a container component to display collapsible content.
@@ -79007,7 +79215,7 @@ var Coral = (function (exports) {
 
         _get(_getPrototypeOf(Tree.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1E); // a11y
+        this.classList.add(CLASSNAME$1G); // a11y
 
         this.setAttribute('role', 'tree');
         this.setAttribute('aria-multiselectable', this.multiple); // Enable keyboard interaction
@@ -79155,7 +79363,7 @@ var Coral = (function (exports) {
   Tree.Item = TreeItem;
   Tree.Item.Content = TreeItemContent;
 
-  var CLASSNAME$1F = '_coral-WizardView';
+  var CLASSNAME$1H = '_coral-WizardView';
   /**
    @class Coral.WizardView
    @classdesc A WizardView component is the wrapping container used to create the typical Wizard pattern. This is intended
@@ -79481,7 +79689,7 @@ var Coral = (function (exports) {
       value: function render() {
         _get(_getPrototypeOf(WizardView.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1F);
+        this.classList.add(CLASSNAME$1H);
 
         this._syncStepListSelection(0);
 
@@ -79563,7 +79771,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.10.20";
+  var version$1 = "4.10.21";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

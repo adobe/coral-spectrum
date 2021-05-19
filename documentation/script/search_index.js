@@ -942,6 +942,18 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@adobe/coral-spectrum~shellselectlistswitcher",
+    "class/coral-spectrum/coral-component-shell/src/scripts/ShellSelectListSwitcher.js~ShellSelectListSwitcher.html",
+    "<span>ShellSelectListSwitcher</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~shellselectlistswitcheritem",
+    "class/coral-spectrum/coral-component-shell/src/scripts/ShellSelectListSwitcherItem.js~ShellSelectListSwitcherItem.html",
+    "<span>ShellSelectListSwitcherItem</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
     "@adobe/coral-spectrum~shellsolution",
     "class/coral-spectrum/coral-component-shell/src/scripts/ShellSolution.js~ShellSolution.html",
     "<span>ShellSolution</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
@@ -6801,6 +6813,30 @@ window.esdocSearchIndex = [
     "coral-spectrum/coral-component-shell/src/scripts/shellorganization.js~shellorganization#selecteditem",
     "class/coral-spectrum/coral-component-shell/src/scripts/ShellOrganization.js~ShellOrganization.html#instance-member-selectedItem",
     "coral-spectrum/coral-component-shell/src/scripts/ShellOrganization.js~ShellOrganization#selectedItem",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-shell/src/scripts/shellselectlistswitcher.js",
+    "file/coral-spectrum/coral-component-shell/src/scripts/ShellSelectListSwitcher.js.html",
+    "coral-spectrum/coral-component-shell/src/scripts/ShellSelectListSwitcher.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-shell/src/scripts/shellselectlistswitcher.js~shellselectlistswitcher#items",
+    "class/coral-spectrum/coral-component-shell/src/scripts/ShellSelectListSwitcher.js~ShellSelectListSwitcher.html#instance-member-items",
+    "coral-spectrum/coral-component-shell/src/scripts/ShellSelectListSwitcher.js~ShellSelectListSwitcher#items",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-shell/src/scripts/shellselectlistswitcheritem.js",
+    "file/coral-spectrum/coral-component-shell/src/scripts/ShellSelectListSwitcherItem.js.html",
+    "coral-spectrum/coral-component-shell/src/scripts/ShellSelectListSwitcherItem.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-shell/src/scripts/shellselectlistswitcheritem.js~shellselectlistswitcheritem#href",
+    "class/coral-spectrum/coral-component-shell/src/scripts/ShellSelectListSwitcherItem.js~ShellSelectListSwitcherItem.html#instance-member-href",
+    "coral-spectrum/coral-component-shell/src/scripts/ShellSelectListSwitcherItem.js~ShellSelectListSwitcherItem#href",
     "member"
   ],
   [

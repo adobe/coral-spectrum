@@ -24071,6 +24071,16 @@ coral-shell-solution-label {
 coral-shell-solutions-header {
   display: none;
 }
+._coral-Shell-selectListSwitcher {
+  display: block;
+  box-sizing: border-box;
+  width: 170px;
+  float: right;
+}
+._coral-Shell-selectlistswitcher-item {
+  display: none;
+  padding: 7px 12px 7px 10px;
+}
 ._coral-Shell-user {
   display: block;
   padding: 24px;
