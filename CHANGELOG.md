@@ -1,3 +1,10 @@
+## [4.10.23](https://github.com/adobe/coral-spectrum/compare/v4.10.22...v4.10.23) (2021-05-25)
+
+
+### Bug Fixes
+
+* remove duplicate path ids from spectrum-icons.svg ([#175](https://github.com/adobe/coral-spectrum/issues/175)) ([563ca0d](https://github.com/adobe/coral-spectrum/commit/563ca0d5cf72c8466bd846732a7e990b85482d90))
+
 ## [4.10.22](https://github.com/adobe/coral-spectrum/compare/v4.10.21...v4.10.22) (2021-05-19)
 
 
