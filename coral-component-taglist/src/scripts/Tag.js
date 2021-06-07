@@ -471,10 +471,6 @@ class Tag extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-
     super.connectedCallback();
 
     // Used to inform the tag list that it's added

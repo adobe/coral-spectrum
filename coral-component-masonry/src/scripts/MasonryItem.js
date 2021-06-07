@@ -14,7 +14,9 @@ import {BaseComponent} from '../../../coral-base-component';
 import {DragAction} from '../../../coral-dragaction';
 import '../../../coral-component-checkbox';
 import quickactions from '../templates/quickactions';
-import {transform, commons} from '../../../coral-utils';
+import {transform, commons, validate} from '../../../coral-utils';
+import {Messenger} from '../../../coral-messenger';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Masonry-item';
 
@@ -25,10 +27,13 @@ const CLASSNAME = '_coral-Masonry-item';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class MasonryItem extends BaseComponent(HTMLElement) {
+const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
+
+    // messenger
+    this._messenger = new Messenger(this);
 
     // Represents ownership (necessary when the item is moved which triggers callbacks)
     this._masonry = null;
@@ -38,6 +43,7 @@ class MasonryItem extends BaseComponent(HTMLElement) {
 
     // Template
     this._elements = {};
+
     quickactions.call(this._elements);
   }
 
@@ -57,6 +63,31 @@ class MasonryItem extends BaseComponent(HTMLElement) {
   }
 
   /**
+   Specify while disconnecting the item, should it show transition or not.
+   This is useful when replacing large items, this result in delay.
+
+   @type {Boolean}
+   @default true
+   @private No need to update in public document.
+   */
+  get showRemoveTransition() {
+    return !(this._showRemoveTransition === false);
+  }
+
+  set showRemoveTransition(value) {
+    this._showRemoveTransition = transform.booleanAttr(value);
+  }
+
+
+  /**
+   Specify whether the item is in removing state or not.
+   @type {Boolean}
+   */
+  get removing() {
+    return this.hasAttribute('_removing');
+  }
+
+  /**
    Whether the item is selected.
 
    @type {Boolean}
@@ -69,15 +100,19 @@ class MasonryItem extends BaseComponent(HTMLElement) {
   }
 
   set selected(value) {
-    this._selected = transform.booleanAttr(value);
-    this._reflectAttribute('selected', this._selected);
+    value = transform.booleanAttr(value);
 
-    this.setAttribute('aria-selected', this._selected);
-    this.classList.toggle('is-selected', this._selected);
+    if(validate.valueMustChange(this._selected, value)) {
+      this._selected = value;
+      this._reflectAttribute('selected', value);
 
-    this._elements.check[this._selected ? 'setAttribute' : 'removeAttribute']('checked', '');
+      this.setAttribute('aria-selected', value);
+      this.classList.toggle('is-selected', value);
 
-    this.trigger('coral-masonry-item:_selectedchanged');
+      this._elements.check[value ? 'setAttribute' : 'removeAttribute']('checked', '');
+
+      this._messenger.postMessage('coral-masonry-item:_selectedchanged');
+    }
   }
 
   /**
@@ -149,15 +184,27 @@ class MasonryItem extends BaseComponent(HTMLElement) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
+  _updateCallback(connected) {
+    super._updateCallback(connected);
+    if(connected) {
+      this._messenger.connect();
+      // In case an already connected element is switched to new parent,
+      // we need to ignore the connected callback in that case as well which is correct,
+      // as the item will be connected to new parent and messenger needs to be informed as well parent.
+      // Hence posting connected in update callback.
+      this._messenger.postMessage('coral-masonry-item:_connected');
+    } else {
+      this._messenger.disconnect();
     }
+  }
 
+  /** @ignore */
+  connectedCallback() {
+    this._messenger.connect();
     super.connectedCallback();
 
     // Inform masonry immediately
-    this.trigger('coral-masonry-item:_connected');
+    this._messenger.postMessage('coral-masonry-item:_connected');
   }
 
   /** @ignore */
@@ -181,10 +228,6 @@ class MasonryItem extends BaseComponent(HTMLElement) {
 
   /** @ignore */
   disconnectedCallback() {
-    if (this.isConnected) {
-      return;
-    }
-
     super.disconnectedCallback();
 
     // Handle it in masonry immediately
@@ -192,7 +235,8 @@ class MasonryItem extends BaseComponent(HTMLElement) {
     if (masonry) {
       masonry._onItemDisconnected(this);
     }
+    this._messenger.disconnect();
   }
-}
+});
 
 export default MasonryItem;

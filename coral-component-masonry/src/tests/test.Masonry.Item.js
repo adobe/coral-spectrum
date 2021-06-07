@@ -144,39 +144,60 @@ describe('Masonry.Item', function () {
       });
 
       it('should avoid connectedCallback when encounter skipped cases', function(done){
-        const spy = sinon.spy();
         const el = helpers.build(window.__html__['Masonry.with.div.wrapper.html']);
         const masonry = el.querySelector("coral-masonry");
         const items = masonry.querySelectorAll("coral-masonry-item");
         const item1 = items[0];
         const item2 = items[1];
 
-        masonry.on('coral-masonry-item:_connected', spy, true);
-
         const newItem = new Masonry.Item();
+        const spy = sinon.spy(newItem._messenger, 'postMessage').withArgs('coral-masonry-item:_connected');
         newItem.content.innerHTML = "Hi";
         masonry.appendChild(newItem);
 
         expect(spy.calledOnce).to.be.true;
 
-        spy.resetHistory();
-
+        const spy1 = sinon.spy(item1._messenger, 'postMessage').withArgs('coral-masonry-item:_connected');
+        const spy2 = sinon.spy(item1, '_updateCallback');
         item1._ignoreConnectedCallback = true;
         masonry.appendChild(item1);
+        item1._ignoreConnectedCallback = false;
+        expect(spy1.calledOnce).to.be.true;
+        // updateCallback should be called more than once
+        expect(spy2.called).to.be.true;
 
-        expect(spy.notCalled).to.be.true;
+        const spy3 = sinon.spy(item2._messenger, 'postMessage').withArgs('coral-masonry-item:_connected');
+        const spy4 = sinon.spy(item2, '_updateCallback');
 
+        const spy5 = sinon.spy(newItem, 'connectedCallback');
+        newItem.showRemoveTransition = false;
+
+        // remove Child
         masonry.removeChild(item2);
+        masonry.removeChild(newItem);
+
+        // newItem should not wait for transition to end
+        expect(newItem._disconnected).to.be.true;
+        expect(newItem._masonry).to.be.null;
+        expect(spy5.notCalled).to.be.true;
 
         // let the removing transition to end
         commons.transitionEnd(item2, () => {
           helpers.next(function() {
-            spy.resetHistory();
+            // because of showing transition element is connected again
+            expect(spy3.calledOnce).to.be.true;
+            expect(spy4.called).to.be.true;
+            expect(item2._disconnected).to.be.true;
+            expect(item2._masonry).to.be.null;
+
+            spy3.resetHistory();
+            spy4.resetHistory();
             // assume item is in connected state.
             item2._disconnected = false;
             masonry.appendChild(item2);
 
-            expect(spy.notCalled).to.be.true;
+            expect(spy3.calledOnce).to.be.true;
+            expect(spy4.calledOnce).to.be.true;
             done();
           });
         });

@@ -14,12 +14,13 @@ import {Icon} from '../../../coral-component-icon';
 import {Button} from '../../../coral-component-button';
 import {AnchorButton} from '../../../coral-component-anchorbutton';
 import {ButtonList, AnchorList} from '../../../coral-component-list';
-import {Overlay} from '../../../coral-component-overlay';
+import {ExtensibleOverlay, Overlay} from '../../../coral-component-overlay';
 import {Collection} from '../../../coral-collection';
 import QuickActionsItem from './QuickActionsItem';
 import '../../../coral-component-popover';
 import base from '../templates/base';
 import {transform, validate, commons, i18n} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const BUTTON_FOCUSABLE_SELECTOR = '._coral-QuickActions-item:not([disabled]):not([hidden])';
 
@@ -86,7 +87,7 @@ const CLASSNAME = '_coral-QuickActions';
  @htmltag coral-quickactions
  @extends {Overlay}
  */
-class QuickActions extends Overlay {
+const QuickActions = Decorator(class extends ExtensibleOverlay {
   /** @ignore */
   constructor() {
     super();
@@ -136,11 +137,8 @@ class QuickActions extends Overlay {
       'click > ._coral-QuickActions-item:not([handle="moreButton"])': '_onButtonClick',
       'click > ._coral-QuickActions-item[handle="moreButton"]': '_onMoreButtonClick',
 
-      // Items
-      'coral-quickactions-item:_contentchanged': '_onItemChange',
-      'coral-quickactions-item:_iconchanged': '_onItemChange',
-      'coral-quickactions-item:_hrefchanged': '_onItemChange',
-      'coral-quickactions-item:_typechanged': '_onItemTypeChange'
+      //Messenger
+      'coral-quickactions-item:_messengerconnected': '_onMessengerConnected'
     };
 
     const overlayId = this._elements.overlay.id;
@@ -266,15 +264,19 @@ class QuickActions extends Overlay {
   }
 
   set target(value) {
+    // avoid popper initialization while connecting for first time and not opened.
+    this._avoidPopperInit = this.open || this._popper ? false : true;
+
     super.target = value;
 
     const targetElement = this._getTarget(value);
-    const targetHasChanged = targetElement !== this._previousTarget;
+    const prevTargetElement = this._previousTarget;
+    const targetHasChanged = targetElement !== prevTargetElement;
 
     if (targetElement && targetHasChanged) {
       // Remove listeners from the previous target
-      if (this._previousTarget) {
-        const previousTarget = this._getTarget(this._previousTarget);
+      if (prevTargetElement) {
+        const previousTarget = this._getTarget(prevTargetElement);
         if (previousTarget) {
           this._removeTargetEventListeners(previousTarget);
           targetElement.removeAttribute('aria-haspopup');
@@ -285,17 +287,27 @@ class QuickActions extends Overlay {
       // Set up listeners for the new target
       this._addTargetEventListeners();
 
-      // Mark the target as owning a popup
-      targetElement.setAttribute('aria-haspopup', 'true');
       let ariaOwns = targetElement.getAttribute('aria-owns');
       ariaOwns = ariaOwns && ariaOwns.length ? `${ariaOwns.trim()}  ${this.id}` : this.id;
+
       targetElement.setAttribute('aria-owns', ariaOwns);
+      // Mark the target as owning a popup
+      targetElement.setAttribute('aria-haspopup', 'true');
 
       // Cache for use as previous target
       this._previousTarget = targetElement;
     }
+    delete this._avoidPopperInit;
   }
 
+  get observedMessages() {
+    return {
+      'coral-quickactions-item:_contentchanged': '_onItemChange',
+      'coral-quickactions-item:_iconchanged': '_onItemChange',
+      'coral-quickactions-item:_hrefchanged': '_onItemChange',
+      'coral-quickactions-item:_typechanged': '_onItemTypeChange'
+    };
+  }
   /**
    Inherited from {@link Overlay#open}.
    */
@@ -591,11 +603,11 @@ class QuickActions extends Overlay {
 
     const buttonListItemParent = this._elements.buttonList;
 
-    buttonListItemParent.insertBefore(buttonListItem, buttonListItemParent.children[index]);
     buttonListItem.tabIndex = -1;
     buttonListItem.content.innerHTML = itemData.htmlContent;
     buttonListItem.icon = itemData.icon;
     buttonListItem.setAttribute('role', 'menuitem');
+    buttonListItemParent.insertBefore(buttonListItem, buttonListItemParent.children[index]);
 
     item._elements.button = button;
     item._elements.buttonListItem = buttonListItem;
@@ -1122,10 +1134,13 @@ class QuickActions extends Overlay {
     // stops propagation so that this event remains internal to the component
     event.stopImmediatePropagation();
 
-    const item = event.target;
-    this._removeItemElements(item);
-    this._attachItem(item);
-    this._layout();
+    // delay this execution while opening quickaction to avoid performance delay
+    if(this._openedBefore || this.open) {
+      const item = event.target;
+      this._removeItemElements(item);
+      this._attachItem(item);
+      this._layout();
+    }
   }
 
   /** @ignore */
@@ -1186,10 +1201,10 @@ class QuickActions extends Overlay {
   }
 
   /** @ignore */
-  reposition() {
+  reposition(forceReposition) {
     // Override to support placement.CENTER
     this._toggleCenterPlacement(true);
-    super.reposition();
+    super.reposition(forceReposition);
     this._toggleCenterPlacement(false);
 
     if (this._openedOnce) {
@@ -1263,10 +1278,16 @@ class QuickActions extends Overlay {
     frag.appendChild(this._elements.moreButton);
     frag.appendChild(this._elements.overlay);
 
+    // avoid popper initialisation if popper neither exist nor overlay opened.
+    this._elements.overlay._avoidPopperInit = this._elements.overlay.open || this._elements.overlay._popper ? false : true;
+
     // Link target
     this._elements.overlay.target = this._elements.moreButton;
 
     this.appendChild(frag);
+
+    // set this to false after overlay has been connected to avoid connected callback target setting
+    delete this._elements.overlay._avoidPopperInit;
   }
 
   /** @ignore */
@@ -1280,6 +1301,6 @@ class QuickActions extends Overlay {
       overlay.remove();
     }
   }
-}
+});
 
 export default QuickActions;

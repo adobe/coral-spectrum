@@ -10,26 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-import '../coral-theme-spectrum';
-
-import '../coral-externals';
-import '../coral-compat';
-
-import {Slider, ExtensibleSlider} from './src/scripts/Slider';
-import SliderContent from './src/scripts/SliderContent';
-import SliderItem from './src/scripts/SliderItem';
-import RangedSlider from './src/scripts/RangedSlider';
-
-import './src/styles/index.css';
-
 import {commons} from '../coral-utils';
 
-// Expose component on the Coral namespace
-commons._define('coral-slider-item', SliderItem);
-commons._define('coral-rangedslider', RangedSlider);
-commons._define('coral-slider', Slider);
+import Messenger from './src/scripts/Messenger';
 
-Slider.Content = SliderContent;
-Slider.Item = SliderItem;
-
-export {Slider, RangedSlider, ExtensibleSlider};
+export {Messenger};

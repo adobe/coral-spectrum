@@ -137,7 +137,7 @@ const CLASSNAME = '_coral-Overlay';
  @extends {BaseComponent}
  @extends {BaseOverlay}
  */
-class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
+class ExtensibleOverlay extends BaseOverlay(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -182,11 +182,10 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
           this.returnFocusTo(targetElement);
         }
 
-        // Initialize popper only if we have a target
-        this._popper = this._popper || new PopperJS(targetElement, this, {onUpdate: this._onUpdate.bind(this)});
-
-        // Make sure popper options modifiers are up to date
-        this.reposition();
+        // update popper if popper already initialised or it is not explicitly avoid.
+        if(this._popper || !this._avoidPopperInit) {
+          this._initPopper(false, targetElement);
+        }
       }
     }
   }
@@ -422,6 +421,11 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
   }
 
   set open(value) {
+    // initialise popper if undefined, used when popper initialisation avoided while setting target.
+    if(!this._popper) {
+      this._initPopper(true);
+    }
+
     super.open = value;
 
     this._toggleSmartBehavior(this.open);
@@ -533,6 +537,14 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
     return this.constructor._getTarget(this, targetValue);
   }
 
+  _initPopper(forceReposition, targetElement) {
+    targetElement = targetElement || this._getTarget();
+    if(targetElement) {
+      this._popper = this._popper || new PopperJS(targetElement, this, {onUpdate: this._onUpdate.bind(this)});
+      // Make sure popper options modifiers are up to date
+      this.reposition(forceReposition);
+    }
+  }
   /**
    Re-position the overlay if it's currently open.
 
@@ -698,10 +710,6 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   connectedCallback() {
-    if (this._skipConnectedCallback()) {
-      return;
-    }
-
     super.connectedCallback();
 
     // In case it was not added to the DOM, make sure popper is initialized by setting target
@@ -726,15 +734,6 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
     this.style.display = 'none';
   }
 
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._ignoreConnectedCallback) {
-      return;
-    }
-
-    super.disconnectedCallback();
-  }
-
   /**
    Triggered after the {@link Overlay} is positioned.
 
@@ -742,4 +741,6 @@ class Overlay extends BaseOverlay(BaseComponent(HTMLElement)) {
    */
 }
 
-export default Overlay;
+const Overlay = ExtensibleOverlay; /* Decorator(ExtensibleOverlay); */
+
+export {Overlay, ExtensibleOverlay};

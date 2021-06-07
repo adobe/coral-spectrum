@@ -12,6 +12,8 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {transform, validate} from '../../../coral-utils';
+import {Messenger} from '../../../coral-messenger';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link QuickActionsItem} type values.
@@ -35,13 +37,15 @@ const type = {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class QuickActionsItem extends BaseComponent(HTMLElement) {
+const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
 
     // QuickActions will add button/anchorbutton references to it
     this._elements = {};
+    // messenger
+    this._messenger = new Messenger(this);
 
     this._observer = new MutationObserver(this._onMutation.bind(this));
     this._observer.observe(this, {
@@ -80,15 +84,13 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
   }
 
   set href(value) {
-    let _href = transform.string(value);
+    value = transform.string(value);
 
-    if(this._href === _href) {
-      return;
+    if(validate.valueMustChange(this._href, value)) {
+      this._href = value;
+      this._reflectAttribute('href', value);
+      this._messenger.postMessage('coral-quickactions-item:_hrefchanged');
     }
-    this._href = _href;
-    this._reflectAttribute('href', this._href);
-
-    this.trigger('coral-quickactions-item:_hrefchanged');
   }
 
   /**
@@ -106,15 +108,14 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
   }
 
   set icon(value) {
-    let _icon = transform.string(value);
+    value = transform.string(value);
 
-    if(this._icon === _icon) {
-      return;
+    if(validate.valueMustChange(this._icon, value)) {
+      this._icon = value;
+      this._reflectAttribute('icon', value);
+
+      this._messenger.postMessage('coral-quickactions-item:_iconchanged');
     }
-    this._icon = _icon;
-    this._reflectAttribute('icon', this._icon);
-
-    this.trigger('coral-quickactions-item:_iconchanged');
   }
 
   /**
@@ -131,16 +132,15 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
   }
 
   set type(value) {
-    let _value = transform.string(value).toLowerCase();
-    let _type = validate.enumeration(type)(_value) && _value || type.BUTTON;
+    value = transform.string(value).toLowerCase();
+    value = validate.enumeration(type)(value) && value || type.BUTTON;
 
-    if(this._type === _type) {
-      return;
+    if(validate.valueMustChange(this._type, value)) {
+      this._type = value;
+      this._reflectAttribute('type', value);
+
+      this._messenger.postMessage('coral-quickactions-item:_typechanged');
     }
-    this._type = _type;
-    this._reflectAttribute('type', this._type);
-
-    this.trigger('coral-quickactions-item:_typechanged');
   }
 
   /**
@@ -165,7 +165,7 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
    @private
    */
   _onMutation() {
-    this.trigger('coral-quickactions-item:_contentchanged');
+    this._messenger.postMessage('coral-quickactions-item:_contentchanged');
   }
 
   /**
@@ -180,6 +180,29 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat(['href', 'icon', 'type']);
+  }
+
+  /** @ignore */
+  _updateCallback(connected) {
+    super._updateCallback(connected);
+
+    if(connected) {
+      this._messenger.connect();
+    } else {
+      this._messenger.disconnect();
+    }
+  }
+
+  /** @ignore */
+  connectedCallback() {
+    this._messenger.connect();
+    super.connectedCallback();
+  }
+
+  /** @ignore */
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._messenger.disconnect();
   }
 
   /** @ignore */
@@ -223,6 +246,6 @@ class QuickActionsItem extends BaseComponent(HTMLElement) {
 
    @private
    */
-}
+});
 
 export default QuickActionsItem;

@@ -14,6 +14,7 @@ import {BaseComponent} from '../../../coral-base-component';
 import MasonryItem from './MasonryItem';
 import {SelectableCollection} from '../../../coral-collection';
 import {validate, transform, commons} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Masonry';
 
@@ -113,7 +114,7 @@ const getPreviousItem = (item) => {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Masonry extends BaseComponent(HTMLElement) {
+const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -155,9 +156,8 @@ class Masonry extends BaseComponent(HTMLElement) {
       'click coral-masonry-item': '_onItemClick',
       'key:space coral-masonry-item': '_onItemClick',
 
-      // private
-      'coral-masonry-item:_connected': '_onItemConnected',
-      'coral-masonry-item:_selectedchanged': '_onItemSelectedChanged'
+      // Messenger
+      'coral-masonry-item:_messengerconnected': '_onMessengerConnected'
     });
 
     // Relayout when child elements change or are added/removed
@@ -790,6 +790,13 @@ class Masonry extends BaseComponent(HTMLElement) {
     }
   }
 
+  _removeItem(item) {
+      item.removeAttribute('_removing');
+      item._masonry = null;
+
+      this._onItemRemoved(item);
+  }
+
   /** @private */
   _onItemDisconnected(item) {
     // We don't care about transitions if the masonry is not in the body
@@ -802,20 +809,20 @@ class Masonry extends BaseComponent(HTMLElement) {
       return;
     }
 
-    if (!item.hasAttribute('_removing')) {
+    if (!item.hasAttribute('_removing') && item.showRemoveTransition) {
       // Attach again for remove transition
       item.setAttribute('_removing', '');
+      item._ignoreConnectedCallback = true;
       this.appendChild(item);
+      item._ignoreConnectedCallback = false;
       commons.transitionEnd(item, () => {
         item.remove();
+        this._removeItem(item);
       });
     }
     // remove transition completed
     else {
-      item.removeAttribute('_removing');
-      item._masonry = null;
-
-      this._onItemRemoved(item);
+      this._removeItem(item);
     }
   }
 
@@ -962,6 +969,13 @@ class Masonry extends BaseComponent(HTMLElement) {
     item._prevDragPos = null;
   }
 
+  get observedMessages() {
+    return {
+      'coral-masonry-item:_connected': '_onItemConnected',
+      'coral-masonry-item:_selectedchanged': '_onItemSelectedChanged',
+    };
+  }
+
   /**
    Registry for masonry layouts.
 
@@ -1097,6 +1111,6 @@ class Masonry extends BaseComponent(HTMLElement) {
    @property {MasonryItem} detail.selection
    The newly selected item(s).
    */
-}
+});
 
 export default Masonry;

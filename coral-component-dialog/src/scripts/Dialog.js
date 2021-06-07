@@ -687,15 +687,6 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._ignoreConnectedCallback) {
-      return;
-    }
-
-    super.connectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
@@ -804,15 +795,6 @@ class Dialog extends BaseOverlay(BaseComponent(HTMLElement)) {
     this.header = header;
     this.footer = footer;
     this.content = content;
-  }
-
-  /** @ignore */
-  disconnectedCallback() {
-    if (this._ignoreConnectedCallback) {
-      return;
-    }
-
-    super.disconnectedCallback();
   }
 }
 

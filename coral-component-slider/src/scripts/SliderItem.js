@@ -11,7 +11,6 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
-
 import {transform} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Slider-item';

@@ -854,8 +854,6 @@ class ButtonGroup extends BaseFormField(BaseComponent(HTMLElement)) {
   render() {
     super.render();
 
-    super.connectedCallback();
-
     this.classList.add(CLASSNAME);
 
     // Default reflected attributes

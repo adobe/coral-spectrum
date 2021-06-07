@@ -43,7 +43,7 @@ const orientation = {
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
+class ExtensibleSlider extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -937,4 +937,6 @@ class Slider extends BaseFormField(BaseComponent(HTMLElement)) {
   }
 }
 
-export default Slider;
+const Slider = ExtensibleSlider; /* Decorator(ExtensibleSlider); */
+
+export {ExtensibleSlider, Slider};

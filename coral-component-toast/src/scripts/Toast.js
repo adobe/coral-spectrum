@@ -482,15 +482,6 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
   }
 
   /** @ignore */
-  connectedCallback() {
-    if (this._ignoreConnectedCallback) {
-      return;
-    }
-
-    super.connectedCallback();
-  }
-
-  /** @ignore */
   render() {
     super.render();
 
@@ -545,10 +536,6 @@ class Toast extends BaseOverlay(BaseComponent(HTMLElement)) {
 
   /** @ignore */
   disconnectedCallback() {
-    if (this._ignoreConnectedCallback) {
-      return;
-    }
-
     super.disconnectedCallback();
 
     if (this._queued) {

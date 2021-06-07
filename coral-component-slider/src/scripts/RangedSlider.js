@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import Slider from './Slider';
+import {ExtensibleSlider, Slider} from './Slider';
 import range from '../templates/range';
 import {commons, transform} from '../../../coral-utils';
 
@@ -20,7 +20,7 @@ import {commons, transform} from '../../../coral-utils';
  @htmltag coral-rangedslider
  @extends {Slider}
  */
-class RangedSlider extends Slider {
+class RangedSlider extends ExtensibleSlider {
   /**
    Ranged sliders are always filled.
 
