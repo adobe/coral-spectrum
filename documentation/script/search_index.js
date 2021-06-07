@@ -558,6 +558,18 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@adobe/coral-spectrum~extensibleoverlay",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html",
+    "<span>ExtensibleOverlay</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~extensibleslider",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html",
+    "<span>ExtensibleSlider</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
     "@adobe/coral-spectrum~fileupload",
     "class/coral-spectrum/coral-component-fileupload/src/scripts/FileUpload.js~FileUpload.html",
     "<span>FileUpload</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
@@ -613,9 +625,9 @@ window.esdocSearchIndex = [
   ],
   [
     "@adobe/coral-spectrum~masonry",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.html",
+    "variable/index.html#static-variable-Masonry",
     "<span>Masonry</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "class"
+    "variable"
   ],
   [
     "@adobe/coral-spectrum~masonrycolumnlayout",
@@ -643,9 +655,9 @@ window.esdocSearchIndex = [
   ],
   [
     "@adobe/coral-spectrum~masonryitem",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/MasonryItem.js~MasonryItem.html",
+    "variable/index.html#static-variable-MasonryItem",
     "<span>MasonryItem</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "class"
+    "variable"
   ],
   [
     "@adobe/coral-spectrum~masonrylayout",
@@ -691,9 +703,9 @@ window.esdocSearchIndex = [
   ],
   [
     "@adobe/coral-spectrum~overlay",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html",
+    "variable/index.html#static-variable-Overlay",
     "<span>Overlay</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "class"
+    "variable"
   ],
   [
     "@adobe/coral-spectrum~panel",
@@ -757,15 +769,15 @@ window.esdocSearchIndex = [
   ],
   [
     "@adobe/coral-spectrum~quickactions",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.html",
+    "variable/index.html#static-variable-QuickActions",
     "<span>QuickActions</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "class"
+    "variable"
   ],
   [
     "@adobe/coral-spectrum~quickactionsitem",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js~QuickActionsItem.html",
+    "variable/index.html#static-variable-QuickActionsItem",
     "<span>QuickActionsItem</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "class"
+    "variable"
   ],
   [
     "@adobe/coral-spectrum~radio",
@@ -1069,9 +1081,9 @@ window.esdocSearchIndex = [
   ],
   [
     "@adobe/coral-spectrum~slider",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html",
+    "variable/index.html#static-variable-Slider",
     "<span>Slider</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
-    "class"
+    "variable"
   ],
   [
     "@adobe/coral-spectrum~slidercontent",
@@ -5130,102 +5142,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonry#ariagrid",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.html#instance-member-ariaGrid",
-    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry#ariaGrid",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonry#arialabel",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.html#instance-member-ariaLabel",
-    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry#ariaLabel",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonry#arialabelledby",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.html#instance-member-ariaLabelledby",
-    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry#ariaLabelledby",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonry#items",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.html#instance-member-items",
-    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry#items",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonry#layout",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.html#instance-member-layout",
-    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry#layout",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonry#layoutinstance",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.html#instance-member-layoutInstance",
-    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry#layoutInstance",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonry#orderable",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.html#instance-member-orderable",
-    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry#orderable",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonry#selecteditem",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.html#instance-member-selectedItem",
-    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry#selectedItem",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonry#selecteditems",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.html#instance-member-selectedItems",
-    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry#selectedItems",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonry#selectionmode",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.html#instance-member-selectionMode",
-    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry#selectionMode",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonry#spacing",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.html#instance-member-spacing",
-    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry#spacing",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonry.coral-masonry:change",
-    "typedef/index.html#static-typedef-coral-masonry:change",
-    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.coral-masonry:change",
-    "typedef"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonry.coral-masonry:order",
-    "typedef/index.html#static-typedef-coral-masonry:order",
-    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.coral-masonry:order",
-    "typedef"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonry.layouts",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.html#static-member-layouts",
-    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.layouts",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonry.registerlayout",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.html#static-method-registerLayout",
-    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.registerLayout",
-    "method"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonry.selectionmode",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.html#static-member-selectionMode",
-    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~Masonry.selectionMode",
-    "member"
-  ],
-  [
     "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonryariagridenum",
     "typedef/index.html#static-typedef-MasonryAriaGridEnum",
     "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~MasonryAriaGridEnum",
@@ -5241,6 +5157,18 @@ window.esdocSearchIndex = [
     "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~masonryselectionmodeenum",
     "typedef/index.html#static-typedef-MasonrySelectionModeEnum",
     "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~MasonrySelectionModeEnum",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~coral-masonry:change",
+    "typedef/index.html#static-typedef-coral-masonry:change",
+    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~coral-masonry:change",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-component-masonry/src/scripts/masonry.js~coral-masonry:order",
+    "typedef/index.html#static-typedef-coral-masonry:order",
+    "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js~coral-masonry:order",
     "typedef"
   ],
   [
@@ -5308,18 +5236,6 @@ window.esdocSearchIndex = [
     "file/coral-spectrum/coral-component-masonry/src/scripts/MasonryItem.js.html",
     "coral-spectrum/coral-component-masonry/src/scripts/MasonryItem.js",
     "file"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonryitem.js~masonryitem#content",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/MasonryItem.js~MasonryItem.html#instance-member-content",
-    "coral-spectrum/coral-component-masonry/src/scripts/MasonryItem.js~MasonryItem#content",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-masonry/src/scripts/masonryitem.js~masonryitem#selected",
-    "class/coral-spectrum/coral-component-masonry/src/scripts/MasonryItem.js~MasonryItem.html#instance-member-selected",
-    "coral-spectrum/coral-component-masonry/src/scripts/MasonryItem.js~MasonryItem#selected",
-    "member"
   ],
   [
     "coral-spectrum/coral-component-masonry/src/scripts/masonrylayout.js",
@@ -5562,129 +5478,129 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay#alignat",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#instance-member-alignAt",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay#alignAt",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay#alignat",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#instance-member-alignAt",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay#alignAt",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay#alignmy",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#instance-member-alignMy",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay#alignMy",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay#alignmy",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#instance-member-alignMy",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay#alignMy",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay#breadthoffset",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#instance-member-breadthOffset",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay#breadthOffset",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay#breadthoffset",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#instance-member-breadthOffset",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay#breadthOffset",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay#collision",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#instance-member-collision",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay#collision",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay#collision",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#instance-member-collision",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay#collision",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay#inner",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#instance-member-inner",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay#inner",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay#inner",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#instance-member-inner",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay#inner",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay#interaction",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#instance-member-interaction",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay#interaction",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay#interaction",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#instance-member-interaction",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay#interaction",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay#lengthoffset",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#instance-member-lengthOffset",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay#lengthOffset",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay#lengthoffset",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#instance-member-lengthOffset",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay#lengthOffset",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay#offset",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#instance-member-offset",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay#offset",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay#offset",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#instance-member-offset",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay#offset",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay#open",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#instance-member-open",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay#open",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay#open",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#instance-member-open",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay#open",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay#placement",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#instance-member-placement",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay#placement",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay#placement",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#instance-member-placement",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay#placement",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay#reposition",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#instance-method-reposition",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay#reposition",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay#reposition",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#instance-method-reposition",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay#reposition",
     "method"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay#smart",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#instance-member-smart",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay#smart",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay#smart",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#instance-member-smart",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay#smart",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay#target",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#instance-member-target",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay#target",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay#target",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#instance-member-target",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay#target",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay#within",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#instance-member-within",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay#within",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay#within",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#instance-member-within",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay#within",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay#withinoffset",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#instance-member-withinOffset",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay#withinOffset",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay#withinoffset",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#instance-member-withinOffset",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay#withinOffset",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay.align",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#static-member-align",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.align",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay.align",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#static-member-align",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.align",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay.collision",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#static-member-collision",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.collision",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay.collision",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#static-member-collision",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.collision",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay.coral-overlay:positioned",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay.coral-overlay:positioned",
     "typedef/index.html#static-typedef-coral-overlay:positioned",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.coral-overlay:positioned",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.coral-overlay:positioned",
     "typedef"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay.interaction",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#static-member-interaction",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.interaction",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay.interaction",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#static-member-interaction",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.interaction",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay.placement",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#static-member-placement",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.placement",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay.placement",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#static-member-placement",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.placement",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~overlay.target",
-    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.html#static-member-target",
-    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~Overlay.target",
+    "coral-spectrum/coral-component-overlay/src/scripts/overlay.js~extensibleoverlay.target",
+    "class/coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.html#static-member-target",
+    "coral-spectrum/coral-component-overlay/src/scripts/Overlay.js~ExtensibleOverlay.target",
     "member"
   ],
   [
@@ -5952,84 +5868,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactions.js~quickactions#focusonshow",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.html#instance-member-focusOnShow",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions#focusOnShow",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactions.js~quickactions#id",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.html#instance-member-id",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions#id",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactions.js~quickactions#interaction",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.html#instance-member-interaction",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions#interaction",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactions.js~quickactions#items",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.html#instance-member-items",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions#items",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactions.js~quickactions#open",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.html#instance-member-open",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions#open",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactions.js~quickactions#overlay",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.html#instance-member-overlay",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions#overlay",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactions.js~quickactions#placement",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.html#instance-member-placement",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions#placement",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactions.js~quickactions#returnfocus",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.html#instance-member-returnFocus",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions#returnFocus",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactions.js~quickactions#target",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.html#instance-member-target",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions#target",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactions.js~quickactions#threshold",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.html#instance-member-threshold",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions#threshold",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactions.js~quickactions#trapfocus",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.html#instance-member-trapFocus",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions#trapFocus",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactions.js~quickactions.placement",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.html#static-member-placement",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.placement",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactions.js~quickactions.target",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.html#static-member-target",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActions.target",
-    "member"
-  ],
-  [
     "coral-spectrum/coral-component-quickactions/src/scripts/quickactions.js~quickactionsinteractionenum",
     "typedef/index.html#static-typedef-QuickActionsInteractionEnum",
     "coral-spectrum/coral-component-quickactions/src/scripts/QuickActions.js~QuickActionsInteractionEnum",
@@ -6052,42 +5890,6 @@ window.esdocSearchIndex = [
     "file/coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js.html",
     "coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js",
     "file"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactionsitem.js~quickactionsitem#content",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js~QuickActionsItem.html#instance-member-content",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js~QuickActionsItem#content",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactionsitem.js~quickactionsitem#href",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js~QuickActionsItem.html#instance-member-href",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js~QuickActionsItem#href",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactionsitem.js~quickactionsitem#icon",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js~QuickActionsItem.html#instance-member-icon",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js~QuickActionsItem#icon",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactionsitem.js~quickactionsitem#trackingelement",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js~QuickActionsItem.html#instance-member-trackingElement",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js~QuickActionsItem#trackingElement",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactionsitem.js~quickactionsitem#type",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js~QuickActionsItem.html#instance-member-type",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js~QuickActionsItem#type",
-    "member"
-  ],
-  [
-    "coral-spectrum/coral-component-quickactions/src/scripts/quickactionsitem.js~quickactionsitem.type",
-    "class/coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js~QuickActionsItem.html#static-member-type",
-    "coral-spectrum/coral-component-quickactions/src/scripts/QuickActionsItem.js~QuickActionsItem.type",
-    "member"
   ],
   [
     "coral-spectrum/coral-component-quickactions/src/scripts/quickactionsitem.js~quickactionsitemtypeenum",
@@ -7170,99 +6972,99 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "coral-spectrum/coral-component-slider/src/scripts/slider.js~slider#content",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html#instance-member-content",
-    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider#content",
+    "coral-spectrum/coral-component-slider/src/scripts/slider.js~extensibleslider#content",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html#instance-member-content",
+    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider#content",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-slider/src/scripts/slider.js~slider#disabled",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html#instance-member-disabled",
-    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider#disabled",
+    "coral-spectrum/coral-component-slider/src/scripts/slider.js~extensibleslider#disabled",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html#instance-member-disabled",
+    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider#disabled",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-slider/src/scripts/slider.js~slider#filled",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html#instance-member-filled",
-    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider#filled",
+    "coral-spectrum/coral-component-slider/src/scripts/slider.js~extensibleslider#filled",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html#instance-member-filled",
+    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider#filled",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-slider/src/scripts/slider.js~slider#items",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html#instance-member-items",
-    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider#items",
+    "coral-spectrum/coral-component-slider/src/scripts/slider.js~extensibleslider#items",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html#instance-member-items",
+    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider#items",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-slider/src/scripts/slider.js~slider#labelledby",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html#instance-member-labelledBy",
-    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider#labelledBy",
+    "coral-spectrum/coral-component-slider/src/scripts/slider.js~extensibleslider#labelledby",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html#instance-member-labelledBy",
+    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider#labelledBy",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-slider/src/scripts/slider.js~slider#max",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html#instance-member-max",
-    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider#max",
+    "coral-spectrum/coral-component-slider/src/scripts/slider.js~extensibleslider#max",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html#instance-member-max",
+    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider#max",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-slider/src/scripts/slider.js~slider#min",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html#instance-member-min",
-    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider#min",
+    "coral-spectrum/coral-component-slider/src/scripts/slider.js~extensibleslider#min",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html#instance-member-min",
+    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider#min",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-slider/src/scripts/slider.js~slider#name",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html#instance-member-name",
-    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider#name",
+    "coral-spectrum/coral-component-slider/src/scripts/slider.js~extensibleslider#name",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html#instance-member-name",
+    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider#name",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-slider/src/scripts/slider.js~slider#orientation",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html#instance-member-orientation",
-    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider#orientation",
+    "coral-spectrum/coral-component-slider/src/scripts/slider.js~extensibleslider#orientation",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html#instance-member-orientation",
+    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider#orientation",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-slider/src/scripts/slider.js~slider#readonly",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html#instance-member-readOnly",
-    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider#readOnly",
+    "coral-spectrum/coral-component-slider/src/scripts/slider.js~extensibleslider#readonly",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html#instance-member-readOnly",
+    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider#readOnly",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-slider/src/scripts/slider.js~slider#required",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html#instance-member-required",
-    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider#required",
+    "coral-spectrum/coral-component-slider/src/scripts/slider.js~extensibleslider#required",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html#instance-member-required",
+    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider#required",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-slider/src/scripts/slider.js~slider#showvalue",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html#instance-member-showValue",
-    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider#showValue",
+    "coral-spectrum/coral-component-slider/src/scripts/slider.js~extensibleslider#showvalue",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html#instance-member-showValue",
+    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider#showValue",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-slider/src/scripts/slider.js~slider#step",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html#instance-member-step",
-    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider#step",
+    "coral-spectrum/coral-component-slider/src/scripts/slider.js~extensibleslider#step",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html#instance-member-step",
+    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider#step",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-slider/src/scripts/slider.js~slider#value",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html#instance-member-value",
-    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider#value",
+    "coral-spectrum/coral-component-slider/src/scripts/slider.js~extensibleslider#value",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html#instance-member-value",
+    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider#value",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-slider/src/scripts/slider.js~slider#valueasnumber",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html#instance-member-valueAsNumber",
-    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider#valueAsNumber",
+    "coral-spectrum/coral-component-slider/src/scripts/slider.js~extensibleslider#valueasnumber",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html#instance-member-valueAsNumber",
+    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider#valueAsNumber",
     "member"
   ],
   [
-    "coral-spectrum/coral-component-slider/src/scripts/slider.js~slider.orientation",
-    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.html#static-member-orientation",
-    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~Slider.orientation",
+    "coral-spectrum/coral-component-slider/src/scripts/slider.js~extensibleslider.orientation",
+    "class/coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.html#static-member-orientation",
+    "coral-spectrum/coral-component-slider/src/scripts/Slider.js~ExtensibleSlider.orientation",
     "member"
   ],
   [
@@ -8898,6 +8700,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "coral-spectrum/coral-decorator/src/scripts/decorator.js",
+    "file/coral-spectrum/coral-decorator/src/scripts/Decorator.js.html",
+    "coral-spectrum/coral-decorator/src/scripts/Decorator.js",
+    "file"
+  ],
+  [
     "coral-spectrum/coral-dragaction/src/scripts/dragaction.js",
     "file/coral-spectrum/coral-dragaction/src/scripts/DragAction.js.html",
     "coral-spectrum/coral-dragaction/src/scripts/DragAction.js",
@@ -9004,6 +8812,12 @@ window.esdocSearchIndex = [
     "typedef/index.html#static-typedef-DragActionAxisEnum",
     "coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragActionAxisEnum",
     "typedef"
+  ],
+  [
+    "coral-spectrum/coral-messenger/src/scripts/messenger.js",
+    "file/coral-spectrum/coral-messenger/src/scripts/Messenger.js.html",
+    "coral-spectrum/coral-messenger/src/scripts/Messenger.js",
+    "file"
   ],
   [
     "coral-spectrum/coral-utils/src/scripts/commons.js",

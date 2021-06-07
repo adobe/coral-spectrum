@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.06% </span>
+                <span class="strong">96.97% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>33/34</span>
+                <span class='fraction'>32/33</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.06% </span>
+                <span class="strong">96.97% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>33/34</span>
+                <span class='fraction'>32/33</span>
             </div>
         
             
@@ -149,9 +149,7 @@
 <a name='L91'></a><a href='#L91'>91</a>
 <a name='L92'></a><a href='#L92'>92</a>
 <a name='L93'></a><a href='#L93'>93</a>
-<a name='L94'></a><a href='#L94'>94</a>
-<a name='L95'></a><a href='#L95'>95</a>
-<a name='L96'></a><a href='#L96'>96</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L94'></a><a href='#L94'>94</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -202,9 +200,6 @@
 <span class="cline-any cline-yes">46x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">46x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">34x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">34x</span>
@@ -237,6 +232,7 @@
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -281,49 +277,47 @@ class SideNavLevel extends BaseComponent(HTMLElement) {
     if (name === '_expanded') {
       const isExpanded = value === 'on';
 &nbsp;
-      if (oldValue === value) {
-        return;
-      }
+      if (oldValue !== value) {
+        this.classList.toggle('is-expanded', isExpanded);
 &nbsp;
-      this.classList.toggle('is-expanded', isExpanded);
+        // Do animation in next frame to avoid a forced reflow
+        window.requestAnimationFrame(() =&gt; {
+          // Don't animate on initialization
+          if (this._animate) {
+            // Remove height as we want the level to naturally grow if content is added later
+            commons.transitionEnd(this, () =&gt; {
+              if (isExpanded) {
+                this.style.height = '';
+              } else {
+      <span class="missing-if-branch" title="else path not taken" >E</span>          this.hidden = true;
+              }
+            });
 &nbsp;
-      // Do animation in next frame to avoid a forced reflow
-      window.requestAnimationFrame(() =&gt; {
-        // Don't animate on initialization
-        if (this._animate) {
-          // Remove height as we want the level to naturally grow if content is added later
-          commons.transitionEnd(this, () =&gt; {
-      <span class="missing-if-branch" title="else path not taken" >E</span>      if (isExpanded) {
-              this.style.height = '';
+            // Force height to enable transition
+            if (!isExpanded) {
+              this.style.height = `${this.scrollHeight}px`;
             } else {
+              this.hidden = false;
+            }
+&nbsp;
+            // We read the offset height to force a reflow, this is needed to start the transition between absolute values
+            // https://blog.alexmaccaw.com/css-transitions under Redrawing
+            // eslint-disable-next-line no-unused-vars
+            const offsetHeight = this.offsetHeight;
+&nbsp;
+            this.style.height = isExpanded ? `${this.scrollHeight}px` : 0;
+          } else {
+            // Make sure it's animated next time
+            this._animate = true;
+&nbsp;
+            // Hide it on initialization if closed
+            if (!isExpanded) {
+              this.style.height = 0;
               this.hidden = true;
             }
-          });
-&nbsp;
-          // Force height to enable transition
-          if (!isExpanded) {
-            this.style.height = `${this.scrollHeight}px`;
-          } else {
-            this.hidden = false;
           }
-&nbsp;
-          // We read the offset height to force a reflow, this is needed to start the transition between absolute values
-          // https://blog.alexmaccaw.com/css-transitions under Redrawing
-          // eslint-disable-next-line no-unused-vars
-          const offsetHeight = this.offsetHeight;
-&nbsp;
-          this.style.height = isExpanded ? `${this.scrollHeight}px` : 0;
-        } else {
-          // Make sure it's animated next time
-          this._animate = true;
-&nbsp;
-          // Hide it on initialization if closed
-          if (!isExpanded) {
-            this.style.height = 0;
-            this.hidden = true;
-          }
-        }
-      });
+        });
+      }
     } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
@@ -348,7 +342,7 @@ export default SideNavLevel;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue May 25 2021 21:08:50 GMT+0000 (Coordinated Universal Time)
+                at Mon Jun 07 2021 09:51:30 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
