@@ -1,3 +1,10 @@
+## [4.10.24](https://github.com/adobe/coral-spectrum/compare/v4.10.23...v4.10.24) (2021-06-07)
+
+
+### Bug Fixes
+
+* Performance Improvement - Masonry takes time to load with huge quickactions items. ([#163](https://github.com/adobe/coral-spectrum/issues/163)) ([40aa149](https://github.com/adobe/coral-spectrum/commit/40aa14980f6e55e989a1182d2cd961ed41f6702e))
+
 ## [4.10.23](https://github.com/adobe/coral-spectrum/compare/v4.10.22...v4.10.23) (2021-05-25)
 
 
