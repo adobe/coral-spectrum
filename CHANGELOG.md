@@ -1,3 +1,10 @@
+## [4.10.25](https://github.com/adobe/coral-spectrum/compare/v4.10.24...v4.10.25) (2021-06-10)
+
+
+### Bug Fixes
+
+* updating coral tag label to word wrap ([#177](https://github.com/adobe/coral-spectrum/issues/177)) ([e0e9377](https://github.com/adobe/coral-spectrum/commit/e0e9377bcaecef07a3558cbe58885b3ed26db33c))
+
 ## [4.10.24](https://github.com/adobe/coral-spectrum/compare/v4.10.23...v4.10.24) (2021-06-07)
 
 
