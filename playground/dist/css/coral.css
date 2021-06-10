@@ -12361,6 +12361,9 @@ button[is="coral-button"] {
 ._coral-Label {
   margin: calc(8px / 2);
 }
+._coral-Tags-itemLabel {
+  white-space: normal;
+}
 .coral--light ._coral-Tags-item--quiet,
 .coral--light ._coral-Tags-item--quiet:hover {
   border-color: transparent;
