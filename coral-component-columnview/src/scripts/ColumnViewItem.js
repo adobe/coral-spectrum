@@ -416,6 +416,9 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
 
     // @a11y Item should be labelled by thumbnail, content, and accessibility state.
     this.setAttribute('aria-labelledby', thumbnail.id + ' ' + content.id);
+
+    //adding html title, on hovering over textcontent title will be visible
+    this.setAttribute('title', this.content.textContent.trim());
   }
 }
 
