@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.67% </span>
+                <span class="strong">97.69% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>126/129</span>
+                <span class='fraction'>127/130</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.67% </span>
+                <span class="strong">97.69% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>126/129</span>
+                <span class='fraction'>127/130</span>
             </div>
         
             
@@ -478,7 +478,10 @@
 <a name='L420'></a><a href='#L420'>420</a>
 <a name='L421'></a><a href='#L421'>421</a>
 <a name='L422'></a><a href='#L422'>422</a>
-<a name='L423'></a><a href='#L423'>423</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L423'></a><a href='#L423'>423</a>
+<a name='L424'></a><a href='#L424'>424</a>
+<a name='L425'></a><a href='#L425'>425</a>
+<a name='L426'></a><a href='#L426'>426</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -658,10 +661,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1486x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1486x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3038x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4524x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1486x</span>
@@ -785,7 +790,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2571x</span>
+<span class="cline-any cline-yes">2572x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">196x</span>
@@ -894,7 +899,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">38208x</span>
+<span class="cline-any cline-yes">38244x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1114,9 +1120,9 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
 &nbsp;
       // @a11y Update aria-expanded. Active drilldowns should be expanded.
       // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
-      // to announce drilldown items as "row 1 expanded<span class="branch-1 cbranch-no" title="branch not covered" >" or </span>"row 1 collapsed" when
+      // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
       // navigating between items.
-      if (this.variant === variant.DRILLDOWN) {
+      if (this.variant === variant.DRILLDOWN) {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
         if (this._selected || (isChromeMacOS &amp;&amp; this.getAttribute('aria-level') === '1')) {
           this.removeAttribute('aria-expanded');
         } else {
@@ -1129,13 +1135,13 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
       if (this._selected) {
 &nbsp;
         // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
-        this.removeAttribute('<span class="branch-1 cbranch-no" title="branch not covered" >aria-owns');</span>
+        this.removeAttribute('aria-owns');
         this.removeAttribute('aria-describedby');
-&nbsp;
+<span class="branch-1 cbranch-no" title="branch not covered" ></span>
         // @a11y Update content to ensure that checked state is announced by assistive technology when the item receives focus
-        accessibilityState.innerHTML = i18n.get(', checked');<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+        accessibilityState.innerHTML = i18n.get(', checked');
 &nbsp;
-        // @a11y append live region content element
+        // @a11y append live region content element<span class="branch-2 cbranch-no" title="branch not covered" ></span>
         if (!this.contains(accessibilityState)) {
           this.appendChild(accessibilityState);
         }
@@ -1150,10 +1156,10 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
 &nbsp;
         // @a11y Update content to remove checked state
         this._elements.accessibilityState.innerHTML = '';
-      }<span class="branch-2 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="if path not taken" >I</span></span>
-<span class="cstat-no" title="statement not covered" ></span>
-      // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
-      let ariaLabelledby = this._elements.thumbnail.id + ' ' + this._elements.content.id;
+      }
+&nbsp;
+      //<span class="missing-if-branch" title="if path not taken" >I</span> @a11y Item should be labelled by thum<span class="branch-2 cbranch-no" title="branch not covered" >bnail, content, and if appropriate acces</span>sibility state.
+      let <span class="cstat-no" title="statement not covered" >ariaLabelledby = this._elements.thumbna</span>il.id + ' ' + this._elements.content.id;
       this.setAttribute('aria-labelledby', this.selected ? `${ariaLabelledby} ${accessibilityState.id}` : ariaLabelledby);
 &nbsp;
       // Sync checkbox item selector
@@ -1180,11 +1186,11 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     this._active = transform.booleanAttr(value);
     this._reflectAttribute('active', this._active);
 &nbsp;
-    th<span class="missing-if-branch" title="else path not taken" >E</span>is.classList.toggle('is-navigated', this._active);
+    this.classList.toggle('is-navigated', this._active);
     this.setAttribute('aria-selected', this.hasAttribute('_selectable') ? this.selected : this._active);
 <span class="missing-if-branch" title="else path not taken" >E</span>
     // @a11y Update aria-expanded. Active drilldowns should be expanded.
-    // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+    // N<span class="missing-if-branch" title="else path not taken" >E</span>ote: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
     // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
     // navigating between items.
     if (this.variant === variant.DRILLDOWN) {
@@ -1228,9 +1234,9 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
           itemSelector = new Checkbox();
           itemSelector.setAttribute('coral-columnview-itemselect', '');
           if (this.classList.contains('is-selected')) {
-            itemSelector.setAttribute('checked', ''<span class="branch-2 cbranch-no" title="branch not covered" >);</span>
+            itemSelector.setAttribute('checked', '');
           }
-          itemSelector._elements.input.tabIndex = -1;
+          itemSelector._elements.input.tabIndex = -<span class="branch-2 cbranch-no" title="branch not covered" >1;</span>
           itemSelector.setAttribute('labelledby', this._elements.content.id);
 &nbsp;
           // Add the item selector as first child
@@ -1246,9 +1252,9 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
    Returns {@link ColumnViewItem} variants.
 &nbsp;
    @return {ColumnViewItemVariantEnum}
-   */<span class="missing-if-branch" title="else path not taken" >E</span>
+   */
   static get variant() {
-    return variant;
+    return<span class="missing-if-branch" title="else path not taken" >E</span> variant;
   }
 &nbsp;
   /** @ignore */
@@ -1298,9 +1304,9 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
     // Assign content zones
     this.content = content;
     this.thumbnail = thumbnail;
-<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+&nbsp;
     // @a11y thumbnail img element should have alt attribute
-    const thumbnailImg = thumbnail.querySelector('img:not([alt])');
+    const thumbnailImg = thumbnail.querySelecto<span class="branch-2 cbranch-no" title="branch not covered" >r('img:not([alt])');</span>
     if (thumbnailImg) {
       thumbnailImg.setAttribute('alt', '');
     }
@@ -1318,6 +1324,9 @@ class ColumnViewItem extends BaseLabellable(BaseComponent(HTMLElement)) {
 &nbsp;
     // @a11y Item should be labelled by thumbnail, content, and accessibility state.
     this.setAttribute('aria-labelledby', thumbnail.id + ' ' + content.id);
+&nbsp;
+    //adding html title, on hovering over textcontent title will be visible
+    this.setAttribute('title', this.content.textContent.trim());
   }
 }
 &nbsp;
@@ -1329,7 +1338,7 @@ export default ColumnViewItem;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jun 10 2021 21:37:59 GMT+0000 (Coordinated Universal Time)
+                at Fri Jun 25 2021 11:49:18 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
