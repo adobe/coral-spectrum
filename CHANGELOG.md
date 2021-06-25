@@ -1,3 +1,10 @@
+## [4.10.26](https://github.com/adobe/coral-spectrum/compare/v4.10.25...v4.10.26) (2021-06-25)
+
+
+### Bug Fixes
+
+* adding html title feature in columnitem ([#178](https://github.com/adobe/coral-spectrum/issues/178)) ([b0e840a](https://github.com/adobe/coral-spectrum/commit/b0e840a8fc6252a2345202766c02fc10a78b9345))
+
 ## [4.10.25](https://github.com/adobe/coral-spectrum/compare/v4.10.24...v4.10.25) (2021-06-10)
 
 
