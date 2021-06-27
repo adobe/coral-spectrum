@@ -10,12 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-// @IE
-import './polyfills/element.closest.js';
-import './polyfills/element.matches.js';
-import './polyfills/element.remove.js';
-import './polyfills/classList-partial-shim.js';
-import './polyfills/CustomEvent.js';
 import './polyfills/focus-options-polyfill.js';
 import 'core-js/es/reflect';
 import 'core-js/es/promise';
