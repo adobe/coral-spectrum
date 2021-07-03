@@ -41,6 +41,7 @@ export {CheckboxGroup} from './coral-component-checkboxgroup';
 export {Clock} from './coral-component-clock';
 export {CoachMark} from './coral-component-coachmark';
 export {Color, ColorInput} from './coral-component-colorinput';
+export {ColorPicker} from './coral-component-colorpicker';
 export {ColumnView} from './coral-component-columnview';
 export {CycleButton} from './coral-component-cyclebutton';
 export {Datepicker} from './coral-component-datepicker';

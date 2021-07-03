@@ -1,0 +1,44 @@
+/**
+ * Copyright 2021 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+
+@require '../../../../coral-theme-spectrum/src/styles/vars.css';
+
+._coral-ColorPicker-ColorArea {  
+  &.is-disabled {
+    background: $colorpicker-colorarea-fill-color-disabled;
+  }
+  
+  &.is-disabled:before {
+   // box-shadow: inset 0 0 0 var(--spectrum-medium-colorarea-border-size, var(--spectrum-alias-border-size-thin))
+   //   $colorpicker-colorarea-colorarea-border-color-disabled;
+  }
+}
+
+._coral-ColorPicker-ColorArea:before {
+  //  box-shadow: inset 0 0 0 var(--spectrum-medium-colorarea-border-size, var(--spectrum-alias-border-size-thin)) $colorpicker-colorarea-colorarea-border-color;
+}
+  
+._coral-ColorPicker-ColorArea-gradient {
+  background: linear-gradient(to top, black 0%, hsla(0, 100%, 0%, 0) 100%), // L
+              linear-gradient(to right, white 0%, hsla(0, 100%, 0%, 0) 100%),  // S
+              hsl(0, 100%, 50%); // Hue
+  forced-color-adjust: none;
+}
+
+@media (forced-colors: active) {
+  ._coral-ColorPicker-ColorArea {
+    --spectrum-colorarea-fill-color-disabled : GrayText;
+  }
+  ._coral-ColorPicker-ColorArea.is-disabled {
+    forced-color-adjust: none;
+  }
+}
