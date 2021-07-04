@@ -131,9 +131,59 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
     return super.observedAttributes.concat([
       'value',
       'disabled',
+      'label',
+      'labelledBy'
     ]);
   } 
+ 
+   /**   
+   The ColorPicker label.
+   @default 'Select Color'
+   @type {String}
+   @htmlattribute label
+   @htmlattributereflected
+   */   
+  get label() {
+     return this._label || i18n.get('Color Picker');
+  }
   
+  set label(value) {
+    this._label = value;
+    this._reflectAttribute('label', this.label);
+    this._elements.input.setAttribute('aria-label', this.label);
+  } 
+
+   /**   
+   The ColorPicker label.
+   @default 'Select Color'
+   @type {String}
+   @htmlattribute label
+   @htmlattributereflected
+   */   
+  get labelledBy() {
+     return super.labelledBy;
+  }
+  
+  set labelledBy(value) {
+    super.labelledBy = value;
+
+    // Sync input aria-labelledby
+    this._elements.input[value ? 'setAttribute' : 'removeAttribute']('aria-labelledby', value);
+
+    // in case the user focuses the buttons, he will still get a notion of the usage of the component
+    if (this.labelledBy) {
+      this.setAttribute('aria-labelledby', this.labelledBy);
+      var labelElement = document.getElementById(value);
+      labelElement.setAttribute('for', this._elements.input.id.substring(1));
+      this._elements.colorPreview.setAttribute('aria-labelledby',
+        [this.labelledBy,
+          this._elements.colorPreview.label.id].join(' '));
+    } else {
+      this.removeAttribute('aria-labelledby');
+      this._elements.colorPreview.removeAttribute('aria-labelledby');
+    }
+  } 
+     
   /**
    Whether this field is disabled or not.
    @type {Boolean}
