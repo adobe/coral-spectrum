@@ -178,7 +178,8 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
       this._elements.colorPreview.setAttribute('aria-labelledby',
         [this.labelledBy,
           this._elements.colorPreview.label.id].join(' '));
-    } else {
+    } 
+    else {
       this.removeAttribute('aria-labelledby');
       this._elements.colorPreview.removeAttribute('aria-labelledby');
     }
