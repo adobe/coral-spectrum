@@ -49,8 +49,6 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
       'key:enter input': '_onKeyEsc',
       'capture:change  [handle="input"]': '_onColorInputChange',
       'change [handle="propertiesView"]': '_onPropertyChange'
-
-      // private events e.g. color properties change should be handled here
     });
 
     // Overlay

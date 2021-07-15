@@ -23,12 +23,7 @@ export default {
     "Hue":  "Hue",
     "Color Value": "Color Value",
     "Enter Color Value": "Enter Color Value",
-    "Color Value" : "Color Value",
     "Color Picker": "Color Picker",
-    "unset": "Not set",
-    "checked": "Checked",
-    "{value}, Color": "{value}, Color",
-    "Color not set": "Color not set",
     "saturation and luminosity": "saturation and luminosity",
     'Select Color Format': 'Select Color Format'
   }
