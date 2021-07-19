@@ -1,28 +1,28 @@
 {
   "type": "File",
   "start": 0,
-  "end": 1403,
+  "end": 1475,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 44,
+      "line": 45,
       "column": 0
     }
   },
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 1403,
+    "end": 1475,
     "loc": {
       "start": {
         "line": 1,
         "column": 0
       },
       "end": {
-        "line": 44,
+        "line": 45,
         "column": 0
       }
     },
@@ -254,20 +254,106 @@
             "raw": "'../../../coral-component-checkbox'"
           },
           "value": "../../../coral-component-checkbox"
+        }
+      },
+      {
+        "type": "ImportDeclaration",
+        "start": 790,
+        "end": 841,
+        "loc": {
+          "start": {
+            "line": 16,
+            "column": 0
+          },
+          "end": {
+            "line": 16,
+            "column": 51
+          }
+        },
+        "specifiers": [
+          {
+            "type": "ImportSpecifier",
+            "start": 798,
+            "end": 807,
+            "loc": {
+              "start": {
+                "line": 16,
+                "column": 8
+              },
+              "end": {
+                "line": 16,
+                "column": 17
+              }
+            },
+            "imported": {
+              "type": "Identifier",
+              "start": 798,
+              "end": 807,
+              "loc": {
+                "start": {
+                  "line": 16,
+                  "column": 8
+                },
+                "end": {
+                  "line": 16,
+                  "column": 17
+                },
+                "identifierName": "Decorator"
+              },
+              "name": "Decorator"
+            },
+            "local": {
+              "type": "Identifier",
+              "start": 798,
+              "end": 807,
+              "loc": {
+                "start": {
+                  "line": 16,
+                  "column": 8
+                },
+                "end": {
+                  "line": 16,
+                  "column": 17
+                },
+                "identifierName": "Decorator"
+              },
+              "name": "Decorator"
+            }
+          }
+        ],
+        "source": {
+          "type": "StringLiteral",
+          "start": 814,
+          "end": 840,
+          "loc": {
+            "start": {
+              "line": 16,
+              "column": 24
+            },
+            "end": {
+              "line": 16,
+              "column": 50
+            }
+          },
+          "extra": {
+            "rawValue": "../../../coral-decorator",
+            "raw": "'../../../coral-decorator'"
+          },
+          "value": "../../../coral-decorator"
         },
         "trailingComments": [
           {
             "type": "CommentBlock",
             "value": "*\n @class Coral.CheckboxGroup\n @classdesc A CheckboxGroup component to group checkbox fields\n @htmltag coral-checkboxgroup\n @extends {HTMLElement}\n @extends {BaseComponent}\n @extends {BaseFieldGroup}\n ",
-            "start": 791,
-            "end": 996,
+            "start": 843,
+            "end": 1048,
             "loc": {
               "start": {
-                "line": 17,
+                "line": 18,
                 "column": 0
               },
               "end": {
-                "line": 24,
+                "line": 25,
                 "column": 3
               }
             }
@@ -276,525 +362,594 @@
       },
       {
         "type": "Identifier",
-        "start": 997,
-        "end": 1371,
+        "start": 1049,
+        "end": 1443,
         "loc": {
           "start": {
-            "line": 25,
+            "line": 26,
             "column": 0
           },
           "end": {
-            "line": 41,
-            "column": 1
+            "line": 42,
+            "column": 3
           }
         },
-        "id": {
-          "type": "Identifier",
-          "start": 1003,
-          "end": 1016,
-          "loc": {
-            "start": {
-              "line": 25,
-              "column": 6
-            },
-            "end": {
-              "line": 25,
-              "column": 19
-            },
-            "identifierName": "CheckboxGroup"
-          },
-          "name": "CheckboxGroup",
-          "leadingComments": null
-        },
-        "superClass": {
-          "type": "CallExpression",
-          "start": 1025,
-          "end": 1067,
-          "loc": {
-            "start": {
-              "line": 25,
-              "column": 28
-            },
-            "end": {
-              "line": 25,
-              "column": 70
-            }
-          },
-          "callee": {
-            "type": "Identifier",
-            "start": 1025,
-            "end": 1039,
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "start": 1055,
+            "end": 1442,
             "loc": {
               "start": {
-                "line": 25,
-                "column": 28
+                "line": 26,
+                "column": 6
               },
               "end": {
-                "line": 25,
-                "column": 42
-              },
-              "identifierName": "BaseFieldGroup"
+                "line": 42,
+                "column": 2
+              }
             },
-            "name": "BaseFieldGroup"
-          },
-          "arguments": [
-            {
-              "type": "CallExpression",
-              "start": 1040,
-              "end": 1066,
+            "id": {
+              "type": "Identifier",
+              "start": 1055,
+              "end": 1068,
               "loc": {
                 "start": {
-                  "line": 25,
-                  "column": 43
+                  "line": 26,
+                  "column": 6
                 },
                 "end": {
-                  "line": 25,
-                  "column": 69
+                  "line": 26,
+                  "column": 19
+                },
+                "identifierName": "CheckboxGroup"
+              },
+              "name": "CheckboxGroup",
+              "leadingComments": null
+            },
+            "init": {
+              "type": "CallExpression",
+              "start": 1071,
+              "end": 1442,
+              "loc": {
+                "start": {
+                  "line": 26,
+                  "column": 22
+                },
+                "end": {
+                  "line": 42,
+                  "column": 2
                 }
               },
               "callee": {
                 "type": "Identifier",
-                "start": 1040,
-                "end": 1053,
+                "start": 1071,
+                "end": 1080,
                 "loc": {
                   "start": {
-                    "line": 25,
-                    "column": 43
-                  },
-                  "end": {
-                    "line": 25,
-                    "column": 56
-                  },
-                  "identifierName": "BaseComponent"
-                },
-                "name": "BaseComponent"
-              },
-              "arguments": [
-                {
-                  "type": "Identifier",
-                  "start": 1054,
-                  "end": 1065,
-                  "loc": {
-                    "start": {
-                      "line": 25,
-                      "column": 57
-                    },
-                    "end": {
-                      "line": 25,
-                      "column": 68
-                    },
-                    "identifierName": "HTMLElement"
-                  },
-                  "name": "HTMLElement"
-                }
-              ]
-            }
-          ]
-        },
-        "body": {
-          "type": "ClassBody",
-          "start": 1068,
-          "end": 1371,
-          "loc": {
-            "start": {
-              "line": 25,
-              "column": 71
-            },
-            "end": {
-              "line": 41,
-              "column": 1
-            }
-          },
-          "body": [
-            {
-              "type": "ClassMethod",
-              "start": 1090,
-              "end": 1170,
-              "loc": {
-                "start": {
-                  "line": 27,
-                  "column": 2
-                },
-                "end": {
-                  "line": 30,
-                  "column": 3
-                }
-              },
-              "static": false,
-              "computed": false,
-              "key": {
-                "type": "Identifier",
-                "start": 1094,
-                "end": 1106,
-                "loc": {
-                  "start": {
-                    "line": 27,
-                    "column": 6
-                  },
-                  "end": {
-                    "line": 27,
-                    "column": 18
-                  },
-                  "identifierName": "_itemTagName"
-                },
-                "name": "_itemTagName"
-              },
-              "kind": "get",
-              "id": null,
-              "generator": false,
-              "expression": false,
-              "async": false,
-              "params": [],
-              "body": {
-                "type": "BlockStatement",
-                "start": 1109,
-                "end": 1170,
-                "loc": {
-                  "start": {
-                    "line": 27,
-                    "column": 21
-                  },
-                  "end": {
-                    "line": 30,
-                    "column": 3
-                  }
-                },
-                "body": [
-                  {
-                    "type": "ReturnStatement",
-                    "start": 1142,
-                    "end": 1166,
-                    "loc": {
-                      "start": {
-                        "line": 29,
-                        "column": 4
-                      },
-                      "end": {
-                        "line": 29,
-                        "column": 28
-                      }
-                    },
-                    "argument": {
-                      "type": "StringLiteral",
-                      "start": 1149,
-                      "end": 1165,
-                      "loc": {
-                        "start": {
-                          "line": 29,
-                          "column": 11
-                        },
-                        "end": {
-                          "line": 29,
-                          "column": 27
-                        }
-                      },
-                      "extra": {
-                        "rawValue": "coral-checkbox",
-                        "raw": "'coral-checkbox'"
-                      },
-                      "value": "coral-checkbox",
-                      "leadingComments": null
-                    },
-                    "leadingComments": [
-                      {
-                        "type": "CommentLine",
-                        "value": " Used for Collection",
-                        "start": 1115,
-                        "end": 1137,
-                        "loc": {
-                          "start": {
-                            "line": 28,
-                            "column": 4
-                          },
-                          "end": {
-                            "line": 28,
-                            "column": 26
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ],
-                "directives": [],
-                "trailingComments": null
-              },
-              "leadingComments": [
-                {
-                  "type": "CommentBlock",
-                  "value": "* @private ",
-                  "start": 1072,
-                  "end": 1087,
-                  "loc": {
-                    "start": {
-                      "line": 26,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 26,
-                      "column": 17
-                    }
-                  }
-                }
-              ],
-              "trailingComments": [
-                {
-                  "type": "CommentBlock",
-                  "value": "*\n   Returns an Array containing the selected field group items.\n\n   @type {Array.<HTMLElement>}\n   @readonly\n   ",
-                  "start": 1174,
-                  "end": 1291,
-                  "loc": {
-                    "start": {
-                      "line": 32,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 37,
-                      "column": 5
-                    }
-                  }
-                }
-              ]
-            },
-            {
-              "type": "ClassMethod",
-              "start": 1294,
-              "end": 1369,
-              "loc": {
-                "start": {
-                  "line": 38,
-                  "column": 2
-                },
-                "end": {
-                  "line": 40,
-                  "column": 3
-                }
-              },
-              "static": false,
-              "computed": false,
-              "key": {
-                "type": "Identifier",
-                "start": 1298,
-                "end": 1311,
-                "loc": {
-                  "start": {
-                    "line": 38,
-                    "column": 6
-                  },
-                  "end": {
-                    "line": 38,
-                    "column": 19
-                  },
-                  "identifierName": "selectedItems"
-                },
-                "name": "selectedItems"
-              },
-              "kind": "get",
-              "id": null,
-              "generator": false,
-              "expression": false,
-              "async": false,
-              "params": [],
-              "body": {
-                "type": "BlockStatement",
-                "start": 1314,
-                "end": 1369,
-                "loc": {
-                  "start": {
-                    "line": 38,
+                    "line": 26,
                     "column": 22
                   },
                   "end": {
-                    "line": 40,
-                    "column": 3
-                  }
+                    "line": 26,
+                    "column": 31
+                  },
+                  "identifierName": "Decorator"
                 },
-                "body": [
-                  {
-                    "type": "ReturnStatement",
-                    "start": 1320,
-                    "end": 1365,
+                "name": "Decorator"
+              },
+              "arguments": [
+                {
+                  "type": "ClassExpression",
+                  "start": 1081,
+                  "end": 1441,
+                  "loc": {
+                    "start": {
+                      "line": 26,
+                      "column": 32
+                    },
+                    "end": {
+                      "line": 42,
+                      "column": 1
+                    }
+                  },
+                  "id": null,
+                  "superClass": {
+                    "type": "CallExpression",
+                    "start": 1095,
+                    "end": 1137,
                     "loc": {
                       "start": {
-                        "line": 39,
-                        "column": 4
+                        "line": 26,
+                        "column": 46
                       },
                       "end": {
-                        "line": 39,
-                        "column": 49
+                        "line": 26,
+                        "column": 88
                       }
                     },
-                    "argument": {
-                      "type": "CallExpression",
-                      "start": 1327,
-                      "end": 1364,
+                    "callee": {
+                      "type": "Identifier",
+                      "start": 1095,
+                      "end": 1109,
                       "loc": {
                         "start": {
-                          "line": 39,
-                          "column": 11
+                          "line": 26,
+                          "column": 46
                         },
                         "end": {
-                          "line": 39,
-                          "column": 48
-                        }
+                          "line": 26,
+                          "column": 60
+                        },
+                        "identifierName": "BaseFieldGroup"
                       },
-                      "callee": {
-                        "type": "MemberExpression",
-                        "start": 1327,
-                        "end": 1353,
+                      "name": "BaseFieldGroup"
+                    },
+                    "arguments": [
+                      {
+                        "type": "CallExpression",
+                        "start": 1110,
+                        "end": 1136,
+                        "loc": {
+                          "start": {
+                            "line": 26,
+                            "column": 61
+                          },
+                          "end": {
+                            "line": 26,
+                            "column": 87
+                          }
+                        },
+                        "callee": {
+                          "type": "Identifier",
+                          "start": 1110,
+                          "end": 1123,
+                          "loc": {
+                            "start": {
+                              "line": 26,
+                              "column": 61
+                            },
+                            "end": {
+                              "line": 26,
+                              "column": 74
+                            },
+                            "identifierName": "BaseComponent"
+                          },
+                          "name": "BaseComponent"
+                        },
+                        "arguments": [
+                          {
+                            "type": "Identifier",
+                            "start": 1124,
+                            "end": 1135,
+                            "loc": {
+                              "start": {
+                                "line": 26,
+                                "column": 75
+                              },
+                              "end": {
+                                "line": 26,
+                                "column": 86
+                              },
+                              "identifierName": "HTMLElement"
+                            },
+                            "name": "HTMLElement"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "body": {
+                    "type": "ClassBody",
+                    "start": 1138,
+                    "end": 1441,
+                    "loc": {
+                      "start": {
+                        "line": 26,
+                        "column": 89
+                      },
+                      "end": {
+                        "line": 42,
+                        "column": 1
+                      }
+                    },
+                    "body": [
+                      {
+                        "type": "ClassMethod",
+                        "start": 1160,
+                        "end": 1240,
+                        "loc": {
+                          "start": {
+                            "line": 28,
+                            "column": 2
+                          },
+                          "end": {
+                            "line": 31,
+                            "column": 3
+                          }
+                        },
+                        "static": false,
+                        "computed": false,
+                        "key": {
+                          "type": "Identifier",
+                          "start": 1164,
+                          "end": 1176,
+                          "loc": {
+                            "start": {
+                              "line": 28,
+                              "column": 6
+                            },
+                            "end": {
+                              "line": 28,
+                              "column": 18
+                            },
+                            "identifierName": "_itemTagName"
+                          },
+                          "name": "_itemTagName"
+                        },
+                        "kind": "get",
+                        "id": null,
+                        "generator": false,
+                        "expression": false,
+                        "async": false,
+                        "params": [],
+                        "body": {
+                          "type": "BlockStatement",
+                          "start": 1179,
+                          "end": 1240,
+                          "loc": {
+                            "start": {
+                              "line": 28,
+                              "column": 21
+                            },
+                            "end": {
+                              "line": 31,
+                              "column": 3
+                            }
+                          },
+                          "body": [
+                            {
+                              "type": "ReturnStatement",
+                              "start": 1212,
+                              "end": 1236,
+                              "loc": {
+                                "start": {
+                                  "line": 30,
+                                  "column": 4
+                                },
+                                "end": {
+                                  "line": 30,
+                                  "column": 28
+                                }
+                              },
+                              "argument": {
+                                "type": "StringLiteral",
+                                "start": 1219,
+                                "end": 1235,
+                                "loc": {
+                                  "start": {
+                                    "line": 30,
+                                    "column": 11
+                                  },
+                                  "end": {
+                                    "line": 30,
+                                    "column": 27
+                                  }
+                                },
+                                "extra": {
+                                  "rawValue": "coral-checkbox",
+                                  "raw": "'coral-checkbox'"
+                                },
+                                "value": "coral-checkbox",
+                                "leadingComments": null
+                              },
+                              "leadingComments": [
+                                {
+                                  "type": "CommentLine",
+                                  "value": " Used for Collection",
+                                  "start": 1185,
+                                  "end": 1207,
+                                  "loc": {
+                                    "start": {
+                                      "line": 29,
+                                      "column": 4
+                                    },
+                                    "end": {
+                                      "line": 29,
+                                      "column": 26
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ],
+                          "directives": [],
+                          "trailingComments": null
+                        },
+                        "leadingComments": [
+                          {
+                            "type": "CommentBlock",
+                            "value": "* @private ",
+                            "start": 1142,
+                            "end": 1157,
+                            "loc": {
+                              "start": {
+                                "line": 27,
+                                "column": 2
+                              },
+                              "end": {
+                                "line": 27,
+                                "column": 17
+                              }
+                            }
+                          }
+                        ],
+                        "trailingComments": [
+                          {
+                            "type": "CommentBlock",
+                            "value": "*\n   Returns an Array containing the selected field group items.\n\n   @type {Array.<HTMLElement>}\n   @readonly\n   ",
+                            "start": 1244,
+                            "end": 1361,
+                            "loc": {
+                              "start": {
+                                "line": 33,
+                                "column": 2
+                              },
+                              "end": {
+                                "line": 38,
+                                "column": 5
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "ClassMethod",
+                        "start": 1364,
+                        "end": 1439,
                         "loc": {
                           "start": {
                             "line": 39,
-                            "column": 11
+                            "column": 2
                           },
                           "end": {
-                            "line": 39,
-                            "column": 37
+                            "line": 41,
+                            "column": 3
                           }
                         },
-                        "object": {
-                          "type": "MemberExpression",
-                          "start": 1327,
-                          "end": 1337,
+                        "static": false,
+                        "computed": false,
+                        "key": {
+                          "type": "Identifier",
+                          "start": 1368,
+                          "end": 1381,
                           "loc": {
                             "start": {
                               "line": 39,
-                              "column": 11
+                              "column": 6
                             },
                             "end": {
                               "line": 39,
-                              "column": 21
-                            }
-                          },
-                          "object": {
-                            "type": "ThisExpression",
-                            "start": 1327,
-                            "end": 1331,
-                            "loc": {
-                              "start": {
-                                "line": 39,
-                                "column": 11
-                              },
-                              "end": {
-                                "line": 39,
-                                "column": 15
-                              }
-                            }
-                          },
-                          "property": {
-                            "type": "Identifier",
-                            "start": 1332,
-                            "end": 1337,
-                            "loc": {
-                              "start": {
-                                "line": 39,
-                                "column": 16
-                              },
-                              "end": {
-                                "line": 39,
-                                "column": 21
-                              },
-                              "identifierName": "items"
+                              "column": 19
                             },
-                            "name": "items"
+                            "identifierName": "selectedItems"
                           },
-                          "computed": false
+                          "name": "selectedItems"
                         },
-                        "property": {
-                          "type": "Identifier",
-                          "start": 1338,
-                          "end": 1353,
+                        "kind": "get",
+                        "id": null,
+                        "generator": false,
+                        "expression": false,
+                        "async": false,
+                        "params": [],
+                        "body": {
+                          "type": "BlockStatement",
+                          "start": 1384,
+                          "end": 1439,
                           "loc": {
                             "start": {
                               "line": 39,
                               "column": 22
                             },
                             "end": {
-                              "line": 39,
-                              "column": 37
-                            },
-                            "identifierName": "_getAllSelected"
-                          },
-                          "name": "_getAllSelected"
-                        },
-                        "computed": false
-                      },
-                      "arguments": [
-                        {
-                          "type": "StringLiteral",
-                          "start": 1354,
-                          "end": 1363,
-                          "loc": {
-                            "start": {
-                              "line": 39,
-                              "column": 38
-                            },
-                            "end": {
-                              "line": 39,
-                              "column": 47
+                              "line": 41,
+                              "column": 3
                             }
                           },
-                          "extra": {
-                            "rawValue": "checked",
-                            "raw": "'checked'"
-                          },
-                          "value": "checked"
-                        }
-                      ]
-                    }
-                  }
-                ],
-                "directives": []
-              },
-              "leadingComments": [
-                {
-                  "type": "CommentBlock",
-                  "value": "*\n   Returns an Array containing the selected field group items.\n\n   @type {Array.<HTMLElement>}\n   @readonly\n   ",
-                  "start": 1174,
-                  "end": 1291,
-                  "loc": {
-                    "start": {
-                      "line": 32,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 37,
-                      "column": 5
-                    }
+                          "body": [
+                            {
+                              "type": "ReturnStatement",
+                              "start": 1390,
+                              "end": 1435,
+                              "loc": {
+                                "start": {
+                                  "line": 40,
+                                  "column": 4
+                                },
+                                "end": {
+                                  "line": 40,
+                                  "column": 49
+                                }
+                              },
+                              "argument": {
+                                "type": "CallExpression",
+                                "start": 1397,
+                                "end": 1434,
+                                "loc": {
+                                  "start": {
+                                    "line": 40,
+                                    "column": 11
+                                  },
+                                  "end": {
+                                    "line": 40,
+                                    "column": 48
+                                  }
+                                },
+                                "callee": {
+                                  "type": "MemberExpression",
+                                  "start": 1397,
+                                  "end": 1423,
+                                  "loc": {
+                                    "start": {
+                                      "line": 40,
+                                      "column": 11
+                                    },
+                                    "end": {
+                                      "line": 40,
+                                      "column": 37
+                                    }
+                                  },
+                                  "object": {
+                                    "type": "MemberExpression",
+                                    "start": 1397,
+                                    "end": 1407,
+                                    "loc": {
+                                      "start": {
+                                        "line": 40,
+                                        "column": 11
+                                      },
+                                      "end": {
+                                        "line": 40,
+                                        "column": 21
+                                      }
+                                    },
+                                    "object": {
+                                      "type": "ThisExpression",
+                                      "start": 1397,
+                                      "end": 1401,
+                                      "loc": {
+                                        "start": {
+                                          "line": 40,
+                                          "column": 11
+                                        },
+                                        "end": {
+                                          "line": 40,
+                                          "column": 15
+                                        }
+                                      }
+                                    },
+                                    "property": {
+                                      "type": "Identifier",
+                                      "start": 1402,
+                                      "end": 1407,
+                                      "loc": {
+                                        "start": {
+                                          "line": 40,
+                                          "column": 16
+                                        },
+                                        "end": {
+                                          "line": 40,
+                                          "column": 21
+                                        },
+                                        "identifierName": "items"
+                                      },
+                                      "name": "items"
+                                    },
+                                    "computed": false
+                                  },
+                                  "property": {
+                                    "type": "Identifier",
+                                    "start": 1408,
+                                    "end": 1423,
+                                    "loc": {
+                                      "start": {
+                                        "line": 40,
+                                        "column": 22
+                                      },
+                                      "end": {
+                                        "line": 40,
+                                        "column": 37
+                                      },
+                                      "identifierName": "_getAllSelected"
+                                    },
+                                    "name": "_getAllSelected"
+                                  },
+                                  "computed": false
+                                },
+                                "arguments": [
+                                  {
+                                    "type": "StringLiteral",
+                                    "start": 1424,
+                                    "end": 1433,
+                                    "loc": {
+                                      "start": {
+                                        "line": 40,
+                                        "column": 38
+                                      },
+                                      "end": {
+                                        "line": 40,
+                                        "column": 47
+                                      }
+                                    },
+                                    "extra": {
+                                      "rawValue": "checked",
+                                      "raw": "'checked'"
+                                    },
+                                    "value": "checked"
+                                  }
+                                ]
+                              }
+                            }
+                          ],
+                          "directives": []
+                        },
+                        "leadingComments": [
+                          {
+                            "type": "CommentBlock",
+                            "value": "*\n   Returns an Array containing the selected field group items.\n\n   @type {Array.<HTMLElement>}\n   @readonly\n   ",
+                            "start": 1244,
+                            "end": 1361,
+                            "loc": {
+                              "start": {
+                                "line": 33,
+                                "column": 2
+                              },
+                              "end": {
+                                "line": 38,
+                                "column": 5
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
                   }
                 }
               ]
-            }
-          ]
-        },
+            },
+            "leadingComments": null
+          }
+        ],
+        "kind": "const",
         "leadingComments": [],
         "name": "_",
         "trailingComments": []
       },
       {
         "type": "Identifier",
-        "start": 1373,
-        "end": 1402,
+        "start": 1445,
+        "end": 1474,
         "loc": {
           "start": {
-            "line": 43,
+            "line": 44,
             "column": 0
           },
           "end": {
-            "line": 43,
+            "line": 44,
             "column": 29
           }
         },
         "declaration": {
           "type": "Identifier",
-          "start": 1388,
-          "end": 1401,
+          "start": 1460,
+          "end": 1473,
           "loc": {
             "start": {
-              "line": 43,
+              "line": 44,
               "column": 15
             },
             "end": {
-              "line": 43,
+              "line": 44,
               "column": 28
             },
             "identifierName": "CheckboxGroup"
@@ -807,532 +962,599 @@
       },
       {
         "type": "ExportDefaultDeclaration",
-        "start": 1373,
-        "end": 1402,
+        "start": 1445,
+        "end": 1474,
         "loc": {
           "start": {
-            "line": 43,
+            "line": 44,
             "column": 0
           },
           "end": {
-            "line": 43,
+            "line": 44,
             "column": 29
           }
         },
         "declaration": {
-          "type": "ClassDeclaration",
-          "start": 997,
-          "end": 1371,
+          "type": "VariableDeclaration",
+          "start": 1049,
+          "end": 1443,
           "loc": {
             "start": {
-              "line": 25,
+              "line": 26,
               "column": 0
             },
             "end": {
-              "line": 41,
-              "column": 1
+              "line": 42,
+              "column": 3
             }
           },
-          "id": {
-            "type": "Identifier",
-            "start": 1003,
-            "end": 1016,
-            "loc": {
-              "start": {
-                "line": 25,
-                "column": 6
-              },
-              "end": {
-                "line": 25,
-                "column": 19
-              },
-              "identifierName": "CheckboxGroup"
-            },
-            "name": "CheckboxGroup",
-            "leadingComments": null
-          },
-          "superClass": {
-            "type": "CallExpression",
-            "start": 1025,
-            "end": 1067,
-            "loc": {
-              "start": {
-                "line": 25,
-                "column": 28
-              },
-              "end": {
-                "line": 25,
-                "column": 70
-              }
-            },
-            "callee": {
-              "type": "Identifier",
-              "start": 1025,
-              "end": 1039,
+          "declarations": [
+            {
+              "type": "VariableDeclarator",
+              "start": 1055,
+              "end": 1442,
               "loc": {
                 "start": {
-                  "line": 25,
-                  "column": 28
+                  "line": 26,
+                  "column": 6
                 },
                 "end": {
-                  "line": 25,
-                  "column": 42
-                },
-                "identifierName": "BaseFieldGroup"
+                  "line": 42,
+                  "column": 2
+                }
               },
-              "name": "BaseFieldGroup"
-            },
-            "arguments": [
-              {
-                "type": "CallExpression",
-                "start": 1040,
-                "end": 1066,
+              "id": {
+                "type": "Identifier",
+                "start": 1055,
+                "end": 1068,
                 "loc": {
                   "start": {
-                    "line": 25,
-                    "column": 43
+                    "line": 26,
+                    "column": 6
                   },
                   "end": {
-                    "line": 25,
-                    "column": 69
+                    "line": 26,
+                    "column": 19
+                  },
+                  "identifierName": "CheckboxGroup"
+                },
+                "name": "CheckboxGroup",
+                "leadingComments": null
+              },
+              "init": {
+                "type": "CallExpression",
+                "start": 1071,
+                "end": 1442,
+                "loc": {
+                  "start": {
+                    "line": 26,
+                    "column": 22
+                  },
+                  "end": {
+                    "line": 42,
+                    "column": 2
                   }
                 },
                 "callee": {
                   "type": "Identifier",
-                  "start": 1040,
-                  "end": 1053,
+                  "start": 1071,
+                  "end": 1080,
                   "loc": {
                     "start": {
-                      "line": 25,
-                      "column": 43
-                    },
-                    "end": {
-                      "line": 25,
-                      "column": 56
-                    },
-                    "identifierName": "BaseComponent"
-                  },
-                  "name": "BaseComponent"
-                },
-                "arguments": [
-                  {
-                    "type": "Identifier",
-                    "start": 1054,
-                    "end": 1065,
-                    "loc": {
-                      "start": {
-                        "line": 25,
-                        "column": 57
-                      },
-                      "end": {
-                        "line": 25,
-                        "column": 68
-                      },
-                      "identifierName": "HTMLElement"
-                    },
-                    "name": "HTMLElement"
-                  }
-                ]
-              }
-            ]
-          },
-          "body": {
-            "type": "ClassBody",
-            "start": 1068,
-            "end": 1371,
-            "loc": {
-              "start": {
-                "line": 25,
-                "column": 71
-              },
-              "end": {
-                "line": 41,
-                "column": 1
-              }
-            },
-            "body": [
-              {
-                "type": "ClassMethod",
-                "start": 1090,
-                "end": 1170,
-                "loc": {
-                  "start": {
-                    "line": 27,
-                    "column": 2
-                  },
-                  "end": {
-                    "line": 30,
-                    "column": 3
-                  }
-                },
-                "static": false,
-                "computed": false,
-                "key": {
-                  "type": "Identifier",
-                  "start": 1094,
-                  "end": 1106,
-                  "loc": {
-                    "start": {
-                      "line": 27,
-                      "column": 6
-                    },
-                    "end": {
-                      "line": 27,
-                      "column": 18
-                    },
-                    "identifierName": "_itemTagName"
-                  },
-                  "name": "_itemTagName"
-                },
-                "kind": "get",
-                "id": null,
-                "generator": false,
-                "expression": false,
-                "async": false,
-                "params": [],
-                "body": {
-                  "type": "BlockStatement",
-                  "start": 1109,
-                  "end": 1170,
-                  "loc": {
-                    "start": {
-                      "line": 27,
-                      "column": 21
-                    },
-                    "end": {
-                      "line": 30,
-                      "column": 3
-                    }
-                  },
-                  "body": [
-                    {
-                      "type": "ReturnStatement",
-                      "start": 1142,
-                      "end": 1166,
-                      "loc": {
-                        "start": {
-                          "line": 29,
-                          "column": 4
-                        },
-                        "end": {
-                          "line": 29,
-                          "column": 28
-                        }
-                      },
-                      "argument": {
-                        "type": "StringLiteral",
-                        "start": 1149,
-                        "end": 1165,
-                        "loc": {
-                          "start": {
-                            "line": 29,
-                            "column": 11
-                          },
-                          "end": {
-                            "line": 29,
-                            "column": 27
-                          }
-                        },
-                        "extra": {
-                          "rawValue": "coral-checkbox",
-                          "raw": "'coral-checkbox'"
-                        },
-                        "value": "coral-checkbox",
-                        "leadingComments": null
-                      },
-                      "leadingComments": [
-                        {
-                          "type": "CommentLine",
-                          "value": " Used for Collection",
-                          "start": 1115,
-                          "end": 1137,
-                          "loc": {
-                            "start": {
-                              "line": 28,
-                              "column": 4
-                            },
-                            "end": {
-                              "line": 28,
-                              "column": 26
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  ],
-                  "directives": [],
-                  "trailingComments": null
-                },
-                "leadingComments": [
-                  {
-                    "type": "CommentBlock",
-                    "value": "* @private ",
-                    "start": 1072,
-                    "end": 1087,
-                    "loc": {
-                      "start": {
-                        "line": 26,
-                        "column": 2
-                      },
-                      "end": {
-                        "line": 26,
-                        "column": 17
-                      }
-                    }
-                  }
-                ],
-                "trailingComments": [
-                  {
-                    "type": "CommentBlock",
-                    "value": "*\n   Returns an Array containing the selected field group items.\n\n   @type {Array.<HTMLElement>}\n   @readonly\n   ",
-                    "start": 1174,
-                    "end": 1291,
-                    "loc": {
-                      "start": {
-                        "line": 32,
-                        "column": 2
-                      },
-                      "end": {
-                        "line": 37,
-                        "column": 5
-                      }
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "ClassMethod",
-                "start": 1294,
-                "end": 1369,
-                "loc": {
-                  "start": {
-                    "line": 38,
-                    "column": 2
-                  },
-                  "end": {
-                    "line": 40,
-                    "column": 3
-                  }
-                },
-                "static": false,
-                "computed": false,
-                "key": {
-                  "type": "Identifier",
-                  "start": 1298,
-                  "end": 1311,
-                  "loc": {
-                    "start": {
-                      "line": 38,
-                      "column": 6
-                    },
-                    "end": {
-                      "line": 38,
-                      "column": 19
-                    },
-                    "identifierName": "selectedItems"
-                  },
-                  "name": "selectedItems"
-                },
-                "kind": "get",
-                "id": null,
-                "generator": false,
-                "expression": false,
-                "async": false,
-                "params": [],
-                "body": {
-                  "type": "BlockStatement",
-                  "start": 1314,
-                  "end": 1369,
-                  "loc": {
-                    "start": {
-                      "line": 38,
+                      "line": 26,
                       "column": 22
                     },
                     "end": {
-                      "line": 40,
-                      "column": 3
-                    }
+                      "line": 26,
+                      "column": 31
+                    },
+                    "identifierName": "Decorator"
                   },
-                  "body": [
-                    {
-                      "type": "ReturnStatement",
-                      "start": 1320,
-                      "end": 1365,
+                  "name": "Decorator"
+                },
+                "arguments": [
+                  {
+                    "type": "ClassExpression",
+                    "start": 1081,
+                    "end": 1441,
+                    "loc": {
+                      "start": {
+                        "line": 26,
+                        "column": 32
+                      },
+                      "end": {
+                        "line": 42,
+                        "column": 1
+                      }
+                    },
+                    "id": null,
+                    "superClass": {
+                      "type": "CallExpression",
+                      "start": 1095,
+                      "end": 1137,
                       "loc": {
                         "start": {
-                          "line": 39,
-                          "column": 4
+                          "line": 26,
+                          "column": 46
                         },
                         "end": {
-                          "line": 39,
-                          "column": 49
+                          "line": 26,
+                          "column": 88
                         }
                       },
-                      "argument": {
-                        "type": "CallExpression",
-                        "start": 1327,
-                        "end": 1364,
+                      "callee": {
+                        "type": "Identifier",
+                        "start": 1095,
+                        "end": 1109,
                         "loc": {
                           "start": {
-                            "line": 39,
-                            "column": 11
+                            "line": 26,
+                            "column": 46
                           },
                           "end": {
-                            "line": 39,
-                            "column": 48
-                          }
+                            "line": 26,
+                            "column": 60
+                          },
+                          "identifierName": "BaseFieldGroup"
                         },
-                        "callee": {
-                          "type": "MemberExpression",
-                          "start": 1327,
-                          "end": 1353,
+                        "name": "BaseFieldGroup"
+                      },
+                      "arguments": [
+                        {
+                          "type": "CallExpression",
+                          "start": 1110,
+                          "end": 1136,
+                          "loc": {
+                            "start": {
+                              "line": 26,
+                              "column": 61
+                            },
+                            "end": {
+                              "line": 26,
+                              "column": 87
+                            }
+                          },
+                          "callee": {
+                            "type": "Identifier",
+                            "start": 1110,
+                            "end": 1123,
+                            "loc": {
+                              "start": {
+                                "line": 26,
+                                "column": 61
+                              },
+                              "end": {
+                                "line": 26,
+                                "column": 74
+                              },
+                              "identifierName": "BaseComponent"
+                            },
+                            "name": "BaseComponent"
+                          },
+                          "arguments": [
+                            {
+                              "type": "Identifier",
+                              "start": 1124,
+                              "end": 1135,
+                              "loc": {
+                                "start": {
+                                  "line": 26,
+                                  "column": 75
+                                },
+                                "end": {
+                                  "line": 26,
+                                  "column": 86
+                                },
+                                "identifierName": "HTMLElement"
+                              },
+                              "name": "HTMLElement"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "body": {
+                      "type": "ClassBody",
+                      "start": 1138,
+                      "end": 1441,
+                      "loc": {
+                        "start": {
+                          "line": 26,
+                          "column": 89
+                        },
+                        "end": {
+                          "line": 42,
+                          "column": 1
+                        }
+                      },
+                      "body": [
+                        {
+                          "type": "ClassMethod",
+                          "start": 1160,
+                          "end": 1240,
+                          "loc": {
+                            "start": {
+                              "line": 28,
+                              "column": 2
+                            },
+                            "end": {
+                              "line": 31,
+                              "column": 3
+                            }
+                          },
+                          "static": false,
+                          "computed": false,
+                          "key": {
+                            "type": "Identifier",
+                            "start": 1164,
+                            "end": 1176,
+                            "loc": {
+                              "start": {
+                                "line": 28,
+                                "column": 6
+                              },
+                              "end": {
+                                "line": 28,
+                                "column": 18
+                              },
+                              "identifierName": "_itemTagName"
+                            },
+                            "name": "_itemTagName"
+                          },
+                          "kind": "get",
+                          "id": null,
+                          "generator": false,
+                          "expression": false,
+                          "async": false,
+                          "params": [],
+                          "body": {
+                            "type": "BlockStatement",
+                            "start": 1179,
+                            "end": 1240,
+                            "loc": {
+                              "start": {
+                                "line": 28,
+                                "column": 21
+                              },
+                              "end": {
+                                "line": 31,
+                                "column": 3
+                              }
+                            },
+                            "body": [
+                              {
+                                "type": "ReturnStatement",
+                                "start": 1212,
+                                "end": 1236,
+                                "loc": {
+                                  "start": {
+                                    "line": 30,
+                                    "column": 4
+                                  },
+                                  "end": {
+                                    "line": 30,
+                                    "column": 28
+                                  }
+                                },
+                                "argument": {
+                                  "type": "StringLiteral",
+                                  "start": 1219,
+                                  "end": 1235,
+                                  "loc": {
+                                    "start": {
+                                      "line": 30,
+                                      "column": 11
+                                    },
+                                    "end": {
+                                      "line": 30,
+                                      "column": 27
+                                    }
+                                  },
+                                  "extra": {
+                                    "rawValue": "coral-checkbox",
+                                    "raw": "'coral-checkbox'"
+                                  },
+                                  "value": "coral-checkbox",
+                                  "leadingComments": null
+                                },
+                                "leadingComments": [
+                                  {
+                                    "type": "CommentLine",
+                                    "value": " Used for Collection",
+                                    "start": 1185,
+                                    "end": 1207,
+                                    "loc": {
+                                      "start": {
+                                        "line": 29,
+                                        "column": 4
+                                      },
+                                      "end": {
+                                        "line": 29,
+                                        "column": 26
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            ],
+                            "directives": [],
+                            "trailingComments": null
+                          },
+                          "leadingComments": [
+                            {
+                              "type": "CommentBlock",
+                              "value": "* @private ",
+                              "start": 1142,
+                              "end": 1157,
+                              "loc": {
+                                "start": {
+                                  "line": 27,
+                                  "column": 2
+                                },
+                                "end": {
+                                  "line": 27,
+                                  "column": 17
+                                }
+                              }
+                            }
+                          ],
+                          "trailingComments": [
+                            {
+                              "type": "CommentBlock",
+                              "value": "*\n   Returns an Array containing the selected field group items.\n\n   @type {Array.<HTMLElement>}\n   @readonly\n   ",
+                              "start": 1244,
+                              "end": 1361,
+                              "loc": {
+                                "start": {
+                                  "line": 33,
+                                  "column": 2
+                                },
+                                "end": {
+                                  "line": 38,
+                                  "column": 5
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "ClassMethod",
+                          "start": 1364,
+                          "end": 1439,
                           "loc": {
                             "start": {
                               "line": 39,
-                              "column": 11
+                              "column": 2
                             },
                             "end": {
-                              "line": 39,
-                              "column": 37
+                              "line": 41,
+                              "column": 3
                             }
                           },
-                          "object": {
-                            "type": "MemberExpression",
-                            "start": 1327,
-                            "end": 1337,
+                          "static": false,
+                          "computed": false,
+                          "key": {
+                            "type": "Identifier",
+                            "start": 1368,
+                            "end": 1381,
                             "loc": {
                               "start": {
                                 "line": 39,
-                                "column": 11
+                                "column": 6
                               },
                               "end": {
                                 "line": 39,
-                                "column": 21
-                              }
-                            },
-                            "object": {
-                              "type": "ThisExpression",
-                              "start": 1327,
-                              "end": 1331,
-                              "loc": {
-                                "start": {
-                                  "line": 39,
-                                  "column": 11
-                                },
-                                "end": {
-                                  "line": 39,
-                                  "column": 15
-                                }
-                              }
-                            },
-                            "property": {
-                              "type": "Identifier",
-                              "start": 1332,
-                              "end": 1337,
-                              "loc": {
-                                "start": {
-                                  "line": 39,
-                                  "column": 16
-                                },
-                                "end": {
-                                  "line": 39,
-                                  "column": 21
-                                },
-                                "identifierName": "items"
+                                "column": 19
                               },
-                              "name": "items"
+                              "identifierName": "selectedItems"
                             },
-                            "computed": false
+                            "name": "selectedItems"
                           },
-                          "property": {
-                            "type": "Identifier",
-                            "start": 1338,
-                            "end": 1353,
+                          "kind": "get",
+                          "id": null,
+                          "generator": false,
+                          "expression": false,
+                          "async": false,
+                          "params": [],
+                          "body": {
+                            "type": "BlockStatement",
+                            "start": 1384,
+                            "end": 1439,
                             "loc": {
                               "start": {
                                 "line": 39,
                                 "column": 22
                               },
                               "end": {
-                                "line": 39,
-                                "column": 37
-                              },
-                              "identifierName": "_getAllSelected"
-                            },
-                            "name": "_getAllSelected"
-                          },
-                          "computed": false
-                        },
-                        "arguments": [
-                          {
-                            "type": "StringLiteral",
-                            "start": 1354,
-                            "end": 1363,
-                            "loc": {
-                              "start": {
-                                "line": 39,
-                                "column": 38
-                              },
-                              "end": {
-                                "line": 39,
-                                "column": 47
+                                "line": 41,
+                                "column": 3
                               }
                             },
-                            "extra": {
-                              "rawValue": "checked",
-                              "raw": "'checked'"
-                            },
-                            "value": "checked"
-                          }
-                        ]
-                      }
-                    }
-                  ],
-                  "directives": []
-                },
-                "leadingComments": [
-                  {
-                    "type": "CommentBlock",
-                    "value": "*\n   Returns an Array containing the selected field group items.\n\n   @type {Array.<HTMLElement>}\n   @readonly\n   ",
-                    "start": 1174,
-                    "end": 1291,
-                    "loc": {
-                      "start": {
-                        "line": 32,
-                        "column": 2
-                      },
-                      "end": {
-                        "line": 37,
-                        "column": 5
-                      }
+                            "body": [
+                              {
+                                "type": "ReturnStatement",
+                                "start": 1390,
+                                "end": 1435,
+                                "loc": {
+                                  "start": {
+                                    "line": 40,
+                                    "column": 4
+                                  },
+                                  "end": {
+                                    "line": 40,
+                                    "column": 49
+                                  }
+                                },
+                                "argument": {
+                                  "type": "CallExpression",
+                                  "start": 1397,
+                                  "end": 1434,
+                                  "loc": {
+                                    "start": {
+                                      "line": 40,
+                                      "column": 11
+                                    },
+                                    "end": {
+                                      "line": 40,
+                                      "column": 48
+                                    }
+                                  },
+                                  "callee": {
+                                    "type": "MemberExpression",
+                                    "start": 1397,
+                                    "end": 1423,
+                                    "loc": {
+                                      "start": {
+                                        "line": 40,
+                                        "column": 11
+                                      },
+                                      "end": {
+                                        "line": 40,
+                                        "column": 37
+                                      }
+                                    },
+                                    "object": {
+                                      "type": "MemberExpression",
+                                      "start": 1397,
+                                      "end": 1407,
+                                      "loc": {
+                                        "start": {
+                                          "line": 40,
+                                          "column": 11
+                                        },
+                                        "end": {
+                                          "line": 40,
+                                          "column": 21
+                                        }
+                                      },
+                                      "object": {
+                                        "type": "ThisExpression",
+                                        "start": 1397,
+                                        "end": 1401,
+                                        "loc": {
+                                          "start": {
+                                            "line": 40,
+                                            "column": 11
+                                          },
+                                          "end": {
+                                            "line": 40,
+                                            "column": 15
+                                          }
+                                        }
+                                      },
+                                      "property": {
+                                        "type": "Identifier",
+                                        "start": 1402,
+                                        "end": 1407,
+                                        "loc": {
+                                          "start": {
+                                            "line": 40,
+                                            "column": 16
+                                          },
+                                          "end": {
+                                            "line": 40,
+                                            "column": 21
+                                          },
+                                          "identifierName": "items"
+                                        },
+                                        "name": "items"
+                                      },
+                                      "computed": false
+                                    },
+                                    "property": {
+                                      "type": "Identifier",
+                                      "start": 1408,
+                                      "end": 1423,
+                                      "loc": {
+                                        "start": {
+                                          "line": 40,
+                                          "column": 22
+                                        },
+                                        "end": {
+                                          "line": 40,
+                                          "column": 37
+                                        },
+                                        "identifierName": "_getAllSelected"
+                                      },
+                                      "name": "_getAllSelected"
+                                    },
+                                    "computed": false
+                                  },
+                                  "arguments": [
+                                    {
+                                      "type": "StringLiteral",
+                                      "start": 1424,
+                                      "end": 1433,
+                                      "loc": {
+                                        "start": {
+                                          "line": 40,
+                                          "column": 38
+                                        },
+                                        "end": {
+                                          "line": 40,
+                                          "column": 47
+                                        }
+                                      },
+                                      "extra": {
+                                        "rawValue": "checked",
+                                        "raw": "'checked'"
+                                      },
+                                      "value": "checked"
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "directives": []
+                          },
+                          "leadingComments": [
+                            {
+                              "type": "CommentBlock",
+                              "value": "*\n   Returns an Array containing the selected field group items.\n\n   @type {Array.<HTMLElement>}\n   @readonly\n   ",
+                              "start": 1244,
+                              "end": 1361,
+                              "loc": {
+                                "start": {
+                                  "line": 33,
+                                  "column": 2
+                                },
+                                "end": {
+                                  "line": 38,
+                                  "column": 5
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   }
                 ]
-              }
-            ]
-          },
+              },
+              "leadingComments": null
+            }
+          ],
+          "kind": "const",
           "leadingComments": [
             {
               "type": "CommentBlock",
               "value": "*\n @class Coral.CheckboxGroup\n @classdesc A CheckboxGroup component to group checkbox fields\n @htmltag coral-checkboxgroup\n @extends {HTMLElement}\n @extends {BaseComponent}\n @extends {BaseFieldGroup}\n ",
-              "start": 791,
-              "end": 996,
+              "start": 843,
+              "end": 1048,
               "loc": {
                 "start": {
-                  "line": 17,
+                  "line": 18,
                   "column": 0
                 },
                 "end": {
-                  "line": 24,
+                  "line": 25,
                   "column": 3
                 }
               }
             }
           ],
-          "__PseudoExport__": false,
           "trailingComments": []
-        },
-        "leadingComments": null
+        }
       }
     ],
     "directives": []
@@ -1357,15 +1579,15 @@
     {
       "type": "CommentBlock",
       "value": "*\n @class Coral.CheckboxGroup\n @classdesc A CheckboxGroup component to group checkbox fields\n @htmltag coral-checkboxgroup\n @extends {HTMLElement}\n @extends {BaseComponent}\n @extends {BaseFieldGroup}\n ",
-      "start": 791,
-      "end": 996,
+      "start": 843,
+      "end": 1048,
       "loc": {
         "start": {
-          "line": 17,
+          "line": 18,
           "column": 0
         },
         "end": {
-          "line": 24,
+          "line": 25,
           "column": 3
         }
       }
@@ -1373,15 +1595,15 @@
     {
       "type": "CommentBlock",
       "value": "* @private ",
-      "start": 1072,
-      "end": 1087,
+      "start": 1142,
+      "end": 1157,
       "loc": {
         "start": {
-          "line": 26,
+          "line": 27,
           "column": 2
         },
         "end": {
-          "line": 26,
+          "line": 27,
           "column": 17
         }
       }
@@ -1389,15 +1611,15 @@
     {
       "type": "CommentLine",
       "value": " Used for Collection",
-      "start": 1115,
-      "end": 1137,
+      "start": 1185,
+      "end": 1207,
       "loc": {
         "start": {
-          "line": 28,
+          "line": 29,
           "column": 4
         },
         "end": {
-          "line": 28,
+          "line": 29,
           "column": 26
         }
       }
@@ -1405,15 +1627,15 @@
     {
       "type": "CommentBlock",
       "value": "*\n   Returns an Array containing the selected field group items.\n\n   @type {Array.<HTMLElement>}\n   @readonly\n   ",
-      "start": 1174,
-      "end": 1291,
+      "start": 1244,
+      "end": 1361,
       "loc": {
         "start": {
-          "line": 32,
+          "line": 33,
           "column": 2
         },
         "end": {
-          "line": 37,
+          "line": 38,
           "column": 5
         }
       }
@@ -1884,18 +2106,333 @@
       }
     },
     {
-      "type": "CommentBlock",
-      "value": "*\n @class Coral.CheckboxGroup\n @classdesc A CheckboxGroup component to group checkbox fields\n @htmltag coral-checkboxgroup\n @extends {HTMLElement}\n @extends {BaseComponent}\n @extends {BaseFieldGroup}\n ",
-      "start": 791,
-      "end": 996,
+      "type": {
+        "label": "import",
+        "keyword": "import",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "import",
+      "start": 790,
+      "end": 796,
       "loc": {
         "start": {
-          "line": 17,
+          "line": 16,
           "column": 0
         },
         "end": {
-          "line": 24,
+          "line": 16,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 797,
+      "end": 798,
+      "loc": {
+        "start": {
+          "line": 16,
+          "column": 7
+        },
+        "end": {
+          "line": 16,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "Decorator",
+      "start": 798,
+      "end": 807,
+      "loc": {
+        "start": {
+          "line": 16,
+          "column": 8
+        },
+        "end": {
+          "line": 16,
+          "column": 17
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 807,
+      "end": 808,
+      "loc": {
+        "start": {
+          "line": 16,
+          "column": 17
+        },
+        "end": {
+          "line": 16,
+          "column": 18
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "from",
+      "start": 809,
+      "end": 813,
+      "loc": {
+        "start": {
+          "line": 16,
+          "column": 19
+        },
+        "end": {
+          "line": 16,
+          "column": 23
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "../../../coral-decorator",
+      "start": 814,
+      "end": 840,
+      "loc": {
+        "start": {
+          "line": 16,
+          "column": 24
+        },
+        "end": {
+          "line": 16,
+          "column": 50
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 840,
+      "end": 841,
+      "loc": {
+        "start": {
+          "line": 16,
+          "column": 50
+        },
+        "end": {
+          "line": 16,
+          "column": 51
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n @class Coral.CheckboxGroup\n @classdesc A CheckboxGroup component to group checkbox fields\n @htmltag coral-checkboxgroup\n @extends {HTMLElement}\n @extends {BaseComponent}\n @extends {BaseFieldGroup}\n ",
+      "start": 843,
+      "end": 1048,
+      "loc": {
+        "start": {
+          "line": 18,
+          "column": 0
+        },
+        "end": {
+          "line": 25,
           "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "const",
+        "keyword": "const",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "const",
+      "start": 1049,
+      "end": 1054,
+      "loc": {
+        "start": {
+          "line": 26,
+          "column": 0
+        },
+        "end": {
+          "line": 26,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "CheckboxGroup",
+      "start": 1055,
+      "end": 1068,
+      "loc": {
+        "start": {
+          "line": 26,
+          "column": 6
+        },
+        "end": {
+          "line": 26,
+          "column": 19
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 1069,
+      "end": 1070,
+      "loc": {
+        "start": {
+          "line": 26,
+          "column": 20
+        },
+        "end": {
+          "line": 26,
+          "column": 21
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "Decorator",
+      "start": 1071,
+      "end": 1080,
+      "loc": {
+        "start": {
+          "line": 26,
+          "column": 22
+        },
+        "end": {
+          "line": 26,
+          "column": 31
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "(",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 1080,
+      "end": 1081,
+      "loc": {
+        "start": {
+          "line": 26,
+          "column": 31
+        },
+        "end": {
+          "line": 26,
+          "column": 32
         }
       }
     },
@@ -1914,42 +2451,16 @@
         "updateContext": null
       },
       "value": "class",
-      "start": 997,
-      "end": 1002,
+      "start": 1081,
+      "end": 1086,
       "loc": {
         "start": {
-          "line": 25,
-          "column": 0
+          "line": 26,
+          "column": 32
         },
         "end": {
-          "line": 25,
-          "column": 5
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "value": "CheckboxGroup",
-      "start": 1003,
-      "end": 1016,
-      "loc": {
-        "start": {
-          "line": 25,
-          "column": 6
-        },
-        "end": {
-          "line": 25,
-          "column": 19
+          "line": 26,
+          "column": 37
         }
       }
     },
@@ -1968,16 +2479,16 @@
         "updateContext": null
       },
       "value": "extends",
-      "start": 1017,
-      "end": 1024,
+      "start": 1087,
+      "end": 1094,
       "loc": {
         "start": {
-          "line": 25,
-          "column": 20
+          "line": 26,
+          "column": 38
         },
         "end": {
-          "line": 25,
-          "column": 27
+          "line": 26,
+          "column": 45
         }
       }
     },
@@ -1994,16 +2505,16 @@
         "binop": null
       },
       "value": "BaseFieldGroup",
-      "start": 1025,
-      "end": 1039,
+      "start": 1095,
+      "end": 1109,
       "loc": {
         "start": {
-          "line": 25,
-          "column": 28
+          "line": 26,
+          "column": 46
         },
         "end": {
-          "line": 25,
-          "column": 42
+          "line": 26,
+          "column": 60
         }
       }
     },
@@ -2019,16 +2530,16 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1039,
-      "end": 1040,
+      "start": 1109,
+      "end": 1110,
       "loc": {
         "start": {
-          "line": 25,
-          "column": 42
+          "line": 26,
+          "column": 60
         },
         "end": {
-          "line": 25,
-          "column": 43
+          "line": 26,
+          "column": 61
         }
       }
     },
@@ -2045,16 +2556,16 @@
         "binop": null
       },
       "value": "BaseComponent",
-      "start": 1040,
-      "end": 1053,
+      "start": 1110,
+      "end": 1123,
       "loc": {
         "start": {
-          "line": 25,
-          "column": 43
+          "line": 26,
+          "column": 61
         },
         "end": {
-          "line": 25,
-          "column": 56
+          "line": 26,
+          "column": 74
         }
       }
     },
@@ -2070,16 +2581,16 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1053,
-      "end": 1054,
+      "start": 1123,
+      "end": 1124,
       "loc": {
         "start": {
-          "line": 25,
-          "column": 56
+          "line": 26,
+          "column": 74
         },
         "end": {
-          "line": 25,
-          "column": 57
+          "line": 26,
+          "column": 75
         }
       }
     },
@@ -2096,16 +2607,16 @@
         "binop": null
       },
       "value": "HTMLElement",
-      "start": 1054,
-      "end": 1065,
+      "start": 1124,
+      "end": 1135,
       "loc": {
         "start": {
-          "line": 25,
-          "column": 57
+          "line": 26,
+          "column": 75
         },
         "end": {
-          "line": 25,
-          "column": 68
+          "line": 26,
+          "column": 86
         }
       }
     },
@@ -2121,16 +2632,16 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1065,
-      "end": 1066,
+      "start": 1135,
+      "end": 1136,
       "loc": {
         "start": {
-          "line": 25,
-          "column": 68
+          "line": 26,
+          "column": 86
         },
         "end": {
-          "line": 25,
-          "column": 69
+          "line": 26,
+          "column": 87
         }
       }
     },
@@ -2146,16 +2657,16 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1066,
-      "end": 1067,
+      "start": 1136,
+      "end": 1137,
       "loc": {
         "start": {
-          "line": 25,
-          "column": 69
+          "line": 26,
+          "column": 87
         },
         "end": {
-          "line": 25,
-          "column": 70
+          "line": 26,
+          "column": 88
         }
       }
     },
@@ -2171,31 +2682,31 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1068,
-      "end": 1069,
+      "start": 1138,
+      "end": 1139,
       "loc": {
         "start": {
-          "line": 25,
-          "column": 71
+          "line": 26,
+          "column": 89
         },
         "end": {
-          "line": 25,
-          "column": 72
+          "line": 26,
+          "column": 90
         }
       }
     },
     {
       "type": "CommentBlock",
       "value": "* @private ",
-      "start": 1072,
-      "end": 1087,
+      "start": 1142,
+      "end": 1157,
       "loc": {
         "start": {
-          "line": 26,
+          "line": 27,
           "column": 2
         },
         "end": {
-          "line": 26,
+          "line": 27,
           "column": 17
         }
       }
@@ -2213,15 +2724,15 @@
         "binop": null
       },
       "value": "get",
-      "start": 1090,
-      "end": 1093,
+      "start": 1160,
+      "end": 1163,
       "loc": {
         "start": {
-          "line": 27,
+          "line": 28,
           "column": 2
         },
         "end": {
-          "line": 27,
+          "line": 28,
           "column": 5
         }
       }
@@ -2239,15 +2750,15 @@
         "binop": null
       },
       "value": "_itemTagName",
-      "start": 1094,
-      "end": 1106,
+      "start": 1164,
+      "end": 1176,
       "loc": {
         "start": {
-          "line": 27,
+          "line": 28,
           "column": 6
         },
         "end": {
-          "line": 27,
+          "line": 28,
           "column": 18
         }
       }
@@ -2264,15 +2775,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1106,
-      "end": 1107,
+      "start": 1176,
+      "end": 1177,
       "loc": {
         "start": {
-          "line": 27,
+          "line": 28,
           "column": 18
         },
         "end": {
-          "line": 27,
+          "line": 28,
           "column": 19
         }
       }
@@ -2289,15 +2800,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1107,
-      "end": 1108,
+      "start": 1177,
+      "end": 1178,
       "loc": {
         "start": {
-          "line": 27,
+          "line": 28,
           "column": 19
         },
         "end": {
-          "line": 27,
+          "line": 28,
           "column": 20
         }
       }
@@ -2314,15 +2825,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1109,
-      "end": 1110,
+      "start": 1179,
+      "end": 1180,
       "loc": {
         "start": {
-          "line": 27,
+          "line": 28,
           "column": 21
         },
         "end": {
-          "line": 27,
+          "line": 28,
           "column": 22
         }
       }
@@ -2330,15 +2841,15 @@
     {
       "type": "CommentLine",
       "value": " Used for Collection",
-      "start": 1115,
-      "end": 1137,
+      "start": 1185,
+      "end": 1207,
       "loc": {
         "start": {
-          "line": 28,
+          "line": 29,
           "column": 4
         },
         "end": {
-          "line": 28,
+          "line": 29,
           "column": 26
         }
       }
@@ -2358,15 +2869,15 @@
         "updateContext": null
       },
       "value": "return",
-      "start": 1142,
-      "end": 1148,
+      "start": 1212,
+      "end": 1218,
       "loc": {
         "start": {
-          "line": 29,
+          "line": 30,
           "column": 4
         },
         "end": {
-          "line": 29,
+          "line": 30,
           "column": 10
         }
       }
@@ -2385,15 +2896,15 @@
         "updateContext": null
       },
       "value": "coral-checkbox",
-      "start": 1149,
-      "end": 1165,
+      "start": 1219,
+      "end": 1235,
       "loc": {
         "start": {
-          "line": 29,
+          "line": 30,
           "column": 11
         },
         "end": {
-          "line": 29,
+          "line": 30,
           "column": 27
         }
       }
@@ -2411,15 +2922,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1165,
-      "end": 1166,
+      "start": 1235,
+      "end": 1236,
       "loc": {
         "start": {
-          "line": 29,
+          "line": 30,
           "column": 27
         },
         "end": {
-          "line": 29,
+          "line": 30,
           "column": 28
         }
       }
@@ -2436,15 +2947,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1169,
-      "end": 1170,
+      "start": 1239,
+      "end": 1240,
       "loc": {
         "start": {
-          "line": 30,
+          "line": 31,
           "column": 2
         },
         "end": {
-          "line": 30,
+          "line": 31,
           "column": 3
         }
       }
@@ -2452,15 +2963,15 @@
     {
       "type": "CommentBlock",
       "value": "*\n   Returns an Array containing the selected field group items.\n\n   @type {Array.<HTMLElement>}\n   @readonly\n   ",
-      "start": 1174,
-      "end": 1291,
+      "start": 1244,
+      "end": 1361,
       "loc": {
         "start": {
-          "line": 32,
+          "line": 33,
           "column": 2
         },
         "end": {
-          "line": 37,
+          "line": 38,
           "column": 5
         }
       }
@@ -2478,15 +2989,15 @@
         "binop": null
       },
       "value": "get",
-      "start": 1294,
-      "end": 1297,
+      "start": 1364,
+      "end": 1367,
       "loc": {
         "start": {
-          "line": 38,
+          "line": 39,
           "column": 2
         },
         "end": {
-          "line": 38,
+          "line": 39,
           "column": 5
         }
       }
@@ -2504,15 +3015,15 @@
         "binop": null
       },
       "value": "selectedItems",
-      "start": 1298,
-      "end": 1311,
+      "start": 1368,
+      "end": 1381,
       "loc": {
         "start": {
-          "line": 38,
+          "line": 39,
           "column": 6
         },
         "end": {
-          "line": 38,
+          "line": 39,
           "column": 19
         }
       }
@@ -2529,15 +3040,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1311,
-      "end": 1312,
+      "start": 1381,
+      "end": 1382,
       "loc": {
         "start": {
-          "line": 38,
+          "line": 39,
           "column": 19
         },
         "end": {
-          "line": 38,
+          "line": 39,
           "column": 20
         }
       }
@@ -2554,15 +3065,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1312,
-      "end": 1313,
+      "start": 1382,
+      "end": 1383,
       "loc": {
         "start": {
-          "line": 38,
+          "line": 39,
           "column": 20
         },
         "end": {
-          "line": 38,
+          "line": 39,
           "column": 21
         }
       }
@@ -2579,15 +3090,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1314,
-      "end": 1315,
+      "start": 1384,
+      "end": 1385,
       "loc": {
         "start": {
-          "line": 38,
+          "line": 39,
           "column": 22
         },
         "end": {
-          "line": 38,
+          "line": 39,
           "column": 23
         }
       }
@@ -2607,15 +3118,15 @@
         "updateContext": null
       },
       "value": "return",
-      "start": 1320,
-      "end": 1326,
+      "start": 1390,
+      "end": 1396,
       "loc": {
         "start": {
-          "line": 39,
+          "line": 40,
           "column": 4
         },
         "end": {
-          "line": 39,
+          "line": 40,
           "column": 10
         }
       }
@@ -2635,15 +3146,15 @@
         "updateContext": null
       },
       "value": "this",
-      "start": 1327,
-      "end": 1331,
+      "start": 1397,
+      "end": 1401,
       "loc": {
         "start": {
-          "line": 39,
+          "line": 40,
           "column": 11
         },
         "end": {
-          "line": 39,
+          "line": 40,
           "column": 15
         }
       }
@@ -2661,15 +3172,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1331,
-      "end": 1332,
+      "start": 1401,
+      "end": 1402,
       "loc": {
         "start": {
-          "line": 39,
+          "line": 40,
           "column": 15
         },
         "end": {
-          "line": 39,
+          "line": 40,
           "column": 16
         }
       }
@@ -2687,15 +3198,15 @@
         "binop": null
       },
       "value": "items",
-      "start": 1332,
-      "end": 1337,
+      "start": 1402,
+      "end": 1407,
       "loc": {
         "start": {
-          "line": 39,
+          "line": 40,
           "column": 16
         },
         "end": {
-          "line": 39,
+          "line": 40,
           "column": 21
         }
       }
@@ -2713,15 +3224,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1337,
-      "end": 1338,
+      "start": 1407,
+      "end": 1408,
       "loc": {
         "start": {
-          "line": 39,
+          "line": 40,
           "column": 21
         },
         "end": {
-          "line": 39,
+          "line": 40,
           "column": 22
         }
       }
@@ -2739,15 +3250,15 @@
         "binop": null
       },
       "value": "_getAllSelected",
-      "start": 1338,
-      "end": 1353,
+      "start": 1408,
+      "end": 1423,
       "loc": {
         "start": {
-          "line": 39,
+          "line": 40,
           "column": 22
         },
         "end": {
-          "line": 39,
+          "line": 40,
           "column": 37
         }
       }
@@ -2764,15 +3275,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1353,
-      "end": 1354,
+      "start": 1423,
+      "end": 1424,
       "loc": {
         "start": {
-          "line": 39,
+          "line": 40,
           "column": 37
         },
         "end": {
-          "line": 39,
+          "line": 40,
           "column": 38
         }
       }
@@ -2791,15 +3302,15 @@
         "updateContext": null
       },
       "value": "checked",
-      "start": 1354,
-      "end": 1363,
+      "start": 1424,
+      "end": 1433,
       "loc": {
         "start": {
-          "line": 39,
+          "line": 40,
           "column": 38
         },
         "end": {
-          "line": 39,
+          "line": 40,
           "column": 47
         }
       }
@@ -2816,15 +3327,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1363,
-      "end": 1364,
+      "start": 1433,
+      "end": 1434,
       "loc": {
         "start": {
-          "line": 39,
+          "line": 40,
           "column": 47
         },
         "end": {
-          "line": 39,
+          "line": 40,
           "column": 48
         }
       }
@@ -2842,15 +3353,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1364,
-      "end": 1365,
+      "start": 1434,
+      "end": 1435,
       "loc": {
         "start": {
-          "line": 39,
+          "line": 40,
           "column": 48
         },
         "end": {
-          "line": 39,
+          "line": 40,
           "column": 49
         }
       }
@@ -2867,15 +3378,15 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1368,
-      "end": 1369,
+      "start": 1438,
+      "end": 1439,
       "loc": {
         "start": {
-          "line": 40,
+          "line": 41,
           "column": 2
         },
         "end": {
-          "line": 40,
+          "line": 41,
           "column": 3
         }
       }
@@ -2892,16 +3403,67 @@
         "postfix": false,
         "binop": null
       },
-      "start": 1370,
-      "end": 1371,
+      "start": 1440,
+      "end": 1441,
       "loc": {
         "start": {
-          "line": 41,
+          "line": 42,
           "column": 0
         },
         "end": {
-          "line": 41,
+          "line": 42,
           "column": 1
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ")",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 1441,
+      "end": 1442,
+      "loc": {
+        "start": {
+          "line": 42,
+          "column": 1
+        },
+        "end": {
+          "line": 42,
+          "column": 2
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1442,
+      "end": 1443,
+      "loc": {
+        "start": {
+          "line": 42,
+          "column": 2
+        },
+        "end": {
+          "line": 42,
+          "column": 3
         }
       }
     },
@@ -2920,15 +3482,15 @@
         "updateContext": null
       },
       "value": "export",
-      "start": 1373,
-      "end": 1379,
+      "start": 1445,
+      "end": 1451,
       "loc": {
         "start": {
-          "line": 43,
+          "line": 44,
           "column": 0
         },
         "end": {
-          "line": 43,
+          "line": 44,
           "column": 6
         }
       }
@@ -2948,15 +3510,15 @@
         "updateContext": null
       },
       "value": "default",
-      "start": 1380,
-      "end": 1387,
+      "start": 1452,
+      "end": 1459,
       "loc": {
         "start": {
-          "line": 43,
+          "line": 44,
           "column": 7
         },
         "end": {
-          "line": 43,
+          "line": 44,
           "column": 14
         }
       }
@@ -2974,15 +3536,15 @@
         "binop": null
       },
       "value": "CheckboxGroup",
-      "start": 1388,
-      "end": 1401,
+      "start": 1460,
+      "end": 1473,
       "loc": {
         "start": {
-          "line": 43,
+          "line": 44,
           "column": 15
         },
         "end": {
-          "line": 43,
+          "line": 44,
           "column": 28
         }
       }
@@ -3000,15 +3562,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1401,
-      "end": 1402,
+      "start": 1473,
+      "end": 1474,
       "loc": {
         "start": {
-          "line": 43,
+          "line": 44,
           "column": 28
         },
         "end": {
-          "line": 43,
+          "line": 44,
           "column": 29
         }
       }
@@ -3026,15 +3588,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1403,
-      "end": 1403,
+      "start": 1475,
+      "end": 1475,
       "loc": {
         "start": {
-          "line": 44,
+          "line": 45,
           "column": 0
         },
         "end": {
-          "line": 44,
+          "line": 45,
           "column": 0
         }
       }

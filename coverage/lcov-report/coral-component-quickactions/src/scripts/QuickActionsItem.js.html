@@ -29,16 +29,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.23% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>18/26</span>
+                <span class='fraction'>18/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.47% </span>
+                <span class="strong">85% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>17/19</span>
+                <span class='fraction'>17/20</span>
             </div>
         
             
@@ -307,7 +307,8 @@
 <a name='L249'></a><a href='#L249'>249</a>
 <a name='L250'></a><a href='#L250'>250</a>
 <a name='L251'></a><a href='#L251'>251</a>
-<a name='L252'></a><a href='#L252'>252</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L252'></a><a href='#L252'>252</a>
+<a name='L253'></a><a href='#L253'>253</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -407,10 +408,15 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -554,11 +560,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">386x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">386x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">386x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -654,19 +656,19 @@ const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
   }
 &nbsp;
   /**
-   Specifies the nam<span class="fstat-no" title="function not covered" >e of the icon to</span> be shown in the QuickActions Item. See {@link Icon} for valid icon
+   Specifies the nam<span class="fstat-no" title="function not covered" >e of the icon to </span>be shown in the QuickActions Item. See {@link Icon} for valid icon
    nam<span class="cstat-no" title="statement not covered" >es.</span>
 &nbsp;
    @ty<span class="cstat-no" title="statement not covered" >pe {String}</span>
-   @defa<span class="cstat-no" title="statement not covered" >ult ""</span>
+   @default ""
    @htmlattribute icon
-   @html<span class="cstat-no" title="statement not covered" >attributereflected</span>
+   @htmlattributereflected
    @emits {coral-quickactions-item:_iconchanged}
    */
-  get icon() {
-    return this._icon || '';
+  get icon() {<span class="fstat-no" title="function not covered" ></span>
+    re<span class="cstat-no" title="statement not covered" >turn this._icon || '';</span>
   }
-&nbsp;
+<span class="cstat-no" title="statement not covered" ></span>
   set icon(value) {
     value = transform.string(value);
 &nbsp;
@@ -724,12 +726,12 @@ const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
 &nbsp;
    @private
    */
-  _onM<span class="missing-if-branch" title="else path not taken" >E</span>utation() {
+  _onMutation() {
     this._messenger.postMessage('coral-quickactions-item:_contentchanged');
   }
 &nbsp;
   /**
-   Returns {@link QuickActionsItem} type options.
+   Ret<span class="missing-if-branch" title="else path not taken" >E</span>urns {@link QuickActionsItem} type options.
 &nbsp;
    @return {QuickActionsItemTypeEnum}
    */
@@ -743,16 +745,17 @@ const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
   }
 &nbsp;
   /** @ignore */
-  _updateCallback(connected) {
-    super._updateCallback(connected);
-&nbsp;
-    if(connected) {
-      this._messenger.connect();
-    } <span class="missing-if-branch" title="else path not taken" >E</span>else {
-      this._messenger.disconnect();
-    }
+  _suspendCallback() {
+    super._suspendCallback();
+    this._messenger.disconnect();
   }
 &nbsp;
+  /** @ignore */
+  _resumeCallback() {
+    this._messenger.connect();
+    super._resumeCallback();
+  }
+<span class="missing-if-branch" title="else path not taken" >E</span>
   /** @ignore */
   connectedCallback() {
     this._messenger.connect();
@@ -774,11 +777,11 @@ const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
       this.type = type.BUTTON;
     }
   }
-<span class="missing-if-branch" title="else path not taken" >E</span>
+&nbsp;
   /**
    Triggered when an icon of a {@link QuickActionsItem} was changed.
 &nbsp;
-   @typedef {CustomEvent} coral-quickactions-item:_iconchanged
+   @ty<span class="missing-if-branch" title="else path not taken" >E</span>pedef {CustomEvent} coral-quickactions-item:_iconchanged
 &nbsp;
    @private
    */
@@ -794,11 +797,11 @@ const QuickActionsItem = Decorator(class extends BaseComponent(HTMLElement) {
   /**
    Triggered when the href of a {@link QuickActionsItem} was changed.
 &nbsp;
-   @typedef {CustomEvent} c<span class="branch-1 cbranch-no" title="branch not covered" >oral-quickac</span>tions-item:_hrefchanged
+   @typedef {CustomEvent} coral-quickactions-item:_hrefchanged
 &nbsp;
    @private
    */
-&nbsp;
+<span class="branch-1 cbranch-no" title="branch not covered" ></span>
   /**
    Triggered when the type of a {@link QuickActionsItem} was changed.
 &nbsp;
@@ -816,7 +819,7 @@ export default QuickActionsItem;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Jun 25 2021 11:49:18 GMT+0000 (Coordinated Universal Time)
+                at Mon Jul 19 2021 10:05:18 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

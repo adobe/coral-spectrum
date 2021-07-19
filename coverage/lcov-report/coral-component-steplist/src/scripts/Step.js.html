@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.03% </span>
+                <span class="strong">85.92% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>125/142</span>
+                <span class='fraction'>122/142</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.55% </span>
+                <span class="strong">74.49% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>76/98</span>
+                <span class='fraction'>73/98</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.03% </span>
+                <span class="strong">85.92% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>125/142</span>
+                <span class='fraction'>122/142</span>
             </div>
         
             
@@ -479,7 +479,9 @@
 <a name='L421'></a><a href='#L421'>421</a>
 <a name='L422'></a><a href='#L422'>422</a>
 <a name='L423'></a><a href='#L423'>423</a>
-<a name='L424'></a><a href='#L424'>424</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L424'></a><a href='#L424'>424</a>
+<a name='L425'></a><a href='#L425'>425</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -605,14 +607,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">688x</span>
+<span class="cline-any cline-yes">676x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">688x</span>
+<span class="cline-any cline-yes">676x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">688x</span>
+<span class="cline-any cline-yes">676x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">688x</span>
-<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">676x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -681,13 +683,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">688x</span>
+<span class="cline-any cline-yes">676x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">688x</span>
+<span class="cline-any cline-yes">676x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">688x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">676x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -920,6 +922,7 @@ import step from '../templates/step';
 import {transform, commons} from '../../../coral-utils';
 import getTarget from './getTarget';
 import StepList from './StepList';
+import {Decorator} from '../../../coral-decorator';
 &nbsp;
 const CLASSNAME = '_coral-Steplist-item';
 &nbsp;
@@ -930,7 +933,7 @@ const CLASSNAME = '_coral-Steplist-item';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Step extends BaseComponent(HTMLElement) {
+const Step = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -1034,8 +1037,8 @@ class Step extends BaseComponent(HTMLElement) {
   }
 &nbsp;
   set disabled(value) {
-    this._disabled = transform.booleanAttr(value);
-    this._reflectAttribute('disabled', this._disabled);
+    th<span class="missing-if-branch" title="if path not taken" >I</span>is._disabled = transform.booleanAttr(value);
+    this<span class="cstat-no" title="statement not covered" >._reflectAttribute('disabled', this._d</span>isabled);
     this.classList.toggle('is-disabled', this.disabled);
     const stepList = this.parentElement;
     if (stepList) {
@@ -1108,9 +1111,9 @@ class Step extends BaseComponent(HTMLElement) {
     return this._describedBy || this.getAttribute('describedby') || this._elements.link.getAttribute('aria-describedby') || '';
   }
 &nbsp;
-  set describedBy(value) {
-    this._describedBy = transform.string(value);<span class="branch-0 cbranch-no" title="branch not covered" ></span>
-    this._reflectAttribute('describedby', value || false);
+  set <span class="missing-if-branch" title="if path not taken" >I</span>describedBy(value) {
+    this<span class="cstat-no" title="statement not covered" >._describedBy = transform.string(value);</span>
+    this<span class="cstat-no" title="statement not covered" >._reflectAttribute</span>('describedby', value || false);
     if (this._describedBy !== '') {
       this._elements.link.setAttribute('aria-describedby', this._describedBy);
     } else {
@@ -1322,7 +1325,7 @@ class Step extends BaseComponent(HTMLElement) {
       overlay.remove();
     }
   }
-}
+});
 &nbsp;
 export default Step;
 &nbsp;</pre></td></tr></table></pre>
@@ -1332,7 +1335,7 @@ export default Step;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Jun 25 2021 11:49:18 GMT+0000 (Coordinated Universal Time)
+                at Mon Jul 19 2021 10:05:18 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
