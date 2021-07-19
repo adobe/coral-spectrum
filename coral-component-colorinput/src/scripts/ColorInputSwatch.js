@@ -16,6 +16,7 @@ import Color from './Color';
 import '../../../coral-component-button';
 import colorButton from '../templates/colorButton';
 import {commons, i18n, transform} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-ColorInput-swatch';
 
@@ -27,7 +28,7 @@ const CLASSNAME = '_coral-ColorInput-swatch';
  @extends {BaseComponent}
  @extends {BaseColorInputAbstractSubview}
  */
-class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLElement)) {
+const ColorInputSwatch = Decorator(class extends BaseColorInputAbstractSubview(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -193,6 +194,6 @@ class ColorInputSwatch extends BaseColorInputAbstractSubview(BaseComponent(HTMLE
 
     this.appendChild(this._elements.colorButton);
   }
-}
+});
 
 export default ColorInputSwatch;

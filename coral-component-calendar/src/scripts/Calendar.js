@@ -19,6 +19,7 @@ import calendar from '../templates/calendar';
 import container from '../templates/container';
 import table from '../templates/table';
 import {transform, commons, i18n, Keys} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 /** @ignore */
 function isDateInRange(date, startDate, endDate) {
@@ -180,7 +181,7 @@ const CLASSNAME = '_coral-Calendar';
  @extends {BaseComponent}
  @extends {BaseFormField}
  */
-class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
+const Calendar = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   constructor() {
     super();
@@ -1104,6 +1105,6 @@ class Calendar extends BaseFormField(BaseComponent(HTMLElement)) {
       this._renderCalendar();
     }
   }
-}
+});
 
 export default Calendar;

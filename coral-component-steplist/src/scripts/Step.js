@@ -16,6 +16,7 @@ import step from '../templates/step';
 import {transform, commons} from '../../../coral-utils';
 import getTarget from './getTarget';
 import StepList from './StepList';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Steplist-item';
 
@@ -26,7 +27,7 @@ const CLASSNAME = '_coral-Steplist-item';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Step extends BaseComponent(HTMLElement) {
+const Step = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -418,6 +419,6 @@ class Step extends BaseComponent(HTMLElement) {
       overlay.remove();
     }
   }
-}
+});
 
 export default Step;

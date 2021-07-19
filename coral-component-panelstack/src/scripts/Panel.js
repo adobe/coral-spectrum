@@ -12,6 +12,7 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {transform} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Panel';
 
@@ -22,7 +23,7 @@ const CLASSNAME = '_coral-Panel';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Panel extends BaseComponent(HTMLElement) {
+const Panel = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -116,6 +117,6 @@ class Panel extends BaseComponent(HTMLElement) {
     // Assign the content zone so the insert function will be called
     this.content = content;
   }
-}
+});
 
 export default Panel;

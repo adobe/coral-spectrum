@@ -15,6 +15,7 @@ import '../../../coral-component-button';
 import item from '../templates/item';
 import {DragAction} from '../../../coral-dragaction';
 import {i18n, transform, commons} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Multifield-item';
 
@@ -26,7 +27,7 @@ const CLASSNAME = '_coral-Multifield-item';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class MultifieldItem extends BaseComponent(HTMLElement) {
+const MultifieldItem = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -161,6 +162,6 @@ class MultifieldItem extends BaseComponent(HTMLElement) {
     dragAction.axis = 'vertical';
     dragAction.handle = this._elements.move;
   }
-}
+});
 
 export default MultifieldItem;

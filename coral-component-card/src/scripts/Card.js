@@ -13,6 +13,7 @@
 import {BaseComponent} from '../../../coral-base-component';
 import base from '../templates/base';
 import {commons, transform, validate} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const COLOR_HINT_REG_EXP = /^#[0-9A-F]{6}$/i;
 
@@ -57,7 +58,7 @@ for (const variantValue in variant) {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Card extends BaseComponent(HTMLElement) {
+const Card = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -421,6 +422,6 @@ class Card extends BaseComponent(HTMLElement) {
       this.classList.toggle(`${CLASSNAME}--overflow`, this.info.childNodes.length && this.info.scrollHeight > this.clientHeight);
     });
   }
-}
+});
 
 export default Card;

@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Adobe. All rights reserved.
+ * Copyright 2021 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -23,11 +23,11 @@ const SCOPE_SELECTOR = ':scope > ';
  * coral internal events and not any DOM based or public events.
  *
  * Limitations :
-   - This doesnot support the case where any change in child property,
-     needs to be notified to two or more parents.
-     This is achievable, but not currently supported.
-   - Do not use messenger for generic events like click, hover, etc.
-  @private
+ * - This doesnot support the case where any change in child property, needs to be notified
+ *   to two or more parents. This is achievable, but not currently supported.
+ * - Use this to post message only coral internal events.
+ * - Do not use for DOM events or public events.
+ * @private
  */
 
 class Messenger {
@@ -39,33 +39,37 @@ class Messenger {
     this._clearListeners();
   }
 
-  /* checks whether Messenger is connected or not.
-    @returns {Boolean} true if connected
-    @private
+  /**
+   * checks whether Messenger is connected or not.
+   * @returns {Boolean} true if connected
+   * @private
    */
   get isConnected() {
     return this._connected === true;
   }
 
-  /* checks whether the event is silenced or not
-    @returns {Boolean} true if silenced
-    @private
+  /**
+   * checks whether the event is silenced or not
+   * @returns {Boolean} true if silenced
+   * @private
    */
   get isSilenced() {
     return this._element._silenced === true;
   }
 
-  /* specifies the list of listener attached to messenger.
-    @returns {Array} array of listeners
-    @private
+  /**
+   * specifies the list of listener attached to messenger.
+   * @returns {Array} array of listeners
+   * @private
    */
   get listeners() {
     return this._listeners;
   }
 
-  /* add a message to the queue only if messenger is not connected
-    message will be added only if element is not connected.
-    @private
+  /**
+   * add a message to the queue only if messenger is not connected
+   * message will be added only if element is not connected.
+   * @private
    */
   _addMessageToQueue(message, detail) {
     if(!this.isConnected) {
@@ -76,9 +80,10 @@ class Messenger {
     }
   }
 
-  /* executes the stored queue messages.
-    It will be executed when element is connected.
-    @private
+  /**
+   * executes the stored queue messages.
+   * It will be executed when element is connected.
+   * @private
    */
   _executeQueue() {
     this._queue.forEach((options) => {
@@ -87,24 +92,27 @@ class Messenger {
     this._clearQueue();
   }
 
-  /* empty the stored queue message
-    @private
+  /**
+   * empty the stored queue message
+   * @private
    */
   _clearQueue() {
     this._queue = [];
   }
 
-  /* clears the listeners
-    @private
+  /**
+   * clears the listeners
+   * @private
    */
   _clearListeners() {
     this._listeners = [];
   }
 
-  /* element should call this method when they are connected in DOM.
-     its the responsibility of the element to call this hook
-    @triggers `${element.tagName.toLowerCase()}:_messengerconnected`
-    @private
+  /**
+   * element should call this method when they are connected in DOM.
+   * its the responsibility of the element to call this hook
+   * @triggers `${element.tagName.toLowerCase()}:_messengerconnected`
+   * @private
    */
   connect() {
     if(!this.isConnected) {
@@ -120,10 +128,11 @@ class Messenger {
     }
   }
 
-  /* add the listener to messenger
-     this handler will be passed when messengerconnect event is trigger
-     the handler needs to be executed by listeners.
-    @private
+  /**
+   * add the listener to messenger
+   * this handler will be passed when messengerconnect event is trigger
+   * the handler needs to be executed by listeners.
+   * @private
    */
   registerListener(listener) {
     if(listener) {
@@ -131,10 +140,11 @@ class Messenger {
     }
   }
 
-  /* post the provided message to all listener.
-    @param {String} message which should be posted
-    @param {Object} additional detail which needs to be posted.
-    @private
+  /**
+   * post the provided message to all listener.
+   * @param {String} message which should be posted
+   * @param {Object} additional detail which needs to be posted.
+   * @private
    */
   _postMessage(message, detail) {
     let element = this._element;
@@ -172,11 +182,12 @@ class Messenger {
     });
   }
 
-  /* post the provided message to all listener,
-     along with validating silencing and storing in queue
-    @param {String} message which should be posted
-    @param {Object} additional detail which needs to be posted.
-    @private
+  /**
+    * post the provided message to all listener,
+    * along with validating silencing and storing in queue
+    * @param {String} message which should be posted
+    * @param {Object} additional detail which needs to be posted.
+    * @private
    */
   postMessage(message, detail) {
     if(this.isSilenced) {
@@ -188,12 +199,22 @@ class Messenger {
       return;
     }
 
+    // element got disconnect and messenger not notified.
+    if(!this._element.isConnected) {
+      // disconnect messenger and again post the same message,
+      // message will get store in queue.
+      this.disconnect();
+      this.postMessage(message, detail);
+      return;
+    }
+
     this._postMessage(message, detail);
   }
 
-  /* element should call this method when they are disconnected from DOM.
-    its the responsibility of the element to call this hook
-    @private
+  /**
+    * element should call this method when they are disconnected from DOM.
+    * Its the responsibility of the element to call this hook
+    * @private
    */
   disconnect() {
     if(this.isConnected) {

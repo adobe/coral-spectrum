@@ -13,6 +13,7 @@
 import {BaseComponent} from '../../../coral-base-component';
 import {Icon} from '../../../coral-component-icon';
 import {transform, validate} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link Alert} variants.
@@ -73,7 +74,7 @@ const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Alert extends BaseComponent(HTMLElement) {
+const Alert = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -314,6 +315,6 @@ class Alert extends BaseComponent(HTMLElement) {
       this[contentZoneName] = this._elements[contentZoneName];
     }
   }
-}
+});
 
 export default Alert;

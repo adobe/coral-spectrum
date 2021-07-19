@@ -12,6 +12,7 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import BaseTableSection from './BaseTableSection';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Table-foot';
 
@@ -24,13 +25,13 @@ const CLASSNAME = '_coral-Table-foot';
  @extends {BaseComponent}
  @extends {BaseTableSection}
  */
-class TableFoot extends BaseTableSection(BaseComponent(HTMLTableSectionElement)) {
+const TableFoot = Decorator(class extends BaseTableSection(BaseComponent(HTMLTableSectionElement)) {
   /** @ignore */
   render() {
     super.render();
 
     this.classList.add(CLASSNAME);
   }
-}
+});
 
 export default TableFoot;

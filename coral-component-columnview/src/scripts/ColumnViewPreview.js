@@ -12,6 +12,7 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {commons} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-MillerColumns-item';
 
@@ -22,7 +23,7 @@ const CLASSNAME = '_coral-MillerColumns-item';
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class ColumnViewPreview extends BaseComponent(HTMLElement) {
+const ColumnViewPreview = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -134,6 +135,6 @@ class ColumnViewPreview extends BaseComponent(HTMLElement) {
       element.setAttribute('alt', '');
     }
   }
-}
+});
 
 export default ColumnViewPreview;

@@ -11,6 +11,7 @@
  */
 
 import {BaseComponent} from '../../../coral-base-component';
+import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAMES = ['coral-Rule', 'coral-Rule--subsection2'];
 
@@ -21,12 +22,12 @@ const CLASSNAMES = ['coral-Rule', 'coral-Rule--subsection2'];
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class PopoverSeparator extends BaseComponent(HTMLElement) {
+const PopoverSeparator = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
     this.classList.add(...CLASSNAMES);
   }
-}
+});
 
 export default PopoverSeparator;

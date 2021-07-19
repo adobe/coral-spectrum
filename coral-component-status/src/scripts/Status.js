@@ -12,6 +12,7 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {transform, validate} from '../../../coral-utils';
+import {Decorator} from '../../../coral-decorator';
 
 /**
  Enumeration for {@link Status} variants.
@@ -90,7 +91,7 @@ for (const colorValue in color) {
  @extends {HTMLElement}
  @extends {BaseComponent}
  */
-class Status extends BaseComponent(HTMLElement) {
+const Status = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   constructor() {
     super();
@@ -259,6 +260,6 @@ class Status extends BaseComponent(HTMLElement) {
     // Assign the content zone moving it into place
     this.label = label;
   }
-}
+});
 
 export default Status;
