@@ -1,0 +1,22 @@
+<js>var uid = data.commons.getUID();</js>
+<div class="_coral-ColorPicker-propertiesSubview" handle="propertiesSubview" role="group">
+  <div class="_coral-ColorPicker-propertiesContainer1" role="presentation">
+    <coral-colorpicker-colorarea handle="propertySL" label="{{data.i18n.get('saturation and luminosity')}}"></coral-colorpicker-colorarea>
+    <coral-colorpicker-colorsliderhue handle="propertyHue" label="{{data.i18n.get('Hue')}}"></coral-colorpicker-colorsliderhue>
+  </div>
+  <div class="_coral-ColorPicker-propertiesContainer2" role="presentation">
+    <coral-select class="_coral-ColorPicker-formatSelector" handle="formatSelector" variant="quiet" labelled="{{data.i18n.get('Select Color Format')}}">
+       <coral-select-item value="hsl">{{data.i18n.get('HSL')}}</coral-select-item>
+       <coral-select-item value="hsv">{{data.i18n.get('HSV')}}</coral-select-item>
+       <coral-select-item value="hex">{{data.i18n.get('Hex')}}</coral-select-item>
+       <coral-select-item value="hex3">{{data.i18n.get('Hex3')}}</coral-select-item>
+       <coral-select-item value="hex4">{{data.i18n.get('Hex4')}}</coral-select-item>
+       <coral-select-item value="hex8">{{data.i18n.get('Hex8')}}</coral-select-item>
+       <coral-select-item value="rgb">{{data.i18n.get('RGB')}}</coral-select-item>
+       <coral-select-item value="prgb">{{data.i18n.get('PRGB')}}</coral-select-item>
+       <coral-select-item value="name">{{data.i18n.get('Name')}}</coral-select-item>
+    </coral-select>
+    <input type="text" is="coral-textfield" class="_coral-ColorPicker-inputField" placeholder="{{data.i18n.get('Enter Color Value')}}" 
+      handle="colorInput" variant="quiet" aria-label="{{data.i18n.get('Color Value')}}">
+  </div>
+</div>
