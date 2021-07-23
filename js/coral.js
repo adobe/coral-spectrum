@@ -58626,7 +58626,10 @@ var Coral = (function (exports) {
           window.requestAnimationFrame(function () {
             // Skip layout if a layout was forced in between
             if (_this4._layoutScheduled) {
-              _this4._doLayout();
+              _this4._doLayout(); // Cancel potentially scheduled layout if the current layout was enforced by calling doLayout directly
+
+
+              _this4._layoutScheduled = false;
             }
           });
           this._layoutScheduled = true;
@@ -58746,10 +58749,8 @@ var Coral = (function (exports) {
 
         this._updateAriaRoleForItems(this.ariaGrid);
 
-        this._updateAriaColumnCountForParent(this.ariaGrid); // set to false in case forced layouting is done between animation call
+        this._updateAriaColumnCountForParent(this.ariaGrid); // Prevent endless observation loop (skip mutations which have been caused by the layout)
 
-
-        this._layoutScheduled = false; // Prevent endless observation loop (skip mutations which have been caused by the layout)
 
         this._observer.takeRecords();
       }
