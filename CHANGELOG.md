@@ -1,3 +1,10 @@
+## [4.10.27](https://github.com/adobe/coral-spectrum/compare/v4.10.26...v4.10.27) (2021-07-23)
+
+
+### Bug Fixes
+
+* resizing masonry should perform layouting ([#180](https://github.com/adobe/coral-spectrum/issues/180)) ([05c8c7a](https://github.com/adobe/coral-spectrum/commit/05c8c7aba3ed618dd30bc196cf546a1741139332))
+
 ## [4.10.26](https://github.com/adobe/coral-spectrum/compare/v4.10.25...v4.10.26) (2021-06-25)
 
 
