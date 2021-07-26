@@ -25,27 +25,15 @@ class ColorSliderHue extends ColorSlider {
   /** @ignore */
   constructor() {
     super();
+    this._min = 0;
+    this._max = 360;
+    this._step = 1;    
   }
   
   /** @ignore */ 
   render() {
     super.render();
     this.classList.add(CLASSNAME);
-  }
-
-  /** @private */
-  _min() {
-    return 0;
-  }
-  
-  /** @private */ 
-  _max() {
-    return 360;
-  }
-  
-  /** @private */ 
-  _step() {
-    return 1;
   }
 
   /** @private */ 

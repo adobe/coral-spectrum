@@ -11,7 +11,7 @@
  */
 import {BaseComponent} from '../../../coral-base-component';
 import colorArea from '../templates/colorArea';
-import {validate, transform, events, commons, i18n} from '../../../coral-utils';
+import {validate, transform, events, commons, i18n, Keys} from '../../../coral-utils';
 import { TinyColor } from '@ctrl/tinycolor';
 import colorUtil from "./ColorUtil";
 
@@ -53,6 +53,12 @@ class ColorArea extends BaseComponent(HTMLElement) {
     this._x = 1;
     this._y = 1;
     this._hue = 120;
+    this._minX = 0;
+    this._minY = 0;
+    this._maxX = 1;
+    this._maxY = 1;
+    this._stepX = 0.01;
+    this._stepY = 0.01;
   }
 
   /** @ignore */  
@@ -128,9 +134,9 @@ class ColorArea extends BaseComponent(HTMLElement) {
     let rawX =  Number(value, 10);
     if(parseFloat(rawX).toFixed(3) !== parseFloat(this._x).toFixed(3)) {
       if(isNaN(rawX)) {
-         rawX = this._minX();
+         rawX = this._minX;
        } 
-      this._x = this._snapValueToStep(rawX, this._minX(), this._maxX(),  this._stepX());
+      this._x = this._snapValueToStep(rawX, this._minX, this._maxX,  this._stepX);
       this._reflectAttribute('x', this._x);
       this._elements.sliderX.setAttribute('value', this._x);
       this.color = this._toHsvString(this._hue, this._x, this.y);
@@ -139,8 +145,8 @@ class ColorArea extends BaseComponent(HTMLElement) {
 
   /** @private */
   _toHsvString(hue, x, y) {
-      const s = `${Math.round(this._x / (this._maxX() - this._minX()) * 100)}%`;
-      const v = `${Math.round(this._y / (this._maxY() - this._minY()) * 100)}%`;
+      const s = `${Math.round(this._x / (this._maxX - this._minX) * 100)}%`;
+      const v = `${Math.round(this._y / (this._maxY - this._minY) * 100)}%`;
       return `hsv(${this._hue}, ${s}, ${v})`;
   }
 
@@ -159,9 +165,9 @@ class ColorArea extends BaseComponent(HTMLElement) {
     let rawY = Number(value, 10);
     if(parseFloat(rawY).toFixed(3) !== parseFloat(this._y).toFixed(3)) {
       if(isNaN(rawY)) {
-        rawY = this._minY();
+        rawY = this._minY;
       }
-      this._y = this._snapValueToStep(rawY, this._minY(), this._maxY(),  this._stepY());
+      this._y = this._snapValueToStep(rawY, this._minY, this._maxY,  this._stepY);
       this._reflectAttribute('y', this._y);
       this._elements.sliderY.setAttribute('value', this._y);
       this.color = this._toHsvString(this._hue, this.x, this._y);
@@ -241,36 +247,7 @@ class ColorArea extends BaseComponent(HTMLElement) {
   focus() {
     this._sliderX.focus();
   }
-  
-  /** @private */
-  _minX() {
-    return 0;
-  }
-  
-  /** @private */ 
-  _maxX() {
-    return 1;
-  }
 
-  _minY() {
-    return 0;
-  }
-  
-  /** @private */ 
-  _maxY() {
-    return 1;
-  }
-    
-  /** @private */ 
-  _stepX() {
-    return 0.01;
-  }
-
-  /** @private */ 
-  _stepY() {
-    return 0.01;
-  }
-  
   /** @private **/
   _updateHue(hue) {
     this._hue = hue;
@@ -283,28 +260,28 @@ class ColorArea extends BaseComponent(HTMLElement) {
         
   /** @private */
   _syncInputSliderAttrs() {
-    if(Number(this._elements.sliderX.getAttribute('min')) !== this._minX()) {
-      this._elements.slideX.setAttribute('min', this._minX());
+    if(Number(this._elements.sliderX.getAttribute('min')) !== this._minX) {
+      this._elements.slideX.setAttribute('min', this._minX);
     }
     
-    if(Number(this._elements.sliderX.getAttribute('max')) !== this._maxX()) {
-      this._elements.slideX.setAttribute('max', this._maxX());
+    if(Number(this._elements.sliderX.getAttribute('max')) !== this._maxX) {
+      this._elements.slideX.setAttribute('max', this._maxX);
     }
     
-    if(Number(this._elements.sliderX.getAttribute('step')) !== this._stepX()) {
-      this._elements.slideX.setAttribute('step', this._stepX());
+    if(Number(this._elements.sliderX.getAttribute('step')) !== this._stepX) {
+      this._elements.slideX.setAttribute('step', this._stepX);
     }  
 
-    if(Number(this._elements.sliderY.getAttribute('min')) !== this._minY()) {
-      this._elements.sliderY.setAttribute('min', this._minY());
+    if(Number(this._elements.sliderY.getAttribute('min')) !== this._minY) {
+      this._elements.sliderY.setAttribute('min', this._minY);
     }
     
-    if(Number(this._elements.sliderY.getAttribute('max')) !== this._maxY()) {
-      this._elements.sliderY.setAttribute('max', this._maxY());
+    if(Number(this._elements.sliderY.getAttribute('max')) !== this._maxY) {
+      this._elements.sliderY.setAttribute('max', this._maxY);
     }
     
-    if(Number(this._elements.sliderY.getAttribute('step')) !== this._stepY()) {
-      this._elements.sliderY.setAttribute('step', this._stepY());
+    if(Number(this._elements.sliderY.getAttribute('step')) !== this._stepY) {
+      this._elements.sliderY.setAttribute('step', this._stepY);
     } 
         
     if(this._elements.sliderX.getAttribute('aria-label') !== this._label) {
@@ -335,12 +312,12 @@ class ColorArea extends BaseComponent(HTMLElement) {
   
   /** @private */
   _updateHandle(hue, x, y, colorStr) {
-    let percent = 100 - ((y - this._minY()) / (this._maxY() - this._minY()) * 100);
+    let percent = 100 - ((y - this._minY) / (this._maxY - this._minY) * 100);
     if(this._handle) {
       this._handle.style.top = `${percent}%`;
     }
     
-    percent = (x - this._minX()) / (this._maxX() - this._minX()) * 100;
+    percent = (x - this._minX) / (this._maxX - this._minX) * 100;
     if(this._handle) {
       this._handle.style.left = `${percent}%`;
     }   
@@ -361,11 +338,8 @@ class ColorArea extends BaseComponent(HTMLElement) {
 
   /** @private */ 
   _changeValue(x, y) {
-     if(this.x !== x) {
+     if(this.x !== x || this.y !== y) {
        this.x = x;
-       this.trigger('change');
-     }
-     if(this.y !== y) {
        this.y = y;
        this.trigger('change');
      }
@@ -401,37 +375,37 @@ class ColorArea extends BaseComponent(HTMLElement) {
     // increase
     if (event.keyCode === Keys.keyToCode('up') ||
       event.keyCode === Keys.keyToCode('pageUp')) {
-      y += this._stepY();
+      y += this._stepY;
       this._focusY();
     }
     // decrease
     else if (event.keyCode === Keys.keyToCode('down') ||
       event.keyCode === Keys.keyToCode('pageDown')) {
-      y -= this._stepY();
+      y -= this._stepY;
       this._focusY();
     }
 
     // increase
     if (event.keyCode === Keys.keyToCode('right')) {
-      x += this._stepX();
+      x += this._stepX;
       this._focusX();
     }
     // decrease
     else if (event.keyCode === Keys.keyToCode('left')) {
-      x -= this._stepX();
+      x -= this._stepX;
       this._focusX();
     }
         
     // min
     else if (event.keyCode === Keys.keyToCode('home')) {
-      x = this._minX();
-      y = this._minY();
+      x = this._minX;
+      y = this._minY;
       this._focusX();
     }
     // max
     else if (event.keyCode === Keys.keyToCode('end')) {
-      x = this._maxX();
-      y = this._maxY();
+      x = this._maxX;
+      y = this._maxY;
       this._focusX();
     }
     
@@ -490,10 +464,10 @@ class ColorArea extends BaseComponent(HTMLElement) {
     }
         
     let positionFraction = (height -(posY - boundingClientRect.top)) / height; 
-    const rawY = this._minY() + positionFraction * (this._maxY() - this._minY());
+    const rawY = this._minY + positionFraction * (this._maxY - this._minY);
 
     positionFraction =  (posX - boundingClientRect.left) / width; 
-    const rawX = this._minX() + positionFraction * (this._maxX() - this._minX());
+    const rawX = this._minX + positionFraction * (this._maxX - this._minX);
        
     return {x: rawX, y: rawY};
   }

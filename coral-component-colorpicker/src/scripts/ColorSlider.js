@@ -55,6 +55,9 @@ class ColorSlider extends BaseComponent(HTMLElement) {
     this._value = 180;
     this._color = new TinyColor("hsla(180, 100%, 50%, 1)");
     this._hue = 180;
+    this._min = 0;
+    this._max = 100;
+    this._step = 1;
   }
   
   /** @ignore */ 
@@ -187,22 +190,6 @@ class ColorSlider extends BaseComponent(HTMLElement) {
     this._slider.focus();
   }
 
-// min, max, step and colorFromValue can be overidden by subclasses to customise this picker for other uses. e.g. for alptha channel slider.
-  /** @private */
-  _min() {
-    return 0;
-  }
-  
-  /** @private */ 
-  _max() {
-    return 100;
-  }
-  
-  /** @private */ 
-  _step() {
-    return 1;
-  }
-
   /** @private */ 
   _colorFromValue(value) {
     return new TinyColor({ h: value, s: 1, l: .5, a:1 });
@@ -210,16 +197,16 @@ class ColorSlider extends BaseComponent(HTMLElement) {
       
   /** @private */
   _syncInputSliderAttrs() {
-    if(Number(this._elements.slider.getAttribute('min')) !== this._min()) {
-      this._elements.slider.setAttribute('min', this._min());
+    if(Number(this._elements.slider.getAttribute('min')) !== this._min) {
+      this._elements.slider.setAttribute('min', this._min);
     }
     
-    if(Number(this._elements.slider.getAttribute('max')) !== this._max()) {
-      this._elements.slider.setAttribute('max', this._max());
+    if(Number(this._elements.slider.getAttribute('max')) !== this._max) {
+      this._elements.slider.setAttribute('max', this._max);
     }
     
-    if(Number(this._elements.slider.getAttribute('step')) !== this._step()) {
-      this._elements.slider.setAttribute('step', this._step());
+    if(Number(this._elements.slider.getAttribute('step')) !== this._step) {
+      this._elements.slider.setAttribute('step', this._step);
     }  
     
     if(this._elements.slider.getAttribute('aria-label') !== this._label) {
@@ -249,7 +236,7 @@ class ColorSlider extends BaseComponent(HTMLElement) {
   
   /** @private */
   _updateHandlePosition() {
-    const percent = 100 - ((this._value - this._min()) / (this._max() - this._min()) * 100);
+    const percent = 100 - ((this._value - this._min) / (this._max - this._min) * 100);
     if(this._handle) {
       this._handle.style.top = `${percent}%`;
     }
@@ -271,10 +258,10 @@ class ColorSlider extends BaseComponent(HTMLElement) {
   _updateValue(value) {
     let rawValue = Number(value, 10);
     if(isNaN(rawValue)) {
-      rawValue = this._min();
+      rawValue = this._min;
     }
     
-    this._value = this._snapValueToStep(rawValue, this._min(), this._max(),  this._step());
+    this._value = this._snapValueToStep(rawValue, this._min, this._max,  this._step);
     this._hue = this._value;
     // update color
     this._color = this._colorFromValue(this._value);
@@ -297,7 +284,7 @@ class ColorSlider extends BaseComponent(HTMLElement) {
       const handleTop = this._handle.offsetTop + this._handle.offsetHeight/2; // adding  half height to account for margin-top
       const height = this._handle.offsetParent.offsetHeight;
       const positionFraction = (height - handleTop) / height;
-      const rawValue = this._min() + positionFraction * (this._max() - this._min());
+      const rawValue = this._min + positionFraction * (this._max - this._min);
       this._updateValue(rawValue);
     }
   }
@@ -322,17 +309,17 @@ class ColorSlider extends BaseComponent(HTMLElement) {
     if (event.keyCode === Keys.keyToCode('up') ||
       event.keyCode === Keys.keyToCode('right') ||
       event.keyCode === Keys.keyToCode('pageUp')) {
-      value += this._step();
+      value += this._step;
     }
     // decrease
     else if (event.keyCode === Keys.keyToCode('down') ||
       event.keyCode === Keys.keyToCode('left') ||
       event.keyCode === Keys.keyToCode('pageDown')) {
-      value -= this._step();
+      value -= this._step;
     }
     // min
     else if (event.keyCode === Keys.keyToCode('home')) {
-      value = this._min();
+      value = this._min;
     }
     // max
     else if (event.keyCode === Keys.keyToCode('end')) {
@@ -379,8 +366,8 @@ class ColorSlider extends BaseComponent(HTMLElement) {
       posY = boundingClientRect.bottom;
     }
     const positionFraction = (height -(posY - boundingClientRect.top)) / height; 
-    const rawValue = this._min() + positionFraction * (this._max() - this._min());
-    return this._snapValueToStep(rawValue, this._min(), this._max(), this._step());
+    const rawValue = this._min + positionFraction * (this._max - this._min);
+    return this._snapValueToStep(rawValue, this._min, this._max, this._step);
   }
     
   /** @private */
