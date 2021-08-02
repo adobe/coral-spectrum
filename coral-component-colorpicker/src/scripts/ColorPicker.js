@@ -12,12 +12,14 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import {BaseFormField} from '../../../coral-base-formfield';
+import ColorFormats from './ColorFormats';
 import '../../../coral-component-textfield';
 import '../../../coral-component-button';
 import '../../../coral-component-popover';
 import base from '../templates/base';
 import {validate, transform, commons, i18n} from '../../../coral-utils';
 import { TinyColor } from '@ctrl/tinycolor';
+import colorUtil from "./ColorUtil";
 
 const CLASSNAME = '_coral-ColorPicker';
 
@@ -59,6 +61,7 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
     // Events
     this._delegateEvents(events);
     this.value = "";
+    this._format = ColorFormats.HSL;
   }
     
   /** @ignore */  
@@ -128,6 +131,7 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'value',
+      'formats',
       'disabled',
       'label',
       'labelledBy'
@@ -235,7 +239,33 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
   set value(value) {
     this._update(value);
   }  
+
+  /**
+   The ColorPicker formats. comma separated formats should be in supported formats.
+   Any invalid/unsupported format is ignored.
+   Values selected in any other format will be converted to this format.
+   @default ColorFormats.HSL
+   @type {String}
+   @htmlattribute formats
+   @htmlattributereflected
+   */   
+  get formats() {
+    return this._formats || "";
+  }
   
+  set formats(value) {
+    let formats = value.split(',');
+    formats = colorUtil.getValidFormats(formats);
+    if(formats.length > 0) {
+      this._formats = formats;
+      this._format = formats[0];
+      this._reflectAttribute('formats', this._formats);
+      this._elements.propertiesView.setAttribute('formats', value);
+      // refresh color in this new format
+      this._update(colorUtil.formatColorString(this.value, this._format));
+    }
+  } 
+    
   /**  @private */
   _update(value) {
     if(this.value === value) {
@@ -244,18 +274,19 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
     
     // sync UI for empty value
     this.classList[ (value == "") ? 'add' : 'remove']('_coral-ColorPicker--novalue');
-    this._elements.colorPreview.classList[ (value == "") ? 'add' : 'remove']('_coral-ColorPicker-preview--novalue');
-
-    
-    let color = new TinyColor(value);
+    this._elements.colorPreview.classList[ (value == "") ? 'add' : 'remove']('_coral-ColorPicker-preview--novalue');   
     // Empty value isn't invalid.
-    const isInvalid = (value !== "" && !color.isValid);
+    let color = new TinyColor(value);
+    let isInvalid = (value !== "" && !color.isValid);
     this[isInvalid ? 'setAttribute' : 'removeAttribute']('invalid', "true");
-    this._elements.input[isInvalid ? 'setAttribute' : 'removeAttribute']('invalid', "true");
-    this._value = value;
+    this._elements.input[isInvalid ? 'setAttribute' : 'removeAttribute']('invalid', "true"); 
+    if(color.isValid && (!this._formats || this._formats.indexOf(color.format) !== -1)) {
+        this._format = color.format;
+    }
+    this._value = (value == "" || !color.isValid) ? value : colorUtil.formatColorString(value, this._format);
     this._elements.input.value = this._value;
     this._elements.propertiesView.setAttribute('color', this._value);
-    this._elements.colorPreview.style["background-color"] = this._value;   
+    this._elements.colorPreview.style["background-color"] = new TinyColor(this._value).toHslString();
   }
   
   /**  @private */
@@ -303,12 +334,14 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
   }
   
   /**  @private */      
-  _onColorInputChange() {
+  _onColorInputChange(event) {
+    event.stopImmediatePropagation();
     this._change(this._input.value);
   }
   
   /**  @private */
-  _onPropertyChange() {
+  _onPropertyChange(event) {
+    event.stopImmediatePropagation();
     this._change(this._properties.color);
   }
 }

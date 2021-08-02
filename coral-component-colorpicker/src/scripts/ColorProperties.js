@@ -12,23 +12,13 @@
 
 import {BaseComponent} from '../../../coral-base-component';
 import '../../../coral-component-select';
+import ColorFormats from './ColorFormats';
 import propertiesSubview from '../templates/colorProperties';
 import {validate, transform, commons, i18n} from '../../../coral-utils';
 import { TinyColor } from '@ctrl/tinycolor';
 import colorUtil from "./ColorUtil";
 
 const CLASSNAME = '_coral-ColorPicker-properties';
-const ColorFormat = {
-  HSL: "hsl",
-  HSV: "hsv",
-  RGB: "rgb",
-  PRGB: "prgb",
-  HEX : "hex",
-  HEX3: "hex3",
-  HEX4: "hex4",
-  HEX8: "hex8",
-  NAME: "name" 
-};
 
 /**
  @class Coral.ColorPicker.ColorProperties
@@ -55,7 +45,7 @@ class ColorProperties extends BaseComponent(HTMLElement) {
     this._s = 1;
     this._l = 0.5;
     this._a = 1;
-    this._format = "hsl";
+    this._format = ColorFormats.HSV;
   }
   
   render() {
@@ -115,7 +105,43 @@ class ColorProperties extends BaseComponent(HTMLElement) {
     this._elements.formatSelector[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', this._disabled);
     this._elements.colorInput[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', this._disabled);
   }
+
+  /**
+   The ColorProperties formats. comma separated formats should be in supported formats.
+   First format will be used as default format.
+   Values selected in any other format will be converted to default format.
+   @default ColorFormats.HSL
+   @type {Array}
+   @htmlattribute formats
+   @htmlattributereflected
+   */   
+  get formats() {
+    return this._formats || "";
+  }
   
+  set formats(value) {
+    if(value == "") {
+      return;
+    }
+    let formats = value.split(',');
+    formats = colorUtil.getValidFormats(formats);
+    if(formats.length > 0) {
+      this._formats = formats;
+      this._format = formats[0];
+      this._elements.formatSelector.setAttribute('value', this._format);
+      // update input value to this format
+      this._elements.colorInput.value = this.color;
+      // populate format selector list
+      let selList = this._elements.formatSelector.querySelectorAll('coral-select-item');
+      selList.forEach(function(element) {
+        if(formats.indexOf(element.value) == -1) {
+          element.remove();
+        }
+      });
+      this._reflectAttribute('formats', this._formats);
+    }
+  }
+    
   /**
    The ColorProperties color string.
    @default hsla(0, 100%, 50%, 1)
@@ -124,7 +150,7 @@ class ColorProperties extends BaseComponent(HTMLElement) {
    @htmlattributereflected
    */   
   get color() {
-    return this._formatColorString();
+    return colorUtil.formatColorString(colorUtil.toHslString(this._hue, this._getColorFromProps()), this._format);
   }
   
   set color(value) {
@@ -149,20 +175,21 @@ class ColorProperties extends BaseComponent(HTMLElement) {
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'disabled',
-      'color'
+      'color',
+      'formats'
     ]);
   }  
 
   /** @private */
   _onHueChange(event) {
-    event.stopPropagation();
+    event.stopImmediatePropagation();
     this._updateHue(this._colorSliderHue.value);
     this.trigger('change');
   }
 
   /** @private */
   _onSLChange(event) {
-    event.stopPropagation();
+    event.stopImmediatePropagation();
     const color = new TinyColor({h: this._hue, s: this._colorArea.x, v: this._colorArea.y});
     this._updateSL(color.toHsl().s, color.toHsl().l);
     this.trigger('change');
@@ -170,14 +197,14 @@ class ColorProperties extends BaseComponent(HTMLElement) {
   
   /** @private */
   _onFormatChange(event) {
-    event.stopPropagation();
+    event.stopImmediatePropagation();
     this._updateFormat(this._formatSelector.value);
     this.trigger('change');
   }
 
   /** @private */
   _onColorInputChange(event) {
-    event.stopPropagation();
+    event.stopImmediatePropagation();
     this.color = this._colorInput.value;
     this.trigger('change');
   }
@@ -226,20 +253,6 @@ class ColorProperties extends BaseComponent(HTMLElement) {
     return  new TinyColor({h:this._hue, s:this._s, l:this._l, a:this._a});
   }
   
-  /** @private */
-  _formatColorString() {
-    const color = this._getColorFromProps();
-    if(this._format === ColorFormat.HSV) {
-      return colorUtil.toHsvString(this._hue, color.toHslString());
-    }
-    else if(this._format === ColorFormat.HSL) {
-      return colorUtil.toHslString(this._hue, color.toHslString());
-    } 
-    else {
-      return color.toString(this._format);
-    }
-  }
-    
   /** @private */ 
   _updateValue() {
     this._reflectAttribute('color', this.color);

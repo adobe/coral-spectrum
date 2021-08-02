@@ -10,6 +10,7 @@
  * governing permissions and limitations under the License.
  */
 import { TinyColor } from '@ctrl/tinycolor';
+import ColorFormats from './ColorFormats';
 
 class ColorUtil {
 
@@ -74,6 +75,41 @@ class ColorUtil {
       return new TinyColor(colorString).toHsv().h;
     }  
   }
+
+  /**
+  Utility function to validate given formats in supported formats and return a list of formats.
+  Any invalid/unsupported format is ignored.
+  @param {Array} formats
+  */  
+  getValidFormats(formats) {
+    const supportedFormats = Object.values(ColorFormats);
+    let validFormats = [];
+    formats.forEach(function(value){
+      if(supportedFormats.indexOf(value) !== -1) {
+        validFormats.push(value);
+      }
+    });
+    return validFormats;
+  }
+
+  /**
+  Utility function to convert a color into a desired format.
+  @param {String} color
+  @param {String} format
+  */  
+  formatColorString(color, format) {
+    const hue = this.getHue(color);
+    if(format === ColorFormats.HSV) {
+      return this.toHsvString(hue, color);
+    }
+    else if(format === ColorFormats.HSL) {
+      return this.toHslString(hue, color);
+    } 
+    else {
+      return new TinyColor(color).toString(format);
+    }
+  }
+    
 }
 
 const colorUtil = new ColorUtil();

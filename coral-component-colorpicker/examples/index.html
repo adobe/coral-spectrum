@@ -79,27 +79,43 @@
         </form>
       </div>
 
-      <h2 class="coral--Heading--S">Invalid</h2>
+      <h2 class="coral--Heading--S">Invalid Value</h2>
       <div class="markup">
         <form class="coral-Form coral-Form--vertical">
           <label id="label3" class="coral-Form-fieldlabel">Label</label>
-          <coral-colorpicker labelledby="label3" value="hello" invalid></coral-colorpicker>
+          <coral-colorpicker labelledby="label3" value="hello"></coral-colorpicker>
         </form>
       </div>
 
-      <h2 class="coral--Heading--S">ReadOnly</h2>
+      <h2 class="coral--Heading--S">Formats</h2>
       <div class="markup">
         <form class="coral-Form coral-Form--vertical">
           <label id="label4" class="coral-Form-fieldlabel">Label</label>
-          <coral-colorpicker labelledby="label4" value="rgb(123,23,155,.5)" readonly labelledby="label-ro"></coral-colorpicker>
+          <coral-colorpicker labelledby="label3" value="#39CCCC" formats="hex,rgb,hsl"></coral-colorpicker>
+        </form>
+      </div>
+      
+      <h2 class="coral--Heading--S">Invalid Formats  Ignored</h2>
+      <div class="markup">
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label5" class="coral-Form-fieldlabel">Label</label>
+          <coral-colorpicker labelledby="label3" value="#39CCCC" formats="rgb,abcd"></coral-colorpicker>
         </form>
       </div>
 
-      <h2 class="coral--Heading--S">Form Field</h2>
+      <h2 class="coral--Heading--S">Value Converted In Format</h2>
       <div class="markup">
-        <form class="coral-Form coral-Form--vertical" style="max-width:300px;">
-          <label id="label5" class="coral-FieldLabel">Label</label>
-          <coral-colorpicker labelledby="label5" class="coral-Form-field" value="navy" labelledby="label"></coral-colorpicker>
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label6" class="coral-Form-fieldlabel">Label</label>
+          <coral-colorpicker labelledby="label3" value="#39CCCC" formats="rgb"></coral-colorpicker>
+        </form>
+      </div>
+            
+      <h2 class="coral--Heading--S">ReadOnly</h2>
+      <div class="markup">
+        <form class="coral-Form coral-Form--vertical">
+          <label id="label7" class="coral-Form-fieldlabel">Label</label>
+          <coral-colorpicker labelledby="label4" value="rgb(123,23,155,.5)" readonly labelledby="label-ro"></coral-colorpicker>
         </form>
       </div>
     </main>
