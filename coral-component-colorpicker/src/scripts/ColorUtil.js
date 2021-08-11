@@ -54,7 +54,7 @@ class ColorUtil {
       colorString = new TinyColor(colorString).toHsvString();
     } 
     let groups = exp.exec(colorString);
-    const h = groups[1];
+    const h = parseInt(groups[1]);
     const s = parseInt(groups[2])/100;
     const v = parseInt(groups[3])/100;
     return {h:h, s:s, v:v};

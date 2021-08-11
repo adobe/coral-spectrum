@@ -339,9 +339,14 @@ class ColorArea extends BaseComponent(HTMLElement) {
   /** @private */ 
   _changeValue(x, y) {
      if(this.x !== x || this.y !== y) {
+       var currX = this.x;
+       var currY = this.y;
        this.x = x;
        this.y = y;
-       this.trigger('change');
+       if(this.x !== currX || this.y !== currY) {
+         console.log("Change : x=" + this.x + ", y: " + this.y);
+         this.trigger('change');
+       }
      }
   }
 
