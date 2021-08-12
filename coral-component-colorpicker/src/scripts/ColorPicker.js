@@ -123,6 +123,7 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
     this._input = this.querySelector("[handle='input']");
     this._preview = this.querySelector("[handle='colorPreview']");
     this._overlay = this.querySelector("[handle='overlay']");
+    this._overlay.setAttribute('aria-live', 'off');
     this._properties = this._overlay.querySelector("[handle='propertiesView']");
     this._update(this._value);
   }
