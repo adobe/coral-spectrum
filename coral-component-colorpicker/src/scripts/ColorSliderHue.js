@@ -29,11 +29,18 @@ class ColorSliderHue extends ColorSlider {
     this._max = 360;
     this._step = 1;    
   }
+
+  /** @private */ 
+  _updateValue(value) {
+    super._updateValue(value);
+    this._elements.slider.setAttribute('aria-valuetext', `${this.value}°`);
+  }
   
   /** @ignore */ 
   render() {
     super.render();
     this.classList.add(CLASSNAME);
+    this._updateValue(this.value);
   }
 
   /** @private */ 

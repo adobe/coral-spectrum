@@ -138,9 +138,11 @@ class ColorArea extends BaseComponent(HTMLElement) {
        } 
       this._x = this._snapValueToStep(rawX, this._minX, this._maxX,  this._stepX);
       this._reflectAttribute('x', this._x);
-      this._elements.sliderX.setAttribute('value', this._x);
       this.color = this._toHsvString(this._hue, this._x, this.y);
     }
+    this._elements.sliderX.setAttribute('aria-valuetext', `${i18n.get('Saturation')}: ${Math.round(this._x / (this._maxX - this._minX) * 100)}%`);
+    this._elements.sliderX.setAttribute('title', this.color);
+    this._elements.sliderX.setAttribute('value', this._x);
   }
 
   /** @private */
@@ -169,9 +171,11 @@ class ColorArea extends BaseComponent(HTMLElement) {
       }
       this._y = this._snapValueToStep(rawY, this._minY, this._maxY,  this._stepY);
       this._reflectAttribute('y', this._y);
-      this._elements.sliderY.setAttribute('value', this._y);
       this.color = this._toHsvString(this._hue, this.x, this._y);
     }
+    this._elements.sliderY.setAttribute('aria-valuetext', `${i18n.get('Brightness')}: ${Math.round(this._y / (this._maxY - this._minY) * 100)}%`);
+    this._elements.sliderY.setAttribute('title', this.color);
+    this._elements.sliderY.setAttribute('value', this._y);
   }
   
   /**
@@ -344,7 +348,7 @@ class ColorArea extends BaseComponent(HTMLElement) {
        this.x = x;
        this.y = y;
        if(this.x !== currX || this.y !== currY) {
-         console.log("Change : x=" + this.x + ", y: " + this.y);
+         // console.log("Change : x=" + this.x + ", y: " + this.y);
          this.trigger('change');
        }
      }
@@ -375,6 +379,7 @@ class ColorArea extends BaseComponent(HTMLElement) {
   _handleKey(event) {
     this._focusHandle(true);
     event.preventDefault();
+    event.stopPropagation();
     let y = this.y;
     let x = this.x;
     // increase

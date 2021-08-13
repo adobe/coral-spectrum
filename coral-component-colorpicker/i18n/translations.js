@@ -24,7 +24,9 @@ export default {
     "Color Value": "Color Value",
     "Enter Color Value": "Enter Color Value",
     "Color Picker": "Color Picker",
-    "saturation and luminosity": "saturation and luminosity",
+    "Saturation and Brightness": "Saturation and Brightness",
+    "Saturation": "Saturation",
+    "Brightness": "Brightness",
     'Select Color Format': 'Select Color Format'
   }
 }
