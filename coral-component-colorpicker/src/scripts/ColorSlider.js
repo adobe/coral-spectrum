@@ -11,7 +11,7 @@
  */
 import {BaseComponent} from '../../../coral-base-component';
 import view from '../templates/colorSlider';
-import {validate, transform, events, commons, i18n} from '../../../coral-utils';
+import {validate, transform, events, commons, i18n, Keys} from '../../../coral-utils';
 import { TinyColor } from '@ctrl/tinycolor';
 import colorUtil from "./ColorUtil";
 
@@ -29,14 +29,14 @@ class ColorSlider extends BaseComponent(HTMLElement) {
     super();
 
     this._delegateEvents(commons.extend(this._events, {
-      'key:up ._coral-ColorPicker-ColorSlider': '_handleKey',
-      'key:right ._coral-ColorPicker-ColorSlider': '_handleKey',
-      'key:down ._coral-ColorPicker-ColorSlider': '_handleKey',
-      'key:left ._coral-ColorPicker-ColorSlider': '_handleKey',
-      'key:pageUp ._coral-ColorPicker-ColorSlider': '_handleKey',
-      'key:pageDown ._coral-ColorPicker-ColorSlider': '_handleKey',
-      'key:home ._coral-ColorPicker-ColorSlider': '_handleKey',
-      'key:end ._coral-ColorPicker-ColorSlider': '_handleKey',
+      'key:up': '_handleKey',
+      'key:right': '_handleKey',
+      'key:down': '_handleKey',
+      'key:left': '_handleKey',
+      'key:pageUp': '_handleKey',
+      'key:pageDown': '_handleKey',
+      'key:home': '_handleKey',
+      'key:end': '_handleKey',
       
       'input': '_onInputChangeHandler',
       
@@ -92,8 +92,6 @@ class ColorSlider extends BaseComponent(HTMLElement) {
     // can be set to e.g. this._elements.colorHandle.    
     this._handle = this.querySelector('._coral-ColorPicker-ColorSlider-colorHandle');
     this._slider = this.querySelector('._coral-ColorPicker-ColorSlider-slider');
-    
-    this._calculateValue();
     this._updateValue(this._hue);
   }
 
@@ -274,19 +272,13 @@ class ColorSlider extends BaseComponent(HTMLElement) {
 
   /** @private */ 
   _changeValue(value) {
-     this._updateValue(value);
-     this.trigger('change');
-  }
-
-  /** @private */
-  _calculateValue() {
-    if(this._handle && this._handle.offsetParent)  {
-      const handleTop = this._handle.offsetTop + this._handle.offsetHeight/2; // adding  half height to account for margin-top
-      const height = this._handle.offsetParent.offsetHeight;
-      const positionFraction = (height - handleTop) / height;
-      const rawValue = this._min + positionFraction * (this._max - this._min);
-      this._updateValue(rawValue);
-    }
+     if(value !== this.value) {
+      var currVal = this.value;
+      this._updateValue(value);
+      if(currVal !== this.value) {
+        this.trigger('change');
+      }
+     }
   }
 
 /******* Events Handling **************/
@@ -304,6 +296,7 @@ class ColorSlider extends BaseComponent(HTMLElement) {
     this.focus();
     this._focusHandle(true);
     event.preventDefault();
+    event.stopPropagation();
     let value = this._value;
     // increase
     if (event.keyCode === Keys.keyToCode('up') ||

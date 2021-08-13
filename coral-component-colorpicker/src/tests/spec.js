@@ -10,4 +10,5 @@
  * governing permissions and limitations under the License.
  */
 
+import './test.ColorSliderHue';
 import './test.ColorArea';

@@ -348,7 +348,6 @@ class ColorArea extends BaseComponent(HTMLElement) {
        this.x = x;
        this.y = y;
        if(this.x !== currX || this.y !== currY) {
-         // console.log("Change : x=" + this.x + ", y: " + this.y);
          this.trigger('change');
        }
      }

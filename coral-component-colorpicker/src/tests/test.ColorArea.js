@@ -14,7 +14,6 @@ import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {ColorPicker} from '../../../coral-component-colorpicker';
 import { TinyColor } from '@ctrl/tinycolor';
 import colorUtil from "../scripts/ColorUtil";
-import ColorArea from "../scripts/ColorArea";
 
 describe('ColorPicker.ColorArea', function () {
   describe('Instantiation', function () {
@@ -290,9 +289,10 @@ describe('ColorPicker.ColorArea', function () {
       var valY = 0.75;           
       el.y = valY;
       el.x = 1.0;
-      helpers.keydown('up', el);
+      helpers.keypress('up', el);
       validateYSlider(el, (valY + step));
       expect(spy.callCount).to.equal(1);
+      expect(el._elements.colorHandle.classList.contains('is-focused')).to.equal(true, "ColorHandle should be focused.");
     });
 
     it("Keyboard Interaction Down key", function() {  
@@ -302,6 +302,7 @@ describe('ColorPicker.ColorArea', function () {
       helpers.keypress('down', el);
       validateYSlider(el, (valY - step));
       expect(spy.callCount).to.equal(1);
+      expect(el._elements.colorHandle.classList.contains('is-focused')).to.equal(true, "ColorHandle should be focused.");
     });
 
     it("Keyboard Interaction Left key", function() {    
@@ -311,6 +312,7 @@ describe('ColorPicker.ColorArea', function () {
       helpers.keypress('left', el);
       validateXSlider(el,  (valX - step));
       expect(spy.callCount).to.equal(1);
+      expect(el._elements.colorHandle.classList.contains('is-focused')).to.equal(true, "ColorHandle should be focused.");
     });
 
     it("Keyboard Interaction Right key", function() {
@@ -320,8 +322,29 @@ describe('ColorPicker.ColorArea', function () {
       helpers.keypress('right', el);
       validateXSlider(el,  (valX + step));
       expect(spy.callCount).to.equal(1);
+      expect(el._elements.colorHandle.classList.contains('is-focused')).to.equal(true, "ColorHandle should be focused.");
     });
 
+    it("Keyboard Interaction Home key", function() {
+      el.x = 1.0;
+      el.y = 1.0;
+      helpers.keypress('home', el);
+      expect(el.x).to.equal(0, "Home key should set x to min");
+      expect(el.y).to.equal(0, "Home key should set y to min");
+      expect(spy.callCount).to.equal(1);
+      expect(el._elements.colorHandle.classList.contains('is-focused')).to.equal(true, "ColorHandle should be focused.");
+    });
+
+    it("Keyboard Interaction End key", function() {
+      el.x = 0.5;
+      el.y = 0.5;
+      helpers.keypress('end', el);
+      expect(el.x).to.equal(1.0, "Home key should set x to max");
+      expect(el.y).to.equal(1.0, "Home key should set y to max");
+      expect(spy.callCount).to.equal(1);
+      expect(el._elements.colorHandle.classList.contains('is-focused')).to.equal(true, "ColorHandle should be focused.");
+    });
+        
     it("Keyboard Interaction at boundaries Up Key at top-right", function() {            
       el.y = 1.0;
       el.x = 1.0;
@@ -390,7 +413,6 @@ describe('ColorPicker.ColorArea', function () {
     expect(el._elements.colorHandle.disabled).to.equal(true, 'color handle should now be disabled.');
     expect(el._elements.sliderX.disabled).to.equal(true, 'input field x should now be disabled.');
     expect(el._elements.sliderY.disabled).to.equal(true, 'input field y should now be disabled.');
-    expect(el._elements.colorHandle.disabled).to.equal(true, 'colorHandle should be disabled.');
     expect(el.classList.contains('is-disabled')).to.equal(true, "class is-disabled should be added.");
   } 
   
@@ -404,8 +426,9 @@ describe('ColorPicker.ColorArea', function () {
   function validateXSlider(el, xValue) {
     var expectedColor = colorUtil.toHslString(120, new TinyColor({h:120, s:xValue, v:1}).toHslString());
     expect(el.x).to.equal(xValue, 'x value should be set.');
-    expect(el.getAttribute('x')).to.equal("" + xValue, 'attribute x value  be set.');
-    expect(el._elements.sliderX.getAttribute('value')).to.equal("" + xValue, 'input field x value should be set.');
+    expect(el.getAttribute('x')).to.equal(`${xValue}`, 'attribute x value  be set.');
+    expect(el._elements.sliderX.getAttribute('value')).to.equal(`${xValue}`, 'input field x value should be set.');
+    expect(el._elements.sliderX.getAttribute('aria-valuetext')).to.equal(`Saturation: ${Math.round(xValue * 100)}%`, 'input field x aria-valuetex should be set.');
     expect(el._elements.colorHandle.style.left).to.equal(`${xValue*100}%`, 'colorHandle position should be set on x value change.');
     expect(el._elements.colorHandle.getAttribute('color')).to.equal(expectedColor,'color-handle color should be set on x value change.');
     expect(el.color).to.equal(expectedColor, 'saturation should be set on x value change.');
@@ -414,8 +437,9 @@ describe('ColorPicker.ColorArea', function () {
   function validateYSlider(el, yValue) {
     var expectedColor = colorUtil.toHslString(120, new TinyColor({h:120, s:1, v:yValue}).toHslString());
     expect(el.y).to.equal(yValue, 'y value should be set.');
-    expect(el.getAttribute('y')).to.equal("" + yValue, 'attribute x value  be set.');
-    expect(el._elements.sliderY.getAttribute('value')).to.equal("" + yValue, 'input field x value should be set.');
+    expect(el.getAttribute('y')).to.equal(`${yValue}`, 'attribute x value  be set.');
+    expect(el._elements.sliderY.getAttribute('value')).to.equal(`${yValue}`, 'input field x value should be set.');
+    expect(el._elements.sliderY.getAttribute('aria-valuetext')).to.equal(`Brightness: ${Math.round(yValue * 100)}%`, 'input field y aria-valuetex should be set.');    
     expect(el._elements.colorHandle.style.top).to.equal(`${100 - (yValue*100)}%`, 'colorHandle position should be set on y value change.');
     expect(el._elements.colorHandle.getAttribute('color')).to.equal(expectedColor,'color should be set on color-handle on y value change.');
     expect(el.color).to.equal(expectedColor, 'luminosity should be set on y value change.');
