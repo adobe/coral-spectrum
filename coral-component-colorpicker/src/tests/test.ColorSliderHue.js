@@ -42,14 +42,14 @@ describe('ColorPicker.ColorSliderHue', function () {
     });
 
     describe('#label', function () {
-      it('should be possible to set label on the colorsliderhue', function(){
+      it('should be possible to set label on the colorsliderhue', function() {
         var label = "Color Slider Hue Label";
         el.label = label;    
         validateLabel(el, label);
       });
     });     
     describe('#disabled', function () {
-      it('should be possible to disable the colorsliderhue', function(){
+      it('should be possible to disable the colorsliderhue', function() {
         // set disabled
         el.disabled = true;    
         validateDisabled(el);
@@ -57,14 +57,14 @@ describe('ColorPicker.ColorSliderHue', function () {
     });
     
     describe('#value', function () {
-      it('should be possible to set value on the colorsliderhue', function(){ 
+      it('should be possible to set value on the colorsliderhue', function() { 
         el.value = 120;
         validateValue(el, 120);
       });
     });
     
     describe('#color', function () {
-      it('should be possible to set color on the colorsliderhue', function(){ 
+      it('should be possible to set color on the colorsliderhue', function() { 
         el.color = "#5151a4";
         validateColor(el, "hsl(240, 100%, 50%)");
       });

@@ -99,6 +99,7 @@ class ColorProperties extends BaseComponent(HTMLElement) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
     this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
+    this.classList.toggle('is-disabled', this._disabled);
 
     this._elements.propertySL[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', this._disabled);
     this._elements.propertyHue[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', this._disabled);
