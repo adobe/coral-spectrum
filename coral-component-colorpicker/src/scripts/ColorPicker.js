@@ -135,10 +135,17 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
       'formats',
       'disabled',
       'label',
-      'labelledBy'
+      'labelledby'
     ]);
   } 
- 
+
+
+  /** @ignore */
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      labelledby: 'labelledBy'
+    });
+  } 
    /**   
    The ColorPicker label.
    @default 'Select Color'
@@ -156,13 +163,9 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements.input.setAttribute('aria-label', this.label);
   } 
 
-   /**   
-   The ColorPicker label.
-   @default 'Select Color'
-   @type {String}
-   @htmlattribute label
-   @htmlattributereflected
-   */   
+  /**
+   Inherited from {@link BaseFormField#labelledBy}.
+   */  
   get labelledBy() {
      return super.labelledBy;
   }
@@ -176,8 +179,6 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
     // in case the user focuses the buttons, he will still get a notion of the usage of the component
     if (this.labelledBy) {
       this.setAttribute('aria-labelledby', this.labelledBy);
-      var labelElement = document.getElementById(value);
-      labelElement.setAttribute('for', this._elements.input.id.substring(1));
       this._elements.colorPreview.setAttribute('aria-labelledby',
         [this.labelledBy,
           this._elements.colorPreview.label.id].join(' '));

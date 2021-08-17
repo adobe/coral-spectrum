@@ -19,7 +19,7 @@ const CLASSNAME = '_coral-ColorPicker-ColorArea';
 
 /**
  @class Coral.ColorPicker.ColorArea
- @classdesc A ColorPicker area component
+ @classdesc A ColorPicker area component to select Saturation and Value
  @htmltag coral-colorpicker-colorarea
  @extends {HTMLElement}
  @extends {BaseComponent}

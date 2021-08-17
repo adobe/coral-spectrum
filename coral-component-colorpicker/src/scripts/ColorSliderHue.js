@@ -16,10 +16,9 @@ const CLASSNAME = '_coral-ColorPicker-ColorSlider-hue';
 
 /**
  @class Coral.ColorPicker.ColorSliderHue
- @classdesc A ColorPicker color slider hue component
+ @classdesc A ColorPicker color slider hue component to select Hue
  @htmltag coral-colorpicker-colorsliderhue
- @extends {HTMLElement}
- @extends {BaseComponent}
+ @extends {ColorSlider}
  */
 class ColorSliderHue extends ColorSlider {
   /** @ignore */

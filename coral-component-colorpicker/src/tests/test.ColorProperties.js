@@ -124,7 +124,8 @@ describe('ColorPicker.ColorProperties', function () {
     it('should be able to set color in name format', function() {
       el.color = "navy";
       validateColor(el, 'navy');
-    });   }); 
+    });  
+  }); 
 
   describe("# Invalid Values", function() {
     var el;

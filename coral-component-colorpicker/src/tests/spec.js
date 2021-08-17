@@ -13,3 +13,4 @@
 import './test.ColorSliderHue';
 import './test.ColorArea';
 import './test.ColorProperties';
+import './test.ColorPicker';

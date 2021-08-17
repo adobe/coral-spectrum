@@ -47,7 +47,8 @@ describe('ColorPicker.ColorSliderHue', function () {
         el.label = label;    
         validateLabel(el, label);
       });
-    });     
+    });
+     
     describe('#disabled', function () {
       it('should be possible to disable the colorsliderhue', function() {
         // set disabled

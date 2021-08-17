@@ -63,6 +63,7 @@ class ColorUtil {
   /**
   Utility function to extract hue.
   @param {String} colorString
+  The color string
   */
   getHue(colorString) {
     if(colorString.startsWith('hs')) {
@@ -79,7 +80,8 @@ class ColorUtil {
   /**
   Utility function to validate given formats in supported formats and return a list of formats.
   Any invalid/unsupported format is ignored.
-  @param {Array} formats
+  @param {Array} formats 
+  An  array of formats to validate
   */  
   getValidFormats(formats) {
     const supportedFormats = Object.values(ColorFormats);
@@ -94,8 +96,10 @@ class ColorUtil {
 
   /**
   Utility function to convert a color into a desired format.
-  @param {String} color
+  @param {String} color 
+  The color string
   @param {String} format
+  A color format
   */  
   formatColorString(color, format) {
     const hue = this.getHue(color);
