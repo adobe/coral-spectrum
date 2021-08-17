@@ -112,8 +112,107 @@ describe('ColorPicker', function () {
     });  
   });
   
-  describe("Invalid/Empty Values and formats", function() {
-  
+  describe("Values and formats", function() {
+    var el;
+
+    beforeEach(function () {
+      el = helpers.build(new ColorPicker());
+    });
+
+    afterEach(function () {
+      el = null;
+    });
+      
+    it("invalid value should be highlighted", function() {
+      el.value =  "abcd(efg)";
+      expect(el.classList.contains('is-invalid')).to.equal(true, "Invalid value should show invalid UI");
+      expect(el.getAttribute('invalid')).to.equal("true", "Invalid value should show invalid UI");
+      expect(el._elements.input.classList.contains('is-invalid')).to.equal(true, "Invalid value should show invalid UI");
+      expect(el._elements.input.getAttribute('invalid')).to.equal("true", "Invalid value should show invalid UI");      
+    });
+    
+    it("invalid formats should be ignored", function() {
+      el.formats = "abcd,rgb";
+      validateFormats(el, "rgb");
+    });
+
+    it("should be able to set Empty value", function() {
+      el.value = "hsl(240, 100%, 50%)";
+      validateValue(el, "hsl(240, 100%, 50%)");
+      el.value = "";
+      expect(el.value).to.equal("", 'should set empty value.');
+      expect(el._elements.input.value).to.equal("", 'should set empty value.');
+      expect(el.classList.contains('_coral-ColorPicker--novalue')).to.equal(true, 'should show empty value ui.');
+      expect(el._elements.colorPreview.classList.contains('_coral-ColorPicker-preview--novalue')).to.equal(true, 'should show empty value ui.');
+      el.value = "hsl(240, 100%, 50%)";
+      validateValue(el, "hsl(240, 100%, 50%)");
+      expect(el.classList.contains('_coral-ColorPicker--novalue')).to.equal(false, 'should reset empty value ui.');
+      expect(el._elements.colorPreview.classList.contains('_coral-ColorPicker-preview--novalue')).to.equal(false, 'should reset empty value ui.');          
+    });
+    
+    it("should be able to set value in  given format", function() {
+      el.formats = "rgb";
+      el.value = "hsl(240, 100%, 50%)";
+      validateValue(el, "rgb(0, 0, 255)");
+    });       
+  });
+
+  describe("#User Interaction", function() {
+    var el;
+
+    beforeEach(function () {
+      el = helpers.build(new ColorPicker());
+    });
+
+    afterEach(function () {
+      el = null;
+    });
+    
+    it("should open color properties overlay on down key on input", function() {
+      expect(el._elements.overlay.open).to.equal(false, 'overlay should be closed by default');
+      
+      helpers.keypress('down', el._elements.input);
+      expect(el._elements.overlay.open).to.equal(true, 'overlay should open.');
+    }); 
+
+    it("should open color properties overlay on down key on preview button", function() {
+      expect(el._elements.overlay.open).to.equal(false, 'overlay should be closed by default');
+      
+      helpers.keypress('down', el._elements.colorPreview);
+      expect(el._elements.overlay.open).to.equal(true, 'overlay should open.');
+    });
+ 
+    it("should open color properties overlay on click on preview button", function() {
+    
+    });
+            
+    it("should close color properties overlay on esc key", function() {
+      expect(el._elements.overlay.open).to.equal(false, 'overlay should be closed by default');
+
+      // click on button should open overlay
+      el._elements.colorPreview.click();
+      expect(el._elements.overlay.open).to.equal(true, 'overlay should now be open');      
+    });
+     
+    it("should close color properties overlay on enter key", function() {      
+      helpers.keypress('down', el._elements.input);
+      expect(el._elements.overlay.open).to.equal(true, 'overlay should open.');
+      helpers.keypress('enter', el._elements.input); 
+      expect(el._elements.overlay.open).to.equal(false, 'overlay should close.');
+    });
+    
+    it("should close color properties overlay on esc key", function() {
+      helpers.keypress('down', el._elements.input);
+      expect(el._elements.overlay.open).to.equal(true, 'overlay should open.');
+      helpers.keypress('esc', el._elements.input); 
+      expect(el._elements.overlay.open).to.equal(false, 'overlay should close.');    
+    });
+    
+    it("should reflect value on change from input", function() {
+      el._elements.input.value = "rgb(93, 93, 137)";
+      el._elements.input.trigger('change');
+      validateValue(el, "rgb(93, 93, 137)");
+    });
   });
   
   describe("#Color Formats", function() {
