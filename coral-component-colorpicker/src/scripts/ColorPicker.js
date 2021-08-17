@@ -135,7 +135,8 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
       'formats',
       'disabled',
       'label',
-      'labelledby'
+      'labelledby',
+      'readonly'
     ]);
   } 
 
@@ -143,7 +144,8 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
   /** @ignore */
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
-      labelledby: 'labelledBy'
+      labelledby: 'labelledBy',
+      readonly: 'readOnly'
     });
   } 
    /**   

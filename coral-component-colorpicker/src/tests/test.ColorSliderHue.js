@@ -51,6 +51,7 @@ describe('ColorPicker.ColorSliderHue', function () {
      
     describe('#disabled', function () {
       it('should be possible to disable the colorsliderhue', function() {
+        expect(el.disabled).to.equal(false, 'disabled should be false by default.');
         // set disabled
         el.disabled = true;    
         validateDisabled(el);
@@ -91,6 +92,8 @@ describe('ColorPicker.ColorSliderHue', function () {
       it('should be possible to disable the colorsliderhue from markup', function() {
         const el = helpers.build('<coral-colorpicker-colorsliderhue disabled></coral-colorpicker-colorsliderhue>');
         validateDisabled(el);
+        el.disabled = false;
+        validateDisabled(el, false);
       });
     });    
 
@@ -207,7 +210,7 @@ describe('ColorPicker.ColorSliderHue', function () {
         clientX: x
       });
     }
-        
+            
     it("Keyboard Interaction Up key", function() {
       var val = 100;           
       el.value = val;
@@ -266,7 +269,35 @@ describe('ColorPicker.ColorSliderHue', function () {
       el.dispatchEvent(createMouseEvent('mousemove', right, (top + height/2.0)));
       el.dispatchEvent(createMouseEvent('mouseup', right, (top + height/2.0)));
       validateValue(el, 180);
-    });  
+    });
+    
+    it("Mouse drag vertical outside top boundary", function() {
+      const boundingClientRect = el.getBoundingClientRect();
+      const height = boundingClientRect.height;
+      const width = boundingClientRect.width;
+      const right = boundingClientRect.left + width;
+      const top = boundingClientRect.top;
+      
+      el.dispatchEvent(createMouseEvent('mousedown', right, top));
+      // drag down to half
+      el.dispatchEvent(createMouseEvent('mousemove', right, (top - 10)));
+      el.dispatchEvent(createMouseEvent('mouseup', right, (top - 10)));
+      validateValue(el, 360);
+    }); 
+    
+    it("Mouse drag vertical outside bottom boundary", function() {
+      const boundingClientRect = el.getBoundingClientRect();
+      const height = boundingClientRect.height;
+      const width = boundingClientRect.width;
+      const right = boundingClientRect.left + width;
+      const top = boundingClientRect.top;
+      
+      el.dispatchEvent(createMouseEvent('mousedown', right, top));
+      // drag down to half
+      el.dispatchEvent(createMouseEvent('mousemove', right, (top + height + 10)));
+      el.dispatchEvent(createMouseEvent('mouseup', right, (top + height + 10)));
+      validateValue(el, 0);
+    });      
   });
       
   function validateLabel(el, label) {
@@ -275,13 +306,13 @@ describe('ColorPicker.ColorSliderHue', function () {
     expect(el._elements.slider.getAttribute('aria-label')).to.equal(label, 'aria-label attribute should be set on input field.');
   }
   
-  function validateDisabled(el) {
-    expect(el.disabled).to.equal(true, 'should now be disabled.');
-    expect(el.hasAttribute('disabled')).to.equal(true, 'disabled  attribute should be set.');
-    expect(el.getAttribute('aria-disabled')).to.equal("true", 'aria-disabled attribute should be set.');
-    expect(el._elements.colorHandle.disabled).to.equal(true, 'color handle should now be disabled.');
-    expect(el._elements.slider.disabled).to.equal(true, 'input field should now be disabled.');
-    expect(el.classList.contains('is-disabled')).to.equal(true, "class is-disabled should be added."); 
+  function validateDisabled(el, expected = true) {
+    expect(el.disabled).to.equal(expected, 'should now be disabled.');
+    expect(el.hasAttribute('disabled')).to.equal(expected, 'disabled  attribute should be set.');
+    expect(el.hasAttribute('aria-disabled')).to.equal(expected, 'aria-disabled attribute should be set.');
+    expect(el._elements.colorHandle.disabled).to.equal(expected, 'color handle should now be disabled.');
+    expect(el._elements.slider.disabled).to.equal(expected, 'input field should now be disabled.');
+    expect(el.classList.contains('is-disabled')).to.equal(expected, "class is-disabled should be added."); 
   }
   
   function validateValue(el, value) {

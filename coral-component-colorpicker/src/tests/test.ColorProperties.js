@@ -36,6 +36,7 @@ describe('ColorPicker.ColorProperties', function () {
    
     describe('#disabled', function () {
       it('should be possible to disable the colorproperties', function() {
+        expect(el.disabled).to.equal(false, 'disabled should be false by default.');
         // set disabled
         el.disabled = true;  
         validateDisabled(el);
@@ -62,6 +63,8 @@ describe('ColorPicker.ColorProperties', function () {
       it('should be possible to disable the colorproperties from markup', function() {
         const el = helpers.build('<coral-colorpicker-colorproperties disabled></coral-colorpicker-colorproperties>');
         validateDisabled(el);
+        el.disabled = false;
+        validateDisabled(el, false);
       });
     });
     
@@ -214,16 +217,16 @@ describe('ColorPicker.ColorProperties', function () {
     });
   }); 
   
-  function validateDisabled(el) {
-    expect(el.disabled).to.equal(true, 'should now be disabled.');
-    expect(el.hasAttribute('disabled')).to.equal(true, 'disabled  attribute should be set.');
-    expect(el.getAttribute('aria-disabled')).to.equal("true", 'aria-disabled attribute should be set.');
-    expect(el.classList.contains('is-disabled')).to.equal(true, "class is-disabled should be added.");
+  function validateDisabled(el, expected = true) {
+    expect(el.disabled).to.equal(expected, 'should now be disabled.');
+    expect(el.hasAttribute('disabled')).to.equal(expected, 'disabled  attribute should be set.');
+    expect(el.hasAttribute('aria-disabled')).to.equal(expected, 'aria-disabled attribute should be set.');
+    expect(el.classList.contains('is-disabled')).to.equal(expected, "class is-disabled should be added.");
     
-    expect(el._elements.propertySL.disabled).to.equal(true, 'color property SL should now be disabled.');
-    expect(el._elements.propertyHue.disabled).to.equal(true, 'color property Hue should now be disabled.');
-    expect(el._elements.formatSelector.disabled).to.equal(true, 'color format selector should now be disabled.');
-    expect(el._elements.colorInput.disabled).to.equal(true, 'color input should now be disabled.');
+    expect(el._elements.propertySL.disabled).to.equal(expected, 'color property SL should now be disabled.');
+    expect(el._elements.propertyHue.disabled).to.equal(expected, 'color property Hue should now be disabled.');
+    expect(el._elements.formatSelector.disabled).to.equal(expected, 'color format selector should now be disabled.');
+    expect(el._elements.colorInput.disabled).to.equal(expected, 'color input should now be disabled.');
     
   }
   

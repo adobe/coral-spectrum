@@ -40,7 +40,8 @@ describe('ColorPicker.ColorArea', function () {
     });
 
     describe('#disabled', function () {
-      it('should be possible to disable the colorarea', function(){
+      it('should be possible to disable the colorarea', function() {
+        expect(el.disabled).to.equal(false, 'disabled should be false by default.');
         // set disabled
         el.disabled = true;    
         validateDisabled(el);
@@ -48,7 +49,7 @@ describe('ColorPicker.ColorArea', function () {
     });    
 
     describe('#label', function () {
-      it('should be possible to set label on the colorarea', function(){
+      it('should be possible to set label on the colorarea', function() {
         var label = "Color Area Label";
         el.label = label;    
         validateLabel(el, label);
@@ -56,21 +57,21 @@ describe('ColorPicker.ColorArea', function () {
     }); 
     
     describe('#x', function () {
-      it('should be possible to set x on the colorarea', function(){ 
+      it('should be possible to set x on the colorarea', function() { 
         el.x = 0.5;
         validateXSlider(el, 0.5);
       });
     }); 
 
     describe('#y', function () {
-      it('should be possible to set y on the colorarea', function(){ 
+      it('should be possible to set y on the colorarea', function() { 
         el.y = 0.5;
         validateYSlider(el, 0.5);
       });
     }); 
 
     describe('#color', function () {
-      it('should be possible to set color on the colorarea', function(){ 
+      it('should be possible to set color on the colorarea', function() { 
         el.color = "#5151a4";
         validateColor(el, "hsl(240, 34%, 48%)");
       });
@@ -81,14 +82,16 @@ describe('ColorPicker.ColorArea', function () {
   describe('Markup', function () {
   
     describe('#disabled', function () {
-      it('should be possible to disable the colorarea from markup', function(){
+      it('should be possible to disable the colorarea from markup', function() {
         const el = helpers.build('<coral-colorpicker-colorarea disabled></coral-colorpicker-colorarea>');
         validateDisabled(el);
+        el.disabled = false;
+        validateDisabled(el, false);
       });
     });
     
     describe('#label', function () {
-      it('should be possible to set label on the colorarea from markup', function(){
+      it('should be possible to set label on the colorarea from markup', function() {
         var label = "Color Area Label";
         const el = helpers.build('<coral-colorpicker-colorarea label="'  +  label + '"></coral-colorpicker-colorarea>');      
         el.label = label;    
@@ -97,21 +100,21 @@ describe('ColorPicker.ColorArea', function () {
     });       
 
     describe('#x', function () {
-      it('should be possible to set x on the colorarea from markup', function(){ 
+      it('should be possible to set x on the colorarea from markup', function() { 
         const el = helpers.build('<coral-colorpicker-colorarea x="0.5"></coral-colorpicker-colorarea>');
         validateXSlider(el, 0.5);
       });
     }); 
 
     describe('#y', function () {
-      it('should be possible to set y on the colorarea from markup', function(){ 
+      it('should be possible to set y on the colorarea from markup', function() { 
         const el = helpers.build('<coral-colorpicker-colorarea y="0.5"></coral-colorpicker-colorarea>');
         validateYSlider(el, 0.5);
       });
     }); 
 
     describe('#color', function () {
-      it('should be possible to set color on the colorarea from markup', function(){
+      it('should be possible to set color on the colorarea from markup', function() {
         const el = helpers.build('<coral-colorpicker-colorarea color="#5151a4"></coral-colorpicker-colorarea>');
         validateColor(el, "hsl(240, 34%, 48%)");
       });
@@ -385,12 +388,29 @@ describe('ColorPicker.ColorArea', function () {
       const top = boundingClientRect.top;
       
       el.dispatchEvent(createMouseEvent('mousedown', right, top));
+      expect(el._elements.colorHandle.classList.contains('is-focused')).to.equal(true, 'color handle should be focused.');
       // drag down to half
       el.dispatchEvent(createMouseEvent('mousemove', right, (top + height/2.0)));
       el.dispatchEvent(createMouseEvent('mouseup', right, (top + height/2.0)));
+      expect(el._elements.colorHandle.classList.contains('is-focused')).to.equal(false, 'color handle should be blurred.');
       validateYSlider(el,  0.5);
     });
-    
+
+    it("Mouse drag vertical outside upper boundary", function() {
+      const boundingClientRect = el.getBoundingClientRect();
+      const height = boundingClientRect.height;
+      const width = boundingClientRect.width;
+      const right = boundingClientRect.left + width;
+      const top = boundingClientRect.top;
+      
+      el.dispatchEvent(createMouseEvent('mousedown', right, top));
+      // drag down to half
+      el.dispatchEvent(createMouseEvent('mousemove', right + 10, (top - 10)));
+      el.dispatchEvent(createMouseEvent('mouseup', right + 10, (top - 10)));
+      expect(el.x).to.equal(1.0, 'x  value should not cross upper boundary');
+      expect(el.y).to.equal(1.0, 'y  value should not cross upper boundary');
+    });
+        
     it("Mouse drag horizontal", function() {
       const boundingClientRect = el.getBoundingClientRect();
       const height = boundingClientRect.height;
@@ -403,17 +423,39 @@ describe('ColorPicker.ColorArea', function () {
       el.dispatchEvent(createMouseEvent('mousemove', (right - width/2.0), top));
       el.dispatchEvent(createMouseEvent('mouseup', (right - width/2.0), top));
       validateXSlider(el,  0.5);
-    });    
+    });
+    
+    it("Mouse drag vertical outside lower boundary", function() {
+      const boundingClientRect = el.getBoundingClientRect();
+      const height = boundingClientRect.height;
+      const width = boundingClientRect.width;
+      const right = boundingClientRect.left + width;
+      const left = boundingClientRect.left;
+      const top = boundingClientRect.top;
+      
+      el.dispatchEvent(createMouseEvent('mousedown', left, top + height));
+      el.dispatchEvent(createMouseEvent('mousemove', left - 10, top + height + 10));
+      el.dispatchEvent(createMouseEvent('mouseup', left - 10, top + height + 10));
+      expect(el.x).to.equal(0.0, 'x  value should not cross lower boundary');
+      expect(el.y).to.equal(0.0, 'y  value should not cross lower boundary');
+    });
+    
+    it("focus and blur should reflect on color handle", function() {
+      el.trigger('focus');
+      expect(el._elements.colorHandle.classList.contains('is-focused')).to.equal(true, 'color handle should be focused.');
+      el.trigger('blur');
+      expect(el._elements.colorHandle.classList.contains('is-focused')).to.equal(false, 'color handle should be blurred.');     
+    });       
   });
       
-  function validateDisabled(el) {
-    expect(el.disabled).to.equal(true, 'should now be disabled.');
-    expect(el.hasAttribute('disabled')).to.equal(true, 'disabled  attribute should be set.');
-    expect(el.getAttribute('aria-disabled')).to.equal("true", 'aria-disabled attribute should be set.');
-    expect(el._elements.colorHandle.disabled).to.equal(true, 'color handle should now be disabled.');
-    expect(el._elements.sliderX.disabled).to.equal(true, 'input field x should now be disabled.');
-    expect(el._elements.sliderY.disabled).to.equal(true, 'input field y should now be disabled.');
-    expect(el.classList.contains('is-disabled')).to.equal(true, "class is-disabled should be added.");
+  function validateDisabled(el, expected = true) {
+    expect(el.disabled).to.equal(expected, 'should now be disabled.');
+    expect(el.hasAttribute('disabled')).to.equal(expected, 'disabled  attribute should be set.');
+    expect(el.hasAttribute('aria-disabled')).to.equal(expected, 'aria-disabled attribute should be set.');
+    expect(el._elements.colorHandle.disabled).to.equal(expected, 'color handle should now be disabled.');
+    expect(el._elements.sliderX.disabled).to.equal(expected, 'input field x should now be disabled.');
+    expect(el._elements.sliderY.disabled).to.equal(expected, 'input field y should now be disabled.');
+    expect(el.classList.contains('is-disabled')).to.equal(expected, "class is-disabled should be added.");
   } 
   
   function validateLabel(el, label) {

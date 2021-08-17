@@ -50,11 +50,21 @@ describe('ColorPicker', function () {
          
     describe('#disabled', function () {
       it('should be possible to disable the colorpicker', function() {
+        expect(el.disabled).to.equal(false, 'disabled should be false by default.');
         // set disabled
         el.disabled = true;    
         validateDisabled(el);
       });
-    });    
+    });
+    
+    describe('#readonly', function () {
+      it('should be possible to readonly the colorpicker', function() {
+        expect(el.readOnly).to.equal(false, 'readonly should be false by default.');
+        // set disabled
+        el.readOnly = true;  
+        validateReadOnly(el);
+      });
+    });     
 
     describe('#value', function () {
       it('should be possible to set value on the colorpicker', function() {
@@ -94,9 +104,20 @@ describe('ColorPicker', function () {
       it('should be possible to disable the colorpicker', function() {
         const el = helpers.build('<coral-colorpicker disabled></coral-colorpicker>');        
         validateDisabled(el);
+        el.disabled = false;
+        validateDisabled(el, false);
       });
     });    
 
+    describe('#readonly', function () {
+      it('should be possible to disable the colorpicker', function() {
+        const el = helpers.build('<coral-colorpicker readonly></coral-colorpicker>');        
+        validateReadOnly(el);
+        el.readOnly = false;
+        validateReadOnly(el, false);
+      });
+    });  
+    
     describe('#value', function () {
       it('should be possible to set value on the colorpicker', function() {
         const el = helpers.build('<coral-colorpicker value="hsv(240, 40%, 35%)"></coral-colorpicker>');
@@ -213,6 +234,12 @@ describe('ColorPicker', function () {
       el._elements.input.trigger('change');
       validateValue(el, "rgb(93, 93, 137)");
     });
+    
+    it("should reflect color properties change", function() {
+      el._elements.propertiesView.color = "hsv(240, 73%, 85%)";
+      el._elements.propertiesView.trigger('change');
+      expect(el._elements.input.value).to.equal("hsv(240, 73%, 85%)", 'color should be set.');
+    });
   });
   
   describe("#Color Formats", function() {
@@ -262,12 +289,19 @@ describe('ColorPicker', function () {
     });  
   }); 
     
-  function validateDisabled(el) {
-    expect(el.disabled).to.equal(true, 'should now be disabled.');
-    expect(el.hasAttribute('disabled')).to.equal(true, 'disabled  attribute should be set.');
-    expect(el.getAttribute('aria-disabled')).to.equal("true", 'aria-disabled attribute should be set.');
-    expect(el._elements.input.disabled).to.equal(true, 'input field should now be disabled.');
-    expect(el._elements.colorPreview.disabled).to.equal(true, 'color preview should now be disabled.');
+  function validateDisabled(el, expected = true) {
+    expect(el.disabled).to.equal(expected, 'should now be disabled.');
+    expect(el.hasAttribute('disabled')).to.equal(expected, 'disabled  attribute should be set.');
+    expect(el.hasAttribute('aria-disabled')).to.equal(expected , 'aria-disabled attribute should be set.');
+    expect(el._elements.input.disabled).to.equal(expected, 'input field should now be disabled.');
+    expect(el._elements.colorPreview.disabled).to.equal(expected, 'color preview should now be disabled.');
+  }
+  
+  function validateReadOnly(el, expected = true) {
+    expect(el.readOnly).to.equal(expected, 'should now be readonly.');
+    expect(el.hasAttribute('readonly')).to.equal(expected, 'readonly  attribute should be set.');
+    expect(el._elements.input.readOnly).to.equal(expected, 'input field should now be readonly.');
+    expect(el._elements.colorPreview.disabled).to.equal(expected, 'color preview should now be disabled.');  
   }
   
   function validateLabel(el, label) {
