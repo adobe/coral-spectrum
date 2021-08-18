@@ -10,22 +10,14 @@
  * governing permissions and limitations under the License.
  */
 
-@require '../../../../coral-theme-spectrum/src/styles/vars.css';
-
-._coral-ColorHandle.is-disabled ._coral-ColorPicker-colorHandle-color {
-      display: none;
-      pointer-events: none;
-}
-
-._coral-ColorPicker-colorHandle-color {
-  border-radius: 100%;
-  width: 100%;
-  height: 100%;
-}
-
-@require 'medium';
-@require 'large';
-@require 'light';
-@require 'lightest';
-@require 'dark';
-@require 'darkest';
+  ._coral-ColorPicker-ColorArea {
+    --colorarea-width: var(--spectrum-medium-colorarea-default-width, var(--spectrum-medium-global-dimension-size-2400));
+    --colorarea-height: var(--spectrum-medium-colorarea-default-height, var(--spectrum-medium-global-dimension-size-2400));
+    --colorarea-border-radius: var(--spectrum-medium-colorarea-border-radius, var(--spectrum-medium-alias-border-radius-regular));
+  }
+  
+  ._coral-ColorPicker-ColorArea.is-focused ._coral-ColorPicker-ColorArea-colorHandle {
+    --colorarea-colorhandle-size: var(--spectrum-medium-colorhandle-size);
+  }
+  
+  @import 'size.styl'

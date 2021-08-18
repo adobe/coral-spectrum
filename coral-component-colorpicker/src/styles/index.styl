@@ -20,12 +20,6 @@ $colorpicker-button-border-radius = var(--spectrum-medium-actionbutton-border-ra
 $colorpicker-button-border-width = var(--spectrum-medium-actionbutton-border-size);
 
 //overlay
-$colorpicker-container2-size = var(--spectrum-global-dimension-static-size-2400);
-$colorpicker-properties-margin = var(--spectrum-global-dimension-static-size-200);
-
-
-
-
 ._coral-ColorPicker {
   position: relative;
   display: inline-block;
@@ -121,42 +115,8 @@ $colorpicker-properties-margin = var(--spectrum-global-dimension-static-size-200
   min-width: auto;
 }
 
-._coral-ColorPicker-propertiesContainer1 {
-    display: flex;
-    padding: calc(var(--spectrum-global-dimension-static-size-200) + 1px);
-}
-
-._coral-ColorPicker-propertiesContainer1 ._coral-ColorPicker-ColorSlider {
-  margin-left: calc(var(--spectrum-global-dimension-static-size-200) + 1px);
-}
-
-._coral-ColorPicker-propertiesContainer2 {
-    width: $colorpicker-container2-size;
-    display: flex;
-    padding: calc(var(--spectrum-global-dimension-static-size-200) + 1px);
-    padding-top: 0px;
-}
-
-._coral-ColorPicker-inputField {
-  margin-left: var(--spectrum-global-dimension-static-size-200);
-}
-
-._coral-ColorPicker-formatSelector {
-  width: var(--spectrum-global-dimension-static-size-900);
-  padding-bottom: var(--spectrum-global-dimension-static-size-25);
-}
-
-._coral-ColorPicker-value {
-  margin-left: $colorpicker-properties-margin;
-}
-
-.coral--large {
-  ._coral-ColorPicker-button {
-    height: 36px;
-    padding: 0 17px;
-  }
-}
-
+@require 'medium';
+@require 'large';
 @require './colorhandle/index'
 @require './colorarea/index'
 @require './colorslider/index'

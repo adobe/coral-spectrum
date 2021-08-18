@@ -10,22 +10,17 @@
  * governing permissions and limitations under the License.
  */
 
-@require '../../../../coral-theme-spectrum/src/styles/vars.css';
-
-._coral-ColorHandle.is-disabled ._coral-ColorPicker-colorHandle-color {
-      display: none;
-      pointer-events: none;
+.coral--large {
+  ._coral-ColorPicker {
+    ._coral-ColorPicker-button {
+      height: 36px;
+      padding: 0 17px;
+    }
+  
+    --colorpicker-margin-size-200: var(--spectrum-large-global-dimension-size-200);
+    --colorpicker-dimen-size-900: var(--spectrum-large-global-dimension-size-900);
+    --colorpicker-dimen-size-25: var(--spectrum-large-global-dimension-size-25);
+    --colorpicker-dimen-size-2400: var(--spectrum-large-global-dimension-size-2400);
+  }
+  @import 'size.styl'
 }
-
-._coral-ColorPicker-colorHandle-color {
-  border-radius: 100%;
-  width: 100%;
-  height: 100%;
-}
-
-@require 'medium';
-@require 'large';
-@require 'light';
-@require 'lightest';
-@require 'dark';
-@require 'darkest';

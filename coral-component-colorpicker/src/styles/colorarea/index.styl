@@ -12,52 +12,6 @@
 
 @require '../../../../coral-theme-spectrum/src/styles/vars.css';
 
-._coral-ColorPicker-ColorArea {
-  position: relative;
-  display: inline-block;
-  width: var(--spectrum-medium-colorarea-default-width, var(--spectrum-global-dimension-size-2400));
-  height: var(--spectrum-medium-colorarea-default-height, var(--spectrum-global-dimension-size-2400));
-  border-radius: var(--spectrum-medium-colorarea-border-radius, var(--spectrum-medium-alias-border-radius-regular));
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-  &.is-focused {
-    z-index: 2;
-  }
-  
-  &.is-disabled {
-    pointer-events: none;
-  }
-  
-  &:before {
-    content: '';
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    border-radius: var(--spectrum-medium-colorarea-border-radius, var(--spectrum-medium-alias-border-radius-regular));
-  }
-}
-
-._coral-ColorPicker-ColorArea.is-focused ._coral-ColorPicker-ColorArea-colorHandle{
-  width: calc(var(--spectrum-medium-colorhandle-size) * 2);
-  height: calc(var(--spectrum-medium-colorhandle-size) * 2);
-  
-  margin-left: calc(-1 * var(--spectrum-medium-colorhandle-size));
-  margin-top: calc(-1 * var(--spectrum-medium-colorhandle-size));
-}
-
-._coral-ColorPicker-ColorArea-gradient {
-  width: 100%;
-  height: 100%;
-  border-radius: var(--spectrum-medium-colorarea-border-radius, var(--spectrum-medium-alias-border-radius-regular));
-}
-
 ._coral-ColorPicker-ColorArea.is-disabled ._coral-ColorPicker-ColorArea-gradient {
   display: none;
 }
@@ -72,6 +26,8 @@
   pointer-events: none;
 }
 
+@require 'medium';
+@require 'large';
 @require 'light';
 @require 'lightest';
 @require 'dark';
