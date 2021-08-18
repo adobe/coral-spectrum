@@ -62,6 +62,7 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
     this._delegateEvents(events);
     this.value = "";
     this._format = ColorFormats.HSL;
+    this._sendChaneEvent = this._chaneEventDebounced();
   }
     
   /** @ignore */  
@@ -292,11 +293,27 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
     this._elements.propertiesView.setAttribute('color', this._value);
     this._elements.colorPreview.style["background-color"] = new TinyColor(this._value).toHslString();
   }
+
+  _debounce(func, timeout = 1000) {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+  }
+
+  _chaneEventDebounced() {
+    var self = this;
+    return this._debounce(function() {
+      self.trigger('change');
+    }, 1000);  
+  }
   
   /**  @private */
   _change(color) {
     this._update(color);
-    this.trigger('change');
+    var self = this;
+    this._sendChaneEvent();
   }
   /***************** Interaction handlers***********/
   /**  @private */
@@ -339,8 +356,7 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
   
   /**  @private */      
   _onColorInputChange(event) {
-    event.stopImmediatePropagation();
-    this._change(this._input.value);
+    this._update(this._input.value);
   }
   
   /**  @private */
