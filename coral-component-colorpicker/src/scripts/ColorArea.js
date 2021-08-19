@@ -116,7 +116,10 @@ class ColorArea extends BaseComponent(HTMLElement) {
   set label(value) {
     this._label = value;
     this._reflectAttribute('label', this._label);
-    this._syncInputSliderAttrs();
+    if(this._elements.sliderX.getAttribute('aria-label') !== this._label) {
+      this._elements.sliderX.setAttribute('aria-label', this._label);
+      this._elements.sliderY.setAttribute('aria-label', this._label);
+    }
   } 
 
   /**   
@@ -260,38 +263,6 @@ class ColorArea extends BaseComponent(HTMLElement) {
         linear-gradient(to right, white 0%, hsla(${this._hue}, 100%, 0%, 0) 100%),
         hsl(${this._hue}, 100%, 50%)`;
     }  
-  }
-        
-  /** @private */
-  _syncInputSliderAttrs() {
-    if(Number(this._elements.sliderX.getAttribute('min')) !== this._minX) {
-      this._elements.slideX.setAttribute('min', this._minX);
-    }
-    
-    if(Number(this._elements.sliderX.getAttribute('max')) !== this._maxX) {
-      this._elements.slideX.setAttribute('max', this._maxX);
-    }
-    
-    if(Number(this._elements.sliderX.getAttribute('step')) !== this._stepX) {
-      this._elements.slideX.setAttribute('step', this._stepX);
-    }  
-
-    if(Number(this._elements.sliderY.getAttribute('min')) !== this._minY) {
-      this._elements.sliderY.setAttribute('min', this._minY);
-    }
-    
-    if(Number(this._elements.sliderY.getAttribute('max')) !== this._maxY) {
-      this._elements.sliderY.setAttribute('max', this._maxY);
-    }
-    
-    if(Number(this._elements.sliderY.getAttribute('step')) !== this._stepY) {
-      this._elements.sliderY.setAttribute('step', this._stepY);
-    } 
-        
-    if(this._elements.sliderX.getAttribute('aria-label') !== this._label) {
-      this._elements.sliderX.setAttribute('aria-label', this._label);
-      this._elements.sliderY.setAttribute('aria-label', this._label);
-    }
   }
 
   /** @private */  
