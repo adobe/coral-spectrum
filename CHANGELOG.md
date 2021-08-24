@@ -1,3 +1,10 @@
+# [4.11.0](https://github.com/adobe/coral-spectrum/compare/v4.10.27...v4.11.0) (2021-08-24)
+
+
+### Features
+
+* **icons:** add forms portal, usc and bookmarksmall icon ([#181](https://github.com/adobe/coral-spectrum/issues/181)) ([cef32b3](https://github.com/adobe/coral-spectrum/commit/cef32b3236437d183b94201e58c01994c0d7e355))
+
 ## [4.10.27](https://github.com/adobe/coral-spectrum/compare/v4.10.26...v4.10.27) (2021-07-23)
 
 
