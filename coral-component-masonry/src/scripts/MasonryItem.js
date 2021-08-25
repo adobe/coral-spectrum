@@ -14,11 +14,14 @@ import {BaseComponent} from '../../../coral-base-component';
 import {DragAction} from '../../../coral-dragaction';
 import '../../../coral-component-checkbox';
 import quickactions from '../templates/quickactions';
-import {transform, commons, validate} from '../../../coral-utils';
+import {transform, commons, validate, i18n} from '../../../coral-utils';
 import {Messenger} from '../../../coral-messenger';
 import {Decorator} from '../../../coral-decorator';
 
 const CLASSNAME = '_coral-Masonry-item';
+
+/** @ignore */
+const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(window.navigator.platform);
 
 /**
  @class Coral.Masonry.Item
@@ -105,6 +108,7 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
     if(validate.valueMustChange(this._selected, value)) {
       this._selected = value;
       this._reflectAttribute('selected', value);
+      this.trigger('coral-masonry-item:_selecteditemchanged');
 
       this.setAttribute('aria-selected', value);
       this.classList.toggle('is-selected', value);
@@ -217,6 +221,38 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
     // @a11y
     this.setAttribute('tabindex', '-1');
 
+    // @a11y Add live region element to ensure announcement of selected state
+    const accessibilityState = this._elements.accessibilityState || this.querySelector('coral-masonry-item-accessibilitystate') || this.accessibilityState();
+
+    // @a11y Style to be visually hidden yet accessible to screen readers
+    if (!accessibilityState.classList.contains('u-coral-screenReaderOnly')) {
+      accessibilityState.classList.toggle('u-coral-screenReaderOnly');
+    }
+
+    // @a11y accessibility state string should announce in document lang, rather than item lang.
+    accessibilityState.setAttribute('lang', i18n.locale);
+
+    // @a11y accessibility state has role="status" to announce as a live region
+    accessibilityState.setAttribute('role', 'status');
+    accessibilityState.setAttribute('aria-live', 'off');
+    accessibilityState.hidden = true;
+
+    accessibilityState.id = accessibilityState.id || commons.getUID();
+
+    // @a11y Wait a frame and append live region content element so that it is the last child within item.
+    if (!accessibilityState.parentNode) {
+      this.appendChild(accessibilityState);
+    }
+    this._elements.accessibilityState = accessibilityState;
+
+    // @a11y Item should be labelled by accessibility state.
+    if (isMacLike) {
+      const ariaLabelledby = this.getAttribute('aria-labelledby');
+      if (ariaLabelledby) {
+        this.setAttribute('aria-labelledby', ariaLabelledby + ' ' + accessibilityState.id);
+      }
+    }
+
     // Support cloneNode
     const template = this.querySelector('._coral-Masonry-item-quickActions');
     if (template) {
@@ -239,6 +275,18 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
       masonry._onItemDisconnected(this);
     }
   }
+
+  /**
+   @class Coral.Masonry.Item.AccessibilityState
+   @classdesc The Masonry Item Accessibility State
+   @htmltag coral-masonry-item-accessibilitystate
+   @extends HTMLElement
+   */
+  accessibilityState() {
+    const element = document.createElement('coral-masonry-item-accessibilitystate');
+    element.className = 'u-coral-screenReaderOnly';
+    return element;
+  };
 });
 
 export default MasonryItem;

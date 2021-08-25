@@ -474,6 +474,8 @@ describe('Masonry', function () {
   });
 
   describe('Accessibility', function () {
+    const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(window.navigator.platform);
+
     it('should have role group', function () {
       const el = helpers.build(new Masonry());
       expect(el.getAttribute('role')).to.equal('group');
@@ -487,6 +489,50 @@ describe('Masonry', function () {
 
       el.selectionMode = 'multiple';
       expect(el.getAttribute('aria-multiselectable')).to.equal('true');
+    });
+
+    it('should announce "checked" when item becomes selected', function(done) {
+      const item = m.items.getAll()[3];
+      const a11yState = item._elements.accessibilityState;
+      expect(a11yState.hidden).to.be.true;
+      expect(a11yState.getAttribute('role')).to.equal('status');
+
+      helpers.focus(item);
+      item.selected = true;
+
+      setTimeout(function() {
+        expect(a11yState.textContent).equal('checked');
+        expect(a11yState.hidden).to.be.false;
+        expect(a11yState.hasAttribute('aria-live')).to.be.false;
+        setTimeout(function() {
+          expect(a11yState.textContent).equal(isMacLike ? 'checked' : '');
+          expect(a11yState.hidden).to.be.true;
+          expect(a11yState.getAttribute('aria-live')).equal('off');
+          done();
+        }, 2020);
+      }, 220);
+    });
+
+    it('should announce "not checked" when item becomes unselected', function(done) {
+      const item = m.items.getAll()[3];
+      const a11yState = item._elements.accessibilityState;
+      expect(a11yState.hidden).to.be.true;
+      expect(a11yState.getAttribute('role')).to.equal('status');
+
+      helpers.focus(item);
+      item.selected = true;
+      item.selected = false;
+      setTimeout(function() {
+        expect(a11yState.textContent).equal('not checked');
+        expect(a11yState.hidden).to.be.false;
+        expect(a11yState.hasAttribute('aria-live')).to.be.false;
+        setTimeout(function() {
+          expect(a11yState.textContent).equal('');
+          expect(a11yState.hidden).to.be.true;
+          expect(a11yState.getAttribute('aria-live')).equal('off');
+          done();
+        }, 2020);
+      }, 220);
     });
   });
 
