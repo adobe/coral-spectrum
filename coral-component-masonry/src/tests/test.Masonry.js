@@ -493,12 +493,11 @@ describe('Masonry', function () {
 
     it('should announce "checked" when item becomes selected', function(done) {
       const el = helpers.build(window.__html__['Masonry.variable.3-columns-9-items.html']);
-      const a11yState = el._elements.accessibilityState;
+      const item = el.items.getAll()[3];
+      const a11yState = item._elements.accessibilityState;
       expect(a11yState.hidden).to.be.true;
       expect(a11yState.getAttribute('role')).to.equal('status');
 
-      // select an item
-      const item = el.items.getAll()[1];
       helpers.focus(item);
       item.selected = true;
 
@@ -517,12 +516,11 @@ describe('Masonry', function () {
 
     it('should announce "not checked" when item becomes unselected', function(done) {
       const el = helpers.build(window.__html__['Masonry.variable.3-columns-9-items.html']);
-      const a11yState = el._elements.accessibilityState;
+      const item = el.items.getAll()[3];
+      const a11yState = item._elements.accessibilityState;
       expect(a11yState.hidden).to.be.true;
       expect(a11yState.getAttribute('role')).to.equal('status');
 
-      // select an item
-      const item = el.items.getAll()[1];
       helpers.focus(item);
       item.selected = true;
       item.selected = false;
