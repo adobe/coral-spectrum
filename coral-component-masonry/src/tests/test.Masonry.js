@@ -497,8 +497,10 @@ describe('Masonry', function () {
       expect(a11yState.hidden).to.be.true;
       expect(a11yState.getAttribute('role')).to.equal('status');
 
-      helpers.focus(el);
-      el.selected = true;
+      // select an item
+      const item = el.items.getAll()[1];
+      helpers.focus(item);
+      item.selected = true;
 
       setTimeout(function() {
         expect(a11yState.textContent).equal('checked');
@@ -519,9 +521,11 @@ describe('Masonry', function () {
       expect(a11yState.hidden).to.be.true;
       expect(a11yState.getAttribute('role')).to.equal('status');
 
-      helpers.focus(el);
-      el.selected = true;
-      el.selected = false;
+      // select an item
+      const item = el.items.getAll()[1];
+      helpers.focus(item);
+      item.selected = true;
+      item.selected = false;
       setTimeout(function() {
         expect(a11yState.textContent).equal('not checked');
         expect(a11yState.hidden).to.be.false;
