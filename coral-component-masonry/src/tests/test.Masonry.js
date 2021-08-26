@@ -492,14 +492,13 @@ describe('Masonry', function () {
     });
 
     it('should announce "checked" when item becomes selected', function(done) {
-      const el = helpers.build(new Masonry());
-      const item = el.items.getAll()[3];
-      const a11yState = item._elements.accessibilityState;
+      const el = helpers.build(window.__html__['Coral.Masonry.variable.3-columns-9-items.html']);
+      const a11yState = el._elements.accessibilityState;
       expect(a11yState.hidden).to.be.true;
       expect(a11yState.getAttribute('role')).to.equal('status');
 
-      helpers.focus(item);
-      item.selected = true;
+      helpers.focus(el);
+      el.selected = true;
 
       setTimeout(function() {
         expect(a11yState.textContent).equal('checked');
@@ -515,15 +514,14 @@ describe('Masonry', function () {
     });
 
     it('should announce "not checked" when item becomes unselected', function(done) {
-      const el = helpers.build(new Masonry());
-      const item = el.items.getAll()[3];
-      const a11yState = item._elements.accessibilityState;
+      const el = helpers.build(window.__html__['Coral.Masonry.variable.3-columns-9-items.html']);
+      const a11yState = el._elements.accessibilityState;
       expect(a11yState.hidden).to.be.true;
       expect(a11yState.getAttribute('role')).to.equal('status');
 
-      helpers.focus(item);
-      item.selected = true;
-      item.selected = false;
+      helpers.focus(el);
+      el.selected = true;
+      el.selected = false;
       setTimeout(function() {
         expect(a11yState.textContent).equal('not checked');
         expect(a11yState.hidden).to.be.false;
