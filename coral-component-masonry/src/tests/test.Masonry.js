@@ -498,7 +498,7 @@ describe('Masonry', function () {
       expect(a11yState.hidden).to.be.true;
       expect(a11yState.getAttribute('role')).to.equal('status');
 
-      helpers.focus(item);
+      item.focus();
       item.selected = true;
 
       setTimeout(function() {
@@ -521,7 +521,7 @@ describe('Masonry', function () {
       expect(a11yState.hidden).to.be.true;
       expect(a11yState.getAttribute('role')).to.equal('status');
 
-      helpers.focus(item);
+      item.focus();
       item.selected = true;
       item.selected = false;
       setTimeout(function() {
