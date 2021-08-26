@@ -12,7 +12,7 @@
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Masonry} from '../../../coral-component-masonry';
-import {commons} from '../../../coral-utils';
+import {commons, i18n} from '../../../coral-utils';
 
 describe('Masonry', function () {
 
@@ -502,11 +502,11 @@ describe('Masonry', function () {
       item.selected = true;
 
       setTimeout(function() {
-        expect(a11yState.textContent).equal('checked');
+        expect(a11yState.textContent).to.equal(i18n.get('checked'));
         expect(a11yState.hidden).to.be.false;
         expect(a11yState.hasAttribute('aria-live')).to.be.false;
         setTimeout(function() {
-          expect(a11yState.textContent).equal(isMacLike ? 'checked' : '');
+          expect(a11yState.textContent).to.equal(isMacLike ? i18n.get('checked') : '');
           expect(a11yState.hidden).to.be.true;
           expect(a11yState.getAttribute('aria-live')).equal('off');
           done();
@@ -525,13 +525,13 @@ describe('Masonry', function () {
       item.selected = true;
       item.selected = false;
       setTimeout(function() {
-        expect(a11yState.textContent).equal('not checked');
+        expect(a11yState.textContent).to.equal(i18n.get('not checked'));
         expect(a11yState.hidden).to.be.false;
         expect(a11yState.hasAttribute('aria-live')).to.be.false;
         setTimeout(function() {
-          expect(a11yState.textContent).equal('');
+          expect(a11yState.textContent).to.equal('');
           expect(a11yState.hidden).to.be.true;
-          expect(a11yState.getAttribute('aria-live')).equal('off');
+          expect(a11yState.getAttribute('aria-live')).to.equal('off');
           done();
         }, 2020);
       }, 220);
