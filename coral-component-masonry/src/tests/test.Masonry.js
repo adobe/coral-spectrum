@@ -512,7 +512,7 @@ describe('Masonry', function () {
           expect(a11yState.getAttribute('aria-live')).equal('off');
           done();
         }, 2020);
-      }, 220);
+      }, 400);
     });
 
     it('should announce "not checked" when item becomes unselected', function(done) {
@@ -536,7 +536,7 @@ describe('Masonry', function () {
           expect(a11yState.getAttribute('aria-live')).to.equal('off');
           done();
         }, 2020);
-      }, 220);
+      }, 400);
     });
   });
 
