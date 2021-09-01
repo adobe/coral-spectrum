@@ -223,7 +223,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     if (this._selectionMode === selectionMode.NONE) {
       this.classList.remove('is-selectable');
       this.removeAttribute('aria-multiselectable');
-    } else {
+    }
+    else {
       this.classList.add('is-selectable');
       this.setAttribute('aria-multiselectable', this._selectionMode === selectionMode.MULTIPLE);
     }
@@ -289,7 +290,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
         accessibilityState.appendChild(span);
 
         // give screen reader 2 secs before clearing the live region, to provide enough time for announcement
-        self._removeTimeout = setTimeout(resetAccessibilityState, 2000);
+        self._removeTimeout = setTimeout(resetAccessibilityState, 1600);
       }, 100);
     }, 100);
   }
@@ -332,7 +333,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
         this._reflectAttribute('layout', this._layout);
 
         this._scheduleLayout('new layout');
-      } else {
+      }
+      else {
         commons._log('Coral.Masonry: Unknown layout:', value);
       }
     }
@@ -440,11 +442,13 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
       // Preserve existing role and set new role
       this._preservedAriaRole = this.getAttribute('role');
       this.setAttribute('role', 'row');
-    } else if (this._ariaGrid == ariaGrid.OFF) {
+    }
+    else if (this._ariaGrid == ariaGrid.OFF) {
       // Restore or remove role
       if (this._preservedAriaRole) {
         this.setAttribute('role', this._preservedAriaRole);
-      } else {
+      }
+      else {
         this.removeAttribute('role');
       }
     }
@@ -470,7 +474,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     value = transform.string(value);
     if (value === '') {
       this.removeAttribute('aria-label');
-    } else {
+    }
+    else {
       this._reflectAttribute('aria-label', value);
     }
 
@@ -480,7 +485,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
 
     if (this.ariaLabel) {
       this.parentElement.setAttribute('aria-label', this.ariaLabel);
-    } else {
+    }
+    else {
       this.parentElement.removeAttribute('aria-label');
     }
   }
@@ -500,7 +506,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     value = transform.string(value);
     if (value === '') {
       this.removeAttribute('aria-labelledby');
-    } else {
+    }
+    else {
       this._reflectAttribute('aria-labelledby', value);
     }
 
@@ -510,7 +517,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
 
     if (this.ariaLabelledby) {
       this.parentElement.setAttribute('aria-labelledby', this.ariaLabelledby);
-    } else {
+    }
+    else {
       this.parentElement.removeAttribute('aria-labelledby');
     }
   }
@@ -536,11 +544,13 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
         this._preservedParentAriaLabelledby = this.parentElement.getAttribute('aria-labelledby');
         this.parentElement.setAttribute('aria-labelledby', this.ariaLabelledby);
       }
-    } else {
+    }
+    else {
       // Restore/remove role of the parent element
       if (this._preservedParentAriaRole) {
         this.parentElement.setAttribute('role', this._preservedParentAriaRole);
-      } else {
+      }
+      else {
         this.parentElement.removeAttribute('role');
       }
 
@@ -548,13 +558,15 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
       if (this._preservedParentAriaLabel) {
         this.parentElement.setAttribute('aria-label', this._preservedParentAriaLabel);
         this._preservedParentAriaLabel = undefined;
-      } else {
+      }
+      else {
         this.parentElement.removeAttribute('aria-label');
       }
 
       if (this._preservedParentAriaLabelledby !== undefined) {
         this.parentElement.setAttribute('aria-labelledby', this._preservedParentAriaLabelledby);
-      } else {
+      }
+      else {
         this.parentElement.removeAttribute('aria-labelledby');
       }
 
@@ -576,7 +588,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     if (activateAriaGrid === ariaGrid.ON) {
       item.setAttribute('role', 'gridcell');
       item.setAttribute('aria-colindex', columnIndex);
-    } else {
+    }
+    else {
       item.removeAttribute('role');
       item.removeAttribute('aria-colindex');
     }
@@ -590,7 +603,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
 
     if (activateAriaGrid === ariaGrid.ON) {
       this.parentElement.setAttribute('aria-colcount', this.items.length);
-    } else {
+    }
+    else {
       this.parentElement.removeAttribute('aria-colcount');
     }
   }
@@ -604,7 +618,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
         this._preventTriggeringEvents = true;
         selectedItem.removeAttribute('selected');
       });
-    } else if (this.selectionMode === selectionMode.SINGLE) {
+    }
+    else if (this.selectionMode === selectionMode.SINGLE) {
       // Last selected item wins if multiple selection while not allowed
       item = item || selectedItems[selectedItems.length - 1];
 
@@ -635,7 +650,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
           oldSelection: oldSelection,
           selection: selectedItems
         });
-      } else {
+      }
+      else {
         this.trigger('coral-masonry:change', {
           oldSelection: oldSelection.length > 1 ? oldSelection : oldSelection[0] || null,
           selection: selectedItems[0] || null
@@ -720,7 +736,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     if (!this._layouted) {
       // The masonry was first invisible, render it now immediately
       this._doLayout('became visible');
-    } else {
+    }
+    else {
       this._scheduleDebouncedLayout(false);
     }
   }
@@ -789,7 +806,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     if (focusedItem) {
       if (isRemovingOrRemoved(focusedItem) && this._focusedItemNext) {
         this._focusedItemNext.focus();
-      } else if (focusedItem !== document.activeElement) {
+      }
+      else if (focusedItem !== document.activeElement) {
         this._focusedItem = null;
         this._focusedItemNext = null;
       }
@@ -990,7 +1008,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
           // before the item below (the dragged item)
           if (placeholder.compareDocumentPosition(itemBelow) & document.DOCUMENT_POSITION_PRECEDING) {
             itemBelow.parentNode.insertBefore(placeholder, itemBelow);
-          } else {
+          }
+          else {
             itemBelow.parentNode.insertBefore(placeholder, itemBelow.nextSibling);
           }
         }

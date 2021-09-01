@@ -494,49 +494,57 @@ describe('Masonry', function () {
     it('should announce "checked" when item becomes selected', function(done) {
       const el = helpers.build(window.__html__['Masonry.variable.3-columns-9-items.html']);
       el.selectionMode = 'single';
-      const item = el.items.getAll()[3];
-      const a11yState = item._elements.accessibilityState;
-      expect(a11yState.hidden).to.be.true;
-      expect(a11yState.getAttribute('role')).to.equal('status');
 
-      item.focus();
-      item.selected = true;
+      // Wait for layouting
+      helpers.next(function () {
+        const item = el.items.getAll()[3];
+        const a11yState = item._elements.accessibilityState;
+        expect(a11yState.hidden).to.be.true;
+        expect(a11yState.getAttribute('role')).to.equal('status');
 
-      setTimeout(function() {
-        expect(a11yState.textContent).to.equal(i18n.get('checked'));
-        expect(a11yState.hidden).to.be.false;
-        expect(a11yState.hasAttribute('aria-live')).to.be.false;
+        item.focus();
+        item.selected = true;
+
         setTimeout(function() {
-          expect(a11yState.textContent).to.equal(isMacLike ? i18n.get('checked') : '');
-          expect(a11yState.hidden).to.be.true;
-          expect(a11yState.getAttribute('aria-live')).equal('off');
-          done();
-        }, 2020);
-      }, 400);
+          expect(a11yState.textContent).to.equal(i18n.get('checked'));
+          expect(a11yState.hidden).to.be.false;
+          expect(a11yState.hasAttribute('aria-live')).to.be.false;
+          setTimeout(function() {
+            expect(a11yState.textContent).to.equal(isMacLike ? i18n.get('checked') : '');
+            expect(a11yState.hidden).to.be.true;
+            expect(a11yState.getAttribute('aria-live')).equal('off');
+            done();
+          }, 1650);
+        }, 210);
+      });
     });
 
     it('should announce "not checked" when item becomes unselected', function(done) {
       const el = helpers.build(window.__html__['Masonry.variable.3-columns-9-items.html']);
       el.selectionMode = 'single';
-      const item = el.items.getAll()[3];
-      const a11yState = item._elements.accessibilityState;
-      expect(a11yState.hidden).to.be.true;
-      expect(a11yState.getAttribute('role')).to.equal('status');
 
-      item.focus();
-      item.selected = true;
-      item.selected = false;
-      setTimeout(function() {
-        expect(a11yState.textContent).to.equal(i18n.get('not checked'));
-        expect(a11yState.hidden).to.be.false;
-        expect(a11yState.hasAttribute('aria-live')).to.be.false;
+      // Wait for layouting
+      helpers.next(function () {
+        const item = el.items.getAll()[3];
+        const a11yState = item._elements.accessibilityState;
+        expect(a11yState.hidden).to.be.true;
+        expect(a11yState.getAttribute('role')).to.equal('status');
+
+        item.focus();
+        item.selected = true;
+        item.selected = false;
         setTimeout(function() {
-          expect(a11yState.textContent).to.equal('');
-          expect(a11yState.hidden).to.be.true;
-          expect(a11yState.getAttribute('aria-live')).to.equal('off');
-          done();
-        }, 2020);
-      }, 400);
+          expect(a11yState.textContent).to.equal(i18n.get('not checked'));
+          expect(a11yState.hidden).to.be.false;
+          expect(a11yState.hasAttribute('aria-live')).to.be.false;
+          setTimeout(function() {
+            expect(a11yState.textContent).to.equal('');
+            expect(a11yState.hidden).to.be.true;
+            expect(a11yState.getAttribute('aria-live')).to.equal('off');
+            done();
+          }, 1650);
+        }, 210);
+      });
     });
   });
 
