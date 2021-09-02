@@ -147,8 +147,7 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
       // Find handle
       if (this.getAttribute('coral-masonry-draghandle') !== null) {
         handle = this;
-      }
-      else {
+      } else {
         handle = this.querySelector('[coral-masonry-draghandle]');
         if (!handle) {
           // Disable drag&drop if handle wasn't found
@@ -163,8 +162,7 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
         this._dragAction.dropZone = this.parentNode;
       }
       this._dragAction.handle = handle;
-    }
-    else if (this._dragAction) {
+    } else if (this._dragAction) {
       this._dragAction.destroy();
       this._dragAction = null;
     }
@@ -182,11 +180,9 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
       window.requestAnimationFrame(() => {
         this.classList.toggle('is-removing', value !== null);
       });
-    }
-    else if (name === '_orderable') {
+    } else if (name === '_orderable') {
       this._updateDragAction(value !== null);
-    }
-    else {
+    } else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
