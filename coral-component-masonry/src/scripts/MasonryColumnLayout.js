@@ -83,8 +83,7 @@ class MasonryColumnLayout extends MasonryLayout {
       this._offsetTop = spacing - csspx(firstItem, 'marginTop');
       this._verPadding = 2 * spacing;
       this._masonryAvailableWidth = masonry.clientWidth - spacing;
-    }
-    else {
+    } else {
       this._horSpacing = csspx(firstItem, 'marginLeft') + csspx(firstItem, 'marginRight');
       this._verSpacing = csspx(firstItem, 'marginTop') + csspx(firstItem, 'marginBottom');
       this._offsetLeft = csspx(masonry, 'paddingLeft');
@@ -279,8 +278,7 @@ class MasonryColumnLayout extends MasonryLayout {
       nextItem.focus();
       // prevent scrolling at the same time
       event.preventDefault();
-    }
-    else {
+    } else {
       // in case there is no item in the same column, we should move to first item in next column for down
       // and last item of previous column for up key
       let columnIndex = currentLayoutData.columnIndex;
@@ -292,8 +290,7 @@ class MasonryColumnLayout extends MasonryLayout {
             nextItem = prevColumn.items[prevColumn.items.length - 1]; // last item of previous column
           }
         }
-      }
-      else {
+      } else {
         // down key is pressed, go to first item of next column if exists
         let columnCount = this._columns.length;
         let nextColumnIndex = columnIndex + currentLayoutData.colspan;
@@ -327,8 +324,7 @@ class MasonryColumnLayout extends MasonryLayout {
       if (collectionItemIndex > 0) {
         nextItem = items[collectionItemIndex - 1];
       }
-    }
-    else if (collectionItemIndex < items.length - 1) {
+    } else if (collectionItemIndex < items.length - 1) {
       nextItem = items[collectionItemIndex + 1];
     }
 
@@ -355,8 +351,7 @@ class MasonryColumnLayout extends MasonryLayout {
     // when home is pressed, we take the first item of the first column
     if (home) {
       nextItem = columns[0] && columns[0].items[0];
-    }
-    else {
+    } else {
       // when end is pressed, we take the last item of the last column; since some columns are empty, we need to
       // iterate backwards to find the first column that has items
       for (let i = columns.length - 1 ; i > -1 ; i--) {
@@ -387,8 +382,7 @@ class MasonryColumnLayout extends MasonryLayout {
       this._writeStyles(items);
       this._readStyles(items);
       this._positionItems(items);
-    }
-    else {
+    } else {
       this._columns.length = 0;
     }
 
@@ -399,8 +393,7 @@ class MasonryColumnLayout extends MasonryLayout {
     // Check if the masonry has changed its width due to the changed height (can happen because of appearing/disappearing scrollbars)
     if (!secondTry && this._masonryInnerWidth !== masonry.clientWidth) {
       this.layout(true);
-    }
-    else {
+    } else {
       // Post layout hook for sub classes
       this._postLayout(contentHeight);
     }
