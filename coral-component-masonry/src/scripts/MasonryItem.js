@@ -15,6 +15,7 @@ import {DragAction} from '../../../coral-dragaction';
 import '../../../coral-component-checkbox';
 import quickactions from '../templates/quickactions';
 import {transform, commons, validate, i18n} from '../../../coral-utils';
+import MasonryItemAccessibilityState from './MasonryItemAccessibilityState';
 import {Messenger} from '../../../coral-messenger';
 import {Decorator} from '../../../coral-decorator';
 
@@ -222,11 +223,11 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
     this.setAttribute('tabindex', '-1');
 
     // @a11y Add live region element to ensure announcement of selected state
-    const accessibilityState = this._elements.accessibilityState || this.querySelector('coral-masonry-item-accessibilitystate') || this.accessibilityState();
+    const accessibilityState = this._elements.accessibilityState || this.querySelector('coral-masonry-item-accessibilitystate') || new MasonryItemAccessibilityState();
 
     // @a11y Style to be visually hidden yet accessible to screen readers
     if (!accessibilityState.classList.contains('u-coral-screenReaderOnly')) {
-      accessibilityState.classList.toggle('u-coral-screenReaderOnly');
+      accessibilityState.classList.add('u-coral-screenReaderOnly');
     }
 
     // @a11y accessibility state string should announce in document lang, rather than item lang.
@@ -275,18 +276,6 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
       masonry._onItemDisconnected(this);
     }
   }
-
-  /**
-   @class Coral.Masonry.Item.AccessibilityState
-   @classdesc The Masonry Item Accessibility State
-   @htmltag coral-masonry-item-accessibilitystate
-   @extends HTMLElement
-   */
-  accessibilityState() {
-    const element = document.createElement('coral-masonry-item-accessibilitystate');
-    element.className = 'u-coral-screenReaderOnly';
-    return element;
-  };
 });
 
 export default MasonryItem;
