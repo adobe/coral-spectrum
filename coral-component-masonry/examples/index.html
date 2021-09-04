@@ -228,16 +228,13 @@
             const masonry = document.getElementById('masonry');
 
             masonry.items.getAll().forEach(function (item) {
-              var article = item.querySelector('article');
+              const article = item.querySelector('article');
               article.setAttribute('role', 'presentation');
               if (!item.id) {
                 item.id = getUID();
               }
-              var contentId = article.id || item.id + '-content';
-              item.setAttribute('aria-labelledby', contentId);
-              if (!article.id) {
-                article.id = contentId;
-              }
+              article.id = article.id || item.id + '-content';
+              item.setAttribute('aria-labelledby', article.id);
             });
 
             const ariaGridSelector = document.getElementById('ariaGrid');
@@ -268,8 +265,8 @@
             document.addEventListener('click', function(event) {
               const prepend = event.target.matches('.prepend');
               if (prepend) {
-                var count = event.target.dataset.count;
-                for (var i = 0; i < count; i++) {
+                let count = event.target.dataset.count;
+                for (let i = 0; i < count; i++) {
                   masonry.items.add(createItem(), masonry.items.first());
                 }
               }
@@ -278,9 +275,9 @@
             document.addEventListener('click', function(event) {
               const append = event.target.matches('.append');
               if (append) {
-                var startTime = Date.now();
-                var count = event.target.dataset.count;
-                for (var i = 0; i < count; i++) {
+                const startTime = Date.now();
+                const count = event.target.dataset.count;
+                for (let i = 0; i < count; i++) {
                   masonry.items.add(createItem());
                 }
                 window.requestAnimationFrame(function() {
@@ -289,7 +286,7 @@
               }
             });
 
-            var image = false;
+            let image = false;
             function createItem() {
               image = !image;
               return image ? createImageItem() : createTextItem();
@@ -300,13 +297,13 @@
             }
 
             function createImageItem() {
-              var id = getUID();
-              var contentId = id + '-content';
-              var width = randomSize();
-              var height = randomSize();
-              var url = 'http://via.placeholder.com/' + width + 'x' + height;
+              const id = getUID();
+              const contentId = id + '-content';
+              const width = randomSize();
+              const height = randomSize();
+              const url = 'http://via.placeholder.com/' + width + 'x' + height;
 
-              var item = document.createElement('coral-masonry-item');
+              const item = document.createElement('coral-masonry-item');
               item.id = id;
               item.setAttribute('aria-labelledby', contentId);
               item.classList.add('coral-Well');
@@ -316,12 +313,12 @@
             }
 
             function createTextItem() {
-              var id = getUID();
-              var contentId = id + '-content';
-              var rows = 1 + Math.round(Math.random() * 6);
-              var html = new Array(rows + 1).join('card<br>').slice(0, -4);
+              const id = getUID();
+              const contentId = id + '-content';
+              const rows = 1 + Math.round(Math.random() * 6);
+              const html = new Array(rows + 1).join('card<br>').slice(0, -4);
 
-              var item = document.createElement('coral-masonry-item');
+              const item = document.createElement('coral-masonry-item');
               item.id = id;
               item.setAttribute('aria-labelledby', contentId);
               item.classList.add('coral-Well');
