@@ -69,6 +69,7 @@ const BaseFieldGroup = (superClass) => class extends superClass {
   set orientation(value) {
     value = transform.string(value).toLowerCase();
     value = validate.enumeration(this.constructor.orientation)(value) && value || orientation.HORIZONTAL;
+    
     if(validate.valueMustChange(this._orientation, value)) {
       this._orientation = value;
       this._reflectAttribute('orientation', value);
