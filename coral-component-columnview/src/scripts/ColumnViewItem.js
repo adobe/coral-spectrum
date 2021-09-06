@@ -127,10 +127,10 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
     value = transform.string(value).toLowerCase();
     value = validate.enumeration(variant)(value) && value || variant.DEFAULT;
 
+    this._reflectAttribute('variant', value);
+
     if(validate.valueMustChange(this._variant, value)) {
       this._variant = value;
-
-      this._reflectAttribute('variant', value);
 
       if (value === variant.DRILLDOWN) {
         // Render chevron on demand
@@ -172,10 +172,11 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
 
   set icon(value) {
     value = transform.string(value);
+    
+    this._reflectAttribute('icon', value);
+
     if(validate.valueMustChange(this._icon, value)) {
       this._icon = value;
-
-      this._reflectAttribute('icon', value);
 
       // ignored if it is an empty string
       if (value) {
@@ -212,10 +213,10 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
 
   set selected(value) {
     value = transform.booleanAttr(value);
+    this._reflectAttribute('selected', value);
 
     if(validate.valueMustChange(this._selected, value)) {
       this._selected = value;
-      this._reflectAttribute('selected', value);
       this.trigger('coral-columnview-item:_selectedchanged');
   
       // wait a frame before updating attributes
@@ -290,9 +291,10 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
 
   set active(value) {
     value = transform.booleanAttr(value);
+    this._reflectAttribute('active', value);
+
     if(validate.valueMustChange(this._active, value)) {
       this._active = value;
-      this._reflectAttribute('active', value);
 
       this.classList.toggle('is-navigated', value);
       this.setAttribute('aria-selected', this.hasAttribute('_selectable') ? this.selected : value);

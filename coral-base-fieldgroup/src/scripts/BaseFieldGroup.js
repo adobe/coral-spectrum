@@ -70,9 +70,10 @@ const BaseFieldGroup = (superClass) => class extends superClass {
     value = transform.string(value).toLowerCase();
     value = validate.enumeration(this.constructor.orientation)(value) && value || orientation.HORIZONTAL;
     
+    this._reflectAttribute('orientation', value);
+    
     if(validate.valueMustChange(this._orientation, value)) {
       this._orientation = value;
-      this._reflectAttribute('orientation', value);
 
       this.classList.toggle(`${CLASSNAME}--vertical`, value === orientation.VERTICAL);
     }

@@ -70,10 +70,10 @@ const BaseListItem = (superClass) => class extends BaseLabellable(superClass) {
 
   set disabled(value) {
     value = transform.booleanAttr(value);
+    this._reflectAttribute('disabled', value);
+    
     if(validate.valueMustChange(this._disabled, value)) {
       this._disabled = value;
-      this._reflectAttribute('disabled', value);
-
       this.classList.toggle('is-disabled', value);
       this[value ? 'setAttribute' : 'removeAttribute']('aria-disabled', value);
     }

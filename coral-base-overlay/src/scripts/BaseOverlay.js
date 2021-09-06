@@ -414,7 +414,7 @@ const BaseOverlay = (superClass) => class extends superClass {
     value = transform.string(value).toLowerCase();
     this._trapFocus = validate.enumeration(trapFocus)(value) && value || trapFocus.OFF;
 
-    if (value === trapFocus.ON) {
+    if (this._trapFocus === trapFocus.ON) {
       // Give ourselves tabIndex if we are not focusable
       if (this.tabIndex < 0) {
         /** @ignore */
@@ -432,7 +432,7 @@ const BaseOverlay = (superClass) => class extends superClass {
       this._vent.on('keydown', this._handleRootKeypress);
       this._vent.on('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
 
-    } else if (value === trapFocus.OFF) {
+    } else if (this._trapFocus === trapFocus.OFF) {
       // Remove elements
       this._elements.topTabCapture && this._elements.topTabCapture.remove();
       this._elements.intermediateTabCapture && this._elements.intermediateTabCapture.remove();

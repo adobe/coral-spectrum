@@ -217,9 +217,10 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
     value = transform.string(value).toLowerCase();
     value = validate.enumeration(iconPosition)(value) && value || iconPosition.LEFT;
     
+    this._reflectAttribute('iconposition', value);
+
     if(validate.valueMustChange(this._iconPosition, value)) {
       this._iconPosition = value;
-      this._reflectAttribute('iconposition', value);
       this._updateIcon(this.icon);
     }
   }
@@ -312,12 +313,9 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
 
   set size(value) {
     value = transform.string(value).toUpperCase();
-    value = validate.enumeration(size)(value) && value || size.MEDIUM;
+    this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
     
-    if(validate.valueMustChange(this._size, value)) {
-      this._size = value;
-      this._reflectAttribute('size', value);
-    }
+    this._reflectAttribute('size', this._size);
   }
 
   /**
@@ -334,11 +332,11 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
 
   set selected(value) {
     value = transform.booleanAttr(value);
+    
+    this._reflectAttribute('selected', value);
 
     if(validate.valueMustChange(this._selected, value)) {
       this._selected = value;
-
-      this._reflectAttribute('selected', value);
 
       this.classList.toggle('is-selected', value);
   
@@ -372,10 +370,11 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
 
   set block(value) {
     value = transform.booleanAttr(value);
+    
+    this._reflectAttribute('block', value);
+
     if(validate.valueMustChange(this._block, value)) {
       this._block = value;
-
-      this._reflectAttribute('block', value);
 
       this.classList.toggle(`${CLASSNAME}--block`, value);
     }
@@ -397,10 +396,10 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
     value = transform.string(value).toLowerCase();
     value = validate.enumeration(variant)(value) && value || variant.DEFAULT;
 
+    this._reflectAttribute('variant', value);
+
     if(validate.valueMustChange(this._variant , value)) {
       this._variant = value;
-
-      this._reflectAttribute('variant', value);
 
       // removes every existing variant
       this.classList.remove(CLASSNAME, ACTION_CLASSNAME);

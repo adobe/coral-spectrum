@@ -170,11 +170,11 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
   set selectionMode(value) {
     value = transform.string(value).toLowerCase();
     value = validate.enumeration(selectionMode)(value) && value || selectionMode.NONE;
+
+    this._reflectAttribute('selectionmode', value);
     
     if(validate.valueMustChange(this._selectionMode, value)) {
       this._selectionMode = value;
-
-      this._reflectAttribute('selectionmode', value);
 
       // propagates the selection mode to the columns
       this.columns.getAll().forEach((item) => {

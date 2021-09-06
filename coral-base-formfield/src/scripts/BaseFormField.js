@@ -147,9 +147,10 @@ const BaseFormField = (superClass) => class extends superClass {
   set invalid(value) {
     value = transform.booleanAttr(value);
 
+    this._reflectAttribute('invalid', value);
+    
     if(validate.valueMustChange(this._invalid, value)) {
       this._invalid = value;
-      this._reflectAttribute('invalid', value);
       this.setAttribute('aria-invalid', value);
       this.classList.toggle('is-invalid', value);
     }
