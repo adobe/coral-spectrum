@@ -169,22 +169,27 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
 
   set selectionMode(value) {
     value = transform.string(value).toLowerCase();
-    this._selectionMode = validate.enumeration(selectionMode)(value) && value || selectionMode.NONE;
-    this._reflectAttribute('selectionmode', this._selectionMode);
+    value = validate.enumeration(selectionMode)(value) && value || selectionMode.NONE;
+    
+    if(validate.valueMustChange(this._selectionMode, value)) {
+      this._selectionMode = value;
 
-    // propagates the selection mode to the columns
-    this.columns.getAll().forEach((item) => {
-      item.setAttribute('_selectionmode', this._selectionMode);
-    });
+      this._reflectAttribute('selectionmode', value);
 
-    this.classList.remove(`${CLASSNAME}--selection`);
-
-    if (this._selectionMode !== selectionMode.NONE) {
-      this.classList.add(`${CLASSNAME}--selection`);
+      // propagates the selection mode to the columns
+      this.columns.getAll().forEach((item) => {
+        item.setAttribute('_selectionmode', value);
+      });
+  
+      this.classList.remove(`${CLASSNAME}--selection`);
+  
+      if (value !== selectionMode.NONE) {
+        this.classList.add(`${CLASSNAME}--selection`);
+      }
+  
+      // @a11y
+      this.setAttribute('aria-multiselectable', value === selectionMode.MULTIPLE);
     }
-
-    // @a11y
-    this.setAttribute('aria-multiselectable', this._selectionMode === selectionMode.MULTIPLE);
   }
 
   /**

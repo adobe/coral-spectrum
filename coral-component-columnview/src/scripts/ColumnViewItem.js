@@ -125,30 +125,35 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
 
   set variant(value) {
     value = transform.string(value).toLowerCase();
-    this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
-    this._reflectAttribute('variant', this._variant);
+    value = validate.enumeration(variant)(value) && value || variant.DEFAULT;
 
-    if (this._variant === variant.DRILLDOWN) {
-      // Render chevron on demand
-      const childIndicator = this.querySelector('._coral-AssetList-itemChildIndicator');
-      if (!childIndicator) {
-        this.insertAdjacentHTML('beforeend', Icon._renderSVG('spectrum-css-icon-ChevronRightMedium', ['_coral-AssetList-itemChildIndicator', '_coral-UIIcon-ChevronRightMedium']));
-      }
+    if(validate.valueMustChange(this._variant, value)) {
+      this._variant = value;
 
-      this.classList.add('is-branch');
+      this._reflectAttribute('variant', value);
 
-      // @a11y Update aria-expanded. Active drilldowns should be expanded.
-      // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
-      // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
-      // navigating between items.
-      if (this.selected || (isChromeMacOS && this.getAttribute('aria-level') === '1')) {
-        this.removeAttribute('aria-expanded');
+      if (value === variant.DRILLDOWN) {
+        // Render chevron on demand
+        const childIndicator = this.querySelector('._coral-AssetList-itemChildIndicator');
+        if (!childIndicator) {
+          this.insertAdjacentHTML('beforeend', Icon._renderSVG('spectrum-css-icon-ChevronRightMedium', ['_coral-AssetList-itemChildIndicator', '_coral-UIIcon-ChevronRightMedium']));
+        }
+  
+        this.classList.add('is-branch');
+  
+        // @a11y Update aria-expanded. Active drilldowns should be expanded.
+        // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+        // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
+        // navigating between items.
+        if (this.selected || (isChromeMacOS && this.getAttribute('aria-level') === '1')) {
+          this.removeAttribute('aria-expanded');
+        } else {
+          this.setAttribute('aria-expanded', this.active);
+        }
       } else {
-        this.setAttribute('aria-expanded', this.active);
+        this.classList.remove('is-branch');
+        this.removeAttribute('aria-expanded');
       }
-    } else {
-      this.classList.remove('is-branch');
-      this.removeAttribute('aria-expanded');
     }
   }
 
@@ -166,27 +171,31 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
   }
 
   set icon(value) {
-    this._icon = transform.string(value);
-    this._reflectAttribute('icon', this._icon);
+    value = transform.string(value);
+    if(validate.valueMustChange(this._icon, value)) {
+      this._icon = value;
 
-    // ignored if it is an empty string
-    if (this._icon) {
-      // creates a new icon element
-      if (!this._elements.icon) {
-        this._elements.icon = new Icon();
+      this._reflectAttribute('icon', value);
+
+      // ignored if it is an empty string
+      if (value) {
+        // creates a new icon element
+        if (!this._elements.icon) {
+          this._elements.icon = new Icon();
+        }
+  
+        this._elements.icon.icon = this.icon;
+        this._elements.icon.size = Icon.size.SMALL;
+  
+        // removes all the items, since the icon attribute has precedence
+        this._elements.thumbnail.innerHTML = '';
+  
+        // adds the newly created icon
+        this._elements.thumbnail.appendChild(this._elements.icon);
       }
-
-      this._elements.icon.icon = this.icon;
-      this._elements.icon.size = Icon.size.SMALL;
-
-      // removes all the items, since the icon attribute has precedence
-      this._elements.thumbnail.innerHTML = '';
-
-      // adds the newly created icon
-      this._elements.thumbnail.appendChild(this._elements.icon);
+  
+      super._toggleIconAriaHidden();
     }
-
-    super._toggleIconAriaHidden();
   }
 
   /**
@@ -202,65 +211,69 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
   }
 
   set selected(value) {
-    this._selected = transform.booleanAttr(value);
-    this._reflectAttribute('selected', this._selected);
-    this.trigger('coral-columnview-item:_selectedchanged');
+    value = transform.booleanAttr(value);
 
-    // wait a frame before updating attributes
-    commons.nextFrame(() => {
-      this.classList.toggle('is-selected', this._selected);
-      this.setAttribute('aria-selected', this._selected);
-
-      // @a11y Update aria-expanded. Active drilldowns should be expanded.
-      // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
-      // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
-      // navigating between items.
-      if (this.variant === variant.DRILLDOWN) {
-        if (this._selected || (isChromeMacOS && this.getAttribute('aria-level') === '1')) {
-          this.removeAttribute('aria-expanded');
-        } else {
-          this.setAttribute('aria-expanded', this.active);
+    if(validate.valueMustChange(this._selected, value)) {
+      this._selected = value;
+      this._reflectAttribute('selected', value);
+      this.trigger('coral-columnview-item:_selectedchanged');
+  
+      // wait a frame before updating attributes
+      commons.nextFrame(() => {
+        this.classList.toggle('is-selected', value);
+        this.setAttribute('aria-selected', value);
+  
+        // @a11y Update aria-expanded. Active drilldowns should be expanded.
+        // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+        // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
+        // navigating between items.
+        if (value === variant.DRILLDOWN) {
+          if (this._selected || (isChromeMacOS && this.getAttribute('aria-level') === '1')) {
+            this.removeAttribute('aria-expanded');
+          } else {
+            this.setAttribute('aria-expanded', this.active);
+          }
         }
-      }
-
-      let accessibilityState = this._elements.accessibilityState;
-
-      if (this._selected) {
-
-        // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
-        this.removeAttribute('aria-owns');
-        this.removeAttribute('aria-describedby');
-
-        // @a11y Update content to ensure that checked state is announced by assistive technology when the item receives focus
-        accessibilityState.innerHTML = i18n.get(', checked');
-
-        // @a11y append live region content element
-        if (!this.contains(accessibilityState)) {
-          this.appendChild(accessibilityState);
+  
+        let accessibilityState = this._elements.accessibilityState;
+  
+        if (value) {
+  
+          // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
+          this.removeAttribute('aria-owns');
+          this.removeAttribute('aria-describedby');
+  
+          // @a11y Update content to ensure that checked state is announced by assistive technology when the item receives focus
+          accessibilityState.innerHTML = i18n.get(', checked');
+  
+          // @a11y append live region content element
+          if (!this.contains(accessibilityState)) {
+            this.appendChild(accessibilityState);
+          }
         }
-      }
-      // @a11y If deselecting from checked state,
-      else {
-
-        // @a11y remove, but retain reference to accessibilityState state
-        if (accessibilityState.parentNode) {
-          this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+        // @a11y If deselecting from checked state,
+        else {
+  
+          // @a11y remove, but retain reference to accessibilityState state
+          if (accessibilityState.parentNode) {
+            this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+          }
+  
+          // @a11y Update content to remove checked state
+          this._elements.accessibilityState.innerHTML = '';
         }
-
-        // @a11y Update content to remove checked state
-        this._elements.accessibilityState.innerHTML = '';
-      }
-
-      // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
-      let ariaLabelledby = this._elements.thumbnail.id + ' ' + this._elements.content.id;
-      this.setAttribute('aria-labelledby', this.selected ? `${ariaLabelledby} ${accessibilityState.id}` : ariaLabelledby);
-
-      // Sync checkbox item selector
-      const itemSelector = this.querySelector('coral-checkbox[coral-columnview-itemselect]');
-      if (itemSelector) {
-        itemSelector[this._selected ? 'setAttribute' : 'removeAttribute']('checked', '');
-      }
-    });
+  
+        // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
+        let ariaLabelledby = this._elements.thumbnail.id + ' ' + this._elements.content.id;
+        this.setAttribute('aria-labelledby', this.selected ? `${ariaLabelledby} ${accessibilityState.id}` : ariaLabelledby);
+  
+        // Sync checkbox item selector
+        const itemSelector = this.querySelector('coral-checkbox[coral-columnview-itemselect]');
+        if (itemSelector) {
+          itemSelector[value ? 'setAttribute' : 'removeAttribute']('checked', '');
+        }
+      });
+    }
   }
 
   /**
@@ -276,31 +289,34 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
   }
 
   set active(value) {
-    this._active = transform.booleanAttr(value);
-    this._reflectAttribute('active', this._active);
+    value = transform.booleanAttr(value);
+    if(validate.valueMustChange(this._active, value)) {
+      this._active = value;
+      this._reflectAttribute('active', value);
 
-    this.classList.toggle('is-navigated', this._active);
-    this.setAttribute('aria-selected', this.hasAttribute('_selectable') ? this.selected : this._active);
-
-    // @a11y Update aria-expanded. Active drilldowns should be expanded.
-    // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
-    // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
-    // navigating between items.
-    if (this.variant === variant.DRILLDOWN) {
-      if (this._selected || (isChromeMacOS && this.getAttribute('aria-level') === '1')) {
-        this.removeAttribute('aria-expanded');
-      } else {
-        this.setAttribute('aria-expanded', this.active);
+      this.classList.toggle('is-navigated', value);
+      this.setAttribute('aria-selected', this.hasAttribute('_selectable') ? this.selected : value);
+  
+      // @a11y Update aria-expanded. Active drilldowns should be expanded.
+      // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+      // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
+      // navigating between items.
+      if (this.variant === variant.DRILLDOWN) {
+        if (this.selected || (isChromeMacOS && this.getAttribute('aria-level') === '1')) {
+          this.removeAttribute('aria-expanded');
+        } else {
+          this.setAttribute('aria-expanded', this.active);
+        }
       }
+  
+      if (!value) {
+        // @a11y Inactive items are not expanded, so remove aria-owns and aria-describedby attributes.
+        this.removeAttribute('aria-owns');
+        this.removeAttribute('aria-describedby');
+      }
+  
+      this.trigger('coral-columnview-item:_activechanged');
     }
-
-    if (!this._active) {
-      // @a11y Inactive items are not expanded, so remove aria-owns and aria-describedby attributes.
-      this.removeAttribute('aria-owns');
-      this.removeAttribute('aria-describedby');
-    }
-
-    this.trigger('coral-columnview-item:_activechanged');
   }
 
   get _contentZones() {

@@ -173,12 +173,16 @@ const ColumnViewColumn = Decorator(class extends BaseComponent(HTMLElement) {
 
   set _selectionMode(value) {
     value = transform.string(value).toLowerCase();
-    this.__selectionMode = validate.enumeration(selectionMode)(value) && value || null;
-    this._reflectAttribute('_selectionmode', this.__selectionMode);
+    value = validate.enumeration(selectionMode)(value) && value || null;
+    
+    if(validate.valueMustChange(this.__selectionMode, value)) {
+      this.__selectionMode = value;
+      this._reflectAttribute('_selectionmode', value);
 
-    this.items.getAll().forEach(item => this._toggleItemSelection(item));
-
-    this._setStateFromDOM();
+      this.items.getAll().forEach(item => this._toggleItemSelection(item));
+  
+      this._setStateFromDOM();
+    }
   }
 
   /**
