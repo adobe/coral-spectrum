@@ -93,8 +93,12 @@ const BaseList = (superClass) => class extends superClass {
 
   set interaction(value) {
     value = transform.string(value).toLowerCase();
-    this._interaction = validate.enumeration(interaction)(value) && value || interaction.ON;
-    this._reflectAttribute('interaction', this._interaction);
+    value = validate.enumeration(interaction)(value) && value || interaction.ON;
+    
+    if(validate.valueMustChange(this._interaction, value)) {
+      this._interaction = value;
+      this._reflectAttribute('interaction', value);
+    }
   }
 
   /**

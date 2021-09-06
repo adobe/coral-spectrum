@@ -412,34 +412,39 @@ const BaseOverlay = (superClass) => class extends superClass {
 
   set trapFocus(value) {
     value = transform.string(value).toLowerCase();
-    this._trapFocus = validate.enumeration(trapFocus)(value) && value || trapFocus.OFF;
+    value = validate.enumeration(trapFocus)(value) && value || trapFocus.OFF;
 
-    if (this._trapFocus === trapFocus.ON) {
-      // Give ourselves tabIndex if we are not focusable
-      if (this.tabIndex < 0) {
-        /** @ignore */
-        this.tabIndex = 0;
+    if(validate.valueMustChange(this._trapFocus, value)) {
+      this._trapFocus = value;
+
+      if (value === trapFocus.ON) {
+        // Give ourselves tabIndex if we are not focusable
+        if (this.tabIndex < 0) {
+          /** @ignore */
+          this.tabIndex = 0;
+        }
+  
+        // Insert elements
+        this.insertBefore(this._elements.topTabCapture, this.firstElementChild);
+        this.appendChild(this._elements.intermediateTabCapture);
+        this.appendChild(this._elements.bottomTabCapture);
+  
+        // Add listeners
+        this._handleTabCaptureFocus = this._handleTabCaptureFocus.bind(this);
+        this._handleRootKeypress = this._handleRootKeypress.bind(this);
+        this._vent.on('keydown', this._handleRootKeypress);
+        this._vent.on('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
+
+      } else if (value === trapFocus.OFF) {
+        // Remove elements
+        this._elements.topTabCapture && this._elements.topTabCapture.remove();
+        this._elements.intermediateTabCapture && this._elements.intermediateTabCapture.remove();
+        this._elements.bottomTabCapture && this._elements.bottomTabCapture.remove();
+  
+        // Remove listeners
+        this._vent.off('keydown', this._handleRootKeypress);
+        this._vent.off('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
       }
-
-      // Insert elements
-      this.insertBefore(this._elements.topTabCapture, this.firstElementChild);
-      this.appendChild(this._elements.intermediateTabCapture);
-      this.appendChild(this._elements.bottomTabCapture);
-
-      // Add listeners
-      this._handleTabCaptureFocus = this._handleTabCaptureFocus.bind(this);
-      this._handleRootKeypress = this._handleRootKeypress.bind(this);
-      this._vent.on('keydown', this._handleRootKeypress);
-      this._vent.on('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
-    } else if (this._trapFocus === trapFocus.OFF) {
-      // Remove elements
-      this._elements.topTabCapture && this._elements.topTabCapture.remove();
-      this._elements.intermediateTabCapture && this._elements.intermediateTabCapture.remove();
-      this._elements.bottomTabCapture && this._elements.bottomTabCapture.remove();
-
-      // Remove listeners
-      this._vent.off('keydown', this._handleRootKeypress);
-      this._vent.off('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
     }
   }
 

@@ -353,11 +353,9 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
   }
 
   set value(value) {
-    if(validate.valueMustChange(this.value, value)) {
-      this._reflectAttribute('value', value);
+    this._reflectAttribute('value', value);
 
-      this.trigger('coral-button:_valuechanged');
-    }
+    this.trigger('coral-button:_valuechanged');
   }
 
   /**
