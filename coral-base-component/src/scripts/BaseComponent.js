@@ -425,7 +425,6 @@ const BaseComponent = (superClass) => class extends superClass {
   _delegateEvents(eventMap) {
     this._events = commons.extend(this._events, eventMap);
     delegateEvents.call(this);
-    delegateGlobalEvents.call(this);
 
     // Once events are attached, we dispose them
     this._events = {};
@@ -844,9 +843,10 @@ const BaseComponent = (superClass) => class extends superClass {
   /** @ignore */
   connectedCallback() {
     // A component that is reattached should respond to global events again
-    if (this._disconnected) {
-      delegateGlobalEvents.call(this);
-    }
+    // Attach global listener when component is connected to DOM
+    // this would avoid memory leak when element is created but never connected.
+    delegateGlobalEvents.call(this);
+
     this._disconnected = false;
 
     if (!this._rendered) {
@@ -863,6 +863,7 @@ const BaseComponent = (superClass) => class extends superClass {
   disconnectedCallback() {
     // A component that isn't in the DOM should not be responding to global events
     this._disconnected = true;
+    
     undelegateGlobalEvents.call(this);
   }
 };

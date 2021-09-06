@@ -109,7 +109,7 @@ class Commons {
   /** @ignore */
   constructor() {
     // Create a Map to link elements to observe to their resize event callbacks
-    this._resizeObserverMap = new Map();
+    this._resizeObserverMap = new WeakMap();
 
     this._resizeObserver = new ResizeObserver((entries) => {
       for (let i = 0 ; i < entries.length ; i++) {
