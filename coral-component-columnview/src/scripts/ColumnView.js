@@ -825,11 +825,11 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
     const level = colIndex + 1;
     if (column.items) {
       column.items.getAll().filter((item, index) => {
-        item.setAttribute('aria-posinset', index + 1);
-        item.setAttribute('aria-setsize', column.items.length);
+        item._reflectAttribute('aria-posinset', index + 1);
+        item._reflectAttribute('aria-setsize', column.items.length);
         return !item.hasAttribute('aria-level');
       }).forEach((item) => {
-        item.setAttribute('aria-level', level);
+        item._reflectAttribute('aria-level', level);
       });
     }
 
@@ -1183,7 +1183,9 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
       // give screen reader 2 secs before clearing the live region, to provide enough time for announcement
       this._removeTimeout = window.setTimeout(() => {
         self._resetAccessibilityState();
-        this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+        if(accessibilityState.parentNode) {
+          this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+        }
       }, 2000);
     }, 20);
   }
