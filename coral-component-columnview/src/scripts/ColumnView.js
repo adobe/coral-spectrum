@@ -177,7 +177,8 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
       this._selectionMode = value;
 
       // propagates the selection mode to the columns
-      this.columns.getAll().forEach((item) => {
+      let columns = this.columns.getAll();
+      columns.forEach((item) => {
         item.setAttribute('_selectionmode', value);
       });
   
@@ -827,7 +828,7 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
       let items = column.items.getAll();
       items.filter((item, index) => {
         item.setAttribute('aria-posinset', index + 1);
-        item.setAttribute('aria-setsize', column.items.length);
+        item.setAttribute('aria-setsize', items.length);
         return !item.hasAttribute('aria-level');
       }).forEach((item) => {
         item.setAttribute('aria-level', level);
