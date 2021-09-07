@@ -824,12 +824,13 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
     const colIndex = this.columns.getAll().indexOf(column);
     const level = colIndex + 1;
     if (column.items) {
-      column.items.getAll().filter((item, index) => {
-        item._reflectAttribute('aria-posinset', index + 1);
-        item._reflectAttribute('aria-setsize', column.items.length);
+      let items = column.items.getAll();
+      items.filter((item, index) => {
+        item.setAttribute('aria-posinset', index + 1);
+        item.setAttribute('aria-setsize', column.items.length);
         return !item.hasAttribute('aria-level');
       }).forEach((item) => {
-        item._reflectAttribute('aria-level', level);
+        item.setAttribute('aria-level', level);
       });
     }
 
@@ -1122,22 +1123,11 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
     });
   }
 
-  // utility method to clean up accessibility state
-  /* @private */  
-  _resetAccessibilityState() {
-    const accessibilityState = this._elements.accessibilityState;
-    if(accessibilityState) {
-      accessibilityState.hidden = true;
-      accessibilityState.setAttribute('aria-live', 'off');
-      accessibilityState.innerHTML = '';
-    }
-  }
-
   /* @private */
   _announceActiveElementState() {
     // @a11y Add live region element to ensure announcement of selected state
     const accessibilityState = this._elements.accessibilityState;
-    const self = this;
+
     // @a11y accessibility state string should announce in document lang, rather than item lang.
     accessibilityState.setAttribute('lang', i18n.locale);
 
@@ -1146,7 +1136,14 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
       this.appendChild(accessibilityState);
     }
 
-    this._resetAccessibilityState();
+    // utility method to clean up accessibility state
+    function resetAccessibilityState() {
+      accessibilityState.hidden = true;
+      accessibilityState.setAttribute('aria-live', 'off');
+      accessibilityState.innerHTML = '';
+    }
+
+    resetAccessibilityState();
 
     if (this._addTimeout || this._removeTimeout) {
       clearTimeout(this._addTimeout);
@@ -1182,10 +1179,8 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
 
       // give screen reader 2 secs before clearing the live region, to provide enough time for announcement
       this._removeTimeout = window.setTimeout(() => {
-        self._resetAccessibilityState();
-        if(accessibilityState.parentNode) {
-          this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
-        }
+        resetAccessibilityState();
+        this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
       }, 2000);
     }, 20);
   }
