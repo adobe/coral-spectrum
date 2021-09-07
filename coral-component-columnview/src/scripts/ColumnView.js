@@ -1180,7 +1180,9 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
       // give screen reader 2 secs before clearing the live region, to provide enough time for announcement
       this._removeTimeout = window.setTimeout(() => {
         resetAccessibilityState();
-        this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+        if(accessibilityState.parentNode) {
+          this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+        }
       }, 2000);
     }, 20);
   }
