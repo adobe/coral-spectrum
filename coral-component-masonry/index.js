@@ -17,6 +17,7 @@ import '../coral-compat';
 
 import Masonry from './src/scripts/Masonry';
 import MasonryItem from './src/scripts/MasonryItem';
+import MasonryItemAccessibilityState from './src/scripts/MasonryItemAccessibilityState';
 import MasonryLayout from './src/scripts/MasonryLayout';
 import MasonryFixedCenteredLayout from './src/scripts/MasonryFixedCenteredLayout';
 import MasonryFixedSpreadLayout from './src/scripts/MasonryFixedSpreadLayout';
@@ -38,6 +39,7 @@ commons._define('coral-masonry-item', MasonryItem);
 commons._define('coral-masonry', Masonry);
 
 Masonry.Item = MasonryItem;
+Masonry.Item.AccessibilityState = MasonryItemAccessibilityState;
 Masonry.Layout = MasonryLayout;
 
 export {Masonry};

@@ -12,7 +12,7 @@
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Masonry} from '../../../coral-component-masonry';
-import {commons} from '../../../coral-utils';
+import {commons, i18n} from '../../../coral-utils';
 
 describe('Masonry', function () {
 
@@ -474,6 +474,8 @@ describe('Masonry', function () {
   });
 
   describe('Accessibility', function () {
+    const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(window.navigator.platform);
+
     it('should have role group', function () {
       const el = helpers.build(new Masonry());
       expect(el.getAttribute('role')).to.equal('group');
@@ -487,6 +489,62 @@ describe('Masonry', function () {
 
       el.selectionMode = 'multiple';
       expect(el.getAttribute('aria-multiselectable')).to.equal('true');
+    });
+
+    it('should announce "checked" when item becomes selected', function(done) {
+      const el = helpers.build(window.__html__['Masonry.variable.3-columns-9-items.html']);
+      el.selectionMode = 'single';
+
+      // Wait for layouting
+      helpers.next(function () {
+        const item = el.items.getAll()[3];
+        const a11yState = item._elements.accessibilityState;
+        expect(a11yState.hidden).to.be.true;
+        expect(a11yState.getAttribute('role')).to.equal('status');
+
+        item.focus();
+        item.selected = true;
+
+        setTimeout(function() {
+          expect(a11yState.textContent).to.equal(i18n.get('checked'));
+          expect(a11yState.hidden).to.be.false;
+          expect(a11yState.hasAttribute('aria-live')).to.be.false;
+          setTimeout(function() {
+            expect(a11yState.textContent).to.equal(isMacLike ? i18n.get('checked') : '');
+            expect(a11yState.hidden).to.be.true;
+            expect(a11yState.getAttribute('aria-live')).equal('off');
+            done();
+          }, 1650);
+        }, 220);
+      });
+    });
+
+    it('should announce "not checked" when item becomes unselected', function(done) {
+      const el = helpers.build(window.__html__['Masonry.variable.3-columns-9-items.html']);
+      el.selectionMode = 'single';
+
+      // Wait for layouting
+      helpers.next(function () {
+        const item = el.items.getAll()[3];
+        const a11yState = item._elements.accessibilityState;
+        expect(a11yState.hidden).to.be.true;
+        expect(a11yState.getAttribute('role')).to.equal('status');
+
+        item.focus();
+        item.selected = true;
+        item.selected = false;
+        setTimeout(function() {
+          expect(a11yState.textContent).to.equal(i18n.get('not checked'));
+          expect(a11yState.hidden).to.be.false;
+          expect(a11yState.hasAttribute('aria-live')).to.be.false;
+          setTimeout(function() {
+            expect(a11yState.textContent).to.equal('');
+            expect(a11yState.hidden).to.be.true;
+            expect(a11yState.getAttribute('aria-live')).to.equal('off');
+            done();
+          }, 1650);
+        }, 210);
+      });
     });
   });
 

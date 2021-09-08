@@ -140,12 +140,12 @@
         </label>
         <i>(double click on item to remove it)</i>
         <div>
-          <coral-masonry orderable id="masonry" layout="fixed-centered" columnwidth="250" aria-label="Masonry">
+          <coral-masonry orderable id="masonry" layout="fixed-centered" columnwidth="250" aria-label="Masonry" ariagrid="on">
             <coral-masonry-item class="coral-Well">
               <article>
                 <span coral-masonry-draghandle></span>
                 With image
-                <img src="http://via.placeholder.com/600x300" alt="">
+                <img src="http://via.placeholder.com/600x300" alt="600 × 300" />
               </article>
             </coral-masonry-item>
             <coral-masonry-item class="coral-Well">
@@ -221,7 +221,21 @@
         </div>
         <script>
           window.addEventListener('load', function() {
+            let uid = 0;
+            function getUID() {
+              return 'coral-masonry-' + uid++;
+            }
             const masonry = document.getElementById('masonry');
+
+            masonry.items.getAll().forEach(function (item) {
+              const article = item.querySelector('article');
+              article.setAttribute('role', 'presentation');
+              if (!item.id) {
+                item.id = getUID();
+              }
+              article.id = article.id || item.id + '-content';
+              item.setAttribute('aria-labelledby', article.id);
+            });
 
             const ariaGridSelector = document.getElementById('ariaGrid');
             ariaGridSelector.addEventListener('click', function(event) {
@@ -251,8 +265,8 @@
             document.addEventListener('click', function(event) {
               const prepend = event.target.matches('.prepend');
               if (prepend) {
-                var count = event.target.dataset.count;
-                for (var i = 0; i < count; i++) {
+                let count = event.target.dataset.count;
+                for (let i = 0; i < count; i++) {
                   masonry.items.add(createItem(), masonry.items.first());
                 }
               }
@@ -261,9 +275,9 @@
             document.addEventListener('click', function(event) {
               const append = event.target.matches('.append');
               if (append) {
-                var startTime = Date.now();
-                var count = event.target.dataset.count;
-                for (var i = 0; i < count; i++) {
+                const startTime = Date.now();
+                const count = event.target.dataset.count;
+                for (let i = 0; i < count; i++) {
                   masonry.items.add(createItem());
                 }
                 window.requestAnimationFrame(function() {
@@ -272,7 +286,7 @@
               }
             });
 
-            var image = false;
+            let image = false;
             function createItem() {
               image = !image;
               return image ? createImageItem() : createTextItem();
@@ -283,25 +297,32 @@
             }
 
             function createImageItem() {
-              var width = randomSize();
-              var height = randomSize();
-              var url = 'http://via.placeholder.com/' + width + 'x' + height;
+              const id = getUID();
+              const contentId = id + '-content';
+              const width = randomSize();
+              const height = randomSize();
+              const url = 'http://via.placeholder.com/' + width + 'x' + height;
 
-              var item = document.createElement('coral-masonry-item');
+              const item = document.createElement('coral-masonry-item');
+              item.id = id;
+              item.setAttribute('aria-labelledby', contentId);
               item.classList.add('coral-Well');
-              item.content.innerHTML = '<img alt="" src="' + url + '" style="width: ' + (width / 2) + 'px; height: ' + (height / 2) + 'px;">';
+              item.content.innerHTML = '<img id="' + contentId + '" alt="' + width + ' × ' + height + '" src="' + url + '" style="width: ' + (width / 2) + 'px; height: ' + (height / 2) + 'px;">';
 
               return item;
             }
 
             function createTextItem() {
-              var rows = 1 + Math.round(Math.random() * 6);
-              var html = new Array(rows + 1).join('card<br>').slice(0, -4);
+              const id = getUID();
+              const contentId = id + '-content';
+              const rows = 1 + Math.round(Math.random() * 6);
+              const html = new Array(rows + 1).join('card<br>').slice(0, -4);
 
-              var item = document.createElement('coral-masonry-item');
+              const item = document.createElement('coral-masonry-item');
+              item.id = id;
+              item.setAttribute('aria-labelledby', contentId);
               item.classList.add('coral-Well');
-              item.content.innerHTML = '<article>' + html + '</article>';
-
+              item.content.innerHTML = '<article role="presentation" id="' + contentId + '">' + html + '</article>';
               return item;
             }
           });

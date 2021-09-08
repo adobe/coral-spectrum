@@ -13,10 +13,14 @@
 import {BaseComponent} from '../../../coral-base-component';
 import MasonryItem from './MasonryItem';
 import {SelectableCollection} from '../../../coral-collection';
-import {validate, transform, commons} from '../../../coral-utils';
+import {validate, transform, commons, i18n} from '../../../coral-utils';
 import {Decorator} from '../../../coral-decorator';
+import MasonryItemAccessibilityState from "./MasonryItemAccessibilityState";
 
 const CLASSNAME = '_coral-Masonry';
+
+/** @ignore */
+const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(window.navigator.platform);
 
 /**
  Enumeration for {@link Masonry} selection options.
@@ -136,6 +140,10 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     this._preservedAriaRole = this._defaultAriaRole;
     this._preservedParentAriaRole = null;
 
+    this._elements = {
+      accessibilityState: this.querySelector('coral-masonry-item-accessibilitystate') || new MasonryItemAccessibilityState()
+    };
+
     this._delegateEvents({
       'global:resize': '_onWindowResize',
 
@@ -148,6 +156,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
       'coral-dragaction:dragstart coral-masonry-item': '_onItemDragStart',
       'coral-dragaction:dragover coral-masonry-item': '_onItemDragMove',
       'coral-dragaction:dragend coral-masonry-item': '_onItemDragEnd',
+
+      'coral-masonry-item:_selecteditemchanged': '_onMasonrySelectedItemChanged',
 
       // Keyboard
       'capture:focus coral-masonry-item': '_onItemFocus',
@@ -230,6 +240,64 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     event.stopImmediatePropagation();
 
     this._validateSelection(event.target);
+  }
+
+  /** @private */
+  _onMasonrySelectedItemChanged(event) {
+    // this is a private event and should not leave the column view
+    event.stopImmediatePropagation();
+
+    // announce the selection state for the focused item
+    this._announceActiveElementState.call(event.target, event);
+  }
+
+  _announceActiveElementState() {
+    const accessibilityState = this._elements.accessibilityState;
+
+    const self = this;
+    const parentElement = this.parentElement;
+
+    if (this._addTimeout || this._removeTimeout) {
+      clearTimeout(this._addTimeout);
+      clearTimeout(this._removeTimeout);
+    }
+
+    // we use setTimeout instead of nextFrame to give screen reader more time to respond to live region update in order to announce complete text content when the state changes.
+    this._addTimeout = setTimeout(function () {
+      const activeElement = document.activeElement;
+
+      if (!self.contains(activeElement) || activeElement.tagName !== 'CORAL-MASONRY-ITEM') {
+        return;
+      }
+
+      const span = document.createElement('span');
+      span.appendChild(
+        document.createTextNode(
+          i18n.get(activeElement.selected ? 'checked' : 'not checked')
+        )
+      );
+      accessibilityState.innerHTML = '';
+      accessibilityState.hidden = false;
+      accessibilityState.removeAttribute('aria-live');
+      setTimeout(function () {
+        accessibilityState.appendChild(span);
+
+        // give screen reader 1.6 secs before clearing the live region, to provide enough time for announcement
+        self._removeTimeout = setTimeout(parentElement._resetAccessibilityState, 1600, accessibilityState, self);
+      }, 100);
+    }, 100);
+  }
+
+  // utility method to clean up accessibility state
+  _resetAccessibilityState(accessibilityState, self) {
+    accessibilityState.setAttribute('aria-live', 'off');
+
+    // @a11y only persist the checked state on macOS,
+    // where VoiceOver does not announce the selected state for a gridcell.
+    accessibilityState.hidden = true;
+    if (!isMacLike || !self.selected) {
+      accessibilityState.innerHTML = '';
+    }
   }
 
   /**
