@@ -1,3 +1,10 @@
+## [4.11.1](https://github.com/adobe/coral-spectrum/compare/v4.11.0...v4.11.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* **SITES-1579:**  Role and state are not narrated for the TABS in the create page while navigating in the browse mode using down arrow. ([#183](https://github.com/adobe/coral-spectrum/issues/183)) ([32c9c88](https://github.com/adobe/coral-spectrum/commit/32c9c88f1f47340cc61615fee061334de6347e34))
+
 # [4.11.0](https://github.com/adobe/coral-spectrum/compare/v4.10.27...v4.11.0) (2021-08-24)
 
 
