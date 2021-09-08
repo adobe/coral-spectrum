@@ -660,6 +660,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "@adobe/coral-spectrum~masonryitemaccessibilitystate",
+    "function/index.html#static-function-MasonryItemAccessibilityState",
+    "<span>MasonryItemAccessibilityState</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "function"
+  ],
+  [
     "@adobe/coral-spectrum~masonrylayout",
     "class/coral-spectrum/coral-component-masonry/src/scripts/MasonryLayout.js~MasonryLayout.html",
     "<span>MasonryLayout</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
@@ -3429,6 +3435,12 @@ window.esdocSearchIndex = [
     "coral-spectrum/coral-component-masonry/src/scripts/masonryitem.js",
     "file/coral-spectrum/coral-component-masonry/src/scripts/MasonryItem.js.html",
     "coral-spectrum/coral-component-masonry/src/scripts/MasonryItem.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-masonry/src/scripts/masonryitemaccessibilitystate.js",
+    "file/coral-spectrum/coral-component-masonry/src/scripts/MasonryItemAccessibilityState.js.html",
+    "coral-spectrum/coral-component-masonry/src/scripts/MasonryItemAccessibilityState.js",
     "file"
   ],
   [

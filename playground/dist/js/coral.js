@@ -57666,6 +57666,30 @@
     return frag;
   };
 
+  /**
+   * Copyright 2021 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+
+  /**
+   * @class Coral.Masonry.Item.AccessibilityState
+   * @classdesc The Masonry Item Accessibility State
+   * @htmltag coral-masonry-item-accessibilitystate
+   * @extends HTMLElement
+  */
+  var MasonryItemAccessibilityState = (function () {
+    var element = document.createElement('coral-masonry-item-accessibilitystate');
+    element.className = 'u-coral-screenReaderOnly';
+    return element;
+  });
+
   var SCOPE_SELECTOR$1 = ':scope > ';
   /**
    * Messenger will used to pass the messages from child component to its parent. Currently we are relying on
@@ -57979,6 +58003,9 @@
   }();
 
   var CLASSNAME$W = '_coral-Masonry-item';
+  /** @ignore */
+
+  var isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(window.navigator.platform);
   /**
    @class Coral.Masonry.Item
    @classdesc A Masonry Item component
@@ -58135,7 +58162,36 @@
 
         this.classList.add(CLASSNAME$W); // @a11y
 
-        this.setAttribute('tabindex', '-1'); // Support cloneNode
+        this.setAttribute('tabindex', '-1'); // @a11y Add live region element to ensure announcement of selected state
+
+        var accessibilityState = this._elements.accessibilityState || this.querySelector('coral-masonry-item-accessibilitystate') || new MasonryItemAccessibilityState(); // @a11y Style to be visually hidden yet accessible to screen readers
+
+        if (!accessibilityState.classList.contains('u-coral-screenReaderOnly')) {
+          accessibilityState.classList.add('u-coral-screenReaderOnly');
+        } // @a11y accessibility state string should announce in document lang, rather than item lang.
+
+
+        accessibilityState.setAttribute('lang', i18n.locale); // @a11y accessibility state has role="status" to announce as a live region
+
+        accessibilityState.setAttribute('role', 'status');
+        accessibilityState.setAttribute('aria-live', 'off');
+        accessibilityState.hidden = true;
+        accessibilityState.id = accessibilityState.id || commons.getUID(); // @a11y Wait a frame and append live region content element so that it is the last child within item.
+
+        if (!accessibilityState.parentNode) {
+          this.appendChild(accessibilityState);
+        }
+
+        this._elements.accessibilityState = accessibilityState; // @a11y Item should be labelled by accessibility state.
+
+        if (isMacLike) {
+          var ariaLabelledby = this.getAttribute('aria-labelledby');
+
+          if (ariaLabelledby) {
+            this.setAttribute('aria-labelledby', ariaLabelledby + ' ' + accessibilityState.id);
+          }
+        } // Support cloneNode
+
 
         var template = this.querySelector('._coral-Masonry-item-quickActions');
 
@@ -58225,6 +58281,7 @@
 
           this._reflectAttribute('selected', value);
 
+          this.trigger('coral-masonry-item:_selecteditemchanged');
           this.setAttribute('aria-selected', value);
           this.classList.toggle('is-selected', value);
 
@@ -58244,6 +58301,9 @@
   }(BaseComponent(HTMLElement)));
 
   var CLASSNAME$X = '_coral-Masonry';
+  /** @ignore */
+
+  var isMacLike$1 = /(Mac|iPhone|iPod|iPad)/i.test(window.navigator.platform);
   /**
    Enumeration for {@link Masonry} selection options.
 
@@ -58373,6 +58433,9 @@
       _this._ariaGrid = ariaGrid.OFF;
       _this._preservedAriaRole = _this._defaultAriaRole;
       _this._preservedParentAriaRole = null;
+      _this._elements = {
+        accessibilityState: _this.querySelector('coral-masonry-item-accessibilitystate') || new MasonryItemAccessibilityState()
+      };
 
       _this._delegateEvents({
         'global:resize': '_onWindowResize',
@@ -58384,6 +58447,7 @@
         'coral-dragaction:dragstart coral-masonry-item': '_onItemDragStart',
         'coral-dragaction:dragover coral-masonry-item': '_onItemDragMove',
         'coral-dragaction:dragend coral-masonry-item': '_onItemDragEnd',
+        'coral-masonry-item:_selecteditemchanged': '_onMasonrySelectedItemChanged',
         // Keyboard
         'capture:focus coral-masonry-item': '_onItemFocus',
         // Selection
@@ -58424,6 +58488,61 @@
         event.stopImmediatePropagation();
 
         this._validateSelection(event.target);
+      }
+      /** @private */
+
+    }, {
+      key: "_onMasonrySelectedItemChanged",
+      value: function _onMasonrySelectedItemChanged(event) {
+        // this is a private event and should not leave the column view
+        event.stopImmediatePropagation(); // announce the selection state for the focused item
+
+        this._announceActiveElementState.call(event.target, event);
+      }
+    }, {
+      key: "_announceActiveElementState",
+      value: function _announceActiveElementState() {
+        var accessibilityState = this._elements.accessibilityState;
+        var self = this;
+        var parentElement = this.parentElement;
+
+        if (this._addTimeout || this._removeTimeout) {
+          clearTimeout(this._addTimeout);
+          clearTimeout(this._removeTimeout);
+        } // we use setTimeout instead of nextFrame to give screen reader more time to respond to live region update in order to announce complete text content when the state changes.
+
+
+        this._addTimeout = setTimeout(function () {
+          var activeElement = document.activeElement;
+
+          if (!self.contains(activeElement) || activeElement.tagName !== 'CORAL-MASONRY-ITEM') {
+            return;
+          }
+
+          var span = document.createElement('span');
+          span.appendChild(document.createTextNode(i18n.get(activeElement.selected ? 'checked' : 'not checked')));
+          accessibilityState.innerHTML = '';
+          accessibilityState.hidden = false;
+          accessibilityState.removeAttribute('aria-live');
+          setTimeout(function () {
+            accessibilityState.appendChild(span); // give screen reader 1.6 secs before clearing the live region, to provide enough time for announcement
+
+            self._removeTimeout = setTimeout(parentElement._resetAccessibilityState, 1600, accessibilityState, self);
+          }, 100);
+        }, 100);
+      } // utility method to clean up accessibility state
+
+    }, {
+      key: "_resetAccessibilityState",
+      value: function _resetAccessibilityState(accessibilityState, self) {
+        accessibilityState.setAttribute('aria-live', 'off'); // @a11y only persist the checked state on macOS,
+        // where VoiceOver does not announce the selected state for a gridcell.
+
+        accessibilityState.hidden = true;
+
+        if (!isMacLike$1 || !self.selected) {
+          accessibilityState.innerHTML = '';
+        }
       }
       /**
        Allows to interact with the masonry layout instance.
@@ -60343,6 +60462,7 @@
   commons._define('coral-masonry', Masonry);
 
   Masonry.Item = MasonryItem;
+  Masonry.Item.AccessibilityState = MasonryItemAccessibilityState;
   Masonry.Layout = MasonryLayout;
 
   /**
@@ -80323,7 +80443,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.10.27";
+  var version$1 = "4.11.0";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

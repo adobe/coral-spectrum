@@ -1,7 +1,7 @@
 {
-  "coverage": "60.75%",
-  "expectCount": 1483,
-  "actualCount": 901,
+  "coverage": "60.83%",
+  "expectCount": 1486,
+  "actualCount": 904,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
       "expectCount": 6,
@@ -819,14 +819,14 @@
       "undocumentLines": []
     },
     "coral-spectrum/coral-component-masonry/src/scripts/Masonry.js": {
-      "expectCount": 7,
-      "actualCount": 2,
+      "expectCount": 8,
+      "actualCount": 3,
       "undocumentLines": [
-        19,
-        86,
-        89,
-        103,
-        105
+        20,
+        90,
+        93,
+        107,
+        109
       ]
     },
     "coral-spectrum/coral-component-masonry/src/scripts/MasonryColumnLayout.js": {
@@ -867,11 +867,16 @@
       ]
     },
     "coral-spectrum/coral-component-masonry/src/scripts/MasonryItem.js": {
-      "expectCount": 2,
-      "actualCount": 1,
+      "expectCount": 3,
+      "actualCount": 2,
       "undocumentLines": [
-        21
+        22
       ]
+    },
+    "coral-spectrum/coral-component-masonry/src/scripts/MasonryItemAccessibilityState.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
     },
     "coral-spectrum/coral-component-masonry/src/scripts/MasonryLayout.js": {
       "expectCount": 12,

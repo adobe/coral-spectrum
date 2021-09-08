@@ -208,6 +208,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryFixedSpreadLayout.js~MasonryFixedSpreadLayout.html">MasonryFixedSpreadLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryLayout.js~MasonryLayout.html">MasonryLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MasonryItemAccessibilityState">MasonryItemAccessibilityState</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Masonry">Masonry</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MasonryItem">MasonryItem</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
@@ -439,10 +440,14 @@
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
 import MasonryItem from &apos;./MasonryItem&apos;;
 import {SelectableCollection} from &apos;../../../coral-collection&apos;;
-import {validate, transform, commons} from &apos;../../../coral-utils&apos;;
+import {validate, transform, commons, i18n} from &apos;../../../coral-utils&apos;;
 import {Decorator} from &apos;../../../coral-decorator&apos;;
+import MasonryItemAccessibilityState from &quot;./MasonryItemAccessibilityState&quot;;
 
 const CLASSNAME = &apos;_coral-Masonry&apos;;
+
+/** @ignore */
+const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(window.navigator.platform);
 
 /**
  Enumeration for {@link Masonry} selection options.
@@ -562,6 +567,10 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     this._preservedAriaRole = this._defaultAriaRole;
     this._preservedParentAriaRole = null;
 
+    this._elements = {
+      accessibilityState: this.querySelector(&apos;coral-masonry-item-accessibilitystate&apos;) || new MasonryItemAccessibilityState()
+    };
+
     this._delegateEvents({
       &apos;global:resize&apos;: &apos;_onWindowResize&apos;,
 
@@ -574,6 +583,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
       &apos;coral-dragaction:dragstart coral-masonry-item&apos;: &apos;_onItemDragStart&apos;,
       &apos;coral-dragaction:dragover coral-masonry-item&apos;: &apos;_onItemDragMove&apos;,
       &apos;coral-dragaction:dragend coral-masonry-item&apos;: &apos;_onItemDragEnd&apos;,
+
+      &apos;coral-masonry-item:_selecteditemchanged&apos;: &apos;_onMasonrySelectedItemChanged&apos;,
 
       // Keyboard
       &apos;capture:focus coral-masonry-item&apos;: &apos;_onItemFocus&apos;,
@@ -656,6 +667,64 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     event.stopImmediatePropagation();
 
     this._validateSelection(event.target);
+  }
+
+  /** @private */
+  _onMasonrySelectedItemChanged(event) {
+    // this is a private event and should not leave the column view
+    event.stopImmediatePropagation();
+
+    // announce the selection state for the focused item
+    this._announceActiveElementState.call(event.target, event);
+  }
+
+  _announceActiveElementState() {
+    const accessibilityState = this._elements.accessibilityState;
+
+    const self = this;
+    const parentElement = this.parentElement;
+
+    if (this._addTimeout || this._removeTimeout) {
+      clearTimeout(this._addTimeout);
+      clearTimeout(this._removeTimeout);
+    }
+
+    // we use setTimeout instead of nextFrame to give screen reader more time to respond to live region update in order to announce complete text content when the state changes.
+    this._addTimeout = setTimeout(function () {
+      const activeElement = document.activeElement;
+
+      if (!self.contains(activeElement) || activeElement.tagName !== &apos;CORAL-MASONRY-ITEM&apos;) {
+        return;
+      }
+
+      const span = document.createElement(&apos;span&apos;);
+      span.appendChild(
+        document.createTextNode(
+          i18n.get(activeElement.selected ? &apos;checked&apos; : &apos;not checked&apos;)
+        )
+      );
+      accessibilityState.innerHTML = &apos;&apos;;
+      accessibilityState.hidden = false;
+      accessibilityState.removeAttribute(&apos;aria-live&apos;);
+      setTimeout(function () {
+        accessibilityState.appendChild(span);
+
+        // give screen reader 1.6 secs before clearing the live region, to provide enough time for announcement
+        self._removeTimeout = setTimeout(parentElement._resetAccessibilityState, 1600, accessibilityState, self);
+      }, 100);
+    }, 100);
+  }
+
+  // utility method to clean up accessibility state
+  _resetAccessibilityState(accessibilityState, self) {
+    accessibilityState.setAttribute(&apos;aria-live&apos;, &apos;off&apos;);
+
+    // @a11y only persist the checked state on macOS,
+    // where VoiceOver does not announce the selected state for a gridcell.
+    accessibilityState.hidden = true;
+    if (!isMacLike || !self.selected) {
+      accessibilityState.innerHTML = &apos;&apos;;
+    }
   }
 
   /**

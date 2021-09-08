@@ -208,6 +208,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryFixedSpreadLayout.js~MasonryFixedSpreadLayout.html">MasonryFixedSpreadLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryLayout.js~MasonryLayout.html">MasonryLayout</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-component-masonry/src/scripts/MasonryVariableLayout.js~MasonryVariableLayout.html">MasonryVariableLayout</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MasonryItemAccessibilityState">MasonryItemAccessibilityState</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Masonry">Masonry</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MasonryItem">MasonryItem</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-MasonryAriaGridEnum">MasonryAriaGridEnum</a></span></span></li>
@@ -440,11 +441,15 @@ import {BaseComponent} from &apos;../../../coral-base-component&apos;;
 import {DragAction} from &apos;../../../coral-dragaction&apos;;
 import &apos;../../../coral-component-checkbox&apos;;
 import quickactions from &apos;../templates/quickactions&apos;;
-import {transform, commons, validate} from &apos;../../../coral-utils&apos;;
+import {transform, commons, validate, i18n} from &apos;../../../coral-utils&apos;;
+import MasonryItemAccessibilityState from &apos;./MasonryItemAccessibilityState&apos;;
 import {Messenger} from &apos;../../../coral-messenger&apos;;
 import {Decorator} from &apos;../../../coral-decorator&apos;;
 
 const CLASSNAME = &apos;_coral-Masonry-item&apos;;
+
+/** @ignore */
+const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(window.navigator.platform);
 
 /**
  @class Coral.Masonry.Item
@@ -531,6 +536,7 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
     if(validate.valueMustChange(this._selected, value)) {
       this._selected = value;
       this._reflectAttribute(&apos;selected&apos;, value);
+      this.trigger(&apos;coral-masonry-item:_selecteditemchanged&apos;);
 
       this.setAttribute(&apos;aria-selected&apos;, value);
       this.classList.toggle(&apos;is-selected&apos;, value);
@@ -642,6 +648,38 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
 
     // @a11y
     this.setAttribute(&apos;tabindex&apos;, &apos;-1&apos;);
+
+    // @a11y Add live region element to ensure announcement of selected state
+    const accessibilityState = this._elements.accessibilityState || this.querySelector(&apos;coral-masonry-item-accessibilitystate&apos;) || new MasonryItemAccessibilityState();
+
+    // @a11y Style to be visually hidden yet accessible to screen readers
+    if (!accessibilityState.classList.contains(&apos;u-coral-screenReaderOnly&apos;)) {
+      accessibilityState.classList.add(&apos;u-coral-screenReaderOnly&apos;);
+    }
+
+    // @a11y accessibility state string should announce in document lang, rather than item lang.
+    accessibilityState.setAttribute(&apos;lang&apos;, i18n.locale);
+
+    // @a11y accessibility state has role=&quot;status&quot; to announce as a live region
+    accessibilityState.setAttribute(&apos;role&apos;, &apos;status&apos;);
+    accessibilityState.setAttribute(&apos;aria-live&apos;, &apos;off&apos;);
+    accessibilityState.hidden = true;
+
+    accessibilityState.id = accessibilityState.id || commons.getUID();
+
+    // @a11y Wait a frame and append live region content element so that it is the last child within item.
+    if (!accessibilityState.parentNode) {
+      this.appendChild(accessibilityState);
+    }
+    this._elements.accessibilityState = accessibilityState;
+
+    // @a11y Item should be labelled by accessibility state.
+    if (isMacLike) {
+      const ariaLabelledby = this.getAttribute(&apos;aria-labelledby&apos;);
+      if (ariaLabelledby) {
+        this.setAttribute(&apos;aria-labelledby&apos;, ariaLabelledby + &apos; &apos; + accessibilityState.id);
+      }
+    }
 
     // Support cloneNode
     const template = this.querySelector(&apos;._coral-Masonry-item-quickActions&apos;);
