@@ -38,6 +38,7 @@ import '../../coral-component-checkboxgroup/src/tests/spec';
 import '../../coral-component-clock/src/tests/spec';
 import '../../coral-component-coachmark/src/tests/spec';
 import '../../coral-component-colorinput/src/tests/spec';
+import '../../coral-component-colorpicker/src/tests/spec';
 import '../../coral-component-columnview/src/tests/spec';
 import '../../coral-component-cyclebutton/src/tests/spec';
 import '../../coral-component-datepicker/src/tests/spec';

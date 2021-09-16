@@ -1,0 +1,15 @@
+<js>var uid = data.commons.getUID();</js>
+<js>var uidBtn = data.commons.getUID();</js>
+<js>var uidInput = data.commons.getUID()</js>
+<input handle="input" id="#{{uidInput}}" is="coral-textfield" class="_coral-ColorPicker-input" type="text" value="" role="combobox" aria-autocomplete="none" aria-haspopup="dialog" aria-expanded="false" aria-controls="{{uid}}" />
+<div class="_coral-ColorPicker-buttonWrapper" handle="buttonWrapper" role="presentation">
+  <button id="{{uidBtn}}" handle="colorPreview" is="coral-button" variant="_custom" class="_coral-FieldButton _coral-ColorPicker-button _coral-ColorPicker-preview" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="{{uid}}"></button>
+  <js>
+    this.colorPreview.label.classList.add('u-coral-screenReaderOnly');
+    this.colorPreview.label.innerText = data.i18n.get('Color Picker');
+    this.colorPreview.label.id = uid + '-coral-button-label';
+  </js>
+</div>
+<coral-popover class="_coral-ColorPicker-overlay" target="#{{uidBtn}}" variant="info" role="dialog" focusonshow="on" trapfocus="on" handle="overlay" placement="right" id="{{uid}}" aria-label="{{data.i18n.get('Color Picker')}}" aria-live="off">
+  <coral-colorpicker-colorproperties handle="propertiesView"></coral-colorpicker-colorproperties>
+</coral-popover>
