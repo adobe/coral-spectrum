@@ -1,3 +1,10 @@
+# [4.12.0](https://github.com/adobe/coral-spectrum/compare/v4.11.1...v4.12.0) (2021-09-16)
+
+
+### Features
+
+* **ColorPicker:** Add a new Coral Color Picker component. ([#179](https://github.com/adobe/coral-spectrum/issues/179)) ([eb1b4d6](https://github.com/adobe/coral-spectrum/commit/eb1b4d64287007e183b106da674d4926caf7df73))
+
 ## [4.11.1](https://github.com/adobe/coral-spectrum/compare/v4.11.0...v4.11.1) (2021-09-08)
 
 
