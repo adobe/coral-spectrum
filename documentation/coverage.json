@@ -1,7 +1,7 @@
 {
-  "coverage": "60.83%",
-  "expectCount": 1486,
-  "actualCount": 904,
+  "coverage": "60.21%",
+  "expectCount": 1674,
+  "actualCount": 1008,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
       "expectCount": 6,
@@ -523,6 +523,137 @@
       "actualCount": 1,
       "undocumentLines": [
         22
+      ]
+    },
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js": {
+      "expectCount": 47,
+      "actualCount": 23,
+      "undocumentLines": [
+        18,
+        28,
+        50,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        94,
+        95,
+        96,
+        97,
+        117,
+        244,
+        254,
+        327,
+        331,
+        413,
+        414,
+        476
+      ]
+    },
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorFormats.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorHandle.js": {
+      "expectCount": 14,
+      "actualCount": 8,
+      "undocumentLines": [
+        18,
+        36,
+        38,
+        39,
+        66,
+        92
+      ]
+    },
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorPicker.js": {
+      "expectCount": 37,
+      "actualCount": 21,
+      "undocumentLines": [
+        24,
+        39,
+        64,
+        65,
+        124,
+        125,
+        126,
+        128,
+        164,
+        207,
+        227,
+        265,
+        291,
+        297,
+        305,
+        351
+      ]
+    },
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorProperties.js": {
+      "expectCount": 31,
+      "actualCount": 16,
+      "undocumentLines": [
+        21,
+        31,
+        42,
+        44,
+        45,
+        46,
+        47,
+        48,
+        51,
+        75,
+        76,
+        77,
+        78,
+        99,
+        130
+      ]
+    },
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorSlider.js": {
+      "expectCount": 40,
+      "actualCount": 24,
+      "undocumentLines": [
+        18,
+        50,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        93,
+        94,
+        178,
+        187,
+        340,
+        341,
+        386
+      ]
+    },
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorSliderHue.js": {
+      "expectCount": 9,
+      "actualCount": 5,
+      "undocumentLines": [
+        15,
+        27,
+        28,
+        29
+      ]
+    },
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js": {
+      "expectCount": 9,
+      "actualCount": 6,
+      "undocumentLines": [
+        15,
+        17,
+        120
       ]
     },
     "coral-spectrum/coral-component-columnview/src/scripts/ColumnView.js": {

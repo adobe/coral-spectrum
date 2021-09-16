@@ -360,6 +360,24 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@adobe/coral-spectrum~colorarea",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js~ColorArea.html",
+    "<span>ColorArea</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~colorformats",
+    "variable/index.html#static-variable-ColorFormats",
+    "<span>ColorFormats</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "variable"
+  ],
+  [
+    "@adobe/coral-spectrum~colorhandle",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorHandle.js~ColorHandle.html",
+    "<span>ColorHandle</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
     "@adobe/coral-spectrum~colorinput",
     "variable/index.html#static-variable-ColorInput",
     "<span>ColorInput</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
@@ -394,6 +412,36 @@ window.esdocSearchIndex = [
     "variable/index.html#static-variable-ColorInputSwatches",
     "<span>ColorInputSwatches</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
     "variable"
+  ],
+  [
+    "@adobe/coral-spectrum~colorpicker",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorPicker.js~ColorPicker.html",
+    "<span>ColorPicker</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~colorproperties",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorProperties.js~ColorProperties.html",
+    "<span>ColorProperties</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~colorslider",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorSlider.js~ColorSlider.html",
+    "<span>ColorSlider</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~colorsliderhue",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorSliderHue.js~ColorSliderHue.html",
+    "<span>ColorSliderHue</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
+  ],
+  [
+    "@adobe/coral-spectrum~colorutil",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js~ColorUtil.html",
+    "<span>ColorUtil</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "class"
   ],
   [
     "@adobe/coral-spectrum~columnview",
@@ -1329,6 +1377,12 @@ window.esdocSearchIndex = [
     "@adobe/coral-spectrum~wizardview",
     "variable/index.html#static-variable-WizardView",
     "<span>WizardView</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
+    "variable"
+  ],
+  [
+    "@adobe/coral-spectrum~colorutil",
+    "variable/index.html#static-variable-colorUtil",
+    "<span>colorUtil</span> <span class=\"search-result-import-path\">@adobe/coral-spectrum</span>",
     "variable"
   ],
   [
@@ -2854,6 +2908,246 @@ window.esdocSearchIndex = [
     "file/coral-spectrum/coral-component-colorinput/src/scripts/ColorInputSwatches.js.html",
     "coral-spectrum/coral-component-colorinput/src/scripts/ColorInputSwatches.js",
     "file"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorarea.js",
+    "file/coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js.html",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorarea.js~colorarea#color",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js~ColorArea.html#instance-member-color",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js~ColorArea#color",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorarea.js~colorarea#constructor",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js~ColorArea.html#instance-constructor-constructor",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js~ColorArea#constructor",
+    "method"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorarea.js~colorarea#disabled",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js~ColorArea.html#instance-member-disabled",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js~ColorArea#disabled",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorarea.js~colorarea#focus",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js~ColorArea.html#instance-method-focus",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js~ColorArea#focus",
+    "method"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorarea.js~colorarea#label",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js~ColorArea.html#instance-member-label",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js~ColorArea#label",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorarea.js~colorarea#x",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js~ColorArea.html#instance-member-x",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js~ColorArea#x",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorarea.js~colorarea#y",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js~ColorArea.html#instance-member-y",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorArea.js~ColorArea#y",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorformats.js",
+    "file/coral-spectrum/coral-component-colorpicker/src/scripts/ColorFormats.js.html",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorFormats.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorhandle.js",
+    "file/coral-spectrum/coral-component-colorpicker/src/scripts/ColorHandle.js.html",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorHandle.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorhandle.js~colorhandle#color",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorHandle.js~ColorHandle.html#instance-member-color",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorHandle.js~ColorHandle#color",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorhandle.js~colorhandle#disabled",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorHandle.js~ColorHandle.html#instance-member-disabled",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorHandle.js~ColorHandle#disabled",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorpicker.js",
+    "file/coral-spectrum/coral-component-colorpicker/src/scripts/ColorPicker.js.html",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorPicker.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorpicker.js~colorpicker#disabled",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorPicker.js~ColorPicker.html#instance-member-disabled",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorPicker.js~ColorPicker#disabled",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorpicker.js~colorpicker#formats",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorPicker.js~ColorPicker.html#instance-member-formats",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorPicker.js~ColorPicker#formats",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorpicker.js~colorpicker#label",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorPicker.js~ColorPicker.html#instance-member-label",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorPicker.js~ColorPicker#label",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorpicker.js~colorpicker#labelledby",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorPicker.js~ColorPicker.html#instance-member-labelledBy",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorPicker.js~ColorPicker#labelledBy",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorpicker.js~colorpicker#readonly",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorPicker.js~ColorPicker.html#instance-member-readOnly",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorPicker.js~ColorPicker#readOnly",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorpicker.js~colorpicker#value",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorPicker.js~ColorPicker.html#instance-member-value",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorPicker.js~ColorPicker#value",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorproperties.js",
+    "file/coral-spectrum/coral-component-colorpicker/src/scripts/ColorProperties.js.html",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorProperties.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorproperties.js~colorproperties#color",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorProperties.js~ColorProperties.html#instance-member-color",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorProperties.js~ColorProperties#color",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorproperties.js~colorproperties#constructor",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorProperties.js~ColorProperties.html#instance-constructor-constructor",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorProperties.js~ColorProperties#constructor",
+    "method"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorproperties.js~colorproperties#disabled",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorProperties.js~ColorProperties.html#instance-member-disabled",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorProperties.js~ColorProperties#disabled",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorproperties.js~colorproperties#formats",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorProperties.js~ColorProperties.html#instance-member-formats",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorProperties.js~ColorProperties#formats",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorproperties.js~colorproperties#render",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorProperties.js~ColorProperties.html#instance-method-render",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorProperties.js~ColorProperties#render",
+    "method"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorslider.js",
+    "file/coral-spectrum/coral-component-colorpicker/src/scripts/ColorSlider.js.html",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorSlider.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorslider.js~colorslider#color",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorSlider.js~ColorSlider.html#instance-member-color",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorSlider.js~ColorSlider#color",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorslider.js~colorslider#disabled",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorSlider.js~ColorSlider.html#instance-member-disabled",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorSlider.js~ColorSlider#disabled",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorslider.js~colorslider#focus",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorSlider.js~ColorSlider.html#instance-method-focus",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorSlider.js~ColorSlider#focus",
+    "method"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorslider.js~colorslider#label",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorSlider.js~ColorSlider.html#instance-member-label",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorSlider.js~ColorSlider#label",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorslider.js~colorslider#value",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorSlider.js~ColorSlider.html#instance-member-value",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorSlider.js~ColorSlider#value",
+    "member"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorsliderhue.js",
+    "file/coral-spectrum/coral-component-colorpicker/src/scripts/ColorSliderHue.js.html",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorSliderHue.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorutil.js",
+    "file/coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js.html",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js",
+    "file"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorutil.js~colorutil#constructor",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js~ColorUtil.html#instance-constructor-constructor",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js~ColorUtil#constructor",
+    "method"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorutil.js~colorutil#extracthsv",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js~ColorUtil.html#instance-method-extractHsv",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js~ColorUtil#extractHsv",
+    "method"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorutil.js~colorutil#formatcolorstring",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js~ColorUtil.html#instance-method-formatColorString",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js~ColorUtil#formatColorString",
+    "method"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorutil.js~colorutil#gethue",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js~ColorUtil.html#instance-method-getHue",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js~ColorUtil#getHue",
+    "method"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorutil.js~colorutil#getvalidformats",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js~ColorUtil.html#instance-method-getValidFormats",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js~ColorUtil#getValidFormats",
+    "method"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorutil.js~colorutil#tohslstring",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js~ColorUtil.html#instance-method-toHslString",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js~ColorUtil#toHslString",
+    "method"
+  ],
+  [
+    "coral-spectrum/coral-component-colorpicker/src/scripts/colorutil.js~colorutil#tohsvstring",
+    "class/coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js~ColorUtil.html#instance-method-toHsvString",
+    "coral-spectrum/coral-component-colorpicker/src/scripts/ColorUtil.js~ColorUtil#toHsvString",
+    "method"
   ],
   [
     "coral-spectrum/coral-component-columnview/src/scripts/columnview.js",

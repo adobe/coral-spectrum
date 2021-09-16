@@ -406,6 +406,10 @@
     return value;
   }
 
+  function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+  }
+
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
   }
@@ -414,8 +418,39 @@
     if (Array.isArray(arr)) return _arrayLikeToArray(arr);
   }
 
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+
   function _iterableToArray(iter) {
     if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+  }
+
+  function _iterableToArrayLimit(arr, i) {
+    if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+
+    try {
+      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"] != null) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
   }
 
   function _unsupportedIterableToArray(o, minLen) {
@@ -437,6 +472,10 @@
 
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -49263,7 +49302,4255 @@
   ColorInput.Slider = ColorInputSlider;
   ColorInput.ColorProperties = ColorInputColorProperties;
 
+  /**
+   * Copyright 2021 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+  var ColorFormats = {
+    HSL: "hsl",
+    HSV: "hsv",
+    RGB: "rgb",
+    PRGB: "prgb",
+    HEX: "hex",
+    HEX3: "hex3",
+    HEX4: "hex4",
+    HEX8: "hex8",
+    NAME: "name"
+  };
+
   var template$x = function anonymous(data_0) {
+    var frag = document.createDocumentFragment();
+    var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
+    data = data_0;
+    var uid = data.commons.getUID();
+    data_0 = data;
+    var el1 = document.createTextNode("\n");
+    frag.appendChild(el1);
+    data = data_0;
+    var uidBtn = data.commons.getUID();
+    data_0 = data;
+    var el3 = document.createTextNode("\n");
+    frag.appendChild(el3);
+    data = data_0;
+    var uidInput = data.commons.getUID();
+    data_0 = data;
+    var el5 = document.createTextNode("\n");
+    frag.appendChild(el5);
+    var el6 = this["input"] = document.createElement("input", "coral-textfield");
+    el6.setAttribute("handle", "input");
+    el6.id = "#" + uidInput;
+    el6.setAttribute("is", "coral-textfield");
+    el6.className += " _coral-ColorPicker-input";
+    el6.setAttribute("type", "text");
+    el6.setAttribute("value", "");
+    el6.setAttribute("role", "combobox");
+    el6.setAttribute("aria-autocomplete", "none");
+    el6.setAttribute("aria-haspopup", "dialog");
+    el6.setAttribute("aria-expanded", "false");
+    el6.setAttribute("aria-controls", uid);
+    frag.appendChild(el6);
+    var el7 = document.createTextNode("\n");
+    frag.appendChild(el7);
+    var el8 = this["buttonWrapper"] = document.createElement("div");
+    el8.className += " _coral-ColorPicker-buttonWrapper";
+    el8.setAttribute("handle", "buttonWrapper");
+    el8.setAttribute("role", "presentation");
+    var el9 = document.createTextNode("\n  ");
+    el8.appendChild(el9);
+    var el10 = this["colorPreview"] = document.createElement("button", "coral-button");
+    el10.id = uidBtn;
+    el10.setAttribute("handle", "colorPreview");
+    el10.setAttribute("is", "coral-button");
+    el10.setAttribute("variant", "_custom");
+    el10.className += " _coral-FieldButton _coral-ColorPicker-button _coral-ColorPicker-preview";
+    el10.setAttribute("type", "button");
+    el10.setAttribute("aria-haspopup", "dialog");
+    el10.setAttribute("aria-expanded", "false");
+    el10.setAttribute("aria-controls", uid);
+    el8.appendChild(el10);
+    var el11 = document.createTextNode("\n  ");
+    el8.appendChild(el11);
+    data = data_0;
+    this.colorPreview.label.classList.add('u-coral-screenReaderOnly');
+    this.colorPreview.label.innerText = data.i18n.get('Color Picker');
+    this.colorPreview.label.id = uid + '-coral-button-label';
+    data_0 = data;
+    var el13 = document.createTextNode("\n");
+    el8.appendChild(el13);
+    frag.appendChild(el8);
+    var el14 = document.createTextNode("\n");
+    frag.appendChild(el14);
+    var el15 = this["overlay"] = document.createElement("coral-popover");
+    el15.className += " _coral-ColorPicker-overlay";
+    el15.setAttribute("target", "#" + uidBtn);
+    el15.setAttribute("variant", "info");
+    el15.setAttribute("role", "dialog");
+    el15.setAttribute("focusonshow", "on");
+    el15.setAttribute("trapfocus", "on");
+    el15.setAttribute("handle", "overlay");
+    el15.setAttribute("placement", "right");
+    el15.id = uid;
+    el15.setAttribute("aria-label", data_0["i18n"]["get"]('Color Picker'));
+    el15.setAttribute("aria-live", "off");
+    var el16 = document.createTextNode("\n  ");
+    el15.appendChild(el16);
+    var el17 = this["propertiesView"] = document.createElement("coral-colorpicker-colorproperties");
+    el17.setAttribute("handle", "propertiesView");
+    el15.appendChild(el17);
+    var el18 = document.createTextNode("\n");
+    el15.appendChild(el18);
+    frag.appendChild(el15);
+    return frag;
+  };
+
+  /**
+   * Take input from [0, n] and return it as [0, 1]
+   * @hidden
+   */
+  function bound01(n, max) {
+    if (isOnePointZero(n)) {
+      n = '100%';
+    }
+
+    var isPercent = isPercentage(n);
+    n = max === 360 ? n : Math.min(max, Math.max(0, parseFloat(n))); // Automatically convert percentage into number
+
+    if (isPercent) {
+      n = parseInt(String(n * max), 10) / 100;
+    } // Handle floating point rounding errors
+
+
+    if (Math.abs(n - max) < 0.000001) {
+      return 1;
+    } // Convert into [0, 1] range if it isn't already
+
+
+    if (max === 360) {
+      // If n is a hue given in degrees,
+      // wrap around out-of-range values into [0, 360] range
+      // then convert into [0, 1].
+      n = (n < 0 ? n % max + max : n % max) / parseFloat(String(max));
+    } else {
+      // If n not a hue given in degrees
+      // Convert into [0, 1] range if it isn't already.
+      n = n % max / parseFloat(String(max));
+    }
+
+    return n;
+  }
+  /**
+   * Force a number between 0 and 1
+   * @hidden
+   */
+
+  function clamp01(val) {
+    return Math.min(1, Math.max(0, val));
+  }
+  /**
+   * Need to handle 1.0 as 100%, since once it is a number, there is no difference between it and 1
+   * <http://stackoverflow.com/questions/7422072/javascript-how-to-detect-number-as-a-decimal-including-1-0>
+   * @hidden
+   */
+
+  function isOnePointZero(n) {
+    return typeof n === 'string' && n.indexOf('.') !== -1 && parseFloat(n) === 1;
+  }
+  /**
+   * Check to see if string passed in is a percentage
+   * @hidden
+   */
+
+  function isPercentage(n) {
+    return typeof n === 'string' && n.indexOf('%') !== -1;
+  }
+  /**
+   * Return a valid alpha value [0,1] with all invalid values being set to 1
+   * @hidden
+   */
+
+  function boundAlpha(a) {
+    a = parseFloat(a);
+
+    if (isNaN(a) || a < 0 || a > 1) {
+      a = 1;
+    }
+
+    return a;
+  }
+  /**
+   * Replace a decimal with it's percentage value
+   * @hidden
+   */
+
+  function convertToPercentage(n) {
+    if (n <= 1) {
+      return Number(n) * 100 + "%";
+    }
+
+    return n;
+  }
+  /**
+   * Force a hex value to have 2 characters
+   * @hidden
+   */
+
+  function pad2(c) {
+    return c.length === 1 ? '0' + c : String(c);
+  }
+
+  // <http://mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript>
+
+  /**
+   * Handle bounds / percentage checking to conform to CSS color spec
+   * <http://www.w3.org/TR/css3-color/>
+   * *Assumes:* r, g, b in [0, 255] or [0, 1]
+   * *Returns:* { r, g, b } in [0, 255]
+   */
+
+  function rgbToRgb(r, g, b) {
+    return {
+      r: bound01(r, 255) * 255,
+      g: bound01(g, 255) * 255,
+      b: bound01(b, 255) * 255
+    };
+  }
+  /**
+   * Converts an RGB color value to HSL.
+   * *Assumes:* r, g, and b are contained in [0, 255] or [0, 1]
+   * *Returns:* { h, s, l } in [0,1]
+   */
+
+  function rgbToHsl(r, g, b) {
+    r = bound01(r, 255);
+    g = bound01(g, 255);
+    b = bound01(b, 255);
+    var max = Math.max(r, g, b);
+    var min = Math.min(r, g, b);
+    var h = 0;
+    var s = 0;
+    var l = (max + min) / 2;
+
+    if (max === min) {
+      s = 0;
+      h = 0; // achromatic
+    } else {
+      var d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+      switch (max) {
+        case r:
+          h = (g - b) / d + (g < b ? 6 : 0);
+          break;
+
+        case g:
+          h = (b - r) / d + 2;
+          break;
+
+        case b:
+          h = (r - g) / d + 4;
+          break;
+      }
+
+      h /= 6;
+    }
+
+    return {
+      h: h,
+      s: s,
+      l: l
+    };
+  }
+
+  function hue2rgb(p, q, t) {
+    if (t < 0) {
+      t += 1;
+    }
+
+    if (t > 1) {
+      t -= 1;
+    }
+
+    if (t < 1 / 6) {
+      return p + (q - p) * (6 * t);
+    }
+
+    if (t < 1 / 2) {
+      return q;
+    }
+
+    if (t < 2 / 3) {
+      return p + (q - p) * (2 / 3 - t) * 6;
+    }
+
+    return p;
+  }
+  /**
+   * Converts an HSL color value to RGB.
+   *
+   * *Assumes:* h is contained in [0, 1] or [0, 360] and s and l are contained [0, 1] or [0, 100]
+   * *Returns:* { r, g, b } in the set [0, 255]
+   */
+
+
+  function hslToRgb(h, s, l) {
+    var r;
+    var g;
+    var b;
+    h = bound01(h, 360);
+    s = bound01(s, 100);
+    l = bound01(l, 100);
+
+    if (s === 0) {
+      // achromatic
+      g = l;
+      b = l;
+      r = l;
+    } else {
+      var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      var p = 2 * l - q;
+      r = hue2rgb(p, q, h + 1 / 3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1 / 3);
+    }
+
+    return {
+      r: r * 255,
+      g: g * 255,
+      b: b * 255
+    };
+  }
+  /**
+   * Converts an RGB color value to HSV
+   *
+   * *Assumes:* r, g, and b are contained in the set [0, 255] or [0, 1]
+   * *Returns:* { h, s, v } in [0,1]
+   */
+
+  function rgbToHsv(r, g, b) {
+    r = bound01(r, 255);
+    g = bound01(g, 255);
+    b = bound01(b, 255);
+    var max = Math.max(r, g, b);
+    var min = Math.min(r, g, b);
+    var h = 0;
+    var v = max;
+    var d = max - min;
+    var s = max === 0 ? 0 : d / max;
+
+    if (max === min) {
+      h = 0; // achromatic
+    } else {
+      switch (max) {
+        case r:
+          h = (g - b) / d + (g < b ? 6 : 0);
+          break;
+
+        case g:
+          h = (b - r) / d + 2;
+          break;
+
+        case b:
+          h = (r - g) / d + 4;
+          break;
+      }
+
+      h /= 6;
+    }
+
+    return {
+      h: h,
+      s: s,
+      v: v
+    };
+  }
+  /**
+   * Converts an HSV color value to RGB.
+   *
+   * *Assumes:* h is contained in [0, 1] or [0, 360] and s and v are contained in [0, 1] or [0, 100]
+   * *Returns:* { r, g, b } in the set [0, 255]
+   */
+
+  function hsvToRgb(h, s, v) {
+    h = bound01(h, 360) * 6;
+    s = bound01(s, 100);
+    v = bound01(v, 100);
+    var i = Math.floor(h);
+    var f = h - i;
+    var p = v * (1 - s);
+    var q = v * (1 - f * s);
+    var t = v * (1 - (1 - f) * s);
+    var mod = i % 6;
+    var r = [v, q, p, p, t, v][mod];
+    var g = [t, v, v, q, p, p][mod];
+    var b = [p, p, t, v, v, q][mod];
+    return {
+      r: r * 255,
+      g: g * 255,
+      b: b * 255
+    };
+  }
+  /**
+   * Converts an RGB color to hex
+   *
+   * Assumes r, g, and b are contained in the set [0, 255]
+   * Returns a 3 or 6 character hex
+   */
+
+  function rgbToHex(r, g, b, allow3Char) {
+    var hex = [pad2(Math.round(r).toString(16)), pad2(Math.round(g).toString(16)), pad2(Math.round(b).toString(16))]; // Return a 3 character hex if possible
+
+    if (allow3Char && hex[0].startsWith(hex[0].charAt(1)) && hex[1].startsWith(hex[1].charAt(1)) && hex[2].startsWith(hex[2].charAt(1))) {
+      return hex[0].charAt(0) + hex[1].charAt(0) + hex[2].charAt(0);
+    }
+
+    return hex.join('');
+  }
+  /**
+   * Converts an RGBA color plus alpha transparency to hex
+   *
+   * Assumes r, g, b are contained in the set [0, 255] and
+   * a in [0, 1]. Returns a 4 or 8 character rgba hex
+   */
+  // eslint-disable-next-line max-params
+
+  function rgbaToHex(r, g, b, a, allow4Char) {
+    var hex = [pad2(Math.round(r).toString(16)), pad2(Math.round(g).toString(16)), pad2(Math.round(b).toString(16)), pad2(convertDecimalToHex(a))]; // Return a 4 character hex if possible
+
+    if (allow4Char && hex[0].startsWith(hex[0].charAt(1)) && hex[1].startsWith(hex[1].charAt(1)) && hex[2].startsWith(hex[2].charAt(1)) && hex[3].startsWith(hex[3].charAt(1))) {
+      return hex[0].charAt(0) + hex[1].charAt(0) + hex[2].charAt(0) + hex[3].charAt(0);
+    }
+
+    return hex.join('');
+  }
+  /** Converts a decimal to a hex value */
+
+  function convertDecimalToHex(d) {
+    return Math.round(parseFloat(d) * 255).toString(16);
+  }
+  /** Converts a hex value to a decimal */
+
+  function convertHexToDecimal(h) {
+    return parseIntFromHex(h) / 255;
+  }
+  /** Parse a base-16 hex value into a base-10 integer */
+
+  function parseIntFromHex(val) {
+    return parseInt(val, 16);
+  }
+  function numberInputToObject(color) {
+    return {
+      r: color >> 16,
+      g: (color & 0xff00) >> 8,
+      b: color & 0xff
+    };
+  }
+
+  // https://github.com/bahamas10/css-color-names/blob/master/css-color-names.json
+
+  /**
+   * @hidden
+   */
+  var names = {
+    aliceblue: '#f0f8ff',
+    antiquewhite: '#faebd7',
+    aqua: '#00ffff',
+    aquamarine: '#7fffd4',
+    azure: '#f0ffff',
+    beige: '#f5f5dc',
+    bisque: '#ffe4c4',
+    black: '#000000',
+    blanchedalmond: '#ffebcd',
+    blue: '#0000ff',
+    blueviolet: '#8a2be2',
+    brown: '#a52a2a',
+    burlywood: '#deb887',
+    cadetblue: '#5f9ea0',
+    chartreuse: '#7fff00',
+    chocolate: '#d2691e',
+    coral: '#ff7f50',
+    cornflowerblue: '#6495ed',
+    cornsilk: '#fff8dc',
+    crimson: '#dc143c',
+    cyan: '#00ffff',
+    darkblue: '#00008b',
+    darkcyan: '#008b8b',
+    darkgoldenrod: '#b8860b',
+    darkgray: '#a9a9a9',
+    darkgreen: '#006400',
+    darkgrey: '#a9a9a9',
+    darkkhaki: '#bdb76b',
+    darkmagenta: '#8b008b',
+    darkolivegreen: '#556b2f',
+    darkorange: '#ff8c00',
+    darkorchid: '#9932cc',
+    darkred: '#8b0000',
+    darksalmon: '#e9967a',
+    darkseagreen: '#8fbc8f',
+    darkslateblue: '#483d8b',
+    darkslategray: '#2f4f4f',
+    darkslategrey: '#2f4f4f',
+    darkturquoise: '#00ced1',
+    darkviolet: '#9400d3',
+    deeppink: '#ff1493',
+    deepskyblue: '#00bfff',
+    dimgray: '#696969',
+    dimgrey: '#696969',
+    dodgerblue: '#1e90ff',
+    firebrick: '#b22222',
+    floralwhite: '#fffaf0',
+    forestgreen: '#228b22',
+    fuchsia: '#ff00ff',
+    gainsboro: '#dcdcdc',
+    ghostwhite: '#f8f8ff',
+    goldenrod: '#daa520',
+    gold: '#ffd700',
+    gray: '#808080',
+    green: '#008000',
+    greenyellow: '#adff2f',
+    grey: '#808080',
+    honeydew: '#f0fff0',
+    hotpink: '#ff69b4',
+    indianred: '#cd5c5c',
+    indigo: '#4b0082',
+    ivory: '#fffff0',
+    khaki: '#f0e68c',
+    lavenderblush: '#fff0f5',
+    lavender: '#e6e6fa',
+    lawngreen: '#7cfc00',
+    lemonchiffon: '#fffacd',
+    lightblue: '#add8e6',
+    lightcoral: '#f08080',
+    lightcyan: '#e0ffff',
+    lightgoldenrodyellow: '#fafad2',
+    lightgray: '#d3d3d3',
+    lightgreen: '#90ee90',
+    lightgrey: '#d3d3d3',
+    lightpink: '#ffb6c1',
+    lightsalmon: '#ffa07a',
+    lightseagreen: '#20b2aa',
+    lightskyblue: '#87cefa',
+    lightslategray: '#778899',
+    lightslategrey: '#778899',
+    lightsteelblue: '#b0c4de',
+    lightyellow: '#ffffe0',
+    lime: '#00ff00',
+    limegreen: '#32cd32',
+    linen: '#faf0e6',
+    magenta: '#ff00ff',
+    maroon: '#800000',
+    mediumaquamarine: '#66cdaa',
+    mediumblue: '#0000cd',
+    mediumorchid: '#ba55d3',
+    mediumpurple: '#9370db',
+    mediumseagreen: '#3cb371',
+    mediumslateblue: '#7b68ee',
+    mediumspringgreen: '#00fa9a',
+    mediumturquoise: '#48d1cc',
+    mediumvioletred: '#c71585',
+    midnightblue: '#191970',
+    mintcream: '#f5fffa',
+    mistyrose: '#ffe4e1',
+    moccasin: '#ffe4b5',
+    navajowhite: '#ffdead',
+    navy: '#000080',
+    oldlace: '#fdf5e6',
+    olive: '#808000',
+    olivedrab: '#6b8e23',
+    orange: '#ffa500',
+    orangered: '#ff4500',
+    orchid: '#da70d6',
+    palegoldenrod: '#eee8aa',
+    palegreen: '#98fb98',
+    paleturquoise: '#afeeee',
+    palevioletred: '#db7093',
+    papayawhip: '#ffefd5',
+    peachpuff: '#ffdab9',
+    peru: '#cd853f',
+    pink: '#ffc0cb',
+    plum: '#dda0dd',
+    powderblue: '#b0e0e6',
+    purple: '#800080',
+    rebeccapurple: '#663399',
+    red: '#ff0000',
+    rosybrown: '#bc8f8f',
+    royalblue: '#4169e1',
+    saddlebrown: '#8b4513',
+    salmon: '#fa8072',
+    sandybrown: '#f4a460',
+    seagreen: '#2e8b57',
+    seashell: '#fff5ee',
+    sienna: '#a0522d',
+    silver: '#c0c0c0',
+    skyblue: '#87ceeb',
+    slateblue: '#6a5acd',
+    slategray: '#708090',
+    slategrey: '#708090',
+    snow: '#fffafa',
+    springgreen: '#00ff7f',
+    steelblue: '#4682b4',
+    tan: '#d2b48c',
+    teal: '#008080',
+    thistle: '#d8bfd8',
+    tomato: '#ff6347',
+    turquoise: '#40e0d0',
+    violet: '#ee82ee',
+    wheat: '#f5deb3',
+    white: '#ffffff',
+    whitesmoke: '#f5f5f5',
+    yellow: '#ffff00',
+    yellowgreen: '#9acd32'
+  };
+
+  /**
+   * Given a string or object, convert that input to RGB
+   *
+   * Possible string inputs:
+   * ```
+   * "red"
+   * "#f00" or "f00"
+   * "#ff0000" or "ff0000"
+   * "#ff000000" or "ff000000"
+   * "rgb 255 0 0" or "rgb (255, 0, 0)"
+   * "rgb 1.0 0 0" or "rgb (1, 0, 0)"
+   * "rgba (255, 0, 0, 1)" or "rgba 255, 0, 0, 1"
+   * "rgba (1.0, 0, 0, 1)" or "rgba 1.0, 0, 0, 1"
+   * "hsl(0, 100%, 50%)" or "hsl 0 100% 50%"
+   * "hsla(0, 100%, 50%, 1)" or "hsla 0 100% 50%, 1"
+   * "hsv(0, 100%, 100%)" or "hsv 0 100% 100%"
+   * ```
+   */
+
+  function inputToRGB(color) {
+    var rgb = {
+      r: 0,
+      g: 0,
+      b: 0
+    };
+    var a = 1;
+    var s = null;
+    var v = null;
+    var l = null;
+    var ok = false;
+    var format = false;
+
+    if (typeof color === 'string') {
+      color = stringInputToObject(color);
+    }
+
+    if (_typeof(color) === 'object') {
+      if (isValidCSSUnit(color.r) && isValidCSSUnit(color.g) && isValidCSSUnit(color.b)) {
+        rgb = rgbToRgb(color.r, color.g, color.b);
+        ok = true;
+        format = String(color.r).substr(-1) === '%' ? 'prgb' : 'rgb';
+      } else if (isValidCSSUnit(color.h) && isValidCSSUnit(color.s) && isValidCSSUnit(color.v)) {
+        s = convertToPercentage(color.s);
+        v = convertToPercentage(color.v);
+        rgb = hsvToRgb(color.h, s, v);
+        ok = true;
+        format = 'hsv';
+      } else if (isValidCSSUnit(color.h) && isValidCSSUnit(color.s) && isValidCSSUnit(color.l)) {
+        s = convertToPercentage(color.s);
+        l = convertToPercentage(color.l);
+        rgb = hslToRgb(color.h, s, l);
+        ok = true;
+        format = 'hsl';
+      }
+
+      if (Object.prototype.hasOwnProperty.call(color, 'a')) {
+        a = color.a;
+      }
+    }
+
+    a = boundAlpha(a);
+    return {
+      ok: ok,
+      format: color.format || format,
+      r: Math.min(255, Math.max(rgb.r, 0)),
+      g: Math.min(255, Math.max(rgb.g, 0)),
+      b: Math.min(255, Math.max(rgb.b, 0)),
+      a: a
+    };
+  } // <http://www.w3.org/TR/css3-values/#integers>
+
+  var CSS_INTEGER = '[-\\+]?\\d+%?'; // <http://www.w3.org/TR/css3-values/#number-value>
+
+  var CSS_NUMBER = '[-\\+]?\\d*\\.\\d+%?'; // Allow positive/negative integer/number.  Don't capture the either/or, just the entire outcome.
+
+  var CSS_UNIT = "(?:" + CSS_NUMBER + ")|(?:" + CSS_INTEGER + ")"; // Actual matching.
+  // Parentheses and commas are optional, but not required.
+  // Whitespace can take the place of commas or opening paren
+
+  var PERMISSIVE_MATCH3 = "[\\s|\\(]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")\\s*\\)?";
+  var PERMISSIVE_MATCH4 = "[\\s|\\(]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")\\s*\\)?";
+  var matchers = {
+    CSS_UNIT: new RegExp(CSS_UNIT),
+    rgb: new RegExp('rgb' + PERMISSIVE_MATCH3),
+    rgba: new RegExp('rgba' + PERMISSIVE_MATCH4),
+    hsl: new RegExp('hsl' + PERMISSIVE_MATCH3),
+    hsla: new RegExp('hsla' + PERMISSIVE_MATCH4),
+    hsv: new RegExp('hsv' + PERMISSIVE_MATCH3),
+    hsva: new RegExp('hsva' + PERMISSIVE_MATCH4),
+    hex3: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
+    hex6: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/,
+    hex4: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
+    hex8: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
+  };
+  /**
+   * Permissive string parsing.  Take in a number of formats, and output an object
+   * based on detected format.  Returns `{ r, g, b }` or `{ h, s, l }` or `{ h, s, v}`
+   */
+
+  function stringInputToObject(color) {
+    color = color.trim().toLowerCase();
+
+    if (color.length === 0) {
+      return false;
+    }
+
+    var named = false;
+
+    if (names[color]) {
+      color = names[color];
+      named = true;
+    } else if (color === 'transparent') {
+      return {
+        r: 0,
+        g: 0,
+        b: 0,
+        a: 0,
+        format: 'name'
+      };
+    } // Try to match string input using regular expressions.
+    // Keep most of the number bounding out of this function - don't worry about [0,1] or [0,100] or [0,360]
+    // Just return an object and let the conversion functions handle that.
+    // This way the result will be the same whether the tinycolor is initialized with string or object.
+
+
+    var match = matchers.rgb.exec(color);
+
+    if (match) {
+      return {
+        r: match[1],
+        g: match[2],
+        b: match[3]
+      };
+    }
+
+    match = matchers.rgba.exec(color);
+
+    if (match) {
+      return {
+        r: match[1],
+        g: match[2],
+        b: match[3],
+        a: match[4]
+      };
+    }
+
+    match = matchers.hsl.exec(color);
+
+    if (match) {
+      return {
+        h: match[1],
+        s: match[2],
+        l: match[3]
+      };
+    }
+
+    match = matchers.hsla.exec(color);
+
+    if (match) {
+      return {
+        h: match[1],
+        s: match[2],
+        l: match[3],
+        a: match[4]
+      };
+    }
+
+    match = matchers.hsv.exec(color);
+
+    if (match) {
+      return {
+        h: match[1],
+        s: match[2],
+        v: match[3]
+      };
+    }
+
+    match = matchers.hsva.exec(color);
+
+    if (match) {
+      return {
+        h: match[1],
+        s: match[2],
+        v: match[3],
+        a: match[4]
+      };
+    }
+
+    match = matchers.hex8.exec(color);
+
+    if (match) {
+      return {
+        r: parseIntFromHex(match[1]),
+        g: parseIntFromHex(match[2]),
+        b: parseIntFromHex(match[3]),
+        a: convertHexToDecimal(match[4]),
+        format: named ? 'name' : 'hex8'
+      };
+    }
+
+    match = matchers.hex6.exec(color);
+
+    if (match) {
+      return {
+        r: parseIntFromHex(match[1]),
+        g: parseIntFromHex(match[2]),
+        b: parseIntFromHex(match[3]),
+        format: named ? 'name' : 'hex'
+      };
+    }
+
+    match = matchers.hex4.exec(color);
+
+    if (match) {
+      return {
+        r: parseIntFromHex(match[1] + match[1]),
+        g: parseIntFromHex(match[2] + match[2]),
+        b: parseIntFromHex(match[3] + match[3]),
+        a: convertHexToDecimal(match[4] + match[4]),
+        format: named ? 'name' : 'hex8'
+      };
+    }
+
+    match = matchers.hex3.exec(color);
+
+    if (match) {
+      return {
+        r: parseIntFromHex(match[1] + match[1]),
+        g: parseIntFromHex(match[2] + match[2]),
+        b: parseIntFromHex(match[3] + match[3]),
+        format: named ? 'name' : 'hex'
+      };
+    }
+
+    return false;
+  }
+  /**
+   * Check to see if it looks like a CSS unit
+   * (see `matchers` above for definition).
+   */
+
+  function isValidCSSUnit(color) {
+    return Boolean(matchers.CSS_UNIT.exec(String(color)));
+  }
+
+  var TinyColor =
+  /** @class */
+  function () {
+    function TinyColor(color, opts) {
+      if (color === void 0) {
+        color = '';
+      }
+
+      if (opts === void 0) {
+        opts = {};
+      }
+
+      var _a; // If input is already a tinycolor, return itself
+
+
+      if (color instanceof TinyColor) {
+        // eslint-disable-next-line no-constructor-return
+        return color;
+      }
+
+      if (typeof color === 'number') {
+        color = numberInputToObject(color);
+      }
+
+      this.originalInput = color;
+      var rgb = inputToRGB(color);
+      this.originalInput = color;
+      this.r = rgb.r;
+      this.g = rgb.g;
+      this.b = rgb.b;
+      this.a = rgb.a;
+      this.roundA = Math.round(100 * this.a) / 100;
+      this.format = (_a = opts.format) !== null && _a !== void 0 ? _a : rgb.format;
+      this.gradientType = opts.gradientType; // Don't let the range of [0,255] come back in [0,1].
+      // Potentially lose a little bit of precision here, but will fix issues where
+      // .5 gets interpreted as half of the total, instead of half of 1
+      // If it was supposed to be 128, this was already taken care of by `inputToRgb`
+
+      if (this.r < 1) {
+        this.r = Math.round(this.r);
+      }
+
+      if (this.g < 1) {
+        this.g = Math.round(this.g);
+      }
+
+      if (this.b < 1) {
+        this.b = Math.round(this.b);
+      }
+
+      this.isValid = rgb.ok;
+    }
+
+    TinyColor.prototype.isDark = function () {
+      return this.getBrightness() < 128;
+    };
+
+    TinyColor.prototype.isLight = function () {
+      return !this.isDark();
+    };
+    /**
+     * Returns the perceived brightness of the color, from 0-255.
+     */
+
+
+    TinyColor.prototype.getBrightness = function () {
+      // http://www.w3.org/TR/AERT#color-contrast
+      var rgb = this.toRgb();
+      return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
+    };
+    /**
+     * Returns the perceived luminance of a color, from 0-1.
+     */
+
+
+    TinyColor.prototype.getLuminance = function () {
+      // http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+      var rgb = this.toRgb();
+      var R;
+      var G;
+      var B;
+      var RsRGB = rgb.r / 255;
+      var GsRGB = rgb.g / 255;
+      var BsRGB = rgb.b / 255;
+
+      if (RsRGB <= 0.03928) {
+        R = RsRGB / 12.92;
+      } else {
+        // eslint-disable-next-line prefer-exponentiation-operator
+        R = Math.pow((RsRGB + 0.055) / 1.055, 2.4);
+      }
+
+      if (GsRGB <= 0.03928) {
+        G = GsRGB / 12.92;
+      } else {
+        // eslint-disable-next-line prefer-exponentiation-operator
+        G = Math.pow((GsRGB + 0.055) / 1.055, 2.4);
+      }
+
+      if (BsRGB <= 0.03928) {
+        B = BsRGB / 12.92;
+      } else {
+        // eslint-disable-next-line prefer-exponentiation-operator
+        B = Math.pow((BsRGB + 0.055) / 1.055, 2.4);
+      }
+
+      return 0.2126 * R + 0.7152 * G + 0.0722 * B;
+    };
+    /**
+     * Returns the alpha value of a color, from 0-1.
+     */
+
+
+    TinyColor.prototype.getAlpha = function () {
+      return this.a;
+    };
+    /**
+     * Sets the alpha value on the current color.
+     *
+     * @param alpha - The new alpha value. The accepted range is 0-1.
+     */
+
+
+    TinyColor.prototype.setAlpha = function (alpha) {
+      this.a = boundAlpha(alpha);
+      this.roundA = Math.round(100 * this.a) / 100;
+      return this;
+    };
+    /**
+     * Returns the object as a HSVA object.
+     */
+
+
+    TinyColor.prototype.toHsv = function () {
+      var hsv = rgbToHsv(this.r, this.g, this.b);
+      return {
+        h: hsv.h * 360,
+        s: hsv.s,
+        v: hsv.v,
+        a: this.a
+      };
+    };
+    /**
+     * Returns the hsva values interpolated into a string with the following format:
+     * "hsva(xxx, xxx, xxx, xx)".
+     */
+
+
+    TinyColor.prototype.toHsvString = function () {
+      var hsv = rgbToHsv(this.r, this.g, this.b);
+      var h = Math.round(hsv.h * 360);
+      var s = Math.round(hsv.s * 100);
+      var v = Math.round(hsv.v * 100);
+      return this.a === 1 ? "hsv(" + h + ", " + s + "%, " + v + "%)" : "hsva(" + h + ", " + s + "%, " + v + "%, " + this.roundA + ")";
+    };
+    /**
+     * Returns the object as a HSLA object.
+     */
+
+
+    TinyColor.prototype.toHsl = function () {
+      var hsl = rgbToHsl(this.r, this.g, this.b);
+      return {
+        h: hsl.h * 360,
+        s: hsl.s,
+        l: hsl.l,
+        a: this.a
+      };
+    };
+    /**
+     * Returns the hsla values interpolated into a string with the following format:
+     * "hsla(xxx, xxx, xxx, xx)".
+     */
+
+
+    TinyColor.prototype.toHslString = function () {
+      var hsl = rgbToHsl(this.r, this.g, this.b);
+      var h = Math.round(hsl.h * 360);
+      var s = Math.round(hsl.s * 100);
+      var l = Math.round(hsl.l * 100);
+      return this.a === 1 ? "hsl(" + h + ", " + s + "%, " + l + "%)" : "hsla(" + h + ", " + s + "%, " + l + "%, " + this.roundA + ")";
+    };
+    /**
+     * Returns the hex value of the color.
+     * @param allow3Char will shorten hex value to 3 char if possible
+     */
+
+
+    TinyColor.prototype.toHex = function (allow3Char) {
+      if (allow3Char === void 0) {
+        allow3Char = false;
+      }
+
+      return rgbToHex(this.r, this.g, this.b, allow3Char);
+    };
+    /**
+     * Returns the hex value of the color -with a # appened.
+     * @param allow3Char will shorten hex value to 3 char if possible
+     */
+
+
+    TinyColor.prototype.toHexString = function (allow3Char) {
+      if (allow3Char === void 0) {
+        allow3Char = false;
+      }
+
+      return '#' + this.toHex(allow3Char);
+    };
+    /**
+     * Returns the hex 8 value of the color.
+     * @param allow4Char will shorten hex value to 4 char if possible
+     */
+
+
+    TinyColor.prototype.toHex8 = function (allow4Char) {
+      if (allow4Char === void 0) {
+        allow4Char = false;
+      }
+
+      return rgbaToHex(this.r, this.g, this.b, this.a, allow4Char);
+    };
+    /**
+     * Returns the hex 8 value of the color -with a # appened.
+     * @param allow4Char will shorten hex value to 4 char if possible
+     */
+
+
+    TinyColor.prototype.toHex8String = function (allow4Char) {
+      if (allow4Char === void 0) {
+        allow4Char = false;
+      }
+
+      return '#' + this.toHex8(allow4Char);
+    };
+    /**
+     * Returns the object as a RGBA object.
+     */
+
+
+    TinyColor.prototype.toRgb = function () {
+      return {
+        r: Math.round(this.r),
+        g: Math.round(this.g),
+        b: Math.round(this.b),
+        a: this.a
+      };
+    };
+    /**
+     * Returns the RGBA values interpolated into a string with the following format:
+     * "RGBA(xxx, xxx, xxx, xx)".
+     */
+
+
+    TinyColor.prototype.toRgbString = function () {
+      var r = Math.round(this.r);
+      var g = Math.round(this.g);
+      var b = Math.round(this.b);
+      return this.a === 1 ? "rgb(" + r + ", " + g + ", " + b + ")" : "rgba(" + r + ", " + g + ", " + b + ", " + this.roundA + ")";
+    };
+    /**
+     * Returns the object as a RGBA object.
+     */
+
+
+    TinyColor.prototype.toPercentageRgb = function () {
+      var fmt = function fmt(x) {
+        return Math.round(bound01(x, 255) * 100) + "%";
+      };
+
+      return {
+        r: fmt(this.r),
+        g: fmt(this.g),
+        b: fmt(this.b),
+        a: this.a
+      };
+    };
+    /**
+     * Returns the RGBA relative values interpolated into a string
+     */
+
+
+    TinyColor.prototype.toPercentageRgbString = function () {
+      var rnd = function rnd(x) {
+        return Math.round(bound01(x, 255) * 100);
+      };
+
+      return this.a === 1 ? "rgb(" + rnd(this.r) + "%, " + rnd(this.g) + "%, " + rnd(this.b) + "%)" : "rgba(" + rnd(this.r) + "%, " + rnd(this.g) + "%, " + rnd(this.b) + "%, " + this.roundA + ")";
+    };
+    /**
+     * The 'real' name of the color -if there is one.
+     */
+
+
+    TinyColor.prototype.toName = function () {
+      if (this.a === 0) {
+        return 'transparent';
+      }
+
+      if (this.a < 1) {
+        return false;
+      }
+
+      var hex = '#' + rgbToHex(this.r, this.g, this.b, false);
+
+      for (var _i = 0, _a = Object.entries(names); _i < _a.length; _i++) {
+        var _b = _a[_i],
+            key = _b[0],
+            value = _b[1];
+
+        if (hex === value) {
+          return key;
+        }
+      }
+
+      return false;
+    };
+
+    TinyColor.prototype.toString = function (format) {
+      var formatSet = Boolean(format);
+      format = format !== null && format !== void 0 ? format : this.format;
+      var formattedString = false;
+      var hasAlpha = this.a < 1 && this.a >= 0;
+      var needsAlphaFormat = !formatSet && hasAlpha && (format.startsWith('hex') || format === 'name');
+
+      if (needsAlphaFormat) {
+        // Special case for "transparent", all other non-alpha formats
+        // will return rgba when there is transparency.
+        if (format === 'name' && this.a === 0) {
+          return this.toName();
+        }
+
+        return this.toRgbString();
+      }
+
+      if (format === 'rgb') {
+        formattedString = this.toRgbString();
+      }
+
+      if (format === 'prgb') {
+        formattedString = this.toPercentageRgbString();
+      }
+
+      if (format === 'hex' || format === 'hex6') {
+        formattedString = this.toHexString();
+      }
+
+      if (format === 'hex3') {
+        formattedString = this.toHexString(true);
+      }
+
+      if (format === 'hex4') {
+        formattedString = this.toHex8String(true);
+      }
+
+      if (format === 'hex8') {
+        formattedString = this.toHex8String();
+      }
+
+      if (format === 'name') {
+        formattedString = this.toName();
+      }
+
+      if (format === 'hsl') {
+        formattedString = this.toHslString();
+      }
+
+      if (format === 'hsv') {
+        formattedString = this.toHsvString();
+      }
+
+      return formattedString || this.toHexString();
+    };
+
+    TinyColor.prototype.toNumber = function () {
+      return (Math.round(this.r) << 16) + (Math.round(this.g) << 8) + Math.round(this.b);
+    };
+
+    TinyColor.prototype.clone = function () {
+      return new TinyColor(this.toString());
+    };
+    /**
+     * Lighten the color a given amount. Providing 100 will always return white.
+     * @param amount - valid between 1-100
+     */
+
+
+    TinyColor.prototype.lighten = function (amount) {
+      if (amount === void 0) {
+        amount = 10;
+      }
+
+      var hsl = this.toHsl();
+      hsl.l += amount / 100;
+      hsl.l = clamp01(hsl.l);
+      return new TinyColor(hsl);
+    };
+    /**
+     * Brighten the color a given amount, from 0 to 100.
+     * @param amount - valid between 1-100
+     */
+
+
+    TinyColor.prototype.brighten = function (amount) {
+      if (amount === void 0) {
+        amount = 10;
+      }
+
+      var rgb = this.toRgb();
+      rgb.r = Math.max(0, Math.min(255, rgb.r - Math.round(255 * -(amount / 100))));
+      rgb.g = Math.max(0, Math.min(255, rgb.g - Math.round(255 * -(amount / 100))));
+      rgb.b = Math.max(0, Math.min(255, rgb.b - Math.round(255 * -(amount / 100))));
+      return new TinyColor(rgb);
+    };
+    /**
+     * Darken the color a given amount, from 0 to 100.
+     * Providing 100 will always return black.
+     * @param amount - valid between 1-100
+     */
+
+
+    TinyColor.prototype.darken = function (amount) {
+      if (amount === void 0) {
+        amount = 10;
+      }
+
+      var hsl = this.toHsl();
+      hsl.l -= amount / 100;
+      hsl.l = clamp01(hsl.l);
+      return new TinyColor(hsl);
+    };
+    /**
+     * Mix the color with pure white, from 0 to 100.
+     * Providing 0 will do nothing, providing 100 will always return white.
+     * @param amount - valid between 1-100
+     */
+
+
+    TinyColor.prototype.tint = function (amount) {
+      if (amount === void 0) {
+        amount = 10;
+      }
+
+      return this.mix('white', amount);
+    };
+    /**
+     * Mix the color with pure black, from 0 to 100.
+     * Providing 0 will do nothing, providing 100 will always return black.
+     * @param amount - valid between 1-100
+     */
+
+
+    TinyColor.prototype.shade = function (amount) {
+      if (amount === void 0) {
+        amount = 10;
+      }
+
+      return this.mix('black', amount);
+    };
+    /**
+     * Desaturate the color a given amount, from 0 to 100.
+     * Providing 100 will is the same as calling greyscale
+     * @param amount - valid between 1-100
+     */
+
+
+    TinyColor.prototype.desaturate = function (amount) {
+      if (amount === void 0) {
+        amount = 10;
+      }
+
+      var hsl = this.toHsl();
+      hsl.s -= amount / 100;
+      hsl.s = clamp01(hsl.s);
+      return new TinyColor(hsl);
+    };
+    /**
+     * Saturate the color a given amount, from 0 to 100.
+     * @param amount - valid between 1-100
+     */
+
+
+    TinyColor.prototype.saturate = function (amount) {
+      if (amount === void 0) {
+        amount = 10;
+      }
+
+      var hsl = this.toHsl();
+      hsl.s += amount / 100;
+      hsl.s = clamp01(hsl.s);
+      return new TinyColor(hsl);
+    };
+    /**
+     * Completely desaturates a color into greyscale.
+     * Same as calling `desaturate(100)`
+     */
+
+
+    TinyColor.prototype.greyscale = function () {
+      return this.desaturate(100);
+    };
+    /**
+     * Spin takes a positive or negative amount within [-360, 360] indicating the change of hue.
+     * Values outside of this range will be wrapped into this range.
+     */
+
+
+    TinyColor.prototype.spin = function (amount) {
+      var hsl = this.toHsl();
+      var hue = (hsl.h + amount) % 360;
+      hsl.h = hue < 0 ? 360 + hue : hue;
+      return new TinyColor(hsl);
+    };
+    /**
+     * Mix the current color a given amount with another color, from 0 to 100.
+     * 0 means no mixing (return current color).
+     */
+
+
+    TinyColor.prototype.mix = function (color, amount) {
+      if (amount === void 0) {
+        amount = 50;
+      }
+
+      var rgb1 = this.toRgb();
+      var rgb2 = new TinyColor(color).toRgb();
+      var p = amount / 100;
+      var rgba = {
+        r: (rgb2.r - rgb1.r) * p + rgb1.r,
+        g: (rgb2.g - rgb1.g) * p + rgb1.g,
+        b: (rgb2.b - rgb1.b) * p + rgb1.b,
+        a: (rgb2.a - rgb1.a) * p + rgb1.a
+      };
+      return new TinyColor(rgba);
+    };
+
+    TinyColor.prototype.analogous = function (results, slices) {
+      if (results === void 0) {
+        results = 6;
+      }
+
+      if (slices === void 0) {
+        slices = 30;
+      }
+
+      var hsl = this.toHsl();
+      var part = 360 / slices;
+      var ret = [this];
+
+      for (hsl.h = (hsl.h - (part * results >> 1) + 720) % 360; --results;) {
+        hsl.h = (hsl.h + part) % 360;
+        ret.push(new TinyColor(hsl));
+      }
+
+      return ret;
+    };
+    /**
+     * taken from https://github.com/infusion/jQuery-xcolor/blob/master/jquery.xcolor.js
+     */
+
+
+    TinyColor.prototype.complement = function () {
+      var hsl = this.toHsl();
+      hsl.h = (hsl.h + 180) % 360;
+      return new TinyColor(hsl);
+    };
+
+    TinyColor.prototype.monochromatic = function (results) {
+      if (results === void 0) {
+        results = 6;
+      }
+
+      var hsv = this.toHsv();
+      var h = hsv.h;
+      var s = hsv.s;
+      var v = hsv.v;
+      var res = [];
+      var modification = 1 / results;
+
+      while (results--) {
+        res.push(new TinyColor({
+          h: h,
+          s: s,
+          v: v
+        }));
+        v = (v + modification) % 1;
+      }
+
+      return res;
+    };
+
+    TinyColor.prototype.splitcomplement = function () {
+      var hsl = this.toHsl();
+      var h = hsl.h;
+      return [this, new TinyColor({
+        h: (h + 72) % 360,
+        s: hsl.s,
+        l: hsl.l
+      }), new TinyColor({
+        h: (h + 216) % 360,
+        s: hsl.s,
+        l: hsl.l
+      })];
+    };
+    /**
+     * Compute how the color would appear on a background
+     */
+
+
+    TinyColor.prototype.onBackground = function (background) {
+      var fg = this.toRgb();
+      var bg = new TinyColor(background).toRgb();
+      return new TinyColor({
+        r: bg.r + (fg.r - bg.r) * fg.a,
+        g: bg.g + (fg.g - bg.g) * fg.a,
+        b: bg.b + (fg.b - bg.b) * fg.a
+      });
+    };
+    /**
+     * Alias for `polyad(3)`
+     */
+
+
+    TinyColor.prototype.triad = function () {
+      return this.polyad(3);
+    };
+    /**
+     * Alias for `polyad(4)`
+     */
+
+
+    TinyColor.prototype.tetrad = function () {
+      return this.polyad(4);
+    };
+    /**
+     * Get polyad colors, like (for 1, 2, 3, 4, 5, 6, 7, 8, etc...)
+     * monad, dyad, triad, tetrad, pentad, hexad, heptad, octad, etc...
+     */
+
+
+    TinyColor.prototype.polyad = function (n) {
+      var hsl = this.toHsl();
+      var h = hsl.h;
+      var result = [this];
+      var increment = 360 / n;
+
+      for (var i = 1; i < n; i++) {
+        result.push(new TinyColor({
+          h: (h + i * increment) % 360,
+          s: hsl.s,
+          l: hsl.l
+        }));
+      }
+
+      return result;
+    };
+    /**
+     * compare color vs current color
+     */
+
+
+    TinyColor.prototype.equals = function (color) {
+      return this.toRgbString() === new TinyColor(color).toRgbString();
+    };
+
+    return TinyColor;
+  }();
+
+  var ColorUtil = /*#__PURE__*/function () {
+    function ColorUtil() {
+      _classCallCheck(this, ColorUtil);
+    }
+    /**
+     Utility function to convert a color to Hsl string.
+      @param {String} hue
+     The hue value  which is preserved in color conversion.
+     @param {String} colorString
+     The color string
+     */
+
+
+    _createClass(ColorUtil, [{
+      key: "toHslString",
+      value: function toHslString(hue, colorString) {
+        var color = new TinyColor(colorString);
+        var hueExp = /(^hs[v|l]a?\()\d{1,3}/;
+        return color.toHslString().replace(hueExp, "$1".concat(hue));
+      }
+      /**
+       Utility function to convert a color to Hsv string.
+        @param {String} hue
+       The hue value  which is preserved in color conversion.
+       @param {String} colorString
+       The color string
+       */
+
+    }, {
+      key: "toHsvString",
+      value: function toHsvString(hue, colorString) {
+        var color = new TinyColor(colorString);
+        var hueExp = /(^hs[v|l]a?\()\d{1,3}/;
+        return color.toHsvString().replace(hueExp, "$1".concat(hue));
+      }
+      /**
+       Utility function to extract  h,s and v from a color string.
+       @param {String} colorString
+       The color string
+       */
+
+    }, {
+      key: "extractHsv",
+      value: function extractHsv(colorString) {
+        var exp = /^hsva?\((\d{1,3}),\s*(\d{1,3}%),\s*(\d{1,3}%)/;
+
+        if (!colorString.startsWith("hsv")) {
+          colorString = new TinyColor(colorString).toHsvString();
+        }
+
+        var groups = exp.exec(colorString);
+        var h = parseInt(groups[1]);
+        var s = parseInt(groups[2]) / 100;
+        var v = parseInt(groups[3]) / 100;
+        return {
+          h: h,
+          s: s,
+          v: v
+        };
+      }
+      /**
+      Utility function to extract hue.
+      @param {String} colorString
+      The color string
+      */
+
+    }, {
+      key: "getHue",
+      value: function getHue(colorString) {
+        if (colorString.startsWith('hs')) {
+          var hueExp = /^hs[v|l]a?\((\d{1,3})/;
+          var values = hueExp.exec(colorString);
+
+          var _values = _slicedToArray(values, 2),
+              h = _values[1];
+
+          return Number(h);
+        } else {
+          return new TinyColor(colorString).toHsv().h;
+        }
+      }
+      /**
+      Utility function to validate given formats in supported formats and return a list of formats.
+      Any invalid/unsupported format is ignored.
+      @param {Array} formats 
+      An  array of formats to validate
+      */
+
+    }, {
+      key: "getValidFormats",
+      value: function getValidFormats(formats) {
+        var supportedFormats = Object.values(ColorFormats);
+        var validFormats = [];
+        formats.forEach(function (value) {
+          if (supportedFormats.indexOf(value) !== -1) {
+            validFormats.push(value);
+          }
+        });
+        return validFormats;
+      }
+      /**
+      Utility function to convert a color into a desired format.
+      @param {String} color 
+      The color string
+      @param {String} format
+      A color format
+      */
+
+    }, {
+      key: "formatColorString",
+      value: function formatColorString(color, format) {
+        var hue = this.getHue(color);
+
+        if (format === ColorFormats.HSV) {
+          return this.toHsvString(hue, color);
+        } else if (format === ColorFormats.HSL) {
+          return this.toHslString(hue, color);
+        } else {
+          return new TinyColor(color).toString(format);
+        }
+      }
+    }]);
+
+    return ColorUtil;
+  }();
+
+  var colorUtil = new ColorUtil();
+
+  var CLASSNAME$O = '_coral-ColorPicker';
+  /**
+   @class Coral.ColorPicker
+   @classdesc A ColorPicker component than can be used as a form field to select from a list of color options.
+   @htmltag coral-colorpicker
+   @extends {HTMLElement}
+   @extends {BaseComponent}
+   @extends {BaseFormField}
+   */
+
+  var ColorPicker = /*#__PURE__*/function (_BaseFormField) {
+    _inherits(ColorPicker, _BaseFormField);
+
+    var _super = _createSuper(ColorPicker);
+
+    /** @ignore */
+    function ColorPicker() {
+      var _this;
+
+      _classCallCheck(this, ColorPicker);
+
+      _this = _super.call(this); // Prepare templates
+
+      _this._elements = {};
+      template$x.call(_this._elements, {
+        commons: commons,
+        i18n: i18n
+      });
+      var overlay = _this._elements.overlay;
+      var overlayId = overlay.id; // Extend form field events
+
+      var events = commons.extend(_this._events, {
+        'key:down ._coral-ColorPicker-input:not([readonly])': '_onKeyDown',
+        'key:down [handle="colorPreview"]': '_onKeyDown',
+        'click [handle="colorPreview"]': '_onColorPreviewClick',
+        'key:esc input': '_onKeyEsc',
+        'key:enter input': '_onKeyEsc',
+        'capture:change  [handle="input"]': '_onColorInputChange',
+        'change [handle="propertiesView"]': '_onPropertyChange'
+      }); // Overlay
+
+      events["global:capture:coral-overlay:beforeopen #".concat(overlayId)] = '_beforeOverlayOpen';
+      events["global:capture:coral-overlay:close #".concat(overlayId)] = '_onOverlayClose';
+      events["global:key:esc #".concat(overlayId)] = '_onKeyEsc'; // Events
+
+      _this._delegateEvents(events);
+
+      _this.value = "";
+      _this._format = ColorFormats.HSL;
+      _this._sendChaneEvent = _this._chaneEventDebounced();
+      return _this;
+    }
+    /** @ignore */
+
+
+    _createClass(ColorPicker, [{
+      key: "connectedCallback",
+      value: function connectedCallback() {
+        _get(_getPrototypeOf(ColorPicker.prototype), "connectedCallback", this).call(this);
+
+        var overlay = this._elements.overlay; // Cannot be open by default when rendered
+
+        overlay.removeAttribute('open'); // Restore in DOM
+
+        if (overlay._parent) {
+          overlay._parent.appendChild(overlay);
+        }
+      }
+      /** @ignore */
+
+    }, {
+      key: "disconnectedCallback",
+      value: function disconnectedCallback() {
+        _get(_getPrototypeOf(ColorPicker.prototype), "disconnectedCallback", this).call(this);
+
+        var overlay = this._elements.overlay; // In case it was moved out don't forget to remove it
+
+        if (!this.contains(overlay)) {
+          overlay._parent = overlay._repositioned ? document.body : this;
+          overlay.remove();
+        }
+      }
+      /** @ignore */
+
+    }, {
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(ColorPicker.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$O);
+        this.setAttribute('role', 'group');
+        var frag = document.createDocumentFragment(); // Render template
+
+        frag.appendChild(this._elements.input);
+        frag.appendChild(this._elements.buttonWrapper);
+        frag.appendChild(this._elements.overlay); // Support cloneNode
+
+        while (this.firstChild) {
+          var child = this.firstChild;
+
+          if (child.nodeType === Node.ELEMENT_NODE && child.hasAttribute('handle')) {
+            this.removeChild(child);
+          } else {
+            frag.appendChild(child);
+          }
+        }
+
+        this.appendChild(frag); // These should be used to set a property since property handler aren't called until elements are attached to dom.
+        // Attribute values are delivered to change-listeners even if element isn't attached to dom yet, so attributes 
+        // can be set to e.g. this._elements.colorPreview.
+
+        this._input = this.querySelector("[handle='input']");
+        this._preview = this.querySelector("[handle='colorPreview']");
+        this._overlay = this.querySelector("[handle='overlay']");
+
+        this._overlay.setAttribute('aria-live', 'off');
+
+        this._properties = this._overlay.querySelector("[handle='propertiesView']");
+
+        this._update(this._value);
+      }
+      /** @ignore */
+
+    }, {
+      key: "_update",
+
+      /**  @private */
+      value: function _update(value) {
+        if (this.value === value) {
+          return;
+        } // sync UI for empty value
+
+
+        this.classList[value == "" ? 'add' : 'remove']('_coral-ColorPicker--novalue');
+
+        this._elements.colorPreview.classList[value == "" ? 'add' : 'remove']('_coral-ColorPicker-preview--novalue'); // Empty value isn't invalid.
+
+
+        var color = new TinyColor(value);
+        var isInvalid = value !== "" && !color.isValid;
+        this[isInvalid ? 'setAttribute' : 'removeAttribute']('invalid', "true");
+
+        this._elements.input[isInvalid ? 'setAttribute' : 'removeAttribute']('invalid', "true");
+
+        if (color.isValid && (!this._formats || this._formats.indexOf(color.format) !== -1)) {
+          this._format = color.format;
+        }
+
+        this._value = value == "" || !color.isValid ? value : colorUtil.formatColorString(value, this._format);
+        this._elements.input.value = this._value;
+
+        this._elements.propertiesView.setAttribute('color', this._value);
+
+        this._elements.colorPreview.style["background-color"] = new TinyColor(this._value).toHslString();
+      }
+    }, {
+      key: "_debounce",
+      value: function _debounce(func) {
+        var _this2 = this;
+
+        var timeout = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1000;
+        var timer;
+        return function () {
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            func.apply(_this2, args);
+          }, timeout);
+        };
+      }
+    }, {
+      key: "_chaneEventDebounced",
+      value: function _chaneEventDebounced() {
+        var self = this;
+        return this._debounce(function () {
+          self.trigger('change');
+        }, 1000);
+      }
+      /**  @private */
+
+    }, {
+      key: "_change",
+      value: function _change(color) {
+        this._update(color);
+
+        this._sendChaneEvent();
+      }
+      /***************** Interaction handlers***********/
+
+      /**  @private */
+
+    }, {
+      key: "_onKeyDown",
+      value: function _onKeyDown(event) {
+        event.stopPropagation(); // restore focus to appropriate element when overlay closes
+
+        this._elements.overlay.returnFocusTo(event.matchedTarget);
+
+        this._elements.overlay.open = true;
+      }
+      /**  @private */
+
+    }, {
+      key: "_onKeyEsc",
+      value: function _onKeyEsc(event) {
+        if (!this._elements.overlay.open) {
+          return;
+        }
+
+        event.stopPropagation();
+        this._elements.overlay.open = false;
+      }
+      /**  @private */
+
+    }, {
+      key: "_onColorPreviewClick",
+      value: function _onColorPreviewClick(event) {
+        // restore focus to appropriate element when overlay closes
+        this._elements.overlay.returnFocusTo(event.matchedTarget);
+      }
+      /**  @private */
+
+    }, {
+      key: "_beforeOverlayOpen",
+      value: function _beforeOverlayOpen() {
+        // set aria-expanded state
+        this._elements.input.setAttribute('aria-expanded', true);
+
+        this._elements.colorPreview.setAttribute('aria-expanded', true);
+      }
+    }, {
+      key: "_onOverlayClose",
+      value: function _onOverlayClose() {
+        // set aria-expanded state
+        this._elements.input.setAttribute('aria-expanded', true);
+
+        this._elements.colorPreview.setAttribute('aria-expanded', false);
+      }
+      /**  @private */
+
+    }, {
+      key: "_onColorInputChange",
+      value: function _onColorInputChange(event) {
+        this._update(this._input.value);
+      }
+      /**  @private */
+
+    }, {
+      key: "_onPropertyChange",
+      value: function _onPropertyChange(event) {
+        event.stopImmediatePropagation();
+
+        this._change(this._properties.color);
+      }
+    }, {
+      key: "label",
+
+      /**   
+      The ColorPicker label.
+      @default 'Select Color'
+      @type {String}
+      @htmlattribute label
+      @htmlattributereflected
+      */
+      get: function get() {
+        return this._label || i18n.get('Color Picker');
+      },
+      set: function set(value) {
+        this._label = value;
+
+        this._reflectAttribute('label', this.label);
+
+        this._elements.input.setAttribute('aria-label', this.label);
+      }
+      /**
+       Inherited from {@link BaseFormField#labelledBy}.
+       */
+
+    }, {
+      key: "labelledBy",
+      get: function get() {
+        return _get(_getPrototypeOf(ColorPicker.prototype), "labelledBy", this);
+      },
+      set: function set(value) {
+        _set(_getPrototypeOf(ColorPicker.prototype), "labelledBy", value, this, true); // Sync input aria-labelledby
+
+
+        this._elements.input[value ? 'setAttribute' : 'removeAttribute']('aria-labelledby', value); // in case the user focuses the buttons, he will still get a notion of the usage of the component
+
+
+        if (this.labelledBy) {
+          this.setAttribute('aria-labelledby', this.labelledBy);
+
+          this._elements.colorPreview.setAttribute('aria-labelledby', [this.labelledBy, this._elements.colorPreview.label.id].join(' '));
+        } else {
+          this.removeAttribute('aria-labelledby');
+
+          this._elements.colorPreview.removeAttribute('aria-labelledby');
+        }
+      }
+      /**
+       Whether this field is disabled or not.
+       @type {Boolean}
+       @default false
+       @htmlattribute disabled
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "disabled",
+      get: function get() {
+        return this._disabled || false;
+      },
+      set: function set(value) {
+        this._disabled = transform.booleanAttr(value);
+
+        this._reflectAttribute('disabled', this._disabled);
+
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
+        this.classList.toggle('is-disabled', this._disabled);
+
+        this._elements.input[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', this._disabled);
+
+        this._elements.colorPreview[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', this._disabled);
+      }
+      /**
+       Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+       @type {Boolean}
+       @default false
+       @htmlattribute readonly
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "readOnly",
+      get: function get() {
+        return this._readOnly || false;
+      },
+      set: function set(value) {
+        this._readOnly = transform.booleanAttr(value);
+
+        this._reflectAttribute('readonly', this._readOnly);
+
+        this._elements.input[this._readOnly ? 'setAttribute' : 'removeAttribute']('readonly', this._readOnly);
+
+        this._elements.colorPreview[this.disabled || this._readOnly ? 'setAttribute' : 'removeAttribute']('disabled', this.disabled || this._readOnly);
+      }
+      /**   
+       The ColorPicker value. value should be a valid color in supported format.
+       @default Empty
+       @type {String}
+       @htmlattribute label
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "value",
+      get: function get() {
+        return this._value;
+      },
+      set: function set(value) {
+        this._update(value);
+      }
+      /**
+       The ColorPicker formats. comma separated formats should be in supported formats.
+       Any invalid/unsupported format is ignored.
+       Values selected in any other format will be converted to this format.
+       @default ColorFormats.HSL
+       @type {String}
+       @htmlattribute formats
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "formats",
+      get: function get() {
+        return this._formats || "";
+      },
+      set: function set(value) {
+        var formats = value.split(',');
+        formats = colorUtil.getValidFormats(formats);
+
+        if (formats.length > 0) {
+          this._formats = formats;
+          this._format = formats[0];
+
+          this._reflectAttribute('formats', this._formats);
+
+          this._elements.propertiesView.setAttribute('formats', value); // refresh color in this new format
+
+
+          this._update(colorUtil.formatColorString(this.value, this._format));
+        }
+      }
+    }], [{
+      key: "observedAttributes",
+      get: function get() {
+        return _get(_getPrototypeOf(ColorPicker), "observedAttributes", this).concat(['value', 'formats', 'disabled', 'label', 'labelledby', 'readonly']);
+      }
+      /** @ignore */
+
+    }, {
+      key: "_attributePropertyMap",
+      get: function get() {
+        return commons.extend(_get(_getPrototypeOf(ColorPicker), "_attributePropertyMap", this), {
+          labelledby: 'labelledBy',
+          readonly: 'readOnly'
+        });
+      }
+    }]);
+
+    return ColorPicker;
+  }(BaseFormField(BaseComponent(HTMLElement)));
+
+  var template$y = function anonymous(data_0) {
+    var frag = document.createDocumentFragment();
+    var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
+    data = data_0;
+    var uid = data.commons.getUID();
+    data_0 = data;
+    var el1 = document.createTextNode("\n");
+    frag.appendChild(el1);
+    var el2 = this["propertiesSubview"] = document.createElement("div");
+    el2.className += " _coral-ColorPicker-propertiesSubview";
+    el2.setAttribute("handle", "propertiesSubview");
+    el2.setAttribute("role", "group");
+    var el3 = document.createTextNode("\n  ");
+    el2.appendChild(el3);
+    var el4 = document.createElement("div");
+    el4.className += " _coral-ColorPicker-propertiesContainer1";
+    el4.setAttribute("role", "presentation");
+    var el5 = document.createTextNode("\n    ");
+    el4.appendChild(el5);
+    var el6 = this["propertySL"] = document.createElement("coral-colorpicker-colorarea");
+    el6.setAttribute("handle", "propertySL");
+    el6.setAttribute("label", data_0["i18n"]["get"]('Saturation and Brightness'));
+    el4.appendChild(el6);
+    var el7 = document.createTextNode("\n    ");
+    el4.appendChild(el7);
+    var el8 = this["propertyHue"] = document.createElement("coral-colorpicker-colorsliderhue");
+    el8.setAttribute("handle", "propertyHue");
+    el8.setAttribute("label", data_0["i18n"]["get"]('Hue'));
+    el4.appendChild(el8);
+    var el9 = document.createTextNode("\n  ");
+    el4.appendChild(el9);
+    el2.appendChild(el4);
+    var el10 = document.createTextNode("\n  ");
+    el2.appendChild(el10);
+    var el11 = document.createElement("div");
+    el11.className += " _coral-ColorPicker-propertiesContainer2";
+    el11.setAttribute("role", "presentation");
+    var el12 = document.createTextNode("\n    ");
+    el11.appendChild(el12);
+    var el13 = this["formatSelector"] = document.createElement("coral-select");
+    el13.className += " _coral-ColorPicker-formatSelector";
+    el13.setAttribute("handle", "formatSelector");
+    el13.setAttribute("variant", "quiet");
+    el13.setAttribute("labelled", data_0["i18n"]["get"]('Select Color Format'));
+    var el14 = document.createTextNode("\n       ");
+    el13.appendChild(el14);
+    var el15 = document.createElement("coral-select-item");
+    el15.setAttribute("value", "hsl");
+    el15.textContent = data_0["i18n"]["get"]('HSL');
+    el13.appendChild(el15);
+    var el16 = document.createTextNode("\n       ");
+    el13.appendChild(el16);
+    var el17 = document.createElement("coral-select-item");
+    el17.setAttribute("value", "hsv");
+    el17.textContent = data_0["i18n"]["get"]('HSV');
+    el13.appendChild(el17);
+    var el18 = document.createTextNode("\n       ");
+    el13.appendChild(el18);
+    var el19 = document.createElement("coral-select-item");
+    el19.setAttribute("value", "hex");
+    el19.textContent = data_0["i18n"]["get"]('Hex');
+    el13.appendChild(el19);
+    var el20 = document.createTextNode("\n       ");
+    el13.appendChild(el20);
+    var el21 = document.createElement("coral-select-item");
+    el21.setAttribute("value", "hex3");
+    el21.textContent = data_0["i18n"]["get"]('Hex3');
+    el13.appendChild(el21);
+    var el22 = document.createTextNode("\n       ");
+    el13.appendChild(el22);
+    var el23 = document.createElement("coral-select-item");
+    el23.setAttribute("value", "hex4");
+    el23.textContent = data_0["i18n"]["get"]('Hex4');
+    el13.appendChild(el23);
+    var el24 = document.createTextNode("\n       ");
+    el13.appendChild(el24);
+    var el25 = document.createElement("coral-select-item");
+    el25.setAttribute("value", "hex8");
+    el25.textContent = data_0["i18n"]["get"]('Hex8');
+    el13.appendChild(el25);
+    var el26 = document.createTextNode("\n       ");
+    el13.appendChild(el26);
+    var el27 = document.createElement("coral-select-item");
+    el27.setAttribute("value", "rgb");
+    el27.textContent = data_0["i18n"]["get"]('RGB');
+    el13.appendChild(el27);
+    var el28 = document.createTextNode("\n       ");
+    el13.appendChild(el28);
+    var el29 = document.createElement("coral-select-item");
+    el29.setAttribute("value", "prgb");
+    el29.textContent = data_0["i18n"]["get"]('PRGB');
+    el13.appendChild(el29);
+    var el30 = document.createTextNode("\n       ");
+    el13.appendChild(el30);
+    var el31 = document.createElement("coral-select-item");
+    el31.setAttribute("value", "name");
+    el31.textContent = data_0["i18n"]["get"]('Name');
+    el13.appendChild(el31);
+    var el32 = document.createTextNode("\n    ");
+    el13.appendChild(el32);
+    el11.appendChild(el13);
+    var el33 = document.createTextNode("\n    ");
+    el11.appendChild(el33);
+    var el34 = this["colorInput"] = document.createElement("input", "coral-textfield");
+    el34.setAttribute("type", "text");
+    el34.setAttribute("is", "coral-textfield");
+    el34.className += " _coral-ColorPicker-inputField";
+    el34.setAttribute("placeholder", data_0["i18n"]["get"]('Enter Color Value'));
+    el34.setAttribute("handle", "colorInput");
+    el34.setAttribute("variant", "quiet");
+    el34.setAttribute("aria-label", data_0["i18n"]["get"]('Color Value'));
+    el11.appendChild(el34);
+    var el35 = document.createTextNode("\n  ");
+    el11.appendChild(el35);
+    el2.appendChild(el11);
+    var el36 = document.createTextNode("\n");
+    el2.appendChild(el36);
+    frag.appendChild(el2);
+    return frag;
+  };
+
+  var CLASSNAME$P = '_coral-ColorPicker-properties';
+  /**
+   @class Coral.ColorPicker.ColorProperties
+   @classdesc A ColorPicker Color properties component
+   @htmltag coral-colorpicker-properties
+   @extends {HTMLElement}
+   @extends {BaseComponent}
+   */
+
+  var ColorProperties = /*#__PURE__*/function (_BaseComponent) {
+    _inherits(ColorProperties, _BaseComponent);
+
+    var _super = _createSuper(ColorProperties);
+
+    function ColorProperties() {
+      var _this;
+
+      _classCallCheck(this, ColorProperties);
+
+      _this = _super.call(this);
+
+      _this._delegateEvents(commons.extend(_this._events, {
+        'change [handle="propertyHue"]': '_onHueChange',
+        'change [handle="propertySL"]': '_onSLChange',
+        'change  [handle="formatSelector"]': '_onFormatChange',
+        'capture:change  [handle="colorInput"]': '_onColorInputChange'
+      })); // Templates
+
+
+      _this._elements = {};
+      template$y.call(_this._elements, {
+        commons: commons,
+        i18n: i18n
+      });
+      _this._hue = 240;
+      _this._s = 1;
+      _this._l = 0.5;
+      _this._a = 1;
+      _this._format = ColorFormats.HSV;
+      return _this;
+    }
+
+    _createClass(ColorProperties, [{
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(ColorProperties.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$P);
+        var frag = document.createDocumentFragment(); // Render template
+
+        frag.appendChild(this._elements.propertiesSubview); // Support cloneNode
+
+        while (this.firstChild) {
+          var child = this.firstChild;
+
+          if (child.nodeType === Node.ELEMENT_NODE && child.hasAttribute('handle')) {
+            this.removeChild(child);
+          } else {
+            frag.appendChild(child);
+          }
+        }
+
+        this.appendChild(frag); //these should be used to set a property since property handler aren't called until elements are attached to dom.
+        // Attribute values are delivered to change-listeners even if element isn't attached to dom yet.
+
+        this._colorArea = this.querySelector("[handle='propertySL']");
+        this._colorSliderHue = this.querySelector("[handle='propertyHue']");
+        this._formatSelector = this.querySelector("[handle='formatSelector']");
+        this._colorInput = this.querySelector("[handle='colorInput']"); // update color in all subviews
+
+        this._updateFormat(this._format);
+
+        this._updateHue(this._hue);
+
+        this._updateSL(this._s, this._l);
+
+        this._updateAlpha(this._a);
+
+        this._updateValue();
+      }
+      /**
+       Whether this field is disabled or not.
+       @type {Boolean}
+       @default false
+       @htmlattribute disabled
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "_onHueChange",
+
+      /** @private */
+      value: function _onHueChange(event) {
+        event.stopImmediatePropagation();
+
+        this._updateHue(this._colorSliderHue.value);
+
+        this.trigger('change');
+      }
+      /** @private */
+
+    }, {
+      key: "_onSLChange",
+      value: function _onSLChange(event) {
+        event.stopImmediatePropagation();
+        var color = new TinyColor({
+          h: this._hue,
+          s: this._colorArea.x,
+          v: this._colorArea.y
+        });
+
+        this._updateSL(color.toHsl().s, color.toHsl().l);
+
+        this.trigger('change');
+      }
+      /** @private */
+
+    }, {
+      key: "_onFormatChange",
+      value: function _onFormatChange(event) {
+        event.stopImmediatePropagation();
+
+        this._updateFormat(this._formatSelector.value);
+
+        this.trigger('change');
+      }
+      /** @private */
+
+    }, {
+      key: "_onColorInputChange",
+      value: function _onColorInputChange(event) {
+        event.stopImmediatePropagation();
+        this.color = this._colorInput.value;
+        this.trigger('change');
+      }
+      /** @private */
+
+    }, {
+      key: "_updateFormat",
+      value: function _updateFormat(format) {
+        this._format = format;
+
+        this._elements.formatSelector.setAttribute('value', this._format);
+
+        this._updateValue();
+      }
+      /** @private */
+
+    }, {
+      key: "_updateHue",
+      value: function _updateHue(hue) {
+        this._hue = Math.round(hue);
+
+        var color = this._getColorFromProps();
+
+        this._elements.propertyHue.setAttribute('color', colorUtil.toHslString(this._hue, color.toHslString())); // need to update hue in ColorArea but not s and v, so get s and v  from ColorArea
+
+
+        this._elements.propertySL.setAttribute('color', this._toHsvString(this._hue, this._elements.propertySL.x, this._elements.propertySL.y));
+
+        this._updateValue();
+      }
+      /** @private */
+
+    }, {
+      key: "_updateSL",
+      value: function _updateSL(s, l) {
+        this._s = s;
+        this._l = l;
+        var color = new TinyColor({
+          h: this._hue,
+          s: this._s,
+          l: this._l
+        });
+
+        this._elements.propertySL.setAttribute('color', colorUtil.toHslString(this._hue, color.toHslString()));
+
+        this._updateValue();
+      }
+      /** @private */
+
+    }, {
+      key: "_updateAlpha",
+      value: function _updateAlpha(a) {
+        this._a = a;
+
+        this._updateValue();
+      }
+      /** @private */
+
+    }, {
+      key: "_toHsvString",
+      value: function _toHsvString(hue, x, y) {
+        var s = "".concat(Math.round(x * 100), "%");
+        var v = "".concat(Math.round(y * 100), "%");
+        return "hsv(".concat(this._hue, ", ").concat(s, ", ").concat(v, ")");
+      }
+      /** @private */
+
+    }, {
+      key: "_getColorFromProps",
+      value: function _getColorFromProps() {
+        return new TinyColor({
+          h: this._hue,
+          s: this._s,
+          l: this._l,
+          a: this._a
+        });
+      }
+      /** @private */
+
+    }, {
+      key: "_updateValue",
+      value: function _updateValue() {
+        this._reflectAttribute('color', this.color);
+
+        this._elements.colorInput.value = this.color;
+      }
+    }, {
+      key: "disabled",
+      get: function get() {
+        return this._disabled || false;
+      },
+      set: function set(value) {
+        this._disabled = transform.booleanAttr(value);
+
+        this._reflectAttribute('disabled', this._disabled);
+
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
+        this.classList.toggle('is-disabled', this._disabled);
+
+        this._elements.propertySL[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', this._disabled);
+
+        this._elements.propertyHue[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', this._disabled);
+
+        this._elements.formatSelector[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', this._disabled);
+
+        this._elements.colorInput[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', this._disabled);
+      }
+      /**
+       The ColorProperties formats. comma separated formats should be in supported formats.
+       First format will be used as default format.
+       Values selected in any other format will be converted to default format.
+       @default ColorFormats.HSL
+       @type {Array}
+       @htmlattribute formats
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "formats",
+      get: function get() {
+        return this._formats || "";
+      },
+      set: function set(value) {
+        if (value == "") {
+          return;
+        }
+
+        var formats = value.split(',');
+        formats = colorUtil.getValidFormats(formats);
+
+        if (formats.length > 0) {
+          this._formats = formats;
+          this._format = formats[0];
+
+          this._elements.formatSelector.setAttribute('value', this._format); // update input value to this format
+
+
+          this._elements.colorInput.value = this.color; // populate format selector list
+
+          var selList = this._elements.formatSelector.querySelectorAll('coral-select-item');
+
+          selList.forEach(function (element) {
+            if (formats.indexOf(element.value) == -1) {
+              element.remove();
+            }
+          });
+
+          this._reflectAttribute('formats', this._formats);
+        }
+      }
+      /**
+       The ColorProperties color string.
+       @default hsla(0, 100%, 50%, 1)
+       @type {String}
+       @htmlattribute color
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "color",
+      get: function get() {
+        return colorUtil.formatColorString(colorUtil.toHslString(this._hue, this._getColorFromProps()), this._format);
+      },
+      set: function set(value) {
+        var color = new TinyColor(value);
+
+        if (!color.isValid) {
+          color = new TinyColor("hsla(240, 100%, 50%, 1)");
+          value = color.toHslString();
+        }
+
+        if (this.color === value) {
+          return;
+        }
+
+        this._updateFormat(color.format);
+
+        this._updateHue(colorUtil.getHue(value));
+
+        this._updateSL(color.toHsl().s, color.toHsl().l);
+
+        this._updateAlpha(color.a);
+
+        this._updateValue();
+      }
+      /** @ignore */
+
+    }], [{
+      key: "observedAttributes",
+      get: function get() {
+        return _get(_getPrototypeOf(ColorProperties), "observedAttributes", this).concat(['disabled', 'color', 'formats']);
+      }
+    }]);
+
+    return ColorProperties;
+  }(BaseComponent(HTMLElement));
+
+  var template$z = function anonymous(data_0) {
+    var el0 = this["colorAreaGradient"] = document.createElement("div");
+    el0.className += " _coral-ColorPicker-ColorArea-gradient";
+    el0.setAttribute("handle", "colorAreaGradient");
+    el0.setAttribute("role", "presentation");
+    var el1 = document.createTextNode("\n");
+    el0.appendChild(el1);
+    var el2 = this["colorHandle"] = document.createElement("coral-colorpicker-colorhandle");
+    el2.className += " _coral-ColorPicker-ColorArea-colorHandle";
+    el2.setAttribute("handle", "colorHandle");
+    el2.setAttribute("style", "position: absolute;top: 0%;left: 100%");
+    el2.setAttribute("role", "presentation");
+    el0.appendChild(el2);
+    var el3 = document.createTextNode("\n");
+    el0.appendChild(el3);
+    var el4 = this["sliderX"] = document.createElement("input");
+    el4.setAttribute("type", "range");
+    el4.setAttribute("handle", "sliderX");
+    el4.className += " _coral-ColorPicker-ColorArea-slider";
+    el4.setAttribute("name", "x");
+    el4.setAttribute("aria-label", data_0["i18n"]["get"]('Saturation and Brightness'));
+    el4.setAttribute("min", "0");
+    el4.setAttribute("max", "1");
+    el4.setAttribute("step", "0.01");
+    el0.appendChild(el4);
+    var el5 = document.createTextNode("\n");
+    el0.appendChild(el5);
+    var el6 = this["sliderY"] = document.createElement("input");
+    el6.setAttribute("type", "range");
+    el6.setAttribute("handle", "sliderY");
+    el6.className += " _coral-ColorPicker-ColorArea-slider";
+    el6.setAttribute("name", "y");
+    el6.setAttribute("aria-label", data_0["i18n"]["get"]('Saturation and Brightness'));
+    el6.setAttribute("min", "0");
+    el6.setAttribute("max", "1");
+    el6.setAttribute("step", "0.01");
+    el0.appendChild(el6);
+    return el0;
+  };
+
+  var CLASSNAME$Q = '_coral-ColorPicker-ColorArea';
+  /**
+   @class Coral.ColorPicker.ColorArea
+   @classdesc A ColorPicker area component to select Saturation and Value
+   @htmltag coral-colorpicker-colorarea
+   @extends {HTMLElement}
+   @extends {BaseComponent}
+   */
+
+  var ColorArea = /*#__PURE__*/function (_BaseComponent) {
+    _inherits(ColorArea, _BaseComponent);
+
+    var _super = _createSuper(ColorArea);
+
+    function ColorArea() {
+      var _this;
+
+      _classCallCheck(this, ColorArea);
+
+      _this = _super.call(this);
+
+      _this._delegateEvents(commons.extend(_this._events, {
+        'key:up': '_handleKey',
+        'key:right': '_handleKey',
+        'key:down': '_handleKey',
+        'key:left': '_handleKey',
+        'key:pageUp': '_handleKey',
+        'key:pageDown': '_handleKey',
+        'key:home': '_handleKey',
+        'key:end': '_handleKey',
+        'input': '_onInputChangeHandler',
+        'touchstart': '_onMouseDown',
+        'mousedown': '_onMouseDown',
+        'capture:focus': '_focus',
+        'capture:blur': '_blur'
+      })); // Templates
+
+
+      _this._elements = {};
+      template$z.call(_this._elements, {
+        commons: commons,
+        i18n: i18n
+      }); // default values
+
+      _this._x = 1;
+      _this._y = 1;
+      _this._hue = 120;
+      _this._minX = 0;
+      _this._minY = 0;
+      _this._maxX = 1;
+      _this._maxY = 1;
+      _this._stepX = 0.01;
+      _this._stepY = 0.01;
+      return _this;
+    }
+    /** @ignore */
+
+
+    _createClass(ColorArea, [{
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(ColorArea.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$Q);
+        var frag = document.createDocumentFragment(); // Render template
+
+        frag.appendChild(this._elements.colorAreaGradient);
+        frag.appendChild(this._elements.colorHandle);
+        frag.appendChild(this._elements.sliderX);
+        frag.appendChild(this._elements.sliderY); // Support cloneNode
+
+        while (this.firstChild) {
+          var child = this.firstChild;
+
+          if (child.nodeType === Node.ELEMENT_NODE && child.hasAttribute('handle')) {
+            this.removeChild(child);
+          } else {
+            frag.appendChild(child);
+          }
+        }
+
+        this.appendChild(frag); // These should be used to set a property since property handler aren't called until elements are attached to dom.
+        // Attribute values are delivered to change-listeners even if element isn't attached to dom yet, so attributes 
+        // can be set to e.g. this._elements.colorHandle.
+
+        this._handle = this.querySelector('._coral-ColorPicker-ColorArea-colorHandle');
+        this._sliderX = this.querySelector('._coral-ColorPicker-ColorArea-slider[name="x"]');
+        this._sliderY = this.querySelector('._coral-ColorPicker-ColorArea-slider[name="y"]');
+        this._gradient = this.querySelector('._coral-ColorPicker-ColorArea-gradient');
+
+        this._updateHue(this._hue);
+
+        this.x = this._x;
+        this.y = this._y;
+
+        this._updateHandle(this._hue, this.x, this.y, this.color);
+
+        this._reflectAttribute('color', this.color);
+      }
+      /**   
+       The ColorArea label.
+       @default ''
+       @type {String}
+       @htmlattribute label
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "_toHsvString",
+
+      /** @private */
+      value: function _toHsvString(hue, x, y) {
+        var s = "".concat(Math.round(this._x / (this._maxX - this._minX) * 100), "%");
+        var v = "".concat(Math.round(this._y / (this._maxY - this._minY) * 100), "%");
+        return "hsv(".concat(this._hue, ", ").concat(s, ", ").concat(v, ")");
+      }
+      /**   
+       The ColorArea y value. value should be in multiple of y-step size.
+       @default 1
+       @type {String}
+       @htmlattribute label
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "focus",
+      value: function focus() {
+        this._sliderX.focus();
+      }
+      /** @private **/
+
+    }, {
+      key: "_updateHue",
+      value: function _updateHue(hue) {
+        this._hue = hue;
+
+        if (this._gradient) {
+          this._gradient.style.background = "linear-gradient(to top, black 0%, hsla(".concat(this._hue, ", 100%, 0%, 0) 100%),\n        linear-gradient(to right, white 0%, hsla(").concat(this._hue, ", 100%, 0%, 0) 100%),\n        hsl(").concat(this._hue, ", 100%, 50%)");
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_snapValueToStep",
+      value: function _snapValueToStep(rawValue, min, max, step) {
+        var remainder = (rawValue - min) % step;
+        var snappedValue = rawValue;
+
+        if (Math.abs(remainder) * 2 >= step) {
+          snappedValue = rawValue - remainder + step;
+        } else {
+          snappedValue = rawValue - remainder;
+        }
+
+        if (snappedValue < min) {
+          snappedValue = min;
+        } else if (snappedValue > max) {
+          snappedValue = min + Math.floor((max - min) / step) * step;
+        }
+
+        return snappedValue;
+      }
+      /** @private */
+
+    }, {
+      key: "_updateHandle",
+      value: function _updateHandle(hue, x, y, colorStr) {
+        var percent = 100 - (y - this._minY) / (this._maxY - this._minY) * 100;
+
+        if (this._handle) {
+          this._handle.style.top = "".concat(percent, "%");
+        }
+
+        percent = (x - this._minX) / (this._maxX - this._minX) * 100;
+
+        if (this._handle) {
+          this._handle.style.left = "".concat(percent, "%");
+        }
+
+        this._elements.colorHandle.setAttribute('color', colorStr);
+      }
+      /** @private */
+
+    }, {
+      key: "_focusHandle",
+      value: function _focusHandle(isFocused) {
+        if (this._handle) {
+          if (isFocused === true) {
+            this._handle.focus();
+          } else {
+            this._handle.blur();
+          }
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_changeValue",
+      value: function _changeValue(x, y) {
+        if (this.x !== x || this.y !== y) {
+          var currX = this.x;
+          var currY = this.y;
+          this.x = x;
+          this.y = y;
+
+          if (this.x !== currX || this.y !== currY) {
+            this.trigger('change');
+          }
+        }
+      }
+    }, {
+      key: "_focusX",
+      value: function _focusX() {
+        this._sliderX.focus();
+      }
+    }, {
+      key: "_focusY",
+      value: function _focusY() {
+        this._sliderY.focus();
+      }
+      /******* Events Handling **************/
+
+      /** @private */
+
+    }, {
+      key: "_onInputChangeHandler",
+      value: function _onInputChangeHandler(event) {
+        this._focusHandle(true);
+
+        event.stopPropagation();
+
+        if (event.target === this._sliderX) {
+          this._changeValue(event.target.value, this.y);
+        } else {
+          this._changeValue(this.x, event.target.value);
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_handleKey",
+      value: function _handleKey(event) {
+        this._focusHandle(true);
+
+        event.preventDefault();
+        event.stopPropagation();
+        var y = this.y;
+        var x = this.x; // increase
+
+        if (event.keyCode === Keys.keyToCode('up') || event.keyCode === Keys.keyToCode('pageUp')) {
+          y += this._stepY;
+
+          this._focusY();
+        } // decrease
+        else if (event.keyCode === Keys.keyToCode('down') || event.keyCode === Keys.keyToCode('pageDown')) {
+            y -= this._stepY;
+
+            this._focusY();
+          } // increase
+
+
+        if (event.keyCode === Keys.keyToCode('right')) {
+          x += this._stepX;
+
+          this._focusX();
+        } // decrease
+        else if (event.keyCode === Keys.keyToCode('left')) {
+            x -= this._stepX;
+
+            this._focusX();
+          } // min
+          else if (event.keyCode === Keys.keyToCode('home')) {
+              x = this._minX;
+              y = this._minY;
+
+              this._focusX();
+            } // max
+            else if (event.keyCode === Keys.keyToCode('end')) {
+                x = this._maxX;
+                y = this._maxY;
+
+                this._focusX();
+              }
+
+        this._changeValue(x, y);
+      }
+      /** @private */
+
+    }, {
+      key: "_onMouseDown",
+      value: function _onMouseDown() {
+        if (event instanceof MouseEvent) {
+          if ((event.which || event.button) !== 1) {
+            return;
+          }
+        }
+
+        event.preventDefault();
+
+        this._handle.classList.add('is-dragged');
+
+        document.body.classList.add('u-coral-closedHand');
+        this.focus();
+
+        this._focusHandle(true);
+
+        var _this$_getValuesFromC = this._getValuesFromCoord(this._getPoint(event)),
+            x = _this$_getValuesFromC.x,
+            y = _this$_getValuesFromC.y;
+
+        this._changeValue(x, y);
+        this._draggingHandler = this._handleDragging.bind(this);
+        this._mouseUpHandler = this._mouseUp.bind(this);
+        events.on('mousemove.CoralArea', this._draggingHandler);
+        events.on('mouseup.CoralArea', this._mouseUpHandler);
+        events.on('touchmove.CoralArea', this._draggingHandler);
+        events.on('touchend.CoralArea', this._mouseUpHandler);
+        events.on('touchcancel.CoralArea', this._mouseUpHandler);
+      }
+      /**  @private */
+
+    }, {
+      key: "_getValuesFromCoord",
+      value: function _getValuesFromCoord(point) {
+        var boundingClientRect = this.getBoundingClientRect();
+        var height = boundingClientRect.height;
+        var width = boundingClientRect.width;
+        var posY = point.clientY;
+        var posX = point.clientX;
+
+        if (posY < boundingClientRect.top) {
+          posY = boundingClientRect.top;
+        } else if (posY > boundingClientRect.bottom) {
+          posY = boundingClientRect.bottom;
+        }
+
+        if (posX < boundingClientRect.left) {
+          posX = boundingClientRect.left;
+        } else if (posX > boundingClientRect.right) {
+          posX = boundingClientRect.right;
+        }
+
+        var positionFraction = (height - (posY - boundingClientRect.top)) / height;
+        var rawY = this._minY + positionFraction * (this._maxY - this._minY);
+        positionFraction = (posX - boundingClientRect.left) / width;
+        var rawX = this._minX + positionFraction * (this._maxX - this._minX);
+        return {
+          x: rawX,
+          y: rawY
+        };
+      }
+      /** @private */
+
+    }, {
+      key: "_handleDragging",
+      value: function _handleDragging(event) {
+        var _this$_getValuesFromC2 = this._getValuesFromCoord(this._getPoint(event)),
+            x = _this$_getValuesFromC2.x,
+            y = _this$_getValuesFromC2.y;
+
+        this._changeValue(x, y);
+
+        event.preventDefault();
+      }
+      /** @private */
+
+    }, {
+      key: "_mouseUp",
+      value: function _mouseUp(event) {
+        this._handle.style.cursor = 'grab';
+
+        this._handle.classList.remove('is-dragged');
+
+        document.body.classList.remove('u-coral-closedHand');
+
+        this._focusHandle(false);
+        events.off('mousemove.CoralArea', this._draggingHandler);
+        events.off('touchmove.CoralArea', this._draggingHandler);
+        events.off('mouseup.CoralArea', this._mouseUpHandler);
+        events.off('touchend.CoralArea', this._mouseUpHandler);
+        events.off('touchcancel.CoralArea', this._mouseUpHandler);
+        this._currentHandle = null;
+        this._draggingHandler = null;
+        this._mouseUpHandler = null;
+      }
+      /**
+       @private
+       @return {Object} which contains the real coordinates
+       */
+
+    }, {
+      key: "_getPoint",
+      value: function _getPoint(event) {
+        if (event.changedTouches && event.changedTouches.length > 0) {
+          return event.changedTouches[0];
+        } else if (event.touches && event.touches.length > 0) {
+          return event.touches[0];
+        }
+
+        return event;
+      }
+      /**
+       Handles "focusin" event.
+        @private
+       */
+
+    }, {
+      key: "_focus",
+      value: function _focus(event) {
+        this._focusHandle(true);
+      }
+      /**
+       Handles "focusout" event.
+        @private
+       */
+
+    }, {
+      key: "_blur",
+      value: function _blur(event) {
+        this._focusHandle(false);
+      }
+    }, {
+      key: "label",
+      get: function get() {
+        return this._label;
+      },
+      set: function set(value) {
+        this._label = value;
+
+        this._reflectAttribute('label', this._label);
+
+        if (this._elements.sliderX.getAttribute('aria-label') !== this._label) {
+          this._elements.sliderX.setAttribute('aria-label', this._label);
+
+          this._elements.sliderY.setAttribute('aria-label', this._label);
+        }
+      }
+      /**   
+       The ColorArea x value. value should be in multiple of x-step size.
+       @default 1
+       @type {String}
+       @htmlattribute label
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "x",
+      get: function get() {
+        return this._x;
+      },
+      set: function set(value) {
+        var rawX = Number(value, 10);
+
+        if (parseFloat(rawX).toFixed(3) !== parseFloat(this._x).toFixed(3)) {
+          if (isNaN(rawX)) {
+            rawX = this._minX;
+          }
+
+          this._x = this._snapValueToStep(rawX, this._minX, this._maxX, this._stepX);
+
+          this._reflectAttribute('x', this._x);
+
+          this.color = this._toHsvString(this._hue, this._x, this.y);
+        }
+
+        this._elements.sliderX.setAttribute('aria-valuetext', "".concat(i18n.get('Saturation'), ": ").concat(Math.round(this._x / (this._maxX - this._minX) * 100), "%"));
+
+        this._elements.sliderX.setAttribute('title', this.color);
+
+        this._elements.sliderX.setAttribute('value', this._x);
+      }
+    }, {
+      key: "y",
+      get: function get() {
+        return this._y;
+      },
+      set: function set(value) {
+        var rawY = Number(value, 10);
+
+        if (parseFloat(rawY).toFixed(3) !== parseFloat(this._y).toFixed(3)) {
+          if (isNaN(rawY)) {
+            rawY = this._minY;
+          }
+
+          this._y = this._snapValueToStep(rawY, this._minY, this._maxY, this._stepY);
+
+          this._reflectAttribute('y', this._y);
+
+          this.color = this._toHsvString(this._hue, this.x, this._y);
+        }
+
+        this._elements.sliderY.setAttribute('aria-valuetext', "".concat(i18n.get('Brightness'), ": ").concat(Math.round(this._y / (this._maxY - this._minY) * 100), "%"));
+
+        this._elements.sliderY.setAttribute('title', this.color);
+
+        this._elements.sliderY.setAttribute('value', this._y);
+      }
+      /**
+       The ColorArea color string in hsla format.
+       @default hsla(0, 100%, 50%, 1)
+       @type {String}
+       @htmlattribute color
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "color",
+      get: function get() {
+        return colorUtil.toHslString(this._hue, new TinyColor({
+          h: this._hue,
+          s: this.x,
+          v: this.y
+        }).toHslString());
+      },
+      set: function set(value) {
+        var color = new TinyColor(value);
+
+        if (!color.isValid) {
+          color = new TinyColor("hsla(120, 100%, 50%, 1)");
+          value = color.toHslString();
+        } // if  color strings are equal or colors are equivalent  
+
+
+        if (this.color === value || new TinyColor(this.color).toString(color.format) === color) {
+          return;
+        }
+
+        var _colorUtil$extractHsv = colorUtil.extractHsv(value),
+            h = _colorUtil$extractHsv.h,
+            s = _colorUtil$extractHsv.s,
+            v = _colorUtil$extractHsv.v;
+
+        if (h !== this._hue) {
+          this._updateHue(colorUtil.getHue(value));
+        }
+
+        if (s !== this._x) {
+          this.x = s;
+        }
+
+        if (v !== this.Y) {
+          this.y = v;
+        }
+
+        this._updateHandle(this._hue, this.x, this.y, this.color);
+
+        this._reflectAttribute('color', this.color);
+      }
+      /** @ignore */
+
+    }, {
+      key: "disabled",
+
+      /**
+       Whether this field is disabled or not.
+       @type {Boolean}
+       @default false
+       @htmlattribute disabled
+       @htmlattributereflected
+       */
+      get: function get() {
+        return this._disabled || false;
+      },
+      set: function set(value) {
+        this._disabled = transform.booleanAttr(value);
+
+        this._reflectAttribute('disabled', this._disabled);
+
+        this.classList.toggle('is-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
+
+        this._elements.sliderX[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', this._disabled);
+
+        this._elements.sliderY[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', this._disabled);
+
+        this._elements.colorHandle[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', this._disabled);
+      }
+    }], [{
+      key: "observedAttributes",
+      get: function get() {
+        return _get(_getPrototypeOf(ColorArea), "observedAttributes", this).concat(['label', 'x', 'y', 'disabled', 'color']);
+      }
+    }]);
+
+    return ColorArea;
+  }(BaseComponent(HTMLElement));
+
+  var template$A = function anonymous(data_0) {
+    var el0 = this["checkerboard"] = document.createElement("div");
+    el0.className += " _coral-ColorPicker-ColorSlider-checkerboard";
+    el0.setAttribute("handle", "checkerboard");
+    el0.setAttribute("role", "presentation");
+    var el1 = document.createTextNode("\n    ");
+    el0.appendChild(el1);
+    var el2 = document.createElement("div");
+    el2.className += " _coral-ColorPicker-ColorSlider-gradient";
+    el2.setAttribute("role", "presentation");
+    el2.textContent = "\n";
+    el0.appendChild(el2);
+    var el3 = document.createTextNode("\n");
+    el0.appendChild(el3);
+    var el4 = this["colorHandle"] = document.createElement("coral-colorpicker-colorhandle");
+    el4.className += " _coral-ColorPicker-ColorSlider-colorHandle";
+    el4.setAttribute("handle", "colorHandle");
+    el4.setAttribute("style", "position: absolute;top: 100%;");
+    el0.appendChild(el4);
+    var el5 = document.createTextNode("\n");
+    el0.appendChild(el5);
+    var el6 = this["slider"] = document.createElement("input");
+    el6.setAttribute("type", "range");
+    el6.setAttribute("handle", "slider");
+    el6.className += " _coral-ColorPicker-ColorSlider-slider";
+    el0.appendChild(el6);
+    return el0;
+  };
+
+  var CLASSNAME$R = '_coral-ColorPicker-ColorSlider';
+  /**
+   @@base ColorSlider
+   @classdesc A ColorPicker color slider component
+   @extends {HTMLElement}
+   @extends {BaseComponent}
+   */
+
+  var ColorSlider = /*#__PURE__*/function (_BaseComponent) {
+    _inherits(ColorSlider, _BaseComponent);
+
+    var _super = _createSuper(ColorSlider);
+
+    /** @ignore */
+    function ColorSlider() {
+      var _this;
+
+      _classCallCheck(this, ColorSlider);
+
+      _this = _super.call(this);
+
+      _this._delegateEvents(commons.extend(_this._events, {
+        'key:up': '_handleKey',
+        'key:right': '_handleKey',
+        'key:down': '_handleKey',
+        'key:left': '_handleKey',
+        'key:pageUp': '_handleKey',
+        'key:pageDown': '_handleKey',
+        'key:home': '_handleKey',
+        'key:end': '_handleKey',
+        'input': '_onInputChangeHandler',
+        'touchstart': '_onMouseDown',
+        'mousedown': '_onMouseDown',
+        'capture:focus': '_focus',
+        'capture:blur': '_blur'
+      })); // Templates
+
+
+      _this._elements = {};
+      template$A.call(_this._elements, {
+        commons: commons,
+        i18n: i18n
+      }); // default value
+
+      _this._label = "";
+      _this._value = 180;
+      _this._color = new TinyColor("hsla(180, 100%, 50%, 1)");
+      _this._hue = 180;
+      _this._min = 0;
+      _this._max = 100;
+      _this._step = 1;
+      return _this;
+    }
+    /** @ignore */
+
+
+    _createClass(ColorSlider, [{
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(ColorSlider.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$R);
+        var frag = document.createDocumentFragment(); // Render template
+
+        frag.appendChild(this._elements.checkerboard);
+        frag.appendChild(this._elements.colorHandle);
+        frag.appendChild(this._elements.slider); // Support cloneNode
+
+        while (this.firstChild) {
+          var child = this.firstChild;
+
+          if (child.nodeType === Node.ELEMENT_NODE && child.hasAttribute('handle')) {
+            this.removeChild(child);
+          } else {
+            frag.appendChild(child);
+          }
+        }
+
+        this.appendChild(frag);
+
+        this._syncInputSliderAttrs(); // These should be used to set a property since property handler aren't called until elements are attached to dom.
+        // Attribute values are delivered to change-listeners even if element isn't attached to dom yet, so attributes 
+        // can be set to e.g. this._elements.colorHandle.    
+
+
+        this._handle = this.querySelector('._coral-ColorPicker-ColorSlider-colorHandle');
+        this._slider = this.querySelector('._coral-ColorPicker-ColorSlider-slider');
+
+        this._updateValue(this._hue);
+      }
+      /**   
+       The ColorSlider label.
+       @default 'Hue'
+       @type {String}
+       @htmlattribute label
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "focus",
+      value: function focus() {
+        this._slider.focus();
+      }
+      /** @private */
+
+    }, {
+      key: "_colorFromValue",
+      value: function _colorFromValue(value) {
+        return new TinyColor({
+          h: value,
+          s: 1,
+          l: .5,
+          a: 1
+        });
+      }
+      /** @private */
+
+    }, {
+      key: "_syncInputSliderAttrs",
+      value: function _syncInputSliderAttrs() {
+        if (Number(this._elements.slider.getAttribute('min')) !== this._min) {
+          this._elements.slider.setAttribute('min', this._min);
+        }
+
+        if (Number(this._elements.slider.getAttribute('max')) !== this._max) {
+          this._elements.slider.setAttribute('max', this._max);
+        }
+
+        if (Number(this._elements.slider.getAttribute('step')) !== this._step) {
+          this._elements.slider.setAttribute('step', this._step);
+        }
+
+        if (this._elements.slider.getAttribute('aria-label') !== this._label) {
+          this._elements.slider.setAttribute('aria-label', this._label);
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_snapValueToStep",
+      value: function _snapValueToStep(rawValue, min, max, step) {
+        var remainder = (rawValue - min) % step;
+        var snappedValue = rawValue;
+
+        if (Math.abs(remainder) * 2 >= step) {
+          snappedValue = rawValue - remainder + step;
+        } else {
+          snappedValue = rawValue - remainder;
+        }
+
+        if (snappedValue < min) {
+          snappedValue = min;
+        } else if (snappedValue > max) {
+          snappedValue = min + Math.floor((max - min) / step) * step;
+        }
+
+        return snappedValue;
+      }
+      /** @private */
+
+    }, {
+      key: "_updateHandlePosition",
+      value: function _updateHandlePosition() {
+        var percent = 100 - (this._value - this._min) / (this._max - this._min) * 100;
+
+        if (this._handle) {
+          this._handle.style.top = "".concat(percent, "%");
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_focusHandle",
+      value: function _focusHandle(isFocused) {
+        if (this._handle) {
+          if (isFocused === true) {
+            this._handle.focus();
+          } else {
+            this._handle.blur();
+          }
+        }
+      }
+      /** @private */
+
+    }, {
+      key: "_updateValue",
+      value: function _updateValue(value) {
+        var rawValue = Number(value, 10);
+
+        if (isNaN(rawValue)) {
+          rawValue = this._min;
+        }
+
+        this._value = this._snapValueToStep(rawValue, this._min, this._max, this._step);
+        this._hue = this._value; // update color
+
+        this._color = this._colorFromValue(this._value);
+
+        this._elements.colorHandle.setAttribute('color', colorUtil.toHslString(this._hue, this._color.toHslString()));
+
+        this._reflectAttribute('color', colorUtil.toHslString(this._hue, this._color.toHslString()));
+
+        this._reflectAttribute('value', this._value);
+
+        this._elements.slider.setAttribute('value', this._value);
+
+        this._updateHandlePosition();
+      }
+      /** @private */
+
+    }, {
+      key: "_changeValue",
+      value: function _changeValue(value) {
+        if (value !== this.value) {
+          var currVal = this.value;
+
+          this._updateValue(value);
+
+          if (currVal !== this.value) {
+            this.trigger('change');
+          }
+        }
+      }
+      /******* Events Handling **************/
+
+      /** @private */
+
+    }, {
+      key: "_onInputChangeHandler",
+      value: function _onInputChangeHandler(event) {
+        this.focus();
+
+        this._focusHandle(true);
+
+        event.stopPropagation();
+
+        this._changeValue(event.target.value);
+      }
+      /** @private */
+
+    }, {
+      key: "_handleKey",
+      value: function _handleKey(event) {
+        this.focus();
+
+        this._focusHandle(true);
+
+        event.preventDefault();
+        event.stopPropagation();
+        var value = this._value; // increase
+
+        if (event.keyCode === Keys.keyToCode('up') || event.keyCode === Keys.keyToCode('right') || event.keyCode === Keys.keyToCode('pageUp')) {
+          value += this._step;
+        } // decrease
+        else if (event.keyCode === Keys.keyToCode('down') || event.keyCode === Keys.keyToCode('left') || event.keyCode === Keys.keyToCode('pageDown')) {
+            value -= this._step;
+          } // min
+          else if (event.keyCode === Keys.keyToCode('home')) {
+              value = this._min;
+            } // max
+            else if (event.keyCode === Keys.keyToCode('end')) {
+                value = this._max;
+              }
+
+        this._changeValue(value);
+      }
+      /** @private */
+
+    }, {
+      key: "_onMouseDown",
+      value: function _onMouseDown() {
+        if (event instanceof MouseEvent) {
+          if ((event.which || event.button) !== 1) {
+            return;
+          }
+        }
+
+        event.preventDefault();
+
+        this._handle.classList.add('is-dragged');
+
+        document.body.classList.add('u-coral-closedHand');
+        this.focus();
+
+        this._focusHandle(true);
+
+        this._changeValue(this._getValueFromCoord(this._getPoint(event).clientY));
+        this._draggingHandler = this._handleDragging.bind(this);
+        this._mouseUpHandler = this._mouseUp.bind(this);
+        events.on('mousemove.CoralSlider', this._draggingHandler);
+        events.on('mouseup.CoralSlider', this._mouseUpHandler);
+        events.on('touchmove.CoralSlider', this._draggingHandler);
+        events.on('touchend.CoralSlider', this._mouseUpHandler);
+        events.on('touchcancel.CoralSlider', this._mouseUpHandler);
+      }
+      /**  @private */
+
+    }, {
+      key: "_getValueFromCoord",
+      value: function _getValueFromCoord(posY) {
+        var boundingClientRect = this.getBoundingClientRect();
+        var height = boundingClientRect.height;
+
+        if (posY < boundingClientRect.top) {
+          posY = boundingClientRect.top;
+        } else if (posY > boundingClientRect.bottom) {
+          posY = boundingClientRect.bottom;
+        }
+
+        var positionFraction = (height - (posY - boundingClientRect.top)) / height;
+        var rawValue = this._min + positionFraction * (this._max - this._min);
+        return this._snapValueToStep(rawValue, this._min, this._max, this._step);
+      }
+      /** @private */
+
+    }, {
+      key: "_handleDragging",
+      value: function _handleDragging(event) {
+        this._changeValue(this._getValueFromCoord(this._getPoint(event).clientY));
+
+        event.preventDefault();
+      }
+      /** @private */
+
+    }, {
+      key: "_mouseUp",
+      value: function _mouseUp(event) {
+        this._handle.style.cursor = 'grab';
+
+        this._handle.classList.remove('is-dragged');
+
+        document.body.classList.remove('u-coral-closedHand');
+
+        this._focusHandle(false);
+        events.off('mousemove.CoralSlider', this._draggingHandler);
+        events.off('touchmove.CoralSlider', this._draggingHandler);
+        events.off('mouseup.CoralSlider', this._mouseUpHandler);
+        events.off('touchend.CoralSlider', this._mouseUpHandler);
+        events.off('touchcancel.CoralSlider', this._mouseUpHandler);
+        this._currentHandle = null;
+        this._draggingHandler = null;
+        this._mouseUpHandler = null;
+      }
+      /**
+       @private
+       @return {Object} which contains the real coordinates
+       */
+
+    }, {
+      key: "_getPoint",
+      value: function _getPoint(event) {
+        if (event.changedTouches && event.changedTouches.length > 0) {
+          return event.changedTouches[0];
+        } else if (event.touches && event.touches.length > 0) {
+          return event.touches[0];
+        }
+
+        return event;
+      }
+      /**
+       Handles "focusin" event.
+        @private
+       */
+
+    }, {
+      key: "_focus",
+      value: function _focus(event) {
+        this._focusHandle(true);
+      }
+      /**
+       Handles "focusout" event.
+        @private
+       */
+
+    }, {
+      key: "_blur",
+      value: function _blur(event) {
+        this._focusHandle(false);
+      }
+    }, {
+      key: "label",
+      get: function get() {
+        return this._label;
+      },
+      set: function set(value) {
+        this._label = value;
+
+        this._reflectAttribute('label', this._label);
+
+        this._syncInputSliderAttrs();
+      }
+      /**   
+       The ColorSlider value. value should be in multiple of step size.
+       @default 0
+       @type {String}
+       @htmlattribute label
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "value",
+      get: function get() {
+        return this._value;
+      },
+      set: function set(value) {
+        if (this._value !== value) {
+          this._updateValue(value);
+        }
+      }
+      /**
+       The ColorSlider color string in hsla format.
+       @default hsla(0, 100%, 50%, 1)
+       @type {String}
+       @htmlattribute color
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "color",
+      get: function get() {
+        return colorUtil.toHslString(this._hue, this._color.toHslString());
+      },
+      set: function set(value) {
+        if (this.color === value) {
+          return;
+        }
+
+        var color = new TinyColor(value);
+
+        if (!color.isValid) {
+          color = new TinyColor("hsla(180, 100%, 50%, 1)");
+          value = color.toHslString();
+        }
+
+        this._hue = colorUtil.getHue(value);
+
+        this._updateValue(this._hue);
+      }
+      /** @ignore */
+
+    }, {
+      key: "disabled",
+
+      /**
+       Whether this field is disabled or not.
+       @type {Boolean}
+       @default false
+       @htmlattribute disabled
+       @htmlattributereflected
+       */
+      get: function get() {
+        return this._disabled || false;
+      },
+      set: function set(value) {
+        this._disabled = transform.booleanAttr(value);
+
+        this._reflectAttribute('disabled', this._disabled);
+
+        this.classList.toggle('is-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
+
+        this._elements.slider[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', this._disabled);
+
+        this._elements.colorHandle[this._disabled ? 'setAttribute' : 'removeAttribute']('disabled', this._disabled);
+      }
+    }], [{
+      key: "observedAttributes",
+      get: function get() {
+        return _get(_getPrototypeOf(ColorSlider), "observedAttributes", this).concat(['label', 'value', 'disabled', 'color']);
+      }
+    }]);
+
+    return ColorSlider;
+  }(BaseComponent(HTMLElement));
+
+  var CLASSNAME$S = '_coral-ColorPicker-ColorSlider-hue';
+  /**
+   @class Coral.ColorPicker.ColorSliderHue
+   @classdesc A ColorPicker color slider hue component to select Hue
+   @htmltag coral-colorpicker-colorsliderhue
+   @extends {ColorSlider}
+   */
+
+  var ColorSliderHue = /*#__PURE__*/function (_ColorSlider) {
+    _inherits(ColorSliderHue, _ColorSlider);
+
+    var _super = _createSuper(ColorSliderHue);
+
+    /** @ignore */
+    function ColorSliderHue() {
+      var _this;
+
+      _classCallCheck(this, ColorSliderHue);
+
+      _this = _super.call(this);
+      _this._min = 0;
+      _this._max = 360;
+      _this._step = 1;
+      return _this;
+    }
+    /** @private */
+
+
+    _createClass(ColorSliderHue, [{
+      key: "_updateValue",
+      value: function _updateValue(value) {
+        _get(_getPrototypeOf(ColorSliderHue.prototype), "_updateValue", this).call(this, value);
+
+        this._elements.slider.setAttribute('aria-valuetext', "".concat(this.value, "\xB0"));
+      }
+      /** @ignore */
+
+    }, {
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(ColorSliderHue.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$S);
+
+        this._updateValue(this.value);
+      }
+      /** @private */
+
+    }, {
+      key: "_colorFromValue",
+      value: function _colorFromValue(value) {
+        return new TinyColor({
+          h: value,
+          s: 1,
+          l: .50,
+          a: 1
+        });
+      }
+    }]);
+
+    return ColorSliderHue;
+  }(ColorSlider);
+
+  var template$B = function anonymous(data_0) {
+    var frag = document.createDocumentFragment();
+    var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
+    data = data_0;
+    var uid = data.commons.getUID();
+    data_0 = data;
+    var el1 = document.createTextNode("\n");
+    frag.appendChild(el1);
+    var el2 = this["colorHandleSubView"] = document.createElement("div");
+    el2.setAttribute("handle", "colorHandleSubView");
+    el2.className += " _coral-ColorPicker-colorHandle-color";
+    el2.setAttribute("style", "background-color: rgba(255, 0, 0, 1.0);");
+    frag.appendChild(el2);
+    return frag;
+  };
+
+  var CLASSNAME$T = '_coral-ColorPicker-colorHandle';
+  /**
+   @class Coral.ColorPicker.ColorHandle
+   @classdesc A ColorHandle component
+   @htmltag coral-colorpicker-colorhandle
+   @extends {HTMLElement}
+   @extends {BaseComponent}
+   */
+
+  var ColorHandle = /*#__PURE__*/function (_BaseComponent) {
+    _inherits(ColorHandle, _BaseComponent);
+
+    var _super = _createSuper(ColorHandle);
+
+    /** @ignore */
+    function ColorHandle() {
+      var _this;
+
+      _classCallCheck(this, ColorHandle);
+
+      _this = _super.call(this);
+
+      _this._delegateEvents(commons.extend(_this._events, {})); // Templates
+
+
+      _this._elements = {};
+      template$B.call(_this._elements, {
+        commons: commons,
+        i18n: i18n
+      });
+      _this._color = new TinyColor("hsla(0, 100%, 50%, 1)");
+      _this._hue = 0;
+      return _this;
+    }
+    /** @ignore */
+
+
+    _createClass(ColorHandle, [{
+      key: "render",
+      value: function render() {
+        _get(_getPrototypeOf(ColorHandle.prototype), "render", this).call(this);
+
+        this.classList.add(CLASSNAME$T);
+        var frag = document.createDocumentFragment(); // Render template
+
+        frag.appendChild(this._elements.colorHandleSubView); // Support cloneNode
+
+        while (this.firstChild) {
+          var child = this.firstChild;
+
+          if (child.nodeType === Node.ELEMENT_NODE && child.hasAttribute('handle')) {
+            this.removeChild(child);
+          } else {
+            frag.appendChild(child);
+          }
+        }
+
+        this.appendChild(frag);
+        this._subView = this.querySelector("._coral-ColorPicker-colorHandle-color");
+        this.color = colorUtil.toHslString(this._hue, this._color.toHslString());
+      }
+      /** @ignore */
+
+    }, {
+      key: "focus",
+      value: function focus() {
+        this.classList.add("is-focused");
+      }
+      /** @ignore */
+
+    }, {
+      key: "blur",
+      value: function blur() {
+        this.classList.remove("is-focused");
+      }
+      /**
+       Whether this field is disabled or not.
+       @type {Boolean}
+       @default false
+       @htmlattribute disabled
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "disabled",
+      get: function get() {
+        return this._disabled || false;
+      },
+      set: function set(value) {
+        this._disabled = transform.booleanAttr(value);
+
+        this._reflectAttribute('disabled', this._disabled);
+
+        this.classList.toggle('is-disabled', this._disabled);
+        this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
+      }
+      /**   
+       The ColorSlider color.
+       @default hsla(0, 100%, 50%, 1)
+       @type {String}
+       @htmlattribute label
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "color",
+      get: function get() {
+        return this._color.toHslString();
+      },
+      set: function set(value) {
+        var color = new TinyColor(value);
+
+        if (!color.isValid) {
+          color = new TinyColor("hsla(0, 100%, 50%, 1)");
+          value = color.toHslString();
+        }
+
+        this._color = color;
+        this._hue = colorUtil.getHue(value);
+
+        this._reflectAttribute('color', colorUtil.toHslString(this._hue, this._color.toHslString()));
+
+        if (this._subView) {
+          this._subView.style["background-color"] = colorUtil.toHslString(this._hue, this._color.toHslString());
+        }
+      }
+      /** @ignore */
+
+    }], [{
+      key: "observedAttributes",
+      get: function get() {
+        return _get(_getPrototypeOf(ColorHandle), "observedAttributes", this).concat(['disabled', 'color']);
+      }
+    }]);
+
+    return ColorHandle;
+  }(BaseComponent(HTMLElement));
+
+  /**
+   * Copyright 2021 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+  var translations$e = {
+    "en-US": {
+      "Hex": "Hex",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "RGB": "RGB",
+      "HSV": "HSV",
+      "HSL": "HSL",
+      "Name": "Name",
+      "Hue": "Hue",
+      "Color Value": "Color Value",
+      "Enter Color Value": "Enter Color Value",
+      "Color Picker": "Color Picker",
+      "Saturation and Brightness": "Saturation and Brightness",
+      "Saturation": "Saturation",
+      "Brightness": "Brightness",
+      "Select Color Format": "Select Color Format"
+    },
+    "cs-CZ": {
+      "Brightness": "Jas",
+      "Color Picker": "Výběr barvy",
+      "Color Value": "Barevná hodnota",
+      "Enter Color Value": "Zadejte barevnou hodnotu",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Hex",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "Odstín",
+      "Name": "Název",
+      "RGB": "RGB",
+      "Saturation": "Sytost",
+      "Saturation and Brightness": "Sytost a jas",
+      "Select Color Format": "Vyberte formát barvy"
+    },
+    "da-DK": {
+      "Brightness": "Lysstyrke",
+      "Color Picker": "Farvevælger",
+      "Color Value": "Farveværdi",
+      "Enter Color Value": "Angiv farveværdi",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Hex",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "Farvetone",
+      "Name": "Navn",
+      "RGB": "RGB",
+      "Saturation": "Mætning",
+      "Saturation and Brightness": "Mætning og lysstyrke",
+      "Select Color Format": "Vælg farveformat"
+    },
+    "de-DE": {
+      "Brightness": "Helligkeit",
+      "Color Picker": "Farbwähler",
+      "Color Value": "Farbwert",
+      "Enter Color Value": "Farbwert eingeben",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Hex",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "Farbton",
+      "Name": "Name",
+      "RGB": "RGB",
+      "Saturation": "Sättigung",
+      "Saturation and Brightness": "Sättigung und Helligkeit",
+      "Select Color Format": "Farbformat auswählen"
+    },
+    "es-ES": {
+      "Brightness": "Brillo",
+      "Color Picker": "Selector de color",
+      "Color Value": "Valor del color",
+      "Enter Color Value": "Indique el valor del color",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Valor hexadecimal",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "Tono",
+      "Name": "Nombre",
+      "RGB": "RGB",
+      "Saturation": "Saturación",
+      "Saturation and Brightness": "Saturación y brillo",
+      "Select Color Format": "Seleccione el formato del color"
+    },
+    "fi-FI": {
+      "Brightness": "Kirkkaus",
+      "Color Picker": "Värimuokkain",
+      "Color Value": "Värin arvo",
+      "Enter Color Value": "Syötä värin arvo",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Hex",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "Sävy",
+      "Name": "Nimi",
+      "RGB": "RGB",
+      "Saturation": "Kylläisyys",
+      "Saturation and Brightness": "Kylläisyys ja kirkkaus",
+      "Select Color Format": "Valitse värimuoto"
+    },
+    "fr-FR": {
+      "Brightness": "Luminosité",
+      "Color Picker": "Sélecteur de couleurs",
+      "Color Value": "Valeur de la couleur",
+      "Enter Color Value": "Saisir la valeur de la couleur",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Hex",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "Teinte",
+      "Name": "Nom",
+      "RGB": "RGB",
+      "Saturation": "Saturation",
+      "Saturation and Brightness": "Saturation et luminosité",
+      "Select Color Format": "Sélectionner le format de couleur"
+    },
+    "it-IT": {
+      "Brightness": "Luminosità",
+      "Color Picker": "Selettore colore",
+      "Color Value": "Valore colore",
+      "Enter Color Value": "Immetti il valore del colore",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Hex",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "Tonalità",
+      "Name": "Nome",
+      "RGB": "RGB",
+      "Saturation": "Saturazione",
+      "Saturation and Brightness": "Saturazione e luminosità",
+      "Select Color Format": "Seleziona il formato del colore"
+    },
+    "ja-JP": {
+      "Brightness": "明るさ",
+      "Color Picker": "カラーピッカー",
+      "Color Value": "カラー値",
+      "Enter Color Value": "カラー値を入力",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "16 進数",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "色相",
+      "Name": "名前",
+      "RGB": "RGB",
+      "Saturation": "彩度",
+      "Saturation and Brightness": "彩度と明るさ",
+      "Select Color Format": "カラー形式を選択"
+    },
+    "ko-KR": {
+      "Brightness": "명도",
+      "Color Picker": "색상 피커",
+      "Color Value": "색상 값",
+      "Enter Color Value": "색상 값 입력",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Hex",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "색조",
+      "Name": "이름",
+      "RGB": "RGB",
+      "Saturation": "채도",
+      "Saturation and Brightness": "채도 및 명도",
+      "Select Color Format": "색상 포맷 선택"
+    },
+    "nb-NO": {
+      "Brightness": "Lysstyrke",
+      "Color Picker": "Fargevelger",
+      "Color Value": "Fargeverdi",
+      "Enter Color Value": "Angi fargeverdi",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Hex",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "Fargetone",
+      "Name": "Navn",
+      "RGB": "RGB",
+      "Saturation": "Metning",
+      "Saturation and Brightness": "Metning og lysstyrke",
+      "Select Color Format": "Velg fargeformat"
+    },
+    "nl-NL": {
+      "Brightness": "Helderheid",
+      "Color Picker": "Kleurkiezer",
+      "Color Value": "Kleurwaarde",
+      "Enter Color Value": "Kleurwaarde invoeren",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Hex",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "Kleurtoon",
+      "Name": "Naam",
+      "RGB": "RGB",
+      "Saturation": "Verzadiging",
+      "Saturation and Brightness": "Verzadiging en helderheid",
+      "Select Color Format": "Kleuropmaak selecteren"
+    },
+    "pl-PL": {
+      "Brightness": "Jasność",
+      "Color Picker": "Próbnik kolorów",
+      "Color Value": "Wartość koloru",
+      "Enter Color Value": "Wprowadź wartość koloru",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Hex",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "Odcień",
+      "Name": "Nazwa",
+      "RGB": "RGB",
+      "Saturation": "Nasycenie",
+      "Saturation and Brightness": "Nasycenie i jasność",
+      "Select Color Format": "Wybierz format kolorów"
+    },
+    "pt-BR": {
+      "Brightness": "Brilho",
+      "Color Picker": "Seletor de cores",
+      "Color Value": "Valor da cor",
+      "Enter Color Value": "Insira o valor da cor",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Hexadecimal",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "Matiz",
+      "Name": "Nome",
+      "RGB": "RGB",
+      "Saturation": "Saturação",
+      "Saturation and Brightness": "Saturação e brilho",
+      "Select Color Format": "Selecione o formato da cor"
+    },
+    "ru-RU": {
+      "Brightness": "Яркость",
+      "Color Picker": "Палитра цветов",
+      "Color Value": "Значение цвета",
+      "Enter Color Value": "Введите значение цвета",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Hex",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "Hue",
+      "Name": "Имя",
+      "RGB": "RGB",
+      "Saturation": "Насыщенность",
+      "Saturation and Brightness": "Насыщенность и яркость",
+      "Select Color Format": "Выберите формат цвета"
+    },
+    "sv-SE": {
+      "Brightness": "Ljusstyrka",
+      "Color Picker": "Färgväljaren",
+      "Color Value": "Färgvärde",
+      "Enter Color Value": "Ange färgvärde",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Hex",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "Nyans",
+      "Name": "Namn",
+      "RGB": "RGB",
+      "Saturation": "Mättnad",
+      "Saturation and Brightness": "Mättnad och ljusstyrka",
+      "Select Color Format": "Välj färgformat"
+    },
+    "tr-TR": {
+      "Brightness": "Parlaklık",
+      "Color Picker": "Renk Seçici",
+      "Color Value": "Renk Değeri",
+      "Enter Color Value": "Renk Değerini Gir",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Hex",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "Ton",
+      "Name": "Adı",
+      "RGB": "RGB",
+      "Saturation": "Doygunluk",
+      "Saturation and Brightness": "Doygunluk ve Parlaklık",
+      "Select Color Format": "Renk Formatını Seç"
+    },
+    "zh-CN": {
+      "Brightness": "亮度",
+      "Color Picker": "拾色器",
+      "Color Value": "颜色值",
+      "Enter Color Value": "输入颜色值",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Hex",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "色相",
+      "Name": "名称",
+      "RGB": "RGB",
+      "Saturation": "饱和度",
+      "Saturation and Brightness": "饱和度和亮度",
+      "Select Color Format": "选择颜色格式"
+    },
+    "zh-TW": {
+      "Brightness": "亮度",
+      "Color Picker": "檢色器",
+      "Color Value": "顏色值",
+      "Enter Color Value": "輸入顏色值",
+      "HSL": "HSL",
+      "HSV": "HSV",
+      "Hex": "Hex",
+      "Hex3": "Hex3",
+      "Hex4": "Hex4",
+      "Hex8": "Hex8",
+      "Hue": "色相",
+      "Name": "名稱",
+      "RGB": "RGB",
+      "Saturation": "飽和度",
+      "Saturation and Brightness": "飽和度和亮度",
+      "Select Color Format": "選取顏色格式"
+    }
+  };
+
+  /**
+   * Copyright 2021 Adobe. All rights reserved.
+   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License. You may obtain a copy
+   * of the License at http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software distributed under
+   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+   * OF ANY KIND, either express or implied. See the License for the specific language
+   * governing permissions and limitations under the License.
+   */
+
+  commons.extend(strings, {
+    'coral-component-colorpicker': translations$e
+  }); // Expose component on the Coral namespace
+
+  commons._define('coral-colorpicker', ColorPicker);
+
+  commons._define('coral-colorpicker-colorproperties', ColorProperties);
+
+  commons._define('coral-colorpicker-colorarea', ColorArea);
+
+  commons._define('coral-colorpicker-colorsliderhue', ColorSliderHue);
+
+  commons._define('coral-colorpicker-colorhandle', ColorHandle);
+
+  ColorPicker.ColorProperties = ColorProperties;
+  ColorPicker.ColorHandle = ColorHandle;
+  ColorPicker.ColorArea = ColorArea;
+  ColorPicker.ColorSliderHue = ColorSliderHue;
+
+  var template$C = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["accessibilityState"] = document.createElement("span");
     el0.setAttribute("handle", "accessibilityState");
@@ -49391,7 +53678,7 @@
     MULTIPLE: 'multiple'
   };
 
-  var CLASSNAME$O = '_coral-MillerColumns';
+  var CLASSNAME$U = '_coral-MillerColumns';
 
   var scrollTo = function scrollTo(element, to, duration, scrollCallback) {
     if (duration <= 0) {
@@ -49445,7 +53732,7 @@
 
       if (!_this._elements.accessibilityState) {
         // Templates
-        template$x.call(_this._elements, {
+        template$C.call(_this._elements, {
           commons: commons
         });
 
@@ -50668,7 +54955,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$O); // @a11y
+        this.classList.add(CLASSNAME$U); // @a11y
 
         this.setAttribute('role', 'tree'); // @a11y: the columnview needs to be focusable to handle a11y properly
 
@@ -50796,10 +55083,10 @@
         this.columns.getAll().forEach(function (item) {
           item.setAttribute('_selectionmode', _this9._selectionMode);
         });
-        this.classList.remove("".concat(CLASSNAME$O, "--selection"));
+        this.classList.remove("".concat(CLASSNAME$U, "--selection"));
 
         if (this._selectionMode !== selectionMode$1.NONE) {
-          this.classList.add("".concat(CLASSNAME$O, "--selection"));
+          this.classList.add("".concat(CLASSNAME$U, "--selection"));
         } // @a11y
 
 
@@ -50863,7 +55150,7 @@
     return _class;
   }(BaseComponent(HTMLElement)));
 
-  var CLASSNAME$P = '_coral-MillerColumns-item'; // The number of milliseconds for which scroll events should be debounced.
+  var CLASSNAME$V = '_coral-MillerColumns-item'; // The number of milliseconds for which scroll events should be debounced.
 
   var SCROLL_DEBOUNCE$2 = 100; // Height if every item to avoid using offsetHeight during calculations.
 
@@ -51317,7 +55604,7 @@
 
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$P); // @a11y
+        this.classList.add(CLASSNAME$V); // @a11y
 
         if (!this.hasAttribute('role')) {
           this.setAttribute('role', 'group');
@@ -51522,7 +55809,7 @@
     return document.createElement('coral-columnview-column-content');
   });
 
-  var CLASSNAME$Q = '_coral-AssetList-item';
+  var CLASSNAME$W = '_coral-AssetList-item';
   /**
    Enumeration for {@link ColumnViewItem} variants.
 
@@ -51572,7 +55859,7 @@
 
       if (!_this._elements.accessibilityState) {
         // Templates
-        template$x.call(_this._elements, {
+        template$C.call(_this._elements, {
           commons: commons
         });
       }
@@ -51632,7 +55919,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$Q); // @a11y
+        this.classList.add(CLASSNAME$W); // @a11y
 
         this.setAttribute('role', 'treeitem');
         this.id = this.id || commons.getUID(); // only set tabIndex if it is not already set
@@ -51689,7 +55976,7 @@
           handle: 'content',
           tagName: 'coral-columnview-item-content',
           insert: function insert(content) {
-            content.classList.add("".concat(CLASSNAME$Q, "Label")); // Insert before chevron
+            content.classList.add("".concat(CLASSNAME$W, "Label")); // Insert before chevron
 
             this.insertBefore(content, this.querySelector('._coral-AssetList-itemChildIndicator'));
           }
@@ -51711,7 +55998,7 @@
           handle: 'thumbnail',
           tagName: 'coral-columnview-item-thumbnail',
           insert: function insert(thumbnail) {
-            thumbnail.classList.add("".concat(CLASSNAME$Q, "Thumbnail")); // Insert before content
+            thumbnail.classList.add("".concat(CLASSNAME$W, "Thumbnail")); // Insert before content
 
             this.insertBefore(thumbnail, this.content || null);
           }
@@ -51981,7 +56268,7 @@
     return document.createElement('coral-columnview-item-thumbnail');
   });
 
-  var CLASSNAME$R = '_coral-MillerColumns-item';
+  var CLASSNAME$X = '_coral-MillerColumns-item';
   /**
    @class Coral.ColumnView.Preview
    @classdesc A ColumnView Preview component
@@ -52024,7 +56311,7 @@
 
         this.setAttribute('role', 'group');
         this.id = this.id || commons.getUID();
-        this.classList.add(CLASSNAME$R);
+        this.classList.add(CLASSNAME$X);
         var content = this._elements.content; // when the content zone was not created, we need to make sure that everything is added inside it as a content.
         // this stops the content zone from being voracious
 
@@ -52237,7 +56524,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$e = {
+  var translations$f = {
     "en-US": {
       "Column View": "Column View",
       ", checked": ", checked",
@@ -52347,7 +56634,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-columnview': translations$e
+    'coral-component-columnview': translations$f
   }); // Expose component on the Coral namespace
 
   commons._define('coral-columnview-preview', ColumnViewPreview);
@@ -52599,7 +56886,7 @@
     return _class;
   }(BaseComponent(HTMLElement)));
 
-  var template$y = function anonymous(data_0) {
+  var template$D = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -52707,7 +56994,7 @@
   /** @ignore */
 
   var ACTION_TAG_NAME = 'coral-cyclebutton-action';
-  var CLASSNAME$S = '_coral-CycleSelect';
+  var CLASSNAME$Y = '_coral-CycleSelect';
   /**
    @class Coral.CycleButton
    @classdesc A CycleButton component is a simple multi-state toggle button that toggles between the possible items below
@@ -52732,7 +57019,7 @@
       _this._id = _this.id || commons.getUID(); // Templates
 
       _this._elements = {};
-      template$y.call(_this._elements, {
+      template$D.call(_this._elements, {
         Icon: Icon,
         commons: commons,
         id: _this._id
@@ -53092,7 +57379,7 @@
       value: function _checkExtended() {
         var isExtended = this._isExtended();
 
-        this.classList.toggle("".concat(CLASSNAME$S, "--extended"), isExtended); // @a11y
+        this.classList.toggle("".concat(CLASSNAME$Y, "--extended"), isExtended); // @a11y
 
         if (isExtended) {
           this._elements.button.setAttribute('aria-controls', this._elements.overlay.id);
@@ -53438,7 +57725,7 @@
           this.id = this._id;
         }
 
-        this.classList.add(CLASSNAME$S); // Default reflected attributes
+        this.classList.add(CLASSNAME$Y); // Default reflected attributes
 
         if (typeof this._threshold === 'undefined') {
           this.threshold = 3;
@@ -53773,7 +58060,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$f = {
+  var translations$g = {
     "en-US": {
       "Time": "Time",
       "Calendar": "Calendar"
@@ -53852,7 +58139,7 @@
     }
   };
 
-  var template$z = function anonymous(data_0) {
+  var template$E = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["overlay"] = document.createElement("coral-popover");
     el0.setAttribute("tracking", "off");
@@ -53911,7 +58198,7 @@
     return frag;
   };
 
-  var template$A = function anonymous(data_0) {
+  var template$F = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -53971,13 +58258,13 @@
     DEFAULT: 'default',
     QUIET: 'quiet'
   };
-  var CLASSNAME$T = '_coral-InputGroup'; // builds a string containing all possible variant classnames. This will be used to remove
+  var CLASSNAME$Z = '_coral-InputGroup'; // builds a string containing all possible variant classnames. This will be used to remove
   // classnames when the variant changes.
 
   var ALL_VARIANT_CLASSES$a = [];
 
   for (var variantKey in variant$h) {
-    ALL_VARIANT_CLASSES$a.push("".concat(CLASSNAME$T, "--").concat(variant$h[variantKey]));
+    ALL_VARIANT_CLASSES$a.push("".concat(CLASSNAME$Z, "--").concat(variant$h[variantKey]));
   }
   /** @ignore */
 
@@ -54056,12 +58343,12 @@
       _this = _super.call(this); // Prepare templates
 
       _this._elements = {};
-      template$z.call(_this._elements, {
+      template$E.call(_this._elements, {
         commons: commons,
         i18n: i18n
       }); // Creates and stores the contents of the popover separately
 
-      _this._calendarFragment = template$A.call(_this._elements, {
+      _this._calendarFragment = template$F.call(_this._elements, {
         commons: commons,
         i18n: i18n
       }); // Pre-define labellable element
@@ -54282,7 +58569,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$T); // a11y
+        this.classList.add(CLASSNAME$Z); // a11y
 
         this.setAttribute('role', 'group'); // Input attributes per ARIA Autocomplete
 
@@ -54641,7 +58928,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$a);
 
         if (this._variant !== variant$h.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$T, "--").concat(this._variant));
+          this.classList.add("".concat(CLASSNAME$Z, "--").concat(this._variant));
         }
       }
       /**
@@ -54898,7 +59185,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-datepicker': translations$f
+    'coral-component-datepicker': translations$g
   }); // Expose component on the Coral namespace
 
   commons._define('coral-datepicker', Datepicker);
@@ -54914,7 +59201,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$g = {
+  var translations$h = {
     "en-US": {
       "More": "More"
     },
@@ -54974,7 +59261,7 @@
     }
   };
 
-  var template$B = function anonymous(data_0) {
+  var template$G = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -55039,12 +59326,12 @@
     UP: 'up'
   }; // The drawer's base classname
 
-  var CLASSNAME$U = '_coral-Drawer'; // A string of all possible direction classnames
+  var CLASSNAME$_ = '_coral-Drawer'; // A string of all possible direction classnames
 
   var ALL_DIRECTION_CLASSES = [];
 
   for (var directionValue in direction$1) {
-    ALL_DIRECTION_CLASSES.push("".concat(CLASSNAME$U, "--").concat(direction$1[directionValue]));
+    ALL_DIRECTION_CLASSES.push("".concat(CLASSNAME$_, "--").concat(direction$1[directionValue]));
   }
   /**
    @class Coral.Drawer
@@ -55071,7 +59358,7 @@
       _this._elements = {
         content: _this.querySelector('coral-drawer-content') || document.createElement('coral-drawer-content')
       };
-      template$B.call(_this._elements, {
+      template$G.call(_this._elements, {
         commons: commons,
         i18n: i18n
       }); // Events
@@ -55105,7 +59392,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$U, 'coral-Well'); // Default reflected attributes
+        this.classList.add(CLASSNAME$_, 'coral-Well'); // Default reflected attributes
 
         if (!this._direction) {
           this.direction = direction$1.DOWN;
@@ -55208,7 +59495,7 @@
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_DIRECTION_CLASSES);
 
-        this.classList.add("".concat(CLASSNAME$U, "--").concat(this._direction));
+        this.classList.add("".concat(CLASSNAME$_, "--").concat(this._direction));
       }
       /**
        Whether the Drawer is expanded or not.
@@ -55332,7 +59619,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-drawer': translations$g
+    'coral-component-drawer': translations$h
   }); // Expose component on the Coral namespace
 
   commons._define('coral-drawer', Drawer);
@@ -56460,7 +60747,7 @@
     return FileUploadItem;
   }();
 
-  var template$C = function anonymous(data_0) {
+  var template$H = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["input"] = document.createElement("input");
     el0.id = data_0["commons"]["getUID"]();
@@ -56476,7 +60763,7 @@
     return frag;
   };
 
-  var CLASSNAME$V = '_coral-FileUpload';
+  var CLASSNAME$$ = '_coral-FileUpload';
   var XHR_EVENT_NAMES = ['loadstart', 'progress', 'load', 'error', 'loadend', 'readystatechange', 'abort', 'timeout'];
   /**
    Enumeration for {@link FileUpload} HTTP methods that can be used to upload files.
@@ -56550,7 +60837,7 @@
 
 
       _this._elements = {};
-      template$C.call(_this._elements, {
+      template$H.call(_this._elements, {
         commons: commons
       }); // Pre-define labellable element
 
@@ -57183,7 +61470,7 @@
 
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$V);
+        this.classList.add(CLASSNAME$$);
         var button = this.querySelector('[coral-fileupload-select]');
 
         if (button) {
@@ -57648,7 +61935,7 @@
 
   FileUpload.Item = FileUploadItem;
 
-  var template$D = function anonymous(data_0) {
+  var template$I = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["quickactions"] = document.createElement("div");
     el0.setAttribute("handle", "quickactions");
@@ -58002,7 +62289,7 @@
     return Event;
   }();
 
-  var CLASSNAME$W = '_coral-Masonry-item';
+  var CLASSNAME$10 = '_coral-Masonry-item';
   /** @ignore */
 
   var isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(window.navigator.platform);
@@ -58034,7 +62321,7 @@
       _this._dragAction = null; // Template
 
       _this._elements = {};
-      template$D.call(_this._elements);
+      template$I.call(_this._elements);
       return _this;
     } // @compat
 
@@ -58160,7 +62447,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$W); // @a11y
+        this.classList.add(CLASSNAME$10); // @a11y
 
         this.setAttribute('tabindex', '-1'); // @a11y Add live region element to ensure announcement of selected state
 
@@ -58300,7 +62587,7 @@
     return _class;
   }(BaseComponent(HTMLElement)));
 
-  var CLASSNAME$X = '_coral-Masonry';
+  var CLASSNAME$11 = '_coral-Masonry';
   /** @ignore */
 
   var isMacLike$1 = /(Mac|iPhone|iPod|iPad)/i.test(window.navigator.platform);
@@ -59141,7 +63428,7 @@
 
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$X); // Keep the default behavior when ariaGrid is not enabled
+        this.classList.add(CLASSNAME$11); // Keep the default behavior when ariaGrid is not enabled
 
         if (this._ariaGrid === ariaGrid.OFF) {
           // a11y
@@ -60476,7 +64763,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$h = {
+  var translations$i = {
     "en-US": {
       "({0} of {1})": "({0} of {1})",
       "Remove": "Remove",
@@ -60653,7 +64940,7 @@
     return MultifieldCollection;
   }(Collection$1);
 
-  var CLASSNAME$Y = '_coral-Multifield';
+  var CLASSNAME$12 = '_coral-Multifield';
   var IS_DRAGGING_CLASS$1 = 'is-dragging';
   var IS_AFTER_CLASS = 'is-after';
   var IS_BEFORE_CLASS = 'is-before';
@@ -61281,7 +65568,7 @@
 
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$Y, 'coral-Well'); // a11y
+        this.classList.add(CLASSNAME$12, 'coral-Well'); // a11y
 
         this.setAttribute('role', 'list'); // Assign the content zones, moving them into place in the process
 
@@ -61406,7 +65693,7 @@
     return _class;
   }(BaseComponent(HTMLElement)));
 
-  var template$E = function anonymous(data_0) {
+  var template$J = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["remove"] = document.createElement("button", "coral-button");
     el0.id = data_0["uid"] + "-remove";
@@ -61448,7 +65735,7 @@
     return frag;
   };
 
-  var CLASSNAME$Z = '_coral-Multifield-item';
+  var CLASSNAME$13 = '_coral-Multifield-item';
   /**
    @class Coral.Multifield.Item
    @classdesc A Multifield item component. It can have a pre-filled content different from the Multifield template but
@@ -61481,7 +65768,7 @@
 
       _this._elements.content.setAttribute('id', "".concat(uid, "-content"));
 
-      template$E.call(_this._elements, {
+      template$J.call(_this._elements, {
         i18n: i18n,
         uid: uid
       });
@@ -61501,7 +65788,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$Z); // a11y
+        this.classList.add(CLASSNAME$13); // a11y
 
         this.setAttribute('role', 'listitem'); // Create a fragment
 
@@ -61648,7 +65935,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-multifield': translations$h
+    'coral-component-multifield': translations$i
   }); // Expose component on the Coral namespace
 
   commons._define('coral-multifield-item', MultifieldItem);
@@ -61658,7 +65945,7 @@
   Multifield.Item = MultifieldItem;
   Multifield.Item.Content = MultifieldItemContent;
 
-  var CLASSNAME$_ = '_coral-PanelStack';
+  var CLASSNAME$14 = '_coral-PanelStack';
   /**
    @class Coral.PanelStack
    @classdesc A PanelStack component holding a collection of panels. It wraps content, keeping only the selected panel in view.
@@ -61757,7 +66044,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$_);
+        this.classList.add(CLASSNAME$14);
         this.setAttribute('role', 'presentation'); // Don't trigger events once connected
 
         this._preventTriggeringEvents = true;
@@ -61809,7 +66096,7 @@
     return _class;
   }(BaseComponent(HTMLElement)));
 
-  var CLASSNAME$$ = '_coral-Panel';
+  var CLASSNAME$15 = '_coral-Panel';
   /**
    @class Coral.Panel
    @classdesc A Panel component
@@ -61850,7 +66137,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$$); // Adds the role to support accessibility when role is not already defined.
+        this.classList.add(CLASSNAME$15); // Adds the role to support accessibility when role is not already defined.
 
         if (!this.hasAttribute('role')) {
           this.setAttribute('role', 'region');
@@ -61971,7 +66258,7 @@
 
   Panel.Content = PanelContent;
 
-  var template$F = function anonymous(data_0) {
+  var template$K = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["percentage"] = document.createElement("div");
     el0.className += " _coral-BarLoader-percentage";
@@ -62038,7 +66325,7 @@
     BOTTOM: 'bottom'
   }; // Base classname
 
-  var CLASSNAME$10 = '_coral-BarLoader';
+  var CLASSNAME$16 = '_coral-BarLoader';
   /**
    @class Coral.Progress
    @classdesc A Progress component to indicate progress of processes.
@@ -62064,7 +66351,7 @@
         // Fetch or create the content content zone element
         label: _this.querySelector('coral-progress-label') || document.createElement('coral-progress-label')
       };
-      template$F.call(_this._elements); // Watch for label changes
+      template$K.call(_this._elements); // Watch for label changes
 
       _this._observer = new MutationObserver(_this._toggleLabelVisibility.bind(_assertThisInitialized(_this)));
 
@@ -62164,7 +66451,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$10); // Default reflected attributes
+        this.classList.add(CLASSNAME$16); // Default reflected attributes
 
         if (!this._value) {
           this.value = this.value;
@@ -62274,14 +66561,14 @@
         this._reflectAttribute('indeterminate', this._indeterminate);
 
         if (this._indeterminate) {
-          this.classList.add("".concat(CLASSNAME$10, "--indeterminate")); // ARIA: Remove attributes
+          this.classList.add("".concat(CLASSNAME$16, "--indeterminate")); // ARIA: Remove attributes
 
           this.removeAttribute('aria-valuenow');
           this.removeAttribute('aria-valuemin');
           this.removeAttribute('aria-valuemax');
           this.value = 0;
         } else {
-          this.classList.remove("".concat(CLASSNAME$10, "--indeterminate")); // ARIA: Add attributes
+          this.classList.remove("".concat(CLASSNAME$16, "--indeterminate")); // ARIA: Add attributes
 
           this.setAttribute('aria-valuemin', '0');
           this.setAttribute('aria-valuemax', '100');
@@ -62308,7 +66595,7 @@
 
         this._reflectAttribute('size', this._size);
 
-        this.classList.toggle("".concat(CLASSNAME$10, "--small"), this._size === size$6.SMALL);
+        this.classList.toggle("".concat(CLASSNAME$16, "--small"), this._size === size$6.SMALL);
       }
       /**
        Boolean attribute to toggle showing progress percent as the label content.
@@ -62353,7 +66640,7 @@
           handle: 'label',
           tagName: 'coral-progress-label',
           insert: function insert(label) {
-            label.classList.add("".concat(CLASSNAME$10, "-label"));
+            label.classList.add("".concat(CLASSNAME$16, "-label"));
             this.appendChild(label);
           }
         });
@@ -62733,7 +67020,7 @@
     return _class;
   }(BaseComponent(HTMLElement)));
 
-  var template$G = function anonymous(data_0) {
+  var template$L = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["moreButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("tracking", "off");
@@ -62832,7 +67119,7 @@
     BOTTOM: 'bottom'
   };
   var OFFSET$2 = 10;
-  var CLASSNAME$11 = '_coral-QuickActions';
+  var CLASSNAME$17 = '_coral-QuickActions';
   /**
    @class Coral.QuickActions
    @classdesc A QuickActions component is an overlay component that reveals actions when interacting with a container.
@@ -62874,7 +67161,7 @@
 
       _this._timeout = null; // Template
 
-      template$G.call(_this._elements, {
+      template$L.call(_this._elements, {
         commons: commons,
         i18n: i18n
       });
@@ -63917,7 +68204,7 @@
 
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$11); // Define QuickActions as a menu
+        this.classList.add(CLASSNAME$17); // Define QuickActions as a menu
 
         this.setAttribute('role', 'menu'); // Support cloneNode
 
@@ -64182,7 +68469,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$i = {
+  var translations$j = {
     "en-US": {
       "More actions": "More actions"
     },
@@ -64255,7 +68542,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-quickactions': translations$i
+    'coral-component-quickactions': translations$j
   }); // Expose component on the Coral namespace
 
   commons._define('coral-quickactions-item', QuickActionsItem);
@@ -64501,7 +68788,7 @@
     }
   };
 
-  var CLASSNAME$12 = '_coral-Shell';
+  var CLASSNAME$18 = '_coral-Shell';
   /**
    @class Coral.Shell
    @classdesc The Shell base component to be used with its family for console like applications. See examples for how to
@@ -64547,7 +68834,7 @@
 
         _get(_getPrototypeOf(Shell.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$12);
+        this.classList.add(CLASSNAME$18);
         var header = this._elements.header;
         var menus = this.menus.getAll();
         var content = this._elements.content; // If the the content zone is not provided, we need to make sure that it holds all children
@@ -64661,7 +68948,7 @@
     return document.createElement('coral-shell-content');
   });
 
-  var CLASSNAME$13 = '_coral-Shell-header';
+  var CLASSNAME$19 = '_coral-Shell-header';
   /**
    @class Coral.Shell.Header
    @classdesc A Shell Header component
@@ -64708,7 +68995,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellHeader.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$13); // appheader only exists on darkest theme
+        this.classList.add(CLASSNAME$19); // appheader only exists on darkest theme
 
         this.classList.add('coral--darkest', 'u-coral-clearFix');
         var home = this._elements.home;
@@ -64805,7 +69092,7 @@
     return ShellHeader;
   }(BaseComponent(HTMLElement));
 
-  var template$H = function anonymous(data_0) {
+  var template$M = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("handle", "icon");
@@ -64818,7 +69105,7 @@
     return frag;
   };
 
-  var CLASSNAME$14 = '_coral-Shell-homeAnchor';
+  var CLASSNAME$1a = '_coral-Shell-homeAnchor';
   /**
    @class Coral.Shell.HomeAnchor
    @classdesc A Shell Home Anchor component
@@ -64846,7 +69133,7 @@
         label: _this.querySelector('coral-shell-homeanchor-label') || document.createElement('coral-shell-homeanchor-label')
       }; // Create icon by default
 
-      template$H.call(_this._elements);
+      template$M.call(_this._elements);
       return _this;
     }
     /**
@@ -64863,7 +69150,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellHomeAnchor.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$14); // Create doc fragment
+        this.classList.add(CLASSNAME$1a); // Create doc fragment
 
         var fragment = document.createDocumentFragment();
         var label = this._elements.label; // Remove it so we can process children
@@ -64988,7 +69275,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$j = {
+  var translations$k = {
     "it-IT": {
       "Clear search": "Azzera ricerca"
     },
@@ -65048,7 +69335,7 @@
     }
   };
 
-  var template$I = function anonymous(data_0) {
+  var template$N = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["input"] = document.createElement("input", "coral-textfield");
@@ -65087,7 +69374,7 @@
     return frag;
   };
 
-  var CLASSNAME$15 = '_coral-Search';
+  var CLASSNAME$1b = '_coral-Search';
   /**
    Enumeration for {@link Search} variants.
 
@@ -65137,7 +69424,7 @@
 
 
       _this._elements = {};
-      template$I.call(_this._elements, {
+      template$N.call(_this._elements, {
         i18n: i18n,
         Icon: Icon
       }); // Pre-define labellable element
@@ -65246,7 +69533,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$15); // Default reflected attributes
+        this.classList.add(CLASSNAME$1b); // Default reflected attributes
 
         if (!this._icon) {
           this.icon = 'search';
@@ -65518,12 +69805,12 @@
    */
 
   commons.extend(strings, {
-    'coral-component-search': translations$j
+    'coral-component-search': translations$k
   }); // Expose component on the Coral namespace
 
   commons._define('coral-search', Search);
 
-  var template$J = function anonymous(data_0) {
+  var template$O = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -65600,7 +69887,7 @@
     return frag;
   };
 
-  var template$K = function anonymous(data_0) {
+  var template$P = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = document.createElement("coral-list-item-content");
     var el1 = document.createTextNode(data_0["title"] + "\n  ");
@@ -65617,7 +69904,7 @@
     return frag;
   };
 
-  var template$L = function anonymous(data_0) {
+  var template$Q = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = document.createElement("div");
     el0.className += " _coral-Shell-help-resultMessage-container";
@@ -65635,7 +69922,7 @@
     return frag;
   };
 
-  var template$M = function anonymous(data_0) {
+  var template$R = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = document.createElement("div");
     el0.className += " _coral-Shell-help-resultMessage-container";
@@ -65674,7 +69961,7 @@
       _this = _super.call(this); // Prepare templates
 
       _this._elements = {};
-      template$J.call(_this._elements, {
+      template$O.call(_this._elements, {
         commons: commons,
         i18n: i18n
       }); // Events
@@ -65815,7 +70102,7 @@
 
         this._elements.resultMessage.innerHTML = ''; // Show the error message
 
-        this._showMessage('resultMessage', template$L.call(this._elements, {
+        this._showMessage('resultMessage', template$Q.call(this._elements, {
           i18n: i18n
         }));
       }
@@ -65847,7 +70134,7 @@
           // Clear existing result message
           this._elements.resultMessage.innerHTML = ''; // Indicate to the user that no results were found
 
-          this._showMessage('resultMessage', template$M.call(this._elements, {
+          this._showMessage('resultMessage', template$R.call(this._elements, {
             i18n: i18n
           }));
         } else {
@@ -65863,7 +70150,7 @@
               target: result.target
             });
             item.classList.add('_coral-Shell-help-result-item');
-            item.content = template$K.call(_this3._elements, {
+            item.content = template$P.call(_this3._elements, {
               title: result.title,
               description: description
             }).firstElementChild;
@@ -65979,7 +70266,7 @@
     return ShellHelp;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$16 = '_coral-Shell-help-item';
+  var CLASSNAME$1c = '_coral-Shell-help-item';
   /**
    @class Coral.Shell.Help.Item
    @classdesc A Shell Help item component
@@ -66005,7 +70292,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellHelpItem.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$16);
+        this.classList.add(CLASSNAME$1c);
       }
     }]);
 
@@ -66036,7 +70323,7 @@
     return document.createElement('coral-shell-help-separator');
   });
 
-  var CLASSNAME$17 = '_coral-Shell-menu';
+  var CLASSNAME$1d = '_coral-Shell-menu';
   /**
    @class Coral.Shell.Menu
    @classdesc A Shell Menu component
@@ -66062,7 +70349,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellMenu.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$17);
+        this.classList.add(CLASSNAME$1d);
         this.trigger('coral-shell-menu:_connected');
       }
     }, {
@@ -66109,7 +70396,7 @@
 
         this._reflectAttribute('full', this._full);
 
-        this.classList.toggle("".concat(CLASSNAME$17, "--full"), this._full);
+        this.classList.toggle("".concat(CLASSNAME$1d, "--full"), this._full);
       }
       /** @ignore */
 
@@ -66123,7 +70410,7 @@
     return ShellMenu;
   }(Popover);
 
-  var CLASSNAME$18 = '_coral-Shell-menubar';
+  var CLASSNAME$1e = '_coral-Shell-menubar';
   /**
    @class Coral.Shell.MenuBar
    @classdesc A Shell MenuBar component
@@ -66165,7 +70452,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellMenuBar.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$18);
+        this.classList.add(CLASSNAME$1e);
       }
     }, {
       key: "items",
@@ -66185,7 +70472,7 @@
     return ShellMenuBar;
   }(BaseComponent(HTMLElement));
 
-  var template$N = function anonymous(data_0) {
+  var template$S = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["shellMenuButton"] = document.createElement("button", "coral-button");
     el0.setAttribute("is", "coral-button");
@@ -66250,13 +70537,13 @@
     DEFAULT: null
   }; // the Menubar Item's base classname
 
-  var CLASSNAME$19 = '_coral-Shell-menubar-item'; // Builds a string containing all possible iconVariant classnames. This will be used to remove classnames when the variant
+  var CLASSNAME$1f = '_coral-Shell-menubar-item'; // Builds a string containing all possible iconVariant classnames. This will be used to remove classnames when the variant
   // changes
 
   var ALL_ICON_VARIANT_CLASSES = [];
 
   for (var variantValue$8 in iconVariant) {
-    ALL_ICON_VARIANT_CLASSES.push("".concat(CLASSNAME$19, "--").concat(iconVariant[variantValue$8]));
+    ALL_ICON_VARIANT_CLASSES.push("".concat(CLASSNAME$1f, "--").concat(iconVariant[variantValue$8]));
   }
   /**
    @class Coral.Shell.MenuBar.Item
@@ -66281,7 +70568,7 @@
       _this = _super.call(this); // Templates
 
       _this._elements = {};
-      template$N.call(_this._elements); // Events
+      template$S.call(_this._elements); // Events
 
       _this._delegateEvents({
         'click [handle="shellMenuButton"]': '_handleButtonClick',
@@ -66394,7 +70681,7 @@
         _get(_getPrototypeOf(ShellMenuBarItem.prototype), "render", this).call(this);
 
         this.setAttribute('role', 'listitem');
-        this.classList.add(CLASSNAME$19);
+        this.classList.add(CLASSNAME$1f);
         var button = this.querySelector('._coral-Shell-menu-button');
 
         if (button) {
@@ -66472,7 +70759,7 @@
 
 
         if (this.variant !== iconVariant.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$19, "--").concat(this._iconVariant));
+          this.classList.add("".concat(CLASSNAME$1f, "--").concat(this._iconVariant));
         }
       }
       /**
@@ -66646,7 +70933,7 @@
     return ShellMenuBarItem;
   }(BaseComponent(HTMLElement));
 
-  var template$O = function anonymous(data_0) {
+  var template$T = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.className += " _coral-Shell-user-container";
@@ -66675,7 +70962,7 @@
     return frag;
   };
 
-  var CLASSNAME$1a = '_coral-Shell-user';
+  var CLASSNAME$1g = '_coral-Shell-user';
   /**
    Enumeration for {@link ShellUser} avatar options. Avatar assets should use one of those provided, when no asset is set
 
@@ -66717,7 +71004,7 @@
         content: _this.querySelector('coral-shell-user-content') || document.createElement('coral-shell-user-content'),
         footer: _this.querySelector('coral-shell-user-footer') || document.createElement('coral-shell-user-footer')
       };
-      template$O.call(_this._elements, {
+      template$T.call(_this._elements, {
         icon: avatar.DEFAULT
       });
       return _this;
@@ -66738,7 +71025,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellUser.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1a);
+        this.classList.add(CLASSNAME$1g);
         var frag = document.createDocumentFragment(); // Render template
 
         frag.appendChild(this._elements.container);
@@ -67029,7 +71316,7 @@
     return document.createElement('coral-shell-user-subheading');
   });
 
-  var CLASSNAME$1b = '_coral-Shell-workspaces';
+  var CLASSNAME$1h = '_coral-Shell-workspaces';
   /**
    @class Coral.Shell.Workspaces
    @classdesc A Shell Workspaces component
@@ -67259,7 +71546,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellWorkspaces.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1b); // Don't trigger events once connected
+        this.classList.add(CLASSNAME$1h); // Don't trigger events once connected
 
         this._preventTriggeringEvents = true;
 
@@ -67308,7 +71595,7 @@
     return ShellWorkspaces;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1c = '_coral-Shell-workspaces-workspace';
+  var CLASSNAME$1i = '_coral-Shell-workspaces-workspace';
   /**
    @class Coral.Shell.Workspace
    @classdesc A Shell Workspace component
@@ -67364,7 +71651,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellWorkspace.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1c);
+        this.classList.add(CLASSNAME$1i);
       }
       /**
        Triggered when a {@link ShellWorkspace} selection changed.
@@ -67396,7 +71683,7 @@
     return ShellWorkspace;
   }(BaseComponent(HTMLAnchorElement));
 
-  var template$P = function anonymous(data_0) {
+  var template$U = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.setAttribute("handle", "container");
@@ -67407,7 +71694,7 @@
     return frag;
   };
 
-  var CLASSNAME$1d = '_coral-Shell-solutionSwitcher';
+  var CLASSNAME$1j = '_coral-Shell-solutionSwitcher';
   /**
    @class Coral.Shell.SolutionSwitcher
    @classdesc A Shell Solution Switcher component
@@ -67430,7 +71717,7 @@
       _this = _super.call(this); // Template
 
       _this._elements = {};
-      template$P.call(_this._elements); // Listen for mutations
+      template$U.call(_this._elements); // Listen for mutations
 
       var observer = new MutationObserver(function (mutations) {
         mutations.forEach(function (mutation) {
@@ -67463,7 +71750,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellSolutionSwitcher.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1d); // force darkest theme
+        this.classList.add(CLASSNAME$1j); // force darkest theme
 
         this.classList.add('coral--darkest');
 
@@ -67499,7 +71786,7 @@
     return ShellSolutionSwitcher;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1e = '_coral-Shell-solutions';
+  var CLASSNAME$1k = '_coral-Shell-solutions';
   /**
    @class Coral.Shell.Solutions
    @classdesc A Shell Solutions component
@@ -67573,7 +71860,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellSolutions.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1e); // Sort linked solutions then non linked solutions alphabetically
+        this.classList.add(CLASSNAME$1k); // Sort linked solutions then non linked solutions alphabetically
 
         this._sortSolutions();
       }
@@ -67615,7 +71902,7 @@
 
         this._reflectAttribute('secondary', this._secondary);
 
-        this.classList.toggle("".concat(CLASSNAME$1e, "--secondary"), this._secondary);
+        this.classList.toggle("".concat(CLASSNAME$1k, "--secondary"), this._secondary);
       }
     }], [{
       key: "observedAttributes",
@@ -67653,7 +71940,7 @@
     return document.createElement('coral-shell-solutions-header');
   });
 
-  var template$Q = function anonymous(data_0) {
+  var template$V = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("size", "XL");
@@ -67666,7 +71953,7 @@
     return frag;
   };
 
-  var CLASSNAME$1f = '_coral-Shell-solution';
+  var CLASSNAME$1l = '_coral-Shell-solution';
   /**
    @class Coral.Shell.Solution
    @classdesc A Shell Solution component
@@ -67692,7 +71979,7 @@
         // Fetch or create the content zone elements
         label: _this.querySelector('coral-shell-solution-label') || document.createElement('coral-shell-solution-label')
       };
-      template$Q.call(_this._elements);
+      template$V.call(_this._elements);
       return _this;
     }
     /**
@@ -67710,7 +71997,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellSolution.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1f);
+        this.classList.add(CLASSNAME$1l);
         var fragment = document.createDocumentFragment(); // Render template
 
         fragment.appendChild(this._elements.icon);
@@ -67782,7 +72069,7 @@
 
         this._reflectAttribute('linked', this._linked);
 
-        this.classList.toggle("".concat(CLASSNAME$1f, "--linked"), this._linked);
+        this.classList.toggle("".concat(CLASSNAME$1l, "--linked"), this._linked);
       }
     }, {
       key: "_contentZones",
@@ -67825,7 +72112,7 @@
     return document.createElement('coral-shell-solution-label');
   });
 
-  var template$R = function anonymous(data_0) {
+  var template$W = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("coral-selectlist");
     el0.setAttribute("handle", "container");
@@ -67836,7 +72123,7 @@
     return frag;
   };
 
-  var CLASSNAME$1g = '_coral-Shell-selectListSwitcher';
+  var CLASSNAME$1m = '_coral-Shell-selectListSwitcher';
   /**
    @class Coral.Shell.SelectListSwitcher
    @classdesc A Shell SelectList Switcher component
@@ -67859,7 +72146,7 @@
       _this = _super.call(this); // Template
 
       _this._elements = {};
-      template$R.call(_this._elements);
+      template$W.call(_this._elements);
 
       _this._delegateEvents({
         'coral-selectlist:change': '_onSelectListChange',
@@ -67929,7 +72216,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellSelectListSwitcher.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1g);
+        this.classList.add(CLASSNAME$1m);
 
         var container = this.querySelector('._coral-Shell-selectList-container') || this._elements.container; // Put the container as first child
 
@@ -67958,7 +72245,7 @@
     return ShellSelectListSwitcher;
   }(BaseComponent(HTMLElement));
 
-  var CLASSNAME$1h = '_coral-Shell-selectlistswitcher-item';
+  var CLASSNAME$1n = '_coral-Shell-selectlistswitcher-item';
   /**
    @class Coral.Shell.SelectListSwitcherItem
    @classdesc A Shell SelectListSwitcherItem component
@@ -67985,7 +72272,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellSelectListSwitcherItem.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1h);
+        this.classList.add(CLASSNAME$1n);
       }
     }, {
       key: "href",
@@ -68027,7 +72314,7 @@
     return ShellSelectListSwitcherItem;
   }(BaseComponent(HTMLElement));
 
-  var template$S = function anonymous(data_0) {
+  var template$X = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     data = data_0;
@@ -68088,7 +72375,7 @@
     return frag;
   };
 
-  var CLASSNAME$1i = '_coral-Shell-orgSwitcher';
+  var CLASSNAME$1o = '_coral-Shell-orgSwitcher';
   /**
    Minimum number of entries required to show search control.
 
@@ -68131,7 +72418,7 @@
       _this._elements = {
         footer: _this.querySelector('coral-shell-orgswitcher-footer') || document.createElement('coral-shell-orgswitcher-footer')
       };
-      template$S.call(_this._elements, {
+      template$X.call(_this._elements, {
         commons: commons,
         i18n: i18n
       }); // Used for eventing
@@ -68338,7 +72625,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellOrgSwitcher.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1i); // Move the items into the right place
+        this.classList.add(CLASSNAME$1o); // Move the items into the right place
 
         this._moveItems();
 
@@ -68479,7 +72766,7 @@
     return document.createElement('coral-shell-orgswitcher-footer');
   });
 
-  var template$T = function anonymous(data_0) {
+  var template$Y = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["checkmark"] = document.createElement("span");
@@ -68505,7 +72792,7 @@
     return frag;
   };
 
-  var CLASSNAME$1j = '_coral-Shell-orgSwitcher-item';
+  var CLASSNAME$1p = '_coral-Shell-orgSwitcher-item';
   /**
    @class Coral.Shell.Organization
    @classdesc A Shell Organization component
@@ -68535,7 +72822,7 @@
       });
 
       var template = {};
-      template$T.call(template, {
+      template$Y.call(template, {
         Icon: Icon
       });
       commons.extend(_this._elements, template); // Used for eventing
@@ -68678,7 +72965,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellOrganization.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1j); // Move items into the right place
+        this.classList.add(CLASSNAME$1p); // Move items into the right place
 
         this._moveItems();
 
@@ -68806,7 +73093,7 @@
     return ShellOrganization;
   }(List.Item);
 
-  var CLASSNAME$1k = '_coral-Shell-orgSwitcher-subitem';
+  var CLASSNAME$1q = '_coral-Shell-orgSwitcher-subitem';
   /**
    @class Coral.Shell.Suborganization
    @classdesc A Shell Sub organization component
@@ -68832,7 +73119,7 @@
       value: function render() {
         _get(_getPrototypeOf(ShellSuborganization.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1k); // Set the icon size
+        this.classList.add(CLASSNAME$1q); // Set the icon size
 
         this._elements.icon.size = Icon.size.SMALL; // Be accessible
 
@@ -68937,7 +73224,7 @@
   Shell.SelectListSwitcher = ShellSelectListSwitcher;
   Shell.SelectListSwitcherItem = ShellSelectListSwitcherItem;
 
-  var CLASSNAME$1l = '_coral-SideNav';
+  var CLASSNAME$1r = '_coral-SideNav';
 
   var isLevel = function isLevel(node) {
     return node.nodeName === 'CORAL-SIDENAV-LEVEL';
@@ -69166,7 +73453,7 @@
     }, {
       key: "_syncHeading",
       value: function _syncHeading(heading) {
-        heading.classList.add("".concat(CLASSNAME$1l, "-heading"));
+        heading.classList.add("".concat(CLASSNAME$1r, "-heading"));
         heading.setAttribute('role', 'heading');
       }
     }, {
@@ -69215,7 +73502,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1l); // Default reflected attributes
+        this.classList.add(CLASSNAME$1r); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$j.DEFAULT;
@@ -69295,7 +73582,7 @@
 
         this._reflectAttribute('variant', this._variant);
 
-        this.classList.toggle("".concat(CLASSNAME$1l, "--multiLevel"), this._variant === variant$j.MULTI_LEVEL);
+        this.classList.toggle("".concat(CLASSNAME$1r, "--multiLevel"), this._variant === variant$j.MULTI_LEVEL);
 
         if (this.variant === variant$j.MULTI_LEVEL) {
           // Don't hide the selected item level
@@ -69326,7 +73613,7 @@
     return _class;
   }(BaseComponent(HTMLElement)));
 
-  var template$U = function anonymous(data_0) {
+  var template$Z = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["container"] = document.createElement("div");
     el0.className += " _coral-SideNav-itemLink";
@@ -69357,7 +73644,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var CLASSNAME$1m = '_coral-SideNav-item';
+  var CLASSNAME$1s = '_coral-SideNav-item';
   /**
    @class Coral.SideNav.Item
    @classdesc A SideNav Item component.
@@ -69382,7 +73669,7 @@
       _this._elements = {
         content: _this.querySelector('coral-sidenav-item-content') || document.createElement('coral-sidenav-item-content')
       };
-      template$U.call(_this._elements);
+      template$Z.call(_this._elements);
 
       _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(_class.prototype)), "_observeLabel", _thisSuper).call(_thisSuper);
 
@@ -69402,7 +73689,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1m); // Create a fragment
+        this.classList.add(CLASSNAME$1s); // Create a fragment
 
         var fragment = document.createDocumentFragment(); // Render the main template
 
@@ -69547,7 +73834,7 @@
     return document.createElement('coral-sidenav-heading');
   });
 
-  var CLASSNAME$1n = '_coral-SideNav';
+  var CLASSNAME$1t = '_coral-SideNav';
   /**
    @class Coral.SideNav.Level
    @classdesc A SideNav Level component
@@ -69625,7 +73912,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1n); // a11y
+        this.classList.add(CLASSNAME$1t); // a11y
 
         this.setAttribute('role', 'region');
       }
@@ -69686,7 +73973,7 @@
     CTA: 'cta',
     SECONDARY: 'secondary'
   };
-  var CLASSNAME$1o = '_coral-SplitButton';
+  var CLASSNAME$1u = '_coral-SplitButton';
   /**
    @class Coral.SplitButton
    @classdesc A Split Button component composed of an action and a trigger {@link AnchorButton} or {@link Button}.
@@ -69810,7 +74097,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1o); // a11y
+        this.classList.add(CLASSNAME$1u); // a11y
 
         this.setAttribute('role', 'group'); // Default reflected attributes
 
@@ -69918,7 +74205,7 @@
     MAGENTA: 'magenta',
     PURPLE: 'purple'
   };
-  var CLASSNAME$1p = '_coral-StatusLight';
+  var CLASSNAME$1v = '_coral-StatusLight';
   var variantMapping = {
     SUCCESS: 'positive',
     ERROR: 'negative',
@@ -69927,13 +74214,13 @@
   var ALL_VARIANT_CLASSES$b = [];
 
   for (var variantValue$9 in variant$l) {
-    ALL_VARIANT_CLASSES$b.push("".concat(CLASSNAME$1p, "--").concat(variantMapping[variantValue$9] || variant$l[variantValue$9]));
+    ALL_VARIANT_CLASSES$b.push("".concat(CLASSNAME$1v, "--").concat(variantMapping[variantValue$9] || variant$l[variantValue$9]));
   }
 
   var ALL_COLOR_CLASSES$1 = [];
 
   for (var colorValue$1 in color$1) {
-    ALL_COLOR_CLASSES$1.push("".concat(CLASSNAME$1p, "--").concat(color$1[colorValue$1]));
+    ALL_COLOR_CLASSES$1.push("".concat(CLASSNAME$1v, "--").concat(color$1[colorValue$1]));
   }
   /**
    @class Coral.Status
@@ -69981,7 +74268,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1p); // Default reflected attributes
+        this.classList.add(CLASSNAME$1v); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$l.NEUTRAL;
@@ -70040,7 +74327,7 @@
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$b);
 
-        this.classList.add("".concat(CLASSNAME$1p, "--").concat(variantMapping[this._variant.toUpperCase()] || this._variant));
+        this.classList.add("".concat(CLASSNAME$1v, "--").concat(variantMapping[this._variant.toUpperCase()] || this._variant));
       }
       /**
        The status color. See {@link StatusColorEnum}.
@@ -70080,7 +74367,7 @@
         (_this$classList2 = this.classList).remove.apply(_this$classList2, ALL_COLOR_CLASSES$1);
 
         if (this._color !== color$1.DEFAULT) {
-          this.classList.add("".concat(CLASSNAME$1p, "--").concat(this._color));
+          this.classList.add("".concat(CLASSNAME$1v, "--").concat(this._color));
         }
       }
       /**
@@ -70249,7 +74536,7 @@
     LARGE: 'L'
   }; // the StepList's base classname
 
-  var CLASSNAME$1q = '_coral-Steplist';
+  var CLASSNAME$1w = '_coral-Steplist';
   /**
    @class Coral.StepList
    @classdesc A StepList component that holds a collection of steps.
@@ -70569,7 +74856,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1q); // Default reflected attributes
+        this.classList.add(CLASSNAME$1w); // Default reflected attributes
 
         if (!this._interaction) {
           this.interaction = interaction$4.OFF;
@@ -70716,7 +75003,7 @@
 
         this._reflectAttribute('size', this._size);
 
-        this.classList.toggle("".concat(CLASSNAME$1q, "--small"), this._size === size$7.SMALL);
+        this.classList.toggle("".concat(CLASSNAME$1w, "--small"), this._size === size$7.SMALL);
 
         if (!this.items.length) {
           return;
@@ -70772,7 +75059,7 @@
         this._reflectAttribute('interaction', this._interaction);
 
         var isInteractive = this._interaction === interaction$4.ON;
-        this.classList.toggle("".concat(CLASSNAME$1q, "--interactive"), isInteractive);
+        this.classList.toggle("".concat(CLASSNAME$1w, "--interactive"), isInteractive);
 
         if (!this.items.length) {
           return;
@@ -70828,7 +75115,7 @@
     return _class;
   }(BaseComponent(HTMLElement)));
 
-  var template$V = function anonymous(data_0) {
+  var template$_ = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["link"] = document.createElement("a");
     el0.className += " _coral-Steplist-link";
@@ -70880,7 +75167,7 @@
     return frag;
   };
 
-  var CLASSNAME$1r = '_coral-Steplist-item';
+  var CLASSNAME$1x = '_coral-Steplist-item';
   /**
    @class Coral.Step
    @classdesc A Step component
@@ -70905,7 +75192,7 @@
       _this._elements = {
         label: _this.querySelector('coral-step-label') || document.createElement('coral-step-label')
       };
-      template$V.call(_this._elements);
+      template$_.call(_this._elements);
       return _this;
     }
     /**
@@ -70998,7 +75285,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1r); // Generate a unique ID for the Step panel if one isn't already present
+        this.classList.add(CLASSNAME$1x); // Generate a unique ID for the Step panel if one isn't already present
         // This will be used for accessibility purposes
 
         this.setAttribute('id', this.id || commons.getUID()); // A11y
@@ -71350,7 +75637,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$k = {
+  var translations$l = {
     "en-US": {
       "Step List": "Step List",
       "completed: ": "completed: ",
@@ -71480,7 +75767,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-steplist': translations$k
+    'coral-component-steplist': translations$l
   }); // Expose component on the Coral namespace
 
   commons._define('coral-step', Step);
@@ -71500,7 +75787,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$l = {
+  var translations$m = {
     "en-US": {
       "Select": "Select"
     },
@@ -71560,7 +75847,7 @@
     }
   };
 
-  var template$W = function anonymous(data_0) {
+  var template$$ = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["input"] = document.createElement("input");
     el0.setAttribute("type", "checkbox");
@@ -71595,7 +75882,7 @@
     return frag;
   };
 
-  var CLASSNAME$1s = '_coral-ToggleSwitch';
+  var CLASSNAME$1y = '_coral-ToggleSwitch';
   /**
    @class Coral.Switch
    @classdesc A Switch component is a toggle form field similar to a Checkbox component.
@@ -71628,7 +75915,7 @@
         // Try to find the label content zone
         label: _this.querySelector('coral-switch-label') || document.createElement('coral-switch-label')
       };
-      template$W.call(_this._elements, {
+      template$$.call(_this._elements, {
         commons: commons,
         i18n: i18n
       }); // Pre-define labellable element
@@ -71710,7 +75997,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1s); // Create a fragment
+        this.classList.add(CLASSNAME$1y); // Create a fragment
 
         var frag = document.createDocumentFragment();
         var templateHandleNames = ['input', 'switch', 'labelWrapper']; // Render the template
@@ -71961,7 +76248,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-switch': translations$l
+    'coral-component-switch': translations$m
   }); // Expose component on the Coral namespace
 
   commons._define('coral-switch', Switch);
@@ -71979,7 +76266,7 @@
    * OF ANY KIND, either express or implied. See the License for the specific language
    * governing permissions and limitations under the License.
    */
-  var translations$m = {
+  var translations$n = {
     "en-US": {
       "Select": "Select",
       "Select All": "Select All",
@@ -72328,7 +76615,7 @@
     RIGHT: 'right'
   };
 
-  var CLASSNAME$1t = '_coral-Table-column';
+  var CLASSNAME$1z = '_coral-Table-column';
   /**
    Enumeration for {@link TableColumn} sortable direction options.
 
@@ -72430,7 +76717,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1t); // Default reflected attributes
+        this.classList.add(CLASSNAME$1z); // Default reflected attributes
 
         if (!this._sortableType) {
           this.sortableType = sortableType.ALPHANUMERIC;
@@ -72717,7 +77004,7 @@
     return _class;
   }(BaseComponent(HTMLTableColElement)));
 
-  var CLASSNAME$1u = '_coral-Table-cell';
+  var CLASSNAME$1A = '_coral-Table-cell';
   /**
    @class Coral.Table.Cell
    @classdesc A Table cell component
@@ -72824,7 +77111,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1u);
+        this.classList.add(CLASSNAME$1A);
         this.id = this.id || commons.getUID();
       }
       /**
@@ -72911,7 +77198,7 @@
     return _class;
   }(BaseComponent(HTMLTableCellElement)));
 
-  var template$X = function anonymous(data_0) {
+  var template$10 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["accessibilityState"] = document.createElement("div");
     el0.setAttribute("handle", "accessibilityState");
@@ -72924,7 +77211,7 @@
     return frag;
   };
 
-  var CLASSNAME$1v = '_coral-Table-row';
+  var CLASSNAME$1B = '_coral-Table-row';
   /**
    @class Coral.Table.Row
    @classdesc A Table row component
@@ -72948,7 +77235,7 @@
       _this = _super.call(this); // Templates
 
       _this._elements = {};
-      template$X.call(_this._elements, {
+      template$10.call(_this._elements, {
         commons: commons
       }); // Required for coral-table-row:change event
 
@@ -73335,7 +77622,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1v);
+        this.classList.add(CLASSNAME$1B);
 
         this._syncAriaLabelledby();
       }
@@ -73632,7 +77919,7 @@
     }(superClass);
   };
 
-  var CLASSNAME$1w = '_coral-Table-head';
+  var CLASSNAME$1C = '_coral-Table-head';
   /**
    @class Coral.Table.Head
    @classdesc A Table head component
@@ -73679,7 +77966,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1w);
+        this.classList.add(CLASSNAME$1C);
       }
       /**
        Triggered when the {@link TableHead} content changed.
@@ -73722,7 +78009,7 @@
     return _class;
   }(BaseTableSection(BaseComponent(HTMLTableSectionElement))));
 
-  var CLASSNAME$1x = '_coral-Table-body';
+  var CLASSNAME$1D = '_coral-Table-body';
   /**
    @class Coral.Table.Body
    @classdesc A Table body component
@@ -73758,7 +78045,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1x);
+        this.classList.add(CLASSNAME$1D);
 
         if (getRows([this]).length === 0) {
           this.trigger('coral-table-body:_empty');
@@ -73781,7 +78068,7 @@
     return _class;
   }(BaseTableSection(BaseComponent(HTMLTableSectionElement))));
 
-  var CLASSNAME$1y = '_coral-Table-foot';
+  var CLASSNAME$1E = '_coral-Table-foot';
   /**
    @class Coral.Table.Foot
    @classdesc A Table foot component
@@ -73810,14 +78097,14 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1y);
+        this.classList.add(CLASSNAME$1E);
       }
     }]);
 
     return _class;
   }(BaseTableSection(BaseComponent(HTMLTableSectionElement))));
 
-  var template$Y = function anonymous(data_0) {
+  var template$11 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["liveRegion"] = document.createElement("div");
     el0.setAttribute("handle", "liveRegion");
@@ -73859,7 +78146,7 @@
     return frag;
   };
 
-  var CLASSNAME$1z = '_coral-Table-wrapper';
+  var CLASSNAME$1F = '_coral-Table-wrapper';
   /**
    Enumeration for {@link Table} variants
 
@@ -73881,7 +78168,7 @@
   var ALL_VARIANT_CLASSES$c = [];
 
   for (var variantValue$a in variant$m) {
-    ALL_VARIANT_CLASSES$c.push("".concat(CLASSNAME$1z, "--").concat(variant$m[variantValue$a]));
+    ALL_VARIANT_CLASSES$c.push("".concat(CLASSNAME$1F, "--").concat(variant$m[variantValue$a]));
   }
 
   var IS_DISABLED = 'is-disabled';
@@ -73929,7 +78216,7 @@
         foot: _this.querySelector('tfoot[is="coral-table-foot"]') || new TableFoot(),
         columns: _this.querySelector('colgroup') || document.createElement('colgroup')
       };
-      template$Y.call(_this._elements, {
+      template$11.call(_this._elements, {
         commons: commons
       }); // Events
 
@@ -75407,7 +79694,7 @@
             });
           }); // Make sure sticky styling is applied
 
-          table.classList.toggle("".concat(CLASSNAME$1z, "--sticky"), head.sticky); // Layout sticky head
+          table.classList.toggle("".concat(CLASSNAME$1F, "--sticky"), head.sticky); // Layout sticky head
 
           table._preventResetLayout = false;
 
@@ -76136,7 +80423,7 @@
 
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1z); // Wrapper should have role="presentation" because it wraps another table
+        this.classList.add(CLASSNAME$1F); // Wrapper should have role="presentation" because it wraps another table
 
         this.setAttribute('role', 'presentation'); // Default reflected attribute
 
@@ -76457,7 +80744,7 @@
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$c);
 
-        this.classList.add("".concat(CLASSNAME$1z, "--").concat(this._variant));
+        this.classList.add("".concat(CLASSNAME$1F, "--").concat(this._variant));
       }
       /**
        Whether the items are selectable.
@@ -76728,7 +81015,7 @@
     return _class;
   }(BaseComponent(HTMLTableElement)));
 
-  var CLASSNAME$1A = '_coral-Table-headerCell';
+  var CLASSNAME$1G = '_coral-Table-headerCell';
   /**
    @class Coral.Table.HeaderCell
    @classdesc A Table header cell component
@@ -76785,7 +81072,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1A); // Fetch or create the content zone element
+        this.classList.add(CLASSNAME$1G); // Fetch or create the content zone element
 
         var content = this._elements.content;
 
@@ -76866,7 +81153,7 @@
    */
 
   commons.extend(strings, {
-    'coral-component-table': translations$m
+    'coral-component-table': translations$n
   }); // Expose component on the Coral namespace
 
   commons._define('coral-table-column', TableColumn, {
@@ -76910,7 +81197,7 @@
   Table.Body = TableBody;
   Table.Foot = TableFoot;
 
-  var template$Z = function anonymous(data_0) {
+  var template$12 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["icon"] = document.createElement("coral-icon");
     el0.setAttribute("handle", "icon");
@@ -76960,7 +81247,7 @@
     return newTarget;
   }
 
-  var CLASSNAME$1B = '_coral-Tabs-item';
+  var CLASSNAME$1H = '_coral-Tabs-item';
   /**
    @class Coral.Tab
    @classdesc A Tab component
@@ -76986,7 +81273,7 @@
         label: _this.querySelector('coral-tab-label') || document.createElement('coral-tab-label'),
         invalidIcon: _this.querySelector('._coral-Tabs-itemInvalidIcon') || _this._createInvalidIcon()
       };
-      template$Z.call(_this._elements); // Listen for mutations
+      template$12.call(_this._elements); // Listen for mutations
 
       _this._observer = new MutationObserver(function () {
         // Change icon size if the label is empty
@@ -77091,7 +81378,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1B); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$1H); // adds the role to support accessibility
 
         this.setAttribute('role', 'tab'); // Generate a unique ID for the tab panel if one isn't already present
         // This will be used for accessibility purposes
@@ -77140,7 +81427,7 @@
           handle: 'label',
           tagName: 'coral-tab-label',
           insert: function insert(label) {
-            label.classList.add("".concat(CLASSNAME$1B, "Label"));
+            label.classList.add("".concat(CLASSNAME$1H, "Label"));
             this.appendChild(label);
 
             this._toggleEllipsis();
@@ -77355,7 +81642,7 @@
     return document.createElement('coral-tab-label');
   });
 
-  var template$_ = function anonymous(data_0) {
+  var template$13 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["line"] = document.createElement("div");
     el0.setAttribute("handle", "line");
@@ -77401,7 +81688,7 @@
     VERTICAL: 'vertical'
   }; // the tablist's base classname
 
-  var CLASSNAME$1C = '_coral-Tabs';
+  var CLASSNAME$1I = '_coral-Tabs';
   /**
    @class Coral.TabList
    @classdesc A TabList component holds a collection of tabs.
@@ -77424,7 +81711,7 @@
       _this = _super.call(this); // Templates
 
       _this._elements = {};
-      template$_.call(_this._elements); // Attach events
+      template$13.call(_this._elements); // Attach events
 
       _this._delegateEvents({
         'click > coral-tab': '_onTabClick',
@@ -77697,7 +81984,7 @@
       value: function render() {
         _get(_getPrototypeOf(TabList.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1C); // adds the role to support accessibility
+        this.classList.add(CLASSNAME$1I); // adds the role to support accessibility
 
         this.setAttribute('role', 'tablist');
         this.setAttribute('aria-multiselectable', 'false'); // Default reflected attributes
@@ -77850,12 +82137,12 @@
         this._reflectAttribute('size', this._size); // Remove all variant classes
 
 
-        this.classList.remove("".concat(CLASSNAME$1C, "--compact"), "".concat(CLASSNAME$1C, "--quiet"));
+        this.classList.remove("".concat(CLASSNAME$1I, "--compact"), "".concat(CLASSNAME$1I, "--quiet"));
 
         if (this._size === size$8.SMALL) {
-          this.classList.add("".concat(CLASSNAME$1C, "--compact"));
+          this.classList.add("".concat(CLASSNAME$1I, "--compact"));
         } else if (this._size === size$8.LARGE) {
-          this.classList.add("".concat(CLASSNAME$1C, "--quiet"));
+          this.classList.add("".concat(CLASSNAME$1I, "--quiet"));
         }
       }
       /**
@@ -77882,8 +82169,8 @@
 
         this._reflectAttribute('orientation', this._orientation);
 
-        this.classList.toggle("".concat(CLASSNAME$1C, "--vertical"), this._orientation === orientation$3.VERTICAL);
-        this.classList.toggle("".concat(CLASSNAME$1C, "--horizontal"), this._orientation === orientation$3.HORIZONTAL);
+        this.classList.toggle("".concat(CLASSNAME$1I, "--vertical"), this._orientation === orientation$3.VERTICAL);
+        this.classList.toggle("".concat(CLASSNAME$1I, "--horizontal"), this._orientation === orientation$3.HORIZONTAL);
 
         this._setLine();
       }
@@ -77948,7 +82235,7 @@
     VERTICAL: 'vertical'
   }; // the tabview's base classname
 
-  var CLASSNAME$1D = '_coral-TabView';
+  var CLASSNAME$1J = '_coral-TabView';
   /**
    @class Coral.TabView
    @classdesc A TabView component is the wrapping container used to create the typical Tabbed pattern.
@@ -78043,7 +82330,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1D); // Default reflected attributes
+        this.classList.add(CLASSNAME$1J); // Default reflected attributes
 
         if (!this._orientation) {
           this.orientation = this.orientation;
@@ -78079,7 +82366,7 @@
 
         this._reflectAttribute('orientation', this.orientation);
 
-        this.classList[this.orientation === orientation$4.VERTICAL ? 'add' : 'remove']("".concat(CLASSNAME$1D, "--vertical"));
+        this.classList[this.orientation === orientation$4.VERTICAL ? 'add' : 'remove']("".concat(CLASSNAME$1J, "--vertical"));
       }
       /**
        The TabList which handles all the tabs.
@@ -78172,7 +82459,7 @@
 
   commons._define('coral-tabview', TabView);
 
-  var template$$ = function anonymous(data_0) {
+  var template$14 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["body"] = document.createElement("div");
     el0.className += " _coral-Toast-body";
@@ -78253,12 +82540,12 @@
     CENTER: 'center',
     RIGHT: 'right'
   };
-  var CLASSNAME$1E = '_coral-Toast'; // An array of all possible variant
+  var CLASSNAME$1K = '_coral-Toast'; // An array of all possible variant
 
   var ALL_VARIANT_CLASSES$d = [];
 
   for (var variantValue$b in variant$n) {
-    ALL_VARIANT_CLASSES$d.push("".concat(CLASSNAME$1E, "--").concat(variant$n[variantValue$b]));
+    ALL_VARIANT_CLASSES$d.push("".concat(CLASSNAME$1K, "--").concat(variant$n[variantValue$b]));
   }
 
   var PRIORITY_QUEUE = [];
@@ -78346,7 +82633,7 @@
         // Fetch or create the content zone element
         content: _this.querySelector('coral-toast-content') || document.createElement('coral-toast-content')
       };
-      template$$.call(_this._elements);
+      template$14.call(_this._elements);
 
       _this._delegateEvents({
         'global:resize': '_debounceLayout',
@@ -78482,7 +82769,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1E); // Default reflected attributes
+        this.classList.add(CLASSNAME$1K); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$n.DEFAULT;
@@ -78693,7 +82980,7 @@
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$d); // Set new variant class
 
 
-        this.classList.add("".concat(CLASSNAME$1E, "--").concat(this._variant)); // Set the role attribute to alert or status depending on
+        this.classList.add("".concat(CLASSNAME$1K, "--").concat(this._variant)); // Set the role attribute to alert or status depending on
         // the variant so that the element turns into a live region
 
         this.setAttribute('role', this._variant);
@@ -78714,7 +83001,7 @@
           handle: 'content',
           tagName: 'coral-toast-content',
           insert: function insert(content) {
-            content.classList.add("".concat(CLASSNAME$1E, "-content")); // After the header
+            content.classList.add("".concat(CLASSNAME$1K, "-content")); // After the header
 
             this._elements.body.insertBefore(content, this._elements.body.firstChild);
           }
@@ -78827,7 +83114,7 @@
 
   Toast.Content = ToastContent;
 
-  var template$10 = function anonymous(data_0) {
+  var template$15 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var data = data_0 = typeof data_0 === "undefined" ? {} : data_0;
     var el0 = this["header"] = document.createElement("div");
@@ -78865,7 +83152,7 @@
     return frag;
   };
 
-  var CLASSNAME$1F = '_coral-TreeView-item';
+  var CLASSNAME$1L = '_coral-TreeView-item';
   /**
    Enumeration for {@link TreeItem} variants.
 
@@ -78887,7 +83174,7 @@
   var ALL_VARIANT_CLASSES$e = [];
 
   for (var variantValue$c in variant$o) {
-    ALL_VARIANT_CLASSES$e.push("".concat(CLASSNAME$1F, "--").concat(variant$o[variantValue$c]));
+    ALL_VARIANT_CLASSES$e.push("".concat(CLASSNAME$1L, "--").concat(variant$o[variantValue$c]));
   }
 
   var IS_TOUCH_DEVICE = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
@@ -78916,7 +83203,7 @@
         // Create or fetch the content zones
         content: _this.querySelector('coral-tree-item-content') || document.createElement('coral-tree-item-content')
       };
-      template$10.call(_this._elements, {
+      template$15.call(_this._elements, {
         Icon: Icon,
         commons: commons
       });
@@ -78995,7 +83282,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1F);
+        this.classList.add(CLASSNAME$1L);
         var header = this._elements.header;
         var subTreeContainer = this._elements.subTreeContainer;
         var content = this._elements.content;
@@ -79258,7 +83545,7 @@
 
         (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$e);
 
-        this.classList.add("".concat(CLASSNAME$1F, "--").concat(this._variant));
+        this.classList.add("".concat(CLASSNAME$1L, "--").concat(this._variant));
       }
       /**
        Whether the item is selected.
@@ -79354,7 +83641,7 @@
     return _class;
   }(BaseComponent(HTMLElement)));
 
-  var CLASSNAME$1G = '_coral-TreeView';
+  var CLASSNAME$1M = '_coral-TreeView';
   /**
    @class Coral.Tree
    @classdesc A Tree component is a container component to display collapsible content.
@@ -79887,7 +84174,7 @@
 
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1G); // a11y
+        this.classList.add(CLASSNAME$1M); // a11y
 
         this.setAttribute('role', 'tree');
         this.setAttribute('aria-multiselectable', this.multiple); // Enable keyboard interaction
@@ -80035,7 +84322,7 @@
   Tree.Item = TreeItem;
   Tree.Item.Content = TreeItemContent;
 
-  var CLASSNAME$1H = '_coral-WizardView';
+  var CLASSNAME$1N = '_coral-WizardView';
   /**
    @class Coral.WizardView
    @classdesc A WizardView component is the wrapping container used to create the typical Wizard pattern. This is intended
@@ -80361,7 +84648,7 @@
       value: function render() {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add(CLASSNAME$1H);
+        this.classList.add(CLASSNAME$1N);
 
         this._syncStepListSelection(0);
 
@@ -80443,7 +84730,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.11.0";
+  var version$1 = "4.11.1";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
@@ -80486,6 +84773,7 @@
   	"@adobe/focus-ring-polyfill": "0.1.5",
   	"@adobe/spectrum-css": "2.18.0",
   	"@adobe/vent": "1.0.0",
+  	"@ctrl/tinycolor": "^3.3.3",
   	"core-js": "3.6.4",
   	"document-register-element": "1.14.3",
   	"normalize.css": "8.0.1",
@@ -80649,6 +84937,7 @@
     CoachMark: CoachMark,
     Color: Color,
     ColorInput: ColorInput,
+    ColorPicker: ColorPicker,
     ColumnView: ColumnView,
     CycleButton: CycleButton,
     Datepicker: Datepicker,
@@ -80702,7 +84991,7 @@
     version: version$2
   });
 
-  var template$11 = function anonymous(data_0) {
+  var template$16 = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["wrapper"] = document.createElement("div");
     el0.setAttribute("handle", "wrapper");
@@ -98789,7 +103078,7 @@
       _this._config = config; // Template
 
       _this._elements = {};
-      template$11.call(_this._elements, {
+      template$16.call(_this._elements, {
         commons: commons
       });
       var overlayId = _this._elements.overlay.id; // Events

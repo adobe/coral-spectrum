@@ -22196,6 +22196,743 @@ coral-colorinput-item {
 }
 
 /**
+ * Copyright 2021 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+
+._coral-ColorPicker {
+  position: relative;
+  display: inline-block;
+}
+._coral-ColorPicker-input {
+  display: block;
+  padding-right: 38px;
+  width: 100%;
+}
+._coral-ColorPicker-buttonWrapper {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  opacity: 0.999;
+}
+._coral-ColorPicker-buttonWrapper ._coral-ColorPicker-preview {
+  border-width: 1px;
+}
+._coral-ColorPicker-previewView {
+  display: inline-block;
+}
+._coral-ColorPicker-button {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+._coral-ColorPicker-preview {
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-origin: border-box;
+}
+._coral-ColorPicker-preview:before {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='GridPattern' x='6' y='6' width='16' height='16' patternUnits='userSpaceOnUse'%3E%3Crect x='0' y='0' width='8' height='8' fill='%23ffffff' /%3E%3Crect x='8' y='0' width='8' height='8' fill='%23a0a0a0' /%3E%3Crect x='0' y='8' width='8' height='8' fill='%23a0a0a0' /%3E%3Crect x='8' y='8' width='8' height='8' fill='%23ffffff' /%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url%28%23GridPattern%29' x='0' y='0' width='100%25' height='100%25' /%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+._coral-ColorPicker-preview:not([disabled]):hover:after {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  content: "";
+  width: 100%;
+  height: 100%;
+}
+._coral-ColorPicker--novalue ._coral-ColorPicker-preview,
+._coral-ColorPicker-preview--novalue,
+._coral-ColorPicker.is-invalid ._coral-ColorPicker-preview {
+  background-image: url("data:image/svg+xml;utf8,%3C!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0%29 --%3E%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='96 -296 1152 1152' style='enable-background:new 96 -296 1152 1152%3B' xml:space='preserve'%3E%3Cstyle type='text/css'%3E.st0%7Bfill:%23FFFFFF%3B%7D .st1%7Bfill:%23FF0000%3B%7D%3C/style%3E%3Crect x='96' y='-296' class='st0' width='1152' height='1152'/%3E%3Cpolygon class='st1' points='1217.8,-296 96,825.8 96,856 126.2,856 1248,-265.8 1248,-296 '/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+._coral-ColorPicker--novalue ._coral-ColorPicker-preview:hover,
+._coral-ColorPicker-preview--novalue:hover,
+._coral-ColorPicker.is-invalid ._coral-ColorPicker-preview:hover,
+._coral-ColorPicker--novalue ._coral-ColorPicker-preview:focus,
+._coral-ColorPicker-preview--novalue:focus,
+._coral-ColorPicker.is-invalid ._coral-ColorPicker-preview:focus {
+  background-image: url("data:image/svg+xml;utf8,%3C!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0%29 --%3E%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='96 -296 1152 1152' style='enable-background:new 96 -296 1152 1152%3B' xml:space='preserve'%3E%3Cstyle type='text/css'%3E.st0%7Bfill:%23FFFFFF%3B%7D .st1%7Bfill:%23FF0000%3B%7D%3C/style%3E%3Crect x='96' y='-296' class='st0' width='1152' height='1152'/%3E%3Cpolygon class='st1' points='1217.8,-296 96,825.8 96,856 126.2,856 1248,-265.8 1248,-296 '/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+._coral-ColorPicker-overlay {
+  padding: 0px;
+  min-width: auto;
+}
+._coral-ColorPicker ._coral-ColorPicker-propertiesContainer1 {
+  display: flex;
+  padding: calc(16px + 1px);
+}
+._coral-ColorPicker ._coral-ColorPicker-propertiesContainer1 ._coral-ColorPicker-ColorSlider {
+  margin-left: calc(16px + 1px);
+}
+._coral-ColorPicker ._coral-ColorPicker-propertiesContainer2 {
+  width: 192px;
+  display: flex;
+  padding: calc(16px + 1px);
+  padding-top: 0px;
+}
+._coral-ColorPicker ._coral-ColorPicker-inputField {
+  margin-left: 16px;
+}
+._coral-ColorPicker ._coral-ColorPicker-formatSelector {
+  width: 72px;
+  padding-bottom: 2px;
+}
+._coral-ColorPicker ._coral-ColorPicker-value {
+  margin-left: 16px;
+}
+.coral--large ._coral-ColorPicker ._coral-ColorPicker-button {
+  height: 36px;
+  padding: 0 17px;
+}
+.coral--large ._coral-ColorPicker ._coral-ColorPicker-propertiesContainer1 {
+  display: flex;
+  padding: calc(20px + 1px);
+}
+.coral--large ._coral-ColorPicker ._coral-ColorPicker-propertiesContainer1 ._coral-ColorPicker-ColorSlider {
+  margin-left: calc(20px + 1px);
+}
+.coral--large ._coral-ColorPicker ._coral-ColorPicker-propertiesContainer2 {
+  width: 240px;
+  display: flex;
+  padding: calc(20px + 1px);
+  padding-top: 0px;
+}
+.coral--large ._coral-ColorPicker ._coral-ColorPicker-inputField {
+  margin-left: 20px;
+}
+.coral--large ._coral-ColorPicker ._coral-ColorPicker-formatSelector {
+  width: 112px;
+  padding-bottom: 2px;
+}
+.coral--large ._coral-ColorPicker ._coral-ColorPicker-value {
+  margin-left: 20px;
+}
+._coral-ColorHandle.is-disabled ._coral-ColorPicker-colorHandle-color {
+  display: none;
+  pointer-events: none;
+}
+._coral-ColorPicker-colorHandle-color {
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+}
+._coral-ColorPicker-colorHandle {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  margin-left: calc(-1 * 16px / 2);
+  margin-top: calc(-1 * 16px / 2);
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 100%;
+  background-size: 16px 16px;
+  background-position: calc(-1 * 2px) calc(-1 * 2px), calc(-1 * 2px) calc(8px + calc(-1 * 2px)), calc(8px + calc(-1 * 2px)) calc(-1 * 8px + calc(-1 * 2px)), calc(-1 * 8px + calc(-1 * 2px)) calc(-1 * 2px);
+  transition: width 130ms ease-in-out, height 130ms ease-in-out, border-width 130ms ease-in-out, margin-left 130ms ease-in-out, margin-top 130ms ease-in-out;
+}
+._coral-ColorPicker-colorHandle.is-focused {
+  width: calc(16px * 2);
+  height: calc(16px * 2);
+  margin-left: calc(-1 * 16px);
+  margin-top: calc(-1 * 16px);
+}
+._coral-ColorPicker-colorHandle.focus-ring {
+  width: calc(16px * 2);
+  height: calc(16px * 2);
+  margin-left: calc(-1 * 16px);
+  margin-top: calc(-1 * 16px);
+}
+._coral-ColorPicker-colorHandle:after {
+  border-radius: 100%;
+  content: '';
+  left: calc(50% - 24px / 2);
+  top: calc(50% - 24px / 2);
+  position: absolute;
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+.coral--large ._coral-ColorPicker-colorHandle {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  margin-left: calc(-1 * 20px / 2);
+  margin-top: calc(-1 * 20px / 2);
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 100%;
+  background-size: 20px 20px;
+  background-position: calc(-1 * 2px) calc(-1 * 2px), calc(-1 * 2px) calc(10px + calc(-1 * 2px)), calc(10px + calc(-1 * 2px)) calc(-1 * 10px + calc(-1 * 2px)), calc(-1 * 10px + calc(-1 * 2px)) calc(-1 * 2px);
+  transition: width 130ms ease-in-out, height 130ms ease-in-out, border-width 130ms ease-in-out, margin-left 130ms ease-in-out, margin-top 130ms ease-in-out;
+}
+.coral--large ._coral-ColorPicker-colorHandle.is-focused {
+  width: calc(20px * 2);
+  height: calc(20px * 2);
+  margin-left: calc(-1 * 20px);
+  margin-top: calc(-1 * 20px);
+}
+.coral--large ._coral-ColorPicker-colorHandle.focus-ring {
+  width: calc(20px * 2);
+  height: calc(20px * 2);
+  margin-left: calc(-1 * 20px);
+  margin-top: calc(-1 * 20px);
+}
+.coral--large ._coral-ColorPicker-colorHandle:after {
+  border-radius: 100%;
+  content: '';
+  left: calc(50% - 30px / 2);
+  top: calc(50% - 30px / 2);
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 30px;
+}
+.coral--light ._coral-ColorPicker-colorHandle {
+  border-color: rgb(255, 255, 255);
+  box-shadow: 0 0 0 1px;
+  background-color: rgb(255, 255, 255);
+  background-image: linear-gradient(-45deg, transparent 75.5%, rgb(188, 188, 188) 75.5%), linear-gradient(45deg, transparent 75.5%, rgb(188, 188, 188) 75.5%), linear-gradient(-45deg, rgb(188, 188, 188) 25.5%, transparent 25.5%), linear-gradient(45deg, rgb(188, 188, 188) 25.5%, transparent 25.5%);
+}
+.coral--light ._coral-ColorPicker-colorHandle.is-disabled {
+  border-color: rgb(202, 202, 202);
+  background: rgb(225, 225, 225);
+  box-shadow: none;
+}
+.coral--light ._coral-ColorPicker-colorHandle-color {
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.42);
+}
+@media (forced-colors: active) {
+  .coral--light ._coral-ColorPicker-colorHandle.is-disabled {
+    forced-color-adjust: none;
+  }
+}
+.coral--lightest ._coral-ColorPicker-colorHandle {
+  border-color: rgb(255, 255, 255);
+  box-shadow: 0 0 0 1px;
+  background-color: rgb(255, 255, 255);
+  background-image: linear-gradient(-45deg, transparent 75.5%, rgb(188, 188, 188) 75.5%), linear-gradient(45deg, transparent 75.5%, rgb(188, 188, 188) 75.5%), linear-gradient(-45deg, rgb(188, 188, 188) 25.5%, transparent 25.5%), linear-gradient(45deg, rgb(188, 188, 188) 25.5%, transparent 25.5%);
+}
+.coral--lightest ._coral-ColorPicker-colorHandle.is-disabled {
+  border-color: rgb(211, 211, 211);
+  background: rgb(234, 234, 234);
+  box-shadow: none;
+}
+.coral--lightest ._coral-ColorPicker-colorHandle-color {
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.42);
+}
+@media (forced-colors: active) {
+  .coral--lightest ._coral-ColorPicker-colorHandle.is-disabled {
+    forced-color-adjust: none;
+  }
+}
+.coral--dark ._coral-ColorPicker-colorHandle {
+  border-color: rgb(255, 255, 255);
+  box-shadow: 0 0 0 1px;
+  background-color: rgb(255, 255, 255);
+  background-image: linear-gradient(-45deg, transparent 75.5%, rgb(188, 188, 188) 75.5%), linear-gradient(45deg, transparent 75.5%, rgb(188, 188, 188) 75.5%), linear-gradient(-45deg, rgb(188, 188, 188) 25.5%, transparent 25.5%), linear-gradient(45deg, rgb(188, 188, 188) 25.5%, transparent 25.5%);
+}
+.coral--dark ._coral-ColorPicker-colorHandle.is-disabled {
+  border-color: rgb(90, 90, 90);
+  background: rgb(74, 74, 74);
+  box-shadow: none;
+}
+.coral--dark ._coral-ColorPicker-colorHandle-color {
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.42);
+}
+@media (forced-colors: active) {
+  .coral--dark ._coral-ColorPicker-colorHandle.is-disabled {
+    forced-color-adjust: none;
+  }
+}
+.coral--darkest ._coral-ColorPicker-colorHandle {
+  border-color: rgb(255, 255, 255);
+  box-shadow: 0 0 0 1px;
+  background-color: rgb(255, 255, 255);
+  background-image: linear-gradient(-45deg, transparent 75.5%, rgb(188, 188, 188) 75.5%), linear-gradient(45deg, transparent 75.5%, rgb(188, 188, 188) 75.5%), linear-gradient(-45deg, rgb(188, 188, 188) 25.5%, transparent 25.5%), linear-gradient(45deg, rgb(188, 188, 188) 25.5%, transparent 25.5%);
+}
+.coral--darkest ._coral-ColorPicker-colorHandle.is-disabled {
+  border-color: rgb(73, 73, 73);
+  background: rgb(57, 57, 57);
+  box-shadow: none;
+}
+.coral--darkest ._coral-ColorPicker-colorHandle-color {
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.42);
+}
+@media (forced-colors: active) {
+  .coral--darkest ._coral-ColorPicker-colorHandle.is-disabled {
+    forced-color-adjust: none;
+  }
+}
+._coral-ColorPicker-ColorArea.is-disabled ._coral-ColorPicker-ColorArea-gradient {
+  display: none;
+}
+._coral-ColorPicker-ColorArea-slider {
+  opacity: 0.0001;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  margin: 0;
+  pointer-events: none;
+}
+._coral-ColorPicker-ColorArea {
+  position: relative;
+  display: inline-block;
+  width: 192px;
+  height: 192px;
+  border-radius: 4px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+._coral-ColorPicker-ColorArea.is-focused {
+  z-index: 2;
+}
+._coral-ColorPicker-ColorArea.is-disabled {
+  pointer-events: none;
+}
+._coral-ColorPicker-ColorArea:before {
+  content: '';
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 4px;
+}
+._coral-ColorPicker-ColorArea.is-focused ._coral-ColorPicker-ColorArea-colorHandle {
+  width: calc(16px * 2);
+  height: calc(16px * 2);
+  margin-left: calc(-1 * 16px);
+  margin-top: calc(-1 * 16px);
+}
+._coral-ColorPicker-ColorArea ._coral-ColorPicker-ColorArea-gradient {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
+.coral--large ._coral-ColorPicker-ColorArea {
+  position: relative;
+  display: inline-block;
+  width: 240px;
+  height: 240px;
+  border-radius: 5px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.coral--large ._coral-ColorPicker-ColorArea.is-focused {
+  z-index: 2;
+}
+.coral--large ._coral-ColorPicker-ColorArea.is-disabled {
+  pointer-events: none;
+}
+.coral--large ._coral-ColorPicker-ColorArea:before {
+  content: '';
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 5px;
+}
+.coral--large ._coral-ColorPicker-ColorArea.is-focused ._coral-ColorPicker-ColorArea-colorHandle {
+  width: calc(20px * 2);
+  height: calc(20px * 2);
+  margin-left: calc(-1 * 20px);
+  margin-top: calc(-1 * 20px);
+}
+.coral--large ._coral-ColorPicker-ColorArea ._coral-ColorPicker-ColorArea-gradient {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+.coral--light ._coral-ColorPicker-ColorArea.is-disabled {
+  background: rgb(225, 225, 225);
+}
+.coral--light ._coral-ColorPicker-ColorArea-gradient {
+  background: linear-gradient(to top, #000 0%, rgba(0,0,0,0) 100%), linear-gradient(to right, #fff 0%, rgba(0,0,0,0) 100%), #f00;
+  forced-color-adjust: none;
+}
+@media (forced-colors: active) {
+  .coral--light ._coral-ColorPicker-ColorArea.is-disabled {
+    forced-color-adjust: none;
+  }
+}
+.coral--lightest ._coral-ColorPicker-ColorArea.is-disabled {
+  background: rgb(234, 234, 234);
+}
+.coral--lightest ._coral-ColorPicker-ColorArea-gradient {
+  background: linear-gradient(to top, #000 0%, rgba(0,0,0,0) 100%), linear-gradient(to right, #fff 0%, rgba(0,0,0,0) 100%), #f00;
+  forced-color-adjust: none;
+}
+@media (forced-colors: active) {
+  .coral--lightest ._coral-ColorPicker-ColorArea.is-disabled {
+    forced-color-adjust: none;
+  }
+}
+.coral--dark ._coral-ColorPicker-ColorArea.is-disabled {
+  background: rgb(74, 74, 74);
+}
+.coral--dark ._coral-ColorPicker-ColorArea-gradient {
+  background: linear-gradient(to top, #000 0%, rgba(0,0,0,0) 100%), linear-gradient(to right, #fff 0%, rgba(0,0,0,0) 100%), #f00;
+  forced-color-adjust: none;
+}
+@media (forced-colors: active) {
+  .coral--dark ._coral-ColorPicker-ColorArea.is-disabled {
+    forced-color-adjust: none;
+  }
+}
+.coral--darkest ._coral-ColorPicker-ColorArea.is-disabled {
+  background: rgb(57, 57, 57);
+}
+.coral--darkest ._coral-ColorPicker-ColorArea-gradient {
+  background: linear-gradient(to top, #000 0%, rgba(0,0,0,0) 100%), linear-gradient(to right, #fff 0%, rgba(0,0,0,0) 100%), #f00;
+  forced-color-adjust: none;
+}
+@media (forced-colors: active) {
+  .coral--darkest ._coral-ColorPicker-ColorArea.is-disabled {
+    forced-color-adjust: none;
+  }
+}
+._coral-ColorPicker-ColorSlider-slider {
+  opacity: 0.0001;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  margin: 0;
+  pointer-events: none;
+}
+._coral-ColorPicker-ColorSlider.is-focused ._coral-ColorPicker-ColorSlider-colorHandle {
+  width: calc(16px * 2);
+  height: calc(16px * 2);
+  margin-left: calc(-1 * 16px);
+  margin-top: calc(-1 * 16px);
+}
+._coral-ColorPicker-ColorSlider {
+  position: relative;
+  display: block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+  display: inline-block;
+  width: 24px;
+  height: 192px;
+}
+._coral-ColorPicker-ColorSlider.is-focused {
+  z-index: 2;
+}
+._coral-ColorPicker-ColorSlider.is-disabled {
+  pointer-events: none;
+}
+._coral-ColorPicker-ColorSlider-colorHandle {
+  left: 50%;
+  top: 0;
+}
+._coral-ColorPicker-ColorSlider-colorHandle:after {
+  border-radius: 0%;
+  width: var(-spectrum-medium-global-dimension-size-300);
+  height: var(-spectrum-medium-global-dimension-size-300);
+}
+._coral-ColorPicker-ColorSlider-checkerboard {
+  background-size: 16px;
+  background-position: 0 0, 0 8px 0;
+}
+._coral-ColorPicker-ColorSlider-checkerboard:before {
+  content: "";
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 4px;
+}
+._coral-ColorPicker-ColorSlider-checkerboard {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
+._coral-ColorPicker-ColorSlider-gradient {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
+.coral--large ._coral-ColorPicker-ColorSlider.is-focused ._coral-ColorPicker-ColorSlider-colorHandle {
+  width: calc(20px * 2);
+  height: calc(20px * 2);
+  margin-left: calc(-1 * 20px);
+  margin-top: calc(-1 * 20px);
+}
+.coral--large ._coral-ColorPicker-ColorSlider {
+  position: relative;
+  display: block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+  display: inline-block;
+  width: 30px;
+  height: 240px;
+}
+.coral--large ._coral-ColorPicker-ColorSlider.is-focused {
+  z-index: 2;
+}
+.coral--large ._coral-ColorPicker-ColorSlider.is-disabled {
+  pointer-events: none;
+}
+.coral--large ._coral-ColorPicker-ColorSlider-colorHandle {
+  left: 50%;
+  top: 0;
+}
+.coral--large ._coral-ColorPicker-ColorSlider-colorHandle:after {
+  border-radius: 0%;
+  width: var(-spectrum-large-global-dimension-size-300);
+  height: var(-spectrum-large-global-dimension-size-300);
+}
+.coral--large ._coral-ColorPicker-ColorSlider-checkerboard {
+  background-size: 20px;
+  background-position: 0 0, 0 10px 0;
+}
+.coral--large ._coral-ColorPicker-ColorSlider-checkerboard:before {
+  content: "";
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 5px;
+}
+.coral--large ._coral-ColorPicker-ColorSlider-checkerboard {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+.coral--large ._coral-ColorPicker-ColorSlider-gradient {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+.coral--light ._coral-ColorPicker-ColorSlider-checkerboard {
+  background-color: rgb(255, 255, 255);
+  background-image: linear-gradient(-45deg, transparent 75.5%, rgb(188, 188, 188) 75.5%), linear-gradient(45deg, transparent 75.5%, rgb(188, 188, 188) 75.5%), linear-gradient(-45deg, rgb(188, 188, 188) 25.5%, transparent 25.5%), linear-gradient(45deg, rgb(188, 188, 188) 25.5%, transparent 25.5%);
+}
+.coral--light ._coral-ColorPicker-ColorSlider.is-disabled ._coral-ColorPicker-ColorSlider-checkerboard {
+  background: rgb(225, 225, 225);
+}
+.coral--light ._coral-ColorPicker-ColorSlider.is-disabled ._coral-ColorPicker-ColorSlider-gradient {
+  display: none;
+}
+.coral--light ._coral-ColorPicker-ColorSlider-hue ._coral-ColorPicker-ColorSlider-gradient {
+  background: linear-gradient(to top, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+}
+@media (forced-colors: active) {
+  .coral--light ._coral-ColorPicker-ColorSlider {
+    forced-color-adjust: none;
+  }
+}
+.coral--lightest ._coral-ColorPicker-ColorSlider-checkerboard {
+  background-color: rgb(255, 255, 255);
+  background-image: linear-gradient(-45deg, transparent 75.5%, rgb(188, 188, 188) 75.5%), linear-gradient(45deg, transparent 75.5%, rgb(188, 188, 188) 75.5%), linear-gradient(-45deg, rgb(188, 188, 188) 25.5%, transparent 25.5%), linear-gradient(45deg, rgb(188, 188, 188) 25.5%, transparent 25.5%);
+}
+.coral--lightest ._coral-ColorPicker-ColorSlider.is-disabled ._coral-ColorPicker-ColorSlider-checkerboard {
+  background: rgb(234, 234, 234);
+}
+.coral--lightest ._coral-ColorPicker-ColorSlider.is-disabled ._coral-ColorPicker-ColorSlider-gradient {
+  display: none;
+}
+.coral--lightest ._coral-ColorPicker-ColorSlider-hue ._coral-ColorPicker-ColorSlider-gradient {
+  background: linear-gradient(to top, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+}
+@media (forced-colors: active) {
+  .coral--lightest ._coral-ColorPicker-ColorSlider {
+    forced-color-adjust: none;
+  }
+}
+.coral--dark ._coral-ColorPicker-ColorSlider-checkerboard {
+  background-color: rgb(255, 255, 255);
+  background-image: linear-gradient(-45deg, transparent 75.5%, rgb(188, 188, 188) 75.5%), linear-gradient(45deg, transparent 75.5%, rgb(188, 188, 188) 75.5%), linear-gradient(-45deg, rgb(188, 188, 188) 25.5%, transparent 25.5%), linear-gradient(45deg, rgb(188, 188, 188) 25.5%, transparent 25.5%);
+}
+.coral--dark ._coral-ColorPicker-ColorSlider.is-disabled ._coral-ColorPicker-ColorSlider-checkerboard {
+  background: rgb(74, 74, 74);
+}
+.coral--dark ._coral-ColorPicker-ColorSlider.is-disabled ._coral-ColorPicker-ColorSlider-gradient {
+  display: none;
+}
+.coral--dark ._coral-ColorPicker-ColorSlider-hue ._coral-ColorPicker-ColorSlider-gradient {
+  background: linear-gradient(to top, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+}
+@media (forced-colors: active) {
+  .coral--dark ._coral-ColorPicker-ColorSlider {
+    forced-color-adjust: none;
+  }
+}
+.coral--darkest ._coral-ColorPicker-ColorSlider-checkerboard {
+  background-color: rgb(255, 255, 255);
+  background-image: linear-gradient(-45deg, transparent 75.5%, rgb(188, 188, 188) 75.5%), linear-gradient(45deg, transparent 75.5%, rgb(188, 188, 188) 75.5%), linear-gradient(-45deg, rgb(188, 188, 188) 25.5%, transparent 25.5%), linear-gradient(45deg, rgb(188, 188, 188) 25.5%, transparent 25.5%);
+}
+.coral--darkest ._coral-ColorPicker-ColorSlider.is-disabled ._coral-ColorPicker-ColorSlider-checkerboard {
+  background: rgb(57, 57, 57);
+}
+.coral--darkest ._coral-ColorPicker-ColorSlider.is-disabled ._coral-ColorPicker-ColorSlider-gradient {
+  display: none;
+}
+.coral--darkest ._coral-ColorPicker-ColorSlider-hue ._coral-ColorPicker-ColorSlider-gradient {
+  background: linear-gradient(to top, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+}
+@media (forced-colors: active) {
+  .coral--darkest ._coral-ColorPicker-ColorSlider {
+    forced-color-adjust: none;
+  }
+}
+.coral--light ._coral-ColorPicker-ColorArea-gradient {
+  border-color: rgba(44,44,44,0.1);
+}
+.coral--light ._coral-ColorPicker-ColorArea-gradient:hover {
+  border-color: rgba(44,44,44,0.1);
+}
+.coral--light ._coral-ColorPicker-ColorArea-gradient:disabled {
+  background: rgb(225, 225, 225);
+}
+.coral--light ._coral-ColorPicker-ColorArea-gradient[disabled] {
+  background: rgb(225, 225, 225);
+}
+.coral--light ._coral-ColorPicker-ColorSlider {
+  border-color: rgba(44,44,44,0.1);
+}
+.coral--light ._coral-ColorPicker-ColorSlider:hover {
+  border-color: rgba(44,44,44,0.1);
+}
+.coral--light ._coral-ColorPicker-ColorSlider:disabled {
+  background: rgb(225, 225, 225);
+}
+.coral--light ._coral-ColorPicker-ColorSlider[disabled] {
+  background: rgb(225, 225, 225);
+}
+.coral--lightest ._coral-ColorPicker-ColorArea-gradient {
+  border-color: rgba(50,50,50,0.1);
+}
+.coral--lightest ._coral-ColorPicker-ColorArea-gradient:hover {
+  border-color: rgba(50,50,50,0.1);
+}
+.coral--lightest ._coral-ColorPicker-ColorArea-gradient:disabled {
+  background: rgb(234, 234, 234);
+}
+.coral--lightest ._coral-ColorPicker-ColorArea-gradient[disabled] {
+  background: rgb(234, 234, 234);
+}
+.coral--lightest ._coral-ColorPicker-ColorSlider {
+  border-color: rgba(50,50,50,0.1);
+}
+.coral--lightest ._coral-ColorPicker-ColorSlider:hover {
+  border-color: rgba(50,50,50,0.1);
+}
+.coral--lightest ._coral-ColorPicker-ColorSlider:disabled {
+  background: rgb(234, 234, 234);
+}
+.coral--lightest ._coral-ColorPicker-ColorSlider[disabled] {
+  background: rgb(234, 234, 234);
+}
+.coral--dark ._coral-ColorPicker-ColorArea-gradient {
+  border-color: rgba(255,255,255,0.1);
+}
+.coral--dark ._coral-ColorPicker-ColorArea-gradient:hover {
+  border-color: rgba(255,255,255,0.1);
+}
+.coral--dark ._coral-ColorPicker-ColorArea-gradient:disabled {
+  background: rgb(74, 74, 74);
+}
+.coral--dark ._coral-ColorPicker-ColorArea-gradient[disabled] {
+  background: rgb(74, 74, 74);
+}
+.coral--dark ._coral-ColorPicker-ColorSlider {
+  border-color: rgba(255,255,255,0.1);
+}
+.coral--dark ._coral-ColorPicker-ColorSlider:hover {
+  border-color: rgba(255,255,255,0.1);
+}
+.coral--dark ._coral-ColorPicker-ColorSlider:disabled {
+  background: rgb(74, 74, 74);
+}
+.coral--dark ._coral-ColorPicker-ColorSlider[disabled] {
+  background: rgb(74, 74, 74);
+}
+.coral--darkest ._coral-ColorPicker-ColorArea-gradient {
+  border-color: rgba(239,239,239,0.1);
+}
+.coral--darkest ._coral-ColorPicker-ColorArea-gradient:hover {
+  border-color: rgba(239,239,239,0.1);
+}
+.coral--darkest ._coral-ColorPicker-ColorArea-gradient:disabled {
+  background: rgb(57, 57, 57);
+}
+.coral--darkest ._coral-ColorPicker-ColorArea-gradient[disabled] {
+  background: rgb(57, 57, 57);
+}
+.coral--darkest ._coral-ColorPicker-ColorSlider {
+  border-color: rgba(239,239,239,0.1);
+}
+.coral--darkest ._coral-ColorPicker-ColorSlider:hover {
+  border-color: rgba(239,239,239,0.1);
+}
+.coral--darkest ._coral-ColorPicker-ColorSlider:disabled {
+  background: rgb(57, 57, 57);
+}
+.coral--darkest ._coral-ColorPicker-ColorSlider[disabled] {
+  background: rgb(57, 57, 57);
+}
+
+/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
