@@ -1,3 +1,10 @@
+## [4.12.1](https://github.com/adobe/coral-spectrum/compare/v4.12.0...v4.12.1) (2021-09-21)
+
+
+### Bug Fixes
+
+* [Performance] Improvements in Columnview ([#185](https://github.com/adobe/coral-spectrum/issues/185)) ([223a11e](https://github.com/adobe/coral-spectrum/commit/223a11e97ac2eb1bb76cac210879dd4b1ccbef6d))
+
 # [4.12.0](https://github.com/adobe/coral-spectrum/compare/v4.11.1...v4.12.0) (2021-09-16)
 
 
