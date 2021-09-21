@@ -215,10 +215,14 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
 
   set iconPosition(value) {
     value = transform.string(value).toLowerCase();
-    this._iconPosition = validate.enumeration(iconPosition)(value) && value || iconPosition.LEFT;
-    this._reflectAttribute('iconposition', this._iconPosition);
+    value = validate.enumeration(iconPosition)(value) && value || iconPosition.LEFT;
+    
+    this._reflectAttribute('iconposition', value);
 
-    this._updateIcon(this.icon);
+    if(validate.valueMustChange(this._iconPosition, value)) {
+      this._iconPosition = value;
+      this._updateIcon(this.icon);
+    }
   }
 
   /**
@@ -237,9 +241,11 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
   }
 
   set icon(value) {
-    this._icon = transform.string(value);
-
-    this._updateIcon(value);
+    value = transform.string(value);
+    if(validate.valueMustChange(this._icon, value)) {
+      this._icon = value;
+      this._updateIcon(value);
+    }
   }
 
   /**
@@ -259,10 +265,11 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
 
   set iconSize(value) {
     value = transform.string(value).toUpperCase();
-    this._iconSize = validate.enumeration(Icon.size)(value) && value || Icon.size.SMALL;
+    value = validate.enumeration(Icon.size)(value) && value || Icon.size.SMALL;
 
-    if (this._updatedIcon) {
-      this._getIconElement().setAttribute('size', value);
+    if(validate.valueMustChange(this._iconSize, value)) {
+      this._iconSize = value;
+      this._updatedIcon && this._getIconElement().setAttribute('size', value);
     }
   }
 
@@ -283,10 +290,11 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
 
   set iconAutoAriaLabel(value) {
     value = transform.string(value).toLowerCase();
-    this._iconAutoAriaLabel = validate.enumeration(Icon.autoAriaLabel)(value) && value || Icon.autoAriaLabel.OFF;
+    value = validate.enumeration(Icon.autoAriaLabel)(value) && value || Icon.autoAriaLabel.OFF;
 
-    if (this._updatedIcon) {
-      this._getIconElement().setAttribute('autoarialabel', value);
+    if(validate.valueMustChange(this._iconAutoAriaLabel, value)) {
+      this._iconAutoAriaLabel = value;
+      this._updatedIcon && this._getIconElement().setAttribute('autoarialabel', value);
     }
   }
 
@@ -306,6 +314,7 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
   set size(value) {
     value = transform.string(value).toUpperCase();
     this._size = validate.enumeration(size)(value) && value || size.MEDIUM;
+    
     this._reflectAttribute('size', this._size);
   }
 
@@ -322,12 +331,17 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
   }
 
   set selected(value) {
-    this._selected = transform.booleanAttr(value);
-    this._reflectAttribute('selected', this._selected);
+    value = transform.booleanAttr(value);
+    
+    this._reflectAttribute('selected', value);
 
-    this.classList.toggle('is-selected', this._selected);
+    if(validate.valueMustChange(this._selected, value)) {
+      this._selected = value;
 
-    this.trigger('coral-button:_selectedchanged');
+      this.classList.toggle('is-selected', value);
+  
+      this.trigger('coral-button:_selectedchanged');
+    }
   }
 
   // We just reflect it but we also trigger an event to be used by button group
@@ -355,10 +369,15 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
   }
 
   set block(value) {
-    this._block = transform.booleanAttr(value);
-    this._reflectAttribute('block', this._block);
+    value = transform.booleanAttr(value);
+    
+    this._reflectAttribute('block', value);
 
-    this.classList.toggle(`${CLASSNAME}--block`, this._block);
+    if(validate.valueMustChange(this._block, value)) {
+      this._block = value;
+
+      this.classList.toggle(`${CLASSNAME}--block`, value);
+    }
   }
 
   /**
@@ -375,25 +394,30 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
 
   set variant(value) {
     value = transform.string(value).toLowerCase();
-    this._variant = validate.enumeration(variant)(value) && value || variant.DEFAULT;
-    this._reflectAttribute('variant', this._variant);
+    value = validate.enumeration(variant)(value) && value || variant.DEFAULT;
 
-    // removes every existing variant
-    this.classList.remove(CLASSNAME, ACTION_CLASSNAME);
-    this.classList.remove(...ALL_VARIANT_CLASSES);
+    this._reflectAttribute('variant', value);
 
-    if (this._variant === variant._CUSTOM) {
-      this.classList.remove(CLASSNAME);
-    } else {
-      this.classList.add(...VARIANT_MAP[this._variant]);
+    if(validate.valueMustChange(this._variant , value)) {
+      this._variant = value;
 
-      if (this._variant === variant.ACTION || this._variant === variant.QUIET_ACTION) {
+      // removes every existing variant
+      this.classList.remove(CLASSNAME, ACTION_CLASSNAME);
+      this.classList.remove(...ALL_VARIANT_CLASSES);
+  
+      if (value === variant._CUSTOM) {
         this.classList.remove(CLASSNAME);
+      } else {
+        this.classList.add(...VARIANT_MAP[value]);
+  
+        if (value === variant.ACTION || value === variant.QUIET_ACTION) {
+          this.classList.remove(CLASSNAME);
+        }
       }
+  
+      // Update label styles
+      this._updateLabel();
     }
-
-    // Update label styles
-    this._updateLabel();
   }
 
   /**

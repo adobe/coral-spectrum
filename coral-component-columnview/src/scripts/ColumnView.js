@@ -169,22 +169,28 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
 
   set selectionMode(value) {
     value = transform.string(value).toLowerCase();
-    this._selectionMode = validate.enumeration(selectionMode)(value) && value || selectionMode.NONE;
-    this._reflectAttribute('selectionmode', this._selectionMode);
+    value = validate.enumeration(selectionMode)(value) && value || selectionMode.NONE;
 
-    // propagates the selection mode to the columns
-    this.columns.getAll().forEach((item) => {
-      item.setAttribute('_selectionmode', this._selectionMode);
-    });
+    this._reflectAttribute('selectionmode', value);
+    
+    if(validate.valueMustChange(this._selectionMode, value)) {
+      this._selectionMode = value;
 
-    this.classList.remove(`${CLASSNAME}--selection`);
-
-    if (this._selectionMode !== selectionMode.NONE) {
-      this.classList.add(`${CLASSNAME}--selection`);
+      // propagates the selection mode to the columns
+      let columns = this.columns.getAll();
+      columns.forEach((item) => {
+        item.setAttribute('_selectionmode', value);
+      });
+  
+      this.classList.remove(`${CLASSNAME}--selection`);
+  
+      if (value !== selectionMode.NONE) {
+        this.classList.add(`${CLASSNAME}--selection`);
+      }
+  
+      // @a11y
+      this.setAttribute('aria-multiselectable', value === selectionMode.MULTIPLE);
     }
-
-    // @a11y
-    this.setAttribute('aria-multiselectable', this._selectionMode === selectionMode.MULTIPLE);
   }
 
   /**
@@ -819,9 +825,10 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
     const colIndex = this.columns.getAll().indexOf(column);
     const level = colIndex + 1;
     if (column.items) {
-      column.items.getAll().filter((item, index) => {
+      let items = column.items.getAll();
+      items.filter((item, index) => {
         item.setAttribute('aria-posinset', index + 1);
-        item.setAttribute('aria-setsize', column.items.length);
+        item.setAttribute('aria-setsize', items.length);
         return !item.hasAttribute('aria-level');
       }).forEach((item) => {
         item.setAttribute('aria-level', level);
@@ -1127,7 +1134,7 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
 
     // @a11y append live region content element
     if (!this.contains(accessibilityState)) {
-      this.insertBefore(accessibilityState, this.firstChild);
+      this.appendChild(accessibilityState);
     }
 
     // utility method to clean up accessibility state
@@ -1174,7 +1181,9 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
       // give screen reader 2 secs before clearing the live region, to provide enough time for announcement
       this._removeTimeout = window.setTimeout(() => {
         resetAccessibilityState();
-        this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+        if(accessibilityState.parentNode) {
+          this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+        }
       }, 2000);
     }, 20);
   }

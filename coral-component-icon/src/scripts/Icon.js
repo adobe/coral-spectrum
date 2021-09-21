@@ -195,8 +195,11 @@ const Icon = Decorator(class extends BaseComponent(HTMLElement) {
 
   set autoAriaLabel(value) {
     value = transform.string(value).toLowerCase();
-    this._autoAriaLabel = validate.enumeration(autoAriaLabel)(value) && value || autoAriaLabel.OFF;
-    this._updateAltText();
+    value = validate.enumeration(autoAriaLabel)(value) && value || autoAriaLabel.OFF;
+    if(validate.valueMustChange(this._autoAriaLabel, value)) {
+      this._autoAriaLabel = value;
+      this._updateAltText();
+    }
   }
 
   /**
@@ -273,21 +276,26 @@ const Icon = Decorator(class extends BaseComponent(HTMLElement) {
     const oldSize = this._size;
 
     value = transform.string(value).toUpperCase();
-    this._size = validate.enumeration(size)(value) && value || size.SMALL;
-    this._reflectAttribute('size', this._size);
+    value = validate.enumeration(size)(value) && value || size.SMALL;
+    
+    this._reflectAttribute('size', value);
+    
+    if(validate.valueMustChange(this._size, value)) {
+      this._size = value;
 
-    // removes all the existing sizes
-    this.classList.remove(...ALL_SIZE_CLASSES);
-    // adds the new size
-    this.classList.add(`${CLASSNAME}--size${this._size}`);
-
-    // We need to update the icon if the size changed
-    if (oldSize && oldSize !== this._size && this.contains(this._elements.svg)) {
-      this._elements.svg.remove();
-      this._updateIcon();
+      // removes all the existing sizes
+      this.classList.remove(...ALL_SIZE_CLASSES);
+      // adds the new size
+      this.classList.add(`${CLASSNAME}--size${value}`);
+  
+      // We need to update the icon if the size changed
+      if (oldSize && oldSize !== value && this.contains(this._elements.svg)) {
+        this._elements.svg.remove();
+        this._updateIcon();
+      }
+  
+      this._updateAltText();
     }
-
-    this._updateAltText();
   }
 
   /** @private */

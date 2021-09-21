@@ -558,10 +558,10 @@ const ActionBar = Decorator(class extends BaseComponent(HTMLElement) {
     const primary = this._elements.primary;
     const secondary = this._elements.secondary;
 
-    if (!primary.getAttribute('role')) {
+    if (!primary.hasAttribute('role')) {
       primary.setAttribute('role', 'toolbar');
     }
-    if (!secondary.getAttribute('role')) {
+    if (!secondary.hasAttribute('role')) {
       secondary.setAttribute('role', 'toolbar');
     }
 

@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {transform, commons} from '../../../coral-utils';
+import {transform, commons, validate} from '../../../coral-utils';
 
 // https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories
 let LABELLABLE_ELEMENTS_SELECTOR = 'button,input:not([type=hidden]),keygen,meter,output,progress,select,textarea';
@@ -145,11 +145,15 @@ const BaseFormField = (superClass) => class extends superClass {
   }
 
   set invalid(value) {
-    this._invalid = transform.booleanAttr(value);
-    this._reflectAttribute('invalid', this._invalid);
+    value = transform.booleanAttr(value);
 
-    this.setAttribute('aria-invalid', this._invalid);
-    this.classList.toggle('is-invalid', this._invalid);
+    this._reflectAttribute('invalid', value);
+    
+    if(validate.valueMustChange(this._invalid, value)) {
+      this._invalid = value;
+      this.setAttribute('aria-invalid', value);
+      this.classList.toggle('is-invalid', value);
+    }
   }
 
   /**

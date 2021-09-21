@@ -12,7 +12,7 @@
 
 import {BaseLabellable} from '../../../coral-base-labellable';
 import {Icon} from '../../../coral-component-icon';
-import {transform} from '../../../coral-utils';
+import {transform, validate} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Menu-item';
 
@@ -69,11 +69,14 @@ const BaseListItem = (superClass) => class extends BaseLabellable(superClass) {
   }
 
   set disabled(value) {
-    this._disabled = transform.booleanAttr(value);
-    this._reflectAttribute('disabled', this._disabled);
-
-    this.classList.toggle('is-disabled', this._disabled);
-    this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
+    value = transform.booleanAttr(value);
+    this._reflectAttribute('disabled', value);
+    
+    if(validate.valueMustChange(this._disabled, value)) {
+      this._disabled = value;
+      this.classList.toggle('is-disabled', value);
+      this[value ? 'setAttribute' : 'removeAttribute']('aria-disabled', value);
+    }
   }
 
   /**
