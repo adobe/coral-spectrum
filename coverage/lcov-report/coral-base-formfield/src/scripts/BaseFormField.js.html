@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.2% </span>
+                <span class="strong">94.37% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>65/69</span>
+                <span class='fraction'>67/71</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.45% </span>
+                <span class="strong">93.48% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>42/44</span>
+                <span class='fraction'>43/46</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.2% </span>
+                <span class="strong">94.37% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>65/69</span>
+                <span class='fraction'>67/71</span>
             </div>
         
             
@@ -477,7 +477,11 @@
 <a name='L419'></a><a href='#L419'>419</a>
 <a name='L420'></a><a href='#L420'>420</a>
 <a name='L421'></a><a href='#L421'>421</a>
-<a name='L422'></a><a href='#L422'>422</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L422'></a><a href='#L422'>422</a>
+<a name='L423'></a><a href='#L423'>423</a>
+<a name='L424'></a><a href='#L424'>424</a>
+<a name='L425'></a><a href='#L425'>425</a>
+<a name='L426'></a><a href='#L426'>426</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -617,9 +621,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19658x</span>
+<span class="cline-any cline-yes">19662x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19658x</span>
+<span class="cline-any cline-yes">19662x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -665,7 +669,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">79828x</span>
+<span class="cline-any cline-yes">206x</span>
 <span class="cline-any cline-yes">206x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -759,7 +763,10 @@
 <span class="cline-any cline-yes">1546x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1546x</span>
-<span class="cline-any cline-yes">1546x</span>
+<span class="cline-any cline-yes">884x</span>
+<span class="cline-any cline-yes">884x</span>
+<span class="cline-any cline-yes">884x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -808,7 +815,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7776x</span>
+<span class="cline-any cline-yes">7780x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4994x</span>
@@ -875,7 +882,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15276x</span>
+<span class="cline-any cline-yes">15318x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -898,6 +905,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">38x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -910,7 +918,7 @@
  * governing permissions and limitations under the License.
  */
 &nbsp;
-import {transform, commons} from '../../../coral-utils';
+import {transform, commons, validate} from '../../../coral-utils';
 &nbsp;
 // https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories
 let LABELLABLE_ELEMENTS_SELECTOR = 'button,input:not([type=hidden]),keygen,meter,output,progress,select,textarea';
@@ -1045,11 +1053,15 @@ const BaseFormField = (superClass) =&gt; class extends superClass {
   }
 &nbsp;
   set invalid(value) {
-    this._invalid = transform.booleanAttr(value);
-    this._reflectAttribute('invalid', this._invalid);
+    value = transform.booleanAttr(value);
 &nbsp;
-    this.setAttribute('aria-invalid', this._invalid);
-    this.classList.toggle('is-invalid', this._invalid);
+    this._reflectAttribute('invalid', value);
+    
+    if(validate.valueMustChange(this._invalid, value)) {
+      this._invalid = value;
+      this.setAttribute('aria-invalid', value);
+      this.classList.toggle('is-invalid', value);
+    }
   }
 &nbsp;
   /**
@@ -1070,11 +1082,11 @@ const BaseFormField = (superClass) =&gt; class extends superClass {
   }
 &nbsp;
   /**
-   Reflects the &lt;code&gt;aria-label&lt;/code&gt; attribute to the labellable element e.g. inner input.
+   Refle<span class="missing-if-branch" title="else path not taken" >E</span>cts the &lt;code&gt;aria-label&lt;/code&gt; attribute to the labellable element e.g. inner input.
 &nbsp;
    @type {String}
    @default null
-   @html<span class="missing-if-branch" title="else path not taken" >E</span>attribute labelled
+   @htmlattribute labelled
    */
   get labelled() {
     return this._getLabellableElement().getAttribute('aria-label');
@@ -1082,7 +1094,7 @@ const BaseFormField = (superClass) =&gt; class extends superClass {
 &nbsp;
   set labelled(value) {
     value = transform.string(value);
-&nbsp;
+<span class="missing-if-branch" title="else path not taken" >E</span>
     this._getLabellableElement()[value ? 'setAttribute' : 'removeAttribute']('aria-label', value);
   }
 &nbsp;
@@ -1326,7 +1338,7 @@ export default BaseFormField;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Sep 16 2021 16:23:49 GMT+0000 (Coordinated Universal Time)
+                at Tue Sep 21 2021 05:43:19 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

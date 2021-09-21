@@ -561,30 +561,35 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
 
   set variant(value) {
     value = transform.string(value).toLowerCase();
-    this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.DEFAULT;
-    this._reflectAttribute(&apos;variant&apos;, this._variant);
+    value = validate.enumeration(variant)(value) &amp;&amp; value || variant.DEFAULT;
 
-    if (this._variant === variant.DRILLDOWN) {
-      // Render chevron on demand
-      const childIndicator = this.querySelector(&apos;._coral-AssetList-itemChildIndicator&apos;);
-      if (!childIndicator) {
-        this.insertAdjacentHTML(&apos;beforeend&apos;, Icon._renderSVG(&apos;spectrum-css-icon-ChevronRightMedium&apos;, [&apos;_coral-AssetList-itemChildIndicator&apos;, &apos;_coral-UIIcon-ChevronRightMedium&apos;]));
-      }
+    this._reflectAttribute(&apos;variant&apos;, value);
 
-      this.classList.add(&apos;is-branch&apos;);
+    if(validate.valueMustChange(this._variant, value)) {
+      this._variant = value;
 
-      // @a11y Update aria-expanded. Active drilldowns should be expanded.
-      // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
-      // to announce drilldown items as &quot;row 1 expanded&quot; or &quot;row 1 collapsed&quot; when
-      // navigating between items.
-      if (this.selected || (isChromeMacOS &amp;&amp; this.getAttribute(&apos;aria-level&apos;) === &apos;1&apos;)) {
-        this.removeAttribute(&apos;aria-expanded&apos;);
+      if (value === variant.DRILLDOWN) {
+        // Render chevron on demand
+        const childIndicator = this.querySelector(&apos;._coral-AssetList-itemChildIndicator&apos;);
+        if (!childIndicator) {
+          this.insertAdjacentHTML(&apos;beforeend&apos;, Icon._renderSVG(&apos;spectrum-css-icon-ChevronRightMedium&apos;, [&apos;_coral-AssetList-itemChildIndicator&apos;, &apos;_coral-UIIcon-ChevronRightMedium&apos;]));
+        }
+  
+        this.classList.add(&apos;is-branch&apos;);
+  
+        // @a11y Update aria-expanded. Active drilldowns should be expanded.
+        // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+        // to announce drilldown items as &quot;row 1 expanded&quot; or &quot;row 1 collapsed&quot; when
+        // navigating between items.
+        if (this.selected || (isChromeMacOS &amp;&amp; this.getAttribute(&apos;aria-level&apos;) === &apos;1&apos;)) {
+          this.removeAttribute(&apos;aria-expanded&apos;);
+        } else {
+          this.setAttribute(&apos;aria-expanded&apos;, this.active);
+        }
       } else {
-        this.setAttribute(&apos;aria-expanded&apos;, this.active);
+        this.classList.remove(&apos;is-branch&apos;);
+        this.removeAttribute(&apos;aria-expanded&apos;);
       }
-    } else {
-      this.classList.remove(&apos;is-branch&apos;);
-      this.removeAttribute(&apos;aria-expanded&apos;);
     }
   }
 
@@ -602,27 +607,32 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
   }
 
   set icon(value) {
-    this._icon = transform.string(value);
-    this._reflectAttribute(&apos;icon&apos;, this._icon);
+    value = transform.string(value);
+    
+    this._reflectAttribute(&apos;icon&apos;, value);
 
-    // ignored if it is an empty string
-    if (this._icon) {
-      // creates a new icon element
-      if (!this._elements.icon) {
-        this._elements.icon = new Icon();
+    if(validate.valueMustChange(this._icon, value)) {
+      this._icon = value;
+
+      // ignored if it is an empty string
+      if (value) {
+        // creates a new icon element
+        if (!this._elements.icon) {
+          this._elements.icon = new Icon();
+        }
+  
+        this._elements.icon.icon = this.icon;
+        this._elements.icon.size = Icon.size.SMALL;
+  
+        // removes all the items, since the icon attribute has precedence
+        this._elements.thumbnail.innerHTML = &apos;&apos;;
+  
+        // adds the newly created icon
+        this._elements.thumbnail.appendChild(this._elements.icon);
       }
-
-      this._elements.icon.icon = this.icon;
-      this._elements.icon.size = Icon.size.SMALL;
-
-      // removes all the items, since the icon attribute has precedence
-      this._elements.thumbnail.innerHTML = &apos;&apos;;
-
-      // adds the newly created icon
-      this._elements.thumbnail.appendChild(this._elements.icon);
+  
+      super._toggleIconAriaHidden();
     }
-
-    super._toggleIconAriaHidden();
   }
 
   /**
@@ -638,65 +648,69 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
   }
 
   set selected(value) {
-    this._selected = transform.booleanAttr(value);
-    this._reflectAttribute(&apos;selected&apos;, this._selected);
-    this.trigger(&apos;coral-columnview-item:_selectedchanged&apos;);
+    value = transform.booleanAttr(value);
+    this._reflectAttribute(&apos;selected&apos;, value);
 
-    // wait a frame before updating attributes
-    commons.nextFrame(() =&gt; {
-      this.classList.toggle(&apos;is-selected&apos;, this._selected);
-      this.setAttribute(&apos;aria-selected&apos;, this._selected);
-
-      // @a11y Update aria-expanded. Active drilldowns should be expanded.
-      // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
-      // to announce drilldown items as &quot;row 1 expanded&quot; or &quot;row 1 collapsed&quot; when
-      // navigating between items.
-      if (this.variant === variant.DRILLDOWN) {
-        if (this._selected || (isChromeMacOS &amp;&amp; this.getAttribute(&apos;aria-level&apos;) === &apos;1&apos;)) {
-          this.removeAttribute(&apos;aria-expanded&apos;);
-        } else {
-          this.setAttribute(&apos;aria-expanded&apos;, this.active);
+    if(validate.valueMustChange(this._selected, value)) {
+      this._selected = value;
+      this.trigger(&apos;coral-columnview-item:_selectedchanged&apos;);
+  
+      // wait a frame before updating attributes
+      commons.nextFrame(() =&gt; {
+        this.classList.toggle(&apos;is-selected&apos;, value);
+        this.setAttribute(&apos;aria-selected&apos;, value);
+  
+        // @a11y Update aria-expanded. Active drilldowns should be expanded.
+        // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+        // to announce drilldown items as &quot;row 1 expanded&quot; or &quot;row 1 collapsed&quot; when
+        // navigating between items.
+        if (value === variant.DRILLDOWN) {
+          if (this._selected || (isChromeMacOS &amp;&amp; this.getAttribute(&apos;aria-level&apos;) === &apos;1&apos;)) {
+            this.removeAttribute(&apos;aria-expanded&apos;);
+          } else {
+            this.setAttribute(&apos;aria-expanded&apos;, this.active);
+          }
         }
-      }
-
-      let accessibilityState = this._elements.accessibilityState;
-
-      if (this._selected) {
-
-        // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
-        this.removeAttribute(&apos;aria-owns&apos;);
-        this.removeAttribute(&apos;aria-describedby&apos;);
-
-        // @a11y Update content to ensure that checked state is announced by assistive technology when the item receives focus
-        accessibilityState.innerHTML = i18n.get(&apos;, checked&apos;);
-
-        // @a11y append live region content element
-        if (!this.contains(accessibilityState)) {
-          this.appendChild(accessibilityState);
+  
+        let accessibilityState = this._elements.accessibilityState;
+  
+        if (value) {
+  
+          // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
+          this.removeAttribute(&apos;aria-owns&apos;);
+          this.removeAttribute(&apos;aria-describedby&apos;);
+  
+          // @a11y Update content to ensure that checked state is announced by assistive technology when the item receives focus
+          accessibilityState.innerHTML = i18n.get(&apos;, checked&apos;);
+  
+          // @a11y append live region content element
+          if (!this.contains(accessibilityState)) {
+            this.appendChild(accessibilityState);
+          }
         }
-      }
-      // @a11y If deselecting from checked state,
-      else {
-
-        // @a11y remove, but retain reference to accessibilityState state
-        if (accessibilityState.parentNode) {
-          this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+        // @a11y If deselecting from checked state,
+        else {
+  
+          // @a11y remove, but retain reference to accessibilityState state
+          if (accessibilityState.parentNode) {
+            this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+          }
+  
+          // @a11y Update content to remove checked state
+          this._elements.accessibilityState.innerHTML = &apos;&apos;;
         }
-
-        // @a11y Update content to remove checked state
-        this._elements.accessibilityState.innerHTML = &apos;&apos;;
-      }
-
-      // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
-      let ariaLabelledby = this._elements.thumbnail.id + &apos; &apos; + this._elements.content.id;
-      this.setAttribute(&apos;aria-labelledby&apos;, this.selected ? `${ariaLabelledby} ${accessibilityState.id}` : ariaLabelledby);
-
-      // Sync checkbox item selector
-      const itemSelector = this.querySelector(&apos;coral-checkbox[coral-columnview-itemselect]&apos;);
-      if (itemSelector) {
-        itemSelector[this._selected ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;checked&apos;, &apos;&apos;);
-      }
-    });
+  
+        // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
+        let ariaLabelledby = this._elements.thumbnail.id + &apos; &apos; + this._elements.content.id;
+        this.setAttribute(&apos;aria-labelledby&apos;, this.selected ? `${ariaLabelledby} ${accessibilityState.id}` : ariaLabelledby);
+  
+        // Sync checkbox item selector
+        const itemSelector = this.querySelector(&apos;coral-checkbox[coral-columnview-itemselect]&apos;);
+        if (itemSelector) {
+          itemSelector[value ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;checked&apos;, &apos;&apos;);
+        }
+      });
+    }
   }
 
   /**
@@ -712,31 +726,35 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
   }
 
   set active(value) {
-    this._active = transform.booleanAttr(value);
-    this._reflectAttribute(&apos;active&apos;, this._active);
+    value = transform.booleanAttr(value);
+    this._reflectAttribute(&apos;active&apos;, value);
 
-    this.classList.toggle(&apos;is-navigated&apos;, this._active);
-    this.setAttribute(&apos;aria-selected&apos;, this.hasAttribute(&apos;_selectable&apos;) ? this.selected : this._active);
+    if(validate.valueMustChange(this._active, value)) {
+      this._active = value;
 
-    // @a11y Update aria-expanded. Active drilldowns should be expanded.
-    // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
-    // to announce drilldown items as &quot;row 1 expanded&quot; or &quot;row 1 collapsed&quot; when
-    // navigating between items.
-    if (this.variant === variant.DRILLDOWN) {
-      if (this._selected || (isChromeMacOS &amp;&amp; this.getAttribute(&apos;aria-level&apos;) === &apos;1&apos;)) {
-        this.removeAttribute(&apos;aria-expanded&apos;);
-      } else {
-        this.setAttribute(&apos;aria-expanded&apos;, this.active);
+      this.classList.toggle(&apos;is-navigated&apos;, value);
+      this.setAttribute(&apos;aria-selected&apos;, this.hasAttribute(&apos;_selectable&apos;) ? this.selected : value);
+  
+      // @a11y Update aria-expanded. Active drilldowns should be expanded.
+      // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+      // to announce drilldown items as &quot;row 1 expanded&quot; or &quot;row 1 collapsed&quot; when
+      // navigating between items.
+      if (this.variant === variant.DRILLDOWN) {
+        if (this.selected || (isChromeMacOS &amp;&amp; this.getAttribute(&apos;aria-level&apos;) === &apos;1&apos;)) {
+          this.removeAttribute(&apos;aria-expanded&apos;);
+        } else {
+          this.setAttribute(&apos;aria-expanded&apos;, this.active);
+        }
       }
+  
+      if (!value) {
+        // @a11y Inactive items are not expanded, so remove aria-owns and aria-describedby attributes.
+        this.removeAttribute(&apos;aria-owns&apos;);
+        this.removeAttribute(&apos;aria-describedby&apos;);
+      }
+  
+      this.trigger(&apos;coral-columnview-item:_activechanged&apos;);
     }
-
-    if (!this._active) {
-      // @a11y Inactive items are not expanded, so remove aria-owns and aria-describedby attributes.
-      this.removeAttribute(&apos;aria-owns&apos;);
-      this.removeAttribute(&apos;aria-describedby&apos;);
-    }
-
-    this.trigger(&apos;coral-columnview-item:_activechanged&apos;);
   }
 
   get _contentZones() {

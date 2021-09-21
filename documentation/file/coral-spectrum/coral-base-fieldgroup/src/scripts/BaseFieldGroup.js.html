@@ -504,10 +504,15 @@ class BaseFieldGroup extends superClass {
 
   set orientation(value) {
     value = transform.string(value).toLowerCase();
-    this._orientation = validate.enumeration(this.constructor.orientation)(value) &amp;&amp; value || orientation.HORIZONTAL;
-    this._reflectAttribute(&apos;orientation&apos;, this._orientation);
+    value = validate.enumeration(this.constructor.orientation)(value) &amp;&amp; value || orientation.HORIZONTAL;
+    
+    this._reflectAttribute(&apos;orientation&apos;, value);
+    
+    if(validate.valueMustChange(this._orientation, value)) {
+      this._orientation = value;
 
-    this.classList.toggle(`${CLASSNAME}--vertical`, this._orientation === orientation.VERTICAL);
+      this.classList.toggle(`${CLASSNAME}--vertical`, value === orientation.VERTICAL);
+    }
   }
 
   /**

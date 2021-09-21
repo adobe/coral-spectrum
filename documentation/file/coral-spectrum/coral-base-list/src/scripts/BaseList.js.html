@@ -530,6 +530,7 @@ class BaseList extends superClass {
   set interaction(value) {
     value = transform.string(value).toLowerCase();
     this._interaction = validate.enumeration(interaction)(value) &amp;&amp; value || interaction.ON;
+    
     this._reflectAttribute(&apos;interaction&apos;, this._interaction);
   }
 

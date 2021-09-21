@@ -448,7 +448,7 @@
 
 import {BaseLabellable} from &apos;../../../coral-base-labellable&apos;;
 import {Icon} from &apos;../../../coral-component-icon&apos;;
-import {transform} from &apos;../../../coral-utils&apos;;
+import {transform, validate} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-Menu-item&apos;;
 
@@ -505,11 +505,14 @@ const BaseListItem = (superClass) =&gt; class extends BaseLabellable(superClass)
   }
 
   set disabled(value) {
-    this._disabled = transform.booleanAttr(value);
-    this._reflectAttribute(&apos;disabled&apos;, this._disabled);
-
-    this.classList.toggle(&apos;is-disabled&apos;, this._disabled);
-    this[this._disabled ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, this._disabled);
+    value = transform.booleanAttr(value);
+    this._reflectAttribute(&apos;disabled&apos;, value);
+    
+    if(validate.valueMustChange(this._disabled, value)) {
+      this._disabled = value;
+      this.classList.toggle(&apos;is-disabled&apos;, value);
+      this[value ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-disabled&apos;, value);
+    }
   }
 
   /**

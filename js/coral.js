@@ -6452,7 +6452,7 @@ var Coral = (function (exports) {
       _classCallCheck(this, Commons);
 
       // Create a Map to link elements to observe to their resize event callbacks
-      this._resizeObserverMap = new Map();
+      this._resizeObserverMap = new WeakMap();
       this._resizeObserver = new ResizeObserver(function (entries) {
         for (var i = 0; i < entries.length; i++) {
           var observedElement = entries[i].target;
@@ -11173,8 +11173,7 @@ var Coral = (function (exports) {
         key: "_delegateEvents",
         value: function _delegateEvents(eventMap) {
           this._events = commons.extend(this._events, eventMap);
-          delegateEvents.call(this);
-          delegateGlobalEvents.call(this); // Once events are attached, we dispose them
+          delegateEvents.call(this); // Once events are attached, we dispose them
 
           this._events = {};
         } // Returns the content zone if the component is connected and contains the content zone else null
@@ -11572,10 +11571,9 @@ var Coral = (function (exports) {
         key: "connectedCallback",
         value: function connectedCallback() {
           // A component that is reattached should respond to global events again
-          if (this._disconnected) {
-            delegateGlobalEvents.call(this);
-          }
-
+          // Attach global listener when component is connected to DOM
+          // this would avoid memory leak when element is created but never connected.
+          delegateGlobalEvents.call(this);
           this._disconnected = false;
 
           if (!this._rendered) {
@@ -11947,12 +11945,15 @@ var Coral = (function (exports) {
           return this._invalid || false;
         },
         set: function set(value) {
-          this._invalid = transform.booleanAttr(value);
+          value = transform.booleanAttr(value);
 
-          this._reflectAttribute('invalid', this._invalid);
+          this._reflectAttribute('invalid', value);
 
-          this.setAttribute('aria-invalid', this._invalid);
-          this.classList.toggle('is-invalid', this._invalid);
+          if (validate.valueMustChange(this._invalid, value)) {
+            this._invalid = value;
+            this.setAttribute('aria-invalid', value);
+            this.classList.toggle('is-invalid', value);
+          }
         }
         /**
          Reflects the <code>aria-describedby</code> attribute to the labellable element e.g. inner input.
@@ -13413,9 +13414,13 @@ var Coral = (function (exports) {
       },
       set: function set(value) {
         value = transform.string(value).toLowerCase();
-        this._autoAriaLabel = validate.enumeration(autoAriaLabel)(value) && value || autoAriaLabel.OFF;
+        value = validate.enumeration(autoAriaLabel)(value) && value || autoAriaLabel.OFF;
 
-        this._updateAltText();
+        if (validate.valueMustChange(this._autoAriaLabel, value)) {
+          this._autoAriaLabel = value;
+
+          this._updateAltText();
+        }
       }
       /**
        Icon name.
@@ -13493,27 +13498,30 @@ var Coral = (function (exports) {
         return this._size || size.SMALL;
       },
       set: function set(value) {
-        var _this$classList;
-
         var oldSize = this._size;
         value = transform.string(value).toUpperCase();
-        this._size = validate.enumeration(size)(value) && value || size.SMALL;
+        value = validate.enumeration(size)(value) && value || size.SMALL;
 
-        this._reflectAttribute('size', this._size); // removes all the existing sizes
+        this._reflectAttribute('size', value);
+
+        if (validate.valueMustChange(this._size, value)) {
+          var _this$classList;
+
+          this._size = value; // removes all the existing sizes
+
+          (_this$classList = this.classList).remove.apply(_this$classList, ALL_SIZE_CLASSES); // adds the new size
 
 
-        (_this$classList = this.classList).remove.apply(_this$classList, ALL_SIZE_CLASSES); // adds the new size
+          this.classList.add("".concat(CLASSNAME$1, "--size").concat(value)); // We need to update the icon if the size changed
 
+          if (oldSize && oldSize !== value && this.contains(this._elements.svg)) {
+            this._elements.svg.remove();
 
-        this.classList.add("".concat(CLASSNAME$1, "--size").concat(this._size)); // We need to update the icon if the size changed
+            this._updateIcon();
+          }
 
-        if (oldSize && oldSize !== this._size && this.contains(this._elements.svg)) {
-          this._elements.svg.remove();
-
-          this._updateIcon();
+          this._updateAltText();
         }
-
-        this._updateAltText();
       }
       /** @private */
 
@@ -14996,11 +15004,15 @@ var Coral = (function (exports) {
         },
         set: function set(value) {
           value = transform.string(value).toLowerCase();
-          this._iconPosition = validate.enumeration(iconPosition)(value) && value || iconPosition.LEFT;
+          value = validate.enumeration(iconPosition)(value) && value || iconPosition.LEFT;
 
-          this._reflectAttribute('iconposition', this._iconPosition);
+          this._reflectAttribute('iconposition', value);
 
-          this._updateIcon(this.icon);
+          if (validate.valueMustChange(this._iconPosition, value)) {
+            this._iconPosition = value;
+
+            this._updateIcon(this.icon);
+          }
         }
         /**
          Specifies the icon name used inside the button. See {@link Icon} for valid icon names.
@@ -15019,9 +15031,13 @@ var Coral = (function (exports) {
           return this._icon || '';
         },
         set: function set(value) {
-          this._icon = transform.string(value);
+          value = transform.string(value);
 
-          this._updateIcon(value);
+          if (validate.valueMustChange(this._icon, value)) {
+            this._icon = value;
+
+            this._updateIcon(value);
+          }
         }
         /**
          Size of the icon. It accepts both lower and upper case sizes. See {@link ButtonIconSizeEnum}.
@@ -15041,10 +15057,11 @@ var Coral = (function (exports) {
         },
         set: function set(value) {
           value = transform.string(value).toUpperCase();
-          this._iconSize = validate.enumeration(Icon.size)(value) && value || Icon.size.SMALL;
+          value = validate.enumeration(Icon.size)(value) && value || Icon.size.SMALL;
 
-          if (this._updatedIcon) {
-            this._getIconElement().setAttribute('size', value);
+          if (validate.valueMustChange(this._iconSize, value)) {
+            this._iconSize = value;
+            this._updatedIcon && this._getIconElement().setAttribute('size', value);
           }
         }
         /**
@@ -15065,10 +15082,11 @@ var Coral = (function (exports) {
         },
         set: function set(value) {
           value = transform.string(value).toLowerCase();
-          this._iconAutoAriaLabel = validate.enumeration(Icon.autoAriaLabel)(value) && value || Icon.autoAriaLabel.OFF;
+          value = validate.enumeration(Icon.autoAriaLabel)(value) && value || Icon.autoAriaLabel.OFF;
 
-          if (this._updatedIcon) {
-            this._getIconElement().setAttribute('autoarialabel', value);
+          if (validate.valueMustChange(this._iconAutoAriaLabel, value)) {
+            this._iconAutoAriaLabel = value;
+            this._updatedIcon && this._getIconElement().setAttribute('autoarialabel', value);
           }
         }
         /**
@@ -15105,12 +15123,15 @@ var Coral = (function (exports) {
           return this._selected || false;
         },
         set: function set(value) {
-          this._selected = transform.booleanAttr(value);
+          value = transform.booleanAttr(value);
 
-          this._reflectAttribute('selected', this._selected);
+          this._reflectAttribute('selected', value);
 
-          this.classList.toggle('is-selected', this._selected);
-          this.trigger('coral-button:_selectedchanged');
+          if (validate.valueMustChange(this._selected, value)) {
+            this._selected = value;
+            this.classList.toggle('is-selected', value);
+            this.trigger('coral-button:_selectedchanged');
+          }
         } // We just reflect it but we also trigger an event to be used by button group
 
         /** @ignore */
@@ -15139,11 +15160,14 @@ var Coral = (function (exports) {
           return this._block || false;
         },
         set: function set(value) {
-          this._block = transform.booleanAttr(value);
+          value = transform.booleanAttr(value);
 
-          this._reflectAttribute('block', this._block);
+          this._reflectAttribute('block', value);
 
-          this.classList.toggle("".concat(CLASSNAME$2, "--block"), this._block);
+          if (validate.valueMustChange(this._block, value)) {
+            this._block = value;
+            this.classList.toggle("".concat(CLASSNAME$2, "--block"), value);
+          }
         }
         /**
          The button's variant. See {@link ButtonVariantEnum}.
@@ -15159,32 +15183,35 @@ var Coral = (function (exports) {
           return this._variant || variant$1.DEFAULT;
         },
         set: function set(value) {
-          var _this$classList;
-
           value = transform.string(value).toLowerCase();
-          this._variant = validate.enumeration(variant$1)(value) && value || variant$1.DEFAULT;
+          value = validate.enumeration(variant$1)(value) && value || variant$1.DEFAULT;
 
-          this._reflectAttribute('variant', this._variant); // removes every existing variant
+          this._reflectAttribute('variant', value);
 
+          if (validate.valueMustChange(this._variant, value)) {
+            var _this$classList;
 
-          this.classList.remove(CLASSNAME$2, ACTION_CLASSNAME);
+            this._variant = value; // removes every existing variant
 
-          (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$1);
+            this.classList.remove(CLASSNAME$2, ACTION_CLASSNAME);
 
-          if (this._variant === variant$1._CUSTOM) {
-            this.classList.remove(CLASSNAME$2);
-          } else {
-            var _this$classList2;
+            (_this$classList = this.classList).remove.apply(_this$classList, ALL_VARIANT_CLASSES$1);
 
-            (_this$classList2 = this.classList).add.apply(_this$classList2, _toConsumableArray(VARIANT_MAP[this._variant]));
-
-            if (this._variant === variant$1.ACTION || this._variant === variant$1.QUIET_ACTION) {
+            if (value === variant$1._CUSTOM) {
               this.classList.remove(CLASSNAME$2);
-            }
-          } // Update label styles
+            } else {
+              var _this$classList2;
+
+              (_this$classList2 = this.classList).add.apply(_this$classList2, _toConsumableArray(VARIANT_MAP[value]));
+
+              if (value === variant$1.ACTION || value === variant$1.QUIET_ACTION) {
+                this.classList.remove(CLASSNAME$2);
+              }
+            } // Update label styles
 
 
-          this._updateLabel();
+            this._updateLabel();
+          }
         }
         /**
          Inherited from {@link BaseComponent#trackingElement}.
@@ -18159,12 +18186,15 @@ var Coral = (function (exports) {
           return this._disabled || false;
         },
         set: function set(value) {
-          this._disabled = transform.booleanAttr(value);
+          value = transform.booleanAttr(value);
 
-          this._reflectAttribute('disabled', this._disabled);
+          this._reflectAttribute('disabled', value);
 
-          this.classList.toggle('is-disabled', this._disabled);
-          this[this._disabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', this._disabled);
+          if (validate.valueMustChange(this._disabled, value)) {
+            this._disabled = value;
+            this.classList.toggle('is-disabled', value);
+            this[value ? 'setAttribute' : 'removeAttribute']('aria-disabled', value);
+          }
         }
         /**
          The icon to display. See {@link Icon}.
@@ -29811,11 +29841,14 @@ var Coral = (function (exports) {
         },
         set: function set(value) {
           value = transform.string(value).toLowerCase();
-          this._orientation = validate.enumeration(this.constructor.orientation)(value) && value || orientation.HORIZONTAL;
+          value = validate.enumeration(this.constructor.orientation)(value) && value || orientation.HORIZONTAL;
 
-          this._reflectAttribute('orientation', this._orientation);
+          this._reflectAttribute('orientation', value);
 
-          this.classList.toggle("".concat(CLASSNAME$n, "--vertical"), this._orientation === orientation.VERTICAL);
+          if (validate.valueMustChange(this._orientation, value)) {
+            this._orientation = value;
+            this.classList.toggle("".concat(CLASSNAME$n, "--vertical"), value === orientation.VERTICAL);
+          }
         }
         /**
          Returns the first selected field group item in the Field Group. The value <code>null</code> is returned if no item is
@@ -34257,11 +34290,11 @@ var Coral = (function (exports) {
         var primary = this._elements.primary;
         var secondary = this._elements.secondary;
 
-        if (!primary.getAttribute('role')) {
+        if (!primary.hasAttribute('role')) {
           primary.setAttribute('role', 'toolbar');
         }
 
-        if (!secondary.getAttribute('role')) {
+        if (!secondary.hasAttribute('role')) {
           secondary.setAttribute('role', 'toolbar');
         } // we need to know if the content zone was provided to stop the voracious behavior
 
@@ -54437,9 +54470,10 @@ var Coral = (function (exports) {
         var level = colIndex + 1;
 
         if (column.items) {
-          column.items.getAll().filter(function (item, index) {
+          var items = column.items.getAll();
+          items.filter(function (item, index) {
             item.setAttribute('aria-posinset', index + 1);
-            item.setAttribute('aria-setsize', column.items.length);
+            item.setAttribute('aria-setsize', items.length);
             return !item.hasAttribute('aria-level');
           }).forEach(function (item) {
             item.setAttribute('aria-level', level);
@@ -54774,7 +54808,7 @@ var Coral = (function (exports) {
         accessibilityState.setAttribute('lang', i18n.locale); // @a11y append live region content element
 
         if (!this.contains(accessibilityState)) {
-          this.insertBefore(accessibilityState, this.firstChild);
+          this.appendChild(accessibilityState);
         } // utility method to clean up accessibility state
 
 
@@ -54818,7 +54852,10 @@ var Coral = (function (exports) {
 
           _this7._removeTimeout = window.setTimeout(function () {
             resetAccessibilityState();
-            _this7._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+
+            if (accessibilityState.parentNode) {
+              _this7._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+            }
           }, 2000);
         }, 20);
       }
@@ -55072,25 +55109,27 @@ var Coral = (function (exports) {
         return this._selectionMode || selectionMode$1.NONE;
       },
       set: function set(value) {
-        var _this9 = this;
-
         value = transform.string(value).toLowerCase();
-        this._selectionMode = validate.enumeration(selectionMode$1)(value) && value || selectionMode$1.NONE;
+        value = validate.enumeration(selectionMode$1)(value) && value || selectionMode$1.NONE;
 
-        this._reflectAttribute('selectionmode', this._selectionMode); // propagates the selection mode to the columns
+        this._reflectAttribute('selectionmode', value);
+
+        if (validate.valueMustChange(this._selectionMode, value)) {
+          this._selectionMode = value; // propagates the selection mode to the columns
+
+          var columns = this.columns.getAll();
+          columns.forEach(function (item) {
+            item.setAttribute('_selectionmode', value);
+          });
+          this.classList.remove("".concat(CLASSNAME$U, "--selection"));
+
+          if (value !== selectionMode$1.NONE) {
+            this.classList.add("".concat(CLASSNAME$U, "--selection"));
+          } // @a11y
 
 
-        this.columns.getAll().forEach(function (item) {
-          item.setAttribute('_selectionmode', _this9._selectionMode);
-        });
-        this.classList.remove("".concat(CLASSNAME$U, "--selection"));
-
-        if (this._selectionMode !== selectionMode$1.NONE) {
-          this.classList.add("".concat(CLASSNAME$U, "--selection"));
-        } // @a11y
-
-
-        this.setAttribute('aria-multiselectable', this._selectionMode === selectionMode$1.MULTIPLE);
+          this.setAttribute('aria-multiselectable', value === selectionMode$1.MULTIPLE);
+        }
       }
       /**
        First selected item of the ColumnView.
@@ -55737,15 +55776,19 @@ var Coral = (function (exports) {
         var _this4 = this;
 
         value = transform.string(value).toLowerCase();
-        this.__selectionMode = validate.enumeration(selectionMode$1)(value) && value || null;
+        value = validate.enumeration(selectionMode$1)(value) && value || null;
 
-        this._reflectAttribute('_selectionmode', this.__selectionMode);
+        this._reflectAttribute('_selectionmode', value);
 
-        this.items.getAll().forEach(function (item) {
-          return _this4._toggleItemSelection(item);
-        });
+        if (validate.valueMustChange(this.__selectionMode, value)) {
+          this.__selectionMode = value;
+          var items = this.items.getAll();
+          items.forEach(function (item) {
+            return _this4._toggleItemSelection(item);
+          });
 
-        this._setStateFromDOM();
+          this._setStateFromDOM();
+        }
       }
       /**
        Returns an Array containing the last selected items inside this Column in selected order.
@@ -56019,31 +56062,35 @@ var Coral = (function (exports) {
       },
       set: function set(value) {
         value = transform.string(value).toLowerCase();
-        this._variant = validate.enumeration(variant$g)(value) && value || variant$g.DEFAULT;
+        value = validate.enumeration(variant$g)(value) && value || variant$g.DEFAULT;
 
-        this._reflectAttribute('variant', this._variant);
+        this._reflectAttribute('variant', value);
 
-        if (this._variant === variant$g.DRILLDOWN) {
-          // Render chevron on demand
-          var childIndicator = this.querySelector('._coral-AssetList-itemChildIndicator');
+        if (validate.valueMustChange(this._variant, value)) {
+          this._variant = value;
 
-          if (!childIndicator) {
-            this.insertAdjacentHTML('beforeend', Icon._renderSVG('spectrum-css-icon-ChevronRightMedium', ['_coral-AssetList-itemChildIndicator', '_coral-UIIcon-ChevronRightMedium']));
-          }
+          if (value === variant$g.DRILLDOWN) {
+            // Render chevron on demand
+            var childIndicator = this.querySelector('._coral-AssetList-itemChildIndicator');
 
-          this.classList.add('is-branch'); // @a11y Update aria-expanded. Active drilldowns should be expanded.
-          // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
-          // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
-          // navigating between items.
+            if (!childIndicator) {
+              this.insertAdjacentHTML('beforeend', Icon._renderSVG('spectrum-css-icon-ChevronRightMedium', ['_coral-AssetList-itemChildIndicator', '_coral-UIIcon-ChevronRightMedium']));
+            }
 
-          if (this.selected || isChromeMacOS && this.getAttribute('aria-level') === '1') {
-            this.removeAttribute('aria-expanded');
+            this.classList.add('is-branch'); // @a11y Update aria-expanded. Active drilldowns should be expanded.
+            // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+            // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
+            // navigating between items.
+
+            if (this.selected || isChromeMacOS && this.getAttribute('aria-level') === '1') {
+              this.removeAttribute('aria-expanded');
+            } else {
+              this.setAttribute('aria-expanded', this.active);
+            }
           } else {
-            this.setAttribute('aria-expanded', this.active);
+            this.classList.remove('is-branch');
+            this.removeAttribute('aria-expanded');
           }
-        } else {
-          this.classList.remove('is-branch');
-          this.removeAttribute('aria-expanded');
         }
       }
       /**
@@ -56061,26 +56108,29 @@ var Coral = (function (exports) {
         return this._icon || '';
       },
       set: function set(value) {
-        this._icon = transform.string(value);
+        value = transform.string(value);
 
-        this._reflectAttribute('icon', this._icon); // ignored if it is an empty string
+        this._reflectAttribute('icon', value);
 
+        if (validate.valueMustChange(this._icon, value)) {
+          this._icon = value; // ignored if it is an empty string
 
-        if (this._icon) {
-          // creates a new icon element
-          if (!this._elements.icon) {
-            this._elements.icon = new Icon();
+          if (value) {
+            // creates a new icon element
+            if (!this._elements.icon) {
+              this._elements.icon = new Icon();
+            }
+
+            this._elements.icon.icon = this.icon;
+            this._elements.icon.size = Icon.size.SMALL; // removes all the items, since the icon attribute has precedence
+
+            this._elements.thumbnail.innerHTML = ''; // adds the newly created icon
+
+            this._elements.thumbnail.appendChild(this._elements.icon);
           }
 
-          this._elements.icon.icon = this.icon;
-          this._elements.icon.size = Icon.size.SMALL; // removes all the items, since the icon attribute has precedence
-
-          this._elements.thumbnail.innerHTML = ''; // adds the newly created icon
-
-          this._elements.thumbnail.appendChild(this._elements.icon);
+          _get(_getPrototypeOf(_class.prototype), "_toggleIconAriaHidden", this).call(this);
         }
-
-        _get(_getPrototypeOf(_class.prototype), "_toggleIconAriaHidden", this).call(this);
       }
       /**
        Whether the item is selected.
@@ -56098,66 +56148,69 @@ var Coral = (function (exports) {
       set: function set(value) {
         var _this2 = this;
 
-        this._selected = transform.booleanAttr(value);
+        value = transform.booleanAttr(value);
 
-        this._reflectAttribute('selected', this._selected);
+        this._reflectAttribute('selected', value);
 
-        this.trigger('coral-columnview-item:_selectedchanged'); // wait a frame before updating attributes
+        if (validate.valueMustChange(this._selected, value)) {
+          this._selected = value;
+          this.trigger('coral-columnview-item:_selectedchanged'); // wait a frame before updating attributes
 
-        commons.nextFrame(function () {
-          _this2.classList.toggle('is-selected', _this2._selected);
+          commons.nextFrame(function () {
+            _this2.classList.toggle('is-selected', value);
 
-          _this2.setAttribute('aria-selected', _this2._selected); // @a11y Update aria-expanded. Active drilldowns should be expanded.
-          // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
-          // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
-          // navigating between items.
+            _this2.setAttribute('aria-selected', value); // @a11y Update aria-expanded. Active drilldowns should be expanded.
+            // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+            // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
+            // navigating between items.
 
 
-          if (_this2.variant === variant$g.DRILLDOWN) {
-            if (_this2._selected || isChromeMacOS && _this2.getAttribute('aria-level') === '1') {
-              _this2.removeAttribute('aria-expanded');
-            } else {
-              _this2.setAttribute('aria-expanded', _this2.active);
+            if (value === variant$g.DRILLDOWN) {
+              if (_this2._selected || isChromeMacOS && _this2.getAttribute('aria-level') === '1') {
+                _this2.removeAttribute('aria-expanded');
+              } else {
+                _this2.setAttribute('aria-expanded', _this2.active);
+              }
             }
-          }
 
-          var accessibilityState = _this2._elements.accessibilityState;
+            var accessibilityState = _this2._elements.accessibilityState;
 
-          if (_this2._selected) {
-            // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
-            _this2.removeAttribute('aria-owns');
+            if (value) {
+              // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
+              _this2.removeAttribute('aria-owns');
 
-            _this2.removeAttribute('aria-describedby'); // @a11y Update content to ensure that checked state is announced by assistive technology when the item receives focus
+              _this2.removeAttribute('aria-describedby'); // @a11y Update content to ensure that checked state is announced by assistive technology when the item receives focus
 
 
-            accessibilityState.innerHTML = i18n.get(', checked'); // @a11y append live region content element
+              accessibilityState.innerHTML = i18n.get(', checked'); // @a11y append live region content element
 
-            if (!_this2.contains(accessibilityState)) {
-              _this2.appendChild(accessibilityState);
+              if (!_this2.contains(accessibilityState)) {
+                _this2.appendChild(accessibilityState);
+              }
+            } // @a11y If deselecting from checked state,
+            else {
+                // @a11y remove, but retain reference to accessibilityState state
+                if (accessibilityState.parentNode) {
+                  _this2._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
+                } // @a11y Update content to remove checked state
+
+
+                _this2._elements.accessibilityState.innerHTML = '';
+              } // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
+
+
+            var ariaLabelledby = _this2._elements.thumbnail.id + ' ' + _this2._elements.content.id;
+
+            _this2.setAttribute('aria-labelledby', _this2.selected ? "".concat(ariaLabelledby, " ").concat(accessibilityState.id) : ariaLabelledby); // Sync checkbox item selector
+
+
+            var itemSelector = _this2.querySelector('coral-checkbox[coral-columnview-itemselect]');
+
+            if (itemSelector) {
+              itemSelector[value ? 'setAttribute' : 'removeAttribute']('checked', '');
             }
-          } // @a11y If deselecting from checked state,
-          else {
-              // @a11y remove, but retain reference to accessibilityState state
-              if (accessibilityState.parentNode) {
-                _this2._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
-              } // @a11y Update content to remove checked state
-
-
-              _this2._elements.accessibilityState.innerHTML = '';
-            } // @a11y Item should be labelled by thumbnail, content, and if appropriate accessibility state.
-
-
-          var ariaLabelledby = _this2._elements.thumbnail.id + ' ' + _this2._elements.content.id;
-
-          _this2.setAttribute('aria-labelledby', _this2.selected ? "".concat(ariaLabelledby, " ").concat(accessibilityState.id) : ariaLabelledby); // Sync checkbox item selector
-
-
-          var itemSelector = _this2.querySelector('coral-checkbox[coral-columnview-itemselect]');
-
-          if (itemSelector) {
-            itemSelector[_this2._selected ? 'setAttribute' : 'removeAttribute']('checked', '');
-          }
-        });
+          });
+        }
       }
       /**
        Whether the item is active.
@@ -56173,31 +56226,34 @@ var Coral = (function (exports) {
         return this._active || false;
       },
       set: function set(value) {
-        this._active = transform.booleanAttr(value);
+        value = transform.booleanAttr(value);
 
-        this._reflectAttribute('active', this._active);
+        this._reflectAttribute('active', value);
 
-        this.classList.toggle('is-navigated', this._active);
-        this.setAttribute('aria-selected', this.hasAttribute('_selectable') ? this.selected : this._active); // @a11y Update aria-expanded. Active drilldowns should be expanded.
-        // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
-        // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
-        // navigating between items.
+        if (validate.valueMustChange(this._active, value)) {
+          this._active = value;
+          this.classList.toggle('is-navigated', value);
+          this.setAttribute('aria-selected', this.hasAttribute('_selectable') ? this.selected : value); // @a11y Update aria-expanded. Active drilldowns should be expanded.
+          // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
+          // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
+          // navigating between items.
 
-        if (this.variant === variant$g.DRILLDOWN) {
-          if (this._selected || isChromeMacOS && this.getAttribute('aria-level') === '1') {
-            this.removeAttribute('aria-expanded');
-          } else {
-            this.setAttribute('aria-expanded', this.active);
+          if (this.variant === variant$g.DRILLDOWN) {
+            if (this.selected || isChromeMacOS && this.getAttribute('aria-level') === '1') {
+              this.removeAttribute('aria-expanded');
+            } else {
+              this.setAttribute('aria-expanded', this.active);
+            }
           }
-        }
 
-        if (!this._active) {
-          // @a11y Inactive items are not expanded, so remove aria-owns and aria-describedby attributes.
-          this.removeAttribute('aria-owns');
-          this.removeAttribute('aria-describedby');
-        }
+          if (!value) {
+            // @a11y Inactive items are not expanded, so remove aria-owns and aria-describedby attributes.
+            this.removeAttribute('aria-owns');
+            this.removeAttribute('aria-describedby');
+          }
 
-        this.trigger('coral-columnview-item:_activechanged');
+          this.trigger('coral-columnview-item:_activechanged');
+        }
       }
     }, {
       key: "_contentZones",
@@ -84730,7 +84786,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.11.1";
+  var version$1 = "4.12.0";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

@@ -867,6 +867,7 @@ class BaseOverlay extends superClass {
       this._handleRootKeypress = this._handleRootKeypress.bind(this);
       this._vent.on(&apos;keydown&apos;, this._handleRootKeypress);
       this._vent.on(&apos;focus&apos;, &apos;[coral-tabcapture]&apos;, this._handleTabCaptureFocus);
+
     } else if (this._trapFocus === trapFocus.OFF) {
       // Remove elements
       this._elements.topTabCapture &amp;&amp; this._elements.topTabCapture.remove();

@@ -288,7 +288,8 @@
 <a name='L230'></a><a href='#L230'>230</a>
 <a name='L231'></a><a href='#L231'>231</a>
 <a name='L232'></a><a href='#L232'>232</a>
-<a name='L233'></a><a href='#L233'>233</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L233'></a><a href='#L233'>233</a>
+<a name='L234'></a><a href='#L234'>234</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -520,7 +521,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">676x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -616,70 +618,71 @@ const BaseList = (superClass) =&gt; class extends superClass {
   set interaction(value) {
     value = transform.string(value).toLowerCase();
     this._interaction = validate.enumeration(interaction)(value) &amp;&amp; value || interaction.ON;
-    this._reflectAttri<span class="fstat-no" title="function not covered" >bute('interact</span>ion', this._interaction);
+    <span class="fstat-no" title="function not covered" ></span>
+    this<span class="cstat-no" title="statement not covered" >._reflectAttribute('interaction', this._interaction);</span>
   }<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
   /**
    Returns true if the event is at the matched target.
 &nbsp;
    @private
    */
-  _eventIsAtTarget(event) {
-    const target = eve<span class="fstat-no" title="function not covered" >nt.target;</span>
-    cons<span class="cstat-no" title="statement not covered" >t listItem = event.matchedTarget;</span>
-<span class="cstat-no" title="statement not covered" ></span>
-    const isAtTarget = target === listItem;
+  _eventIsAtTarget(eve<span class="fstat-no" title="function not covered" >nt) {</span>
+    cons<span class="cstat-no" title="statement not covered" >t target = event.target;</span>
+    const <span class="cstat-no" title="statement not covered" >listItem</span> = event.matchedTarget;
 &nbsp;
-    if (isAtTarget) <span class="cstat-no" title="statement not covered" >{</span>
-      // Don't let arrow keys etc scroll the page
-      ev<span class="cstat-no" title="statement not covered" >ent.preventDefault</span>();
+    const isAtTarget = target === listItem;
+<span class="cstat-no" title="statement not covered" ></span>
+    if (isAtTarget) {
+      //<span class="cstat-no" title="statement not covered" > Don't let arrow k</span>eys etc scroll the page
+      event.preventDefault();
     }
 &nbsp;
     return isAtTarget;
   }
-&nbsp;
-  _onMouseEnter() {<span class="fstat-no" title="function not covered" ></span>
-    if (<span class="cstat-no" title="statement not covered" >this.contains(document.activeElement)) {</span>
-      docu<span class="cstat-no" title="statement not covered" >ment.act</span>iveElement.blur();
+<span class="fstat-no" title="function not covered" ></span>
+  _onMou<span class="cstat-no" title="statement not covered" >seEnter() {</span>
+    if (th<span class="cstat-no" title="statement not covered" >is.conta</span>ins(document.activeElement)) {
+      document.activeElement.blur();
     }
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /** @p<span class="cstat-no" title="statement not covered" >rivate */</span>
+  _focusFirstItem(event) {
+    if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
+      return;
+    }
+&nbsp;
+    const items = this<span class="fstat-no" title="function not covered" >._getSelectable</span>Items();
+    item<span class="cstat-no" title="statement not covered" >s[0].focus();</span>
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /** @private */
+  _focusLastItem(even<span class="cstat-no" title="statement not covered" >t) {</span>
+    if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
+      return;<span class="cstat-no" title="statement not covered" ></span>
+    }
+<span class="cstat-no" title="statement not covered" ></span>
+    const items = this._getSelectableItems();
+    item<span class="cstat-no" title="statement not covered" >s[items.length - 1].focus();</span>
   }
 <span class="cstat-no" title="statement not covered" ></span>
   /** @private */
-  _focus<span class="cstat-no" title="statement not covered" >FirstItem(event) {</span>
-    if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
-      return;
-    }
-&nbsp;
-    const items = this._getSelectableItems();
-    items[0].focus();<span class="fstat-no" title="function not covered" ></span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-  /** @private */
-  _focusLastItem(event) {
-    if (this.interact<span class="cstat-no" title="statement not covered" >ion === interaction.</span>OFF || !this._eventIsAtTarget(event)) {
-      return;
-    }<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-    const items = th<span class="cstat-no" title="statement not covered" >is._getSelectableItems</span>();
-    items[items.length - 1].focus();
-  }<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-  /** @pri<span class="cstat-no" title="statement not covered" >vate */</span>
   _focusNextItem(event) {
-    if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
-      re<span class="cstat-no" title="statement not covered" >turn;</span>
-    }<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-    const <span class="cstat-no" title="statement not covered" >target = event.mat</span>chedTarget;
+    if (<span class="cstat-no" title="statement not covered" >this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {</span>
+      retu<span class="cstat-no" title="statement not covered" >rn;</span>
+    }
+<span class="cstat-no" title="statement not covered" ></span>
+    const target = event.matchedTarget;
     const items = this._getSelectableItems();
     const index = items.indexOf(target);
 &nbsp;
     if (index === -1) {
       // Invalid state
       return;
-    }
-<span class="missing-if-branch" title="if path not taken" >I</span>
-    if (in<span class="cstat-no" title="statement not covered" >dex &lt; it</span>ems.length - 1) {
+    }<span class="missing-if-branch" title="if path not taken" >I</span>
+<span class="cstat-no" title="statement not covered" ></span>
+    if (index &lt; items.length - 1) {
       items[index + 1].focus();
     } else {
       items[0].focus();
@@ -687,14 +690,14 @@ const BaseList = (superClass) =&gt; class extends superClass {
   }
 &nbsp;
   /** @private */
-  _focusPreviousItem(event) {
-    if (<span class="missing-if-branch" title="if path not taken" >I</span>this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
-      return;
-    }<span class="cstat-no" title="statement not covered" ></span>
+  _focus<span class="missing-if-branch" title="if path not taken" >I</span>PreviousItem(event) {
+    if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
+      retu<span class="cstat-no" title="statement not covered" >rn;</span>
+    }
 &nbsp;
-    const target = event.matchedTarget;
-    cons<span class="missing-if-branch" title="if path not taken" >I</span>t items = this._getSelectableItems();
-    const <span class="cstat-no" title="statement not covered" >index = items.indexOf(targ</span>et);
+    cons<span class="missing-if-branch" title="if path not taken" >I</span>t target = event.matchedTarget;
+    const <span class="cstat-no" title="statement not covered" >items = this._getSelectabl</span>eItems();
+    const index = items.indexOf(target);
 &nbsp;
     if (index === -1) {
       // Invalid state
@@ -713,11 +716,11 @@ const BaseList = (superClass) =&gt; class extends superClass {
     // Also checks if item is visible
     return this.items._getSelectableItems().filter(item =&gt; !item.hasAttribute('hidden') &amp;&amp; item.offsetParent);
   }
-&nbsp;
-  /** @i<span class="missing-if-branch" title="else path not taken" >E</span>gnore */
+<span class="missing-if-branch" title="else path not taken" >E</span>
+  /** @ignore */
   focus() {
-    if (!this.contains(document.activeElement)) {
-      cons<span class="missing-if-branch" title="else path not taken" >E</span>t items = this._getSelectableItems();
+    if (!t<span class="missing-if-branch" title="else path not taken" >E</span>his.contains(document.activeElement)) {
+      const items = this._getSelectableItems();
       if (items.length &gt; 0) {
         items[0].focus();
       }
@@ -759,7 +762,7 @@ export default BaseList;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Sep 16 2021 16:23:49 GMT+0000 (Coordinated Universal Time)
+                at Tue Sep 21 2021 05:43:19 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

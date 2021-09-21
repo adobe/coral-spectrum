@@ -23291,6 +23291,9 @@ coral-columnview-preview-content.coral-Body--small {
   margin-bottom: 0;
   padding-bottom: 2px;
 }
+[coral-columnview-itemselect] ._coral-Checkbox-input {
+  z-index: auto;
+}
 .coral--light coral-columnview-preview-value:focus.focus-ring {
   border-color: rgb(38, 128, 235);
 }

@@ -29,13 +29,13 @@
         413,
         420,
         425,
-        436,
-        446,
-        505,
-        508,
-        688,
-        785,
-        799,
+        435,
+        445,
+        504,
+        507,
+        687,
+        784,
+        798,
         850,
         859
       ]
@@ -46,7 +46,7 @@
       "undocumentLines": [
         17,
         48,
-        71
+        76
       ]
     },
     "coral-spectrum/coral-base-formfield/src/scripts/BaseFormField.js": {
@@ -56,9 +56,9 @@
         16,
         51,
         69,
-        148,
-        387,
-        396
+        153,
+        391,
+        400
       ]
     },
     "coral-spectrum/coral-base-labellable/src/scripts/BaseLabellable.js": {
@@ -80,7 +80,7 @@
         42,
         65,
         96,
-        119
+        120
       ]
     },
     "coral-spectrum/coral-base-list/src/scripts/BaseListItem.js": {
@@ -103,21 +103,21 @@
         64,
         398,
         415,
-        459,
-        491,
-        510,
-        562,
-        579,
-        668,
-        690,
-        742,
-        747,
-        797,
-        874,
-        878,
-        946,
-        950,
-        999
+        460,
+        492,
+        511,
+        563,
+        580,
+        669,
+        691,
+        743,
+        748,
+        798,
+        875,
+        879,
+        947,
+        951,
+        1000
       ]
     },
     "coral-spectrum/coral-collection/src/scripts/Collection.js": {
@@ -849,8 +849,8 @@
         151,
         155,
         161,
-        563,
-        564
+        571,
+        572
       ]
     },
     "coral-spectrum/coral-component-icon/src/scripts/iconCollection.js": {
