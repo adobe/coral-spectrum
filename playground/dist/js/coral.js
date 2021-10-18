@@ -16955,10 +16955,6 @@
       set: function set(value) {
         var _value = transform.string(value);
 
-        if (this._value === _value) {
-          return;
-        }
-
         this._value = _value;
 
         this._reflectAttribute('value', this._value);
@@ -84786,7 +84782,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.12.0";
+  var version$1 = "4.12.1";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
