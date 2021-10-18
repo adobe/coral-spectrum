@@ -232,9 +232,6 @@ const Tag = Decorator(class extends BaseComponent(HTMLElement) {
   set value(value) {
     let _value = transform.string(value);
 
-    if(this._value === _value) {
-      return;
-    }
     this._value = _value;
     this._reflectAttribute('value', this._value);
 
