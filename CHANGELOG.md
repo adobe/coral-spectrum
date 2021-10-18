@@ -1,3 +1,10 @@
+## [4.12.2](https://github.com/adobe/coral-spectrum/compare/v4.12.1...v4.12.2) (2021-10-18)
+
+
+### Bug Fixes
+
+* **CQ-4332761:** first value is undefined when coral-select is initialised with selected value ([#188](https://github.com/adobe/coral-spectrum/issues/188)) ([a7e745e](https://github.com/adobe/coral-spectrum/commit/a7e745e15dda79e243393a5cc8b7861ab5f32eee))
+
 ## [4.12.1](https://github.com/adobe/coral-spectrum/compare/v4.12.0...v4.12.1) (2021-09-21)
 
 
