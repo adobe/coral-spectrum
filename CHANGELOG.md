@@ -1,3 +1,10 @@
+## [4.12.3](https://github.com/adobe/coral-spectrum/compare/v4.12.2...v4.12.3) (2021-10-21)
+
+
+### Bug Fixes
+
+* **GRANITE-36188:** Able to select the date on disabled datepicker ([#189](https://github.com/adobe/coral-spectrum/issues/189)) ([6e8a0eb](https://github.com/adobe/coral-spectrum/commit/6e8a0ebc78f813753eaa227e3a11dad75286f9a6))
+
 ## [4.12.2](https://github.com/adobe/coral-spectrum/compare/v4.12.1...v4.12.2) (2021-10-18)
 
 
