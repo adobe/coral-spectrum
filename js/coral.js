@@ -59023,7 +59023,7 @@ var Coral = (function (exports) {
         this.classList.toggle('is-disabled', this._disabled);
         this._elements.input.disabled = this._disabled;
         this._elements.hiddenInput.disabled = this._disabled;
-        this._elements.toggle.disabled = this._disabled;
+        this._elements.toggle.disabled = this._disabled || this.readOnly;
       }
       /**
        Inherited from {@link BaseFormField#invalid}.
@@ -59087,7 +59087,7 @@ var Coral = (function (exports) {
 
         this._elements.hiddenInput.readOnly = this.readOnly;
         this._elements.input.readOnly = this._readOnly;
-        this._elements.toggle.disabled = this._readOnly;
+        this._elements.toggle.disabled = this._readOnly || this.disabled;
       }
       /**
        Inherited from {@link BaseFormField#labelled}.
