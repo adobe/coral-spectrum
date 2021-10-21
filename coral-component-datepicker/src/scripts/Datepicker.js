@@ -477,7 +477,7 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
 
     this._elements.input.disabled = this._disabled;
     this._elements.hiddenInput.disabled = this._disabled;
-    this._elements.toggle.disabled = this._disabled;
+    this._elements.toggle.disabled = this._disabled || this.readOnly;
   }
 
   /**
@@ -533,7 +533,7 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
 
     this._elements.hiddenInput.readOnly = this.readOnly;
     this._elements.input.readOnly = this._readOnly;
-    this._elements.toggle.disabled = this._readOnly;
+    this._elements.toggle.disabled = this._readOnly || this.disabled;
   }
 
   /**
