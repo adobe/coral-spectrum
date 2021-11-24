@@ -384,12 +384,19 @@ class Collection {
       // detects them
       this._handleItems = true;
 
-      this._observer.observe(this._container, {
-        // we only need to observe for items that were added and removed, no need to check attributes and contents
-        childList: true,
-        // we need to listen to subtree mutations as items may not be direct children
-        subtree: true
-      });
+      if (this._onlyHandleChildren) {
+        this._observer.observe(this._container, {
+          // we only need to observe for items that were added and removed, no need to check attributes and contents
+          childList: true,
+        });
+      } else {
+        this._observer.observe(this._container, {
+          // we only need to observe for items that were added and removed, no need to check attributes and contents
+          childList: true,
+          // we need to listen to subtree mutations as items may not be direct children
+          subtree: true
+        });
+      }
 
       // by default we handle the initial items unless otherwise indicated
       if (skipInitialItems !== true) {
