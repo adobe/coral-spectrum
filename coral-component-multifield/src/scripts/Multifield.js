@@ -116,6 +116,7 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
         itemTagName: 'coral-multifield-item',
         // allows multifields to be nested
         itemSelector: ':scope > coral-multifield-item',
+        onlyHandleChildren: true,
         onItemAdded: this._onItemAdded,
         onItemRemoved: this._onItemRemoved
       });

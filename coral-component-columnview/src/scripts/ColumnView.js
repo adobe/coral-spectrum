@@ -1006,7 +1006,7 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
       if (item.tagName === 'CORAL-COLUMNVIEW-COLUMN') {
         // we use the property since the item may not be ready
         item.setAttribute('_selectionmode', this.selectionMode);
-        this.trigger('coral-collection:add', {item});
+        //this.trigger('coral-collection:add', {item});
         this._updateAriaLevel(item);
       }
     }
@@ -1017,7 +1017,7 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
       item = removedNodes[j];
       // @todo: should I handle it specially if it was selected? should a selection and active event be triggered?
       if (item.tagName === 'CORAL-COLUMNVIEW-COLUMN') {
-        this.trigger('coral-collection:remove', {item});
+        // this.trigger('coral-collection:remove', {item});
       }
     }
   }

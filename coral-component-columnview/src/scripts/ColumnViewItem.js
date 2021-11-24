@@ -63,8 +63,6 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
       // Templates
       accessibilityState.call(this._elements, {commons});
     }
-
-    super._observeLabel();
   }
 
   /**
@@ -183,6 +181,8 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
         // creates a new icon element
         if (!this._elements.icon) {
           this._elements.icon = new Icon();
+          // register observer only if there present an icon field.
+          super._observeLabel();
         }
   
         this._elements.icon.icon = this.icon;

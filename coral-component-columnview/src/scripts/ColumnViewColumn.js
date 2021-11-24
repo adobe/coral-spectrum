@@ -511,11 +511,11 @@ const ColumnViewColumn = Decorator(class extends BaseComponent(HTMLElement) {
   /** @private */
   _handleMutation(mutations) {
     const mutationsCount = mutations.length;
-    for (let i = 0 ; i < mutationsCount ; i++) {
+    /* for (let i = 0 ; i < mutationsCount ; i++) {
       const mutation = mutations[i];
       // we handle the collection events
       this._triggerCollectionEvents(mutation.addedNodes, mutation.removedNodes);
-    }
+    } */
 
     this._setStateFromDOM();
 

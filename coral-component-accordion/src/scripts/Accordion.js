@@ -113,6 +113,7 @@ const Accordion = Decorator(class extends BaseComponent(HTMLElement) {
         itemTagName: 'coral-accordion-item',
         // allows accordions to be nested
         itemSelector: ':scope > coral-accordion-item',
+        onlyHandleChildren: true,
         onItemAdded: this._validateSelection,
         onItemRemoved: this._validateSelection
       });
