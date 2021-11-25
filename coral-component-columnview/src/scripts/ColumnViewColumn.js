@@ -129,7 +129,8 @@ const ColumnViewColumn = Decorator(class extends BaseComponent(HTMLElement) {
         host: this,
         container: this._elements.content,
         itemTagName: 'coral-columnview-item',
-        onItemAdded: this._toggleItemSelection
+        onItemAdded: this._toggleItemSelection,
+        onCollectionChange: this._handleMutation
       });
     }
 
@@ -509,14 +510,7 @@ const ColumnViewColumn = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   /** @private */
-  _handleMutation(mutations) {
-    const mutationsCount = mutations.length;
-    /* for (let i = 0 ; i < mutationsCount ; i++) {
-      const mutation = mutations[i];
-      // we handle the collection events
-      this._triggerCollectionEvents(mutation.addedNodes, mutation.removedNodes);
-    } */
-
+  _handleMutation() {
     this._setStateFromDOM();
 
     // in case items were added removed and selection changed
@@ -524,26 +518,6 @@ const ColumnViewColumn = Decorator(class extends BaseComponent(HTMLElement) {
 
     // checks if more items can be added after the childlist change
     this._tryToLoadAdditionalItems();
-  }
-
-  /** @private */
-  _triggerCollectionEvents(addedNodes, removedNodes) {
-    let item;
-    const addedNodesCount = addedNodes.length;
-    for (let i = 0 ; i < addedNodesCount ; i++) {
-      item = addedNodes[i];
-      if (item.tagName === 'CORAL-COLUMNVIEW-ITEM') {
-        this.trigger('coral-collection:add', {item});
-      }
-    }
-
-    const removedNodesCount = removedNodes.length;
-    for (let j = 0 ; j < removedNodesCount ; j++) {
-      item = removedNodes[j];
-      if (item.tagName === 'CORAL-COLUMNVIEW-ITEM') {
-        this.trigger('coral-collection:remove', {item});
-      }
-    }
   }
 
   get _contentZones() {

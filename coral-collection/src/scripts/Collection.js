@@ -345,21 +345,21 @@ class Collection {
 
   /**
    Handles the collection changes. It automatically triggers the collection change event.
-   @param {Array<HTMLElement>} addedItems The items that was added to the collection
-   @param {Array<HTMLElement>} removedItems The items that was removed from the collection
+   @param {Array<HTMLElement>} addedNodes The items that was added to the collection
+   @param {Array<HTMLElement>} removedNodes The items that was removed from the collection
    @emits {coral-collection:change}
    @protected
    */
-  _onCollectionMutation(addedItems, removedItems) {
+  _onCollectionMutation(addedNodes, removedNodes) {
     // if options._onCollectionChange was provided, we call the function
     if (typeof this._onCollectionChange === 'function') {
-      this._onCollectionChange.call(this._host, addedItems, removedItems);
+      this._onCollectionChange.call(this._host, addedNodes, removedNodes);
     }
 
     // the usage of trigger assumes that the host is a coral component
     this._host.trigger('coral-collection:change', {
-      addedItems: addedItems,
-      removedItems: removedItems
+      addedItems: addedNodes,
+      removedItems: removedNodes
     });
   }
 
