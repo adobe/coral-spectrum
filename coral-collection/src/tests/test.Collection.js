@@ -1154,6 +1154,391 @@ describe('Collection', function () {
         });
       });
     });
+
+    describe('#coral-collection:change', function () {
+      var collectionChangeSpy = sinon.spy();
+
+      beforeEach(function () {
+        helpers.target.addEventListener('coral-collection:change', collectionChangeSpy);
+      });
+
+      afterEach(function () {
+        helpers.target.removeEventListener('coral-collection:change', collectionChangeSpy);
+
+        collectionChangeSpy.resetHistory();
+      });
+
+      it('should not trigger collection change event for initial items', function () {
+        const el = helpers.build(window.__html__['Collection.nested.html']);
+        expect(collectionChangeSpy.callCount).to.equal(0, 'Should not be initially called');
+        // excluded items should call the callback
+        expect(onItemAddedNestedSpy.callCount).to.equal(3, 'But added callback must be called');
+        expect(onNestedCollectionChangedSpy.callCount).to.equal(1, 'Initial state must be reported');
+      });
+
+      it('should not trigger collection change event for initial items (nested)', function () {
+        const el = helpers.build(window.__html__['Collection.nested.nested.html']);
+        var nestedEl = el.querySelector('coral-collection-nested-test');
+
+        // we consider both outer and nested elements
+        var itemCount = el.items.length + nestedEl.items.length;
+
+        expect(collectionChangeSpy.callCount).to.equal(0, 'Should not be initially called');
+        // excluded items should call the callback
+        expect(onItemAddedNestedSpy.callCount).to.equal(itemCount, 'But added callback must be called');
+        expect(onNestedCollectionChangedSpy.callCount).to.equal(2, 'Initial state must be reported, including nested');
+      });
+
+      it('should be triggered when an item is added using appendChild()', function (done) {
+        const el = helpers.build(window.__html__['Collection.nested.nested.html']);
+        var itemCount = el.items.length;
+        // we create and add a new item using appendChild
+        var item = document.createElement('coral-collection-test-item');
+        el.appendChild(item);
+
+        // we wait for the MO
+        helpers.next(function () {
+          expect(collectionChangeSpy.callCount).to.equal(1);
+          expect(collectionChangeSpy.getCall(0).args[0].target).to.equal(el, 'Event should be triggered by the collection');
+          expect(collectionChangeSpy.getCall(0).args[0].detail).to.deep.equal({
+            addedItems: [item],
+            removedItems: []
+          });
+          expect(el.items.length).to.equal(itemCount + 1, 'Collection should have one more item');
+
+          done();
+        });
+      });
+
+      it('should be triggered when an item is added using add()', function (done) {
+        const el = helpers.build(window.__html__['Collection.nested.nested.html']);
+        var itemCount = el.items.length;
+        // we create and add a new item using the collection API
+        var item = document.createElement('coral-collection-test-item');
+        el.items.add(item);
+
+        // we wait for the MO
+        helpers.next(function () {
+          expect(collectionChangeSpy.callCount).to.equal(1);
+          expect(collectionChangeSpy.getCall(0).args[0].target).to.equal(el, 'Event should be triggered by the collection');
+          expect(collectionChangeSpy.getCall(0).args[0].detail).to.deep.equal({
+            addedItems: [item],
+            removedItems: []
+          });
+          expect(el.items.length).to.equal(itemCount + 1, 'Collection should have one more item');
+
+          done();
+        });
+      });
+
+      it('should be triggered when an item is added using object notation', function (done) {
+        const el = helpers.build(window.__html__['Collection.nested.nested.html']);
+        var itemCount = el.items.length;
+        // we use the object notation to add the new item
+        var item = el.items.add({
+          title: 'Item 6'
+        });
+
+        // we wait for the MO
+        helpers.next(function () {
+          expect(collectionChangeSpy.callCount).to.equal(1);
+          expect(collectionChangeSpy.getCall(0).args[0].target).to.equal(el, 'Event should be triggered by the collection');
+          expect(collectionChangeSpy.getCall(0).args[0].detail).to.deep.equal({
+            addedItems: [item],
+            removedItems: []
+          });
+          expect(collectionChangeSpy.getCall(0).args[0].detail.addedItems[0].title).to.equal('Item 6');
+          expect(el.items.length).to.equal(itemCount + 1, 'Collection should have one more item');
+
+          done();
+        });
+      });
+
+      it('should not be triggered if the item is excluded', function (done) {
+        const el = helpers.build(window.__html__['Collection.nested.nested.html']);
+
+        var item = document.createElement('coral-collection-test-item');
+        item.setAttribute('excluded', '');
+
+        el.items.add(item);
+
+        // we wait for the MO
+        helpers.next(function () {
+          expect(collectionChangeSpy.callCount).to.equal(0, 'It should not be called because the item does not match the collection');
+
+          done();
+        });
+      });
+
+      it('should not be triggered when non matching item is added', function (done) {
+        const el = helpers.build(window.__html__['Collection.nested.nested.html']);
+        var item = document.createElement('div');
+
+        el.items.add(item);
+
+        // we wait for the MO
+        helpers.next(function () {
+          expect(collectionChangeSpy.callCount).to.equal(0, 'It should not be called because the item does not match the collection');
+
+          done();
+        });
+      });
+
+      it('should not be triggered when text nodes are added', function (done) {
+        const el = helpers.build(window.__html__['Collection.nested.text.html']);
+        // number of items before the text nodes
+        var itemCount = el.items.length;
+
+        el.appendChild(document.createTextNode('text'));
+
+        // we wait for the MO to detect the text node
+        helpers.next(function () {
+          expect(collectionChangeSpy.callCount).to.equal(0, 'It should not be called because the item does not match the collection');
+
+          // clears the filter for the purpose of the test
+          el.items._filter = undefined;
+
+          el.appendChild(document.createTextNode('text2'));
+
+          // we wait for the MO to detect the text node
+          helpers.next(function () {
+            // we restore the filter to get the correct collection count
+            el.items._filter = filter;
+
+            expect(collectionChangeSpy.callCount).to.equal(0, 'Should not be called because text nodes are not part of the collection');
+            expect(el.items.length).to.equal(itemCount, 'Text nodes should not be part of the collection');
+
+            done();
+          });
+        });
+      });
+
+      it('should be triggered even though no onCollectionChange callback was provided', function (done) {
+        var container = document.createElement('coral-collection-test');
+        helpers.target.appendChild(container);
+
+        var collection = new Collection({
+          // host has to be a coral component
+          host: container,
+          itemTagName: 'coral-collection-test-item'
+        });
+
+        expect(collection._onCollectionChange).to.be.undefined;
+
+        // we need to call _startHandlingItems to enable the mutation observers
+        collection._startHandlingItems();
+
+        // observing starts on a different frame
+        helpers.next(function () {
+          var item = document.createElement('coral-collection-test-item');
+          collection.add(item);
+
+          // we wait for the MO
+          helpers.next(function () {
+            expect(collectionChangeSpy.callCount).to.equal(1, 'New item must be notified');
+            expect(collectionChangeSpy.getCall(0).args[0].target).to.equal(container);
+            expect(collectionChangeSpy.getCall(0).args[0].detail).to.deep.equal({
+              addedItems: [item],
+              removedItems: []
+            });
+
+            done();
+          });
+        });
+      });
+
+      it('should be triggered when an item is removed using removeChild()', function (done) {
+        const el = helpers.build(window.__html__['Collection.nested.nested.html']);
+        var itemCount = el.items.length;
+        var item = el.items.first();
+
+        el.removeChild(item);
+
+        // we wait for the MO
+        helpers.next(function () {
+          expect(collectionChangeSpy.callCount).to.equal(1);
+          expect(collectionChangeSpy.getCall(0).args[0].target).to.equal(el, 'Event should be triggered by the collection');
+          expect(collectionChangeSpy.getCall(0).args[0].detail).to.deep.equal({
+            addedItems: [],
+            removedItems: [item]
+          });
+          expect(el.items.length).to.equal(itemCount - 1, 'Collection should have one item less');
+
+          done();
+        });
+      });
+
+      it('should be triggered when an item is removed using remove()', function (done) {
+        const el = helpers.build(window.__html__['Collection.nested.nested.html']);
+        var itemCount = el.items.length;
+        var item = el.items.first();
+
+        el.items.remove(item);
+
+        // we wait for the MO
+        helpers.next(function () {
+          expect(collectionChangeSpy.callCount).to.equal(1);
+          expect(collectionChangeSpy.getCall(0).args[0].target).to.equal(el, 'Event should be triggered by the collection');
+          expect(collectionChangeSpy.getCall(0).args[0].detail).to.deep.equal({
+            addedItems: [],
+            removedItems: [item]
+          });
+          expect(el.items.length).to.equal(itemCount - 1, 'Collection should have one item less');
+
+          done();
+        });
+      });
+
+      it('should not be triggered if the item is excluded', function (done) {
+        const el = helpers.build(window.__html__['Collection.nested.nested.html']);
+        // we use query selector since the collection won't return this item
+        var item = el.querySelector('coral-collection-test-item[excluded]');
+
+        el.items.remove(item);
+
+        // we wait for the MO
+        helpers.next(function () {
+          expect(collectionChangeSpy.callCount).to.equal(0, 'It should not be called because the item does not match the collection');
+
+          done();
+        });
+      });
+
+      it('should not be triggered when non matching item is removed', function (done) {
+        const el = helpers.build(window.__html__['Collection.nested.nested.html']);
+        // we add first a non-collection item to remove it later
+        var item = document.createElement('div');
+        el.appendChild(item);
+
+        // we wait for the MO
+        helpers.next(function () {
+          el.items.remove(item);
+
+          helpers.next(function () {
+            expect(collectionChangeSpy.callCount).to.equal(0, 'It should not be called because the item does not match the collection');
+
+            done();
+          });
+        });
+      });
+
+      it('should not be triggered when text nodes are removed', function (done) {
+        const el = helpers.build(window.__html__['Collection.nested.text.html']);
+        // number of items before the text nodes
+        var itemCount = el.items.length;
+
+        // we need to extract all the current text nodes
+        var textNodes = [];
+        for (var node = el.firstChild ; node !== null ; node = node.nextSibling) {
+          if (node.nodeType === 3 && node.textContent.trim() !== '') {
+            textNodes.push(node);
+          }
+        }
+
+        // we remove the first node we found
+        el.removeChild(textNodes[0]);
+
+        // we wait for the MO to detect the text node
+        helpers.next(function () {
+          expect(collectionChangeSpy.callCount).to.equal(0, 'It should not be called because the item does not match the collection');
+
+          // clears the filter for the purpose of the test
+          el.items._filter = undefined;
+
+          el.removeChild(textNodes[1]);
+
+          // we wait for the MO to detect the text node
+          helpers.next(function () {
+            // we restore the filter to get the correct collection count
+            el.items._filter = filter;
+
+            expect(collectionChangeSpy.callCount).to.equal(0, 'Should not be called because text nodes are not part of the collection');
+            expect(el.items.length).to.equal(itemCount, 'Text nodes should not be part of the collection');
+
+            done();
+          });
+        });
+      });
+
+      it('should be triggered even though no onCollectionChange callback was provided', function (done) {
+        // we create a container with just 3 items
+        var container = document.createElement('coral-collection-test');
+        container.appendChild(document.createElement('coral-collection-test-item'));
+        container.appendChild(document.createElement('coral-collection-test-item'));
+        container.appendChild(document.createElement('coral-collection-test-item'));
+
+        helpers.target.appendChild(container);
+
+        var collection = new Collection({
+          // host has to be a coral component
+          host: container,
+          itemTagName: 'coral-collection-test-item'
+        });
+
+        expect(collection._onCollectionChange).to.be.undefined;
+
+        // we need to call _startHandlingItems to enable the mutation observers
+        collection._startHandlingItems();
+
+        // observing starts on a different frame
+        helpers.next(function () {
+          // we use the first item for testing purposes
+          var item = collection.first();
+          collection.remove(item);
+
+          // we wait for the MO
+          helpers.next(function () {
+            expect(collectionChangeSpy.callCount).to.equal(1, 'New item must be notified');
+            expect(collectionChangeSpy.getCall(0).args[0].target).to.equal(container);
+            expect(collectionChangeSpy.getCall(0).args[0].detail).to.deep.equal({
+              addedItems: [],
+              removedItems: [item]
+            });
+
+            done();
+          });
+        });
+      });
+
+      it('should be triggered once for all mutations', function (done) {
+        // we create a container with just 3 items
+        var container = document.createElement('coral-collection-test');
+
+        helpers.target.appendChild(container);
+
+        var collection = new Collection({
+          // host has to be a coral component
+          host: container,
+          itemTagName: 'coral-collection-test-item'
+        });
+
+        expect(collection._onCollectionChange).to.be.undefined;
+
+        // we need to call _startHandlingItems to enable the mutation observers
+        collection._startHandlingItems();
+
+        var item1 = document.createElement('coral-collection-test-item');
+        var item2 = document.createElement('coral-collection-test-item');
+        var item3 = document.createElement('coral-collection-test-item');
+
+        container.appendChild(item1);
+        container.appendChild(item2);
+        container.appendChild(item3);
+
+        item3.remove();
+
+        // observing starts on a different frame
+        helpers.next(function () {
+          expect(collectionChangeSpy.callCount).to.equal(1, 'New item must be notified');
+          expect(collectionChangeSpy.getCall(0).args[0].target).to.equal(container);
+          expect(collectionChangeSpy.getCall(0).args[0].detail).to.deep.equal({
+            addedItems: [item1, item2, item3],
+            removedItems: [item3]
+          });
+          done();
+        });
+      });
+    });
   });
 
   describe('Implementation Details', function () {
