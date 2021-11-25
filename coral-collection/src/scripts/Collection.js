@@ -351,7 +351,7 @@ class Collection {
    @protected
    */
   _onCollectionMutation(addedNodes, removedNodes) {
-    // if options._onCollectionChange was provided, we call the function
+    // if options.onCollectionChange was provided, we call the function
     if (typeof this._onCollectionChange === 'function') {
       this._onCollectionChange.call(this._host, addedNodes, removedNodes);
     }
