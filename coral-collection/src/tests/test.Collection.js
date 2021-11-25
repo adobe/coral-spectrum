@@ -63,6 +63,7 @@ describe('Collection', function () {
           host: this,
           itemTagName: 'coral-collection-test-item',
           itemSelector: ':scope > coral-collection-test-item',
+          onlyHandleChildren: true,
           filter: filter,
           onItemAdded: onItemAddedNestedSpy,
           onItemRemoved: onItemRemovedNestedSpy,
