@@ -1,3 +1,10 @@
+## [4.12.4](https://github.com/adobe/coral-spectrum/compare/v4.12.3...v4.12.4) (2021-11-30)
+
+
+### Bug Fixes
+
+* performance improvement ([#191](https://github.com/adobe/coral-spectrum/issues/191)) ([764046e](https://github.com/adobe/coral-spectrum/commit/764046e1107d6f32b22a7766fe97cd832e0ff0c1))
+
 ## [4.12.3](https://github.com/adobe/coral-spectrum/compare/v4.12.2...v4.12.3) (2021-10-21)
 
 
