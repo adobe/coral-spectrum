@@ -98,11 +98,18 @@ class Collection {
     this._host = options.host;
     this._itemTagName = options.itemTagName;
     this._itemBaseTagName = options.itemBaseTagName;
+
+    this._itemTagNameFilter = [];
+    this._itemBaseTagName && this._itemTagNameFilter.push(this._itemBaseTagName.toUpperCase());
+    this._itemTagName && this._itemTagNameFilter.push(this._itemTagName.toUpperCase());
+
     this._itemSelector = options.itemSelector || getTagSelector(this._itemTagName, this._itemBaseTagName);
 
     // the container where the new items are added
     this._container = options.container || this._host;
     this._filter = options.filter;
+
+    this._onlyHandleChildren = typeof options.onlyHandleChildren === 'boolean' ? options.onlyHandleChildren : false;
 
     // internal variable to determine if collection events will be handled internally
     this._handleItems = false;
@@ -287,10 +294,13 @@ class Collection {
    */
   _isPartOfCollection(node) {
     // Only element nodes are allowed
+    let tagName = node.tagName;
+
     return node.nodeType === Node.ELEMENT_NODE &&
+      (this._itemTagNameFilter.length === 0 || this._itemTagNameFilter.includes(tagName)) &&
       filterItem(node, this._filter) &&
       // this is an optimization to avoid using matches
-      (this._useItemTagName ? this._useItemTagName === node.tagName : node.matches(this._itemSelector));
+      (this._useItemTagName ? this._useItemTagName === tagName : node.matches(this._itemSelector));
   }
 
   /**
@@ -334,6 +344,26 @@ class Collection {
   }
 
   /**
+   Handles the collection changes. It automatically triggers the collection change event.
+   @param {Array<HTMLElement>} addedNodes The items that was added to the collection
+   @param {Array<HTMLElement>} removedNodes The items that was removed from the collection
+   @emits {coral-collection:change}
+   @protected
+   */
+  _onCollectionMutation(addedNodes, removedNodes) {
+    // if options.onCollectionChange was provided, we call the function
+    if (typeof this._onCollectionChange === 'function') {
+      this._onCollectionChange.call(this._host, addedNodes, removedNodes);
+    }
+
+    // the usage of trigger assumes that the host is a coral component
+    this._host.trigger('coral-collection:change', {
+      addedItems: addedNodes,
+      removedItems: removedNodes
+    });
+  }
+
+  /**
    Enables the automatic detection of collection items. The collection will take care of triggering the appropriate
    collection event when an item is added or removed, as well the related callbacks. Components can decide to skip the
    initialization of the starting items by providing <code>skipInitialItems</code> as <code>false</code>.
@@ -354,12 +384,19 @@ class Collection {
       // detects them
       this._handleItems = true;
 
-      this._observer.observe(this._container, {
-        // we only need to observe for items that were added and removed, no need to check attributes and contents
-        childList: true,
-        // we need to listen to subtree mutations as items may not be direct children
-        subtree: true
-      });
+      if (this._onlyHandleChildren) {
+        this._observer.observe(this._container, {
+          // we only need to observe for items that were added and removed, no need to check attributes and contents
+          childList: true,
+        });
+      } else {
+        this._observer.observe(this._container, {
+          // we only need to observe for items that were added and removed, no need to check attributes and contents
+          childList: true,
+          // we need to listen to subtree mutations as items may not be direct children
+          subtree: true
+        });
+      }
 
       // by default we handle the initial items unless otherwise indicated
       if (skipInitialItems !== true) {
@@ -455,8 +492,8 @@ class Collection {
 
     // if changes were done to the collection we need to notify the component. we do this after all the mutations were
     // processed to make sure we only do it once
-    if (itemChanges !== 0 && typeof this._onCollectionChange === 'function' && this._host) {
-      this._onCollectionChange.call(this._host, validAddedNodes, validRemovedNodes);
+    if (itemChanges !== 0 && this._host) {
+      this._onCollectionMutation(validAddedNodes, validRemovedNodes);
     }
   }
 
@@ -478,6 +515,17 @@ class Collection {
 
    @property {HTMLElement} detail.item
    The item that was removed.
+   */
+
+  /**
+   * Triggered when either items are added or removed from {@link Collection}. {@link Collection} events are not synchronous so the DOM
+   * may reflect a different reality although every addition or removal will be reported. This event describes that {@link Collection} has
+   * changed or modified.
+   *
+   * @event coral-collection:change
+   * @type {Object}
+   * @property {Array<HTMLElement>} detail.addedItems - Items that are added to collection
+   * @property {Array<HTMLElement>} detail.removedItems - Items that are removed from collection
    */
 
   /**

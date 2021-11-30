@@ -113,6 +113,7 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
         itemBaseTagName: 'button',
         itemTagName: 'coral-button',
         itemSelector: ITEM_SELECTOR,
+        onlyHandleChildren: true,
         onItemAdded: this._onItemAdded,
         onItemRemoved: this._onItemRemoved,
         onCollectionChange: this._onCollectionChange

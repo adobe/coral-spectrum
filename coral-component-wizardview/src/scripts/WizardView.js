@@ -83,6 +83,7 @@ const WizardView = Decorator(class extends BaseComponent(HTMLElement) {
         itemTagName: 'coral-panelstack',
         // allows panelstack to be nested
         itemSelector: ':scope > coral-panelstack[coral-wizardview-panelstack]',
+        onlyHandleChildren: true,
         onItemAdded: this._onItemAdded
       });
     }
@@ -104,6 +105,7 @@ const WizardView = Decorator(class extends BaseComponent(HTMLElement) {
         itemTagName: 'coral-steplist',
         // allows steplist to be nested
         itemSelector: ':scope > coral-steplist[coral-wizardview-steplist]',
+        onlyHandleChildren: true,
         onItemAdded: this._onItemAdded
       });
     }
