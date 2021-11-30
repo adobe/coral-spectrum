@@ -539,7 +539,8 @@
 <a name='L481'></a><a href='#L481'>481</a>
 <a name='L482'></a><a href='#L482'>482</a>
 <a name='L483'></a><a href='#L483'>483</a>
-<a name='L484'></a><a href='#L484'>484</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L484'></a><a href='#L484'>484</a>
+<a name='L485'></a><a href='#L485'>485</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -643,7 +644,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">624x</span>
+<span class="cline-any cline-yes">254x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -836,6 +837,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1776x</span>
 <span class="cline-any cline-yes">676x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1138,6 +1140,7 @@ const TreeItem = Decorator(class extends BaseComponent(HTMLElement) {
         host: this,
         itemTagName: 'coral-tree-item',
         itemSelector: ':scope &gt; coral-tree-item',
+        onlyHandleChildren: true,
         container: this._elements.subTreeContainer,
         filter: this._filterItem.bind(this),
         onItemAdded: this._onItemAdded,
@@ -1147,9 +1150,9 @@ const TreeItem = Decorator(class extends BaseComponent(HTMLElement) {
 &nbsp;
     return this._items;
   }
-&nbsp;
-  /**<span class="missing-if-branch" title="if path not taken" >I</span>
-   Wheth<span class="cstat-no" title="statement not covered" >er the item is expanded. Expanded cannot be set to &lt;</span>code&gt;true&lt;/code&gt; if the item is disabled.
+<span class="missing-if-branch" title="if path not taken" >I</span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
+   Whether the item is expanded. Expanded cannot be set to &lt;code&gt;true&lt;/code&gt; if the item is disabled.
 &nbsp;
    @type {Boolean}
    @default false
@@ -1188,25 +1191,25 @@ const TreeItem = Decorator(class extends BaseComponent(HTMLElement) {
     }
 &nbsp;
     if (IS_TOUCH_DEVICE) {
-      const icon = header.querySelector('._coral-TreeView-indicator');
-      <span class="missing-if-branch" title="if path not taken" >I</span>icon.setAttribute('aria-label', i18n.get(this._expanded ? 'Collapse' : 'Expand'));
-    }<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-    this<span class="cstat-no" title="statement not covered" >.trigger('coral-tree-item:_expandedchanged');</span>
+      <span class="missing-if-branch" title="if path not taken" >I</span>const icon = header.querySelector('._coral-TreeView-indicator');
+      icon.setAttri<span class="cstat-no" title="statement not covered" >bute('aria-label', i18n.get(this._expanded ? 'Collapse' : 'Expand'));</span>
+    }
 <span class="cstat-no" title="statement not covered" ></span>
+    this.t<span class="cstat-no" title="statement not covered" >rigger('coral-tree-item:_exp</span>andedchanged');
+&nbsp;
     // Do animation in next frame to avoid a forced reflow
-    window.requestAnimationFrame(() =&gt; {
+    wind<span class="cstat-no" title="statement not covered" >ow.requestAnimationFrame(() =&gt; {</span>
       //<span class="cstat-no" title="statement not covered" > Don't animate on initialization</span>
       if<span class="cstat-no" title="statement not covered" > (this._animate) {</span>
-<span class="cstat-no" title="statement not covered" >        // Remove height as we want the drawer to naturally grow if conten</span>t is added later
+<span class="cstat-no" title="statement not covered" >        // Remove height as we want the drawer to naturally grow if content is added later</span>
 <span class="cstat-no" title="statement not covered" >        commons.transitionEnd(subTreeContainer, () =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >          if (this.expanded) {</span>
-<span class="cstat-no" title="statement not covered" >            subTreeContainer.style.height = '</span>';
+<span class="cstat-no" title="statement not covered" >            subTreeContainer.style.height = '';</span>
 <span class="cstat-no" title="statement not covered" >          } else {</span>
 <span class="cstat-no" title="statement not covered" >            subTreeContainer.hidden = true;</span>
 <span class="cstat-no" title="statement not covered" >          }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >          // Trigger once the animation is over to inform coral-tree</span>
+          // Trigger once the animation is over to inform coral-tree
           if (triggerEvent) {
             this.trigger('coral-tree-item:_afterexpandedchanged');
           }
@@ -1512,7 +1515,7 @@ export default TreeItem;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Oct 21 2021 07:00:24 GMT+0000 (Coordinated Universal Time)
+                at Tue Nov 30 2021 08:23:17 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

@@ -742,7 +742,8 @@
 <a name='L684'></a><a href='#L684'>684</a>
 <a name='L685'></a><a href='#L685'>685</a>
 <a name='L686'></a><a href='#L686'>686</a>
-<a name='L687'></a><a href='#L687'>687</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L687'></a><a href='#L687'>687</a>
+<a name='L688'></a><a href='#L688'>688</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1428,6 +1429,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -1546,6 +1548,7 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
         itemTagName: 'coral-multifield-item',
         // allows multifields to be nested
         itemSelector: ':scope &gt; coral-multifield-item',
+        onlyHandleChildren: true,
         onItemAdded: this._onItemAdded,
         onItemRemoved: this._onItemRemoved
       });
@@ -1585,8 +1588,8 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     If component contains less items, remaining items will be added.
 &nbsp;
     @type {Number}
-    @default 0
-    @htmlattrib<span class="missing-if-branch" title="else path not taken" >E</span>ute min
+    @default 0<span class="missing-if-branch" title="else path not taken" >E</span>
+    @htmlattribute min
     @htmlattributereflected
     */
   get min() {
@@ -1603,8 +1606,8 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
       self._validateMinItems();
     }
   }
-&nbsp;
-  /**<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+  /**
    * Validates minimum items required. will add items, if validation fails.
    * @param schedule schedule validation in next frame
    * @ignore
@@ -1614,15 +1617,15 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     if(this._disconnected === false) {
       const self = this;
       const items = self.items;
-      let currentLength = items.length;
-      <span class="missing-if-branch" title="if path not taken" >I</span>let currentMin = self.min<span class="branch-1 cbranch-no" title="branch not covered" >;</span>
-      let deletable<span class="cstat-no" title="statement not covered" > = true;</span>
+      <span class="missing-if-branch" title="if path not taken" >I</span>let currentLength = items<span class="branch-1 cbranch-no" title="branch not covered" >.length;</span>
+      let currentMi<span class="cstat-no" title="statement not covered" >n = self.min;</span>
+      let deletable = true;
+<span class="cstat-no" title="statement not covered" ></span>
+      if(c<span class="cstat-no" title="statement not covered" >urrentLength &lt;= currentMin) {</span>
+        let itemsToBeAdded = currentMin - currentLength;
 &nbsp;
-      if<span class="cstat-no" title="statement not covered" >(currentLength &lt;= currentMin) {</span>
-        le<span class="cstat-no" title="statement not covered" >t itemsToBeAdded = currentMin - current</span>Length;
-&nbsp;
-        for(let i = 0; i &lt; itemsToBeAdded; i++) {
-<span class="cstat-no" title="statement not covered" >          items.add(document.crea</span>teElement('coral-multifield-item'));
+<span class="cstat-no" title="statement not covered" >        for(let i = 0; i &lt; itemsT</span>oBeAdded; i++) {
+          items.add(document.createElement('coral-multifield-item'));
         }
         deletable = !deletable;
       }
@@ -1631,8 +1634,8 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
         window.cancelAnimationFrame(self._updateItemsDeletableId);
         delete self._updateItemsDeletableId;
         self._updateItemsDeletable(items.getAll(), deletable);
-      } else if(!self._updateItemsDeletableId) {
-      <span class="missing-if-branch" title="else path not taken" >E</span>  self._updateItemsDeletableId = window.requestAnimationFrame(() =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>} else if(!self._updateItemsDeletableId) {
+        self._updateItemsDeletableId = window.requestAnimationFrame(() =&gt; {
           delete self._updateItemsDeletableId;
           self._updateItemsDeletable(items.getAll(), deletable);
         });
@@ -1646,11 +1649,11 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
    */
   _updateItemsDeletable(items, deletable) {
     deletable = transform.boolean(deletable);
-    items = !Array.isArray(items) ? [items] : items;
-<span class="missing-if-branch" title="else path not taken" >E</span>
+    it<span class="missing-if-branch" title="else path not taken" >E</span>ems = !Array.isArray(items) ? [items] : items;
+&nbsp;
     items.forEach(function(item) {
-      item._deletable = deletable;
-    });<span class="missing-if-branch" title="else path not taken" >E</span>
+      it<span class="missing-if-branch" title="else path not taken" >E</span>em._deletable = deletable;
+    });
   }
 &nbsp;
   /** @ignore */
@@ -1672,8 +1675,8 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
 &nbsp;
       // Wait for MO to render item template
       window.requestAnimationFrame(() =&gt; {
-        this.trigger('change');
-<span class="missing-if-branch" title="else path not taken" >E</span>
+        this<span class="missing-if-branch" title="else path not taken" >E</span>.trigger('change');
+&nbsp;
         this._trackEvent('click', 'add item button', event);
       });
     }
@@ -1691,8 +1694,8 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
         if (setsize &gt; 1) {
           const itemIndex = items.indexOf(item);
           if (itemIndex === setsize - 1) {
-            itemToFocus = items[itemIndex - 1];
-          } else {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+            itemToFocus = items[itemIndex - 1];<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+          } else {
             itemToFocus = items[itemIndex + 1];
           }
         }
@@ -1761,9 +1764,9 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     const dragHandle = event.matchedTarget;
     const multiFieldItem = dragHandle.closest('coral-multifield-item');
     commons.nextFrame(() =&gt; {
-      if (document.activeElement !== dragHandle) {
-      <span class="missing-if-branch" title="if path not taken" >I</span>  this._toggleItemDragging(multiFieldItem, false);
-      }<span class="cstat-no" title="statement not covered" ></span>
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (document.activeElement !== dragHandle) {
+<span class="cstat-no" title="statement not covered" >        this._to</span>ggleItemDragging(multiFieldItem, false);
+      }
     });
   }
 &nbsp;
@@ -1788,9 +1791,9 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     dragHandle.focus();
   }
 &nbsp;
-  /**
-   * M<span class="missing-if-branch" title="if path not taken" >I</span>oves multiField item selected for dragging down one index position in the multifield collection.
-   * @ig<span class="cstat-no" title="statement not covered" >nore</span>
+  /**<span class="missing-if-branch" title="if path not taken" >I</span>
+   * Mov<span class="cstat-no" title="statement not covered" >es multi</span>Field item selected for dragging down one index position in the multifield collection.
+   * @ignore
    */
   _onMoveItemDown(event) {
     const dragHandle = event.matchedTarget;
@@ -1816,9 +1819,9 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
    */
   _onMoveItemHome(event) {
     const dragHandle = event.matchedTarget;
-    let dragElement = dragHandle.closest('coral-multifield-item');
-    if<span class="missing-if-branch" title="if path not taken" >I</span> (!dragElement._dragging) {
-      re<span class="cstat-no" title="statement not covered" >turn;</span>
+    le<span class="missing-if-branch" title="if path not taken" >I</span>t dragElement = dragHandle.closest('coral-multifield-item');
+    if (<span class="cstat-no" title="statement not covered" >!dragEle</span>ment._dragging) {
+      return;
     }
     event.preventDefault();
     event.stopPropagation();
@@ -1843,9 +1846,9 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     }
     event.preventDefault();
     event.stopPropagation();
-    const items = this.items.getAll();
-    co<span class="missing-if-branch" title="if path not taken" >I</span>nst dragElementIndex = items.indexOf(dragElement);
-    if (<span class="cstat-no" title="statement not covered" >dragElem</span>entIndex &lt; items.length - 1) {
+    co<span class="missing-if-branch" title="if path not taken" >I</span>nst items = this.items.getAll();
+    cons<span class="cstat-no" title="statement not covered" >t dragEl</span>ementIndex = items.indexOf(dragElement);
+    if (dragElementIndex &lt; items.length - 1) {
       this.insertBefore(dragElement, this.items.last().nextElementSibling);
     }
     dragElement._dragging = true;
@@ -1870,8 +1873,8 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
   _onInputChange(event) {
     this._trackEvent('change', 'input', event);
   }
-&nbsp;
-  /** <span class="missing-if-branch" title="else path not taken" >E</span>@ignore */
+<span class="missing-if-branch" title="else path not taken" >E</span>
+  /** @ignore */
   _onDragStart(event) {
     if (event.target.closest('coral-multifield') === this) {
       document.body.classList.add('u-coral-closedHand');
@@ -1888,8 +1891,8 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
           item.classList.add(IS_BEFORE_CLASS);
         } else if (i &gt; dragElementIndex) {
           item.classList.add(IS_AFTER_CLASS);
-        }
-      <span class="missing-if-branch" title="else path not taken" >E</span>});
+      <span class="missing-if-branch" title="else path not taken" >E</span>  }
+      });
     }
   }
 &nbsp;
@@ -1910,12 +1913,12 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
           const itemBoundingClientRect = item.getBoundingClientRect();
           const dragElementOffsetTop = dragElementBoundingClientRect.top;
           const itemOffsetTop = itemBoundingClientRect.top;
-&nbsp;
-      <span class="missing-if-branch" title="else path not taken" >E</span>    const isAfter = dragElementOffsetTop &lt; itemOffsetTop;
+<span class="missing-if-branch" title="else path not taken" >E</span>
+          const isAfter = dragElementOffsetTop &lt; itemOffsetTop;
           const itemReorderedTop = `${dragElementBoundingClientRect.height + marginBottom}px`;
 &nbsp;
-          item.classList.toggle(IS_AFTER_CLASS, isAfter);
-        <span class="missing-if-branch" title="else path not taken" >E</span>  item.classList.toggle(IS_BEFORE_CLASS, !isAfter);
+        <span class="missing-if-branch" title="else path not taken" >E</span>  item.classList.toggle(IS_AFTER_CLASS, isAfter);
+          item.classList.toggle(IS_BEFORE_CLASS, !isAfter);
 &nbsp;
           if (item.classList.contains(IS_AFTER_CLASS)) {
             item.style.top = items.indexOf(item) &lt; items.indexOf(dragElement) ? itemReorderedTop : '';
@@ -1931,13 +1934,13 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
   }
 &nbsp;
   /** @ignore */
-  _onDragEnd(event) {
-    if (event.target.closest('coral-multifield') === this) {<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+  _onDragEnd(event) {<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+    if (event.target.closest('coral-multifield') === this) {
       document.body.classList.remove('u-coral-closedHand');
 &nbsp;
       const dragElement = event.detail.dragElement;
-      const items = this.items.getAll();
-      const beforeArr = [];<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+      const items = this.items.getAll();<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+      const beforeArr = [];
       const afterArr = [];
 &nbsp;
       items.forEach((item) =&gt; {
@@ -1947,8 +1950,8 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
           beforeArr.push(item);
         }
 &nbsp;
-        item.classList.remove(IS_DRAGGING_CLASS, IS_AFTER_CLASS, IS_BEFORE_CLASS);
-      <span class="missing-if-branch" title="else path not taken" >E</span>  item.style.top = '';
+      <span class="missing-if-branch" title="else path not taken" >E</span>  item.classList.remove(IS_DRAGGING_CLASS, IS_AFTER_CLASS, IS_BEFORE_CLASS);
+        item.style.top = '';
         item.style.position = '';
       });
 &nbsp;
@@ -2056,13 +2059,13 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     return {template: 'template'};
   }
 &nbsp;
-  /** @ignore */
-  static<span class="missing-if-branch" title="if path not taken" >I</span> get observedAttributes() {
-    return super.observedAttributes.concat([
-      'min'<span class="cstat-no" title="statement not covered" ></span>
-    ]);<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+  /** @i<span class="missing-if-branch" title="if path not taken" >I</span>gnore */
+  static get observedAttributes() {
+    return super.observedAttribu<span class="cstat-no" title="statement not covered" >tes.concat([</span>
+      'min<span class="cstat-no" title="statement not covered" >'<span class="fstat-no" title="function not covered" ></span></span>
+    ]);<span class="cstat-no" title="statement not covered" ></span>
   }<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
   /** @ignore */
   render() {
     super.render();
@@ -2121,7 +2124,7 @@ export default Multifield;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Oct 21 2021 07:00:24 GMT+0000 (Coordinated Universal Time)
+                at Tue Nov 30 2021 08:23:17 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

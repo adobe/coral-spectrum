@@ -525,7 +525,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -580,8 +579,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1492x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1492x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -794,16 +791,18 @@
 <span class="cline-any cline-yes">1164x</span>
 <span class="cline-any cline-yes">1164x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1164x</span>
-<span class="cline-any cline-yes">1164x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1164x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1164x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1164x</span>
+<span class="cline-any cline-yes">1164x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1164x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1164x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1164x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -817,7 +816,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2868x</span>
+<span class="cline-any cline-yes">2864x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">196x</span>
@@ -932,7 +931,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">38280x</span>
+<span class="cline-any cline-yes">38352x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -941,6 +940,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -989,8 +989,8 @@ const isChromeMacOS = !!window &amp;&amp; !!window.chrome &amp;&amp; /Mac/i.test
 /**
  @class Coral.ColumnView.Item
  @classdesc A ColumnView Item component
- @htmltag coral-columnview-item
- @extends {HTMLElement}<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+ @htmltag coral-columnview-item<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+ @extends {HTMLElement}
  @extends {BaseComponent}
  */
 const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTMLElement)) {
@@ -1009,8 +1009,6 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
       // Templates
       accessibilityState.call(this._elements, {commons});
     }
-&nbsp;
-    super._observeLabel();
   }
 &nbsp;
   /**
@@ -1018,8 +1016,8 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
 &nbsp;
    @type {ColumnViewItemContent}
    @contentzone
-   *<span class="missing-if-branch" title="else path not taken" >E</span>/
-  get content() {
+   */
+  ge<span class="missing-if-branch" title="else path not taken" >E</span>t content() {
     return this._getContentZone(this._elements.content);
   }
 &nbsp;
@@ -1053,9 +1051,9 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
         thumbnail.classList.add(`${CLASSNAME}Thumbnail`);
         // Insert before content
         this.insertBefore(thumbnail, this.content || null);
-      }
-    });<span class="missing-if-branch" title="if path not taken" >I</span>
-  }<span class="cstat-no" title="statement not covered" ></span>
+      }<span class="missing-if-branch" title="if path not taken" >I</span>
+    });<span class="cstat-no" title="statement not covered" ></span>
+  }
 &nbsp;
   /**
    The item's variant. See {@link ColumnViewItemVariantEnum}.
@@ -1100,8 +1098,8 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
         this.classList.remove('is-branch');
         this.removeAttribute('aria-expanded');
       }
-    }
-  }<span class="cstat-no" title="statement not covered" ></span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+  }
 &nbsp;
   /**
    Specifies the icon that will be placed inside the thumbnail. The size of the icon is always controlled by the
@@ -1129,6 +1127,8 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
         // creates a new icon element
         if (!this._elements.icon) {
           this._elements.icon = new Icon();
+          // register observer only if there present an icon field.
+          super._observeLabel();
         }
   
         this._elements.icon.icon = this.icon;
@@ -1158,10 +1158,10 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
   }
 &nbsp;
   set selected(value) {
-    value = transform.booleanAttr(value);
+    value = transform.booleanAttr(value);<span class="branch-1 cbranch-no" title="branch not covered" ></span>
     this._reflectAttribute('selected', value);
 &nbsp;
-    if(validate.valueMustChange(this._selected, value))<span class="branch-1 cbranch-no" title="branch not covered" > {</span>
+    if(validate.valueMustChange(this._selected, value)) {
       this._selected = value;
       this.trigger('coral-columnview-item:_selectedchanged');
   
@@ -1173,18 +1173,18 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
         // @a11y Update aria-expanded. Active drilldowns should be expanded.
         // Note: Omit aria-expanded on Chrome for macOS, because with VoiceOver tends
         // to announce drilldown items as "row 1 expanded" or "row 1 collapsed" when
-        // navigating between items.
+        // navigating between <span class="branch-1 cbranch-no" title="branch not covered" >items.</span>
         if (value === variant.DRILLDOWN) {
           if (this._selected || (isChromeMacOS &amp;&amp; this.getAttribute('aria-level') === '1')) {
-            this.removeAttribu<span class="branch-1 cbranch-no" title="branch not covered" >te('aria-expande</span>d');
-          } else {
+            this.removeAttribute('aria-expanded');
+          } else {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
             this.setAttribute('aria-expanded', this.active);
           }
-        }<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-  
+        }
+  <span class="missing-if-branch" title="else path not taken" >E</span>
         let accessibilityState = this._elements.accessibilityState;
   
-      <span class="missing-if-branch" title="else path not taken" >E</span>  if (value) {
+        if (value) {
   
           // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
           this.removeAttribute('aria-owns');
@@ -1197,11 +1197,11 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
           if (!this.contains(accessibilityState)) {
             this.appendChild(accessibilityState);
           }
-        }
-        // @a11y If deselecting from checked state,
+        }<span class="branch-2 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="if path not taken" >I</span></span>
+        // @<span class="cstat-no" title="statement not covered" >a11y If deselecting from checked state,</span>
         else {
-  <span class="branch-2 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="if path not taken" >I</span></span>
-          //<span class="cstat-no" title="statement not covered" > @a11y remove, but retain reference to </span>accessibilityState state
+  
+          // @a11y remove, but retain reference to accessibilityState state
           if (accessibilityState.parentNode) {
             this._elements.accessibilityState = accessibilityState.parentNode.removeChild(accessibilityState);
           }
@@ -1227,15 +1227,15 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
    Whether the item is active.
 &nbsp;
    @type {Boolean}
-   @default false
+   @de<span class="missing-if-branch" title="else path not taken" >E</span>fault false
    @htmlattribut active
    @htmlattributereflected
    */<span class="missing-if-branch" title="else path not taken" >E</span>
   get active() {
-    return this._active || false;
-  }<span class="missing-if-branch" title="else path not taken" >E</span>
+    return<span class="missing-if-branch" title="else path not taken" >E</span> this._active || false;
+  }
 &nbsp;
-  set acti<span class="missing-if-branch" title="else path not taken" >E</span>ve(value) {
+  set active(value) {
     value = transform.booleanAttr(value);
     this._reflectAttribute('active', value);
 &nbsp;
@@ -1269,8 +1269,8 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
 &nbsp;
   get _contentZones() {
     return {
-      'coral-columnview-item-content': 'content',
-      <span class="missing-if-branch" title="else path not taken" >E</span>'coral-columnview-item-thumbnail': 'thumbnail'
+      <span class="missing-if-branch" title="else path not taken" >E</span>'coral-columnview-item-content': 'content',
+      'coral-columnview-item-thumbnail': 'thumbnail'
     };
   }
 &nbsp;
@@ -1282,12 +1282,12 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
         this.classList.remove('is-selectable');
       }
       // Enable selection
-      else {
-        th<span class="missing-if-branch" title="if path not taken" >I</span>is.classList.add('is-selectable');
-        let <span class="cstat-no" title="statement not covered" >itemSelector = this.querySelector('[coral-columnview-itemselect]');</span>
-<span class="cstat-no" title="statement not covered" ></span>
-        // Render checkbox on demand
-        if (!i<span class="cstat-no" title="statement not covered" >temSelector) {</span>
+      else<span class="missing-if-branch" title="if path not taken" >I</span> {
+        this<span class="cstat-no" title="statement not covered" >.classList.add('is-selectable');</span>
+        let it<span class="cstat-no" title="statement not covered" >emSelector = this.querySelector('[coral-c</span>olumnview-itemselect]');
+&nbsp;
+        // Ren<span class="cstat-no" title="statement not covered" >der checkbox on demand</span>
+        if (!itemSelector) {
           itemSelector = new Checkbox();
           itemSelector.setAttribute('coral-columnview-itemselect', '');
           if (this.classList.contains('is-selected')) {
@@ -1301,14 +1301,14 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
         }
       }
     } else {
-      super.attributeChangedCallback(name, oldValue, value);
-    }<span class="missing-if-branch" title="else path not taken" >E</span>
+      super.<span class="missing-if-branch" title="else path not taken" >E</span>attributeChangedCallback(name, oldValue, value);
+    }
   }
 &nbsp;
   /**
    Returns {@link ColumnViewItem} variants.
-&nbsp;
-   @return {Co<span class="missing-if-branch" title="else path not taken" >E</span>lumnViewItemVariantEnum}
+<span class="missing-if-branch" title="else path not taken" >E</span>
+   @return {ColumnViewItemVariantEnum}
    */
   static get variant() {
     return variant;
@@ -1356,8 +1356,8 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
       while (this.firstChild) {
         content.appendChild(this.firstChild);
       }
-    }
-<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    }<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+&nbsp;
     // Assign content zones
     this.content = content;
     this.thumbnail = thumbnail;
@@ -1395,7 +1395,7 @@ export default ColumnViewItem;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Oct 21 2021 07:00:24 GMT+0000 (Coordinated Universal Time)
+                at Tue Nov 30 2021 08:23:17 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

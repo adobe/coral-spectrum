@@ -15744,10 +15744,14 @@ var Coral = (function (exports) {
       this._host = options.host;
       this._itemTagName = options.itemTagName;
       this._itemBaseTagName = options.itemBaseTagName;
+      this._itemTagNameFilter = [];
+      this._itemBaseTagName && this._itemTagNameFilter.push(this._itemBaseTagName.toUpperCase());
+      this._itemTagName && this._itemTagNameFilter.push(this._itemTagName.toUpperCase());
       this._itemSelector = options.itemSelector || getTagSelector(this._itemTagName, this._itemBaseTagName); // the container where the new items are added
 
       this._container = options.container || this._host;
-      this._filter = options.filter; // internal variable to determine if collection events will be handled internally
+      this._filter = options.filter;
+      this._onlyHandleChildren = typeof options.onlyHandleChildren === 'boolean' ? options.onlyHandleChildren : false; // internal variable to determine if collection events will be handled internally
 
       this._handleItems = false; // we provide support for the :scope selector and swap it for an id
 
@@ -15923,8 +15927,9 @@ var Coral = (function (exports) {
       key: "_isPartOfCollection",
       value: function _isPartOfCollection(node) {
         // Only element nodes are allowed
-        return node.nodeType === Node.ELEMENT_NODE && filterItem(node, this._filter) && ( // this is an optimization to avoid using matches
-        this._useItemTagName ? this._useItemTagName === node.tagName : node.matches(this._itemSelector));
+        var tagName = node.tagName;
+        return node.nodeType === Node.ELEMENT_NODE && (this._itemTagNameFilter.length === 0 || this._itemTagNameFilter.includes(tagName)) && filterItem(node, this._filter) && ( // this is an optimization to avoid using matches
+        this._useItemTagName ? this._useItemTagName === tagName : node.matches(this._itemSelector));
       }
       /**
        Handles the attachment of an item to the collection. It triggers automatically the collection event.
@@ -15969,6 +15974,28 @@ var Coral = (function (exports) {
         });
       }
       /**
+       Handles the collection changes. It automatically triggers the collection change event.
+       @param {Array<HTMLElement>} addedNodes The items that was added to the collection
+       @param {Array<HTMLElement>} removedNodes The items that was removed from the collection
+       @emits {coral-collection:change}
+       @protected
+       */
+
+    }, {
+      key: "_onCollectionMutation",
+      value: function _onCollectionMutation(addedNodes, removedNodes) {
+        // if options.onCollectionChange was provided, we call the function
+        if (typeof this._onCollectionChange === 'function') {
+          this._onCollectionChange.call(this._host, addedNodes, removedNodes);
+        } // the usage of trigger assumes that the host is a coral component
+
+
+        this._host.trigger('coral-collection:change', {
+          addedItems: addedNodes,
+          removedItems: removedNodes
+        });
+      }
+      /**
        Enables the automatic detection of collection items. The collection will take care of triggering the appropriate
        collection event when an item is added or removed, as well the related callbacks. Components can decide to skip the
        initialization of the starting items by providing <code>skipInitialItems</code> as <code>false</code>.
@@ -15989,12 +16016,19 @@ var Coral = (function (exports) {
 
           this._handleItems = true;
 
-          this._observer.observe(this._container, {
-            // we only need to observe for items that were added and removed, no need to check attributes and contents
-            childList: true,
-            // we need to listen to subtree mutations as items may not be direct children
-            subtree: true
-          }); // by default we handle the initial items unless otherwise indicated
+          if (this._onlyHandleChildren) {
+            this._observer.observe(this._container, {
+              // we only need to observe for items that were added and removed, no need to check attributes and contents
+              childList: true
+            });
+          } else {
+            this._observer.observe(this._container, {
+              // we only need to observe for items that were added and removed, no need to check attributes and contents
+              childList: true,
+              // we need to listen to subtree mutations as items may not be direct children
+              subtree: true
+            });
+          } // by default we handle the initial items unless otherwise indicated
 
 
           if (skipInitialItems !== true) {
@@ -16092,8 +16126,8 @@ var Coral = (function (exports) {
         // processed to make sure we only do it once
 
 
-        if (itemChanges !== 0 && typeof this._onCollectionChange === 'function' && this._host) {
-          this._onCollectionChange.call(this._host, validAddedNodes, validRemovedNodes);
+        if (itemChanges !== 0 && this._host) {
+          this._onCollectionMutation(validAddedNodes, validRemovedNodes);
         }
       }
       /**
@@ -16110,6 +16144,17 @@ var Coral = (function (exports) {
         @typedef {CustomEvent} coral-collection:remove
         @property {HTMLElement} detail.item
        The item that was removed.
+       */
+
+      /**
+       * Triggered when either items are added or removed from {@link Collection}. {@link Collection} events are not synchronous so the DOM
+       * may reflect a different reality although every addition or removal will be reported. This event describes that {@link Collection} has
+       * changed or modified.
+       *
+       * @event coral-collection:change
+       * @type {Object}
+       * @property {Array<HTMLElement>} detail.addedItems - Items that are added to collection
+       * @property {Array<HTMLElement>} detail.removedItems - Items that are removed from collection
        */
 
       /**
@@ -33133,6 +33178,7 @@ var Coral = (function (exports) {
             itemTagName: 'coral-accordion-item',
             // allows accordions to be nested
             itemSelector: ':scope > coral-accordion-item',
+            onlyHandleChildren: true,
             onItemAdded: this._validateSelection,
             onItemRemoved: this._validateSelection
           });
@@ -39456,6 +39502,7 @@ var Coral = (function (exports) {
             itemBaseTagName: 'button',
             itemTagName: 'coral-button',
             itemSelector: ITEM_SELECTOR,
+            onlyHandleChildren: true,
             onItemAdded: this._onItemAdded,
             onItemRemoved: this._onItemRemoved,
             onCollectionChange: this._onCollectionChange
@@ -55065,7 +55112,8 @@ var Coral = (function (exports) {
         if (!this._columns) {
           this._columns = new ColumnViewCollection({
             host: this,
-            itemTagName: 'coral-columnview-column'
+            itemTagName: 'coral-columnview-column',
+            onlyHandleChildren: true
           });
         }
 
@@ -55238,14 +55286,7 @@ var Coral = (function (exports) {
       _this._oldActiveItem = null; // cache bound event handler functions
 
       _this._onDebouncedScroll = _this._onDebouncedScroll.bind(_assertThisInitialized(_this));
-      _this._toggleItemSelection = _this._toggleItemSelection.bind(_assertThisInitialized(_this));
-      _this._observer = new MutationObserver(_this._handleMutation.bind(_assertThisInitialized(_this))); // items outside the scroll area are not supported
-
-      _this._observer.observe(_this._elements.content, {
-        // only watch the childList, items will tell us if selected/value/content changes
-        childList: true
-      }); // Init the collection mutation observer
-
+      _this._toggleItemSelection = _this._toggleItemSelection.bind(_assertThisInitialized(_this)); // Init the collection mutation observer
 
       _this.items._startHandlingItems(true);
 
@@ -55583,15 +55624,7 @@ var Coral = (function (exports) {
 
     }, {
       key: "_handleMutation",
-      value: function _handleMutation(mutations) {
-        var mutationsCount = mutations.length;
-
-        for (var i = 0; i < mutationsCount; i++) {
-          var mutation = mutations[i]; // we handle the collection events
-
-          this._triggerCollectionEvents(mutation.addedNodes, mutation.removedNodes);
-        }
-
+      value: function _handleMutation() {
         this._setStateFromDOM(); // in case items were added removed and selection changed
 
 
@@ -55599,36 +55632,6 @@ var Coral = (function (exports) {
 
 
         this._tryToLoadAdditionalItems();
-      }
-      /** @private */
-
-    }, {
-      key: "_triggerCollectionEvents",
-      value: function _triggerCollectionEvents(addedNodes, removedNodes) {
-        var item;
-        var addedNodesCount = addedNodes.length;
-
-        for (var i = 0; i < addedNodesCount; i++) {
-          item = addedNodes[i];
-
-          if (item.tagName === 'CORAL-COLUMNVIEW-ITEM') {
-            this.trigger('coral-collection:add', {
-              item: item
-            });
-          }
-        }
-
-        var removedNodesCount = removedNodes.length;
-
-        for (var j = 0; j < removedNodesCount; j++) {
-          item = removedNodes[j];
-
-          if (item.tagName === 'CORAL-COLUMNVIEW-ITEM') {
-            this.trigger('coral-collection:remove', {
-              item: item
-            });
-          }
-        }
       }
     }, {
       key: "render",
@@ -55724,7 +55727,8 @@ var Coral = (function (exports) {
             host: this,
             container: this._elements.content,
             itemTagName: 'coral-columnview-item',
-            onItemAdded: this._toggleItemSelection
+            onItemAdded: this._toggleItemSelection,
+            onCollectionChange: this._handleMutation
           });
         }
 
@@ -55884,7 +55888,7 @@ var Coral = (function (exports) {
 
     /** @ignore */
     function _class() {
-      var _thisSuper, _this;
+      var _this;
 
       _classCallCheck(this, _class);
 
@@ -55902,8 +55906,6 @@ var Coral = (function (exports) {
           commons: commons
         });
       }
-
-      _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(_class.prototype)), "_observeLabel", _thisSuper).call(_thisSuper);
 
       return _this;
     }
@@ -56114,7 +56116,9 @@ var Coral = (function (exports) {
           if (value) {
             // creates a new icon element
             if (!this._elements.icon) {
-              this._elements.icon = new Icon();
+              this._elements.icon = new Icon(); // register observer only if there present an icon field.
+
+              _get(_getPrototypeOf(_class.prototype), "_observeLabel", this).call(this);
             }
 
             this._elements.icon.icon = this.icon;
@@ -63546,6 +63550,7 @@ var Coral = (function (exports) {
             itemTagName: 'coral-masonry-item',
             // allows masonry to be nested
             itemSelector: ':scope > coral-masonry-item:not([_removing]):not([_placeholder])',
+            onlyHandleChildren: true,
             onItemAdded: this._validateSelection,
             onItemRemoved: this._validateSelection
           });
@@ -65666,6 +65671,7 @@ var Coral = (function (exports) {
             itemTagName: 'coral-multifield-item',
             // allows multifields to be nested
             itemSelector: ':scope > coral-multifield-item',
+            onlyHandleChildren: true,
             onItemAdded: this._onItemAdded,
             onItemRemoved: this._onItemRemoved
           });
@@ -66125,6 +66131,7 @@ var Coral = (function (exports) {
             itemTagName: 'coral-panel',
             // allows panels to be nested
             itemSelector: ':scope > coral-panel',
+            onlyHandleChildren: true,
             onItemAdded: this._validateSelection,
             onItemRemoved: this._validateSelection
           });
@@ -83480,6 +83487,7 @@ var Coral = (function (exports) {
             host: this,
             itemTagName: 'coral-tree-item',
             itemSelector: ':scope > coral-tree-item',
+            onlyHandleChildren: true,
             container: this._elements.subTreeContainer,
             filter: this._filterItem.bind(this),
             onItemAdded: this._onItemAdded,
@@ -84733,6 +84741,7 @@ var Coral = (function (exports) {
             itemTagName: 'coral-panelstack',
             // allows panelstack to be nested
             itemSelector: ':scope > coral-panelstack[coral-wizardview-panelstack]',
+            onlyHandleChildren: true,
             onItemAdded: this._onItemAdded
           });
         }
@@ -84755,6 +84764,7 @@ var Coral = (function (exports) {
             itemTagName: 'coral-steplist',
             // allows steplist to be nested
             itemSelector: ':scope > coral-steplist[coral-wizardview-steplist]',
+            onlyHandleChildren: true,
             onItemAdded: this._onItemAdded
           });
         }
@@ -84782,7 +84792,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.12.2";
+  var version$1 = "4.12.3";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

@@ -951,7 +951,8 @@
 <a name='L893'></a><a href='#L893'>893</a>
 <a name='L894'></a><a href='#L894'>894</a>
 <a name='L895'></a><a href='#L895'>895</a>
-<a name='L896'></a><a href='#L896'>896</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L896'></a><a href='#L896'>896</a>
+<a name='L897'></a><a href='#L897'>897</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1391,28 +1392,28 @@
 <span class="cline-any cline-yes">1966x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1966x</span>
-<span class="cline-any cline-yes">841x</span>
+<span class="cline-any cline-yes">838x</span>
 <span class="cline-any cline-yes">220x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">841x</span>
+<span class="cline-any cline-yes">838x</span>
 <span class="cline-any cline-yes">470x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">841x</span>
+<span class="cline-any cline-yes">838x</span>
 <span class="cline-any cline-yes">198x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1125x</span>
-<span class="cline-any cline-yes">1125x</span>
+<span class="cline-any cline-yes">1128x</span>
+<span class="cline-any cline-yes">1128x</span>
 <span class="cline-any cline-yes">156x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1125x</span>
-<span class="cline-any cline-yes">1105x</span>
+<span class="cline-any cline-yes">1128x</span>
+<span class="cline-any cline-yes">1108x</span>
 <span class="cline-any cline-yes">682x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1105x</span>
+<span class="cline-any cline-yes">1108x</span>
 <span class="cline-any cline-yes">372x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1475,7 +1476,7 @@
 <span class="cline-any cline-yes">1164x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1164x</span>
-<span class="cline-any cline-yes">349x</span>
+<span class="cline-any cline-yes">346x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1645,6 +1646,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2991x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1658,7 +1660,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">14090x</span>
+<span class="cline-any cline-yes">14093x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">468x</span>
@@ -1961,6 +1963,7 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
         itemBaseTagName: 'button',
         itemTagName: 'coral-button',
         itemSelector: ITEM_SELECTOR,
+        onlyHandleChildren: true,
         onItemAdded: this._onItemAdded,
         onItemRemoved: this._onItemRemoved,
         onCollectionChange: this._onCollectionChange
@@ -1983,11 +1986,11 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
   }
 &nbsp;
   set selectionMode(value) {
-    value = transform.string(value).toLowerCase();
-    th<span class="missing-if-branch" title="if path not taken" >I</span>is._selectionMode = validate.enumeration(selectionMode)(value) &amp;&amp; value || selectionMode.NONE;
-    this<span class="cstat-no" title="statement not covered" >._reflectAttribute('sele</span>ctionmode', this._selectionMode);
+    va<span class="missing-if-branch" title="if path not taken" >I</span>lue = transform.string(value).toLowerCase();
+    this<span class="cstat-no" title="statement not covered" >._selectionMode = valida</span>te.enumeration(selectionMode)(value) &amp;&amp; value || selectionMode.NONE;
+    this<span class="cstat-no" title="statement not covered" >._reflectAttribute('selectionmode'</span>, this._selectionMode);
 <span class="cstat-no" title="statement not covered" ></span>
-    // u<span class="cstat-no" title="statement not covered" >pdate se</span>lect element if multiple
+    // update select element if multiple
     // this is required while appplying default selection
     // if selection mode is single first elem gets selected but for multiple its not
     this._elements.nativeSelect.multiple = this._selectionMode === selectionMode.MULTIPLE;
@@ -2057,15 +2060,15 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
    @readonly
    */
   get selectedItems() {
-    if (this.selectionMode === selectionMode.MULTIPLE) {
-      return th<span class="missing-if-branch" title="else path not taken" >E</span>is.items._getAllSelected();
+    if (this.se<span class="missing-if-branch" title="else path not taken" >E</span>lectionMode === selectionMode.MULTIPLE) {
+      return this.items._getAllSelected();
     }
 &nbsp;
     const item = this.selectedItem;
     return item ? [item] : [];
   }
-&nbsp;
-  /**<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  /**
    Returns the first selected button in the Button Group. The value &lt;code&gt;null&lt;/code&gt; is returned if no button is
    selected.
 &nbsp;
@@ -2087,10 +2090,10 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
     const values = [];
 &nbsp;
     // uses the nativeSelect since it holds the truth of what will be submitted with the form
-    const selectedOptions = this._elements.nativeSelect.querySelectorAll(':checked');
-    fo<span class="missing-if-branch" title="else path not taken" >E</span>r (let i = 0, selectedOptionsCount = selectedOptions.length ; i &lt; selectedOptionsCount ; i++) {
-      va<span class="missing-if-branch" title="if path not taken" >I</span>lues.push(selectedOptions[i].value);
-    }<span class="cstat-no" title="statement not covered" ></span>
+    co<span class="missing-if-branch" title="else path not taken" >E</span>nst selectedOptions = this._elements.nativeSelect.querySelectorAll(':checked');
+    for <span class="missing-if-branch" title="if path not taken" >I</span>(let i = 0, selectedOptionsCount = selectedOptions.length ; i &lt; selectedOptionsCount ; i++) {
+      valu<span class="cstat-no" title="statement not covered" >es.push(selected</span>Options[i].value);
+    }
 &nbsp;
     return values;
   }
@@ -2105,15 +2108,15 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
       // we proceed to select the provided values
       this._selectItemByValue(values);
     }
-  }
-<span class="missing-if-branch" title="else path not taken" >E</span>
+  }<span class="missing-if-branch" title="else path not taken" >E</span>
+&nbsp;
   /**
-   Whether this field is disabled or not.
-   @type {<span class="cstat-no" title="statement not covered" >Boolean}</span>
+   Whether<span class="cstat-no" title="statement not covered" > this field is disabled or not.</span>
+   @type {Boolean}
    @default false
    @htmlattribute disabled
-   @htmlattributereflected
-   */<span class="missing-if-branch" title="else path not taken" >E</span>
+   @ht<span class="missing-if-branch" title="else path not taken" >E</span>mlattributereflected
+   */
   get disabled() {
     return this._disabled || false;
   }
@@ -2130,10 +2133,10 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
     });
     this[isDisabled ? 'setAttribute' : 'removeAttribute']('aria-disabled', isDisabled);
   }
-&nbsp;
-  /**<span class="missing-if-branch" title="else path not taken" >E</span>
-   Wheth<span class="missing-if-branch" title="if path not taken" >I</span>er this field is readOnly or not. Indicating that the user cannot modify the value of the control.
-   @type {<span class="cstat-no" title="statement not covered" >Boolean}</span>
+<span class="missing-if-branch" title="else path not taken" >E</span>
+  /**<span class="missing-if-branch" title="if path not taken" >I</span>
+   Whether<span class="cstat-no" title="statement not covered" > this field is r</span>eadOnly or not. Indicating that the user cannot modify the value of the control.
+   @type {Boolean}
    @default false
    @htmlattribute readonly
    @htmlattributereflected
@@ -2148,10 +2151,10 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
 &nbsp;
     this._elements.nativeSelect.disabled = this.readOnly || this.disabled;
     // Also update for all the items the disabled property so it matches the native select.
-    this.items.getAll().forEach((item) =&gt; {
-      <span class="missing-if-branch" title="else path not taken" >E</span>item.disabled = this.disabled || this.readOnly &amp;&amp; !item.hasAttribute('selected');
-      it<span class="missing-if-branch" title="if path not taken" >I</span>em[this.readOnly ? 'setAttribute' : 'removeAttribute']('aria-disabled', true);
-    });<span class="cstat-no" title="statement not covered" ></span>
+    th<span class="missing-if-branch" title="else path not taken" >E</span>is.items.getAll().forEach((item) =&gt; {
+      it<span class="missing-if-branch" title="if path not taken" >I</span>em.disabled = this.disabled || this.readOnly &amp;&amp; !item.hasAttribute('selected');
+      item<span class="cstat-no" title="statement not covered" >[this.readOnly ?</span> 'setAttribute' : 'removeAttribute']('aria-disabled', true);
+    });
     // aria-readonly is not permitted on elements with role="radiogroup" or role="group"
     this.removeAttribute('aria-readonly');
   }
@@ -2161,8 +2164,8 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
    @type {Boolean}
    @default false
    @htmlattribute required
-   @htmlattributereflected
-   */<span class="missing-if-branch" title="else path not taken" >E</span>
+   @ht<span class="missing-if-branch" title="else path not taken" >E</span>mlattributereflected
+   */
   get required() {
     return this._required || false;
   }
@@ -2174,8 +2177,8 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
     this._elements.nativeSelect.required = this.required;
     // aria-required is permitted on elements with role="radiogroup" but not with role="group"
     if (this.selectionMode !== selectionMode.SINGLE) {
-      this.removeAttribute('aria-required');
-    }<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+      this.removeAttribute('aria-required');<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+    }
   }
 &nbsp;
   /**
@@ -2296,8 +2299,8 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
 &nbsp;
     const item = event.matchedTarget;
     let button = item.previousElementSibling;
-&nbsp;
-    // skip d<span class="missing-if-branch" title="else path not taken" >E</span>isabled items
+<span class="missing-if-branch" title="else path not taken" >E</span>
+    // skip disabled items
     while (!button || (button.disabled || button.nodeName !== 'BUTTON')) {
       if (!button) {
         button = this.items._getLastSelectable();
@@ -2419,8 +2422,8 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
     item.variant = item._initialVariant;
     item._initialVariant = undefined;
     item.removeAttribute('role');
-&nbsp;
-    if (!item<span class="missing-if-branch" title="else path not taken" >E</span>.parentNode) {
+<span class="missing-if-branch" title="else path not taken" >E</span>
+    if (!item.parentNode) {
       // Remove the item from the initial selected values
       const index = this._initalSelectedValues.indexOf(item.value);
       if (index !== -1) {
@@ -2439,11 +2442,11 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
   _onCollectionChange() {
     // we need to make sure that the state of the selectionMode is valid
     this._validateSelection();
-  }
-<span class="missing-if-branch" title="else path not taken" >E</span>
+  }<span class="missing-if-branch" title="else path not taken" >E</span>
+&nbsp;
   /** @private */
-  _onButtonSelectedChanged(event) {
-    event.<span class="cstat-no" title="statement not covered" >stopImmediatePropagation();</span>
+  _onButto<span class="cstat-no" title="statement not covered" >nSelectedChanged(event) {</span>
+    event.stopImmediatePropagation();
 &nbsp;
     const button = event.target;
     const isSelected = button.hasAttribute('selected');
@@ -2748,7 +2751,7 @@ export default ButtonGroup;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Oct 21 2021 07:00:24 GMT+0000 (Coordinated Universal Time)
+                at Tue Nov 30 2021 08:23:17 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

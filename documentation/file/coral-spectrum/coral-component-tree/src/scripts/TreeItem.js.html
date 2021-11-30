@@ -550,6 +550,7 @@ const TreeItem = Decorator(class extends BaseComponent(HTMLElement) {
         host: this,
         itemTagName: &apos;coral-tree-item&apos;,
         itemSelector: &apos;:scope &gt; coral-tree-item&apos;,
+        onlyHandleChildren: true,
         container: this._elements.subTreeContainer,
         filter: this._filterItem.bind(this),
         onItemAdded: this._onItemAdded,

@@ -491,6 +491,7 @@ const PanelStack = Decorator(class extends BaseComponent(HTMLElement) {
         itemTagName: &apos;coral-panel&apos;,
         // allows panels to be nested
         itemSelector: &apos;:scope &gt; coral-panel&apos;,
+        onlyHandleChildren: true,
         onItemAdded: this._validateSelection,
         onItemRemoved: this._validateSelection
       });

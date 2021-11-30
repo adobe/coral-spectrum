@@ -636,6 +636,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
         itemTagName: &apos;coral-masonry-item&apos;,
         // allows masonry to be nested
         itemSelector: &apos;:scope &gt; coral-masonry-item:not([_removing]):not([_placeholder])&apos;,
+        onlyHandleChildren: true,
         onItemAdded: this._validateSelection,
         onItemRemoved: this._validateSelection
       });

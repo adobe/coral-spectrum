@@ -564,7 +564,8 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
     if (!this._columns) {
       this._columns = new ColumnViewCollection({
         host: this,
-        itemTagName: &apos;coral-columnview-column&apos;
+        itemTagName: &apos;coral-columnview-column&apos;,
+        onlyHandleChildren: true
       });
     }
 

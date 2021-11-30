@@ -442,7 +442,9 @@
 <a name='L384'></a><a href='#L384'>384</a>
 <a name='L385'></a><a href='#L385'>385</a>
 <a name='L386'></a><a href='#L386'>386</a>
-<a name='L387'></a><a href='#L387'>387</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L387'></a><a href='#L387'>387</a>
+<a name='L388'></a><a href='#L388'>388</a>
+<a name='L389'></a><a href='#L389'>389</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -504,12 +506,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">98x</span>
-<span class="cline-any cline-yes">95x</span>
+<span class="cline-any cline-yes">100x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3271x</span>
-<span class="cline-any cline-yes">2714x</span>
+<span class="cline-any cline-yes">3448x</span>
+<span class="cline-any cline-yes">2822x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2714x</span>
+<span class="cline-any cline-yes">2822x</span>
 <span class="cline-any cline-yes">92x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -828,6 +830,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -913,6 +917,7 @@ const WizardView = Decorator(class extends BaseComponent(HTMLElement) {
         itemTagName: 'coral-panelstack',
         // allows panelstack to be nested
         itemSelector: ':scope &gt; coral-panelstack[coral-wizardview-panelstack]',
+        onlyHandleChildren: true,
         onItemAdded: this._onItemAdded
       });
     }
@@ -934,6 +939,7 @@ const WizardView = Decorator(class extends BaseComponent(HTMLElement) {
         itemTagName: 'coral-steplist',
         // allows steplist to be nested
         itemSelector: ':scope &gt; coral-steplist[coral-wizardview-steplist]',
+        onlyHandleChildren: true,
         onItemAdded: this._onItemAdded
       });
     }
@@ -998,18 +1004,18 @@ const WizardView = Decorator(class extends BaseComponent(HTMLElement) {
     // Get the step number
     const index = event.target.items.getAll().indexOf(event.detail.selection);
 &nbsp;
-    // Sync the other StepLists
+    //<span class="missing-if-branch" title="else path not taken" >E</span> Sync the other StepLists
     this._selectStep(index);
-<span class="missing-if-branch" title="else path not taken" >E</span>
+&nbsp;
     this.trigger('coral-wizardview:change', {
-      selection: event.detail.selection,
+      selection: eve<span class="cstat-no" title="statement not covered" >nt.detail.selection,</span>
       oldSelection: event.detail.oldSelection
     });<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-    this<span class="cstat-no" title="statement not covered" >._trackEvent('change', 'coral-wizardview', event);</span>
-  }<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
-  /** @priva<span class="cstat-no" title="statement not covered" >te */</span>
+    this._tr<span class="cstat-no" title="statement not covered" >ackEvent('chang</span>e', 'coral-wizardview', event);
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  /** @private */
   _getSelectedIndex() {
     const stepList = this.stepLists.first();
     if (!stepList) {
@@ -1034,12 +1040,12 @@ const WizardView = Decorator(class extends BaseComponent(HTMLElement) {
 &nbsp;
     return stepIndex;
   }
-&nbsp;
+<span class="missing-if-branch" title="if path not taken" >I</span>
   /**
-   Select t<span class="missing-if-branch" title="if path not taken" >I</span>he step according to the provided index.
-&nbsp;
-   @param <span class="cstat-no" title="statement not covered" >{*} component</span>
-   The StepList<span class="missing-if-branch" title="else path not taken" >E</span> or PanelStack to select the step on.
+   Select <span class="cstat-no" title="statement not covered" >the step according to the provided index.</span>
+<span class="missing-if-branch" title="else path not taken" >E</span>
+   @param {*} component
+   The StepList or PanelStack to select the step on.
    @param {Number} index
    The index of the step that should be selected.
 &nbsp;
@@ -1054,9 +1060,9 @@ const WizardView = Decorator(class extends BaseComponent(HTMLElement) {
     // if collection api is available we use it to find the correct item
     if (component.items) {
       // Get the corresponding item
-      item = component.items.getAll()[index];
+      item = comp<span class="missing-if-branch" title="else path not taken" >E</span>onent.items.getAll()[index];
     }
-    // Resort to <span class="missing-if-branch" title="else path not taken" >E</span>querying manually on immediately children
+    // Resort to querying manually on immediately children
     else if (component.tagName === 'CORAL-STEPLIST') {
       // @polyfill IE - we use id since :scope is not supported
       item = component.querySelectorAll(`#${component.id} &gt; coral-step`)[index];
@@ -1094,13 +1100,13 @@ const WizardView = Decorator(class extends BaseComponent(HTMLElement) {
     // we apply the selection to all available steplists
     this.stepLists.getAll().forEach((stepList) =&gt; {
       this._selectItemByIndex(stepList, index);
-    });
+    });<span class="missing-if-branch" title="else path not taken" >E</span>
 &nbsp;
-    // w<span class="missing-if-branch" title="else path not taken" >E</span>e apply the selection to all available panelstacks
+    // we apply the selection to all available panelstacks
     this.panelStacks.getAll().forEach((panelStack) =&gt; {
-      this._selectItemByIndex(panelStack, index);
+      this<span class="cstat-no" title="statement not covered" >._select</span>ItemByIndex(panelStack, index);
     });
-  }<span class="cstat-no" title="statement not covered" ></span>
+  }
 &nbsp;
   /**
    Sets the correct selected item in every PanelStack.
@@ -1120,13 +1126,13 @@ const WizardView = Decorator(class extends BaseComponent(HTMLElement) {
       }
     }
 &nbsp;
-    this.panelStacks.getAll().forEach((panelStack) =&gt; {
+    this<span class="missing-if-branch" title="else path not taken" >E</span>.panelStacks.getAll().forEach((panelStack) =&gt; {
       this._selectItemByIndex(panelStack, index);
-    });<span class="missing-if-branch" title="else path not taken" >E</span>
+    });
   }
-&nbsp;
+<span class="cstat-no" title="statement not covered" ></span>
   /**
-   Selects<span class="cstat-no" title="statement not covered" > the cor</span>rect step in every StepList.
+   Selects the correct step in every StepList.
 &nbsp;
    @private
    */
@@ -1221,7 +1227,7 @@ export default WizardView;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Oct 21 2021 07:00:24 GMT+0000 (Coordinated Universal Time)
+                at Tue Nov 30 2021 08:23:17 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
