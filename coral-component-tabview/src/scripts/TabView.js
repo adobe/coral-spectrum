@@ -137,7 +137,7 @@ const TabView = Decorator(class extends BaseComponent(HTMLElement) {
   /**
    * This helps in syncing the tablist with new panelstack.
    * This helpful when panelstack is changed for tabview dynamically. 
-   * @param {*} panels new/updated panelstack
+   * @param {PanelStack} panels new/updated panelstack
    */
   _onNewPanelStack(panels) {
     const tabs = this._elements.tabList;
