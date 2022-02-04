@@ -472,7 +472,7 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
 
   /** @private */
   _setHandle(handle) {
-    requestAnimationFrame(() => {
+    setTimeout(() => {
       // Specify handle directly on the row if none found
       if (!this.querySelector(`[${handle}]`)) {
         this.setAttribute(handle, '');
@@ -480,7 +480,7 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
       this._syncSelectHandle();
       this._syncAriaLabelledby();
       this._syncAriaSelectedState();
-    });
+    }, 0);
   }
 
   /** @private */
