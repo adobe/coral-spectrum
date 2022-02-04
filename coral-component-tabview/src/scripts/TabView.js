@@ -128,8 +128,26 @@ const TabView = Decorator(class extends BaseComponent(HTMLElement) {
         tagName: 'coral-panelstack',
         insert: function (panels) {
           this.appendChild(panels);
+          this._onNewPanelStack(panels);
         }
       });
+    }
+  }
+
+  /**
+   * This helps in syncing the tablist with new panelstack.
+   * This helpful when panelstack is changed for tabview dynamically. 
+   * @param {*} panels new/updated panelstack
+   */
+  _onNewPanelStack(panels) {
+    const tabs = this._elements.tabList;
+
+    // Bind the tablist and panel stack together, using the panel id
+    panels.id = panels.id || commons.getUID();
+    tabs.setAttribute('target', `#${panels.id}`);
+
+    if(tabs.selectedItem) {
+      tabs.selectedItem.selected = true;
     }
   }
 

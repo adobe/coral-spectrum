@@ -149,9 +149,7 @@ class TabList extends BaseComponent(HTMLElement) {
       this._target = value;
 
       // we do in case the target was not yet in the DOM
-      !(this._setTargetInQueue === true) && window.requestAnimationFrame(() => {
-        delete this._setTargetInQueue;
-
+      window.requestAnimationFrame(() => {
         const realTarget = getTarget(this._target);
         // we add proper accessibility if available
         if (realTarget) {
@@ -194,7 +192,6 @@ class TabList extends BaseComponent(HTMLElement) {
           }
         }
       });
-      this._setTargetInQueue = true;
     }
   }
 
@@ -395,9 +392,7 @@ class TabList extends BaseComponent(HTMLElement) {
   }
 
   _setLine() {
-    !(this._setLineInQueue === true) && window.requestAnimationFrame(() => {
-      delete this._setLineInQueue;
-
+    window.requestAnimationFrame(() => {
       const selectedItem = this.selectedItem;
 
       // Position line under the selected item
@@ -433,8 +428,6 @@ class TabList extends BaseComponent(HTMLElement) {
       }
       this._previousOrientation = this.orientation;
     });
-
-    this._setLineInQueue = true;
   }
 
   /** @private */
