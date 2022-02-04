@@ -1170,14 +1170,13 @@ describe('Table', function () {
         table.on('coral-table:roworder', eventSpy);
         var row = table.body.rows[1];
 
-        helpers.next(() => {
+        setTimeout(() => {
           dragRowTo(row, -1);
 
           expect(eventSpy.callCount).to.equal(1);
           expect(eventSpy.args[0][0].detail.row).to.equal(row);
-
           done();
-        });
+        }, 10);
       });
 
       it('should pass the sibling row to allow reverting', function (done) {
@@ -1425,7 +1424,7 @@ describe('Table', function () {
 
         expect(getIndexOf(row)).to.equal(1);
 
-        helpers.next(() => {
+        setTimeout(() => {
           dragRowTo(row, -1);
 
           // Wait for dragging
@@ -1437,7 +1436,7 @@ describe('Table', function () {
 
             done();
           });
-        });
+        }, 10);
       });
 
       it('should drag the row to the bottom', function (done) {
@@ -1478,7 +1477,7 @@ describe('Table', function () {
 
         expect(getIndexOf(row)).to.equal(0);
 
-        helpers.next(() => {
+        setTimeout(() => {
           dragRowTo(row, 1);
 
           // Wait for dragging
@@ -1491,7 +1490,7 @@ describe('Table', function () {
 
             done();
           });
-        });
+        }, 0);
       });
 
       it('should not initialize dragging logic if the order handle is disabled', function () {
