@@ -311,13 +311,13 @@ describe('Table', function () {
         var table = helpers.build(window.__html__['Table.base.html']);
         table.orderable = true;
 
-        helpers.next(() => {
+        setTimeout(() => {
           table.items.getAll().forEach(function (item) {
             expect(item.hasAttribute('coral-table-roworder')).to.be.true;
           });
 
           done();
-        });
+        }, 10);
       });
 
       it('should remove orderable mode', function () {
@@ -1191,7 +1191,7 @@ describe('Table', function () {
 
         expect(getIndexOf(row)).to.equal(0);
 
-        helpers.next(() => {
+        setTimeout(() => {
           dragRowTo(row, 1);
 
           expect(eventSpy.callCount).to.equal(1);
@@ -1200,7 +1200,7 @@ describe('Table', function () {
           expect(eventSpy.args[0][0].detail.before).to.equal(row.nextElementSibling);
 
           done();
-        });
+        }, 10);
       });
     });
 
@@ -1216,9 +1216,9 @@ describe('Table', function () {
           done();
         });
 
-        helpers.next(() => {
+        setTimeout(() => {
           dragRowTo(table.body.rows[0], 1);
-        });
+        }, 10);
       });
     });
 
@@ -2275,9 +2275,9 @@ describe('Table', function () {
           done();
         });
 
-        helpers.next(() => {
+        setTimeout(() => {
           dragRowTo(table.body.rows[0], 1);
-        });
+        }, 10);
       });
 
       it('should destroy the dragaction', function () {
