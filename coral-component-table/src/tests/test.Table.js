@@ -1449,7 +1449,7 @@ describe('Table', function () {
 
         expect(getIndexOf(row)).to.equal(0);
 
-        helpers.next(() => {
+        setTimeout(() => {
           dragRowTo(row, 1);
 
           // Wait for dragging
@@ -1461,7 +1461,7 @@ describe('Table', function () {
 
             done();
           });
-        });
+        }, 10);
       });
 
       it('should prevent the row from being inserted at the dragged position', function (done) {
