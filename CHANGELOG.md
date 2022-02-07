@@ -1,3 +1,10 @@
+## [4.12.6](https://github.com/adobe/coral-spectrum/compare/v4.12.5...v4.12.6) (2022-02-07)
+
+
+### Bug Fixes
+
+* **CQ-4340781:** Blank screen for view Page Properties - Coral Tab not being selected ([#197](https://github.com/adobe/coral-spectrum/issues/197)) ([9615b03](https://github.com/adobe/coral-spectrum/commit/9615b03affa0b88023490befd6e3047e2b05a1c4))
+
 ## [4.12.5](https://github.com/adobe/coral-spectrum/compare/v4.12.4...v4.12.5) (2022-02-07)
 
 
