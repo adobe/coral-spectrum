@@ -1,3 +1,11 @@
+## [4.12.5](https://github.com/adobe/coral-spectrum/compare/v4.12.4...v4.12.5) (2022-02-07)
+
+
+### Bug Fixes
+
+* Correcting failing testcase ([#198](https://github.com/adobe/coral-spectrum/issues/198)) ([0d292cc](https://github.com/adobe/coral-spectrum/commit/0d292cce5d5bbefb7e0dc4841b42da8c663b151b))
+* **GRANITE-37908:** Intermittently action bar options don't show up on selection of items in tableview. ([#196](https://github.com/adobe/coral-spectrum/issues/196)) ([1957c75](https://github.com/adobe/coral-spectrum/commit/1957c7500ba19c34cef9717747c9d66f16873b62))
+
 ## [4.12.4](https://github.com/adobe/coral-spectrum/compare/v4.12.3...v4.12.4) (2021-11-30)
 
 
