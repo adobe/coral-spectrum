@@ -891,7 +891,7 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
   /** @private */
   _toggleOrderable(orderable) {
     if (orderable) {
-      this._setHandle(&apos;coral-table-roworder&apos;);
+      this._setHandle(&apos;coral-table-roworder&apos;, 0);
     }
     // Remove DragAction instance
     else if (this.dragAction) {
@@ -906,17 +906,27 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
     }
   }
 
+  _setHandleAndSync(handle) {
+    // Specify handle directly on the row if none found
+    if (!this.querySelector(`[${handle}]`)) {
+      this.setAttribute(handle, &apos;&apos;);
+    }
+    this._syncSelectHandle();
+    this._syncAriaLabelledby();
+    this._syncAriaSelectedState();
+  }
+
   /** @private */
-  _setHandle(handle) {
-    requestAnimationFrame(() =&gt; {
-      // Specify handle directly on the row if none found
-      if (!this.querySelector(`[${handle}]`)) {
-        this.setAttribute(handle, &apos;&apos;);
-      }
-      this._syncSelectHandle();
-      this._syncAriaLabelledby();
-      this._syncAriaSelectedState();
-    });
+  _setHandle(handle, timeout) {
+    if(typeof timeout === &quot;number&quot;) {
+      setTimeout(() =&gt; {
+        this._setHandleAndSync(handle);
+      }, timeout);
+    } else {
+      requestAnimationFrame(() =&gt; {
+        this._setHandleAndSync(handle);
+      });
+    }
   }
 
   /** @private */

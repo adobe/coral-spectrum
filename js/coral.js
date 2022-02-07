@@ -77605,7 +77605,7 @@ var Coral = (function (exports) {
       key: "_toggleOrderable",
       value: function _toggleOrderable(orderable) {
         if (orderable) {
-          this._setHandle('coral-table-roworder');
+          this._setHandle('coral-table-roworder', 0);
         } // Remove DragAction instance
         else if (this.dragAction) {
             this.dragAction.destroy();
@@ -77620,25 +77620,36 @@ var Coral = (function (exports) {
           this._setHandle('coral-table-rowlock');
         }
       }
+    }, {
+      key: "_setHandleAndSync",
+      value: function _setHandleAndSync(handle) {
+        // Specify handle directly on the row if none found
+        if (!this.querySelector("[".concat(handle, "]"))) {
+          this.setAttribute(handle, '');
+        }
+
+        this._syncSelectHandle();
+
+        this._syncAriaLabelledby();
+
+        this._syncAriaSelectedState();
+      }
       /** @private */
 
     }, {
       key: "_setHandle",
-      value: function _setHandle(handle) {
+      value: function _setHandle(handle, timeout) {
         var _this5 = this;
 
-        requestAnimationFrame(function () {
-          // Specify handle directly on the row if none found
-          if (!_this5.querySelector("[".concat(handle, "]"))) {
-            _this5.setAttribute(handle, '');
-          }
-
-          _this5._syncSelectHandle();
-
-          _this5._syncAriaLabelledby();
-
-          _this5._syncAriaSelectedState();
-        });
+        if (typeof timeout === "number") {
+          setTimeout(function () {
+            _this5._setHandleAndSync(handle);
+          }, timeout);
+        } else {
+          requestAnimationFrame(function () {
+            _this5._setHandleAndSync(handle);
+          });
+        }
       }
       /** @private */
 
