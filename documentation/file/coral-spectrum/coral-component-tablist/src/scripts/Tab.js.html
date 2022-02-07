@@ -621,14 +621,10 @@ const Tab = Decorator(class extends BaseLabellable(BaseComponent(HTMLElement)) {
   }
 
   set selected(value) {
-    let _selected = transform.booleanAttr(value);
+    value = transform.booleanAttr(value);
 
-    if(this._selected === _selected) {
-      return;
-    }
-
-    if (!_selected || _selected &amp;&amp; !this.disabled) {
-      this._selected = _selected;
+    if (!value || value &amp;&amp; !this.disabled) {
+      this._selected = value;
       this._reflectAttribute(&apos;selected&apos;, this.disabled ? false : this._selected);
 
       this.classList.toggle(&apos;is-selected&apos;, this._selected);

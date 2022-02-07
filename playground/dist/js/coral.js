@@ -81609,14 +81609,10 @@
         return this._selected || false;
       },
       set: function set(value) {
-        var _selected = transform.booleanAttr(value);
+        value = transform.booleanAttr(value);
 
-        if (this._selected === _selected) {
-          return;
-        }
-
-        if (!_selected || _selected && !this.disabled) {
-          this._selected = _selected;
+        if (!value || value && !this.disabled) {
+          this._selected = value;
 
           this._reflectAttribute('selected', this.disabled ? false : this._selected);
 
@@ -81988,8 +81984,7 @@
       value: function _setLine() {
         var _this3 = this;
 
-        !(this._setLineInQueue === true) && window.requestAnimationFrame(function () {
-          delete _this3._setLineInQueue;
+        window.requestAnimationFrame(function () {
           var selectedItem = _this3.selectedItem; // Position line under the selected item
 
           if (selectedItem) {
@@ -82024,7 +82019,6 @@
 
           _this3._previousOrientation = _this3.orientation;
         });
-        this._setLineInQueue = true;
       }
       /** @private */
 
@@ -82141,8 +82135,7 @@
         if (value === null || typeof value === 'string' || value instanceof Node) {
           this._target = value; // we do in case the target was not yet in the DOM
 
-          !(this._setTargetInQueue === true) && window.requestAnimationFrame(function () {
-            delete _this4._setTargetInQueue;
+          window.requestAnimationFrame(function () {
             var realTarget = getTarget$1(_this4._target); // we add proper accessibility if available
 
             if (realTarget) {
@@ -82182,7 +82175,6 @@
               }
             }
           });
-          this._setTargetInQueue = true;
         }
       }
       /**
@@ -82355,12 +82347,30 @@
 
 
     _createClass(_class, [{
-      key: "_onTabListChange",
+      key: "_onNewPanelStack",
 
+      /**
+       * This helps in syncing the tablist with new panelstack.
+       * This helpful when panelstack is changed for tabview dynamically. 
+       * @param {PanelStack} panels new/updated panelstack
+       */
+      value: function _onNewPanelStack(panels) {
+        var tabs = this._elements.tabList; // Bind the tablist and panel stack together, using the panel id
+
+        panels.id = panels.id || commons.getUID();
+        tabs.setAttribute('target', "#".concat(panels.id));
+
+        if (tabs.selectedItem) {
+          tabs.selectedItem.selected = true;
+        }
+      }
       /**
        Detects a change in the TabList and triggers an event.
         @private
        */
+
+    }, {
+      key: "_onTabListChange",
       value: function _onTabListChange(event) {
         this.trigger('coral-tabview:change', {
           selection: event.detail.selection,
@@ -82481,6 +82491,8 @@
             tagName: 'coral-panelstack',
             insert: function insert(panels) {
               this.appendChild(panels);
+
+              this._onNewPanelStack(panels);
             }
           });
         }
@@ -84803,7 +84815,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.12.4";
+  var version$1 = "4.12.5";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

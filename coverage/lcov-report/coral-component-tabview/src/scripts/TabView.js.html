@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.74% </span>
+                <span class="strong">96.23% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>45/47</span>
+                <span class='fraction'>51/53</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">82.35% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>25/30</span>
+                <span class='fraction'>28/34</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.12% </span>
+                <span class="strong">94.44% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>16/17</span>
+                <span class='fraction'>17/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.74% </span>
+                <span class="strong">96.23% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>45/47</span>
+                <span class='fraction'>51/53</span>
             </div>
         
             
@@ -284,7 +284,25 @@
 <a name='L226'></a><a href='#L226'>226</a>
 <a name='L227'></a><a href='#L227'>227</a>
 <a name='L228'></a><a href='#L228'>228</a>
-<a name='L229'></a><a href='#L229'>229</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L229'></a><a href='#L229'>229</a>
+<a name='L230'></a><a href='#L230'>230</a>
+<a name='L231'></a><a href='#L231'>231</a>
+<a name='L232'></a><a href='#L232'>232</a>
+<a name='L233'></a><a href='#L233'>233</a>
+<a name='L234'></a><a href='#L234'>234</a>
+<a name='L235'></a><a href='#L235'>235</a>
+<a name='L236'></a><a href='#L236'>236</a>
+<a name='L237'></a><a href='#L237'>237</a>
+<a name='L238'></a><a href='#L238'>238</a>
+<a name='L239'></a><a href='#L239'>239</a>
+<a name='L240'></a><a href='#L240'>240</a>
+<a name='L241'></a><a href='#L241'>241</a>
+<a name='L242'></a><a href='#L242'>242</a>
+<a name='L243'></a><a href='#L243'>243</a>
+<a name='L244'></a><a href='#L244'>244</a>
+<a name='L245'></a><a href='#L245'>245</a>
+<a name='L246'></a><a href='#L246'>246</a>
+<a name='L247'></a><a href='#L247'>247</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -373,6 +391,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">86x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">86x</span>
+<span class="cline-any cline-yes">86x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">86x</span>
+<span class="cline-any cline-yes">30x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -500,6 +536,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">86x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">86x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -507,8 +545,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2670x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -611,7 +647,7 @@ const TabView = Decorator(class extends BaseComponent(HTMLElement) {
   }
 &nbsp;
   set tabList(value) {
-    // Support nested coral-tablist
+    // Support nested coral-tab<span class="branch-1 cbranch-no" title="branch not covered" >list</span>
     if (value instanceof HTMLElement &amp;&amp; !value.parentNode || value.parentNode === this) {
       this._setContentZone('tabList', value, {
         handle: 'tabList',
@@ -619,13 +655,13 @@ const TabView = Decorator(class extends BaseComponent(HTMLElement) {
         insert: function (tabs) {
           tabs.setAttribute('tracking', 'off');
           this.insertBefore(tabs, this._elements.panelStack || null);
-      <span class="missing-if-branch" title="else path not taken" >E</span>  }
+        }
       });
     }
   }
 &nbsp;
-  /**<span class="missing-if-branch" title="if path not taken" >I</span>
-   The Panel<span class="cstat-no" title="statement not covered" >Stack which contains all the panel</span>s.
+  /**
+   The PanelStack which contains all the panels.
 &nbsp;
    @type {PanelStack}
    @contentzone
@@ -636,14 +672,32 @@ const TabView = Decorator(class extends BaseComponent(HTMLElement) {
 &nbsp;
   set panelStack(value) {
     // Support nested coral-panelstack
-    if (value instan<span class="fstat-no" title="function not covered" >ceof HTMLElement &amp;&amp; !value</span>.parentNode || value.parentNode === this) {
-<span class="cstat-no" title="statement not covered" >      this._setContentZone('panelStack', value, {</span>
+    if (value instanceof HTMLElement &amp;&amp; !value.parentNode || value.parentNode === this) {
+      <span class="missing-if-branch" title="else path not taken" >E</span>this._setContentZone('panelStack', value, {
         handle: 'panelStack',
         tagName: 'coral-panelstack',
         insert: function (panels) {
           this.appendChild(panels);
-        }
+          <span class="missing-if-branch" title="if path not taken" >I</span>this._onNewPanelStack(panels);
+        }<span class="cstat-no" title="statement not covered" ></span>
       });
+    }
+  }
+&nbsp;
+  /**
+   * This helps in syncing the tablist with new panelstack.
+   * This helpful when panelstack is changed for tabview dynamically. 
+   * @param {PanelStack} panels new/updated panelstack
+   */
+  _onNewPanelStack(panels) {
+    const tabs = thi<span class="fstat-no" title="function not covered" >s._elements.tabList;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+    // Bind the tablist and panel stack together, using the panel id
+    panels.id = panels.id || commons.getUID();
+    tabs.setAttribute('target', `#${panels.id}`);
+&nbsp;
+    if(tabs.selectedItem) {
+      tabs.selectedItem.selected = true;
     }
   }
 &nbsp;
@@ -747,7 +801,7 @@ export default TabView;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Feb 07 2022 07:49:23 GMT+0000 (Coordinated Universal Time)
+                at Mon Feb 07 2022 11:20:56 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
