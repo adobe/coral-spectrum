@@ -311,13 +311,13 @@ describe('Table', function () {
         var table = helpers.build(window.__html__['Table.base.html']);
         table.orderable = true;
 
-        helpers.next(() => {
+        setTimeout(() => {
           table.items.getAll().forEach(function (item) {
             expect(item.hasAttribute('coral-table-roworder')).to.be.true;
           });
 
           done();
-        });
+        }, 10);
       });
 
       it('should remove orderable mode', function () {
@@ -1170,14 +1170,13 @@ describe('Table', function () {
         table.on('coral-table:roworder', eventSpy);
         var row = table.body.rows[1];
 
-        helpers.next(() => {
+        setTimeout(() => {
           dragRowTo(row, -1);
 
           expect(eventSpy.callCount).to.equal(1);
           expect(eventSpy.args[0][0].detail.row).to.equal(row);
-
           done();
-        });
+        }, 10);
       });
 
       it('should pass the sibling row to allow reverting', function (done) {
@@ -1191,7 +1190,7 @@ describe('Table', function () {
 
         expect(getIndexOf(row)).to.equal(0);
 
-        helpers.next(() => {
+        setTimeout(() => {
           dragRowTo(row, 1);
 
           expect(eventSpy.callCount).to.equal(1);
@@ -1200,7 +1199,7 @@ describe('Table', function () {
           expect(eventSpy.args[0][0].detail.before).to.equal(row.nextElementSibling);
 
           done();
-        });
+        }, 10);
       });
     });
 
@@ -1216,9 +1215,9 @@ describe('Table', function () {
           done();
         });
 
-        helpers.next(() => {
+        setTimeout(() => {
           dragRowTo(table.body.rows[0], 1);
-        });
+        }, 10);
       });
     });
 
@@ -1425,7 +1424,7 @@ describe('Table', function () {
 
         expect(getIndexOf(row)).to.equal(1);
 
-        helpers.next(() => {
+        setTimeout(() => {
           dragRowTo(row, -1);
 
           // Wait for dragging
@@ -1437,7 +1436,7 @@ describe('Table', function () {
 
             done();
           });
-        });
+        }, 10);
       });
 
       it('should drag the row to the bottom', function (done) {
@@ -1450,7 +1449,7 @@ describe('Table', function () {
 
         expect(getIndexOf(row)).to.equal(0);
 
-        helpers.next(() => {
+        setTimeout(() => {
           dragRowTo(row, 1);
 
           // Wait for dragging
@@ -1462,7 +1461,7 @@ describe('Table', function () {
 
             done();
           });
-        });
+        }, 10);
       });
 
       it('should prevent the row from being inserted at the dragged position', function (done) {
@@ -1478,7 +1477,7 @@ describe('Table', function () {
 
         expect(getIndexOf(row)).to.equal(0);
 
-        helpers.next(() => {
+        setTimeout(() => {
           dragRowTo(row, 1);
 
           // Wait for dragging
@@ -1491,7 +1490,7 @@ describe('Table', function () {
 
             done();
           });
-        });
+        }, 0);
       });
 
       it('should not initialize dragging logic if the order handle is disabled', function () {
@@ -2275,9 +2274,9 @@ describe('Table', function () {
           done();
         });
 
-        helpers.next(() => {
+        setTimeout(() => {
           dragRowTo(table.body.rows[0], 1);
-        });
+        }, 10);
       });
 
       it('should destroy the dragaction', function () {
