@@ -2254,9 +2254,9 @@ describe('Table', function () {
                   expect(accessibilityState.textContent).to.equal(index !== 0 ? ', checked' : '');
                 });
                 done();
-              }, 275);
-            }, 75);
-          }, 75);
+              }, 280);
+            }, 80);
+          }, 80);
         });
       });
     });
