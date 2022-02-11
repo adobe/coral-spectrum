@@ -241,9 +241,13 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
     accessibilityState.id = accessibilityState.id || commons.getUID();
 
     // @a11y Wait a frame and append live region content element so that it is the last child within item.
-    if (!accessibilityState.parentNode) {
-      this.appendChild(accessibilityState);
-    }
+    // wait for next macrotask to avoid appending the accessibility state element before quickactions.
+    setTimeout(() => {
+      if (!accessibilityState.parentNode) {
+        this.appendChild(accessibilityState);
+      }
+    });
+
     this._elements.accessibilityState = accessibilityState;
 
     // @a11y Item should be labelled by accessibility state.
