@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.75% </span>
+                <span class="strong">91.92% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>89/97</span>
+                <span class='fraction'>91/99</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.44% </span>
+                <span class="strong">82.22% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>38/45</span>
+                <span class='fraction'>37/45</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.48% </span>
+                <span class="strong">90.91% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>19/21</span>
+                <span class='fraction'>20/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.75% </span>
+                <span class="strong">91.92% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>89/97</span>
+                <span class='fraction'>91/99</span>
             </div>
         
             
@@ -337,7 +337,11 @@
 <a name='L279'></a><a href='#L279'>279</a>
 <a name='L280'></a><a href='#L280'>280</a>
 <a name='L281'></a><a href='#L281'>281</a>
-<a name='L282'></a><a href='#L282'>282</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L282'></a><a href='#L282'>282</a>
+<a name='L283'></a><a href='#L283'>283</a>
+<a name='L284'></a><a href='#L284'>284</a>
+<a name='L285'></a><a href='#L285'>285</a>
+<a name='L286'></a><a href='#L286'>286</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -410,22 +414,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">222x</span>
+<span class="cline-any cline-yes">224x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">222x</span>
-<span class="cline-any cline-yes">222x</span>
-<span class="cline-any cline-yes">222x</span>
-<span class="cline-any cline-yes">222x</span>
-<span class="cline-any cline-yes">222x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">224x</span>
+<span class="cline-any cline-yes">224x</span>
+<span class="cline-any cline-yes">224x</span>
+<span class="cline-any cline-yes">224x</span>
+<span class="cline-any cline-yes">224x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">90x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">92x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -530,6 +534,8 @@
 <span class="cline-any cline-yes">406x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">406x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">406x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -541,8 +547,10 @@
 <span class="cline-any cline-yes">406x</span>
 <span class="cline-any cline-yes">406x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">406x</span>
-<span class="cline-any cline-yes">396x</span>
+<span class="cline-any cline-yes">406x</span>
+<span class="cline-any cline-yes">406x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">406x</span>
@@ -810,10 +818,10 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
 &nbsp;
   /** @ignore */
   _suspendCallback() {
-    su<span class="missing-if-branch" title="if path not taken" >I</span>per._suspendCallback();
-    this<span class="cstat-no" title="statement not covered" >._messenger.disconnect();</span>
-  }
-&nbsp;
+    super._suspendCallback();
+    this._messenger.disconnect();
+  }<span class="missing-if-branch" title="if path not taken" >I</span>
+<span class="cstat-no" title="statement not covered" ></span>
   /** @ignore */
   _resumeCallback() {
     this._messenger.connect();
@@ -826,17 +834,17 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
 &nbsp;
   /** @ignore */
   connectedCallback() {
-    this._messenger.connect();
+    this<span class="missing-if-branch" title="else path not taken" >E</span>._messenger.connect();
     super.connectedCallback();
-<span class="missing-if-branch" title="if path not taken" >I</span>
-    // Inform masonry immedia<span class="cstat-no" title="statement not covered" >tely</span>
-    this._messenger.postMessage('coral-masonry-item:_connected');
-  }<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-  /** @ignore */
-  render() {
-    super.render();
 &nbsp;
+    // Inform masonry immediately
+    this._messenger.postMessage('coral-masonry-item:_connected');
+  }
+<span class="missing-if-branch" title="if path not taken" >I</span>
+  /** @ignore */<span class="cstat-no" title="statement not covered" ></span>
+  render() {
+    supe<span class="cstat-no" title="statement not covered" >r.render();</span>
+<span class="cstat-no" title="statement not covered" ></span>
     this.classList.add(CLASSNAME);
 &nbsp;
     // @a11y
@@ -861,9 +869,13 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
     accessibilityState.id = accessibilityState.id || commons.getUID();
 &nbsp;
     // @a11y Wait a frame and append live region content element so that it is the last child within item.
-    if (!accessibilityState.parentNode) {
-      this.appendChild(accessibilityState);
-    }
+    // wait for next macrotask to avoid appending the accessibility state element before quickactions.
+    setTimeout(() =&gt; {
+      if (!accessibilityState.parentNode) {
+        this.appendChild(accessibilityState);
+      }
+    });
+&nbsp;
     this._elements.accessibilityState = accessibilityState;
 &nbsp;
     // @a11y Item should be labelled by accessibility state.
@@ -906,7 +918,7 @@ export default MasonryItem;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Feb 07 2022 11:20:56 GMT+0000 (Coordinated Universal Time)
+                at Mon Feb 14 2022 06:49:02 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

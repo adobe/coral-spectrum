@@ -62501,6 +62501,8 @@ var Coral = (function (exports) {
     }, {
       key: "render",
       value: function render() {
+        var _this4 = this;
+
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
         this.classList.add(CLASSNAME$10); // @a11y
@@ -62520,11 +62522,13 @@ var Coral = (function (exports) {
         accessibilityState.setAttribute('aria-live', 'off');
         accessibilityState.hidden = true;
         accessibilityState.id = accessibilityState.id || commons.getUID(); // @a11y Wait a frame and append live region content element so that it is the last child within item.
+        // wait for next macrotask to avoid appending the accessibility state element before quickactions.
 
-        if (!accessibilityState.parentNode) {
-          this.appendChild(accessibilityState);
-        }
-
+        setTimeout(function () {
+          if (!accessibilityState.parentNode) {
+            _this4.appendChild(accessibilityState);
+          }
+        });
         this._elements.accessibilityState = accessibilityState; // @a11y Item should be labelled by accessibility state.
 
         if (isMacLike) {
@@ -84815,7 +84819,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.12.5";
+  var version$1 = "4.12.6";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
