@@ -1,3 +1,10 @@
+## [4.12.7](https://github.com/adobe/coral-spectrum/compare/v4.12.6...v4.12.7) (2022-02-14)
+
+
+### Bug Fixes
+
+* **GRANITE-38030:** Using private browser window would intermittently not show the pop up context menu ([#202](https://github.com/adobe/coral-spectrum/issues/202)) ([d648031](https://github.com/adobe/coral-spectrum/commit/d648031aa02c01754d7f0f79a54326ec3f9c0029))
+
 ## [4.12.6](https://github.com/adobe/coral-spectrum/compare/v4.12.5...v4.12.6) (2022-02-07)
 
 
