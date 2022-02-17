@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.5% </span>
+                <span class="strong">94.67% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>212/222</span>
+                <span class='fraction'>213/225</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.39% </span>
+                <span class="strong">85.91% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>127/147</span>
+                <span class='fraction'>128/149</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.34% </span>
+                <span class="strong">92.59% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>50/53</span>
+                <span class='fraction'>50/54</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.5% </span>
+                <span class="strong">94.67% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>212/222</span>
+                <span class='fraction'>213/225</span>
             </div>
         
             
@@ -858,7 +858,15 @@
 <a name='L800'></a><a href='#L800'>800</a>
 <a name='L801'></a><a href='#L801'>801</a>
 <a name='L802'></a><a href='#L802'>802</a>
-<a name='L803'></a><a href='#L803'>803</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L803'></a><a href='#L803'>803</a>
+<a name='L804'></a><a href='#L804'>804</a>
+<a name='L805'></a><a href='#L805'>805</a>
+<a name='L806'></a><a href='#L806'>806</a>
+<a name='L807'></a><a href='#L807'>807</a>
+<a name='L808'></a><a href='#L808'>808</a>
+<a name='L809'></a><a href='#L809'>809</a>
+<a name='L810'></a><a href='#L810'>810</a>
+<a name='L811'></a><a href='#L811'>811</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1262,6 +1270,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">42x</span>
+<span class="cline-any cline-yes">42x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2063,13 +2079,13 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
           this._handleFocus();
           this._elements.closeButton.tabIndex = 0;
           this._elements.closeButton.removeAttribute('coral-tabcapture');
-        });
+        });<span class="missing-if-branch" title="else path not taken" >E</span>
       } else {
         this._elements.closeButton.tabIndex = -1;
         this._elements.closeButton.setAttribute('coral-tabcapture', '');
       }
-    });
-  }
+    });<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+  }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
   /**
    The dialog's icon.
@@ -2109,19 +2125,19 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
   /**
    Whether the dialog can moved around by dragging the title.
 &nbsp;
-   @type {Boolean}<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+   @type {Boolean}
    @default false
    @htmlattribute movable
    @htmlattributereflected
-   */<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+   */
   get movable() {
     return this._movable || false;
   }
-&nbsp;
+<span class="branch-1 cbranch-no" title="branch not covered" ></span>
   set movable(value) {
     this._movable = transform.booleanAttr(value);
     this._reflectAttribute('movable', this._movable);
-&nbsp;
+<span class="branch-2 cbranch-no" title="branch not covered" ></span>
     // Movable and fullscreen are not compatible
     if (this._movable) {
       this.fullscreen = false;
@@ -2163,7 +2179,7 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
         this._headerObserver.observe(this._elements.header, {
           // Catch changes to childList
           childList: true,
-          // Catch changes to textContent<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+          // Catch changes to textContent
           characterData: true,
           // Monitor any child node
           subtree: true
@@ -2171,7 +2187,7 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       }
     }
   }
-&nbsp;
+<span class="branch-2 cbranch-no" title="branch not covered" ></span>
   /**
    Hide the header wrapper if the header content zone is empty.
    @ignore
@@ -2203,7 +2219,7 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
     // When escape is pressed, hide ourselves
     if (this.interaction === interaction.ON &amp;&amp; this.open &amp;&amp; this._isTopOverlay()) {
       event.stopPropagation();
-      this.open = false;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+      this.open = false;
     }
   }
 &nbsp;
@@ -2211,7 +2227,7 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
    @ignore
    @todo maybe this should be base or something
    */
-  _handleCloseClick(event) {
+  _handleCloseClick(event) {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
     const dismissTarget = event.matchedTarget;
     const dismissValue = dismissTarget.getAttribute('coral-close');
     if (!dismissValue || this.matches(dismissValue)) {
@@ -2230,7 +2246,7 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       this._trackEvent('close', 'coral-dialog', event);
     }
   }
-<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+&nbsp;
   /** @ignore */
   _moveToDocumentBody() {
     // Not in the DOM
@@ -2238,7 +2254,7 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       document.body.appendChild(this);
     }
     // In the DOM but not a direct child of body
-    else if (this.parentNode !== document.body) {
+    else if (this.parentNode !== document.body) {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
       this._ignoreConnectedCallback = true;
       this._repositioned = true;
       document.body.appendChild(this);
@@ -2273,20 +2289,20 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       this.open = false;
     }
   }
-<span class="missing-if-branch" title="else path not taken" >E</span>
+&nbsp;
   /**
    Centers the dialog in the middle of the screen.
 &nbsp;
-   @returns {<span class="missing-if-branch" title="if path not taken" >I</span>Dialog} this, chainable.
-   */<span class="cstat-no" title="statement not covered" ></span>
+   @returns {Dialog} this, chainable.
+   */
   center() {
     // We're already centered in fullscreen mode
-    if (this.fullscreen) {
+    if (this.<span class="missing-if-branch" title="else path not taken" >E</span>fullscreen) {
       return;
     }
 &nbsp;
-    // If moved we reset the position
-    this.style.top = '';
+    // If mov<span class="missing-if-branch" title="if path not taken" >I</span>ed we reset the position
+    this<span class="cstat-no" title="statement not covered" >.style.top = '';</span>
     this.style.left = '';
 &nbsp;
     return this;
@@ -2363,36 +2379,36 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       this.backdrop = backdrop.MODAL;
     }
     if (!this._closable) {
-      this.closabl<span class="fstat-no" title="function not covered" >e = </span>closable.OFF;
-    }<span class="cstat-no" title="statement not covered" ></span>
+      this.closable = closable.OFF;
+    }
     if (!this._interaction) {
-      this.interac<span class="fstat-no" title="function not covered" >tion</span> = interaction.ON;
-    }<span class="cstat-no" title="statement not covered" ></span>
+      this.interaction = interaction.ON;
+    }
 &nbsp;
     // Fetch the content zones
     const header = this._elements.header;
-    const content = this._elements.content;
-    const footer = this._elements.footer;
+    const content <span class="fstat-no" title="function not covered" >= th</span>is._elements.content;
+    co<span class="cstat-no" title="statement not covered" >nst footer = this._elements.</span>footer;
 &nbsp;
-    // Verify if a content zone is provided
-    const contentZoneProvided = this.contains(content) &amp;&amp; content || this.contains(footer) &amp;&amp; footer || this.contains(header) &amp;&amp; header;
+    // Verify if a<span class="fstat-no" title="function not covered" > con</span>tent zone is provided
+    co<span class="cstat-no" title="statement not covered" >nst contentZoneProvided = thi</span>s.contains(content) &amp;&amp; content || this.contains(footer) &amp;&amp; footer || this.contains(header) &amp;&amp; header;
 &nbsp;
     // Verify if the internal wrapper exists
     let wrapper = this.querySelector(`.${CLASSNAME}`);
 &nbsp;
-    // Case where the dialog wa<span class="branch-1 cbranch-no" title="branch not covered" >s rendered al</span>ready - cloneNode support
+    // Case where the dialog was rendered already - cloneNode support
     if (wrapper) {
       // Remove tab captures
       Array.prototype.filter.call(this.children, (child) =&gt; child.hasAttribute('coral-tabcapture')).forEach((tabCapture) =&gt; {
-        this.removeChild(tabCapture);<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+        this.removeChild(tabCapture);
       });
 &nbsp;
       // Assign internal elements
-      this._elements.headerWrapper = this.querySelector('._coral-Dialog-header');
+      this._elements.headerWrap<span class="branch-1 cbranch-no" title="branch not covered" >per = this.qu</span>erySelector('._coral-Dialog-header');
       this._elements.closeButton = this.querySelector('._coral-Dialog-closeButton');
 &nbsp;
       this._elements.wrapper = wrapper;
-    }
+    }<span class="branch-2 cbranch-no" title="branch not covered" ></span>
     // Case where the dialog needs to be rendered
     else {
       // Create default wrapper
@@ -2418,7 +2434,15 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
         }
 &nbsp;
         // Add the dialog header before the content
-        this._elements.wrapper.insertBefore(headerWrapper, content);
+        if(this._elements.wrapper.contains(content)) {
+          this._elements.wrapper.insertBefore(headerWrapper, content);
+        } else {
+          // try adding in next frame
+          // so that content is a child of dialog wrapper
+          commons.nextFrame(() =&gt; {
+            this._elements.wrapper.insertBefore(headerWrapper, content);
+          });
+        }
       }
       // Case where the dialog needs to be rendered and content zones need to be created
       else {
@@ -2469,7 +2493,7 @@ export default Dialog;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Feb 14 2022 06:49:02 GMT+0000 (Coordinated Universal Time)
+                at Thu Feb 17 2022 07:36:21 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

@@ -26114,7 +26114,15 @@ var Coral = (function (exports) {
               } // Add the dialog header before the content
 
 
-              this._elements.wrapper.insertBefore(headerWrapper, content);
+              if (this._elements.wrapper.contains(content)) {
+                this._elements.wrapper.insertBefore(headerWrapper, content);
+              } else {
+                // try adding in next frame
+                // so that content is a child of dialog wrapper
+                commons.nextFrame(function () {
+                  _this2._elements.wrapper.insertBefore(headerWrapper, content);
+                });
+              }
             } // Case where the dialog needs to be rendered and content zones need to be created
             else {
                 // Default content zone target is wrapper
@@ -84819,7 +84827,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.12.6";
+  var version$1 = "4.12.7";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
