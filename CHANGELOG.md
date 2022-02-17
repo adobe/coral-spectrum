@@ -1,3 +1,10 @@
+## [4.12.8](https://github.com/adobe/coral-spectrum/compare/v4.12.7...v4.12.8) (2022-02-17)
+
+
+### Bug Fixes
+
+* **CUI-7460:** Intermittently rendering dialog resullt in error ([#205](https://github.com/adobe/coral-spectrum/issues/205)) ([f8c9903](https://github.com/adobe/coral-spectrum/commit/f8c9903971cbc7b2cae00b88cb8a3e1adcbc17de))
+
 ## [4.12.7](https://github.com/adobe/coral-spectrum/compare/v4.12.6...v4.12.7) (2022-02-14)
 
 
