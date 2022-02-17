@@ -756,7 +756,14 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
         }
 
         // Add the dialog header before the content
-        this._elements.wrapper.insertBefore(headerWrapper, content);
+        if(this._elements.wrapper.contains(content)) {
+          this._elements.wrapper.insertBefore(headerWrapper, content);
+        } else {
+          // try adding in next frame in case content is not the child of wrapper
+          commons.nextFrame(() => {
+            this._elements.wrapper.insertBefore(headerWrapper, content);
+          });
+        }
       }
       // Case where the dialog needs to be rendered and content zones need to be created
       else {
