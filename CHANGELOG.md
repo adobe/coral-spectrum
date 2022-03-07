@@ -1,3 +1,10 @@
+## [4.12.9](https://github.com/adobe/coral-spectrum/compare/v4.12.8...v4.12.9) (2022-03-07)
+
+
+### Bug Fixes
+
+* **CQ-4341758:** intermittently columnview does not allow selection ([#207](https://github.com/adobe/coral-spectrum/issues/207)) ([e205367](https://github.com/adobe/coral-spectrum/commit/e205367293c2c4f380479a7c9ad679dd81b38868))
+
 ## [4.12.8](https://github.com/adobe/coral-spectrum/compare/v4.12.7...v4.12.8) (2022-02-17)
 
 
