@@ -53783,7 +53783,7 @@ var Coral = (function (exports) {
           scrollCallback();
         }
       } else {
-        scrollTo(element, to, duration - 10);
+        scrollTo(element, to, duration - 10, scrollCallback);
       }
     }, 10);
   };
@@ -84827,7 +84827,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.12.7";
+  var version$1 = "4.12.8";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
