@@ -38,7 +38,7 @@ const scrollTo = (element, to, duration, scrollCallback) => {
         scrollCallback();
       }
     } else {
-      scrollTo(element, to, duration - 10);
+      scrollTo(element, to, duration - 10, scrollCallback);
     }
   }, 10);
 };
