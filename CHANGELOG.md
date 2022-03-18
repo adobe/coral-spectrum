@@ -1,3 +1,10 @@
+## [4.12.10](https://github.com/adobe/coral-spectrum/compare/v4.12.9...v4.12.10) (2022-03-18)
+
+
+### Bug Fixes
+
+* **SITES-5286:** Adding missing Algorithm icon ([#208](https://github.com/adobe/coral-spectrum/issues/208)) ([2c7ab85](https://github.com/adobe/coral-spectrum/commit/2c7ab854c0eda7230aebe1897e56cce9362eaa8c))
+
 ## [4.12.9](https://github.com/adobe/coral-spectrum/compare/v4.12.8...v4.12.9) (2022-03-07)
 
 
