@@ -905,7 +905,8 @@ describe('Table', function () {
         // Wait for MO
         helpers.next(function () {
           // One event for the added row and one for the added body
-          expect(eventSpy.callCount).to.equal(1);
+          // change will trigger twice one for body mutation and second for row mutation.
+          expect(eventSpy.callCount).to.equal(2);
           expect(eventSpy.args[0][0].detail.oldSelection).to.deep.equal([]);
           expect(eventSpy.args[0][0].detail.selection).to.deep.equal(table.selectedItems);
           done();
