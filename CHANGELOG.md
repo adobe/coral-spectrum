@@ -1,3 +1,10 @@
+## [4.12.11](https://github.com/adobe/coral-spectrum/compare/v4.12.10...v4.12.11) (2022-03-29)
+
+
+### Bug Fixes
+
+* **GRANITE-36119:** Asset selection checkbox doesn't appear for all the assets in list view ([#209](https://github.com/adobe/coral-spectrum/issues/209)) ([fa723c5](https://github.com/adobe/coral-spectrum/commit/fa723c5aa391e06b91789eb0c4d6d9ef3e14c190))
+
 ## [4.12.10](https://github.com/adobe/coral-spectrum/compare/v4.12.9...v4.12.10) (2022-03-18)
 
 
