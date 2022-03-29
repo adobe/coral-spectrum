@@ -2472,6 +2472,21 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
   /**  @private */
   _handleMutations(mutations) {
     mutations.forEach((mutation) => {
+      // Sync added nodes
+      for (let k = 0 ; k < mutation.addedNodes.length ; k++) {
+        const addedNode = mutation.addedNodes[k];
+
+        if (isTableBody(addedNode)) {
+          this._onBodyContentChanged({
+            target: addedNode,
+            detail: {
+              addedNodes: getRows([addedNode]),
+              removedNodes: []
+            }
+          });
+        }
+      }
+
       // Sync removed nodes
       for (let k = 0 ; k < mutation.removedNodes.length ; k++) {
         const removedNode = mutation.removedNodes[k];
@@ -2653,7 +2668,7 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
     this._allowSorting = true;
     const column = this._isSorted();
     if (column) {
-      column._doSort(true);
+      column._doSort && column._doSort(true);
     }
 
     // @compat
