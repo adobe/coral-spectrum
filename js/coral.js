@@ -80452,9 +80452,24 @@ var Coral = (function (exports) {
         var _this8 = this;
 
         mutations.forEach(function (mutation) {
-          // Sync removed nodes
-          for (var k = 0; k < mutation.removedNodes.length; k++) {
-            var removedNode = mutation.removedNodes[k];
+          // Sync added nodes
+          for (var k = 0; k < mutation.addedNodes.length; k++) {
+            var addedNode = mutation.addedNodes[k];
+
+            if (isTableBody(addedNode)) {
+              _this8._onBodyContentChanged({
+                target: addedNode,
+                detail: {
+                  addedNodes: getRows([addedNode]),
+                  removedNodes: []
+                }
+              });
+            }
+          } // Sync removed nodes
+
+
+          for (var _k = 0; _k < mutation.removedNodes.length; _k++) {
+            var removedNode = mutation.removedNodes[_k];
 
             if (isTableBody(removedNode)) {
               // Always make sure there's a body content zone
@@ -80604,7 +80619,7 @@ var Coral = (function (exports) {
         var column = this._isSorted();
 
         if (column) {
-          column._doSort(true);
+          column._doSort && column._doSort(true);
         } // @compat
 
 
@@ -84827,7 +84842,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.12.9";
+  var version$1 = "4.12.10";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
