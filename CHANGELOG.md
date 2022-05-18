@@ -1,3 +1,10 @@
+# [4.13.0](https://github.com/adobe/coral-spectrum/compare/v4.12.11...v4.13.0) (2022-05-18)
+
+
+### Features
+
+* **icons:** add MicrosoftPowerAutomate and MicrosoftDataverse icons ([#213](https://github.com/adobe/coral-spectrum/issues/213)) ([98b4d09](https://github.com/adobe/coral-spectrum/commit/98b4d0933dbedaaec6ca8287824c39d661259aae))
+
 ## [4.12.11](https://github.com/adobe/coral-spectrum/compare/v4.12.10...v4.12.11) (2022-03-29)
 
 
