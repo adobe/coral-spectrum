@@ -1,3 +1,10 @@
+# [4.14.0](https://github.com/adobe/coral-spectrum/compare/v4.13.0...v4.14.0) (2022-06-03)
+
+
+### Features
+
+* **icons:** Add Microsoft Office Apps icons ([#217](https://github.com/adobe/coral-spectrum/issues/217)) ([4485dec](https://github.com/adobe/coral-spectrum/commit/4485dec33b85f9c3df9f5fcf572bd36c757e2c22))
+
 # [4.13.0](https://github.com/adobe/coral-spectrum/compare/v4.12.11...v4.13.0) (2022-05-18)
 
 
