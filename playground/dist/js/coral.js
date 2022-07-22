@@ -34759,6 +34759,7 @@
     el0.setAttribute("coral-actionbar-more", "");
     el0.setAttribute("aria-expanded", "false");
     el0.setAttribute("aria-haspopup", "true");
+    el0.setAttribute("aria-label", data_0["i18n"]["get"]('More'));
     var el1 = document.createTextNode("\n  ");
     el0.appendChild(el1);
     var el2 = this["moreButtonLabel"] = document.createElement("coral-button-label");
@@ -35027,7 +35028,9 @@
 
         _this._elements = {};
         _this._itemsInPopover = [];
-        template$e.call(_this._elements);
+        template$e.call(_this._elements, {
+          i18n: i18n
+        });
         template$d.call(_this._elements, {
           commons: commons
         });
@@ -84842,7 +84845,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.13.0";
+  var version$1 = "4.14.0";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
