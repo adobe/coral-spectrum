@@ -50,7 +50,7 @@ const BaseActionBarContainer = (superClass) => class extends superClass {
     // Templates
     this._elements = {};
     this._itemsInPopover = [];
-    moreButton.call(this._elements);
+    moreButton.call(this._elements, {i18n});
     moreOverlay.call(this._elements, {commons});
     overlayContent.call(this._elements, {
       items: this._itemsInPopover,
