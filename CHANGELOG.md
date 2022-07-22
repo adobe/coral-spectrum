@@ -1,3 +1,10 @@
+## [4.14.1](https://github.com/adobe/coral-spectrum/compare/v4.14.0...v4.14.1) (2022-07-22)
+
+
+### Bug Fixes
+
+* **ASSETS-6913:** Add aria-label to more button element([#221](https://github.com/adobe/coral-spectrum/issues/221)) ([6a3bdcd](https://github.com/adobe/coral-spectrum/commit/6a3bdcd774638099ada1d4f2b1e33abb3c4829f5))
+
 # [4.14.0](https://github.com/adobe/coral-spectrum/compare/v4.13.0...v4.14.0) (2022-06-03)
 
 
