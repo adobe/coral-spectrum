@@ -48710,8 +48710,6 @@ var Coral = (function (exports) {
           this.classList.remove('_coral-ColorInput--swatch');
 
           this._elements.input.removeAttribute('tabindex');
-
-          this._elements.colorPreview.setAttribute('tabindex', -1);
         }
 
         this._syncColorPreviewIcon();
@@ -84845,7 +84843,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.14.0";
+  var version$1 = "4.14.1";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
