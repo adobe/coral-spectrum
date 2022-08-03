@@ -1,3 +1,10 @@
+## [4.14.2](https://github.com/adobe/coral-spectrum/compare/v4.14.1...v4.14.2) (2022-08-03)
+
+
+### Bug Fixes
+
+* **CQ-4273833:** Removed the tabindex=-1 from the color picker button ([#224](https://github.com/adobe/coral-spectrum/issues/224)) ([448a0da](https://github.com/adobe/coral-spectrum/commit/448a0dab240ac12ae9361258afa933040b07e7e3))
+
 ## [4.14.1](https://github.com/adobe/coral-spectrum/compare/v4.14.0...v4.14.1) (2022-07-22)
 
 
