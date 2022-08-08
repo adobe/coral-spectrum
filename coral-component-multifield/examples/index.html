@@ -134,6 +134,17 @@
         </coral-multifield>
       </div>
 
+      <h2 class="coral--Heading--S">With label element</h2>
+      <div class="markup">
+        <label id="labelElement" style="display:block;padding: 4px 0 5px;">Label Coral Multifield</label>
+        <coral-multifield aria-label="With label element">
+          <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+          <template coral-multifield-template>
+            <input is="coral-textfield" aria-label="input" type="text"/>
+          </template>
+        </coral-multifield>
+      </div>
+
     </main>
   </body>
 </html>

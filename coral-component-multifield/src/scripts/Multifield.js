@@ -583,11 +583,14 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
 
   /**
    * update aria-posinset and aria-setsize for each item in the collection
+   * add corresponding aria-labelledby to the inside input element 
    * @private
    */
-  _updatePosInSet() {
+   _updatePosInSet() {
     const items = this.items.getAll();
     const setsize = items.length;
+    // get the label element 
+    const labelElement = this.parentNode.querySelector('label');
     items.forEach((item, i) => {
       item.setAttribute('aria-posinset', i + 1);
       item.setAttribute('aria-setsize', setsize);
@@ -596,6 +599,12 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
       // add aria-labelledby so that the item is labelled by its content and itself.
       if (!item.querySelector('coral-multifield')) {
         item.setAttribute('aria-labelledby', `${item.id}-content ${item.id}`);
+      }
+      // add aria-labelledby to the input element
+      const inputElement = item.querySelector('input');
+      if (inputElement) {
+        const inputAriaLabelledBy = labelElement && labelElement.id ? `${labelElement.id} ${item.id}` : item.id;
+        inputElement.setAttribute('aria-labelledby', inputAriaLabelledBy);
       }
     });
   }
