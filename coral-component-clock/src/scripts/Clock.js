@@ -233,6 +233,32 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
 
     this._elements.hours.invalid = this._invalid;
     this._elements.minutes.invalid = this._invalid;
+
+    const createErrorMessage = () => {
+      const errorLabel = document.createElement("label");
+      const errorText = document.createTextNode("Please enter a valid time");
+      errorLabel.appendChild(errorText);
+      errorLabel.setAttribute("aria-errormessage", this.id);
+      errorLabel.setAttribute("id", "clock-error-label");
+      errorLabel.classList.add("coral-Form-errorlabel");
+      errorLabel.style.display = "table-row";
+      this.parentNode.appendChild(errorLabel);
+    };
+
+    const errorMessage = document.getElementById("clock-error-label");
+
+    const removeErrorMessage = () => {
+      errorMessage.remove();
+    };
+
+    if (this._elements.hours.invalid || this._elements.minutes.invalid) {
+      if (!errorMessage) {
+        createErrorMessage();
+      }
+    } else {
+      if (errorMessage) {
+        removeErrorMessage();}
+    }
   }
 
   /**
