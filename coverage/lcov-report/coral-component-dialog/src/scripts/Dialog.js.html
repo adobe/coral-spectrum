@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.67% </span>
+                <span class="strong">94.69% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>213/225</span>
+                <span class='fraction'>214/226</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.67% </span>
+                <span class="strong">94.69% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>213/225</span>
+                <span class='fraction'>214/226</span>
             </div>
         
             
@@ -866,7 +866,8 @@
 <a name='L808'></a><a href='#L808'>808</a>
 <a name='L809'></a><a href='#L809'>809</a>
 <a name='L810'></a><a href='#L810'>810</a>
-<a name='L811'></a><a href='#L811'>811</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L811'></a><a href='#L811'>811</a>
+<a name='L812'></a><a href='#L812'>812</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1208,6 +1209,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">166x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">166x</span>
 <span class="cline-any cline-yes">166x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">166x</span>
@@ -2032,8 +2034,8 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
    */
   get fullscreen() {
     return this._fullscreen || false;
-  }<span class="missing-if-branch" title="else path not taken" >E</span>
-&nbsp;
+  }
+<span class="missing-if-branch" title="else path not taken" >E</span>
   set fullscreen(value) {
     this._fullscreen = transform.booleanAttr(value);
     this._reflectAttribute('fullscreen', this._fullscreen);
@@ -2041,8 +2043,8 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
     if (this._fullscreen) {
       // Full screen and movable are not compatible
       this.movable = false;
-      this._elements.wrapper.classList.add(FULLSCREEN_CLASSNAME);<span class="branch-5 cbranch-no" title="branch not covered" ><span class="branch-3 cbranch-no" title="branch not covered" ></span></span>
-    } else {
+      this._elements.wrapper.classList.add(FULLSCREEN_CLASSNAME);
+    } else {<span class="branch-5 cbranch-no" title="branch not covered" ><span class="branch-3 cbranch-no" title="branch not covered" ></span></span>
       this._elements.wrapper.classList.remove(FULLSCREEN_CLASSNAME);
     }
   }
@@ -2079,14 +2081,14 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
           this._handleFocus();
           this._elements.closeButton.tabIndex = 0;
           this._elements.closeButton.removeAttribute('coral-tabcapture');
-        });<span class="missing-if-branch" title="else path not taken" >E</span>
-      } else {
+        });
+      } else<span class="missing-if-branch" title="else path not taken" >E</span> {
         this._elements.closeButton.tabIndex = -1;
         this._elements.closeButton.setAttribute('coral-tabcapture', '');
       }
-    });<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
+    });
+  }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" ></span>
   /**
    The dialog's icon.
 &nbsp;
@@ -2133,12 +2135,12 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
   get movable() {
     return this._movable || false;
   }
-<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-  set movable(value) {
+&nbsp;
+  set movable(value) {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
     this._movable = transform.booleanAttr(value);
     this._reflectAttribute('movable', this._movable);
-<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-    // Movable and fullscreen are not compatible
+&nbsp;
+    // Movable and fullscreen are not compatible<span class="branch-2 cbranch-no" title="branch not covered" ></span>
     if (this._movable) {
       this.fullscreen = false;
     }
@@ -2187,8 +2189,8 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       }
     }
   }
-<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-  /**
+&nbsp;
+  /**<span class="branch-2 cbranch-no" title="branch not covered" ></span>
    Hide the header wrapper if the header content zone is empty.
    @ignore
    */
@@ -2227,8 +2229,8 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
    @ignore
    @todo maybe this should be base or something
    */
-  _handleCloseClick(event) {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-    const dismissTarget = event.matchedTarget;
+  _handleCloseClick(event) {
+    const dismissTarget = event.matchedTarget;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
     const dismissValue = dismissTarget.getAttribute('coral-close');
     if (!dismissValue || this.matches(dismissValue)) {
       this.open = false;
@@ -2254,8 +2256,8 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       document.body.appendChild(this);
     }
     // In the DOM but not a direct child of body
-    else if (this.parentNode !== document.body) {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-      this._ignoreConnectedCallback = true;
+    else if (this.parentNode !== document.body) {
+      this._ignoreConnectedCallback = true;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
       this._repositioned = true;
       document.body.appendChild(this);
       this._ignoreConnectedCallback = false;
@@ -2297,13 +2299,13 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
    */
   center() {
     // We're already centered in fullscreen mode
-    if (this.<span class="missing-if-branch" title="else path not taken" >E</span>fullscreen) {
-      return;
+    if (this.fullscreen) {
+      return;<span class="missing-if-branch" title="else path not taken" >E</span>
     }
 &nbsp;
-    // If mov<span class="missing-if-branch" title="if path not taken" >I</span>ed we reset the position
-    this<span class="cstat-no" title="statement not covered" >.style.top = '';</span>
-    this.style.left = '';
+    // If moved we reset the position
+    this.styl<span class="missing-if-branch" title="if path not taken" >I</span>e.top = '';
+    this<span class="cstat-no" title="statement not covered" >.style.left = '';</span>
 &nbsp;
     return this;
   }
@@ -2370,6 +2372,7 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
     super.render();
 &nbsp;
     this.classList.add(`${CLASSNAME}-wrapper`);
+    this.setAttribute("aria-modal", "dialog");
 &nbsp;
     // Default reflected attributes
     if (!this._variant) {
@@ -2493,7 +2496,7 @@ export default Dialog;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Aug 03 2022 09:09:18 GMT+0000 (Coordinated Universal Time)
+                at Mon Aug 15 2022 23:32:05 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

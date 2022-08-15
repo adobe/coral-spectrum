@@ -26053,7 +26053,8 @@ var Coral = (function (exports) {
 
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
-        this.classList.add("".concat(CLASSNAME$j, "-wrapper")); // Default reflected attributes
+        this.classList.add("".concat(CLASSNAME$j, "-wrapper"));
+        this.setAttribute("aria-modal", "dialog"); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$4.DEFAULT;
@@ -84843,7 +84844,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.14.1";
+  var version$1 = "4.14.2";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
