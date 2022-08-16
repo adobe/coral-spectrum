@@ -625,6 +625,9 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       tagName: &apos;coral-dialog-header&apos;,
       insert: function (header) {
         header.classList.add(`${CLASSNAME}-title`);
+        // Providing the ARIA attributes to coral dialog header
+        header.setAttribute(&apos;role&apos;, &apos;heading&apos;);
+        header.setAttribute(&apos;aria-level&apos;, &apos;2&apos;);
         // Position the header between the drag zone and the type icon
         this._elements.headerWrapper.insertBefore(header, this._elements.dragZone.nextElementSibling);
       },

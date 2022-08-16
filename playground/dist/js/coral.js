@@ -26191,7 +26191,10 @@
           handle: 'header',
           tagName: 'coral-dialog-header',
           insert: function insert(header) {
-            header.classList.add("".concat(CLASSNAME$j, "-title")); // Position the header between the drag zone and the type icon
+            header.classList.add("".concat(CLASSNAME$j, "-title")); // Providing the ARIA attributes to coral dialog header
+
+            header.setAttribute('role', 'heading');
+            header.setAttribute('aria-level', '2'); // Position the header between the drag zone and the type icon
 
             this._elements.headerWrapper.insertBefore(header, this._elements.dragZone.nextElementSibling);
           },
@@ -84844,7 +84847,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.14.2";
+  var version$1 = "4.14.3";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

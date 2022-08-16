@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.69% </span>
+                <span class="strong">94.74% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>214/226</span>
+                <span class='fraction'>216/228</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.69% </span>
+                <span class="strong">94.74% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>214/226</span>
+                <span class='fraction'>216/228</span>
             </div>
         
             
@@ -867,7 +867,10 @@
 <a name='L809'></a><a href='#L809'>809</a>
 <a name='L810'></a><a href='#L810'>810</a>
 <a name='L811'></a><a href='#L811'>811</a>
-<a name='L812'></a><a href='#L812'>812</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L812'></a><a href='#L812'>812</a>
+<a name='L813'></a><a href='#L813'>813</a>
+<a name='L814'></a><a href='#L814'>814</a>
+<a name='L815'></a><a href='#L815'>815</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1347,6 +1350,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">166x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">166x</span>
 <span class="cline-any cline-yes">166x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">166x</span>
@@ -1869,6 +1875,9 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       tagName: 'coral-dialog-header',
       insert: function (header) {
         header.classList.add(`${CLASSNAME}-title`);
+        // Providing the ARIA attributes to coral dialog header
+        header.setAttribute('role', 'heading');
+        header.setAttribute('aria-level', '2');
         // Position the header between the drag zone and the type icon
         this._elements.headerWrapper.insertBefore(header, this._elements.dragZone.nextElementSibling);
       },
@@ -1948,17 +1957,17 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
     // We're visible now, so hide or show the modal accordingly
     if (this.open &amp;&amp; showBackdrop) {
       this._showBackdrop();
-    }
+    }<span class="missing-if-branch" title="else path not taken" >E</span>
   }
 &nbsp;
-  /**<span class="missing-if-branch" title="else path not taken" >E</span>
-   The dialog's variant. See {@link DialogVariantEnum}.
-&nbsp;
-   @type {S<span class="cstat-no" title="statement not covered" >tring}</span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
+   The dia<span class="cstat-no" title="statement not covered" >log's variant. See {@link DialogVarian</span>tEnum}.
+<span class="cstat-no" title="statement not covered" ></span>
+   @type {<span class="cstat-no" title="statement not covered" >String}</span>
    @defaul<span class="cstat-no" title="statement not covered" >t DialogVariantEnum.DEFAULT</span>
-   @htmlat<span class="cstat-no" title="statement not covered" >tribute variant</span>
-   @htmlat<span class="cstat-no" title="statement not covered" >tributereflected</span>
-   */<span class="cstat-no" title="statement not covered" ></span>
+   @htmlattribute variant
+   @htmlattributereflected
+   */
   get variant() {
     return this._variant || variant.DEFAULT;
   }
@@ -1984,13 +1993,13 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       // ARIA
       this.setAttribute('role', 'alertdialog');
     }
-&nbsp;
+<span class="fstat-no" title="function not covered" ></span>
     const hasHeader = this.header &amp;&amp; this.header.textContent !== '';
-&nbsp;
-    // If the dialog<span class="fstat-no" title="function not covered" > has a header and is not</span> otherwise labelled,
-    if (hasHeader &amp;&amp; !(this.hasAttribute('aria-labelledby') || this.hasAttribute('aria-label'))) {
-<span class="cstat-no" title="statement not covered" >      this.header.id = this.header.id || commons.getUID();</span>
 <span class="cstat-no" title="statement not covered" ></span>
+    // I<span class="cstat-no" title="statement not covered" >f the dialog has a </span>header and is not otherwise labelled,
+    if (hasHeader &amp;&amp; !(this.hasAttribute('aria-labelledby') || this.hasAttribute('aria-label'))) {
+      this.header.id = this.header.id || commons.getUID();
+&nbsp;
       // label the dialog with a reference to the header
       this.setAttribute('aria-labelledby', this.header.id);
     }
@@ -2032,19 +2041,19 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
    @htmlattribute fullscreen
    @htmlattributereflected
    */
-  get fullscreen() {
+  get <span class="missing-if-branch" title="else path not taken" >E</span>fullscreen() {
     return this._fullscreen || false;
   }
-<span class="missing-if-branch" title="else path not taken" >E</span>
+&nbsp;
   set fullscreen(value) {
     this._fullscreen = transform.booleanAttr(value);
     this._reflectAttribute('fullscreen', this._fullscreen);
 &nbsp;
     if (this._fullscreen) {
-      // Full screen and movable are not compatible
+      // Full screen and movable are not compatible<span class="branch-5 cbranch-no" title="branch not covered" ><span class="branch-3 cbranch-no" title="branch not covered" ></span></span>
       this.movable = false;
       this._elements.wrapper.classList.add(FULLSCREEN_CLASSNAME);
-    } else {<span class="branch-5 cbranch-no" title="branch not covered" ><span class="branch-3 cbranch-no" title="branch not covered" ></span></span>
+    } else {
       this._elements.wrapper.classList.remove(FULLSCREEN_CLASSNAME);
     }
   }
@@ -2079,16 +2088,16 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       if (this.open) {
         commons.transitionEnd(this._elements.wrapper, () =&gt; {
           this._handleFocus();
-          this._elements.closeButton.tabIndex = 0;
+          th<span class="missing-if-branch" title="else path not taken" >E</span>is._elements.closeButton.tabIndex = 0;
           this._elements.closeButton.removeAttribute('coral-tabcapture');
         });
-      } else<span class="missing-if-branch" title="else path not taken" >E</span> {
+      } else {
         this._elements.closeButton.tabIndex = -1;
-        this._elements.closeButton.setAttribute('coral-tabcapture', '');
-      }
+        this._<span class="cstat-no" title="statement not covered" >elements.closeButt<span class="fstat-no" title="function not covered" >on</span>.setAttribute('coral-tabcapture', '');</span>
+      }<span class="cstat-no" title="statement not covered" ></span>
     });
-  }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" ></span>
+  }
+&nbsp;
   /**
    The dialog's icon.
 &nbsp;
@@ -2133,14 +2142,14 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
    @htmlattributereflected
    */
   get movable() {
-    return this._movable || false;
+    return this._movable || false;<span class="branch-1 cbranch-no" title="branch not covered" ></span>
   }
 &nbsp;
-  set movable(value) {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-    this._movable = transform.booleanAttr(value);
+  set movable(value) {
+    this._movable = transform.booleanAttr(value);<span class="branch-2 cbranch-no" title="branch not covered" ></span>
     this._reflectAttribute('movable', this._movable);
 &nbsp;
-    // Movable and fullscreen are not compatible<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    // Movable and fullscreen are not compatible
     if (this._movable) {
       this.fullscreen = false;
     }
@@ -2496,7 +2505,7 @@ export default Dialog;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Aug 15 2022 23:32:05 GMT+0000 (Coordinated Universal Time)
+                at Tue Aug 16 2022 08:16:40 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
