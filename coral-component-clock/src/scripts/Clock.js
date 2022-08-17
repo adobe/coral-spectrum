@@ -82,6 +82,10 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
 
     // Pre-define labellable element
     this._labellableElement = this;
+
+    // Add aria-errormessage attribute to coral-clock element
+    this.errorID = (this.id || commons.getUID()) + "-coral-clock-error-label";
+    this.setAttribute("aria-errormessage", this.errorID);
   }
 
   /**
@@ -234,30 +238,17 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
     this._elements.hours.invalid = this._invalid;
     this._elements.minutes.invalid = this._invalid;
 
-    const createErrorMessage = () => {
-      const errorLabel = document.createElement("label");
-      const errorText = document.createTextNode("Please enter a valid time");
-      errorLabel.appendChild(errorText);
-      errorLabel.setAttribute("aria-errormessage", this.id);
-      errorLabel.setAttribute("id", "clock-error-label");
-      errorLabel.classList.add("coral-Form-errorlabel");
-      errorLabel.style.display = "table-row";
-      this.parentNode.appendChild(errorLabel);
-    };
-
-    const errorMessage = document.getElementById("clock-error-label");
-
-    const removeErrorMessage = () => {
-      errorMessage.remove();
-    };
+    const ERROR_LABEL_ELEMENT_CLASS = ".coral-Form-errorlabel";
+    const errorLabel = document.querySelector(ERROR_LABEL_ELEMENT_CLASS);
 
     if (this._elements.hours.invalid || this._elements.minutes.invalid) {
-      if (!errorMessage) {
-        createErrorMessage();
-      }
+      errorLabel.setAttribute("id", this.errorID);
+      errorLabel.setAttribute("aria-live", "assertive");
+      errorLabel.hidden = false;
+      errorLabel.style.display = "table-row";
     } else {
-      if (errorMessage) {
-        removeErrorMessage();}
+      errorLabel.setAttribute("aria-live", "off");
+      errorLabel.hidden = true;
     }
   }
 
