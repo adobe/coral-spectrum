@@ -86,6 +86,17 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
     // Add aria-errormessage attribute to coral-clock element
     this.errorID = (this.id || commons.getUID()) + "-coral-clock-error-label";
     this.setAttribute("aria-errormessage", this.errorID);
+
+    // Removes 'e' from the input if typed in.
+    // 'e' can be typed in input of type 'number' and will invalidate the input but
+    // only by adding a red border & icon, and not setting 'invalid' and 'aria-invalid' attributes.
+    // That way the error text does not get displayed.
+    this.addEventListener("keyup", (e) => {
+      if (e.key === "e") {
+        this.value = "";
+      }
+    });
+
   }
 
   /**
@@ -238,14 +249,15 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
     this._elements.hours.invalid = this._invalid;
     this._elements.minutes.invalid = this._invalid;
 
-    const ERROR_LABEL_ELEMENT_CLASS = ".coral-Form-errorlabel";
+    const ERROR_LABEL_ELEMENT_CLASS = "._coral-Clock .coral-Form-errorlabel";
     const errorLabel = document.querySelector(ERROR_LABEL_ELEMENT_CLASS);
 
     if (this._elements.hours.invalid || this._elements.minutes.invalid) {
       errorLabel.setAttribute("id", this.errorID);
       errorLabel.setAttribute("aria-live", "assertive");
       errorLabel.hidden = false;
-      errorLabel.style.display = "table-row";
+      errorLabel.style.display = "table-caption";
+      errorLabel.style["caption-side"] = "bottom";
     } else {
       errorLabel.setAttribute("aria-live", "off");
       errorLabel.hidden = true;
