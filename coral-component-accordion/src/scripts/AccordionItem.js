@@ -137,12 +137,12 @@ const AccordionItem = Decorator(class extends BaseComponent(HTMLElement) {
 
     if(!this._selected) {
       this._elements.content.setAttribute('aria-hidden', 'true');
-      setTimeout(this._elements.content.style.visibility = 'hidden', 500);
+      this._elements.content.style.visibility = 'hidden';
     } else {
       this._elements.content.setAttribute('aria-hidden', 'false');
       this._elements.content.style.visibility = 'visible';
     }
-    
+
     this.trigger('coral-accordion-item:_selectedchanged');
   }
 
