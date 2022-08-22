@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.34% </span>
+                <span class="strong">96.55% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>79/82</span>
+                <span class='fraction'>84/87</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.71% </span>
+                <span class="strong">86.36% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>36/42</span>
+                <span class='fraction'>38/44</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.34% </span>
+                <span class="strong">96.55% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>79/82</span>
+                <span class='fraction'>84/87</span>
             </div>
         
             
@@ -329,7 +329,15 @@
 <a name='L271'></a><a href='#L271'>271</a>
 <a name='L272'></a><a href='#L272'>272</a>
 <a name='L273'></a><a href='#L273'>273</a>
-<a name='L274'></a><a href='#L274'>274</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L274'></a><a href='#L274'>274</a>
+<a name='L275'></a><a href='#L275'>275</a>
+<a name='L276'></a><a href='#L276'>276</a>
+<a name='L277'></a><a href='#L277'>277</a>
+<a name='L278'></a><a href='#L278'>278</a>
+<a name='L279'></a><a href='#L279'>279</a>
+<a name='L280'></a><a href='#L280'>280</a>
+<a name='L281'></a><a href='#L281'>281</a>
+<a name='L282'></a><a href='#L282'>282</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -534,6 +542,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">750x</span>
+<span class="cline-any cline-yes">660x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">660x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">750x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -597,8 +615,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">682x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -739,6 +755,14 @@ const AccordionItem = Decorator(class extends BaseComponent(HTMLElement) {
       });
     }
 &nbsp;
+    if(!this._selected) {
+      this._elements.content.setAttribute('aria-hidden', 'true');
+      this._elements.content.style.visibility = 'hidden';
+    } else {
+      this._elements.content.setAttribute('aria-hidden', 'false');
+      this._elements.content.style.visibility = 'visible';
+    }
+&nbsp;
     this.trigger('coral-accordion-item:_selectedchanged');
   }
 &nbsp;
@@ -828,9 +852,9 @@ const AccordionItem = Decorator(class extends BaseComponent(HTMLElement) {
 &nbsp;
    @ignore
    */
-  focus() {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+  focus() {
     this._elements.label.focus();
-  }
+  }<span class="branch-1 cbranch-no" title="branch not covered" ></span>
 &nbsp;
   get _contentZones() {
     return {'coral-accordion-item-label': 'label', 'coral-accordion-item-content': 'content'};
@@ -842,10 +866,10 @@ const AccordionItem = Decorator(class extends BaseComponent(HTMLElement) {
   }
 &nbsp;
   /** @ignore */
-  render() {<span class="fstat-no" title="function not covered" ></span>
-    su<span class="cstat-no" title="statement not covered" >per.render();</span>
-&nbsp;
-    this.classList.add(CLASSNAME);
+  render() {
+    super.render();
+<span class="fstat-no" title="function not covered" ></span>
+    th<span class="cstat-no" title="statement not covered" >is.classList.add(CLASSNAM</span>E);
 &nbsp;
     // a11y
     this.setAttribute('role', 'presentation');
@@ -853,9 +877,9 @@ const AccordionItem = Decorator(class extends BaseComponent(HTMLElement) {
     // Support cloneNode
     const template = this.querySelector('._coral-Accordion-itemHeading');
     if (template) {
-      <span class="missing-if-branch" title="else path not taken" >E</span>template.remove();
+      template.remove();
     }
-&nbsp;
+<span class="missing-if-branch" title="else path not taken" >E</span>
     // Move content into the content zone if not specified
     if (!this._elements.content.parentNode) {
       while (this.firstChild) {
@@ -875,14 +899,14 @@ const AccordionItem = Decorator(class extends BaseComponent(HTMLElement) {
 });
 &nbsp;
 export default AccordionItem;
-<span class="fstat-no" title="function not covered" ></span></pre></td></tr></table></pre>
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Aug 16 2022 08:16:40 GMT+0000 (Coordinated Universal Time)
+                at Mon Aug 22 2022 11:03:53 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

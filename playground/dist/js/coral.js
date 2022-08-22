@@ -33509,6 +33509,16 @@
           });
         }
 
+        if (!this._selected) {
+          this._elements.content.setAttribute('aria-hidden', 'true');
+
+          this._elements.content.style.visibility = 'hidden';
+        } else {
+          this._elements.content.setAttribute('aria-hidden', 'false');
+
+          this._elements.content.style.visibility = 'visible';
+        }
+
         this.trigger('coral-accordion-item:_selectedchanged');
       }
       /**

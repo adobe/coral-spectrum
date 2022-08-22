@@ -571,6 +571,14 @@ const AccordionItem = Decorator(class extends BaseComponent(HTMLElement) {
       });
     }
 
+    if(!this._selected) {
+      this._elements.content.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
+      this._elements.content.style.visibility = &apos;hidden&apos;;
+    } else {
+      this._elements.content.setAttribute(&apos;aria-hidden&apos;, &apos;false&apos;);
+      this._elements.content.style.visibility = &apos;visible&apos;;
+    }
+
     this.trigger(&apos;coral-accordion-item:_selectedchanged&apos;);
   }
 
