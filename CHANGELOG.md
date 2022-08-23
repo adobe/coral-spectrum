@@ -1,3 +1,10 @@
+## [4.14.4](https://github.com/adobe/coral-spectrum/compare/v4.14.3...v4.14.4) (2022-08-22)
+
+
+### Bug Fixes
+
+* **SITES-2869:** Hidden or empty element receive focus ([#230](https://github.com/adobe/coral-spectrum/issues/230)) ([f4841df](https://github.com/adobe/coral-spectrum/commit/f4841dff926a7690b6f37f396b1a4b9858fac677))
+
 ## [4.14.3](https://github.com/adobe/coral-spectrum/compare/v4.14.2...v4.14.3) (2022-08-15)
 
 
