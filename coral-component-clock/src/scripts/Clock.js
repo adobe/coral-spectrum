@@ -87,16 +87,13 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
     this.errorID = (this.id || commons.getUID()) + "-coral-clock-error-label";
     this.setAttribute("aria-errormessage", this.errorID);
 
-    // Removes 'e' from the input if typed in.
-    // 'e' can be typed in input of type 'number' and will invalidate the input but
-    // only by adding a red border & icon, and not setting 'invalid' and 'aria-invalid' attributes.
-    // That way the error text does not get displayed.
-    this.addEventListener("keyup", (e) => {
-      if (e.key === "e") {
-        this.value = "";
+    // Prevent typing in specific characters which can be added to number inputs
+    const forbiddenChars = ["-", "+", "e", ",", "."];
+    this.addEventListener("keydown", (e) => {
+      if (forbiddenChars.includes(e.key)) {
+        e.preventDefault();
       }
     });
-
   }
 
   /**
