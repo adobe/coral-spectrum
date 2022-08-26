@@ -248,7 +248,7 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
     this._elements.minutes.invalid = this._invalid;
 
     const ERROR_LABEL_ELEMENT_CLASS = "._coral-Clock .coral-Form-errorlabel";
-    const errorLabel = document.querySelector(ERROR_LABEL_ELEMENT_CLASS);
+    const errorLabel = this.querySelector(ERROR_LABEL_ELEMENT_CLASS);
 
     if (this._elements.hours.invalid || this._elements.minutes.invalid) {
       errorLabel.setAttribute("id", this.errorID);
