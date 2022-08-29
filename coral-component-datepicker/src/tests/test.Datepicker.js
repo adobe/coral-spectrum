@@ -72,6 +72,19 @@ describe('Datepicker', function () {
       });
 
       describe('#disabled', function () {
+        it('should not be able to tab to calendar button with disabled set to true', function () {
+          el.disabled = true;
+
+          expect(el._elements.toggle.disabled).to.be.true;
+          expect(el._elements.toggle.getAttribute('tabindex')).to.equal('-1');
+        });
+
+        it('should be able to tab to calendar button with disabled set to false', function () {
+          el.disabled = false;
+
+          expect(el._elements.toggle.disabled).to.be.false;
+          expect(el._elements.toggle.getAttribute('tabindex')).to.equal('0');
+        });
       });
 
       describe('#displayFormat', function () {
@@ -348,6 +361,23 @@ describe('Datepicker', function () {
 
           expect(el.contains(document.activeElement)).to.be.false;
         });
+
+        it('should not be able to tab to calendar button with readOnly set to true', function () {
+          el.readOnly = true;
+
+          expect(el._elements.input.readOnly).to.be.true;
+          expect(el._elements.toggle.disabled).to.be.true;
+          expect(el._elements.toggle.getAttribute('tabindex')).to.equal('-1');
+        });
+
+        it('should be able to tab to calendar button with readOnly set to false', function () {
+          el.readOnly = false;
+
+          expect(el._elements.input.readOnly).to.be.false;
+          expect(el._elements.toggle.disabled).to.be.false;
+          expect(el._elements.toggle.getAttribute('tabindex')).to.equal('0');
+        });
+
       });
 
       describe('#required', function () {
