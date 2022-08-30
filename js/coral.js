@@ -83112,6 +83112,7 @@ var Coral = (function (exports) {
         // the variant so that the element turns into a live region
 
         this.setAttribute('role', this._variant);
+        this.setAttribute('aria-live', 'polite');
       }
       /**
        The Toast content element.
@@ -84861,7 +84862,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.14.4";
+  var version$1 = "4.14.5";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
