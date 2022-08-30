@@ -1,3 +1,10 @@
+## [4.14.6](https://github.com/adobe/coral-spectrum/compare/v4.14.5...v4.14.6) (2022-08-30)
+
+
+### Bug Fixes
+
+* **ASSETS-6815:** Added aria-live to toast component to announce automatically ([#231](https://github.com/adobe/coral-spectrum/issues/231)) ([99e80d4](https://github.com/adobe/coral-spectrum/commit/99e80d42cad2bd61897f4d6b1d334eb84ffc7846))
+
 ## [4.14.5](https://github.com/adobe/coral-spectrum/compare/v4.14.4...v4.14.5) (2022-08-30)
 
 
