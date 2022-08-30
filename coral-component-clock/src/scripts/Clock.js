@@ -85,7 +85,6 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
 
     // Add aria-errormessage attribute to coral-clock element
     this.errorID = (this.id || commons.getUID()) + "-coral-clock-error-label";
-    this.setAttribute("aria-errormessage", this.errorID);
 
     // Prevent typing in specific characters which can be added to number inputs
     const forbiddenChars = ["-", "+", "e", ",", "."];
@@ -245,6 +244,8 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
 
     this._elements.hours.invalid = this._invalid;
     this._elements.minutes.invalid = this._invalid;
+    this._elements.hours.setAttribute("aria-errormessage", this.errorID);
+    this._elements.minutes.setAttribute("aria-errormessage", this.errorID);
 
     const ERROR_LABEL_ELEMENT_CLASS = "._coral-Clock .coral-Form-errorlabel";
     const errorLabel = this.querySelector(ERROR_LABEL_ELEMENT_CLASS);
