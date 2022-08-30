@@ -59051,6 +59051,8 @@
         this._elements.input.disabled = this._disabled;
         this._elements.hiddenInput.disabled = this._disabled;
         this._elements.toggle.disabled = this._disabled || this.readOnly;
+
+        this._elements.toggle.setAttribute("tabindex", !this._elements.toggle.disabled ? "0" : "-1");
       }
       /**
        Inherited from {@link BaseFormField#invalid}.
@@ -59115,6 +59117,8 @@
         this._elements.hiddenInput.readOnly = this.readOnly;
         this._elements.input.readOnly = this._readOnly;
         this._elements.toggle.disabled = this._readOnly || this.disabled;
+
+        this._elements.toggle.setAttribute("tabindex", !this._elements.toggle.disabled ? "0" : "-1");
       }
       /**
        Inherited from {@link BaseFormField#labelled}.
@@ -84857,7 +84861,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.14.3";
+  var version$1 = "4.14.4";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
