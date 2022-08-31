@@ -1,3 +1,11 @@
+## [4.14.7](https://github.com/adobe/coral-spectrum/compare/v4.14.6...v4.14.7) (2022-08-31)
+
+
+### Bug Fixes
+
+* **ASSETS-6921:** Hours and Minutes validation error label not available ([#228](https://github.com/adobe/coral-spectrum/issues/228)) ([b783d55](https://github.com/adobe/coral-spectrum/commit/b783d550c86e826438f1045b9ff7eb38fb44dfab))
+* **SITES-2854:** reduce the margin-right size of icon ([#225](https://github.com/adobe/coral-spectrum/issues/225)) ([9c9b398](https://github.com/adobe/coral-spectrum/commit/9c9b39857b26f4787d9d53d61fb78cde580c3988))
+
 ## [4.14.6](https://github.com/adobe/coral-spectrum/compare/v4.14.5...v4.14.6) (2022-08-30)
 
 
