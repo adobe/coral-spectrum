@@ -518,6 +518,17 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
 
     // Pre-define labellable element
     this._labellableElement = this;
+
+    // Add aria-errormessage attribute to coral-clock element
+    this.errorID = (this.id || commons.getUID()) + &quot;-coral-clock-error-label&quot;;
+
+    // Prevent typing in specific characters which can be added to number inputs
+    const forbiddenChars = [&quot;-&quot;, &quot;+&quot;, &quot;e&quot;, &quot;,&quot;, &quot;.&quot;];
+    this.addEventListener(&quot;keydown&quot;, (e) =&gt; {
+      if (forbiddenChars.includes(e.key)) {
+        e.preventDefault();
+      }
+    });
   }
 
   /**
@@ -669,6 +680,22 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
 
     this._elements.hours.invalid = this._invalid;
     this._elements.minutes.invalid = this._invalid;
+    this._elements.hours.setAttribute(&quot;aria-errormessage&quot;, this.errorID);
+    this._elements.minutes.setAttribute(&quot;aria-errormessage&quot;, this.errorID);
+
+    const ERROR_LABEL_ELEMENT_CLASS = &quot;._coral-Clock .coral-Form-errorlabel&quot;;
+    const errorLabel = this.querySelector(ERROR_LABEL_ELEMENT_CLASS);
+
+    if (this._elements.hours.invalid || this._elements.minutes.invalid) {
+      errorLabel.setAttribute(&quot;id&quot;, this.errorID);
+      errorLabel.setAttribute(&quot;aria-live&quot;, &quot;assertive&quot;);
+      errorLabel.hidden = false;
+      errorLabel.style.display = &quot;table-caption&quot;;
+      errorLabel.style[&quot;caption-side&quot;] = &quot;bottom&quot;;
+    } else {
+      errorLabel.setAttribute(&quot;aria-live&quot;, &quot;off&quot;);
+      errorLabel.hidden = true;
+    }
   }
 
   /**

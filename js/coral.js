@@ -42553,7 +42553,8 @@ var Coral = (function (exports) {
       "pm": "pm",
       "Hours": "Hours",
       "Minutes": "Minutes",
-      "AM/PM": "AM/PM"
+      "AM/PM": "AM/PM",
+      "invalidTime": "Please enter a valid time"
     },
     "de-DE": {
       "am": "vormittags",
@@ -42769,6 +42770,11 @@ var Coral = (function (exports) {
     frag.appendChild(el16);
     var el22 = document.createTextNode("\n");
     frag.appendChild(el22);
+    var el23 = document.createElement("label");
+    el23.className += " coral-Form-errorlabel";
+    el23.setAttribute("hidden", "");
+    el23.textContent = data_0["i18n"]["get"]('invalidTime');
+    frag.appendChild(el23);
     return frag;
   };
 
@@ -42840,7 +42846,18 @@ var Coral = (function (exports) {
         i18n: i18n
       }); // Pre-define labellable element
 
-      _this._labellableElement = _assertThisInitialized(_this);
+      _this._labellableElement = _assertThisInitialized(_this); // Add aria-errormessage attribute to coral-clock element
+
+      _this.errorID = (_this.id || commons.getUID()) + "-coral-clock-error-label"; // Prevent typing in specific characters which can be added to number inputs
+
+      var forbiddenChars = ["-", "+", "e", ",", "."];
+
+      _this.addEventListener("keydown", function (e) {
+        if (forbiddenChars.includes(e.key)) {
+          e.preventDefault();
+        }
+      });
+
       return _this;
     }
     /**
@@ -43220,6 +43237,24 @@ var Coral = (function (exports) {
 
         this._elements.hours.invalid = this._invalid;
         this._elements.minutes.invalid = this._invalid;
+
+        this._elements.hours.setAttribute("aria-errormessage", this.errorID);
+
+        this._elements.minutes.setAttribute("aria-errormessage", this.errorID);
+
+        var ERROR_LABEL_ELEMENT_CLASS = "._coral-Clock .coral-Form-errorlabel";
+        var errorLabel = this.querySelector(ERROR_LABEL_ELEMENT_CLASS);
+
+        if (this._elements.hours.invalid || this._elements.minutes.invalid) {
+          errorLabel.setAttribute("id", this.errorID);
+          errorLabel.setAttribute("aria-live", "assertive");
+          errorLabel.hidden = false;
+          errorLabel.style.display = "table-caption";
+          errorLabel.style["caption-side"] = "bottom";
+        } else {
+          errorLabel.setAttribute("aria-live", "off");
+          errorLabel.hidden = true;
+        }
       }
       /**
        Whether this field is required or not.
