@@ -51,6 +51,9 @@ const ACTION_TAG_NAME = 'coral-cyclebutton-action';
 
 const CLASSNAME = '_coral-CycleSelect';
 
+const TIMELINE_CYCLE_BUTTON_ITEM = "coral-cyclebutton-item[data-granite-toggleable-control-name='timeline']";
+const CONTENT_ONLY_CYCLE_BUTTON_ITEM = "coral-cyclebutton-item[data-granite-toggleable-control-name='content-only']";
+
 /**
  @class Coral.CycleButton
  @classdesc A CycleButton component is a simple multi-state toggle button that toggles between the possible items below
@@ -391,6 +394,19 @@ const CycleButton = Decorator(class extends BaseComponent(HTMLElement) {
     }
   }
 
+  /** @private */
+  _isAnnotateAssetPage() {
+    const loc = window.location.pathname;
+    const assetAnnotatePage = "/annotate.html/";
+    return loc.includes(assetAnnotatePage);
+  }
+
+  /** @private */
+  _isAnnotateAssetItemSelected(selector) {
+    const cycleButtonItem = $(selector);
+    return this._isAnnotateAssetPage() && cycleButtonItem && cycleButtonItem.attr("selected");
+  }
+
   /**
    Render the provided item as selected according to resolved icon and displayMode properties.
 
@@ -442,6 +458,21 @@ const CycleButton = Decorator(class extends BaseComponent(HTMLElement) {
       // @a11y we do not require aria attributes since we already show text
       this._elements.button.removeAttribute('aria-label');
       this._elements.button.removeAttribute('title');
+    }
+
+    // @a11y
+    // on annotate asset page
+    // if timeline cycle button item is selected
+    // the aria-expanded attribute of the button should be true
+    const isAnnotateAssetTimelineSelected = this._isAnnotateAssetItemSelected(TIMELINE_CYCLE_BUTTON_ITEM);
+    if (isAnnotateAssetTimelineSelected) {
+      this._elements.button.setAttribute('aria-expanded', true);
+    }
+    // if timeline cycle button item is selected
+    // the aria-expanded attribute of the button should be false
+    const isAnnotateAssetContentOnlySelected = this._isAnnotateAssetItemSelected(CONTENT_ONLY_CYCLE_BUTTON_ITEM);
+    if (isAnnotateAssetContentOnlySelected) {
+      this._elements.button.setAttribute("aria-expanded", false);
     }
   }
 
@@ -625,7 +656,12 @@ const CycleButton = Decorator(class extends BaseComponent(HTMLElement) {
 
   _onOverlayClose() {
     // @a11y
-    this._elements.button.setAttribute('aria-expanded', false);
+    // when annotation asset page initially loads and timeline cycle button item is selected
+    // prevent changing the aria-expanded attribute of the button to false
+    const isAnnotateAssetTimelineSelected = this._isAnnotateAssetItemSelected(TIMELINE_CYCLE_BUTTON_ITEM);
+    if (!isAnnotateAssetTimelineSelected) {
+      this._elements.button.setAttribute('aria-expanded', false);
+    }
   }
 
   _onOverlayOpen() {
