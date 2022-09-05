@@ -51,8 +51,8 @@ const ACTION_TAG_NAME = 'coral-cyclebutton-action';
 
 const CLASSNAME = '_coral-CycleSelect';
 
-const TIMELINE_CYCLE_BUTTON_ITEM = "coral-cyclebutton-item[data-granite-toggleable-control-name='timeline']";
 const CONTENT_ONLY_CYCLE_BUTTON_ITEM = "coral-cyclebutton-item[data-granite-toggleable-control-name='content-only']";
+const TIMELINE_CYCLE_BUTTON_ITEM = "coral-cyclebutton-item[data-granite-toggleable-control-name='timeline']";
 
 /**
  @class Coral.CycleButton
@@ -395,16 +395,16 @@ const CycleButton = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   /** @private */
+  _isAnnotateAssetItemSelected(selector) {
+    const cycleButtonItem = $(selector);
+    return this._isAnnotateAssetPage() && cycleButtonItem && cycleButtonItem.attr("selected");
+  }
+
+  /** @private */
   _isAnnotateAssetPage() {
     const loc = window.location.pathname;
     const assetAnnotatePage = "/annotate.html/";
     return loc.includes(assetAnnotatePage);
-  }
-
-  /** @private */
-  _isAnnotateAssetItemSelected(selector) {
-    const cycleButtonItem = $(selector);
-    return this._isAnnotateAssetPage() && cycleButtonItem && cycleButtonItem.attr("selected");
   }
 
   /**
@@ -468,7 +468,7 @@ const CycleButton = Decorator(class extends BaseComponent(HTMLElement) {
     if (isAnnotateAssetTimelineSelected) {
       this._elements.button.setAttribute('aria-expanded', true);
     }
-    // if timeline cycle button item is selected
+    // if content only cycle button item is selected
     // the aria-expanded attribute of the button should be false
     const isAnnotateAssetContentOnlySelected = this._isAnnotateAssetItemSelected(CONTENT_ONLY_CYCLE_BUTTON_ITEM);
     if (isAnnotateAssetContentOnlySelected) {
