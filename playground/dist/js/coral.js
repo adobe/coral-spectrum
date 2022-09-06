@@ -58263,6 +58263,7 @@
     el0.id = data_0["commons"]["getUID"]();
     el0.setAttribute("breadthoffset", "50%r - 50%p");
     el0.setAttribute("placement", "bottom");
+    el0.setAttribute("style", "max-height: 75vh;");
     frag.appendChild(el0);
     var el1 = document.createTextNode("\n");
     frag.appendChild(el1);
@@ -84897,7 +84898,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.14.6";
+  var version$1 = "4.14.7";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
