@@ -34747,7 +34747,6 @@
   var template$d = function anonymous(data_0) {
     var frag = document.createDocumentFragment();
     var el0 = this["overlay"] = document.createElement("coral-popover");
-    el0.setAttribute("smart", "");
     el0.id = data_0["commons"]["getUID"]();
     el0.setAttribute("handle", "overlay");
     el0.setAttribute("placement", "bottom");
