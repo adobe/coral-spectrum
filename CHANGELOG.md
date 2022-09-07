@@ -1,3 +1,10 @@
+## [4.14.8](https://github.com/adobe/coral-spectrum/compare/v4.14.7...v4.14.8) (2022-09-07)
+
+
+### Bug Fixes
+
+* **GRANITE-41583:** Manage Publication option is not clickable when o… ([#235](https://github.com/adobe/coral-spectrum/issues/235)) ([f83c2cf](https://github.com/adobe/coral-spectrum/commit/f83c2cf4c340536d20887c1f74ee9a90c7f9c860))
+
 ## [4.14.7](https://github.com/adobe/coral-spectrum/compare/v4.14.6...v4.14.7) (2022-08-31)
 
 
