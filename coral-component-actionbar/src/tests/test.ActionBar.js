@@ -694,7 +694,7 @@ describe('ActionBar', function () {
       }, 200);
     });
 
-    describe('Smart Overlay', () => {
+    describe.skip('Smart Overlay', () => {
       helpers.testSmartOverlay('coral-actionbar-primary');
       helpers.testSmartOverlay('coral-actionbar-secondary');
       helpers.testSmartOverlay('coral-actionbar-container');
