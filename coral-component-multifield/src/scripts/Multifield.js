@@ -55,6 +55,8 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
       'key:home [coral-multifield-move]': '_onMoveItemHome',
       'key:end [coral-multifield-move]': '_onMoveItemEnd',
       'key:esc [coral-multifield-move]': '_onMoveItemEsc',
+      'click [coral-multifield-up]': '_onUpClick',
+      'click [coral-multifield-down]': '_onDownClick',
       'capture:blur [coral-multifield-move]': '_onBlurDragHandle',
       'change coral-multifield-item-content > input': '_onInputChange'
     };
@@ -173,6 +175,10 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
       self._reflectAttribute('min', value);
       self._validateMinItems();
     }
+  }
+
+  get _upDownRequired() {
+    return this.hasAttribute('up-down-required');
   }
 
   /**
@@ -556,11 +562,30 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     }
   }
 
+  /** @ignore */
+  _onUpClick(event) {
+    const upHandle = event.matchedTarget;
+    const shiftElement = upHandle.closest('coral-multifield-item');
+    if(shiftElement.previousElementSibling.tagName === 'CORAL-MULTIFIELD-ITEM') {
+      this.insertBefore(shiftElement, shiftElement.previousElementSibling);
+    }
+  }
+
+  /** @ignore */
+  _onDownClick(event) {
+    const upHandle = event.matchedTarget;
+    const shiftElement = upHandle.closest('coral-multifield-item');
+    if(shiftElement.nextElementSibling.tagName === 'CORAL-MULTIFIELD-ITEM') {
+      this.insertBefore(shiftElement.nextElementSibling, shiftElement);
+    }
+  }
+
   /** @private */
   _onItemAdded(item) {
     const self = this;
     // Update the item content with the template content
     if (item.parentNode === self) {
+      item._upDownRequired = this._upDownRequired;
       self._renderTemplate(item);
       self._updatePosInSet();
     }
