@@ -417,6 +417,27 @@ describe('Clock', function () {
           expect(el.getAttribute('aria-labelledby')).to.equal(labelId + ' ' + el._elements.valueAsText.id);
         });
       });
+
+      describe('#invalid', function () {
+        it('Should show error message when clock has invalid state', function () {
+          var clock = document.getElementsByTagName('coral-clock')[0];
+          // Checks that error is hidden by default
+          expect(clock.querySelector('.coral-Form-errorlabel').hidden).to.be.true;
+          // Checks that error is shown when clock is invalid
+          el.invalid = true;
+          expect(clock.querySelector('.coral-Form-errorlabel').hidden).to.be.false;
+          // Check that error is hidden when clock is valid
+          el.invalid = false;
+          expect(clock.querySelector('.coral-Form-errorlabel').hidden).to.be.true;
+        });
+
+        it('Should disallow typing "e" in hours/minutes inputs', function () {
+          el.value = '10:55';
+          expect(el.value).to.equal('10:55');
+          el.value = 'e:ee';
+          expect(el.value).to.equal('');
+        })
+      })
     });
 
     describe('Markup', function () {

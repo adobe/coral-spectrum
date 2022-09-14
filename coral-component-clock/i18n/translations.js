@@ -16,7 +16,8 @@ export default {
     "pm": "pm",
     "Hours": "Hours",
     "Minutes": "Minutes",
-    "AM/PM": "AM/PM"
+    "AM/PM": "AM/PM",
+    "invalidTime": "Please enter a valid time"
   },
   "de-DE": {
     "am": "vormittags",

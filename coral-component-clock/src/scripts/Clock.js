@@ -82,6 +82,17 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
 
     // Pre-define labellable element
     this._labellableElement = this;
+
+    // Add aria-errormessage attribute to coral-clock element
+    this.errorID = (this.id || commons.getUID()) + "-coral-clock-error-label";
+
+    // Prevent typing in specific characters which can be added to number inputs
+    const forbiddenChars = ["-", "+", "e", ",", "."];
+    this.addEventListener("keydown", (e) => {
+      if (forbiddenChars.includes(e.key)) {
+        e.preventDefault();
+      }
+    });
   }
 
   /**
@@ -233,6 +244,22 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
 
     this._elements.hours.invalid = this._invalid;
     this._elements.minutes.invalid = this._invalid;
+    this._elements.hours.setAttribute("aria-errormessage", this.errorID);
+    this._elements.minutes.setAttribute("aria-errormessage", this.errorID);
+
+    const ERROR_LABEL_ELEMENT_CLASS = "._coral-Clock .coral-Form-errorlabel";
+    const errorLabel = this.querySelector(ERROR_LABEL_ELEMENT_CLASS);
+
+    if (this._elements.hours.invalid || this._elements.minutes.invalid) {
+      errorLabel.setAttribute("id", this.errorID);
+      errorLabel.setAttribute("aria-live", "assertive");
+      errorLabel.hidden = false;
+      errorLabel.style.display = "table-caption";
+      errorLabel.style["caption-side"] = "bottom";
+    } else {
+      errorLabel.setAttribute("aria-live", "off");
+      errorLabel.hidden = true;
+    }
   }
 
   /**

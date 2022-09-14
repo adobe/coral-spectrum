@@ -1,3 +1,81 @@
+## [4.14.8](https://github.com/adobe/coral-spectrum/compare/v4.14.7...v4.14.8) (2022-09-07)
+
+
+### Bug Fixes
+
+* **GRANITE-41583:** Manage Publication option is not clickable when o… ([#235](https://github.com/adobe/coral-spectrum/issues/235)) ([f83c2cf](https://github.com/adobe/coral-spectrum/commit/f83c2cf4c340536d20887c1f74ee9a90c7f9c860))
+
+## [4.14.7](https://github.com/adobe/coral-spectrum/compare/v4.14.6...v4.14.7) (2022-08-31)
+
+
+### Bug Fixes
+
+* **ASSETS-6921:** Hours and Minutes validation error label not available ([#228](https://github.com/adobe/coral-spectrum/issues/228)) ([b783d55](https://github.com/adobe/coral-spectrum/commit/b783d550c86e826438f1045b9ff7eb38fb44dfab))
+* **SITES-2854:** reduce the margin-right size of icon ([#225](https://github.com/adobe/coral-spectrum/issues/225)) ([9c9b398](https://github.com/adobe/coral-spectrum/commit/9c9b39857b26f4787d9d53d61fb78cde580c3988))
+
+## [4.14.6](https://github.com/adobe/coral-spectrum/compare/v4.14.5...v4.14.6) (2022-08-30)
+
+
+### Bug Fixes
+
+* **ASSETS-6815:** Added aria-live to toast component to announce automatically ([#231](https://github.com/adobe/coral-spectrum/issues/231)) ([99e80d4](https://github.com/adobe/coral-spectrum/commit/99e80d42cad2bd61897f4d6b1d334eb84ffc7846))
+
+## [4.14.5](https://github.com/adobe/coral-spectrum/compare/v4.14.4...v4.14.5) (2022-08-30)
+
+
+### Bug Fixes
+
+* **ASSETS-6857:** Set the tabindex attribute of calendar button according to the disabled attribute value ([#232](https://github.com/adobe/coral-spectrum/issues/232)) ([6f3ab89](https://github.com/adobe/coral-spectrum/commit/6f3ab897de2fe30a707e4184db8010021f3c78a6))
+
+## [4.14.4](https://github.com/adobe/coral-spectrum/compare/v4.14.3...v4.14.4) (2022-08-22)
+
+
+### Bug Fixes
+
+* **SITES-2869:** Hidden or empty element receive focus ([#230](https://github.com/adobe/coral-spectrum/issues/230)) ([f4841df](https://github.com/adobe/coral-spectrum/commit/f4841dff926a7690b6f37f396b1a4b9858fac677))
+
+## [4.14.3](https://github.com/adobe/coral-spectrum/compare/v4.14.2...v4.14.3) (2022-08-15)
+
+
+### Bug Fixes
+
+* **CQ-4274470:** Modal dialogs missing attributes ([#229](https://github.com/adobe/coral-spectrum/issues/229)) ([fa462e9](https://github.com/adobe/coral-spectrum/commit/fa462e9a2774c610d62655bd34ffa5320f256817))
+
+## [4.14.2](https://github.com/adobe/coral-spectrum/compare/v4.14.1...v4.14.2) (2022-08-03)
+
+
+### Bug Fixes
+
+* **CQ-4273833:** Removed the tabindex=-1 from the color picker button ([#224](https://github.com/adobe/coral-spectrum/issues/224)) ([448a0da](https://github.com/adobe/coral-spectrum/commit/448a0dab240ac12ae9361258afa933040b07e7e3))
+
+## [4.14.1](https://github.com/adobe/coral-spectrum/compare/v4.14.0...v4.14.1) (2022-07-22)
+
+
+### Bug Fixes
+
+* **ASSETS-6913:** Add aria-label to more button element([#221](https://github.com/adobe/coral-spectrum/issues/221)) ([6a3bdcd](https://github.com/adobe/coral-spectrum/commit/6a3bdcd774638099ada1d4f2b1e33abb3c4829f5))
+
+# [4.14.0](https://github.com/adobe/coral-spectrum/compare/v4.13.0...v4.14.0) (2022-06-03)
+
+
+### Features
+
+* **icons:** Add Microsoft Office Apps icons ([#217](https://github.com/adobe/coral-spectrum/issues/217)) ([4485dec](https://github.com/adobe/coral-spectrum/commit/4485dec33b85f9c3df9f5fcf572bd36c757e2c22))
+
+# [4.13.0](https://github.com/adobe/coral-spectrum/compare/v4.12.11...v4.13.0) (2022-05-18)
+
+
+### Features
+
+* **icons:** add MicrosoftPowerAutomate and MicrosoftDataverse icons ([#213](https://github.com/adobe/coral-spectrum/issues/213)) ([98b4d09](https://github.com/adobe/coral-spectrum/commit/98b4d0933dbedaaec6ca8287824c39d661259aae))
+
+## [4.12.11](https://github.com/adobe/coral-spectrum/compare/v4.12.10...v4.12.11) (2022-03-29)
+
+
+### Bug Fixes
+
+* **GRANITE-36119:** Asset selection checkbox doesn't appear for all the assets in list view ([#209](https://github.com/adobe/coral-spectrum/issues/209)) ([fa723c5](https://github.com/adobe/coral-spectrum/commit/fa723c5aa391e06b91789eb0c4d6d9ef3e14c190))
+
 ## [4.12.10](https://github.com/adobe/coral-spectrum/compare/v4.12.9...v4.12.10) (2022-03-18)
 
 
