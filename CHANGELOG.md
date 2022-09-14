@@ -1,3 +1,10 @@
+# [4.15.0](https://github.com/adobe/coral-spectrum/compare/v4.14.8...v4.15.0) (2022-09-14)
+
+
+### Features
+
+* **icons:** add FormAdd icon ([#237](https://github.com/adobe/coral-spectrum/issues/237)) ([377d0ba](https://github.com/adobe/coral-spectrum/commit/377d0ba550b2eca58f8b753d277f49a5c11fa022))
+
 ## [4.14.8](https://github.com/adobe/coral-spectrum/compare/v4.14.7...v4.14.8) (2022-09-07)
 
 
