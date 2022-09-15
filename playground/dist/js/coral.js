@@ -65622,7 +65622,10 @@
 
         if (self.items.length === self.min + 1) {
           self._validateMinItems();
-        }
+        } // a11y
+
+
+        self._handleRoleList();
       }
       /** @private */
 
@@ -65636,6 +65639,25 @@
 
         if (self.items.length <= self.min) {
           self._validateMinItems();
+        } // a11y
+
+
+        self._handleRoleList();
+      }
+      /**
+       * handle role list of the multifield based on number of items
+       * @private
+       */
+
+    }, {
+      key: "_handleRoleList",
+      value: function _handleRoleList() {
+        var self = this;
+
+        if (self.items.length > 0 && self.getAttribute('role') !== 'list') {
+          self.setAttribute('role', 'list');
+        } else if (self.items.length === 0 && self.getAttribute('role') === 'list') {
+          self.removeAttribute('role');
         }
       }
       /**
@@ -65693,7 +65715,8 @@
 
         this.classList.add(CLASSNAME$12, 'coral-Well'); // a11y
 
-        this.setAttribute('role', 'list'); // Assign the content zones, moving them into place in the process
+        this._handleRoleList(); // Assign the content zones, moving them into place in the process
+
 
         this.template = this._elements.template; // Prepare items content based on the given template
 
@@ -84897,7 +84920,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.14.8";
+  var version$1 = "4.15.0";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
