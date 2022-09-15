@@ -586,6 +586,38 @@ describe('Multifield', function () {
       });
     });
 
+    it('should not have role list attribute set initially', function () {
+      const el = helpers.build(window.__html__['Multifield.base.html']);
+      expect(el.items.getAll().length).to.equal(0);
+      expect(el.getAttribute('role')).to.be.null;
+    });
+
+    it('should have role list attribute set after adding item', function (done) {
+      const el = helpers.build(window.__html__['Multifield.base.html']);
+      el.items.add({});
+      helpers.next(() => {
+        expect(el.items.getAll().length).to.equal(1);
+        expect(el.getAttribute('role')).to.equal('list');
+        done();
+      });
+    });
+
+    it('should not have role list attribute set after removing all items', function (done) {
+      const el = helpers.build(window.__html__['Multifield.base.html']);
+      el.items.add({});
+      el.items.add({});
+      helpers.next(() => {
+        expect(el.items.getAll().length).to.equal(2);
+        expect(el.getAttribute('role')).to.equal('list');
+        el.items.clear();
+        helpers.next(() => {
+          expect(el.items.getAll().length).to.equal(0);
+          expect(el.getAttribute('role')).to.be.null;
+          done();
+        });
+      });
+    });
+
     describe('keyboard reordering', function () {
       it('should toggle aria-grabbed and force forms mode when move button is clicked', function () {
         const el = helpers.build(window.__html__['Multifield.base.html']);
