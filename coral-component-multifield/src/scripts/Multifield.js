@@ -570,10 +570,7 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     }
 
     // a11y
-    // add role list attribute if is not already added
-    if (self.getAttribute('role') !== 'list') {
-      self.setAttribute('role', 'list');
-    }
+    self._handleRoleList();
   }
 
   /** @private */
@@ -587,9 +584,19 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     }
 
     // a11y
-    // remove role list attribute if there is no item left
-    if (self.items.length === 0) {
-      this.removeAttribute('role');
+    self._handleRoleList();
+  }
+
+  /**
+   * handle role list of the multifield based on number of items
+   * @private
+   */
+  _handleRoleList() {
+    const self = this;
+    if (self.items.length > 0 && self.getAttribute('role') !== 'list') {
+      self.setAttribute('role', 'list');
+    } else if (self.items.length === 0 && self.getAttribute('role') === 'list') {
+      self.removeAttribute('role');
     }
   }
 
@@ -653,10 +660,7 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     this.classList.add(CLASSNAME, 'coral-Well');
 
     // a11y
-    // add role list attribute if there is at least one item
-    if (this.items.length > 0) {
-      this.setAttribute('role', 'list');
-    }
+    this._handleRoleList();
 
     // Assign the content zones, moving them into place in the process
     this.template = this._elements.template;
