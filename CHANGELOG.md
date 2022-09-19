@@ -1,3 +1,17 @@
+## [4.15.1](https://github.com/adobe/coral-spectrum/compare/v4.15.0...v4.15.1) (2022-09-15)
+
+
+### Bug Fixes
+
+* **ASSETS-6863:** Files: Asset information - IPTC tab - Certain ARIA roles must contain particular children ([#239](https://github.com/adobe/coral-spectrum/issues/239)) ([9bb6f17](https://github.com/adobe/coral-spectrum/commit/9bb6f178ed5c7030f554817137d248017462936d))
+
+# [4.15.0](https://github.com/adobe/coral-spectrum/compare/v4.14.8...v4.15.0) (2022-09-14)
+
+
+### Features
+
+* **icons:** add FormAdd icon ([#237](https://github.com/adobe/coral-spectrum/issues/237)) ([377d0ba](https://github.com/adobe/coral-spectrum/commit/377d0ba550b2eca58f8b753d277f49a5c11fa022))
+
 ## [4.14.8](https://github.com/adobe/coral-spectrum/compare/v4.14.7...v4.14.8) (2022-09-07)
 
 
