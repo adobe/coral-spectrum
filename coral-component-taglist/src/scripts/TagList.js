@@ -295,8 +295,8 @@ const TagList = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)
     attachedItem.setAttribute('role', 'row');
 
     // adds role to parent to support accessibility, if it doesn't already have it
-    if (attachedItem.parentElement.getAttribute('role') === null) {
-      attachedItem.parentElement.setAttribute('role', 'grid');
+    if (this.getAttribute('role') === null) {
+      this.setAttribute('role', 'grid');
     }
 
     if (!this.disabled) {
@@ -327,7 +327,7 @@ const TagList = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)
     detachedItem.removeAttribute('role');
 
     // Removes role from taglist if it has no tag elements
-    if (this.childNodes.length <= 0) {
+    if (this.items.length <= 0) {
       this.removeAttribute('role');
     }
 
