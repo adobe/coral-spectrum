@@ -429,6 +429,11 @@ describe('TagList', function () {
       expect(tagList.getAttribute('role')).to.equal('grid');
     });
 
+    it('should not have a role of grid when having no children', function () {
+      var tagList = helpers.build(window.__html__['TagList.empty.html']);
+      expect(tagList.getAttribute('role')).not.to.equal('grid');
+    });
+
     it('should remove a focused tag on backspace', function () {
       var eventSpy = sinon.spy();
       var tagList = helpers.build(window.__html__['TagList.base.html']);

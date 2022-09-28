@@ -293,6 +293,12 @@ const TagList = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)
 
     // adds the role to support accessibility
     attachedItem.setAttribute('role', 'row');
+
+    // adds role to parent to support accessibility, if it doesn't already have it
+    if (this.getAttribute('role') === null) {
+      this.setAttribute('role', 'grid');
+    }
+
     if (!this.disabled) {
       attachedItem.setAttribute('tabindex', '-1');
     }
@@ -319,6 +325,12 @@ const TagList = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)
   _onItemDisconnected(detachedItem) {
     // Cleans the tag from TagList specific values
     detachedItem.removeAttribute('role');
+
+    // Removes role from taglist if it has no tag elements
+    if (this.items.length <= 0) {
+      this.removeAttribute('role');
+    }
+
     detachedItem.removeAttribute('tabindex');
     detachedItem._host = undefined;
 
@@ -535,7 +547,11 @@ const TagList = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)
     this.classList.add(CLASSNAME);
 
     // adds the role to support accessibility
-    this.setAttribute('role', 'grid');
+    if (this.items.length > 0) {
+      this.setAttribute('role', 'grid');
+    } else {
+      this.removeAttribute('role');
+    };
 
     this.setAttribute('aria-live', 'off');
     this.setAttribute('aria-atomic', 'false');
