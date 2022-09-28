@@ -17282,7 +17282,11 @@ var Coral = (function (exports) {
         attachedItem.setAttribute('color', Tag.color.DEFAULT);
         attachedItem.setAttribute('size', Tag.size.SMALL); // adds the role to support accessibility
 
-        attachedItem.setAttribute('role', 'row');
+        attachedItem.setAttribute('role', 'row'); // adds role to parent to support accessibility, if it doesn't already have it
+
+        if (this.getAttribute('role') === null) {
+          this.setAttribute('role', 'grid');
+        }
 
         if (!this.disabled) {
           attachedItem.setAttribute('tabindex', '-1');
@@ -17313,7 +17317,12 @@ var Coral = (function (exports) {
         var _this2 = this;
 
         // Cleans the tag from TagList specific values
-        detachedItem.removeAttribute('role');
+        detachedItem.removeAttribute('role'); // Removes role from taglist if it has no tag elements
+
+        if (this.items.length <= 0) {
+          this.removeAttribute('role');
+        }
+
         detachedItem.removeAttribute('tabindex');
         detachedItem._host = undefined;
         var parentElement = this.parentElement;
@@ -17552,7 +17561,11 @@ var Coral = (function (exports) {
 
         this.classList.add(CLASSNAME$5); // adds the role to support accessibility
 
-        this.setAttribute('role', 'grid');
+        if (this.items.length > 0) {
+          this.setAttribute('role', 'grid');
+        } else {
+          this.removeAttribute('role');
+        }
         this.setAttribute('aria-live', 'off');
         this.setAttribute('aria-atomic', 'false');
         this.setAttribute('aria-relevant', 'additions'); // Since tagList can have multiple values, we have to store them all to be able to reset them
@@ -84920,7 +84933,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.15.0";
+  var version$1 = "4.15.1";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

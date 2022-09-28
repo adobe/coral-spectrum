@@ -729,6 +729,12 @@ const TagList = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)
 
     // adds the role to support accessibility
     attachedItem.setAttribute(&apos;role&apos;, &apos;row&apos;);
+
+    // adds role to parent to support accessibility, if it doesn&apos;t already have it
+    if (this.getAttribute(&apos;role&apos;) === null) {
+      this.setAttribute(&apos;role&apos;, &apos;grid&apos;);
+    }
+
     if (!this.disabled) {
       attachedItem.setAttribute(&apos;tabindex&apos;, &apos;-1&apos;);
     }
@@ -755,6 +761,12 @@ const TagList = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)
   _onItemDisconnected(detachedItem) {
     // Cleans the tag from TagList specific values
     detachedItem.removeAttribute(&apos;role&apos;);
+
+    // Removes role from taglist if it has no tag elements
+    if (this.items.length &lt;= 0) {
+      this.removeAttribute(&apos;role&apos;);
+    }
+
     detachedItem.removeAttribute(&apos;tabindex&apos;);
     detachedItem._host = undefined;
 
@@ -971,7 +983,11 @@ const TagList = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)
     this.classList.add(CLASSNAME);
 
     // adds the role to support accessibility
-    this.setAttribute(&apos;role&apos;, &apos;grid&apos;);
+    if (this.items.length &gt; 0) {
+      this.setAttribute(&apos;role&apos;, &apos;grid&apos;);
+    } else {
+      this.removeAttribute(&apos;role&apos;);
+    };
 
     this.setAttribute(&apos;aria-live&apos;, &apos;off&apos;);
     this.setAttribute(&apos;aria-atomic&apos;, &apos;false&apos;);
