@@ -30,6 +30,21 @@ coral-multifield-item-content {
 ._coral-Multifield {
   display: inline-block;
   box-sizing: border-box;
+
+  &[reorderupdown] ._coral-Multifield-item > ._coral-Multifield-move {
+    display: none;
+  }
+
+  &:not([reorderupdown]) ._coral-Multifield-item {
+
+    & > ._coral-Multifield-up {
+      display: none;
+    }
+
+    & > ._coral-Multifield-down {
+      display: none;
+    }   
+  }
 }
 
 ._coral-Multifield-item {
@@ -51,18 +66,6 @@ coral-multifield-item-content {
   }
 
   &:only-of-type > ._coral-Multifield-down {
-    display: none;
-  }
-
-  &[up-down-required] > ._coral-Multifield-move {
-    display: none;
-  }
-
-  &:not([up-down-required]) > ._coral-Multifield-up {
-    display: none;
-  }
-
-  &:not([up-down-required]) > ._coral-Multifield-down {
     display: none;
   }
 

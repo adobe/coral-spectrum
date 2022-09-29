@@ -177,8 +177,20 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     }
   }
 
-  get _upDownRequired() {
-    return this.hasAttribute('up-down-required');
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      reorderupdown: 'reorderUpDown'
+    });
+  }
+
+  get reorderUpDown() {
+    return this._reorderUpDown || false;
+  }
+
+  set reorderUpDown(value) {
+     value = transform.booleanAttr(value);
+     this._reorderUpDown = value;
+     this._reflectAttribute('reorderupdown', value);
   }
 
   /**
@@ -585,7 +597,6 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     const self = this;
     // Update the item content with the template content
     if (item.parentNode === self) {
-      item._upDownRequired = this._upDownRequired;
       self._renderTemplate(item);
       self._updatePosInSet();
     }
@@ -674,7 +685,8 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
-      'min'
+      'min',
+      'reorderupdown'
     ]);
   }
 

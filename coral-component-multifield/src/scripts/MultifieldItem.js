@@ -113,16 +113,6 @@ const MultifieldItem = Decorator(class extends BaseComponent(HTMLElement) {
     return {'coral-multifield-item-content': 'content'};
   }
 
-  get _upDownRequired() {
-      return this.hasAttribute('up-down-required');
-  }
-
-  set _upDownRequired(value) {
-      if(value) {
-          this.setAttribute('up-down-required', '');
-      }
-  }
-
   /** @ignore */
   render() {
     super.render();
@@ -135,13 +125,13 @@ const MultifieldItem = Decorator(class extends BaseComponent(HTMLElement) {
     // Create a fragment
     const fragment = document.createDocumentFragment();
 
-    const templateHandleNames = ['move', 'remove'];
+    const templateHandleNames = ['move', 'remove', 'reorderup', 'reorderdown'];
 
     // Render the main template
     fragment.appendChild(this._elements.remove);
     fragment.appendChild(this._elements.move);
-    fragment.appendChild(this._elements.up);
-    fragment.appendChild(this._elements.down);
+    fragment.appendChild(this._elements.reorderup);
+    fragment.appendChild(this._elements.reorderdown);
 
     const content = this._elements.content;
 
