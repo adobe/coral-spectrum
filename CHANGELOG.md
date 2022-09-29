@@ -1,3 +1,10 @@
+## [4.15.2](https://github.com/adobe/coral-spectrum/compare/v4.15.1...v4.15.2) (2022-09-28)
+
+
+### Bug Fixes
+
+* **ASSETS-6862:** Files: Filter - Required ARIA child role is missing ([#240](https://github.com/adobe/coral-spectrum/issues/240)) ([52635cd](https://github.com/adobe/coral-spectrum/commit/52635cdb27a0f23cb06c7133a0d26a1c48bb19bc))
+
 ## [4.15.1](https://github.com/adobe/coral-spectrum/compare/v4.15.0...v4.15.1) (2022-09-15)
 
 
