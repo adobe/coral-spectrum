@@ -1232,6 +1232,62 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
   }  
 
   /** @private */
+  _onRowDragOverOnKeyArrowDown(event) {
+    const table = this;
+    const body = table.body;
+    const dragElement = event.detail.dragElement;
+    const items = getRows([body]);
+    const index = getIndexOf(dragElement);
+    const dragData = dragElement.dragAction._dragData;
+
+    // We cannot rely on :focus since the row is being moved in the dom while dnd
+    dragElement.classList.add('is-focused');
+
+    if (dragElement === items[items.length - 1]) {
+      for (let position = 0; position < items.length - 1; position++) {
+        body.appendChild(items[position]);
+      }
+      body.insertBefore(items[0], items[items.length - 2].nextElementSibling);
+    } else {
+      body.insertBefore(items[index + 1], items[index]);
+    }
+
+    // Restore specific styling
+    dragElement.setAttribute('style', dragData.style.row || '');
+    getCells(dragElement).forEach((cell, i) => {
+      cell.setAttribute('style', dragData.style.cells[i] || '');
+    });  
+  }
+
+  /** @private */
+  _onRowDragOverOnKeyArrowUp(event) {
+    const table = this;
+    const body = table.body;
+    const dragElement = event.detail.dragElement;
+    const items = getRows([body]);
+    const index = getIndexOf(dragElement);
+    const dragData = dragElement.dragAction._dragData;
+
+    // We cannot rely on :focus since the row is being moved in the dom while dnd
+    dragElement.classList.add('is-focused');
+
+    if (dragElement === items[0]) {
+      for (let position = 0; position < items.length - 2; position++) {
+        body.insertBefore(items[position + 1], items[0]);
+      }
+      body.insertBefore(items[items.length - 1], items[1]);
+    } else {
+      body.insertBefore(items[index - 1], items[index].nextElementSibling);
+    }
+
+    // Restore specific styling
+    dragElement.setAttribute('style', dragData.style.row || '');
+    getCells(dragElement).forEach((cell, i) => {
+      cell.setAttribute('style', dragData.style.cells[i] || '');
+    });  
+  }  
+
+  /** @private */
   _onRowMultipleChanged(event) {
     event.stopImmediatePropagation();
 
