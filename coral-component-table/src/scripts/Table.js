@@ -1180,6 +1180,43 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
     });
   }
 
+  /** @private */  
+  _onKeyboardDrag(event) {
+    const table = this;
+    const row = event.target.closest('tr[is="coral-table-row"]');
+    
+    if (row && table.orderable) {
+      const body = table.body;
+      const style = row.getAttribute('style');
+      const index = getIndexOf(row);
+      const oldBefore = row.nextElementSibling;
+      const dragAction = new DragAction(row);
+      const items = getRows([body]);
+
+      dragAction.axis = 'vertical';
+      // Handle the scroll in table
+      dragAction.scroll = false;
+      // Specify selection handle directly on the row if none found
+      dragAction.handle = row.querySelector('[coral-table-roworder]');
+
+      // The row placeholder indicating where the dragged element will be dropped
+      const placeholder = row.cloneNode(true);
+      placeholder.classList.add('_coral-Table-row--placeholder');
+
+      // Store the data to avoid re-reading the layout on drag events
+      const dragData = {
+        placeholder: placeholder,
+        index: index,
+        oldBefore: oldBefore,
+        // Backup styles to restore them later
+        style: {
+          row: style
+        }
+      };
+      row.dragAction._dragData = dragData;
+    }
+  }  
+
   /** @private */
   _onRowMultipleChanged(event) {
     event.stopImmediatePropagation();
