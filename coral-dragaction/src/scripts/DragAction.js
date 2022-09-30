@@ -244,11 +244,13 @@ class DragAction {
 
     this._drag = this._drag.bind(this);
     this._dragEnd = this._dragEnd.bind(this);
+    this._dragOnKeyEnd = this._dragOnKeyEnd.bind(this);
 
     events.on(`touchmove.DragAction${this._id}`, this._drag);
     events.on(`mousemove.DragAction${this._id}`, this._drag);
     events.on(`touchend.DragAction${this._id}`, this._dragEnd);
     events.on(`mouseup.DragAction${this._id}`, this._dragEnd);
+    events.on(`focusout.DragAction${this._id}`, this._dragOnKeyEnd);
 
     // Store reference on dragElement
     this._dragElement.dragAction = this;
@@ -307,11 +309,13 @@ class DragAction {
           handle._dragEvents = handle._dragEvents || new Vent(handle);
           handle._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
           handle._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
+          handle._dragEvents.on('keyup.DragAction', this._dragOnKey.bind(this));
           handle.classList.add(OPEN_HAND_CLASS);
         });
       } else {
         this._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
         this._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
+        this._dragEvents.on('keyup.DragAction', this._dragOnKey.bind(this));
         this._dragElement.classList.add(OPEN_HAND_CLASS);
       }
     } else {
@@ -319,6 +323,7 @@ class DragAction {
       this._handles = [];
       this._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
       this._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
+      this._dragEvents.on('keyup.DragAction', this._dragOnKey.bind(this));
       this._dragElement.classList.add(OPEN_HAND_CLASS);
     }
   }
