@@ -682,6 +682,36 @@ class DragAction {
     }
   }
 
+  /** @private */
+  _dragOnKey(event) {
+    switch (event.code) {
+      case 'Space':
+        this._dragEvents.dispatch('coral-dragaction:dragonkeyspace', {
+          detail: {
+            dragElement: this._dragElement
+          }
+        });
+        break;
+      case 'ArrowDown':
+        this._dragEvents.dispatch('coral-dragaction:dragoveronkeyarrowdown', {
+          detail: {
+            dragElement: this._dragElement
+          }
+        });
+        break;
+      case 'ArrowUp':
+        this._dragEvents.dispatch('coral-dragaction:dragoveronkeyarrowup', {
+          detail: {
+            dragElement: this._dragElement
+          }
+        });
+        break;
+      case 'Enter':
+        this._dragOnKeyEnd(event);
+        break;
+    }
+  }  
+
   /**
    Remove draggable actions
 
