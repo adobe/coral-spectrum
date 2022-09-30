@@ -1285,6 +1285,19 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
     getCells(dragElement).forEach((cell, i) => {
       cell.setAttribute('style', dragData.style.cells[i] || '');
     });  
+  }
+  
+  /** @private */
+  _onRowDragOverOnKeyEnter(event) {
+    const table = this;
+    const dragElement = event.detail.dragElement;
+    dragElement.dragAction.destroy();
+
+    // Refocus the dragged element manually
+    window.requestAnimationFrame(() => {
+      dragElement.classList.remove('is-focused');
+      table._focusItem(dragElement, true);
+    });
   }  
 
   /** @private */
