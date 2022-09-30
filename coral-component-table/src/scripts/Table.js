@@ -1218,6 +1218,20 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
   }  
 
   /** @private */
+  _onRowDragOnKeySpace(event) {
+    const dragElement = event.detail.dragElement;
+    const dragData = dragElement.dragAction._dragData;
+
+    dragData.style.cells = [];
+    getCells(dragElement).forEach((cell) => {
+      // Backup styles to restore them later
+      dragData.style.cells.push(cell.getAttribute('style'));
+      // Cells will shrink otherwise
+      cell.style.width = window.getComputedStyle(cell).width;
+    });
+  }  
+
+  /** @private */
   _onRowMultipleChanged(event) {
     event.stopImmediatePropagation();
 
