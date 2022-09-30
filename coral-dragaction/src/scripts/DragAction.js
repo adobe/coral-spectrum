@@ -712,6 +712,15 @@ class DragAction {
     }
   }  
 
+  /** @private */
+  _dragOnKeyEnd(event) {
+    this._dragEvents.dispatch('coral-dragaction:dragendonkey', {
+      detail: {
+        dragElement: this._dragElement
+      }
+    });
+  }  
+
   /**
    Remove draggable actions
 
