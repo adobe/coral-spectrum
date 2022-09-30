@@ -132,7 +132,13 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
       'coral-dragaction:dragstart tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragStart',
       'coral-dragaction:drag tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDrag',
       'coral-dragaction:dragover tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragOver',
-      'coral-dragaction:dragend tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragEnd',
+      'coral-dragaction:dragend tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragEnd',    
+      // a11y dnd
+      'key:space tbody[is="coral-table-body"] [coral-table-roworder]:not([disabled])': '_onKeyboardDrag',
+      'coral-dragaction:dragonkeyspace tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragOnKeySpace',
+      'coral-dragaction:dragoveronkeyarrowdown tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragOverOnKeyArrowDown',
+      'coral-dragaction:dragoveronkeyarrowup tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragOverOnKeyArrowUp',
+      'coral-dragaction:dragendonkey tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragOverOnKeyEnter',
       // a11y
       'mousedown tbody[is="coral-table-body"] [coral-table-rowselect]': '_onRowDown',
       'key:enter tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowSelect',
