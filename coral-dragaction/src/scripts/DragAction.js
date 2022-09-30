@@ -888,6 +888,51 @@ class DragAction {
    @property {Number} pageY
    The mouse position relative to the top edge of the document.
    */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is selected to be dragged.
+
+   @typedef {CustomEvent} coral-dragaction:dragonkeyspace
+
+   @property {HTMLElement} dragElement
+   The dragged element
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is moved on arrow down pressed.
+
+   @typedef {CustomEvent} coral-dragaction:dragoveronkeyarrowdown
+
+   @property {HTMLElement} dragElement
+   The dragged element
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is moved on arrow up pressed.
+
+   @typedef {CustomEvent} coral-dragaction:dragoveronkeyarrowup
+
+   @property {HTMLElement} dragElement
+   The dragged element
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is losing focus.
+
+   @typedef {CustomEvent} coral-dragaction:dragonkeyfocusout
+
+   @property {HTMLElement} dragElement
+   The dragged element
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is dropped on key.
+
+   @typedef {CustomEvent} coral-dragaction:dragendonkey
+
+   @property {HTMLElement} dragElement
+   The dragged element
+   */      
 }
 
 export default DragAction;
