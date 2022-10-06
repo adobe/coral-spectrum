@@ -226,12 +226,18 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     this._selectionMode = validate.enumeration(selectionMode)(value) && value || selectionMode.NONE;
     this._reflectAttribute('selectionmode', this._selectionMode);
 
+    const isGrid = this.ariaGrid === ariaGrid.ON && this.parentElement;
+
     if (this._selectionMode === selectionMode.NONE) {
       this.classList.remove('is-selectable');
-      this.removeAttribute('aria-multiselectable');
+      if (isGrid) {
+        this.parentElement.removeAttribute('aria-multiselectable');
+      }
     } else {
       this.classList.add('is-selectable');
-      this.setAttribute('aria-multiselectable', this._selectionMode === selectionMode.MULTIPLE);
+      if (isGrid) {
+        this.parentElement.setAttribute('aria-multiselectable', this._selectionMode === selectionMode.MULTIPLE);
+      }
     }
 
     this._validateSelection();
@@ -543,6 +549,12 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
         this._preservedParentAriaLabelledby = this.parentElement.getAttribute('aria-labelledby');
         this.parentElement.setAttribute('aria-labelledby', this.ariaLabelledby);
       }
+
+      if (this._selectionMode === selectionMode.NONE) {
+        this.parentElement.removeAttribute('aria-multiselectable');
+      } else {
+        this.parentElement.setAttribute('aria-multiselectable', this._selectionMode === selectionMode.MULTIPLE);
+      }
     } else {
       // Restore/remove role of the parent element
       if (this._preservedParentAriaRole) {
@@ -567,6 +579,9 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
 
       // Remove aria-colcount
       this.parentElement.removeAttribute('aria-colcount');
+
+      // Remove aria-multiselectable
+      this.parentElement.removeAttribute('aria-multiselectable');
     }
   }
 
