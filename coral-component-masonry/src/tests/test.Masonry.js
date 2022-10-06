@@ -484,11 +484,18 @@ describe('Masonry', function () {
     it('should have an aria attribute for single/multiple selection', function () {
       const el = helpers.build(new Masonry());
 
+      // aria-multiselectable should only apply when ariaGrid="on".
+      el.ariaGrid = 'on';
+      expect(el.parentElement.hasAttribute('aria-multiselectable')).to.be.false;
+
       el.selectionMode = 'single';
-      expect(el.getAttribute('aria-multiselectable')).to.equal('false');
+      expect(el.parentElement.getAttribute('aria-multiselectable')).to.equal('false');
 
       el.selectionMode = 'multiple';
-      expect(el.getAttribute('aria-multiselectable')).to.equal('true');
+      expect(el.parentElement.getAttribute('aria-multiselectable')).to.equal('true');
+
+      el.selectionMode = 'none';
+      expect(el.parentElement.hasAttribute('aria-multiselectable')).to.be.false;
     });
 
     it('should announce "checked" when item becomes selected', function(done) {
