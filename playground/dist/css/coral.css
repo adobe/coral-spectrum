@@ -7675,6 +7675,9 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
 .coral--lightest ._coral-Textfield::placeholder {
   color: rgb(116, 116, 116);
 }
+.coral--light ._coral-Textfield {
+  border-color: #9e9e9e;
+}
 
 /**
  * Copyright 2019 Adobe. All rights reserved.
@@ -14847,6 +14850,9 @@ coral-select-item {
 }
 .coral--lightest ._coral-Dropdown-label.is-placeholder {
   color: rgb(116, 116, 116);
+}
+.coral--light ._coral-FieldButton {
+  border-color: #9e9e9e;
 }
 
 /**
