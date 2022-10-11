@@ -513,16 +513,16 @@ describe('Masonry', function () {
         item.selected = true;
 
         setTimeout(function() {
-          expect(a11yState.textContent).to.equal(i18n.get('checked'));
+          expect(a11yState.textContent).to.equal(i18n.get('checked'), 'after ~275ms accessibilityState should read "checked"');
           expect(a11yState.hidden).to.be.false;
           expect(a11yState.hasAttribute('aria-live')).to.be.false;
           setTimeout(function() {
-            expect(a11yState.textContent).to.equal(isMacLike ? i18n.get('checked') : '');
-            expect(a11yState.hidden).to.be.true;
+            expect(a11yState.textContent).to.equal(isMacLike ? i18n.get('checked') : '', 'after 1600ms accessibilityState should read "" or "checked" on macOS');
+            expect(a11yState.hidden).to.equal(!isMacLike, 'on macOS, the "checked" accessibilityState should not be hidden');
             expect(a11yState.getAttribute('aria-live')).equal('off');
             done();
-          }, 1650);
-        }, 220);
+          }, 1600);
+        }, 275);
       });
     });
 
@@ -541,16 +541,16 @@ describe('Masonry', function () {
         item.selected = true;
         item.selected = false;
         setTimeout(function() {
-          expect(a11yState.textContent).to.equal(i18n.get('not checked'));
+          expect(a11yState.textContent).to.equal(i18n.get('not checked'), 'after ~275ms accessibilityState should read "not checked"');
           expect(a11yState.hidden).to.be.false;
           expect(a11yState.hasAttribute('aria-live')).to.be.false;
           setTimeout(function() {
-            expect(a11yState.textContent).to.equal('');
+            expect(a11yState.textContent).to.equal('', 'after 1600ms accessibilityState should read ""');
             expect(a11yState.hidden).to.be.true;
             expect(a11yState.getAttribute('aria-live')).to.equal('off');
             done();
-          }, 1650);
-        }, 210);
+          }, 1600);
+        }, 275);
       });
     });
   });
@@ -571,6 +571,8 @@ describe('Masonry', function () {
         .to.equal('gridcell', '<coral-masonry-item> should have role="gridcell"');
       expect(el.items.last().getAttribute('aria-colindex'))
         .to.equal('3', 'last <coral-masonry-item> should have aria-colindex="3"');
+      expect(el.items.first().hasAttribute('aria-selected'))
+        .to.equal(false, '<coral-masonry-item> should not have aria-selected when selectionMode="none"');
 
       // Disable aria grid dynamically
       el.ariaGrid = "off";
@@ -595,9 +597,31 @@ describe('Masonry', function () {
       expect(el.parentElement.getAttribute('aria-label')).to.equal('Masonry Label', 'Masonry parent element should receive same aria-label as Masonry');
       expect(el.parentElement.getAttribute('aria-labelledby')).to.equal('Masonry Labelledby', 'Masonry parent element should receive same aria-labelledby as Masonry');
     });
+    it('masonry elements should have aria-selected when selectionMode is not "none"', function() {
+      const el = helpers.build(window.__html__['Masonry.items.selected.html']);
+
+      el.ariaGrid = "on";
+
+      expect(el.items.first().getAttribute('aria-selected'))
+        .to.equal('true', 'selected <coral-masonry-item> should have aria-selected="true" when selectionMode="single"');
+      expect(el.items.last().getAttribute('aria-selected'))
+        .to.equal('false', 'not selected <coral-masonry-item> should have aria-selected="false" when selectionMode="single"');
+
+      el.selectionMode = 'multiple';
+      expect(el.items.first().getAttribute('aria-selected'))
+        .to.equal('true', 'selected <coral-masonry-item> should have aria-selected="true" when selectionMode="multiple"');
+      expect(el.items.last().getAttribute('aria-selected'))
+        .to.equal('false', 'not selected <coral-masonry-item> should have aria-selected="false" when selectionMode="multiple"');
+
+      el.selectionMode = 'none';
+      expect(el.items.first().hasAttribute('aria-selected'))
+        .to.equal(false, 'selected <coral-masonry-item> should not have aria-selected when selectionMode="none"');
+      expect(el.items.last().hasAttribute('aria-selected'))
+        .to.equal(false, 'not selected <coral-masonry-item> should note have aria-selected="false" when selectionMode="none"');
+    })
   });
 
-  describe('Attach/Detch', function () {
+  describe('Attach/Detach', function () {
     it('changing masonry parent should keep child intact', function (done) {
       const el = helpers.build(window.__html__['Masonry.with.div.wrapper.html']);
       const masonry = el.querySelector("coral-masonry");
