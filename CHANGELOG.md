@@ -1,3 +1,10 @@
+## [4.15.3](https://github.com/adobe/coral-spectrum/compare/v4.15.2...v4.15.3) (2022-10-11)
+
+
+### Bug Fixes
+
+* **ASSETS-6854:** All the empty text input fields lack 3 to 1 contrast ratio ([#246](https://github.com/adobe/coral-spectrum/issues/246)) ([093fb74](https://github.com/adobe/coral-spectrum/commit/093fb74d5c9354c6ca72afcea6e0adc0705a97e8))
+
 ## [4.15.2](https://github.com/adobe/coral-spectrum/compare/v4.15.1...v4.15.2) (2022-09-28)
 
 
