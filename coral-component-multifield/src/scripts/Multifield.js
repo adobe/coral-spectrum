@@ -571,6 +571,10 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
 
     // a11y
     self._handleRoleList();
+
+    // Focus the newly created input
+    const itemInput = item.firstChild.querySelector('input');
+    itemInput.focus();
   }
 
   /** @private */
