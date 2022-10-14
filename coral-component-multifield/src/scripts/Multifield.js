@@ -573,7 +573,7 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     self._handleRoleList();
 
     // Focus the newly created input
-    const itemInput = item.firstChild.querySelector('input');
+    const itemInput = item.querySelector('coral-multifield-item-content').querySelector('input');
     itemInput.focus();
   }
 
