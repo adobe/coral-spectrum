@@ -800,7 +800,15 @@ const Autocomplete = Decorator(class extends BaseFormField(BaseComponent(HTMLEle
 
       if (itemObj) {
         // Reflect the content in the input
-        content = itemObj.content;
+        /*
+          prefence would be first given to innerText instead of innerHtml
+          as special characters like '&' transformed as ;amp in case of innerHtml. 
+        */
+        if(itemObj.text && itemObj.text !== '') {
+          content = itemObj.text;
+        } else {
+          content = itemObj.content;
+        }
       } else {
         // Just use the provided value
         content = value;
@@ -1498,11 +1506,6 @@ const Autocomplete = Decorator(class extends BaseFormField(BaseComponent(HTMLEle
 
     if (!this.multiple) {
       this.value = selectListItem.value;
-
-      // Make sure the value is changed
-      // The setter won't run if we set the same value again
-      // This forces the DOM to update
-      this._setInputValues(this.value, selectListItem.content.textContent, false);
     } else {
       // Add to values
       this._addValue(selectListItem.value, selectListItem.content.innerHTML, true);
