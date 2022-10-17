@@ -246,6 +246,13 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
         this.trigger('change');
 
         this._trackEvent('click', 'add item button', event);
+
+        // Focus the newly created input
+        const items = this.items.getAll();
+        const setsize = items.length;
+        const itemToFocus = items[setsize - 1];
+        const inputItem = itemToFocus.querySelector("coral-multifield-item-content > input");
+        inputItem.focus();
       });
     }
   }
@@ -571,10 +578,6 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
 
     // a11y
     self._handleRoleList();
-
-    // Focus the newly created input
-    const itemInput = item.querySelector('coral-multifield-item-content').querySelector('input');
-    itemInput.focus();
   }
 
   /** @private */

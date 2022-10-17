@@ -618,6 +618,20 @@ describe('Multifield', function () {
       });
     });
 
+    it('should focus the input in item after adding new item', function (done) {
+      const el = helpers.build(window.__html__['Multifield.base.html']);
+      el.querySelector('[coral-multifield-add]').click();
+      helpers.next(function() {
+        const items = el.items.getAll();
+        const setsize = items.length;
+        const itemFocused = items[setsize - 1];
+        const inputItemFocused = itemFocused.querySelector('coral-multifield-item-content > input');
+        const hasFocus = document.activeElement === inputItemFocused;
+        expect(hasFocus).to.be.true;
+        done();
+      });
+    });
+
     describe('keyboard reordering', function () {
       it('should toggle aria-grabbed and force forms mode when move button is clicked', function () {
         const el = helpers.build(window.__html__['Multifield.base.html']);
