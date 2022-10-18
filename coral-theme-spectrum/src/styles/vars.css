@@ -21768,4 +21768,6 @@
   --spectrum-darkest-well-label-text-color: rgb(239, 239, 239);
   --ui-icon-large-display: none;
   --ui-icon-medium-display: block;
+  --spectrum-light-textfield-border-color-accessibility: rgb(158, 158, 158);
+  --spectrum-light-textfield-background-color-accessibility: rgb(158, 158, 158);
 }
