@@ -1,3 +1,10 @@
+## [4.15.4](https://github.com/adobe/coral-spectrum/compare/v4.15.3...v4.15.4) (2022-10-19)
+
+
+### Bug Fixes
+
+* **ASSETS-6851:** The selected state of the action button does not have a sufficient contrast ratio ([#251](https://github.com/adobe/coral-spectrum/issues/251)) ([f64ae67](https://github.com/adobe/coral-spectrum/commit/f64ae67cd594f5c875732d2baeaf12915a0228a2))
+
 ## [4.15.3](https://github.com/adobe/coral-spectrum/compare/v4.15.2...v4.15.3) (2022-10-11)
 
 
