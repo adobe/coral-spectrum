@@ -7676,7 +7676,7 @@ body:lang(ja) .coral-Code--XS, body:lang(ko) .coral-Code--XS, body:lang(zh) .cor
   color: rgb(116, 116, 116);
 }
 .coral--light ._coral-Textfield {
-  border-color: #9e9e9e;
+  border-color: rgb(158, 158, 158);
 }
 
 /**
@@ -11159,6 +11159,9 @@ button[is="coral-button"] {
 }
 .coral--light ._coral-ActionButton.is-disabled ._coral-Icon {
   color: rgb(110, 110, 110);
+}
+.coral--light ._coral-ActionButton--quiet.is-selected.focus-ring {
+  background-color: rgb(158, 158, 158);
 }
 
 /**
@@ -14852,7 +14855,7 @@ coral-select-item {
   color: rgb(116, 116, 116);
 }
 .coral--light ._coral-FieldButton {
-  border-color: #9e9e9e;
+  border-color: rgb(158, 158, 158);
 }
 
 /**
