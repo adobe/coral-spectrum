@@ -812,4 +812,18 @@ describe('StepList', function () {
       expect(trackData).to.have.property('rootType', 'coral-steplist');
     });
   });
+
+  describe('Accessibility', function () {
+    it('should have attribute aria-hidden set to true when has only one child', function () {
+      const el = helpers.build(window.__html__['StepList.onlyonechild.html']);
+      expect(el.items.length).to.equal(1);
+      expect(el.getAttribute('aria-hidden')).to.equal('true');
+    });
+
+    it('should not have attribute aria-hidden when has more than one child', function () {
+      const el = helpers.build(window.__html__['StepList.base.html']);
+      expect(el.items.length).to.equal(5);
+      expect(el.getAttribute('aria-hidden')).to.be.null;
+    });
+  });
 });
