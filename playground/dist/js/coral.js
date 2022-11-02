@@ -62602,18 +62602,18 @@
         setTimeout(function () {
           if (!accessibilityState.parentNode) {
             _this4.appendChild(accessibilityState);
+          } // @a11y Item should be labelled by accessibility state.
+
+
+          if (isMacLike) {
+            var ariaLabelledby = _this4.getAttribute('aria-labelledby');
+
+            if (ariaLabelledby) {
+              _this4.setAttribute('aria-labelledby', ariaLabelledby + ' ' + accessibilityState.id);
+            }
           }
         });
-        this._elements.accessibilityState = accessibilityState; // @a11y Item should be labelled by accessibility state.
-
-        if (isMacLike) {
-          var ariaLabelledby = this.getAttribute('aria-labelledby');
-
-          if (ariaLabelledby) {
-            this.setAttribute('aria-labelledby', ariaLabelledby + ' ' + accessibilityState.id);
-          }
-        } // Support cloneNode
-
+        this._elements.accessibilityState = accessibilityState; // Support cloneNode
 
         var template = this.querySelector('._coral-Masonry-item-quickActions');
 
@@ -62624,6 +62624,8 @@
         this.insertBefore(this._elements.quickactions, this.firstChild); // todo workaround to not give user possibility to tab into checkbox
 
         this._elements.check._labellableElement.tabIndex = -1;
+
+        this._elements.check.setAttribute('aria-hidden', 'true');
       }
       /** @ignore */
 
@@ -62960,7 +62962,7 @@
         accessibilityState.setAttribute('aria-live', 'off'); // @a11y only persist the checked state on macOS,
         // where VoiceOver does not announce the selected state for a gridcell.
 
-        accessibilityState.hidden = true;
+        accessibilityState.hidden = !isMacLike$1 || !self.selected;
 
         if (!isMacLike$1 || !self.selected) {
           accessibilityState.innerHTML = '';
@@ -62995,6 +62997,12 @@
             this._preservedParentAriaLabelledby = this.parentElement.getAttribute('aria-labelledby');
             this.parentElement.setAttribute('aria-labelledby', this.ariaLabelledby);
           }
+
+          if (this._selectionMode === selectionMode$2.NONE) {
+            this.parentElement.removeAttribute('aria-multiselectable');
+          } else {
+            this.parentElement.setAttribute('aria-multiselectable', this._selectionMode === selectionMode$2.MULTIPLE);
+          }
         } else {
           // Restore/remove role of the parent element
           if (this._preservedParentAriaRole) {
@@ -63018,7 +63026,9 @@
           } // Remove aria-colcount
 
 
-          this.parentElement.removeAttribute('aria-colcount');
+          this.parentElement.removeAttribute('aria-colcount'); // Remove aria-multiselectable
+
+          this.parentElement.removeAttribute('aria-multiselectable');
         }
       }
       /** @private */
@@ -63040,10 +63050,15 @@
       value: function _updateAriaRoleForItem(item, columnIndex, activateAriaGrid) {
         if (activateAriaGrid === ariaGrid.ON) {
           item.setAttribute('role', 'gridcell');
-          item.setAttribute('aria-colindex', columnIndex);
+          item.setAttribute('aria-colindex', columnIndex); // communicate aria-selected state of all cells
+
+          if (this.selectionMode !== selectionMode$2.NONE || this.parentElement.hasAttribute('aria-multiselectable')) {
+            item.setAttribute('aria-selected', item.selected);
+          }
         } else {
           item.removeAttribute('role');
           item.removeAttribute('aria-colindex');
+          item.removeAttribute('aria-selected');
         }
       }
       /** @private */
@@ -63069,10 +63084,15 @@
         var selectedItems = this.selectedItems;
 
         if (this.selectionMode === selectionMode$2.NONE) {
-          selectedItems.forEach(function (selectedItem) {
+          this.items.getAll().forEach(function (item) {
             // Don't trigger change events
             _this3._preventTriggeringEvents = true;
-            selectedItem.removeAttribute('selected');
+
+            if (item.selected) {
+              item.removeAttribute('selected');
+            }
+
+            item.removeAttribute('aria-selected');
           });
         } else if (this.selectionMode === selectionMode$2.SINGLE) {
           // Last selected item wins if multiple selection while not allowed
@@ -63656,12 +63676,20 @@
 
         this._reflectAttribute('selectionmode', this._selectionMode);
 
+        var isGrid = this.ariaGrid === ariaGrid.ON && this.parentElement;
+
         if (this._selectionMode === selectionMode$2.NONE) {
           this.classList.remove('is-selectable');
-          this.removeAttribute('aria-multiselectable');
+
+          if (isGrid) {
+            this.parentElement.removeAttribute('aria-multiselectable');
+          }
         } else {
           this.classList.add('is-selectable');
-          this.setAttribute('aria-multiselectable', this._selectionMode === selectionMode$2.MULTIPLE);
+
+          if (isGrid) {
+            this.parentElement.setAttribute('aria-multiselectable', this._selectionMode === selectionMode$2.MULTIPLE);
+          }
         }
 
         this._validateSelection();
@@ -84933,7 +84961,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.15.4";
+  var version$1 = "4.15.5";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

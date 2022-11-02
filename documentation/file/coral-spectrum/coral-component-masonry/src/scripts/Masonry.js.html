@@ -662,12 +662,18 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     this._selectionMode = validate.enumeration(selectionMode)(value) &amp;&amp; value || selectionMode.NONE;
     this._reflectAttribute(&apos;selectionmode&apos;, this._selectionMode);
 
+    const isGrid = this.ariaGrid === ariaGrid.ON &amp;&amp; this.parentElement;
+
     if (this._selectionMode === selectionMode.NONE) {
       this.classList.remove(&apos;is-selectable&apos;);
-      this.removeAttribute(&apos;aria-multiselectable&apos;);
+      if (isGrid) {
+        this.parentElement.removeAttribute(&apos;aria-multiselectable&apos;);
+      }
     } else {
       this.classList.add(&apos;is-selectable&apos;);
-      this.setAttribute(&apos;aria-multiselectable&apos;, this._selectionMode === selectionMode.MULTIPLE);
+      if (isGrid) {
+        this.parentElement.setAttribute(&apos;aria-multiselectable&apos;, this._selectionMode === selectionMode.MULTIPLE);
+      }
     }
 
     this._validateSelection();
@@ -731,7 +737,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
 
     // @a11y only persist the checked state on macOS,
     // where VoiceOver does not announce the selected state for a gridcell.
-    accessibilityState.hidden = true;
+    accessibilityState.hidden = !isMacLike || !self.selected;
     if (!isMacLike || !self.selected) {
       accessibilityState.innerHTML = &apos;&apos;;
     }
@@ -979,6 +985,12 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
         this._preservedParentAriaLabelledby = this.parentElement.getAttribute(&apos;aria-labelledby&apos;);
         this.parentElement.setAttribute(&apos;aria-labelledby&apos;, this.ariaLabelledby);
       }
+
+      if (this._selectionMode === selectionMode.NONE) {
+        this.parentElement.removeAttribute(&apos;aria-multiselectable&apos;);
+      } else {
+        this.parentElement.setAttribute(&apos;aria-multiselectable&apos;, this._selectionMode === selectionMode.MULTIPLE);
+      }
     } else {
       // Restore/remove role of the parent element
       if (this._preservedParentAriaRole) {
@@ -1003,6 +1015,9 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
 
       // Remove aria-colcount
       this.parentElement.removeAttribute(&apos;aria-colcount&apos;);
+
+      // Remove aria-multiselectable
+      this.parentElement.removeAttribute(&apos;aria-multiselectable&apos;);
     }
   }
 
@@ -1019,9 +1034,15 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     if (activateAriaGrid === ariaGrid.ON) {
       item.setAttribute(&apos;role&apos;, &apos;gridcell&apos;);
       item.setAttribute(&apos;aria-colindex&apos;, columnIndex);
+
+      // communicate aria-selected state of all cells
+      if (this.selectionMode !== selectionMode.NONE || this.parentElement.hasAttribute(&apos;aria-multiselectable&apos;)) {
+        item.setAttribute(&apos;aria-selected&apos;, item.selected);
+      }
     } else {
       item.removeAttribute(&apos;role&apos;);
       item.removeAttribute(&apos;aria-colindex&apos;);
+      item.removeAttribute(&apos;aria-selected&apos;);
     }
   }
 
@@ -1042,10 +1063,13 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     const selectedItems = this.selectedItems;
 
     if (this.selectionMode === selectionMode.NONE) {
-      selectedItems.forEach((selectedItem) =&gt; {
+      this.items.getAll().forEach((item) =&gt; {
         // Don&apos;t trigger change events
         this._preventTriggeringEvents = true;
-        selectedItem.removeAttribute(&apos;selected&apos;);
+        if (item.selected) {
+          item.removeAttribute(&apos;selected&apos;);
+        }
+        item.removeAttribute(&apos;aria-selected&apos;);
       });
     } else if (this.selectionMode === selectionMode.SINGLE) {
       // Last selected item wins if multiple selection while not allowed
