@@ -21850,6 +21850,14 @@ coral-card-info > coral-alert {
 coral-slider-item {
   display: none;
 }
+@media (forced-colors: active) {
+  ._coral-Slider-track {
+    height: 0;
+  }
+  ._coral-Slider-track::before {
+    border: 1px solid;
+  }
+}
 
 /**
  * Copyright 2019 Adobe. All rights reserved.
