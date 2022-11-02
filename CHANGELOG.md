@@ -1,3 +1,10 @@
+## [4.15.6](https://github.com/adobe/coral-spectrum/compare/v4.15.5...v4.15.6) (2022-11-02)
+
+
+### Bug Fixes
+
+* **#249:** [Masonry][Accessibility] Files: Main Navigation (Card View) - Selected state of the folder is not announced to the screen reader ([#250](https://github.com/adobe/coral-spectrum/issues/250)) ([ff33df1](https://github.com/adobe/coral-spectrum/commit/ff33df1c9603a47156355aaa32fe647d28b8334e)), closes [#249](https://github.com/adobe/coral-spectrum/issues/249) [#244](https://github.com/adobe/coral-spectrum/issues/244) [#249](https://github.com/adobe/coral-spectrum/issues/249)
+
 ## [4.15.5](https://github.com/adobe/coral-spectrum/compare/v4.15.4...v4.15.5) (2022-11-02)
 
 
