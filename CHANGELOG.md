@@ -1,3 +1,10 @@
+## [4.15.5](https://github.com/adobe/coral-spectrum/compare/v4.15.4...v4.15.5) (2022-11-02)
+
+
+### Bug Fixes
+
+* **ASSETS-5344:** slider track visibility in windows high contrast modes ([#254](https://github.com/adobe/coral-spectrum/issues/254)) ([07f5793](https://github.com/adobe/coral-spectrum/commit/07f579300041efa8c927732129178c4803d042a8))
+
 ## [4.15.4](https://github.com/adobe/coral-spectrum/compare/v4.15.3...v4.15.4) (2022-10-19)
 
 
