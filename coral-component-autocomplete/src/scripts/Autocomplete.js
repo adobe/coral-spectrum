@@ -800,7 +800,11 @@ const Autocomplete = Decorator(class extends BaseFormField(BaseComponent(HTMLEle
 
       if (itemObj) {
         // Reflect the content in the input
-        content = itemObj.content;
+        /*
+          prefence would be first given to innerText instead of innerHtml
+          as special characters like '&' transformed as ;amp in case of innerHtml.
+        */
+        content = itemObj.text && itemObj.text !== '' ? itemObj.text : itemObj.content;
       } else {
         // Just use the provided value
         content = value;
