@@ -36807,7 +36807,12 @@ var Coral = (function (exports) {
 
           if (itemObj) {
             // Reflect the content in the input
-            content = itemObj.content;
+
+            /*
+              prefence would be first given to innerText instead of innerHtml
+              as special characters like '&' transformed as ;amp in case of innerHtml.
+            */
+            content = itemObj.text && itemObj.text !== '' ? itemObj.text : itemObj.content;
           } else {
             // Just use the provided value
             content = value;
@@ -84961,7 +84966,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.15.5";
+  var version$1 = "4.15.6";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
