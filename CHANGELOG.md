@@ -1,3 +1,10 @@
+## [4.15.7](https://github.com/adobe/coral-spectrum/compare/v4.15.6...v4.15.7) (2022-11-07)
+
+
+### Bug Fixes
+
+* **Granite 37225:** Autocomplete items containing HTML character references don't render when selected with arrow keys ([#253](https://github.com/adobe/coral-spectrum/issues/253)) ([dbac744](https://github.com/adobe/coral-spectrum/commit/dbac744acd5f7204bd1ebb8f84fbfec4b52c9143))
+
 ## [4.15.6](https://github.com/adobe/coral-spectrum/compare/v4.15.5...v4.15.6) (2022-11-02)
 
 
