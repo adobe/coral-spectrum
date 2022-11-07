@@ -79,7 +79,10 @@ const MultifieldItem = Decorator(class extends BaseComponent(HTMLElement) {
   set _deletable(value) {
     value = transform.boolean(value);
     this.__deletable = value;
-    this._elements.remove.disabled = !value;
+
+    if(!this._readOnly) {
+      this._elements.remove.disabled = !value;
+    }
   }
 
   /**
@@ -109,8 +112,48 @@ const MultifieldItem = Decorator(class extends BaseComponent(HTMLElement) {
     this._elements.move.selected = this.__dragging;
   }
 
+  /**
+   Whether this multifieldItem is readOnly or not. Indicating that the user cannot modify the value of the multifieldItem fields.
+   @type {Boolean}
+   @default false
+   @private
+   */
+  get _readOnly() {
+    return this.__readOnly || false;
+  }
+
+  set _readOnly(value) {
+    value = transform.booleanAttr(value);
+    this.__readOnly = value;
+    this._reflectAttribute('_readonly', value);
+
+
+    this.content && Array.prototype.forEach.call(this.content.children, (child) => {
+      if(typeof child.readOnly === "boolean") {
+        child.readOnly = value;
+      }
+    });
+
+    this._elements.move.disabled = value;
+    this._elements.remove.disabled = value;
+  }
+
   get _contentZones() {
     return {'coral-multifield-item-content': 'content'};
+  }
+
+  /** @ignore */
+  static get observedAttributes() {
+    return super.observedAttributes.concat([
+      '_readonly'
+    ]);
+  }
+  
+  /** @ignore */
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      _readonly: '_readOnly',
+    });
   }
 
   /** @ignore */
