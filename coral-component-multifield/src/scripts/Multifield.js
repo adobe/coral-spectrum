@@ -165,7 +165,6 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
   set readOnly(value) {
     value = transform.booleanAttr(value);
     this._readOnly = value;
-    this.ariaReadOnly = value;
     this._reflectAttribute('readonly', value);
     
     this.items.getAll().forEach((item) => {
