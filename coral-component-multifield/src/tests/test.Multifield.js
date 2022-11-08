@@ -158,7 +158,7 @@ describe('Multifield', function () {
       });
     });
 
-    describe.only("#readonly", function() {
+    describe("#readonly", function() {
       it("readOnly property and attribute should be true when readonly is set", function() {
         var el = helpers.build(window.__html__['Multifield.readonly.html']);
         
