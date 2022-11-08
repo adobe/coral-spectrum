@@ -165,14 +165,15 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
   set readOnly(value) {
     value = transform.booleanAttr(value);
     this._readOnly = value;
+    this.ariaReadOnly = value;
     this._reflectAttribute('readonly', value);
-
+    
     this.items.getAll().forEach((item) => {
-      item[value ? 'setAttribute' : 'removeAttribute']('_readonly', value);
+      item[value ? 'setAttribute' : 'removeAttribute']('_readonly', '');
     });
 
     let addBtn = this.querySelector('[coral-multifield-add]');
-    if(addBtn) {
+    if (addBtn) {
       addBtn.disabled = value;
     }
   }
@@ -223,7 +224,7 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
           items.add(item);
           item._readOnly = this.readOnly;
         }
-        
+
         deletable = !deletable;
       }
 

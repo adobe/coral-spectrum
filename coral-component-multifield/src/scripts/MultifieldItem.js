@@ -127,10 +127,11 @@ const MultifieldItem = Decorator(class extends BaseComponent(HTMLElement) {
     this.__readOnly = value;
     this._reflectAttribute('_readonly', value);
 
-
-    this.content && Array.prototype.forEach.call(this.content.children, (child) => {
-      if(typeof child.readOnly === "boolean") {
-        child.readOnly = value;
+    // get all fields and set readonly to those whose has this property
+    let allFields = this.querySelectorAll("*");
+    Array.prototype.forEach.call(allFields, (field) => {
+      if(typeof field.readOnly === "boolean") {
+        field.readOnly = value;
       }
     });
 
