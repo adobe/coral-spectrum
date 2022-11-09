@@ -175,6 +175,7 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     if (addBtn) {
       addBtn.disabled = value;
     }
+    
   }
 
   /**
