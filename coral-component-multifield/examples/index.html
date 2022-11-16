@@ -64,7 +64,7 @@
 
       <h2 class="coral--Heading--S">Default</h2>
       <div class="markup">
-        <coral-multifield aria-label="Default multifield"  reorderupdown>
+        <coral-multifield aria-label="Default multifield">
           <coral-multifield-item>
             <input is="coral-textfield" aria-label="input" type="text" value="Basel"/>
           </coral-multifield-item>
@@ -127,6 +127,22 @@
       <h2 class="coral--Heading--S">With Min specified</h2>
       <div class="markup">
         <coral-multifield aria-label="Multifield with min specified" min="2">
+          <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+          <template coral-multifield-template>
+            <input is="coral-textfield" aria-label="input" type="text"/>
+          </template>
+        </coral-multifield>
+      </div>
+
+      <h2 class="coral--Heading--S">With renderupdown</h2>
+      <div class="markup">
+        <coral-multifield aria-label="Multifield with reorderupdown specified" reorderupdown>
+          <coral-multifield-item>
+            <input is="coral-textfield" aria-label="input" type="text" value="Basel"/>
+          </coral-multifield-item>
+          <coral-multifield-item>
+            <input is="coral-textfield" aria-label="input" type="text" value="London"/>
+          </coral-multifield-item>
           <button coral-multifield-add type="button" is="coral-button">Add a field</button>
           <template coral-multifield-template>
             <input is="coral-textfield" aria-label="input" type="text"/>
