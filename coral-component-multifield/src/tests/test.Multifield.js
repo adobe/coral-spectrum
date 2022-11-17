@@ -346,6 +346,26 @@ describe('Multifield', function () {
       // when the last item is removed, focus should be restored to the add button
       expect(el.querySelector('[coral-multifield-add]')).to.equal(document.activeElement);
     });
+
+    describe('#reorderupdown', function() {
+      it('should move up if up button is clicked', function() {
+        const el = helpers.build(window.__html__['Multifield.redorderupdown.html']);
+        el.items.getAll()[1].querySelector('[coral-multifield-up]').click();
+
+        expect(el.items.length).to.equal(2);
+        expect(el.items.getAll()[0].querySelector('input').value).equal('London');
+        expect(el.items.getAll()[1].querySelector('input').value).equal('Basel');
+      });
+
+      it('should move down if down button is clicked', function() {
+        const el = helpers.build(window.__html__['Multifield.redorderupdown.html']);
+        el.items.getAll()[0].querySelector('[coral-multifield-down]').click();
+
+        expect(el.items.length).to.equal(2);
+        expect(el.items.getAll()[0].querySelector('input').value).equal('London');
+        expect(el.items.getAll()[1].querySelector('input').value).equal('Basel');
+      });
+    });
   });
 
   describe('Events', function () {

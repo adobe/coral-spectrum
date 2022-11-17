@@ -30,6 +30,21 @@ coral-multifield-item-content {
 ._coral-Multifield {
   display: inline-block;
   box-sizing: border-box;
+
+  &[reorderupdown] ._coral-Multifield-item > ._coral-Multifield-move {
+    display: none;
+  }
+
+  &:not([reorderupdown]) ._coral-Multifield-item {
+
+    & > ._coral-Multifield-up {
+      display: none;
+    }
+
+    & > ._coral-Multifield-down {
+      display: none;
+    }
+  }
 }
 
 ._coral-Multifield-item {
@@ -43,6 +58,14 @@ coral-multifield-item-content {
   // Moving only makes sense, when there is more than one input
   // we use the tag because type selectors work better with an actual type
   &:only-of-type > ._coral-Multifield-move {
+    display: none;
+  }
+
+  &:only-of-type > ._coral-Multifield-up {
+    display: none;
+  }
+
+  &:only-of-type > ._coral-Multifield-down {
     display: none;
   }
 
@@ -63,7 +86,9 @@ coral-multifield-item-content {
 }
 
 ._coral-Multifield-remove,
-._coral-Multifield-move {
+._coral-Multifield-move,
+._coral-Multifield-up,
+._coral-Multifield-down {
   position: absolute;
   top: 0;
 }
@@ -72,7 +97,16 @@ coral-multifield-item-content {
   right: $multifield-button-width;
 }
 
-._coral-Multifield-move {
+._coral-Multifield-move,
+._coral-Multifield-up,
+._coral-Multifield-down {
   right: 0;
 }
 
+._coral-Multifield-up {
+  margin-top: -4px;
+}
+
+._coral-Multifield-down {
+  margin-top: 7px;
+}
