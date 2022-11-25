@@ -184,6 +184,13 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     });
   }
 
+  /**
+   Whether this multifield require up and down buttons.
+   @type {Boolean}
+   @default false
+   @htmlattribute reorderupdown
+   @htmlattributereflected
+   */
   get reorderUpDown() {
     return this._reorderUpDown || false;
   }
