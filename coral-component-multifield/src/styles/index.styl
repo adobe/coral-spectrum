@@ -37,10 +37,7 @@ coral-multifield-item-content {
 
   &:not([reorderupdown]) ._coral-Multifield-item {
 
-    & > ._coral-Multifield-up {
-      display: none;
-    }
-
+    & > ._coral-Multifield-up,
     & > ._coral-Multifield-down {
       display: none;
     }
@@ -57,14 +54,8 @@ coral-multifield-item-content {
 
   // Moving only makes sense, when there is more than one input
   // we use the tag because type selectors work better with an actual type
-  &:only-of-type > ._coral-Multifield-move {
-    display: none;
-  }
-
-  &:only-of-type > ._coral-Multifield-up {
-    display: none;
-  }
-
+  &:only-of-type > ._coral-Multifield-move,
+  &:only-of-type > ._coral-Multifield-up,
   &:only-of-type > ._coral-Multifield-down {
     display: none;
   }
