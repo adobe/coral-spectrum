@@ -152,7 +152,7 @@ module.exports = function (config) {
     autoWatch: true,
 
     // If browser does not capture in given timeout [ms], kill it
-    captureTimeout: 20000,
+    captureTimeout: 60000,
     // report which specs are slower than 500ms
     reportSlowerThan: 500,
 
