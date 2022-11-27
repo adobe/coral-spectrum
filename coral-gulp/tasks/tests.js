@@ -21,7 +21,6 @@ module.exports = function (gulp) {
       singleRun: true
     }, (err) => {
       if (err) {
-        console.log(err);
         done(new PluginError('karma', 'Test failures'));
       }
       done();
