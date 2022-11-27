@@ -125,11 +125,13 @@ const MultifieldItem = Decorator(class extends BaseComponent(HTMLElement) {
     // Create a fragment
     const fragment = document.createDocumentFragment();
 
-    const templateHandleNames = ['move', 'remove'];
+    const templateHandleNames = ['move', 'remove', 'reorderup', 'reorderdown'];
 
     // Render the main template
     fragment.appendChild(this._elements.remove);
     fragment.appendChild(this._elements.move);
+    fragment.appendChild(this._elements.reorderup);
+    fragment.appendChild(this._elements.reorderdown);
 
     const content = this._elements.content;
 
