@@ -592,7 +592,7 @@ describe('ColumnView', function () {
         item.click();
       });
 
-      it('should be triggered when a column is removed', function (done) {
+      it.skip('should be triggered when a column is removed', function (done) {
         const navigateSpy = sinon.spy();
 
         const navigateEvent = function (event) {
