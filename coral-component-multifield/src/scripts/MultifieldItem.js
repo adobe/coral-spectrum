@@ -137,6 +137,8 @@ const MultifieldItem = Decorator(class extends BaseComponent(HTMLElement) {
 
     this._elements.move.disabled = value;
     this._elements.remove.disabled = value;
+    this._elements.reorderup.disabled = value;
+    this._elements.reorderdown.disabled = value;
   }
 
   get _contentZones() {
@@ -149,7 +151,7 @@ const MultifieldItem = Decorator(class extends BaseComponent(HTMLElement) {
       '_readonly'
     ]);
   }
-  
+
   /** @ignore */
   static get _attributePropertyMap() {
     return commons.extend(super._attributePropertyMap, {
@@ -169,11 +171,13 @@ const MultifieldItem = Decorator(class extends BaseComponent(HTMLElement) {
     // Create a fragment
     const fragment = document.createDocumentFragment();
 
-    const templateHandleNames = ['move', 'remove'];
+    const templateHandleNames = ['move', 'remove', 'reorderup', 'reorderdown'];
 
     // Render the main template
     fragment.appendChild(this._elements.remove);
     fragment.appendChild(this._elements.move);
+    fragment.appendChild(this._elements.reorderup);
+    fragment.appendChild(this._elements.reorderdown);
 
     const content = this._elements.content;
 
