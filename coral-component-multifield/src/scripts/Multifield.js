@@ -154,6 +154,33 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   /**
+   Whether this multifield is readOnly or not. Indicating that the user cannot modify the value of the multifield fields.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   */
+   get readOnly() {
+    return this._readOnly || false;
+  }
+
+  set readOnly(value) {
+    value = transform.booleanAttr(value);
+    this._readOnly = value;
+    this._reflectAttribute('readonly', value);
+
+    this.items.getAll().forEach((item) => {
+      item[value ? 'setAttribute' : 'removeAttribute']('_readonly', '');
+    });
+
+    let addBtn = this.querySelector('[coral-multifield-add]');
+    if (addBtn) {
+      addBtn.disabled = value;
+    }
+
+  }
+
+  /**
     Specifies the minimum number of items multifield should render.
     If component contains less items, remaining items will be added.
 
