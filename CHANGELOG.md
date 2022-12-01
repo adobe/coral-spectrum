@@ -1,3 +1,11 @@
+## [4.15.8](https://github.com/adobe/coral-spectrum/compare/v4.15.7...v4.15.8) (2022-12-01)
+
+
+### Bug Fixes
+
+* Correct build ([#266](https://github.com/adobe/coral-spectrum/issues/266)) ([0e7e535](https://github.com/adobe/coral-spectrum/commit/0e7e535272dd6da582f14d93af64af3d55a09004))
+* **GRANITE-42603:** Multifield component does not provide support for readonly ([#257](https://github.com/adobe/coral-spectrum/issues/257)) ([952936f](https://github.com/adobe/coral-spectrum/commit/952936f10e1988e3eeb412b2a438bb8502c6e657))
+
 ## [4.15.7](https://github.com/adobe/coral-spectrum/compare/v4.15.6...v4.15.7) (2022-11-07)
 
 
