@@ -134,6 +134,21 @@
         </coral-multifield>
       </div>
 
+      <h2 class="coral--Heading--S">Readonly</h2>
+      <div class="markup">
+        <coral-multifield readOnly aria-label="Readonly multifield">
+          <coral-multifield-item>
+            <input is="coral-textfield" aria-label="input" type="text" value="Hello"/>
+          </coral-multifield-item>
+          <coral-multifield-item>
+            <input is="coral-textfield" aria-label="input" type="text" value="World"/>
+          </coral-multifield-item>
+          <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+          <template coral-multifield-template>
+            <input is="coral-textfield" aria-label="input" type="text"/>
+          </template>
+        </coral-multifield>
+      </div>
     </main>
   </body>
 </html>

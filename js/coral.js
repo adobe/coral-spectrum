@@ -65232,7 +65232,9 @@ var Coral = (function (exports) {
             var itemsToBeAdded = currentMin - currentLength;
 
             for (var i = 0; i < itemsToBeAdded; i++) {
-              items.add(document.createElement('coral-multifield-item'));
+              var item = document.createElement('coral-multifield-item');
+              items.add(item);
+              item._readOnly = this.readOnly;
             }
 
             deletable = !deletable;
@@ -65842,6 +65844,34 @@ var Coral = (function (exports) {
         });
       }
       /**
+       Whether this multifield is readOnly or not. Indicating that the user cannot modify the value of the multifield fields.
+       @type {Boolean}
+       @default false
+       @htmlattribute readonly
+       @htmlattributereflected
+       */
+
+    }, {
+      key: "readOnly",
+      get: function get() {
+        return this._readOnly || false;
+      },
+      set: function set(value) {
+        value = transform.booleanAttr(value);
+        this._readOnly = value;
+
+        this._reflectAttribute('readonly', value);
+
+        this.items.getAll().forEach(function (item) {
+          item[value ? 'setAttribute' : 'removeAttribute']('_readonly', '');
+        });
+        var addBtn = this.querySelector('[coral-multifield-add]');
+
+        if (addBtn) {
+          addBtn.disabled = value;
+        }
+      }
+      /**
         Specifies the minimum number of items multifield should render.
         If component contains less items, remaining items will be added.
          @type {Number}
@@ -65879,7 +65909,16 @@ var Coral = (function (exports) {
     }], [{
       key: "observedAttributes",
       get: function get() {
-        return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['min']);
+        return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['min', 'readonly']);
+      }
+      /** @ignore */
+
+    }, {
+      key: "_attributePropertyMap",
+      get: function get() {
+        return commons.extend(_get(_getPrototypeOf(_class), "_attributePropertyMap", this), {
+          readonly: 'readOnly'
+        });
       }
     }]);
 
@@ -66048,7 +66087,10 @@ var Coral = (function (exports) {
       set: function set(value) {
         value = transform.boolean(value);
         this.__deletable = value;
-        this._elements.remove.disabled = !value;
+
+        if (!this._readOnly) {
+          this._elements.remove.disabled = !value;
+        }
       }
       /**
        Whether the item is set to be reorder using the keyboard
@@ -66081,12 +66123,56 @@ var Coral = (function (exports) {
 
         this._elements.move.selected = this.__dragging;
       }
+      /**
+       Whether this multifieldItem is readOnly or not. Indicating that the user cannot modify the value of the multifieldItem fields.
+       @type {Boolean}
+       @default false
+       @private
+       */
+
+    }, {
+      key: "_readOnly",
+      get: function get() {
+        return this.__readOnly || false;
+      },
+      set: function set(value) {
+        value = transform.booleanAttr(value);
+        this.__readOnly = value;
+
+        this._reflectAttribute('_readonly', value); // get all fields and set readonly to those whose has this property
+
+
+        var allFields = this.querySelectorAll("*");
+        Array.prototype.forEach.call(allFields, function (field) {
+          if (typeof field.readOnly === "boolean") {
+            field.readOnly = value;
+          }
+        });
+        this._elements.move.disabled = value;
+        this._elements.remove.disabled = value;
+      }
     }, {
       key: "_contentZones",
       get: function get() {
         return {
           'coral-multifield-item-content': 'content'
         };
+      }
+      /** @ignore */
+
+    }], [{
+      key: "observedAttributes",
+      get: function get() {
+        return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['_readonly']);
+      }
+      /** @ignore */
+
+    }, {
+      key: "_attributePropertyMap",
+      get: function get() {
+        return commons.extend(_get(_getPrototypeOf(_class), "_attributePropertyMap", this), {
+          _readonly: '_readOnly'
+        });
       }
     }]);
 
@@ -84966,7 +85052,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.15.6";
+  var version$1 = "4.15.7";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
