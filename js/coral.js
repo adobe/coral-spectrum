@@ -64938,133 +64938,171 @@ var Coral = (function (exports) {
       "Remove": "Remove",
       "Reorder": "Reorder",
       "reorder_drag_handle": "move handle",
-      "reorder_hint": "Drag and drop or use the up and down arrow keys to reorder."
+      "reorder_hint": "Drag and drop or use the up and down arrow keys to reorder.",
+      "Reorder up": "Reorder up",
+      "Reorder down": "Reorder down"
     },
     "fr-FR": {
       "({0} of {1})": "({0} sur {1})",
       "Remove": "Supprimer",
       "Reorder": "Réorganiser",
       "reorder_drag_handle": "déplacer la poignée",
-      "reorder_hint": "Réorganisez en utilisant le glisser-déposer ou les touches fléchées haut et bas."
+      "reorder_hint": "Réorganisez en utilisant le glisser-déposer ou les touches fléchées haut et bas.",
+      "Reorder up": "Réorganiser",
+      "Reorder down": "Réorganiser vers le bas"
     },
     "de-DE": {
       "({0} of {1})": "({0} von {1})",
       "Remove": "Entfernen",
       "Reorder": "Neu sortieren",
       "reorder_drag_handle": "Verschiebepunkt",
-      "reorder_hint": "Neu anordnen mit Drag & Drop oder den Aufwärts- und Abwärtspfeiltasten."
+      "reorder_hint": "Neu anordnen mit Drag & Drop oder den Aufwärts- und Abwärtspfeiltasten.",
+      "Reorder up": "Neu anordnen",
+      "Reorder down": "Nach unten neu anordnen"
     },
     "it-IT": {
       "({0} of {1})": "({0} di {1})",
       "Remove": "Rimuovi",
       "Reorder": "Riordina",
       "reorder_drag_handle": "maniglia di spostamento",
-      "reorder_hint": "Trascina e rilascia o usa i tasti freccia su e giù per riordinare."
+      "reorder_hint": "Trascina e rilascia o usa i tasti freccia su e giù per riordinare.",
+      "Reorder up": "Riordina",
+      "Reorder down": "Riordina verso il basso"
     },
     "es-ES": {
       "({0} of {1})": "({0} de {1})",
       "Remove": "Eliminar",
       "Reorder": "Reordenar",
       "reorder_drag_handle": "mover controlador",
-      "reorder_hint": "Arrastre y suelte o use las teclas de flecha arriba y abajo para reordenar."
+      "reorder_hint": "Arrastre y suelte o use las teclas de flecha arriba y abajo para reordenar.",
+      "Reorder up": "Reordenar",
+      "Reorder down": "Reordenar hacia abajo"
     },
     "pt-BR": {
       "({0} of {1})": "({0} de {1})",
       "Remove": "Remover",
       "Reorder": "Reorganizar",
       "reorder_drag_handle": "mover a alça",
-      "reorder_hint": "Arraste e solte ou use as teclas de seta para cima e para baixo para reordenar."
+      "reorder_hint": "Arraste e solte ou use as teclas de seta para cima e para baixo para reordenar.",
+      "Reorder up": "reordenar para cima",
+      "Reorder down": "reordenar para baixo"
     },
     "ja-JP": {
       "({0} of {1})": "({0}/{1})",
       "Remove": "削除",
       "Reorder": "並べ替え",
       "reorder_drag_handle": "ハンドルを移動",
-      "reorder_hint": "ドラッグアンドドロップするか、上下の矢印キーを使用して並べ替えます。"
+      "reorder_hint": "ドラッグアンドドロップするか、上下の矢印キーを使用して並べ替えます。",
+      "Reorder up": "並べ替え",
+      "Reorder down": "下に並べ替え"
     },
     "ko-KR": {
       "({0} of {1})": "({0}/{1})",
       "Remove": "제거",
       "Reorder": "재정렬",
       "reorder_drag_handle": "핸들 이동",
-      "reorder_hint": "드래그 앤 드롭하거나 위 / 아래 화살표 키를 사용하여 순서를 변경하십시오."
+      "reorder_hint": "드래그 앤 드롭하거나 위 / 아래 화살표 키를 사용하여 순서를 변경하십시오.",
+      "Reorder up": "재정렬",
+      "Reorder down": "아래로 재정렬"
     },
     "zh-CN": {
       "({0} of {1})": "({0}/{1})",
       "Remove": "删除",
       "Reorder": "重新排序",
       "reorder_drag_handle": "移动手抦",
-      "reorder_hint": "拖放或使用向上和向下箭头键重新排序。"
+      "reorder_hint": "拖放或使用向上和向下箭头键重新排序。",
+      "Reorder up": "重新订购",
+      "Reorder down": "重新订购"
     },
     "zh-TW": {
       "({0} of {1})": "({0}/{1})",
       "Remove": "移除",
       "Reorder": "重新排序",
       "reorder_drag_handle": "移動控制點",
-      "reorder_hint": "拖放或使用向上和向下箭頭鍵重新排序。"
+      "reorder_hint": "拖放或使用向上和向下箭頭鍵重新排序。",
+      "Reorder up": "向上重新排列",
+      "Reorder down": "向下重新排列"
     },
     "nl-NL": {
       "({0} of {1})": "({0} van {1})",
       "Remove": "Verwijderen",
       "Reorder": "Opnieuw ordenen",
       "reorder_drag_handle": "ingang verplaatsen",
-      "reorder_hint": "Sleep en zet neer of gebruik de pijltoetsen omhoog en omlaag om opnieuw te ordenen."
+      "reorder_hint": "Sleep en zet neer of gebruik de pijltoetsen omhoog en omlaag om opnieuw te ordenen.",
+      "Reorder up": "Opnieuw ordenen",
+      "Reorder down": "Opnieuw ordenen naar beneden"
     },
     "da-DK": {
       "({0} of {1})": "({0} af {1})",
       "Remove": "Fjern",
       "Reorder": "Omarranger",
       "reorder_drag_handle": "flyt håndtag",
-      "reorder_hint": "Træk og slip eller brug piletasterne op og ned til at sortere igen."
+      "reorder_hint": "Træk og slip eller brug piletasterne op og ned til at sortere igen.",
+      "Reorder up": "Omarranger op",
+      "Reorder down": "Omarranger ned"
     },
     "fi-FI": {
       "({0} of {1})": "({0}/{1})",
       "Remove": "Poista",
       "Reorder": "Järjestä uudelleen",
       "reorder_drag_handle": "siirtokahva",
-      "reorder_hint": "Vedä ja pudota tai käytä ylä- ja alanuolinäppäimiä järjestyksen muuttamiseksi."
+      "reorder_hint": "Vedä ja pudota tai käytä ylä- ja alanuolinäppäimiä järjestyksen muuttamiseksi.",
+      "Reorder up": "Järjestä uudelleen",
+      "Reorder down": "Järjestä uudelleen alas"
     },
     "nb-NO": {
       "({0} of {1})": "({0} av {1})",
       "Remove": "Fjern",
       "Reorder": "Endre rekkefølge",
       "reorder_drag_handle": "flytt håndtak",
-      "reorder_hint": "Dra og slipp eller bruk piltastene opp og ned for å ordne på nytt."
+      "reorder_hint": "Dra og slipp eller bruk piltastene opp og ned for å ordne på nytt.",
+      "Reorder up": "Endre rekkefølgen på nytt",
+      "Reoder down": "Endre rekkefølgen nedover"
     },
     "sv-SE": {
       "({0} of {1})": "({0} av {1})",
       "Remove": "Ta bort",
       "Reorder": "Ändra ordning",
       "reorder_drag_handle": "flytta handtag",
-      "reorder_hint": "Dra och släpp eller använd upp- och nedpiltangenterna för att ordna om."
+      "reorder_hint": "Dra och släpp eller använd upp- och nedpiltangenterna för att ordna om.",
+      "Reorder up": "Ändra ordning upp",
+      "Reorder down": "Ändra ordning ner"
     },
     "cs-CZ": {
       "({0} of {1})": "({0} z {1})",
       "Remove": "Odebrat",
       "Reorder": "Změnit pořadí",
       "reorder_drag_handle": "táhlo přesunu",
-      "reorder_hint": "Chcete-li změnit pořadí, přetáhněte nebo přetáhněte nebo použijte klávesy se šipkami nahoru a dolů."
+      "reorder_hint": "Chcete-li změnit pořadí, přetáhněte nebo přetáhněte nebo použijte klávesy se šipkami nahoru a dolů.",
+      "Reorder up": "Změňte pořadí směrem nahoru",
+      "Reorder down": "Změňte pořadí směrem dolů"
     },
     "pl-PL": {
       "({0} of {1})": "({0} z {1})",
       "Remove": "Usuń",
       "Reorder": "Zmień kolejność",
       "reorder_drag_handle": "przeciągnij uchwyt",
-      "reorder_hint": "Przeciągnij i upuść lub użyj klawiszy strzałek w górę iw dół, aby zmienić kolejność."
+      "reorder_hint": "Przeciągnij i upuść lub użyj klawiszy strzałek w górę iw dół, aby zmienić kolejność.",
+      "Reorder up": "Zmień kolejność w górę",
+      "Reorder down": "Zmień kolejność w dół"
     },
     "ru-RU": {
       "({0} of {1})": ", {0} из {1})",
       "Remove": "Удалить",
       "Reorder": "Переупорядочить",
       "reorder_drag_handle": "переместить манипулятор",
-      "reorder_hint": "Перетащите или используйте клавиши со стрелками вверх и вниз, чтобы изменить порядок."
+      "reorder_hint": "Перетащите или используйте клавиши со стрелками вверх и вниз, чтобы изменить порядок.",
+      "Reorder up": "изменить порядок вверх",
+      "Reorder down": "изменить порядок вниз"
     },
     "tr-TR": {
       "({0} of {1})": "({0}/{1})",
       "Remove": "Kaldır",
       "Reorder": "Yeniden Sırala",
       "reorder_drag_handle": "move handle",
-      "reorder_hint": "Yeniden sıralamak için sürükleyip bırakın veya yukarı ve aşağı ok tuşlarını kullanın."
+      "reorder_hint": "Yeniden sıralamak için sürükleyip bırakın veya yukarı ve aşağı ok tuşlarını kullanın.",
+      "Reorder up": "yukarı doğru yeniden sırala",
+      "Reorder down": "Aşağı doğru yeniden sırala"
     }
   };
 
@@ -65156,6 +65194,8 @@ var Coral = (function (exports) {
         'key:home [coral-multifield-move]': '_onMoveItemHome',
         'key:end [coral-multifield-move]': '_onMoveItemEnd',
         'key:esc [coral-multifield-move]': '_onMoveItemEsc',
+        'click [coral-multifield-up]': '_onUpClick',
+        'click [coral-multifield-down]': '_onDownClick',
         'capture:blur [coral-multifield-move]': '_onBlurDragHandle',
         'change coral-multifield-item-content > input': '_onInputChange'
       };
@@ -65655,6 +65695,30 @@ var Coral = (function (exports) {
           }
         }
       }
+      /** @ignore */
+
+    }, {
+      key: "_onUpClick",
+      value: function _onUpClick(event) {
+        var upHandle = event.matchedTarget;
+        var shiftElement = upHandle.closest('coral-multifield-item');
+
+        if (shiftElement.previousElementSibling.tagName === 'CORAL-MULTIFIELD-ITEM') {
+          this.insertBefore(shiftElement, shiftElement.previousElementSibling);
+        }
+      }
+      /** @ignore */
+
+    }, {
+      key: "_onDownClick",
+      value: function _onDownClick(event) {
+        var upHandle = event.matchedTarget;
+        var shiftElement = upHandle.closest('coral-multifield-item');
+
+        if (shiftElement.nextElementSibling.tagName === 'CORAL-MULTIFIELD-ITEM') {
+          this.insertBefore(shiftElement.nextElementSibling, shiftElement);
+        }
+      }
       /** @private */
 
     }, {
@@ -65898,6 +65962,25 @@ var Coral = (function (exports) {
         }
       }
     }, {
+      key: "reorderUpDown",
+
+      /**
+       Whether this multifield require up and down buttons.
+       @type {Boolean}
+       @default false
+       @htmlattribute reorderupdown
+       @htmlattributereflected
+       */
+      get: function get() {
+        return this._reorderUpDown || false;
+      },
+      set: function set(value) {
+        value = transform.booleanAttr(value);
+        this._reorderUpDown = value;
+
+        this._reflectAttribute('reorderupdown', value);
+      }
+    }, {
       key: "_contentZones",
       get: function get() {
         return {
@@ -65907,18 +65990,17 @@ var Coral = (function (exports) {
       /** @ignore */
 
     }], [{
-      key: "observedAttributes",
-      get: function get() {
-        return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['min', 'readonly']);
-      }
-      /** @ignore */
-
-    }, {
       key: "_attributePropertyMap",
       get: function get() {
         return commons.extend(_get(_getPrototypeOf(_class), "_attributePropertyMap", this), {
+          reorderupdown: 'reorderUpDown',
           readonly: 'readOnly'
         });
+      }
+    }, {
+      key: "observedAttributes",
+      get: function get() {
+        return _get(_getPrototypeOf(_class), "observedAttributes", this).concat(['min', 'readonly', 'reorderupdown']);
       }
     }]);
 
@@ -65964,6 +66046,48 @@ var Coral = (function (exports) {
     el2.className += " _coral-Multifield-move u-coral-openHand";
     el2.setAttribute("coral-multifield-move", "");
     frag.appendChild(el2);
+    var el3 = document.createTextNode("\n");
+    frag.appendChild(el3);
+    var el4 = this["reorderup"] = document.createElement("button", "coral-button");
+    el4.id = data_0["uid"] + "-up";
+    el4.setAttribute("aria-labelledby", data_0["uid"] + "-up " + data_0["uid"] + "-content " + data_0["uid"]);
+    el4.setAttribute("aria-label", data_0["i18n"]["get"]('Reorder up'));
+    el4.setAttribute("aria-grabbed", "false");
+    el4.setAttribute("aria-pressed", "false");
+    el4.setAttribute("title", data_0["i18n"]["get"]('reorder_hint'));
+    el4.setAttribute("tracking", "off");
+    el4.setAttribute("type", "button");
+    el4.setAttribute("is", "coral-button");
+    el4.setAttribute("handle", "reorderup");
+    el4.setAttribute("variant", "quietaction");
+    el4.setAttribute("icon", "ChevronUp");
+    el4.setAttribute("iconsize", "S");
+    el4.setAttribute("iconautoarialabel", "on");
+    el4.className += " _coral-Multifield-up u-coral-openHand";
+    el4.setAttribute("coral-multifield-up", "");
+    frag.appendChild(el4);
+    var el5 = document.createTextNode("\n");
+    frag.appendChild(el5);
+    var el6 = this["reorderdown"] = document.createElement("button", "coral-button");
+    el6.id = data_0["uid"] + "-down";
+    el6.setAttribute("aria-labelledby", data_0["uid"] + "-down " + data_0["uid"] + "-content " + data_0["uid"]);
+    el6.setAttribute("aria-label", data_0["i18n"]["get"]('Reorder down'));
+    el6.setAttribute("aria-grabbed", "false");
+    el6.setAttribute("aria-pressed", "false");
+    el6.setAttribute("title", data_0["i18n"]["get"]('reorder_hint'));
+    el6.setAttribute("tracking", "off");
+    el6.setAttribute("type", "button");
+    el6.setAttribute("is", "coral-button");
+    el6.setAttribute("handle", "reorderdown");
+    el6.setAttribute("variant", "quietaction");
+    el6.setAttribute("icon", "ChevronDown");
+    el6.setAttribute("iconsize", "S");
+    el6.setAttribute("iconautoarialabel", "on");
+    el6.className += " _coral-Multifield-down u-coral-openHand";
+    el6.setAttribute("coral-multifield-down", "");
+    frag.appendChild(el6);
+    var el7 = document.createTextNode("\n");
+    frag.appendChild(el7);
     return frag;
   };
 
@@ -66025,10 +66149,12 @@ var Coral = (function (exports) {
         this.setAttribute('role', 'listitem'); // Create a fragment
 
         var fragment = document.createDocumentFragment();
-        var templateHandleNames = ['move', 'remove']; // Render the main template
+        var templateHandleNames = ['move', 'remove', 'reorderup', 'reorderdown']; // Render the main template
 
         fragment.appendChild(this._elements.remove);
         fragment.appendChild(this._elements.move);
+        fragment.appendChild(this._elements.reorderup);
+        fragment.appendChild(this._elements.reorderdown);
         var content = this._elements.content; // Remove it so we can process children
 
         if (content.parentNode) {
@@ -66150,6 +66276,8 @@ var Coral = (function (exports) {
         });
         this._elements.move.disabled = value;
         this._elements.remove.disabled = value;
+        this._elements.reorderup.disabled = value;
+        this._elements.reorderdown.disabled = value;
       }
     }, {
       key: "_contentZones",
@@ -85052,7 +85180,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.15.7";
+  var version$1 = "4.15.8";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

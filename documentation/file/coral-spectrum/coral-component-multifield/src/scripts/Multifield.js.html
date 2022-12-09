@@ -491,6 +491,8 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
       &apos;key:home [coral-multifield-move]&apos;: &apos;_onMoveItemHome&apos;,
       &apos;key:end [coral-multifield-move]&apos;: &apos;_onMoveItemEnd&apos;,
       &apos;key:esc [coral-multifield-move]&apos;: &apos;_onMoveItemEsc&apos;,
+      &apos;click [coral-multifield-up]&apos;: &apos;_onUpClick&apos;,
+      &apos;click [coral-multifield-down]&apos;: &apos;_onDownClick&apos;,
       &apos;capture:blur [coral-multifield-move]&apos;: &apos;_onBlurDragHandle&apos;,
       &apos;change coral-multifield-item-content &gt; input&apos;: &apos;_onInputChange&apos;
     };
@@ -602,7 +604,7 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     value = transform.booleanAttr(value);
     this._readOnly = value;
     this._reflectAttribute(&apos;readonly&apos;, value);
-    
+
     this.items.getAll().forEach((item) =&gt; {
       item[value ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;_readonly&apos;, &apos;&apos;);
     });
@@ -611,7 +613,7 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     if (addBtn) {
       addBtn.disabled = value;
     }
-    
+
   }
 
   /**
@@ -636,6 +638,30 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
       self._reflectAttribute(&apos;min&apos;, value);
       self._validateMinItems();
     }
+  }
+
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      reorderupdown: &apos;reorderUpDown&apos;,
+      readonly: &apos;readOnly&apos;
+    });
+  }
+
+  /**
+   Whether this multifield require up and down buttons.
+   @type {Boolean}
+   @default false
+   @htmlattribute reorderupdown
+   @htmlattributereflected
+   */
+  get reorderUpDown() {
+    return this._reorderUpDown || false;
+  }
+
+  set reorderUpDown(value) {
+     value = transform.booleanAttr(value);
+     this._reorderUpDown = value;
+     this._reflectAttribute(&apos;reorderupdown&apos;, value);
   }
 
   /**
@@ -1022,6 +1048,24 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     }
   }
 
+  /** @ignore */
+  _onUpClick(event) {
+    const upHandle = event.matchedTarget;
+    const shiftElement = upHandle.closest(&apos;coral-multifield-item&apos;);
+    if(shiftElement.previousElementSibling.tagName === &apos;CORAL-MULTIFIELD-ITEM&apos;) {
+      this.insertBefore(shiftElement, shiftElement.previousElementSibling);
+    }
+  }
+
+  /** @ignore */
+  _onDownClick(event) {
+    const upHandle = event.matchedTarget;
+    const shiftElement = upHandle.closest(&apos;coral-multifield-item&apos;);
+    if(shiftElement.nextElementSibling.tagName === &apos;CORAL-MULTIFIELD-ITEM&apos;) {
+      this.insertBefore(shiftElement.nextElementSibling, shiftElement);
+    }
+  }
+
   /** @private */
   _onItemAdded(item) {
     const self = this;
@@ -1116,15 +1160,9 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
   static get observedAttributes() {
     return super.observedAttributes.concat([
       &apos;min&apos;,
-      &apos;readonly&apos;
+      &apos;readonly&apos;,
+      &apos;reorderupdown&apos;
     ]);
-  }
-
-  /** @ignore */
-  static get _attributePropertyMap() {
-    return commons.extend(super._attributePropertyMap, {
-      readonly: &apos;readOnly&apos;,
-    });
   }
 
   /** @ignore */
