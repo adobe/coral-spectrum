@@ -1,3 +1,10 @@
+## [4.15.9](https://github.com/adobe/coral-spectrum/compare/v4.15.8...v4.15.9) (2022-12-13)
+
+
+### Bug Fixes
+
+* **GRANITE-37303:** Move Multifield should have button instead of drag ([#270](https://github.com/adobe/coral-spectrum/issues/270)) ([fd92b40](https://github.com/adobe/coral-spectrum/commit/fd92b40139fa080b67c0ab32f88fdc1f4456815f))
+
 ## [4.15.8](https://github.com/adobe/coral-spectrum/compare/v4.15.7...v4.15.8) (2022-12-01)
 
 
