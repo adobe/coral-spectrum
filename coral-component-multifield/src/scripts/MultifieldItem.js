@@ -79,7 +79,10 @@ const MultifieldItem = Decorator(class extends BaseComponent(HTMLElement) {
   set _deletable(value) {
     value = transform.boolean(value);
     this.__deletable = value;
-    this._elements.remove.disabled = !value;
+
+    if(!this._readOnly) {
+      this._elements.remove.disabled = !value;
+    }
   }
 
   /**
@@ -109,8 +112,51 @@ const MultifieldItem = Decorator(class extends BaseComponent(HTMLElement) {
     this._elements.move.selected = this.__dragging;
   }
 
+  /**
+   Whether this multifieldItem is readOnly or not. Indicating that the user cannot modify the value of the multifieldItem fields.
+   @type {Boolean}
+   @default false
+   @private
+   */
+  get _readOnly() {
+    return this.__readOnly || false;
+  }
+
+  set _readOnly(value) {
+    value = transform.booleanAttr(value);
+    this.__readOnly = value;
+    this._reflectAttribute('_readonly', value);
+
+    // get all fields and set readonly to those whose has this property
+    let allFields = this.querySelectorAll("*");
+    Array.prototype.forEach.call(allFields, (field) => {
+      if(typeof field.readOnly === "boolean") {
+        field.readOnly = value;
+      }
+    });
+
+    this._elements.move.disabled = value;
+    this._elements.remove.disabled = value;
+    this._elements.reorderup.disabled = value;
+    this._elements.reorderdown.disabled = value;
+  }
+
   get _contentZones() {
     return {'coral-multifield-item-content': 'content'};
+  }
+
+  /** @ignore */
+  static get observedAttributes() {
+    return super.observedAttributes.concat([
+      '_readonly'
+    ]);
+  }
+
+  /** @ignore */
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      _readonly: '_readOnly',
+    });
   }
 
   /** @ignore */
@@ -125,11 +171,13 @@ const MultifieldItem = Decorator(class extends BaseComponent(HTMLElement) {
     // Create a fragment
     const fragment = document.createDocumentFragment();
 
-    const templateHandleNames = ['move', 'remove'];
+    const templateHandleNames = ['move', 'remove', 'reorderup', 'reorderdown'];
 
     // Render the main template
     fragment.appendChild(this._elements.remove);
     fragment.appendChild(this._elements.move);
+    fragment.appendChild(this._elements.reorderup);
+    fragment.appendChild(this._elements.reorderdown);
 
     const content = this._elements.content;
 

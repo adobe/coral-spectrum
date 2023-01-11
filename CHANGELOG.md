@@ -1,3 +1,46 @@
+## [4.15.9](https://github.com/adobe/coral-spectrum/compare/v4.15.8...v4.15.9) (2022-12-13)
+
+
+### Bug Fixes
+
+* **GRANITE-37303:** Move Multifield should have button instead of drag ([#270](https://github.com/adobe/coral-spectrum/issues/270)) ([fd92b40](https://github.com/adobe/coral-spectrum/commit/fd92b40139fa080b67c0ab32f88fdc1f4456815f))
+
+## [4.15.8](https://github.com/adobe/coral-spectrum/compare/v4.15.7...v4.15.8) (2022-12-01)
+
+
+### Bug Fixes
+
+* Correct build ([#266](https://github.com/adobe/coral-spectrum/issues/266)) ([0e7e535](https://github.com/adobe/coral-spectrum/commit/0e7e535272dd6da582f14d93af64af3d55a09004))
+* **GRANITE-42603:** Multifield component does not provide support for readonly ([#257](https://github.com/adobe/coral-spectrum/issues/257)) ([952936f](https://github.com/adobe/coral-spectrum/commit/952936f10e1988e3eeb412b2a438bb8502c6e657))
+
+## [4.15.7](https://github.com/adobe/coral-spectrum/compare/v4.15.6...v4.15.7) (2022-11-07)
+
+
+### Bug Fixes
+
+* **Granite 37225:** Autocomplete items containing HTML character references don't render when selected with arrow keys ([#253](https://github.com/adobe/coral-spectrum/issues/253)) ([dbac744](https://github.com/adobe/coral-spectrum/commit/dbac744acd5f7204bd1ebb8f84fbfec4b52c9143))
+
+## [4.15.6](https://github.com/adobe/coral-spectrum/compare/v4.15.5...v4.15.6) (2022-11-02)
+
+
+### Bug Fixes
+
+* **#249:** [Masonry][Accessibility] Files: Main Navigation (Card View) - Selected state of the folder is not announced to the screen reader ([#250](https://github.com/adobe/coral-spectrum/issues/250)) ([ff33df1](https://github.com/adobe/coral-spectrum/commit/ff33df1c9603a47156355aaa32fe647d28b8334e)), closes [#249](https://github.com/adobe/coral-spectrum/issues/249) [#244](https://github.com/adobe/coral-spectrum/issues/244) [#249](https://github.com/adobe/coral-spectrum/issues/249)
+
+## [4.15.5](https://github.com/adobe/coral-spectrum/compare/v4.15.4...v4.15.5) (2022-11-02)
+
+
+### Bug Fixes
+
+* **ASSETS-5344:** slider track visibility in windows high contrast modes ([#254](https://github.com/adobe/coral-spectrum/issues/254)) ([07f5793](https://github.com/adobe/coral-spectrum/commit/07f579300041efa8c927732129178c4803d042a8))
+
+## [4.15.4](https://github.com/adobe/coral-spectrum/compare/v4.15.3...v4.15.4) (2022-10-19)
+
+
+### Bug Fixes
+
+* **ASSETS-6851:** The selected state of the action button does not have a sufficient contrast ratio ([#251](https://github.com/adobe/coral-spectrum/issues/251)) ([f64ae67](https://github.com/adobe/coral-spectrum/commit/f64ae67cd594f5c875732d2baeaf12915a0228a2))
+
 ## [4.15.3](https://github.com/adobe/coral-spectrum/compare/v4.15.2...v4.15.3) (2022-10-11)
 
 

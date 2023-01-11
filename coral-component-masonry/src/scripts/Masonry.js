@@ -226,12 +226,18 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     this._selectionMode = validate.enumeration(selectionMode)(value) && value || selectionMode.NONE;
     this._reflectAttribute('selectionmode', this._selectionMode);
 
+    const isGrid = this.ariaGrid === ariaGrid.ON && this.parentElement;
+
     if (this._selectionMode === selectionMode.NONE) {
       this.classList.remove('is-selectable');
-      this.removeAttribute('aria-multiselectable');
+      if (isGrid) {
+        this.parentElement.removeAttribute('aria-multiselectable');
+      }
     } else {
       this.classList.add('is-selectable');
-      this.setAttribute('aria-multiselectable', this._selectionMode === selectionMode.MULTIPLE);
+      if (isGrid) {
+        this.parentElement.setAttribute('aria-multiselectable', this._selectionMode === selectionMode.MULTIPLE);
+      }
     }
 
     this._validateSelection();
@@ -295,7 +301,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
 
     // @a11y only persist the checked state on macOS,
     // where VoiceOver does not announce the selected state for a gridcell.
-    accessibilityState.hidden = true;
+    accessibilityState.hidden = !isMacLike || !self.selected;
     if (!isMacLike || !self.selected) {
       accessibilityState.innerHTML = '';
     }
@@ -543,6 +549,12 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
         this._preservedParentAriaLabelledby = this.parentElement.getAttribute('aria-labelledby');
         this.parentElement.setAttribute('aria-labelledby', this.ariaLabelledby);
       }
+
+      if (this._selectionMode === selectionMode.NONE) {
+        this.parentElement.removeAttribute('aria-multiselectable');
+      } else {
+        this.parentElement.setAttribute('aria-multiselectable', this._selectionMode === selectionMode.MULTIPLE);
+      }
     } else {
       // Restore/remove role of the parent element
       if (this._preservedParentAriaRole) {
@@ -567,6 +579,9 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
 
       // Remove aria-colcount
       this.parentElement.removeAttribute('aria-colcount');
+
+      // Remove aria-multiselectable
+      this.parentElement.removeAttribute('aria-multiselectable');
     }
   }
 
@@ -583,9 +598,15 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     if (activateAriaGrid === ariaGrid.ON) {
       item.setAttribute('role', 'gridcell');
       item.setAttribute('aria-colindex', columnIndex);
+
+      // communicate aria-selected state of all cells
+      if (this.selectionMode !== selectionMode.NONE || this.parentElement.hasAttribute('aria-multiselectable')) {
+        item.setAttribute('aria-selected', item.selected);
+      }
     } else {
       item.removeAttribute('role');
       item.removeAttribute('aria-colindex');
+      item.removeAttribute('aria-selected');
     }
   }
 
@@ -606,10 +627,13 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     const selectedItems = this.selectedItems;
 
     if (this.selectionMode === selectionMode.NONE) {
-      selectedItems.forEach((selectedItem) => {
+      this.items.getAll().forEach((item) => {
         // Don't trigger change events
         this._preventTriggeringEvents = true;
-        selectedItem.removeAttribute('selected');
+        if (item.selected) {
+          item.removeAttribute('selected');
+        }
+        item.removeAttribute('aria-selected');
       });
     } else if (this.selectionMode === selectionMode.SINGLE) {
       // Last selected item wins if multiple selection while not allowed
