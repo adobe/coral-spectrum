@@ -11,7 +11,7 @@
  */
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
-import {tracking, i18n} from '../../../coral-utils';
+import {tracking, i18n, commons} from '../../../coral-utils';
 import {Multifield} from '../../../coral-component-multifield';
 
 describe('Multifield', function () {
@@ -734,7 +734,7 @@ describe('Multifield', function () {
         const items = el.items.getAll();
         const setsize = items.length;
         const itemFocused = items[setsize - 1];
-        const inputItemFocused = itemFocused.querySelector('coral-multifield-item-content > input');
+        const inputItemFocused = itemFocused.querySelector(commons.TABBABLE_ELEMENT_SELECTOR);
         const hasFocus = document.activeElement === inputItemFocused;
         expect(hasFocus).to.be.true;
         done();

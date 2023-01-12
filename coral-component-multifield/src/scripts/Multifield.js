@@ -307,7 +307,7 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
         const items = this.items.getAll();
         const setsize = items.length;
         const itemToFocus = items[setsize - 1];
-        const inputItem = itemToFocus.querySelector("coral-multifield-item-content > input");
+        const inputItem = itemToFocus.querySelector(commons.TABBABLE_ELEMENT_SELECTOR);
         inputItem.focus();
       });
     }
