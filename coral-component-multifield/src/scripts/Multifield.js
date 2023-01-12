@@ -303,13 +303,13 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
 
         this._trackEvent('click', 'add item button', event);
 
-        // Focus the newly created input
+        // Focus the newly created input if it can receive focus
         const items = this.items.getAll();
         const setsize = items.length;
         const itemToFocus = items[setsize - 1];
         const inputItem = itemToFocus.querySelector(commons.TABBABLE_ELEMENT_SELECTOR);
 
-        if (inputItem.hasAttribute('disabled') || inputItem.hasAttribute('hidden')) {
+        if (inputItem.hasAttribute('disabled')) {
           return;
         } else {
           inputItem.focus();
