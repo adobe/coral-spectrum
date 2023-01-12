@@ -308,7 +308,12 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
         const setsize = items.length;
         const itemToFocus = items[setsize - 1];
         const inputItem = itemToFocus.querySelector(commons.TABBABLE_ELEMENT_SELECTOR);
-        inputItem.focus();
+
+        if (inputItem.hasAttribute('disabled') || inputItem.hasAttribute('hidden')) {
+          return;
+        } else {
+          inputItem.focus();
+        }
       });
     }
   }

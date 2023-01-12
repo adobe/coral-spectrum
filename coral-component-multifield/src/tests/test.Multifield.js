@@ -735,8 +735,13 @@ describe('Multifield', function () {
         const setsize = items.length;
         const itemFocused = items[setsize - 1];
         const inputItemFocused = itemFocused.querySelector(commons.TABBABLE_ELEMENT_SELECTOR);
-        const hasFocus = document.activeElement === inputItemFocused;
-        expect(hasFocus).to.be.true;
+        if (inputItemFocused.hasAttribute('disabled') || inputItemFocused.hasAttribute('hidden')) {
+          const hasFocus = document.activeElement === inputItemFocused;
+          expect(hasFocus).to.be.false;
+        } else {
+          const hasFocus = document.activeElement === inputItemFocused;
+          expect(hasFocus).to.be.true;
+        }
         done();
       });
     });
