@@ -733,13 +733,13 @@ describe('Multifield', function () {
       helpers.next(function() {
         const items = el.items.getAll();
         const setsize = items.length;
-        const itemFocused = items[setsize - 1];
-        const inputItemFocused = itemFocused.querySelector(commons.TABBABLE_ELEMENT_SELECTOR);
-        if (inputItemFocused.hasAttribute('disabled')) {
-          const hasFocus = document.activeElement === inputItemFocused;
+        const itemToFocus = items[setsize - 1];
+        const focusableItem = itemToFocus.querySelector(commons.TABBABLE_ELEMENT_SELECTOR);
+        if (focusableItem.hasAttribute('disabled')) {
+          const hasFocus = document.activeElement === focusableItem;
           expect(hasFocus).to.be.false;
         } else {
-          const hasFocus = document.activeElement === inputItemFocused;
+          const hasFocus = document.activeElement === focusableItem;
           expect(hasFocus).to.be.true;
         }
         done();
