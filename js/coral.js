@@ -65337,7 +65337,22 @@ var Coral = (function (exports) {
           window.requestAnimationFrame(function () {
             _this2.trigger('change');
 
-            _this2._trackEvent('click', 'add item button', event);
+            _this2._trackEvent('click', 'add item button', event); // Focus the newly created input if it can receive focus
+
+
+            var addBtn = event.target;
+
+            var items = _this2.items.getAll();
+
+            var setsize = items.length;
+            var itemToFocus = items[setsize - 1];
+            var focusableItem = itemToFocus.querySelector(commons.TABBABLE_ELEMENT_SELECTOR);
+
+            if (focusableItem.hasAttribute('disabled')) {
+              addBtn.focus();
+            } else {
+              focusableItem.focus();
+            }
           });
         }
       }
@@ -85180,7 +85195,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.15.8";
+  var version$1 = "4.15.9";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

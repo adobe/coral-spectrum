@@ -738,6 +738,19 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
         this.trigger(&apos;change&apos;);
 
         this._trackEvent(&apos;click&apos;, &apos;add item button&apos;, event);
+
+        // Focus the newly created input if it can receive focus
+        var addBtn = event.target;
+        const items = this.items.getAll();
+        const setsize = items.length;
+        const itemToFocus = items[setsize - 1];
+        const focusableItem = itemToFocus.querySelector(commons.TABBABLE_ELEMENT_SELECTOR);
+
+        if (focusableItem.hasAttribute(&apos;disabled&apos;)) {
+          addBtn.focus();
+        } else {
+          focusableItem.focus();
+        }
       });
     }
   }
