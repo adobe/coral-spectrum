@@ -1,3 +1,10 @@
+## [4.15.10](https://github.com/adobe/coral-spectrum/compare/v4.15.9...v4.15.10) (2023-01-18)
+
+
+### Bug Fixes
+
+* **ASSETS-6927:** Upon invoking the “Add” button present in the page, focus is not shifted to the newly identified field. ([#252](https://github.com/adobe/coral-spectrum/issues/252)) ([a1c9593](https://github.com/adobe/coral-spectrum/commit/a1c95932e501fc38a43fa02ad2fe29323b4da52f))
+
 ## [4.15.9](https://github.com/adobe/coral-spectrum/compare/v4.15.8...v4.15.9) (2022-12-13)
 
 
