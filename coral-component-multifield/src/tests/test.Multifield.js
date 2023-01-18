@@ -11,7 +11,7 @@
  */
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
-import {tracking, i18n} from '../../../coral-utils';
+import {tracking, i18n, commons} from '../../../coral-utils';
 import {Multifield} from '../../../coral-component-multifield';
 
 describe('Multifield', function () {
@@ -724,6 +724,25 @@ describe('Multifield', function () {
           expect(el.getAttribute('role')).to.be.null;
           done();
         });
+      });
+    });
+
+    it('should focus the input in item after adding new item', function (done) {
+      const el = helpers.build(window.__html__['Multifield.base.html']);
+      el.querySelector('[coral-multifield-add]').click();
+      helpers.next(function() {
+        const items = el.items.getAll();
+        const setsize = items.length;
+        const itemToFocus = items[setsize - 1];
+        const focusableItem = itemToFocus.querySelector(commons.TABBABLE_ELEMENT_SELECTOR);
+        if (focusableItem.hasAttribute('disabled')) {
+          const hasFocus = document.activeElement === focusableItem;
+          expect(hasFocus).to.be.false;
+        } else {
+          const hasFocus = document.activeElement === focusableItem;
+          expect(hasFocus).to.be.true;
+        }
+        done();
       });
     });
 
