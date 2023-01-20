@@ -4,7 +4,7 @@ var labelId = data.commons.getUID();
 <div handle="contentWrapper">
   <label class="u-coral-screenReaderOnly" id="{{labelId}}">{{data.i18n.get('Search for Help')}}</label>
   <coral-search class="_coral-Shell-help-search" handle="search" placeholder="{{data.i18n.get('Search for Help')}}" labelledby="{{labelId}}"></coral-search>
-  <div class="_coral-Shell-help-items" handle="items"></div>
+  <ul class="_coral-Shell-help-items" handle="items"></ul>
   <coral-anchorlist class="_coral-Shell-help-results" handle="results" hidden></coral-anchorlist>
   <div class="_coral-Shell-help-resultMessage" handle="resultMessage" role="status" hidden></div>
   <div class="_coral-Shell-help-loading" handle="loading" role="status" hidden>
