@@ -23,7 +23,7 @@ describe('SelectList.Item', function () {
   describe('Instantiation', function () {
     function testDefaultInstance(el) {
       expect(el.classList.contains('_coral-Menu-item')).to.be.true;
-      expect(el.getAttribute('role')).to.equal('option');
+      expect(el.getAttribute('role')).to.equal('listitem');
     }
 
     it('should be possible using new', function () {

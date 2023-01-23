@@ -221,7 +221,7 @@ const SelectListItem = Decorator(class extends BaseComponent(HTMLElement) {
     this.classList.add(CLASSNAME);
 
     if (!this.hasAttribute('role')) {
-      this.setAttribute('role', 'option');
+      this.setAttribute('role', 'listitem');
     }
 
     // Support cloneNode

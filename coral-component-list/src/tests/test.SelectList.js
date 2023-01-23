@@ -17,7 +17,7 @@ describe('SelectList', function () {
   describe('Instantiation', function () {
     function testDefaultInstance(el) {
       expect(el.classList.contains('_coral-Menu')).to.be.true;
-      expect(el.getAttribute('role')).equal('listbox');
+      expect(el.getAttribute('role')).equal('list');
     }
 
     it('should be possible using new', function () {
