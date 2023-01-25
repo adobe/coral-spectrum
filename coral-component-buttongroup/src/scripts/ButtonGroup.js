@@ -543,7 +543,13 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
         item.setAttribute('role', 'radio');
         item.setAttribute('tabindex', item.hasAttribute('selected') ? 0 : -1);
       } else {
-        item.setAttribute('role', 'checkbox');
+         if((item.getAttribute('data-action') === '#lists')) {
+            item.setAttribute('role', 'Lists');
+          } else if ((item.getAttribute('data-action') === 'links#modifylink')) {
+            item.setAttribute('role', 'Hyperlink');
+          } else {
+            item.setAttribute('role', 'checkbox');
+          }
       }
       item.setAttribute('aria-checked', item.hasAttribute('selected'));
     } else {
