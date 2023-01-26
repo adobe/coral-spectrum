@@ -544,9 +544,9 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
         item.setAttribute('tabindex', item.hasAttribute('selected') ? 0 : -1);
       } else {
          if((item.getAttribute('data-action') === '#lists')) {
-            item.setAttribute('role', 'Lists');
+            item.setAttribute('role', 'list');
           } else if ((item.getAttribute('data-action') === 'links#modifylink')) {
-            item.setAttribute('role', 'Hyperlink');
+            item.setAttribute('role', 'link');
           } else {
             item.setAttribute('role', 'checkbox');
           }
