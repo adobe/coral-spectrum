@@ -28,7 +28,12 @@ coral-shell-content {
   right: 0;
 
   -webkit-overflow-scrolling: touch;
-  overflow: auto;
+}
+
+@media screen and (max-width: 480px){
+  coral-shell-content {
+    overflow-x: hidden;
+  }
 }
 
 @require 'header';
