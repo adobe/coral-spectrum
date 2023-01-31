@@ -24399,7 +24399,11 @@ coral-quickactions-item {
 coral-shell-content {
   top: 48px;
   -webkit-overflow-scrolling: touch;
-  overflow: auto;
+}
+@media screen and (max-width: 480px) {
+  coral-shell-content {
+    overflow-x: hidden;
+  }
 }
 ._coral-Shell-header {
   display: block;
