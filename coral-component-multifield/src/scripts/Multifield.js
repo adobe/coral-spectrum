@@ -751,6 +751,9 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     // a11y
     this._handleRoleList();
 
+    // a11y Add aria-label to the add button to give context to screen reader users
+    $("[coral-multifield-add]").attr("aria-label","Add a new item to the options list");
+
     // Assign the content zones, moving them into place in the process
     this.template = this._elements.template;
 
