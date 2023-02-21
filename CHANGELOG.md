@@ -1,3 +1,10 @@
+## [4.15.11](https://github.com/adobe/coral-spectrum/compare/v4.15.10...v4.15.11) (2023-02-21)
+
+
+### Bug Fixes
+
+* **ASSETS-5617:** [Screen Readers-AEM Dynamic Media-Image Set Editor]: Screen readers are not narrating the descriptive information for the 'Swatches list items' which are present after 'Full Screen' button in the 'lmage Set Editor' page ([#256](https://github.com/adobe/coral-spectrum/issues/256)) ([a128e83](https://github.com/adobe/coral-spectrum/commit/a128e83c10840eb67beaaa596ac6ad5b0ccc442b))
+
 ## [4.15.10](https://github.com/adobe/coral-spectrum/compare/v4.15.9...v4.15.10) (2023-01-18)
 
 
