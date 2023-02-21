@@ -145,7 +145,7 @@
               <article>
                 <span coral-masonry-draghandle></span>
                 With image
-                <img src="http://via.placeholder.com/600x300" alt="600 × 300" />
+                <img src="https://via.placeholder.com/600x300" alt="600 × 300" />
               </article>
             </coral-masonry-item>
             <coral-masonry-item class="coral-Well">
@@ -234,7 +234,6 @@
                 item.id = getUID();
               }
               article.id = article.id || item.id + '-content';
-              item.setAttribute('aria-labelledby', article.id);
             });
 
             const ariaGridSelector = document.getElementById('ariaGrid');
@@ -301,11 +300,10 @@
               const contentId = id + '-content';
               const width = randomSize();
               const height = randomSize();
-              const url = 'http://via.placeholder.com/' + width + 'x' + height;
+              const url = 'https://via.placeholder.com/' + width + 'x' + height;
 
               const item = document.createElement('coral-masonry-item');
               item.id = id;
-              item.setAttribute('aria-labelledby', contentId);
               item.classList.add('coral-Well');
               item.content.innerHTML = '<img id="' + contentId + '" alt="' + width + ' × ' + height + '" src="' + url + '" style="width: ' + (width / 2) + 'px; height: ' + (height / 2) + 'px;">';
 
@@ -320,7 +318,6 @@
 
               const item = document.createElement('coral-masonry-item');
               item.id = id;
-              item.setAttribute('aria-labelledby', contentId);
               item.classList.add('coral-Well');
               item.content.innerHTML = '<article role="presentation" id="' + contentId + '">' + html + '</article>';
               return item;

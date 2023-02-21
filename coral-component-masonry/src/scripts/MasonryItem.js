@@ -246,17 +246,17 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
       if (!accessibilityState.parentNode) {
         this.appendChild(accessibilityState);
       }
+
+      // @a11y Item should be labelled by accessibility state.
+      if (isMacLike) {
+        const ariaLabelledby = this.getAttribute('aria-labelledby');
+        if (ariaLabelledby) {
+          this.setAttribute('aria-labelledby', ariaLabelledby + ' ' + accessibilityState.id);
+        }
+      }
     });
 
     this._elements.accessibilityState = accessibilityState;
-
-    // @a11y Item should be labelled by accessibility state.
-    if (isMacLike) {
-      const ariaLabelledby = this.getAttribute('aria-labelledby');
-      if (ariaLabelledby) {
-        this.setAttribute('aria-labelledby', ariaLabelledby + ' ' + accessibilityState.id);
-      }
-    }
 
     // Support cloneNode
     const template = this.querySelector('._coral-Masonry-item-quickActions');
@@ -266,6 +266,7 @@ const MasonryItem = Decorator(class extends BaseComponent(HTMLElement) {
     this.insertBefore(this._elements.quickactions, this.firstChild);
     // todo workaround to not give user possibility to tab into checkbox
     this._elements.check._labellableElement.tabIndex = -1;
+    this._elements.check.setAttribute('aria-hidden', 'true');
   }
 
   /** @ignore */

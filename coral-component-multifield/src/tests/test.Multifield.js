@@ -11,7 +11,7 @@
  */
 
 import {helpers} from '../../../coral-utils/src/tests/helpers';
-import {tracking, i18n} from '../../../coral-utils';
+import {tracking, i18n, commons} from '../../../coral-utils';
 import {Multifield} from '../../../coral-component-multifield';
 
 describe('Multifield', function () {
@@ -58,18 +58,18 @@ describe('Multifield', function () {
 
     describe('#min', function () {
       it('remaining items should be added when items count less than min value', function () {
-        var el = helpers.build(window.__html__['Multifield.base.min.html']);
+        var el = helpers.build(window.__html__['Multifield.min.html']);
         expect(el.items.length).to.be.equal(el.min);
       });
 
       it('remaining items should be added when min value increased to more than items count', function () {
-        var el = helpers.build(window.__html__['Multifield.base.min.html']);
+        var el = helpers.build(window.__html__['Multifield.min.html']);
         el.min = 5;
         expect(el.items.length).to.be.equal(5);
       });
 
       it('no items should be added when min value decreased to less than items count', function () {
-        var el = helpers.build(window.__html__['Multifield.base.min.html']);
+        var el = helpers.build(window.__html__['Multifield.min.html']);
         var initialCount = el.items.length;
         el.min = initialCount - 1;
         expect(initialCount).to.be.equal(3);
@@ -93,8 +93,8 @@ describe('Multifield', function () {
         expect(el.items.length).to.be.equal(2);
       });
 
-      it('items should not be deletable when count less than or equal to min', function (done) {
-        var el = helpers.build(window.__html__['Multifield.base.min.html']);
+      it('items should not be deletable when item count less than or equal to min', function (done) {
+        var el = helpers.build(window.__html__['Multifield.min.html']);
         var initialCount = el.items.length;
 
         expect(initialCount).to.be.equal(el.min);
@@ -117,8 +117,8 @@ describe('Multifield', function () {
         });
       });
 
-      it('items should be deletable when count greater than min', function (done) {
-        var el = helpers.build(window.__html__['Multifield.base.min.html']);
+      it('items should be deletable when item count greater than min', function (done) {
+        var el = helpers.build(window.__html__['Multifield.min.html']);
 
         // initial min validation takes 1 frame
         helpers.next(function() {
@@ -131,7 +131,7 @@ describe('Multifield', function () {
       });
 
       it('toggle items deletable state when items added from button click', function (done) {
-        var el = helpers.build(window.__html__['Multifield.base.min.html']);
+        var el = helpers.build(window.__html__['Multifield.min.html']);
         el.querySelector('[coral-multifield-add]').click();
         // MO execution
         helpers.next(function() {
@@ -143,7 +143,7 @@ describe('Multifield', function () {
       });
 
       it('toggle items deletable state when items removed from button click and items count equal to min', function (done) {
-        var el = helpers.build(window.__html__['Multifield.base.min.html']);
+        var el = helpers.build(window.__html__['Multifield.min.html']);
 
         el.min = 2;
 
@@ -157,6 +157,95 @@ describe('Multifield', function () {
         });
       });
     });
+
+    describe("#readonly", function() {
+      it("readOnly property and attribute should be true when readonly is set", function() {
+        var el = helpers.build(window.__html__['Multifield.readonly.html']);
+        
+        expect(el.readOnly).to.be.true;
+        expect(el.hasAttribute('readonly')).to.be.true;
+      });
+
+      it("should disable add, remove and move buttons when readonly is set", function() {
+        var el = helpers.build(window.__html__['Multifield.readonly.html']);
+        
+        expect(el.querySelector('[coral-multifield-add]').disabled).to.be.true;
+
+        el.items.getAll().forEach(function(item) {
+          expect(item.querySelector('[coral-multifield-move]').disabled).to.be.true;
+          expect(item.querySelector('[coral-multifield-remove]').disabled).to.be.true;
+        });
+      });
+
+      it("should enable add, remove and move buttons when readonly is unset", function() {
+        var el = helpers.build(window.__html__['Multifield.readonly.html']);
+        
+        el.readOnly = false;
+        expect(el.querySelector('[coral-multifield-add]').disabled).to.be.false;
+
+        el.items.getAll().forEach(function(item) {
+          expect(item.querySelector('[coral-multifield-move]').disabled).to.be.false;
+          expect(item.querySelector('[coral-multifield-remove]').disabled).to.be.false;
+        });
+      });
+
+      it("editable fields in multifield should be readable when reaadonly is set", function(done) {
+        var el = helpers.build(window.__html__['Multifield.readonly.html']);
+
+        helpers.next(() => {
+          el.items.getAll().forEach((item) => {
+            var allFields = item.content.querySelectorAll("*");
+
+            Array.prototype.forEach.call(allFields, (field) => {
+              if(typeof field.readOnly === "boolean") {
+                console.log(field);
+                expect(field.readOnly).to.be.true;
+              }
+            });
+          });
+          done();
+        });
+      });
+
+      it("multifield template fields should not be affected when readonly is set", function() {
+        var el = helpers.build(window.__html__['Multifield.readonly.html']);
+
+        var template = el.querySelector('template');
+
+        var allFields = template.querySelectorAll("*");
+
+        Array.prototype.forEach.call(allFields, (field) => {
+          if(typeof field.readOnly === "boolean") {
+            expect(field.readOnly).to.be.false;
+          }
+        });
+      });
+
+      it("should add item with disabled move and remove button when readonly is set and item count less than min", function() {
+        var el = helpers.build(`
+          <coral-multifield readOnly min="3">
+            <coral-multifield-item>
+              <input type="text" value="Hello"/>
+            </coral-multifield-item>
+            <coral-multifield-item>
+              <input type="text" value="World"/>
+            </coral-multifield-item>
+            <button coral-multifield-add type="button" is="coral-button">Add a field</button>
+            <template coral-multifield-template>
+              <input type="text"/>
+            </template>
+          </coral-multifield>
+        `);
+        
+        expect(el.querySelector('[coral-multifield-add]').disabled).to.be.true;
+        expect(el.items.getAll().length).to.be.equal(3);
+
+        el.items.getAll().forEach(function(item) {
+          expect(item.querySelector('[coral-multifield-move]').disabled).to.be.true;
+          expect(item.querySelector('[coral-multifield-remove]').disabled).to.be.true;
+        });
+      });
+    })
 
     describe('#template', function () {
     });
@@ -345,6 +434,26 @@ describe('Multifield', function () {
 
       // when the last item is removed, focus should be restored to the add button
       expect(el.querySelector('[coral-multifield-add]')).to.equal(document.activeElement);
+    });
+
+    describe('#reorderupdown', function() {
+      it('should move up if up button is clicked', function() {
+        const el = helpers.build(window.__html__['Multifield.redorderupdown.html']);
+        el.items.getAll()[1].querySelector('[coral-multifield-up]').click();
+
+        expect(el.items.length).to.equal(2);
+        expect(el.items.getAll()[0].querySelector('input').value).equal('London');
+        expect(el.items.getAll()[1].querySelector('input').value).equal('Basel');
+      });
+
+      it('should move down if down button is clicked', function() {
+        const el = helpers.build(window.__html__['Multifield.redorderupdown.html']);
+        el.items.getAll()[0].querySelector('[coral-multifield-down]').click();
+
+        expect(el.items.length).to.equal(2);
+        expect(el.items.getAll()[0].querySelector('input').value).equal('London');
+        expect(el.items.getAll()[1].querySelector('input').value).equal('Basel');
+      });
     });
   });
 
@@ -615,6 +724,25 @@ describe('Multifield', function () {
           expect(el.getAttribute('role')).to.be.null;
           done();
         });
+      });
+    });
+
+    it('should focus the input in item after adding new item', function (done) {
+      const el = helpers.build(window.__html__['Multifield.base.html']);
+      el.querySelector('[coral-multifield-add]').click();
+      helpers.next(function() {
+        const items = el.items.getAll();
+        const setsize = items.length;
+        const itemToFocus = items[setsize - 1];
+        const focusableItem = itemToFocus.querySelector(commons.TABBABLE_ELEMENT_SELECTOR);
+        if (focusableItem.hasAttribute('disabled')) {
+          const hasFocus = document.activeElement === focusableItem;
+          expect(hasFocus).to.be.false;
+        } else {
+          const hasFocus = document.activeElement === focusableItem;
+          expect(hasFocus).to.be.true;
+        }
+        done();
       });
     });
 

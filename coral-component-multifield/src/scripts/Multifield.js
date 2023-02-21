@@ -55,6 +55,8 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
       'key:home [coral-multifield-move]': '_onMoveItemHome',
       'key:end [coral-multifield-move]': '_onMoveItemEnd',
       'key:esc [coral-multifield-move]': '_onMoveItemEsc',
+      'click [coral-multifield-up]': '_onUpClick',
+      'click [coral-multifield-down]': '_onDownClick',
       'capture:blur [coral-multifield-move]': '_onBlurDragHandle',
       'change coral-multifield-item-content > input': '_onInputChange'
     };
@@ -152,6 +154,33 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   /**
+   Whether this multifield is readOnly or not. Indicating that the user cannot modify the value of the multifield fields.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   */
+   get readOnly() {
+    return this._readOnly || false;
+  }
+
+  set readOnly(value) {
+    value = transform.booleanAttr(value);
+    this._readOnly = value;
+    this._reflectAttribute('readonly', value);
+
+    this.items.getAll().forEach((item) => {
+      item[value ? 'setAttribute' : 'removeAttribute']('_readonly', '');
+    });
+
+    let addBtn = this.querySelector('[coral-multifield-add]');
+    if (addBtn) {
+      addBtn.disabled = value;
+    }
+
+  }
+
+  /**
     Specifies the minimum number of items multifield should render.
     If component contains less items, remaining items will be added.
 
@@ -175,6 +204,30 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     }
   }
 
+  static get _attributePropertyMap() {
+    return commons.extend(super._attributePropertyMap, {
+      reorderupdown: 'reorderUpDown',
+      readonly: 'readOnly'
+    });
+  }
+
+  /**
+   Whether this multifield require up and down buttons.
+   @type {Boolean}
+   @default false
+   @htmlattribute reorderupdown
+   @htmlattributereflected
+   */
+  get reorderUpDown() {
+    return this._reorderUpDown || false;
+  }
+
+  set reorderUpDown(value) {
+     value = transform.booleanAttr(value);
+     this._reorderUpDown = value;
+     this._reflectAttribute('reorderupdown', value);
+  }
+
   /**
    * Validates minimum items required. will add items, if validation fails.
    * @param schedule schedule validation in next frame
@@ -193,8 +246,11 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
         let itemsToBeAdded = currentMin - currentLength;
 
         for(let i = 0; i < itemsToBeAdded; i++) {
-          items.add(document.createElement('coral-multifield-item'));
+          let item = document.createElement('coral-multifield-item');
+          items.add(item);
+          item._readOnly = this.readOnly;
         }
+
         deletable = !deletable;
       }
 
@@ -246,6 +302,19 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
         this.trigger('change');
 
         this._trackEvent('click', 'add item button', event);
+
+        // Focus the newly created input if it can receive focus
+        var addBtn = event.target;
+        const items = this.items.getAll();
+        const setsize = items.length;
+        const itemToFocus = items[setsize - 1];
+        const focusableItem = itemToFocus.querySelector(commons.TABBABLE_ELEMENT_SELECTOR);
+
+        if (focusableItem.hasAttribute('disabled')) {
+          addBtn.focus();
+        } else {
+          focusableItem.focus();
+        }
       });
     }
   }
@@ -556,6 +625,24 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     }
   }
 
+  /** @ignore */
+  _onUpClick(event) {
+    const upHandle = event.matchedTarget;
+    const shiftElement = upHandle.closest('coral-multifield-item');
+    if(shiftElement.previousElementSibling.tagName === 'CORAL-MULTIFIELD-ITEM') {
+      this.insertBefore(shiftElement, shiftElement.previousElementSibling);
+    }
+  }
+
+  /** @ignore */
+  _onDownClick(event) {
+    const upHandle = event.matchedTarget;
+    const shiftElement = upHandle.closest('coral-multifield-item');
+    if(shiftElement.nextElementSibling.tagName === 'CORAL-MULTIFIELD-ITEM') {
+      this.insertBefore(shiftElement.nextElementSibling, shiftElement);
+    }
+  }
+
   /** @private */
   _onItemAdded(item) {
     const self = this;
@@ -649,7 +736,9 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
-      'min'
+      'min',
+      'readonly',
+      'reorderupdown'
     ]);
   }
 
