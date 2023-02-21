@@ -75294,6 +75294,13 @@ var Coral = (function (exports) {
 
         if (!this.hasAttribute('aria-label') && !this.hasAttribute('aria-labelledby')) {
           this.setAttribute('aria-label', i18n.get('Step List'));
+        } // the screen reader should not navigate to hidden element
+        // the element is hidden if has only one child
+
+
+        if (this.items.length === 1) {
+          this.setAttribute('aria-hidden', 'true');
+          this.interaction = StepList.interaction.OFF;
         } // Don't trigger events once connected
 
 

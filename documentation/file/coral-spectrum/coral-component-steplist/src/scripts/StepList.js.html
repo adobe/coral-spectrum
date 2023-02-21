@@ -990,6 +990,13 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
       this.setAttribute(&apos;aria-label&apos;, i18n.get(&apos;Step List&apos;));
     }
 
+    // the screen reader should not navigate to hidden element
+    // the element is hidden if has only one child
+    if (this.items.length === 1) {
+      this.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
+      this.interaction = StepList.interaction.OFF;
+    }
+
     // Don&apos;t trigger events once connected
     this._preventTriggeringEvents = true;
     this._validateSelection();
