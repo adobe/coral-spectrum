@@ -558,9 +558,7 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
     // the element is hidden if has only one child
     if (this.items.length === 1) {
       this.setAttribute('aria-hidden', 'true');
-      // set tabindex attribute to -1 to the only child
-      const stepItems = this.items.getAll();
-      stepItems[0].setAttribute('tabindex', '-1');
+      this.interaction = StepList.interaction.OFF;
     }
 
     // Don't trigger events once connected
