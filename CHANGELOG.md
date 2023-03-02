@@ -1,3 +1,10 @@
+## [4.15.12](https://github.com/adobe/coral-spectrum/compare/v4.15.11...v4.15.12) (2023-03-02)
+
+
+### Bug Fixes
+
+* **CQ-4273759:** Added aria-label to multifield add new item button ([#281](https://github.com/adobe/coral-spectrum/issues/281)) ([ecf34e1](https://github.com/adobe/coral-spectrum/commit/ecf34e1ed67f18cc0fc49f22b574423bfb2a77b9))
+
 ## [4.15.11](https://github.com/adobe/coral-spectrum/compare/v4.15.10...v4.15.11) (2023-02-21)
 
 
