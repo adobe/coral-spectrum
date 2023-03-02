@@ -65842,7 +65842,14 @@ var Coral = (function (exports) {
 
         this.classList.add(CLASSNAME$12, 'coral-Well'); // a11y
 
-        this._handleRoleList(); // Assign the content zones, moving them into place in the process
+        this._handleRoleList(); // a11y Add aria-label to the add button if exists to give context to screen reader users
+
+
+        var coralMultifieldAddBtn = this.querySelector('[coral-multifield-add]');
+
+        if (coralMultifieldAddBtn) {
+          coralMultifieldAddBtn.setAttribute("aria-label", "Add");
+        } // Assign the content zones, moving them into place in the process
 
 
         this.template = this._elements.template; // Prepare items content based on the given template
@@ -85202,7 +85209,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.15.10";
+  var version$1 = "4.15.11";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
