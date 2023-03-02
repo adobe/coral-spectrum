@@ -751,6 +751,12 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     // a11y
     this._handleRoleList();
 
+    // a11y Add aria-label to the add button if exists to give context to screen reader users
+    const coralMultifieldAddBtn = this.querySelector('[coral-multifield-add]');
+    if (coralMultifieldAddBtn){
+      coralMultifieldAddBtn.setAttribute("aria-label","Add");
+    }
+
     // Assign the content zones, moving them into place in the process
     this.template = this._elements.template;
 
