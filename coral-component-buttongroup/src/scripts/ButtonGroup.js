@@ -356,6 +356,10 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
     // uses matchTarget to make sure the buttons is handled and not an internal component
     const item = event.matchedTarget;
 
+    if(item.hasAttribute("aria-expanded")){
+      item.getAttribute("aria-expanded") === "false" ? item.setAttribute("aria-expanded", "true") : item.setAttribute("aria-expanded", "false");
+    }
+
     this._onButtonFocus(event);
 
     if (this.readOnly) {
@@ -413,6 +417,10 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
     const item = event.matchedTarget;
     const buttons = this.items.getAll();
     const buttonsCount = buttons.length;
+
+    if(item.hasAttribute("aria-expanded")){
+      item.setAttribute("aria-expanded", "false");
+    }
 
     let button;
     let tabindex;
@@ -564,6 +572,14 @@ const ButtonGroup = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
         item.removeAttribute('selected');
       }
     }
+
+    const selector = "coral-icon[icon='chevronDown']";
+    const selectedItem = $(item).find(selector);
+
+    if ($(selectedItem).length > 0) {
+      item.setAttribute('aria-expanded', "false" );
+    }
+
   }
 
   /** @private */
