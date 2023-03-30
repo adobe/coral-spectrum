@@ -163,6 +163,7 @@ describe('Shell.User', function () {
         var user = helpers.build('<coral-shell-user></coral-shell-user>');
         expect(user.avatar).to.equal(Shell.User.avatar.DEFAULT);
         expect(user._elements.avatar.classList.contains('_coral-Shell-user-avatar')).to.be.true;
+        expect(user._elements.avatar.hasAttribute("alt"));
       });
 
       it('should set the new avatar', function () {
