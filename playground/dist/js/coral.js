@@ -71378,6 +71378,7 @@
     var el4 = this["avatar"] = document.createElement("coral-icon");
     el4.setAttribute("icon", data_0["icon"]);
     el4.className += " _coral-Shell-user-avatar";
+    el4.setAttribute("alt", "");
     el4.setAttribute("size", "XL");
     el4.setAttribute("handle", "avatar");
     el2.appendChild(el4);
