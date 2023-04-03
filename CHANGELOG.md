@@ -1,3 +1,10 @@
+## [4.15.13](https://github.com/adobe/coral-spectrum/compare/v4.15.12...v4.15.13) (2023-04-03)
+
+
+### Bug Fixes
+
+* Run testcases on firefox. ([#285](https://github.com/adobe/coral-spectrum/issues/285)) ([32474ea](https://github.com/adobe/coral-spectrum/commit/32474ea3d5b24cc4de8971de63c6a04bc4a88bf8))
+
 ## [4.15.12](https://github.com/adobe/coral-spectrum/compare/v4.15.11...v4.15.12) (2023-03-02)
 
 
