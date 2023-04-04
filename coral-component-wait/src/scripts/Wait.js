@@ -264,7 +264,13 @@ const Wait = Decorator(class extends BaseComponent(HTMLElement) {
     this.classList.add(CLASSNAME);
 
     // ARIA
-    this.setAttribute('role', 'progressbar');
+    if (this.classList.contains("tree-loading-wait")) {
+      this.setAttribute("role", "treeitem");
+    } else if (this.classList.contains("grid-loading-wait")) {
+      this.setAttribute("role", "row");
+    } else {
+      this.setAttribute("role", "progressbar");
+    }
 
     // Default reflected attributes
     if (!this._size) {
