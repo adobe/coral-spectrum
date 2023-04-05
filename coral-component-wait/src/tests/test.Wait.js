@@ -264,4 +264,21 @@ describe('Wait', function () {
       });
     });
   });
+
+  describe('Accessibility', function () {
+    it('should have "role=progressbar" by default', function () {
+      var el = helpers.build('<coral-wait></coral-wait>');
+      expect(el.getAttribute('role')).to.equal('progressbar');
+    });
+
+    it('should have "role=treeitem" when has class "tree-loading-wait"', function () {
+      var el = helpers.build('<coral-wait class="tree-loading-wait"></coral-wait>');
+      expect(el.getAttribute('role')).to.equal('treeitem');
+    });
+
+    it('should have "role=row" when has class "grid-loading-wait"', function () {
+      var el = helpers.build('<coral-wait class="grid-loading-wait"></coral-wait>');
+      expect(el.getAttribute('role')).to.equal('row');
+    });
+  });
 });
