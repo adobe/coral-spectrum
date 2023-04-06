@@ -1,3 +1,10 @@
+## [4.15.14](https://github.com/adobe/coral-spectrum/compare/v4.15.13...v4.15.14) (2023-04-06)
+
+
+### Bug Fixes
+
+* **ASSETS-17269:** Text content lacks 4.5:1 contrast ratio ([#287](https://github.com/adobe/coral-spectrum/issues/287)) ([3965bda](https://github.com/adobe/coral-spectrum/commit/3965bdaaec7330c6e3b8142495fbe0936e155011))
+
 ## [4.15.13](https://github.com/adobe/coral-spectrum/compare/v4.15.12...v4.15.13) (2023-04-03)
 
 
