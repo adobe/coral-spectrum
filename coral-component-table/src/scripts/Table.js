@@ -2460,6 +2460,12 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
       if (this.head && this.head.sticky) {
         headerCell.setAttribute('role', 'presentation');
         headerCell._elements.content.setAttribute('role', 'columnheader');
+        if(!headerCell.children.length > 0) {
+          headerCell._elements.content.setAttribute('role', 'button');
+          if(!headerCell.firstChild) {
+            headerCell._elements.content.setAttribute('role', 'columnheader');
+          }
+        };
       } else {
         headerCell.setAttribute('role', 'columnheader');
       }
