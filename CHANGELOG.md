@@ -1,3 +1,10 @@
+## [4.15.15](https://github.com/adobe/coral-spectrum/compare/v4.15.14...v4.15.15) (2023-04-12)
+
+
+### Bug Fixes
+
+* **ASSETS-17256:** Function cannot be performed by keyboard alone ([#279](https://github.com/adobe/coral-spectrum/issues/279)) ([f5be562](https://github.com/adobe/coral-spectrum/commit/f5be5625387c3158d92fea80fc640c084d86b2c4))
+
 ## [4.15.14](https://github.com/adobe/coral-spectrum/compare/v4.15.13...v4.15.14) (2023-04-06)
 
 

@@ -1,7 +1,7 @@
 {
   "name": "@adobe/coral-spectrum",
   "description": "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.",
-  "version": "4.15.14",
+  "version": "4.15.15",
   "homepage": "https://github.com/adobe/coral-spectrum#readme",
   "license": "Apache-2.0",
   "repository": {
