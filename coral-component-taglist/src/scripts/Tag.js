@@ -213,6 +213,7 @@ const Tag = Decorator(class extends BaseComponent(HTMLElement) {
     }
 
     this._elements.button.hidden = !this._closable;
+    this._elements.button.tabIndex = this._elements.button.hidden ? -1 : 0;
     this._elements.buttonCell.hidden = !this._closable;
     this._updateAriaLabel();
   }
