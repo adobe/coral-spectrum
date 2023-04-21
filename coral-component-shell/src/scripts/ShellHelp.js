@@ -68,7 +68,7 @@ class ShellHelp extends BaseComponent(HTMLElement) {
 
     return this._items;
   }
-  
+
   /**
    The search field placeholder.
 
@@ -103,7 +103,7 @@ class ShellHelp extends BaseComponent(HTMLElement) {
     this._showLoading();
     this._elements.resultMessage.hidden = true;
     this._elements.results.hidden = true;
-    
+
     // Trigger event
     const searchTerm = this._elements.search.value;
     this.trigger('coral-shell-help:search', {
