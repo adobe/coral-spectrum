@@ -542,9 +542,11 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
   /** @ignore */
   _handleEscape(event) {
     // When escape is pressed, hide ourselves
+    const triggerButton = document.querySelector('a[title="Select another mode"]');
     if (this.interaction === interaction.ON && this.open && this._isTopOverlay()) {
       event.stopPropagation();
       this.open = false;
+      triggerButton.focus();
     }
   }
 
@@ -555,20 +557,24 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
   _handleCloseClick(event) {
     const dismissTarget = event.matchedTarget;
     const dismissValue = dismissTarget.getAttribute('coral-close');
+    const triggerButton = document.querySelector('a[title="Select another mode"]');
     if (!dismissValue || this.matches(dismissValue)) {
       this.open = false;
       event.stopPropagation();
 
       this._trackEvent('close', 'coral-dialog', event);
+      triggerButton.focus();
     }
   }
 
   _handleClick(event) {
     // When we're modal, we close when our outer area (over the backdrop) is clicked
+    const triggerButton = document.querySelector('a[title="Select another mode"]');
     if (event.target === this && this.backdrop === backdrop.MODAL && this._isTopOverlay()) {
       this.open = false;
 
       this._trackEvent('close', 'coral-dialog', event);
+      triggerButton.focus();
     }
   }
 
