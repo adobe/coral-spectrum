@@ -215,7 +215,7 @@ const AccordionItem = Decorator(class extends BaseComponent(HTMLElement) {
     if (this.disabled) {
       this._elements.button.removeAttribute('tabindex');
     } else {
-      this._elements.button.setAttribute('tabindex', this.__isTabTarget ? '0' : '-1');
+      this._elements.button.setAttribute('tabindex', '0');
     }
   }
 
