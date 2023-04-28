@@ -19010,6 +19010,10 @@ coral-autocomplete-item {
 .coral--darkest ._coral-Calendar-body:focus ._coral-Calendar-date.is-today.is-focused:before {
   border-color: rgb(20, 115, 230);
 }
+.coral--light ._coral-Calendar-date.is-selected:not(.is-range-selection) {
+  background: #326ec8;
+  color: #fff;
+}
 
 /**
  * Copyright 2019 Adobe. All rights reserved.
