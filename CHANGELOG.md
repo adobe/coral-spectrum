@@ -1,3 +1,10 @@
+## [4.15.16](https://github.com/adobe/coral-spectrum/compare/v4.15.15...v4.15.16) (2023-04-28)
+
+
+### Bug Fixes
+
+* **ASSETS-17241:** Focus indicator is missing. ([#288](https://github.com/adobe/coral-spectrum/issues/288)) ([c65ecdf](https://github.com/adobe/coral-spectrum/commit/c65ecdf607cae54024e2fc2e82e47ec99cea4794))
+
 ## [4.15.15](https://github.com/adobe/coral-spectrum/compare/v4.15.14...v4.15.15) (2023-04-12)
 
 
