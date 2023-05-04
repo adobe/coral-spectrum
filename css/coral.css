@@ -28108,7 +28108,7 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
 }
 .coral--light ._coral-Table-cell {
   background-color: rgb(255, 255, 255);
-  color: rgb(75, 75, 75);
+  color: rgb(34, 34, 34);
 }
 .coral--light ._coral-Table-head ._coral-Table-row:not(:first-of-type) ._coral-Table-cell {
   border-top-color: rgb(225, 225, 225);
@@ -28206,10 +28206,11 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
   background-color: #f3f3f3;
 }
 .coral--light ._coral-Table-wrapper[selectable] ._coral-Table-row.is-selected ._coral-Table-cell {
-  background-color: #e8f1fc;
+  background-color: rgba(2,101,220,0.1);
 }
 .coral--light ._coral-Table-wrapper[selectable] ._coral-Table-row.is-selected:hover ._coral-Table-cell {
-  background-color: #d2e4f9;
+  background-color: rgba(2,101,220,0.07);
+  color: #000;
 }
 .coral--light ._coral-Table-wrapper[selectable]._coral-Table-wrapper--quiet ._coral-Table-row:not([disabled]):hover ._coral-Table-cell {
   background-color: rgba(44,44,44,0.06);
@@ -28282,7 +28283,7 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
 }
 .coral--lightest ._coral-Table-cell {
   background-color: rgb(255, 255, 255);
-  color: rgb(80, 80, 80);
+  color: rgb(34, 34, 34);
 }
 .coral--lightest ._coral-Table-head ._coral-Table-row:not(:first-of-type) ._coral-Table-cell {
   border-top-color: rgb(234, 234, 234);
@@ -28380,10 +28381,11 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
   background-color: #f3f3f3;
 }
 .coral--lightest ._coral-Table-wrapper[selectable] ._coral-Table-row.is-selected ._coral-Table-cell {
-  background-color: #eaf2fd;
+  background-color: rgba(2,101,220,0.1);
 }
 .coral--lightest ._coral-Table-wrapper[selectable] ._coral-Table-row.is-selected:hover ._coral-Table-cell {
-  background-color: #d5e6fa;
+  background-color: rgba(2,101,220,0.07);
+  color: #000;
 }
 .coral--lightest ._coral-Table-wrapper[selectable]._coral-Table-wrapper--quiet ._coral-Table-row:not([disabled]):hover ._coral-Table-cell {
   background-color: rgba(50,50,50,0.06);
@@ -28456,7 +28458,7 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
 }
 .coral--dark ._coral-Table-cell {
   background-color: rgb(37, 37, 37);
-  color: rgb(227, 227, 227);
+  color: rgb(34, 34, 34);
 }
 .coral--dark ._coral-Table-head ._coral-Table-row:not(:first-of-type) ._coral-Table-cell {
   border-top-color: rgb(74, 74, 74);
@@ -28554,10 +28556,11 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
   background-color: #333;
 }
 .coral--dark ._coral-Table-wrapper[selectable] ._coral-Table-row.is-selected ._coral-Table-cell {
-  background-color: #283442;
+  background-color: rgba(2,101,220,0.1);
 }
 .coral--dark ._coral-Table-wrapper[selectable] ._coral-Table-row.is-selected:hover ._coral-Table-cell {
-  background-color: #2a3f56;
+  background-color: rgba(2,101,220,0.07);
+  color: #000;
 }
 .coral--dark ._coral-Table-wrapper[selectable]._coral-Table-wrapper--quiet ._coral-Table-row:not([disabled]):hover ._coral-Table-cell {
   background-color: rgba(255,255,255,0.07);
@@ -28630,7 +28633,7 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
 }
 .coral--darkest ._coral-Table-cell {
   background-color: rgb(8, 8, 8);
-  color: rgb(200, 200, 200);
+  color: rgb(34, 34, 34);
 }
 .coral--darkest ._coral-Table-head ._coral-Table-row:not(:first-of-type) ._coral-Table-cell {
   border-top-color: rgb(57, 57, 57);
@@ -28728,10 +28731,11 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
   background-color: #1a1a1a;
 }
 .coral--darkest ._coral-Table-wrapper[selectable] ._coral-Table-row.is-selected ._coral-Table-cell {
-  background-color: #0f2034;
+  background-color: rgba(2,101,220,0.1);
 }
 .coral--darkest ._coral-Table-wrapper[selectable] ._coral-Table-row.is-selected:hover ._coral-Table-cell {
-  background-color: #142e4c;
+  background-color: rgba(2,101,220,0.07);
+  color: #000;
 }
 .coral--darkest ._coral-Table-wrapper[selectable]._coral-Table-wrapper--quiet ._coral-Table-row:not([disabled]):hover ._coral-Table-cell {
   background-color: rgba(239,239,239,0.08);
