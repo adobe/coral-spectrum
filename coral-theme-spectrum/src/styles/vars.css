@@ -12593,6 +12593,7 @@
   --spectrum-light-table-header-sort-icon-color: rgb(142, 142, 142);
   --spectrum-light-table-header-background-color: rgba(0, 0, 0, 0);
   --spectrum-light-table-cell-text-color: rgb(75, 75, 75);
+  --spectrum-light-table-cell-text-color-members: rgb(34, 34, 34);
   --spectrum-light-table-cell-background-color: rgba(0, 0, 0, 0);
   --spectrum-light-table-cell-border-color: rgb(225, 225, 225);
   --spectrum-light-table-row-background-color-hover: rgba(44,44,44,0.06);

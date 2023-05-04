@@ -1,3 +1,17 @@
+## [4.15.17](https://github.com/adobe/coral-spectrum/compare/v4.15.16...v4.15.17) (2023-05-04)
+
+
+### Bug Fixes
+
+* **ASSETS-17260:** State of active component lacks 3 to 1 contrast ratio ([#290](https://github.com/adobe/coral-spectrum/issues/290)) ([f6596a6](https://github.com/adobe/coral-spectrum/commit/f6596a6da4a19dedd5ea6b8197f657928581e0b2))
+
+## [4.15.16](https://github.com/adobe/coral-spectrum/compare/v4.15.15...v4.15.16) (2023-04-28)
+
+
+### Bug Fixes
+
+* **ASSETS-17241:** Focus indicator is missing. ([#288](https://github.com/adobe/coral-spectrum/issues/288)) ([c65ecdf](https://github.com/adobe/coral-spectrum/commit/c65ecdf607cae54024e2fc2e82e47ec99cea4794))
+
 ## [4.15.15](https://github.com/adobe/coral-spectrum/compare/v4.15.14...v4.15.15) (2023-04-12)
 
 
