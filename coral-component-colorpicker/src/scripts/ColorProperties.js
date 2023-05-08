@@ -35,7 +35,8 @@ class ColorProperties extends BaseComponent(HTMLElement) {
        'change [handle="propertyHue"]': '_onHueChange',
        'change [handle="propertySL"]': '_onSLChange',
        'change  [handle="formatSelector"]': '_onFormatChange',
-       'capture:change  [handle="colorInput"]': '_onColorInputChange'
+       'capture:change  [handle="colorInput"]': '_onColorInputChange',
+       'input  [handle="colorInput"]': "_onColorInputChange"
     }));
 
     // Templates
@@ -205,9 +206,21 @@ class ColorProperties extends BaseComponent(HTMLElement) {
 
   /** @private */
   _onColorInputChange(event) {
+    var inputColorText = this._colorInput.value;
+    var color = new TinyColor(inputColorText);
+    if (!color.isValid) {
+      return;
+    }
+    var cursorLoc = event.target.selectionStart;
     event.stopImmediatePropagation();
     this.color = this._colorInput.value;
     this.trigger('change');
+    // trigger picker change event & send input color as event details to set it in picker input
+    this.trigger('change', inputColorText);
+    // restore user input color text in textfield
+    this._colorInput.value = inputColorText;
+    // set cursor to last user input location
+    event.target.setSelectionRange(cursorLoc, cursorLoc);
   }
       
   /** @private */
