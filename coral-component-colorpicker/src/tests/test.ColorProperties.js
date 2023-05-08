@@ -213,7 +213,6 @@ describe('ColorPicker.ColorProperties', function () {
       el._elements.colorInput.value = "#3b3b81";
       el._elements.colorInput.trigger('change');
       validateColor(el, "#3b3b81");
-      
       });
 
     it("color text input should not change due to conversion", function() {
