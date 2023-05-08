@@ -362,7 +362,7 @@ class ColorPicker extends BaseFormField(BaseComponent(HTMLElement)) {
   /**  @private */
   _onPropertyChange(event) {
     event.stopImmediatePropagation();
-    this._change(this._properties.color);
+    this._change(event.detail ? event.detail : this._properties.color);
   }
 }
 export default ColorPicker;
