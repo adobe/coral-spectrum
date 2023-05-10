@@ -38,6 +38,7 @@ class ColorProperties extends BaseComponent(HTMLElement) {
        'capture:change  [handle="colorInput"]': '_onColorInputChange',
        'input  [handle="colorInput"]': "_onColorInputChange"
     }));
+    
 
     // Templates
     this._elements = {};
