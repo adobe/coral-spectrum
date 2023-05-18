@@ -1,3 +1,10 @@
+## [4.15.18](https://github.com/adobe/coral-spectrum/compare/v4.15.17...v4.15.18) (2023-05-18)
+
+
+### Bug Fixes
+
+* **ASSETS-22047:** Color picker improvement ([#297](https://github.com/adobe/coral-spectrum/issues/297)) ([cf23f77](https://github.com/adobe/coral-spectrum/commit/cf23f77fbc3e8b8a4ca911ff045a92ba9073860a))
+
 ## [4.15.17](https://github.com/adobe/coral-spectrum/compare/v4.15.16...v4.15.17) (2023-05-04)
 
 
