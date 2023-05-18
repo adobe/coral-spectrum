@@ -51355,7 +51355,7 @@
       value: function _onPropertyChange(event) {
         event.stopImmediatePropagation();
 
-        this._change(this._properties.color);
+        this._change(event.detail ? event.detail : this._properties.color);
       }
     }, {
       key: "label",
@@ -51663,7 +51663,8 @@
         'change [handle="propertyHue"]': '_onHueChange',
         'change [handle="propertySL"]': '_onSLChange',
         'change  [handle="formatSelector"]': '_onFormatChange',
-        'capture:change  [handle="colorInput"]': '_onColorInputChange'
+        'capture:change  [handle="colorInput"]': '_onColorInputChange',
+        'input  [handle="colorInput"]': "_onColorInputChange"
       })); // Templates
 
 
@@ -51769,9 +51770,22 @@
     }, {
       key: "_onColorInputChange",
       value: function _onColorInputChange(event) {
+        var inputColorText = this._colorInput.value;
+        var color = new TinyColor(inputColorText);
+
+        if (!color.isValid) {
+          return;
+        }
+
+        var cursorLoc = event.target.selectionStart;
         event.stopImmediatePropagation();
-        this.color = this._colorInput.value;
-        this.trigger('change');
+        this.color = this._colorInput.value; // trigger picker change event & send input color as event details to set it in picker input
+
+        this.trigger('change', inputColorText); // restore user input color text in textfield
+
+        this._colorInput.value = inputColorText; // set cursor to last user input location
+
+        event.target.setSelectionRange(cursorLoc, cursorLoc);
       }
       /** @private */
 
@@ -85211,7 +85225,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.15.16";
+  var version$1 = "4.15.17";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

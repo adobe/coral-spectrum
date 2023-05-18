@@ -602,19 +602,19 @@
       "undocumentLines": [
         21,
         31,
-        42,
         44,
-        45,
         46,
         47,
         48,
-        51,
-        75,
-        76,
+        49,
+        50,
+        53,
         77,
         78,
-        99,
-        130
+        79,
+        80,
+        101,
+        132
       ]
     },
     "coral-spectrum/coral-component-colorpicker/src/scripts/ColorSlider.js": {
