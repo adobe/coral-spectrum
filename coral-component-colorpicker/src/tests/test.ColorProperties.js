@@ -213,7 +213,18 @@ describe('ColorPicker.ColorProperties', function () {
       el._elements.colorInput.value = "#3b3b81";
       el._elements.colorInput.trigger('change');
       validateColor(el, "#3b3b81");
-      
+      });
+
+    it("color text input should not change due to conversion", function() {
+      el._elements.colorInput.value = "#000009";
+      el._elements.colorInput.trigger('change');
+      expect(el._elements.colorInput.value).to.equal("#000009",  "color input text should not change");
+    });
+
+    it("color text input trigger input event to change color", function() {
+      el._elements.colorInput.value = "#3b3b81";
+      el._elements.colorInput.trigger('input');
+      validateColor(el, "#3b3b81");
     });
   }); 
   
