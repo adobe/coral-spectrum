@@ -207,12 +207,12 @@ class ColorProperties extends BaseComponent(HTMLElement) {
 
   /** @private */
   _onColorInputChange(event) {
-    let inputColorText = this._colorInput.value;
-    let color = new TinyColor(inputColorText);
+    const inputColorText = this._colorInput.value;
+    const color = new TinyColor(inputColorText);
     if (!color.isValid) {
       return;
     }
-    let cursorLoc = event.target.selectionStart;
+    const cursorLoc = event.target.selectionStart;
     event.stopImmediatePropagation();
     this.color = this._colorInput.value;
     // trigger picker change event & send input color as event details to set it in picker input
