@@ -991,16 +991,22 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
     const addedNodesCount = addedNodes.length;
     for (let i = 0 ; i < addedNodesCount ; i++) {
       item = addedNodes[i];
-      if (this.activeItem) {
+      let activeOrSelectedItem;
+      if (this.selectedItems.length === 1 && this.selectedItem){
+        activeOrSelectedItem = this.selectedItem;
+      } else if (this.activeItem){
+        activeOrSelectedItem = this.activeItem;
+      }
+      if (activeOrSelectedItem) {
         // @a11y add aria-owns attribute to active item to express relationship of added column to the active item
-        this.activeItem.setAttribute('aria-owns', item.id);
+        this.activeOrSelectedItem.setAttribute('aria-owns', item.id);
 
         // @a11y column or preview should be labelled by active item
-        item.setAttribute('aria-labelledby', this.activeItem.content.id);
+        item.setAttribute('aria-labelledby', this.activeOrSelectedItem.content.id);
 
         // @a11y preview should provide description for active item
         if (item.tagName === 'CORAL-COLUMNVIEW-PREVIEW') {
-          this.activeItem.setAttribute('aria-describedby', item.id);
+          this.activeOrSelectedItem.setAttribute('aria-describedby', item.id);
         }
       }
 
