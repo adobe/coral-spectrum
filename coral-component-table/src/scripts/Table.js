@@ -1598,6 +1598,10 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
       // For icons (chevron up/down) styling
       headerCell[column.sortable ? 'setAttribute' : 'removeAttribute']('sortable', '');
 
+      if(headerCell.hasAttribute('sortable')){
+        headerCell.firstChild.setAttribute('role', 'button');
+      }
+
       // Toggle tab index. Sortable headercells are focusable.
       table._toggleHeaderCellTabIndex(headerCell, head && head.sticky);
 
@@ -2467,13 +2471,11 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
       headerCell.setAttribute('role', 'rowheader');
     }
     headerCell.setAttribute('scope', scope);
-    if(!headerCell.children.length > 0) {
-      headerCell._elements.content.setAttribute('role', 'button');
-      if(!headerCell.firstChild) {
-        headerCell._elements.content.setAttribute('role', 'columnheader');
-      }
-    };
+    if(headerCell.hasAttribute('sortable')) {
+      console.log("test");
+    }
   }
+
 
   /**  @private */
   _handleMutations(mutations) {
