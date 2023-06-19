@@ -1,3 +1,10 @@
+## [4.15.19](https://github.com/adobe/coral-spectrum/compare/v4.15.18...v4.15.19) (2023-06-19)
+
+
+### Bug Fixes
+
+* **accessibility:** State of active component lacks 3 to 1 contrast ratio ([#299](https://github.com/adobe/coral-spectrum/issues/299)) ([734bff1](https://github.com/adobe/coral-spectrum/commit/734bff1c9cd87a6b25755a8006979c7be07150e1))
+
 ## [4.15.18](https://github.com/adobe/coral-spectrum/compare/v4.15.17...v4.15.18) (2023-05-18)
 
 
