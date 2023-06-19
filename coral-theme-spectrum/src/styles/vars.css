@@ -21771,4 +21771,12 @@
   --ui-icon-medium-display: block;
   --spectrum-light-textfield-border-color-accessibility: rgb(158, 158, 158);
   --spectrum-light-textfield-background-color-accessibility: rgb(158, 158, 158);
+  --spectrum-neutral-subdued-background-color-default: 	rgb(109, 109, 109);
+  --spectrum-neutral-subdued-background-color-hover: rgb(70, 70, 70);
+  --spectrum-neutral-subdued-background-color-down: rgb(34, 34, 34);
+  --spectrum-neutral-subdued-background-color-key-focus: rgb(70, 70, 70);
+  --spectrum-gray-200: rgb(63, 63, 63);
+  --spectrum-gray-300: rgb(84, 84, 84);
+  --spectrum-white: rgb(255, 255, 255);
+  --spectrum-disabled-background-color: rgb(230, 230, 230);
 }
