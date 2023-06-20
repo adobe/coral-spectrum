@@ -46,6 +46,7 @@ class ActionBarContainerCollection extends SelectableCollection {
       child = this._host.children[i];
       if (
         !child.hasAttribute('disabled') &&
+        !child.firstChild.hasAttribute('disabled') &&
         !child.hasAttribute('hidden') &&
         !child.hasAttribute('coral-actionbar-offscreen') &&
         child !== this._host._elements.overlay &&
