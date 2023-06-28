@@ -96,6 +96,8 @@ const ColumnViewPreview = Decorator(class extends BaseComponent(HTMLElement) {
     let element;
     let elementLabel;
 
+    Granite.I18n.get(elements);
+
     // @a11y If the previous column has selected items,
     // do not include item values in the tab order,
     // so that a keyboard user can quickly advance to a subsequent toolbar.
