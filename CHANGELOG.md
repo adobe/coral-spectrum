@@ -1,3 +1,10 @@
+## [4.15.20](https://github.com/adobe/coral-spectrum/compare/v4.15.19...v4.15.20) (2023-06-29)
+
+
+### Bug Fixes
+
+* Accordion Items tabbable ([c95e26b](https://github.com/adobe/coral-spectrum/commit/c95e26b90ddf6811b5b2663f033539b5d327c3b6))
+
 ## [4.15.19](https://github.com/adobe/coral-spectrum/compare/v4.15.18...v4.15.19) (2023-06-19)
 
 
