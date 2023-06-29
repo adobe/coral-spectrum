@@ -33611,7 +33611,7 @@ var Coral = (function (exports) {
         if (this.disabled) {
           this._elements.button.removeAttribute('tabindex');
         } else {
-          this._elements.button.setAttribute('tabindex', this.__isTabTarget ? '0' : '-1');
+          this._elements.button.setAttribute('tabindex', '0');
         }
       }
     }, {
@@ -85225,7 +85225,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.15.18";
+  var version$1 = "4.15.19";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
