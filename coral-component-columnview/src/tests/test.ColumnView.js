@@ -1480,6 +1480,14 @@ describe('ColumnView', function () {
           expect(el.activeItem.getAttribute('aria-owns')).to.equal(lastColumn.id, 'aria-owns of activeItem should reference added column');
           expect(lastColumn.getAttribute('aria-labelledby')).to.equal(el.activeItem.content.id, 'added column should be labelled by activeItem of previous column');
 
+          el.activeItem.trigger('click');
+          helpers.keypress('space', el.activeItem);
+
+          el.selectedItem.selected = true;
+
+          expect(el.selectedItem.getAttribute('aria-owns')).to.equal(lastColumn.id, 'aria-owns of selectedItem should reference added column');
+          expect(lastColumn.getAttribute('aria-labelledby')).to.equal(el.selectedItem.content.id, 'added column should be labelled by selectedItem of previous column');
+
           // we clean the test afterwards
           helpers.target.removeEventListener('coral-columnview:navigate', navigateEvent);
 

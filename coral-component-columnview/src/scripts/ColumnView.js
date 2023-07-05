@@ -991,22 +991,29 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
     const addedNodesCount = addedNodes.length;
     for (let i = 0 ; i < addedNodesCount ; i++) {
       item = addedNodes[i];
-      let activeOrSelectedItem;
-      if (this.selectedItems.length === 1 && this.selectedItem){
-        activeOrSelectedItem = this.selectedItem;
-      } else if (this.activeItem){
-        activeOrSelectedItem = this.activeItem;
-      }
-      if (activeOrSelectedItem) {
+      if (this.activeItem) {
         // @a11y add aria-owns attribute to active item to express relationship of added column to the active item
-        this.activeOrSelectedItem.setAttribute('aria-owns', item.id);
+        this.activeItem.setAttribute('aria-owns', item.id);
 
         // @a11y column or preview should be labelled by active item
-        item.setAttribute('aria-labelledby', this.activeOrSelectedItem.content.id);
+        item.setAttribute('aria-labelledby', this.activeItem.content.id);
 
         // @a11y preview should provide description for active item
         if (item.tagName === 'CORAL-COLUMNVIEW-PREVIEW') {
-          this.activeOrSelectedItem.setAttribute('aria-describedby', item.id);
+          this.activeItem.setAttribute('aria-describedby', item.id);
+        }
+      }
+
+      if (this.selectedItem && this.selectedItems.length === 1) {
+        // @a11y add aria-owns attribute to active item to express relationship of added column to the active item
+        this.selectedItem.setAttribute('aria-owns', item.id);
+
+        // @a11y column or preview should be labelled by active item
+        item.setAttribute('aria-labelledby', this.selectedItem.content.id);
+
+        // @a11y preview should provide description for active item
+        if (item.tagName === 'CORAL-COLUMNVIEW-PREVIEW') {
+          this.selectedItem.setAttribute('aria-describedby', item.id);
         }
       }
 
