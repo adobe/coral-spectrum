@@ -310,8 +310,11 @@ const Toast = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
 
     // Set the role attribute to alert or status depending on
     // the variant so that the element turns into a live region
-    this.setAttribute('role', this._variant);
-    this.setAttribute('aria-live', 'polite');
+    // aria-live set to assertlive after 1.5 seconds so screen readers will announce the message once the property is updated
+    setTimeout(() =>{
+      this.setAttribute('role', this._variant);
+      this.setAttribute('aria-live', 'assertive');
+    }, 1500);
   }
 
   /**
