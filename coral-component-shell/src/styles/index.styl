@@ -28,12 +28,18 @@ coral-shell-content {
   right: 0;
 
   -webkit-overflow-scrolling: touch;
+  overflow: auto;
+  scrollbar-width: thin;
+  -ms-overflow-style: none;
 }
 
-@media screen and (max-width: 480px){
-  coral-shell-content {
-    overflow-x: hidden;
-  }
+coral-shell-content::-webkit-scrollbar {
+  width: 0.1em;
+  background-color: transparent;
+}
+
+coral-shell-content::-webkit-scrollbar-thumb {
+  background-color: transparent;
 }
 
 @require 'header';
