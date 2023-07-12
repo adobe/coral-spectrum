@@ -101,6 +101,14 @@
   height: var(--spectrum-medium-circleloader-medium-height);
 }
 
+@media (forced-colors: active) {
+  ._coral-Menu-item.focus-ring,
+  ._coral-Menu-item.is-focused {
+      border: 1px solid #000000;
+      box-sizing: border-box;
+    }
+}
+
 @require 'light';
 @require 'lightest';
 @require 'dark';
