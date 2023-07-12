@@ -33798,7 +33798,7 @@
     for (var i = 0; i < wrapperItem.children.length; i++) {
       child = wrapperItem.children[i]; // maybe filter even more elements? (opacity, display='none', position='absolute' ...)
 
-      if (child.offsetParent && (child.matches(commons.FOCUSABLE_ELEMENT_SELECTOR) || child.matches('a:not([href])'))) {
+      if (child.offsetParent && (child.matches(commons.FOCUSABLE_ELEMENT_SELECTOR) || child.matches('a:not([href])')) && !child.hasAttribute('disabled')) {
         return child;
       }
     } // search at 2nd level, some elements like coral-fileupload has selectable items inside them
@@ -85225,7 +85225,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.15.19";
+  var version$1 = "4.15.20";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

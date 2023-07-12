@@ -465,7 +465,7 @@ export default function getFirstSelectableWrappedItem(wrapperItem) {
     child = wrapperItem.children[i];
 
     // maybe filter even more elements? (opacity, display=&apos;none&apos;, position=&apos;absolute&apos; ...)
-    if (child.offsetParent &amp;&amp; (child.matches(commons.FOCUSABLE_ELEMENT_SELECTOR) || child.matches(&apos;a:not([href])&apos;))) {
+    if (child.offsetParent &amp;&amp; (child.matches(commons.FOCUSABLE_ELEMENT_SELECTOR) || child.matches(&apos;a:not([href])&apos;)) &amp;&amp; !child.hasAttribute(&apos;disabled&apos;)) {
       return child;
     }
   }
