@@ -29,7 +29,7 @@ export default function getFirstSelectableWrappedItem(wrapperItem) {
     child = wrapperItem.children[i];
 
     // maybe filter even more elements? (opacity, display='none', position='absolute' ...)
-    if (child.offsetParent && (child.matches(commons.FOCUSABLE_ELEMENT_SELECTOR) || child.matches('a:not([href])'))) {
+    if (child.offsetParent && (child.matches(commons.FOCUSABLE_ELEMENT_SELECTOR) || child.matches('a:not([href])')) && !child.hasAttribute('disabled')) {
       return child;
     }
   }
