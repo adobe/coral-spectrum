@@ -13543,6 +13543,13 @@ button[is="coral-button"] {
   position: relative;
   height: 32px;
 }
+@media (forced-colors: active) {
+  ._coral-Menu-item.focus-ring,
+  ._coral-Menu-item.is-focused {
+    border: 1px solid #000;
+    box-sizing: border-box;
+  }
+}
 .coral--light ._coral-SelectList-group:before {
   color: rgb(110, 110, 110);
 }
