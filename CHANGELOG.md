@@ -1,3 +1,12 @@
+## [4.15.21](https://github.com/adobe/coral-spectrum/compare/v4.15.20...v4.15.21) (2023-07-12)
+
+
+### Bug Fixes
+
+* **Accessibility:** Focus is not visible on dropdown elements in high contrast ([#304](https://github.com/adobe/coral-spectrum/issues/304)) ([cde7c68](https://github.com/adobe/coral-spectrum/commit/cde7c68573dffda90581873fc804b45135d2246d))
+* ActionBar items moves focus to disabled items. ([#302](https://github.com/adobe/coral-spectrum/issues/302)) ([fae0821](https://github.com/adobe/coral-spectrum/commit/fae0821ac8daab803bb87dbfc2a3a4ed1900d427))
+* **bug:** Shell header menu is being cut off ([#301](https://github.com/adobe/coral-spectrum/issues/301)) ([299ba4a](https://github.com/adobe/coral-spectrum/commit/299ba4a473966f99e67fef76647b3a78672928d4))
+
 ## [4.15.20](https://github.com/adobe/coral-spectrum/compare/v4.15.19...v4.15.20) (2023-06-29)
 
 
