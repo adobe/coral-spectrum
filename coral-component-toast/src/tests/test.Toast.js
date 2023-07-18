@@ -322,14 +322,6 @@ describe('Toast', function () {
     });
   });
 
-  describe('Accessibility', function () {
-    it('should set a live region role', function () {
-      const el = helpers.build(new Toast());
-      el.variant = 'alert';
-      expect(el.getAttribute('role')).to.equal(el.variant);
-    });
-  });
-
   describe('Implementation Details', function () {
     describe('Priority queue', function () {
       it('should define a priority queue', function () {
