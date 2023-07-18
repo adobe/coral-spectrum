@@ -325,7 +325,7 @@ describe('Toast', function () {
   describe('Accessibility', function () {
     it('should set a live region role', function () {
       const el = helpers.build(new Toast());
-      el.variant = 'error';
+      el.variant = 'alert';
       expect(el.getAttribute('role')).to.equal(el.variant);
     });
   });
