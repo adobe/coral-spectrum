@@ -168,6 +168,16 @@ describe('Toast', function () {
       });
     });
 
+    describe('#accessibility', function() {
+      it('should have role alert when variant is success', function(done) {
+        el.variant = Toast.variant.SUCCESS;
+        helpers.next(function() {
+          expect(el.getAttribute('role')).to.equal('alert');
+          done();
+        });
+      });
+    });
+
     describe('#variant', function () {
       it('should be set to "default" by default', function () {
         expect(el.variant).to.equal(Toast.variant.DEFAULT);
