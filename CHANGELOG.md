@@ -1,3 +1,10 @@
+## [4.15.22](https://github.com/adobe/coral-spectrum/compare/v4.15.21...v4.15.22) (2023-07-19)
+
+
+### Bug Fixes
+
+* **Accessibility:** focus is not visible when the high contrast mode is enabled. ([#306](https://github.com/adobe/coral-spectrum/issues/306)) ([f3d7f25](https://github.com/adobe/coral-spectrum/commit/f3d7f2568ff8ba7d9e30e5538d7c98d2fbe6b3db))
+
 ## [4.15.21](https://github.com/adobe/coral-spectrum/compare/v4.15.20...v4.15.21) (2023-07-12)
 
 
