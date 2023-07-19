@@ -29262,11 +29262,21 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
 .coral--light ._coral-Tabs-item:not(.is-disabled).is-invalid ._coral-Tabs-itemInvalidIcon ._coral-Icon {
   color: rgb(201, 37, 45);
 }
+@media (forced-colors: active) {
+  .coral--light ._coral-Tabs-item.is-selected {
+    border: 1px solid;
+  }
+}
 .coral--lightest ._coral-Tabs-item:not(.is-disabled).is-invalid {
   color: rgb(215, 55, 63);
 }
 .coral--lightest ._coral-Tabs-item:not(.is-disabled).is-invalid ._coral-Tabs-itemInvalidIcon ._coral-Icon {
   color: rgb(215, 55, 63);
+}
+@media (forced-colors: active) {
+  .coral--lightest ._coral-Tabs-item.is-selected {
+    border: 1px solid;
+  }
 }
 .coral--dark ._coral-Tabs-item:not(.is-disabled).is-invalid {
   color: rgb(247, 109, 116);
@@ -29274,11 +29284,21 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
 .coral--dark ._coral-Tabs-item:not(.is-disabled).is-invalid ._coral-Tabs-itemInvalidIcon ._coral-Icon {
   color: rgb(247, 109, 116);
 }
+@media (forced-colors: active) {
+  .coral--dark ._coral-Tabs-item.is-selected {
+    border: 1px solid;
+  }
+}
 .coral--darkest ._coral-Tabs-item:not(.is-disabled).is-invalid {
   color: rgb(236, 91, 98);
 }
 .coral--darkest ._coral-Tabs-item:not(.is-disabled).is-invalid ._coral-Tabs-itemInvalidIcon ._coral-Icon {
   color: rgb(236, 91, 98);
+}
+@media (forced-colors: active) {
+  .coral--darkest ._coral-Tabs-item.is-selected {
+    border: 1px solid;
+  }
 }
 
 /**
