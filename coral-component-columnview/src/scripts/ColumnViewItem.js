@@ -239,11 +239,6 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
         let accessibilityState = this._elements.accessibilityState;
   
         if (value) {
-  
-          // @a11y Panels to right of selected item are removed, so remove aria-owns and aria-describedby attributes.
-          this.removeAttribute('aria-owns');
-          this.removeAttribute('aria-describedby');
-  
           // @a11y Update content to ensure that checked state is announced by assistive technology when the item receives focus
           accessibilityState.innerHTML = i18n.get(', checked');
   

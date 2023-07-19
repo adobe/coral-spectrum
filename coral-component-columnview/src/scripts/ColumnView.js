@@ -1004,17 +1004,15 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
         }
       }
 
-      if (this.selectedItem && this.selectedItems.length === 1) {
-        // @a11y add aria-owns attribute to active item to express relationship of added column to the active item
+      if (this.selectedItem && this.selectedItems.length === 1 && item.tagName === 'CORAL-COLUMNVIEW-PREVIEW') {
+        // @a11y add aria-owns attribute to selection item to express relationship of added column to the selection item
         this.selectedItem.setAttribute('aria-owns', item.id);
 
-        // @a11y column or preview should be labelled by active item
+        // @a11y column or preview should be labelled by selection item
         item.setAttribute('aria-labelledby', this.selectedItem.content.id);
 
-        // @a11y preview should provide description for active item
-        if (item.tagName === 'CORAL-COLUMNVIEW-PREVIEW') {
-          this.selectedItem.setAttribute('aria-describedby', item.id);
-        }
+        // @a11y preview should provide description for selection item
+        this.selectedItem.setAttribute('aria-describedby', item.id);
       }
 
       if (item.tagName === 'CORAL-COLUMNVIEW-COLUMN') {

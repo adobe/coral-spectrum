@@ -1471,6 +1471,32 @@ describe('ColumnView', function () {
       });
 
       it('should express ownership of expanded column using aria-owns', function (done) {
+        function onChangeEvent(event) {
+          const columnView = event.target;
+          if (event.detail.selection.length) {
+            // on selection, it means we load the item content
+            let url = columnView.items._getLastSelected().dataset.src;
+  
+            // there is no information on additional items
+            if (typeof url === 'undefined') {
+              return;
+            }
+  
+            // we load the url from the snippets instead of using ajax
+            let data = window.__html__[`examples/${url}`];
+            if (typeof data !== 'undefined') {
+              let t = document.createElement('div');
+              t.innerHTML = data;
+              let el = t.firstElementChild;
+  
+              // if it is a preview column we add it directly
+              if (el.matches('coral-columnview-preview')) {
+                columnView.setNextColumn(el, columnView.columns.last(), false);
+              }
+            }
+          }
+        }
+
         function navigateEvent(event) {
           const el = event.target;
           const columns = el.columns;
@@ -1480,21 +1506,21 @@ describe('ColumnView', function () {
           expect(el.activeItem.getAttribute('aria-owns')).to.equal(lastColumn.id, 'aria-owns of activeItem should reference added column');
           expect(lastColumn.getAttribute('aria-labelledby')).to.equal(el.activeItem.content.id, 'added column should be labelled by activeItem of previous column');
 
-          el.activeItem.trigger('click');
-          helpers.keypress('space', el.activeItem);
-
-          el.selectedItem.selected = true;
-
-          expect(el.selectedItem.getAttribute('aria-owns')).to.equal(lastColumn.id, 'aria-owns of selectedItem should reference added column');
-          expect(lastColumn.getAttribute('aria-labelledby')).to.equal(el.selectedItem.content.id, 'added column should be labelled by selectedItem of previous column');
-
-          // we clean the test afterwards
-          helpers.target.removeEventListener('coral-columnview:navigate', navigateEvent);
-
-          done();
+          const selectItem = lastColumn.items.getAll()[0];
+          selectItem.active = true;
+          helpers.keypress('space', selectItem);
+          helpers.next(() => {
+            expect(el.selectedItem.getAttribute('aria-owns')).to.equal(lastColumn.nextElementSibling.id, 'aria-owns of selectedItem should reference added column');
+            expect(lastColumn.nextElementSibling.getAttribute('aria-labelledby')).to.equal(el.selectedItem.content.id, 'added column should be labelled by selectedItem of previous column');
+            // we clean the test afterwards
+            helpers.target.removeEventListener('coral-columnview:navigate', navigateEvent);
+            helpers.target.removeEventListener('coral-columnview:change', onChangeEvent);
+            done();
+          });
         };
 
         helpers.target.addEventListener('coral-columnview:navigate', navigateEvent);
+        helpers.target.addEventListener('coral-columnview:change', onChangeEvent);
 
         const el = helpers.build(window.__html__['ColumnView.full.html']);
         el.activeItem.trigger('click');
