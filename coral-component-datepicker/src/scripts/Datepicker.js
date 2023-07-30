@@ -511,10 +511,9 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
-
-    this._elements.toggle.classList.toggle('is-invalid', this._required);
-
-    this._elements.input.required = this._required;
+    // this._elements.toggle.classList.toggle('is-invalid', this._required);
+    // this._elements.input.required = this._required;
+    this._elements.input.setAttribute("aria-required", this._required);
   }
 
   /**
