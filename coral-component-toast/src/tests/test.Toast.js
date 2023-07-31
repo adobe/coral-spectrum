@@ -325,7 +325,7 @@ describe('Toast', function () {
   describe('Implementation Details', function () {
     describe('Priority queue', function () {
       it('should define a priority queue', function () {
-        const wrapper = helpers.build(window.__html__['Toast.queue.html']);
+        const wrapper = helpers.build(window.__html__['Toast.queue.html']); 
 
         expect(Toast._queue.length).to.equal(wrapper.querySelectorAll('coral-toast[open]').length);
         Toast._queue.forEach((item) => {
