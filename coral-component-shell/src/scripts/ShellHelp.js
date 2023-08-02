@@ -64,6 +64,7 @@ class ShellHelp extends BaseComponent(HTMLElement) {
         itemBaseTagName: 'a',
         container: this._elements.items
       });
+      this._elements.items.setAttribute("role", "list");
     }
 
     return this._items;
