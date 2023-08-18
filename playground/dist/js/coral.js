@@ -83474,7 +83474,7 @@
         this.classList.add("".concat(CLASSNAME$1K, "--").concat(this._variant)); // Set the role attribute to alert or status depending on
         // the variant so that the element turns into a live region
 
-        this.setAttribute('role', this._variant);
+        this.setAttribute('role', this.variant === variant$n.ERROR || this.variant === variant$n.WARNING || this.variant === variant$n.SUCCESS ? 'alert' : 'status');
         this.setAttribute('aria-live', 'polite');
       }
       /**
@@ -85225,7 +85225,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.15.21";
+  var version$1 = "4.15.22";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
