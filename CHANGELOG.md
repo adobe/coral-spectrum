@@ -1,3 +1,10 @@
+## [4.15.23](https://github.com/adobe/coral-spectrum/compare/v4.15.22...v4.15.23) (2023-08-18)
+
+
+### Bug Fixes
+
+* Update the role to alert for success toast ([#307](https://github.com/adobe/coral-spectrum/issues/307)) ([4db63d6](https://github.com/adobe/coral-spectrum/commit/4db63d6a6cd136a951582c61e18544342bd901cb))
+
 ## [4.15.22](https://github.com/adobe/coral-spectrum/compare/v4.15.21...v4.15.22) (2023-07-19)
 
 
