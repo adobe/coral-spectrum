@@ -168,6 +168,16 @@ describe('Toast', function () {
       });
     });
 
+    describe('#accessibility', function() {
+      it('should have role alert when variant is success', function(done) {
+        el.variant = Toast.variant.SUCCESS;
+        helpers.next(function() {
+          expect(el.getAttribute('role')).to.equal('alert');
+          done();
+        });
+      });
+    });
+
     describe('#variant', function () {
       it('should be set to "default" by default', function () {
         expect(el.variant).to.equal(Toast.variant.DEFAULT);
@@ -312,18 +322,10 @@ describe('Toast', function () {
     });
   });
 
-  describe('Accessibility', function () {
-    it('should set a live region role', function () {
-      const el = helpers.build(new Toast());
-      el.variant = 'error';
-      expect(el.getAttribute('role')).to.equal(el.variant);
-    });
-  });
-
   describe('Implementation Details', function () {
     describe('Priority queue', function () {
       it('should define a priority queue', function () {
-        const wrapper = helpers.build(window.__html__['Toast.queue.html']);
+        const wrapper = helpers.build(window.__html__['Toast.queue.html']); 
 
         expect(Toast._queue.length).to.equal(wrapper.querySelectorAll('coral-toast[open]').length);
         Toast._queue.forEach((item) => {
