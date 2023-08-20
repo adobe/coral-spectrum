@@ -31202,7 +31202,9 @@
 
       _this._delegateEvents({
         'coral-overlay:positioned': '_onPositioned',
-        'coral-overlay:_animate': '_onAnimate'
+        'coral-overlay:_animate': '_onAnimate',
+        'mouseenter': '_onMouseEnter',
+        'mouseleave': '_onMouseLeave'
       });
 
       return _this;
@@ -31242,6 +31244,22 @@
           this.style.left = '-8px';
         } else if (popperPlacement === 'bottom') {
           this.style.top = '-8px';
+        }
+      }
+    }, {
+      key: "_onMouseEnter",
+      value: function _onMouseEnter() {
+        if (this.interaction === this.constructor.interaction.ON && this.open) {
+          // on automatic interaction and tooltip still open and mouse enters the tooltip, cancel hide.
+          this._cancelHide();
+        }
+      }
+    }, {
+      key: "_onMouseLeave",
+      value: function _onMouseLeave() {
+        if (this.interaction === this.constructor.interaction.ON) {
+          // on automatic interaction and mouse leave tooltip and execute same flow when mouse leaves target.
+          this._startHide();
         }
       }
       /** @ignore */
@@ -31318,28 +31336,6 @@
         this._oldTarget = target; // Use Vent to bind events on the target
 
         this._targetEvents = new vent(target);
-
-        var handleEventToShow = function handleEventToShow() {
-          // Don't let the tooltip hide
-          _this4._cancelHide();
-
-          if (!_this4.open) {
-            _this4._cancelShow();
-
-            if (_this4.delay === 0) {
-              // Show immediately
-              _this4.show();
-            } else {
-              _this4._showTimeout = window.setTimeout(function () {
-                _this4.show();
-              }, _this4.delay);
-            }
-          }
-        };
-
-        this._targetEvents.on("mouseenter.Tooltip".concat(this._id), handleEventToShow);
-
-        this._targetEvents.on("focusin.Tooltip".concat(this._id), handleEventToShow);
 
         this._targetEvents.on("mouseenter.Tooltip".concat(this._id), this._handleOpenTooltip.bind(this));
 
@@ -85225,7 +85221,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.15.22";
+  var version$1 = "4.15.23";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
