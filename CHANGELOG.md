@@ -1,3 +1,10 @@
+## [4.15.24](https://github.com/adobe/coral-spectrum/compare/v4.15.23...v4.15.24) (2023-08-20)
+
+
+### Bug Fixes
+
+* Tooltip should be visible when mouse hover over tooltip ([#309](https://github.com/adobe/coral-spectrum/issues/309)) ([0ba13f6](https://github.com/adobe/coral-spectrum/commit/0ba13f65168fcea0592f87c42e75570212c6fa9a))
+
 ## [4.15.23](https://github.com/adobe/coral-spectrum/compare/v4.15.22...v4.15.23) (2023-08-18)
 
 
