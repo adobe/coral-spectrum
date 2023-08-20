@@ -105,7 +105,9 @@ const Tooltip = Decorator(class extends ExtensibleOverlay {
     this._id = commons.getUID();
     this._delegateEvents({
       'coral-overlay:positioned': '_onPositioned',
-      'coral-overlay:_animate': '_onAnimate'
+      'coral-overlay:_animate': '_onAnimate',
+      'mouseenter': '_onMouseEnter',
+      'mouseleave': '_onMouseLeave'
     });
   }
 
@@ -250,6 +252,20 @@ const Tooltip = Decorator(class extends ExtensibleOverlay {
     }
   }
 
+  _onMouseEnter() {
+    if (this.interaction === this.constructor.interaction.ON && this.open) {
+      // on automatic interaction and tooltip still open and mouse enters the tooltip, cancel hide.
+      this._cancelHide();
+    }
+  }
+
+  _onMouseLeave() {
+    if (this.interaction === this.constructor.interaction.ON) {
+      // on automatic interaction and mouse leave tooltip and execute same flow when mouse leaves target.
+      this._startHide();
+    }
+  }
+
   /** @ignore */
   _handleFocusOut() {
     // The item that should have focus will get it on the next frame
@@ -306,27 +322,6 @@ const Tooltip = Decorator(class extends ExtensibleOverlay {
 
     // Use Vent to bind events on the target
     this._targetEvents = new Vent(target);
-
-    const handleEventToShow = () => {
-      // Don't let the tooltip hide
-      this._cancelHide();
-
-      if (!this.open) {
-        this._cancelShow();
-
-        if (this.delay === 0) {
-          // Show immediately
-          this.show();
-        } else {
-          this._showTimeout = window.setTimeout(() => {
-            this.show();
-          }, this.delay);
-        }
-      }
-    };
-
-    this._targetEvents.on(`mouseenter.Tooltip${this._id}`, handleEventToShow);
-    this._targetEvents.on(`focusin.Tooltip${this._id}`, handleEventToShow);
 
     this._targetEvents.on(`mouseenter.Tooltip${this._id}`, this._handleOpenTooltip.bind(this));
     this._targetEvents.on(`focusin.Tooltip${this._id}`, this._handleOpenTooltip.bind(this));
