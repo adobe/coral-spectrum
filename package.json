@@ -107,7 +107,7 @@
     "karma-rollup-preprocessor": "^7.0.3",
     "karma-sinon-chai": "^2.0.2",
     "minimist": "^1.2.0",
-    "mocha": "^7.2.0",
+    "mocha": "^10.2.0",
     "moment": "^2.24.0",
     "plugin-error": "^1.0.1",
     "postcss-css-variables": "^0.13.0",
