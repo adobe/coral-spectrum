@@ -222,7 +222,7 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
       this.classList.remove('_coral-ColorInput--swatch');
       this._elements.input.removeAttribute('tabindex');
     }
-
+    
     this._syncColorPreviewIcon();
   }
 
@@ -819,6 +819,7 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     if (preview) {
       preview.classList.toggle('_coral-ColorInput-preview--novalue', isValueEmpty);
     }
+    this._elements.input.setAttribute("aria-label", this._items._container._color._value);
   }
 
   /**
