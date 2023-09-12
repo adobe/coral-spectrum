@@ -288,7 +288,31 @@ class ShellHelp extends BaseComponent(HTMLElement) {
     } else {
       this.appendChild(this._elements.contentWrapper);
     }
+    let isFirefoxOnMacOS = /Firefox\//.test(navigator.userAgent) && /Mac OS X/.test(navigator.userAgent);
+
+    if(isFirefoxOnMacOS){
+      this.querySelectorAll("coral-list-item-content").forEach(item=>item.setAttribute("tabindex", "0"));
+
+      const parents = document.querySelectorAll('._coral-Menu-item');
+        parents.forEach((parent) => {
+        parent.addEventListener('focusin', (event) => {
+          if (event.target.classList.contains('_coral-Menu-itemLabel')) {
+            parent.setAttribute('style', 'border-left-color: #2680EB; background-color: #2C2C2C0A; color: #4B4B4B;');
+            parent.querySelector('._coral-Menu-itemLabel').style.outline = "none";
+          }
+        });
+
+        parent.addEventListener('focusout', (event) => {
+          if (event.target.classList.contains('_coral-Menu-itemLabel')) {
+            parent.removeAttribute('style');
+            parent.querySelector('._coral-Menu-itemLabel').removeAttribute('style');
+          }
+        });
+      });
+
+    }
   }
+
 
   /**
    A search result object.
