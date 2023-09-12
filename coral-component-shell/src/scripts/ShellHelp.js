@@ -313,7 +313,6 @@ class ShellHelp extends BaseComponent(HTMLElement) {
     }
   }
 
-
   /**
    A search result object.
 
