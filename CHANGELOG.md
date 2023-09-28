@@ -1,3 +1,10 @@
+## [4.15.25](https://github.com/adobe/coral-spectrum/compare/v4.15.24...v4.15.25) (2023-09-28)
+
+
+### Bug Fixes
+
+* Datepicker required functionality is incorrect. ([#310](https://github.com/adobe/coral-spectrum/issues/310)) ([d8f70bc](https://github.com/adobe/coral-spectrum/commit/d8f70bcc4cb7b30594be4dcfdf2dba3511c0cd54))
+
 ## [4.15.24](https://github.com/adobe/coral-spectrum/compare/v4.15.23...v4.15.24) (2023-08-20)
 
 
