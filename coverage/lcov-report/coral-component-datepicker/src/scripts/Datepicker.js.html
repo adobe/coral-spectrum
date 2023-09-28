@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.7% </span>
+                <span class="strong">93.04% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>254/274</span>
+                <span class='fraction'>254/273</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.7% </span>
+                <span class="strong">93.04% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>254/274</span>
+                <span class='fraction'>254/273</span>
             </div>
         
             
@@ -937,8 +937,7 @@
 <a name='L879'></a><a href='#L879'>879</a>
 <a name='L880'></a><a href='#L880'>880</a>
 <a name='L881'></a><a href='#L881'>881</a>
-<a name='L882'></a><a href='#L882'>882</a>
-<a name='L883'></a><a href='#L883'>883</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L882'></a><a href='#L882'>882</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1739,7 +1738,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1819,8 +1818,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">998x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">998x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -2333,10 +2331,9 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
   set required(value) {
     this._required = transform.booleanAttr(value);
     this._reflectAttribute('required', this._required);
-&nbsp;
-    this._elements.toggle.classList.toggle('is-invalid', this._required);
-&nbsp;
-    this._elements.input.required = this._required;
+    // this._elements.toggle.classList.toggle('is-invalid', this._required);
+    // this._elements.input.required = this._required;
+    this._elements.input.setAttribute("aria-required", this._required);
   }
 &nbsp;
   /**
@@ -2446,9 +2443,9 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     this._elements.overlay.returnFocusTo(this._elements.input);
     this._elements.calendar._validateCalendar();
     this._renderCalendar();
-  }<span class="fstat-no" title="function not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-  /**
+  }
+<span class="fstat-no" title="function not covered" ></span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
    Matches the accessibility to the state of the popover.
 &nbsp;
    @ignore
@@ -2462,9 +2459,9 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
         this._elements.calendar.focus();
       }
       this._elements.input.setAttribute('aria-expanded', 'true');
-      this._elemen<span class="fstat-no" title="function not covered" >ts.t</span>oggle.setAttribute('aria-expanded', 'true');
-<span class="cstat-no" title="statement not covered" >      this._trackEvent('open', 'coral-datepicke</span>r', event);
-    } else {
+      this._elements.toggle.setAttribute('aria-expanded', 'true');
+      this._trackE<span class="fstat-no" title="function not covered" >vent</span>('open', 'coral-datepicker', event);
+    } <span class="cstat-no" title="statement not covered" >else {</span>
       this._elements.input.setAttribute('aria-expanded', 'false');
       this._elements.toggle.setAttribute('aria-expanded', 'false');
       this._trackEvent('close', 'coral-datepicker', event);
@@ -2520,14 +2517,14 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
   }
 &nbsp;
   /** @ignore */
-  _validateValue() {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-    // calendar validates only on user input, we have to manually force the validation
+  _validateValue() {
+    // calendar validates only<span class="branch-1 cbranch-no" title="branch not covered" > on user input, </span>we have to manually force the validation
     this._elements.calendar._validateCalendar();
 &nbsp;
     // check if the current value is valid and update the internal state of the component
     if (this.type === type.DATE) {
-      this.invalid = this._elements.calendar.invalid;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-    } else if (this.type === type.TIME) {
+      this.invalid = this._elements.calendar.invalid;
+    } else if (this.type === type.TIME) {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
       this.invalid = this._elements.clock.invalid;
     } else {
       this.invalid = this._elements.calendar.invalid || this._elements.clock.invalid;
@@ -2616,15 +2613,15 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
       'placeholder',
       'startday',
       'headerFormat',
-      'displayform<span class="fstat-no" title="function not covered" >at',</span>
-<span class="cstat-no" title="statement not covered" >      'valueformat',</span>
-      'variant'
-    ])<span class="cstat-no" title="statement not covered" >;</span>
-  }
-<span class="cstat-no" title="statement not covered" ></span>
+      'displayformat',
+      'valueformat<span class="fstat-no" title="function not covered" >',</span>
+<span class="cstat-no" title="statement not covered" >      'variant'</span>
+    ]);
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
   /** @ignore */
-  conn<span class="cstat-no" title="statement not covered" >ectedCallback() {</span>
-    super.connectedCallback();
+  connectedCallback() {
+    su<span class="cstat-no" title="statement not covered" >per.connectedCallback();</span>
 &nbsp;
     const overlay = this._elements.overlay;
     // Cannot be open by default when rendered
@@ -2702,14 +2699,14 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
 });
 &nbsp;
 export default Datepicker;
-<span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="if path not taken" >I</span></span></pre></td></tr></table></pre>
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Aug 20 2023 11:37:47 GMT+0000 (Coordinated Universal Time)
+                at Thu Sep 28 2023 05:56:04 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

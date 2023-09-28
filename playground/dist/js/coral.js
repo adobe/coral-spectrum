@@ -59154,11 +59154,11 @@
       set: function set(value) {
         this._required = transform.booleanAttr(value);
 
-        this._reflectAttribute('required', this._required);
+        this._reflectAttribute('required', this._required); // this._elements.toggle.classList.toggle('is-invalid', this._required);
+        // this._elements.input.required = this._required;
 
-        this._elements.toggle.classList.toggle('is-invalid', this._required);
 
-        this._elements.input.required = this._required;
+        this._elements.input.setAttribute("aria-required", this._required);
       }
       /**
        Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
@@ -85221,7 +85221,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.15.23";
+  var version$1 = "4.15.24";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
