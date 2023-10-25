@@ -45,7 +45,7 @@ const AnchorListItem = Decorator(class extends BaseListItem(BaseComponent(HTMLAn
   get disabled() {
     return super.disabled;
   }
-  
+
   set disabled(value) {
     super.disabled = value;
 
