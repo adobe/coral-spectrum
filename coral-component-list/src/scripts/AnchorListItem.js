@@ -45,7 +45,7 @@ const AnchorListItem = Decorator(class extends BaseListItem(BaseComponent(HTMLAn
   get disabled() {
     return super.disabled;
   }
-
+  
   set disabled(value) {
     super.disabled = value;
 
@@ -80,10 +80,14 @@ const AnchorListItem = Decorator(class extends BaseListItem(BaseComponent(HTMLAn
     }
   }
 
+  _addRolesList() {
+    this.setAttribute('role', 'listItem');
+  }
+
   /** @ignore */
   render() {
     super.render();
-
+    this._addRolesList();
     this.classList.add(CLASSNAME);
   }
 });
