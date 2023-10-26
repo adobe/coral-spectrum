@@ -82,7 +82,6 @@ const AnchorListItem = Decorator(class extends BaseListItem(BaseComponent(HTMLAn
 
   _addRolesList() {
     this.setAttribute('role', 'listitem');
-    this.parentElement.setAttribute('role', 'list');
   }
 
   /** @ignore */
