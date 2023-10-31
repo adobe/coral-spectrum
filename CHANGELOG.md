@@ -1,3 +1,10 @@
+## [4.15.26](https://github.com/adobe/coral-spectrum/compare/v4.15.25...v4.15.26) (2023-10-31)
+
+
+### Bug Fixes
+
+* Add coral tabs item background color([#315](https://github.com/adobe/coral-spectrum/issues/315)) ([a4806a1](https://github.com/adobe/coral-spectrum/commit/a4806a16b53102efd6f5b855a1b20d7ca2674b68))
+
 ## [4.15.25](https://github.com/adobe/coral-spectrum/compare/v4.15.24...v4.15.25) (2023-09-28)
 
 
