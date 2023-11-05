@@ -90,7 +90,9 @@ class ShellHelp extends BaseComponent(HTMLElement) {
 
     const selector = `#${this.id} > a[is="coral-shell-help-item"], coral-shell-help-separator`;
     Array.prototype.forEach.call(this.querySelectorAll(selector), (item) => {
-      this._elements.items.appendChild(item);
+      var listItem = document.createElement('li');
+      listItem.appendChild(item);
+      this._elements.items.appendChild(listItem);
     });
   }
 

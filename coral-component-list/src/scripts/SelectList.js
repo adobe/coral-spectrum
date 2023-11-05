@@ -526,7 +526,7 @@ const SelectList = Decorator(class extends BaseComponent(HTMLElement) {
 
     // adds the role to support accessibility
     if (!this.hasAttribute('role')) {
-      this.setAttribute('role', 'listbox');
+      this.setAttribute('role', 'list');
     }
 
     if (!this.hasAttribute('aria-label')) {
