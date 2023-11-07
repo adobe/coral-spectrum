@@ -418,8 +418,14 @@ const ColumnViewItem = Decorator(class extends BaseLabellable(BaseComponent(HTML
 
     // @a11y thumbnail img element should have alt attribute
     const thumbnailImg = thumbnail.querySelector('img:not([alt])');
+    const folderImg = this.thumbnail.querySelector('coral-icon[icon="folder"]');
+
     if (thumbnailImg) {
       thumbnailImg.setAttribute('alt', '');
+    }
+
+    if (folderImg) {
+      folderImg.setAttribute('alt', '');
     }
 
     // @ally add aria-labelledby so that JAWS/IE announces item correctly
