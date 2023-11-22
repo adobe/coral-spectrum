@@ -26,6 +26,7 @@ class ShellHelpItem extends AnchorList.Item {
     super.render();
 
     this.classList.add(CLASSNAME);
+    this.setAttribute("role", "listitem");
   }
 }
 
