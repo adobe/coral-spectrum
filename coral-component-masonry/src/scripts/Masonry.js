@@ -621,6 +621,10 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     } else {
       this.parentElement.removeAttribute('aria-colcount');
     }
+
+    if(this.parentElement.classList.contains('globalnav-collection-container')) {
+      this.parentElement.setAttribute('role', 'presentation');
+    }
   }
 
   _validateSelection(item) {
