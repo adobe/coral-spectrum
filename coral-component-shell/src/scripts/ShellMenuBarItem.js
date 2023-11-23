@@ -384,7 +384,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
     // providing aria-label will correctly pass it on to the shell menu button child element.
     if (name === 'aria-label') {
       if (value && this._elements.shellMenuButton.textContent.trim() === '') {
-        this._elements.shellMenuButton.setAttribute('aria-label', value);
+        this._elements.shellMenuButton.setAttribute('aria-label', this.title);
       }
     } else {
       super.attributeChangedCallback(name, oldValue, value);
@@ -418,6 +418,8 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
     if (this.menu !== null) {
       this.menu = this.menu;
     }
+
+    this._elements.shellMenuButton.getElementsByTagName('coral-icon')[0].setAttribute('alt', this.title);
   }
 
   /**
