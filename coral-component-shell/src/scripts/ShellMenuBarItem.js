@@ -384,7 +384,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
     // providing aria-label will correctly pass it on to the shell menu button child element.
     if (name === 'aria-label') {
       if (value && this._elements.shellMenuButton.textContent.trim() === '') {
-        this._elements.shellMenuButton.setAttribute('aria-label', this.title);
+        this._elements.shellMenuButton.setAttribute('aria-label', this.title ? this.title : value);
       }
     } else {
       super.attributeChangedCallback(name, oldValue, value);
