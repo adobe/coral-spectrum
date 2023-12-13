@@ -48628,6 +48628,8 @@
         if (preview) {
           preview.classList.toggle('_coral-ColorInput-preview--novalue', isValueEmpty);
         }
+
+        this._elements.input.setAttribute("aria-label", this._items._container._color._value);
       }
       /**
        Returns {@link ColorInput} variants.
