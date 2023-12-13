@@ -47614,7 +47614,7 @@ var Coral = (function (exports) {
     el7.appendChild(el8);
     var el9 = this["swatchesContainer"] = document.createElement("div");
     el9.setAttribute("handle", "swatchesContainer");
-    el9.setAttribute("role", "presentation");
+    el9.setAttribute("role", "listbox");
     el7.appendChild(el9);
     var el10 = document.createTextNode("\n  ");
     el7.appendChild(el10);
