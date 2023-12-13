@@ -1,3 +1,14 @@
+## [4.15.27](https://github.com/adobe/coral-spectrum/compare/v4.15.26...v4.15.27) (2023-12-13)
+
+
+### Bug Fixes
+
+* Add button role to table header interactive element ([#289](https://github.com/adobe/coral-spectrum/issues/289)) ([7384f9f](https://github.com/adobe/coral-spectrum/commit/7384f9fff2189afab26d9cd03d698027e98d8099))
+* Coral shell help items should have list role ([#321](https://github.com/adobe/coral-spectrum/issues/321)) ([5c631fd](https://github.com/adobe/coral-spectrum/commit/5c631fd999072600342d9814c957514f2420a1d2))
+* Correct anchor color and table header text color ([#317](https://github.com/adobe/coral-spectrum/issues/317)) ([19c2665](https://github.com/adobe/coral-spectrum/commit/19c26655c721a4ca37fd8eec4ec701a22d9b3ab4))
+* Ensure interactive controls are not nested. ([#324](https://github.com/adobe/coral-spectrum/issues/324)) ([ef230a4](https://github.com/adobe/coral-spectrum/commit/ef230a4d41b473ba979c68926a65dd46ba33479e))
+* Set the aria-label to color value for color input  ([#316](https://github.com/adobe/coral-spectrum/issues/316)) ([eab60b0](https://github.com/adobe/coral-spectrum/commit/eab60b074cd11f11512c7e8827c6de4b27af5d48))
+
 ## [4.15.26](https://github.com/adobe/coral-spectrum/compare/v4.15.25...v4.15.26) (2023-10-31)
 
 
