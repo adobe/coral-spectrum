@@ -70281,6 +70281,7 @@ var Coral = (function (exports) {
     var el8 = this["items"] = document.createElement("div");
     el8.className += " _coral-Shell-help-items";
     el8.setAttribute("handle", "items");
+    el8.setAttribute("role", "list");
     el2.appendChild(el8);
     var el9 = document.createTextNode("\n  ");
     el2.appendChild(el9);
@@ -70734,6 +70735,7 @@ var Coral = (function (exports) {
         _get(_getPrototypeOf(ShellHelpItem.prototype), "render", this).call(this);
 
         this.classList.add(CLASSNAME$1c);
+        this.setAttribute("role", "listitem");
       }
     }]);
 
@@ -80821,6 +80823,10 @@ var Coral = (function (exports) {
         }
 
         headerCell.setAttribute('scope', scope);
+
+        if (headerCell.hasAttribute('sortable')) {
+          headerCell.content.setAttribute('role', 'button');
+        }
       }
       /**  @private */
 
@@ -85221,7 +85227,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.15.25";
+  var version$1 = "4.15.26";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

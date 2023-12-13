@@ -24473,7 +24473,7 @@ coral-shell-header-content {
   text-decoration: none;
   text-align: center;
   line-height: 38px;
-  color: rgba(255,255,255,0.8);
+  color: #949494;
   cursor: pointer;
   white-space: nowrap;
 }
@@ -28197,7 +28197,7 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
   background-color: rgba(44,44,44,0.06);
 }
 .coral--light ._coral-Table-headerCell[sortable]:hover {
-  color: rgb(44, 44, 44);
+  color: rgb(37, 37, 37);
 }
 .coral--light ._coral-Table-headerCell[sortable][sortabledirection="default"]:hover coral-table-headercell-content:after {
   background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 10'%3E%3Cstyle%3Epath %7B fill: %236e6e6e%3B %7D%3C/style%3E%3Cpath d='M8,4.00848a.99994.99994,0,0,1-1.707.70709L5,3.42267V9.00055A.99948.99948,0,0,1,4.00049,10h-.001A.99948.99948,0,0,1,3,9.00055V3.42267L1.707,4.71558A.99994.99994,0,1,1,.293,3.30139L3.251.34326c.01379-.0155.01855-.03552.03345-.05035A.997.997,0,0,1,3.99146,0l.00415.00079L3.99951,0h.001l.00391.00079L4.00854,0a.997.997,0,0,1,.707.29291c.01489.01483.01965.03485.03345.05035L7.707,3.30139A.99669.99669,0,0,1,8,4.00848Z'/%3E%3C/svg%3E");
@@ -28258,7 +28258,7 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
   border-bottom-color: rgb(225, 225, 225);
 }
 .coral--light ._coral-Table-headerCell[orderable]:not([sortable]):hover {
-  color: rgb(44, 44, 44);
+  color: rgb(37, 37, 37);
 }
 .coral--light ._coral-Table-headerCell[orderable] coral-table-headercell-content:before {
   background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1152 1152'%3E%3Cstyle%3Ecircle %7B fill: %236e6e6e%3B %7D%3C/style%3E%3Ctitle%3EDragHandle_24%3C/title%3E%3Ccircle cx='432' cy='144' r='48'/%3E%3Ccircle cx='432' cy='336' r='48'/%3E%3Ccircle cx='432' cy='528' r='48'/%3E%3Ccircle cx='432' cy='720' r='48'/%3E%3Ccircle cx='432' cy='912' r='48'/%3E%3Ccircle cx='624' cy='144' r='48'/%3E%3Ccircle cx='624' cy='336' r='48'/%3E%3Ccircle cx='624' cy='528' r='48'/%3E%3Ccircle cx='624' cy='720' r='48'/%3E%3Ccircle cx='624' cy='912' r='48'/%3E%3C/svg%3E");

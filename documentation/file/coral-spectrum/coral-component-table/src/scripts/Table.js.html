@@ -2903,6 +2903,10 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
       headerCell.setAttribute(&apos;role&apos;, &apos;rowheader&apos;);
     }
     headerCell.setAttribute(&apos;scope&apos;, scope);
+      
+    if(headerCell.hasAttribute(&apos;sortable&apos;)){
+      headerCell.content.setAttribute(&apos;role&apos;, &apos;button&apos;);
+    }
   }
 
   /**  @private */
