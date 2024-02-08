@@ -35131,7 +35131,7 @@
           this._itemsInPopover.forEach(function (item) {
             item.style.visibility = ''; // Store the button and popover on the item
 
-            item._button = item.querySelector('button[is="coral-button"]') || item.querySelector('a[is="coral-anchorbutton"]');
+            item._button = item.querySelector(':scope > button[is="coral-button"]') || item.querySelector(':scope > a[is="coral-anchorbutton"]');
             item._popover = item.querySelector('coral-popover');
 
             if (item._popover) {
@@ -85229,7 +85229,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.15.26";
+  var version$1 = "4.15.27";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

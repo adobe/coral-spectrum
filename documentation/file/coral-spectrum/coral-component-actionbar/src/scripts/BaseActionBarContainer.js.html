@@ -621,7 +621,7 @@ class BaseActionBarContainer extends superClass {
     this._itemsInPopover.forEach((item) =&gt; {
       item.style.visibility = &apos;&apos;;
       // Store the button and popover on the item
-      item._button = item.querySelector(&apos;button[is=&quot;coral-button&quot;]&apos;) || item.querySelector(&apos;a[is=&quot;coral-anchorbutton&quot;]&apos;);
+      item._button = item.querySelector(&apos;:scope &gt; button[is=&quot;coral-button&quot;]&apos;) || item.querySelector(&apos;:scope &gt; a[is=&quot;coral-anchorbutton&quot;]&apos;);
       item._popover = item.querySelector(&apos;coral-popover&apos;);
       if (item._popover) {
         item._popoverId = item._popover.id;
