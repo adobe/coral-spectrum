@@ -1,3 +1,10 @@
+## [4.15.28](https://github.com/adobe/coral-spectrum/compare/v4.15.27...v4.15.28) (2024-02-08)
+
+
+### Bug Fixes
+
+* ActionBar overlay button does not work when has one child([#330](https://github.com/adobe/coral-spectrum/issues/330)) ([855d999](https://github.com/adobe/coral-spectrum/commit/855d9990e9350c2af2a3a6e705659e21f4292b6c))
+
 ## [4.15.27](https://github.com/adobe/coral-spectrum/compare/v4.15.26...v4.15.27) (2023-12-13)
 
 
