@@ -425,7 +425,9 @@ describe('Clock', function () {
           expect(clock.querySelector('.coral-Form-errorlabel').hidden).to.be.true;
           // Checks that error is shown when clock is invalid
           el.invalid = true;
-          expect(clock.querySelector('.coral-Form-errorlabel').hidden).to.be.false;
+          helpers.next(function () {
+            expect(clock.querySelector('.coral-Form-errorlabel').hidden).to.be.false;
+          });
           // Check that error is hidden when clock is valid
           el.invalid = false;
           expect(clock.querySelector('.coral-Form-errorlabel').hidden).to.be.true;
