@@ -532,6 +532,13 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       }
 
       this.variant = this.variant;
+
+      if (header.getAttribute('class', 'cq-dialog-actions')) {
+        var headerChild = document.getElementsByClassName('cq-dialog-actions')[0];
+        if (headerChild) {
+          this._elements.headerWrapper.append(headerChild);
+        }
+      }
     }
   }
 
