@@ -160,7 +160,8 @@ const BaseList = (superClass) => class extends superClass {
 
     if (index < items.length - 1) {
       items[index + 1].focus();
-    } else {
+    }
+    else {
       items[0].focus();
     }
   }
@@ -182,7 +183,8 @@ const BaseList = (superClass) => class extends superClass {
 
     if (index > 0) {
       items[index - 1].focus();
-    } else {
+    }
+    else {
       items[items.length - 1].focus();
     }
   }
