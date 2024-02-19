@@ -519,12 +519,14 @@ const BaseComponent = (superClass) => class extends superClass {
         this._reflectedAttribute = true;
         this.setAttribute(attributeName, '');
         this._reflectedAttribute = false;
-      } else if (!value && this.hasAttribute(attributeName)) {
+      }
+      else if (!value && this.hasAttribute(attributeName)) {
         this._reflectedAttribute = true;
         this.removeAttribute(attributeName);
         this._reflectedAttribute = false;
       }
-    } else if (this.getAttribute(attributeName) !== String(value)) {
+    }
+    else if (this.getAttribute(attributeName) !== String(value)) {
       this._reflectedAttribute = true;
       this.setAttribute(attributeName, value);
       this._reflectedAttribute = false;
@@ -695,7 +697,8 @@ const BaseComponent = (superClass) => class extends superClass {
     const setProperty = (prop, val) => {
       if (isContentZone(prop)) {
         updateContentZone(prop, val);
-      } else {
+      }
+      else {
         this._silenced = silent;
         /** @ignore */
         this[prop] = val;
@@ -709,7 +712,8 @@ const BaseComponent = (superClass) => class extends superClass {
       value = valueOrSilent;
 
       setProperty(property, value);
-    } else {
+    }
+    else {
       properties = propertyOrProperties;
       silent = valueOrSilent;
 
@@ -775,7 +779,8 @@ const BaseComponent = (superClass) => class extends superClass {
     let handler = event.detail.handler;
     if(typeof handler === 'function') {
       handler(this);
-    } else {
+    }
+    else {
       throw new Error("Messenger handler should be a function");
     }
   }
