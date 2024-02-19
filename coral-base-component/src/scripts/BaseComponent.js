@@ -174,10 +174,12 @@ const delegateEvents = function () {
           for (let i = 0 ; i < elements.length ; ++i) {
             commons.addResizeListener(elements[i], listener);
           }
-        } else {
+        }
+        else {
           commons.addResizeListener(this, listener);
         }
-      } else {
+      }
+      else {
         this._vent.on(eventName, selector, listener, isCapture);
       }
     }
@@ -276,7 +278,8 @@ const getConstructorName = function (constructor) {
 
             if (found) {
               break;
-            } else {
+            }
+            else {
               found = find(obj[key], constructorToFind);
             }
           }
@@ -295,7 +298,8 @@ const getConstructorName = function (constructor) {
     if (constructor._namespace) {
       constructorName.push(constructor._namespace.value);
       constructor = constructor._namespace.parent;
-    } else {
+    }
+    else {
       constructor = false;
     }
   }
@@ -319,7 +323,8 @@ const _recursiveIgnoreConnectedCallback = function(el, value) {
     // todo better check for coral-component
     if(typeof child._ignoreConnectedCallback === 'boolean') {
       child._ignoreConnectedCallback = value;
-    } else {
+    }
+    else {
       _recursiveIgnoreConnectedCallback(child, value);
     }
   }
@@ -478,16 +483,19 @@ const BaseComponent = (superClass) => class extends superClass {
         }
         // Insert new node
         insert.call(this, value);
-      } else if (oldNode && oldNode.parentNode) {
+      }
+      else if (oldNode && oldNode.parentNode) {
         commons._log('warn', `${this._componentName} does not define an insert method for content zone ${handle}, falling back to replace.`);
         // Old way -- assume we have an old node
         this._elements[handle].parentNode.replaceChild(value, this._elements[handle]);
-      } else {
+      }
+      else {
         commons._log('error', `${this._componentName} does not define an insert method for content zone ${handle}, falling back to append.`);
         // Just append, which may introduce bugs, but at least doesn't crazy
         this.appendChild(value);
       }
-    } else {
+    }
+    else {
       // we need to remove the content zone if it exists
       oldNode = this._elements[handle];
       if (oldNode && oldNode.parentNode) {
