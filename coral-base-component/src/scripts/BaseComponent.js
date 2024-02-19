@@ -39,7 +39,8 @@ const getListenerFromMethodNameOrFunction = function (obj, eventName, methodName
   // Try to get the method
   if (typeof methodNameOrFunction === 'function') {
     return methodNameOrFunction;
-  } else if (typeof methodNameOrFunction === 'string') {
+  }
+  else if (typeof methodNameOrFunction === 'string') {
     if (!obj[methodNameOrFunction]) {
       throw new Error(`Coral.Component: Unable to add ${eventName} listener for ${obj.toString()}, method
       ${methodNameOrFunction} not found`);
@@ -53,7 +54,8 @@ const getListenerFromMethodNameOrFunction = function (obj, eventName, methodName
     }
 
     return listener;
-  } else if (methodNameOrFunction) {
+  }
+  else if (methodNameOrFunction) {
     // If we're passed something that's truthy (like an object), but it's not a valid method name or a function, get
     // angry
     throw new Error(`Coral.Component: Unable to add ${eventName} listener for ${obj.toString()}, ${methodNameOrFunction}
@@ -147,7 +149,8 @@ const delegateEvents = function () {
             selector: selector,
             listener: listener
           });
-        } else {
+        }
+        else {
           this._globalEvents = this._globalEvents || [];
           this._globalEvents.push({eventName, selector, listener, isCapture});
         }
@@ -164,7 +167,8 @@ const delegateEvents = function () {
 
         // Add listener locally
         this._keys.on(eventName, selector, listener);
-      } else if (isResize) {
+      }
+      else if (isResize) {
         if (selector) {
           elements = document.querySelectorAll(selector);
           for (let i = 0 ; i < elements.length ; ++i) {
