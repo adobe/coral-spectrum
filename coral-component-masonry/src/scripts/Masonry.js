@@ -452,7 +452,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     if (this._ariaGrid === ariaGrid.ON) {
       // Preserve existing role and set new role
       this._preservedAriaRole = this.getAttribute('role');
-      this.setAttribute('role', 'row');
+      this.setAttribute('role', 'list');
     } else if (this._ariaGrid == ariaGrid.OFF) {
       // Restore or remove role
       if (this._preservedAriaRole) {
@@ -596,7 +596,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
   /** @private */
   _updateAriaRoleForItem(item, columnIndex, activateAriaGrid) {
     if (activateAriaGrid === ariaGrid.ON) {
-      item.setAttribute('role', 'gridcell');
+      item.setAttribute('role', 'listitem');
       item.setAttribute('aria-colindex', columnIndex);
 
       // communicate aria-selected state of all cells
