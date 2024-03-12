@@ -1,3 +1,10 @@
+## [4.15.29](https://github.com/adobe/coral-spectrum/compare/v4.15.28...v4.15.29) (2024-03-12)
+
+
+### Bug Fixes
+
+* Disordered Week Names in Coral Datepicker Component ([#333](https://github.com/adobe/coral-spectrum/issues/333)) ([e30dd24](https://github.com/adobe/coral-spectrum/commit/e30dd24b5cf7240da22dc68a34b2c09b18828f2b))
+
 ## [4.15.28](https://github.com/adobe/coral-spectrum/compare/v4.15.27...v4.15.28) (2024-02-08)
 
 
