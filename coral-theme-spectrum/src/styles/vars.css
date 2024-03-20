@@ -21779,5 +21779,9 @@
   --spectrum-gray-300: rgb(84, 84, 84);
   --spectrum-white: rgb(255, 255, 255);
   --spectrum-disabled-background-color: rgb(230, 230, 230);
-  --spectrum-coral-tabs-item-background-color: rgb(142, 142, 142)
+  --spectrum-coral-tabs-item-background-color: rgb(142, 142, 142);
+  --spectrum-coral-global-bar-btn-backgound-color-selected: rgb(109, 109, 109);
+  --spectrum-coral-global-bar-btn-color-selected: rgb(255, 255, 255);
+  --spectrum-coral-global-bar-btn-color: rgb(34, 34, 34);
+  
 }
