@@ -421,9 +421,12 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
     
     let shellMenuButtonIcon = this._elements.shellMenuButton.getElementsByTagName('coral-icon')[0];
 
-    if(shellMenuButtonIcon !== null) {
-      shellMenuButtonIcon.setAttribute('alt', this.title);
-    }
+    commons.nextFrame(() => {
+      let shellMenuButtonIcon = this._elements.shellMenuButton.getElementsByTagName('coral-icon')[0];
+      if(shellMenuButtonIcon !== null) {
+        shellMenuButtonIcon.setAttribute('alt', this.title);
+      }
+    });
   }
 
   /**
