@@ -418,8 +418,6 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
     if (this.menu !== null) {
       this.menu = this.menu;
     }
-    
-    let shellMenuButtonIcon = this._elements.shellMenuButton.getElementsByTagName('coral-icon')[0];
 
     commons.nextFrame(() => {
       let shellMenuButtonIcon = this._elements.shellMenuButton.getElementsByTagName('coral-icon')[0];
