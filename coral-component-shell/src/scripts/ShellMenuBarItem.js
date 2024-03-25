@@ -422,7 +422,7 @@ class ShellMenuBarItem extends BaseComponent(HTMLElement) {
 
       let shellMenuButtonIcon = this._elements.shellMenuButton.getElementsByTagName('coral-icon')[0];
 
-      if(shellMenuButtonIcon) {
+      if(shellMenuButtonIcon && shellMenuButtonIcon !== null ) {
         shellMenuButtonIcon.setAttribute('alt', this.title);
       }
   }
