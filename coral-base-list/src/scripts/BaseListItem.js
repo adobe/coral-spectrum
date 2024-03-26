@@ -95,7 +95,8 @@ const BaseListItem = (superClass) => class extends BaseLabellable(superClass) {
     const el = this._getIconElement();
     if (transform.string(value) === '') {
       el.remove();
-    } else {
+    }
+    else {
       this.insertBefore(el, this.firstChild);
     }
 
