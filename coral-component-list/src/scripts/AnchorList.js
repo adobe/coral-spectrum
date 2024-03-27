@@ -52,14 +52,9 @@ const AnchorList = Decorator(class extends BaseList(BaseComponent(HTMLElement)) 
     this._trackEvent('click', 'coral-anchorlist-item', event, event.matchedTarget);
   }
 
-  _addRoleList() {
-    this.setAttribute('role', 'list');
-  }
-
   /** @ignore */
   render() {
     super.render();
-    this._addRoleList();
     this.classList.add(CLASSNAME);
   }
 });
