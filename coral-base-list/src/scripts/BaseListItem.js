@@ -131,6 +131,7 @@ const BaseListItem = (superClass) => class extends BaseLabellable(superClass) {
     // The attribute that makes different types of list items co-exist
     // This is also used for event delegation
     this.setAttribute('coral-list-item', '');
+    this.setAttribute('role', 'listitem');
 
     // Fetch or create the content content zone element
     const content = this._elements.content;
