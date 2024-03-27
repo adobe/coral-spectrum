@@ -56,7 +56,6 @@ const AnchorList = Decorator(class extends BaseList(BaseComponent(HTMLElement)) 
   render() {
     super.render();
 
-    this.setAttribute('role', 'list');
   }
 });
 

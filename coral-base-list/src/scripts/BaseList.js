@@ -222,6 +222,7 @@ const BaseList = (superClass) => class extends superClass {
     super.render();
 
     this.classList.add(CLASSNAME);
+    this.setAttribute('role', 'list');
 
     // Default reflected attributes
     if (!this._interaction) {
