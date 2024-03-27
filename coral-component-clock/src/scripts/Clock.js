@@ -242,8 +242,8 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
   set invalid(value) {
     super.invalid = value;
 
-    this._elements.hours.invalid = this._invalid;
-    this._elements.minutes.invalid = this._invalid;
+    if (this._elements.hours.value > this._elements.hours.getAttribute("max")) this._elements.hours.invalid = this._invalid;
+    if (this._elements.minutes.value > this._elements.minutes.getAttribute("max")) this._elements.minutes.invalid = this._invalid;
     this._elements.hours.setAttribute("aria-errormessage", this.errorID);
     this._elements.minutes.setAttribute("aria-errormessage", this.errorID);
 
@@ -253,6 +253,8 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
     if (this._elements.hours.invalid || this._elements.minutes.invalid) {
       errorLabel.setAttribute("id", this.errorID);
       errorLabel.setAttribute("aria-live", "assertive");
+      if (this._elements.hours.invalid) errorLabel.textContent = "Please enter valid hours";
+      else if (this._elements.minutes.invalid) errorLabel.textContent = "Please enter valid minutes";
       errorLabel.hidden = false;
       errorLabel.style.display = "table-caption";
       errorLabel.style["caption-side"] = "bottom";
