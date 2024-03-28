@@ -73,6 +73,12 @@ const CardProperty = Decorator(class extends BaseComponent(HTMLElement) {
 
     // removes the icon element from the DOM since there is no valid icon. this causes the content to have the
     // correct styling
+    
+    if(this._elements.icon.icon === 'globeRemove') {
+      this._elements.icon.removeAttribute('aria-label');
+      this._elements.icon.setAttribute("alt", '');
+    }
+
     if (this.icon === '') {
       this._elements.icon.remove();
     } else if (!this._elements.icon.parentNode) {
