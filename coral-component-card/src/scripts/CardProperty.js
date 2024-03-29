@@ -165,8 +165,13 @@ const CardProperty = Decorator(class extends BaseComponent(HTMLElement) {
     this.content = content;
 
     // Adjusting icon aria-label attribute as per coral-card-property title attribute
-    const iconParentTitle = this._elements.icon.parentNode.getAttribute('title');
-    this._elements.icon.setAttribute('aria-label', iconParentTitle);
+
+    if(this._elements.icon.parentNode !== null) {
+      const iconParentTitle = this._elements.icon.parentNode.getAttribute('title');
+      this._elements.icon.setAttribute('aria-label', iconParentTitle);
+    }
+
+
   }
 });
 
