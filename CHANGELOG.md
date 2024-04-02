@@ -1,3 +1,15 @@
+# [4.16.0](https://github.com/adobe/coral-spectrum/compare/v4.15.29...v4.16.0) (2024-04-02)
+
+
+### Bug Fixes
+
+* **Accessibility:** State of active component lacks 3 to 1 contrast ratio.([#329](https://github.com/adobe/coral-spectrum/issues/329)) ([f98bf47](https://github.com/adobe/coral-spectrum/commit/f98bf47992fa44ce9dc3876cc907610b534172a1))
+
+
+### Features
+
+* **Icon:** Add Car icon to the spectrum icons list. ([#343](https://github.com/adobe/coral-spectrum/issues/343)) ([d545314](https://github.com/adobe/coral-spectrum/commit/d545314710fe8ad516f95f4ff61bd0d12e950bcb))
+
 ## [4.15.29](https://github.com/adobe/coral-spectrum/compare/v4.15.28...v4.15.29) (2024-03-12)
 
 
