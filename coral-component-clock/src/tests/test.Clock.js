@@ -563,12 +563,10 @@ describe('Clock', function () {
               expect(el._elements.hours.value).to.equal('02');
               expect(el._elements.minutes.value).to.equal('02');
               expect(el._elements.valueAsText.textContent).to.equal('02:02 PM');
-
-              done();
             }, true);
-          } else {
-            done();
           }
+
+          done();
         });
 
         it('should allow AM/PM lowercase and uppercase format', function () {
@@ -619,12 +617,10 @@ describe('Clock', function () {
               expect(el._elements.hours.value).to.equal('');
               expect(el._elements.minutes.value).to.equal('');
               expect(el._elements.valueAsText.textContent).to.equal('');
-
-              done();
             }, true);
-          } else {
-            done();
           }
+
+          done();
         });
 
         it('should not change display nor value if AM/PM is set but hours format is 24 hours clock', function (done) {
@@ -644,12 +640,10 @@ describe('Clock', function () {
               expect(el._elements.hours.value).to.equal('11');
               expect(el._elements.minutes.value).to.equal('32');
               expect(el._elements.valueAsText.textContent).to.equal('11:32 AM');
-
-              done();
             }, true);
-          } else {
-            done();
           }
+
+          done();
         });
       });
 
