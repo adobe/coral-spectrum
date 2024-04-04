@@ -542,12 +542,10 @@ describe('Clock', function () {
               expect(el._elements.hours.value).to.equal('02');
               expect(el._elements.minutes.value).to.equal('02');
               expect(el._elements.valueAsText.textContent).to.equal('02:02 AM');
-
-              done();
             }, true);
-          } else {
-            done();
           }
+
+          done();
         });
 
         it('should switch from AM to PM', function (done) {
