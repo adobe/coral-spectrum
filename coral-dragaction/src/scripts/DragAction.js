@@ -250,7 +250,6 @@ class DragAction {
     events.on(`mousemove.DragAction${this._id}`, this._drag);
     events.on(`touchend.DragAction${this._id}`, this._dragEnd);
     events.on(`mouseup.DragAction${this._id}`, this._dragEnd);
-    events.on(`focusout.DragAction${this._id}`, this._dragOnKeyEnd);
 
     // Store reference on dragElement
     this._dragElement.dragAction = this;
@@ -309,13 +308,17 @@ class DragAction {
           handle._dragEvents = handle._dragEvents || new Vent(handle);
           handle._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
           handle._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
-          handle._dragEvents.on('keyup.DragAction', this._dragOnKey.bind(this));
+          handle._dragEvents.on('keydown.DragAction', this._dragOnKeyDown.bind(this));
+          handle._dragEvents.on('keyup.DragAction', this._dragOnKeyUp.bind(this));
+          handle._dragEvents.on('focusout.DragAction', this._dragOnFocusOut.bind(this));
           handle.classList.add(OPEN_HAND_CLASS);
         });
       } else {
         this._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
         this._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
-        this._dragEvents.on('keyup.DragAction', this._dragOnKey.bind(this));
+        this._dragEvents.on('keydown.DragAction', this._dragOnKeyDown.bind(this));
+        this._dragEvents.on('keyup.DragAction', this._dragOnKeyUp.bind(this));
+        this._dragEvents.on('focusout.DragAction', this._dragOnFocusOut.bind(this));
         this._dragElement.classList.add(OPEN_HAND_CLASS);
       }
     } else {
@@ -323,7 +326,9 @@ class DragAction {
       this._handles = [];
       this._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
       this._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
-      this._dragEvents.on('keyup.DragAction', this._dragOnKey.bind(this));
+      this._dragEvents.on('keydown.DragAction', this._dragOnKeyDown.bind(this));
+      this._dragEvents.on('keyup.DragAction', this._dragOnKeyUp.bind(this));
+      this._dragEvents.on('focusout.DragAction', this._dragOnFocusOut.bind(this));
       this._dragElement.classList.add(OPEN_HAND_CLASS);
     }
   }
@@ -688,14 +693,32 @@ class DragAction {
   }
 
   /** @private */
-  _dragOnKey(event) {
+  _dragOnKeyDown(event) {
     switch (event.code) {
       case 'Space':
-        this._dragEvents.dispatch('coral-dragaction:dragonkeyspace', {
-          detail: {
-            dragElement: this._dragElement
-          }
-        });
+      case 'ArrowDown':
+      case 'ArrowUp':
+      case 'Enter':
+      case 'Escape':
+        event.preventDefault();
+        break;
+    }
+  }
+
+  /** @private */
+  _dragOnKeyUp(event) {
+    switch (event.code) {
+      case 'Space':
+        if (!this.isKeyboardDragging) {
+          this._dragEvents.dispatch('coral-dragaction:dragonkeyspace', {
+            detail: {
+              dragElement: this._dragElement
+            }
+          });
+          this.isKeyboardDragging = true;
+        } else {
+          this._dragOnKeyEnd();
+        }
         break;
       case 'ArrowDown':
         this._dragEvents.dispatch('coral-dragaction:dragoveronkeyarrowdown', {
@@ -712,19 +735,31 @@ class DragAction {
         });
         break;
       case 'Enter':
-        this._dragOnKeyEnd(event);
+      case 'Escape':
+        this._dragOnKeyEnd();
         break;
     }
-  }  
+  }
 
   /** @private */
-  _dragOnKeyEnd(event) {
+  _dragOnFocusOut(event) {
+    window.setTimeout(() => {
+      if (document.activeElement === event.target) {
+        return;
+      }
+      this._dragOnKeyEnd();
+    }, 0);
+  }
+
+  /** @private */
+  _dragOnKeyEnd() {
     this._dragEvents.dispatch('coral-dragaction:dragendonkey', {
       detail: {
         dragElement: this._dragElement
       }
     });
-  }  
+    this.isKeyboardDragging = false;
+  }
 
   /**
    Remove draggable actions
@@ -932,7 +967,7 @@ class DragAction {
 
    @property {HTMLElement} dragElement
    The dragged element
-   */      
+   */
 }
 
 export default DragAction;
