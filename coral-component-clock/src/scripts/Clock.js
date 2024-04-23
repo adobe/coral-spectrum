@@ -242,19 +242,22 @@ const Clock = Decorator(class extends BaseFormField(BaseComponent(HTMLElement)) 
   set invalid(value) {
     super.invalid = value;
 
-    if (this._elements.hours.value > this._elements.hours.getAttribute("max")) this._elements.hours.invalid = this._invalid;
-    if (this._elements.minutes.value > this._elements.minutes.getAttribute("max")) this._elements.minutes.invalid = this._invalid;
-    this._elements.hours.setAttribute("aria-errormessage", this.errorID);
-    this._elements.minutes.setAttribute("aria-errormessage", this.errorID);
+    const hoursElement = this._elements.hours;
+    const minutesElement = this._elements.minutes;
+
+    if (hoursElement.value > hoursElement.getAttribute("max")) hoursElement.invalid = this._invalid;
+    if (minutesElement.value > minutesElement.getAttribute("max")) minutesElement.invalid = this._invalid;
+    hoursElement.setAttribute("aria-errormessage", this.errorID);
+    minutesElement.setAttribute("aria-errormessage", this.errorID);
 
     const ERROR_LABEL_ELEMENT_CLASS = "._coral-Clock .coral-Form-errorlabel";
     const errorLabel = this.querySelector(ERROR_LABEL_ELEMENT_CLASS);
 
-    if (this._elements.hours.invalid || this._elements.minutes.invalid) {
+    if (hoursElement.invalid || minutesElement.invalid) {
       errorLabel.setAttribute("id", this.errorID);
       errorLabel.setAttribute("aria-live", "assertive");
-      if (this._elements.hours.invalid) errorLabel.textContent = "Please enter valid hours";
-      else if (this._elements.minutes.invalid) errorLabel.textContent = "Please enter valid minutes";
+      if (hoursElement.invalid) errorLabel.textContent = i18n.get("Please enter valid hours");
+      else if (minutesElement.invalid) errorLabel.textContent = i18n.get("Please enter valid minutes");
       errorLabel.hidden = false;
       errorLabel.style.display = "table-caption";
       errorLabel.style["caption-side"] = "bottom";
