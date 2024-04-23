@@ -1,3 +1,10 @@
+## [4.16.1](https://github.com/adobe/coral-spectrum/compare/v4.16.0...v4.16.1) (2024-04-23)
+
+
+### Bug Fixes
+
+* **Accessibility:** Annotation swatch selector button missing an accessible name ([#341](https://github.com/adobe/coral-spectrum/issues/341)) ([a5a4c93](https://github.com/adobe/coral-spectrum/commit/a5a4c9360970d717d2f474a5fb58209d1e15835b))
+
 # [4.16.0](https://github.com/adobe/coral-spectrum/compare/v4.15.29...v4.16.0) (2024-04-02)
 
 
