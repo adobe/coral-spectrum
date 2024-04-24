@@ -2468,6 +2468,11 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
     }
     headerCell.setAttribute('scope', scope);
       
+    commons.nextFrame(() => {
+      if(headerCell.hasAttribute('sortable') && headerCell.content){
+        headerCell.content.setAttribute('role', 'button');
+      }
+    });
   }
 
   /**  @private */
