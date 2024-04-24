@@ -2470,7 +2470,7 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
       
     commons.nextFrame(() => {
       if(headerCell.hasAttribute('sortable')){
-        headerCell.setAttribute('role', 'button');
+        headerCell.content.setAttribute('role', 'button');
       }
     });
   }
