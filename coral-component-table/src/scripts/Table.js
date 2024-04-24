@@ -2471,6 +2471,8 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
     commons.nextFrame(() => {
       if(headerCell.hasAttribute('sortable') && headerCell.content){
         headerCell.content.setAttribute('role', 'button');
+        headerCell.content.removeAttribute('aria-sort');
+
       }
     });
   }
