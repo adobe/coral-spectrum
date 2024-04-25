@@ -52,8 +52,8 @@ describe('DragAction', function () {
       var windowEventCount = events._vent._allListeners.length;
 
       dragAction.destroy();
-      // mousestart, touchstart
-      expect(dragElementEvents._allListeners.length).to.equal(dragElementEventCount - 2);
+      // mousestart, touchstart, keydown, keyup, focusout
+      expect(dragElementEvents._allListeners.length).to.equal(dragElementEventCount - 5);
       // touchmove, mousemove, touchend, mouseend
       // @todo don't use private _vent instance
       expect(events._vent._allListeners.length).to.equal(windowEventCount - 4);
