@@ -717,7 +717,7 @@ class DragAction {
           });
           this.isKeyboardDragging = true;
         } else {
-          this._dragOnKeyEnd(event);
+          this._dragOnKeyEnd();
         }
         break;
       case 'ArrowDown':
@@ -736,7 +736,7 @@ class DragAction {
         break;
       case 'Enter':
       case 'Escape':
-        this._dragOnKeyEnd(event);
+        this._dragOnKeyEnd();
         break;
       }
     }
@@ -747,12 +747,12 @@ class DragAction {
         if (document.activeElement === event.target) {
           return;
         }
-        this._dragOnKeyEnd(event);
+        this._dragOnKeyEnd();
       }, 0);
     }
 
     /** @private */
-    _dragOnKeyEnd(event) {
+    _dragOnKeyEnd() {
       this._dragEvents.dispatch('coral-dragaction:dragendonkey', {
         detail: {
           dragElement: this._dragElement
