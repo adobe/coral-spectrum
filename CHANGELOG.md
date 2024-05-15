@@ -1,3 +1,10 @@
+## [4.16.2](https://github.com/adobe/coral-spectrum/compare/v4.16.1...v4.16.2) (2024-05-15)
+
+
+### Bug Fixes
+
+* **Accessability:** Add button role to table header interactive element ([#347](https://github.com/adobe/coral-spectrum/issues/347)) ([a17ed32](https://github.com/adobe/coral-spectrum/commit/a17ed3203802d03d1d267eb0fbd329224e7fdb00))
+
 ## [4.16.1](https://github.com/adobe/coral-spectrum/compare/v4.16.0...v4.16.1) (2024-04-23)
 
 
