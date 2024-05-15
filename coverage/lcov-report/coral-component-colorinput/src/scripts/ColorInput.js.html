@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.33% </span>
+                <span class="strong">92.04% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>265/287</span>
+                <span class='fraction'>266/289</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.82% </span>
+                <span class="strong">81.41% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>126/154</span>
+                <span class='fraction'>127/156</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.33% </span>
+                <span class="strong">92.04% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>265/287</span>
+                <span class='fraction'>266/289</span>
             </div>
         
             
@@ -1023,7 +1023,10 @@
 <a name='L965'></a><a href='#L965'>965</a>
 <a name='L966'></a><a href='#L966'>966</a>
 <a name='L967'></a><a href='#L967'>967</a>
-<a name='L968'></a><a href='#L968'>968</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L968'></a><a href='#L968'>968</a>
+<a name='L969'></a><a href='#L969'>969</a>
+<a name='L970'></a><a href='#L970'>970</a>
+<a name='L971'></a><a href='#L971'>971</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1377,6 +1380,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1989,7 +1996,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -2345,8 +2351,8 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
       defaultPalette.parentNode.removeChild(defaultPalette);
     }
   }
-&nbsp;
-  /**
+<span class="missing-if-branch" title="if path not taken" >I</span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
    Short hint that describes the expected value of the ColorInput. It is displayed when the ColorInput is empty
    and the variant is {@link Coral.ColorInput.variant.DEFAULT}
 &nbsp;
@@ -2408,11 +2414,11 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
 &nbsp;
   /**
    Name used to submit the data in a form.
-   @ty<span class="missing-if-branch" title="else path not taken" >E</span>pe {String}
+   @type {String}
    @default ""
    @htmlattribute name
    @htmlattributereflected
-   */
+   */<span class="missing-if-branch" title="else path not taken" >E</span>
   get name() {
     return this._elements.input.name;
   }
@@ -2430,11 +2436,11 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
    @htmlattribute disabled
    @htmlattributereflected
    */
-  get <span class="missing-if-branch" title="else path not taken" >E</span>disabled() {
+  get disabled() {
     return this._disabled || false;
   }
 &nbsp;
-  set disabled(value) {
+  set <span class="missing-if-branch" title="else path not taken" >E</span>disabled(value) {
     this._disabled = transform.booleanAttr(value);
     this._reflectAttribute('disabled', this._disabled);
 &nbsp;
@@ -2562,18 +2568,18 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
           selectedItem.removeAttribute('selected');
         }
       });
-<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+&nbsp;
       // We can trigger change events again
       this._preventTriggeringEvents = false;
     }
-&nbsp;
+<span class="branch-1 cbranch-no" title="branch not covered" ></span>
     this._triggerChangeEvent();
-  }<span class="fstat-no" title="function not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
+  }
+&nbsp;
   /** @private */
   _triggerChangeEvent() {
-    const selectedItem = this.selectedItem;
-    const oldSelection = this._oldSelection;
+    const selected<span class="fstat-no" title="function not covered" >Item</span> = this.selectedItem;
+    co<span class="cstat-no" title="statement not covered" >nst oldSelection = this._oldSel</span>ection;
 &nbsp;
     if (!this._preventTriggeringEvents &amp;&amp; selectedItem !== oldSelection) {
       // update hidden fields
@@ -2618,24 +2624,24 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     this._elements.overlay.returnFocusTo(this.variant === variant.SWATCH ? event.matchedTarget : this._elements.input);
 &nbsp;
     this._elements.overlay.open = true;
-  }<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+  }
 &nbsp;
   /** @ignore */
   _onKeyEsc(event) {
-    if<span class="missing-if-branch" title="else path not taken" >E</span> (!this._elements.overlay.open) {
+    if (!this._elements.overlay.open) {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
       return;
     }
 &nbsp;
-    event.stopPropagation();
+    ev<span class="missing-if-branch" title="else path not taken" >E</span>ent.stopPropagation();
 &nbsp;
     this._elements.overlay.open = false;
-  }<span class="cstat-no" title="statement not covered" ></span>
+  }
 &nbsp;
-  /** @i<span class="cstat-no" title="statement not covered" >gnore */</span>
+  /** @ignore */
   _beforeOverlayOpen() {
-    // Make sure appropriate tabbable descendant will receive focus
+    // M<span class="cstat-no" title="statement not covered" >ake sure appropriate tabbable descendant will receiv</span>e focus
     if (this.showProperties === showProperties.ON) {
-      this._elements.overlay.focusOnShow = this._elements.propertiesView._elements.colorPreview2;
+      th<span class="cstat-no" title="statement not covered" >is._elements.overlay.focusOnShow = this._elements.</span>propertiesView._elements.colorPreview2;
     } else if (this.showSwatches === showSwatches.ON) {
       this._elements.overlay.focusOnShow =
         this._elements.overlay.querySelector('coral-colorinput-swatch[selected] &gt; button') ||
@@ -2665,22 +2671,25 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
 &nbsp;
   /** @ignore */
   _showOrHideView(view, hide) {
-    vi<span class="missing-if-branch" title="if path not taken" >I</span>ew.hidden = hide;
-    // R<span class="cstat-no" title="statement not covered" >emove both classes and add </span>only the required one
+    view.hidden = hide;
+    // Remove both classes and add only the required one
     this._elements.overlay.classList.remove('_coral-ColorInput-onlySwatchesView', '_coral-ColorInput-onlyPropertiesView');
 &nbsp;
-    if (!this._elements.propertiesView.hidden &amp;&amp; this._elements.swatchesView.hidden) {
-      this._elements.overlay.classList.add('_coral-ColorInput-onlyPropertiesView');
+    if<span class="missing-if-branch" title="if path not taken" >I</span> (!this._elements.propertiesView.hidden &amp;&amp; this._elements.swatchesView.hidden) {
+      th<span class="cstat-no" title="statement not covered" >is._elements.overlay.classL</span>ist.add('_coral-ColorInput-onlyPropertiesView');
     } else if (this._elements.propertiesView.hidden &amp;&amp; !this._elements.swatchesView.hidden) {
       this._elements.overlay.classList.add('_coral-ColorInput-onlySwatchesView');
     }
 &nbsp;
     // Update accessibility label for colorPreview button when only swatches are shown
     if (this.showProperties === showProperties.OFF &amp;&amp;
-      th<span class="missing-if-branch" title="if path not taken" >I</span>is.showSwatches === showSwatches.ON) {
+      this.showSwatches === showSwatches.ON) {
       this._elements.colorPreview.label.textContent = i18n.get('Swatches');
-      this<span class="cstat-no" title="statement not covered" >._elements.overlay.setAttribut</span>e('aria-label', i18n.get('Swatches'));
-    } else {
+      if (this.previousSibling) {
+        this.previousSibling.setAttribute('aria-label', i18n.get('Confirm hex value'));
+      }<span class="missing-if-branch" title="if path not taken" >I</span>
+      this._elements.overlay.setAttribute('aria-label', i18n.get('Swatches'));
+    } else<span class="cstat-no" title="statement not covered" > {</span>
       this._elements.colorPreview.label.textContent = i18n.get('Color Picker');
       this._elements.overlay.setAttribute('aria-label', i18n.get('Color Picker'));
     }
@@ -2700,8 +2709,8 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
 &nbsp;
       let colorEl = null;
       let color = null;
-      let colorIndex = 0;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-      let generatedIndex = 0;
+      let colorIndex = 0;
+      let generatedIndex = 0;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
 &nbsp;
       let generatedColorEl = null;
       let generatedColors = [];
@@ -2718,8 +2727,8 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
           // be sure to add alpha
           generatedColorEl.value = generatedColors[generatedIndex].rgbaValue;
           generatedColorEl.setAttribute('coral-colorinput-generatedcolor', '');
-          colorEl.parentNode.insertBefore(generatedColorEl, colorEl.nextSibling);<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-        }
+          colorEl.parentNode.insertBefore(generatedColorEl, colorEl.nextSibling);
+        }<span class="branch-2 cbranch-no" title="branch not covered" ></span>
       }
     }
   }
@@ -2736,8 +2745,8 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
   _setActiveColor(color) {
     // method used by subviews to set a color and trigger a change event if needed
     const oldColor = this.valueAsColor ? this.valueAsColor : new Color();
-    this.valueAsColor = color;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-&nbsp;
+    this.valueAsColor = color;
+<span class="branch-2 cbranch-no" title="branch not covered" ></span>
     if (!oldColor.isSimilarTo(this.valueAsColor, false)) {
       // test if current color is invalid
       this._validateInputValue();
@@ -2754,15 +2763,15 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     if (this.selectedItem) {
       const selectedColor = new Color();
       selectedColor.value = this.selectedItem.value;
-<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-      // only select color if it is not already selected
+&nbsp;
+      // only select color if it is not already selected<span class="branch-2 cbranch-no" title="branch not covered" ></span>
       selectColorInItems = !selectedColor.isSimilarTo(newColor, true);
     }
 &nbsp;
-    if (selectColorInItems) {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-      // select right color in this.items (if necessary and possible)
-      const s<span class="missing-if-branch" title="else path not taken" >E</span>electedItem = this.selectedItem;
-      if (selectedItem) {
+    if (selectColorInItems) {
+      // select right color in this.items (if necessary and pos<span class="branch-1 cbranch-no" title="branch not covered" >sible</span>)
+      const selectedItem = this.selectedItem;
+      if (sel<span class="missing-if-branch" title="else path not taken" >E</span>ectedItem) {
         selectedItem.removeAttribute('selected');
       }
 &nbsp;
@@ -2964,7 +2973,7 @@ export default ColorInput;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Apr 02 2024 11:30:14 GMT+0000 (Coordinated Universal Time)
+                at Wed May 15 2024 10:21:31 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

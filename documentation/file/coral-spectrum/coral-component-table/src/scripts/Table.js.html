@@ -2055,7 +2055,7 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
     if (headerCell) {
       // For icons (chevron up/down) styling
       headerCell.setAttribute(&apos;sortabledirection&apos;, column.sortableDirection);
-      (table.head.sticky ? headerCell.content : headerCell).setAttribute(&apos;aria-sort&apos;, column.sortableDirection === sortableDirection.DEFAULT ? &apos;none&apos; : column.sortableDirection);
+      headerCell.setAttribute(&apos;aria-sort&apos;, column.sortableDirection === sortableDirection.DEFAULT ? &apos;none&apos; : column.sortableDirection);
 
       if (column.sortableDirection === sortableDirection.DEFAULT) {
         this._elements.liveRegion.innerText = &apos;&apos;;
@@ -2149,7 +2149,7 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
         // For icons (chevron up/down) styling
         getSiblingsOf(colHeaderCell, &apos;th[is=&quot;coral-table-headercell&quot;]&apos;).forEach((headerCell) =&gt; {
           headerCell.setAttribute(&apos;sortabledirection&apos;, sortableDirection.DEFAULT);
-          (table.head.sticky ? headerCell.content : headerCell).setAttribute(&apos;aria-sort&apos;, &apos;none&apos;);
+          headerCell.setAttribute(&apos;aria-sort&apos;, &apos;none&apos;);
         });
       }
 
@@ -2204,7 +2204,7 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
       if (colHeaderCell) {
         getSiblingsOf(colHeaderCell, &apos;th[is=&quot;coral-table-headercell&quot;]&apos;).forEach((headerCell) =&gt; {
           headerCell.setAttribute(&apos;sortabledirection&apos;, sortableDirection.DEFAULT);
-          (table.head.sticky ? headerCell.content : headerCell).setAttribute(&apos;aria-sort&apos;, &apos;none&apos;);
+          headerCell.setAttribute(&apos;aria-sort&apos;, &apos;none&apos;);
         });
       }
 
@@ -2450,8 +2450,8 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
   _toggleHeaderCellTabIndex(headerCell, sticky) {
     const column = this._getColumn(headerCell);
     const sortable = column &amp;&amp; (column.sortable || column.orderable);
-    headerCell[sortable &amp;&amp; !sticky ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;tabindex&apos;, &apos;0&apos;);
-    headerCell.content[sortable &amp;&amp; sticky ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;tabindex&apos;, &apos;0&apos;);
+    headerCell.content[sortable ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;tabindex&apos;, &apos;0&apos;);
+    headerCell.content[sortable ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;role&apos;, &apos;button&apos;);
   }
 
   /** @private */
@@ -2547,7 +2547,7 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
 
   /** @private */
   _getFocusableHeaderCell() {
-    return this.head &amp;&amp; this.head.querySelector(&apos;th[is=&quot;coral-table-headercell&quot;][tabindex=&quot;0&quot;], coral-table-headercell-label[tabindex=&quot;0&quot;]&apos;);
+    return this.head &amp;&amp; this.head.querySelector(&apos;th[is=&quot;coral-table-headercell&quot;][tabindex=&quot;0&quot;], th[is=&quot;coral-table-headercell&quot;] &gt; coral-table-headercell-content[tabindex=&quot;0&quot;]&apos;);
   }
 
   /** @private */
@@ -2893,20 +2893,11 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
     // Add appropriate scope depending on whether header cell is in THEAD or TBODY
     const scope = tableSection.nodeName === &apos;THEAD&apos; || tableSection.nodeName === &apos;TFOOT&apos; ? &apos;col&apos; : &apos;row&apos;;
     if (scope === &apos;col&apos;) {
-      if (this.head &amp;&amp; this.head.sticky) {
-        headerCell.setAttribute(&apos;role&apos;, &apos;presentation&apos;);
-        headerCell._elements.content.setAttribute(&apos;role&apos;, &apos;columnheader&apos;);
-      } else {
-        headerCell.setAttribute(&apos;role&apos;, &apos;columnheader&apos;);
-      }
+      headerCell.setAttribute(&apos;role&apos;, &apos;columnheader&apos;);
     } else {
       headerCell.setAttribute(&apos;role&apos;, &apos;rowheader&apos;);
     }
     headerCell.setAttribute(&apos;scope&apos;, scope);
-      
-    if(headerCell.hasAttribute(&apos;sortable&apos;)){
-      headerCell.content.setAttribute(&apos;role&apos;, &apos;button&apos;);
-    }
   }
 
   /**  @private */

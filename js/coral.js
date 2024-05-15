@@ -48490,6 +48490,10 @@ var Coral = (function (exports) {
         if (this.showProperties === showProperties.OFF && this.showSwatches === showSwatches.ON) {
           this._elements.colorPreview.label.textContent = i18n.get('Swatches');
 
+          if (this.previousSibling) {
+            this.previousSibling.setAttribute('aria-label', i18n.get('Confirm hex value'));
+          }
+
           this._elements.overlay.setAttribute('aria-label', i18n.get('Swatches'));
         } else {
           this._elements.colorPreview.label.textContent = i18n.get('Color Picker');
@@ -79903,7 +79907,7 @@ var Coral = (function (exports) {
         if (headerCell) {
           // For icons (chevron up/down) styling
           headerCell.setAttribute('sortabledirection', column.sortableDirection);
-          (table.head.sticky ? headerCell.content : headerCell).setAttribute('aria-sort', column.sortableDirection === sortableDirection.DEFAULT ? 'none' : column.sortableDirection);
+          headerCell.setAttribute('aria-sort', column.sortableDirection === sortableDirection.DEFAULT ? 'none' : column.sortableDirection);
 
           if (column.sortableDirection === sortableDirection.DEFAULT) {
             this._elements.liveRegion.innerText = '';
@@ -80003,7 +80007,7 @@ var Coral = (function (exports) {
             // For icons (chevron up/down) styling
             getSiblingsOf(colHeaderCell, 'th[is="coral-table-headercell"]').forEach(function (headerCell) {
               headerCell.setAttribute('sortabledirection', sortableDirection.DEFAULT);
-              (table.head.sticky ? headerCell.content : headerCell).setAttribute('aria-sort', 'none');
+              headerCell.setAttribute('aria-sort', 'none');
             });
           } // Use cell value to sort and fallback if not specified
 
@@ -80059,7 +80063,7 @@ var Coral = (function (exports) {
           if (colHeaderCell) {
             getSiblingsOf(colHeaderCell, 'th[is="coral-table-headercell"]').forEach(function (headerCell) {
               headerCell.setAttribute('sortabledirection', sortableDirection.DEFAULT);
-              (table.head.sticky ? headerCell.content : headerCell).setAttribute('aria-sort', 'none');
+              headerCell.setAttribute('aria-sort', 'none');
             });
           }
 
@@ -80327,8 +80331,8 @@ var Coral = (function (exports) {
         var column = this._getColumn(headerCell);
 
         var sortable = column && (column.sortable || column.orderable);
-        headerCell[sortable && !sticky ? 'setAttribute' : 'removeAttribute']('tabindex', '0');
-        headerCell.content[sortable && sticky ? 'setAttribute' : 'removeAttribute']('tabindex', '0');
+        headerCell.content[sortable ? 'setAttribute' : 'removeAttribute']('tabindex', '0');
+        headerCell.content[sortable ? 'setAttribute' : 'removeAttribute']('role', 'button');
       }
       /** @private */
 
@@ -80440,7 +80444,7 @@ var Coral = (function (exports) {
     }, {
       key: "_getFocusableHeaderCell",
       value: function _getFocusableHeaderCell() {
-        return this.head && this.head.querySelector('th[is="coral-table-headercell"][tabindex="0"], coral-table-headercell-label[tabindex="0"]');
+        return this.head && this.head.querySelector('th[is="coral-table-headercell"][tabindex="0"], th[is="coral-table-headercell"] > coral-table-headercell-content[tabindex="0"]');
       }
       /** @private */
 
@@ -80815,22 +80819,12 @@ var Coral = (function (exports) {
         var scope = tableSection.nodeName === 'THEAD' || tableSection.nodeName === 'TFOOT' ? 'col' : 'row';
 
         if (scope === 'col') {
-          if (this.head && this.head.sticky) {
-            headerCell.setAttribute('role', 'presentation');
-
-            headerCell._elements.content.setAttribute('role', 'columnheader');
-          } else {
-            headerCell.setAttribute('role', 'columnheader');
-          }
+          headerCell.setAttribute('role', 'columnheader');
         } else {
           headerCell.setAttribute('role', 'rowheader');
         }
 
         headerCell.setAttribute('scope', scope);
-
-        if (headerCell.hasAttribute('sortable')) {
-          headerCell.content.setAttribute('role', 'button');
-        }
       }
       /**  @private */
 
@@ -85231,7 +85225,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.15.29";
+  var version$1 = "4.16.1";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
