@@ -50,6 +50,9 @@ $colorinput-button-size = 28px;
 
 $colorinput-input-swatch-size = 38px;
 
+$colorinput-swatch-preview-width = 44px;
+$colorinput-swatch-preview-height = 57px;
+
 $colorinput-slider-width = 160px;
 $colorinput-slider-margin = 5px 16px 0 16px;
 
@@ -141,6 +144,7 @@ coral-colorinput-item {
 ._coral-ColorInput-swatch {
   display: block;
   float: left;
+  text-align: center;
   padding: $colorinput-swatch-top-padding $colorinput-swatch-left-right-padding 0;
 
   /* All buttons inside the colorinput are square */
@@ -185,12 +189,17 @@ coral-colorinput-item {
       }
     }
   }
+
+  label {
+    display block;
+  }
 }
 
 ._coral-ColorInput-buttonWrapper {
   position: absolute;
   right: $colorinput-button-wrapper-offset;
   top: $colorinput-button-wrapper-offset;
+  text-align: center;
 
   // set opacity < 1 to create new stacking context (for checker image to work)
   opacity: .999;
@@ -233,11 +242,11 @@ coral-colorinput-item {
 
 // Swatch variant
 ._coral-ColorInput--swatch {
-  width: $colorinput-input-swatch-size;
-  height: $colorinput-input-swatch-size;
+  width: $colorinput-swatch-preview-width;
+  height: $colorinput-swatch-preview-height;
 
   // makes sure the width stays no matter the parent's configuration
-  max-width: $colorinput-input-swatch-size;
+  max-width: $colorinput-swatch-preview-width;
 
   ._coral-ColorInput-input {
     position: absolute;

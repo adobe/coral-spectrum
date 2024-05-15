@@ -224,7 +224,8 @@ const BaseFormField = (superClass) => class extends superClass {
       if (element.matches(LABELLABLE_ELEMENTS_SELECTOR)) {
         this._updateForAttributes(value, elementId);
       }
-    } else {
+    }
+    else {
       // since no labelledby value was set, we remove everything
       element.removeAttribute('aria-labelledby');
     }
@@ -361,7 +362,8 @@ const BaseFormField = (superClass) => class extends superClass {
           if (forAttribute === elementId) {
             labelElement.removeAttribute('for');
           }
-        } else {
+        }
+        else {
           // if we do not have to remove, it does not matter the current value of the label, we can set it in every
           // case
           labelElement.setAttribute('for', elementId);

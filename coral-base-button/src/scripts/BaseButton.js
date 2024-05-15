@@ -192,7 +192,8 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
 
         if (this.iconPosition === iconPosition.LEFT) {
           this.appendChild(label);
-        } else {
+        }
+        else {
           this.insertBefore(label, this.firstChild);
         }
       }
@@ -407,7 +408,8 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
   
       if (value === variant._CUSTOM) {
         this.classList.remove(CLASSNAME);
-      } else {
+      }
+      else {
         this.classList.add(...VARIANT_MAP[value]);
   
         if (value === variant.ACTION || value === variant.QUIET_ACTION) {
@@ -505,7 +507,8 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
     if (this._variant !== variant._CUSTOM) {
       if (this._variant === variant.ACTION || this._variant === variant.QUIET_ACTION) {
         label.classList.add(`${ACTION_CLASSNAME}-label`);
-      } else {
+      }
+      else {
         label.classList.add(`${CLASSNAME}-label`);
       }
     }
@@ -612,7 +615,8 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
         // Don't add duplicated icons
         if (iconAdded) {
           this.removeChild(child);
-        } else {
+        }
+        else {
           // Conserve existing icon element to content
           this._elements.icon = child;
           fragment.appendChild(child);
@@ -622,7 +626,8 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
       // Avoid content zone to be voracious
       else if (contentZoneProvided) {
         fragment.appendChild(child);
-      } else {
+      }
+      else {
         // Move anything else into the label
         label.appendChild(child);
       }

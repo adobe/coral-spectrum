@@ -39,7 +39,8 @@ const getListenerFromMethodNameOrFunction = function (obj, eventName, methodName
   // Try to get the method
   if (typeof methodNameOrFunction === 'function') {
     return methodNameOrFunction;
-  } else if (typeof methodNameOrFunction === 'string') {
+  }
+  else if (typeof methodNameOrFunction === 'string') {
     if (!obj[methodNameOrFunction]) {
       throw new Error(`Coral.Component: Unable to add ${eventName} listener for ${obj.toString()}, method
       ${methodNameOrFunction} not found`);
@@ -53,7 +54,8 @@ const getListenerFromMethodNameOrFunction = function (obj, eventName, methodName
     }
 
     return listener;
-  } else if (methodNameOrFunction) {
+  }
+  else if (methodNameOrFunction) {
     // If we're passed something that's truthy (like an object), but it's not a valid method name or a function, get
     // angry
     throw new Error(`Coral.Component: Unable to add ${eventName} listener for ${obj.toString()}, ${methodNameOrFunction}
@@ -147,7 +149,8 @@ const delegateEvents = function () {
             selector: selector,
             listener: listener
           });
-        } else {
+        }
+        else {
           this._globalEvents = this._globalEvents || [];
           this._globalEvents.push({eventName, selector, listener, isCapture});
         }
@@ -164,16 +167,19 @@ const delegateEvents = function () {
 
         // Add listener locally
         this._keys.on(eventName, selector, listener);
-      } else if (isResize) {
+      }
+      else if (isResize) {
         if (selector) {
           elements = document.querySelectorAll(selector);
           for (let i = 0 ; i < elements.length ; ++i) {
             commons.addResizeListener(elements[i], listener);
           }
-        } else {
+        }
+        else {
           commons.addResizeListener(this, listener);
         }
-      } else {
+      }
+      else {
         this._vent.on(eventName, selector, listener, isCapture);
       }
     }
@@ -272,7 +278,8 @@ const getConstructorName = function (constructor) {
 
             if (found) {
               break;
-            } else {
+            }
+            else {
               found = find(obj[key], constructorToFind);
             }
           }
@@ -291,7 +298,8 @@ const getConstructorName = function (constructor) {
     if (constructor._namespace) {
       constructorName.push(constructor._namespace.value);
       constructor = constructor._namespace.parent;
-    } else {
+    }
+    else {
       constructor = false;
     }
   }
@@ -315,7 +323,8 @@ const _recursiveIgnoreConnectedCallback = function(el, value) {
     // todo better check for coral-component
     if(typeof child._ignoreConnectedCallback === 'boolean') {
       child._ignoreConnectedCallback = value;
-    } else {
+    }
+    else {
       _recursiveIgnoreConnectedCallback(child, value);
     }
   }
@@ -474,16 +483,19 @@ const BaseComponent = (superClass) => class extends superClass {
         }
         // Insert new node
         insert.call(this, value);
-      } else if (oldNode && oldNode.parentNode) {
+      }
+      else if (oldNode && oldNode.parentNode) {
         commons._log('warn', `${this._componentName} does not define an insert method for content zone ${handle}, falling back to replace.`);
         // Old way -- assume we have an old node
         this._elements[handle].parentNode.replaceChild(value, this._elements[handle]);
-      } else {
+      }
+      else {
         commons._log('error', `${this._componentName} does not define an insert method for content zone ${handle}, falling back to append.`);
         // Just append, which may introduce bugs, but at least doesn't crazy
         this.appendChild(value);
       }
-    } else {
+    }
+    else {
       // we need to remove the content zone if it exists
       oldNode = this._elements[handle];
       if (oldNode && oldNode.parentNode) {
@@ -507,12 +519,14 @@ const BaseComponent = (superClass) => class extends superClass {
         this._reflectedAttribute = true;
         this.setAttribute(attributeName, '');
         this._reflectedAttribute = false;
-      } else if (!value && this.hasAttribute(attributeName)) {
+      }
+      else if (!value && this.hasAttribute(attributeName)) {
         this._reflectedAttribute = true;
         this.removeAttribute(attributeName);
         this._reflectedAttribute = false;
       }
-    } else if (this.getAttribute(attributeName) !== String(value)) {
+    }
+    else if (this.getAttribute(attributeName) !== String(value)) {
       this._reflectedAttribute = true;
       this.setAttribute(attributeName, value);
       this._reflectedAttribute = false;
@@ -683,7 +697,8 @@ const BaseComponent = (superClass) => class extends superClass {
     const setProperty = (prop, val) => {
       if (isContentZone(prop)) {
         updateContentZone(prop, val);
-      } else {
+      }
+      else {
         this._silenced = silent;
         /** @ignore */
         this[prop] = val;
@@ -697,7 +712,8 @@ const BaseComponent = (superClass) => class extends superClass {
       value = valueOrSilent;
 
       setProperty(property, value);
-    } else {
+    }
+    else {
       properties = propertyOrProperties;
       silent = valueOrSilent;
 
@@ -763,7 +779,8 @@ const BaseComponent = (superClass) => class extends superClass {
     let handler = event.detail.handler;
     if(typeof handler === 'function') {
       handler(this);
-    } else {
+    }
+    else {
       throw new Error("Messenger handler should be a function");
     }
   }
