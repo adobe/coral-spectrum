@@ -154,8 +154,17 @@ coral-columnview-preview-content.coral-Body--small {
 }
 
 @media (max-width:321px) {
-  .test {
-    backgorund: red;
+  ._coral-MillerColumns {
+    scroll-snap-type: x mandatory;
+  }
+
+  ._coral-MillerColumns-item {
+    width: 20rem;
+    scroll-snap-align: start;
+  }
+
+  ._coral-AssetList-item {
+    width: 20rem;
   }
 }
 
