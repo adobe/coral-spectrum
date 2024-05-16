@@ -132,7 +132,13 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
       'coral-dragaction:dragstart tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragStart',
       'coral-dragaction:drag tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDrag',
       'coral-dragaction:dragover tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragOver',
-      'coral-dragaction:dragend tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragEnd',
+      'coral-dragaction:dragend tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragEnd',    
+      // a11y dnd
+      'key:space tbody[is="coral-table-body"] [coral-table-roworder]:not([disabled])': '_onKeyboardDrag',
+      'coral-dragaction:dragonkeyspace tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragOnKeySpace',
+      'coral-dragaction:dragoveronkeyarrowdown tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragOverOnKeyArrowDown',
+      'coral-dragaction:dragoveronkeyarrowup tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragOverOnKeyArrowUp',
+      'coral-dragaction:dragendonkey tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragOverOnKeyEnter',
       // a11y
       'mousedown tbody[is="coral-table-body"] [coral-table-rowselect]': '_onRowDown',
       'key:enter tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowSelect',
@@ -1173,6 +1179,126 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
       table._focusItem(dragElement, true);
     });
   }
+
+  /** @private */  
+  _onKeyboardDrag(event) {
+    const table = this;
+    const row = event.target.closest('tr[is="coral-table-row"]');
+    
+    if (row && table.orderable) {
+      const body = table.body;
+      const style = row.getAttribute('style');
+      const index = getIndexOf(row);
+      const oldBefore = row.nextElementSibling;
+      const dragAction = new DragAction(row);
+      const items = getRows([body]);
+
+      dragAction.axis = 'vertical';
+      // Handle the scroll in table
+      dragAction.scroll = false;
+      // Specify selection handle directly on the row if none found
+      dragAction.handle = row.querySelector('[coral-table-roworder]');
+
+      // The row placeholder indicating where the dragged element will be dropped
+      const placeholder = row.cloneNode(true);
+      placeholder.classList.add('_coral-Table-row--placeholder');
+
+      // Store the data to avoid re-reading the layout on drag events
+      const dragData = {
+        placeholder: placeholder,
+        index: index,
+        oldBefore: oldBefore,
+        // Backup styles to restore them later
+        style: {
+          row: style
+        }
+      };
+      row.dragAction._dragData = dragData;
+    }
+  }  
+
+  /** @private */
+  _onRowDragOnKeySpace(event) {
+    const dragElement = event.detail.dragElement;
+    const dragData = dragElement.dragAction._dragData;
+
+    dragData.style.cells = [];
+    getCells(dragElement).forEach((cell) => {
+      // Backup styles to restore them later
+      dragData.style.cells.push(cell.getAttribute('style'));
+      // Cells will shrink otherwise
+      cell.style.width = window.getComputedStyle(cell).width;
+    });
+  }  
+
+  /** @private */
+  _onRowDragOverOnKeyArrowDown(event) {
+    const table = this;
+    const body = table.body;
+    const dragElement = event.detail.dragElement;
+    const items = getRows([body]);
+    const index = getIndexOf(dragElement);
+    const dragData = dragElement.dragAction._dragData;
+
+    // We cannot rely on :focus since the row is being moved in the dom while dnd
+    dragElement.classList.add('is-focused');
+
+    if (dragElement === items[items.length - 1]) {
+      for (let position = 0; position < items.length - 1; position++) {
+        body.appendChild(items[position]);
+      }
+      body.insertBefore(items[0], items[items.length - 2].nextElementSibling);
+    } else {
+      body.insertBefore(items[index + 1], items[index]);
+    }
+
+    // Restore specific styling
+    dragElement.setAttribute('style', dragData.style.row || '');
+    getCells(dragElement).forEach((cell, i) => {
+      cell.setAttribute('style', dragData.style.cells[i] || '');
+    });  
+  }
+
+  /** @private */
+  _onRowDragOverOnKeyArrowUp(event) {
+    const table = this;
+    const body = table.body;
+    const dragElement = event.detail.dragElement;
+    const items = getRows([body]);
+    const index = getIndexOf(dragElement);
+    const dragData = dragElement.dragAction._dragData;
+
+    // We cannot rely on :focus since the row is being moved in the dom while dnd
+    dragElement.classList.add('is-focused');
+
+    if (dragElement === items[0]) {
+      for (let position = 0; position < items.length - 2; position++) {
+        body.insertBefore(items[position + 1], items[0]);
+      }
+      body.insertBefore(items[items.length - 1], items[1]);
+    } else {
+      body.insertBefore(items[index - 1], items[index].nextElementSibling);
+    }
+
+    // Restore specific styling
+    dragElement.setAttribute('style', dragData.style.row || '');
+    getCells(dragElement).forEach((cell, i) => {
+      cell.setAttribute('style', dragData.style.cells[i] || '');
+    });  
+  }
+  
+  /** @private */
+  _onRowDragOverOnKeyEnter(event) {
+    const table = this;
+    const dragElement = event.detail.dragElement;
+    dragElement.dragAction.destroy();
+
+    // Refocus the dragged element manually
+    window.requestAnimationFrame(() => {
+      dragElement.classList.remove('is-focused');
+      table._focusItem(dragElement, true);
+    });
+  }  
 
   /** @private */
   _onRowMultipleChanged(event) {
