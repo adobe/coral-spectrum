@@ -482,7 +482,7 @@ describe('DragAction', function () {
       dragAction.handle = [];
       dragElement.addEventListener('coral-dragaction:dragstart', eventSpy);
 
-      helpers.mouseEvent('mousedown', dragElement);
+      helpers.mouseEvent('mousedown', dragElement, {pointerType: 'mouse'});
 
       expect(eventSpy.callCount).to.equal(1);
     });

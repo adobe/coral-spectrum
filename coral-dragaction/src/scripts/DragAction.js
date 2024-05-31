@@ -409,6 +409,10 @@ class DragAction {
 
   /** @private */
   _dragStart(event) {
+    if (events.isVirtualEvent(event)) {
+      return;
+    }
+
     // Container
     this._container = getViewContainer(this._dragElement) || document.body;
 

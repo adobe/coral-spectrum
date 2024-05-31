@@ -38,7 +38,7 @@ import {
   getIndexOf,
   divider
 } from './TableUtil';
-import {transform, validate, commons, i18n, Keys} from '../../../coral-utils';
+import {events, transform, validate, commons, i18n, Keys} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Table-wrapper';
 
@@ -578,6 +578,10 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
 
   /** @private */
   _onRowOrder(event) {
+    if (events.isVirtualEvent(event)) {
+      return;
+    }
+
     const table = this;
     const row = event.target.closest('tr[is="coral-table-row"]');
 
@@ -2746,7 +2750,7 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
       headerCell.setAttribute('role', 'rowheader');
     }
     headerCell.setAttribute('scope', scope);
-      
+
     if(headerCell.hasAttribute('sortable')){
       headerCell.content.setAttribute('role', 'button');
     }
