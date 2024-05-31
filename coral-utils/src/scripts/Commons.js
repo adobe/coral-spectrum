@@ -102,6 +102,28 @@ function isFunction(object) {
   return typeof object === 'function';
 }
 
+
+/**
+ Check if the provided regular expression matches the brand.
+
+ @ignore
+
+ @param {RegExp} re
+ A regular expression to evaluate against the user agent string.
+ 
+ @returns {Boolean} Whether user agent matches the regular expression.
+ */
+ function testUserAgent(re) {
+  if (typeof window === 'undefined' || window.navigator == null) {
+    return false;
+  }
+  return (
+    window.navigator['userAgentData'] &&
+    window.navigator['userAgentData'].brands.some(brand => re.test(brand.brand))
+  ) ||
+  re.test(window.navigator.userAgent);
+}
+
 /**
  Utility belt.
  */
@@ -680,6 +702,10 @@ class Commons {
    */
   get TABBABLE_ELEMENT_SELECTOR() {
     return this._tabbableElementsSelector;
+  }
+
+  isAndroid() {
+    return testUserAgent(/Android/i);
   }
 }
 

@@ -29,7 +29,9 @@ describe('Dialog', function () {
       clientX: x,
       clientY: y,
       bubbles: true,
-      cancelable: true
+      cancelable: true,
+      pointerType: 'mouse',
+      detail: 1
     });
   };
 
