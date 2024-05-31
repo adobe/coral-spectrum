@@ -1879,7 +1879,7 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
     if (headerCell) {
       // For icons (chevron up/down) styling
       headerCell.setAttribute('sortabledirection', column.sortableDirection);
-      (table.head.sticky ? headerCell.content : headerCell).setAttribute('aria-sort', column.sortableDirection === sortableDirection.DEFAULT ? 'none' : column.sortableDirection);
+      headerCell.setAttribute('aria-sort', column.sortableDirection === sortableDirection.DEFAULT ? 'none' : column.sortableDirection);
 
       if (column.sortableDirection === sortableDirection.DEFAULT) {
         this._announceLiveRegion();
@@ -1996,7 +1996,7 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
         // For icons (chevron up/down) styling
         getSiblingsOf(colHeaderCell, 'th[is="coral-table-headercell"]').forEach((headerCell) => {
           headerCell.setAttribute('sortabledirection', sortableDirection.DEFAULT);
-          (table.head.sticky ? headerCell.content : headerCell).setAttribute('aria-sort', 'none');
+          headerCell.setAttribute('aria-sort', 'none');
         });
       }
 
@@ -2051,7 +2051,7 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
       if (colHeaderCell) {
         getSiblingsOf(colHeaderCell, 'th[is="coral-table-headercell"]').forEach((headerCell) => {
           headerCell.setAttribute('sortabledirection', sortableDirection.DEFAULT);
-          (table.head.sticky ? headerCell.content : headerCell).setAttribute('aria-sort', 'none');
+          headerCell.setAttribute('aria-sort', 'none');
         });
       }
 
@@ -2297,8 +2297,8 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
   _toggleHeaderCellTabIndex(headerCell, sticky) {
     const column = this._getColumn(headerCell);
     const sortable = column && (column.sortable || column.orderable);
-    headerCell[sortable && !sticky ? 'setAttribute' : 'removeAttribute']('tabindex', '0');
-    headerCell.content[sortable && sticky ? 'setAttribute' : 'removeAttribute']('tabindex', '0');
+    headerCell.content[sortable ? 'setAttribute' : 'removeAttribute']('tabindex', '0');
+    headerCell.content[sortable ? 'setAttribute' : 'removeAttribute']('role', 'button');
   }
 
   /** @private */
@@ -2394,7 +2394,7 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
 
   /** @private */
   _getFocusableHeaderCell() {
-    return this.head && this.head.querySelector('th[is="coral-table-headercell"][tabindex="0"], coral-table-headercell-label[tabindex="0"]');
+    return this.head && this.head.querySelector('th[is="coral-table-headercell"][tabindex="0"], th[is="coral-table-headercell"] > coral-table-headercell-content[tabindex="0"]');
   }
 
   /** @private */
@@ -2740,12 +2740,7 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
     // Add appropriate scope depending on whether header cell is in THEAD or TBODY
     const scope = tableSection.nodeName === 'THEAD' || tableSection.nodeName === 'TFOOT' ? 'col' : 'row';
     if (scope === 'col') {
-      if (this.head && this.head.sticky) {
-        headerCell.setAttribute('role', 'presentation');
-        headerCell._elements.content.setAttribute('role', 'columnheader');
-      } else {
-        headerCell.setAttribute('role', 'columnheader');
-      }
+      headerCell.setAttribute('role', 'columnheader');
     } else {
       headerCell.setAttribute('role', 'rowheader');
     }
