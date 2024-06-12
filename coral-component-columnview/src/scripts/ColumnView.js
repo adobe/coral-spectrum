@@ -1004,6 +1004,17 @@ const ColumnView = Decorator(class extends BaseComponent(HTMLElement) {
         }
       }
 
+      if (this.selectedItem && this.selectedItems.length === 1 && item.tagName === 'CORAL-COLUMNVIEW-PREVIEW') {
+        // @a11y add aria-owns attribute to selection item to express relationship of added column to the selection item
+        this.selectedItem.setAttribute('aria-owns', item.id);
+
+        // @a11y column or preview should be labelled by selection item
+        item.setAttribute('aria-labelledby', this.selectedItem.content.id);
+
+        // @a11y preview should provide description for selection item
+        this.selectedItem.setAttribute('aria-describedby', item.id);
+      }
+
       if (item.tagName === 'CORAL-COLUMNVIEW-COLUMN') {
         // we use the property since the item may not be ready
         item.setAttribute('_selectionmode', this.selectionMode);
