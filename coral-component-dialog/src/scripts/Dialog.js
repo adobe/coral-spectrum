@@ -222,7 +222,9 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       insert: function (content) {
         content.classList.add(`${CLASSNAME}-content`);
         const coralIcon = content.querySelector('coral-icon');
-        coralIcon.setAttribute('title', 'infoCircle');
+        if (coralIcon !== null) {
+          coralIcon.setAttribute('title', 'infoCircle');
+        }
         const footer = this.footer;
         // The content should always be before footer
         this._elements.wrapper.insertBefore(content, this.contains(footer) && footer || null);
