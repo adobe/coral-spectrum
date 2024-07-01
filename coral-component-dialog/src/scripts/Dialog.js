@@ -305,7 +305,7 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
         setTimeout(() => {
           const coralDialog = this._elements.wrapper.querySelector('coral-dialog-content');
           const coralIcon = coralDialog.getElementsByTagName('coral-icon');
-          if (coralIcon[0]) {
+          if (coralIcon !== null) {
             coralIcon[0].setAttribute('title', 'infoCircle');
           }
         }, 1000);
