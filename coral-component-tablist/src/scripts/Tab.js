@@ -290,6 +290,7 @@ const Tab = Decorator(class extends BaseLabellable(BaseComponent(HTMLElement)) {
   _createInvalidIcon() {
     const iconElement = document.createElement('coral-icon');
     iconElement.icon = 'alert';
+    iconElement.alt = 'alert';
     iconElement.size = Icon.size.EXTRA_SMALL;
     iconElement.setAttribute('aria-hidden', 'true');
     iconElement.classList.add('_coral-Tabs-itemInvalidIcon');
