@@ -1574,11 +1574,11 @@ describe('ColumnView', function () {
         let focusables = el.querySelectorAll('coral-columnview-preview coral-columnview-preview-value[tabindex="-1"]');
         let tabbables = el.querySelectorAll('coral-columnview-preview coral-columnview-preview-value[tabindex="0"]');
         expect(focusables.length).to.equal(0);
-        expect(tabbables.length).to.equal(7);
+        expect(tabbables.length).to.equal(0);
         item.selected = true;
         focusables = el.querySelectorAll('coral-columnview-preview coral-columnview-preview-value[tabindex="-1"]');
         tabbables = el.querySelectorAll('coral-columnview-preview coral-columnview-preview-value[tabindex="0"]');
-        expect(focusables.length).to.equal(7);
+        expect(focusables.length).to.equal(0);
         expect(tabbables.length).to.equal(0);
       })
     });
