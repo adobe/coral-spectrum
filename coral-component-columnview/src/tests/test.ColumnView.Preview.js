@@ -74,7 +74,6 @@ describe('ColumnView.Preview', function () {
         element = elements[i];
         elementLabel = element.previousElementSibling;
         elementLabel.id = elementLabel.id || commons.getUID();
-        expect(element.getAttribute('aria-readonly')).to.equal('true');
       }
     });
 

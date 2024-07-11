@@ -104,7 +104,6 @@ const ColumnViewPreview = Decorator(class extends BaseComponent(HTMLElement) {
       element = elements[i];
       elementLabel = element.previousElementSibling;
       elementLabel.id = elementLabel.id || commons.getUID();
-      element.setAttribute('aria-readonly', 'true');
 
       // force ChromeVox to read value of textbox
       if (window.cvox) {
