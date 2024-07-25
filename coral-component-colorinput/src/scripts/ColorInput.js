@@ -222,7 +222,7 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
       this.classList.remove('_coral-ColorInput--swatch');
       this._elements.input.removeAttribute('tabindex');
     }
-    
+
     this._syncColorPreviewIcon();
   }
 
@@ -814,7 +814,7 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     this._elements.colorPreview.style.backgroundColor = currentColor ? currentColor.rgbaValue : '';
     this.classList.toggle('_coral-ColorInput--novalue', isValueEmpty);
 
-    this._elements.colorPreviewLabel.textContent = currentColor ? this._color.value : '';
+    this._elements.colorPreviewLabel.textContent = currentColor ? this.value : i18n.get('unset');
 
     // Update preview in overlay
     const preview = this._elements.overlay.querySelector('._coral-ColorInput-preview');
