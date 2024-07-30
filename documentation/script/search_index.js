@@ -5670,6 +5670,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "coral-spectrum/coral-dragaction/src/scripts/dragaction.js~dragaction#iskeyboarddragging",
+    "class/coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.html#instance-member-isKeyboardDragging",
+    "coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction#isKeyboardDragging",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-dragaction/src/scripts/dragaction.js~dragaction#scroll",
     "class/coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.html#instance-member-scroll",
     "coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction#scroll",
@@ -5694,6 +5700,12 @@ window.esdocSearchIndex = [
     "typedef"
   ],
   [
+    "coral-spectrum/coral-dragaction/src/scripts/dragaction.js~dragaction.coral-dragaction:dragendonkey",
+    "typedef/index.html#static-typedef-coral-dragaction:dragendonkey",
+    "coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.coral-dragaction:dragendonkey",
+    "typedef"
+  ],
+  [
     "coral-spectrum/coral-dragaction/src/scripts/dragaction.js~dragaction.coral-dragaction:dragenter",
     "typedef/index.html#static-typedef-coral-dragaction:dragenter",
     "coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.coral-dragaction:dragenter",
@@ -5706,9 +5718,33 @@ window.esdocSearchIndex = [
     "typedef"
   ],
   [
+    "coral-spectrum/coral-dragaction/src/scripts/dragaction.js~dragaction.coral-dragaction:dragonkeyfocusout",
+    "typedef/index.html#static-typedef-coral-dragaction:dragonkeyfocusout",
+    "coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.coral-dragaction:dragonkeyfocusout",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-dragaction/src/scripts/dragaction.js~dragaction.coral-dragaction:dragonkeyspace",
+    "typedef/index.html#static-typedef-coral-dragaction:dragonkeyspace",
+    "coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.coral-dragaction:dragonkeyspace",
+    "typedef"
+  ],
+  [
     "coral-spectrum/coral-dragaction/src/scripts/dragaction.js~dragaction.coral-dragaction:dragover",
     "typedef/index.html#static-typedef-coral-dragaction:dragover",
     "coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.coral-dragaction:dragover",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-dragaction/src/scripts/dragaction.js~dragaction.coral-dragaction:dragoveronkeyarrowdown",
+    "typedef/index.html#static-typedef-coral-dragaction:dragoveronkeyarrowdown",
+    "coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.coral-dragaction:dragoveronkeyarrowdown",
+    "typedef"
+  ],
+  [
+    "coral-spectrum/coral-dragaction/src/scripts/dragaction.js~dragaction.coral-dragaction:dragoveronkeyarrowup",
+    "typedef/index.html#static-typedef-coral-dragaction:dragoveronkeyarrowup",
+    "coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.coral-dragaction:dragoveronkeyarrowup",
     "typedef"
   ],
   [
@@ -5787,6 +5823,12 @@ window.esdocSearchIndex = [
     "coral-spectrum/coral-utils/src/scripts/commons.js~commons#getuid",
     "class/coral-spectrum/coral-utils/src/scripts/Commons.js~Commons.html#instance-method-getUID",
     "coral-spectrum/coral-utils/src/scripts/Commons.js~Commons#getUID",
+    "method"
+  ],
+  [
+    "coral-spectrum/coral-utils/src/scripts/commons.js~commons#isandroid",
+    "class/coral-spectrum/coral-utils/src/scripts/Commons.js~Commons.html#instance-method-isAndroid",
+    "coral-spectrum/coral-utils/src/scripts/Commons.js~Commons#isAndroid",
     "method"
   ],
   [

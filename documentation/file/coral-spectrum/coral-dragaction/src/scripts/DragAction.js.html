@@ -407,9 +407,14 @@
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-dragaction-src-scripts">coral-dragaction/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.html">DragAction</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:drag">coral-dragaction:drag</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragend">coral-dragaction:dragend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragendonkey">coral-dragaction:dragendonkey</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragenter">coral-dragaction:dragenter</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragleave">coral-dragaction:dragleave</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragonkeyfocusout">coral-dragaction:dragonkeyfocusout</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragonkeyspace">coral-dragaction:dragonkeyspace</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragover">coral-dragaction:dragover</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragoveronkeyarrowdown">coral-dragaction:dragoveronkeyarrowdown</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragoveronkeyarrowup">coral-dragaction:dragoveronkeyarrowup</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragstart">coral-dragaction:dragstart</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:drop">coral-dragaction:drop</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DragActionAxisEnum">DragActionAxisEnum</a></span></span></li>
@@ -680,6 +685,7 @@ class DragAction {
 
     this._drag = this._drag.bind(this);
     this._dragEnd = this._dragEnd.bind(this);
+    this._dragOnKeyEnd = this._dragOnKeyEnd.bind(this);
 
     events.on(`touchmove.DragAction${this._id}`, this._drag);
     events.on(`mousemove.DragAction${this._id}`, this._drag);
@@ -743,11 +749,17 @@ class DragAction {
           handle._dragEvents = handle._dragEvents || new Vent(handle);
           handle._dragEvents.on(&apos;mousedown.DragAction&apos;, this._dragStart.bind(this));
           handle._dragEvents.on(&apos;touchstart.DragAction&apos;, this._dragStart.bind(this));
+          handle._dragEvents.on(&apos;keydown.DragAction&apos;, this._dragOnKeyDown.bind(this));
+          handle._dragEvents.on(&apos;keyup.DragAction&apos;, this._dragOnKeyUp.bind(this));
+          handle._dragEvents.on(&apos;focusout.DragAction&apos;, this._dragOnFocusOut.bind(this));
           handle.classList.add(OPEN_HAND_CLASS);
         });
       } else {
         this._dragEvents.on(&apos;touchstart.DragAction&apos;, this._dragStart.bind(this));
         this._dragEvents.on(&apos;mousedown.DragAction&apos;, this._dragStart.bind(this));
+        this._dragEvents.on(&apos;keydown.DragAction&apos;, this._dragOnKeyDown.bind(this));
+        this._dragEvents.on(&apos;keyup.DragAction&apos;, this._dragOnKeyUp.bind(this));
+        this._dragEvents.on(&apos;focusout.DragAction&apos;, this._dragOnFocusOut.bind(this));
         this._dragElement.classList.add(OPEN_HAND_CLASS);
       }
     } else {
@@ -755,6 +767,9 @@ class DragAction {
       this._handles = [];
       this._dragEvents.on(&apos;touchstart.DragAction&apos;, this._dragStart.bind(this));
       this._dragEvents.on(&apos;mousedown.DragAction&apos;, this._dragStart.bind(this));
+      this._dragEvents.on(&apos;keydown.DragAction&apos;, this._dragOnKeyDown.bind(this));
+      this._dragEvents.on(&apos;keyup.DragAction&apos;, this._dragOnKeyUp.bind(this));
+      this._dragEvents.on(&apos;focusout.DragAction&apos;, this._dragOnFocusOut.bind(this));
       this._dragElement.classList.add(OPEN_HAND_CLASS);
     }
   }
@@ -835,6 +850,10 @@ class DragAction {
 
   /** @private */
   _dragStart(event) {
+    if (events.isVirtualEvent(event)) {
+      return;
+    }
+
     // Container
     this._container = getViewContainer(this._dragElement) || document.body;
 
@@ -1118,6 +1137,75 @@ class DragAction {
     }
   }
 
+  /** @private */
+  _dragOnKeyDown(event) {
+    switch (event.code) {
+      case &apos;Space&apos;:
+      case &apos;ArrowDown&apos;:
+      case &apos;ArrowUp&apos;:
+      case &apos;Enter&apos;:
+      case &apos;Escape&apos;:
+        event.preventDefault();
+        break;
+    }
+  }
+
+  /** @private */
+  _dragOnKeyUp(event) {
+    switch (event.code) {
+      case &apos;Space&apos;:
+        if (!this.isKeyboardDragging) {
+          this._dragEvents.dispatch(&apos;coral-dragaction:dragonkeyspace&apos;, {
+            detail: {
+              dragElement: this._dragElement
+            }
+          });
+          this.isKeyboardDragging = true;
+        } else {
+          this._dragOnKeyEnd();
+        }
+        break;
+      case &apos;ArrowDown&apos;:
+        this._dragEvents.dispatch(&apos;coral-dragaction:dragoveronkeyarrowdown&apos;, {
+          detail: {
+            dragElement: this._dragElement
+          }
+        });
+        break;
+      case &apos;ArrowUp&apos;:
+        this._dragEvents.dispatch(&apos;coral-dragaction:dragoveronkeyarrowup&apos;, {
+          detail: {
+            dragElement: this._dragElement
+          }
+        });
+        break;
+      case &apos;Enter&apos;:
+      case &apos;Escape&apos;:
+        this._dragOnKeyEnd();
+        break;
+      }
+    }
+
+    /** @private */
+    _dragOnFocusOut(event) {
+      window.setTimeout(() =&gt; {
+        if (document.activeElement === event.target) {
+          return;
+        }
+        this._dragOnKeyEnd();
+      }, 0);
+    }
+
+    /** @private */
+    _dragOnKeyEnd() {
+      this._dragEvents.dispatch(&apos;coral-dragaction:dragendonkey&apos;, {
+        detail: {
+          dragElement: this._dragElement
+        }
+      });
+      this.isKeyboardDragging = false;
+    }
+
   /**
    Remove draggable actions
 
@@ -1279,6 +1367,41 @@ class DragAction {
    The mouse position relative to the left edge of the document.
    @property {Number} pageY
    The mouse position relative to the top edge of the document.
+   */
+
+   /**
+   Triggered when the {@link DragAction#dragElement} is selected to be dragged.
+   @typedef {CustomEvent} coral-dragaction:dragonkeyspace
+   @property {HTMLElement} dragElement
+   The dragged element
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is moved on arrow down pressed.
+   @typedef {CustomEvent} coral-dragaction:dragoveronkeyarrowdown
+   @property {HTMLElement} dragElement
+   The dragged element
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is moved on arrow up pressed.
+   @typedef {CustomEvent} coral-dragaction:dragoveronkeyarrowup
+   @property {HTMLElement} dragElement
+   The dragged element
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is losing focus.
+   @typedef {CustomEvent} coral-dragaction:dragonkeyfocusout
+   @property {HTMLElement} dragElement
+   The dragged element
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is dropped on key.
+   @typedef {CustomEvent} coral-dragaction:dragendonkey
+   @property {HTMLElement} dragElement
+   The dragged element
    */
 }
 

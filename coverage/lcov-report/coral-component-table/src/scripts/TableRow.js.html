@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.56% </span>
+                <span class="strong">94.54% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>172/180</span>
+                <span class='fraction'>173/183</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.14% </span>
+                <span class="strong">88.28% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>128/142</span>
+                <span class='fraction'>128/145</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">95.24% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>39/39</span>
+                <span class='fraction'>40/42</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.56% </span>
+                <span class="strong">94.54% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>172/180</span>
+                <span class='fraction'>173/183</span>
             </div>
         
             
@@ -636,7 +636,22 @@
 <a name='L578'></a><a href='#L578'>578</a>
 <a name='L579'></a><a href='#L579'>579</a>
 <a name='L580'></a><a href='#L580'>580</a>
-<a name='L581'></a><a href='#L581'>581</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L581'></a><a href='#L581'>581</a>
+<a name='L582'></a><a href='#L582'>582</a>
+<a name='L583'></a><a href='#L583'>583</a>
+<a name='L584'></a><a href='#L584'>584</a>
+<a name='L585'></a><a href='#L585'>585</a>
+<a name='L586'></a><a href='#L586'>586</a>
+<a name='L587'></a><a href='#L587'>587</a>
+<a name='L588'></a><a href='#L588'>588</a>
+<a name='L589'></a><a href='#L589'>589</a>
+<a name='L590'></a><a href='#L590'>590</a>
+<a name='L591'></a><a href='#L591'>591</a>
+<a name='L592'></a><a href='#L592'>592</a>
+<a name='L593'></a><a href='#L593'>593</a>
+<a name='L594'></a><a href='#L594'>594</a>
+<a name='L595'></a><a href='#L595'>595</a>
+<a name='L596'></a><a href='#L596'>596</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -966,10 +981,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">114x</span>
-<span class="cline-any cline-yes">112x</span>
-<span class="cline-any cline-yes">160x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">112x</span>
+<span class="cline-any cline-yes">112x</span>
+<span class="cline-any cline-yes">234x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">112x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1216,6 +1235,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">330x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -1399,12 +1429,24 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
     return this._items;
   }
 <span class="missing-if-branch" title="else path not taken" >E</span>
-  _triggerChangeEvent() {
+  /**
+   * The row header element for the row.
+   * @type {HTMLElement}
+   * @readonly
+   */
+  get rowHea<span class="missing-if-branch" title="if path not taken" >I</span>der ()  {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+    return thi<span class="cstat-no" title="statement not covered" >s.items.getAll().filter(cell =&gt; {</span>
+      return (cell.getAttribute('role') === 'rowheader' ||
+        (cell.tagName === 'TH' &amp;&amp; cell.getAttribute('scope') === 'row'));
+    })[0];
+  }
+<span class="missing-if-branch" title="if path not taken" >I</span>
+  _triggerChan<span class="cstat-no" title="statement not covered" >geEvent() {</span>
     const selectedItems = this.selectedItems;
     this.trigger('coral-table-row:_change', {
       oldSelection: this._oldSelection,
       selection: selectedItems
-    });<span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="if path not taken" >I</span></span>
+    });<span class="missing-if-branch" title="if path not taken" >I</span>
     this._oldS<span class="cstat-no" title="statement not covered" >election = selectedItems;</span>
   }
 &nbsp;
@@ -1416,19 +1458,19 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
   }
 &nbsp;
   /** @private */
-  _onBeforeC<span class="missing-if-branch" title="if path not taken" >I</span>ellSelectionChanged(event) {
-    event.stop<span class="cstat-no" title="statement not covered" >ImmediatePropagation();</span>
+  _onBeforeC<span class="missing-if-branch" title="else path not taken" >E</span>ellSelectionChanged(event) {
+    event.stopImmediatePropagation();
 &nbsp;
     // In single selection, if the added item is selected, the rest should be deselected
     const selectedItem = this.selectedItem;
     if (!this.multiple &amp;&amp; selectedItem &amp;&amp; !event.target.selected) {
-      select<span class="missing-if-branch" title="if path not taken" >I</span>edItem.set('selected', false, true);
-    }<span class="cstat-no" title="statement not covered" ></span>
+      selectedItem.set('selected', false, true);
+    }
   }
 &nbsp;
   /** @private */
   _syncAriaSelectedState() {
-    this.cla<span class="missing-if-branch" title="else path not taken" >E</span>ssList.toggle('is-selected', this.selected);
+    this.classList.toggle('is-selected', this.selected);
     const selectHandle = this.querySelector('[coral-table-rowselect]');
 &nbsp;
     // @a11y Only update aria-selected if the table row can be selected
@@ -1464,7 +1506,7 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
       // assistive technology
       if (rowLockHandle) {
         rowLockHandle.removeAttribute('aria-hidden');
-      }
+      }<span class="branch-2 cbranch-no" title="branch not covered" ></span>
 &nbsp;
       // @a11y Unhide the coral-row-remove handle, so that it will be resume being announced by
       // assistive technology
@@ -1473,10 +1515,10 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
       }
 &nbsp;
       if (accessibilityState) {
-        // @a11y Hide the _accessibilityState from assistive technology, so that it can not be read
+        //<span class="missing-if-branch" title="else path not taken" >E</span> @a11y Hide the _accessibilityState from assistive technology, so that it can not be read
         // using a screen reader separately from the row it helps label
         accessibilityState.setAttribute('aria-hidden', 'true');
-<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+&nbsp;
         // @a11y If the item is not selected, remove ', unchecked' to decrease verbosity.
         if (!this.selected) {
           accessibilityState.innerHTML = '';
@@ -1485,7 +1527,7 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
     };
 &nbsp;
     // @a11y set aria-selected
-    this.s<span class="missing-if-branch" title="else path not taken" >E</span>etAttribute('aria-selected', this.selected);
+    this.setAttribute('aria-selected', this.selected);
 &nbsp;
     if (this._ariaLiveOnTimeout || this._ariaLiveOffTimeout) {
       clearTimeout(this._ariaLiveOnTimeout);
@@ -1569,16 +1611,16 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
       // @a11y exclude cells for coral-table-roworder, coral-table-rowlock or coral-row-remove
       return (
         cell.id &amp;&amp;
-        !(
-          cell.hasAttribute('coral-table-roworder') || cell.querySelector('[coral-table-roworder]') ||
+        !(<span class="missing-if-branch" title="if path not taken" >I</span>
+<span class="cstat-no" title="statement not covered" >          cell.hasAttribute('coral-ta</span>ble-roworder') || cell.querySelector('[coral-table-roworder]') ||
           cell.hasAttribute('coral-table-rowlock') || cell.querySelector('[coral-table-rowlock]') ||
           cell.hasAttribute('coral-row-remove') || cell.querySelector('[coral-table-remove]')
         )
       );
     });
 &nbsp;
-    const r<span class="missing-if-branch" title="if path not taken" >I</span>owHeaders = cells.filter(cell =&gt; {
-      retu<span class="cstat-no" title="statement not covered" >rn (cell.getAttribute('role</span>') === 'rowheader' ||
+    const rowHeaders = cells.filter(cell =&gt; {
+      return (cell.getAttribute('role') === 'rowheader' ||
         (cell.tagName === 'TH' &amp;&amp; cell.getAttribute('scope') === 'row'));
     });
 &nbsp;
@@ -1647,11 +1689,14 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
 &nbsp;
         // @a11y provide a more explicit label for the checkbox than just "Select"
         if (this.hasAttribute('aria-labelledby')) {
-          let ids = this.getAttribute('aria-labelledby')
-            .split(' ')
-            .filter(id =&gt; selectHandle._elements.input.id !== id &amp;&amp; this._elements.accessibilityState.id !== id)
-            .join(' ');
-          selectHandle.labelledBy = selectHandle._elements.input.id + ' ' + ids;
+          // Wait for the next frame to ensure the selectHandle has initialized _elements object.
+          window.requestAnimationFrame(() =&gt; {
+            let ids = this.getAttribute('aria-labelledby')
+              .split(/\s+/g)
+              .filter(id =&gt; selectHandle._elements.id !== id &amp;&amp; this._elements.accessibilityState.id !== id)
+              .join(' ');
+            selectHandle.labelledBy = selectHandle._elements.id + ' ' + ids;
+          });
         }
       }
     }
@@ -1803,7 +1848,7 @@ export default TableRow;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed May 15 2024 10:21:31 GMT+0000 (Coordinated Universal Time)
+                at Tue Jul 30 2024 23:47:28 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

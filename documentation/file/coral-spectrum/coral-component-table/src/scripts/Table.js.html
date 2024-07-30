@@ -407,9 +407,14 @@
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-dragaction-src-scripts">coral-dragaction/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.html">DragAction</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:drag">coral-dragaction:drag</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragend">coral-dragaction:dragend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragendonkey">coral-dragaction:dragendonkey</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragenter">coral-dragaction:dragenter</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragleave">coral-dragaction:dragleave</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragonkeyfocusout">coral-dragaction:dragonkeyfocusout</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragonkeyspace">coral-dragaction:dragonkeyspace</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragover">coral-dragaction:dragover</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragoveronkeyarrowdown">coral-dragaction:dragoveronkeyarrowdown</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragoveronkeyarrowup">coral-dragaction:dragoveronkeyarrowup</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragstart">coral-dragaction:dragstart</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:drop">coral-dragaction:drop</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DragActionAxisEnum">DragActionAxisEnum</a></span></span></li>
@@ -474,7 +479,7 @@ import {
   getIndexOf,
   divider
 } from &apos;./TableUtil&apos;;
-import {transform, validate, commons, i18n, Keys} from &apos;../../../coral-utils&apos;;
+import {events, transform, validate, commons, i18n, Keys} from &apos;../../../coral-utils&apos;;
 
 const CLASSNAME = &apos;_coral-Table-wrapper&apos;;
 
@@ -569,6 +574,13 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
       &apos;coral-dragaction:drag tbody[is=&quot;coral-table-body&quot;] tr[is=&quot;coral-table-row&quot;]&apos;: &apos;_onRowDrag&apos;,
       &apos;coral-dragaction:dragover tbody[is=&quot;coral-table-body&quot;] tr[is=&quot;coral-table-row&quot;]&apos;: &apos;_onRowDragOver&apos;,
       &apos;coral-dragaction:dragend tbody[is=&quot;coral-table-body&quot;] tr[is=&quot;coral-table-row&quot;]&apos;: &apos;_onRowDragEnd&apos;,
+      // a11y dnd
+      &apos;key:space tbody[is=&quot;coral-table-body&quot;] [coral-table-roworder]:not([disabled])&apos;: &apos;_onKeyboardDrag&apos;,
+      &apos;click tbody[is=&quot;coral-table-body&quot;] tr[is=&quot;coral-table-row&quot;] [coral-table-roworder]:not([disabled])&apos;: &apos;_onDragHandleClick&apos;,
+      &apos;coral-dragaction:dragonkeyspace tbody[is=&quot;coral-table-body&quot;] tr[is=&quot;coral-table-row&quot;]&apos;: &apos;_onRowDragOnKeySpace&apos;,
+      &apos;coral-dragaction:dragoveronkeyarrowdown tbody[is=&quot;coral-table-body&quot;] tr[is=&quot;coral-table-row&quot;]&apos;: &apos;_onRowDragOverOnKeyArrowDown&apos;,
+      &apos;coral-dragaction:dragoveronkeyarrowup tbody[is=&quot;coral-table-body&quot;] tr[is=&quot;coral-table-row&quot;]&apos;: &apos;_onRowDragOverOnKeyArrowUp&apos;,
+      &apos;coral-dragaction:dragendonkey tbody[is=&quot;coral-table-body&quot;] tr[is=&quot;coral-table-row&quot;]&apos;: &apos;_onRowDragOverOnKeyEnter&apos;,
       // a11y
       &apos;mousedown tbody[is=&quot;coral-table-body&quot;] [coral-table-rowselect]&apos;: &apos;_onRowDown&apos;,
       &apos;key:enter tbody[is=&quot;coral-table-body&quot;] tr[is=&quot;coral-table-row&quot;]&apos;: &apos;_onRowSelect&apos;,
@@ -1007,10 +1019,18 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
 
   /** @private */
   _onRowOrder(event) {
+    if (events.isVirtualEvent(event)) {
+      return;
+    }
+
     const table = this;
     const row = event.target.closest(&apos;tr[is=&quot;coral-table-row&quot;]&apos;);
 
     if (row &amp;&amp; table.orderable) {
+      if (row.dragAction &amp;&amp; row.dragAction.handle) {
+        this._unwrapDragHandle(row.dragAction.handle);
+      }
+
       const head = table.head;
       const body = table.body;
       const sticky = head &amp;&amp; head.sticky;
@@ -1559,16 +1579,19 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
     const table = this;
     const body = table.body;
     const dragElement = event.detail.dragElement;
+    const dragAction = event.detail.dragElement.dragAction;
 
-    const dragData = dragElement.dragAction._dragData;
-    const before = dragData.placeholder.nextElementSibling;
+    const dragData = dragAction._dragData;
+    const before = dragData.placeholder ? dragData.placeholder.nextElementSibling : null;
 
     // Clean up
     table.classList.remove(IS_FIRST_ITEM_DRAGGED);
     table.classList.remove(IS_LAST_ITEM_DRAGGED);
 
-    body.removeChild(dragData.placeholder);
-    dragElement.dragAction.destroy();
+    if (dragData.placeholder &amp;&amp; dragData.placeholder.parentNode) {
+      dragData.placeholder.parentNode.removeChild(dragData.placeholder);
+    }
+    dragAction.destroy();
 
     // Restore specific styling
     dragElement.setAttribute(&apos;style&apos;, dragData.style.row || &apos;&apos;);
@@ -1608,6 +1631,248 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
       dragElement.classList.remove(&apos;is-focused&apos;);
       table._focusItem(dragElement, true);
     });
+  }
+
+  /** @private */
+  _wrapDragHandle(handle, callback = () =&gt; {}) {
+    if(!handle.closest(&apos;span[role=&quot;application&quot;]&apos;)) {
+      const span = document.createElement(&apos;span&apos;);
+      span.setAttribute(&apos;role&apos;, &apos;application&apos;);
+      span.setAttribute(&apos;aria-label&apos;, i18n.get(&apos;reordering&apos;));
+      handle.parentNode.insertBefore(span, handle);
+      span.appendChild(handle);
+      handle.selected = true;
+      handle.setAttribute(&apos;aria-pressed&apos;, &apos;true&apos;);
+      window.requestAnimationFrame(() =&gt; callback());
+    }
+  }
+
+  /** @private */
+  _unwrapDragHandle(handle, callback = () =&gt; {}) {
+    const span = handle &amp;&amp; handle.closest(&apos;span[role=&quot;application&quot;]&apos;);
+
+    if (handle) {
+      handle.selected = false;
+      handle.removeAttribute(&apos;aria-pressed&apos;);
+      handle.removeAttribute(&apos;aria-describedby&apos;);
+    }
+    window.requestAnimationFrame(() =&gt; {
+      if (span) {
+        span.parentNode.insertBefore(handle, span);
+        span.remove();
+      }
+      callback();
+    });
+  }
+
+  /** @private */
+  _onKeyboardDrag(event) {
+    const table = this;
+    const row = event.target.closest(&apos;tr[is=&quot;coral-table-row&quot;]&apos;);
+
+    if (row &amp;&amp; table.orderable) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (row.dragAction &amp;&amp; row.dragAction.isKeyboardDragging) {
+        return;
+      }
+
+      const style = row.getAttribute(&apos;style&apos;);
+      const index = getIndexOf(row);
+      const oldBefore = row.nextElementSibling;
+      const dragAction = new DragAction(row);
+
+      dragAction.axis = &apos;vertical&apos;;
+
+      // Handle the scroll in table
+      dragAction.scroll = false;
+
+      // Specify selection handle directly on the row if none found
+      const handle = row.querySelector(&apos;[coral-table-roworder]&apos;);
+      dragAction.handle = handle;
+
+      // Wrap the drag handle button in a span with role=&quot;application&quot;,
+      // to force Windows screen readers into forms mode while dragging.
+      if (event.target === handle) {
+        this._wrapDragHandle(handle, () =&gt; handle.focus());
+      }
+
+      // The row placeholder indicating where the dragged element will be dropped
+      const placeholder = row.cloneNode(true);
+      placeholder.classList.add(&apos;_coral-Table-row--placeholder&apos;);
+
+      // Store the data to avoid re-reading the layout on drag events
+      const dragData = {
+        placeholder: placeholder,
+        index: index,
+        oldBefore: oldBefore,
+        // Backup styles to restore them later
+        style: {
+          row: style
+        }
+      };
+      row.dragAction._dragData = dragData;
+    }
+  }
+
+  _onDragHandleClick(event) {
+    const row = event.target.closest(&apos;tr[is=&quot;coral-table-row&quot;]&apos;);
+    if (!row.dragAction) {
+      this._onKeyboardDrag(event);
+      row.dragAction._isKeyboardDrag = true;
+    } else if (row.dragAction._isKeyboardDrag) {
+      row.dragAction._isKeyboardDrag = undefined;
+    }
+  }
+
+  /** @private */
+  _onRowDragOnKeySpace(event) {
+    event.preventDefault();
+
+    const dragElement = event.detail.dragElement;
+    const dragData = dragElement.dragAction._dragData;
+
+    if (dragElement.dragAction._isKeyboardDrag) {
+      return;
+    }
+
+    dragData.style.cells = [];
+    getCells(dragElement).forEach((cell) =&gt; {
+      // Backup styles to restore them later
+      dragData.style.cells.push(cell.getAttribute(&apos;style&apos;));
+      // Cells will shrink otherwise
+      cell.style.width = window.getComputedStyle(cell).width;
+    });
+  }
+
+  /** @private */
+  _onRowDragOverOnKeyArrowDown(event) {
+    const table = this;
+    const body = table.body;
+    const dragElement = event.detail.dragElement;
+    const items = getRows([body]);
+    const index = getIndexOf(dragElement);
+    const dragData = dragElement.dragAction._dragData;
+    const handle = dragElement.dragAction.handle;
+    const rowHeader = dragElement.rowHeader;
+
+    event.preventDefault();
+
+    // We cannot rely on :focus since the row is being moved in the dom while dnd
+    dragElement.classList.add(&apos;is-focused&apos;);
+
+    if (dragElement === items[items.length - 1]) {
+      for (let position = 0; position &lt; items.length - 1; position++) {
+        body.appendChild(items[position]);
+      }
+      body.insertBefore(items[0], items[items.length - 2].nextElementSibling);
+    } else {
+      body.insertBefore(items[index + 1], items[index]);
+    }
+
+    // Restore specific styling
+    dragElement.setAttribute(&apos;style&apos;, dragData.style.row || &apos;&apos;);
+    getCells(dragElement).forEach((cell, i) =&gt; {
+      if (dragData.style.cells) {
+        cell.setAttribute(&apos;style&apos;, dragData.style.cells[i] || &apos;&apos;);
+      }
+    });
+
+    if (handle) {
+      handle.focus();
+      this._announceLiveRegion((rowHeader ? rowHeader.textContent + &apos; &apos; : &apos;&apos;) + i18n.get(&apos;reordered to row {0}&apos;, [getIndexOf(dragElement) + 1]), &apos;assertive&apos;);
+    }
+
+    dragElement.scrollIntoView({block: &apos;nearest&apos;});
+  }
+
+  /** @private */
+  _onRowDragOverOnKeyArrowUp(event) {
+    const table = this;
+    const body = table.body;
+    const dragElement = event.detail.dragElement;
+    const items = getRows([body]);
+    const index = getIndexOf(dragElement);
+    const dragData = dragElement.dragAction._dragData;
+    const handle = dragElement.dragAction.handle;
+    const rowHeader = dragElement.rowHeader;
+
+    event.preventDefault();
+
+    // We cannot rely on :focus since the row is being moved in the dom while dnd
+    dragElement.classList.add(&apos;is-focused&apos;);
+
+    if (dragElement === items[0]) {
+      for (let position = 0; position &lt; items.length - 2; position++) {
+        body.insertBefore(items[position + 1], items[0]);
+      }
+      body.insertBefore(items[items.length - 1], items[1]);
+    } else {
+      body.insertBefore(items[index - 1], items[index].nextElementSibling);
+    }
+
+    // Restore specific styling
+    dragElement.setAttribute(&apos;style&apos;, dragData.style.row || &apos;&apos;);
+    getCells(dragElement).forEach((cell, i) =&gt; {
+      if (dragData.style.cells) {
+        cell.setAttribute(&apos;style&apos;, dragData.style.cells[i] || &apos;&apos;);
+      }
+    });
+
+    if (handle) {
+      handle.focus();
+      this._announceLiveRegion((rowHeader ? rowHeader.textContent + &apos; &apos; : &apos;&apos;) + i18n.get(&apos;reordered to row {0}&apos;, [getIndexOf(dragElement) + 1]), &apos;assertive&apos;);
+    }
+
+    dragElement.scrollIntoView({block: &apos;nearest&apos;});
+  }
+
+  /** @private */
+  _onRowDragOverOnKeyEnter(event) {
+    const table = this;
+    const dragElement = event.detail.dragElement;
+    const dragAction = dragElement.dragAction;
+    const dragData = dragAction._dragData;
+    const handle = dragAction.handle;
+
+    if (dragAction._isKeyboardDrag) {
+      dragAction._isKeyboardDrag = undefined;
+      return;
+    }
+
+    // Trigger the event on table
+    const beforeEvent = table.trigger(&apos;coral-table:beforeroworder&apos;, {
+      row: dragElement,
+      before: dragData.oldBefore
+    });
+
+    if (!beforeEvent.defaultPrevented &amp;&amp; dragData.oldBefore !== dragElement.nextElementSibling) {
+      // Trigger the order event if the row position changed
+      table.trigger(&apos;coral-table:roworder&apos;, {
+        row: dragElement,
+        oldBefore: dragData.oldBefore,
+        before: dragElement.nextElementSibling
+      });
+    }
+
+    dragAction.destroy();
+
+    const isFocusWithinDragElement = dragElement.contains(document.activeElement) || dragElement === document.activeElement;
+    const isFocusOnHandle = handle &amp;&amp; handle === document.activeElement;
+
+    // Refocus the dragged element manually
+    const callback = () =&gt; {
+      dragElement.classList.remove(&apos;is-focused&apos;);
+      if (isFocusWithinDragElement) {
+        table._focusItem(dragElement, true);
+      }
+      if (isFocusOnHandle) {
+        handle.focus();
+      }
+    };
+
+    this._unwrapDragHandle(handle, callback);
   }
 
   /** @private */
@@ -2058,23 +2323,46 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
       headerCell.setAttribute(&apos;aria-sort&apos;, column.sortableDirection === sortableDirection.DEFAULT ? &apos;none&apos; : column.sortableDirection);
 
       if (column.sortableDirection === sortableDirection.DEFAULT) {
-        this._elements.liveRegion.innerText = &apos;&apos;;
+        this._announceLiveRegion();
       } else {
         const textContent = headerCell.content.textContent.trim();
         if (textContent.length) {
           // Set live region to true so that sort description string will be announced.
-          this._elements.liveRegion.setAttribute(&apos;aria-live&apos;, &apos;polite&apos;);
-          this._elements.liveRegion.removeAttribute(&apos;aria-hidden&apos;);
-          this._elements.liveRegion.innerText = i18n.get(`sorted by column {0} in ${column.sortableDirection} order`, textContent);
-
-          // @a11y wait 2.5 seconds to give screen reader enough time to announce the live region before silencing the it.
-          window.setTimeout(() =&gt; {
-            this._elements.liveRegion.setAttribute(&apos;aria-live&apos;, &apos;off&apos;);
-            this._elements.liveRegion.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
-          }, 2500);
+          this._announceLiveRegion(i18n.get(`sorted by column {0} in ${column.sortableDirection} order`, textContent));
         }
       }
     }
+  }
+
+  /** @private */
+  _announceLiveRegion(text, politeness = &apos;polite&apos;) {
+
+    if (this._liveRegionTimeout) {
+      window.clearTimeout(this._liveRegionTimeout);
+    }
+
+    if (!text || !text.length) {
+      this._elements.liveRegion.innerText = &apos;&apos;;
+      return;
+    }
+
+    // Set live region to true so that text string will be announced.
+    this._elements.liveRegion.setAttribute(&apos;aria-live&apos;, politeness);
+    this._elements.liveRegion.removeAttribute(&apos;aria-hidden&apos;);
+    if (this._isSorted()) {
+      this._elements.liveRegion.innerText = text;
+    } else {
+      this._liveRegionTimeout = window.setTimeout(() =&gt; this._elements.liveRegion.innerText = text, 100);
+    }
+
+    // @a11y wait 2.5 seconds to give screen reader enough time to announce the live region before silencing the it.
+    window.setTimeout(() =&gt; {
+      this._elements.liveRegion.setAttribute(&apos;aria-live&apos;, &apos;off&apos;);
+      this._elements.liveRegion.setAttribute(&apos;aria-hidden&apos;, &apos;true&apos;);
+      if (!this._isSorted()) {
+        this._elements.liveRegion.innerText = &apos;&apos;;
+      }
+    }, 2500);
   }
 
   _onColumnHiddenChanged(event) {
@@ -2898,6 +3186,10 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
       headerCell.setAttribute(&apos;role&apos;, &apos;rowheader&apos;);
     }
     headerCell.setAttribute(&apos;scope&apos;, scope);
+
+    if(headerCell.hasAttribute(&apos;sortable&apos;)){
+      headerCell.content.setAttribute(&apos;role&apos;, &apos;button&apos;);
+    }
   }
 
   /**  @private */
