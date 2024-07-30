@@ -186,12 +186,13 @@ coral-colorinput-item {
       ._coral-Icon {
         display: inherit;
         vertical-align: inherit;
+        filter: drop-shadow(0 0 0.25px rgba(0 0 0 0.4));
       }
     }
   }
 
-  label {
-    display block;
+  ._coral-ColorInput-swatch-tooltip {
+    min-width: max-content;
   }
 }
 
@@ -206,6 +207,10 @@ coral-colorinput-item {
 
   ._coral-ColorInput-preview {
     border-width: $colorinput-button-border-width;
+  }
+
+  ._coral-ColorInput-preview-tooltip {
+    min-width: max-content;
   }
 }
 

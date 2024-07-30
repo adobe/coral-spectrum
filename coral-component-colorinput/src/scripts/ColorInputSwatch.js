@@ -18,6 +18,7 @@ import colorButton from '../templates/colorButton';
 import colorLabel from '../templates/colorLabel';
 import {commons, i18n, transform} from '../../../coral-utils';
 import {Decorator} from '../../../coral-decorator';
+import {Tooltip} from '../../../coral-component-tooltip';
 
 const CLASSNAME = '_coral-ColorInput-swatch';
 
@@ -39,7 +40,7 @@ const ColorInputSwatch = Decorator(class extends BaseColorInputAbstractSubview(B
 
     // Templates
     this._elements = {};
-    colorButton.call(this._elements);
+    colorButton.call(this._elements, {commons});
     colorLabel.call(this._elements);
   }
 
@@ -109,12 +110,12 @@ const ColorInputSwatch = Decorator(class extends BaseColorInputAbstractSubview(B
     if (cssColorValue) {
       this._elements.colorButton.style.backgroundColor = cssColorValue;
       this._elements.colorButton.label.textContent = hexColorValue;
-      this._elements.colorLabel.textContent = hexColorValue;
+      this._elements.colorLabel.content.textContent = hexColorValue;
       this.setAttribute('data-value', hexColorValue);
     } else {
       this._elements.colorButton.classList.add('_coral-ColorInput-swatch-novalue');
       this._elements.colorButton.label.textContent = i18n.get('unset');
-      this._elements.colorLabel.textContent = i18n.get('unset');
+      this._elements.colorLabel.content.textContent = i18n.get('unset');
       this.setAttribute('data-value', '');
     }
   }
@@ -203,6 +204,8 @@ const ColorInputSwatch = Decorator(class extends BaseColorInputAbstractSubview(B
 
     this.appendChild(this._elements.colorButton);
     this.appendChild(this._elements.colorLabel);
+
+    this._elements.colorLabel.target = '#' + this._elements.colorButton.id;
   }
 });
 

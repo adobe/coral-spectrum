@@ -21,7 +21,6 @@
 <input handle="input" is="coral-textfield" class="_coral-ColorInput-input" type="text" value="" role="combobox" aria-autocomplete="none" aria-haspopup="dialog" aria-expanded="false" aria-controls="{{uid}}" />
 <div class="_coral-ColorInput-buttonWrapper" handle="buttonWrapper" role="presentation">
   <button handle="colorPreview" is="coral-button" variant="_custom" class="_coral-FieldButton _coral-ColorInput-button _coral-ColorInput-preview" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="{{uid}}"></button>
-  <label handle="colorPreviewLabel" type="label"></label>
   <js>
     // Since we don't have a mutation observer anymore to replace content zones magically, we have to do it manually.
     this.colorPreview.label.classList.add('u-coral-screenReaderOnly');
