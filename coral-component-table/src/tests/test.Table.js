@@ -20,6 +20,8 @@ const dragHeaderCellTo = (headerCell, direction) => {
   var x = headerCell.getBoundingClientRect().width * 2 * direction;
   // Initiates the dragAction
   headerCell.dispatchEvent(new MouseEvent('mousedown', {
+    pointerType: 'mouse',
+    detail: 1,
     bubbles: true
   }));
   // Triggering twice is enough to perform the swap
@@ -41,6 +43,8 @@ const dragRowTo = (row, direction) => {
   var y = row.getBoundingClientRect().height * 2 * direction;
   // Initiates the dragAction
   row.dispatchEvent(new MouseEvent('mousedown', {
+    pointerType: 'mouse',
+    detail: 1,
     bubbles: true
   }));
   // Triggering twice is enough to perform the swap
@@ -337,6 +341,8 @@ describe('Table', function () {
         setTimeout(function () {
           // Initiates the dragAction
           item.dispatchEvent(new MouseEvent('mousedown', {
+            pointerType: 'mouse',
+            detail: 1,
             bubbles: true
           }));
 
@@ -1500,6 +1506,8 @@ describe('Table', function () {
 
         row.setAttribute('disabled', '');
         row.dispatchEvent(new MouseEvent('mousedown', {
+          pointerType: 'mouse',
+          detail: 1,
           bubbles: true
         }));
 
@@ -2021,6 +2029,8 @@ describe('Table', function () {
 
         helpers.next(() => {
           table.body.rows[1].dispatchEvent(new MouseEvent('mousedown', {
+            pointerType: 'mouse',
+            detail: 1,
             bubbles: true,
             shiftKey: true
           }));
@@ -3089,7 +3099,7 @@ describe('Table', function () {
         helpers.next(() => {
           expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DEFAULT);
           expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
-          expect(headerCell._elements.content.getAttribute('aria-sort')).to.equal('none');
+          expect(headerCell.getAttribute('aria-sort')).to.equal('none');
           done();
         });
       });
@@ -3106,7 +3116,7 @@ describe('Table', function () {
           expect(eventSpy.args[0][0].detail.column).to.equal(col);
           expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.ASCENDING);
           expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
-          expect(headerCell._elements.content.getAttribute('aria-sort')).to.equal(col.sortableDirection);
+          expect(headerCell.getAttribute('aria-sort')).to.equal(col.sortableDirection);
           done();
         });
       });
@@ -3124,7 +3134,7 @@ describe('Table', function () {
           expect(eventSpy.args[0][0].detail.column).to.equal(col);
           expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DESCENDING);
           expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
-          expect(headerCell._elements.content.getAttribute('aria-sort')).to.equal(col.sortableDirection);
+          expect(headerCell.getAttribute('aria-sort')).to.equal(col.sortableDirection);
           done();
         });
       });
@@ -3143,7 +3153,7 @@ describe('Table', function () {
           expect(eventSpy.args[0][0].detail.column).to.equal(col);
           expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DEFAULT);
           expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
-          expect(headerCell._elements.content.getAttribute('aria-sort')).to.equal('none');
+          expect(headerCell.getAttribute('aria-sort')).to.equal('none');
           done();
         });
       });
