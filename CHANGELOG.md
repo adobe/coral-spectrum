@@ -1,3 +1,31 @@
+## [4.16.4](https://github.com/adobe/coral-spectrum/compare/v4.16.3...v4.16.4) (2024-07-30)
+
+
+### Bug Fixes
+
+* **bug:** Custom color coral ui element is non-functional ([#354](https://github.com/adobe/coral-spectrum/issues/354)) ([a6e038e](https://github.com/adobe/coral-spectrum/commit/a6e038e0fc669e23f9043551b236e25494e897d4))
+
+## [4.16.3](https://github.com/adobe/coral-spectrum/compare/v4.16.2...v4.16.3) (2024-07-30)
+
+
+### Bug Fixes
+
+* **Accessibility:** Drag and Drop feature is not keyboard accessible ([#346](https://github.com/adobe/coral-spectrum/issues/346)) ([d762873](https://github.com/adobe/coral-spectrum/commit/d7628735a25e8597eabbacff59aa5dec6c47cfd2))
+
+## [4.16.2](https://github.com/adobe/coral-spectrum/compare/v4.16.1...v4.16.2) (2024-05-15)
+
+
+### Bug Fixes
+
+* **Accessability:** Add button role to table header interactive element ([#347](https://github.com/adobe/coral-spectrum/issues/347)) ([a17ed32](https://github.com/adobe/coral-spectrum/commit/a17ed3203802d03d1d267eb0fbd329224e7fdb00))
+
+## [4.16.1](https://github.com/adobe/coral-spectrum/compare/v4.16.0...v4.16.1) (2024-04-23)
+
+
+### Bug Fixes
+
+* **Accessibility:** Annotation swatch selector button missing an accessible name ([#341](https://github.com/adobe/coral-spectrum/issues/341)) ([a5a4c93](https://github.com/adobe/coral-spectrum/commit/a5a4c9360970d717d2f474a5fb58209d1e15835b))
+
 # [4.16.0](https://github.com/adobe/coral-spectrum/compare/v4.15.29...v4.16.0) (2024-04-02)
 
 
