@@ -1,3 +1,50 @@
+## [4.16.4](https://github.com/adobe/coral-spectrum/compare/v4.16.3...v4.16.4) (2024-07-30)
+
+
+### Bug Fixes
+
+* **bug:** Custom color coral ui element is non-functional ([#354](https://github.com/adobe/coral-spectrum/issues/354)) ([a6e038e](https://github.com/adobe/coral-spectrum/commit/a6e038e0fc669e23f9043551b236e25494e897d4))
+
+## [4.16.3](https://github.com/adobe/coral-spectrum/compare/v4.16.2...v4.16.3) (2024-07-30)
+
+
+### Bug Fixes
+
+* **Accessibility:** Drag and Drop feature is not keyboard accessible ([#346](https://github.com/adobe/coral-spectrum/issues/346)) ([d762873](https://github.com/adobe/coral-spectrum/commit/d7628735a25e8597eabbacff59aa5dec6c47cfd2))
+
+## [4.16.2](https://github.com/adobe/coral-spectrum/compare/v4.16.1...v4.16.2) (2024-05-15)
+
+
+### Bug Fixes
+
+* **Accessability:** Add button role to table header interactive element ([#347](https://github.com/adobe/coral-spectrum/issues/347)) ([a17ed32](https://github.com/adobe/coral-spectrum/commit/a17ed3203802d03d1d267eb0fbd329224e7fdb00))
+
+## [4.16.1](https://github.com/adobe/coral-spectrum/compare/v4.16.0...v4.16.1) (2024-04-23)
+
+
+### Bug Fixes
+
+* **Accessibility:** Annotation swatch selector button missing an accessible name ([#341](https://github.com/adobe/coral-spectrum/issues/341)) ([a5a4c93](https://github.com/adobe/coral-spectrum/commit/a5a4c9360970d717d2f474a5fb58209d1e15835b))
+
+# [4.16.0](https://github.com/adobe/coral-spectrum/compare/v4.15.29...v4.16.0) (2024-04-02)
+
+
+### Bug Fixes
+
+* **Accessibility:** State of active component lacks 3 to 1 contrast ratio.([#329](https://github.com/adobe/coral-spectrum/issues/329)) ([f98bf47](https://github.com/adobe/coral-spectrum/commit/f98bf47992fa44ce9dc3876cc907610b534172a1))
+
+
+### Features
+
+* **Icon:** Add Car icon to the spectrum icons list. ([#343](https://github.com/adobe/coral-spectrum/issues/343)) ([d545314](https://github.com/adobe/coral-spectrum/commit/d545314710fe8ad516f95f4ff61bd0d12e950bcb))
+
+## [4.15.29](https://github.com/adobe/coral-spectrum/compare/v4.15.28...v4.15.29) (2024-03-12)
+
+
+### Bug Fixes
+
+* Disordered Week Names in Coral Datepicker Component ([#333](https://github.com/adobe/coral-spectrum/issues/333)) ([e30dd24](https://github.com/adobe/coral-spectrum/commit/e30dd24b5cf7240da22dc68a34b2c09b18828f2b))
+
 ## [4.15.28](https://github.com/adobe/coral-spectrum/compare/v4.15.27...v4.15.28) (2024-02-08)
 
 
