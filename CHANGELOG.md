@@ -1,3 +1,17 @@
+## [4.16.4](https://github.com/adobe/coral-spectrum/compare/v4.16.3...v4.16.4) (2024-07-30)
+
+
+### Bug Fixes
+
+* **bug:** Custom color coral ui element is non-functional ([#354](https://github.com/adobe/coral-spectrum/issues/354)) ([a6e038e](https://github.com/adobe/coral-spectrum/commit/a6e038e0fc669e23f9043551b236e25494e897d4))
+
+## [4.16.3](https://github.com/adobe/coral-spectrum/compare/v4.16.2...v4.16.3) (2024-07-30)
+
+
+### Bug Fixes
+
+* **Accessibility:** Drag and Drop feature is not keyboard accessible ([#346](https://github.com/adobe/coral-spectrum/issues/346)) ([d762873](https://github.com/adobe/coral-spectrum/commit/d7628735a25e8597eabbacff59aa5dec6c47cfd2))
+
 ## [4.16.2](https://github.com/adobe/coral-spectrum/compare/v4.16.1...v4.16.2) (2024-05-15)
 
 
