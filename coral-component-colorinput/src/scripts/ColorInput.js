@@ -687,8 +687,8 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     if (this.showProperties === showProperties.OFF &&
       this.showSwatches === showSwatches.ON) {
       this._elements.colorPreview.label.textContent = i18n.get('Swatches');
-      if (this.previousSibling) {
-        this.previousSibling.setAttribute('aria-label', i18n.get('Confirm hex value'));
+      if (this.previousElementSibling) {
+        this.previousElementSibling.setAttribute('aria-label', i18n.get('Confirm hex value'));
       }
       this._elements.overlay.setAttribute('aria-label', i18n.get('Swatches'));
     } else {
