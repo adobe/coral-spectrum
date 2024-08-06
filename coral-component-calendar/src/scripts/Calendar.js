@@ -259,6 +259,7 @@ const Calendar = Decorator(class extends BaseFormField(BaseComponent(HTMLElement
   }
 
   set startDay(value) {
+    value = transform.number(value);
     if (value >= 0 && value < 7) {
       this._startDay = value;
 
