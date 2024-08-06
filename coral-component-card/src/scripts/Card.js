@@ -94,6 +94,14 @@ const Card = Decorator(class extends BaseComponent(HTMLElement) {
       handle: 'asset',
       tagName: 'coral-card-asset',
       insert: function (asset) {
+        const coralTitle = this.querySelector('coral-card-title');
+        const imgElement = asset.querySelector('img');
+        if (imgElement && coralTitle) {
+          const coralTitleTextContent = coralTitle.textContent;
+          if (coralTitleTextContent) {
+            imgElement.setAttribute('title', coralTitleTextContent);
+          }
+        }
         this.insertBefore(asset, this.info || this._elements.wrapper || null);
       }
     });
