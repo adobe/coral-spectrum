@@ -363,6 +363,15 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
     this._fullscreen = transform.booleanAttr(value);
     this._reflectAttribute('fullscreen', this._fullscreen);
 
+    var icons = this._elements.header.querySelectorAll('coral-Icon');
+
+    icons.forEach(function (icon) {
+      if (icon.parentElement.hasAttribute("title")) {
+        icon.setAttribute("alt", icon.parentElement.title);
+        icon.parentElement.removeAttribute("title");
+      }
+    });
+
     if (this._fullscreen) {
       // Full screen and movable are not compatible
       this.movable = false;
