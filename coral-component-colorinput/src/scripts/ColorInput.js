@@ -217,7 +217,7 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     if (this._variant === variant.SWATCH) {
       this.classList.add('_coral-ColorInput--swatch');
       this._elements.input.setAttribute('tabindex', -1);
-      this._elements.colorPreview.removeAttribute('tabindex');
+      this._elements.colorPreview.setAttribute('tabindex', '0');
     } else {
       this.classList.remove('_coral-ColorInput--swatch');
       this._elements.input.removeAttribute('tabindex');
