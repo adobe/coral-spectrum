@@ -1,3 +1,16 @@
+# [4.17.0](https://github.com/adobe/coral-spectrum/compare/v4.16.4...v4.17.0) (2024-10-06)
+
+
+### Bug Fixes
+
+* correct axe violations ([#358](https://github.com/adobe/coral-spectrum/issues/358)) ([92d83e2](https://github.com/adobe/coral-spectrum/commit/92d83e284b5523ff56890eb1f71cf887d6361d1c))
+
+
+### Features
+
+* **FORMS-16421:** Add marketo icon ([#356](https://github.com/adobe/coral-spectrum/issues/356)) ([98381b6](https://github.com/adobe/coral-spectrum/commit/98381b655c995b807217d0fa19ca665e34305ec5))
+* **FORMS-16421:** Add marketo icon ([#357](https://github.com/adobe/coral-spectrum/issues/357)) ([0541270](https://github.com/adobe/coral-spectrum/commit/054127040007d18a549c2db506da4c4d93ae9228))
+
 ## [4.16.4](https://github.com/adobe/coral-spectrum/compare/v4.16.3...v4.16.4) (2024-07-30)
 
 
