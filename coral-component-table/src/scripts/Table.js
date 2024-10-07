@@ -2746,7 +2746,7 @@ const Table = Decorator(class extends BaseComponent(HTMLTableElement) {
     }
     headerCell.setAttribute('scope', scope);
 
-    if(headerCell.hasAttribute('sortable')){
+    if(headerCell.hasAttribute('sortable') && headerCell.content){
       headerCell.content.setAttribute('role', 'button');
     }
   }
