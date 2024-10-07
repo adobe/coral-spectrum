@@ -1,3 +1,10 @@
+## [4.17.1](https://github.com/adobe/coral-spectrum/compare/v4.17.0...v4.17.1) (2024-10-07)
+
+
+### Bug Fixes
+
+* Add Marketo Icons ([#359](https://github.com/adobe/coral-spectrum/issues/359)) ([c83a7b2](https://github.com/adobe/coral-spectrum/commit/c83a7b2530cee862b05a0a25088d0186ab46b6c4))
+
 # [4.17.0](https://github.com/adobe/coral-spectrum/compare/v4.16.4...v4.17.0) (2024-10-06)
 
 
