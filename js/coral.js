@@ -61722,8 +61722,9 @@ var Coral = (function (exports) {
           input.style.width = "".concat(parseInt(size.width, 10), "px");
           input.style.height = "".concat(parseInt(size.height, 10), "px");
         } else {
-          input.style.width = '0';
-          input.style.height = '0';
+          input.style.width = '0px';
+          input.style.height = '0px';
+          input.style.visibility = 'hidden';
         }
       }
       /**
@@ -85770,7 +85771,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.16.3";
+  var version$1 = "4.17.0";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

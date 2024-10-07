@@ -22028,8 +22028,9 @@ coral-colorinput-item {
 ._coral-ColorInput--swatch ._coral-ColorInput-input {
   position: absolute;
   opacity: 0;
-  height: 38px;
-  width: 38px;
+  height: 0px;
+  width: 0px;
+  visibility: hidden;
 }
 ._coral-ColorInput--swatch ._coral-ColorInput-buttonWrapper {
   top: 0;

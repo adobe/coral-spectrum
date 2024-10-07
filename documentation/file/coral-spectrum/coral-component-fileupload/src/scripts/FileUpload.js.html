@@ -1380,8 +1380,9 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
       input.style.width = `${parseInt(size.width, 10)}px`;
       input.style.height = `${parseInt(size.height, 10)}px`;
     } else {
-      input.style.width = &apos;0&apos;;
-      input.style.height = &apos;0&apos;;
+      input.style.width = &apos;0px&apos;;
+      input.style.height = &apos;0px&apos;;
+      input.style.visibility = &apos;hidden&apos;;
     }
   }
 
