@@ -1,3 +1,10 @@
+# [4.18.0](https://github.com/adobe/coral-spectrum/compare/v4.17.1...v4.18.0) (2024-10-14)
+
+
+### Features
+
+* Revert Drag and Drop support via keyboard and add new marketo icons ([#361](https://github.com/adobe/coral-spectrum/issues/361)) ([bd91bb6](https://github.com/adobe/coral-spectrum/commit/bd91bb6ee083f6d64dde070efd872ca680c9f59e))
+
 ## [4.17.1](https://github.com/adobe/coral-spectrum/compare/v4.17.0...v4.17.1) (2024-10-07)
 
 
