@@ -17,9 +17,7 @@ export default {
     "sorted by column {0}, in ascending order": "sorted by column {0} in ascending order",
     "sorted by column {0}, in descending order": "sorted by column {0} in descending order",
     ", checked": ", checked",
-    ", unchecked": ", unchecked",
-    "reordering": "reordering",
-    "reordered to row {0}": "reordered to row {0}",
+    ", unchecked": ", unchecked"
   },
   "de-DE": {
     "Select": "Auswählen",

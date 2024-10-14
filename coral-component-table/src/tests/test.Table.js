@@ -20,8 +20,6 @@ const dragHeaderCellTo = (headerCell, direction) => {
   var x = headerCell.getBoundingClientRect().width * 2 * direction;
   // Initiates the dragAction
   headerCell.dispatchEvent(new MouseEvent('mousedown', {
-    pointerType: 'mouse',
-    detail: 1,
     bubbles: true
   }));
   // Triggering twice is enough to perform the swap
@@ -43,8 +41,6 @@ const dragRowTo = (row, direction) => {
   var y = row.getBoundingClientRect().height * 2 * direction;
   // Initiates the dragAction
   row.dispatchEvent(new MouseEvent('mousedown', {
-    pointerType: 'mouse',
-    detail: 1,
     bubbles: true
   }));
   // Triggering twice is enough to perform the swap
@@ -341,8 +337,6 @@ describe('Table', function () {
         setTimeout(function () {
           // Initiates the dragAction
           item.dispatchEvent(new MouseEvent('mousedown', {
-            pointerType: 'mouse',
-            detail: 1,
             bubbles: true
           }));
 
@@ -1506,8 +1500,6 @@ describe('Table', function () {
 
         row.setAttribute('disabled', '');
         row.dispatchEvent(new MouseEvent('mousedown', {
-          pointerType: 'mouse',
-          detail: 1,
           bubbles: true
         }));
 
@@ -2029,8 +2021,6 @@ describe('Table', function () {
 
         helpers.next(() => {
           table.body.rows[1].dispatchEvent(new MouseEvent('mousedown', {
-            pointerType: 'mouse',
-            detail: 1,
             bubbles: true,
             shiftKey: true
           }));
