@@ -407,14 +407,9 @@
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-dragaction-src-scripts">coral-dragaction/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.html">DragAction</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:drag">coral-dragaction:drag</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragend">coral-dragaction:dragend</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragendonkey">coral-dragaction:dragendonkey</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragenter">coral-dragaction:dragenter</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragleave">coral-dragaction:dragleave</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragonkeyfocusout">coral-dragaction:dragonkeyfocusout</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragonkeyspace">coral-dragaction:dragonkeyspace</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragover">coral-dragaction:dragover</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragoveronkeyarrowdown">coral-dragaction:dragoveronkeyarrowdown</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragoveronkeyarrowup">coral-dragaction:dragoveronkeyarrowup</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragstart">coral-dragaction:dragstart</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:drop">coral-dragaction:drop</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DragActionAxisEnum">DragActionAxisEnum</a></span></span></li>
@@ -451,7 +446,6 @@
  * governing permissions and limitations under the License.
  */
 
-import commons from &apos;./Commons&apos;;
 import Vent from &apos;@adobe/vent&apos;;
 
 /**
@@ -526,37 +520,6 @@ class Events {
    */
   destroy() {
     this._vent.destroy();
-  }
-
-  /**
-   * @ignore
-   * @param {MouseEvent | TouchEvent} event
-   * @returns {boolean}
-   * Keyboards, Assistive Technologies, and element.click() all produce a &quot;virtual&quot;
-   * click event. This is a method of inferring such clicks. Every browser except
-   * IE 11 only sets a zero value of &quot;detail&quot; for click events that are &quot;virtual&quot;.
-   * However, IE 11 uses a zero value for all click events. For IE 11 we rely on
-   * the quirk that it produces click events that are of type PointerEvent, and
-   * where only the &quot;virtual&quot; click lacks a pointerType field.
-   *
-   * Original licensing for the following method can be found in the
-   * NOTICE file in the root directory of this source tree.
-   * See https://github.com/facebook/react/blob/3c713d513195a53788b3f8bb4b70279d68b15bcc/packages/react-interactions/events/src/dom/shared/index.js#L74-L87
-   */
-  isVirtualEvent(event) {
-    // JAWS/NVDA with Firefox.
-    if (event.mozInputSource === 0 &amp;&amp; event.isTrusted) {
-      return true;
-    }
-
-    // Android TalkBack&apos;s detail value varies depending on the event listener providing the event so we have specific logic here instead
-    // If pointerType is defined, event is from a click listener. For events from mousedown listener, detail === 0 is a sufficient check
-    // to detect TalkBack virtual clicks.
-    if (commons.isAndroid() &amp;&amp; event.pointerType) {
-      return event.type === &apos;click&apos; &amp;&amp; event.buttons === 1;
-    }
-
-    return event.detail === 0 &amp;&amp; !event.pointerType;
   }
 }
 

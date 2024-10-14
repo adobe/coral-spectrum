@@ -6440,27 +6440,6 @@
     return typeof object === 'function';
   }
   /**
-   Check if the provided regular expression matches the brand.
-
-   @ignore
-
-   @param {RegExp} re
-   A regular expression to evaluate against the user agent string.
-   
-   @returns {Boolean} Whether user agent matches the regular expression.
-   */
-
-
-  function testUserAgent(re) {
-    if (typeof window === 'undefined' || window.navigator == null) {
-      return false;
-    }
-
-    return window.navigator['userAgentData'] && window.navigator['userAgentData'].brands.some(function (brand) {
-      return re.test(brand.brand);
-    }) || re.test(window.navigator.userAgent);
-  }
-  /**
    Utility belt.
    */
 
@@ -7033,11 +7012,6 @@
        */
 
     }, {
-      key: "isAndroid",
-      value: function isAndroid() {
-        return testUserAgent(/Android/i);
-      }
-    }, {
       key: "options",
       get: function get() {
         var options = {};
@@ -7222,39 +7196,6 @@
       key: "destroy",
       value: function destroy() {
         this._vent.destroy();
-      }
-      /**
-       * @ignore
-       * @param {MouseEvent | TouchEvent} event
-       * @returns {boolean}
-       * Keyboards, Assistive Technologies, and element.click() all produce a "virtual"
-       * click event. This is a method of inferring such clicks. Every browser except
-       * IE 11 only sets a zero value of "detail" for click events that are "virtual".
-       * However, IE 11 uses a zero value for all click events. For IE 11 we rely on
-       * the quirk that it produces click events that are of type PointerEvent, and
-       * where only the "virtual" click lacks a pointerType field.
-       *
-       * Original licensing for the following method can be found in the
-       * NOTICE file in the root directory of this source tree.
-       * See https://github.com/facebook/react/blob/3c713d513195a53788b3f8bb4b70279d68b15bcc/packages/react-interactions/events/src/dom/shared/index.js#L74-L87
-       */
-
-    }, {
-      key: "isVirtualEvent",
-      value: function isVirtualEvent(event) {
-        // JAWS/NVDA with Firefox.
-        if (event.mozInputSource === 0 && event.isTrusted) {
-          return true;
-        } // Android TalkBack's detail value varies depending on the event listener providing the event so we have specific logic here instead
-        // If pointerType is defined, event is from a click listener. For events from mousedown listener, detail === 0 is a sufficient check
-        // to detect TalkBack virtual clicks.
-
-
-        if (commons.isAndroid() && event.pointerType) {
-          return event.type === 'click' && event.buttons === 1;
-        }
-
-        return event.detail === 0 && !event.pointerType;
       }
     }]);
 
@@ -25140,7 +25081,6 @@
       this.containment = this._dragElement.matches("[".concat(CONTAINMENT_ATTRIBUTE, "]"));
       this._drag = this._drag.bind(this);
       this._dragEnd = this._dragEnd.bind(this);
-      this._dragOnKeyEnd = this._dragOnKeyEnd.bind(this);
       events.on("touchmove.DragAction".concat(this._id), this._drag);
       events.on("mousemove.DragAction".concat(this._id), this._drag);
       events.on("touchend.DragAction".concat(this._id), this._dragEnd);
@@ -25162,11 +25102,7 @@
 
       /** @private */
       value: function _dragStart(event) {
-        if (events.isVirtualEvent(event)) {
-          return;
-        } // Container
-
-
+        // Container
         this._container = getViewContainer(this._dragElement) || document.body; // Prevent dragging ghost image
 
         if (event.target.tagName === 'IMG') {
@@ -25445,95 +25381,6 @@
           });
         }
       }
-      /** @private */
-
-    }, {
-      key: "_dragOnKeyDown",
-      value: function _dragOnKeyDown(event) {
-        switch (event.code) {
-          case 'Space':
-          case 'ArrowDown':
-          case 'ArrowUp':
-          case 'Enter':
-          case 'Escape':
-            event.preventDefault();
-            break;
-        }
-      }
-      /** @private */
-
-    }, {
-      key: "_dragOnKeyUp",
-      value: function _dragOnKeyUp(event) {
-        switch (event.code) {
-          case 'Space':
-            if (!this.isKeyboardDragging) {
-              this._dragEvents.dispatch('coral-dragaction:dragonkeyspace', {
-                detail: {
-                  dragElement: this._dragElement
-                }
-              });
-
-              this.isKeyboardDragging = true;
-            } else {
-              this._dragOnKeyEnd();
-            }
-
-            break;
-
-          case 'ArrowDown':
-            this._dragEvents.dispatch('coral-dragaction:dragoveronkeyarrowdown', {
-              detail: {
-                dragElement: this._dragElement
-              }
-            });
-
-            break;
-
-          case 'ArrowUp':
-            this._dragEvents.dispatch('coral-dragaction:dragoveronkeyarrowup', {
-              detail: {
-                dragElement: this._dragElement
-              }
-            });
-
-            break;
-
-          case 'Enter':
-          case 'Escape':
-            this._dragOnKeyEnd();
-
-            break;
-        }
-      }
-      /** @private */
-
-    }, {
-      key: "_dragOnFocusOut",
-      value: function _dragOnFocusOut(event) {
-        var _this = this;
-
-        window.setTimeout(function () {
-          if (document.activeElement === event.target) {
-            return;
-          }
-
-          _this._dragOnKeyEnd();
-        }, 0);
-      }
-      /** @private */
-
-    }, {
-      key: "_dragOnKeyEnd",
-      value: function _dragOnKeyEnd() {
-        this._dragEvents.dispatch('coral-dragaction:dragendonkey', {
-          detail: {
-            dragElement: this._dragElement
-          }
-        });
-
-        this.isKeyboardDragging = false;
-      }
       /**
        Remove draggable actions
         @function destroy
@@ -25609,7 +25456,7 @@
         return this._handle;
       },
       set: function set(value) {
-        var _this2 = this;
+        var _this = this;
 
         // Set new value
         this._handle = value; // Unbind events
@@ -25638,15 +25485,9 @@
             this._handles.forEach(function (handle) {
               handle._dragEvents = handle._dragEvents || new vent(handle);
 
-              handle._dragEvents.on('mousedown.DragAction', _this2._dragStart.bind(_this2));
+              handle._dragEvents.on('mousedown.DragAction', _this._dragStart.bind(_this));
 
-              handle._dragEvents.on('touchstart.DragAction', _this2._dragStart.bind(_this2));
-
-              handle._dragEvents.on('keydown.DragAction', _this2._dragOnKeyDown.bind(_this2));
-
-              handle._dragEvents.on('keyup.DragAction', _this2._dragOnKeyUp.bind(_this2));
-
-              handle._dragEvents.on('focusout.DragAction', _this2._dragOnFocusOut.bind(_this2));
+              handle._dragEvents.on('touchstart.DragAction', _this._dragStart.bind(_this));
 
               handle.classList.add(OPEN_HAND_CLASS);
             });
@@ -25654,12 +25495,6 @@
             this._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
 
             this._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
-
-            this._dragEvents.on('keydown.DragAction', this._dragOnKeyDown.bind(this));
-
-            this._dragEvents.on('keyup.DragAction', this._dragOnKeyUp.bind(this));
-
-            this._dragEvents.on('focusout.DragAction', this._dragOnFocusOut.bind(this));
 
             this._dragElement.classList.add(OPEN_HAND_CLASS);
           }
@@ -25670,12 +25505,6 @@
           this._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
 
           this._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
-
-          this._dragEvents.on('keydown.DragAction', this._dragOnKeyDown.bind(this));
-
-          this._dragEvents.on('keyup.DragAction', this._dragOnKeyUp.bind(this));
-
-          this._dragEvents.on('focusout.DragAction', this._dragOnFocusOut.bind(this));
 
           this._dragElement.classList.add(OPEN_HAND_CLASS);
         }
@@ -25844,41 +25673,6 @@
        The mouse position relative to the left edge of the document.
        @property {Number} pageY
        The mouse position relative to the top edge of the document.
-       */
-
-      /**
-      Triggered when the {@link DragAction#dragElement} is selected to be dragged.
-      @typedef {CustomEvent} coral-dragaction:dragonkeyspace
-      @property {HTMLElement} dragElement
-      The dragged element
-      */
-
-      /**
-       Triggered when the {@link DragAction#dragElement} is moved on arrow down pressed.
-       @typedef {CustomEvent} coral-dragaction:dragoveronkeyarrowdown
-       @property {HTMLElement} dragElement
-       The dragged element
-       */
-
-      /**
-       Triggered when the {@link DragAction#dragElement} is moved on arrow up pressed.
-       @typedef {CustomEvent} coral-dragaction:dragoveronkeyarrowup
-       @property {HTMLElement} dragElement
-       The dragged element
-       */
-
-      /**
-       Triggered when the {@link DragAction#dragElement} is losing focus.
-       @typedef {CustomEvent} coral-dragaction:dragonkeyfocusout
-       @property {HTMLElement} dragElement
-       The dragged element
-       */
-
-      /**
-       Triggered when the {@link DragAction#dragElement} is dropped on key.
-       @typedef {CustomEvent} coral-dragaction:dragendonkey
-       @property {HTMLElement} dragElement
-       The dragged element
        */
 
     }], [{
@@ -76939,9 +76733,7 @@
       "sorted by column {0}, in ascending order": "sorted by column {0} in ascending order",
       "sorted by column {0}, in descending order": "sorted by column {0} in descending order",
       ", checked": ", checked",
-      ", unchecked": ", unchecked",
-      "reordering": "reordering",
-      "reordered to row {0}": "reordered to row {0}"
+      ", unchecked": ", unchecked"
     },
     "de-DE": {
       "Select": "Auswählen",
@@ -78185,14 +77977,10 @@
 
 
             if (this.hasAttribute('aria-labelledby')) {
-              // Wait for the next frame to ensure the selectHandle has initialized _elements object.
-              window.requestAnimationFrame(function () {
-                var ids = _this4.getAttribute('aria-labelledby').split(/\s+/g).filter(function (id) {
-                  return selectHandle._elements.id !== id && _this4._elements.accessibilityState.id !== id;
-                }).join(' ');
-
-                selectHandle.labelledBy = selectHandle._elements.id + ' ' + ids;
-              });
+              var ids = this.getAttribute('aria-labelledby').split(' ').filter(function (id) {
+                return selectHandle._elements.input.id !== id && _this4._elements.accessibilityState.id !== id;
+              }).join(' ');
+              selectHandle.labelledBy = selectHandle._elements.input.id + ' ' + ids;
             }
           }
         }
@@ -78473,19 +78261,6 @@
         }
 
         return this._items;
-      }
-      /**
-       * The row header element for the row.
-       * @type {HTMLElement}
-       * @readonly
-       */
-
-    }, {
-      key: "rowHeader",
-      get: function get() {
-        return this.items.getAll().filter(function (cell) {
-          return cell.getAttribute('role') === 'rowheader' || cell.tagName === 'TH' && cell.getAttribute('scope') === 'row';
-        })[0];
       }
     }], [{
       key: "observedAttributes",
@@ -78941,13 +78716,6 @@
         'coral-dragaction:drag tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDrag',
         'coral-dragaction:dragover tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragOver',
         'coral-dragaction:dragend tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragEnd',
-        // a11y dnd
-        'key:space tbody[is="coral-table-body"] [coral-table-roworder]:not([disabled])': '_onKeyboardDrag',
-        'click tbody[is="coral-table-body"] tr[is="coral-table-row"] [coral-table-roworder]:not([disabled])': '_onDragHandleClick',
-        'coral-dragaction:dragonkeyspace tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragOnKeySpace',
-        'coral-dragaction:dragoveronkeyarrowdown tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragOverOnKeyArrowDown',
-        'coral-dragaction:dragoveronkeyarrowup tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragOverOnKeyArrowUp',
-        'coral-dragaction:dragendonkey tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowDragOverOnKeyEnter',
         // a11y
         'mousedown tbody[is="coral-table-body"] [coral-table-rowselect]': '_onRowDown',
         'key:enter tbody[is="coral-table-body"] tr[is="coral-table-row"]': '_onRowSelect',
@@ -79066,18 +78834,10 @@
     }, {
       key: "_onRowOrder",
       value: function _onRowOrder(event) {
-        if (events.isVirtualEvent(event)) {
-          return;
-        }
-
         var table = this;
         var row = event.target.closest('tr[is="coral-table-row"]');
 
         if (row && table.orderable) {
-          if (row.dragAction && row.dragAction.handle) {
-            this._unwrapDragHandle(row.dragAction.handle);
-          }
-
           var head = table.head;
           var body = table.body;
           var sticky = head && head.sticky;
@@ -79623,18 +79383,13 @@
         var table = this;
         var body = table.body;
         var dragElement = event.detail.dragElement;
-        var dragAction = event.detail.dragElement.dragAction;
-        var dragData = dragAction._dragData;
-        var before = dragData.placeholder ? dragData.placeholder.nextElementSibling : null; // Clean up
+        var dragData = dragElement.dragAction._dragData;
+        var before = dragData.placeholder.nextElementSibling; // Clean up
 
         table.classList.remove(IS_FIRST_ITEM_DRAGGED);
         table.classList.remove(IS_LAST_ITEM_DRAGGED);
-
-        if (dragData.placeholder && dragData.placeholder.parentNode) {
-          dragData.placeholder.parentNode.removeChild(dragData.placeholder);
-        }
-
-        dragAction.destroy(); // Restore specific styling
+        body.removeChild(dragData.placeholder);
+        dragElement.dragAction.destroy(); // Restore specific styling
 
         dragElement.setAttribute('style', dragData.style.row || '');
         getCells(dragElement).forEach(function (cell, i) {
@@ -79674,272 +79429,6 @@
 
           table._focusItem(dragElement, true);
         });
-      }
-      /** @private */
-
-    }, {
-      key: "_wrapDragHandle",
-      value: function _wrapDragHandle(handle) {
-        var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-        if (!handle.closest('span[role="application"]')) {
-          var span = document.createElement('span');
-          span.setAttribute('role', 'application');
-          span.setAttribute('aria-label', i18n.get('reordering'));
-          handle.parentNode.insertBefore(span, handle);
-          span.appendChild(handle);
-          handle.selected = true;
-          handle.setAttribute('aria-pressed', 'true');
-          window.requestAnimationFrame(function () {
-            return callback();
-          });
-        }
-      }
-      /** @private */
-
-    }, {
-      key: "_unwrapDragHandle",
-      value: function _unwrapDragHandle(handle) {
-        var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-        var span = handle && handle.closest('span[role="application"]');
-
-        if (handle) {
-          handle.selected = false;
-          handle.removeAttribute('aria-pressed');
-          handle.removeAttribute('aria-describedby');
-        }
-
-        window.requestAnimationFrame(function () {
-          if (span) {
-            span.parentNode.insertBefore(handle, span);
-            span.remove();
-          }
-
-          callback();
-        });
-      }
-      /** @private */
-
-    }, {
-      key: "_onKeyboardDrag",
-      value: function _onKeyboardDrag(event) {
-        var table = this;
-        var row = event.target.closest('tr[is="coral-table-row"]');
-
-        if (row && table.orderable) {
-          event.preventDefault();
-          event.stopPropagation();
-
-          if (row.dragAction && row.dragAction.isKeyboardDragging) {
-            return;
-          }
-
-          var style = row.getAttribute('style');
-          var index = getIndexOf(row);
-          var oldBefore = row.nextElementSibling;
-          var dragAction = new DragAction(row);
-          dragAction.axis = 'vertical'; // Handle the scroll in table
-
-          dragAction.scroll = false; // Specify selection handle directly on the row if none found
-
-          var handle = row.querySelector('[coral-table-roworder]');
-          dragAction.handle = handle; // Wrap the drag handle button in a span with role="application",
-          // to force Windows screen readers into forms mode while dragging.
-
-          if (event.target === handle) {
-            this._wrapDragHandle(handle, function () {
-              return handle.focus();
-            });
-          } // The row placeholder indicating where the dragged element will be dropped
-
-
-          var placeholder = row.cloneNode(true);
-          placeholder.classList.add('_coral-Table-row--placeholder'); // Store the data to avoid re-reading the layout on drag events
-
-          var dragData = {
-            placeholder: placeholder,
-            index: index,
-            oldBefore: oldBefore,
-            // Backup styles to restore them later
-            style: {
-              row: style
-            }
-          };
-          row.dragAction._dragData = dragData;
-        }
-      }
-    }, {
-      key: "_onDragHandleClick",
-      value: function _onDragHandleClick(event) {
-        var row = event.target.closest('tr[is="coral-table-row"]');
-
-        if (!row.dragAction) {
-          this._onKeyboardDrag(event);
-
-          row.dragAction._isKeyboardDrag = true;
-        } else if (row.dragAction._isKeyboardDrag) {
-          row.dragAction._isKeyboardDrag = undefined;
-        }
-      }
-      /** @private */
-
-    }, {
-      key: "_onRowDragOnKeySpace",
-      value: function _onRowDragOnKeySpace(event) {
-        event.preventDefault();
-        var dragElement = event.detail.dragElement;
-        var dragData = dragElement.dragAction._dragData;
-
-        if (dragElement.dragAction._isKeyboardDrag) {
-          return;
-        }
-
-        dragData.style.cells = [];
-        getCells(dragElement).forEach(function (cell) {
-          // Backup styles to restore them later
-          dragData.style.cells.push(cell.getAttribute('style')); // Cells will shrink otherwise
-
-          cell.style.width = window.getComputedStyle(cell).width;
-        });
-      }
-      /** @private */
-
-    }, {
-      key: "_onRowDragOverOnKeyArrowDown",
-      value: function _onRowDragOverOnKeyArrowDown(event) {
-        var table = this;
-        var body = table.body;
-        var dragElement = event.detail.dragElement;
-        var items = getRows([body]);
-        var index = getIndexOf(dragElement);
-        var dragData = dragElement.dragAction._dragData;
-        var handle = dragElement.dragAction.handle;
-        var rowHeader = dragElement.rowHeader;
-        event.preventDefault(); // We cannot rely on :focus since the row is being moved in the dom while dnd
-
-        dragElement.classList.add('is-focused');
-
-        if (dragElement === items[items.length - 1]) {
-          for (var position = 0; position < items.length - 1; position++) {
-            body.appendChild(items[position]);
-          }
-
-          body.insertBefore(items[0], items[items.length - 2].nextElementSibling);
-        } else {
-          body.insertBefore(items[index + 1], items[index]);
-        } // Restore specific styling
-
-
-        dragElement.setAttribute('style', dragData.style.row || '');
-        getCells(dragElement).forEach(function (cell, i) {
-          if (dragData.style.cells) {
-            cell.setAttribute('style', dragData.style.cells[i] || '');
-          }
-        });
-
-        if (handle) {
-          handle.focus();
-
-          this._announceLiveRegion((rowHeader ? rowHeader.textContent + ' ' : '') + i18n.get('reordered to row {0}', [getIndexOf(dragElement) + 1]), 'assertive');
-        }
-
-        dragElement.scrollIntoView({
-          block: 'nearest'
-        });
-      }
-      /** @private */
-
-    }, {
-      key: "_onRowDragOverOnKeyArrowUp",
-      value: function _onRowDragOverOnKeyArrowUp(event) {
-        var table = this;
-        var body = table.body;
-        var dragElement = event.detail.dragElement;
-        var items = getRows([body]);
-        var index = getIndexOf(dragElement);
-        var dragData = dragElement.dragAction._dragData;
-        var handle = dragElement.dragAction.handle;
-        var rowHeader = dragElement.rowHeader;
-        event.preventDefault(); // We cannot rely on :focus since the row is being moved in the dom while dnd
-
-        dragElement.classList.add('is-focused');
-
-        if (dragElement === items[0]) {
-          for (var position = 0; position < items.length - 2; position++) {
-            body.insertBefore(items[position + 1], items[0]);
-          }
-
-          body.insertBefore(items[items.length - 1], items[1]);
-        } else {
-          body.insertBefore(items[index - 1], items[index].nextElementSibling);
-        } // Restore specific styling
-
-
-        dragElement.setAttribute('style', dragData.style.row || '');
-        getCells(dragElement).forEach(function (cell, i) {
-          if (dragData.style.cells) {
-            cell.setAttribute('style', dragData.style.cells[i] || '');
-          }
-        });
-
-        if (handle) {
-          handle.focus();
-
-          this._announceLiveRegion((rowHeader ? rowHeader.textContent + ' ' : '') + i18n.get('reordered to row {0}', [getIndexOf(dragElement) + 1]), 'assertive');
-        }
-
-        dragElement.scrollIntoView({
-          block: 'nearest'
-        });
-      }
-      /** @private */
-
-    }, {
-      key: "_onRowDragOverOnKeyEnter",
-      value: function _onRowDragOverOnKeyEnter(event) {
-        var table = this;
-        var dragElement = event.detail.dragElement;
-        var dragAction = dragElement.dragAction;
-        var dragData = dragAction._dragData;
-        var handle = dragAction.handle;
-
-        if (dragAction._isKeyboardDrag) {
-          dragAction._isKeyboardDrag = undefined;
-          return;
-        } // Trigger the event on table
-
-
-        var beforeEvent = table.trigger('coral-table:beforeroworder', {
-          row: dragElement,
-          before: dragData.oldBefore
-        });
-
-        if (!beforeEvent.defaultPrevented && dragData.oldBefore !== dragElement.nextElementSibling) {
-          // Trigger the order event if the row position changed
-          table.trigger('coral-table:roworder', {
-            row: dragElement,
-            oldBefore: dragData.oldBefore,
-            before: dragElement.nextElementSibling
-          });
-        }
-
-        dragAction.destroy();
-        var isFocusWithinDragElement = dragElement.contains(document.activeElement) || dragElement === document.activeElement;
-        var isFocusOnHandle = handle && handle === document.activeElement; // Refocus the dragged element manually
-
-        var callback = function callback() {
-          dragElement.classList.remove('is-focused');
-
-          if (isFocusWithinDragElement) {
-            table._focusItem(dragElement, true);
-          }
-
-          if (isFocusOnHandle) {
-            handle.focus();
-          }
-        };
-
-        this._unwrapDragHandle(handle, callback);
       }
       /** @private */
 
@@ -80405,6 +79894,8 @@
     }, {
       key: "_onColumnSortableDirectionChanged",
       value: function _onColumnSortableDirectionChanged(event) {
+        var _this2 = this;
+
         event.stopImmediatePropagation();
         var table = this;
         var column = event.target;
@@ -80420,58 +79911,26 @@
           headerCell.setAttribute('aria-sort', column.sortableDirection === sortableDirection.DEFAULT ? 'none' : column.sortableDirection);
 
           if (column.sortableDirection === sortableDirection.DEFAULT) {
-            this._announceLiveRegion();
+            this._elements.liveRegion.innerText = '';
           } else {
             var textContent = headerCell.content.textContent.trim();
 
             if (textContent.length) {
               // Set live region to true so that sort description string will be announced.
-              this._announceLiveRegion(i18n.get("sorted by column {0} in ".concat(column.sortableDirection, " order"), textContent));
+              this._elements.liveRegion.setAttribute('aria-live', 'polite');
+
+              this._elements.liveRegion.removeAttribute('aria-hidden');
+
+              this._elements.liveRegion.innerText = i18n.get("sorted by column {0} in ".concat(column.sortableDirection, " order"), textContent); // @a11y wait 2.5 seconds to give screen reader enough time to announce the live region before silencing the it.
+
+              window.setTimeout(function () {
+                _this2._elements.liveRegion.setAttribute('aria-live', 'off');
+
+                _this2._elements.liveRegion.setAttribute('aria-hidden', 'true');
+              }, 2500);
             }
           }
         }
-      }
-      /** @private */
-
-    }, {
-      key: "_announceLiveRegion",
-      value: function _announceLiveRegion(text) {
-        var _this2 = this;
-
-        var politeness = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'polite';
-
-        if (this._liveRegionTimeout) {
-          window.clearTimeout(this._liveRegionTimeout);
-        }
-
-        if (!text || !text.length) {
-          this._elements.liveRegion.innerText = '';
-          return;
-        } // Set live region to true so that text string will be announced.
-
-
-        this._elements.liveRegion.setAttribute('aria-live', politeness);
-
-        this._elements.liveRegion.removeAttribute('aria-hidden');
-
-        if (this._isSorted()) {
-          this._elements.liveRegion.innerText = text;
-        } else {
-          this._liveRegionTimeout = window.setTimeout(function () {
-            return _this2._elements.liveRegion.innerText = text;
-          }, 100);
-        } // @a11y wait 2.5 seconds to give screen reader enough time to announce the live region before silencing the it.
-
-
-        window.setTimeout(function () {
-          _this2._elements.liveRegion.setAttribute('aria-live', 'off');
-
-          _this2._elements.liveRegion.setAttribute('aria-hidden', 'true');
-
-          if (!_this2._isSorted()) {
-            _this2._elements.liveRegion.innerText = '';
-          }
-        }, 2500);
       }
     }, {
       key: "_onColumnHiddenChanged",
@@ -81367,10 +80826,6 @@
         }
 
         headerCell.setAttribute('scope', scope);
-
-        if (headerCell.hasAttribute('sortable')) {
-          headerCell.content.setAttribute('role', 'button');
-        }
       }
       /**  @private */
 
@@ -85771,7 +85226,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.17.0";
+  var version$1 = "4.17.1";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

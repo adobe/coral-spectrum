@@ -407,14 +407,9 @@
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#coral-dragaction-src-scripts">coral-dragaction/src/scripts</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.html">DragAction</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:drag">coral-dragaction:drag</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragend">coral-dragaction:dragend</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragendonkey">coral-dragaction:dragendonkey</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragenter">coral-dragaction:dragenter</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragleave">coral-dragaction:dragleave</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragonkeyfocusout">coral-dragaction:dragonkeyfocusout</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragonkeyspace">coral-dragaction:dragonkeyspace</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragover">coral-dragaction:dragover</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragoveronkeyarrowdown">coral-dragaction:dragoveronkeyarrowdown</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragoveronkeyarrowup">coral-dragaction:dragoveronkeyarrowup</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:dragstart">coral-dragaction:dragstart</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-coral-dragaction:drop">coral-dragaction:drop</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-DragActionAxisEnum">DragActionAxisEnum</a></span></span></li>
@@ -620,18 +615,6 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
     }
 
     return this._items;
-  }
-
-  /**
-   * The row header element for the row.
-   * @type {HTMLElement}
-   * @readonly
-   */
-  get rowHeader ()  {
-    return this.items.getAll().filter(cell =&gt; {
-      return (cell.getAttribute(&apos;role&apos;) === &apos;rowheader&apos; ||
-        (cell.tagName === &apos;TH&apos; &amp;&amp; cell.getAttribute(&apos;scope&apos;) === &apos;row&apos;));
-    })[0];
   }
 
   _triggerChangeEvent() {
@@ -882,14 +865,11 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
 
         // @a11y provide a more explicit label for the checkbox than just &quot;Select&quot;
         if (this.hasAttribute(&apos;aria-labelledby&apos;)) {
-          // Wait for the next frame to ensure the selectHandle has initialized _elements object.
-          window.requestAnimationFrame(() =&gt; {
-            let ids = this.getAttribute(&apos;aria-labelledby&apos;)
-              .split(/\s+/g)
-              .filter(id =&gt; selectHandle._elements.id !== id &amp;&amp; this._elements.accessibilityState.id !== id)
-              .join(&apos; &apos;);
-            selectHandle.labelledBy = selectHandle._elements.id + &apos; &apos; + ids;
-          });
+          let ids = this.getAttribute(&apos;aria-labelledby&apos;)
+            .split(&apos; &apos;)
+            .filter(id =&gt; selectHandle._elements.input.id !== id &amp;&amp; this._elements.accessibilityState.id !== id)
+            .join(&apos; &apos;);
+          selectHandle.labelledBy = selectHandle._elements.input.id + &apos; &apos; + ids;
         }
       }
     }
