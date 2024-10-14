@@ -52,8 +52,8 @@ describe('DragAction', function () {
       var windowEventCount = events._vent._allListeners.length;
 
       dragAction.destroy();
-      // mousestart, touchstart, keydown, keyup, focusout
-      expect(dragElementEvents._allListeners.length).to.equal(dragElementEventCount - 5);
+      // mousestart, touchstart
+      expect(dragElementEvents._allListeners.length).to.equal(dragElementEventCount - 2);
       // touchmove, mousemove, touchend, mouseend
       // @todo don't use private _vent instance
       expect(events._vent._allListeners.length).to.equal(windowEventCount - 4);
@@ -482,7 +482,7 @@ describe('DragAction', function () {
       dragAction.handle = [];
       dragElement.addEventListener('coral-dragaction:dragstart', eventSpy);
 
-      helpers.mouseEvent('mousedown', dragElement, {pointerType: 'mouse'});
+      helpers.mouseEvent('mousedown', dragElement);
 
       expect(eventSpy.callCount).to.equal(1);
     });

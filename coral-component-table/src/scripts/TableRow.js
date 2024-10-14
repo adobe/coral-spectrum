@@ -181,18 +181,6 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
     return this._items;
   }
 
-  /**
-   * The row header element for the row.
-   * @type {HTMLElement}
-   * @readonly
-   */
-  get rowHeader ()  {
-    return this.items.getAll().filter(cell => {
-      return (cell.getAttribute('role') === 'rowheader' ||
-        (cell.tagName === 'TH' && cell.getAttribute('scope') === 'row'));
-    })[0];
-  }
-
   _triggerChangeEvent() {
     const selectedItems = this.selectedItems;
     this.trigger('coral-table-row:_change', {
@@ -441,14 +429,11 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
 
         // @a11y provide a more explicit label for the checkbox than just "Select"
         if (this.hasAttribute('aria-labelledby')) {
-          // Wait for the next frame to ensure the selectHandle has initialized _elements object.
-          window.requestAnimationFrame(() => {
-            let ids = this.getAttribute('aria-labelledby')
-              .split(/\s+/g)
-              .filter(id => selectHandle._elements.id !== id && this._elements.accessibilityState.id !== id)
-              .join(' ');
-            selectHandle.labelledBy = selectHandle._elements.id + ' ' + ids;
-          });
+          let ids = this.getAttribute('aria-labelledby')
+            .split(' ')
+            .filter(id => selectHandle._elements.input.id !== id && this._elements.accessibilityState.id !== id)
+            .join(' ');
+          selectHandle.labelledBy = selectHandle._elements.input.id + ' ' + ids;
         }
       }
     }
