@@ -536,16 +536,18 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
   _onInputFocusOut() {
     // Unmark all the focused buttons
     const button = this.querySelector('[coral-fileupload-select].is-focused');
-    button.classList.remove('is-focused');
-    button.classList.remove('focus-ring');
-
-    // Wait a frame so that shifting focus backwards with screen reader doesn't create a focus trap
-    window.requestAnimationFrame(() => {
-      button.tabIndex = 0;
-      // @a11y: aria-hidden is removed to prevent focus trap when navigating backwards using a screen reader's
-      // virtual cursor
-      button.removeAttribute('aria-hidden');
-    });
+    if (button) {
+      button.classList.remove('is-focused');
+      button.classList.remove('focus-ring');
+  
+      // Wait a frame so that shifting focus backwards with screen reader doesn't create a focus trap
+      window.requestAnimationFrame(() => {
+        button.tabIndex = 0;
+        // @a11y: aria-hidden is removed to prevent focus trap when navigating backwards using a screen reader's
+        // virtual cursor
+        button.removeAttribute('aria-hidden');
+      });
+    }
   }
 
   /** @private */
