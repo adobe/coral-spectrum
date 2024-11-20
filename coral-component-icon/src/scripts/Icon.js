@@ -413,8 +413,8 @@ const Icon = Decorator(class extends BaseComponent(HTMLElement) {
     // role depending on whether or not the icon is an arbitrary image URL.
     const role = this.getAttribute('role');
     const roleOverride = role && (role !== 'presentation' && role !== 'img');
-    if (!roleOverride) {
-      this.setAttribute('role', isImage ? 'presentation' : 'img');
+    if (!roleOverride && isImage) {
+      this.setAttribute('role', 'presentation');
     }
 
     // Set accessibility attributes accordingly

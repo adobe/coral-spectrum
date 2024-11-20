@@ -436,15 +436,6 @@ describe('Icon', function () {
         expect(icon.hasAttribute('aria-label')).to.be.false;
       });
 
-      it('should have role="img" when icon property is not a URL', function () {
-        var icon = helpers.build(new Icon());
-
-        icon.icon = 'add';
-        icon.alt = 'Add Item';
-
-        expect(icon.getAttribute('role')).to.equal('img');
-      });
-
       it('should have role="presentation" when icon property is a URL', function () {
         var icon = helpers.build(new Icon());
 
