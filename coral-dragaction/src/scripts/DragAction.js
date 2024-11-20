@@ -244,11 +244,13 @@ class DragAction {
 
     this._drag = this._drag.bind(this);
     this._dragEnd = this._dragEnd.bind(this);
+    this._dragOnKeyEnd = this._dragOnKeyEnd.bind(this);
 
     events.on(`touchmove.DragAction${this._id}`, this._drag);
     events.on(`mousemove.DragAction${this._id}`, this._drag);
     events.on(`touchend.DragAction${this._id}`, this._dragEnd);
     events.on(`mouseup.DragAction${this._id}`, this._dragEnd);
+    events.on(`focusout.DragAction${this._id}`, this._dragOnKeyEnd);
 
     // Store reference on dragElement
     this._dragElement.dragAction = this;
@@ -307,11 +309,13 @@ class DragAction {
           handle._dragEvents = handle._dragEvents || new Vent(handle);
           handle._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
           handle._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
+          handle._dragEvents.on('keyup.DragAction', this._dragOnKey.bind(this));
           handle.classList.add(OPEN_HAND_CLASS);
         });
       } else {
         this._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
         this._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
+        this._dragEvents.on('keyup.DragAction', this._dragOnKey.bind(this));
         this._dragElement.classList.add(OPEN_HAND_CLASS);
       }
     } else {
@@ -319,6 +323,7 @@ class DragAction {
       this._handles = [];
       this._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
       this._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
+      this._dragEvents.on('keyup.DragAction', this._dragOnKey.bind(this));
       this._dragElement.classList.add(OPEN_HAND_CLASS);
     }
   }
@@ -682,6 +687,45 @@ class DragAction {
     }
   }
 
+  /** @private */
+  _dragOnKey(event) {
+    switch (event.code) {
+      case 'Space':
+        this._dragEvents.dispatch('coral-dragaction:dragonkeyspace', {
+          detail: {
+            dragElement: this._dragElement
+          }
+        });
+        break;
+      case 'ArrowDown':
+        this._dragEvents.dispatch('coral-dragaction:dragoveronkeyarrowdown', {
+          detail: {
+            dragElement: this._dragElement
+          }
+        });
+        break;
+      case 'ArrowUp':
+        this._dragEvents.dispatch('coral-dragaction:dragoveronkeyarrowup', {
+          detail: {
+            dragElement: this._dragElement
+          }
+        });
+        break;
+      case 'Enter':
+        this._dragOnKeyEnd(event);
+        break;
+    }
+  }  
+
+  /** @private */
+  _dragOnKeyEnd(event) {
+    this._dragEvents.dispatch('coral-dragaction:dragendonkey', {
+      detail: {
+        dragElement: this._dragElement
+      }
+    });
+  }  
+
   /**
    Remove draggable actions
 
@@ -844,6 +888,51 @@ class DragAction {
    @property {Number} pageY
    The mouse position relative to the top edge of the document.
    */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is selected to be dragged.
+
+   @typedef {CustomEvent} coral-dragaction:dragonkeyspace
+
+   @property {HTMLElement} dragElement
+   The dragged element
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is moved on arrow down pressed.
+
+   @typedef {CustomEvent} coral-dragaction:dragoveronkeyarrowdown
+
+   @property {HTMLElement} dragElement
+   The dragged element
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is moved on arrow up pressed.
+
+   @typedef {CustomEvent} coral-dragaction:dragoveronkeyarrowup
+
+   @property {HTMLElement} dragElement
+   The dragged element
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is losing focus.
+
+   @typedef {CustomEvent} coral-dragaction:dragonkeyfocusout
+
+   @property {HTMLElement} dragElement
+   The dragged element
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is dropped on key.
+
+   @typedef {CustomEvent} coral-dragaction:dragendonkey
+
+   @property {HTMLElement} dragElement
+   The dragged element
+   */      
 }
 
 export default DragAction;
