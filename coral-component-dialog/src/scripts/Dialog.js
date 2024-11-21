@@ -221,6 +221,10 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       tagName: 'coral-dialog-content',
       insert: function (content) {
         content.classList.add(`${CLASSNAME}-content`);
+        const coralIcon = content.querySelector('coral-icon');
+        if (coralIcon !== null) {
+          coralIcon.setAttribute('title', 'infoCircle');
+        }
         const footer = this.footer;
         // The content should always be before footer
         this._elements.wrapper.insertBefore(content, this.contains(footer) && footer || null);
@@ -296,6 +300,19 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
 
     // Remove all variant classes
     this._elements.wrapper.classList.remove(...ALL_VARIANT_CLASSES);
+
+    const deleteButton = document.getElementsByClassName('cq-siteadmin-admin-actions-delete-activator');
+    if (deleteButton[0]) {
+      deleteButton[0].addEventListener('click', () => {
+        setTimeout(() => {
+          const coralDialog = this._elements.wrapper.querySelector('coral-dialog-content');
+          const coralIcon = coralDialog.getElementsByTagName('coral-icon');
+          if (coralIcon !== null) {
+            coralIcon[0].setAttribute('title', 'infoCircle');
+          }
+        }, 1000);
+      });
+    }
 
     if (this._variant === variant.DEFAULT) {
       // ARIA
