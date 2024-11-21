@@ -85,7 +85,8 @@ function hideEverythingBut(instance) {
           // It's already true, don't bother setting
           continue;
         }
-      } else {
+      }
+      else {
         // Nothing is hidden by default, store that
         child._previousAriaHidden = 'false';
       }
@@ -244,7 +245,8 @@ function createDocumentTabCaptureEls() {
         }
       }
     });
-  } else {
+  }
+  else {
     if (document.body.firstElementChild !== topTabCaptureEl) {
       // Make sure we stay at the very top
       document.body.insertBefore(topTabCaptureEl, document.body.firstChild);
@@ -325,7 +327,8 @@ function hideOrRepositionBackdrop() {
   if (!keepBackdrop) {
     // Hide the backdrop
     doBackdropHide();
-  } else {
+  }
+  else {
     // Reposition the backdrop
     doRepositionBackdrop();
   }
@@ -335,7 +338,8 @@ function hideOrRepositionBackdrop() {
   const top = OverlayManager.top();
   if (!top || !(top.instance.trapFocus === trapFocus.ON && top.instance._requestedBackdrop)) {
     hideDocumentTabCaptureEls();
-  } else if (top && top.instance.trapFocus === trapFocus.ON && top.instance._requestedBackdrop) {
+  }
+  else if (top && top.instance.trapFocus === trapFocus.ON && top.instance._requestedBackdrop) {
     createDocumentTabCaptureEls();
   }
 }
@@ -432,7 +436,8 @@ const BaseOverlay = (superClass) => class extends superClass {
       this._vent.on('keydown', this._handleRootKeypress);
       this._vent.on('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
 
-    } else if (this._trapFocus === trapFocus.OFF) {
+    }
+    else if (this._trapFocus === trapFocus.OFF) {
       // Remove elements
       this._elements.topTabCapture && this._elements.topTabCapture.remove();
       this._elements.intermediateTabCapture && this._elements.intermediateTabCapture.remove();
@@ -547,7 +552,8 @@ const BaseOverlay = (superClass) => class extends superClass {
       // Doesn't matter when we set aria-hidden true (nothing being announced)
       if (open) {
         this.removeAttribute('aria-hidden');
-      } else {
+      }
+      else {
         this.setAttribute('aria-hidden', !open);
       }
 
@@ -568,7 +574,8 @@ const BaseOverlay = (superClass) => class extends superClass {
               // element that had focus before opening the overlay
               (document.activeElement === document.body ? null : document.activeElement);
           }
-        } else {
+        }
+        else {
           // Release zIndex
           this._popOverlay();
         }
@@ -622,11 +629,13 @@ const BaseOverlay = (superClass) => class extends superClass {
           if (this._overlayAnimationTime) {
             // Wait for animation to complete
             commons.transitionEnd(this, openComplete);
-          } else {
+          }
+          else {
             // Execute immediately
             openComplete();
           }
-        } else {
+        }
+        else {
           // Fade out
           this.classList.remove('is-open');
 
@@ -657,7 +666,8 @@ const BaseOverlay = (superClass) => class extends superClass {
           if (this._overlayAnimationTime) {
             // Wait for animation to complete
             commons.transitionEnd(this, closeComplete);
-          } else {
+          }
+          else {
             // Execute immediately
             closeComplete();
           }
@@ -816,9 +826,11 @@ const BaseOverlay = (superClass) => class extends superClass {
     // ON handles the focusing per accessibility recommendations
     if (this.focusOnShow === focusOnShow.ON) {
       this._focusOn('first');
-    } else if (this.focusOnShow instanceof HTMLElement) {
+    }
+    else if (this.focusOnShow instanceof HTMLElement) {
       this.focusOnShow.focus(preventScroll(this));
-    } else if (typeof this.focusOnShow === 'string' && this.focusOnShow !== focusOnShow.OFF) {
+    }
+    else if (typeof this.focusOnShow === 'string' && this.focusOnShow !== focusOnShow.OFF) {
       // we need to add :not([coral-tabcapture]) to avoid selecting the tab captures
       const selectedElement = this.querySelector(`${this.focusOnShow}:not([coral-tabcapture])`);
 
@@ -1039,7 +1051,8 @@ const BaseOverlay = (superClass) => class extends superClass {
         // Show the backdrop again
         this._showBackdrop();
       }
-    } else {
+    }
+    else {
       // If overlay is closed, make sure that it is hidden with `display: none`,
       // but set `visibility: visible` to ensure that the overlay will be included in accessibility name or description
       // of an element that references it using `aria-labelledby` or `aria-describedby`.

@@ -222,7 +222,7 @@ const ColorInput = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
       this.classList.remove('_coral-ColorInput--swatch');
       this._elements.input.removeAttribute('tabindex');
     }
-    
+
     this._syncColorPreviewIcon();
   }
 

@@ -55,7 +55,8 @@ const BaseLabellable = (superClass) => class extends superClass {
   attributeChangedCallback(name, oldValue, value) {
     if (name === 'aria-label' || name === 'aria-labelledby') {
       this._toggleIconAriaHidden();
-    } else {
+    }
+    else {
       super.attributeChangedCallback(name, oldValue, value);
     }
   }
