@@ -1,3 +1,77 @@
+# [4.18.0](https://github.com/adobe/coral-spectrum/compare/v4.17.1...v4.18.0) (2024-10-14)
+
+
+### Features
+
+* Revert Drag and Drop support via keyboard and add new marketo icons ([#361](https://github.com/adobe/coral-spectrum/issues/361)) ([bd91bb6](https://github.com/adobe/coral-spectrum/commit/bd91bb6ee083f6d64dde070efd872ca680c9f59e))
+
+## [4.17.1](https://github.com/adobe/coral-spectrum/compare/v4.17.0...v4.17.1) (2024-10-07)
+
+
+### Bug Fixes
+
+* Add Marketo Icons ([#359](https://github.com/adobe/coral-spectrum/issues/359)) ([c83a7b2](https://github.com/adobe/coral-spectrum/commit/c83a7b2530cee862b05a0a25088d0186ab46b6c4))
+
+# [4.17.0](https://github.com/adobe/coral-spectrum/compare/v4.16.4...v4.17.0) (2024-10-06)
+
+
+### Bug Fixes
+
+* correct axe violations ([#358](https://github.com/adobe/coral-spectrum/issues/358)) ([92d83e2](https://github.com/adobe/coral-spectrum/commit/92d83e284b5523ff56890eb1f71cf887d6361d1c))
+
+
+### Features
+
+* **FORMS-16421:** Add marketo icon ([#356](https://github.com/adobe/coral-spectrum/issues/356)) ([98381b6](https://github.com/adobe/coral-spectrum/commit/98381b655c995b807217d0fa19ca665e34305ec5))
+* **FORMS-16421:** Add marketo icon ([#357](https://github.com/adobe/coral-spectrum/issues/357)) ([0541270](https://github.com/adobe/coral-spectrum/commit/054127040007d18a549c2db506da4c4d93ae9228))
+
+## [4.16.4](https://github.com/adobe/coral-spectrum/compare/v4.16.3...v4.16.4) (2024-07-30)
+
+
+### Bug Fixes
+
+* **bug:** Custom color coral ui element is non-functional ([#354](https://github.com/adobe/coral-spectrum/issues/354)) ([a6e038e](https://github.com/adobe/coral-spectrum/commit/a6e038e0fc669e23f9043551b236e25494e897d4))
+
+## [4.16.3](https://github.com/adobe/coral-spectrum/compare/v4.16.2...v4.16.3) (2024-07-30)
+
+
+### Bug Fixes
+
+* **Accessibility:** Drag and Drop feature is not keyboard accessible ([#346](https://github.com/adobe/coral-spectrum/issues/346)) ([d762873](https://github.com/adobe/coral-spectrum/commit/d7628735a25e8597eabbacff59aa5dec6c47cfd2))
+
+## [4.16.2](https://github.com/adobe/coral-spectrum/compare/v4.16.1...v4.16.2) (2024-05-15)
+
+
+### Bug Fixes
+
+* **Accessability:** Add button role to table header interactive element ([#347](https://github.com/adobe/coral-spectrum/issues/347)) ([a17ed32](https://github.com/adobe/coral-spectrum/commit/a17ed3203802d03d1d267eb0fbd329224e7fdb00))
+
+## [4.16.1](https://github.com/adobe/coral-spectrum/compare/v4.16.0...v4.16.1) (2024-04-23)
+
+
+### Bug Fixes
+
+* **Accessibility:** Annotation swatch selector button missing an accessible name ([#341](https://github.com/adobe/coral-spectrum/issues/341)) ([a5a4c93](https://github.com/adobe/coral-spectrum/commit/a5a4c9360970d717d2f474a5fb58209d1e15835b))
+
+# [4.16.0](https://github.com/adobe/coral-spectrum/compare/v4.15.29...v4.16.0) (2024-04-02)
+
+
+### Bug Fixes
+
+* **Accessibility:** State of active component lacks 3 to 1 contrast ratio.([#329](https://github.com/adobe/coral-spectrum/issues/329)) ([f98bf47](https://github.com/adobe/coral-spectrum/commit/f98bf47992fa44ce9dc3876cc907610b534172a1))
+
+
+### Features
+
+* **Icon:** Add Car icon to the spectrum icons list. ([#343](https://github.com/adobe/coral-spectrum/issues/343)) ([d545314](https://github.com/adobe/coral-spectrum/commit/d545314710fe8ad516f95f4ff61bd0d12e950bcb))
+
+## [4.15.29](https://github.com/adobe/coral-spectrum/compare/v4.15.28...v4.15.29) (2024-03-12)
+
+
+### Bug Fixes
+
+* Disordered Week Names in Coral Datepicker Component ([#333](https://github.com/adobe/coral-spectrum/issues/333)) ([e30dd24](https://github.com/adobe/coral-spectrum/commit/e30dd24b5cf7240da22dc68a34b2c09b18828f2b))
+
 ## [4.15.28](https://github.com/adobe/coral-spectrum/compare/v4.15.27...v4.15.28) (2024-02-08)
 
 

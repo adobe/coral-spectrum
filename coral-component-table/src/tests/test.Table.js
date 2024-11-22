@@ -3089,7 +3089,7 @@ describe('Table', function () {
         helpers.next(() => {
           expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DEFAULT);
           expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
-          expect(headerCell._elements.content.getAttribute('aria-sort')).to.equal('none');
+          expect(headerCell.getAttribute('aria-sort')).to.equal('none');
           done();
         });
       });
@@ -3106,7 +3106,7 @@ describe('Table', function () {
           expect(eventSpy.args[0][0].detail.column).to.equal(col);
           expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.ASCENDING);
           expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
-          expect(headerCell._elements.content.getAttribute('aria-sort')).to.equal(col.sortableDirection);
+          expect(headerCell.getAttribute('aria-sort')).to.equal(col.sortableDirection);
           done();
         });
       });
@@ -3124,7 +3124,7 @@ describe('Table', function () {
           expect(eventSpy.args[0][0].detail.column).to.equal(col);
           expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DESCENDING);
           expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
-          expect(headerCell._elements.content.getAttribute('aria-sort')).to.equal(col.sortableDirection);
+          expect(headerCell.getAttribute('aria-sort')).to.equal(col.sortableDirection);
           done();
         });
       });
@@ -3143,7 +3143,7 @@ describe('Table', function () {
           expect(eventSpy.args[0][0].detail.column).to.equal(col);
           expect(col.sortableDirection).to.equal(Table.Column.sortableDirection.DEFAULT);
           expect(headerCell.getAttribute('sortabledirection')).to.equal(col.sortableDirection);
-          expect(headerCell._elements.content.getAttribute('aria-sort')).to.equal('none');
+          expect(headerCell.getAttribute('aria-sort')).to.equal('none');
           done();
         });
       });
