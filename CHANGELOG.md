@@ -1,3 +1,10 @@
+## [4.18.1](https://github.com/adobe/coral-spectrum/compare/v4.18.0...v4.18.1) (2024-11-25)
+
+
+### Bug Fixes
+
+* **Accessibility:** Certain ARIA roles must contain particular children ([#352](https://github.com/adobe/coral-spectrum/issues/352)) ([1430fd8](https://github.com/adobe/coral-spectrum/commit/1430fd800707898c645b751c90a9577fc08ed5a3))
+
 # [4.18.0](https://github.com/adobe/coral-spectrum/compare/v4.17.1...v4.18.0) (2024-10-14)
 
 
