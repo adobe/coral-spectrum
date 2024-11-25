@@ -56491,16 +56491,10 @@ var Coral = (function (exports) {
         // do not include item values in the tab order,
         // so that a keyboard user can quickly advance to a subsequent toolbar.
 
-        var tabIndex = this.parentElement && this.parentElement.tagName === 'CORAL-COLUMNVIEW' && this.parentElement.selectedItems.length ? -1 : 0;
-
         for (i = 0; i < length; i++) {
           element = elements[i];
           elementLabel = element.previousElementSibling;
-          elementLabel.id = elementLabel.id || commons.getUID();
-          element.setAttribute('aria-labelledby', elementLabel.id);
-          element.setAttribute('role', 'textbox');
-          element.setAttribute('tabindex', tabIndex);
-          element.setAttribute('aria-readonly', 'true'); // force ChromeVox to read value of textbox
+          elementLabel.id = elementLabel.id || commons.getUID(); // force ChromeVox to read value of textbox
 
           if (window.cvox) {
             element.setAttribute('aria-valuetext', element.textContent);
