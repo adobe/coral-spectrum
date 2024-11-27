@@ -24486,7 +24486,6 @@ coral-shell-header-content {
 ._coral-Shell-homeAnchor:not(:disabled):not(.is-disabled):focus,
 ._coral-Shell-homeAnchor:not(:disabled):not(.is-disabled).is-focused {
   color: #fff;
-  outline: none;
 }
 ._coral-Shell-homeAnchor:not(:disabled):not(.is-disabled):active {
   color: #fff;
