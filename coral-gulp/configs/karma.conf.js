@@ -158,10 +158,7 @@ module.exports = function (config) {
 
     client: {
       // Set to true for debugging via e.g console.debug
-      captureConsole: false,
-      mocha: {
-        timeout: 2500
-      }
+      captureConsole: false
       /* ,
       // Override the timeout, should tests fail due to timeout errors.
       mocha: {
