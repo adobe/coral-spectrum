@@ -244,6 +244,7 @@ class DragAction {
 
     this._drag = this._drag.bind(this);
     this._dragEnd = this._dragEnd.bind(this);
+    this._dragOnKeyEnd = this._dragOnKeyEnd.bind(this);
 
     events.on(`touchmove.DragAction${this._id}`, this._drag);
     events.on(`mousemove.DragAction${this._id}`, this._drag);
@@ -307,11 +308,17 @@ class DragAction {
           handle._dragEvents = handle._dragEvents || new Vent(handle);
           handle._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
           handle._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
+          handle._dragEvents.on('keydown.DragAction', this._dragOnKeyDown.bind(this));
+          handle._dragEvents.on('keyup.DragAction', this._dragOnKeyUp.bind(this));
+          handle._dragEvents.on('focusout.DragAction', this._dragOnFocusOut.bind(this));
           handle.classList.add(OPEN_HAND_CLASS);
         });
       } else {
         this._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
         this._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
+        this._dragEvents.on('keydown.DragAction', this._dragOnKeyDown.bind(this));
+        this._dragEvents.on('keyup.DragAction', this._dragOnKeyUp.bind(this));
+        this._dragEvents.on('focusout.DragAction', this._dragOnFocusOut.bind(this));
         this._dragElement.classList.add(OPEN_HAND_CLASS);
       }
     } else {
@@ -319,6 +326,9 @@ class DragAction {
       this._handles = [];
       this._dragEvents.on('touchstart.DragAction', this._dragStart.bind(this));
       this._dragEvents.on('mousedown.DragAction', this._dragStart.bind(this));
+      this._dragEvents.on('keydown.DragAction', this._dragOnKeyDown.bind(this));
+      this._dragEvents.on('keyup.DragAction', this._dragOnKeyUp.bind(this));
+      this._dragEvents.on('focusout.DragAction', this._dragOnFocusOut.bind(this));
       this._dragElement.classList.add(OPEN_HAND_CLASS);
     }
   }
@@ -399,6 +409,10 @@ class DragAction {
 
   /** @private */
   _dragStart(event) {
+    if (events.isVirtualEvent(event)) {
+      return;
+    }
+
     // Container
     this._container = getViewContainer(this._dragElement) || document.body;
 
@@ -682,6 +696,75 @@ class DragAction {
     }
   }
 
+  /** @private */
+  _dragOnKeyDown(event) {
+    switch (event.code) {
+      case 'Space':
+      case 'ArrowDown':
+      case 'ArrowUp':
+      case 'Enter':
+      case 'Escape':
+        event.preventDefault();
+        break;
+    }
+  }
+
+  /** @private */
+  _dragOnKeyUp(event) {
+    switch (event.code) {
+      case 'Space':
+        if (!this.isKeyboardDragging) {
+          this._dragEvents.dispatch('coral-dragaction:dragonkeyspace', {
+            detail: {
+              dragElement: this._dragElement
+            }
+          });
+          this.isKeyboardDragging = true;
+        } else {
+          this._dragOnKeyEnd();
+        }
+        break;
+      case 'ArrowDown':
+        this._dragEvents.dispatch('coral-dragaction:dragoveronkeyarrowdown', {
+          detail: {
+            dragElement: this._dragElement
+          }
+        });
+        break;
+      case 'ArrowUp':
+        this._dragEvents.dispatch('coral-dragaction:dragoveronkeyarrowup', {
+          detail: {
+            dragElement: this._dragElement
+          }
+        });
+        break;
+      case 'Enter':
+      case 'Escape':
+        this._dragOnKeyEnd();
+        break;
+    }
+  }
+
+  /** @private */
+  _dragOnFocusOut(event) {
+    window.setTimeout(() => {
+      if (document.activeElement === event.target) {
+        return;
+      }
+      this._dragOnKeyEnd();
+    }, 0);
+  }
+
+  /** @private */
+  _dragOnKeyEnd() {
+    this._dragEvents.dispatch('coral-dragaction:dragendonkey', {
+      detail: {
+        dragElement: this._dragElement
+      }
+    });
+    this.isKeyboardDragging = false;
+  }
+
   /**
    Remove draggable actions
 
@@ -843,6 +926,41 @@ class DragAction {
    The mouse position relative to the left edge of the document.
    @property {Number} pageY
    The mouse position relative to the top edge of the document.
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is selected to be dragged.
+   @typedef {CustomEvent} coral-dragaction:dragonkeyspace
+   @property {HTMLElement} dragElement
+   The dragged element
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is moved on arrow down pressed.
+   @typedef {CustomEvent} coral-dragaction:dragoveronkeyarrowdown
+   @property {HTMLElement} dragElement
+   The dragged element
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is moved on arrow up pressed.
+   @typedef {CustomEvent} coral-dragaction:dragoveronkeyarrowup
+   @property {HTMLElement} dragElement
+   The dragged element
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is losing focus.
+   @typedef {CustomEvent} coral-dragaction:dragonkeyfocusout
+   @property {HTMLElement} dragElement
+   The dragged element
+   */
+
+  /**
+   Triggered when the {@link DragAction#dragElement} is dropped on key.
+   @typedef {CustomEvent} coral-dragaction:dragendonkey
+   @property {HTMLElement} dragElement
+   The dragged element
    */
 }
 
