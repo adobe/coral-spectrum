@@ -84012,7 +84012,7 @@
         this.classList.add("".concat(CLASSNAME$1K, "--").concat(this._variant)); // Set the role attribute to alert or status depending on
         // the variant so that the element turns into a live region
 
-        this.setAttribute('role', this.variant === variant$n.ERROR || this.variant === variant$n.WARNING || this.variant === variant$n.SUCCESS ? 'alert' : 'status');
+        this.setAttribute('role', this.variant === variant$n.ERROR || this.variant === variant$n.WARNING || this.variant === variant$n.SUCCESS || this.variant === variant$n.INFO ? 'alert' : 'status');
         this.setAttribute('aria-live', 'polite');
       }
       /**

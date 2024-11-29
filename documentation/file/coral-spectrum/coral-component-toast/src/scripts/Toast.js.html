@@ -751,7 +751,7 @@ const Toast = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
 
     // Set the role attribute to alert or status depending on
     // the variant so that the element turns into a live region
-    this.setAttribute(&apos;role&apos;, (this.variant === variant.ERROR || this.variant === variant.WARNING || this.variant === variant.SUCCESS) ? &apos;alert&apos; : &apos;status&apos;);
+    this.setAttribute(&apos;role&apos;, (this.variant === variant.ERROR || this.variant === variant.WARNING || this.variant === variant.SUCCESS || this.variant === variant.INFO) ? &apos;alert&apos; : &apos;status&apos;);
     this.setAttribute(&apos;aria-live&apos;, &apos;polite&apos;);
   }
 
