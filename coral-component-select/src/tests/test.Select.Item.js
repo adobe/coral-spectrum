@@ -218,44 +218,38 @@ describe('Select.Item', function () {
 
     describe('#coral-select-item:_valuechanged', function () {
       it('should be triggered when the value changes', function () {
-        var changeSpy = sinon.spy();
-        el.on('coral-select-item:_valuechanged', changeSpy);
+        const spy = sinon.spy(el._messenger, 'postMessage').withArgs('coral-select-item:_valuechanged');
 
         el.value = 'value';
 
-        expect(changeSpy.callCount).to.equal(1);
-        expect(changeSpy.getCall(0).args[0].target.value).to.equal('value');
+        expect(spy.calledOnce).to.be.true;
+        expect(spy.getCall(0).thisValue._element.value).to.equal('value');
       });
     });
 
     describe('#coral-select-item:_contentchanged', function () {
       it('should be triggered when the content changes', function (done) {
-        var changeSpy = sinon.spy();
-        el.on('coral-select-item:_contentchanged', changeSpy);
+        const spy = sinon.spy(el._messenger, 'postMessage').withArgs('coral-select-item:_contentchanged');
 
         el.content.innerHTML = 'new content';
 
         // we need to wait for the mutation observer
         helpers.next(function () {
-          expect(changeSpy.callCount).to.equal(1);
-          expect(changeSpy.getCall(0).args[0].target.content.innerHTML).to.equal('new content');
-
+          expect(spy.calledOnce).to.be.true;
+          expect(spy.getCall(0).thisValue._element.content.innerHTML).to.equal('new content');
           done();
         });
       });
 
       it('should be triggered when item is appended', function (done) {
-        var changeSpy = sinon.spy();
-        el.on('coral-select-item:_contentchanged', changeSpy);
-
-        var icon = new Icon();
+        const icon = new Icon();
+        const spy = sinon.spy(el._messenger, 'postMessage').withArgs('coral-select-item:_contentchanged');
 
         el.content.appendChild(icon);
 
         // we need to wait for the mutation observer
         helpers.next(function () {
-          expect(changeSpy.callCount).to.equal(1);
-
+          expect(spy.calledOnce).to.be.true;
           done();
         });
       });
@@ -263,25 +257,23 @@ describe('Select.Item', function () {
 
     describe('#coral-select-item:_disabledchanged', function () {
       it('should be triggered when the value changes', function () {
-        var changeSpy = sinon.spy();
-        el.on('coral-select-item:_disabledchanged', changeSpy);
+        const spy = sinon.spy(el._messenger, 'postMessage').withArgs('coral-select-item:_disabledchanged');
 
         el.disabled = true;
 
-        expect(changeSpy.callCount).to.equal(1);
-        expect(changeSpy.getCall(0).args[0].target.disabled).to.be.true;
+        expect(spy.calledOnce).to.be.true;
+        expect(spy.getCall(0).thisValue._element.disabled).to.be.true;
       });
     });
 
     describe('#coral-select-item:_selectedchanged', function () {
       it('should be triggered when the value changes', function () {
-        var changeSpy = sinon.spy();
-        el.on('coral-select-item:_selectedchanged', changeSpy);
+        const spy = sinon.spy(el._messenger, 'postMessage').withArgs('coral-select-item:_selectedchanged');
 
         el.selected = true;
 
-        expect(changeSpy.callCount).to.equal(1);
-        expect(changeSpy.getCall(0).args[0].target.selected).to.be.true;
+        expect(spy.calledOnce).to.be.true;
+        expect(spy.getCall(0).args[0].target.selected).to.be.true;
       });
     });
   });
