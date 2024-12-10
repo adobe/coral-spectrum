@@ -292,6 +292,9 @@ const Popover = Decorator(class extends ExtensibleOverlay {
   }
 
   set target(value) {
+    // avoid popper initialization while connecting for first time and not opened.
+    this._avoidPopperInit = this.open || this._popper ? false : true;
+
     super.target = value;
 
     // Coach Mark specific
@@ -301,6 +304,8 @@ const Popover = Decorator(class extends ExtensibleOverlay {
     }
 
     this._setAriaExpandedOnTarget();
+
+    delete this._avoidPopperInit;
   }
 
   /**
