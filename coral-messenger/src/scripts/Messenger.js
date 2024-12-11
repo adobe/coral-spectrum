@@ -273,4 +273,6 @@ class Event {
   }
 }
 
+Messenger.Event = Event;
+
 export default Messenger;

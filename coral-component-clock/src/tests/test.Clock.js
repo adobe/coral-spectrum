@@ -528,21 +528,23 @@ describe('Clock', function () {
         it('should switch from PM to AM', function (done) {
           if (useMomentJS) {
             const el = helpers.build(window.__html__['Clock.periodpm.html']);
-            // Open coral-select overlay
-            el.querySelector('button').click();
+            helpers.next(function () {
+              // Open coral-select overlay
+              el.querySelector('button').click();
 
-            // Private event
-            el.on('coral-select:_overlayopen', function () {
-              // Select AM
-              el.querySelector('coral-selectlist-item:first-child').click();
-
-              expect(el.value).to.equal('02:02');
-              expect(el._elements.hours.value).to.equal('02');
-              expect(el._elements.minutes.value).to.equal('02');
-              expect(el._elements.valueAsText.textContent).to.equal('02:02 AM');
-
-              done();
-            }, true);
+              // Private event
+              el.on('coral-select:_overlayopen', function () {
+                // Select AM
+                el.querySelector('coral-selectlist-item:first-child').click();
+  
+                expect(el.value).to.equal('02:02');
+                expect(el._elements.hours.value).to.equal('02');
+                expect(el._elements.minutes.value).to.equal('02');
+                expect(el._elements.valueAsText.textContent).to.equal('02:02 AM');
+  
+                done();
+              }, true);
+            });
           } else {
             done();
           }
@@ -551,21 +553,23 @@ describe('Clock', function () {
         it('should switch from AM to PM', function (done) {
           if (useMomentJS) {
             const el = helpers.build(window.__html__['Clock.periodam.html']);
-            // Open coral-select overlay
-            el.querySelector('button').click();
+            helpers.next(function () {
+              // Open coral-select overlay
+              el.querySelector('button').click();
 
-            // Private event
-            el.on('coral-select:_overlayopen', function () {
-              // Select PM
-              el.querySelector('coral-selectlist-item:last-child').click();
-
-              expect(el.value).to.equal('14:02');
-              expect(el._elements.hours.value).to.equal('02');
-              expect(el._elements.minutes.value).to.equal('02');
-              expect(el._elements.valueAsText.textContent).to.equal('02:02 PM');
-
-              done();
-            }, true);
+              // Private event
+              el.on('coral-select:_overlayopen', function () {
+                // Select PM
+                el.querySelector('coral-selectlist-item:last-child').click();
+  
+                expect(el.value).to.equal('14:02');
+                expect(el._elements.hours.value).to.equal('02');
+                expect(el._elements.minutes.value).to.equal('02');
+                expect(el._elements.valueAsText.textContent).to.equal('02:02 PM');
+  
+                done();
+              }, true);
+            });
           } else {
             done();
           }
@@ -605,23 +609,25 @@ describe('Clock', function () {
         it('should stay empty when value is empty and AM/PM is set', function (done) {
           if (useMomentJS) {
             const el = helpers.build(window.__html__['Clock.periodam.html']);
-            el.value = '';
+            helpers.next(function() {
+              el.value = '';
 
-            // Open coral-select overlay
-            el.querySelector('button').click();
-
-            // Private event
-            el.on('coral-select:_overlayopen', function () {
-              // Select PM
-              el.querySelector('coral-selectlist-item:last-child').click();
-
-              expect(el.value).to.equal('');
-              expect(el._elements.hours.value).to.equal('');
-              expect(el._elements.minutes.value).to.equal('');
-              expect(el._elements.valueAsText.textContent).to.equal('');
-
-              done();
-            }, true);
+              // Open coral-select overlay
+              el.querySelector('button').click();
+  
+              // Private event
+              el.on('coral-select:_overlayopen', function () {
+                // Select PM
+                el.querySelector('coral-selectlist-item:last-child').click();
+  
+                expect(el.value).to.equal('');
+                expect(el._elements.hours.value).to.equal('');
+                expect(el._elements.minutes.value).to.equal('');
+                expect(el._elements.valueAsText.textContent).to.equal('');
+  
+                done();
+              }, true);
+            });
           } else {
             done();
           }
@@ -630,23 +636,25 @@ describe('Clock', function () {
         it('should not change display nor value if AM/PM is set but hours format is 24 hours clock', function (done) {
           if (useMomentJS) {
             const el = helpers.build(window.__html__['Clock.value.html']);
-            el.displayFormat = 'HH:mm A';
+            helpers.next(function() {
+              el.displayFormat = 'HH:mm A';
 
-            // Open coral-select overlay
-            el.querySelector('button').click();
-
-            // Private event
-            el.on('coral-select:_overlayopen', function () {
-              // Select PM
-              el.querySelector('coral-selectlist-item:last-child').click();
-
-              expect(el.value).to.equal('11:32');
-              expect(el._elements.hours.value).to.equal('11');
-              expect(el._elements.minutes.value).to.equal('32');
-              expect(el._elements.valueAsText.textContent).to.equal('11:32 AM');
-
-              done();
-            }, true);
+              // Open coral-select overlay
+              el.querySelector('button').click();
+  
+              // Private event
+              el.on('coral-select:_overlayopen', function () {
+                // Select PM
+                el.querySelector('coral-selectlist-item:last-child').click();
+  
+                expect(el.value).to.equal('11:32');
+                expect(el._elements.hours.value).to.equal('11');
+                expect(el._elements.minutes.value).to.equal('32');
+                expect(el._elements.valueAsText.textContent).to.equal('11:32 AM');
+  
+                done();
+              }, true);
+            });
           } else {
             done();
           }
@@ -786,18 +794,20 @@ describe('Clock', function () {
 
           el.on('change', changeSpy);
 
-          // Open coral-select overlay
-          el.querySelector('button').click();
+          helpers.next(function() {
+            // Open coral-select overlay
+            el.querySelector('button').click();
 
-          // Private event
-          el.on('coral-select:_overlayopen', function () {
-            // Select AM
-            el.querySelector('coral-selectlist-item:first-child').click();
+            // Private event
+            el.on('coral-select:_overlayopen', function () {
+              // Select AM
+              el.querySelector('coral-selectlist-item:first-child').click();
 
-            expect(changeSpy.callCount).to.equal(1);
+              expect(changeSpy.callCount).to.equal(1);
 
-            done();
-          }, true);
+              done();
+            }, true);
+          });
         });
       });
     });
