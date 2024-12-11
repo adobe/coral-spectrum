@@ -273,7 +273,7 @@ describe('Select.Item', function () {
         el.selected = true;
 
         expect(spy.calledOnce).to.be.true;
-        expect(spy.getCall(0).args[0].target.selected).to.be.true;
+        expect(spy.getCall(0).thisValue._element.selected).to.be.true;
       });
     });
   });
