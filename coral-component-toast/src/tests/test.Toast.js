@@ -176,6 +176,14 @@ describe('Toast', function () {
           done();
         });
       });
+
+      it('should have role alert when variant is info', function(done) {
+        el.variant = Toast.variant.INFO;
+        helpers.next(function() {
+          expect(el.getAttribute('role')).to.equal('alert');
+          done();
+        });
+      });
     });
 
     describe('#variant', function () {
