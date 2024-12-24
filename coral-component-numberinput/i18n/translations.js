@@ -13,7 +13,8 @@
 export default {
   "en-US": {
     "Decrement": "Decrement",
-    "Increment": "Increment"
+    "Increment": "Increment",
+    "NumberInput": "Number Input",
   },
   "fr-FR": {
     "Decrement": "Décrémenter",
