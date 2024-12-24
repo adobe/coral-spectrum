@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.09% </span>
+                <span class="strong">84.84% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>291/342</span>
+                <span class='fraction'>291/343</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">79.53% </span>
+                <span class="strong">78.61% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>136/171</span>
+                <span class='fraction'>136/173</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.09% </span>
+                <span class="strong">84.84% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>291/342</span>
+                <span class='fraction'>291/343</span>
             </div>
         
             
@@ -1154,7 +1154,9 @@
 <a name='L1096'></a><a href='#L1096'>1096</a>
 <a name='L1097'></a><a href='#L1097'>1097</a>
 <a name='L1098'></a><a href='#L1098'>1098</a>
-<a name='L1099'></a><a href='#L1099'>1099</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L1099'></a><a href='#L1099'>1099</a>
+<a name='L1100'></a><a href='#L1100'>1100</a>
+<a name='L1101'></a><a href='#L1101'>1101</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1336,6 +1338,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1344,6 +1348,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1768,19 +1773,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">397x</span>
-<span class="cline-any cline-yes">397x</span>
+<span class="cline-any cline-yes">396x</span>
+<span class="cline-any cline-yes">396x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">397x</span>
+<span class="cline-any cline-yes">396x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">379x</span>
-<span class="cline-any cline-yes">379x</span>
-<span class="cline-any cline-yes">379x</span>
+<span class="cline-any cline-yes">378x</span>
+<span class="cline-any cline-yes">378x</span>
+<span class="cline-any cline-yes">378x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2251,7 +2256,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -2434,16 +2438,16 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     super.invalid = <span class="fstat-no" title="function not covered" >value;</span>
 &nbsp;
     this._elements.<span class="cstat-no" title="statement not covered" >input.setAttribute('aria-invalid', this.invalid);</span>
-    th<span class="cstat-no" title="statement not covered" >is._setElementState();</span>
+    this._setElementState();
   }<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-  /**<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-   Wheth<span class="cstat-no" title="statement not covered" >er this field is requ</span>ired or not.
-   @type {Boolean}
-   @default false
-   @html<span class="cstat-no" title="statement not covered" >attribute required</span>
+<span class="cstat-no" title="statement not covered" ></span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
+   Whether this field is required or not.
+   @type<span class="cstat-no" title="statement not covered" > {Boolean}<span class="fstat-no" title="function not covered" ></span></span>
+   @defaul<span class="cstat-no" title="statement not covered" >t false</span>
+   @htmlattribute required
    @htmlattributereflected
-   */
+   */<span class="cstat-no" title="statement not covered" ></span>
   get required() {
     return this._elements.input.required;
   }
@@ -2456,10 +2460,10 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     this._setElementState();
   }
 &nbsp;
-  /**<span class="missing-if-branch" title="else path not taken" >E</span>
+  /**
    Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
    @type {Boolean}
-   @default false
+   @de<span class="missing-if-branch" title="else path not taken" >E</span>fault false
    @htmlattribute readonly
    @htmlattributereflected
    */
@@ -2471,10 +2475,10 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     this._readOnly = transform.booleanAttr(value);
     this._reflectAttribute('readonly', this._readOnly);
 &nbsp;
-    this<span class="missing-if-branch" title="else path not taken" >E</span>._setElementState();
+    this._setElementState();
   }
 &nbsp;
-  /**
+  /**<span class="missing-if-branch" title="else path not taken" >E</span>
    The names of the currently selected files.
    When {@link Coral.FileUpload#multiple} is &lt;code&gt;false&lt;/code&gt;, this will be an array of length 1.
 &nbsp;
@@ -2488,10 +2492,10 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     }
 &nbsp;
     return values;
-  }<span class="missing-if-branch" title="else path not taken" >E</span>
+  }
 &nbsp;
   set values(values) {
-    if (Array.isArray(values)) {
+    if<span class="missing-if-branch" title="else path not taken" >E</span> (Array.isArray(values)) {
       if (values.length) {
         this.value = values[0];
       } else {
@@ -2500,10 +2504,10 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     }
   }
 &nbsp;
-  /**<span class="missing-if-branch" title="else path not taken" >E</span>
+  /**
    Inherited from {@link BaseFormField#labelledBy}.
    */
-  get labelledBy() {
+  get labelle<span class="missing-if-branch" title="else path not taken" >E</span>dBy() {
     return super.labelledBy;
   }
 &nbsp;
@@ -2518,19 +2522,19 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
 &nbsp;
     const button = this.querySelector('[coral-fileupload-select]');
 &nbsp;
-    if (button) {<span class="fstat-no" title="function not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      ids.push(button.id);</span>
+    if (button) {
+      ids.push(button.id);
+    }
+<span class="fstat-no" title="function not covered" ></span>
+    //<span class="cstat-no" title="statement not covered" > If a labelledBy property exists,</span>
+    if (labelledBy) {<span class="cstat-no" title="statement not covered" ></span>
+      // prepend the labelledBy value to the ids array
+<span class="cstat-no" title="statement not covered" >      ids.unshift(labelledBy);</span>
     }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
-    //<span class="cstat-no" title="statement not covered" > If a labelledBy property exists,</span>
-    if (<span class="cstat-no" title="statement not covered" >labelledBy) {</span>
-      // prepend the labelledBy value to the ids array
-      ids.unshift(labelledBy);
-    }
-<span class="cstat-no" title="statement not covered" ></span>
     // Set aria-labelledby attribute on the labellable element joining ids array into space-delimited list of ids.
     this._elements.input.setAttribute('aria-labelledby', ids.join(' '));
-&nbsp;
+<span class="cstat-no" title="statement not covered" ></span>
     if (labelledBy) {
       // Set label for attribute
       const labelElement = document.getElementById(labelledBy);
@@ -2545,10 +2549,10 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     }
   }
 &nbsp;
-  /**<span class="missing-if-branch" title="else path not taken" >E</span>
+  /**
    Array of additional parameters as key:value to send in addition of files.
    A parameter must contain a &lt;code&gt;name&lt;/code&gt; key:value and optionally a &lt;code&gt;value&lt;/code&gt; key:value.
-&nbsp;
+<span class="missing-if-branch" title="else path not taken" >E</span>
    @type {Array.&lt;Object&gt;}
    @default []
    */
@@ -2589,28 +2593,28 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
    @type {Boolean}
    @default false
    @htmlattribute async
-   @ht<span class="missing-if-branch" title="else path not taken" >E</span>mlattributereflected
+   @htmlattributereflected
    */
   get async() {
-    return this._async || false;
+    re<span class="missing-if-branch" title="else path not taken" >E</span>turn this._async || false;
   }
 &nbsp;
   set async(value) {
     this._async = transform.booleanAttr(value);
     this._reflectAttribute('async', this._async);
-<span class="cstat-no" title="statement not covered" ></span>
-    // Syn<span class="cstat-no" title="statement not covered" >c extra parameters i</span>n case of form submission
+&nbsp;
+    // Sync extra parameters in case of form submission
     if (!this._async) {
-      this<span class="cstat-no" title="statement not covered" >.parameters = this.parameters;</span>
-    }
-<span class="cstat-no" title="statement not covered" ></span>
-    // Clear<span class="cstat-no" title="statement not covered" > file selection</span>
+      this.<span class="cstat-no" title="statement not covered" >parameters = this.parameters;</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    // Cle<span class="cstat-no" title="statement not covered" >ar file selection</span>
     if (this._uploadQueue) {
-      this._clearQueue();
-      this<span class="cstat-no" title="statement not covered" >._clearF</span>ileInputValue();
+      this<span class="cstat-no" title="statement not covered" >._clearQueue();</span>
+      this._<span class="cstat-no" title="statement not covered" >clearFileInputValue(</span>);
     }
   }
-&nbsp;
+<span class="cstat-no" title="statement not covered" ></span>
   /**
    The URL where the upload request should be sent. When used within a &lt;code&gt;&amp;lt;form&amp;gt;&lt;/code&gt; tag to upload
    synchronously, the action of the form is used. If an element is clicked that has a
@@ -2618,10 +2622,10 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
    the clicked element will be used. Set this property before calling {@link Coral.FileUpload#upload} to reset the
    action set by a click.
 &nbsp;
-   @type<span class="missing-if-branch" title="else path not taken" >E</span> {String}
+   @type {String}
    @default ""
    @htmlattribute action
-   @htmlattributereflected
+   @html<span class="missing-if-branch" title="else path not taken" >E</span>attributereflected
    */
   get action() {
     return this._action || '';
@@ -2645,10 +2649,10 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
 &nbsp;
    @type {String}
    @default FileUploadMethodEnum.POST
-   @ht<span class="missing-if-branch" title="else path not taken" >E</span>mlattribute method
+   @htmlattribute method
    @htmlattributereflected
    */
-  get method() {
+  get <span class="missing-if-branch" title="else path not taken" >E</span>method() {
     return this._method || method.POST;
   }
 &nbsp;
@@ -2669,10 +2673,10 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
    @htmlattribute multiple
    @htmlattributereflected
    */
-  get multiple() {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+  get multiple() {
     return this._elements.input.multiple;
   }
-&nbsp;
+<span class="branch-1 cbranch-no" title="branch not covered" ></span>
   set multiple(value) {
     this._elements.input.multiple = transform.booleanAttr(value);
     this._reflectAttribute('multiple', this.multiple);
@@ -2705,10 +2709,10 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
    @htmlattribute accept
    @htmlattributereflected
    */
-  get <span class="missing-if-branch" title="else path not taken" >E</span>accept() {
+  get accept() {
     return this._elements.input.accept;
   }
-&nbsp;
+<span class="missing-if-branch" title="else path not taken" >E</span>
   set accept(value) {
     this._elements.input.accept = value;
     this._reflectAttribute('accept', this.accept);
@@ -2729,23 +2733,23 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
   set autoStart(value) {
     this._autoStart = transform.booleanAttr(value);
     this._reflectAttribute('autostart', this._autoStart);
-  }<span class="missing-if-branch" title="else path not taken" >E</span>
+  }
 &nbsp;
   /**
-   Files to be uploaded.
+   Fil<span class="missing-if-branch" title="else path not taken" >E</span>es to be uploaded.
 &nbsp;
    @readonly
    @default []
    @type {Array.&lt;Object&gt;}
    */
   get uploadQueue() {
-    return this._upl<span class="fstat-no" title="function not covered" >oadQueue;</span>
+    return this._uploadQueue;
   }
 &nbsp;
-  /** <span class="cstat-no" title="statement not covered" >@private */</span>
+  /** @private */<span class="fstat-no" title="function not covered" ></span>
   _onButtonFocusIn(event) {
     // Get the input
-    const input = this._elements.input;
+    co<span class="cstat-no" title="statement not covered" >nst input = this._elements.inp</span>ut;
 &nbsp;
     // Get the button
     const button = event.matchedTarget;
@@ -2778,11 +2782,11 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
       // Mark the button as focused
       button.classList.add('is-focused');
 &nbsp;
-      window.requestAnima<span class="fstat-no" title="function not covered" >ti</span>onFrame(() =&gt; {
-<span class="cstat-no" title="statement not covered" >        if (input.classList.contains('focus-ring')) {</span>
+      window.requestAnimationFrame(() =&gt; {
+        if (input.classList.contains('focus-ring')) {
           button.classList.add('focus-ring');
-        }
-      });
+        }<span class="fstat-no" title="function not covered" ></span>
+      })<span class="cstat-no" title="statement not covered" >;</span>
     }
   }
 &nbsp;
@@ -2790,16 +2794,18 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
   _onInputFocusOut() {
     // Unmark all the focused buttons
     const button = this.querySelector('[coral-fileupload-select].is-focused');
-    button.classList.remove('is-focused');
-    button.classList.remove('focus-ring');
-&nbsp;
-    // Wait a frame so that shifting focus backwards with screen reader doesn't create a focus trap
-    window.requestAnimationFrame(() =&gt; {
-      button.tabIndex = 0;
-      // @a11y: aria-hidden is removed to prevent focus trap when navigating backwards using a screen reader's
-      // virtual cursor
-      button.removeAttribute('aria-hidden');
-    });
+    if (button) {
+      button.classList.remove('is-focused');
+      button.classList.remove('focus-ring');
+  
+      // Wait a frame so that shifting focus backwards with screen reader doesn't create a focus trap
+      window.requestAnimationFrame(() =&gt; {
+        button.tabIndex = 0;
+        // @a11y: aria-hidden is removed to prevent focus trap when navigating backwards using a screen reader's
+        // virtual cursor
+        button.removeAttribute('aria-hidden');
+      });
+    }
   }
 &nbsp;
   /** @private */
@@ -2894,32 +2900,32 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
   /**
    Handles clicks to submit buttons
 &nbsp;
-   @priv<span class="missing-if-branch" title="else path not taken" >E</span>ate
-   */
+   @private
+   */<span class="missing-if-branch" title="else path not taken" >E</span>
   _onSubmitButtonClick(event) {
     const target = event.matchedTarget;
+&nbsp;
+    // Override or <span class="cstat-no" title="statement not covered" >reset the action/meth</span>od given the button's configuration
+    this._buttonAction = target.getAttribute('formaction');
 <span class="cstat-no" title="statement not covered" ></span>
-    // Override or reset the action/method given the button's configuration
-    this<span class="cstat-no" title="statement not covered" >._buttonAction = target.getAttribute('formaction');</span>
-<span class="cstat-no" title="statement not covered" ></span>
-    // Mak<span class="cstat-no" title="statement not covered" >e sure the method provided by the button </span>is valid
-    const <span class="cstat-no" title="statement not covered" >buttonMethod = transform.string(target</span>.getAttribute('formmethod')).toUpperCase();
-    this._<span class="cstat-no" title="statement not covered" >buttonMethod = validate.enu</span>meration(method)(buttonMethod) &amp;&amp; buttonMethod || null;
+    // Mak<span class="cstat-no" title="statement not covered" >e sure the method provided by the butto</span>n is valid
+    const <span class="cstat-no" title="statement not covered" >buttonMethod = transform.string(target.ge</span>tAttribute('formmethod')).toUpperCase();
+    this._<span class="cstat-no" title="statement not covered" >buttonMethod = validate.enumeration(me</span>thod)(buttonMethod) &amp;&amp; buttonMethod || null;
 <span class="cstat-no" title="statement not covered" ></span>
     // Sta<span class="cstat-no" title="statement not covered" >rt the file upload</span>
-    this.u<span class="cstat-no" title="statement not covered" >pload();<span class="fstat-no" title="function not covered" ></span></span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
+    this.u<span class="cstat-no" title="statement not covered" >pload();</span>
+  }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" ></span>
   /**
-   Handles<span class="cstat-no" title="statement not covered" > changes to the input el</span>ement.
-&nbsp;
+   Handles changes to the input element.
+<span class="cstat-no" title="statement not covered" ></span>
    @private
-   */<span class="cstat-no" title="statement not covered" ></span>
-  _onInp<span class="cstat-no" title="statement not covered" >utChange(event) {</span>
+   */
+  _onInputChange(eve<span class="cstat-no" title="statement not covered" >nt) {</span>
     // S<span class="cstat-no" title="statement not covered" >top the current event</span>
     even<span class="cstat-no" title="statement not covered" >t.stopPropagation();</span>
 <span class="cstat-no" title="statement not covered" ></span>
-    if (this.disabled) {
+    if (<span class="cstat-no" title="statement not covered" >this.disabled) </span>{
       return;
     }
 &nbsp;
@@ -3040,10 +3046,10 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
   _clearFile(filename) {
     const item = this._getQueueItemByFilename(filename);
     if (item) {
-      // Abort file upload<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-      this._abortFile(filename);
-<span class="branch-0 cbranch-no" title="branch not covered" ></span>
-      // Remove file from queue
+      // Abort file upload
+      this._abortFile(filename);<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+&nbsp;
+      // Remove file<span class="branch-0 cbranch-no" title="branch not covered" > from queue</span>
       this._uploadQueue.splice(this._getQueueIndex(filename), 1);
 &nbsp;
       this.trigger('coral-fileupload:fileremoved', {item});
@@ -3154,8 +3160,8 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
   /** @private */
   _getQueueItemByFilename(filename) {
     return this._getQueueItem(this._getQueueIndex(filename));
-  }<span class="missing-if-branch" title="else path not taken" >E</span>
-&nbsp;
+  }
+<span class="missing-if-branch" title="else path not taken" >E</span>
   /** @private */
   _getQueueItem(index) {
     return index &gt; -1 ? this._uploadQueue[index] : null;
@@ -3216,8 +3222,8 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
       if (!form) {
         form = document.createElement('form');
         form.method = this.method.toLowerCase();
-        form.enctype = 'multipart<span class="branch-1 cbranch-no" title="branch not covered" >/fo</span>rm-data';
-        form.action = this.action;
+        form.enctype = 'multipart/form-data';
+        form.action = this.action<span class="branch-1 cbranch-no" title="branch not covered" >;</span>
         form.hidden = true;
 &nbsp;
         form.appendChild(this._elements.input);
@@ -3230,9 +3236,9 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
         this.appendChild(form);
       }
 &nbsp;
-      const input = document.createElement('input');<span class="fstat-no" title="function not covered" ></span>
-      input.<span class="cstat-no" title="statement not covered" >type = 'hidden';</span>
-      input.name = '_charset_';
+      const input = document.createElement('input');
+      input.type = 'hidden';<span class="fstat-no" title="function not covered" ></span>
+      input.<span class="cstat-no" title="statement not covered" >name = '_charset_';</span>
       input.value = 'utf-8';
 &nbsp;
       form.submit();
@@ -3271,8 +3277,8 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
 &nbsp;
    @param {String} [filename]
    The filename of the file to abort. If a filename is not provided, all files will be aborted.
-   */<span class="missing-if-branch" title="else path not taken" >E</span>
-  abort(filename) {
+   */
+  abor<span class="missing-if-branch" title="else path not taken" >E</span>t(filename) {
     if (!this.async) {
       throw new Error('Coral.FileUpload does not support aborting file(s) upload on synchronous mode.');
     }
@@ -3322,8 +3328,8 @@ const FileUpload = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     this.labelledBy = this.labelledBy;
 &nbsp;
     // Fetch additional parameters if any
-    const parameters = [];<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-    Array.prototype.forEach.call(this.querySelectorAll('input[type="hidden"]'), (input) =&gt; {
+    const parameters = [];
+    Array.prototype.forEach.call(this.querySelectorAll('input[type="h<span class="branch-2 cbranch-no" title="branch not covered" >idden"]'), (</span>input) =&gt; {
       parameters.push({
         name: input.name,
         value: input.value
@@ -3357,7 +3363,7 @@ export default FileUpload;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Nov 29 2024 11:04:04 GMT+0000 (Coordinated Universal Time)
+                at Tue Dec 24 2024 09:51:53 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
