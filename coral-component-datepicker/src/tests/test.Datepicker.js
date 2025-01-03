@@ -1108,18 +1108,20 @@ describe('Datepicker', function () {
 
         it('should call tracker callback with the expected tracker data when toggle button is clicked', function (done) {
           const el = helpers.build(window.__html__['Datepicker.base.trackingOnWithAttributes.html']);
-          el._elements.toggle.click();
-          el.on('coral-overlay:open', function () {
-            expect(trackerFnSpy.callCount).to.equal(1, 'Track callback should be called once.');
-            var spyCall = trackerFnSpy.getCall(0);
-            var trackData = spyCall.args[0];
-            expect(trackData).to.have.property('targetType', 'coral-datepicker');
-            expect(trackData).to.have.property('targetElement', 'start date');
-            expect(trackData).to.have.property('eventType', 'open');
-            expect(trackData).to.have.property('rootFeature', 'sites');
-            expect(trackData).to.have.property('rootElement', 'start date');
-            expect(trackData).to.have.property('rootType', 'coral-datepicker');
-            done();
+          helpers.next(function () {
+            el._elements.toggle.click();
+            el.on('coral-overlay:open', function () {
+              expect(trackerFnSpy.callCount).to.equal(1, 'Track callback should be called once.');
+              var spyCall = trackerFnSpy.getCall(0);
+              var trackData = spyCall.args[0];
+              expect(trackData).to.have.property('targetType', 'coral-datepicker');
+              expect(trackData).to.have.property('targetElement', 'start date');
+              expect(trackData).to.have.property('eventType', 'open');
+              expect(trackData).to.have.property('rootFeature', 'sites');
+              expect(trackData).to.have.property('rootElement', 'start date');
+              expect(trackData).to.have.property('rootType', 'coral-datepicker');
+              done();
+            });
           });
         });
 

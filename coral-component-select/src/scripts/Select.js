@@ -96,12 +96,6 @@ const Select = Decorator(class extends BaseFormField(BaseComponent(HTMLElement))
       'coral-collection:add coral-taglist': '_onInternalEvent',
       'coral-collection:remove coral-taglist': '_onInternalEvent',
 
-      // item events
-      'coral-select-item:_valuechanged coral-select-item': '_onItemValueChange',
-      'coral-select-item:_contentchanged coral-select-item': '_onItemContentChange',
-      'coral-select-item:_disabledchanged coral-select-item': '_onItemDisabledChange',
-      'coral-select-item:_selectedchanged coral-select-item': '_onItemSelectedChange',
-
       'change coral-taglist': '_onTagListChange',
       'change select': '_onNativeSelectChange',
       'click select': '_onNativeSelectClick',
@@ -110,7 +104,10 @@ const Select = Decorator(class extends BaseFormField(BaseComponent(HTMLElement))
       'key:space > ._coral-Dropdown-trigger': '_onSpaceKey',
       'key:enter > ._coral-Dropdown-trigger': '_onSpaceKey',
       'key:return > ._coral-Dropdown-trigger': '_onSpaceKey',
-      'key:down > ._coral-Dropdown-trigger': '_onSpaceKey'
+      'key:down > ._coral-Dropdown-trigger': '_onSpaceKey',
+
+      // Messenger
+      'coral-select-item:_messengerconnected': '_onMessengerConnected',
     };
 
     // Overlay
@@ -1392,6 +1389,15 @@ const Select = Decorator(class extends BaseFormField(BaseComponent(HTMLElement))
     return super.observedAttributes.concat(['variant', 'multiple', 'placeholder', 'loading']);
   }
 
+  get observedMessages() {
+    return {
+      'coral-select-item:_valuechanged': '_onItemValueChange',
+      'coral-select-item:_contentchanged': '_onItemContentChange',
+      'coral-select-item:_disabledchanged': '_onItemDisabledChange',
+      'coral-select-item:_selectedchanged': '_onItemSelectedChange',
+    };
+  }
+
   /** @ignore */
   connectedCallback() {
     super.connectedCallback();
@@ -1450,12 +1456,18 @@ const Select = Decorator(class extends BaseFormField(BaseComponent(HTMLElement))
     frag.appendChild(this._elements.taglist);
     frag.appendChild(this._elements.overlay);
 
+    // avoid popper initialisation if popper neither exist nor overlay opened.
+    this._elements.overlay._avoidPopperInit = this._elements.overlay.open || this._elements.overlay._popper ? false : true;
+
     // Assign the button as the target for the overlay
     this._elements.overlay.target = this._elements.button;
     // handles the focus allocation every time the overlay closes
     this._elements.overlay.returnFocusTo(this._elements.button);
 
     this.appendChild(frag);
+
+    // set this to false after overlay has been connected to avoid connected callback target setting
+    delete this._elements.overlay._avoidPopperInit;
   }
 
   /** @ignore */
