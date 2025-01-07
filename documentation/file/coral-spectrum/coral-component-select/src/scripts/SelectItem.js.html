@@ -452,8 +452,9 @@
  */
 
 import {BaseComponent} from &apos;../../../coral-base-component&apos;;
-import {transform} from &apos;../../../coral-utils&apos;;
+import {transform, validate} from &apos;../../../coral-utils&apos;;
 import {Decorator} from &apos;../../../coral-decorator&apos;;
+import {Messenger} from &apos;../../../coral-messenger&apos;;
 
 /**
  @class Coral.Select.Item
@@ -467,6 +468,8 @@ const SelectItem = Decorator(class extends BaseComponent(HTMLElement) {
   constructor() {
     super();
 
+    // messenger
+    this._messenger = new Messenger(this);
     this._observer = new MutationObserver(this._handleMutation.bind(this));
     this._observer.observe(this, {
       characterData: true,
@@ -504,10 +507,13 @@ const SelectItem = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   set disabled(value) {
-    this._disabled = transform.booleanAttr(value);
-    this._reflectAttribute(&apos;disabled&apos;, this._disabled);
+    value = transform.booleanAttr(value);
 
-    this.trigger(&apos;coral-select-item:_disabledchanged&apos;);
+    if(validate.valueMustChange(this._disabled, value)) {
+      this._disabled = value;
+      this._reflectAttribute(&apos;disabled&apos;, value);
+      this._messenger.postMessage(&apos;coral-select-item:_disabledchanged&apos;);
+    }
   }
 
   /**
@@ -523,16 +529,13 @@ const SelectItem = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   set selected(value) {
-    let _selected = transform.booleanAttr(value);
+    value = transform.booleanAttr(value);
 
-    if(this._selected === _selected) {
-      return;
+    if(validate.valueMustChange(this._selected, value)) {
+      this._selected = value;
+      this._reflectAttribute(&apos;selected&apos;, value);
+      this._messenger.postMessage(&apos;coral-select-item:_selectedchanged&apos;);
     }
-
-    this._selected = _selected;
-    this._reflectAttribute(&apos;selected&apos;, this._selected);
-
-    this.trigger(&apos;coral-select-item:_selectedchanged&apos;);
   }
 
   /**
@@ -558,15 +561,13 @@ const SelectItem = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   set value(value) {
-    let _value = transform.string(value);
-    if(this._value === _value) {
-      return;
+    value = transform.string(value);
+
+    if(validate.valueMustChange(this._value, value)) {
+      this._value = value;
+      this._reflectAttribute(&apos;value&apos;, value);
+      this._messenger.postMessage(&apos;coral-select-item:_valuechanged&apos;);
     }
-
-    this._value = _value;
-    this._reflectAttribute(&apos;value&apos;, this._value);
-
-    this.trigger(&apos;coral-select-item:_valuechanged&apos;);
   }
 
   /**
@@ -585,7 +586,7 @@ const SelectItem = Decorator(class extends BaseComponent(HTMLElement) {
 
   /** @private */
   _handleMutation() {
-    this.trigger(&apos;coral-select-item:_contentchanged&apos;, {
+    this._messenger.postMessage(&apos;coral-select-item:_contentchanged&apos;, {
       content: this.textContent
     });
   }
@@ -593,6 +594,30 @@ const SelectItem = Decorator(class extends BaseComponent(HTMLElement) {
   /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([&apos;selected&apos;, &apos;disabled&apos;, &apos;value&apos;]);
+  }
+
+  /** @ignore */
+  _suspendCallback() {
+    super._suspendCallback();
+    this._messenger.disconnect();
+  }
+
+  /** @ignore */
+  _resumeCallback() {
+    this._messenger.connect();
+    super._resumeCallback();
+  }
+
+  /** @ignore */
+  connectedCallback() {
+    this._messenger.connect();
+    super.connectedCallback();
+  }
+
+  /** @ignore */
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._messenger.disconnect();
   }
 });
 

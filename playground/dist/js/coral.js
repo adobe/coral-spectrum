@@ -24440,14 +24440,14 @@
 
         this.target = this.target; // We need an additional frame to help popper read the correct offsets
 
-        window.requestAnimationFrame(function () {
-          // Force repositioning
-          _this5.reposition(true);
+        if (this._popper) {
+          window.requestAnimationFrame(function () {
+            _this5.reposition(true); // Force repositioning
 
-          if (!_this5.open) {
-            _this5._togglePopperEventListener(false);
-          }
-        });
+
+            !_this5.open && _this5._togglePopperEventListener(false);
+          });
+        }
       }
       /** @ignore */
 
@@ -27443,6 +27443,9 @@
         return _get(_getPrototypeOf(_class.prototype), "target", this);
       },
       set: function set(value) {
+        // avoid popper initialization while connecting for first time and not opened.
+        this._avoidPopperInit = this.open || this._popper ? false : true;
+
         _set(_getPrototypeOf(_class.prototype), "target", value, this, true); // Coach Mark specific
 
 
@@ -27453,6 +27456,8 @@
         }
 
         this._setAriaExpandedOnTarget();
+
+        delete this._avoidPopperInit;
       }
       /**
        Inherited from {@link Overlay#open}.
@@ -27852,11 +27857,6 @@
         'global:touchstart': '_onGlobalClick',
         'coral-collection:add coral-taglist': '_onInternalEvent',
         'coral-collection:remove coral-taglist': '_onInternalEvent',
-        // item events
-        'coral-select-item:_valuechanged coral-select-item': '_onItemValueChange',
-        'coral-select-item:_contentchanged coral-select-item': '_onItemContentChange',
-        'coral-select-item:_disabledchanged coral-select-item': '_onItemDisabledChange',
-        'coral-select-item:_selectedchanged coral-select-item': '_onItemSelectedChange',
         'change coral-taglist': '_onTagListChange',
         'change select': '_onNativeSelectChange',
         'click select': '_onNativeSelectClick',
@@ -27864,7 +27864,9 @@
         'key:space > ._coral-Dropdown-trigger': '_onSpaceKey',
         'key:enter > ._coral-Dropdown-trigger': '_onSpaceKey',
         'key:return > ._coral-Dropdown-trigger': '_onSpaceKey',
-        'key:down > ._coral-Dropdown-trigger': '_onSpaceKey'
+        'key:down > ._coral-Dropdown-trigger': '_onSpaceKey',
+        // Messenger
+        'coral-select-item:_messengerconnected': '_onMessengerConnected'
       }; // Overlay
 
       var overlayId = _this._elements.overlay.id;
@@ -28783,13 +28785,17 @@
         frag.appendChild(this._elements.input);
         frag.appendChild(this._elements.nativeSelect);
         frag.appendChild(this._elements.taglist);
-        frag.appendChild(this._elements.overlay); // Assign the button as the target for the overlay
+        frag.appendChild(this._elements.overlay); // avoid popper initialisation if popper neither exist nor overlay opened.
+
+        this._elements.overlay._avoidPopperInit = this._elements.overlay.open || this._elements.overlay._popper ? false : true; // Assign the button as the target for the overlay
 
         this._elements.overlay.target = this._elements.button; // handles the focus allocation every time the overlay closes
 
         this._elements.overlay.returnFocusTo(this._elements.button);
 
-        this.appendChild(frag);
+        this.appendChild(frag); // set this to false after overlay has been connected to avoid connected callback target setting
+
+        delete this._elements.overlay._avoidPopperInit;
       }
       /** @ignore */
 
@@ -29284,6 +29290,16 @@
 
         this._elements.button.classList.toggle('_coral-FieldButton--quiet', this._variant === variant$6.QUIET);
       }
+    }, {
+      key: "observedMessages",
+      get: function get() {
+        return {
+          'coral-select-item:_valuechanged': '_onItemValueChange',
+          'coral-select-item:_contentchanged': '_onItemContentChange',
+          'coral-select-item:_disabledchanged': '_onItemDisabledChange',
+          'coral-select-item:_selectedchanged': '_onItemSelectedChange'
+        };
+      }
     }], [{
       key: "variant",
       get: function get() {
@@ -29300,6 +29316,320 @@
 
     return _class;
   }(BaseFormField(BaseComponent(HTMLElement))));
+
+  var SCOPE_SELECTOR$1 = ':scope > ';
+  /**
+   * Messenger will used to pass the messages from child component to its parent. Currently we are relying on
+   * events to do the job. When a large DOM is connected, these events as a bulk leads to delays.
+   * With the use of messenger we will directly call the parent method provided in the observed messages list.
+   * The current implmentation only supports one to many mapping i.e. one parent and many children and any
+   * in child property will result in execution of only one parent method. This should be used purely for
+   * coral internal events and not any DOM based or public events.
+   *
+   * Limitations :
+   * - This doesnot support the case where any change in child property, needs to be notified
+   *   to two or more parents. This is achievable, but not currently supported.
+   * - Use this to post message only coral internal events.
+   * - Do not use for DOM events or public events.
+   * @private
+   */
+
+  var Messenger = /*#__PURE__*/function () {
+    /** @ignore */
+    function Messenger(element) {
+      _classCallCheck(this, Messenger);
+
+      this._element = element;
+      this._connected = false;
+
+      this._clearQueue();
+
+      this._clearListeners();
+    }
+    /**
+     * checks whether Messenger is connected or not.
+     * @returns {Boolean} true if connected
+     * @private
+     */
+
+
+    _createClass(Messenger, [{
+      key: "_addMessageToQueue",
+
+      /**
+       * add a message to the queue only if messenger is not connected
+       * message will be added only if element is not connected.
+       * @private
+       */
+      value: function _addMessageToQueue(message, detail) {
+        if (!this.isConnected) {
+          this._queue.push({
+            message: message,
+            detail: detail
+          });
+        }
+      }
+      /**
+       * executes the stored queue messages.
+       * It will be executed when element is connected.
+       * @private
+       */
+
+    }, {
+      key: "_executeQueue",
+      value: function _executeQueue() {
+        var _this = this;
+
+        this._queue.forEach(function (options) {
+          _this._postMessage(options.message, options.detail);
+        });
+
+        this._clearQueue();
+      }
+      /**
+       * empty the stored queue message
+       * @private
+       */
+
+    }, {
+      key: "_clearQueue",
+      value: function _clearQueue() {
+        this._queue = [];
+      }
+      /**
+       * clears the listeners
+       * @private
+       */
+
+    }, {
+      key: "_clearListeners",
+      value: function _clearListeners() {
+        this._listeners = [];
+      }
+      /**
+       * element should call this method when they are connected in DOM.
+       * its the responsibility of the element to call this hook
+       * @triggers `${element.tagName.toLowerCase()}:_messengerconnected`
+       * @private
+       */
+
+    }, {
+      key: "connect",
+      value: function connect() {
+        if (!this.isConnected) {
+          var element = this._element;
+          this._connected = true;
+          element.trigger("".concat(element.tagName.toLowerCase(), ":_messengerconnected"), {
+            handler: this.registerListener.bind(this)
+          }); // post all stored messages
+
+          this._executeQueue();
+        }
+      }
+      /**
+       * add the listener to messenger
+       * this handler will be passed when messengerconnect event is trigger
+       * the handler needs to be executed by listeners.
+       * @private
+       */
+
+    }, {
+      key: "registerListener",
+      value: function registerListener(listener) {
+        if (listener) {
+          this._listeners.push(listener);
+        }
+      }
+      /**
+       * post the provided message to all listener.
+       * @param {String} message which should be posted
+       * @param {Object} additional detail which needs to be posted.
+       * @private
+       */
+
+    }, {
+      key: "_postMessage",
+      value: function _postMessage(message, detail) {
+        var element = this._element;
+        this.listeners.forEach(function (listener) {
+          var observedMessages = listener.observedMessages;
+          var messageInfo = observedMessages[message];
+
+          if (messageInfo) {
+            var selector;
+            var handler;
+
+            if (typeof messageInfo === 'string') {
+              selector = "*";
+              handler = messageInfo;
+            } else if (_typeof(messageInfo) === 'object') {
+              selector = messageInfo.selector || "*";
+              handler = messageInfo.handler;
+            }
+
+            if (selector.indexOf(SCOPE_SELECTOR$1) === 0) {
+              if (!listener.id) {
+                listener.id = commons.getUID();
+              }
+
+              selector = selector.replace(SCOPE_SELECTOR$1, "#".concat(listener.id, " > "));
+            }
+
+            if (element.matches(selector)) {
+              listener[handler].call(listener, new Event$1({
+                target: element,
+                detail: detail,
+                type: message,
+                currentTarget: listener
+              }));
+            }
+          }
+        });
+      }
+      /**
+        * post the provided message to all listener,
+        * along with validating silencing and storing in queue
+        * @param {String} message which should be posted
+        * @param {Object} additional detail which needs to be posted.
+        * @private
+       */
+
+    }, {
+      key: "postMessage",
+      value: function postMessage(message, detail) {
+        if (this.isSilenced) {
+          return;
+        }
+
+        if (!this.isConnected) {
+          this._addMessageToQueue(message, detail);
+
+          return;
+        } // element got disconnect and messenger not notified.
+
+
+        if (!this._element.isConnected) {
+          // disconnect messenger and again post the same message,
+          // message will get store in queue.
+          this.disconnect();
+          this.postMessage(message, detail);
+          return;
+        }
+
+        this._postMessage(message, detail);
+      }
+      /**
+        * element should call this method when they are disconnected from DOM.
+        * Its the responsibility of the element to call this hook
+        * @private
+       */
+
+    }, {
+      key: "disconnect",
+      value: function disconnect() {
+        if (this.isConnected) {
+          this._connected = false;
+
+          this._clearListeners();
+
+          this._clearQueue();
+        }
+      }
+    }, {
+      key: "isConnected",
+      get: function get() {
+        return this._connected === true;
+      }
+      /**
+       * checks whether the event is silenced or not
+       * @returns {Boolean} true if silenced
+       * @private
+       */
+
+    }, {
+      key: "isSilenced",
+      get: function get() {
+        return this._element._silenced === true;
+      }
+      /**
+       * specifies the list of listener attached to messenger.
+       * @returns {Array} array of listeners
+       * @private
+       */
+
+    }, {
+      key: "listeners",
+      get: function get() {
+        return this._listeners;
+      }
+    }]);
+
+    return Messenger;
+  }();
+  /**
+   * This Event class is just a bogus class, current message callback aspects
+   * actual event as a parameter, since we are directly calling the method instead
+   * of triggering event, will pass an instance of this disguised object,
+   * to avoid breaks.
+   * This just disguise the  most used functionality of event object
+   * @private
+   */
+
+
+  var Event$1 = /*#__PURE__*/function () {
+    function Event(options) {
+      _classCallCheck(this, Event);
+
+      this._detail = options.detail;
+      this._target = options.target;
+      this._type = options.type;
+      this._currentTarget = options.currentTarget;
+      this._defaultPrevented = false;
+      this._propagationStopped = false;
+      this._immediatePropagationStopped = false;
+    }
+
+    _createClass(Event, [{
+      key: "preventDefault",
+      value: function preventDefault() {
+        this._defaultPrevented = true;
+      }
+    }, {
+      key: "stopPropagation",
+      value: function stopPropagation() {
+        this._propagationStopped = true;
+      }
+    }, {
+      key: "stopImmediatePropagation",
+      value: function stopImmediatePropagation() {
+        this._immediatePropagationStopped = true;
+      }
+    }, {
+      key: "detail",
+      get: function get() {
+        return this._detail;
+      }
+    }, {
+      key: "type",
+      get: function get() {
+        return this._type;
+      }
+    }, {
+      key: "target",
+      get: function get() {
+        return this._target;
+      }
+    }, {
+      key: "currentTarget",
+      get: function get() {
+        return this._currentTarget;
+      }
+    }]);
+
+    return Event;
+  }();
+
+  Messenger.Event = Event$1;
 
   /**
    @class Coral.Select.Item
@@ -29320,7 +29650,9 @@
 
       _classCallCheck(this, _class);
 
-      _this = _super.call(this);
+      _this = _super.call(this); // messenger
+
+      _this._messenger = new Messenger(_assertThisInitialized(_this));
       _this._observer = new MutationObserver(_this._handleMutation.bind(_assertThisInitialized(_this)));
 
       _this._observer.observe(_assertThisInitialized(_this), {
@@ -29338,12 +29670,48 @@
 
       /** @private */
       value: function _handleMutation() {
-        this.trigger('coral-select-item:_contentchanged', {
+        this._messenger.postMessage('coral-select-item:_contentchanged', {
           content: this.textContent
         });
       }
       /** @ignore */
 
+    }, {
+      key: "_suspendCallback",
+
+      /** @ignore */
+      value: function _suspendCallback() {
+        _get(_getPrototypeOf(_class.prototype), "_suspendCallback", this).call(this);
+
+        this._messenger.disconnect();
+      }
+      /** @ignore */
+
+    }, {
+      key: "_resumeCallback",
+      value: function _resumeCallback() {
+        this._messenger.connect();
+
+        _get(_getPrototypeOf(_class.prototype), "_resumeCallback", this).call(this);
+      }
+      /** @ignore */
+
+    }, {
+      key: "connectedCallback",
+      value: function connectedCallback() {
+        this._messenger.connect();
+
+        _get(_getPrototypeOf(_class.prototype), "connectedCallback", this).call(this);
+      }
+      /** @ignore */
+
+    }, {
+      key: "disconnectedCallback",
+      value: function disconnectedCallback() {
+        _get(_getPrototypeOf(_class.prototype), "disconnectedCallback", this).call(this);
+
+        this._messenger.disconnect();
+      }
     }, {
       key: "content",
       get: function get() {
@@ -29373,11 +29741,15 @@
         return this._disabled || false;
       },
       set: function set(value) {
-        this._disabled = transform.booleanAttr(value);
+        value = transform.booleanAttr(value);
 
-        this._reflectAttribute('disabled', this._disabled);
+        if (validate.valueMustChange(this._disabled, value)) {
+          this._disabled = value;
 
-        this.trigger('coral-select-item:_disabledchanged');
+          this._reflectAttribute('disabled', value);
+
+          this._messenger.postMessage('coral-select-item:_disabledchanged');
+        }
       }
       /**
        Whether the item is selected. Selected cannot be set to <code>true</code> if the item is disabled.
@@ -29393,17 +29765,15 @@
         return this._selected || false;
       },
       set: function set(value) {
-        var _selected = transform.booleanAttr(value);
+        value = transform.booleanAttr(value);
 
-        if (this._selected === _selected) {
-          return;
+        if (validate.valueMustChange(this._selected, value)) {
+          this._selected = value;
+
+          this._reflectAttribute('selected', value);
+
+          this._messenger.postMessage('coral-select-item:_selectedchanged');
         }
-
-        this._selected = _selected;
-
-        this._reflectAttribute('selected', this._selected);
-
-        this.trigger('coral-select-item:_selectedchanged');
       }
       /**
        Value of the item. If not explicitly set, the value of <code>Node.textContent</code> is returned.
@@ -29430,17 +29800,15 @@
         return val;
       },
       set: function set(value) {
-        var _value = transform.string(value);
+        value = transform.string(value);
 
-        if (this._value === _value) {
-          return;
+        if (validate.valueMustChange(this._value, value)) {
+          this._value = value;
+
+          this._reflectAttribute('value', value);
+
+          this._messenger.postMessage('coral-select-item:_valuechanged');
         }
-
-        this._value = _value;
-
-        this._reflectAttribute('value', this._value);
-
-        this.trigger('coral-select-item:_valuechanged');
       }
       /**
        Inherited from {@link BaseComponent#trackingElement}.
@@ -62334,318 +62702,6 @@
     return element;
   });
 
-  var SCOPE_SELECTOR$1 = ':scope > ';
-  /**
-   * Messenger will used to pass the messages from child component to its parent. Currently we are relying on
-   * events to do the job. When a large DOM is connected, these events as a bulk leads to delays.
-   * With the use of messenger we will directly call the parent method provided in the observed messages list.
-   * The current implmentation only supports one to many mapping i.e. one parent and many children and any
-   * in child property will result in execution of only one parent method. This should be used purely for
-   * coral internal events and not any DOM based or public events.
-   *
-   * Limitations :
-   * - This doesnot support the case where any change in child property, needs to be notified
-   *   to two or more parents. This is achievable, but not currently supported.
-   * - Use this to post message only coral internal events.
-   * - Do not use for DOM events or public events.
-   * @private
-   */
-
-  var Messenger = /*#__PURE__*/function () {
-    /** @ignore */
-    function Messenger(element) {
-      _classCallCheck(this, Messenger);
-
-      this._element = element;
-      this._connected = false;
-
-      this._clearQueue();
-
-      this._clearListeners();
-    }
-    /**
-     * checks whether Messenger is connected or not.
-     * @returns {Boolean} true if connected
-     * @private
-     */
-
-
-    _createClass(Messenger, [{
-      key: "_addMessageToQueue",
-
-      /**
-       * add a message to the queue only if messenger is not connected
-       * message will be added only if element is not connected.
-       * @private
-       */
-      value: function _addMessageToQueue(message, detail) {
-        if (!this.isConnected) {
-          this._queue.push({
-            message: message,
-            detail: detail
-          });
-        }
-      }
-      /**
-       * executes the stored queue messages.
-       * It will be executed when element is connected.
-       * @private
-       */
-
-    }, {
-      key: "_executeQueue",
-      value: function _executeQueue() {
-        var _this = this;
-
-        this._queue.forEach(function (options) {
-          _this._postMessage(options.message, options.detail);
-        });
-
-        this._clearQueue();
-      }
-      /**
-       * empty the stored queue message
-       * @private
-       */
-
-    }, {
-      key: "_clearQueue",
-      value: function _clearQueue() {
-        this._queue = [];
-      }
-      /**
-       * clears the listeners
-       * @private
-       */
-
-    }, {
-      key: "_clearListeners",
-      value: function _clearListeners() {
-        this._listeners = [];
-      }
-      /**
-       * element should call this method when they are connected in DOM.
-       * its the responsibility of the element to call this hook
-       * @triggers `${element.tagName.toLowerCase()}:_messengerconnected`
-       * @private
-       */
-
-    }, {
-      key: "connect",
-      value: function connect() {
-        if (!this.isConnected) {
-          var element = this._element;
-          this._connected = true;
-          element.trigger("".concat(element.tagName.toLowerCase(), ":_messengerconnected"), {
-            handler: this.registerListener.bind(this)
-          }); // post all stored messages
-
-          this._executeQueue();
-        }
-      }
-      /**
-       * add the listener to messenger
-       * this handler will be passed when messengerconnect event is trigger
-       * the handler needs to be executed by listeners.
-       * @private
-       */
-
-    }, {
-      key: "registerListener",
-      value: function registerListener(listener) {
-        if (listener) {
-          this._listeners.push(listener);
-        }
-      }
-      /**
-       * post the provided message to all listener.
-       * @param {String} message which should be posted
-       * @param {Object} additional detail which needs to be posted.
-       * @private
-       */
-
-    }, {
-      key: "_postMessage",
-      value: function _postMessage(message, detail) {
-        var element = this._element;
-        this.listeners.forEach(function (listener) {
-          var observedMessages = listener.observedMessages;
-          var messageInfo = observedMessages[message];
-
-          if (messageInfo) {
-            var selector;
-            var handler;
-
-            if (typeof messageInfo === 'string') {
-              selector = "*";
-              handler = messageInfo;
-            } else if (_typeof(messageInfo) === 'object') {
-              selector = messageInfo.selector || "*";
-              handler = messageInfo.handler;
-            }
-
-            if (selector.indexOf(SCOPE_SELECTOR$1) === 0) {
-              if (!listener.id) {
-                listener.id = commons.getUID();
-              }
-
-              selector = selector.replace(SCOPE_SELECTOR$1, "#".concat(listener.id, " > "));
-            }
-
-            if (element.matches(selector)) {
-              listener[handler].call(listener, new Event$1({
-                target: element,
-                detail: detail,
-                type: message,
-                currentTarget: listener
-              }));
-            }
-          }
-        });
-      }
-      /**
-        * post the provided message to all listener,
-        * along with validating silencing and storing in queue
-        * @param {String} message which should be posted
-        * @param {Object} additional detail which needs to be posted.
-        * @private
-       */
-
-    }, {
-      key: "postMessage",
-      value: function postMessage(message, detail) {
-        if (this.isSilenced) {
-          return;
-        }
-
-        if (!this.isConnected) {
-          this._addMessageToQueue(message, detail);
-
-          return;
-        } // element got disconnect and messenger not notified.
-
-
-        if (!this._element.isConnected) {
-          // disconnect messenger and again post the same message,
-          // message will get store in queue.
-          this.disconnect();
-          this.postMessage(message, detail);
-          return;
-        }
-
-        this._postMessage(message, detail);
-      }
-      /**
-        * element should call this method when they are disconnected from DOM.
-        * Its the responsibility of the element to call this hook
-        * @private
-       */
-
-    }, {
-      key: "disconnect",
-      value: function disconnect() {
-        if (this.isConnected) {
-          this._connected = false;
-
-          this._clearListeners();
-
-          this._clearQueue();
-        }
-      }
-    }, {
-      key: "isConnected",
-      get: function get() {
-        return this._connected === true;
-      }
-      /**
-       * checks whether the event is silenced or not
-       * @returns {Boolean} true if silenced
-       * @private
-       */
-
-    }, {
-      key: "isSilenced",
-      get: function get() {
-        return this._element._silenced === true;
-      }
-      /**
-       * specifies the list of listener attached to messenger.
-       * @returns {Array} array of listeners
-       * @private
-       */
-
-    }, {
-      key: "listeners",
-      get: function get() {
-        return this._listeners;
-      }
-    }]);
-
-    return Messenger;
-  }();
-  /**
-   * This Event class is just a bogus class, current message callback aspects
-   * actual event as a parameter, since we are directly calling the method instead
-   * of triggering event, will pass an instance of this disguised object,
-   * to avoid breaks.
-   * This just disguise the  most used functionality of event object
-   * @private
-   */
-
-
-  var Event$1 = /*#__PURE__*/function () {
-    function Event(options) {
-      _classCallCheck(this, Event);
-
-      this._detail = options.detail;
-      this._target = options.target;
-      this._type = options.type;
-      this._currentTarget = options.currentTarget;
-      this._defaultPrevented = false;
-      this._propagationStopped = false;
-      this._immediatePropagationStopped = false;
-    }
-
-    _createClass(Event, [{
-      key: "preventDefault",
-      value: function preventDefault() {
-        this._defaultPrevented = true;
-      }
-    }, {
-      key: "stopPropagation",
-      value: function stopPropagation() {
-        this._propagationStopped = true;
-      }
-    }, {
-      key: "stopImmediatePropagation",
-      value: function stopImmediatePropagation() {
-        this._immediatePropagationStopped = true;
-      }
-    }, {
-      key: "detail",
-      get: function get() {
-        return this._detail;
-      }
-    }, {
-      key: "type",
-      get: function get() {
-        return this._type;
-      }
-    }, {
-      key: "target",
-      get: function get() {
-        return this._target;
-      }
-    }, {
-      key: "currentTarget",
-      get: function get() {
-        return this._currentTarget;
-      }
-    }]);
-
-    return Event;
-  }();
-
   var CLASSNAME$10 = '_coral-Masonry-item';
   /** @ignore */
 
@@ -85766,7 +85822,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.18.1";
+  var version$1 = "4.18.2";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

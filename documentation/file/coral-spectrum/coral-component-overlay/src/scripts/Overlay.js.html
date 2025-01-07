@@ -1158,14 +1158,12 @@ class ExtensibleOverlay extends BaseOverlay(BaseComponent(HTMLElement)) {
     this.target = this.target;
 
     // We need an additional frame to help popper read the correct offsets
-    window.requestAnimationFrame(() =&gt; {
-      // Force repositioning
-      this.reposition(true);
-
-      if (!this.open) {
-        this._togglePopperEventListener(false);
-      }
-    });
+    if (this._popper) {
+      window.requestAnimationFrame(() =&gt; {
+        this.reposition(true); // Force repositioning
+        !this.open &amp;&amp; this._togglePopperEventListener(false);
+      });
+    }
   }
 
   /** @ignore */
