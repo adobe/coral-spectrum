@@ -13,6 +13,7 @@
 import {tracking} from '../../../coral-utils';
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Select} from '../../../coral-component-select';
+import { Messenger } from '../../../coral-messenger';
 
 describe('Select', function () {
   // @todo: test reordering the options
@@ -2397,7 +2398,8 @@ describe('Select', function () {
       expect(trackData).to.have.property('rootElement', 'element name');
       expect(trackData).to.have.property('rootFeature', 'feature name');
       expect(trackData).to.have.property('rootType', 'coral-select');
-      expect(spyCall.args[1]).to.be.an.instanceof(CustomEvent);
+
+      expect(spyCall.args[1]).to.be.an.instanceof(Messenger.Event);
       expect(spyCall.args[2]).to.be.an.instanceof(Select);
     });
 

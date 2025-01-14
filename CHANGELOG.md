@@ -1,3 +1,17 @@
+# [4.19.0](https://github.com/adobe/coral-spectrum/compare/v4.18.2...v4.19.0) (2025-01-07)
+
+
+### Features
+
+* **perf:** select item and multifield items are taking too much time ([#368](https://github.com/adobe/coral-spectrum/issues/368)) ([fb1b292](https://github.com/adobe/coral-spectrum/commit/fb1b292ab45edfa9490b49629dba67253436b72c))
+
+## [4.18.2](https://github.com/adobe/coral-spectrum/compare/v4.18.1...v4.18.2) (2024-12-24)
+
+
+### Bug Fixes
+
+* correct npe in fileupload ([#362](https://github.com/adobe/coral-spectrum/issues/362)) ([db671bc](https://github.com/adobe/coral-spectrum/commit/db671bc61cee3a4af54fb4acbe88afbc29ffca8a))
+
 ## [4.18.1](https://github.com/adobe/coral-spectrum/compare/v4.18.0...v4.18.1) (2024-11-25)
 
 
