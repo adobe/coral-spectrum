@@ -227,7 +227,7 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
         if (!step.labelled && label.textContent.length) {
           label.classList.toggle('u-coral-screenReaderOnly', isSmall);
           label.style.display = isSmall ? 'block' : '';
-          link.tabIndex = isSmall ? 0 : 1;
+          link. = isSmall ? 0 : -1;
         }
       }
     };
