@@ -100,6 +100,19 @@ const Textfield = Decorator(class extends BaseFormField(BaseComponent(HTMLInputE
   render() {
     super.render();
 
+    var icon = this.nextElementSibling;
+    var tooltip;
+
+    if (icon) {
+      tooltip = icon.nextElementSibling;
+    }
+
+    $(this).each(function(index, element) {
+      if (tooltip && $(tooltip).prop("tagName") === "CORAL-TOOLTIP") {
+        tooltip.after(element);
+      }
+    });
+
     this.classList.add(CLASSNAME);
 
     // Default reflected attributes
