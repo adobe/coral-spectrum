@@ -223,8 +223,8 @@ class Collection {
       let items = this._liveCollection ?
         // instead of querying the DOM, we just convert the live collection to an array, this way we obtain a
         // "snapshot" of the DOM
-        listToArray(this._container.getElementsByTagName(this._allItemsSelector)) :
-        listToArray(this._container.querySelectorAll(this._allItemsSelector));
+        Array.from(this._container.getElementsByTagName(this._allItemsSelector)) :
+        Array.from(this._container.querySelectorAll(this._allItemsSelector));
 
       if (this._filter) {
         items = items.filter(this._filter);
