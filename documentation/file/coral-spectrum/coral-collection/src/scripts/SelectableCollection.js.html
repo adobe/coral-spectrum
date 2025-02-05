@@ -484,7 +484,7 @@ class SelectableCollection extends Collection {
    @protected
    */
   _getSelectableItems() {
-    return listToArray(this._container.querySelectorAll(this._selectableItemSelector));
+    return Array.from(this._container.querySelectorAll(this._selectableItemSelector));
   }
 
   /**
@@ -633,8 +633,7 @@ class SelectableCollection extends Collection {
     if (typeof selectedAttribute === &apos;string&apos;) {
       selector = selector.replace(&apos;[selected]&apos;, `[${selectedAttribute}]`);
     }
-
-    return listToArray(this._container.querySelectorAll(selector));
+    return Array.from(this._container.querySelectorAll(selector));
   }
 
   /**

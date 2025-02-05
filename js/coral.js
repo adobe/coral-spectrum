@@ -15690,29 +15690,6 @@ var Coral = (function (exports) {
   };
 
   /**
-   * Copyright 2019 Adobe. All rights reserved.
-   * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License. You may obtain a copy
-   * of the License at http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software distributed under
-   * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-   * OF ANY KIND, either express or implied. See the License for the specific language
-   * governing permissions and limitations under the License.
-   */
-
-  /** @private */
-  function listToArray(list) {
-    var res = [];
-
-    for (var i = 0, listCount = res.length = list.length; i < listCount; i++) {
-      res[i] = list[i];
-    }
-
-    return res;
-  }
-
-  /**
    Unique id used to idenfity the collection.
 
    @private
@@ -15915,7 +15892,7 @@ var Coral = (function (exports) {
         if (this._container && this._allItemsSelector) {
           var items = this._liveCollection ? // instead of querying the DOM, we just convert the live collection to an array, this way we obtain a
           // "snapshot" of the DOM
-          listToArray(this._container.getElementsByTagName(this._allItemsSelector)) : listToArray(this._container.querySelectorAll(this._allItemsSelector));
+          Array.from(this._container.getElementsByTagName(this._allItemsSelector)) : Array.from(this._container.querySelectorAll(this._allItemsSelector));
 
           if (this._filter) {
             items = items.filter(this._filter);
@@ -16301,7 +16278,7 @@ var Coral = (function (exports) {
     _createClass(SelectableCollection, [{
       key: "_getSelectableItems",
       value: function _getSelectableItems() {
-        return listToArray(this._container.querySelectorAll(this._selectableItemSelector));
+        return Array.from(this._container.querySelectorAll(this._selectableItemSelector));
       }
       /**
        Returns the first selectable item. Items that are disabled quality for selection. On the other hand, hidden items
@@ -16448,7 +16425,7 @@ var Coral = (function (exports) {
           selector = selector.replace('[selected]', "[".concat(selectedAttribute, "]"));
         }
 
-        return listToArray(this._container.querySelectorAll(selector));
+        return Array.from(this._container.querySelectorAll(selector));
       }
       /**
        Deselects all the items except the first selected item in the Collection. By default the <code>selected</code>
@@ -19423,6 +19400,17 @@ var Coral = (function (exports) {
           newFocusItem.classList.add('focus-ring');
         }
       }
+    }, {
+      key: "_debounceResetTabTarget",
+      value: function _debounceResetTabTarget() {
+        var _this3 = this;
+
+        var forceFirst = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+        window.cancelAnimationFrame(this._resetTabTargetdebouncedId);
+        this._resetTabTargetdebouncedId = window.requestAnimationFrame(function () {
+          _this3._resetTabTarget(forceFirst);
+        });
+      }
       /**
        Determine what item should get focus (if any) when the user tries to tab into the SelectList. This should be the
        first selected item, or the first selectable item otherwise. When neither is available, it cannot be tabbed into
@@ -19490,7 +19478,7 @@ var Coral = (function (exports) {
     }, {
       key: "_validateSelection",
       value: function _validateSelection(item) {
-        var _this3 = this;
+        var _this4 = this;
 
         var selectedItems = this.selectedItems;
 
@@ -19502,7 +19490,7 @@ var Coral = (function (exports) {
             selectedItems.forEach(function (selectedItem) {
               if (selectedItem !== item) {
                 // Don't trigger change events
-                _this3._preventTriggeringEvents = true;
+                _this4._preventTriggeringEvents = true;
                 selectedItem.removeAttribute('selected');
               }
             }); // We can trigger change events again
@@ -19511,7 +19499,7 @@ var Coral = (function (exports) {
           }
         }
 
-        this._resetTabTarget();
+        this._debounceResetTabTarget();
 
         this._triggerChangeEvent();
       }
@@ -19590,6 +19578,8 @@ var Coral = (function (exports) {
         this._preventTriggeringEvents = true;
 
         this._validateSelection();
+
+        this._resetTabTarget();
 
         this._preventTriggeringEvents = false;
         this._oldSelection = this.selectedItems;
@@ -77240,7 +77230,7 @@ var Coral = (function (exports) {
   /** @ignore */
 
 
-  var listToArray$1 = function listToArray(list) {
+  var listToArray = function listToArray(list) {
     var res = [];
 
     for (var i = 0, listCount = res.length = list.length; i < listCount; i++) {
@@ -77253,7 +77243,7 @@ var Coral = (function (exports) {
 
 
   var getColumns = function getColumns(colgroup) {
-    return listToArray$1(colgroup.querySelectorAll('col[is="coral-table-column"]'));
+    return listToArray(colgroup.querySelectorAll('col[is="coral-table-column"]'));
   };
   /** @ignore */
 
@@ -77262,7 +77252,7 @@ var Coral = (function (exports) {
     var rows = [];
     sections.forEach(function (section) {
       if (section) {
-        rows = rows.concat(listToArray$1(section.querySelectorAll('tr[is="coral-table-row"]')));
+        rows = rows.concat(listToArray(section.querySelectorAll('tr[is="coral-table-row"]')));
       }
     });
     return rows;
@@ -77271,19 +77261,19 @@ var Coral = (function (exports) {
 
 
   var getCells = function getCells(row) {
-    return listToArray$1(row.querySelectorAll('td[is="coral-table-cell"], th[is="coral-table-headercell"]'));
+    return listToArray(row.querySelectorAll('td[is="coral-table-cell"], th[is="coral-table-headercell"]'));
   };
   /** @ignore */
 
 
   var getContentCells = function getContentCells(row) {
-    return listToArray$1(row.querySelectorAll('td[is="coral-table-cell"]'));
+    return listToArray(row.querySelectorAll('td[is="coral-table-cell"]'));
   };
   /** @ignore */
 
 
   var getHeaderCells = function getHeaderCells(row) {
-    return listToArray$1(row.querySelectorAll('th[is="coral-table-headercell"]'));
+    return listToArray(row.querySelectorAll('th[is="coral-table-headercell"]'));
   };
   /** @ignore */
 
@@ -83139,9 +83129,10 @@ var Coral = (function (exports) {
         var _this4 = this;
 
         if (value === null || typeof value === 'string' || value instanceof Node) {
-          this._target = value; // we do in case the target was not yet in the DOM
+          this._target = value;
+          window.cancelAnimationFrame(this._targetDebouncedId); // we do in case the target was not yet in the DOM
 
-          window.requestAnimationFrame(function () {
+          this._targetDebouncedId = window.requestAnimationFrame(function () {
             var realTarget = getTarget$1(_this4._target); // we add proper accessibility if available
 
             if (realTarget) {
@@ -83150,12 +83141,10 @@ var Coral = (function (exports) {
               var panelItems = realTarget.items ? realTarget.items.getAll() : realTarget.children; // we need to add a11y to all component, no matter if they can be perfectly paired
 
               var maxItems = Math.max(tabItems.length, panelItems.length);
-              var tab;
-              var panel;
 
               for (var i = 0; i < maxItems; i++) {
-                tab = tabItems[i];
-                panel = panelItems[i]; // if the tab has its own target, we assume the target component will handle its own accessibility. if the
+                var tab = tabItems[i];
+                var panel = panelItems[i]; // if the tab has its own target, we assume the target component will handle its own accessibility. if the
                 // target is an empty string we simply ignore it
 
                 if (tab && tab.target && tab.target.trim() !== '') {
@@ -85822,7 +85811,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.18.2";
+  var version$1 = "4.19.0";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
