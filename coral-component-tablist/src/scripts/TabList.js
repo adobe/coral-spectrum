@@ -149,7 +149,8 @@ class TabList extends BaseComponent(HTMLElement) {
       this._target = value;
 
       // we do in case the target was not yet in the DOM
-      window.requestAnimationFrame(() => {
+      window.cancelAnimationFrame(this._targetAnimationFrameId); 
+      this._targetAnimationFrameId = window.requestAnimationFrame(() => {
         const realTarget = getTarget(this._target);
         // we add proper accessibility if available
         if (realTarget) {
