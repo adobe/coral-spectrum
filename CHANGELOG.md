@@ -1,3 +1,10 @@
+# [4.20.0](https://github.com/adobe/coral-spectrum/compare/v4.19.0...v4.20.0) (2025-02-05)
+
+
+### Features
+
+* **perf:** Performance Issue with Coral Select Field ([#372](https://github.com/adobe/coral-spectrum/issues/372)) ([dcdba17](https://github.com/adobe/coral-spectrum/commit/dcdba17a62998ac69e24947ba4897f6225dcdfc9))
+
 # [4.19.0](https://github.com/adobe/coral-spectrum/compare/v4.18.2...v4.19.0) (2025-01-07)
 
 
