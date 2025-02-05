@@ -148,9 +148,9 @@ class TabList extends BaseComponent(HTMLElement) {
     if (value === null || typeof value === 'string' || value instanceof Node) {
       this._target = value;
 
+      window.cancelAnimationFrame(this._targetDebouncedId);
       // we do in case the target was not yet in the DOM
-      window.cancelAnimationFrame(this._targetAnimationFrameId); 
-      this._targetAnimationFrameId = window.requestAnimationFrame(() => {
+      this._targetDebouncedId = window.requestAnimationFrame(() => {
         const realTarget = getTarget(this._target);
         // we add proper accessibility if available
         if (realTarget) {
@@ -160,11 +160,9 @@ class TabList extends BaseComponent(HTMLElement) {
           // we need to add a11y to all component, no matter if they can be perfectly paired
           const maxItems = Math.max(tabItems.length, panelItems.length);
 
-          let tab;
-          let panel;
           for (let i = 0 ; i < maxItems ; i++) {
-            tab = tabItems[i];
-            panel = panelItems[i];
+            let tab = tabItems[i];
+            let panel = panelItems[i];
 
             // if the tab has its own target, we assume the target component will handle its own accessibility. if the
             // target is an empty string we simply ignore it

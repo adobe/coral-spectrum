@@ -396,6 +396,13 @@ const SelectList = Decorator(class extends BaseComponent(HTMLElement) {
     }
   }
 
+  _debounceResetTabTarget(forceFirst = false) {
+    window.cancelAnimationFrame(this._resetTabTargetdebouncedId);
+    this._resetTabTargetdebouncedId = window.requestAnimationFrame(() => {
+      this._resetTabTarget(forceFirst);
+    });
+  }
+
   /**
    Determine what item should get focus (if any) when the user tries to tab into the SelectList. This should be the
    first selected item, or the first selectable item otherwise. When neither is available, it cannot be tabbed into
@@ -465,7 +472,7 @@ const SelectList = Decorator(class extends BaseComponent(HTMLElement) {
       }
     }
 
-    this._resetTabTarget();
+    this._debounceResetTabTarget();
 
     this._triggerChangeEvent();
   }
@@ -536,6 +543,7 @@ const SelectList = Decorator(class extends BaseComponent(HTMLElement) {
     // Don't trigger events once connected
     this._preventTriggeringEvents = true;
     this._validateSelection();
+    this._resetTabTarget();
     this._preventTriggeringEvents = false;
 
     this._oldSelection = this.selectedItems;
