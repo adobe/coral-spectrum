@@ -630,9 +630,6 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       tagName: &apos;coral-dialog-header&apos;,
       insert: function (header) {
         header.classList.add(`${CLASSNAME}-title`);
-        // Providing the ARIA attributes to coral dialog header
-        header.setAttribute(&apos;role&apos;, &apos;heading&apos;);
-        header.setAttribute(&apos;aria-level&apos;, &apos;2&apos;);
         // Position the header between the drag zone and the type icon
         this._elements.headerWrapper.insertBefore(header, this._elements.dragZone.nextElementSibling);
       },
@@ -757,6 +754,18 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
 
       // label the dialog with a reference to the header
       this.setAttribute(&apos;aria-labelledby&apos;, this.header.id);
+    }
+
+    // Provide the ARIA heading role to coral dialog header
+    // depending on whether the header contains focusable elements
+    if (hasHeader) {
+      if (this.header.querySelector(commons.FOCUSABLE_ELEMENT_SELECTOR) !== null) {
+        this.header.removeAttribute(&apos;role&apos;);
+        this.header.removeAttribute(&apos;aria-level&apos;);
+      } else if (!this.header.hasAttribute(&apos;role&apos;)) {
+        this.header.setAttribute(&apos;role&apos;, &apos;heading&apos;);
+        this.header.setAttribute(&apos;aria-level&apos;, &apos;2&apos;);
+      }
     }
 
     // If the dialog has no content, or the content is empty, do nothing further.
