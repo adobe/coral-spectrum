@@ -26262,7 +26262,7 @@ var Coral = (function (exports) {
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
         this.classList.add("".concat(CLASSNAME$j, "-wrapper"));
-        this.setAttribute("aria-modal", "dialog"); // Default reflected attributes
+        this.setAttribute("aria-modal", true); // Default reflected attributes
 
         if (!this._variant) {
           this.variant = variant$4.DEFAULT;

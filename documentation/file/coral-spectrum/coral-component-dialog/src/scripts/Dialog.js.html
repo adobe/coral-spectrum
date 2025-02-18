@@ -1145,7 +1145,7 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
     super.render();
 
     this.classList.add(`${CLASSNAME}-wrapper`);
-    this.setAttribute(&quot;aria-modal&quot;, &quot;dialog&quot;);
+    this.setAttribute(&quot;aria-modal&quot;, true);
 
     // Default reflected attributes
     if (!this._variant) {
