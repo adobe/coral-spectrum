@@ -42,6 +42,12 @@ coral-shell-content::-webkit-scrollbar-thumb {
   background-color: transparent;
 }
 
+@media (max-width:320px) {
+  coral-shell-content {
+    scrollbar-width: none;
+  }
+}
+
 @require 'header';
 @require 'help';
 @require 'menubar';
