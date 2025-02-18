@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.15% </span>
+                <span class="strong">94.21% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>177/188</span>
+                <span class='fraction'>179/190</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">75.44% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>84/112</span>
+                <span class='fraction'>86/114</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.15% </span>
+                <span class="strong">94.21% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>177/188</span>
+                <span class='fraction'>179/190</span>
             </div>
         
             
@@ -640,7 +640,9 @@
 <a name='L582'></a><a href='#L582'>582</a>
 <a name='L583'></a><a href='#L583'>583</a>
 <a name='L584'></a><a href='#L584'>584</a>
-<a name='L585'></a><a href='#L585'>585</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L585'></a><a href='#L585'>585</a>
+<a name='L586'></a><a href='#L586'>586</a>
+<a name='L587'></a><a href='#L587'>587</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1187,8 +1189,10 @@
 <span class="cline-any cline-yes">180x</span>
 <span class="cline-any cline-yes">640x</span>
 <span class="cline-any cline-yes">640x</span>
+<span class="cline-any cline-yes">640x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">640x</span>
+<span class="cline-any cline-yes">496x</span>
 <span class="cline-any cline-yes">496x</span>
 <span class="cline-any cline-yes">496x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1449,9 +1453,11 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
       for (let i = 0 ; i &lt; stepsCount ; i++) {
       <span class="missing-if-branch" title="else path not taken" >E</span>  const step = steps[i];
         const label = step._elements.label;
+        const link = step._elements.link;
         if (!step.labelled &amp;&amp; label.textContent.length) {
           label.classList.toggle('u-coral-screenReaderOnly', isSmall);
           label.style.display = isSmall ? 'block' : '';
+          link.tabIndex = isSmall ? 0 : -1;
         }
       }
     };
@@ -1465,10 +1471,10 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
     }
   }
 &nbsp;
-  /**
-   Whether Steps should be interactive or not. When interactive, a Step can be clicked to jump to it.
-   See {<span class="missing-if-branch" title="if path not taken" >I</span>@link StepListInteractionEnum}.
-<span class="cstat-no" title="statement not covered" ></span>
+  /**<span class="missing-if-branch" title="if path not taken" >I</span>
+   Whether<span class="cstat-no" title="statement not covered" > Steps s</span>hould be interactive or not. When interactive, a Step can be clicked to jump to it.
+   See {@link StepListInteractionEnum}.
+&nbsp;
    @type {String}
    @default StepListInteractionEnum.OFF
    @htmlattribute interaction
@@ -1479,33 +1485,33 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
   }
 &nbsp;
   set interaction(value) {
-    value = transform.string(value).toLowerCase();
-    this._interaction = validate.enumeration(interaction)(value) &amp;&amp; value || interaction.OFF;
-    th<span class="missing-if-branch" title="if path not taken" >I</span>is._reflectAttribute('interaction', this._interaction);
+    va<span class="missing-if-branch" title="if path not taken" >I</span>lue = transform.string(value).toLowerCase();
+    this._interacti<span class="cstat-no" title="statement not covered" >on = validate.enumeration(interacti</span>on)(value) &amp;&amp; value || interaction.OFF;
+    this._reflectAttribute('interaction', this._interaction);
 <span class="cstat-no" title="statement not covered" ></span>
-    const isInteractive = this._interaction === interaction.ON;
-    this<span class="cstat-no" title="statement not covered" >.classList.toggle(`${CLASSNAME}--interactive`, isInteractive);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-    if (!t<span class="cstat-no" title="statement not covered" >his.items.length) {</span>
+    const <span class="cstat-no" title="statement not covered" >isInteractive = this._interaction === interaction.ON;</span>
+    this.c<span class="cstat-no" title="statement not covered" >lassList.toggle(`${CLASSNAME}--inter</span>active`, isInteractive);
+&nbsp;
+    if (!this.items.length) {
       return;
     }
 &nbsp;
     // update tab index for all children
     const _syncItemProps = () =&gt; {
       const steps = this.items.getAll();
-      const stepsCount = steps.length;
-&nbsp;
-      <span class="missing-if-branch" title="if path not taken" >I</span>for (let i = 0 ; i &lt; stepsCount ; i++) {
-        // update t<span class="cstat-no" title="statement not covered" >ab index for all children</span>
-<span class="cstat-no" title="statement not covered" >        steps[i]._syncTabIndex(isInteractive)</span>;
+      <span class="missing-if-branch" title="if path not taken" >I</span>const stepsCount = steps.length;
+<span class="cstat-no" title="statement not covered" ></span>
+      fo<span class="cstat-no" title="statement not covered" >r (let i = 0 ; i &lt; stepsCount ; i++) </span>{
+        // update tab index for all children
+        steps[i]._syncTabIndex(isInteractive);
         //update posin set and total size for all steps
         steps[i]._syncSizeAndCurrentIndex(i + 1, stepsCount);
       }
     };
 &nbsp;
-    const lastItem = this.items.last();
+    co<span class="missing-if-branch" title="else path not taken" >E</span>nst lastItem = this.items.last();
 &nbsp;
-    if<span class="missing-if-branch" title="else path not taken" >E</span> (typeof lastItem._syncTabIndex === 'function') {
+    if (typeof lastItem._syncTabIndex === 'function') {
       _syncItemProps();
     } else {
       commons.ready(lastItem, _syncItemProps);
@@ -1516,9 +1522,9 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
   _syncItemTabIndex(item) {
     item._syncTabIndex(this.interaction === interaction.ON);
   }
-&nbsp;
+<span class="missing-if-branch" title="else path not taken" >E</span>
   /** @private */
-  _onI<span class="missing-if-branch" title="else path not taken" >E</span>temSelectedChanged(event) {
+  _onItemSelectedChanged(event) {
     event.stopImmediatePropagation();
 &nbsp;
     const item = event.target;
@@ -1529,9 +1535,9 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
 &nbsp;
   /** @private */
   _validateSelection(item) {
-    // gets the current selection
+    //<span class="missing-if-branch" title="else path not taken" >E</span> gets the current selection
     const selection = this.items._getAllSelected();
-    co<span class="missing-if-branch" title="else path not taken" >E</span>nst selectionCount = selection.length;
+    const selectionCount = selection.length;
 &nbsp;
     // if no item is currently selected, we need to find a candidate
     if (selectionCount === 0) {
@@ -1539,9 +1545,9 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
       const selectable = this.items._getFirstSelectable();
 &nbsp;
       if (selectable) {
-        selectable.setAttribute('selected', '');
+      <span class="missing-if-branch" title="else path not taken" >E</span>  selectable.setAttribute('selected', '');
       }
-    }<span class="missing-if-branch" title="else path not taken" >E</span>
+    }
     // more items are selected, so we find a single item and deselect everything else
     else if (selectionCount &gt; 1) {
       // By default, the last one stays selected
@@ -1549,9 +1555,9 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
 &nbsp;
       for (let i = 0 ; i &lt; selectionCount ; i++) {
         if (selection[i] !== item) {
-          // Don't trigger change events
+      <span class="missing-if-branch" title="else path not taken" >E</span>    // Don't trigger change events
           this._preventTriggeringEvents = true;
-      <span class="missing-if-branch" title="else path not taken" >E</span>    selection[i].removeAttribute('selected');
+          selection[i].removeAttribute('selected');
         }
       }
 &nbsp;
@@ -1564,9 +1570,9 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
 &nbsp;
     this._triggerChangeEvent();
   }
-&nbsp;
+<span class="missing-if-branch" title="else path not taken" >E</span>
   /** @private */
-  _tri<span class="missing-if-branch" title="else path not taken" >E</span>ggerChangeEvent() {
+  _triggerChangeEvent() {
     const selectedItem = this.selectedItem;
     const oldSelection = this._oldSelection;
 &nbsp;
@@ -1580,9 +1586,9 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
     }
   }
 &nbsp;
-  /** @private */
+  /** <span class="missing-if-branch" title="else path not taken" >E</span>@private */
   _setStateClasses() {
-    le<span class="missing-if-branch" title="else path not taken" >E</span>t selectedItemIndex = Infinity;
+    let selectedItemIndex = Infinity;
     this.items.getAll().forEach((item, index) =&gt; {
       // Use attribute instead of property as items might not be initialized
       if (item.hasAttribute('selected')) {
@@ -1682,18 +1688,18 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
       this._selectAndFocusItem(item);
     }
   }
-&nbsp;
+<span class="branch-2 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
   /** @private */
-  _sel<span class="missing-if-branch" title="else path not taken" >E</span>ectNextItem(event) {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+  _selectNextItem(event) {
     if (this.interaction === interaction.ON) {
       event.preventDefault();
 &nbsp;
-      this.next();
+      this<span class="missing-if-branch" title="else path not taken" >E</span>.next();
     }
-  }<span class="missing-if-branch" title="else path not taken" >E</span>
-&nbsp;
+  }
+<span class="branch-0 cbranch-no" title="branch not covered" ></span>
   /** @private */
-  _selectPreviousItem(event) {<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+  _selectPreviousItem(event) {
     if (this.interaction === interaction.ON) {
       event.preventDefault();
 &nbsp;
@@ -1702,29 +1708,29 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
   }
 &nbsp;
   /** @private */
-  _selectAndFocusItem(item) {
-    if (item) {
-      item.set<span class="missing-if-branch" title="if path not taken" >I</span>Attribute('selected', '');<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-      item.focus<span class="cstat-no" title="statement not covered" >();</span>
-    }
+  _selectAndFo<span class="missing-if-branch" title="if path not taken" >I</span>cusItem(item) {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    if (item) {<span class="cstat-no" title="statement not covered" ></span>
+      item.setAttribute('selected', '');
+      item.focus();
+    }<span class="missing-if-branch" title="else path not taken" >E</span>
   }
-<span class="missing-if-branch" title="else path not taken" >E</span>
-  /**
-   Show the next Step.
 &nbsp;
-   @emits {cor<span class="missing-if-branch" title="else path not taken" >E</span>al-steplist:change}
-   */
-  next() {<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-    let item = this.selectedItem;<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+  /**
+   Show the ne<span class="missing-if-branch" title="else path not taken" >E</span>xt Step.
+&nbsp;
+   @emits {coral-steplist:change}<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+   */<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+  next() {
+    let item = this.selectedItem;
     if (item) {
-      item = this.items._getNextSelectable(item);
+      item = this.ite<span class="cstat-no" title="statement not covered" >ms._getNextSelectable(item);</span>
       this._selectAndFocusItem(item);
     }<span class="cstat-no" title="statement not covered" ></span>
   }
-<span class="cstat-no" title="statement not covered" ></span>
-  /**
+&nbsp;
+  /**<span class="cstat-no" title="statement not covered" ></span>
    Show the previous Step.
-<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
    @emits {coral-steplist:change}
    */
   previous() {
@@ -1742,15 +1748,15 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
    */
   static get size() {
     return size;
-  }
+  }<span class="branch-1 cbranch-no" title="branch not covered" ></span>
 &nbsp;
-  /**<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+  /**
    Returns {@link StepList} interaction options.
 &nbsp;
    @return {StepListInteractionEnum}
-   */
+   */<span class="branch-2 cbranch-no" title="branch not covered" ></span>
   static get interaction() {
-    return interaction;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    return interaction;
   }
 &nbsp;
   /** @ignore */
@@ -1815,7 +1821,7 @@ export default StepList;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Feb 05 2025 17:08:58 GMT+0000 (Coordinated Universal Time)
+                at Tue Feb 18 2025 05:58:33 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

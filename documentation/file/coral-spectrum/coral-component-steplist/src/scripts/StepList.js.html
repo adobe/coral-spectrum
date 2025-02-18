@@ -664,9 +664,11 @@ const StepList = Decorator(class extends BaseComponent(HTMLElement) {
       for (let i = 0 ; i &lt; stepsCount ; i++) {
         const step = steps[i];
         const label = step._elements.label;
+        const link = step._elements.link;
         if (!step.labelled &amp;&amp; label.textContent.length) {
           label.classList.toggle(&apos;u-coral-screenReaderOnly&apos;, isSmall);
           label.style.display = isSmall ? &apos;block&apos; : &apos;&apos;;
+          link.tabIndex = isSmall ? 0 : -1;
         }
       }
     };
