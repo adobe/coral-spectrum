@@ -1,3 +1,12 @@
+## [4.20.1](https://github.com/adobe/coral-spectrum/compare/v4.20.0...v4.20.1) (2025-02-18)
+
+
+### Bug Fixes
+
+* **accessibility:** Ensures all ARIA attributes have valid values ([#373](https://github.com/adobe/coral-spectrum/issues/373)) ([e29cde6](https://github.com/adobe/coral-spectrum/commit/e29cde6b6e90b4b0666ed3716dbbf57068fb8573))
+* **accessibility:** Remove heading role that contains interactive elements ([#370](https://github.com/adobe/coral-spectrum/issues/370)) ([8d70e65](https://github.com/adobe/coral-spectrum/commit/8d70e6576b15bc9eaed5e3ce67524b2bf8aa7afa))
+* **Accessibility:** made steps keyboard accessible when screen is set to small ([#369](https://github.com/adobe/coral-spectrum/issues/369)) ([7d04dc0](https://github.com/adobe/coral-spectrum/commit/7d04dc06c06aef5176a2fd104ea45d4ff92fb70d))
+
 # [4.20.0](https://github.com/adobe/coral-spectrum/compare/v4.19.0...v4.20.0) (2025-02-05)
 
 
