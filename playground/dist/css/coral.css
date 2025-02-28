@@ -23248,6 +23248,11 @@ coral-colorinput-item {
 ._coral-AssetList-itemThumbnail > coral-icon {
   vertical-align: middle;
 }
+@media (max-width: 320px) {
+  ._coral-AssetList-item {
+    width: 100vw;
+  }
+}
 coral-columnview-preview._coral-MillerColumns-item {
   padding-bottom: 2px;
 }
@@ -23322,6 +23327,16 @@ coral-columnview-preview-content.coral-Body--small {
 }
 [coral-columnview-itemselect] ._coral-Checkbox-input {
   z-index: auto;
+}
+@media (max-width: 320px) {
+  ._coral-MillerColumns {
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  ._coral-MillerColumns-item {
+    width: 100vw;
+    scroll-snap-align: start;
+  }
 }
 .coral--light coral-columnview-preview-value:focus.focus-ring {
   border-color: rgb(38, 128, 235);
@@ -24421,6 +24436,11 @@ coral-shell-content::-webkit-scrollbar {
 }
 coral-shell-content::-webkit-scrollbar-thumb {
   background-color: transparent;
+}
+@media (max-width: 320px) {
+  coral-shell-content {
+    scrollbar-width: none;
+  }
 }
 ._coral-Shell-header {
   display: block;
