@@ -1,3 +1,10 @@
+## [4.20.2](https://github.com/adobe/coral-spectrum/compare/v4.20.1...v4.20.2) (2025-02-28)
+
+
+### Bug Fixes
+
+* **Accessibility:** Horizontal scroll bar appears when content is resized to 400% ([#355](https://github.com/adobe/coral-spectrum/issues/355)) ([a48ca21](https://github.com/adobe/coral-spectrum/commit/a48ca21a6be3ea7813b8dc3d6b931272976d8359))
+
 ## [4.20.1](https://github.com/adobe/coral-spectrum/compare/v4.20.0...v4.20.1) (2025-02-18)
 
 
