@@ -209,6 +209,8 @@ const MultifieldItem = Decorator(class extends BaseComponent(HTMLElement) {
     const dragAction = new DragAction(this);
     dragAction.axis = 'vertical';
     dragAction.handle = this._elements.move;
+    dragAction.scroll = true;
+    dragAction.useScrollParent = true;
   }
 });
 
