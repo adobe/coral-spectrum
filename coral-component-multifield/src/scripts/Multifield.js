@@ -655,7 +655,7 @@ const Multifield = Decorator(class extends BaseComponent(HTMLElement) {
     if(self.items.length === self.min + 1) {
       self._validateMinItems();
     }
-    
+
     // a11y
     self._handleRoleList();
   }
