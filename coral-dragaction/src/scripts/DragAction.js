@@ -170,15 +170,11 @@ function isOverDropZone(dragAction) {
 }
 
 function getScrollParent(node) {
-  if (node == null) {
+  if (!node) {
     return null;
   }
 
-  if (node.scrollHeight > node.clientHeight) {
-    return node;
-  } else {
-    return getScrollParent(node.parentNode);
-  }
+  return node.scrollHeight > node.clientHeight ? node : getScrollParent(node.parentNode);
 }
 
 /**
@@ -404,7 +400,7 @@ class DragAction {
   }
 
   get useScrollParent() {
-    return this._useScrollParent;
+    return this._useScrollParent || false;
   }
 
   set useScrollParent(value) {
