@@ -169,6 +169,18 @@ function isOverDropZone(dragAction) {
   return el;
 }
 
+function getScrollParent(node) {
+  if (node == null) {
+    return null;
+  }
+
+  if (node.scrollHeight > node.clientHeight) {
+    return node;
+  } else {
+    return getScrollParent(node.parentNode);
+  }
+}
+
 /**
  @class Coral.DragAction
  @classdesc This a decorator which adds draggable functionality to elements.
@@ -391,6 +403,14 @@ class DragAction {
     this._scroll = transform.boolean(value);
   }
 
+  get useScrollParent() {
+    return this._useScrollParent;
+  }
+
+  set useScrollParent(value) {
+    this._useScrollParent = transform.boolean(value);
+  }
+
   /**
    Whether to constrain the draggable element to its container viewport.
 
@@ -414,7 +434,8 @@ class DragAction {
     }
 
     // Container
-    this._container = getViewContainer(this._dragElement) || document.body;
+    const viewContainer = getViewContainer(this._dragElement) || document.body;
+    this._container = this.useScrollParent ? getScrollParent(this._dragElement) || viewContainer : viewContainer;
 
     // Prevent dragging ghost image
     if (event.target.tagName === 'IMG') {
