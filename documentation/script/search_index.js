@@ -5682,6 +5682,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "coral-spectrum/coral-dragaction/src/scripts/dragaction.js~dragaction#usescrollparent",
+    "class/coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.html#instance-member-useScrollParent",
+    "coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction#useScrollParent",
+    "member"
+  ],
+  [
     "coral-spectrum/coral-dragaction/src/scripts/dragaction.js~dragaction.axis",
     "class/coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.html#static-member-axis",
     "coral-spectrum/coral-dragaction/src/scripts/DragAction.js~DragAction.axis",

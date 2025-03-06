@@ -1,6 +1,6 @@
 {
-  "coverage": "60.27%",
-  "expectCount": 1684,
+  "coverage": "60.16%",
+  "expectCount": 1687,
   "actualCount": 1015,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
@@ -1870,7 +1870,7 @@
       "undocumentLines": []
     },
     "coral-spectrum/coral-dragaction/src/scripts/DragAction.js": {
-      "expectCount": 50,
+      "expectCount": 53,
       "actualCount": 23,
       "undocumentLines": [
         17,
@@ -1883,23 +1883,26 @@
         26,
         29,
         30,
-        209,
-        210,
-        211,
-        221,
-        228,
-        283,
-        303,
-        349,
-        350,
-        355,
-        375,
-        391,
+        172,
+        217,
+        218,
+        219,
+        229,
+        236,
+        291,
+        311,
+        357,
+        358,
+        363,
+        383,
+        399,
+        402,
         407,
-        417,
-        439,
-        614,
-        722
+        423,
+        434,
+        456,
+        631,
+        739
       ]
     },
     "coral-spectrum/coral-messenger/src/scripts/Messenger.js": {

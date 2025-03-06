@@ -25057,6 +25057,14 @@
 
     return el;
   }
+
+  function getScrollParent$2(node) {
+    if (!node) {
+      return null;
+    }
+
+    return node.scrollHeight > node.clientHeight ? node : getScrollParent$2(node.parentNode);
+  }
   /**
    @class Coral.DragAction
    @classdesc This a decorator which adds draggable functionality to elements.
@@ -25155,7 +25163,8 @@
         } // Container
 
 
-        this._container = getViewContainer(this._dragElement) || document.body; // Prevent dragging ghost image
+        var viewContainer = getViewContainer(this._dragElement) || document.body;
+        this._container = this.useScrollParent ? getScrollParent$2(this._dragElement) || viewContainer : viewContainer; // Prevent dragging ghost image
 
         if (event.target.tagName === 'IMG') {
           event.preventDefault();
@@ -25723,6 +25732,14 @@
       },
       set: function set(value) {
         this._scroll = transform.boolean(value);
+      }
+    }, {
+      key: "useScrollParent",
+      get: function get() {
+        return this._useScrollParent || false;
+      },
+      set: function set(value) {
+        this._useScrollParent = transform.boolean(value);
       }
       /**
        Whether to constrain the draggable element to its container viewport.
@@ -66480,6 +66497,8 @@
         var dragAction = new DragAction(this);
         dragAction.axis = 'vertical';
         dragAction.handle = this._elements.move;
+        dragAction.scroll = true;
+        dragAction.useScrollParent = true;
       }
     }, {
       key: "content",
@@ -85822,7 +85841,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.20.1";
+  var version$1 = "4.20.2";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
