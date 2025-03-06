@@ -1,3 +1,10 @@
+## [4.20.3](https://github.com/adobe/coral-spectrum/compare/v4.20.2...v4.20.3) (2025-03-06)
+
+
+### Bug Fixes
+
+* multifield item not scrollable when dragged ([#376](https://github.com/adobe/coral-spectrum/issues/376)) ([2b8e587](https://github.com/adobe/coral-spectrum/commit/2b8e58778d7984cc9329b896b8432c5390b4f9f5))
+
 ## [4.20.2](https://github.com/adobe/coral-spectrum/compare/v4.20.1...v4.20.2) (2025-02-28)
 
 
