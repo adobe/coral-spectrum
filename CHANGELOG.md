@@ -1,3 +1,15 @@
+# [4.21.0](https://github.com/adobe/coral-spectrum/compare/v4.20.3...v4.21.0) (2025-03-19)
+
+
+### Bug Fixes
+
+* dropdown selection values are not getting selected ([#379](https://github.com/adobe/coral-spectrum/issues/379)) ([9d541c3](https://github.com/adobe/coral-spectrum/commit/9d541c34b7944bb06f45a2a16d7fa80cbf294671))
+
+
+### Features
+
+* **icon:** Add aep icon ([#378](https://github.com/adobe/coral-spectrum/issues/378)) ([3dcdc9f](https://github.com/adobe/coral-spectrum/commit/3dcdc9f8c6586e4645162320aa58013b5513ac71))
+
 ## [4.20.3](https://github.com/adobe/coral-spectrum/compare/v4.20.2...v4.20.3) (2025-03-06)
 
 
