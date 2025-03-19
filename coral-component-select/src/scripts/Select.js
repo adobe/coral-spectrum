@@ -792,6 +792,14 @@ const Select = Decorator(class extends BaseFormField(BaseComponent(HTMLElement))
 
     selectListItem._selectItem = item;
     nativeOption._selectItem = item;
+
+    const messenger = item._messenger;
+
+    if (messenger && messenger.isConnected && messenger.listeners.length === 0) {
+      // sometimes child get connected before parent, and listeners are not set yet, so we need to reconnect
+      messenger._connected = false;
+      messenger.connect();
+    }
   }
 
   /** @private */
