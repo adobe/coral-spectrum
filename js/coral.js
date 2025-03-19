@@ -28128,6 +28128,13 @@ var Coral = (function (exports) {
         item._nativeOption = nativeOption;
         selectListItem._selectItem = item;
         nativeOption._selectItem = item;
+        var messenger = item._messenger;
+
+        if (messenger && messenger.isConnected && messenger.listeners.length === 0) {
+          // sometimes child get connected before parent, and listeners are not set yet, so we need to reconnect
+          messenger._connected = false;
+          messenger.connect();
+        }
       }
       /** @private */
 
@@ -85841,7 +85848,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.20.2";
+  var version$1 = "4.20.3";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
