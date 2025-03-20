@@ -1,3 +1,10 @@
+## [4.21.1](https://github.com/adobe/coral-spectrum/compare/v4.21.0...v4.21.1) (2025-03-20)
+
+
+### Bug Fixes
+
+* Add aep icon ([#380](https://github.com/adobe/coral-spectrum/issues/380)) ([6e558e7](https://github.com/adobe/coral-spectrum/commit/6e558e7b96c90c40b3eb1d54cc0e2aeea9b66df0))
+
 # [4.21.0](https://github.com/adobe/coral-spectrum/compare/v4.20.3...v4.21.0) (2025-03-19)
 
 
