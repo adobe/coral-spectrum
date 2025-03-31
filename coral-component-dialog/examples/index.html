@@ -421,6 +421,27 @@
 
       </div>
 
+      <h2 class="coral--Heading--S">Dialog with buttons in header</h2>
+      <div class="markup">
+        <coral-dialog id="buttonsInHeader" aria-labelledby="buttonsInHeader--heading">
+          <coral-dialog-header>
+            <span id="buttonsInHeader--heading" role="heading" aria-level="2">Dialog with buttons in header</span>
+            <div class="u-coral-pullRight">
+              <button is="coral-button" icon="helpCircle" variant="quietaction" title="Help" size="M" iconautoarialabel="off"></button>
+              <button is="coral-button" icon="fullScreen" variant="quietaction" title="Toggle Fullscreen" size="M" iconautoarialabel="off"></button>
+              <button is="coral-button" icon="close" variant="quietaction" title="Cancel" size="M" iconautoarialabel="off"></button>
+              <button is="coral-button" icon="check" variant="quietaction" title="Done" size="M" iconautoarialabel="off"></button>
+            </div>
+          </coral-dialog-header>
+          <coral-dialog-content>This dialog was created from markup with child elements.</coral-dialog-content>
+          <coral-dialog-footer>
+            <button is="coral-button" coral-close>Cancel</button>
+            <button is="coral-button" variant="primary" coral-close>Done</button>
+          </coral-dialog-footer>
+        </coral-dialog>
+        <button is="coral-button" onclick="showDialog('buttonsInHeader')">Dialog with buttons in header</button>
+      </div>
+
     </main>
 
     <script>
