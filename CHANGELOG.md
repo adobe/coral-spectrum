@@ -1,3 +1,52 @@
+## [4.21.1](https://github.com/adobe/coral-spectrum/compare/v4.21.0...v4.21.1) (2025-03-20)
+
+
+### Bug Fixes
+
+* Add aep icon ([#380](https://github.com/adobe/coral-spectrum/issues/380)) ([6e558e7](https://github.com/adobe/coral-spectrum/commit/6e558e7b96c90c40b3eb1d54cc0e2aeea9b66df0))
+
+# [4.21.0](https://github.com/adobe/coral-spectrum/compare/v4.20.3...v4.21.0) (2025-03-19)
+
+
+### Bug Fixes
+
+* dropdown selection values are not getting selected ([#379](https://github.com/adobe/coral-spectrum/issues/379)) ([9d541c3](https://github.com/adobe/coral-spectrum/commit/9d541c34b7944bb06f45a2a16d7fa80cbf294671))
+
+
+### Features
+
+* **icon:** Add aep icon ([#378](https://github.com/adobe/coral-spectrum/issues/378)) ([3dcdc9f](https://github.com/adobe/coral-spectrum/commit/3dcdc9f8c6586e4645162320aa58013b5513ac71))
+
+## [4.20.3](https://github.com/adobe/coral-spectrum/compare/v4.20.2...v4.20.3) (2025-03-06)
+
+
+### Bug Fixes
+
+* multifield item not scrollable when dragged ([#376](https://github.com/adobe/coral-spectrum/issues/376)) ([2b8e587](https://github.com/adobe/coral-spectrum/commit/2b8e58778d7984cc9329b896b8432c5390b4f9f5))
+
+## [4.20.2](https://github.com/adobe/coral-spectrum/compare/v4.20.1...v4.20.2) (2025-02-28)
+
+
+### Bug Fixes
+
+* **Accessibility:** Horizontal scroll bar appears when content is resized to 400% ([#355](https://github.com/adobe/coral-spectrum/issues/355)) ([a48ca21](https://github.com/adobe/coral-spectrum/commit/a48ca21a6be3ea7813b8dc3d6b931272976d8359))
+
+## [4.20.1](https://github.com/adobe/coral-spectrum/compare/v4.20.0...v4.20.1) (2025-02-18)
+
+
+### Bug Fixes
+
+* **accessibility:** Ensures all ARIA attributes have valid values ([#373](https://github.com/adobe/coral-spectrum/issues/373)) ([e29cde6](https://github.com/adobe/coral-spectrum/commit/e29cde6b6e90b4b0666ed3716dbbf57068fb8573))
+* **accessibility:** Remove heading role that contains interactive elements ([#370](https://github.com/adobe/coral-spectrum/issues/370)) ([8d70e65](https://github.com/adobe/coral-spectrum/commit/8d70e6576b15bc9eaed5e3ce67524b2bf8aa7afa))
+* **Accessibility:** made steps keyboard accessible when screen is set to small ([#369](https://github.com/adobe/coral-spectrum/issues/369)) ([7d04dc0](https://github.com/adobe/coral-spectrum/commit/7d04dc06c06aef5176a2fd104ea45d4ff92fb70d))
+
+# [4.20.0](https://github.com/adobe/coral-spectrum/compare/v4.19.0...v4.20.0) (2025-02-05)
+
+
+### Features
+
+* **perf:** Performance Issue with Coral Select Field ([#372](https://github.com/adobe/coral-spectrum/issues/372)) ([dcdba17](https://github.com/adobe/coral-spectrum/commit/dcdba17a62998ac69e24947ba4897f6225dcdfc9))
+
 # [4.19.0](https://github.com/adobe/coral-spectrum/compare/v4.18.2...v4.19.0) (2025-01-07)
 
 
