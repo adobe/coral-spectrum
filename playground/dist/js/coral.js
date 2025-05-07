@@ -66333,7 +66333,7 @@
     var frag = document.createDocumentFragment();
     var el0 = this["remove"] = document.createElement("button", "coral-button");
     el0.id = data_0["uid"] + "-remove";
-    el0.setAttribute("aria-labelledby", data_0["uid"] + "-remove " + data_0["uid"] + "-content " + data_0["uid"]);
+    el0.setAttribute("aria-labelledby", data_0["uid"] + "-remove " + data_0["uid"]);
     el0.setAttribute("aria-label", data_0["i18n"]["get"]('Remove'));
     el0.setAttribute("title", data_0["i18n"]["get"]('Remove'));
     el0.setAttribute("tracking", "off");
@@ -66351,7 +66351,7 @@
     frag.appendChild(el1);
     var el2 = this["move"] = document.createElement("button", "coral-button");
     el2.id = data_0["uid"] + "-reorder";
-    el2.setAttribute("aria-labelledby", data_0["uid"] + "-reorder " + data_0["uid"] + "-content " + data_0["uid"]);
+    el2.setAttribute("aria-labelledby", data_0["uid"] + "-reorder " + data_0["uid"]);
     el2.setAttribute("aria-label", data_0["i18n"]["get"]('Reorder'));
     el2.setAttribute("aria-roledescription", data_0["i18n"]["get"]('reorder_drag_handle'));
     el2.setAttribute("aria-grabbed", "false");
@@ -66372,7 +66372,7 @@
     frag.appendChild(el3);
     var el4 = this["reorderup"] = document.createElement("button", "coral-button");
     el4.id = data_0["uid"] + "-up";
-    el4.setAttribute("aria-labelledby", data_0["uid"] + "-up " + data_0["uid"] + "-content " + data_0["uid"]);
+    el4.setAttribute("aria-labelledby", data_0["uid"] + "-up " + data_0["uid"]);
     el4.setAttribute("aria-label", data_0["i18n"]["get"]('Reorder up'));
     el4.setAttribute("aria-grabbed", "false");
     el4.setAttribute("aria-pressed", "false");
@@ -66392,7 +66392,7 @@
     frag.appendChild(el5);
     var el6 = this["reorderdown"] = document.createElement("button", "coral-button");
     el6.id = data_0["uid"] + "-down";
-    el6.setAttribute("aria-labelledby", data_0["uid"] + "-down " + data_0["uid"] + "-content " + data_0["uid"]);
+    el6.setAttribute("aria-labelledby", data_0["uid"] + "-down " + data_0["uid"]);
     el6.setAttribute("aria-label", data_0["i18n"]["get"]('Reorder down'));
     el6.setAttribute("aria-grabbed", "false");
     el6.setAttribute("aria-pressed", "false");
@@ -85848,7 +85848,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.21.0";
+  var version$1 = "4.21.1";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
