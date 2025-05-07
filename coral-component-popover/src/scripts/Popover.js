@@ -326,6 +326,12 @@ const Popover = Decorator(class extends ExtensibleOverlay {
       }
 
       this._setAriaExpandedOnTarget();
+
+      if (this._popper) {
+        setTimeout(() => {
+          this._popper.scheduleUpdate();
+        });
+      }
     }
   }
 
