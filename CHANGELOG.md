@@ -1,3 +1,10 @@
+## [4.21.2](https://github.com/adobe/coral-spectrum/compare/v4.21.1...v4.21.2) (2025-05-07)
+
+
+### Bug Fixes
+
+* **accessibility:** Missing images alt for coral card. ([#366](https://github.com/adobe/coral-spectrum/issues/366)) ([548d5ce](https://github.com/adobe/coral-spectrum/commit/548d5cec5fbdd71fe5fa67b570797d75c8bbfccd))
+
 ## [4.21.1](https://github.com/adobe/coral-spectrum/compare/v4.21.0...v4.21.1) (2025-03-20)
 
 
