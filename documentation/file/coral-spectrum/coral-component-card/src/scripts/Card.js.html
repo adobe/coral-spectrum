@@ -819,6 +819,9 @@ const Card = Decorator(class extends BaseComponent(HTMLElement) {
     const imagesCount = images.length;
     for (let i = 0 ; i &lt; imagesCount ; i++) {
       const image = images[i];
+      if (!image.hasAttribute(&quot;alt&quot;)) {
+        image.setAttribute(&quot;alt&quot;, &quot;&quot;);
+      }
       if (!image.complete) {
         image.classList.add(&apos;is-loading&apos;);
       }

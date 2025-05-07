@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.82% </span>
+                <span class="strong">73.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>75/103</span>
+                <span class='fraction'>77/105</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">58.06% </span>
+                <span class="strong">59.38% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>36/62</span>
+                <span class='fraction'>38/64</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.82% </span>
+                <span class="strong">73.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>75/103</span>
+                <span class='fraction'>77/105</span>
             </div>
         
             
@@ -483,7 +483,10 @@
 <a name='L425'></a><a href='#L425'>425</a>
 <a name='L426'></a><a href='#L426'>426</a>
 <a name='L427'></a><a href='#L427'>427</a>
-<a name='L428'></a><a href='#L428'>428</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L428'></a><a href='#L428'>428</a>
+<a name='L429'></a><a href='#L429'>429</a>
+<a name='L430'></a><a href='#L430'>430</a>
+<a name='L431'></a><a href='#L431'>431</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -619,6 +622,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-yes">24x</span>
@@ -909,8 +916,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">22x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -1047,11 +1053,11 @@ const Card = Decorator(class extends BaseComponent(HTMLElement) {
         else if (this.variant !== variant.CONDENSED &amp;&amp; this.variant !== variant.INVERTED) {
           this._elements.asset.style.height = `${ratio * this._assetHeight}px`;
         }
-      }<span class="missing-if-branch" title="else path not taken" >E</span>
+      }
     });
   }
 &nbsp;
-  /**
+  /**<span class="missing-if-branch" title="else path not taken" >E</span>
    Hints the width of the asset that is going to be loaded. This prepares the size so that when the image is
    loaded no reflow is triggered. Both &lt;code&gt;assetHeight&lt;/code&gt; and &lt;code&gt;assetWidth&lt;/code&gt; need to be specified
    for this feature to take effect.
@@ -1064,13 +1070,13 @@ const Card = Decorator(class extends BaseComponent(HTMLElement) {
     return this._assetWidth || '';
   }
 &nbsp;
-  set as<span class="missing-if-branch" title="if path not taken" >I</span>setWidth(value) {
+  set assetWidth(value) {
     this._assetWidth = transform.number(value);
-  }<span class="cstat-no" title="statement not covered" ></span>
+  }
 &nbsp;
-  /**
+  /**<span class="missing-if-branch" title="if path not taken" >I</span>
    @type {String}
-   @default ""
+   @defaul<span class="cstat-no" title="statement not covered" >t ""</span>
    @htmlattribute colorhint
    */
   get colorHint() {
@@ -1083,24 +1089,24 @@ const Card = Decorator(class extends BaseComponent(HTMLElement) {
 &nbsp;
       // if the image is already loaded we do not add the color hint to the asset
       if (!this._loaded) {
-        this._elements.asset.style['background-color'] = this._colorHint;<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+        this._elements.asset.style['background-color'] = this._colorHint;
       }
     }
   }
-&nbsp;
-  /**<span class="fstat-no" title="function not covered" ></span>
-   The<span class="cstat-no" title="statement not covered" > Content of the card.</span>
+<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+  /**
+   The Content of the card.
 &nbsp;
    @type {CardContent}
-   @contentzone
-   */
+   @contentzone<span class="fstat-no" title="function not covered" ></span>
+   */<span class="cstat-no" title="statement not covered" ></span>
   get content() {
     return this._getContentZone(this._elements.content);
-  }<span class="branch-2 cbranch-no" title="branch not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ></span></span>
+  }
 &nbsp;
   set content(value) {
     this._setContentZone('content', value, {
-      handle: 'content',
+      handle: 'content',<span class="branch-2 cbranch-no" title="branch not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ></span></span>
       tagName: 'coral-card-content',
       insert: function (content) {
         // Ensure title comes first
@@ -1121,25 +1127,25 @@ const Card = Decorator(class extends BaseComponent(HTMLElement) {
    @contentzone
    */
   get info() {
-    retu<span class="missing-if-branch" title="if path not taken" >I</span>rn this._getContentZone(this._elements.info);<span class="branch-3 cbranch-no" title="branch not covered" ></span>
+    return this._getContentZone(this._elements.info);
   }
-<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
   set info(value) {
-    this._setContentZo<span class="cstat-no" title="statement not covered" >ne('info', value, {</span>
+    this<span class="missing-if-branch" title="if path not taken" >I</span>._setContentZone('info', value, {<span class="branch-3 cbranch-no" title="branch not covered" ></span>
       handle: 'info',
-      tagName: 'coral-<span class="cstat-no" title="statement not covered" >card-info',</span>
+      tagName: 'coral-card-<span class="cstat-no" title="statement not covered" >info',</span>
       insert: function (info) {
-        this.appendChild(info);
-      }<span class="cstat-no" title="statement not covered" ></span>
-    });
-  }<span class="cstat-no" title="statement not covered" ></span>
+        this.appendChi<span class="cstat-no" title="statement not covered" >ld(info);</span>
+      }
+    });<span class="cstat-no" title="statement not covered" ></span>
+  }
 &nbsp;
   /**<span class="cstat-no" title="statement not covered" ></span>
-   Fixes the w<span class="cstat-no" title="statement not covered" >idth of the card. By default cards will take the width of their containers allowing </span>them to interact
-   nicely with grids. Whenever they are used standalone fixing the width might be desired.
+   Fixes the width of the card. By default cards will take the width of their containers allowing them to interact
+   nicely wi<span class="cstat-no" title="statement not covered" >th grids. Whenever they are used standalone fixing the width might be desired.</span>
 &nbsp;
-   @type {Boolean}
-   @default false
+   @type {Boole<span class="cstat-no" title="statement not covered" >an}</span>
+   @default fa<span class="cstat-no" title="statement not covered" >lse</span>
    @htmlattribute fixedwidth
    @htmlattributereflected
    */
@@ -1154,30 +1160,30 @@ const Card = Decorator(class extends BaseComponent(HTMLElement) {
     this.classList.toggle(`${CLASSNAME}--fixedWidth`, this._fixedWidth);
   }
 &nbsp;
-  /**<span class="fstat-no" title="function not covered" ></span>
-   The<span class="cstat-no" title="statement not covered" > Overlay of the card.</span>
+  /**
+   The Overlay of the card.
 &nbsp;
    @type {CardOverlay}
-   @contentzone
-   */
+   @contentzone<span class="fstat-no" title="function not covered" ></span>
+   */<span class="cstat-no" title="statement not covered" ></span>
   get overlay() {
     return this._getContentZone(this._elements.overlay);
   }
 &nbsp;
   set overlay(value) {
-    this._setConte<span class="fstat-no" title="function not covered" >ntZo</span>ne('overlay', value, {
-<span class="cstat-no" title="statement not covered" >      handle: 'overlay',</span>
+    this._setContentZone('overlay', value, {
+      handle: 'overlay',
       tagName: 'coral-card-overlay',
-      insert: func<span class="fstat-no" title="function not covered" >tion</span> (overlay) {
-<span class="cstat-no" title="statement not covered" >        this._elements.wrapper.appendChild(overlay);</span>
-      }<span class="cstat-no" title="statement not covered" ></span>
+      insert: function (overlay) {
+        this._elem<span class="fstat-no" title="function not covered" >ents</span>.wrapper.appendChild(overlay);
+<span class="cstat-no" title="statement not covered" >      }</span>
     });
-  }<span class="cstat-no" title="statement not covered" ></span>
+  }<span class="fstat-no" title="function not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
-  /**
+  /**<span class="cstat-no" title="statement not covered" ></span>
    Whether the card is stacked or not. This is used to represent several assets grouped together.
-&nbsp;
-   @type {Boolean}
+<span class="cstat-no" title="statement not covered" ></span>
+   @type {<span class="cstat-no" title="statement not covered" >Boolean}</span>
    @default false
    @htmlattribute stacked
    @htmlattributereflected
@@ -1185,23 +1191,23 @@ const Card = Decorator(class extends BaseComponent(HTMLElement) {
   get stacked() {
     return this._stacked || false;
   }
-<span class="fstat-no" title="function not covered" ></span>
-  set <span class="cstat-no" title="statement not covered" >stacked(value) {</span>
+&nbsp;
+  set stacked(value) {
     this._stacked = transform.booleanAttr(value);
     this._reflectAttribute('stacked', this._stacked);
-&nbsp;
-    this.classList.toggle(`${CLASSNAME}--stacked`, this._stacked);
+<span class="fstat-no" title="function not covered" ></span>
+    th<span class="cstat-no" title="statement not covered" >is.classList.toggle(`${CLASSNAME}--stacked`, this._st</span>acked);
   }
 &nbsp;
   /**
    The card's variant. It determines which sections of the Card and in which position they are shown.
    See {@link CardVariantEnum}.
-<span class="missing-if-branch" title="if path not taken" >I</span>
-   @type {St<span class="cstat-no" title="statement not covered" >ring}</span>
+&nbsp;
+   @type {String}
    @default CardVariantEnum.DEFAULT
    @htmlattribute variant
-   */
-  get variant() {
+   */<span class="missing-if-branch" title="if path not taken" >I</span>
+  get varian<span class="cstat-no" title="statement not covered" >t() {</span>
     return this._variant || variant.DEFAULT;
   }
 &nbsp;
@@ -1235,19 +1241,19 @@ const Card = Decorator(class extends BaseComponent(HTMLElement) {
   get _contentZones() {
     return {
       'coral-card-asset': 'asset',
-      'coral-card-<span class="fstat-no" title="function not covered" >cont</span>ent': 'content',
-<span class="cstat-no" title="statement not covered" >      'coral-card-info': 'info',</span>
+      'coral-card-content': 'content',
+      'coral-card-info': 'info',
       'coral-card-overlay': 'overlay'
-    };<span class="fstat-no" title="function not covered" ></span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-  /**<span class="cstat-no" title="statement not covered" ></span>
-   Returns {@link Card} variants.
+    };
+  }<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+  /**
+   Returns {@link <span class="fstat-no" title="function not covered" >Card</span>} variants.
 <span class="cstat-no" title="statement not covered" ></span>
    @return {CardVariantEnum}
-   */
+   */<span class="cstat-no" title="statement not covered" ></span>
   static get variant() {
-    return variant;
+    re<span class="cstat-no" title="statement not covered" >turn variant;</span>
   }
 &nbsp;
   static get _attributePropertyMap() {
@@ -1275,35 +1281,38 @@ const Card = Decorator(class extends BaseComponent(HTMLElement) {
   render() {
     super.render();
 &nbsp;
-    this.classList<span class="fstat-no" title="function not covered" >.add</span>(CLASSNAME);
-<span class="cstat-no" title="statement not covered" ></span>
+    this.classList.add(CLASSNAME);
+&nbsp;
     // Default reflected attributes
-    if (!this._var<span class="fstat-no" title="function not covered" >iant</span>) {
-<span class="cstat-no" title="statement not covered" >      this.variant = variant.DEFAULT;</span>
-    }
-<span class="cstat-no" title="statement not covered" ></span>
-    const content = this._elements.content;
+    if (!this._variant) {
+      this.variant<span class="fstat-no" title="function not covered" > = v</span>ariant.DEFAULT;
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    const content <span class="fstat-no" title="function not covered" >= th</span>is._elements.content;
     co<span class="cstat-no" title="statement not covered" >nst asset = this._elements.asset;</span>
 &nbsp;
-    // Prepares images to be loaded nicely
+    //<span class="cstat-no" title="statement not covered" > Prepares images to be loaded nicely</span>
     const images = asset.querySelectorAll('img');
-    const imagesCount = images.length;
+    co<span class="cstat-no" title="statement not covered" >nst imagesCount = images.length;</span>
     for (let i = 0 ; i &lt; imagesCount ; i++) {
       const image = images[i];
+      if (!image.hasAttribute("alt")) {
+        image.setAttribute("alt", "");
+      }
       if (!image.complete) {
         image.classList.add('is-loading');
       }
     }
 &nbsp;
     for (const contentZone in this._contentZones) {
-      const element = this._el<span class="branch-1 cbranch-no" title="branch not covered" >ements[this._con</span>tentZones[contentZone]];
-      // Remove it so we can process children
+      const element = this._elements[this._contentZones[contentZone]];
+      // Remove it so we can p<span class="branch-1 cbranch-no" title="branch not covered" >rocess children</span>
       if (element.parentNode) {
         element.parentNode.removeChild(element);
       }
     }
-<span class="branch-2 cbranch-no" title="branch not covered" ></span>
-    // Moves everything into the main content zone
+&nbsp;
+    // Moves everything into the main content zone<span class="branch-2 cbranch-no" title="branch not covered" ></span>
     while (this.firstChild) {
       const child = this.firstChild;
       // Removes the empty spaces
@@ -1344,7 +1353,7 @@ export default Card;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed May 07 2025 05:36:20 GMT+0000 (Coordinated Universal Time)
+                at Wed May 07 2025 05:37:54 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

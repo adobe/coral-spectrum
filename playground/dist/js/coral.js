@@ -42211,6 +42211,10 @@
         for (var i = 0; i < imagesCount; i++) {
           var image = images[i];
 
+          if (!image.hasAttribute("alt")) {
+            image.setAttribute("alt", "");
+          }
+
           if (!image.complete) {
             image.classList.add('is-loading');
           }
