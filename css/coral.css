@@ -28288,15 +28288,19 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
 }
 .coral--light ._coral-Table-headerCell:focus {
   color: rgb(44, 44, 44);
+  text-decoration: underline;
 }
 .coral--light ._coral-Table-headerCell.is-focused {
   color: rgb(44, 44, 44);
+  text-decoration: underline;
 }
 .coral--light ._coral-Table-headerCell coral-table-headercell-content:focus {
   color: rgb(44, 44, 44);
+  text-decoration: underline;
 }
 .coral--light ._coral-Table-headerCell coral-table-headercell-content.is-focused {
   color: rgb(44, 44, 44);
+  text-decoration: underline;
 }
 .coral--light ._coral-Table-row:focus ._coral-Table-cell:first-of-type:after {
   border-left-color: rgb(38, 128, 235);
@@ -28463,15 +28467,19 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
 }
 .coral--lightest ._coral-Table-headerCell:focus {
   color: rgb(50, 50, 50);
+  text-decoration: underline;
 }
 .coral--lightest ._coral-Table-headerCell.is-focused {
   color: rgb(50, 50, 50);
+  text-decoration: underline;
 }
 .coral--lightest ._coral-Table-headerCell coral-table-headercell-content:focus {
   color: rgb(50, 50, 50);
+  text-decoration: underline;
 }
 .coral--lightest ._coral-Table-headerCell coral-table-headercell-content.is-focused {
   color: rgb(50, 50, 50);
+  text-decoration: underline;
 }
 .coral--lightest ._coral-Table-row:focus ._coral-Table-cell:first-of-type:after {
   border-left-color: rgb(55, 142, 240);
@@ -28638,15 +28646,19 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
 }
 .coral--dark ._coral-Table-headerCell:focus {
   color: rgb(255, 255, 255);
+  text-decoration: underline;
 }
 .coral--dark ._coral-Table-headerCell.is-focused {
   color: rgb(255, 255, 255);
+  text-decoration: underline;
 }
 .coral--dark ._coral-Table-headerCell coral-table-headercell-content:focus {
   color: rgb(255, 255, 255);
+  text-decoration: underline;
 }
 .coral--dark ._coral-Table-headerCell coral-table-headercell-content.is-focused {
   color: rgb(255, 255, 255);
+  text-decoration: underline;
 }
 .coral--dark ._coral-Table-row:focus ._coral-Table-cell:first-of-type:after {
   border-left-color: rgb(38, 128, 235);
@@ -28813,15 +28825,19 @@ table[is="coral-table"]:not([orderable]) th[is="coral-table-headercell"] [coral-
 }
 .coral--darkest ._coral-Table-headerCell:focus {
   color: rgb(239, 239, 239);
+  text-decoration: underline;
 }
 .coral--darkest ._coral-Table-headerCell.is-focused {
   color: rgb(239, 239, 239);
+  text-decoration: underline;
 }
 .coral--darkest ._coral-Table-headerCell coral-table-headercell-content:focus {
   color: rgb(239, 239, 239);
+  text-decoration: underline;
 }
 .coral--darkest ._coral-Table-headerCell coral-table-headercell-content.is-focused {
   color: rgb(239, 239, 239);
+  text-decoration: underline;
 }
 .coral--darkest ._coral-Table-row:focus ._coral-Table-cell:first-of-type:after {
   border-left-color: rgb(20, 115, 230);
