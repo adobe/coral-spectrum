@@ -1265,6 +1265,9 @@ const QuickActions = Decorator(class extends ExtensibleOverlay {
     // Define QuickActions as a menu
     this.setAttribute('role', 'menu');
 
+    // Add accessible name to QuickActions
+    this.setAttribute('aria-label', i18n.get('Actions'));
+
     // Support cloneNode
     ['moreButton', 'overlay'].forEach((handleName) => {
       const handle = this.querySelector(`[handle="${handleName}"]`);
