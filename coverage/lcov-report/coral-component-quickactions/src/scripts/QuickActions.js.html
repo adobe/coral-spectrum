@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.26% </span>
+                <span class="strong">81.3% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>386/475</span>
+                <span class='fraction'>387/476</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.26% </span>
+                <span class="strong">81.3% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>386/475</span>
+                <span class='fraction'>387/476</span>
             </div>
         
             
@@ -1362,7 +1362,10 @@
 <a name='L1304'></a><a href='#L1304'>1304</a>
 <a name='L1305'></a><a href='#L1305'>1305</a>
 <a name='L1306'></a><a href='#L1306'>1306</a>
-<a name='L1307'></a><a href='#L1307'>1307</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L1307'></a><a href='#L1307'>1307</a>
+<a name='L1308'></a><a href='#L1308'>1308</a>
+<a name='L1309'></a><a href='#L1309'>1309</a>
+<a name='L1310'></a><a href='#L1310'>1310</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2536,6 +2539,8 @@
 <span class="cline-any cline-yes">112x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">112x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">112x</span>
 <span class="cline-any cline-yes">224x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">224x</span>
@@ -2668,7 +2673,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">174x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">174x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">174x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -3870,9 +3876,9 @@ const QuickActions = Decorator(class extends ExtensibleOverlay {
     }
   }
 &nbsp;
-  /** @ignore */<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+  /** @ignore */
   reposition(forceReposition) {
-    // Override to support placement.CENTER
+    // Override to support placement.CENTER<span class="branch-1 cbranch-no" title="branch not covered" ></span>
     this._toggleCenterPlacement(true);
     super.reposition(forceReposition);
     this._toggleCenterPlacement(false);
@@ -3934,10 +3940,13 @@ const QuickActions = Decorator(class extends ExtensibleOverlay {
 &nbsp;
     // Define QuickActions as a menu
     this.setAttribute('role', 'menu');
-<span class="fstat-no" title="function not covered" ></span>
+&nbsp;
+    // Add accessible name to QuickActions
+    this.setAttrib<span class="fstat-no" title="function not covered" >ute(</span>'aria-label', i18n.get('Actions'));
+<span class="cstat-no" title="statement not covered" ></span>
     //<span class="cstat-no" title="statement not covered" > Support cloneNode</span>
-    ['<span class="cstat-no" title="statement not covered" >moreButton', 'overlay'].forEach((handleName) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      const handle = this</span>.querySelector(`[handle="${handleName}"]`);
+    ['<span class="cstat-no" title="statement not covered" >moreButton', 'overl</span>ay'].forEach((handleName) =&gt; {
+      const handle = this.querySelector(`[handle="${handleName}"]`);
       if (handle) {
         handle.remove();
       }
@@ -3951,14 +3960,14 @@ const QuickActions = Decorator(class extends ExtensibleOverlay {
     // avoid popper initialisation if popper neither exist nor overlay opened.
     this._elements.overlay._avoidPopperInit = this._elements.overlay.open || this._elements.overlay._popper ? false : true;
 &nbsp;
-    // Link target
-    this._elements<span class="fstat-no" title="function not covered" >.ove</span>rlay.target = this._elements.moreButton;
+    // Link target<span class="fstat-no" title="function not covered" ></span>
+    th<span class="cstat-no" title="statement not covered" >is._elements.overlay.target = this._elements.moreButton;</span>
+&nbsp;
+    th<span class="cstat-no" title="statement not covered" >is.appendChild(frag);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-    this.appendChild(frag);
-<span class="cstat-no" title="statement not covered" ></span>
-    // s<span class="cstat-no" title="statement not covered" >et this to false after overlay ha</span>s been connected to avoid connected callback target setting
-    delete this._elements.overlay._avoidPopperInit;
-  }<span class="cstat-no" title="statement not covered" ></span>
+    // set this to false after overlay has been connected to avoid connected callback target setting
+    dele<span class="cstat-no" title="statement not covered" >te this._elements.overlay._avoidPopp</span>erInit;
+  }
 &nbsp;
   /** @ignore */
   disconnectedCallback() {
@@ -3981,7 +3990,7 @@ export default QuickActions;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue May 13 2025 10:25:04 GMT+0000 (Coordinated Universal Time)
+                at Tue May 13 2025 15:38:00 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

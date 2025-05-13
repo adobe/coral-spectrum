@@ -68952,7 +68952,9 @@
 
         this.classList.add(CLASSNAME$17); // Define QuickActions as a menu
 
-        this.setAttribute('role', 'menu'); // Support cloneNode
+        this.setAttribute('role', 'menu'); // Add accessible name to QuickActions
+
+        this.setAttribute('aria-label', i18n.get('Actions')); // Support cloneNode
 
         ['moreButton', 'overlay'].forEach(function (handleName) {
           var handle = _this5.querySelector("[handle=\"".concat(handleName, "\"]"));
@@ -85862,7 +85864,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.21.2";
+  var version$1 = "4.21.3";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
