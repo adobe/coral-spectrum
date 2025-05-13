@@ -1,3 +1,10 @@
+## [4.21.3](https://github.com/adobe/coral-spectrum/compare/v4.21.2...v4.21.3) (2025-05-13)
+
+
+### Bug Fixes
+
+* Correct coral-select popover placement ([#384](https://github.com/adobe/coral-spectrum/issues/384)) ([d04b0a8](https://github.com/adobe/coral-spectrum/commit/d04b0a86f0b7e2913782a940b3097f07e28112c9))
+
 ## [4.21.2](https://github.com/adobe/coral-spectrum/compare/v4.21.1...v4.21.2) (2025-05-07)
 
 
