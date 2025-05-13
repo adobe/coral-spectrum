@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.55% </span>
+                <span class="strong">97.61% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>199/204</span>
+                <span class='fraction'>204/209</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">89.55% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>117/130</span>
+                <span class='fraction'>120/134</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.56% </span>
+                <span class="strong">95.65% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>43/45</span>
+                <span class='fraction'>44/46</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.55% </span>
+                <span class="strong">97.61% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>199/204</span>
+                <span class='fraction'>204/209</span>
             </div>
         
             
@@ -660,7 +660,15 @@
 <a name='L602'></a><a href='#L602'>602</a>
 <a name='L603'></a><a href='#L603'>603</a>
 <a name='L604'></a><a href='#L604'>604</a>
-<a name='L605'></a><a href='#L605'>605</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L605'></a><a href='#L605'>605</a>
+<a name='L606'></a><a href='#L606'>606</a>
+<a name='L607'></a><a href='#L607'>607</a>
+<a name='L608'></a><a href='#L608'>608</a>
+<a name='L609'></a><a href='#L609'>609</a>
+<a name='L610'></a><a href='#L610'>610</a>
+<a name='L611'></a><a href='#L611'>611</a>
+<a name='L612'></a><a href='#L612'>612</a>
+<a name='L613'></a><a href='#L613'>613</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -842,7 +850,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">203x</span>
+<span class="cline-any cline-yes">204x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1252,8 +1260,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">31261x</span>
+<span class="cline-any cline-yes">31860x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">600x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">600x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1264,7 +1274,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">576x</span>
 <span class="cline-any cline-yes">530x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">576x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">576x</span>
+<span class="cline-any cline-yes">576x</span>
+<span class="cline-any cline-yes">576x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -1592,6 +1608,14 @@ const Popover = Decorator(class extends ExtensibleOverlay {
       }
 &nbsp;
       this._setAriaExpandedOnTarget();
+&nbsp;
+      if (this._popper) {
+        setTimeout(() =&gt; {
+          if (this.open) {
+            this._popper.scheduleUpdate();
+          }
+        });
+      }
     }
   }
 &nbsp;
@@ -1622,7 +1646,7 @@ const Popover = Decorator(class extends ExtensibleOverlay {
   _onPositioned(event) {
     if (this.open) {
       // Set arrow placement
-      this.classList.remove(...ALL_PLACEMENT_CLASSES);
+      this.classList.remove(...ALL_PLACEMENT_CLASSES);<span class="branch-3 cbranch-no" title="branch not covered" ></span>
       this.classList.add(`${CLASSNAME}--${event.detail.placement}`);
     }
   }
@@ -1630,7 +1654,7 @@ const Popover = Decorator(class extends ExtensibleOverlay {
   _onAnimate() {
     // popper attribute
     const popperPlacement = this.getAttribute('x-placement');
-<span class="branch-3 cbranch-no" title="branch not covered" ></span>
+&nbsp;
     // popper takes care of setting left, top to 0 on positioning
     if (popperPlacement === 'left') {
       this.style.left = '8px';
@@ -1680,7 +1704,7 @@ const Popover = Decorator(class extends ExtensibleOverlay {
 &nbsp;
   _hideContentZoneIfEmpty(name) {
     const contentZone = this._elements[name];
-    const target = name === 'header' ? this._elements.headerWrapper : contentZone;
+    const target = name === 'header' ? this._elements.headerWr<span class="branch-1 cbranch-no" title="branch not covered" >apper :</span> contentZone;
 &nbsp;
     // If it's empty and has no non-textnode children, hide the header
     const hiddenValue = _isEmpty(contentZone);
@@ -1688,7 +1712,7 @@ const Popover = Decorator(class extends ExtensibleOverlay {
     // Only bother if the hidden status has changed
     if (hiddenValue !== target.hidden) {
       target.hidden = hiddenValue;
-<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+&nbsp;
       // Reposition as the height has changed
       this.reposition();
     }
@@ -1754,21 +1778,21 @@ const Popover = Decorator(class extends ExtensibleOverlay {
       // Close if we're open and the click was outside of the target and outside of the popover
       this.hide();
 &nbsp;
-      this._trackEvent('close', 'coral-popover', event);
+      this._trackEvent('close'<span class="branch-1 cbranch-no" title="branch not covered" >, 'coral-popover</span>', event);
     }
   }
 &nbsp;
   get _contentZones() {
     return {
-      'coral-popover-header': 'header',
+      'coral-popover-header': 'header',<span class="branch-2 cbranch-no" title="branch not covered" ></span>
       'coral-popover-content': 'content',
-      'coral-popover-footer': <span class="branch-1 cbranch-no" title="branch not covered" >'footer'</span>
+      'coral-popover-footer': 'footer'
     };
   }
 &nbsp;
   /**
    Returns {@link Popover} variants.
-<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+&nbsp;
    @return {PopoverVariantEnum}
    */
   static get variant() {
@@ -1783,16 +1807,16 @@ const Popover = Decorator(class extends ExtensibleOverlay {
   static get closable() {
     return closable;
   }
-&nbsp;
-  /** @ignore */
+<span class="missing-if-branch" title="if path not taken" >I</span>
+  /** @ignor<span class="cstat-no" title="statement not covered" >e */</span>
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'closable',
       'variant'
     ]);
   }
-<span class="missing-if-branch" title="if path not taken" >I</span>
-  /** @ignor<span class="cstat-no" title="statement not covered" >e */</span>
+&nbsp;
+  /** @ignore */
   render() {
     super.render();
 &nbsp;
@@ -1805,19 +1829,19 @@ const Popover = Decorator(class extends ExtensibleOverlay {
 &nbsp;
     if (!this.hasAttribute('aria-live')) {
       // This helped announcements in certain screen readers
-      this.setAttribute('aria-live', 'assertive');
+      this.setAttribute('aria-l<span class="branch-1 cbranch-no" title="branch not covered" >ive', 'assert</span>ive');
     }
 &nbsp;
     // Default reflected attributes
-    if (!this._variant) {
+    if (!this._variant) {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
       this.variant = variant.DEFAULT;
     }
     if (!this._closable) {
-      this.closable = closable.<span class="branch-1 cbranch-no" title="branch not covered" >OFF;</span>
+      this.closable = closable.OFF;
     }
 &nbsp;
     // // Fetch the content zones
-    const header = this._elements.header;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    const header = this._elements.header;
     const content = this._elements.content;
     const footer = this._elements.footer;
 &nbsp;
@@ -1866,7 +1890,7 @@ const Popover = Decorator(class extends ExtensibleOverlay {
     this.footer = footer;
   }
 });
-&nbsp;
+<span class="missing-if-branch" title="else path not taken" >E</span>
 export default Popover;
 &nbsp;</pre></td></tr></table></pre>
 
@@ -1875,7 +1899,7 @@ export default Popover;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed May 07 2025 05:37:54 GMT+0000 (Coordinated Universal Time)
+                at Tue May 13 2025 10:25:04 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

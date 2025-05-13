@@ -27485,6 +27485,8 @@
         return _get(_getPrototypeOf(_class.prototype), "open", this);
       },
       set: function set(value) {
+        var _this5 = this;
+
         _set(_getPrototypeOf(_class.prototype), "open", value, this, true);
 
         var target = this._getTarget();
@@ -27497,6 +27499,14 @@
           }
 
           this._setAriaExpandedOnTarget();
+
+          if (this._popper) {
+            setTimeout(function () {
+              if (_this5.open) {
+                _this5._popper.scheduleUpdate();
+              }
+            });
+          }
         }
       }
       /**
@@ -85852,7 +85862,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.21.1";
+  var version$1 = "4.21.2";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
