@@ -1,3 +1,10 @@
+## [4.21.4](https://github.com/adobe/coral-spectrum/compare/v4.21.3...v4.21.4) (2025-05-15)
+
+
+### Bug Fixes
+
+* Spin button screen reader feedback is verbose ([#386](https://github.com/adobe/coral-spectrum/issues/386)) ([52351bb](https://github.com/adobe/coral-spectrum/commit/52351bbcc0b332221f604b78593e21f4d487cd87))
+
 ## [4.21.3](https://github.com/adobe/coral-spectrum/compare/v4.21.2...v4.21.3) (2025-05-13)
 
 
