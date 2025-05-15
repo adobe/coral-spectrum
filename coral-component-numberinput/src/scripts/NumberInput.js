@@ -812,7 +812,6 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
     if (this.hasAttribute('aria-labelledby')) {
       this._elements.input.removeAttribute('aria-labelledby');
     }
-   
 
     if (this._elements.input.type === 'text') {
       this._elements.input.setAttribute('role', 'spinbutton');
