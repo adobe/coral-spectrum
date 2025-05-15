@@ -1249,6 +1249,11 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
     // a11y
     this.setAttribute(&apos;role&apos;, &apos;group&apos;);
 
+    // remove duplicated aria-labelledby
+    if (this.hasAttribute(&apos;aria-labelledby&apos;)) {
+      this._elements.input.removeAttribute(&apos;aria-labelledby&apos;);
+    }
+
     if (this._elements.input.type === &apos;text&apos;) {
       this._elements.input.setAttribute(&apos;role&apos;, &apos;spinbutton&apos;);
     }

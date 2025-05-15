@@ -31353,7 +31353,11 @@
         } // a11y
 
 
-        this.setAttribute('role', 'group');
+        this.setAttribute('role', 'group'); // remove duplicated aria-labelledby
+
+        if (this.hasAttribute('aria-labelledby')) {
+          this._elements.input.removeAttribute('aria-labelledby');
+        }
 
         if (this._elements.input.type === 'text') {
           this._elements.input.setAttribute('role', 'spinbutton');

@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.19% </span>
+                <span class="strong">96.81% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>242/249</span>
+                <span class='fraction'>243/251</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.39% </span>
+                <span class="strong">90.85% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>138/151</span>
+                <span class='fraction'>139/153</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.19% </span>
+                <span class="strong">96.81% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>242/249</span>
+                <span class='fraction'>243/251</span>
             </div>
         
             
@@ -895,7 +895,12 @@
 <a name='L837'></a><a href='#L837'>837</a>
 <a name='L838'></a><a href='#L838'>838</a>
 <a name='L839'></a><a href='#L839'>839</a>
-<a name='L840'></a><a href='#L840'>840</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L840'></a><a href='#L840'>840</a>
+<a name='L841'></a><a href='#L841'>841</a>
+<a name='L842'></a><a href='#L842'>842</a>
+<a name='L843'></a><a href='#L843'>843</a>
+<a name='L844'></a><a href='#L844'>844</a>
+<a name='L845'></a><a href='#L845'>845</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1401,10 +1406,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">486x</span>
+<span class="cline-any cline-yes">484x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">486x</span>
-<span class="cline-any cline-yes">149x</span>
+<span class="cline-any cline-yes">484x</span>
+<span class="cline-any cline-yes">148x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1425,7 +1430,7 @@
 <span class="cline-any cline-yes">153x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">153x</span>
-<span class="cline-any cline-yes">149x</span>
+<span class="cline-any cline-yes">147x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1447,6 +1452,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">258x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">258x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">258x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1734,6 +1743,7 @@
 <span class="cline-any cline-yes">488x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">488x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -2291,8 +2301,8 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
     this<span class="cstat-no" title="statement not covered" >.stepUp();</span>
 &nbsp;
     // we only do this on user interaction
-    this._validateInputValue();
-&nbsp;
+    th<span class="missing-if-branch" title="if path not taken" >I</span>is._validateInputValue();
+<span class="cstat-no" title="statement not covered" ></span>
     // checks if we need to trigger a change event
     this._triggerChange(this.value, oldValue);
   }
@@ -2300,13 +2310,13 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
   /**
    Handles the click on the step down button. It causes the NumberInput to step down its value and returns the focus
    back to the input. This way the clicked button does not get focus.
-<span class="missing-if-branch" title="if path not taken" >I</span>
-   @emits {change}
-   @ignore<span class="cstat-no" title="statement not covered" ></span>
-   */
-  _onStepDownButtonClick(event) {
-    event.preventDefault();
 &nbsp;
+   @emits {change}
+   @ignore
+   */
+  _onSte<span class="missing-if-branch" title="if path not taken" >I</span>pDownButtonClick(event) {
+    event.preventDefault();
+<span class="cstat-no" title="statement not covered" ></span>
     // stores the old value before stepdown
     const oldValue = this.value;
 &nbsp;
@@ -2395,11 +2405,11 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
 &nbsp;
     // stops interaction if the numberinput is disabled or readonly
     if (this.disabled || this.readOnly) {
-      return;<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+      return;
     }
 &nbsp;
     this._onStepUpButtonClick(event);
-  }
+  }<span class="branch-0 cbranch-no" title="branch not covered" ></span>
 &nbsp;
   /**
    Handles the down action by steping down the NumberInput. It prevents the default action.
@@ -2432,11 +2442,11 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
     event.preventDefault();
 &nbsp;
     // stores the old value to calculate the change
-    const oldValue = this.value;<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+    const oldValue = this.value;
 &nbsp;
     const delta = Math.max(-1, Math.min(1, event.wheelDelta || -event.detail || event.deltaY));
     if (delta &lt; 0) {
-      this.stepDown();
+      this.stepDown();<span class="branch-0 cbranch-no" title="branch not covered" ></span>
     } else {
       this.stepUp();
     }
@@ -2465,11 +2475,11 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
     // we always trigger a change since it came from user interaction
     this.trigger('change');
   }
-<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+&nbsp;
   /**
    Handles focus event.
 &nbsp;
-   @ignore
+   @ignore<span class="branch-1 cbranch-no" title="branch not covered" ></span>
    */
   _onFocus() {
     this.classList.add('is-focused');
@@ -2531,18 +2541,23 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
   }
 &nbsp;
   /** @ignore */
-  render() {<span class="fstat-no" title="function not covered" ></span>
-    su<span class="cstat-no" title="statement not covered" >per.render();</span>
+  render() {
+    super.render();
 &nbsp;
-    th<span class="cstat-no" title="statement not covered" >is.classList.add(CLASSNAME);</span>
-&nbsp;
+    this.classList.add(CLASSNAME);
+<span class="fstat-no" title="function not covered" ></span>
     //<span class="cstat-no" title="statement not covered" > Default reflected attributes</span>
     if (!this._step) {
-      this.step = 1;
+<span class="cstat-no" title="statement not covered" >      this.step = 1;</span>
     }
-&nbsp;
+<span class="cstat-no" title="statement not covered" ></span>
     // a11y
     this.setAttribute('role', 'group');
+&nbsp;
+    // remove duplicated aria-labelledby
+    if (this.hasAttribute('aria-labelledby')) {
+      this._elements.input.removeAttribute('aria-labelledby');
+    }
 &nbsp;
     if (this._elements.input.type === 'text') {
       this._elements.input.setAttribute('role', 'spinbutton');
@@ -2580,7 +2595,7 @@ export default NumberInput;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue May 13 2025 15:38:00 GMT+0000 (Coordinated Universal Time)
+                at Thu May 15 2025 10:45:49 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
