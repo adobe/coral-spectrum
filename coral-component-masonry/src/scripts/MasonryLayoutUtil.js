@@ -43,7 +43,7 @@ const csspx = (el, property) => parseFloat(window.getComputedStyle(el)[property]
 // TODO if the property changes, it will not automatically relayout the masonry
 // TODO test columnWidth and colspan property and default values
 /** @ignore */
-const getPositiveNumberProperty = (element, property, attribute, defaultValue) => {
+const getPositiveNumberProperty = (element, property, attribute, defaultValue, mobileValue) => {
   let value = element[property];
   if (value === undefined) {
     value = element.getAttribute(attribute);
@@ -51,6 +51,9 @@ const getPositiveNumberProperty = (element, property, attribute, defaultValue) =
   value = parseInt(value, 10);
   if (value <= 0 || isNaN(value)) {
     value = defaultValue;
+  }
+  if(mobileValue && window.innerWidth <= 500) {
+    value = mobileValue;
   }
   return value;
 };
