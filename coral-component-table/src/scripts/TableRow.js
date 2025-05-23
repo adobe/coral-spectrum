@@ -443,8 +443,12 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
         if (this.hasAttribute('aria-labelledby')) {
           // Wait for the next frame to ensure the selectHandle has initialized _elements object.
           window.requestAnimationFrame(() => {
+            let ids = this.getAttribute('aria-labelledby')
+              .split(/\s+/g)
+              .filter(id => selectHandle._elements.id !== id && this._elements.accessibilityState.id !== id)
+              .join(' ');
             let titleCell = this.querySelector(".foundation-collection-item-title");
-            selectHandle.labelledBy = titleCell.id;
+            selectHandle.labelledBy = titleCell ? titleCell.id : selectHandle._elements.id + ' ' + ids;
           });
         }
       }
