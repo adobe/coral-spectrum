@@ -438,19 +438,6 @@ const TableRow = Decorator(class extends BaseComponent(HTMLTableRowElement) {
         if (!selectHandle.labelled) {
           selectHandle.labelled = i18n.get('Select');
         }
-
-        // @a11y provide a more explicit label for the checkbox than just "Select"
-        if (this.hasAttribute('aria-labelledby')) {
-          // Wait for the next frame to ensure the selectHandle has initialized _elements object.
-          window.requestAnimationFrame(() => {
-            let ids = this.getAttribute('aria-labelledby')
-              .split(/\s+/g)
-              .filter(id => selectHandle._elements.id !== id && this._elements.accessibilityState.id !== id)
-              .join(' ');
-            let titleCell = this.querySelector(".foundation-collection-item-title");
-            selectHandle.labelledBy = titleCell ? titleCell.id : selectHandle._elements.id + ' ' + ids;
-          });
-        }
       }
     }
   }
