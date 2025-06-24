@@ -166,13 +166,12 @@ const CardProperty = Decorator(class extends BaseComponent(HTMLElement) {
 
     // Adjusting icon aria-label attribute as per coral-card-property title attribute
 
-    // var parentElement = this._elements.icon.parentElement;
+    var parentElement = this._elements.icon.parentElement;
 
-    // if (parentElement !== null && parentElement.hasAttribute("title")) {
-    //   console.log("test");
-    //   const iconParentTitle = parentElement.getAttribute("title");
-    //   this._elements.icon.setAttribute("aria-label", iconParentTitle);
-    // }
+    if (parentElement !== null && parentElement.hasAttribute("title")) {
+      const iconParentTitle = parentElement.getAttribute("title");
+      this._elements.icon.setAttribute("aria-label", iconParentTitle);
+    }
   }
 });
 
