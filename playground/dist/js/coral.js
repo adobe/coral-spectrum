@@ -42621,7 +42621,19 @@
 
         this.appendChild(frag); // Assign the content zones, moving them into place in the process
 
-        this.content = content;
+        this.content = content; // Adjusting icon aria-label attribute as per coral-card-property title attribute
+
+        var parentElement;
+
+        if (this._elements && this._elements.icon) {
+          parentElement = this._elements.icon.parentElement;
+
+          if (parentElement !== null && parentElement.hasAttribute("title")) {
+            var iconParentTitle = parentElement.getAttribute("title");
+
+            this._elements.icon.setAttribute("aria-label", iconParentTitle);
+          }
+        }
       }
     }, {
       key: "content",
@@ -85868,7 +85880,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.21.3";
+  var version$1 = "4.21.4";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {

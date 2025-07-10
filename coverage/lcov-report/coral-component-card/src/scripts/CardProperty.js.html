@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.67% </span>
+                <span class="strong">14.89% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/42</span>
+                <span class='fraction'>7/47</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/23</span>
+                <span class='fraction'>0/31</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.67% </span>
+                <span class="strong">14.89% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/42</span>
+                <span class='fraction'>7/47</span>
             </div>
         
             
@@ -225,7 +225,19 @@
 <a name='L167'></a><a href='#L167'>167</a>
 <a name='L168'></a><a href='#L168'>168</a>
 <a name='L169'></a><a href='#L169'>169</a>
-<a name='L170'></a><a href='#L170'>170</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -319,6 +331,18 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -491,54 +515,54 @@ const CardProperty = Decorator(class extends BaseComponent(HTMLElement) {
     this._elements.icon &amp;&amp; this._elements.icon.setAttribute('alt', value);
   }
 &nbsp;
-  /**<span class="fstat-no" title="function not covered" ></span>
-   Spe<span class="cstat-no" title="statement not covered" >cifies the title attribute to be used for the icon.</span>
+  /**<span class="cstat-no" title="statement not covered" ></span>
+   Speci<span class="cstat-no" title="statement not covered" >fies the title attribute to be used for the icon.</span>
 &nbsp;
-   @type {String}<span class="fstat-no" title="function not covered" ></span>
-   @de<span class="cstat-no" title="statement not covered" >fault ""</span>
+   @type<span class="cstat-no" title="statement not covered" > {String}</span>
+   @default ""<span class="cstat-no" title="statement not covered" ></span>
    @htmlattribute icontitle
-   */
-  get iconTitle() {<span class="fstat-no" title="function not covered" ></span>
-    return<span class="cstat-no" title="statement not covered" > this._elements.icon ? this</span>._elements.icon.getAttribute('title') : undefined;
+   */<span class="cstat-no" title="statement not covered" ></span>
+  get iconTitle() {
+    return this._elements.icon ? this._elements.icon.getAttribute('title') : undefined;
   }
 &nbsp;
   set iconTitle(value) {
-    this._elements.icon &amp;&amp; this._elements.icon.setAttribute('title', value);
+    this._elements<span class="fstat-no" title="function not covered" >.ico</span>n &amp;&amp; this._elements.icon.setAttribute('title', value);
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  get _contentZone<span class="fstat-no" title="function not covered" >s() </span>{
+    re<span class="cstat-no" title="statement not covered" >turn {'coral-card-property-content': 'content'};</span>
   }
 &nbsp;
-  get _contentZones() {
-    return {'coral-card-property-content': 'content'};
-  }
-&nbsp;
-  static get _attributePropertyMap() {
-    return commons.extend(super._attributePropertyMap, {
-      iconalt: 'ic<span class="fstat-no" title="function not covered" >onAl</span>t',
-<span class="cstat-no" title="statement not covered" >      icontitle: 'iconTitle',</span>
+  static get _attributePr<span class="fstat-no" title="function not covered" >opertyM</span>ap() {
+    return<span class="cstat-no" title="statement not covered" > commons.extend(super._attr</span>ibutePropertyMap, {
+      iconalt: 'iconAlt',
+      icontitle: 'iconTitle',
     });
-  }<span class="fstat-no" title="function not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
+  }
+&nbsp;
   /** @ignore */
   static get observedAttributes() {
-    re<span class="cstat-no" title="statement not covered" >turn super.observedAttributes.concat(['icon', 'iconalt', 'icontitle']);</span>
-  }<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-  /** @i<span class="cstat-no" title="statement not covered" >gnore */</span>
+    return super.observedAttributes.concat(['icon', 'iconalt', 'icontitle']);
+  }
+&nbsp;
+  /** @ignore */
   render() {
-    super.render();
-&nbsp;
+    super.render()<span class="fstat-no" title="function not covered" >;</span>
+<span class="cstat-no" title="statement not covered" ></span>
     this.classList.add(CLASSNAME, 'coral-Body--small');
-&nbsp;
-    // Create a fragment
+<span class="fstat-no" title="function not covered" ></span>
+    //<span class="cstat-no" title="statement not covered" > Create a fragment</span>
     const frag = document.createDocumentFragment();
 &nbsp;
-    // Render the main template
-    if (this.icon) {
-      frag.appendChild(this._elements.icon);
-    }<span class="fstat-no" title="function not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
+    //<span class="cstat-no" title="statement not covered" > Render the main template</span>
+    if (<span class="cstat-no" title="statement not covered" >this.icon) {</span>
+      frag.ap<span class="cstat-no" title="statement not covered" >pendChild(this._elements.icon);</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
     const content = this._elements.content;
-<span class="fstat-no" title="function not covered" ></span>
-    //<span class="cstat-no" title="statement not covered" > Remove it so we can process children</span>
+&nbsp;
+    // Remove it so we can process children
     if (content.parentNode) {
       content.parentNode.removeChild(content);
     }
@@ -546,19 +570,31 @@ const CardProperty = Decorator(class extends BaseComponent(HTMLElement) {
     while (this.firstChild) {
       const child = this.firstChild;
       if (child.nodeType === Node.TEXT_NODE ||
-        child.nodeType === Node.ELEMENT_NODE &amp;&amp; child.getAttribute('handle') !== 'icon') {
-        // Add non-template elements to the label
+        child.node<span class="fstat-no" title="function not covered" >Type</span> === Node.ELEMENT_NODE &amp;&amp; child.getAttribute('handle') !== 'icon') {
+<span class="cstat-no" title="statement not covered" >        // Add non-template elements to the label</span>
         content.appendChild(child);
       } else {<span class="fstat-no" title="function not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        this.removeChild(child);</span>
       }
-    }<span class="fstat-no" title="function not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
+    }
+&nbsp;
     // Add the frag to the component
     this.appendChild(frag);
 &nbsp;
-    // Assign the <span class="fstat-no" title="function not covered" >cont</span>ent zones, moving them into place in the process
-    th<span class="cstat-no" title="statement not covered" >is.content = content;</span>
+    // Assign the content zones, moving them into place in the process
+    this.content = content;
+&nbsp;
+    // Adjusting icon aria-label attribute as per coral-card-property title attribute
+<span class="fstat-no" title="function not covered" ></span>
+    va<span class="cstat-no" title="statement not covered" >r parentElement;</span>
+    if (this._elements &amp;&amp; this._elements.icon) {
+      parentElemen<span class="fstat-no" title="function not covered" >t = </span>this._elements.icon.parentElement;
+<span class="cstat-no" title="statement not covered" >      if (parentElement !== null &amp;&amp; parentElement.hasAttribute("title")) {</span>
+        const iconParentTitle = parentElement.getAttribute("title");
+        this._elements.icon.setAttribute("aria-label", iconParentTitle);
+      }
+    }<span class="fstat-no" title="function not covered" ></span>
+ <span class="cstat-no" title="statement not covered" ></span>
   }
 });
 &nbsp;
@@ -570,7 +606,7 @@ export default CardProperty;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu May 15 2025 10:45:49 GMT+0000 (Coordinated Universal Time)
+                at Thu Jul 10 2025 14:42:39 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
