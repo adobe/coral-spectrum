@@ -1257,6 +1257,9 @@ class BaseOverlay extends superClass {
     // ON handles the focusing per accessibility recommendations
     if (this.focusOnShow === focusOnShow.ON) {
       this._focusOn(&apos;first&apos;);
+      if (this._elementToFocusWhenHidden) {
+        this._elementToFocusWhenHidden.setAttribute(&apos;aria-expanded&apos;, &apos;true&apos;);
+      }
     } else if (this.focusOnShow instanceof HTMLElement) {
       this.focusOnShow.focus(preventScroll(this));
     } else if (typeof this.focusOnShow === &apos;string&apos; &amp;&amp; this.focusOnShow !== focusOnShow.OFF) {
@@ -1282,6 +1285,8 @@ class BaseOverlay extends superClass {
         // Don&apos;t return focus if the user focused outside of the overlay
         return;
       }
+
+      this._elementToFocusWhenHidden.setAttribute(&apos;aria-expanded&apos;, &apos;false&apos;);
 
       // Return focus, ignoring tab capture if it is an overlay
       this._elementToFocusWhenHidden._ignoreTabCapture = true;
