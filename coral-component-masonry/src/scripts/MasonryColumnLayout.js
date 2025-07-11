@@ -69,7 +69,7 @@ class MasonryColumnLayout extends MasonryLayout {
   _init(items) {
     const firstItem = items[0];
     const masonry = this._masonry;
-    this._columnWidth = getPositiveNumberProperty(masonry, 'columnWidth', 'columnwidth', 200);
+    this._columnWidth = getPositiveNumberProperty(masonry, 'columnWidth', 'columnwidth', 200, 120);
 
     this._zeroOffsetLeft = -csspx(firstItem, 'marginLeft');
     // with padding
