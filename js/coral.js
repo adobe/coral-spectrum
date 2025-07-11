@@ -64498,7 +64498,7 @@ var Coral = (function (exports) {
   /** @ignore */
 
 
-  var getPositiveNumberProperty = function getPositiveNumberProperty(element, property, attribute, defaultValue) {
+  var getPositiveNumberProperty = function getPositiveNumberProperty(element, property, attribute, defaultValue, mobileValue) {
     var value = element[property];
 
     if (value === undefined) {
@@ -64509,6 +64509,10 @@ var Coral = (function (exports) {
 
     if (value <= 0 || isNaN(value)) {
       value = defaultValue;
+    }
+
+    if (mobileValue && window.innerWidth <= 500) {
+      value = mobileValue;
     }
 
     return value;
@@ -64584,7 +64588,7 @@ var Coral = (function (exports) {
       value: function _init(items) {
         var firstItem = items[0];
         var masonry = this._masonry;
-        this._columnWidth = getPositiveNumberProperty(masonry, 'columnWidth', 'columnwidth', 200);
+        this._columnWidth = getPositiveNumberProperty(masonry, 'columnWidth', 'columnwidth', 200, 120);
         this._zeroOffsetLeft = -csspx(firstItem, 'marginLeft'); // with padding
 
         this._masonryInnerWidth = masonry.clientWidth;

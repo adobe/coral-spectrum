@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.46% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>23/26</span>
+                <span class='fraction'>24/28</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.5% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/8</span>
+                <span class='fraction'>10/12</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.46% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>23/26</span>
+                <span class='fraction'>24/28</span>
             </div>
         
             
@@ -114,7 +114,10 @@
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -144,24 +147,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">73x</span>
-<span class="cline-any cline-yes">118x</span>
-<span class="cline-any cline-yes">118x</span>
+<span class="cline-any cline-yes">72x</span>
+<span class="cline-any cline-yes">116x</span>
+<span class="cline-any cline-yes">116x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">118x</span>
+<span class="cline-any cline-yes">116x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">63x</span>
+<span class="cline-any cline-yes">62x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1081x</span>
+<span class="cline-any cline-yes">1072x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -169,10 +172,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">787x</span>
+<span class="cline-any cline-yes">784x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">787x</span>
-<span class="cline-any cline-yes">787x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">784x</span>
+<span class="cline-any cline-yes">784x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">784x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -217,7 +223,7 @@ const csspx = (el, property) =&gt; parseFloat(window.getComputedStyle(el)[proper
 // TODO if the property changes, it will not automatically relayout the masonry
 // TODO test columnWidth and colspan property and default values
 /** @ignore */
-const getPositiveNumberProperty = (element, property, attribute, defaultValue) =&gt; {
+const getPositiveNumberProperty = (element, property, attribute, defaultValue, mobileValue) =&gt; {
   let value = element[property];
   if (value === undefined) {
     value = element.getAttribute(attribute);
@@ -226,10 +232,13 @@ const getPositiveNumberProperty = (element, property, attribute, defaultValue) =
   if (value &lt;= 0 || isNaN(value)) {
     value = defaultValue;
   }
-  return value;
+  if(mobileValue &amp;&amp; window.innerWidth &lt;= 500) {
+    value = mobileValue;
+  }
+  <span class="missing-if-branch" title="else path not taken" >E</span>return value;
 };
 &nbsp;
-ex<span class="missing-if-branch" title="else path not taken" >E</span>port {setTransform, setTransition, getFirstRowFilledColumns, csspx, getPositiveNumberProperty};
+export {setTransform, setTransition, getFirstRowFilledColumns, csspx, getPositiveNumberProperty};
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -237,7 +246,7 @@ ex<span class="missing-if-branch" title="else path not taken" >E</span>port {set
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jul 10 2025 14:42:39 GMT+0000 (Coordinated Universal Time)
+                at Fri Jul 11 2025 07:47:58 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
