@@ -620,7 +620,6 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
 
   /** @ignore */
   _onPopoverBeforeOpen() {
-    this._elements.overlay.returnFocusTo(this._elements.input);
     this._elements.calendar._validateCalendar();
     this._renderCalendar();
   }
@@ -642,6 +641,13 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
       this._elements.toggle.setAttribute('aria-expanded', 'true');
       this._trackEvent('open', 'coral-datepicker', event);
     } else {
+
+      if(this._elements.hiddenInput.value) {
+        this._elements.input.focus();
+      } else {
+        this._elements.toggle.focus();
+      }
+
       this._elements.input.setAttribute('aria-expanded', 'false');
       this._elements.toggle.setAttribute('aria-expanded', 'false');
       this._trackEvent('close', 'coral-datepicker', event);
