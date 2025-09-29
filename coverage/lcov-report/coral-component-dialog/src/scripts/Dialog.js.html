@@ -879,7 +879,8 @@
 <a name='L821'></a><a href='#L821'>821</a>
 <a name='L822'></a><a href='#L822'>822</a>
 <a name='L823'></a><a href='#L823'>823</a>
-<a name='L824'></a><a href='#L824'>824</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L824'></a><a href='#L824'>824</a>
+<a name='L825'></a><a href='#L825'>825</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1702,6 +1703,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -2270,6 +2272,7 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
     const dismissValue = dismissTarget.getAttribute('coral-close');
     if (!dismissValue || this.matches(dismissValue)) {
       this.open = false;
+&nbsp;
       event.stopPropagation();
 &nbsp;
       this._trackEvent('close', 'coral-dialog', event);
@@ -2280,8 +2283,8 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
     // When we're modal, we close when our outer area (over the backdrop) is clicked
     if (event.target === this &amp;&amp; this.backdrop === backdrop.MODAL &amp;&amp; this._isTopOverlay()) {
       this.open = false;
-&nbsp;
-      this._trackEvent('close', 'coral-dialog', event);<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+      this._trackEvent('close', 'coral-dialog', event);
     }
   }
 &nbsp;
@@ -2312,10 +2315,10 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       variantValue = 'alert';
     }
 &nbsp;
-    // Inject the SVG icon
-    if (<span class="missing-if-branch" title="if path not taken" >I</span>variantValue !== variant.DEFAULT) {
-      cons<span class="cstat-no" title="statement not covered" >t iconName = capitalize(variantValue)</span>;
-      this<span class="cstat-no" title="statement not covered" >._elements.headerWrapper.insertAdjacentHTML</span>('beforeend', Icon._renderSVG(`spectrum-css-icon-${iconName}Medium`, ['_coral-Dialog-typeIcon', `_coral-UIIcon-${iconName}Medium`]));
+    // I<span class="missing-if-branch" title="if path not taken" >I</span>nject the SVG icon
+    if (va<span class="cstat-no" title="statement not covered" >riantValue !== variant.DEFAULT) {</span>
+      cons<span class="cstat-no" title="statement not covered" >t iconName = capitalize(variantValue);</span>
+      this._elements.headerWrapper.insertAdjacentHTML('beforeend', Icon._renderSVG(`spectrum-css-icon-${iconName}Medium`, ['_coral-Dialog-typeIcon', `_coral-UIIcon-${iconName}Medium`]));
       this._elements.icon = this._elements.headerWrapper.querySelector('._coral-Dialog-typeIcon');
     }
   }
@@ -2335,13 +2338,13 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
    */
   center() {
     // We're already centered in fullscreen mode
-    if (this.fullscreen) {
-      return;<span class="missing-if-branch" title="else path not taken" >E</span>
+    if (this.<span class="missing-if-branch" title="else path not taken" >E</span>fullscreen) {
+      return;
     }
 &nbsp;
-    // If moved we reset the position
-    this.styl<span class="missing-if-branch" title="if path not taken" >I</span>e.top = '';
-    this<span class="cstat-no" title="statement not covered" >.style.left = '';</span>
+    // If mov<span class="missing-if-branch" title="if path not taken" >I</span>ed we reset the position
+    this<span class="cstat-no" title="statement not covered" >.style.top = '';</span>
+    this.style.left = '';
 &nbsp;
     return this;
   }
@@ -2425,12 +2428,12 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
     }
 &nbsp;
     // Fetch the content zones
-    const header = this._elements.header;
-    const content <span class="fstat-no" title="function not covered" >= th</span>is._elements.content;
-    co<span class="cstat-no" title="statement not covered" >nst footer = this._elements.</span>footer;
-&nbsp;
-    // Verify if a<span class="fstat-no" title="function not covered" > con</span>tent zone is provided
-    co<span class="cstat-no" title="statement not covered" >nst contentZoneProvided = thi</span>s.contains(content) &amp;&amp; content || this.contains(footer) &amp;&amp; footer || this.contains(header) &amp;&amp; header;
+    const header =<span class="fstat-no" title="function not covered" > thi</span>s._elements.header;
+    co<span class="cstat-no" title="statement not covered" >nst content = this._elements</span>.content;
+    const footer = this._elements.footer;
+<span class="fstat-no" title="function not covered" ></span>
+    //<span class="cstat-no" title="statement not covered" > Verify if a content zone is </span>provided
+    const contentZoneProvided = this.contains(content) &amp;&amp; content || this.contains(footer) &amp;&amp; footer || this.contains(header) &amp;&amp; header;
 &nbsp;
     // Verify if the internal wrapper exists
     let wrapper = this.querySelector(`.${CLASSNAME}`);
@@ -2442,12 +2445,12 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
         this.removeChild(tabCapture);
       });
 &nbsp;
-      // Assign internal elements
-      this._elements.headerWrap<span class="branch-1 cbranch-no" title="branch not covered" >per = this.qu</span>erySelector('._coral-Dialog-header');
+      // Assign internal elemen<span class="branch-1 cbranch-no" title="branch not covered" >ts</span>
+      this._elements.headerWrapper = this.querySelector('._coral-Dialog-header');
       this._elements.closeButton = this.querySelector('._coral-Dialog-closeButton');
 &nbsp;
-      this._elements.wrapper = wrapper;
-    }<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+      this._elements.wrapper = wrapper;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    }
     // Case where the dialog needs to be rendered
     else {
       // Create default wrapper
@@ -2532,7 +2535,7 @@ export default Dialog;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Sep 03 2025 08:50:11 GMT+0000 (Coordinated Universal Time)
+                at Mon Sep 29 2025 13:19:11 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
