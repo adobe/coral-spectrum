@@ -566,6 +566,7 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
     const dismissValue = dismissTarget.getAttribute('coral-close');
     if (!dismissValue || this.matches(dismissValue)) {
       this.open = false;
+
       event.stopPropagation();
 
       this._trackEvent('close', 'coral-dialog', event);
