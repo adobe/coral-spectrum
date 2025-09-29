@@ -1,3 +1,10 @@
+## [4.21.5](https://github.com/adobe/coral-spectrum/compare/v4.21.4...v4.21.5) (2025-09-29)
+
+
+### Bug Fixes
+
+* added a new line ([#393](https://github.com/adobe/coral-spectrum/issues/393)) ([7c6aa98](https://github.com/adobe/coral-spectrum/commit/7c6aa980f8ff9dea0e2123a95763801cd79e6270))
+
 ## [4.21.4](https://github.com/adobe/coral-spectrum/compare/v4.21.3...v4.21.4) (2025-05-15)
 
 
