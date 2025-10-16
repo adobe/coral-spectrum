@@ -1,3 +1,10 @@
+## [4.21.6](https://github.com/adobe/coral-spectrum/compare/v4.21.5...v4.21.6) (2025-10-16)
+
+
+### Bug Fixes
+
+* [GRANITE-62346]  Dropdown List Misalignment on First Click in Safari ([#396](https://github.com/adobe/coral-spectrum/issues/396)) ([e2df3ff](https://github.com/adobe/coral-spectrum/commit/e2df3ff164b850b3ba4466d8b980709e25ff1980))
+
 ## [4.21.5](https://github.com/adobe/coral-spectrum/compare/v4.21.4...v4.21.5) (2025-09-29)
 
 
