@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.61% </span>
+                <span class="strong">97.62% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>204/209</span>
+                <span class='fraction'>205/210</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.61% </span>
+                <span class="strong">97.62% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>204/209</span>
+                <span class='fraction'>205/210</span>
             </div>
         
             
@@ -668,7 +668,8 @@
 <a name='L610'></a><a href='#L610'>610</a>
 <a name='L611'></a><a href='#L611'>611</a>
 <a name='L612'></a><a href='#L612'>612</a>
-<a name='L613'></a><a href='#L613'>613</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L613'></a><a href='#L613'>613</a>
+<a name='L614'></a><a href='#L614'>614</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -850,13 +851,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">202x</span>
+<span class="cline-any cline-yes">224x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">156x</span>
+<span class="cline-any cline-yes">181x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">156x</span>
+<span class="cline-any cline-yes">181x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1234,7 +1235,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">24960x</span>
+<span class="cline-any cline-yes">25202x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1260,7 +1261,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">31856x</span>
+<span class="cline-any cline-yes">32185x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">600x</span>
@@ -1280,7 +1281,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">576x</span>
 <span class="cline-any cline-yes">576x</span>
-<span class="cline-any cline-yes">576x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">576x</span>
+<span class="cline-any cline-yes">242x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright 2019 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -1612,6 +1614,7 @@ const Popover = Decorator(class extends ExtensibleOverlay {
       if (this._popper) {
         setTimeout(() =&gt; {
           if (this.open) {
+            this.reposition(true); // GRANITE-62346 required for safari to render dropdown correctly
             this._popper.scheduleUpdate();
           }
         });
@@ -1645,8 +1648,8 @@ const Popover = Decorator(class extends ExtensibleOverlay {
 &nbsp;
   _onPositioned(event) {
     if (this.open) {
-      // Set arrow placement
-      this.classList.remove(...ALL_PLACEMENT_CLASSES);<span class="branch-3 cbranch-no" title="branch not covered" ></span>
+      // Set arrow placement<span class="branch-3 cbranch-no" title="branch not covered" ></span>
+      this.classList.remove(...ALL_PLACEMENT_CLASSES);
       this.classList.add(`${CLASSNAME}--${event.detail.placement}`);
     }
   }
@@ -1703,8 +1706,8 @@ const Popover = Decorator(class extends ExtensibleOverlay {
   }
 &nbsp;
   _hideContentZoneIfEmpty(name) {
-    const contentZone = this._elements[name];
-    const target = name === 'header' ? this._elements.headerWr<span class="branch-1 cbranch-no" title="branch not covered" >apper :</span> contentZone;
+    const contentZone = this._elements[name];<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+    const target = name === 'header' ? this._elements.headerWrapper : contentZone;
 &nbsp;
     // If it's empty and has no non-textnode children, hide the header
     const hiddenValue = _isEmpty(contentZone);
@@ -1777,14 +1780,14 @@ const Popover = Decorator(class extends ExtensibleOverlay {
 &nbsp;
       // Close if we're open and the click was outside of the target and outside of the popover
       this.hide();
-&nbsp;
-      this._trackEvent('close'<span class="branch-1 cbranch-no" title="branch not covered" >, 'coral-popover</span>', event);
+<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+      this._trackEvent('close', 'coral-popover', event);
     }
   }
 &nbsp;
   get _contentZones() {
-    return {
-      'coral-popover-header': 'header',<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    return {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+      'coral-popover-header': 'header',
       'coral-popover-content': 'content',
       'coral-popover-footer': 'footer'
     };
@@ -1806,9 +1809,9 @@ const Popover = Decorator(class extends ExtensibleOverlay {
    */
   static get closable() {
     return closable;
-  }
-<span class="missing-if-branch" title="if path not taken" >I</span>
-  /** @ignor<span class="cstat-no" title="statement not covered" >e */</span>
+  }<span class="missing-if-branch" title="if path not taken" >I</span>
+<span class="cstat-no" title="statement not covered" ></span>
+  /** @ignore */
   static get observedAttributes() {
     return super.observedAttributes.concat([
       'closable',
@@ -1828,12 +1831,12 @@ const Popover = Decorator(class extends ExtensibleOverlay {
     }
 &nbsp;
     if (!this.hasAttribute('aria-live')) {
-      // This helped announcements in certain screen readers
-      this.setAttribute('aria-l<span class="branch-1 cbranch-no" title="branch not covered" >ive', 'assert</span>ive');
+      // This helped announceme<span class="branch-1 cbranch-no" title="branch not covered" >nts in certai</span>n screen readers
+      this.setAttribute('aria-live', 'assertive');
     }
 &nbsp;
-    // Default reflected attributes
-    if (!this._variant) {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    // Default reflected attributes<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    if (!this._variant) {
       this.variant = variant.DEFAULT;
     }
     if (!this._closable) {
@@ -1889,8 +1892,8 @@ const Popover = Decorator(class extends ExtensibleOverlay {
     this.content = content;
     this.footer = footer;
   }
-});
-<span class="missing-if-branch" title="else path not taken" >E</span>
+});<span class="missing-if-branch" title="else path not taken" >E</span>
+&nbsp;
 export default Popover;
 &nbsp;</pre></td></tr></table></pre>
 
@@ -1899,7 +1902,7 @@ export default Popover;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Sep 29 2025 13:19:11 GMT+0000 (Coordinated Universal Time)
+                at Thu Oct 16 2025 07:31:41 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

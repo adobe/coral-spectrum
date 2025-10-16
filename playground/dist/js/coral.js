@@ -27509,6 +27509,9 @@
           if (this._popper) {
             setTimeout(function () {
               if (_this5.open) {
+                _this5.reposition(true); // GRANITE-62346 required for safari to render dropdown correctly
+
+
                 _this5._popper.scheduleUpdate();
               }
             });
@@ -58924,7 +58927,7 @@
     el0.id = data_0["commons"]["getUID"]();
     el0.setAttribute("breadthoffset", "50%r - 50%p");
     el0.setAttribute("placement", "bottom");
-    el0.setAttribute("style", "max-height: 75vh;");
+    el0.setAttribute("style", "max-height: 55vh;");
     frag.appendChild(el0);
     var el1 = document.createTextNode("\n");
     frag.appendChild(el1);
@@ -85894,7 +85897,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.21.4";
+  var version$1 = "4.21.5";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
