@@ -330,6 +330,7 @@ const Popover = Decorator(class extends ExtensibleOverlay {
       if (this._popper) {
         setTimeout(() => {
           if (this.open) {
+            this.reposition(true); // GRANITE-62346 required for safari to render dropdown correctly
             this._popper.scheduleUpdate();
           }
         });
