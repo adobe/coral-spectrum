@@ -374,9 +374,10 @@ const Card = Decorator(class extends BaseComponent(HTMLElement) {
     const content = this._elements.content;
     const asset = this._elements.asset;
     const title = this._elements.title;
-    const titleId = Coral.commons.getUID();
+    const titleId = commons.getUID();
 
-    Coral.commons.nextFrame(() => {
+    // Set title attributes after a frame to allow any inner text changes to be applied first
+    commons.nextFrame(() => {
       if (title) {
         setTimeout(function() {
           title.setAttribute("title", title.innerText);
