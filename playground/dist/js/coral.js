@@ -82501,6 +82501,7 @@
       value: function _createInvalidIcon() {
         var iconElement = document.createElement('coral-icon');
         iconElement.icon = 'alert';
+        iconElement.alt = 'alert';
         iconElement.size = Icon.size.EXTRA_SMALL;
         iconElement.setAttribute('aria-hidden', 'true');
         iconElement.classList.add('_coral-Tabs-itemInvalidIcon');
@@ -85897,7 +85898,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.21.5";
+  var version$1 = "4.21.6";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
