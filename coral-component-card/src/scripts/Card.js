@@ -376,15 +376,16 @@ const Card = Decorator(class extends BaseComponent(HTMLElement) {
     const title = this._elements.title;
     const titleId = commons.getUID();
 
-
-    // set title attributes after a short delay to allow for title content to be set
-    setTimeout(function() {
+    // Set title attributes after a frame to allow any inner text changes to be applied first
+    commons.nextFrame(() => {
       if (title) {
-        title.setAttribute("title", title.innerText);
-        title.setAttribute("aria-label", title.innerText);
-        title.setAttribute("id", titleId);
+        setTimeout(function() {
+          title.setAttribute("title", title.innerText);
+          title.setAttribute("aria-label", title.innerText);
+          title.setAttribute("id", titleId);
+        }, 1);
       }
-    }, 20);
+    });
 
     // Prepares images to be loaded nicely
     const images = asset.querySelectorAll('img');
