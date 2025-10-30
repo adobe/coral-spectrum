@@ -510,7 +510,8 @@ const Card = Decorator(class extends BaseComponent(HTMLElement) {
       asset: this.querySelector(&apos;coral-card-asset&apos;) || document.createElement(&apos;coral-card-asset&apos;),
       content: this.querySelector(&apos;coral-card-content&apos;) || document.createElement(&apos;coral-card-content&apos;),
       info: this.querySelector(&apos;coral-card-info&apos;) || document.createElement(&apos;coral-card-info&apos;),
-      overlay: this.querySelector(&apos;coral-card-overlay&apos;) || document.createElement(&apos;coral-card-overlay&apos;)
+      overlay: this.querySelector(&apos;coral-card-overlay&apos;) || document.createElement(&apos;coral-card-overlay&apos;),
+      title : this.querySelector(&apos;coral-card-title&apos;) || document.createElement(&apos;coral-card-title&apos;),
     };
     base.call(this._elements);
 
@@ -813,6 +814,19 @@ const Card = Decorator(class extends BaseComponent(HTMLElement) {
 
     const content = this._elements.content;
     const asset = this._elements.asset;
+    const title = this._elements.title;
+    const titleId = commons.getUID();
+
+    // Set title attributes after a frame to allow any inner text changes to be applied first
+    commons.nextFrame(() =&gt; {
+      if (title) {
+        setTimeout(function() {
+          title.setAttribute(&quot;title&quot;, title.innerText);
+          title.setAttribute(&quot;aria-label&quot;, title.innerText);
+          title.setAttribute(&quot;id&quot;, titleId);
+        }, 1);
+      }
+    });
 
     // Prepares images to be loaded nicely
     const images = asset.querySelectorAll(&apos;img&apos;);

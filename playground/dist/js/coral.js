@@ -42180,7 +42180,8 @@
         asset: _this.querySelector('coral-card-asset') || document.createElement('coral-card-asset'),
         content: _this.querySelector('coral-card-content') || document.createElement('coral-card-content'),
         info: _this.querySelector('coral-card-info') || document.createElement('coral-card-info'),
-        overlay: _this.querySelector('coral-card-overlay') || document.createElement('coral-card-overlay')
+        overlay: _this.querySelector('coral-card-overlay') || document.createElement('coral-card-overlay'),
+        title: _this.querySelector('coral-card-title') || document.createElement('coral-card-title')
       };
       template$m.call(_this._elements); // Events
 
@@ -42226,7 +42227,19 @@
         }
 
         var content = this._elements.content;
-        var asset = this._elements.asset; // Prepares images to be loaded nicely
+        var asset = this._elements.asset;
+        var title = this._elements.title;
+        var titleId = commons.getUID(); // Set title attributes after a frame to allow any inner text changes to be applied first
+
+        commons.nextFrame(function () {
+          if (title) {
+            setTimeout(function () {
+              title.setAttribute("title", title.innerText);
+              title.setAttribute("aria-label", title.innerText);
+              title.setAttribute("id", titleId);
+            }, 1);
+          }
+        }); // Prepares images to be loaded nicely
 
         var images = asset.querySelectorAll('img');
         var imagesCount = images.length;
