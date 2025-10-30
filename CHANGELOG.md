@@ -1,3 +1,10 @@
+## [4.21.7](https://github.com/adobe/coral-spectrum/compare/v4.21.6...v4.21.7) (2025-10-30)
+
+
+### Bug Fixes
+
+* SITES-24933 Use of ARIA Grid pattern in Card view ([#397](https://github.com/adobe/coral-spectrum/issues/397)) ([e10d741](https://github.com/adobe/coral-spectrum/commit/e10d7413a77b2e5978ad6c82a979f48d2fba46aa))
+
 ## [4.21.6](https://github.com/adobe/coral-spectrum/compare/v4.21.5...v4.21.6) (2025-10-16)
 
 
