@@ -698,7 +698,6 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
   }
 
   dialogKeyboardHandler (event, dialog) {
-    console.log("trigger");
     let currentTop = parseInt(dialog.style.top) || 0;
     let currentLeft = parseInt(dialog.style.left) || 0;
     var step = 10;
