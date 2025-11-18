@@ -498,11 +498,11 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
         }
 
         // only add when fullscreen is off
-        commons.nextFrame(() => {
-          if (!this.fullscreen) {
-            commons.nextFrame(() => this.addKeyboardHandler(header, wrapper));
-          }
-        });
+        // commons.nextFrame(() => {
+        //   if (!this.fullscreen) {
+        //     commons.nextFrame(() => this.addKeyboardHandler(header, wrapper));
+        //   }
+        // });
       }
     } else {
       // Disables any dragging interaction
@@ -511,11 +511,11 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       }
 
       // Remove keyboard
-      commons.nextFrame(() => {
-        if (this.fullscreen) {
-          this.removeKeyboardHandler(header);
-        }
-      });
+      // commons.nextFrame(() => {
+      //   if (this.fullscreen) {
+      //     this.removeKeyboardHandler(header);
+      //   }
+      // });
 
       // Recenter the dialog once it's not movable anymore
       this.center();
