@@ -497,7 +497,7 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
           };
         }
 
-        // only add when fullscreen is off
+        // make sure the event is added when fullscreen is false
         commons.nextFrame(() => {
           if (!this.fullscreen) {
             commons.nextFrame(() => this.addKeyboardHandler(header, wrapper));
@@ -510,7 +510,7 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
         this.dragAction.destroy();
       }
 
-      // Remove keyboard
+      // Remove any previos added keyboard listener
       commons.nextFrame(() => {
         if (this.fullscreen) {
           this.removeKeyboardHandler(header);
