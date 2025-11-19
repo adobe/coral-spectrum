@@ -540,7 +540,7 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
   removeKeyboardHandler(header) {
     if (header && this.keyboardHandler) {
       header.removeAttribute("tabindex");
-      header.removeAttribute("aria-labe");
+      header.removeAttribute("aria-label");
       header.removeEventListener("keydown", this.keyboardHandler);
     }
   }
