@@ -475,6 +475,13 @@ const closable = {
   OFF: &apos;off&apos;
 };
 
+const keyCodes = {
+  UP: 38,
+  DOWN: 40,
+  LEFT: 37,
+  RIGHT: 39,
+};
+
 /**
  Enumeration for {@link Dialog} keyboard interaction options.
 
@@ -912,6 +919,8 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
   set movable(value) {
     this._movable = transform.booleanAttr(value);
     this._reflectAttribute(&apos;movable&apos;, this._movable);
+    const wrapper = this;
+    const header = this._elements.headerWrapper;
 
     // Movable and fullscreen are not compatible
     if (this._movable) {
@@ -921,14 +930,59 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
     if (this._movable) {
       const dragAction = new DragAction(this);
       dragAction.handle = this._elements.headerWrapper;
+
+      if (header &amp;&amp; wrapper) {
+        if (!this.keyboardHandler) {
+          this.keyboardHandler = (event) =&gt; {
+            this.dialogKeyboardHandler(event, wrapper, header);
+          };
+        }
+
+        // make sure the event is added when fullscreen is false
+        commons.nextFrame(() =&gt; {
+          if (!this.fullscreen) {
+            commons.nextFrame(() =&gt; this.addKeyboardHandler(header, wrapper));
+          }
+        });
+      }
     } else {
       // Disables any dragging interaction
       if (this.dragAction) {
         this.dragAction.destroy();
       }
 
+      // Remove any previos added keyboard listener
+      commons.nextFrame(() =&gt; {
+        if (this.fullscreen) {
+          this.removeKeyboardHandler(header);
+        }
+      });
+
       // Recenter the dialog once it&apos;s not movable anymore
       this.center();
+    }
+  }
+
+  addKeyboardHandler(header, wrapper) {
+    if (!header || !this._movable) return;
+
+    header.setAttribute(&quot;tabindex&quot;, 0);
+    header.setAttribute(&quot;aria-label&quot;, i18n.get(&quot;Move Dialog&quot;));
+  
+    if (!this.keyboardHandler) {
+      this.keyboardHandler = (event) =&gt; {
+        this.dialogKeyboardHandler(event, wrapper, header);
+      };
+    }
+
+    header.addEventListener(&quot;keydown&quot;, this.keyboardHandler);
+  }
+
+  removeKeyboardHandler(header) {
+    if (header &amp;&amp; this.keyboardHandler) {
+      header.removeAttribute(&quot;tabindex&quot;);
+      header.removeAttribute(&quot;aria-label&quot;);
+      header.removeEventListener(&quot;keydown&quot;, this.keyboardHandler);
     }
   }
 
@@ -1082,6 +1136,34 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
     this.style.left = &apos;&apos;;
 
     return this;
+  }
+
+  dialogKeyboardHandler (event, dialog, header) {
+    if (document.activeElement !== header) {
+      return;
+    }
+
+    let currentTop = parseInt(dialog.style.top) || 0;
+    let currentLeft = parseInt(dialog.style.left) || 0;
+    var step = 10;
+
+    switch (event.keyCode) {
+      case keyCodes.UP:
+        dialog.style.top = (currentTop - step) + &apos;px&apos;;
+        break;
+
+      case keyCodes.DOWN:
+        dialog.style.top = (currentTop + step) + &apos;px&apos;;
+        break;
+
+      case keyCodes.LEFT:
+        dialog.style.left = (currentLeft - step) + &apos;px&apos;;
+        break;
+
+      case keyCodes.RIGHT:
+        dialog.style.left = (currentLeft + step) + &apos;px&apos;;
+        break;
+    }
   }
 
   get _contentZones() {

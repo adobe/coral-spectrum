@@ -25985,6 +25985,12 @@
     ON: 'on',
     OFF: 'off'
   };
+  var keyCodes = {
+    UP: 38,
+    DOWN: 40,
+    LEFT: 37,
+    RIGHT: 39
+  };
   /**
    Enumeration for {@link Dialog} keyboard interaction options.
 
@@ -26124,6 +26130,36 @@
 
 
     _createClass(_class, [{
+      key: "addKeyboardHandler",
+      value: function addKeyboardHandler(header, wrapper) {
+        var _this2 = this;
+
+        if (!header || !this._movable) return;
+        header.setAttribute("tabindex", 0);
+        header.setAttribute("aria-label", i18n.get("Move Dialog"));
+
+        if (!this.keyboardHandler) {
+          this.keyboardHandler = function (event) {
+            _this2.dialogKeyboardHandler(event, wrapper, header);
+          };
+        }
+
+        header.addEventListener("keydown", this.keyboardHandler);
+      }
+    }, {
+      key: "removeKeyboardHandler",
+      value: function removeKeyboardHandler(header) {
+        if (header && this.keyboardHandler) {
+          header.removeAttribute("tabindex");
+          header.removeAttribute("aria-label");
+          header.removeEventListener("keydown", this.keyboardHandler);
+        }
+      }
+      /**
+       Inherited from {@link BaseComponent#trackingElement}.
+       */
+
+    }, {
       key: "_observeHeader",
 
       /** @ignore */
@@ -26276,11 +26312,40 @@
         return this;
       }
     }, {
+      key: "dialogKeyboardHandler",
+      value: function dialogKeyboardHandler(event, dialog, header) {
+        if (document.activeElement !== header) {
+          return;
+        }
+
+        var currentTop = parseInt(dialog.style.top) || 0;
+        var currentLeft = parseInt(dialog.style.left) || 0;
+        var step = 10;
+
+        switch (event.keyCode) {
+          case keyCodes.UP:
+            dialog.style.top = currentTop - step + 'px';
+            break;
+
+          case keyCodes.DOWN:
+            dialog.style.top = currentTop + step + 'px';
+            break;
+
+          case keyCodes.LEFT:
+            dialog.style.left = currentLeft - step + 'px';
+            break;
+
+          case keyCodes.RIGHT:
+            dialog.style.left = currentLeft + step + 'px';
+            break;
+        }
+      }
+    }, {
       key: "render",
 
       /** @ignore */
       value: function render() {
-        var _this2 = this;
+        var _this3 = this;
 
         _get(_getPrototypeOf(_class.prototype), "render", this).call(this);
 
@@ -26317,7 +26382,7 @@
           Array.prototype.filter.call(this.children, function (child) {
             return child.hasAttribute('coral-tabcapture');
           }).forEach(function (tabCapture) {
-            _this2.removeChild(tabCapture);
+            _this3.removeChild(tabCapture);
           }); // Assign internal elements
 
           this._elements.headerWrapper = this.querySelector('._coral-Dialog-header');
@@ -26352,7 +26417,7 @@
                 // try adding in next frame
                 // so that content is a child of dialog wrapper
                 commons.nextFrame(function () {
-                  _this2._elements.wrapper.insertBefore(headerWrapper, content);
+                  _this3._elements.wrapper.insertBefore(headerWrapper, content);
                 });
               }
             } // Case where the dialog needs to be rendered and content zones need to be created
@@ -26387,7 +26452,7 @@
         if (this._elements.wrapper.parentNode !== this) {
           var contentWrapper = this.querySelector('[handle="wrapper"]');
           Array.prototype.forEach.call(contentWrapper.classList, function (style) {
-            return _this2._elements.wrapper.classList.add(style);
+            return _this3._elements.wrapper.classList.add(style);
           });
           contentWrapper.removeAttribute('class');
         } // Assign content zones
@@ -26621,7 +26686,7 @@
         return _get(_getPrototypeOf(_class.prototype), "open", this);
       },
       set: function set(value) {
-        var _this3 = this;
+        var _this4 = this;
 
         _set(_getPrototypeOf(_class.prototype), "open", value, this, true); // Ensure we're in the DOM
 
@@ -26639,21 +26704,21 @@
 
         requestAnimationFrame(function () {
           // Support wrapped dialog
-          _this3._elements.wrapper.classList.toggle('is-open', _this3.open); // Handles what to focus based on focusOnShow
+          _this4._elements.wrapper.classList.toggle('is-open', _this4.open); // Handles what to focus based on focusOnShow
 
 
-          if (_this3.open) {
-            commons.transitionEnd(_this3._elements.wrapper, function () {
-              _this3._handleFocus();
+          if (_this4.open) {
+            commons.transitionEnd(_this4._elements.wrapper, function () {
+              _this4._handleFocus();
 
-              _this3._elements.closeButton.tabIndex = 0;
+              _this4._elements.closeButton.tabIndex = 0;
 
-              _this3._elements.closeButton.removeAttribute('coral-tabcapture');
+              _this4._elements.closeButton.removeAttribute('coral-tabcapture');
             });
           } else {
-            _this3._elements.closeButton.tabIndex = -1;
+            _this4._elements.closeButton.tabIndex = -1;
 
-            _this3._elements.closeButton.setAttribute('coral-tabcapture', '');
+            _this4._elements.closeButton.setAttribute('coral-tabcapture', '');
           }
         });
       }
@@ -26707,10 +26772,14 @@
         return this._movable || false;
       },
       set: function set(value) {
+        var _this5 = this;
+
         this._movable = transform.booleanAttr(value);
 
-        this._reflectAttribute('movable', this._movable); // Movable and fullscreen are not compatible
+        this._reflectAttribute('movable', this._movable);
 
+        var wrapper = this;
+        var header = this._elements.headerWrapper; // Movable and fullscreen are not compatible
 
         if (this._movable) {
           this.fullscreen = false;
@@ -26719,20 +26788,39 @@
         if (this._movable) {
           var dragAction = new DragAction(this);
           dragAction.handle = this._elements.headerWrapper;
+
+          if (header && wrapper) {
+            if (!this.keyboardHandler) {
+              this.keyboardHandler = function (event) {
+                _this5.dialogKeyboardHandler(event, wrapper, header);
+              };
+            } // make sure the event is added when fullscreen is false
+
+
+            commons.nextFrame(function () {
+              if (!_this5.fullscreen) {
+                commons.nextFrame(function () {
+                  return _this5.addKeyboardHandler(header, wrapper);
+                });
+              }
+            });
+          }
         } else {
           // Disables any dragging interaction
           if (this.dragAction) {
             this.dragAction.destroy();
-          } // Recenter the dialog once it's not movable anymore
+          } // Remove any previos added keyboard listener
 
+
+          commons.nextFrame(function () {
+            if (_this5.fullscreen) {
+              _this5.removeKeyboardHandler(header);
+            }
+          }); // Recenter the dialog once it's not movable anymore
 
           this.center();
         }
       }
-      /**
-       Inherited from {@link BaseComponent#trackingElement}.
-       */
-
     }, {
       key: "trackingElement",
       get: function get() {
@@ -85911,7 +85999,7 @@
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.21.6";
+  var version$1 = "4.21.7";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
