@@ -34,6 +34,13 @@ const closable = {
   OFF: 'off'
 };
 
+const keyCodes = {
+  UP: 38,
+  DOWN: 40,
+  LEFT: 37,
+  RIGHT: 39,
+};
+
 /**
  Enumeration for {@link Dialog} keyboard interaction options.
 
@@ -471,6 +478,8 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
   set movable(value) {
     this._movable = transform.booleanAttr(value);
     this._reflectAttribute('movable', this._movable);
+    const wrapper = this;
+    const header = this._elements.headerWrapper;
 
     // Movable and fullscreen are not compatible
     if (this._movable) {
@@ -480,14 +489,59 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
     if (this._movable) {
       const dragAction = new DragAction(this);
       dragAction.handle = this._elements.headerWrapper;
+
+      if (header && wrapper) {
+        if (!this.keyboardHandler) {
+          this.keyboardHandler = (event) => {
+            this.dialogKeyboardHandler(event, wrapper, header);
+          };
+        }
+
+        // make sure the event is added when fullscreen is false
+        commons.nextFrame(() => {
+          if (!this.fullscreen) {
+            commons.nextFrame(() => this.addKeyboardHandler(header, wrapper));
+          }
+        });
+      }
     } else {
       // Disables any dragging interaction
       if (this.dragAction) {
         this.dragAction.destroy();
       }
 
+      // Remove any previos added keyboard listener
+      commons.nextFrame(() => {
+        if (this.fullscreen) {
+          this.removeKeyboardHandler(header);
+        }
+      });
+
       // Recenter the dialog once it's not movable anymore
       this.center();
+    }
+  }
+
+  addKeyboardHandler(header, wrapper) {
+    if (!header || !this._movable) return;
+
+    header.setAttribute("tabindex", 0);
+    header.setAttribute("aria-label", i18n.get("Move Dialog"));
+  
+    if (!this.keyboardHandler) {
+      this.keyboardHandler = (event) => {
+        this.dialogKeyboardHandler(event, wrapper, header);
+      };
+    }
+
+    header.addEventListener("keydown", this.keyboardHandler);
+  }
+
+  removeKeyboardHandler(header) {
+    if (header && this.keyboardHandler) {
+      header.removeAttribute("tabindex");
+      header.removeAttribute("aria-label");
+      header.removeEventListener("keydown", this.keyboardHandler);
     }
   }
 
@@ -641,6 +695,34 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
     this.style.left = '';
 
     return this;
+  }
+
+  dialogKeyboardHandler (event, dialog, header) {
+    if (document.activeElement !== header) {
+      return;
+    }
+
+    let currentTop = parseInt(dialog.style.top) || 0;
+    let currentLeft = parseInt(dialog.style.left) || 0;
+    var step = 10;
+
+    switch (event.keyCode) {
+      case keyCodes.UP:
+        dialog.style.top = (currentTop - step) + 'px';
+        break;
+
+      case keyCodes.DOWN:
+        dialog.style.top = (currentTop + step) + 'px';
+        break;
+
+      case keyCodes.LEFT:
+        dialog.style.left = (currentLeft - step) + 'px';
+        break;
+
+      case keyCodes.RIGHT:
+        dialog.style.left = (currentLeft + step) + 'px';
+        break;
+    }
   }
 
   get _contentZones() {
