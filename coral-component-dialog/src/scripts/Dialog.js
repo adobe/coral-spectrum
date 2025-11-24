@@ -493,7 +493,7 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
       if (header && wrapper) {
         if (!this.keyboardHandler) {
           this.keyboardHandler = (event) => {
-            this.dialogKeyboardHandler(event, wrapper);
+            this.dialogKeyboardHandler(event, wrapper, header);
           };
         }
 
@@ -530,7 +530,7 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
   
     if (!this.keyboardHandler) {
       this.keyboardHandler = (event) => {
-        this.dialogKeyboardHandler(event, wrapper);
+        this.dialogKeyboardHandler(event, wrapper, header);
       };
     }
 
@@ -697,8 +697,11 @@ const Dialog = Decorator(class extends BaseOverlay(BaseComponent(HTMLElement)) {
     return this;
   }
 
-  dialogKeyboardHandler (event, dialog) {
-    console.log("trigger");
+  dialogKeyboardHandler (event, dialog, header) {
+    if (document.activeElement !== header) {
+      return;
+    }
+
     let currentTop = parseInt(dialog.style.top) || 0;
     let currentLeft = parseInt(dialog.style.left) || 0;
     var step = 10;
