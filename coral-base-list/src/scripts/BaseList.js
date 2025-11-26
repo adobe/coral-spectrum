@@ -244,12 +244,17 @@ const BaseList = (superClass) => class extends superClass {
     // Default reflected attributes
     if (!this._interaction) {
       this.interaction = interaction.ON;
-    }
+    } 
 
     commons.nextFrame(() => {
-      const children = this.childNodes;
-      if (this.interaction === interaction.ON && children.length > 0) {
-        children.forEach((child, i) => this.setIndex(child, i === 0 ? 0 : -1));
+      const items = this.querySelectorAll(`
+        coral-list-item:not([disabled]):not([hidden]),
+        button[is="coral-buttonlist-item"]:not([disabled]):not([hidden]),
+        a[is="coral-anchorlist-item"]:not([disabled]):not([hidden])
+      `);
+
+      if (this.interaction === interaction.ON && items.length > 0) {
+        items.forEach((item, i) => this.setIndex(item, i === 0 ? 0 : -1));
       }
     });
   }
