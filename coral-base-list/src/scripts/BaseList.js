@@ -246,17 +246,6 @@ const BaseList = (superClass) => class extends superClass {
       this.interaction = interaction.ON;
     } 
 
-    commons.nextFrame(() => {
-      const items = this.querySelectorAll(`
-        coral-list-item:not([disabled]):not([hidden]),
-        button[is="coral-buttonlist-item"]:not([disabled]):not([hidden]),
-        a[is="coral-anchorlist-item"]:not([disabled]):not([hidden])
-      `);
-
-      if (this.interaction === interaction.ON && items.length > 0) {
-        items.forEach((item, i) => this.setIndex(item, i === 0 ? 0 : -1));
-      }
-    });
   }
 };
 
