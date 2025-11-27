@@ -130,7 +130,6 @@ const BaseList = (superClass) => class extends superClass {
     }
 
     const items = this._getSelectableItems();
-    items.forEach((item, i) => this.setIndex(item, i === 0 ? 0 : -1));
     items[0].focus();
   }
 
@@ -141,9 +140,6 @@ const BaseList = (superClass) => class extends superClass {
     }
 
     const items = this._getSelectableItems();
-    items.forEach((item, i) =>
-      this.setIndex(item, i === items.length - 1 ? 0 : -1)
-    );
     items[items.length - 1].focus();
   }
 
@@ -163,11 +159,8 @@ const BaseList = (superClass) => class extends superClass {
     }
 
     if (index < items.length - 1) {
-      this.setIndex(target, -1);
-      this.setIndex(items[index + 1], 0);
       items[index + 1].focus();
     } else {
-      items.forEach((item, i) => this.setIndex(item, i === 0 ? 0 : -1));
       items[0].focus();
     }
   }
@@ -188,13 +181,8 @@ const BaseList = (superClass) => class extends superClass {
     }
 
     if (index > 0) {
-      this.setIndex(target, -1);
-      this.setIndex(items[index - 1], 0);
       items[index - 1].focus();
     } else {
-      items.forEach((item, i) =>
-        this.setIndex(item, i === items[length - 1] ? 0 : -1)
-      );
       items[items.length - 1].focus();
     }
   }
@@ -212,12 +200,6 @@ const BaseList = (superClass) => class extends superClass {
       if (items.length > 0) {
         items[0].focus();
       }
-    }
-  }
-
-  setIndex(element, value) {
-    if (element instanceof HTMLElement) {
-      element.setAttribute("tabindex", value);
     }
   }
 
