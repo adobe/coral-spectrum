@@ -11,7 +11,7 @@
  */
 
 import {SelectableCollection} from '../../../coral-collection';
-import {commons, transform, validate} from '../../../coral-utils';
+import {transform, validate} from '../../../coral-utils';
 
 const CLASSNAME = '_coral-Menu';
 
@@ -244,8 +244,7 @@ const BaseList = (superClass) => class extends superClass {
     // Default reflected attributes
     if (!this._interaction) {
       this.interaction = interaction.ON;
-    } 
-
+    }
   }
 };
 
