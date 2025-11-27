@@ -1,3 +1,12 @@
+## [4.21.8](https://github.com/adobe/coral-spectrum/compare/v4.21.7...v4.21.8) (2025-11-27)
+
+
+### Bug Fixes
+
+* SITES-37686 Insert New Component Panel Not Keyboard Accessible i… ([#401](https://github.com/adobe/coral-spectrum/issues/401)) ([557f96c](https://github.com/adobe/coral-spectrum/commit/557f96c169049da80dd0b728a8862f9eb1fc94ef))
+* SITES-37686 Insert New Component Panel Not Keyboard Accessible in List Items ([#399](https://github.com/adobe/coral-spectrum/issues/399)) ([fbb01af](https://github.com/adobe/coral-spectrum/commit/fbb01af420abc16074a89659d553f4035b66846a))
+* SITES-37686 revert ([#400](https://github.com/adobe/coral-spectrum/issues/400)) ([2d8d85d](https://github.com/adobe/coral-spectrum/commit/2d8d85dbc661d1cddc6aef0c6d9308041d4a1566))
+
 ## [4.21.7](https://github.com/adobe/coral-spectrum/compare/v4.21.6...v4.21.7) (2025-10-30)
 
 
