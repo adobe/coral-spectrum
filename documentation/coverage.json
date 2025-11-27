@@ -1,6 +1,6 @@
 {
-  "coverage": "60.13%",
-  "expectCount": 1688,
+  "coverage": "60.09%",
+  "expectCount": 1689,
   "actualCount": 1015,
   "files": {
     "coral-spectrum/coral-base-button/src/scripts/BaseButton.js": {
@@ -73,14 +73,15 @@
       ]
     },
     "coral-spectrum/coral-base-list/src/scripts/BaseList.js": {
-      "expectCount": 20,
+      "expectCount": 21,
       "actualCount": 15,
       "undocumentLines": [
         16,
         42,
         65,
         96,
-        120
+        120,
+        218
       ]
     },
     "coral-spectrum/coral-base-list/src/scripts/BaseListItem.js": {

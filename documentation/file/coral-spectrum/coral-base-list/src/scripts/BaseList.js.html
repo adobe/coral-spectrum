@@ -571,6 +571,7 @@ class BaseList extends superClass {
     }
 
     const items = this._getSelectableItems();
+    items.forEach((item, i) =&gt; this.setIndex(item, i === 0 ? 0 : -1));
     items[0].focus();
   }
 
@@ -581,6 +582,9 @@ class BaseList extends superClass {
     }
 
     const items = this._getSelectableItems();
+    items.forEach((item, i) =&gt;
+      this.setIndex(item, i === items.length - 1 ? 0 : -1)
+    );
     items[items.length - 1].focus();
   }
 
@@ -600,8 +604,11 @@ class BaseList extends superClass {
     }
 
     if (index &lt; items.length - 1) {
+      this.setIndex(target, -1);
+      this.setIndex(items[index + 1], 0);
       items[index + 1].focus();
     } else {
+      items.forEach((item, i) =&gt; this.setIndex(item, i === 0 ? 0 : -1));
       items[0].focus();
     }
   }
@@ -622,8 +629,13 @@ class BaseList extends superClass {
     }
 
     if (index &gt; 0) {
+      this.setIndex(target, -1);
+      this.setIndex(items[index - 1], 0);
       items[index - 1].focus();
     } else {
+      items.forEach((item, i) =&gt;
+        this.setIndex(item, i === items[length - 1] ? 0 : -1)
+      );
       items[items.length - 1].focus();
     }
   }
@@ -641,6 +653,12 @@ class BaseList extends superClass {
       if (items.length &gt; 0) {
         items[0].focus();
       }
+    }
+  }
+
+  setIndex(element, value) {
+    if (element instanceof HTMLElement) {
+      element.setAttribute(&quot;tabindex&quot;, value);
     }
   }
 

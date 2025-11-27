@@ -17994,12 +17994,17 @@
       }, {
         key: "_focusFirstItem",
         value: function _focusFirstItem(event) {
+          var _this2 = this;
+
           if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
             return;
           }
 
           var items = this._getSelectableItems();
 
+          items.forEach(function (item, i) {
+            return _this2.setIndex(item, i === 0 ? 0 : -1);
+          });
           items[0].focus();
         }
         /** @private */
@@ -18007,12 +18012,17 @@
       }, {
         key: "_focusLastItem",
         value: function _focusLastItem(event) {
+          var _this3 = this;
+
           if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
             return;
           }
 
           var items = this._getSelectableItems();
 
+          items.forEach(function (item, i) {
+            return _this3.setIndex(item, i === items.length - 1 ? 0 : -1);
+          });
           items[items.length - 1].focus();
         }
         /** @private */
@@ -18020,6 +18030,8 @@
       }, {
         key: "_focusNextItem",
         value: function _focusNextItem(event) {
+          var _this4 = this;
+
           if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
             return;
           }
@@ -18036,8 +18048,13 @@
           }
 
           if (index < items.length - 1) {
+            this.setIndex(target, -1);
+            this.setIndex(items[index + 1], 0);
             items[index + 1].focus();
           } else {
+            items.forEach(function (item, i) {
+              return _this4.setIndex(item, i === 0 ? 0 : -1);
+            });
             items[0].focus();
           }
         }
@@ -18046,6 +18063,8 @@
       }, {
         key: "_focusPreviousItem",
         value: function _focusPreviousItem(event) {
+          var _this5 = this;
+
           if (this.interaction === interaction.OFF || !this._eventIsAtTarget(event)) {
             return;
           }
@@ -18062,8 +18081,13 @@
           }
 
           if (index > 0) {
+            this.setIndex(target, -1);
+            this.setIndex(items[index - 1], 0);
             items[index - 1].focus();
           } else {
+            items.forEach(function (item, i) {
+              return _this5.setIndex(item, i === items[length - 1] ? 0 : -1);
+            });
             items[items.length - 1].focus();
           }
         }
@@ -18088,6 +18112,13 @@
             if (items.length > 0) {
               items[0].focus();
             }
+          }
+        }
+      }, {
+        key: "setIndex",
+        value: function setIndex(element, value) {
+          if (element instanceof HTMLElement) {
+            element.setAttribute("tabindex", value);
           }
         }
         /**

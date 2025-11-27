@@ -2010,6 +2010,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "coral-spectrum/coral-base-list/src/scripts/baselist.js~baselist#setindex",
+    "class/coral-spectrum/coral-base-list/src/scripts/BaseList.js~BaseList.html#instance-method-setIndex",
+    "coral-spectrum/coral-base-list/src/scripts/BaseList.js~BaseList#setIndex",
+    "method"
+  ],
+  [
     "coral-spectrum/coral-base-list/src/scripts/baselist.js~baselist.interaction",
     "class/coral-spectrum/coral-base-list/src/scripts/BaseList.js~BaseList.html#static-member-interaction",
     "coral-spectrum/coral-base-list/src/scripts/BaseList.js~BaseList.interaction",
