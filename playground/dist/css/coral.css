@@ -22131,7 +22131,9 @@ coral-colorinput-item {
   border-right-color: rgb(57, 57, 57);
 }
 .coral--darkest ._coral-ColorInput-swatch[selected] button ._coral-Icon {
-  color: rgb(255, 255, 255);
+  fill: rgb(255, 255, 255);
+  stroke: rgba(0,0,0,0.7);
+  stroke-width: 2px;
 }
 .coral--darkest ._coral-ColorInput-swatch[selected] button._coral-ColorInput-swatch-novalue ._coral-Icon {
   color: rgb(110, 110, 110);
@@ -22155,7 +22157,9 @@ coral-colorinput-item {
   border-right-color: rgb(74, 74, 74);
 }
 .coral--dark ._coral-ColorInput-swatch[selected] button ._coral-Icon {
-  color: rgb(255, 255, 255);
+  fill: rgb(255, 255, 255);
+  stroke: rgba(0,0,0,0.7);
+  stroke-width: 2px;
 }
 .coral--dark ._coral-ColorInput-swatch[selected] button._coral-ColorInput-swatch-novalue ._coral-Icon {
   color: rgb(110, 110, 110);
@@ -22179,7 +22183,9 @@ coral-colorinput-item {
   border-right-color: rgb(225, 225, 225);
 }
 .coral--light ._coral-ColorInput-swatch[selected] button ._coral-Icon {
-  color: rgb(255, 255, 255);
+  fill: rgb(255, 255, 255);
+  stroke: rgba(0,0,0,0.7);
+  stroke-width: 2px;
 }
 .coral--light ._coral-ColorInput-swatch[selected] button._coral-ColorInput-swatch-novalue ._coral-Icon {
   color: rgb(110, 110, 110);
@@ -22203,7 +22209,9 @@ coral-colorinput-item {
   border-right-color: rgb(234, 234, 234);
 }
 .coral--lightest ._coral-ColorInput-swatch[selected] button ._coral-Icon {
-  color: rgb(255, 255, 255);
+  fill: rgb(255, 255, 255);
+  stroke: rgba(0,0,0,0.7);
+  stroke-width: 2px;
 }
 .coral--lightest ._coral-ColorInput-swatch[selected] button._coral-ColorInput-swatch-novalue ._coral-Icon {
   color: rgb(110, 110, 110);
