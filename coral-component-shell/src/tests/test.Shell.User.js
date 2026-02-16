@@ -74,6 +74,7 @@ describe('Shell.User', function () {
 
       it('should have role of heading', function () {
         expect(el.name.role).to.equal('heading');
+        expect(el.name.ariaLevel).to.equal('2');
       });
     });
 
