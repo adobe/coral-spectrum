@@ -49,6 +49,9 @@ class ShellUser extends BaseComponent(HTMLElement) {
       footer: this.querySelector('coral-shell-user-footer') || document.createElement('coral-shell-user-footer')
     };
 
+    this._elements.name.setAttribute("role", "heading");
+    this._elements.name.setAttribute("aria-level", 2);
+
     user.call(this._elements, {icon: avatar.DEFAULT});
   }
 
@@ -202,6 +205,9 @@ class ShellUser extends BaseComponent(HTMLElement) {
     super.render();
 
     this.classList.add(CLASSNAME);
+
+
+    console.log(this._elements);
 
     const frag = document.createDocumentFragment();
 
