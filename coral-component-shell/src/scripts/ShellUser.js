@@ -206,9 +206,6 @@ class ShellUser extends BaseComponent(HTMLElement) {
 
     this.classList.add(CLASSNAME);
 
-
-    console.log(this._elements);
-
     const frag = document.createDocumentFragment();
 
     // Render template
