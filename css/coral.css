@@ -12386,6 +12386,14 @@ button[is="coral-button"] {
 .coral--lightest ._coral-Tags-item--quiet.focus-ring {
   background-color: transparent;
 }
+.coral--lightest ._coral-Tags-item--deletable.focus-ring ._coral-ClearButton.focus-ring {
+  border-color: #378ef0;
+  box-shadow: inset 0 0 0 3px #378ef0;
+}
+.coral--lightest ._coral-Tags-item--deletable.focus-ring:has(._coral-ClearButton:focus) {
+  border-color: #959595;
+  box-shadow: none;
+}
 .coral--dark ._coral-Tags-item--quiet,
 .coral--dark ._coral-Tags-item--quiet:hover {
   border-color: transparent;
