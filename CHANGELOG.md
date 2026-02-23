@@ -1,3 +1,10 @@
+## [4.21.9](https://github.com/adobe/coral-spectrum/compare/v4.21.8...v4.21.9) (2026-02-23)
+
+
+### Bug Fixes
+
+* SITES-24731]Text should be a heading ([#405](https://github.com/adobe/coral-spectrum/issues/405)) ([6a80149](https://github.com/adobe/coral-spectrum/commit/6a801493236c253484d288a80c3f120431bab59a))
+
 ## [4.21.8](https://github.com/adobe/coral-spectrum/compare/v4.21.7...v4.21.8) (2025-11-27)
 
 
