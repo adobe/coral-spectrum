@@ -71,6 +71,11 @@ describe('Shell.User', function () {
         el.name = newContentZone;
         expect(el.name).to.equal(newContentZone);
       });
+
+      it('should have role of heading', function () {
+        expect(el.name.role).to.equal('heading');
+        expect(el.name.ariaLevel).to.equal('2');
+      });
     });
 
     describe('#heading', function () {
