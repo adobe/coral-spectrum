@@ -490,6 +490,9 @@ class ShellUser extends BaseComponent(HTMLElement) {
       footer: this.querySelector(&apos;coral-shell-user-footer&apos;) || document.createElement(&apos;coral-shell-user-footer&apos;)
     };
 
+    this._elements.name.setAttribute(&apos;role&apos;, &apos;heading&apos;);
+    this._elements.name.setAttribute(&apos;aria-level&apos;, &apos;2&apos;);
+
     user.call(this._elements, {icon: avatar.DEFAULT});
   }
 

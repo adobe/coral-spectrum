@@ -71920,6 +71920,11 @@ var Coral = (function (exports) {
         content: _this.querySelector('coral-shell-user-content') || document.createElement('coral-shell-user-content'),
         footer: _this.querySelector('coral-shell-user-footer') || document.createElement('coral-shell-user-footer')
       };
+
+      _this._elements.name.setAttribute('role', 'heading');
+
+      _this._elements.name.setAttribute('aria-level', '2');
+
       template$T.call(_this._elements, {
         icon: avatar.DEFAULT
       });
