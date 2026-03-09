@@ -10741,6 +10741,9 @@ a._coral-ActionButton {
   background-color: transparent;
   border-color: transparent;
 }
+.coral--light ._coral-Button--warning:hover {
+  background-color: #b40000;
+}
 .coral--lightest ._coral-Button--secondary._coral-Button--quiet[variant="minimal"]:hover,
 .coral--lightest ._coral-Button--secondary._coral-Button--quiet[variant="minimal"]:active {
   background-color: transparent;
