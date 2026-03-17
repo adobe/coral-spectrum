@@ -18119,6 +18119,13 @@ var Coral = (function (exports) {
         value: function setIndex(element, value) {
           if (element instanceof HTMLElement) {
             element.setAttribute("tabindex", value);
+            var el = element.querySelectorAll("button:not([hidden])");
+            var buttonArray = Array.from(el).filter(function (item) {
+              return item.offsetParent;
+            });
+            buttonArray.forEach(function (item) {
+              item.setAttribute("tabindex", value);
+            });
           }
         }
         /**

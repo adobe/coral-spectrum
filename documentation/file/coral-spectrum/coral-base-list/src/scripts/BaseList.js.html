@@ -659,6 +659,11 @@ class BaseList extends superClass {
   setIndex(element, value) {
     if (element instanceof HTMLElement) {
       element.setAttribute(&quot;tabindex&quot;, value);
+      const el = element.querySelectorAll(&quot;button:not([hidden])&quot;);
+      const buttonArray = Array.from(el).filter(item =&gt; item.offsetParent);
+      buttonArray.forEach(item =&gt; {
+        item.setAttribute(&quot;tabindex&quot;, value);
+      });
     }
   }
 
