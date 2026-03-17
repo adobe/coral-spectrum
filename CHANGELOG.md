@@ -1,3 +1,10 @@
+## [4.21.10](https://github.com/adobe/coral-spectrum/compare/v4.21.9...v4.21.10) (2026-03-17)
+
+
+### Bug Fixes
+
+* SITES-25253 Focus indicator for the Swatch button in Annotation modal is hard to detect ([#407](https://github.com/adobe/coral-spectrum/issues/407)) ([bd36d83](https://github.com/adobe/coral-spectrum/commit/bd36d83d27f0bd42c558c3317221e44dcbd2081d))
+
 ## [4.21.9](https://github.com/adobe/coral-spectrum/compare/v4.21.8...v4.21.9) (2026-02-23)
 
 
