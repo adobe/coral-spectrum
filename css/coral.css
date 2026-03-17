@@ -22054,24 +22054,18 @@ coral-colorinput-item {
   height: 38px;
   width: 38px;
 }
-._coral-ColorInput-preview {
+._coral-ColorInput-preview.focus-ring {
   border-radius: 4px;
   box-sizing: border-box;
   background-origin: border-box;
 }
-._coral-ColorInput-preview:before {
-  display: block;
+._coral-ColorInput-preview.focus-ring:before {
+  content: '';
   position: absolute;
-  left: 0;
-  top: 0;
-  z-index: -1;
-  content: "";
-  width: 100%;
-  height: 100%;
-  background-image: url("data:image/svg+xml;utf8,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='GridPattern' x='6' y='6' width='16' height='16' patternUnits='userSpaceOnUse'%3E%3Crect x='0' y='0' width='8' height='8' fill='%23ffffff' /%3E%3Crect x='8' y='0' width='8' height='8' fill='%23a0a0a0' /%3E%3Crect x='0' y='8' width='8' height='8' fill='%23a0a0a0' /%3E%3Crect x='8' y='8' width='8' height='8' fill='%23ffffff' /%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url%28%23GridPattern%29' x='0' y='0' width='100%25' height='100%25' /%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
+  inset: 0;
+  box-shadow: 0 0 0 3px rgb(38, 128, 235);
+  border-radius: 4px;
+  margin: -4px;
 }
 ._coral-ColorInput--novalue ._coral-ColorInput-preview,
 ._coral-ColorInput-preview--novalue,
