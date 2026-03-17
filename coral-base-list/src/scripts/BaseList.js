@@ -218,6 +218,11 @@ const BaseList = (superClass) => class extends superClass {
   setIndex(element, value) {
     if (element instanceof HTMLElement) {
       element.setAttribute("tabindex", value);
+      const el = element.querySelectorAll("button:not([hidden])");
+      const buttonArray = Array.from(el).filter(item => item.offsetParent);
+      buttonArray.forEach(item => {
+        item.setAttribute("tabindex", value);
+      });
     }
   }
 
