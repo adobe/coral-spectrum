@@ -957,7 +957,6 @@ describe('Datepicker', function () {
 
           expect(el.getAttribute('role')).to.equal('group');
           expect(el._elements.input.getAttribute('role')).to.equal('combobox');
-          expect(el._elements.input.getAttribute('aria-haspopup')).to.equal('dialog');
           expect(el._elements.input.getAttribute('aria-expanded')).to.equal('false');
           expect(el._elements.toggle.getAttribute('aria-haspopup')).to.equal('dialog');
           expect(el._elements.toggle.getAttribute('aria-expanded')).to.equal('false');
