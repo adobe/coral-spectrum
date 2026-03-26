@@ -150,6 +150,19 @@ const SelectListItem = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   /**
+   Sync aria-selected with {@link #selected} when the element has a role that supports it.
+   Must run after {@link #render} assigns the default {@code role="option"}, because selection
+   may be set before the role attribute exists (WCAG 4.1.2).
+   @private
+   */
+  _syncAriaSelected() {
+    if (this.hasAttribute('role') &&
+      VALID_ARIA_SELECTED_ROLES_REGEXP.test(this.getAttribute('role'))) {
+      this.setAttribute('aria-selected', this._selected);
+    }
+  }
+
+  /**
    Whether the item is selected.
 
    @type {Boolean}
@@ -172,10 +185,7 @@ const SelectListItem = Decorator(class extends BaseComponent(HTMLElement) {
     this._reflectAttribute('selected', this.disabled ? false : this._selected);
 
     this.classList.toggle('is-selected', this._selected);
-    if (this.hasAttribute('role') &&
-      VALID_ARIA_SELECTED_ROLES_REGEXP.test(this.getAttribute('role'))) {
-      this.setAttribute('aria-selected', this._selected);
-    }
+    this._syncAriaSelected();
 
     // Toggle check icon
     this._elements.checkIcon.hidden = !this._selected;
@@ -245,6 +255,8 @@ const SelectListItem = Decorator(class extends BaseComponent(HTMLElement) {
 
     // Assign the content zones, moving them into place in the process
     this.content = content;
+
+    this._syncAriaSelected();
   }
 });
 
