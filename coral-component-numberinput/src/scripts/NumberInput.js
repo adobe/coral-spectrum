@@ -822,11 +822,13 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
 
     const frag = document.createDocumentFragment();
 
-    const templateHandleNames = ['presentation', 'input'];
+    const templateHandleNames = ['presentation', 'input', 'validationMessage'];
 
-    // Render main template
+    // Render main template (validationMessage must be connected — otherwise hint text is not visible and
+    // aria-describedby / aria-errormessage cannot resolve).
     frag.appendChild(this._elements.input);
     frag.appendChild(this._elements.presentation);
+    frag.appendChild(this._elements.validationMessage);
 
     while (this.firstChild) {
       const child = this.firstChild;
@@ -842,13 +844,13 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
 
     this.appendChild(frag);
 
-    this._ensureValidationMessageObserver();
+    this._ensureValidationMessageObservers();
     this._syncValidationAccessibility();
   }
 
   /** @ignore */
   disconnectedCallback() {
-    this._disconnectValidationMessageObserver();
+    this._disconnectValidationMessageObservers();
     super.disconnectedCallback();
   }
 
@@ -903,29 +905,76 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
     this._setAriaDescribedByIds(ids);
   }
 
-  /** @ignore */
-  _ensureValidationMessageObserver() {
-    const input = this._elements.input;
-    if (!input || this._validationMessageObserver) {
-      return;
+  /**
+   Whether the field is in an error state (host or inner), including class-based markers used by Granite validation.
+
+   @ignore
+   */
+  _isInErrorState() {
+    if (this._invalid) {
+      return true;
     }
 
-    this._validationMessageObserver = new MutationObserver(() => {
-      if (!this._disconnected) {
-        this._syncValidationAccessibility();
-      }
-    });
-    this._validationMessageObserver.observe(input, {
-      attributes: true,
-      attributeFilter: ['title', 'invalid']
-    });
+    if (this.classList.contains('is-invalid')) {
+      return true;
+    }
+
+    const input = this._elements.input;
+    if (!input) {
+      return false;
+    }
+
+    if (input.invalid) {
+      return true;
+    }
+
+    if (input.classList.contains('is-invalid')) {
+      return true;
+    }
+
+    return false;
   }
 
   /** @ignore */
-  _disconnectValidationMessageObserver() {
-    if (this._validationMessageObserver) {
-      this._validationMessageObserver.disconnect();
-      this._validationMessageObserver = null;
+  _ensureValidationMessageObservers() {
+    const input = this._elements.input;
+    if (!input) {
+      return;
+    }
+
+    const scheduleSync = () => {
+      if (!this._disconnected) {
+        this._syncValidationAccessibility();
+      }
+    };
+
+    if (!this._validationMessageObserverInput) {
+      this._validationMessageObserverInput = new MutationObserver(scheduleSync);
+      this._validationMessageObserverInput.observe(input, {
+        attributes: true,
+        attributeFilter: ['title', 'invalid', 'class']
+      });
+    }
+
+    if (!this._validationMessageObserverHost) {
+      this._validationMessageObserverHost = new MutationObserver(scheduleSync);
+      this._validationMessageObserverHost.observe(this, {
+        attributes: true,
+        attributeFilter: ['title', 'invalid', 'class']
+      });
+    }
+  }
+
+  /** @ignore */
+  _disconnectValidationMessageObservers() {
+    if (this._validationMessageObserverInput) {
+      this._validationMessageObserverInput.disconnect();
+      this._validationMessageObserverInput = null;
+    }
+
+    if (this._validationMessageObserverHost) {
+      this._validationMessageObserverHost.disconnect();
+      this._validationMessageObserverHost = null;
     }
   }
 
@@ -938,12 +987,29 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
       return;
     }
 
+    if (!panel.isConnected) {
+      return;
+    }
+
     const messageId = this._getValidationMessageId();
     if (!messageId) {
       return;
     }
 
-    if (!this._invalid) {
+    const innerTitle = (input.getAttribute('title') || '').trim();
+    const hostTitle = (this.getAttribute('title') || '').trim();
+    if (innerTitle) {
+      this._cachedTitleValidationMessage = innerTitle;
+    } else if (hostTitle) {
+      this._cachedTitleValidationMessage = hostTitle;
+    }
+
+    const validationMessage = (input.validationMessage || '').trim();
+    const text = innerTitle || hostTitle || validationMessage || this._cachedTitleValidationMessage || '';
+
+    const shouldShow = Boolean(text) && (this._isInErrorState() || innerTitle || hostTitle || validationMessage);
+
+    if (!shouldShow) {
       this._cachedTitleValidationMessage = '';
       panel.textContent = '';
       panel.hidden = true;
@@ -953,26 +1019,7 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
       }
 
       this._removeDescribedById(messageId);
-      return;
-    }
-
-    const titleText = (input.getAttribute('title') || '').trim();
-    if (titleText) {
-      this._cachedTitleValidationMessage = titleText;
-    }
-
-    const validationMessage = (input.validationMessage || '').trim();
-    const text = titleText || validationMessage || this._cachedTitleValidationMessage || '';
-
-    if (!text) {
-      panel.textContent = '';
-      panel.hidden = true;
-      panel.removeAttribute('aria-live');
-      if (panel.getAttribute('id') === messageId) {
-        panel.removeAttribute('id');
-      }
-
-      this._removeDescribedById(messageId);
+      input.removeAttribute('aria-errormessage');
       return;
     }
 
@@ -981,9 +1028,12 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
     panel.hidden = false;
     panel.setAttribute('aria-live', 'polite');
     this._addDescribedById(messageId);
+    input.setAttribute('aria-errormessage', messageId);
 
-    if (titleText) {
+    if (innerTitle) {
       input.removeAttribute('title');
+    } else if (hostTitle) {
+      this.removeAttribute('title');
     }
   }
 });

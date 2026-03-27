@@ -135,11 +135,14 @@ describe('NumberInput', function () {
         input.setAttribute('title', 'Use a value between 0 and 10');
         el.invalid = true;
 
+        expect(panel.isConnected).to.be.true;
+        expect(el.contains(panel)).to.be.true;
         expect(panel.hidden).to.be.false;
         expect(panel.textContent).to.equal('Use a value between 0 and 10');
         expect(panel.id).to.equal(`${input.id}-validation-message`);
         expect(input.getAttribute('title')).to.be.null;
         expect(input.getAttribute('aria-describedby').split(/\s+/)).to.include(panel.id);
+        expect(input.getAttribute('aria-errormessage')).to.equal(panel.id);
       });
 
       it('should preserve existing aria-describedby ids when adding the validation message', function () {
@@ -170,6 +173,7 @@ describe('NumberInput', function () {
         expect(panel.hidden).to.be.true;
         expect(panel.textContent).to.equal('');
         expect(input.getAttribute('aria-describedby')).to.equal('existing-hint');
+        expect(input.getAttribute('aria-errormessage')).to.be.null;
       });
 
       it('should update when title is set after invalid becomes true', function () {
@@ -183,6 +187,24 @@ describe('NumberInput', function () {
         return Promise.resolve().then(function () {
           expect(panel.hidden).to.be.false;
           expect(panel.textContent).to.equal('Added later');
+          expect(input.getAttribute('aria-describedby').split(/\s+/)).to.include(panel.id);
+          expect(input.getAttribute('aria-errormessage')).to.equal(panel.id);
+        });
+      });
+
+      it('should surface host title when host has is-invalid class (Granite-style marker)', function () {
+        const el = helpers.build(new NumberInput());
+        const input = el._elements.input;
+        const panel = el._elements.validationMessage;
+
+        el.classList.add('is-invalid');
+        el.setAttribute('title', 'Error from wrapper');
+
+        return Promise.resolve().then(function () {
+          expect(panel.isConnected).to.be.true;
+          expect(panel.hidden).to.be.false;
+          expect(panel.textContent).to.equal('Error from wrapper');
+          expect(el.getAttribute('title')).to.be.null;
           expect(input.getAttribute('aria-describedby').split(/\s+/)).to.include(panel.id);
         });
       });

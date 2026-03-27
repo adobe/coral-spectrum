@@ -42,8 +42,16 @@
   -moz-appearance: textfield;
 }
 
+// Stepper is a horizontal flex row; force the validation line onto its own row so it stays visible.
+._coral-Stepper[role="group"] {
+  flex-wrap: wrap;
+}
+
 ._coral-Stepper-validationMessage {
+  box-sizing: border-box;
   display: block;
+  flex: 1 0 100%;
   width: 100%;
+  max-width: 100%;
   margin-top: var(--spectrum-global-dimension-size-50, 4px);
 }
