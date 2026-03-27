@@ -22,6 +22,7 @@ describe('NumberInput', function () {
     expect(instance._elements.input).to.exist;
     expect(instance._elements.stepUp).to.exist;
     expect(instance._elements.stepDown).to.exist;
+    expect(instance._elements.validationMessage).to.exist;
 
     if (instance._elements.input.type === 'text') {
       expect(instance._elements.input.getAttribute('role')).to.equal('spinbutton');
@@ -122,6 +123,68 @@ describe('NumberInput', function () {
 
         expect(el.classList.contains('is-invalid')).to.be.false;
         expect(el.getAttribute('invalid')).to.be.null;
+      });
+    });
+
+    describe('validation message accessibility', function () {
+      it('should surface title text below the field with aria-describedby when invalid', function () {
+        const el = helpers.build(new NumberInput());
+        const input = el._elements.input;
+        const panel = el._elements.validationMessage;
+
+        input.setAttribute('title', 'Use a value between 0 and 10');
+        el.invalid = true;
+
+        expect(panel.hidden).to.be.false;
+        expect(panel.textContent).to.equal('Use a value between 0 and 10');
+        expect(panel.id).to.equal(`${input.id}-validation-message`);
+        expect(input.getAttribute('title')).to.be.null;
+        expect(input.getAttribute('aria-describedby').split(/\s+/)).to.include(panel.id);
+      });
+
+      it('should preserve existing aria-describedby ids when adding the validation message', function () {
+        const el = helpers.build(new NumberInput());
+        const input = el._elements.input;
+        const panel = el._elements.validationMessage;
+
+        input.setAttribute('aria-describedby', 'existing-hint');
+        input.setAttribute('title', 'Correction needed');
+        el.invalid = true;
+
+        const ids = input.getAttribute('aria-describedby').split(/\s+/).filter(Boolean);
+        expect(ids).to.include('existing-hint');
+        expect(ids).to.include(panel.id);
+      });
+
+      it('should hide the validation region and drop its describedby id when no longer invalid', function () {
+        const el = helpers.build(new NumberInput());
+        const input = el._elements.input;
+        const panel = el._elements.validationMessage;
+
+        input.setAttribute('aria-describedby', 'existing-hint');
+        input.setAttribute('title', 'Correction needed');
+        el.invalid = true;
+
+        el.invalid = false;
+
+        expect(panel.hidden).to.be.true;
+        expect(panel.textContent).to.equal('');
+        expect(input.getAttribute('aria-describedby')).to.equal('existing-hint');
+      });
+
+      it('should update when title is set after invalid becomes true', function () {
+        const el = helpers.build(new NumberInput());
+        const input = el._elements.input;
+        const panel = el._elements.validationMessage;
+
+        el.invalid = true;
+        input.setAttribute('title', 'Added later');
+
+        return Promise.resolve().then(function () {
+          expect(panel.hidden).to.be.false;
+          expect(panel.textContent).to.equal('Added later');
+          expect(input.getAttribute('aria-describedby').split(/\s+/)).to.include(panel.id);
+        });
       });
     });
   });
