@@ -1,3 +1,10 @@
+## [4.21.11](https://github.com/adobe/coral-spectrum/compare/v4.21.10...v4.21.11) (2026-04-07)
+
+
+### Bug Fixes
+
+* SITES-25263 Date field in Timewarp modal has aria-haspopup="dialog" ([#408](https://github.com/adobe/coral-spectrum/issues/408)) ([a30bad0](https://github.com/adobe/coral-spectrum/commit/a30bad09e824ab4f97798146b58d730fc4e4a4bb))
+
 ## [4.21.10](https://github.com/adobe/coral-spectrum/compare/v4.21.9...v4.21.10) (2026-03-17)
 
 
