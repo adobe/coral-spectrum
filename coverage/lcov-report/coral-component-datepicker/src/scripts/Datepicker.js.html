@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.73% </span>
+                <span class="strong">92.67% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>255/275</span>
+                <span class='fraction'>253/273</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.73% </span>
+                <span class="strong">92.67% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>255/275</span>
+                <span class='fraction'>253/273</span>
             </div>
         
             
@@ -941,9 +941,7 @@
 <a name='L883'></a><a href='#L883'>883</a>
 <a name='L884'></a><a href='#L884'>884</a>
 <a name='L885'></a><a href='#L885'>885</a>
-<a name='L886'></a><a href='#L886'>886</a>
-<a name='L887'></a><a href='#L887'>887</a>
-<a name='L888'></a><a href='#L888'>888</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L886'></a><a href='#L886'>886</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1301,8 +1299,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">480x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">480x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2213,9 +2209,9 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
    */
   get value() {
     return this._getValueAsString(this._value, this.valueFormat);
-  }
+  }<span class="missing-if-branch" title="else path not taken" >E</span>
 &nbsp;
-  set <span class="missing-if-branch" title="else path not taken" >E</span>value(value) {
+  set value(value) {
     // This is used to change the value if valueformat is also set but afterwards
     this._originalValue = value;
 &nbsp;
@@ -2247,16 +2243,16 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
   /**
    The datepicker's variant. See {@link DatepickerVariantEnum}.
 &nbsp;
-   @type {DatepickerVariantEnum}
+   @type {DatepickerVariantEnum}<span class="branch-1 cbranch-no" title="branch not covered" ></span>
    @default DatepickerVariantEnum.DEFAULT
-   @htmlattribute variant<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+   @htmlattribute variant
    @htmlattributereflected
    */
   get variant() {
-    return this._variant || variant.DEFAULT;
-  }
-<span class="fstat-no" title="function not covered" ></span>
-  set <span class="cstat-no" title="statement not covered" >variant(value) {</span>
+    return this._v<span class="fstat-no" title="function not covered" >aria</span>nt || variant.DEFAULT;
+  }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+  set variant(value) {
     value = transform.string(value).toLowerCase();
     this._variant = validate.enumeration(variant)(value) &amp;&amp; value || variant.DEFAULT;
 &nbsp;
@@ -2273,9 +2269,9 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
   }
 &nbsp;
   /**
-   Name used to submit the data in a form.
+   Name used to submit the data in a form.<span class="branch-2 cbranch-no" title="branch not covered" ></span>
    @type {String}
-   @default ""<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+   @default ""
    @htmlattribute name
    @htmlattributereflected
    */
@@ -2324,10 +2320,10 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     super.invalid = value;
 &nbsp;
     this.classList.toggle('is-invalid', this.invalid);
-    this._elements.toggle.classList.toggle('is-invalid', this.invalid);
-    this._elements.input.invalid = this.invalid;
-    th<span class="missing-if-branch" title="if path not taken" >I</span>is._elements.input.setAttrib<span class="branch-1 cbranch-no" title="branch not covered" >ute('aria-invalid', this.inv</span>alid);
-  }<span class="cstat-no" title="statement not covered" ></span>
+    th<span class="missing-if-branch" title="if path not taken" >I</span>is._elements.toggle.classLis<span class="branch-1 cbranch-no" title="branch not covered" >t.toggle('is-invalid', this.</span>invalid);
+    this<span class="cstat-no" title="statement not covered" >._elements.input.invalid = this.in</span>valid;
+    this._elements.input.setAttribute('aria-invalid', this.invalid);
+  }
 &nbsp;
   /**
    Whether this field is required or not.
@@ -2439,7 +2435,6 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
       // Input attributes per ARIA Autocomplete
       this._elements.input.setAttribute('role', 'combobox');
       this._elements.input.setAttribute('aria-autocomplete', 'none');
-      this._elements.input.setAttribute('aria-haspopup', 'dialog');
       this._elements.input.setAttribute('aria-expanded', this._elements.overlay.open);
       this._elements.input.setAttribute('aria-controls', this._elements.overlay.id);
 &nbsp;
@@ -2459,9 +2454,9 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
   /**
    Matches the accessibility to the state of the popover.
 &nbsp;
-   @ignore
-   */<span class="fstat-no" title="function not covered" ></span>
-  _onP<span class="cstat-no" title="statement not covered" >opoverOpenOrClose(event) {</span>
+   @ignore<span class="fstat-no" title="function not covered" ></span>
+   */<span class="cstat-no" title="statement not covered" ></span>
+  _onPopoverOpenOrClose(event) {
     // set focus to calendar grid
     if (this._elements.overlay.open) {
       if (this.type === type.TIME) {
@@ -2475,9 +2470,9 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     } else {
 &nbsp;
       if(this._elements.hiddenInput.value) {
-        this._elements.input.focus();
-      } else {<span class="fstat-no" title="function not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        this._elements.toggle.focus();</span>
+        this._elem<span class="fstat-no" title="function not covered" >ents</span>.input.focus();
+<span class="cstat-no" title="statement not covered" >      } else {</span>
+        this._elements.toggle.focus();
       }
 &nbsp;
       this._elements.input.setAttribute('aria-expanded', 'false');
@@ -2533,14 +2528,14 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
       this._elements.overlay.open = true;
     }
   }
-&nbsp;
-  /** @ignore */<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+  /** @ignore */
   _validateValue() {
     // calendar validates only on user input, we have to manually force the validation
     this._elements.calendar._validateCalendar();
 &nbsp;
-    // check if the current value is valid and update the internal state of the component
-    if (this.type === type.DATE) {<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+    // check if the current value is valid and update the internal stat<span class="branch-2 cbranch-no" title="branch not covered" >e of the compone</span>nt
+    if (this.type === type.DATE) {
       this.invalid = this._elements.calendar.invalid;
     } else if (this.type === type.TIME) {
       this.invalid = this._elements.clock.invalid;
@@ -2629,15 +2624,15 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
       'max',
       'type',
       'placeholder',
-      'startday',
-      'headerForma<span class="fstat-no" title="function not covered" >t',</span>
-<span class="cstat-no" title="statement not covered" >      'displayformat',</span>
-      'valueformat',
-<span class="cstat-no" title="statement not covered" >      'variant'</span>
+      'startday',<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      'headerFormat',</span>
+      'displayformat',
+<span class="cstat-no" title="statement not covered" >      'valueformat',</span>
+      'variant'
     ]);
   }
-&nbsp;
-  /** <span class="cstat-no" title="statement not covered" >@ignore */</span>
+<span class="cstat-no" title="statement not covered" ></span>
+  /** @ignore */
   connectedCallback() {
     super.connectedCallback();
 &nbsp;
@@ -2663,7 +2658,6 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     // Input attributes per ARIA Autocomplete
     this._elements.input.setAttribute('role', 'combobox');
     this._elements.input.setAttribute('aria-autocomplete', 'none');
-    this._elements.input.setAttribute('aria-haspopup', 'dialog');
     this._elements.input.setAttribute('aria-expanded', 'false');
     this._elements.input.setAttribute('aria-controls', this._elements.overlay.id);
 &nbsp;
@@ -2724,7 +2718,7 @@ export<span class="missing-if-branch" title="if path not taken" >I</span> defaul
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Mar 17 2026 12:01:36 GMT+0000 (Coordinated Universal Time)
+                at Tue Apr 07 2026 07:02:48 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

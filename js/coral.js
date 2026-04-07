@@ -59499,8 +59499,6 @@ var Coral = (function (exports) {
 
         this._elements.input.setAttribute('aria-autocomplete', 'none');
 
-        this._elements.input.setAttribute('aria-haspopup', 'dialog');
-
         this._elements.input.setAttribute('aria-expanded', 'false');
 
         this._elements.input.setAttribute('aria-controls', this._elements.overlay.id); // Trigger button attributes per ARIA Autocomplete
@@ -60046,8 +60044,6 @@ var Coral = (function (exports) {
           this._elements.input.setAttribute('role', 'combobox');
 
           this._elements.input.setAttribute('aria-autocomplete', 'none');
-
-          this._elements.input.setAttribute('aria-haspopup', 'dialog');
 
           this._elements.input.setAttribute('aria-expanded', this._elements.overlay.open);
 
@@ -86042,7 +86038,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.21.9";
+  var version$1 = "4.21.10";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
