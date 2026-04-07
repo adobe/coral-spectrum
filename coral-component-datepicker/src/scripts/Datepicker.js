@@ -607,7 +607,6 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
       // Input attributes per ARIA Autocomplete
       this._elements.input.setAttribute('role', 'combobox');
       this._elements.input.setAttribute('aria-autocomplete', 'none');
-      this._elements.input.setAttribute('aria-haspopup', 'dialog');
       this._elements.input.setAttribute('aria-expanded', this._elements.overlay.open);
       this._elements.input.setAttribute('aria-controls', this._elements.overlay.id);
 
@@ -831,7 +830,6 @@ const Datepicker = Decorator(class extends BaseFormField(BaseComponent(HTMLEleme
     // Input attributes per ARIA Autocomplete
     this._elements.input.setAttribute('role', 'combobox');
     this._elements.input.setAttribute('aria-autocomplete', 'none');
-    this._elements.input.setAttribute('aria-haspopup', 'dialog');
     this._elements.input.setAttribute('aria-expanded', 'false');
     this._elements.input.setAttribute('aria-controls', this._elements.overlay.id);
 
