@@ -164,6 +164,8 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
 
     this.invalid = this.hasAttribute('invalid');
     this.disabled = this.hasAttribute('disabled');
+
+    this._syncValidationAccessibility();
   }
 
   /**
@@ -374,6 +376,7 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
   set invalid(value) {
     super.invalid = value;
     this._elements.input.invalid = this._invalid;
+    this._syncValidationAccessibility();
   }
 
   /**
@@ -819,11 +822,13 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
 
     const frag = document.createDocumentFragment();
 
-    const templateHandleNames = ['presentation', 'input'];
+    const templateHandleNames = ['presentation', 'input', 'validationMessage'];
 
-    // Render main template
+    // Render main template (validationMessage must be connected — otherwise hint text is not visible and
+    // aria-describedby / aria-errormessage cannot resolve).
     frag.appendChild(this._elements.input);
     frag.appendChild(this._elements.presentation);
+    frag.appendChild(this._elements.validationMessage);
 
     while (this.firstChild) {
       const child = this.firstChild;
@@ -838,6 +843,198 @@ const NumberInput = Decorator(class extends BaseFormField(BaseComponent(HTMLElem
     }
 
     this.appendChild(frag);
+
+    this._ensureValidationMessageObservers();
+    this._syncValidationAccessibility();
+  }
+
+  /** @ignore */
+  disconnectedCallback() {
+    this._disconnectValidationMessageObservers();
+    super.disconnectedCallback();
+  }
+
+  /**
+   Shows validation hints (e.g. from the title attribute or native validationMessage) in a visible region and links
+   them with aria-describedby so keyboard and screen reader users receive the same information as hover title tooltips.
+
+   @ignore
+   */
+  _getValidationMessageId() {
+    const input = this._elements.input;
+    if (!input || !input.id) {
+      return null;
+    }
+
+    return `${input.id}-validation-message`;
+  }
+
+  /** @ignore */
+  _parseAriaDescribedBy() {
+    const raw = this._elements.input.getAttribute('aria-describedby');
+    if (!raw || !raw.trim()) {
+      return [];
+    }
+
+    return raw.trim().split(/\s+/).filter(Boolean);
+  }
+
+  /** @ignore */
+  _setAriaDescribedByIds(ids) {
+    const input = this._elements.input;
+    if (ids.length) {
+      input.setAttribute('aria-describedby', ids.join(' '));
+    } else {
+      input.removeAttribute('aria-describedby');
+    }
+  }
+
+  /** @ignore */
+  _addDescribedById(id) {
+    const ids = this._parseAriaDescribedBy();
+    if (ids.indexOf(id) === -1) {
+      ids.push(id);
+    }
+
+    this._setAriaDescribedByIds(ids);
+  }
+
+  /** @ignore */
+  _removeDescribedById(id) {
+    const ids = this._parseAriaDescribedBy().filter((current) => current !== id);
+    this._setAriaDescribedByIds(ids);
+  }
+
+  /**
+   Whether the field is in an error state (host or inner), including class-based markers used by Granite validation.
+
+   @ignore
+   */
+  _isInErrorState() {
+    if (this._invalid) {
+      return true;
+    }
+
+    if (this.classList.contains('is-invalid')) {
+      return true;
+    }
+
+    const input = this._elements.input;
+    if (!input) {
+      return false;
+    }
+
+    if (input.invalid) {
+      return true;
+    }
+
+    if (input.classList.contains('is-invalid')) {
+      return true;
+    }
+
+    return false;
+  }
+
+  /** @ignore */
+  _ensureValidationMessageObservers() {
+    const input = this._elements.input;
+    if (!input) {
+      return;
+    }
+
+    const scheduleSync = () => {
+      if (!this._disconnected) {
+        this._syncValidationAccessibility();
+      }
+    };
+
+    if (!this._validationMessageObserverInput) {
+      this._validationMessageObserverInput = new MutationObserver(scheduleSync);
+      this._validationMessageObserverInput.observe(input, {
+        attributes: true,
+        attributeFilter: ['title', 'invalid', 'class']
+      });
+    }
+
+    if (!this._validationMessageObserverHost) {
+      this._validationMessageObserverHost = new MutationObserver(scheduleSync);
+      this._validationMessageObserverHost.observe(this, {
+        attributes: true,
+        attributeFilter: ['title', 'invalid', 'class']
+      });
+    }
+  }
+
+  /** @ignore */
+  _disconnectValidationMessageObservers() {
+    if (this._validationMessageObserverInput) {
+      this._validationMessageObserverInput.disconnect();
+      this._validationMessageObserverInput = null;
+    }
+
+    if (this._validationMessageObserverHost) {
+      this._validationMessageObserverHost.disconnect();
+      this._validationMessageObserverHost = null;
+    }
+  }
+
+  /** @ignore */
+  _syncValidationAccessibility() {
+    const input = this._elements.input;
+    const panel = this._elements.validationMessage;
+
+    if (!input || !panel || !this._rendered) {
+      return;
+    }
+
+    if (!panel.isConnected) {
+      return;
+    }
+
+    const messageId = this._getValidationMessageId();
+    if (!messageId) {
+      return;
+    }
+
+    const innerTitle = (input.getAttribute('title') || '').trim();
+    const hostTitle = (this.getAttribute('title') || '').trim();
+    if (innerTitle) {
+      this._cachedTitleValidationMessage = innerTitle;
+    } else if (hostTitle) {
+      this._cachedTitleValidationMessage = hostTitle;
+    }
+
+    const validationMessage = (input.validationMessage || '').trim();
+    const text = innerTitle || hostTitle || validationMessage || this._cachedTitleValidationMessage || '';
+
+    const shouldShow = Boolean(text) && (this._isInErrorState() || innerTitle || hostTitle || validationMessage);
+
+    if (!shouldShow) {
+      this._cachedTitleValidationMessage = '';
+      panel.textContent = '';
+      panel.hidden = true;
+      panel.removeAttribute('aria-live');
+      if (panel.getAttribute('id') === messageId) {
+        panel.removeAttribute('id');
+      }
+
+      this._removeDescribedById(messageId);
+      input.removeAttribute('aria-errormessage');
+      return;
+    }
+
+    panel.textContent = text;
+    panel.id = messageId;
+    panel.hidden = false;
+    panel.setAttribute('aria-live', 'polite');
+    this._addDescribedById(messageId);
+    input.setAttribute('aria-errormessage', messageId);
+
+    if (innerTitle) {
+      input.removeAttribute('title');
+    } else if (hostTitle) {
+      this.removeAttribute('title');
+    }
   }
 });
 
