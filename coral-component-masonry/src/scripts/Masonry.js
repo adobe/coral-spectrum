@@ -604,7 +604,9 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
         item.setAttribute('aria-selected', item.selected);
       }
     } else {
-      item.removeAttribute('role');
+      if (item.getAttribute('role') === 'gridcell') {
+        item.removeAttribute('role');
+      }
       item.removeAttribute('aria-colindex');
       item.removeAttribute('aria-selected');
     }
