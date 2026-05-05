@@ -563,14 +563,19 @@ describe('Masonry', function () {
 
       expect(el.parentElement.getAttribute('role')).to.equal('grid', 'Parent element should have role="grid"');
       expect(el.parentElement.getAttribute('aria-colcount')).to.equal('3', 'Parent element should have correct aria-colcount');
+      expect(el.parentElement.getAttribute('aria-rowcount')).to.equal('1', 'Parent element should have correct aria-rowcount for a single visual row');
       expect(el.parentElement.getAttribute('aria-label')).to.equal('Masonry Label', 'Masonry parent element should receive same aria-label as Masonry');
       expect(el.parentElement.getAttribute('aria-labelledby')).to.equal('Masonry Labelledby', 'Masonry parent element should receive same aria-labelledby as Masonry');
 
-      expect(el.getAttribute('role')).to.equal('row', '<coral-masonry> should have role="row"');
+      expect(el.getAttribute('role')).to.equal('presentation', '<coral-masonry> should have role="presentation" so the grid is not a single row');
       expect(el.items.first().getAttribute('role'))
         .to.equal('gridcell', '<coral-masonry-item> should have role="gridcell"');
+      expect(el.items.first().getAttribute('aria-rowindex'))
+        .to.equal('1', 'first <coral-masonry-item> should have aria-rowindex in the visual column');
       expect(el.items.last().getAttribute('aria-colindex'))
         .to.equal('3', 'last <coral-masonry-item> should have aria-colindex="3"');
+      expect(el.items.last().getAttribute('aria-rowindex'))
+        .to.equal('1', 'last <coral-masonry-item> should share one visual row when laid out in three columns');
       expect(el.items.first().hasAttribute('aria-selected'))
         .to.equal(false, '<coral-masonry-item> should not have aria-selected when selectionMode="none"');
 
@@ -580,6 +585,8 @@ describe('Masonry', function () {
         .to.equal(null, 'Parent element should have role=null after deactivating ariagrid');
       expect(el.parentElement.getAttribute('aria-colcount'))
         .to.equal(null, 'Parent element should not have aria-colcount after deactivating ariagrid');
+      expect(el.parentElement.getAttribute('aria-rowcount'))
+        .to.equal(null, 'Parent element should not have aria-rowcount after deactivating ariagrid');
       expect(el.parentElement.getAttribute('aria-label')).to.equal('Parent Label', 'Masonry parent element should restore cached aria-label when ariaGrid is set to "off".');
       expect(el.parentElement.getAttribute('aria-labelledby')).to.equal('Parent Labelledby', 'Masonry parent element should restore cached aria-labelledby when ariaGrid is set to "off".');
 
@@ -594,6 +601,7 @@ describe('Masonry', function () {
       el.ariaGrid = "on";
       expect(el.parentElement.getAttribute('role')).to.equal('grid', 'Parent element should have role="grid"');
       expect(el.parentElement.getAttribute('aria-colcount')).to.equal('3', 'Parent element should have correct aria-colcount');
+      expect(el.parentElement.getAttribute('aria-rowcount')).to.equal('1', 'Parent element should have correct aria-rowcount after re-enabling ariagrid');
       expect(el.parentElement.getAttribute('aria-label')).to.equal('Masonry Label', 'Masonry parent element should receive same aria-label as Masonry');
       expect(el.parentElement.getAttribute('aria-labelledby')).to.equal('Masonry Labelledby', 'Masonry parent element should receive same aria-labelledby as Masonry');
     });
