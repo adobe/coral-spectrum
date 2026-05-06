@@ -416,8 +416,10 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
    Attribute to enable/disable auto aria grid role assignment. Value must be one of {@link MasonryAriaGridEnum}.
    Setting this property to {@link MasonryAriaGridEnum.ON} will do following to enable support for accessibility:
    - Preserve current role attribute of the parent element of {@link Masonry}, and set new role as grid.
-   - Preserve current role attribute of the {@link Masonry}, and set new role as row.
-   - Set role attribute of all child {@link MasonryItem} to gridcell.
+   - Preserve current role attribute of the {@link Masonry}, and set new role as row (required <code>grid</code> →
+   <code>row</code> → <code>gridcell</code> structure for ARIA and axe; spatial indices reflect wrapped layout).
+   - Set role attribute of all child {@link MasonryItem} to gridcell, with spatial <code>aria-rowindex</code> /
+   <code>aria-colindex</code> when column layout data is available after layout runs.
 
    Setting the property to {@link MasonryAriaGridEnum.OFF} will do following:
    - Restore preserved (if any) role attribute of the parent element of {@link Masonry}.
@@ -450,7 +452,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
 
     // Update role for this masonry
     if (this._ariaGrid === ariaGrid.ON) {
-      // Preserve existing role and set new role
+      // Preserve existing role and set row so the parent grid satisfies required owned roles (row/rowgroup).
+      // Wrapped layout is expressed via aria-rowindex/aria-colindex on each gridcell (SITES-24510 / WCAG 1.3.1).
       this._preservedAriaRole = this.getAttribute('role');
       this.setAttribute('role', 'row');
     } else if (this._ariaGrid == ariaGrid.OFF) {
@@ -577,8 +580,9 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
         this.parentElement.removeAttribute('aria-labelledby');
       }
 
-      // Remove aria-colcount
+      // Remove aria-colcount / aria-rowcount
       this.parentElement.removeAttribute('aria-colcount');
+      this.parentElement.removeAttribute('aria-rowcount');
 
       // Remove aria-multiselectable
       this.parentElement.removeAttribute('aria-multiselectable');
@@ -586,18 +590,80 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   /** @private */
+  /**
+   When column layout has run, derive aria-colcount / aria-rowcount and per-cell indices from
+   column layout placement data (<code>item._layoutData</code>).
+
+   @private
+   */
+  _getSpatialAriaGridMeta() {
+    const layoutInstance = this._layoutInstance;
+    const columns = layoutInstance && layoutInstance._columns;
+    if (!columns || columns.length === 0) {
+      return null;
+    }
+
+    const items = this.items.getAll();
+    let maxRowDepth = 0;
+    let anyPlaced = false;
+
+    for (let i = 0 ; i < items.length ; i++) {
+      const item = items[i];
+      if (!itemFilter(item) || item.hasAttribute('_placeholder')) {
+        continue;
+      }
+
+      const ld = item._layoutData;
+      if (!ld || ld.ignored) {
+        continue;
+      }
+
+      if (typeof ld.columnIndex !== 'number' || typeof ld.itemIndex !== 'number') {
+        return null;
+      }
+
+      anyPlaced = true;
+      maxRowDepth = Math.max(maxRowDepth, ld.itemIndex + 1);
+    }
+
+    if (!anyPlaced) {
+      return null;
+    }
+
+    return {
+      colcount: columns.length,
+      rowcount: maxRowDepth
+    };
+  }
+
   _updateAriaRoleForItems(activateAriaGrid) {
-    let columnIndex = 1;
+    const spatialMeta = activateAriaGrid === ariaGrid.ON ? this._getSpatialAriaGridMeta() : null;
+    let linearFallbackCol = 1;
     this.items.getAll().forEach((item) => {
-      this._updateAriaRoleForItem(item, columnIndex++, activateAriaGrid);
+      this._updateAriaRoleForItem(item, linearFallbackCol++, activateAriaGrid, spatialMeta);
     });
   }
 
   /** @private */
-  _updateAriaRoleForItem(item, columnIndex, activateAriaGrid) {
+  _updateAriaRoleForItem(item, linearFallbackCol, activateAriaGrid, spatialMeta) {
     if (activateAriaGrid === ariaGrid.ON) {
       item.setAttribute('role', 'gridcell');
-      item.setAttribute('aria-colindex', columnIndex);
+
+      const ld = item._layoutData;
+      if (spatialMeta && ld && !ld.ignored && typeof ld.columnIndex === 'number' && typeof ld.itemIndex === 'number') {
+        item.setAttribute('aria-rowindex', String(ld.itemIndex + 1));
+        item.setAttribute('aria-colindex', String(ld.columnIndex + 1));
+        if (ld.colspan > 1) {
+          item.setAttribute('aria-colspan', String(ld.colspan));
+        } else {
+          item.removeAttribute('aria-colspan');
+        }
+      } else {
+        // Column layout indices are applied after _doLayout runs; until then use single-row placeholders.
+        item.setAttribute('aria-colindex', String(linearFallbackCol));
+        item.setAttribute('aria-rowindex', '1');
+        item.removeAttribute('aria-colspan');
+      }
 
       // communicate aria-selected state of all cells
       if (this.selectionMode !== selectionMode.NONE || this.parentElement.hasAttribute('aria-multiselectable')) {
@@ -606,6 +672,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     } else {
       item.removeAttribute('role');
       item.removeAttribute('aria-colindex');
+      item.removeAttribute('aria-rowindex');
+      item.removeAttribute('aria-colspan');
       item.removeAttribute('aria-selected');
     }
   }
@@ -617,9 +685,20 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     }
 
     if (activateAriaGrid === ariaGrid.ON) {
-      this.parentElement.setAttribute('aria-colcount', this.items.length);
+      const spatial = this._getSpatialAriaGridMeta();
+      if (spatial) {
+        this.parentElement.setAttribute('aria-colcount', String(spatial.colcount));
+        this.parentElement.setAttribute('aria-rowcount', String(spatial.rowcount));
+      } else if (this.items.length > 0) {
+        this.parentElement.setAttribute('aria-colcount', String(this.items.length));
+        this.parentElement.setAttribute('aria-rowcount', '1');
+      } else {
+        this.parentElement.setAttribute('aria-colcount', '0');
+        this.parentElement.removeAttribute('aria-rowcount');
+      }
     } else {
       this.parentElement.removeAttribute('aria-colcount');
+      this.parentElement.removeAttribute('aria-rowcount');
     }
   }
 
@@ -1056,6 +1135,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
 
       // Update items, so that column indexes are correctly set
       this._updateAriaRoleForItems(this.ariaGrid);
+      this._updateAriaColumnCountForParent(this.ariaGrid);
     }
     item._oldBefore = null;
     item._dropPlaceholder = null;
