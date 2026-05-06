@@ -567,7 +567,7 @@ describe('Masonry', function () {
       expect(el.parentElement.getAttribute('aria-label')).to.equal('Masonry Label', 'Masonry parent element should receive same aria-label as Masonry');
       expect(el.parentElement.getAttribute('aria-labelledby')).to.equal('Masonry Labelledby', 'Masonry parent element should receive same aria-labelledby as Masonry');
 
-      expect(el.getAttribute('role')).to.equal('presentation', '<coral-masonry> should have role="presentation" so the grid is not a single row');
+      expect(el.getAttribute('role')).to.equal('row', '<coral-masonry> should have role="row" between grid and gridcells');
       expect(el.items.first().getAttribute('role'))
         .to.equal('gridcell', '<coral-masonry-item> should have role="gridcell"');
       expect(el.items.first().getAttribute('aria-rowindex'))

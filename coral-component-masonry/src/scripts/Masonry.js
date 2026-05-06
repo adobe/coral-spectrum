@@ -416,7 +416,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
    Attribute to enable/disable auto aria grid role assignment. Value must be one of {@link MasonryAriaGridEnum}.
    Setting this property to {@link MasonryAriaGridEnum.ON} will do following to enable support for accessibility:
    - Preserve current role attribute of the parent element of {@link Masonry}, and set new role as grid.
-   - Preserve current role attribute of the {@link Masonry}, and set new role as presentation (so the grid is not a single row wrapper).
+   - Preserve current role attribute of the {@link Masonry}, and set new role as row (required <code>grid</code> →
+   <code>row</code> → <code>gridcell</code> structure for ARIA and axe; spatial indices reflect wrapped layout).
    - Set role attribute of all child {@link MasonryItem} to gridcell, with spatial <code>aria-rowindex</code> /
    <code>aria-colindex</code> when column layout data is available after layout runs.
 
@@ -451,9 +452,10 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
 
     // Update role for this masonry
     if (this._ariaGrid === ariaGrid.ON) {
-      // Preserve existing role; use presentation so grid cells are not all in one logical row (SITES-24510 / WCAG 1.3.1).
+      // Preserve existing role and set row so the parent grid satisfies required owned roles (row/rowgroup).
+      // Wrapped layout is expressed via aria-rowindex/aria-colindex on each gridcell (SITES-24510 / WCAG 1.3.1).
       this._preservedAriaRole = this.getAttribute('role');
-      this.setAttribute('role', 'presentation');
+      this.setAttribute('role', 'row');
     } else if (this._ariaGrid == ariaGrid.OFF) {
       // Restore or remove role
       if (this._preservedAriaRole) {
