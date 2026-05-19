@@ -58610,8 +58610,6 @@
         } // The id reference for an HTML element that labels the button element accessibility name for the button element
         else if (name === 'aria-labelledby') {
             if (value || !this.getAttribute('aria-label')) {
-              this._elements.button.setAttribute('aria-labelledby', "".concat(value, " ").concat(this._elements.button.id));
-
               this._elements.overlay.setAttribute('aria-labelledby', value || this._elements.button.id);
 
               this._elements.selectList[this._hasMenuItemRadioGroup() ? 'setAttribute' : 'removeAttribute']('aria-labelledby', value || this._elements.button.id);

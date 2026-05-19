@@ -1254,7 +1254,6 @@ const CycleButton = Decorator(class extends BaseComponent(HTMLElement) {
     // The id reference for an HTML element that labels the button element accessibility name for the button element
     else if (name === &apos;aria-labelledby&apos;) {
       if (value || !this.getAttribute(&apos;aria-label&apos;)) {
-        this._elements.button.setAttribute(&apos;aria-labelledby&apos;, `${value} ${this._elements.button.id}`);
         this._elements.overlay.setAttribute(&apos;aria-labelledby&apos;, value || this._elements.button.id);
         this._elements.selectList[this._hasMenuItemRadioGroup() ? &apos;setAttribute&apos; : &apos;removeAttribute&apos;](&apos;aria-labelledby&apos;, value || this._elements.button.id);
       }
