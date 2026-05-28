@@ -627,8 +627,8 @@ describe('Masonry', function () {
 
         expect(colcount).to.be.at.least(2, 'narrow masonry should use multiple columns');
         expect(rowcount).to.be.at.least(2, 'narrow masonry should stack items into multiple visual rows');
-        expect(el.getAttribute('role')).to.equal('presentation',
-          '<coral-masonry> should use presentation when aria-rowcount > 1');
+        expect(el.getAttribute('role')).to.equal('row',
+          '<coral-masonry> should keep role="row" for grid → row → gridcell (spatial indices express tiers)');
 
         el.items.getAll().forEach(function (item) {
           const ld = item._layoutData;

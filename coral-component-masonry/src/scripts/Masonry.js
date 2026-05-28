@@ -416,9 +416,10 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
    Attribute to enable/disable auto aria grid role assignment. Value must be one of {@link MasonryAriaGridEnum}.
    Setting this property to {@link MasonryAriaGridEnum.ON} will do following to enable support for accessibility:
    - Preserve current role attribute of the parent element of {@link Masonry}, and set new role as grid.
-   - Preserve current role attribute of the {@link Masonry}, and set <code>role="row"</code> when the layout has a
-   single visual band, or <code>role="presentation"</code> when <code>aria-rowcount</code> on the parent grid is greater
-   than 1 (so gridcells are not all owned by one logical row while using spatial <code>aria-rowindex</code>).
+   - Preserve current role attribute of the {@link Masonry}, and set <code>role="row"</code> so the parent grid satisfies
+   the required <code>grid</code> → <code>row</code> → <code>gridcell</code> structure (axe and ARIA). Wrapped layout
+   is expressed via spatial <code>aria-rowindex</code> / <code>aria-colindex</code> on each gridcell and
+   <code>aria-rowcount</code> on the parent grid.
    - Set role attribute of all child {@link MasonryItem} to gridcell, with spatial <code>aria-rowindex</code> /
    <code>aria-colindex</code> when column layout data is available after layout runs.
 
@@ -638,8 +639,9 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
   }
 
   /**
-   Sets the masonry wrapper role for aria grid mode: <code>row</code> for a single visual band, <code>presentation</code>
-   when multiple rows are expressed via spatial indices on gridcells (SITES-24510).
+   Sets the masonry wrapper <code>role="row"</code> for aria grid mode (required between <code>grid</code> and
+   <code>gridcell</code>). Multi-row layout is conveyed via spatial indices on cells, not multiple row elements
+   (SITES-24510).
 
    @private
    */
@@ -648,9 +650,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
       return;
     }
 
-    const spatial = this._getSpatialAriaGridMeta();
-    const rowcount = spatial ? spatial.rowcount : 1;
-    this.setAttribute('role', rowcount > 1 ? 'presentation' : 'row');
+    this.setAttribute('role', 'row');
   }
 
   /**
