@@ -416,8 +416,9 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
    Attribute to enable/disable auto aria grid role assignment. Value must be one of {@link MasonryAriaGridEnum}.
    Setting this property to {@link MasonryAriaGridEnum.ON} will do following to enable support for accessibility:
    - Preserve current role attribute of the parent element of {@link Masonry}, and set new role as grid.
-   - Preserve current role attribute of the {@link Masonry}, and set new role as row (required <code>grid</code> →
-   <code>row</code> → <code>gridcell</code> structure for ARIA and axe; spatial indices reflect wrapped layout).
+   - Preserve current role attribute of the {@link Masonry}, and set <code>role="row"</code> when the layout has a
+   single visual band, or <code>role="presentation"</code> when <code>aria-rowcount</code> on the parent grid is greater
+   than 1 (so gridcells are not all owned by one logical row while using spatial <code>aria-rowindex</code>).
    - Set role attribute of all child {@link MasonryItem} to gridcell, with spatial <code>aria-rowindex</code> /
    <code>aria-colindex</code> when column layout data is available after layout runs.
 
@@ -452,10 +453,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
 
     // Update role for this masonry
     if (this._ariaGrid === ariaGrid.ON) {
-      // Preserve existing role and set row so the parent grid satisfies required owned roles (row/rowgroup).
-      // Wrapped layout is expressed via aria-rowindex/aria-colindex on each gridcell (SITES-24510 / WCAG 1.3.1).
       this._preservedAriaRole = this.getAttribute('role');
-      this.setAttribute('role', 'row');
+      this._updateAriaWrapperRole(this._ariaGrid);
     } else if (this._ariaGrid == ariaGrid.OFF) {
       // Restore or remove role
       if (this._preservedAriaRole) {
@@ -469,6 +468,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     this._updateAriaRoleForParent(this._ariaGrid);
     this._updateAriaColumnCountForParent(this._ariaGrid);
     this._updateAriaRoleForItems(this._ariaGrid);
+    this._updateAriaWrapperRole(this._ariaGrid);
   }
 
   /**
@@ -589,10 +589,11 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     }
   }
 
-  /** @private */
   /**
-   When column layout has run, derive aria-colcount / aria-rowcount and per-cell indices from
-   column layout placement data (<code>item._layoutData</code>).
+   When column layout has run, derive aria-colcount / aria-rowcount from column layout placement data
+   (<code>item._layoutData</code>). Items without <code>columnIndex</code> / <code>itemIndex</code> are skipped
+   here (and get DOM-order fallbacks in {@link #_updateAriaRoleForItem}) instead of invalidating counts for the
+   whole grid. Returns <code>null</code> only when column layout is unavailable or no positioned item was found.
 
    @private
    */
@@ -619,7 +620,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
       }
 
       if (typeof ld.columnIndex !== 'number' || typeof ld.itemIndex !== 'number') {
-        return null;
+        continue;
       }
 
       anyPlaced = true;
@@ -636,10 +637,54 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     };
   }
 
+  /**
+   Sets the masonry wrapper role for aria grid mode: <code>row</code> for a single visual band, <code>presentation</code>
+   when multiple rows are expressed via spatial indices on gridcells (SITES-24510).
+
+   @private
+   */
+  _updateAriaWrapperRole(activateAriaGrid) {
+    if (activateAriaGrid !== ariaGrid.ON) {
+      return;
+    }
+
+    const spatial = this._getSpatialAriaGridMeta();
+    const rowcount = spatial ? spatial.rowcount : 1;
+    this.setAttribute('role', rowcount > 1 ? 'presentation' : 'row');
+  }
+
+  /**
+   Placeholders and layout-ignored items (e.g. while detached) are not part of the spatial grid.
+
+   @private
+   */
+  _shouldSkipAriaGridCell(item) {
+    if (!itemFilter(item) || item.hasAttribute('_placeholder')) {
+      return true;
+    }
+
+    const ld = item._layoutData;
+    return !!(ld && ld.ignored);
+  }
+
+  /** @private */
+  _clearAriaGridItemAttributes(item) {
+    item.removeAttribute('role');
+    item.removeAttribute('aria-colindex');
+    item.removeAttribute('aria-rowindex');
+    item.removeAttribute('aria-colspan');
+    item.removeAttribute('aria-selected');
+  }
+
   _updateAriaRoleForItems(activateAriaGrid) {
     const spatialMeta = activateAriaGrid === ariaGrid.ON ? this._getSpatialAriaGridMeta() : null;
     let linearFallbackCol = 1;
     this.items.getAll().forEach((item) => {
+      if (activateAriaGrid === ariaGrid.ON && this._shouldSkipAriaGridCell(item)) {
+        this._clearAriaGridItemAttributes(item);
+        return;
+      }
+
       this._updateAriaRoleForItem(item, linearFallbackCol++, activateAriaGrid, spatialMeta);
     });
   }
@@ -650,7 +695,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
       item.setAttribute('role', 'gridcell');
 
       const ld = item._layoutData;
-      if (spatialMeta && ld && !ld.ignored && typeof ld.columnIndex === 'number' && typeof ld.itemIndex === 'number') {
+      if (spatialMeta && ld && typeof ld.columnIndex === 'number' && typeof ld.itemIndex === 'number') {
         item.setAttribute('aria-rowindex', String(ld.itemIndex + 1));
         item.setAttribute('aria-colindex', String(ld.columnIndex + 1));
         if (ld.colspan > 1) {
@@ -670,11 +715,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
         item.setAttribute('aria-selected', item.selected);
       }
     } else {
-      item.removeAttribute('role');
-      item.removeAttribute('aria-colindex');
-      item.removeAttribute('aria-rowindex');
-      item.removeAttribute('aria-colspan');
-      item.removeAttribute('aria-selected');
+      this._clearAriaGridItemAttributes(item);
     }
   }
 
@@ -908,6 +949,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     // Update items, so that column indexes are correctly set
     this._updateAriaRoleForItems(this.ariaGrid);
     this._updateAriaColumnCountForParent(this.ariaGrid);
+    this._updateAriaWrapperRole(this.ariaGrid);
 
     // Prevent endless observation loop (skip mutations which have been caused by the layout)
     this._observer.takeRecords();
@@ -1136,6 +1178,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
       // Update items, so that column indexes are correctly set
       this._updateAriaRoleForItems(this.ariaGrid);
       this._updateAriaColumnCountForParent(this.ariaGrid);
+      this._updateAriaWrapperRole(this.ariaGrid);
     }
     item._oldBefore = null;
     item._dropPlaceholder = null;

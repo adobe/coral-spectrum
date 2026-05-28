@@ -567,7 +567,7 @@ describe('Masonry', function () {
       expect(el.parentElement.getAttribute('aria-label')).to.equal('Masonry Label', 'Masonry parent element should receive same aria-label as Masonry');
       expect(el.parentElement.getAttribute('aria-labelledby')).to.equal('Masonry Labelledby', 'Masonry parent element should receive same aria-labelledby as Masonry');
 
-      expect(el.getAttribute('role')).to.equal('row', '<coral-masonry> should have role="row" between grid and gridcells');
+      expect(el.getAttribute('role')).to.equal('row', '<coral-masonry> should have role="row" when aria-rowcount is 1');
       expect(el.items.first().getAttribute('role'))
         .to.equal('gridcell', '<coral-masonry-item> should have role="gridcell"');
       expect(el.items.first().getAttribute('aria-rowindex'))
@@ -605,6 +605,49 @@ describe('Masonry', function () {
       expect(el.parentElement.getAttribute('aria-label')).to.equal('Masonry Label', 'Masonry parent element should receive same aria-label as Masonry');
       expect(el.parentElement.getAttribute('aria-labelledby')).to.equal('Masonry Labelledby', 'Masonry parent element should receive same aria-labelledby as Masonry');
     });
+
+    it('uses spatial grid indices when narrow width stacks items into multiple rows', function (done) {
+      const container = helpers.build(
+        '<div>' +
+        '<coral-masonry layout="variable" columnwidth="180" spacing="10" ariagrid="on" style="width: 400px">' +
+        '<coral-masonry-item style="height:40px">1</coral-masonry-item>' +
+        '<coral-masonry-item style="height:40px">2</coral-masonry-item>' +
+        '<coral-masonry-item style="height:40px">3</coral-masonry-item>' +
+        '<coral-masonry-item style="height:40px">4</coral-masonry-item>' +
+        '<coral-masonry-item style="height:40px">5</coral-masonry-item>' +
+        '<coral-masonry-item style="height:40px">6</coral-masonry-item>' +
+        '</coral-masonry>' +
+        '</div>'
+      );
+      const el = container.querySelector('coral-masonry');
+
+      helpers.next(function () {
+        const colcount = parseInt(el.parentElement.getAttribute('aria-colcount'), 10);
+        const rowcount = parseInt(el.parentElement.getAttribute('aria-rowcount'), 10);
+
+        expect(colcount).to.be.at.least(2, 'narrow masonry should use multiple columns');
+        expect(rowcount).to.be.at.least(2, 'narrow masonry should stack items into multiple visual rows');
+        expect(el.getAttribute('role')).to.equal('presentation',
+          '<coral-masonry> should use presentation when aria-rowcount > 1');
+
+        el.items.getAll().forEach(function (item) {
+          const ld = item._layoutData;
+          expect(ld, 'item should be placed by column layout').to.exist;
+          expect(item.getAttribute('aria-colindex')).to.equal(String(ld.columnIndex + 1),
+            'aria-colindex should match visual column');
+          expect(item.getAttribute('aria-rowindex')).to.equal(String(ld.itemIndex + 1),
+            'aria-rowindex should match stack position in column');
+        });
+
+        const hasDeepestRow = el.items.getAll().some(function (item) {
+          return parseInt(item.getAttribute('aria-rowindex'), 10) === rowcount;
+        });
+        expect(hasDeepestRow).to.equal(true, 'at least one gridcell should sit on the deepest visual row');
+
+        done();
+      });
+    });
+
     it('masonry elements should have aria-selected when selectionMode is not "none"', function() {
       const el = helpers.build(window.__html__['Masonry.items.selected.html']);
 
