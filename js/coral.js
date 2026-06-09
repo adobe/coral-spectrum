@@ -63510,42 +63510,157 @@ var Coral = (function (exports) {
             this.parentElement.setAttribute('aria-labelledby', this._preservedParentAriaLabelledby);
           } else {
             this.parentElement.removeAttribute('aria-labelledby');
-          } // Remove aria-colcount
+          } // Remove aria-colcount / aria-rowcount
 
 
-          this.parentElement.removeAttribute('aria-colcount'); // Remove aria-multiselectable
+          this.parentElement.removeAttribute('aria-colcount');
+          this.parentElement.removeAttribute('aria-rowcount'); // Remove aria-multiselectable
 
           this.parentElement.removeAttribute('aria-multiselectable');
         }
       }
+      /**
+       When column layout has run, derive aria-colcount / aria-rowcount from column layout placement data
+       (<code>item._layoutData</code>). Items without <code>columnIndex</code> / <code>itemIndex</code> are skipped
+       here (and get DOM-order fallbacks in {@link #_updateAriaRoleForItem}) instead of invalidating counts for the
+       whole grid. Returns <code>null</code> only when column layout is unavailable or no positioned item was found.
+        @private
+       */
+
+    }, {
+      key: "_getSpatialAriaGridMeta",
+      value: function _getSpatialAriaGridMeta() {
+        var layoutInstance = this._layoutInstance;
+        var columns = layoutInstance && layoutInstance._columns;
+
+        if (!columns || columns.length === 0) {
+          return null;
+        }
+
+        var items = this.items.getAll();
+        var maxRowDepth = 0;
+        var anyPlaced = false;
+
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+
+          if (!itemFilter(item) || item.hasAttribute('_placeholder')) {
+            continue;
+          }
+
+          var ld = item._layoutData;
+
+          if (!ld || ld.ignored) {
+            continue;
+          }
+
+          if (typeof ld.columnIndex !== 'number' || typeof ld.itemIndex !== 'number') {
+            continue;
+          }
+
+          anyPlaced = true;
+          maxRowDepth = Math.max(maxRowDepth, ld.itemIndex + 1);
+        }
+
+        if (!anyPlaced) {
+          return null;
+        }
+
+        return {
+          colcount: columns.length,
+          rowcount: maxRowDepth
+        };
+      }
+      /**
+       Sets the masonry wrapper <code>role="row"</code> for aria grid mode (required between <code>grid</code> and
+       <code>gridcell</code>). Multi-row layout is conveyed via spatial indices on cells, not multiple row elements
+       (SITES-24510).
+        @private
+       */
+
+    }, {
+      key: "_updateAriaWrapperRole",
+      value: function _updateAriaWrapperRole(activateAriaGrid) {
+        if (activateAriaGrid !== ariaGrid.ON) {
+          return;
+        }
+
+        this.setAttribute('role', 'row');
+      }
+      /**
+       Placeholders and layout-ignored items (e.g. while detached) are not part of the spatial grid.
+        @private
+       */
+
+    }, {
+      key: "_shouldSkipAriaGridCell",
+      value: function _shouldSkipAriaGridCell(item) {
+        if (!itemFilter(item) || item.hasAttribute('_placeholder')) {
+          return true;
+        }
+
+        var ld = item._layoutData;
+        return !!(ld && ld.ignored);
+      }
       /** @private */
 
+    }, {
+      key: "_clearAriaGridItemAttributes",
+      value: function _clearAriaGridItemAttributes(item) {
+        item.removeAttribute('role');
+        item.removeAttribute('aria-colindex');
+        item.removeAttribute('aria-rowindex');
+        item.removeAttribute('aria-colspan');
+        item.removeAttribute('aria-selected');
+      }
     }, {
       key: "_updateAriaRoleForItems",
       value: function _updateAriaRoleForItems(activateAriaGrid) {
         var _this2 = this;
 
-        var columnIndex = 1;
+        var spatialMeta = activateAriaGrid === ariaGrid.ON ? this._getSpatialAriaGridMeta() : null;
+        var linearFallbackCol = 1;
         this.items.getAll().forEach(function (item) {
-          _this2._updateAriaRoleForItem(item, columnIndex++, activateAriaGrid);
+          if (activateAriaGrid === ariaGrid.ON && _this2._shouldSkipAriaGridCell(item)) {
+            _this2._clearAriaGridItemAttributes(item);
+
+            return;
+          }
+
+          _this2._updateAriaRoleForItem(item, linearFallbackCol++, activateAriaGrid, spatialMeta);
         });
       }
       /** @private */
 
     }, {
       key: "_updateAriaRoleForItem",
-      value: function _updateAriaRoleForItem(item, columnIndex, activateAriaGrid) {
+      value: function _updateAriaRoleForItem(item, linearFallbackCol, activateAriaGrid, spatialMeta) {
         if (activateAriaGrid === ariaGrid.ON) {
           item.setAttribute('role', 'gridcell');
-          item.setAttribute('aria-colindex', columnIndex); // communicate aria-selected state of all cells
+          var ld = item._layoutData;
+
+          if (spatialMeta && ld && typeof ld.columnIndex === 'number' && typeof ld.itemIndex === 'number') {
+            item.setAttribute('aria-rowindex', String(ld.itemIndex + 1));
+            item.setAttribute('aria-colindex', String(ld.columnIndex + 1));
+
+            if (ld.colspan > 1) {
+              item.setAttribute('aria-colspan', String(ld.colspan));
+            } else {
+              item.removeAttribute('aria-colspan');
+            }
+          } else {
+            // Column layout indices are applied after _doLayout runs; until then use single-row placeholders.
+            item.setAttribute('aria-colindex', String(linearFallbackCol));
+            item.setAttribute('aria-rowindex', '1');
+            item.removeAttribute('aria-colspan');
+          } // communicate aria-selected state of all cells
+
 
           if (this.selectionMode !== selectionMode$2.NONE || this.parentElement.hasAttribute('aria-multiselectable')) {
             item.setAttribute('aria-selected', item.selected);
           }
         } else {
-          item.removeAttribute('role');
-          item.removeAttribute('aria-colindex');
-          item.removeAttribute('aria-selected');
+          this._clearAriaGridItemAttributes(item);
         }
       }
       /** @private */
@@ -63558,9 +63673,21 @@ var Coral = (function (exports) {
         }
 
         if (activateAriaGrid === ariaGrid.ON) {
-          this.parentElement.setAttribute('aria-colcount', this.items.length);
+          var spatial = this._getSpatialAriaGridMeta();
+
+          if (spatial) {
+            this.parentElement.setAttribute('aria-colcount', String(spatial.colcount));
+            this.parentElement.setAttribute('aria-rowcount', String(spatial.rowcount));
+          } else if (this.items.length > 0) {
+            this.parentElement.setAttribute('aria-colcount', String(this.items.length));
+            this.parentElement.setAttribute('aria-rowcount', '1');
+          } else {
+            this.parentElement.setAttribute('aria-colcount', '0');
+            this.parentElement.removeAttribute('aria-rowcount');
+          }
         } else {
           this.parentElement.removeAttribute('aria-colcount');
+          this.parentElement.removeAttribute('aria-rowcount');
         }
       }
     }, {
@@ -63797,7 +63924,9 @@ var Coral = (function (exports) {
 
         this._updateAriaRoleForItems(this.ariaGrid);
 
-        this._updateAriaColumnCountForParent(this.ariaGrid); // Prevent endless observation loop (skip mutations which have been caused by the layout)
+        this._updateAriaColumnCountForParent(this.ariaGrid);
+
+        this._updateAriaWrapperRole(this.ariaGrid); // Prevent endless observation loop (skip mutations which have been caused by the layout)
 
 
         this._observer.takeRecords();
@@ -64055,6 +64184,10 @@ var Coral = (function (exports) {
           }); // Update items, so that column indexes are correctly set
 
           this._updateAriaRoleForItems(this.ariaGrid);
+
+          this._updateAriaColumnCountForParent(this.ariaGrid);
+
+          this._updateAriaWrapperRole(this.ariaGrid);
         }
 
         item._oldBefore = null;
@@ -64287,8 +64420,12 @@ var Coral = (function (exports) {
        Attribute to enable/disable auto aria grid role assignment. Value must be one of {@link MasonryAriaGridEnum}.
        Setting this property to {@link MasonryAriaGridEnum.ON} will do following to enable support for accessibility:
        - Preserve current role attribute of the parent element of {@link Masonry}, and set new role as grid.
-       - Preserve current role attribute of the {@link Masonry}, and set new role as row.
-       - Set role attribute of all child {@link MasonryItem} to gridcell.
+       - Preserve current role attribute of the {@link Masonry}, and set <code>role="row"</code> so the parent grid satisfies
+       the required <code>grid</code> → <code>row</code> → <code>gridcell</code> structure (axe and ARIA). Wrapped layout
+       is expressed via spatial <code>aria-rowindex</code> / <code>aria-colindex</code> on each gridcell and
+       <code>aria-rowcount</code> on the parent grid.
+       - Set role attribute of all child {@link MasonryItem} to gridcell, with spatial <code>aria-rowindex</code> /
+       <code>aria-colindex</code> when column layout data is available after layout runs.
         Setting the property to {@link MasonryAriaGridEnum.OFF} will do following:
        - Restore preserved (if any) role attribute of the parent element of {@link Masonry}.
        - Restore preserved role attribute of the {@link Masonry}.
@@ -64320,9 +64457,9 @@ var Coral = (function (exports) {
 
 
         if (this._ariaGrid === ariaGrid.ON) {
-          // Preserve existing role and set new role
           this._preservedAriaRole = this.getAttribute('role');
-          this.setAttribute('role', 'row');
+
+          this._updateAriaWrapperRole(this._ariaGrid);
         } else if (this._ariaGrid == ariaGrid.OFF) {
           // Restore or remove role
           if (this._preservedAriaRole) {
@@ -64338,6 +64475,8 @@ var Coral = (function (exports) {
         this._updateAriaColumnCountForParent(this._ariaGrid);
 
         this._updateAriaRoleForItems(this._ariaGrid);
+
+        this._updateAriaWrapperRole(this._ariaGrid);
       }
       /**
        Specifies aria-label value
@@ -86042,7 +86181,7 @@ var Coral = (function (exports) {
 
   var name = "@adobe/coral-spectrum";
   var description = "Coral Spectrum is a JavaScript library of Web Components following Spectrum design patterns.";
-  var version$1 = "4.21.11";
+  var version$1 = "4.21.12";
   var homepage = "https://github.com/adobe/coral-spectrum#readme";
   var license = "Apache-2.0";
   var repository = {
