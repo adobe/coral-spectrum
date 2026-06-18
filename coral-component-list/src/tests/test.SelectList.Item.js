@@ -47,6 +47,15 @@ describe('SelectList.Item', function () {
         const el = new SelectList.Item();
         expect(el.selected).to.be.false;
       });
+
+      it('should expose aria-selected after render when selected was set before role exists (SITES-24721)', function () {
+        const el = new SelectList.Item();
+        el.textContent = 'Default';
+        el.selected = true;
+        helpers.build(el);
+        expect(el.getAttribute('role')).to.equal('option');
+        expect(el.getAttribute('aria-selected')).to.equal('true');
+      });
     });
 
     describe('#disabled', function () {
