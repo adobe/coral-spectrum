@@ -457,6 +457,11 @@ const BaseButton = (superClass) => class extends BaseLabellable(superClass) {
     // Update autoAriaLabel as well
     iconElement.autoAriaLabel = iconAutoAriaLabelValue;
 
+    // Accessibility fix
+    // If the wrapping <button> has either a "title=" or an "icon=" attribute
+    // passes the value down to the <coral-icon> as "alt="
+    (this.title || this.icon) && (iconElement.alt = this.title || this.icon);
+
     // removes the icon element from the DOM.
     if (this.icon === '') {
       iconElement.remove();
