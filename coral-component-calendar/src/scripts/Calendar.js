@@ -627,7 +627,7 @@ const Calendar = Decorator(class extends BaseFormField(BaseComponent(HTMLElement
 
     this._elements.body[this._activeDescendant ? 'setAttribute' : 'removeAttribute']('aria-activedescendant', this._activeDescendant);
 
-    this._updateTableCaption();
+    this._updateLiveRegion();
 
     if (!this._activeDescendant) {
       return;
@@ -654,25 +654,19 @@ const Calendar = Decorator(class extends BaseFormField(BaseComponent(HTMLElement
   }
 
   /**
-   Updates the table caption which serves as a live region to announce the currently focused date to assistive
-   technology, improving compatibility across operating systems, browsers and screen readers.
+   Updates the live region outside the grid to announce the currently focused date to assistive technology,
+   improving compatibility across operating systems, browsers and screen readers.
 
    @ignore
    */
-  _updateTableCaption() {
-    const caption = this._elements.body.querySelector('caption');
+  _updateLiveRegion() {
+    const liveRegion = this._elements.liveRegion;
 
-    if (!caption) {
-      return;
-    }
-
-    if (caption.firstChild) {
-      caption.removeChild(caption.firstChild);
-    }
+    liveRegion.textContent = '';
     if (this._activeDescendant) {
       const activeDescendant = this._elements.body.querySelector(`#${this._activeDescendant}`);
-      const captionText = document.createTextNode(activeDescendant.getAttribute('title'));
-      caption.appendChild(captionText);
+      const liveRegionText = document.createTextNode(activeDescendant.getAttribute('title'));
+      liveRegion.appendChild(liveRegionText);
     }
   }
 
@@ -1093,6 +1087,7 @@ const Calendar = Decorator(class extends BaseFormField(BaseComponent(HTMLElement
     frag.appendChild(this._elements.input);
     frag.appendChild(this._elements.header);
     frag.appendChild(this._elements.body);
+    frag.appendChild(this._elements.liveRegion);
 
     /// Clean Up (cloneNode support)
     while (this.firstChild) {
