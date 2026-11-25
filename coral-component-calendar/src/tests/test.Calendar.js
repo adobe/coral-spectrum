@@ -13,6 +13,7 @@
 import {helpers} from '../../../coral-utils/src/tests/helpers';
 import {Calendar} from '../../../coral-component-calendar';
 import {DateTime} from '../../../coral-datetime';
+import {commons} from '../../../coral-utils';
 
 describe('Calendar', function () {
   describe('Instantiation', function () {
@@ -1025,6 +1026,58 @@ describe('Calendar', function () {
               done();
             });
           });
+        });
+      });
+    });
+
+    describe('Accessibility', function () {
+      it('should keep date announcements outside the grid', function () {
+        const el = helpers.build('<coral-calendar value="2000-03-06"></coral-calendar>');
+        const grid = el._elements.body;
+        const liveRegion = el.querySelector('.u-coral-screenReaderOnly[aria-live]');
+
+        expect(liveRegion).not.to.be.null;
+        expect(grid.contains(liveRegion)).to.be.false;
+        expect(grid.querySelector('caption')).to.be.null;
+        expect(grid.querySelector('[role="row"]')).not.to.be.null;
+        expect(grid.querySelector('[role="gridcell"]')).not.to.be.null;
+        expect(liveRegion.getAttribute('aria-live')).to.equal('assertive');
+        expect(liveRegion.getAttribute('aria-atomic')).to.equal('true');
+      });
+
+      it('should announce the focused date after keyboard navigation', function () {
+        const el = helpers.build(new Calendar());
+        el.value = '2000-03-06';
+
+        const liveRegion = el.querySelector('.u-coral-screenReaderOnly[aria-live]');
+        const selectedCell = el.querySelector('[aria-selected="true"]');
+
+        expect(liveRegion.textContent).to.equal(selectedCell.getAttribute('title'));
+
+        helpers.keypress('right', el._elements.body);
+
+        const activeCell = el.querySelector(`#${el._elements.body.getAttribute('aria-activedescendant')}`);
+        expect(activeCell.querySelector('[data-date]').dataset.date).to.equal('2000-03-07');
+        expect(liveRegion.textContent).to.equal(activeCell.getAttribute('title'));
+        expect(el.value).to.equal('2000-03-06');
+      });
+
+      it('should preserve the live region when navigating between months', function (done) {
+        const el = helpers.build(new Calendar());
+        el.value = '2000-03-06';
+
+        const liveRegion = el.querySelector('.u-coral-screenReaderOnly[aria-live]');
+
+        el._elements.body.focus();
+        el._elements.next.click();
+
+        commons.transitionEnd(el._animator.oldTable, function () {
+          const activeCell = el.querySelector(`#${el._elements.body.getAttribute('aria-activedescendant')}`);
+          expect(activeCell.querySelector('[data-date]').dataset.date).to.equal('2000-04-06');
+          expect(el.querySelector('.u-coral-screenReaderOnly[aria-live]')).to.equal(liveRegion);
+          expect(el._elements.body.contains(liveRegion)).to.be.false;
+          expect(liveRegion.textContent).to.equal(activeCell.getAttribute('title'));
+          done();
         });
       });
     });
