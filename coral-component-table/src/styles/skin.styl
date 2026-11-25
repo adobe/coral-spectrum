@@ -355,8 +355,11 @@
 ._coral-Table-row {
   &:focus,
   &.is-focused {
-    outline: .125rem solid $table-row-focused-color;
-    outline-offset: -.125rem;
+    ._coral-Table-cell:first-of-type {
+      &:after {
+        border-left-color: $table-row-focused-color;
+      }
+    }
   }
 }
 /* END a11y */
