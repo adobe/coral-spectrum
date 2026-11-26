@@ -114,6 +114,8 @@ const getPreviousItem = (item) => {
 /**
  @class Coral.Masonry
  @classdesc A Masonry component that allows to lay out items in a masonry grid.
+ When <code>ariaGrid</code> is off and the masonry has <code>role="list"</code>, its items receive
+ <code>role="listitem"</code>. Otherwise, non-grid items have no automatically assigned role.
  @htmltag coral-masonry
  @extends {HTMLElement}
  @extends {BaseComponent}
@@ -426,7 +428,8 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
    Setting the property to {@link MasonryAriaGridEnum.OFF} will do following:
    - Restore preserved (if any) role attribute of the parent element of {@link Masonry}.
    - Restore preserved role attribute of the {@link Masonry}.
-   - Remove role attribute of all child {@link MasonryItem}.
+   - Set child {@link MasonryItem} roles to <code>listitem</code> if the restored masonry role is
+   <code>list</code>, or remove their role attributes otherwise.
 
    Setting the attribute to other than allowed values will fallback to {@link MasonryAriaGridEnum.OFF}.
 
@@ -441,6 +444,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
 
   set ariaGrid(value) {
     value = transform.string(value);
+    const previousAriaGrid = this._ariaGrid;
 
     // Ensure correct values
     if (value !== ariaGrid.ON && value !== ariaGrid.OFF) {
@@ -453,10 +457,10 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     this._reflectAttribute('ariagrid', this._ariaGrid);
 
     // Update role for this masonry
-    if (this._ariaGrid === ariaGrid.ON) {
+    if (this._ariaGrid === ariaGrid.ON && previousAriaGrid !== ariaGrid.ON) {
       this._preservedAriaRole = this.getAttribute('role');
       this._updateAriaWrapperRole(this._ariaGrid);
-    } else if (this._ariaGrid == ariaGrid.OFF) {
+    } else if (this._ariaGrid === ariaGrid.OFF && previousAriaGrid === ariaGrid.ON) {
       // Restore or remove role
       if (this._preservedAriaRole) {
         this.setAttribute('role', this._preservedAriaRole);
@@ -466,7 +470,9 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     }
 
     // Update parent and child item roles based on current state
-    this._updateAriaRoleForParent(this._ariaGrid);
+    if (previousAriaGrid !== this._ariaGrid) {
+      this._updateAriaRoleForParent(this._ariaGrid);
+    }
     this._updateAriaColumnCountForParent(this._ariaGrid);
     this._updateAriaRoleForItems(this._ariaGrid);
     this._updateAriaWrapperRole(this._ariaGrid);
@@ -716,6 +722,9 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
       }
     } else {
       this._clearAriaGridItemAttributes(item);
+      if (this.getAttribute('role') === 'list') {
+        item.setAttribute('role', 'listitem');
+      }
     }
   }
 
@@ -1266,7 +1275,7 @@ const Masonry = Decorator(class extends BaseComponent(HTMLElement) {
     this.classList.add(CLASSNAME);
 
     // Keep the default behavior when ariaGrid is not enabled
-    if (this._ariaGrid === ariaGrid.OFF) {
+    if (this._ariaGrid === ariaGrid.OFF && !this.hasAttribute('role')) {
       // a11y
       this.setAttribute('role', this._defaultAriaRole);
     }

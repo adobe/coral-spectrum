@@ -555,6 +555,79 @@ describe('Masonry', function () {
     });
   });
 
+  describe('Accessibility with list semantics', function () {
+    ['', ' ariagrid="off"'].forEach(function (attributes) {
+      it('should preserve an authored list role and assign listitem roles' + attributes, function (done) {
+        const el = helpers.build(
+          '<coral-masonry role="list"' + attributes + '>' +
+          '<coral-masonry-item>item1</coral-masonry-item>' +
+          '<coral-masonry-item>item2</coral-masonry-item>' +
+          '</coral-masonry>'
+        );
+
+        expect(el.getAttribute('role')).to.equal('list');
+        helpers.next(function () {
+          el.items.getAll().forEach(function (item) {
+            expect(item.getAttribute('role')).to.equal('listitem');
+            expect(item.hasAttribute('aria-colindex')).to.be.false;
+            expect(item.hasAttribute('aria-rowindex')).to.be.false;
+            expect(item.hasAttribute('aria-selected')).to.be.false;
+          });
+          done();
+        });
+      });
+    });
+
+    it('should update listitem roles when the wrapper role changes and items are added', function (done) {
+      const el = helpers.build(window.__html__['Masonry.items.html']);
+      el.setAttribute('role', 'list');
+      const item = new Masonry.Item();
+      el.items.add(item);
+
+      helpers.next(function () {
+        el.items.getAll().forEach(function (item) {
+          expect(item.getAttribute('role')).to.equal('listitem');
+        });
+        expect(item.getAttribute('role')).to.equal('listitem');
+
+        el.setAttribute('role', 'group');
+        helpers.next(function () {
+          helpers.next(function () {
+            el.items.getAll().forEach(function (item) {
+              expect(item.hasAttribute('role')).to.be.false;
+            });
+            done();
+          });
+        });
+      });
+    });
+
+    it('should restore list semantics after toggling aria grid and repeated mode assignments', function () {
+      const container = helpers.build(
+        '<div role="region">' +
+        '<coral-masonry role="list" ariagrid="off">' +
+        '<coral-masonry-item>item1</coral-masonry-item>' +
+        '</coral-masonry>' +
+        '</div>'
+      );
+      const el = container.querySelector('coral-masonry');
+
+      el.ariaGrid = 'on';
+      el.ariaGrid = 'on';
+      expect(container.getAttribute('role')).to.equal('grid');
+      expect(el.getAttribute('role')).to.equal('row');
+      expect(el.items.first().getAttribute('role')).to.equal('gridcell');
+
+      el.ariaGrid = 'off';
+      el.ariaGrid = 'off';
+      expect(container.getAttribute('role')).to.equal('region');
+      expect(el.getAttribute('role')).to.equal('list');
+      expect(el.items.first().getAttribute('role')).to.equal('listitem');
+      expect(el.items.first().hasAttribute('aria-colindex')).to.be.false;
+      expect(el.items.first().hasAttribute('aria-rowindex')).to.be.false;
+    });
+  });
+
   describe('Accessibility with auto aria grid', function () {
     it('parent element and masonry elements should have proper grid roles and attributes', function () {
       // Aria grid is enabled in the HTML
